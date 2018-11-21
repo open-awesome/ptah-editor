@@ -1,102 +1,82 @@
 <script>
+import MenuPlatforms from './menu/MenuPlatforms.vue'
+
 export default {
-  data: () => ({
-    device: '',
-    activeColor: '#474747',
-    inactiveColor: '#fff',
-    items: [
-      {
-        name: 'mobile',
-        icon: {
-          name: 'platformMobile',
-          width: 10,
-          height: 17
-        }
-      },
-      {
-        name: 'laptop',
-        icon: {
-          name: 'platformLaptop',
-          width: 20.5,
-          height: 13.7
-        }
-      },
-      {
-        name: 'desktop',
-        icon: {
-          name: 'platformDesktop',
-          width: 16,
-          height: 12.5
-        }
-      }
-    ]
-  }),
-  methods: {
-    setDevice (type) {
-      this.device = type
-      this.$emit('setDevice', 'is-' + this.device)
-    }
-  },
-  mounted () {
-    this.device = 'desktop'
+  components: {
+    MenuPlatforms
   }
 }
 </script>
 
 <template>
-  <div class="b-menu-platforms">
-    <button
-      v-for="(item, index) in items"
-      class="b-menu-platforms__button"
-      tooltip-position="bottom"
-      :key="index"
-      :tooltip="`on ${item.name}`"
-      :class="[
-        `b-menu-platforms__button_${item.name}`,
-        {'b-menu-platforms__button_active': device === item.name}
-      ]"
-      @click="setDevice(item.name)">
-      <icon-base
-        :name="item.icon.name"
-        :width="item.icon.width"
-        :height="item.icon.height"
-        :color="device === item.name ? activeColor : inactiveColor">
-      </icon-base>
-    </button>
+<div class="b-top-bar">
+  <div class="b-top-bar__left">
+    <BaseButton
+      :color="'light-gray'"
+      :transparent="false"
+      @click="$emit('backToLandings', $event)"
+      >
+      Back to landings
+    </BaseButton>
   </div>
+  <div class="b-top-bar__right">
+    <div class="b-top-bar-right-menu">
+      <div class="b-top-bar-right-menu__left">
+        Site name
+      </div>
+      <div class="b-top-bar-right-menu__middle">
+        <MenuPlatforms
+          @setDevice="$emit('setDevice', type)"
+          ></MenuPlatforms>
+      </div>
+      <div class="b-top-bar-right-menu__right">
+        <BaseButton
+          :color="'light-gray'"
+          :transparent="false"
+          @click="$emit('preview', $event)"
+          >
+          Preview
+        </BaseButton>
+        <BaseButton
+          :color="'light-gray'"
+          :transparent="false"
+          @click="$emit('export', $event)"
+          >
+          Export
+        </BaseButton>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <style lang="sass" scoped>
-.b-menu-platforms
-  width: 14rem
-  height: 5.6rem
-  background: #CDCDCD
-  border-radius: 0.2rem
-  border:
-  padding: 1rem
+.b-top-bar
+  background-color: #CDCDCD
   display: flex
   align-items: center
   justify-content: center
-  &__button
-    background-color: transparent
-    border: none
-    outline: none
-    cursor: pointer
-    padding: 0
-    width: 4rem
-    height: 4rem
+  width: 100%
+  height: 100%
+  &__left
+    order: 1
+    width: 24rem
+  &__right
+    order: 2
+    flex-grow: 1
+  &-right-menu
     display: flex
     align-items: center
-    justify-content: center
-    border: #fff 0.1rem solid
-    &_active
-      background-color: rgba(255, 255, 255, 0.5)
-    &_mobile
-      border-right: none
-      border-radius: 0.5rem 0 0 0.5rem
-    &_laptop
-    &_desktop
-      border-left: none
-      border-radius: 0 0.5rem 0.5rem 0
-
+    justify-content: space-between
+    padding: 0.8rem
+    &__left
+      order: 1
+      width: 50%
+    &__middle
+      order: 2
+      width: 14rem
+    &__right
+      order: 3
+      width: 50%
+      text-align: right
 </style>

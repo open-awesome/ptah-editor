@@ -1,5 +1,9 @@
 <template>
-  <BuilderLayout :builder="builder">
+  <BuilderLayout
+    :builder="builder"
+    @export="submit"
+    @preview="preview"
+    >
     <div class="artboard is-editable" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}]">
       <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
       <div class="controller-intro" v-if="emptySections">

@@ -3,6 +3,9 @@
     <div class="builder-layout__top-bar">
       <BuilderTopBar
         @setDevice="setDevice"
+        @backToLandings="backToLandings"
+        @preview="$emit('preview', $event)"
+        @export="$emit('export', $event)"
         ></BuilderTopBar>
     </div>
     <div class="builder-layout-content">
@@ -54,6 +57,9 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', ['toggleSidebar']),
+    backToLandings () {
+      this.$router.push({ path: `/dashboard` })
+    },
     setDevice (device) {
       this.device = device
     }
@@ -67,9 +73,6 @@ export default {
     width: 100%
     height: 7.2rem
     background-color: #CDCDCD
-    display: flex
-    align-items: center
-    justify-content: center
     position: fixed
     top: 0
     right: 0
