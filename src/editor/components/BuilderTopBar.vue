@@ -4,7 +4,18 @@ import MenuPlatforms from './menu/MenuPlatforms.vue'
 export default {
   components: {
     MenuPlatforms
+  },
+
+  data: () => ({
+    device: null
+  }),
+
+  methods: {
+    setDevice (type) {
+      this.$emit('setDevice', type)
+    }
   }
+
 }
 </script>
 
@@ -26,7 +37,7 @@ export default {
       </div>
       <div class="b-top-bar-right-menu__middle">
         <MenuPlatforms
-          @setDevice="$emit('setDevice', type)"
+          @setDevice="setDevice"
           ></MenuPlatforms>
       </div>
       <div class="b-top-bar-right-menu__right">
