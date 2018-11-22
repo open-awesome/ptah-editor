@@ -1,9 +1,12 @@
+import * as _ from 'lodash-es'
+
 export default {
   state: {
     isExpanded: true,
     isSettingsExpanded: false, // 2nd level menu
     settingObjectType: '', // (Styler prop) section, button, text etc.
-    settingObjectOptions: {}
+    settingObjectOptions: {},
+    settingObjectSection: {}
   },
 
   mutations: {
@@ -18,6 +21,9 @@ export default {
     },
     setSettingObjectOptions (state, options) {
       state.settingObjectOptions = options
+    },
+    setSection (state, section) {
+      state.settingObjectSection = section
     }
   },
 
@@ -27,7 +33,6 @@ export default {
     },
 
     setSettingObject ({ commit }, data) {
-      console.log('ssset', data.type, data.options)
       commit('isSettingsExpanded', true)
       commit('setSettingObjectType', data.type)
       commit('setSettingObjectOptions', data.options)
@@ -37,6 +42,30 @@ export default {
       commit('isSettingsExpanded', false)
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
+    },
+
+    updateSettingOptions ({ commit, state }, options) {
+      commit('setSettingObjectOptions', options)
+      console.log('dddd', state.settingObjectSection)
+      state.settingObjectSection.set('$sectionData.mainStyle', { styles: options.styles })
+    },
+
+    /**
+     * Open section settings
+     * @param dispatch
+     * @param section
+     */
+    setSettingSection ({ dispatch, commit }, section) {
+      let options = _.find(section.stylers, { name: '$sectionData.mainStyle' }).options
+      options.sectionId = section.id
+      options.sectionName = section.name
+
+      commit('setSection', section)
+
+      dispatch('setSettingObject', {
+        type: 'section',
+        options
+      })
     }
   },
 

@@ -1,6 +1,6 @@
 <template>
   <transition name="slide-fade" v-if="isOpened">
-    <div>
+    <div class="b-base-dropdown">
       <slot></slot>
     </div>
   </transition>
@@ -20,14 +20,20 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-base-dropdown
+  overflow-y: auto
+  width: 100%
+
 // Animations down here
-.slide-fade-enter-active
-  transition: all .2s ease
+.slide-fade
+  &-enter-active
+    transition: all .2s ease
 
-.slide-fade-leave-active
-  transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+  &-leave-active
+    transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
 
-.slide-fade-enter, .slide-fade-leave-to
-  transform: translateX(-8px)
-  opacity: 0
+  &-enter,
+  &-leave-to
+    transform: translateX(-0.8rem)
+    opacity: 0
 </style>

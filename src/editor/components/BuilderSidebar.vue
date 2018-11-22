@@ -1,54 +1,73 @@
 <template>
-  <div class="builder-sidebar" :class="{'_expanded': isExpanded}">
+  <div class="b-builder-sidebar" :class="{'b-builder-sidebar_expanded': isExpanded}">
     <button
-      class="builder-sidebar__back-button"
+      class="b-builder-sidebar__back-button"
       title="Minimize panel"
       @click="toggleSidebar">
 
-      <svg width="10" height="8" viewBox="0 0 10 8" fill="none" xmlns="http://www.w3.org/2000/svg">
-        <path d="M4 1L1 4L4 7" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M9 1L6 4L9 7" stroke="#888888" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-      </svg>
+      <IconBase
+        slot="icon"
+        name="turnAside"
+        width="10"
+        height="8"
+        color="none"
+        strokeColor="#888888">
+      </IconBase>
     </button>
 
-    <div class="builder-sidebar__content">
-      <ul slot="dropdown">
-        <li v-for="section in builder.sections" :key="section.id">{{ section.name }}</li>
-      </ul>
+    <div class="b-builder-sidebar__content">
+      <!-- Site settings -->
+      <menu-item>
+        <IconBase
+          slot="icon"
+          name="hollowCircle"
+          color="transparent"
+          strokeColor="currentColor">
+        </IconBase>
+        Site Settings
+      </menu-item>
+
+      <!-- Sections -->
       <menu-item
-        v-for="(item, index) in contents"
-        :key="index"
-        :isSelected="item.isSelected"
-        :isExpandable="Boolean(item.items)"
-        @click="item.isSelected = !item.isSelected">
+        :isSelected="isSectionsExpanded"
+        :isExpandable="true"
+        @click="isSectionsExpanded = !isSectionsExpanded">
 
         <IconBase
           slot="icon"
-          name="platformDesktop">
+          name="hollowCircle"
+          color="transparent"
+          strokeColor="currentColor">
         </IconBase>
 
-        <span>{{item.title}}</span>
-
-        <BaseDropdown
-          slot="dropdown"
-          :isOpened="item.isSelected">
-
-          <MenuSubitem
-            v-for="section in builder.sections"
-            :isSelected="section.isSelected"
-            :hasSettings="true"
-            :isSettingsSelected="selectedSettingsName === section.name"
-            :key="section.id"
-            @click="section.isSelected = !section.isSelected"
-            @settingsClick="toggleSettingsBar(section)">
-            {{section.name}}
-          </MenuSubitem>
-        </BaseDropdown>
+        <span>Sections</span>
       </menu-item>
+
+      <!-- Sections CONTENTS -->
+      <BaseDropdown
+        class="b-builder-sidebar__dropdown"
+        slot="dropdown"
+        :isOpened="isSectionsExpanded">
+
+        <Draggable @end="updateSectionsOrder">
+          <MenuSubitem
+            v-for="(section, index) in builder.sections"
+            :key="section.id"
+            :hasSettings="true"
+            :isSettingsSelected="settingObjectOptions.sectionId === section.id"
+            @settingsClick="toggleSettingsBar(section)">
+            {{`${index + 1}.`}} {{section.name}}
+          </MenuSubitem>
+        </Draggable>
+      </BaseDropdown>
+
     </div>
     <transition name="slide-fade">
-      <div class="builder-sidebar-settings" v-show="isExpanded && isSettingsExpanded">
-        <BuilderSettingsBar :title="selectedSettingsName" @requestClose="closeSettingsBar">
+      <div class="b-builder-sidebar-settings" v-show="isExpanded && isSettingsExpanded">
+        <BuilderSettingsBar
+          :title="settingObjectOptions.sectionName"
+          @requestClose="closeSettingsBar"
+          v-if="settingObjectOptions.sectionName">
         </BuilderSettingsBar>
       </div>
     </transition>
@@ -57,11 +76,11 @@
 </template>
 
 <script>
+import Draggable from 'vuedraggable'
 import MenuItem from './MenuItem.vue'
 import MenuSubitem from './MenuSubitem.vue'
 import BuilderSettingsBar from './BuilderSettingsBar.vue'
 import { mapActions, mapState } from 'vuex'
-import * as _ from 'lodash-es'
 
 export default {
   name: 'BuilderSidebar',
@@ -69,7 +88,8 @@ export default {
   components: {
     MenuItem,
     MenuSubitem,
-    BuilderSettingsBar
+    BuilderSettingsBar,
+    Draggable
   },
 
   props: {
@@ -84,31 +104,21 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'isSettingsExpanded'
+      'isSettingsExpanded',
+      'settingObjectOptions'
     ])
   },
 
   data () {
     return {
-      selectedSection: {},
-      selectedSettingsName: '',
-      selectedSettingsTitle: '',
-      contents: [
-        {
-          title: 'Site Settings',
-          isSelected: false
-        },
-        {
-          title: 'Sections',
-          isSelected: false
-        }
-      ]
+      isSectionsExpanded: false,
+      isSettingsOpenedisSettingsOpened: false
     }
   },
 
   methods: {
     ...mapActions('Sidebar', [
-      'setSettingObject',
+      'setSettingSection',
       'clearSettingObject'
     ]),
 
@@ -117,74 +127,87 @@ export default {
     },
 
     toggleSettingsBar (section) {
-      let options = _.find(section.stylers, { name: '$sectionData.mainStyle' }).options
-      console.log(section, options)
-      if (this.selectedSettingsName !== section.name) {
-        this.setSettingObject({ type: 'section', options })
-        this.selectedSettingsName = section.name
+      console.log(section)
+      if (this.settingObjectOptions.sectionId !== section.id) {
+        this.setSettingSection(section)
       } else {
         this.clearSettingObject()
-        this.selectedSettingsName = ''
       }
     },
 
     closeSettingsBar () {
       this.clearSettingObject()
-      this.selectedSettingsName = ''
+    },
+
+    updateSectionsOrder (event) {
+      this.builder.sort(event.oldIndex, event.newIndex)
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-.builder-sidebar
-  width: 240px
+$top-panel-height: 7.2rem
+
+.b-builder-sidebar
+  width: 24rem
   border-right: 1px solid rgba(#000000, 0.08)
   background: #F1F1F1
   position: fixed
-  top: 64px
-  left: -220px
-  bottom: 0
+  top: $top-panel-height
+  left: -22rem
   box-shadow: inset 0 1px 0 rgba(255,255,255,0.05)
   color: #888888
   transition: left 0.3s ease-in-out
+  height: calc(100vh - #{$top-panel-height})
+  display: flex
+  flex-direction: column
 
-  &._expanded
+  &_expanded
     left: 0
     transform: translateX(0px)
 
   &__back-button
-    height: 24px
-    padding: 0 8px
+    height: 2.4rem
+    padding: 0 0.8rem
     width: 100%
     border: 0
     background: #F0F0F0
     border-bottom: 2px solid rgba(#888888, 0.15)
     cursor: pointer
     text-align: right
+    flex-shrink: 0
+
+    // @todo remove maybe?
+    // drops margin from BaseIcon
+    svg
+      margin-bottom: 0
 
     &:hover
       background: rgba(#202020, 0.08)
 
   &__content
     box-shadow: inset 1px 3px 8px 0 rgba(#888888, 0.15)
+    display: flex
+    flex-direction: column
 
-.builder-sidebar-settings
+.b-builder-sidebar-settings
   position: absolute
   right: -248px
-  top: 8px
-  bottom: 8px;
-  display: flex;
+  top: 0.8rem
+  bottom: 0.8rem;
+  display: flex
 
 // Animations down here
-.slide-fade-enter-active
-  transition: all .2s ease
+.slide-fade
+  &-enter-active
+    transition: all .2s ease
 
-.slide-fade-leave-active
-  transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+  &-leave-active
+    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0)
 
-.slide-fade-enter, .slide-fade-leave-to
-  transform: translateX(-8px)
-  opacity: 0
-
+  &-enter,
+  &-leave-to
+    transform: translateX(-0.8rem)
+    opacity: 0
 </style>

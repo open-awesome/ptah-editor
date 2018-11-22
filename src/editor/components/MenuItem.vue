@@ -1,19 +1,21 @@
 <template>
   <div class="menu-item">
     <div
-      class="menu-item-inner"
-      :class="{'_selected': isSelected, '_expandable': isExpandable}"
+      class="b-menu-item-inner"
+      :class="{
+        'b-menu-item-inner_selected': isSelected,
+        'b-menu-item-inner_expandable': isExpandable
+      }"
       @click="$emit('click', $event)">
 
-      <span class="menu-item-inner__icon">
+      <span class="b-menu-item-inner__icon">
         <slot name="icon"></slot>
       </span>
 
-      <span class="menu-item-inner__title">
+      <span class="b-menu-item-inner__title">
         <slot></slot>
       </span>
     </div>
-    <slot name="dropdown"></slot>
   </div>
 </template>
 
@@ -22,10 +24,18 @@ export default {
   name: 'MenuItem',
 
   props: {
+    /**
+     * Configurates selected item color
+     * Items with expandable menus and plain openers looks different
+     */
     isExpandable: {
       type: Boolean,
       default: false
     },
+
+    /**
+     * Configurates selected item view
+     */
     isSelected: {
       type: Boolean,
       default: false
@@ -35,32 +45,32 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-
-.menu-item-inner
+.b-menu-item-inner
   display: flex
-  height: 56px
+  height: 5.6rem
   align-items: center
   cursor: pointer
   color: #474747
-  padding-left: 32px
+  padding-left: 3.2rem
 
   &:hover
     background: rgba(#202020, 0.08)
 
-  &._selected:not(._expandable)
+  &_selected:not(.b-menu-item-inner_expandable)
     background: #4D7DD8
     color: #ffffff
 
-  &._selected._expandable
+  &_selected.b-menu-item-inner_expandable
     background: #D5DFF3
 
   &__title
-    font-size: 16px
-    line-height: 18px
+    margin-top: 0.2rem
+    font-size: 1.6rem
+    line-height: 1.8rem
     font-weight: bold
 
   &__icon
-    width: 32px
+    width: 3.2rem
     display: flex
 
 </style>
