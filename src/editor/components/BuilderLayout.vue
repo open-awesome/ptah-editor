@@ -1,6 +1,6 @@
 <template>
-  <div class="builder-layout">
-    <div class="builder-layout__top-bar">
+  <div class="b-builder-layout">
+    <div class="b-builder-layout__top-bar">
       <BuilderTopBar
         @setDevice="setDevice"
         @backToLandings="backToLandings"
@@ -8,15 +8,15 @@
         @export="$emit('export', $event)"
         ></BuilderTopBar>
     </div>
-    <div class="builder-layout-content">
-      <main class="builder-layout-content__main">
-        <div class="builder-layout-content__main-layout" :class="device">
+    <div class="b-builder-layout-content">
+      <main class="b-builder-layout-content__main">
+        <div class="b-builder-layout-content__main-layout" :class="device">
           <slot></slot>
         </div>
       </main>
       <aside
-        class="builder-layout-content__sidebar"
-        :class="{'_expanded': isExpanded}">
+        class="b-builder-layout-content__sidebar"
+        :class="{'b-builder-layout-content__sidebar_expanded': isExpanded}">
 
         <BuilderSidebar
           :builder="builder"
@@ -68,8 +68,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.builder-layout
+.b-builder-layout
   &__top-bar
+    height: 7.2rem
     width: 100%
     height: 7.2rem
     background-color: #CDCDCD
@@ -79,7 +80,7 @@ export default {
     left: 0
     z-index: 999
 
-.builder-layout-content
+.b-builder-layout-content
   display: flex
   flex-wrap: wrap
   align-items: stretch
@@ -87,12 +88,14 @@ export default {
   &__sidebar
     order: 1
     width: 2rem
+    flex-shrink: 0
+    width: 2rem
     min-height: 5rem
     position: relative
     z-index: 20
     transition: width 0.3s ease-in-out
 
-    &._expanded
+    &_expanded
       width: 24rem
 
   &__main

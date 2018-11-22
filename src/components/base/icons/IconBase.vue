@@ -3,6 +3,7 @@
     :xmlns="'http://www.w3.org/2000/svg'"
     :is="componentName"
     :fill="color"
+    :stroke="strokeColor"
     :width="width"
     :height="height"
     :aria-labelledby="name"
@@ -28,6 +29,10 @@ export default {
     color: {
       type: String,
       default: 'currentColor'
+    },
+    strokeColor: {
+      type: String,
+      default: ''
     }
   },
 
