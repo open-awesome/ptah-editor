@@ -89,8 +89,7 @@ export default {
     top: 100%
     left: 0
     right: 0
-    z-index: 1500
-    width: inherit
+    z-index: 0
     margin: 0
     padding: 0
     &-item
