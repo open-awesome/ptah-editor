@@ -118,14 +118,17 @@ export default {
           list: [
             {
               iconName: 'alignLeft',
+              tooltipText: 'Align left',
               value: 'left'
             },
             {
               iconName: 'alignCenter',
+              tooltipText: 'Align center',
               value: 'center'
             },
             {
               iconName: 'alignRight',
+              tooltipText: 'Align right',
               value: 'right'
             }
           ],

@@ -5,6 +5,7 @@
       v-for="(item, index) in list"
       :key="index"
       :class="{'b-base-button-tabs-button_selected': isSelected(item.value)}"
+      :title="item.tooltipText"
       @click="selectItem(item.value)">
 
       <IconBase class="b-base-button-tabs-button__icon" v-if="item.iconName" :name="item.iconName" />
@@ -25,7 +26,7 @@ export default {
      * Items list
      * list item should containt either text or iconName property
      *
-     * @type {{value: string, ?text: string, ?iconName: string }[]}
+     * @type {{value: string, ?text: string, ?iconName: string, ?tooltipText: string }[]}
      */
     list: {
       required: true,
