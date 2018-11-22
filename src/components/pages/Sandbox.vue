@@ -63,6 +63,18 @@
       <icon-base name="platformMobile"></icon-base>
       <icon-base name="plus"></icon-base>
     </div>
+
+    <hr>
+
+    BaseSelect
+    <div style="width: 17.6rem">
+      <BaseSelect
+        :options="select.options"
+        :value="select.value"
+        v-model="select.selected"
+        >
+      </BaseSelect>
+    </div>
   </div>
 </template>
 
@@ -72,7 +84,16 @@ export default {
 
   data () {
     return {
-      ddOpen: true
+      ddOpen: true,
+      select: {
+        value: { name: 'Default', value: 0 },
+        options: [
+          { name: 'Value', value: 1 },
+          { name: 'Fixed', value: 2 },
+          { name: 'Select', value: 3 }
+        ],
+        selected: { name: 'Default', value: 0 }
+      }
     }
   }
 }
