@@ -34,21 +34,21 @@
           :isOpened="item.isSelected">
 
           <MenuSubitem
-            v-for="(subitem, subindex) in item.items"
-            :isSelected="subitem.isSelected"
-            :hasSettings="subitem.hasSettings || false"
-            :isSettingsSelected="selectedSettingsName === subitem.name"
-            :key="subindex"
-            @click="subitem.isSelected = !subitem.isSelected"
-            @settingsClick="toggleSettingsBar(subitem)">
-            {{subitem.title}}
+            v-for="section in builder.sections"
+            :isSelected="section.isSelected"
+            :hasSettings="true"
+            :isSettingsSelected="selectedSettingsName === section.name"
+            :key="section.id"
+            @click="section.isSelected = !section.isSelected"
+            @settingsClick="toggleSettingsBar(section)">
+            {{section.name}}
           </MenuSubitem>
         </BaseDropdown>
       </menu-item>
     </div>
     <transition name="slide-fade">
-      <div class="builder-sidebar-settings" v-show="isExpanded && isSettingsOpened">
-        <BuilderSettingsBar :title="selectedSettingsTitle" @requestClose="closeSettingsBar">
+      <div class="builder-sidebar-settings" v-show="isExpanded && isSettingsExpanded">
+        <BuilderSettingsBar :title="selectedSettingsName" @requestClose="closeSettingsBar">
         </BuilderSettingsBar>
       </div>
     </transition>
@@ -60,6 +60,8 @@
 import MenuItem from './MenuItem.vue'
 import MenuSubitem from './MenuSubitem.vue'
 import BuilderSettingsBar from './BuilderSettingsBar.vue'
+import { mapActions, mapState } from 'vuex'
+import * as _ from 'lodash-es'
 
 export default {
   name: 'BuilderSidebar',
@@ -80,9 +82,15 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'isSettingsExpanded'
+    ])
+  },
+
   data () {
     return {
-      isSettingsOpened: false,
+      selectedSection: {},
       selectedSettingsName: '',
       selectedSettingsTitle: '',
       contents: [
@@ -92,46 +100,37 @@ export default {
         },
         {
           title: 'Sections',
-          isSelected: false,
-          items: [
-            {
-              title: 'Image',
-              name: 'image',
-              isSelected: false
-            },
-            {
-              title: 'Section',
-              name: 'section',
-              isSelected: false,
-              hasSettings: true
-            }
-          ]
+          isSelected: false
         }
       ]
     }
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'setSettingObject',
+      'clearSettingObject'
+    ]),
+
     toggleSidebar () {
       this.$emit('toggleSidebar')
     },
 
-    toggleSettingsBar ({ name, title }) {
-      if (this.selectedSettingsName !== name) {
-        this.selectedSettingsName = name
-        this.selectedSettingsTitle = title
-        this.isSettingsOpened = true
+    toggleSettingsBar (section) {
+      let options = _.find(section.stylers, { name: '$sectionData.mainStyle' }).options
+      console.log(section, options)
+      if (this.selectedSettingsName !== section.name) {
+        this.setSettingObject({ type: 'section', options })
+        this.selectedSettingsName = section.name
       } else {
+        this.clearSettingObject()
         this.selectedSettingsName = ''
-        this.selectedSettingsTitle = ''
-        this.isSettingsOpened = false
       }
     },
 
     closeSettingsBar () {
-      this.isSettingsOpened = false
+      this.clearSettingObject()
       this.selectedSettingsName = ''
-      this.selectedSettingsTitle = ''
     }
   }
 }

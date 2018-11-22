@@ -11,13 +11,15 @@
       {{title}}
     </h6>
     <div class="builder-settings-bar__contents" v-if="title">
-      <component :is="'BuilderSettingsBar' + title"></component>
+      <component :is="settingComponent"></component>
     </div>
   </div>
 </template>
 
 <script>
 import BuilderSettingsBarSection from './BuilderSettingsBarSection'
+import { mapState } from 'vuex'
+
 export default {
   name: 'BuilderSettingsBar',
 
@@ -25,6 +27,17 @@ export default {
     title: {
       required: true,
       type: String
+    }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectType'
+    ]),
+
+    settingComponent () {
+      const suffix = this.settingObjectType === 'section' ? 'Section' : 'Element'
+      return `BuilderSettingsBar${suffix}`
     }
   },
 

@@ -5,7 +5,18 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
-  name: 'BuilderSettingsBarSection'
+  name: 'BuilderSettingsBarSection',
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ])
+  },
+  created () {
+    // "$sectionData.mainStyle"
+    console.log(this.settingObjectOptions)
+  }
 }
 </script>
