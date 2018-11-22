@@ -53,7 +53,7 @@ export default {
 .b-pth-base-select
   height: 2.5rem
   background-color: transparent
-  border-bottom: 0.1rem solid #888
+  border-bottom: 1px solid #888
   display: flex
   max-width: 50rem
   cursor: pointer
@@ -76,7 +76,7 @@ export default {
     height: 0.4rem
   &__icon
     margin: 0
-    display: block
+    display: block !important
     &_up
       transform: rotate(-180deg)
       transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
