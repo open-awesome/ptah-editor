@@ -63,6 +63,26 @@
       <icon-base name="platformMobile"></icon-base>
       <icon-base name="plus"></icon-base>
     </div>
+
+    <hr>
+    ButtonTabs
+
+    Обычный
+    <div style="margin: 10px; width: 300px;">
+      <BaseButtonTabs :list="buttonTabs.text.list" v-model="buttonTabs.text.value"/>
+    </div>
+    Тут можно выбрать несколько:
+    <div style="margin: 10px; width: 300px;">
+      <BaseButtonTabs :list="buttonTabs.text.list" v-model="buttonTabs.text.valueMultiple"/>
+    </div>
+    С иконками
+    <div style="margin: 10px; width: 200px;">
+      <BaseButtonTabs :list="buttonTabs.icons.list" v-model="buttonTabs.icons.value"/>
+    </div>
+    С иконками и текстом (на будущее)
+    <div style="margin: 10px; width: 300px;">
+      <BaseButtonTabs :list="buttonTabs.iconsWithText.list" v-model="buttonTabs.iconsWithText.value"/>
+    </div>
   </div>
 </template>
 
@@ -72,7 +92,67 @@ export default {
 
   data () {
     return {
-      ddOpen: true
+      ddOpen: true,
+
+      buttonTabs: {
+        text: {
+          list: [
+            {
+              text: 'Hello',
+              value: 'hello'
+            },
+            {
+              text: 'Bye',
+              value: 'bye'
+            },
+            {
+              text: 'Ok',
+              value: 'ok'
+            }
+          ],
+          value: '',
+          valueMultiple: []
+        },
+
+        icons: {
+          list: [
+            {
+              iconName: 'alignLeft',
+              value: 'left'
+            },
+            {
+              iconName: 'alignCenter',
+              value: 'center'
+            },
+            {
+              iconName: 'alignRight',
+              value: 'right'
+            }
+          ],
+          value: ''
+        },
+
+        iconsWithText: {
+          list: [
+            {
+              iconName: 'fontBold',
+              text: 'bold',
+              value: 'left'
+            },
+            {
+              iconName: 'fontFamily',
+              text: 'font',
+              value: 'center'
+            },
+            {
+              iconName: 'fontItalic',
+              text: 'italic',
+              value: 'right'
+            }
+          ],
+          value: ''
+        }
+      }
     }
   }
 }
