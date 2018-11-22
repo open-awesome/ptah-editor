@@ -71,7 +71,7 @@ export default {
 .b-builder-layout
   &__top-bar
     height: 7.2rem
-    width: 100%
+    max-width: 100vw
     height: 7.2rem
     background-color: #CDCDCD
     position: fixed
@@ -84,6 +84,7 @@ export default {
   display: flex
   flex-wrap: wrap
   align-items: stretch
+  width: 100%
 
   &__sidebar
     order: 1
