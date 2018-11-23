@@ -1,5 +1,11 @@
 <script>
+import VueScrollbar from 'vue2-scrollbar'
+require('vue2-scrollbar/dist/style/vue2-scrollbar.css')
+
 export default {
+  components: {
+    VueScrollbar
+  },
   props: {
     /* options */
     options: {
@@ -15,9 +21,21 @@ export default {
   data: () => ({
     showOptions: false
   }),
+  computed: {
+    colorFill: function () {
+      return this.showOptions ? '#0B99FF' : '#888888'
+    }
+  },
   methods: {
     selectOption (option) {
       this.$emit('input', option)
+    },
+    dropdown (e) {
+      let el = this.$refs.dropdown
+      let target = e.target
+      if (el !== target && !el.contains(target)) {
+        this.showOptions = false
+      }
     }
   }
 }
@@ -33,18 +51,22 @@ export default {
         <span class="b-pth-base-select__arrow">
           <icon-base class="b-pth-base-select__icon"
             :class="{ 'b-pth-base-select__icon_up': showOptions }"
-            name="arrowDown"
+            name="arrowDropDown"
             width="6"
             height="4"
-            color="#888">
+            :color="colorFill">
           </icon-base>
         </span>
       </div>
-      <ul class="b-pth-base-select__options" v-if="showOptions" >
-        <li class="b-pth-base-select__options-item" v-for="(option, index) in options" :key="index" @click="selectOption(option)">
-          {{ option.name }}
-        </li>
-      </ul>
+      <div class="b-pth-base-select__dropdown" v-show="showOptions" ref="dropdown">
+        <vue-scrollbar classes="b-pth-base-select__scrollbar" ref="Scrollbar">
+          <ul class="b-pth-base-select__options">
+            <li class="b-pth-base-select__options-item" v-for="(option, index) in options" :key="index" @click="selectOption(option)">
+              {{ option.name }}
+            </li>
+          </ul>
+        </vue-scrollbar>
+      </div>
     </div>
   </div>
 </template>
@@ -80,30 +102,46 @@ export default {
     &_up
       transform: rotate(-180deg)
       transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-  &__options
+  &__dropdown
     transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-    max-height: 18rem
+    max-height: 10rem
     border-top: none
-    overflow: auto
+    overflow: hidden
     position: absolute
     top: 100%
-    left: 0
-    right: 0
+    left: -1.2rem
+    right: -1.2rem
     z-index: 0
     margin: 0
     padding: 0
+    box-shadow: 0 0.6rem 2.4rem 0 rgba(0, 0, 0, 0.15)
+  &__options
+    margin: 0
+    padding: 0
     &-item
-      height: 2.4rem
-      line-height: 2.4rem
+      padding: 0 1.2rem
+      height: 3.2rem
+      line-height: 2.8rem
       font-size: 1.6rem
-      padding: 0
-      background-color: #f5f5fa
-      border-bottom: 1px solid #dddddd
+      list-style: none
       transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
       &:last-child
         border-bottom: none
       &:hover
-        color: #fafafa
-        background-color: #436FEE
-        border-bottom: 1px solid #436FEE
+        background-color: rgba(11, 153, 255, 0.25)
+  &__scrollbar
+    width: 100%
+    min-width: 20rem
+    height: 10rem
+
+.vue-scrollbar__scrollbar-vertical
+  width: 0.4rem
+  height: 92%
+  top: 0.4rem
+  bottom: 0.4rem
+  right: 0.4rem
+  & .scrollbar
+    width: 0.4rem
+    border-radius: 0.4rem
+
 </style>

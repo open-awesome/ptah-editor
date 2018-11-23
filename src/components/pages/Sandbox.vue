@@ -67,7 +67,7 @@
     <hr>
 
     BaseSelect
-    <div style="width: 17.6rem">
+    <div style="width: 17.6rem; margin-left: 2rem">
       <BaseSelect
         :options="select.options"
         :value="select.value"
@@ -88,6 +88,12 @@ export default {
       select: {
         value: { name: 'Default', value: 0 },
         options: [
+          { name: 'Value', value: 1 },
+          { name: 'Fixed', value: 2 },
+          { name: 'Select', value: 3 },
+          { name: 'Value', value: 1 },
+          { name: 'Fixed', value: 2 },
+          { name: 'Select', value: 3 },
           { name: 'Value', value: 1 },
           { name: 'Fixed', value: 2 },
           { name: 'Select', value: 3 }
