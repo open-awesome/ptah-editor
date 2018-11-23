@@ -6,6 +6,12 @@ export default {
     MenuPlatforms
   },
 
+  props: {
+    landingName: {
+      required: true
+    }
+  },
+
   data: () => ({
     device: null
   }),
@@ -14,6 +20,10 @@ export default {
     setDevice (type) {
       this.$emit('setDevice', type)
     }
+  },
+
+  mounted () {
+    console.log(this.builder)
   }
 }
 </script>
@@ -27,8 +37,12 @@ export default {
       :size="'middle'"
       @click="$emit('backToLandings', $event)"
       class="b-top-bar__btn-back"
+      tooltip="back to landings"
+      tooltip-position="bottom"
       >
       Back to landings
+      <span class="b-top-bar__btn-back-arrow-a"/>
+      <span class="b-top-bar__btn-back-arrow-b"/>
     </BaseButton>
   </div>
   <div class="b-top-bar__right">
@@ -38,7 +52,7 @@ export default {
           <!-- insert logo game -->
         </div>
         <div class="b-top-bar__site-name">
-          Site name
+          {{ landingName }}
         </div>
       </div>
       <div class="b-top-bar-right-menu__middle">
@@ -52,6 +66,8 @@ export default {
           :transparent="true"
           :size="'middle'"
           @click="$emit('preview', $event)"
+          tooltip="preview"
+          tooltip-position="bottom"
           >
           Preview
         </BaseButton>
@@ -60,6 +76,8 @@ export default {
           :transparent="true"
           :size="'middle'"
           @click="$emit('export', $event)"
+          tooltip="export"
+          tooltip-position="bottom"
           >
           Export
         </BaseButton>
@@ -102,12 +120,13 @@ export default {
       width: 50%
       text-align: right
   &__btn-back
+    $self: &
     position: relative
     width: 20rem
     margin: 0 0 0 3rem
     border-left-color: transparent
-    &:after,
-    &:before
+    &-arrow-a,
+    &-arrow-b
       content: ''
       position: absolute
       left: -1.4rem
@@ -119,18 +138,18 @@ export default {
       border-bottom: 0.2rem solid #fff
       z-index: -1
       transform: rotate(45deg)
-    &:before
+    &-arrow-b
       z-index: 1
       box-shadow: none
     &:hover
-      &:after,
-      &:before
+      #{$self}-arrow-a,
+      #{$self}-arrow-b
         border-left: 0.2rem solid #165c8f
         border-bottom: 0.2rem  solid #165c8f
         background-color: #165c8f
         border-color: #165c8f
         color: #fafafa
-      &:before
+      #{$self}-arrow-b
         z-index: 1
   &__logo-game
     width: 4rem
