@@ -11,8 +11,7 @@
         width="10"
         height="8"
         color="none"
-        strokeColor="#888888">
-      </IconBase>
+        strokeColor="#888888"/>
     </button>
 
     <div class="b-builder-sidebar__content">
@@ -37,8 +36,7 @@
           slot="icon"
           name="hollowCircle"
           color="transparent"
-          strokeColor="currentColor">
-        </IconBase>
+          strokeColor="currentColor" />
 
         <span>Sections</span>
       </menu-item>
@@ -48,17 +46,15 @@
         class="b-builder-sidebar__dropdown"
         slot="dropdown"
         :isOpened="isSectionsExpanded">
-
-        <Draggable @end="updateSectionsOrder">
+        <div ref="sections">
           <MenuSubitem
             v-for="(section, index) in builder.sections"
             :key="section.id"
-            :hasSettings="true"
-            :isSettingsSelected="selectedSettingsID === section.id"
-            @settingsClick="toggleSettingsBar(section)">
+            :isSelected="selectedSettingsID === section.id"
+            @click="toggleSettingsBar(section)">
             {{`${index + 1}.`}} {{section.name}}
           </MenuSubitem>
-        </Draggable>
+        </div>
       </BaseDropdown>
 
     </div>
@@ -73,7 +69,7 @@
 </template>
 
 <script>
-import Draggable from 'vuedraggable'
+import Sortable from 'sortablejs'
 import MenuItem from './MenuItem.vue'
 import MenuSubitem from './MenuSubitem.vue'
 import BuilderSettingsBar from './BuilderSettingsBar.vue'
@@ -84,8 +80,7 @@ export default {
   components: {
     MenuItem,
     MenuSubitem,
-    BuilderSettingsBar,
-    Draggable
+    BuilderSettingsBar
   },
 
   props: {
@@ -105,6 +100,23 @@ export default {
       isSettingsOpened: false,
       selectedSettingsID: '',
       selectedSettingsName: ''
+    }
+  },
+
+  updated () {
+    if (this.$refs.sections && this.builder.sections.length) {
+      Sortable.create(this.$refs.sections, {
+        group: {
+          name: 'sections'
+        },
+        animation: 150,
+        sort: true,
+        disabled: false,
+        preventOnFilter: false,
+        onUpdate: (event) => {
+          this.builder.sort(event.oldIndex, event.newIndex)
+        }
+      })
     }
   },
 
@@ -182,6 +194,11 @@ $top-panel-height: 7.2rem
     box-shadow: inset 1px 3px 8px 0 rgba(#888888, 0.15)
     display: flex
     flex-direction: column
+
+  &__dropdown
+    display: flex
+    flex-direction: column
+    flex-grow: 1
 
 .b-builder-sidebar-settings
   position: absolute
