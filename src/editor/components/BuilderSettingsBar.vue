@@ -11,7 +11,7 @@
       {{title}}
     </h6>
     <div class="b-builder-settings-bar__contents" v-if="title">
-      <component :is="settingComponent"></component>
+      <component :is="settingComponent" :builder="builder"></component>
     </div>
   </div>
 </template>
@@ -27,6 +27,10 @@ export default {
     title: {
       required: true,
       type: String
+    },
+    builder: {
+      type: Object,
+      required: true
     }
   },
 
@@ -69,5 +73,4 @@ export default {
     cursor: pointer
 
   &__contents
-
 </style>

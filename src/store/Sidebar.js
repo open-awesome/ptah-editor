@@ -32,31 +32,54 @@ export default {
       commit('isExpanded', !state.isExpanded)
     },
 
+    /**
+     * Set current element options (from seeder)
+     * @param commit
+     * @param data
+     */
     setSettingObject ({ commit }, data) {
       commit('isSettingsExpanded', true)
       commit('setSettingObjectType', data.type)
       commit('setSettingObjectOptions', data.options)
     },
 
+    /**
+     * Clear setting values
+     * @param commit
+     */
     clearSettingObject ({ commit }) {
       commit('isSettingsExpanded', false)
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
     },
 
+    /**
+     * Update options & set new styles to section
+     * @param commit
+     * @param state
+     * @param options
+     */
     updateSettingOptions ({ commit, state }, options) {
       commit('setSettingObjectOptions', options)
-      console.log('dddd', state.settingObjectSection)
-      state.settingObjectSection.set('$sectionData.mainStyle', { styles: options.styles })
+      let path = '$sectionData.mainStyle' // TODO: need path to all elements
+      state.settingObjectSection.set(path, { styles: options.styles })
     },
 
     /**
-     * Open section settings
+     * Open and set section settings
      * @param dispatch
-     * @param section
+     * @param commit
+     * @param section {Object} section from builder
      */
     setSettingSection ({ dispatch, commit }, section) {
+      console.log(111, section)
       let options = _.find(section.stylers, { name: '$sectionData.mainStyle' }).options
+
+      // restore styles
+      if (section.data) {
+        options.styles = section.data.mainStyle.styles
+      }
+
       options.sectionId = section.id
       options.sectionName = section.name
 

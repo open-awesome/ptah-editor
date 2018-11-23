@@ -70,6 +70,7 @@ export default {
     :type="type"
     :disabled="disabled"
     :transparent="transparent"
+    @click="$emit('click')"
     >
     <slot></slot>
   </button>

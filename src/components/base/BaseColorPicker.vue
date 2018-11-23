@@ -25,7 +25,9 @@ export default {
 
   watch: {
     value (value) {
-      this.pickerValue = value
+      this.pickerValue = {
+        hex: value
+      }
     },
     pickerValue (value) {
       this.$emit('change', value)
@@ -35,7 +37,9 @@ export default {
   data () {
     return {
       expanded: false,
-      pickerValue: this.value
+      pickerValue: {
+        hex: this.value
+      }
     }
   }
 }

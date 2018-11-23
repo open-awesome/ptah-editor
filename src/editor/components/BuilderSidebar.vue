@@ -54,7 +54,7 @@
             v-for="(section, index) in builder.sections"
             :key="section.id"
             :hasSettings="true"
-            :isSettingsSelected="settingObjectOptions.sectionId === section.id"
+            :isSettingsSelected="isActiveSection(section.id)"
             @settingsClick="toggleSettingsBar(section)">
             {{`${index + 1}.`}} {{section.name}}
           </MenuSubitem>
@@ -66,6 +66,7 @@
       <div class="b-builder-sidebar-settings" v-show="isExpanded && isSettingsExpanded">
         <BuilderSettingsBar
           :title="settingObjectOptions.sectionName"
+          :builder="builder"
           @requestClose="closeSettingsBar"
           v-if="settingObjectOptions.sectionName">
         </BuilderSettingsBar>
@@ -127,11 +128,10 @@ export default {
     },
 
     toggleSettingsBar (section) {
-      console.log(section)
-      if (this.settingObjectOptions.sectionId !== section.id) {
+      this.clearSettingObject()
+
+      if (!this.isActiveSection(section.id)) {
         this.setSettingSection(section)
-      } else {
-        this.clearSettingObject()
       }
     },
 
@@ -141,6 +141,10 @@ export default {
 
     updateSectionsOrder (event) {
       this.builder.sort(event.oldIndex, event.newIndex)
+    },
+
+    isActiveSection (id) {
+      return this.settingObjectOptions.sectionId === id
     }
   }
 }
