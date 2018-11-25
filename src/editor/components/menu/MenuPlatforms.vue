@@ -70,7 +70,7 @@ export default {
 .b-menu-platforms
   width: 14rem
   height: 5.6rem
-  background: #9E9E9E
+  background: #CDCDCD
   border-radius: 0.2rem
   border:
   padding: 1rem
@@ -78,7 +78,7 @@ export default {
   align-items: center
   justify-content: center
   &__button
-    background: #9E9E9E
+    background-color: transparent
     border: none
     outline: none
     cursor: pointer
@@ -90,7 +90,7 @@ export default {
     justify-content: center
     border: #fff 0.1rem solid
     &_active
-      background: rgba(255, 255, 255, 0.5)
+      background-color: rgba(255, 255, 255, 0.5)
     &_mobile
       border-right: none
       border-radius: 0.5rem 0 0 0.5rem

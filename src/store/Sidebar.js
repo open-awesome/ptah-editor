@@ -61,7 +61,7 @@ export default {
      */
     updateSettingOptions ({ commit, state }, options) {
       commit('setSettingObjectOptions', options)
-      let path = '$sectionData.mainStyle' // TODO: need path to all elements
+      let path = '$sectionData.mainStyle' // TODO: need path to any elements
       state.settingObjectSection.set(path, { styles: options.styles })
     },
 
@@ -72,7 +72,6 @@ export default {
      * @param section {Object} section from builder
      */
     setSettingSection ({ dispatch, commit }, section) {
-      console.log(111, section)
       let options = _.find(section.stylers, { name: '$sectionData.mainStyle' }).options
 
       // restore styles

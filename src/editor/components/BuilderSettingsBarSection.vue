@@ -1,12 +1,17 @@
 <template>
   <div class="b-section-settings">
-    <div>
-      <base-color-picker v-model="sectionBgColor" @change="updateBgColor"></base-color-picker>
+    <div class="b-section-settings__control">
+      <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
+    </div>
+
+    <div class="b-section-settings__control">
+      <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
     </div>
 
     <div class="b-section-settings__buttons">
       <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
     </div>
+
   </div>
 </template>
 
@@ -32,7 +37,8 @@ export default {
 
   data () {
     return {
-      sectionBgColor: ''
+      sectionBgColor: '',
+      sectionBgUrl: ''
     }
   },
 
@@ -45,6 +51,7 @@ export default {
 
   created () {
     this.sectionBgColor = this.settingObjectOptions.styles['background-color']
+    this.sectionBgUrl = this.settingObjectOptions.styles['background-image']
   },
 
   watch: {
@@ -66,6 +73,14 @@ export default {
       }))
     },
 
+    updateBgUrl () {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        styles: {
+          'background-image': `url(${this.sectionBgUrl})`
+        }
+      }))
+    },
+
     deleteSection () {
       this.builder.remove(this.settingObjectSection)
     }
@@ -79,7 +94,11 @@ export default {
     flex-direction: column
     align-items: stretch
     &__buttons
-      margin: 10rem 0 0 0
+      position: absolute
+      bottom: 1rem
+      left: 1rem
       button
         max-width: 100%
+    &__control
+      margin-bottom: 3rem
 </style>

@@ -20,6 +20,10 @@ export default {
     showTextValue: {
       type: Boolean,
       default: true
+    },
+    label: {
+      type: String,
+      required: false
     }
   },
 
@@ -47,6 +51,9 @@ export default {
 
 <template>
   <div class="b-picker" :class="{ 'full': showTextValue }">
+    <base-label v-if="label">
+      {{label}}
+    </base-label>
     <div class="b-picker__value-string" @click="expanded = !expanded">
       <div class="b-picker__circle" :style="{ 'background-color': pickerValue.hex }"></div>
       <div class="b-picker__text">

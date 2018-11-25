@@ -56,6 +56,8 @@ export default {
   width: 240px
   background: #F5F5F5
   padding: 28px 32px
+  display: flex
+  flex-direction: column
 
   &__title
     margin: 0 0 28px 0
@@ -73,4 +75,5 @@ export default {
     cursor: pointer
 
   &__contents
+    flex-grow: 2
 </style>

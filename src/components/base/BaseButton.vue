@@ -19,7 +19,10 @@ export default {
       default: 'default',
       type: String,
       validator (value) {
-        const values = ['default']
+        const values = [
+          'default',
+          'middle'
+        ]
         return values.indexOf(value) !== -1
       }
     },
@@ -70,7 +73,7 @@ export default {
     :type="type"
     :disabled="disabled"
     :transparent="transparent"
-    @click="$emit('click')"
+    @click="$emit('click', $event)"
     >
     <slot></slot>
   </button>
@@ -78,10 +81,10 @@ export default {
 
 <style lang="sass">
 .b-pth-base-button
-  border-radius: 0.2rem
+  border-radius: 0.4rem
   border: 0.2rem transparent solid
   outline: none
-  transition: all .3s cubic-bezier(.2,.85,.4,1.275)
+  transition: color .3s cubic-bezier(.2,.85,.4,1.275)
   font-size: 1.6rem
   line-height: 4.4rem
   margin: 0.4rem
@@ -95,6 +98,10 @@ export default {
   &_default
     width: 20.8rem
     height: 4.8rem
+  &_middle
+    width: 11rem
+    height: 4rem
+    line-height: 3.6rem
   &_pressed
     +active
   &_black
@@ -105,9 +112,9 @@ export default {
     background-color: #383838
     border: 0.2rem #dedede solid
   &_light-gray
-    color: #888
+    color: #474747
     background-color: #fafafa
-    border: 0.2rem #dedede solid
+    border: 0.2rem #fff solid
   &_transparent
     background-color: transparent
 </style>
