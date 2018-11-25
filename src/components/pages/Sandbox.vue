@@ -101,6 +101,13 @@
       </base-text-field>
     </div>
 
+    <hr>
+    <h2>BaseRangeSlider</h2>
+    <div style="width: 300px">
+      <base-range-slider v-model="rangeSliderValue" step="10">
+        {{rangeSliderValue}} %
+      </base-range-slider>
+    </div>
   </div>
 </template>
 
@@ -113,6 +120,8 @@ export default {
       ddOpen: true,
 
       textFieldValue: 'Some entered text',
+      
+      rangeSliderValue: 50,
 
       buttonTabs: {
         text: {
