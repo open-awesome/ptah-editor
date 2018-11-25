@@ -591,7 +591,6 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../../assets/sass/app'
 .artboard
   transform-origin: top center
   margin: 0 auto

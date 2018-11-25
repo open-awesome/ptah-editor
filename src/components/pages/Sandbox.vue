@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="b-sandbox-page">
     <h1>A page for components preview and testing</h1>
     <hr>
-    BaseDropdown <button @click="ddOpen = !ddOpen">toggle</button>
+    <h2>BaseDropdown <button @click="ddOpen = !ddOpen">toggle</button></h2>
     <div style="width: 246px;">
       <BaseDropdown :isOpened="ddOpen">
         <ul>
@@ -15,15 +15,15 @@
       </BaseDropdown>
     </div>
     <hr>
-    BaseLoading
+    <h2>BaseLoading</h2>
     <BaseLoading/>
     <hr>
 
-    BaseTimeout
+    <h2>BaseTimeout</h2>
     <BaseTimeout/>
     <hr>
 
-    BaseButton
+    <h2>BaseButton</h2>
     <BaseButton
       :color="'black'"
       >
@@ -42,7 +42,7 @@
       Button
     </BaseButton>
     <hr>
-    Icons
+    <h2>Icons</h2>
     <div class="b-icons">
       <icon-base name="alignLeft" color="red"></icon-base>
       <icon-base name="alignRight" color="green"></icon-base>
@@ -65,7 +65,7 @@
     </div>
 
     <hr>
-    ButtonTabs
+    <h2>ButtonTabs</h2>
 
     Обычный
     <div style="margin: 10px; width: 300px;">
@@ -83,6 +83,24 @@
     <div style="margin: 10px; width: 300px;">
       <BaseButtonTabs :list="buttonTabs.iconsWithText.list" v-model="buttonTabs.iconsWithText.value"/>
     </div>
+    <hr>
+
+    <h2>BaseTextField</h2>
+    <div style="display: flex;">
+      <base-text-field v-model="textFieldValue">
+        <span slot="label">Text field</span>
+      </base-text-field>
+      <base-text-field v-model="textFieldValue" :hasError="true">
+        <span slot="label">Error text field</span>
+        <span slot="error">
+          Error text
+        </span>
+      </base-text-field>
+      <base-text-field :value="textFieldValue" :disabled="true">
+        <span slot="label">Disabled text field</span>
+      </base-text-field>
+    </div>
+
   </div>
 </template>
 
@@ -93,6 +111,8 @@ export default {
   data () {
     return {
       ddOpen: true,
+
+      textFieldValue: 'Some entered text',
 
       buttonTabs: {
         text: {
@@ -162,6 +182,10 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-sandbox-page
+  background: #fff
+  padding: 2.5rem
+
 .b-icons
   width: 70rem
   display: flex
