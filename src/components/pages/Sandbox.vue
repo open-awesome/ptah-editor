@@ -1,8 +1,8 @@
 <template>
-  <div>
+  <div class="b-sandbox-page">
     <h1>A page for components preview and testing</h1>
     <hr>
-    BaseDropdown <button @click="ddOpen = !ddOpen">toggle</button>
+    <h2>BaseDropdown <button @click="ddOpen = !ddOpen">toggle</button></h2>
     <div style="width: 246px;">
       <BaseDropdown :isOpened="ddOpen">
         <ul>
@@ -15,15 +15,15 @@
       </BaseDropdown>
     </div>
     <hr>
-    BaseLoading
+    <h2>BaseLoading</h2>
     <BaseLoading/>
     <hr>
 
-    BaseTimeout
+    <h2>BaseTimeout</h2>
     <BaseTimeout/>
     <hr>
 
-    BaseButton
+    <h2>BaseButton</h2>
     <BaseButton
       :color="'black'"
       >
@@ -42,7 +42,7 @@
       Button
     </BaseButton>
     <hr>
-    Icons
+    <h2>Icons</h2>
     <div class="b-icons">
       <icon-base name="alignLeft" color="red"></icon-base>
       <icon-base name="alignRight" color="green"></icon-base>
@@ -65,8 +65,45 @@
     </div>
 
     <hr>
+    <h2>ButtonTabs</h2>
 
-    BaseSelect
+    Обычный
+    <div style="margin: 10px; width: 300px;">
+      <BaseButtonTabs :list="buttonTabs.text.list" v-model="buttonTabs.text.value"/>
+    </div>
+    Тут можно выбрать несколько:
+    <div style="margin: 10px; width: 300px;">
+      <BaseButtonTabs :list="buttonTabs.text.list" v-model="buttonTabs.text.valueMultiple"/>
+    </div>
+    С иконками
+    <div style="margin: 10px; width: 200px;">
+      <BaseButtonTabs :list="buttonTabs.icons.list" v-model="buttonTabs.icons.value"/>
+    </div>
+    С иконками и текстом (на будущее)
+    <div style="margin: 10px; width: 300px;">
+      <BaseButtonTabs :list="buttonTabs.iconsWithText.list" v-model="buttonTabs.iconsWithText.value"/>
+    </div>
+    <hr>
+
+    <h2>BaseTextField</h2>
+    <div style="display: flex;">
+      <base-text-field v-model="textFieldValue">
+        <span slot="label">Text field</span>
+      </base-text-field>
+      <base-text-field v-model="textFieldValue" :hasError="true">
+        <span slot="label">Error text field</span>
+        <span slot="error">
+          Error text
+        </span>
+      </base-text-field>
+      <base-text-field :value="textFieldValue" :disabled="true">
+        <span slot="label">Disabled text field</span>
+      </base-text-field>
+    </div>
+
+    <hr>
+
+    <h2>BaseSelect</h2>
     <div style="width: 17.6rem; margin-left: 2rem">
       <BaseSelect
         :options="select.options"
@@ -85,6 +122,72 @@ export default {
   data () {
     return {
       ddOpen: true,
+
+      textFieldValue: 'Some entered text',
+
+      buttonTabs: {
+        text: {
+          list: [
+            {
+              text: 'Hello',
+              value: 'hello'
+            },
+            {
+              text: 'Bye',
+              value: 'bye'
+            },
+            {
+              text: 'Ok',
+              value: 'ok'
+            }
+          ],
+          value: '',
+          valueMultiple: []
+        },
+
+        icons: {
+          list: [
+            {
+              iconName: 'alignLeft',
+              tooltipText: 'Align left',
+              value: 'left'
+            },
+            {
+              iconName: 'alignCenter',
+              tooltipText: 'Align center',
+              value: 'center'
+            },
+            {
+              iconName: 'alignRight',
+              tooltipText: 'Align right',
+              value: 'right'
+            }
+          ],
+          value: ''
+        },
+
+        iconsWithText: {
+          list: [
+            {
+              iconName: 'fontBold',
+              text: 'bold',
+              value: 'left'
+            },
+            {
+              iconName: 'fontFamily',
+              text: 'font',
+              value: 'center'
+            },
+            {
+              iconName: 'fontItalic',
+              text: 'italic',
+              value: 'right'
+            }
+          ],
+          value: ''
+        }
+      },
+
       select: {
         value: { name: 'Default', value: 0 },
         options: [
@@ -106,6 +209,10 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-sandbox-page
+  background: #fff
+  padding: 2.5rem
+
 .b-icons
   width: 70rem
   display: flex

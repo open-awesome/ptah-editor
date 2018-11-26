@@ -6,6 +6,7 @@
         @backToLandings="backToLandings"
         @preview="$emit('preview', $event)"
         @export="$emit('export', $event)"
+        :landingName="builder.landing"
         ></BuilderTopBar>
     </div>
     <div class="b-builder-layout-content">

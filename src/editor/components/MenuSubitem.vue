@@ -2,31 +2,28 @@
   <div class="b-menu-subitem"
     :class="{'b-menu-subitem_selected': isSelected}"
     @click="$emit('click', $event)">
-    <span class="b-menu-subitem__drag-icon">
-      <IconBase
-        slot="icon"
-        name="drag">
-      </IconBase>
-    </span>
+    <div class="b-menu-subitem__inner">
+      <span class="b-menu-subitem__drag-icon">
+        <IconBase
+          slot="icon"
+          name="drag" />
+      </span>
 
-    <span class="b-menu-subitem__title">
-      <slot></slot>
-    </span>
+      <span class="b-menu-subitem__title">
+        <slot></slot>
+      </span>
 
-    <span
-      class="b-menu-subitem__settings-icon"
-      v-if="hasSettings"
-      @click.stop="$emit('settingsClick')">
+      <span class="b-menu-subitem__selected-icon">
+        <IconBase
+          name="arrowRight"
+          width="8"
+          height="14"
+          color="transparent"
+          strokeColor="rgba(255,255,255,0.24)"
+          />
+      </span>
 
-      <IconBase
-        slot="icon"
-        name="settings"
-        width="16"
-        height="14"
-        :color="settingsIconColor">
-      </IconBase>
-
-    </span>
+    </div>
   </div>
 </template>
 
@@ -41,28 +38,6 @@ export default {
     isSelected: {
       type: Boolean,
       default: false
-    },
-
-    /**
-     * Is settings button available?
-     */
-    hasSettings: {
-      type: Boolean,
-      default: false
-    },
-
-    /**
-     * Is settings button pressed?
-     */
-    isSettingsSelected: {
-      type: Boolean,
-      default: false
-    }
-  },
-
-  computed: {
-    settingsIconColor () {
-      return this.isSettingsSelected ? '#0B99FF' : '#888888'
     }
   }
 }
@@ -72,30 +47,23 @@ export default {
 $selected-bg-color: rgba(#202020, 0.35)
 
 .b-menu-subitem
-  display: flex
-  height: 4.0rem
-  align-items: center
   cursor: pointer
   color: #474747
   font-size: 1.4rem
-  padding-right: 2.4rem
-  position: relative
+  padding: 0.4rem
 
-  &:hover
+  &:hover:not(.b-menu-subitem_selected)
     background: rgba(#202020, 0.08)
 
-  &_selected
-    background: #4D7DD8
-    color: #ffffff
+  &__inner
+    display: flex
+    align-items: center
+    height: 4.8rem
+    border-radius: 0.2rem
 
-    &:after
-      content: ''
+    .b-menu-subitem_selected &
       background: #4D7DD8
-      width: 0.8rem
-      height: 0.8rem
-      position: absolute
-      right: -0.4rem
-      transform: rotate(45deg)
+      color: #ffffff
 
   &__drag-icon
     visibility: hidden
@@ -108,10 +76,11 @@ $selected-bg-color: rgba(#202020, 0.35)
   &__title
     flex-grow: 1
 
-  &__settings-icon
-    padding: 1rem
+  &__selected-icon
     visibility: hidden
+    margin-right: 1.8rem
 
-    .b-menu-subitem:hover &
+    .b-menu-subitem_selected &
       visibility: visible
+
 </style>
