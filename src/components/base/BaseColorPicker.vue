@@ -99,7 +99,7 @@ export default {
         display: block
     &__palette
       position: absolute
-      top: 3.5rem
+      bottom: -302px
       left: -2.2rem
     &__arrow
       transition: .3s ease-out
