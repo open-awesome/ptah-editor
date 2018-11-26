@@ -1,18 +1,17 @@
-FROM node:10.12-alpine
+FROM node:10.12-alpine AS node
 
 #RUN apk update && apk add libpng-dev
 RUN apk update && apk add --no-cache --update make gcc g++ libc-dev libpng-dev automake autoconf libtool
 
-WORKDIR /application
-COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js webpack.mix.js yarn.lock /application/
+RUN npm install gulp -g
+
+WORKDIR /app
+COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js webpack.mix.js yarn.lock /app/
 RUN yarn install 
-RUN yarn build
+COPY . /app/
+RUN yarn cjs && gulp public-image && yarn build
 
-ENV NODE_ENV=production
+FROM nginx:1.15.4
 
-COPY . /application/
-
-ENV HOST 0.0.0.0
-EXPOSE 80
-
-CMD ["yarn", "run", "prod"]
+WORKDIR /usr/share/nginx/html
+COPY --from=node /app/dist /usr/share/nginx/html
