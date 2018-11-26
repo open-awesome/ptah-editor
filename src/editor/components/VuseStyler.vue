@@ -810,8 +810,6 @@ export default {
     showStyler (event) {
       event.stopPropagation()
 
-      console.log(this.setSettingSection)
-
       if (this.isVisible) return
       this.isVisible = true
 

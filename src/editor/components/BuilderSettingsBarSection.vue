@@ -51,7 +51,7 @@ export default {
 
   created () {
     this.sectionBgColor = this.settingObjectOptions.styles['background-color']
-    this.sectionBgUrl = this.settingObjectOptions.styles['background-image']
+    this.sectionBgUrl = this.settingObjectOptions.styles['background-image'].match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0]
   },
 
   watch: {

@@ -1,6 +1,6 @@
 <template>
   <div class="b-base-upload">
-    <base-label>
+    <base-label v-if="label">
       {{label}}
     </base-label>
 

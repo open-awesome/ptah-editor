@@ -72,15 +72,16 @@ export default {
      * @param section {Object} section from builder
      */
     setSettingSection ({ dispatch, commit }, section) {
-      let options = _.find(section.stylers, { name: '$sectionData.mainStyle' }).options
+      let options = {
+        ..._.find(section.stylers, { name: '$sectionData.mainStyle' }).options,
+        sectionId: section.id,
+        sectionName: section.name
+      }
 
       // restore styles
       if (section.data) {
         options.styles = section.data.mainStyle.styles
       }
-
-      options.sectionId = section.id
-      options.sectionName = section.name
 
       commit('setSection', section)
 
