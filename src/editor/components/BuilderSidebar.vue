@@ -30,15 +30,21 @@
       <menu-item
         :isSelected="isSectionsExpanded"
         :isExpandable="true"
-        @click="isSectionsExpanded = !isSectionsExpanded">
+        >
 
-        <IconBase
-          slot="icon"
-          name="hollowCircle"
-          color="transparent"
-          strokeColor="currentColor" />
+          <span
+            slot="icon"
+            @click="showAddSectionBar">
+            <IconBase
+              name="plus"
+              color="#355CCC"
+              strokeColor="transparent"
+            />
+          </span>
+          <span @click="isSectionsExpanded = !isSectionsExpanded">
+            Sections
+          </span>
 
-        <span>Sections</span>
       </menu-item>
 
       <!-- Sections CONTENTS -->
@@ -69,6 +75,15 @@
       </div>
     </transition>
 
+    <transition name="slide-fade">
+      <div class="b-builder-sidebar-add-section" v-show="isExpanded && isAddSectionExpanded">
+        <BuilderAddSectionBar
+          :builder="builder"
+          @requestClose="closeAddSectionBar">
+        </BuilderAddSectionBar>
+      </div>
+    </transition>
+
   </div>
 </template>
 
@@ -77,6 +92,7 @@ import Sortable from 'sortablejs'
 import MenuItem from './MenuItem.vue'
 import MenuSubitem from './MenuSubitem.vue'
 import BuilderSettingsBar from './BuilderSettingsBar.vue'
+import BuilderAddSectionBar from './BuilderAddSectionBar.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
@@ -85,7 +101,8 @@ export default {
   components: {
     MenuItem,
     MenuSubitem,
-    BuilderSettingsBar
+    BuilderSettingsBar,
+    BuilderAddSectionBar
   },
 
   props: {
@@ -108,6 +125,7 @@ export default {
   data () {
     return {
       isSectionsExpanded: false,
+      isAddSectionExpanded: false,
       isSettingsOpenedisSettingsOpened: false
     }
   },
@@ -151,12 +169,20 @@ export default {
       this.clearSettingObject()
     },
 
+    closeAddSectionBar () {
+      this.isAddSectionExpanded = false
+    },
+
     updateSectionsOrder (event) {
       this.builder.sort(event.oldIndex, event.newIndex)
     },
 
     isActiveSection (id) {
       return this.settingObjectOptions.sectionId === id
+    },
+
+    showAddSectionBar () {
+      this.isAddSectionExpanded = !this.isAddSectionExpanded
     }
   }
 }
@@ -213,7 +239,8 @@ $top-panel-height: 7.2rem
     flex-direction: column
     flex-grow: 1
 
-.b-builder-sidebar-settings
+.b-builder-sidebar-settings,
+.b-builder-sidebar-add-section
   position: absolute
   right: -248px
   top: 0.8rem

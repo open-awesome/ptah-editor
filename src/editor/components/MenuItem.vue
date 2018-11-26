@@ -15,6 +15,7 @@
       <span class="b-menu-item-inner__title">
         <slot></slot>
       </span>
+
     </div>
   </div>
 </template>

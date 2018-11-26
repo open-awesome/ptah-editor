@@ -20,10 +20,6 @@ export default {
     setDevice (type) {
       this.$emit('setDevice', type)
     }
-  },
-
-  mounted () {
-    console.log(this.builder)
   }
 }
 </script>
