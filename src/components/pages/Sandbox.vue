@@ -98,18 +98,22 @@
 
     <h2>BaseTextField</h2>
     <div style="display: flex;">
-      <base-text-field v-model="textFieldValue">
-        <span slot="label">Text field</span>
-      </base-text-field>
-      <base-text-field v-model="textFieldValue" :hasError="true">
-        <span slot="label">Error text field</span>
+      <base-text-field v-model="textFieldValue" label="Text field"></base-text-field>
+      <base-text-field v-model="textFieldValue" label="Error text field" :hasError="true">
         <span slot="error">
           Error text
         </span>
       </base-text-field>
-      <base-text-field :value="textFieldValue" :disabled="true">
-        <span slot="label">Disabled text field</span>
+      <base-text-field :value="textFieldValue" label="Disabled text field" :disabled="true">
       </base-text-field>
+    </div>
+
+    <hr>
+    <h2>BaseRangeSlider</h2>
+    <div style="width: 300px">
+      <base-range-slider v-model="rangeSliderValue" label="Border radius" step="10">
+        {{rangeSliderValue}} %
+      </base-range-slider>
     </div>
   </div>
 </template>
@@ -123,6 +127,8 @@ export default {
       ddOpen: true,
 
       textFieldValue: 'Some entered text',
+
+      rangeSliderValue: 50,
 
       buttonTabs: {
         text: {

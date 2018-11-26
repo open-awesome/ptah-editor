@@ -30,6 +30,7 @@ function installStyler ({ builder, Vue }) {
       }
 
       section.stylers.push(new StylerInstance({
+        store: vnode.context.$store,
         propsData: {
           el,
           section: section,

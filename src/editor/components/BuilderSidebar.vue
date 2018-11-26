@@ -50,7 +50,7 @@
           <MenuSubitem
             v-for="(section, index) in builder.sections"
             :key="section.id"
-            :isSelected="selectedSettingsID === section.id"
+            :isSelected="isActiveSection(section.id)"
             @click="toggleSettingsBar(section)">
             {{`${index + 1}.`}} {{section.name}}
           </MenuSubitem>
@@ -59,8 +59,12 @@
 
     </div>
     <transition name="slide-fade">
-      <div class="b-builder-sidebar-settings" v-show="isExpanded && isSettingsOpened">
-        <BuilderSettingsBar :title="selectedSettingsName" @requestClose="closeSettingsBar">
+      <div class="b-builder-sidebar-settings" v-show="isExpanded && isSettingsExpanded">
+        <BuilderSettingsBar
+          :title="settingObjectOptions.sectionName"
+          :builder="builder"
+          @requestClose="closeSettingsBar"
+          v-if="settingObjectOptions.sectionName">
         </BuilderSettingsBar>
       </div>
     </transition>
@@ -73,6 +77,7 @@ import Sortable from 'sortablejs'
 import MenuItem from './MenuItem.vue'
 import MenuSubitem from './MenuSubitem.vue'
 import BuilderSettingsBar from './BuilderSettingsBar.vue'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'BuilderSidebar',
@@ -93,13 +98,17 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'isSettingsExpanded',
+      'settingObjectOptions'
+    ])
+  },
+
   data () {
     return {
       isSectionsExpanded: false,
-
-      isSettingsOpened: false,
-      selectedSettingsID: '',
-      selectedSettingsName: ''
+      isSettingsOpenedisSettingsOpened: false
     }
   },
 
@@ -121,30 +130,33 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'setSettingSection',
+      'clearSettingObject'
+    ]),
+
     toggleSidebar () {
       this.$emit('toggleSidebar')
     },
 
-    toggleSettingsBar ({ id, name }) {
-      if (this.selectedSettingsID !== id) {
-        this.selectedSettingsID = id
-        this.selectedSettingsName = name
-        this.isSettingsOpened = true
-      } else {
-        this.selectedSettingsID = ''
-        this.selectedSettingsName = ''
-        this.isSettingsOpened = false
+    toggleSettingsBar (section) {
+      this.clearSettingObject()
+
+      if (!this.isActiveSection(section.id)) {
+        this.setSettingSection(section)
       }
     },
 
     closeSettingsBar () {
-      this.isSettingsOpened = false
-      this.selectedSettingsID = ''
-      this.selectedSettingsName = ''
+      this.clearSettingObject()
     },
 
     updateSectionsOrder (event) {
       this.builder.sort(event.oldIndex, event.newIndex)
+    },
+
+    isActiveSection (id) {
+      return this.settingObjectOptions.sectionId === id
     }
   }
 }
