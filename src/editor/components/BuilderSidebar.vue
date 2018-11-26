@@ -206,6 +206,7 @@ $top-panel-height: 7.2rem
     box-shadow: inset 1px 3px 8px 0 rgba(#888888, 0.15)
     display: flex
     flex-direction: column
+    min-height: 0
 
   &__dropdown
     display: flex
