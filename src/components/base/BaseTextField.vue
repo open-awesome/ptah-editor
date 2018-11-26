@@ -3,8 +3,8 @@
     :class="{'b-base-text-field_error': hasError}">
     <label>
 
-      <base-label :hasError="hasError" :hasFocus="hasFocus">
-        <slot name="label"></slot>
+      <base-label v-if="label" :hasError="hasError" :hasFocus="hasFocus">
+        {{label}}
       </base-label>
 
       <input class="b-base-text-field__input" type="text"
@@ -15,6 +15,7 @@
         @blur="$emit('blur', $event), hasFocus = false" />
 
       <base-error-text v-if="hasError">
+        {{errorText}}
         <slot name="error"></slot>
       </base-error-text>
 
@@ -37,6 +38,14 @@ export default {
     hasError: {
       type: Boolean,
       default: false
+    },
+    errorText: {
+      type: String,
+      default: ''
+    },
+    label: {
+      type: String,
+      default: ''
     }
   },
 
