@@ -65,6 +65,17 @@
     </div>
 
     <hr>
+    <h2>BaseSelect</h2>
+    <div style="width: 17.6rem; margin-left: 2rem">
+      <BaseSelect
+        :options="select.options"
+        :value="select.value"
+        v-model="select.selected"
+        >
+      </BaseSelect>
+    </div>
+
+    <hr>
     <h2>ButtonTabs</h2>
 
     Обычный
@@ -99,18 +110,6 @@
       <base-text-field :value="textFieldValue" :disabled="true">
         <span slot="label">Disabled text field</span>
       </base-text-field>
-    </div>
-
-    <hr>
-
-    <h2>BaseSelect</h2>
-    <div style="width: 17.6rem; margin-left: 2rem">
-      <BaseSelect
-        :options="select.options"
-        :value="select.value"
-        v-model="select.selected"
-        >
-      </BaseSelect>
     </div>
   </div>
 </template>

@@ -30,19 +30,15 @@ export default {
     selectOption (option) {
       this.$emit('input', option)
     },
-    dropdown (e) {
-      let el = this.$refs.dropdown
-      let target = e.target
-      if (el !== target && !el.contains(target)) {
-        this.showOptions = false
-      }
+    onClickOutside (e, el) {
+      this.showOptions = false
     }
   }
 }
 </script>
 
 <template>
-  <div class="l-pth-base-select"  @click="showOptions = !showOptions">
+  <div class="l-pth-base-select"  @click="showOptions = !showOptions" v-click-outside="onClickOutside">
     <div class="b-pth-base-select">
       <div class="b-pth-base-select__container">
         <span class="b-pth-base-select__name">
@@ -58,7 +54,7 @@ export default {
           </icon-base>
         </span>
       </div>
-      <div class="b-pth-base-select__dropdown" v-show="showOptions" ref="dropdown">
+      <div class="b-pth-base-select__dropdown" v-show="showOptions">
         <vue-scrollbar classes="b-pth-base-select__scrollbar" ref="Scrollbar">
           <ul class="b-pth-base-select__options">
             <li class="b-pth-base-select__options-item" v-for="(option, index) in options" :key="index" @click="selectOption(option)">
@@ -82,6 +78,8 @@ export default {
   position: relative
   width: 100%
   font-family: Lato, Roboto, Helvetica, Arial, sans-serif
+  & *
+    user-select: none
   &__container
     display: flex
     justify-content: space-between
@@ -124,6 +122,7 @@ export default {
       line-height: 2.8rem
       font-size: 1.6rem
       list-style: none
+      color: #272727
       transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
       &:last-child
         border-bottom: none
