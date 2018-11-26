@@ -1,8 +1,11 @@
 <template>
   <div class="b-range-slider">
-    <span class="b-range-slider__text">
+    <base-label v-if="label">
+      {{label}}
+    </base-label>
+    <div class="b-range-slider__text">
       <slot></slot>
-    </span>
+    </div>
     <range-slider
       class=""
       :min="min"
@@ -30,6 +33,10 @@ export default {
     value: {
       type: Number,
       required: true
+    },
+    label: {
+      type: String,
+      default: ''
     },
     step: {
       type: [String, Number],
@@ -62,17 +69,18 @@ export default {
 <style lang="sass" scoped>
 $slider-height: 1.3rem
 $rail-height: 1px
-$knob-size: 0.9rem
 
 $rail-color: rgba(#888888, 0.25)
 $rail-fill-color: #436FEE
 $knob-color: #fff
+$knob-size: 0.9rem
 
 $knob-border: 2px solid #436FEE
 $knob-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
 
 .b-range-slider
   &__text
+    padding-top: 0.4rem
     font-size: 1.6rem
     line-height: 1.8rem
     color: #272727
@@ -111,19 +119,26 @@ $knob-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
       background-color: $rail-fill-color
 
     .range-slider-knob
-      display: block
+      display: flex
+      align-items: center
+      justify-content: center
       position: absolute
       top: 50%
       left: 0
       box-sizing: border-box
-      height: $knob-size
-      width: $knob-size
-      border: $knob-border
-      border-radius: 50%
-      background-color: $knob-color
-      box-shadow: $knob-shadow
+      width: 2.5rem
+      height: 2.5rem
       transform: translate(-50%, -50%)
       cursor: pointer
+
+      &:before
+        content: ''
+        height: $knob-size
+        width: $knob-size
+        border: $knob-border
+        border-radius: 50%
+        background-color: $knob-color
+        box-shadow: $knob-shadow
 
     .range-slider-hidden
       display: none
