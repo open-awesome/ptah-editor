@@ -360,6 +360,7 @@ import { isParentTo, randomPoneId, getPseudoTemplate, correctArray } from '../ut
 import $ from 'jquery'
 import axios from 'axios'
 import * as _ from 'lodash-es'
+import { mapActions } from 'vuex'
 
 const DEFAULT_BACKGROUND_REPEAT = 'no-repeat'
 const DEFAULT_BACKGROUND_POSITION = 'center center'
@@ -568,6 +569,9 @@ export default {
     document.removeEventListener('click', this.hideStyler, true)
   },
   methods: {
+    ...mapActions('Sidebar', [
+      'setSettingSection'
+    ]),
     changeSize (e) {
       if (this.keepProportions) {
         if (e.target.dataset.type === 'w') {
@@ -814,6 +818,7 @@ export default {
         let inner = ''
 
         if (this.$props.type === 'section') {
+          this.setSettingSection(this.section)
           position = 'left-start'
           inner = true
         } else {

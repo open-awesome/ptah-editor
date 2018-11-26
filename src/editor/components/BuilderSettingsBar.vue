@@ -11,13 +11,15 @@
       {{title}}
     </h6>
     <div class="b-builder-settings-bar__contents" v-if="title">
-      <!-- <component :is="'BuilderSettingsBar' + title"></component> -->
+      <component :is="settingComponent" :builder="builder"></component>
     </div>
   </div>
 </template>
 
 <script>
 import BuilderSettingsBarSection from './BuilderSettingsBarSection'
+import { mapState } from 'vuex'
+
 export default {
   name: 'BuilderSettingsBar',
 
@@ -25,6 +27,21 @@ export default {
     title: {
       required: true,
       type: String
+    },
+    builder: {
+      type: Object,
+      required: true
+    }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectType'
+    ]),
+
+    settingComponent () {
+      const suffix = this.settingObjectType === 'section' ? 'Section' : 'Element'
+      return `BuilderSettingsBar${suffix}`
     }
   },
 
@@ -39,6 +56,8 @@ export default {
   width: 240px
   background: #F5F5F5
   padding: 28px 32px
+  display: flex
+  flex-direction: column
 
   &__title
     margin: 0 0 28px 0
@@ -50,11 +69,11 @@ export default {
     position: absolute
     right: 10px
     top: 10px
-    padding: 6px 10px;
+    padding: 6px 10px
     border: 0
     background: transparent
-    cursor: pointer;
+    cursor: pointer
 
   &__contents
-
+    flex-grow: 2
 </style>

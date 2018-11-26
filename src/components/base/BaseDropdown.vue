@@ -21,7 +21,7 @@ export default {
 
 <style lang="sass" scoped>
 .b-base-dropdown
-  overflow-y: auto;
+  overflow-y: auto
   width: 100%
 
 // Animations down here
