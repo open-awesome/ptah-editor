@@ -54,8 +54,8 @@ export default {
           </icon-base>
         </span>
       </div>
-      <div class="b-pth-base-select__dropdown" v-show="showOptions">
-        <vue-scrollbar classes="b-pth-base-select__scrollbar" ref="Scrollbar">
+      <div class="b-pth-base-select__dropdown" v-if="showOptions">
+        <vue-scrollbar classes="b-pth-base-select__scrollbar">
           <ul class="b-pth-base-select__options">
             <li class="b-pth-base-select__options-item" v-for="(option, index) in options" :key="index" @click="selectOption(option)">
               {{ option.name }}
@@ -116,6 +116,7 @@ export default {
   &__options
     margin: 0
     padding: 0
+    min-height: 11rem
     &-item
       padding: 0 1.2rem
       height: 3.2rem
