@@ -65,6 +65,17 @@
     </div>
 
     <hr>
+    <h2>BaseSelect</h2>
+    <div style="width: 17.6rem; margin-left: 2rem">
+      <BaseSelect
+        :options="select.options"
+        :value="select.value"
+        v-model="select.selected"
+        >
+      </BaseSelect>
+    </div>
+
+    <hr>
     <h2>ButtonTabs</h2>
 
     Обычный
@@ -180,6 +191,22 @@ export default {
           ],
           value: ''
         }
+      },
+
+      select: {
+        value: { name: 'Default', value: 0 },
+        options: [
+          { name: 'Value', value: 1 },
+          { name: 'Fixed', value: 2 },
+          { name: 'Select', value: 3 },
+          { name: 'Value2', value: 21 },
+          { name: 'Fixed2', value: 22 },
+          { name: 'Select2', value: 23 },
+          { name: 'Value3', value: 31 },
+          { name: 'Fixed3', value: 32 },
+          { name: 'Select3', value: 33 }
+        ],
+        selected: { name: 'Default', value: 0 }
       }
     }
   }
