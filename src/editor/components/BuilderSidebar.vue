@@ -17,12 +17,6 @@
     <div class="b-builder-sidebar__content">
       <!-- Site settings -->
       <menu-item>
-        <IconBase
-          slot="icon"
-          name="hollowCircle"
-          color="transparent"
-          strokeColor="currentColor">
-        </IconBase>
         Site Settings
       </menu-item>
 
@@ -32,7 +26,7 @@
         :isExpandable="true"
         >
 
-          <span
+          <span class="b-builder-sidebar__icon-add"
             slot="icon"
             @click="showAddSectionBar">
             <IconBase
@@ -240,13 +234,22 @@ $top-panel-height: 7.2rem
     flex-direction: column
     flex-grow: 1
 
-.b-builder-sidebar-settings,
-.b-builder-sidebar-add-section
-  position: absolute
-  right: -248px
-  top: 0.8rem
-  bottom: 0.8rem;
-  display: flex
+  &__icon-add
+    width: 3.2rem
+    height: 3.2rem
+    background-color: #fff
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 100%
+
+  &-settings,
+  &-add-section
+    position: absolute
+    right: -248px
+    top: 0.8rem
+    bottom: 0.8rem
+    display: flex
 
 // Animations down here
 .slide-fade

@@ -8,12 +8,12 @@
       }"
       @click="$emit('click', $event)">
 
-      <span class="b-menu-item-inner__icon">
-        <slot name="icon"></slot>
-      </span>
-
       <span class="b-menu-item-inner__title">
         <slot></slot>
+      </span>
+
+      <span class="b-menu-item-inner__icon">
+        <slot name="icon"></slot>
       </span>
 
     </div>
@@ -47,12 +47,15 @@ export default {
 
 <style lang="sass" scoped>
 .b-menu-item-inner
-  display: flex
   height: 5.6rem
+  display: flex
   align-items: center
+  justify-content: space-between
   cursor: pointer
   color: #474747
-  padding-left: 3.2rem
+  padding: 0 1.3rem 0 3.2rem
+  background: linear-gradient(0deg, #F0F0F0, #F0F0F0), linear-gradient(0deg, rgba(255, 255, 255, 0.7), rgba(255, 255, 255, 0.7)), #587FEE
+  box-shadow: inset 0px -1px 0px rgba(0, 0, 0, 0.08), inset 0px 1px 0px rgba(0, 0, 0, 0.08)
 
   &:hover
     background: rgba(#202020, 0.08)

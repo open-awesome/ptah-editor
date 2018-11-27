@@ -1,68 +1,3 @@
-<template>
-  <div class="b-add-section">
-    <h6 class="b-add-section__title">
-      {{ title }}
-    </h6>
-
-    <ul class="b-add-section__menu is-visiable" ref="menu">
-      <li class="b-add-section__menu-group"
-          :class="{ 'b-add-section__menu-group_selected': group === selectedGroup }"
-          v-for="(group, name) in groups"
-          :key="name"
-          v-if="group.length">
-        <div class="b-add-section__menu-header" @click="toggleGroupVisibility(group)">
-          <span class="b-add-section__menu-title">{{ name }}</span>
-        </div>
-      </li>
-    </ul>
-
-    <div class="b-add-section-bar" v-show="isVisibleBar">
-      <div class="b-add-section-bar__menu">
-        <template v-for="(section, index) in selectedGroup">
-          <div class="b-add-section-bar__menu-element"
-               :class="{ 'b-add-section-bar__menu-element_selected': section === selectedSection }"
-               v-bind:key="index"
-               @click="selectSection(section)">
-            <img class="b-add-section-bar__menu-image" v-if="section.cover" :src="section.cover"/>
-            <icon-base
-              v-if="section === selectedSection"
-              name="checkMark"
-              :width="17"
-              :height="12"
-              color="#fff">
-            </icon-base>
-            <span class="b-add-section-bar__menu-title" v-if="!section.cover">
-              {{ section.name }}
-            </span>
-          </div>
-        </template>
-      </div>
-    </div>
-
-    <div class="b-add-section-footer"
-        :class="{ 'b-add-section-footer_add': isVisibleBar }">
-      <BaseButton
-        class="b-add-section-footer__bt"
-        :color="'gray'"
-        :transparent="true"
-        @click="$emit('requestClose')"
-        >
-        Cancel
-      </BaseButton>
-      <BaseButton
-        class="b-add-section-footer__bt"
-        :color="'blue'"
-        :transparent="false"
-        @click="addSection"
-        v-if="selectedSection !== null"
-        >
-        Add
-      </BaseButton>
-    </div>
-
-  </div>
-</template>
-
 <script>
 export default {
   name: 'BuilderAddSectionBar',
@@ -90,10 +25,6 @@ export default {
 
   created () {
     this.generateGroups()
-  },
-
-  mounted () {
-
   },
 
   methods: {
@@ -144,19 +75,118 @@ export default {
 }
 </script>
 
+<template>
+  <div class="b-add-section">
+    <div class="b-add-section__padd">
+      <h6 class="b-add-section__title">
+        {{ title }}
+      </h6>
+
+      <ul class="b-add-section__menu is-visiable" ref="menu">
+        <li class="b-add-section__menu-group"
+            :class="{ 'b-add-section__menu-group_selected': group === selectedGroup }"
+            v-for="(group, name) in groups"
+            :key="name"
+            v-if="group.length">
+          <div class="b-add-section__menu-header" @click="toggleGroupVisibility(group)">
+            <span class="b-add-section__menu-title">{{ name }}</span>
+          </div>
+        </li>
+      </ul>
+
+      <div class="b-add-section-bar" v-show="isVisibleBar">
+        <div class="b-add-section-bar__menu">
+          <template v-for="(section, index) in selectedGroup">
+            <div class="b-add-section-bar__menu-element"
+                 :class="{ 'b-add-section-bar__menu-element_selected': section === selectedSection }"
+                 v-bind:key="index"
+                 @click="selectSection(section)">
+              <img class="b-add-section-bar__menu-image" v-if="section.cover" :src="section.cover"/>
+              <icon-base
+                v-if="section === selectedSection"
+                name="checkMark"
+                :width="17"
+                :height="12"
+                color="#fff">
+              </icon-base>
+              <span class="b-add-section-bar__menu-title" v-if="!section.cover">
+                {{ section.name }}
+              </span>
+            </div>
+          </template>
+        </div>
+      </div>
+
+      <div class="b-add-section-footer"
+          :class="{ 'b-add-section-footer_add': isVisibleBar }">
+        <BaseButton
+          class="b-add-section-footer__bt"
+          :color="'gray'"
+          :transparent="true"
+          @click="$emit('requestClose')"
+          >
+          Cancel
+        </BaseButton>
+        <BaseButton
+          class="b-add-section-footer__bt"
+          :color="'blue'"
+          :transparent="false"
+          @click="addSection"
+          v-if="selectedSection !== null"
+          >
+          Add
+        </BaseButton>
+      </div>
+    </div>
+  </div>
+</template>
+
 <style lang="sass" scoped>
 .b-add-section
   width: 24rem
-  background: #F5F5F5
-  padding: 2.8rem 3.2rem
-  display: flex
-  flex-direction: column
+  background: #fff
+  position: relative
+  z-index: 1
+  &__padd
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 1
+    background: #FFFFFF
+    padding: 2.8rem 3.2rem
+    display: flex
+    flex-direction: column
+  &:before
+    content: ""
+    position: absolute
+    width: 2.4rem
+    height: 2.4rem
+    top: 9rem
+    left: -1.2rem
+    background: #FFFFFF
+    transform: rotate(-45deg)
+    z-index: 2
+  &:after
+    content: ""
+    position: absolute
+    width: 2.4rem
+    height: 2.4rem
+    top: 9rem
+    left: -1.2rem
+    background: #FFFFFF
+    transform: rotate(-45deg)
+    box-shadow: 0 0.6rem 2.4rem 0 rgba(0, 0, 0, 0.15)
+    z-index: 0
 
   &__title
     margin: 0 0 2.8rem 1.6rem
-    color: #272727
+    color: #2E2E2E
     font-size: 1.8rem
     font-weight: bold
+    letter-spacing: 0.02rem
+    text-transform: capitalize
 
   &__closer
     position: absolute
@@ -186,8 +216,7 @@ export default {
         border: 1px solid rgba(67, 111, 238, 0.15)
     &-title
       display: inline-block
-      &::first-letter
-        text-transform: uppercase
+      text-transform: capitalize
 
   &-bar
     position: absolute
