@@ -6,7 +6,21 @@ export default {
     isSettingsExpanded: false, // 2nd level menu
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectOptions: {},
-    settingObjectSection: {}
+    settingObjectSection: {},
+    siteSettingsMenu: [
+      {
+        id: 'visualSettings',
+        name: 'Visual settings'
+      },
+      {
+        id: 'seoSettings',
+        name: 'SEO settings'
+      },
+      {
+        id: 'versionHistory',
+        name: 'Version history'
+      }
+    ]
   },
 
   mutations: {

@@ -5,6 +5,7 @@
     <div class="b-menu-subitem__inner">
       <span class="b-menu-subitem__drag-icon">
         <IconBase
+          v-if="hasDraggableIcon"
           slot="icon"
           name="drag" />
       </span>
@@ -36,6 +37,11 @@ export default {
      * Configurates selected item view
      */
     isSelected: {
+      type: Boolean,
+      default: false
+    },
+
+    hasDraggableIcon: {
       type: Boolean,
       default: false
     }
