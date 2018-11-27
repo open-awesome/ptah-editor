@@ -62,7 +62,17 @@
             <span class="menu-icon"><VuseIcon name="arrowDown"></VuseIcon></span>
           </div>
           <div class="menu-body">
-              <template v-for="(section, index) in group"><a class="menu-element" v-bind:key="index" @click="addSection(section)" @drag="currentSection = section"><img class="menu-elementImage" v-if="section.cover" :src="section.cover"/><span class="menu-elementTitle">{{ section.name }}</span></a></template>
+              <template v-for="(section, index) in group">
+                <a class="menu-element"
+                   v-bind:key="index"
+                   @click="addSection(section)"
+                   @drag="currentSection = section">
+                  <img class="menu-elementImage" v-if="section.cover" :src="section.cover"/>
+                  <span class="menu-elementTitle">
+                    {{ section.name }}
+                  </span>
+                </a>
+              </template>
           </div>
       </li>
     </ul>

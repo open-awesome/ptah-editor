@@ -79,6 +79,7 @@
       <div class="b-builder-sidebar-add-section" v-show="isExpanded && isAddSectionExpanded">
         <BuilderAddSectionBar
           :builder="builder"
+          title="Add Section"
           @requestClose="closeAddSectionBar">
         </BuilderAddSectionBar>
       </div>

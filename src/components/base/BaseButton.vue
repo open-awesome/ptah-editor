@@ -8,6 +8,7 @@ export default {
       validator (value) {
         const values = [
           'black',
+          'blue',
           'gray',
           'light-gray'
         ]
@@ -89,9 +90,9 @@ export default {
   line-height: 4.4rem
   margin: 0.4rem
   =active
-    background-color: #165c8f
-    border-color: #165c8f
-    color: #fafafa
+    background-color: #436FEE
+    border-color: #436FEE
+    color: #fff
   &:hover
     cursor: pointer
     +active
@@ -107,10 +108,12 @@ export default {
   &_black
     color: #eee
     background-color: #202020
-  &_grey
-    color: #eee
+  &_blue
+   +active
+  &_gray
+    color: #888
     background-color: #383838
-    border: 0.2rem #dedede solid
+    border: 0.2rem rgba(0, 0, 0, 0.07) solid
   &_light-gray
     color: #474747
     background-color: #fafafa
