@@ -14,7 +14,7 @@
         <div class="b-builder-layout-content__main-layout" :class="device">
           <slot></slot>
         </div>
-        <BuilderModalContent :builder="builder" />
+        <BuilderModalContent />
       </main>
       <aside
         class="b-builder-layout-content__sidebar"

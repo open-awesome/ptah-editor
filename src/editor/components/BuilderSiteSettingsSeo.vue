@@ -87,12 +87,6 @@ export default {
     BuilderModalContentLayout
   },
 
-  props: {
-    builder: {
-      required: true
-    }
-  },
-
   data () {
     return {
       pageTitle: '',
@@ -119,7 +113,6 @@ export default {
 
   methods: {
     ...mapActions([
-      'getLandingData',
       'storeSettings'
     ]),
     updateSettings () {

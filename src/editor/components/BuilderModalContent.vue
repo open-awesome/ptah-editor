@@ -6,7 +6,6 @@
       :style="{'margin-right': `${fakeScrollbarWidth}px`}">
       <component
         :is="contentComponent"
-        :builder="builder"
         @requestClose="closeContent"></component>
     </div>
   </transition>
@@ -25,12 +24,6 @@ export default {
     BuilderSiteSettingsSeo,
     BuilderSiteSettingsVersionHistory,
     BuilderSiteSettingsVisual
-  },
-
-  props: {
-    builder: {
-      required: true
-    }
   },
 
   computed: {
