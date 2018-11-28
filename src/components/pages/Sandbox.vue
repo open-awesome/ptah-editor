@@ -85,6 +85,18 @@
     </div>
     <hr>
 
+    <!--<h2>BaseColorPicker</h2>
+    <div style="width: 250px;">
+      <base-color-picker v-model="someColor" label="Some color"></base-color-picker>
+    </div>-->
+
+    <hr>
+    <h2>BaseUploadInput</h2>
+    <div style="width: 250px;">
+      <base-upload-input v-model="imageUrl" label="Upload image" placeholder="Image Url"></base-upload-input>
+    </div>
+    <hr>
+
     <h2>BaseTextField</h2>
     <div style="display: flex;">
       <base-text-field v-model="textFieldValue" label="Text field"></base-text-field>
@@ -113,6 +125,8 @@ export default {
 
   data () {
     return {
+      someColor: '#FF0000',
+      imageUrl: '',
       ddOpen: true,
 
       textFieldValue: 'Some entered text',

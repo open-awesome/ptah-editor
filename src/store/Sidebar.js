@@ -54,15 +54,15 @@ export default {
     },
 
     /**
-     * Update options & set new styles to section
+     * Update options & set new styles to section / element
      * @param commit
      * @param state
      * @param options
      */
     updateSettingOptions ({ commit, state }, options) {
       commit('setSettingObjectOptions', options)
-      let path = '$sectionData.mainStyle' // TODO: need path to any elements
-      state.settingObjectSection.set(path, { styles: options.styles })
+      const path = state.settingObjectType === 'section' ? '$sectionData.mainStyle' : state.settingObjectOptions.name
+      state.settingObjectSection.set(path, options)
     },
 
     /**
@@ -88,6 +88,22 @@ export default {
       dispatch('setSettingObject', {
         type: 'section',
         options
+      })
+    },
+
+    setSettingElement ({ dispatch, commit }, { type, name, options, section }) {
+      let elementOptions = {
+        ...options,
+        name,
+        sectionId: section.id,
+        sectionName: section.name
+      }
+
+      commit('setSection', section)
+
+      dispatch('setSettingObject', {
+        type,
+        options: elementOptions
       })
     }
   },

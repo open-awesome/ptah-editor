@@ -263,11 +263,11 @@
 
       <!-- Text align -->
       <li v-if="currentOption === 'align'">
-        <ControlAlign
+        <!--<ControlAlign
           v-bind:isBox="options.box"
           @boxAligned="onBoxAligned"
           @textAligned="onTextAligned">
-        </ControlAlign>
+        </ControlAlign>-->
       </li>
 
       <!-- Text style -->
@@ -351,7 +351,7 @@
 <script>
 import Popper from 'popper.js'
 import VuseIcon from './VuseIcon'
-import ControlAlign from './controls/TheControlAlign.vue'
+// import ControlAlign from './controls/TheControlAlign.vue'
 import ControlStyleText from './controls/TheControlStyleText.vue'
 import ControlShape from './controls/TheControlShape.vue'
 import ControlSetUrl from './controls/TheControlSetUrl.vue'
@@ -373,7 +373,7 @@ export default {
   name: 'Styler',
   components: {
     VuseIcon,
-    ControlAlign,
+    // ControlAlign,
     ControlStyleText,
     ControlShape,
     ControlSetUrl,
@@ -570,7 +570,8 @@ export default {
   },
   methods: {
     ...mapActions('Sidebar', [
-      'setSettingSection'
+      'setSettingSection',
+      'setSettingElement'
     ]),
     changeSize (e) {
       if (this.keepProportions) {
@@ -822,6 +823,12 @@ export default {
           position = 'left-start'
           inner = true
         } else {
+          this.setSettingElement({
+            type: this.$props.type,
+            name: this.name,
+            options: _.get(this.section.data, this.path).element,
+            section: this.section
+          })
           position = 'bottom'
           inner = false
         }

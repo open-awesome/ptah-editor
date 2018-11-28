@@ -18,6 +18,8 @@
 
 <script>
 import BuilderSettingsBarSection from './BuilderSettingsBarSection'
+import BuilderSettingsBarElement from './BuilderSettingsBarElement'
+
 import { mapState } from 'vuex'
 
 export default {
@@ -46,7 +48,8 @@ export default {
   },
 
   components: {
-    BuilderSettingsBarSection
+    BuilderSettingsBarSection,
+    BuilderSettingsBarElement
   }
 }
 </script>
