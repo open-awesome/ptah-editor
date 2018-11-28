@@ -31,7 +31,7 @@ data:
         }
 
         location / {
-          index index.php;
+          index index.html;
           try_files $uri @404;
         }
         location @404 {
