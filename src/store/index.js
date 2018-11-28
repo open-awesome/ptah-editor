@@ -2,8 +2,12 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import api from '@store/api'
 import Sidebar from './Sidebar'
+import vOutsideEvents from 'vue-outside-events'
+import BuilderModalContent from './BuilderModalContent'
+import PageTweaks from './PageTweaks/PageTweaks'
 
 Vue.use(Vuex)
+Vue.use(vOutsideEvents)
 
 const state = {
   storefrontPreview: false,
@@ -75,7 +79,9 @@ const mutations = {
 }
 
 const modules = {
-  Sidebar
+  Sidebar,
+  BuilderModalContent,
+  PageTweaks
 }
 
 export default new Vuex.Store({
