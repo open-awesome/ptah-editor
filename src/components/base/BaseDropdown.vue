@@ -1,14 +1,19 @@
 <template>
-  <transition name="slide-fade" v-if="isOpened">
-    <div class="b-base-dropdown">
+  <div class="b-base-dropdown">
+    <slide-up-down :active="isOpened" :duration="200">
       <slot></slot>
-    </div>
-  </transition>
+    </slide-up-down>
+  </div>
 </template>
 
 <script>
+import SlideUpDown from 'vue-slide-up-down'
 export default {
   name: 'BaseDropdown',
+
+  components: {
+    SlideUpDown
+  },
 
   props: {
     isOpened: {
