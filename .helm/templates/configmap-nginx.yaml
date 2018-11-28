@@ -1,0 +1,37 @@
+{{- $configMapName := printf "%s-%s" .Release.Name .Values.frontend.name }}
+{{ $backendSvc := printf "%s-%s" .Release.Name .Values.backend.name }}
+{{ $deployment := .Values.frontend }}
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: {{ $configMapName }}
+  labels:
+    app: {{ .Chart.Name }}
+    chart: "{{ .Chart.Name }}-{{ .Chart.Version }}"
+    release: {{ .Release.Name }}
+    heritage: {{ .Release.Service }} 
+    role: {{ $deployment.role }}
+data:
+  {{ .Values.ingress.hostname }}.conf: |
+      server {
+        server_name {{ .Values.ingress.hostname }};
+        listen {{ .Values.frontend.port }} default_server;
+
+        charset utf-8;
+
+        root /usr/share/nginx/html;
+
+        location = /_healthz {
+          add_header Content-Type text/plain;
+          return 200 'ok';
+        }
+
+        location ~* ^/.*\.(jpg|jpeg|png|gif|swf|eot|woff|svg|ttf|css|js) {
+          expires 31536000;
+        }
+
+        location / {
+          index index.php;
+          try_files $uri;
+        }
+      }
