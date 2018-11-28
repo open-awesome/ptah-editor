@@ -9,7 +9,7 @@ import * as types from '@editor/types'
 export default {
   name: 'Delimiter',
   cover: '/img/covers/delimiter1.png',
-  group: 'delimiters',
+  group: 'elements',
   $schema: {
     mainStyle: types.StyleObject
   },

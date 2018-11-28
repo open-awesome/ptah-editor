@@ -20,10 +20,6 @@ export default {
     setDevice (type) {
       this.$emit('setDevice', type)
     }
-  },
-
-  mounted () {
-    console.log(this.builder)
   }
 }
 </script>
@@ -144,10 +140,10 @@ export default {
     &:hover
       #{$self}-arrow-a,
       #{$self}-arrow-b
-        border-left: 0.2rem solid #165c8f
-        border-bottom: 0.2rem  solid #165c8f
-        background-color: #165c8f
-        border-color: #165c8f
+        border-left: 0.2rem solid #436FEE
+        border-bottom: 0.2rem  solid #436FEE
+        background-color: #436FEE
+        border-color: #436FEE
         color: #fafafa
       #{$self}-arrow-b
         z-index: 1

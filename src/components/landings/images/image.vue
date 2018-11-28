@@ -18,7 +18,7 @@ import * as types from '@editor/types'
 export default {
   name: 'Picture',
   cover: '/img/covers/image.png',
-  group: 'images',
+  group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,
     images: [
