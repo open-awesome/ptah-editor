@@ -3,7 +3,7 @@
     <button
       class="b-builder-sidebar__back-button"
       title="Minimize panel"
-      @click="toggleSidebar">
+      @click="toggleSidebarAndHideContent">
 
       <IconBase
         slot="icon"
@@ -155,6 +155,11 @@ export default {
     ...mapActions('BuilderModalContent', {
       setModalContent: 'setContent'
     }),
+
+    toggleSidebarAndHideContent () {
+      this.toggleSidebar()
+      this.setModalContent('')
+    },
 
     toggleMenuItem (name) {
       if (this.expandedMenuItem === name) {

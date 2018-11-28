@@ -79,10 +79,8 @@ export default {
   &-leave-active
     transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
 
-  &-enter
-    opacity: 0
-    transform: translateX(-0.8rem)
-
+  &-enter,
   &-leave-to
     opacity: 0
+    transform: translateX(-0.8rem)
 </style>
