@@ -45,10 +45,11 @@ export default {
       })
       this.groups = groups
     },
-    toggleGroupVisibility (group) {
+    selectGroup (group) {
       this.selectedGroup = group
       this.selectedSection = null
-      this.isVisibleBar = true
+      this.isVisibleBar = false
+      setTimeout(() => { this.isVisibleBar = true }, 150)
     },
     selectSection (section) {
       this.selectedSection = section
@@ -70,6 +71,12 @@ export default {
         }
       })
       return sections
+    },
+    closeAddSectionBar () {
+      this.$emit('requestClose')
+      this.isVisibleBar = false
+      this.selectedSection = null
+      this.selectedGroup = null
     }
   }
 }
@@ -88,13 +95,16 @@ export default {
             v-for="(group, name) in groups"
             :key="name"
             v-if="group.length">
-          <div class="b-add-section__menu-header" @click="toggleGroupVisibility(group)">
+          <div class="b-add-section__menu-header" @click="selectGroup(group)">
             <span class="b-add-section__menu-title">{{ name }}</span>
           </div>
         </li>
       </ul>
 
-      <div class="b-add-section-bar" v-show="isVisibleBar">
+      <div class="b-add-section-bar" v-if="isVisibleBar">
+        <BaseScrollContainer classes="b-add-section-bar__scrollbar"
+          :styling="{ width: '24rem', height: '100%' }" backgroundBar="white"
+          >
         <div class="b-add-section-bar__menu">
           <template v-for="(section, index) in selectedGroup">
             <div class="b-add-section-bar__menu-element"
@@ -115,6 +125,7 @@ export default {
             </div>
           </template>
         </div>
+        </BaseScrollContainer>
       </div>
 
       <div class="b-add-section-footer"
@@ -123,7 +134,7 @@ export default {
           class="b-add-section-footer__bt"
           :color="'gray'"
           :transparent="true"
-          @click="$emit('requestClose')"
+          @click="closeAddSectionBar"
           >
           Cancel
         </BaseButton>
@@ -147,6 +158,7 @@ export default {
   background: #fff
   position: relative
   z-index: 1
+  box-shadow: 0px 0.4rem 1rem rgba(0, 0, 0, 0.35)
   &__padd
     position: absolute
     top: 0
@@ -201,19 +213,19 @@ export default {
     padding: 0
     margin: 0
     &-group
-      padding: 0 1.6rem
+      padding: 0 1.5rem
       list-style: none
       height: 4.8rem
       line-height: 4.6rem
       font-size: 1.4rem
       color: #474747
       cursor: pointer
-      border: 1px solid transparent
+      border: 0.1rem solid transparent
       &_selected
         background-color: rgba(67, 111, 238, 0.15)
-        border: 1px solid transparent
+        border: 0.1rem solid transparent
       &:hover
-        border: 1px solid rgba(67, 111, 238, 0.15)
+        border: 0.1rem solid rgba(67, 111, 238, 0.15)
     &-title
       display: inline-block
       text-transform: capitalize
@@ -227,26 +239,36 @@ export default {
     background-color: #8189B1
     transition: left 0.3s ease-in-out
     &__menu
-      padding: 3.2rem 3.2rem 0
+      padding: 3.2rem 3.2rem 8rem
       &-element
         overflow: hidden
         width: 17.6rem
         height: 11.2rem
-        background-color: #ebebeb
+        box-sizing: border-box
+        background-color: #8189B1
         margin: 0 auto 3.2rem
         cursor: pointer
         display: flex
         align-items: center
         justify-content: center
+        border: 0.2rem solid transparent
+        transition: all 0.1s ease-in-out
+        &:hover
+          border: 0.2rem solid #fff
         &_selected
           background-color: #436FEE
           box-shadow: 0 0.6rem 2.4rem 0 rgba(0, 0, 0, 0.15)
+          border: 0.2rem solid transparent
           color: #fff
+          &:hover
+            border: 0.2rem solid transparent
           & img
             display: none
+
       &-image
         width: 100%
         height: 100%
+
   &-footer
     position: absolute
     bottom: 0
@@ -258,6 +280,7 @@ export default {
     z-index: 100
     display: flex
     align-items: center
+    box-shadow: 0px -0.6rem 1.5rem rgba(0, 0, 0, 0.1)
     &_add
       width: 48rem
     &__bt
