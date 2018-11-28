@@ -16,14 +16,30 @@
 
     <div class="b-builder-sidebar__content">
       <!-- Site settings -->
-      <menu-item>
+      <menu-item
+        :isSelected="expandedMenuItem === 'siteSettings'"
+        :isExpandable="true"
+        @click="toggleMenuItem('siteSettings')">
         Site Settings
       </menu-item>
 
+      <!-- Site settings CONTENTS -->
+      <BaseDropdown
+        :isOpened="expandedMenuItem === 'siteSettings'">
+        <MenuSubitem
+          v-for="siteSetting in siteSettingsMenu"
+          :key="siteSetting.id"
+          :isSelected="modalContentID === siteSetting.id"
+          @click="toggleSiteSettings(siteSetting.id)">
+          {{siteSetting.name}}
+        </MenuSubitem>
+      </BaseDropdown>
+
       <!-- Sections -->
       <menu-item
-        :isSelected="isSectionsExpanded"
+        :isSelected="expandedMenuItem === 'sections'"
         :isExpandable="true"
+        @click="toggleMenuItem('sections')"
         >
 
           <span class="b-builder-sidebar__icon-add"
@@ -38,19 +54,17 @@
           <span @click="isSectionsExpanded = !isSectionsExpanded">
             Sections
           </span>
-
       </menu-item>
 
       <!-- Sections CONTENTS -->
       <BaseDropdown
-        class="b-builder-sidebar__dropdown"
-        slot="dropdown"
-        :isOpened="isSectionsExpanded">
+        :isOpened="expandedMenuItem === 'sections'">
         <div ref="sections">
           <MenuSubitem
             v-for="(section, index) in builder.sections"
             :key="section.id"
             :isSelected="isActiveSection(section.id)"
+            :hasDraggableIcon="true"
             @click="toggleSettingsBar(section)">
             {{`${index + 1}.`}} {{section.name}}
           </MenuSubitem>
@@ -111,9 +125,13 @@ export default {
   },
 
   computed: {
+    ...mapState('BuilderModalContent', {
+      modalContentID: 'contentID'
+    }),
     ...mapState('Sidebar', [
       'isSettingsExpanded',
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'siteSettingsMenu'
     ])
   },
 
@@ -121,7 +139,8 @@ export default {
     return {
       isSectionsExpanded: false,
       isAddSectionExpanded: false,
-      isSettingsOpenedisSettingsOpened: false
+      isSettingsOpenedisSettingsOpened: false,
+      expandedMenuItem: ''
     }
   },
 
@@ -145,14 +164,24 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'setSettingSection',
-      'clearSettingObject'
+      'clearSettingObject',
+      'toggleSidebar'
     ]),
+    ...mapActions('BuilderModalContent', {
+      setModalContentVisible: 'setContentVisible',
+      setModalContentID: 'setContentID'
+    }),
 
-    toggleSidebar () {
-      this.$emit('toggleSidebar')
+    toggleMenuItem (name) {
+      if (this.expandedMenuItem === name) {
+        this.expandedMenuItem = ''
+      } else {
+        this.expandedMenuItem = name
+      }
     },
 
     toggleSettingsBar (section) {
+      this.closeSiteSettings()
       this.clearSettingObject()
 
       if (!this.isActiveSection(section.id)) {
@@ -162,6 +191,22 @@ export default {
 
     closeSettingsBar () {
       this.clearSettingObject()
+    },
+
+    toggleSiteSettings (contentID) {
+      this.closeSettingsBar()
+
+      if (this.modalContentID === contentID) {
+        this.closeSiteSettings()
+      } else {
+        this.setModalContentID(contentID)
+        this.setModalContentVisible(true)
+      }
+    },
+
+    closeSiteSettings () {
+      this.setModalContentID('')
+      this.setModalContentVisible(false)
     },
 
     closeAddSectionBar () {
@@ -229,7 +274,11 @@ $top-panel-height: 7.2rem
     flex-direction: column
     min-height: 0
 
-  &__dropdown
+  &-settings
+    position: absolute
+    right: -24.8rem
+    top: 0.8rem
+    bottom: 0.8rem;
     display: flex
     flex-direction: column
     flex-grow: 1
