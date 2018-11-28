@@ -19,6 +19,14 @@ data:
 
         charset utf-8;
 
+        gzip on;
+        gzip_vary on;
+        gzip_proxied any;
+        gzip_comp_level 6;
+        gzip_buffers 16 8k;
+        gzip_http_version 1.1;
+        gzip_types text/plain text/css application/json application/javascript text/xml application/xml application/xml+rss text/javascript;
+
         root /usr/share/nginx/html;
 
         location = /_healthz {
@@ -32,9 +40,6 @@ data:
 
         location / {
           index index.html;
-          try_files $uri index.html?q=$uri&$args @404;
-        }
-        location @404 {
-          return 404;
+          try_files $uri/index.html $uri.html $uri/ $uri =404;
         }
       }
