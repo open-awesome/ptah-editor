@@ -153,8 +153,7 @@ export default {
       'toggleSidebar'
     ]),
     ...mapActions('BuilderModalContent', {
-      setModalContentVisible: 'setContentVisible',
-      setModalContentID: 'setContentID'
+      setModalContent: 'setContent'
     }),
 
     toggleMenuItem (name) {
@@ -184,14 +183,12 @@ export default {
       if (this.modalContentID === contentID) {
         this.closeSiteSettings()
       } else {
-        this.setModalContentID(contentID)
-        this.setModalContentVisible(true)
+        this.setModalContent(contentID)
       }
     },
 
     closeSiteSettings () {
-      this.setModalContentID('')
-      this.setModalContentVisible(false)
+      this.setModalContent('')
     },
 
     updateSectionsOrder (event) {

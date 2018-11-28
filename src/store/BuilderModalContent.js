@@ -27,17 +27,12 @@ export default {
 
   actions: {
     /**
-     * Toggles the content layer visibility
-     */
-    setContentVisible ({ commit }, isVisible) {
-      commit('isContentVisible', isVisible)
-    },
-
-    /**
      * Based on ID content component name is defined
+     * Also toggles the content layer visibility
      */
-    setContentID ({ commit }, contentID) {
+    setContent ({ commit }, contentID) {
       commit('contentID', contentID)
+      commit('isContentVisible', !!contentID)
     }
   },
 

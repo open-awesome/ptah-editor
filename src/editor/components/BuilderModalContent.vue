@@ -1,16 +1,15 @@
 <template>
-  <div
-    class="b-builder-modal-content"
-    v-if="isContentVisible"
-    :style="{'margin-right': `${fakeScrollbarWidth}px`}">
-    <div class="b-builder-modal-content__inner">
-      <component :is="contentComponent"></component>
+  <transition name="slide-fade">
+    <div
+      class="b-builder-modal-content"
+      v-if="isContentVisible"
+      :style="{'margin-right': `${fakeScrollbarWidth}px`}">
+      <component
+        :is="contentComponent"
+        :builder="builder"
+        @requestClose="closeContent"></component>
     </div>
-    <div class="b-builder-modal-content-controls">
-      <BaseButton color="gray">Cancel</BaseButton>
-      <BaseButton>Save</BaseButton>
-    </div>
-  </div>
+  </transition>
 </template>
 
 <script>
@@ -26,6 +25,12 @@ export default {
     BuilderSiteSettingsSeo,
     BuilderSiteSettingsVersionHistory,
     BuilderSiteSettingsVisual
+  },
+
+  props: {
+    builder: {
+      required: true
+    }
   },
 
   computed: {
@@ -45,13 +50,19 @@ export default {
   },
 
   methods: {
-    ...mapActions('PageTweaks', ['setScrollbarVisible'])
+    ...mapActions('BuilderModalContent', ['setContent']),
+    ...mapActions('PageTweaks', ['setScrollbarVisible']),
+
+    closeContent () {
+      this.setContent('')
+    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
 .b-builder-modal-content
+  display: flex
   position: fixed
   right: 1rem
   bottom: 0.8rem
@@ -59,19 +70,19 @@ export default {
   top: 8rem
   z-index: 10
   background: #fff
-  display: flex
-  flex-direction: column
 
-  &__inner
-    padding: 4rem
-    overflow-y: auto
-    flex-grow: 1
+// Animations down here
+.slide-fade
+  &-enter-active
+    transition: all .2s ease
 
-.b-builder-modal-content-controls
-  display: flex
-  flex-shrink: 0
-  border-top: 1px solid #E2E2E2
-  padding: 1.6rem
-  justify-content: flex-end
+  &-leave-active
+    transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
 
+  &-enter
+    opacity: 0
+    transform: translateX(-0.8rem)
+
+  &-leave-to
+    opacity: 0
 </style>
