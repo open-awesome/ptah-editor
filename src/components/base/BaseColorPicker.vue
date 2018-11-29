@@ -1,18 +1,14 @@
 <script>
 import { Sketch } from 'vue-color'
-
 export default {
   name: 'BaseColorPicker',
-
   model: {
     prop: 'value',
     event: 'change'
   },
-
   components: {
     Sketch
   },
-
   props: {
     value: {
       default: '#000'
@@ -25,24 +21,28 @@ export default {
       type: String
     }
   },
-
   watch: {
     value (value) {
-      this.pickerValue = {
-        hex: value
-      }
-    },
-    pickerValue (value) {
-      this.$emit('change', value)
+      this.pickerValue = this.getPreparedValue(value)
     }
   },
-
   data () {
     return {
       expanded: false,
-      pickerValue: {
-        hex: this.value
+      pickerValue: this.getPreparedValue(this.value)
+    }
+  },
+  methods: {
+    getPreparedValue (value) {
+      if (typeof value === 'string' && value.charAt(0) === '#') {
+        return {
+          hex: value
+        }
       }
+      return value
+    },
+    changeColor (color) {
+      this.$emit('change', color)
     }
   }
 }
@@ -64,7 +64,7 @@ export default {
     </div>
 
     <div class="b-picker__palette" v-show="expanded">
-      <Sketch v-model="pickerValue"></Sketch>
+      <Sketch :value="pickerValue" @input="changeColor"></Sketch>
     </div>
   </div>
 </template>
@@ -74,6 +74,7 @@ export default {
     font-size: 1.6rem
     padding: 0.5rem 0
     position: relative
+    width: 100%
     &__value-string
       display: flex
       align-items: center
@@ -101,6 +102,7 @@ export default {
       position: absolute
       bottom: -302px
       left: -2.2rem
+      z-index: 10
     &__arrow
       transition: .3s ease-out
       &--turn

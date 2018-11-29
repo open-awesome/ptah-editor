@@ -2,70 +2,71 @@
   <builder-modal-content-layout>
     <div class="b-builder-site-settings-seo">
       <form @submit.prevent="applySettings">
-        <base-heading level="2">Title & Favicon</base-heading>
-        <div class="b-builder-site-settings-seo__field">
-          <BaseImageUpload
-            v-model="favicon"
-            label="Fav Icon"
-            description="32 x 32 px, .ico, .bmp or .png" />
-        </div>
 
-        <div class="b-builder-site-settings-seo__field">
-          <BaseTextField label="Page Title" v-model="pageTitle" />
-        </div>
+        <!-- Title & Favicon -->
+        <base-fieldset>
+          <base-heading level="2">Title & Favicon</base-heading>
 
-        <base-heading level="2">
-          Open Graph
-          <a class="b-builder-site-settings-seo__help"
-            target="_blank"
-            href="#">
-            <IconBase name="questionCircle" width="16" height="16" color="#C4C4C4" />
-          </a>
-        </base-heading>
-        <div class="b-builder-site-settings-seo__field">
-          <div v-for="(item, index) in ogTags" :key="index" class="og-tag">
-            <select v-model="item.property" class="og-input">
-              <option value="og:title" selected>og:title</option>
-              <option value="og:description">og:description</option>
-              <option value="og:image">og:image</option>
-              <option value="og:type">og:type</option>
-              <option value="og:url">og:url</option>
-              <option value="og:locale">og:locale</option>
-              <option value="og:locale:alternate">og:locale:alternate</option>
-              <option value="og:video">og:video</option>
-            </select>
-            <input type="text" v-model="item.content" placeholder="content" class="og-input">
-            <button class="controller-button" @click.prevent="deleteTag(index)" v-if="index !== ogTags.length-1 ">
-              <IconBase name="close" width="16" height="16" color="#fff" />
-            </button>
-            <button class="controller-button is-green" tooltip-position="top" tooltip="add tag" @click.prevent="addTag" v-if="index === ogTags.length-1 ">
-              <IconBase name="plus" width="16" height="16" color="#fff" />
-            </button>
-          </div>
-        </div>
+          <base-fieldset-row>
+            <BaseImageUpload
+              v-model="favicon"
+              label="Fav Icon"
+              description="32 x 32 px, .ico, .bmp or .png" />
+          </base-fieldset-row>
 
-        <base-heading level="2">Google</base-heading>
+          <base-fieldset-row width="wide">
+            <BaseTextField label="Page Title" v-model="pageTitle" />
+          </base-fieldset-row>
+        </base-fieldset>
 
-        <div class="b-builder-site-settings-seo__field">
-          <base-text-field
-            v-model="gtmId"
-            placeholder="GTM-XXXXXX">
+        <!-- Google -->
+        <base-fieldset>
+          <base-heading level="2">Google</base-heading>
 
-            <template slot="label">
-              GTM container ID
-              <a class="b-builder-site-settings-seo__help"
-                target="_blank"
-                href="https://developers.google.com/tag-manager/quickstart">
-                <IconBase name="questionCircle" width="16" height="16" color="#C4C4C4" />
-              </a>
-            </template>
+          <base-fieldset-row width="short">
+            <base-text-field
+              v-model="gtmId"
+              placeholder="GTM-XXXXXX">
 
-          </base-text-field>
-        </div>
+              <template slot="label">
+                GTM container ID
+                <a class="b-builder-site-settings-seo__help"
+                  target="_blank"
+                  href="https://developers.google.com/tag-manager/quickstart">
+                  <IconBase name="questionCircle" width="16" height="16" color="#436FEE" />
+                </a>
+              </template>
 
-        <div class="b-builder-site-settings-seo__field">
-          <BaseTextField label="Google site tag" v-model="gtag" placeholder="UA-XXXXXXXX-X" />
-        </div>
+            </base-text-field>
+          </base-fieldset-row>
+
+          <base-fieldset-row width="short">
+            <BaseTextField label="Google site tag" v-model="gtag" placeholder="UA-XXXXXXXX-X" />
+          </base-fieldset-row>
+        </base-fieldset>
+
+        <!-- Open Graph -->
+        <base-fieldset :hasToggle="true" :isOpened="false">
+          <base-heading slot="heading" level="2">
+            Open Graph
+            <a class="b-builder-site-settings-seo__help"
+              target="_blank"
+              href="#">
+              <IconBase name="questionCircle" width="16" height="16" color="#436FEE" />
+            </a>
+          </base-heading>
+
+          <base-fieldset-row
+            v-for="ogField in ogFields"
+            :key="ogField.id">
+
+            <base-text-field
+              v-model="ogField.value"
+              :placeholder="ogField.placeholder"
+              :label="ogField.label">
+            </base-text-field>
+          </base-fieldset-row>
+        </base-fieldset>
       </form>
     </div>
 
@@ -78,6 +79,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
+import _ from 'lodash'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 
 export default {
@@ -91,9 +93,59 @@ export default {
     return {
       pageTitle: '',
       favicon: '',
-      ogTags: [],
       gtmId: '',
-      gtag: ''
+      gtag: '',
+
+      ogFields: [
+        {
+          id: 'og:title',
+          label: 'Title',
+          placeholder: 'Game name',
+          value: ''
+        },
+        {
+          id: 'og:description',
+          label: 'Description',
+          placeholder: 'Video Game',
+          value: ''
+        },
+        {
+          id: 'og:image',
+          label: 'Image',
+          placeholder: 'http://www.mydomain.com/image.png',
+          value: ''
+        },
+        {
+          id: 'og:type',
+          label: 'Type',
+          placeholder: 'Profile',
+          value: ''
+        },
+        {
+          id: 'og:url',
+          label: 'URL',
+          placeholder: 'http://www.mydomain.com/',
+          value: ''
+        },
+        {
+          id: 'og:locale',
+          label: 'Locale',
+          placeholder: 'en_GB',
+          value: ''
+        },
+        {
+          id: 'og:locale:alternate',
+          label: 'Locale : Alternate',
+          placeholder: 'fr_FR',
+          value: ''
+        },
+        {
+          id: 'og:video',
+          label: 'Video',
+          placeholder: 'http://www.mydomain.com/video.mp4',
+          value: ''
+        }
+      ]
     }
   },
 
@@ -117,22 +169,29 @@ export default {
     ]),
     updateSettings () {
       const settings = this.currentLanding.settings
-      this.ogTags = settings.ogTags
+
+      _.map(settings.ogTags, ({ property, content }) => {
+        const item = _.find(this.ogFields, { id: property })
+        if (item) {
+          item.value = content
+        }
+      })
+
       this.pageTitle = settings.title
       this.gtmId = settings.gtmId
       this.gtag = settings.gtag
       this.favicon = settings.favicon
     },
-    addTag () {
-      this.ogTags.push({ property: '', content: '' })
-    },
-    deleteTag (index) {
-      this.ogTags.splice(index, 1)
-    },
     applySettings () {
+      const ogTags = this.ogFields.filter(({ value }) => value).map(({ id, value }) => {
+        return {
+          property: id,
+          content: value
+        }
+      })
       const data = {
+        ogTags,
         title: this.pageTitle,
-        ogTags: this.ogTags,
         gtmId: this.gtmId,
         gtag: this.gtag,
         favicon: this.favicon
@@ -147,10 +206,6 @@ export default {
 
 <style lang="sass" scoped>
 .b-builder-site-settings-seo
-  &__field
-    width: 32rem
-    margin-bottom: 3.5rem
-
   &__help
     margin-left: 1rem
 </style>

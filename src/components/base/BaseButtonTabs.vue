@@ -93,6 +93,7 @@ $border-color: rgba(#888888, 0.25)
   overflow: visible
 
 .b-base-button-tabs
+  width: 100%
   display: flex
   flex-direction: row
 
@@ -108,7 +109,7 @@ $border-color: rgba(#888888, 0.25)
   justify-content: center
   align-items: center
 
-  background-color: #f5f5f5
+  background-color: #ffffff
   color: #888888
   border: 1px solid $border-color
   border-left: 0
@@ -126,11 +127,12 @@ $border-color: rgba(#888888, 0.25)
     border-radius: 0 0.4rem 0.4rem 0
 
   &:hover
-    background-color: #ffffff
+    background-color: #f5f5f5
 
-  &_selected
-    background-color: #ffffff
-    color: #000000
+  &_selected,
+  &_selected:hover
+    background-color: #F5F8FF
+    color: #202020
 
   &__icon + &__text
     margin-left: 0.6rem

@@ -40,6 +40,10 @@ export default {
     font-size: 2rem
     line-height: 4rem
 
+  &_h3
+    font-size: 1.8rem
+    line-height: 3.2rem
+
   &_has-margin
     margin-bottom: 2.7rem
 
