@@ -1,5 +1,57 @@
+<script>
+import { correctArray } from '@editor/util'
+
+export default {
+  name: 'Sandbox',
+  inject: ['$builder', '$section'],
+  props: {
+    path: {
+      type: String,
+      required: true
+    }
+  },
+  data: () => ({
+    styles: {},
+    showSettings: false,
+    showElements: false,
+    dir: [
+      {
+        title: 'Horizontal',
+        img1: 'https://gn696.cdn.stg.gamenet.ru/0/784bo/o_185fZr.svg',
+        img2: 'https://gn422.cdn.stg.gamenet.ru/0/784bL/o_NMJGv.svg',
+        img3: 'https://gn316.cdn.stg.gamenet.ru/0/784c0/o_1eRO2I.svg'
+      },
+      {
+        title: 'Vertical',
+        img1: 'https://gn283.cdn.stg.gamenet.ru/0/784cH/o_1YHzH4.svg',
+        img2: 'https://gn923.cdn.stg.gamenet.ru/0/784cr/o_Y3r1q.svg',
+        img3: 'https://gn738.cdn.stg.gamenet.ru/0/783tv/o_1N0F0t.svg'
+      }
+    ]
+  }),
+  methods: {
+    align (data, dir) {
+      this.styles = Object.assign(this.styles, this.$section.get(this.path + '.styles'), data)
+      this.$section.set(this.path, { styles: this.styles })
+
+      if ((!!dir && dir === 'column' && this.dir[0].title === 'Horizontal') || (!!dir && dir === 'row' && this.dir[0].title === 'Vertical')) {
+        correctArray(this.dir, [0, 1])
+      }
+    },
+    showList () {
+      this.showSettings = true
+      document.addEventListener('click', this.hideList, true)
+    },
+    hideList () {
+      this.showSettings = false
+      document.removeEventListener('click', this.hideList, true)
+    }
+  }
+}
+</script>
+
 <template>
-  <section class="slot">
+  <div class="slot">
       <button class="slot__tune ptah-control" :class="{'active': showSettings}" @click.prevent="showList">
         <img src="https://gn337.cdn.stg.gamenet.ru/0/79ndM/o_DXxZz.svg" alt="">
       </button>
@@ -58,60 +110,8 @@
       <slot>
 
       </slot>
-  </section>
+  </div>
 </template>
-
-<script>
-import { correctArray } from '@editor/util'
-
-export default {
-  name: 'Sandbox',
-  inject: ['$builder', '$section'],
-  props: {
-    path: {
-      type: String,
-      required: true
-    }
-  },
-  data: () => ({
-    styles: {},
-    showSettings: false,
-    showElements: false,
-    dir: [
-      {
-        title: 'Horizontal',
-        img1: 'https://gn696.cdn.stg.gamenet.ru/0/784bo/o_185fZr.svg',
-        img2: 'https://gn422.cdn.stg.gamenet.ru/0/784bL/o_NMJGv.svg',
-        img3: 'https://gn316.cdn.stg.gamenet.ru/0/784c0/o_1eRO2I.svg'
-      },
-      {
-        title: 'Vertical',
-        img1: 'https://gn283.cdn.stg.gamenet.ru/0/784cH/o_1YHzH4.svg',
-        img2: 'https://gn923.cdn.stg.gamenet.ru/0/784cr/o_Y3r1q.svg',
-        img3: 'https://gn738.cdn.stg.gamenet.ru/0/783tv/o_1N0F0t.svg'
-      }
-    ]
-  }),
-  methods: {
-    align (data, dir) {
-      this.styles = Object.assign(this.styles, this.$section.get(this.path + '.styles'), data)
-      this.$section.set(this.path, { styles: this.styles })
-
-      if ((!!dir && dir === 'column' && this.dir[0].title === 'Horizontal') || (!!dir && dir === 'row' && this.dir[0].title === 'Vertical')) {
-        correctArray(this.dir, [0, 1])
-      }
-    },
-    showList () {
-      this.showSettings = true
-      document.addEventListener('click', this.hideList, true)
-    },
-    hideList () {
-      this.showSettings = false
-      document.removeEventListener('click', this.hideList, true)
-    }
-  }
-}
-</script>
 
 <style lang="sass">
 .slot
@@ -119,7 +119,6 @@ export default {
   flex-wrap: wrap
   justify-content: center
   align-items: center
-  max-width: 100rem
   position: relative
   width: 100%
   .is-editable &

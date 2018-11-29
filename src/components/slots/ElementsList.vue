@@ -7,6 +7,10 @@
       <ul>
         <li><a href="#" @click.prevent="addButton" class="ptah-elements__button">Add button</a></li>
         <li><a href="#" @click.prevent="addTitle" class="ptah-elements__button">Add title</a></li>
+        <li><a href="#" @click.prevent="addDescription" class="ptah-elements__button">Add description</a></li>
+        <li><a href="#" @click.prevent="addImage" class="ptah-elements__button">Add image</a></li>
+        <li><a href="#" @click.prevent="addDelimiter" class="ptah-elements__button">Add delimiter</a></li>
+        <li><a href="#" @click.prevent="addLogo" class="ptah-elements__button">Add logo</a></li>
       </ul>
     </aside>
   </div>
@@ -15,6 +19,7 @@
 <script>
 import * as types from '@editor/types'
 import Seeder from '@editor/seeder'
+import * as _ from 'lodash-es'
 
 export default {
   name: 'ElementsList',
@@ -24,12 +29,34 @@ export default {
     showList: false,
     elements: [
       {
-        name: 'PartButton',
-        element: types.Button
+        name: 'Button',
+        element: types.Button,
+        type: 'button'
       },
       {
-        name: 'PartTitle',
-        element: types.Text
+        name: 'Title',
+        element: types.Text,
+        type: 'text'
+      },
+      {
+        name: 'Description',
+        element: types.Text,
+        type: 'text'
+      },
+      {
+        name: 'Pic',
+        element: types.Image,
+        type: 'image'
+      },
+      {
+        name: 'Logo',
+        element: types.Logo,
+        type: 'image'
+      },
+      {
+        name: 'Delimiter',
+        element: types.StyleObject,
+        type: 'section'
       }
     ]
   }),
@@ -38,11 +65,27 @@ export default {
   },
   methods: {
     addButton () {
-      const el = JSON.parse(JSON.stringify(this.elements[0]))
+      const el = _.merge({}, Seeder.seed(this.elements[0]))
       this.$emit('addEl', el)
     },
     addTitle () {
-      const el = JSON.parse(JSON.stringify(this.elements[1]))
+      const el = _.merge({}, Seeder.seed(this.elements[1]))
+      this.$emit('addEl', el)
+    },
+    addDescription () {
+      const el = _.merge({}, Seeder.seed(this.elements[2]))
+      this.$emit('addEl', el)
+    },
+    addImage () {
+      const el = _.merge({}, Seeder.seed(this.elements[3]))
+      this.$emit('addEl', el)
+    },
+    addLogo () {
+      const el = _.merge({}, Seeder.seed(this.elements[4]))
+      this.$emit('addEl', el)
+    },
+    addDelimiter () {
+      const el = _.merge({}, Seeder.seed(this.elements[5]))
       this.$emit('addEl', el)
     },
     openList () {
@@ -94,13 +137,11 @@ export default {
       li
         padding-bottom: 5px
     &__button
-      display: flex
-      justify-content: center
-      align-items: center
+      display: block
       background: $dark
       color: white
-      border-radius: 4px
-      padding: 8px 5px
+      border-radius: 0.4rem
+      padding: 0.8rem 0.5rem
       width: 100%
       text-decoration: none
 </style>

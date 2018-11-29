@@ -50,7 +50,7 @@ const LINK = {
 export default {
   name: 'Footer',
   cover: '/img/covers/footer1.png',
-  group: 'elements',
+  group: 'footers',
   $schema: {
     mainStyle: types.StyleObject,
     copyrights: [{
