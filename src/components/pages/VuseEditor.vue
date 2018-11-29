@@ -23,6 +23,7 @@ import Delimiter from '@components/elements/Delimiter'
 
 // sections
 import BaseSection from '@components/sections/BaseSection'
+import Hero1 from '@components/sections/hero/Hero1'
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
@@ -44,6 +45,7 @@ Vuse.mix({
 })
 
 Vuse.component('BaseSection', BaseSection)
+Vuse.component('Hero1', Hero1)
 Vuse.component('Gallery1', Gallery1)
 Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
