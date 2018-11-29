@@ -10,7 +10,7 @@
         style="display: none;"
         type="file"
         accept="image/*,video/mp4,video/x-m4v,video/*"
-        :ref="'uploadInput'"
+        ref="uploadInput"
         @change="onUploadClick"/>
       <a class="b-base-upload__button" @click.prevent="upload">
         <icon-base name="download" width="16" color="#436FEE" title="Upload"></icon-base>
@@ -67,23 +67,11 @@ export default {
 
     upload () {
       this.url = ''
-      this['$refs']['uploadInput'].click()
+      this.$refs.uploadInput.click()
     },
 
     uploadFile (event) {
-      let file = event.target.files || event.dataTransfer.files
-
-      if (!file.length) {
-        return
-      }
-
-      let request = new FormData()
-
-      request.append('file[]', file[0])
-      request.append('method', 'storefront.upload')
-      request.append('format', 'json')
-
-      return api.uploadFile(request)
+      return api.uploadFileFromInputFile(event)
     }
   }
 }

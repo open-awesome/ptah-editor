@@ -28,6 +28,8 @@ export default {
   color: #888888
   margin-bottom: 0.6rem
   transition: color 0.1s ease
+  display: flex
+  align-items: center
 
   &_focus
     color: rgba(#888888, 0.5)
