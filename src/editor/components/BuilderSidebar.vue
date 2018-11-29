@@ -3,7 +3,7 @@
     <button
       class="b-builder-sidebar__back-button"
       title="Minimize panel"
-      @click="toggleSidebar">
+      @click="toggleSidebarAndHideContent">
 
       <IconBase
         slot="icon"
@@ -168,9 +168,13 @@ export default {
       'toggleSidebar'
     ]),
     ...mapActions('BuilderModalContent', {
-      setModalContentVisible: 'setContentVisible',
-      setModalContentID: 'setContentID'
+      setModalContent: 'setContent'
     }),
+
+    toggleSidebarAndHideContent () {
+      this.toggleSidebar()
+      this.setModalContent('')
+    },
 
     toggleMenuItem (name) {
       if (this.expandedMenuItem === name) {
@@ -199,14 +203,12 @@ export default {
       if (this.modalContentID === contentID) {
         this.closeSiteSettings()
       } else {
-        this.setModalContentID(contentID)
-        this.setModalContentVisible(true)
+        this.setModalContent(contentID)
       }
     },
 
     closeSiteSettings () {
-      this.setModalContentID('')
-      this.setModalContentVisible(false)
+      this.setModalContent('')
     },
 
     closeAddSectionBar () {

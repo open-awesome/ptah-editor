@@ -79,6 +79,27 @@ export default {
 
         return response['data']['response']['data'][0]
       })
+  },
+
+  /**
+   * Uploads a file by event from input-file
+   *
+   * @param {Event} event native dom-event
+   */
+  uploadFileFromInputFile (event) {
+    let file = event.target.files || event.dataTransfer.files
+
+    if (!file.length) {
+      return
+    }
+
+    let request = new FormData()
+
+    request.append('file[]', file[0])
+    request.append('method', 'storefront.upload')
+    request.append('format', 'json')
+
+    return this.uploadFile(request)
   }
 
 }
