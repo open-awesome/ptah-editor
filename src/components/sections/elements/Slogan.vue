@@ -23,7 +23,7 @@ import * as types from '@editor/types'
 export default {
   name: 'Slogan',
   cover: '/img/covers/slogan.png',
-  group: 'texts',
+  group: 'elements',
   $schema: {
     mainStyle: types.StyleObject,
     images: [

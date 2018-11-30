@@ -29,6 +29,12 @@ import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
 import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
+import Available from '@components/sections/elements/Available'
+import Footer from '@components/sections/elements/Footer'
+import Restrictions from '@components/sections/elements/Restrictions'
+import Slogan from '@components/sections/elements/Slogan'
+import Social from '@components/sections/elements/Social'
+import System from '@components/sections/elements/System'
 
 Vuse.mix({
   components: {
@@ -51,6 +57,12 @@ Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
 Vuse.component('Products', Products)
 Vuse.component('ProductsExtend', ProductsExtend)
+Vuse.component('Available', Available)
+Vuse.component('Footer', Footer)
+Vuse.component('Restrictions', Restrictions)
+Vuse.component('Slogan', Slogan)
+Vuse.component('Social', Social)
+Vuse.component('System', System)
 
 Vuse.use(pwa)
 
