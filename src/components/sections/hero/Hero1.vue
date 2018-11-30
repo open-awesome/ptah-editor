@@ -40,7 +40,7 @@ let slot1 = {
 
 export default {
   name: 'Hero1',
-  cover: '/img/covers/button1.png',
+  cover: '/img/covers/hero1.jpg',
   group: 'Hero',
   $schema: {
     mainStyle: types.StyleObject,
