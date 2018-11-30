@@ -1,5 +1,9 @@
 <template>
-  <section class="l-socials flex flex_center" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="l-socials flex flex_center"
+    v-styler:section="$sectionData.mainStyle"
+    :class="$sectionData.mainStyle.classes"
+    :style="$sectionData.mainStyle.styles"
+    >
     <div>
       <h2 class="b-socials-chapter">
           <span class="b-socials-chapter__text"

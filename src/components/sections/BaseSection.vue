@@ -44,7 +44,7 @@ export default {
       ref="sandbox"
       path="$sectionData.container"
       v-styler:section="$sectionData.container"
-      v-bind:style="$sectionData.container.styles"
+      :style="$sectionData.container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
       <component v-for="(component, index) in $sectionData.components"

@@ -1,5 +1,8 @@
 <template>
-  <section class="l-socials flex flex_center" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="l-socials flex flex_center"
+    v-styler:section="$sectionData.mainStyle"
+    :class="$sectionData.mainStyle.classes"
+    :style="$sectionData.mainStyle.styles">
     <div class="b-socials flex flex_center">
       <div class="b-socials__item"
          v-for="(value, key) in $sectionData.socials" :key="key"

@@ -75,7 +75,7 @@ export default {
       path="$sectionData.slots[0].container"
       direction="column"
       v-styler:section="$sectionData.slots[0].container"
-      v-bind:style="$sectionData.slots[0].container.styles"
+      :style="$sectionData.slots[0].container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
       <component class="b-hero-component" v-for="(component, index) in $sectionData.slots[0].components"
