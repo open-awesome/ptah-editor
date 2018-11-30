@@ -1,16 +1,16 @@
 <template>
-  <div class="ptah-elements is-editable">
-    <button class="ptah-elements__show-list ptah-control" @click="openList" :class="{'active': showList}">
+  <div class="b-elements is-editable">
+    <button class="b-elements__show-list ptah-control" @click="openList" :class="{'active': showList}">
       <img src="https://gn423.cdn.stg.gamenet.ru/0/79nas/o_1mRf76.svg" alt="">
     </button>
-    <aside class="ptah-elements__list ptah-control" v-if="showList">
+    <aside class="b-elements__list ptah-control" v-if="showList">
       <ul>
-        <li><a href="#" @click.prevent="addButton" class="ptah-elements__button">Add button</a></li>
-        <li><a href="#" @click.prevent="addTitle" class="ptah-elements__button">Add title</a></li>
-        <li><a href="#" @click.prevent="addDescription" class="ptah-elements__button">Add description</a></li>
-        <li><a href="#" @click.prevent="addImage" class="ptah-elements__button">Add image</a></li>
-        <li><a href="#" @click.prevent="addDelimiter" class="ptah-elements__button">Add delimiter</a></li>
-        <li><a href="#" @click.prevent="addLogo" class="ptah-elements__button">Add logo</a></li>
+        <li><a href="#" @click.prevent="addButton" class="b-elements__button">Add button</a></li>
+        <li><a href="#" @click.prevent="addTitle" class="b-elements__button">Add title</a></li>
+        <li><a href="#" @click.prevent="addText" class="b-elements__button">Add text</a></li>
+        <li><a href="#" @click.prevent="addImage" class="b-elements__button">Add image</a></li>
+        <li><a href="#" @click.prevent="addDelimiter" class="b-elements__button">Add delimiter</a></li>
+        <li><a href="#" @click.prevent="addLogo" class="b-elements__button">Add logo</a></li>
       </ul>
     </aside>
   </div>
@@ -33,7 +33,7 @@ export default {
       },
       {
         name: 'Title',
-        element: types.Text,
+        element: types.Title,
         type: 'text'
       },
       {
@@ -70,8 +70,8 @@ export default {
       const el = _.merge({}, Seeder.seed(this.elements[1]))
       this.$emit('addEl', el)
     },
-    addDescription () {
-      const el = _.merge({}, Seeder.seed(this.elements[2]))
+    addText () {
+      const el = _.merge({ text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }, Seeder.seed(this.elements[2]))
       this.$emit('addEl', el)
     },
     addImage () {
@@ -99,47 +99,47 @@ export default {
 </script>
 
 <style lang="sass">
-  .ptah-elements
-    position: absolute
-    top: 30px
-    right: 0
-    &__show-list
-      border: none
-      background: lighten($color-form-text, 20%)
-      width: 30px
-      height: 30px
-      display: flex
-      justify-content: center
-      align-items: center
-      padding: 5px
-      cursor: pointer
-      &:hover, &.active
-        background: $color-form-text
-      img
-        width: 20px
-        height: 20px
-    &__list
-      width: 110px
-      position: absolute
-      z-index: 20
-      right: 30px
-      top: 0px
+.b-elements
+  position: absolute
+  top: 3rem
+  right: 0
+  &__show-list
+    border: none
+    background: lighten($color-form-text, 20%)
+    width: 3rem
+    height: 3rem
+    display: flex
+    justify-content: center
+    align-items: center
+    padding: 0.5rem
+    cursor: pointer
+    &:hover, &.active
       background: $color-form-text
-      color: #fff
-      padding: 10px 10px 0
-      border-radius: 4px 0px 4px 4px
-      ul
-        margin: 0
-        padding: 0
-        list-style: none
-      li
-        padding-bottom: 5px
-    &__button
-      display: block
-      background: $dark
-      color: white
-      border-radius: 0.4rem
-      padding: 0.8rem 0.5rem
-      width: 100%
-      text-decoration: none
+    img
+      width: 2rem
+      height: 2rem
+  &__list
+    width: 11rem
+    position: absolute
+    z-index: 20
+    right: 3rem
+    top: 0px
+    background: $color-form-text
+    color: #fff
+    padding: 1rem 1rem 0
+    border-radius: 0.4rem 0 0.4rem 0.4rem
+    ul
+      margin: 0
+      padding: 0
+      list-style: none
+    li
+      padding-bottom: 0.5rem
+  &__button
+    display: block
+    background: $dark
+    color: white
+    border-radius: 0.4rem
+    padding: 0.8rem 0.5rem
+    width: 100%
+    text-decoration: none
 </style>

@@ -40,7 +40,7 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
     >
-    <sandbox class="b-sandbox"
+    <sandbox
       ref="sandbox"
       path="$sectionData.container"
       v-styler:section="$sectionData.container"
@@ -63,16 +63,8 @@ export default {
 </template>
 
 <style lang="sass">
-.b-slot
-  width: 100%
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
-  padding: 1rem
-  & .is-mobile
-    flex-wrap: wrap
 .b-sandbox
+  height: 100%
   min-height: 20rem
   justify-content: center
   align-items: center

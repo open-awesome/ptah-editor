@@ -20,7 +20,7 @@ let slot1 = {
     },
     {
       name: 'Button',
-      element: _.merge(types.Button, { text: 'Button' }),
+      element: _.merge({ text: 'Button' }, types.Button),
       type: 'button',
       class: 'b-button-test'
     },
@@ -30,8 +30,8 @@ let slot1 = {
       type: 'section'
     },
     {
-      name: 'Title',
-      element: _.merge(types.Text, { text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }),
+      name: 'Description',
+      element: _.merge({ text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }, types.Text),
       type: 'text',
       class: 'b-text-test'
     }
@@ -70,14 +70,15 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
-    <sandbox class="b-sandbox"
+    <sandbox
       ref="sandbox"
       path="$sectionData.slots[0].container"
+      direction="column"
       v-styler:section="$sectionData.slots[0].container"
       v-bind:style="$sectionData.slots[0].container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
-      <component v-for="(component, index) in $sectionData.slots[0].components"
+      <component class="b-hero-component" v-for="(component, index) in $sectionData.slots[0].components"
         v-if="$sectionData.slots[0].components.length !== 0"
         :is="component.name"
         :key="index"
@@ -110,6 +111,8 @@ $h: 100vh
   transition: background 200ms
   &.is-editable
     min-height: calc(#{$h} - 7.2rem)
+  &-component
+    margin: 1.2rem
 .b-delimiter-test
   height: 25rem
 .b-logo-test
@@ -117,6 +120,7 @@ $h: 100vh
   background-repeat: no-repeat !important
   background-size: contain !important
   background-color: rgba(0, 0, 0, 0) !important
+  margin: 0
 .b-button-test
   color: rgb(0, 0, 0)
   border-radius: 0

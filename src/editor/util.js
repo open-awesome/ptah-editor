@@ -24,7 +24,6 @@ export function getTypeFromSchema (target, schema) {
   tempTarget.shift()
   const value = _.get(schema, tempTarget.join('.'))
   if (value === types.Text) return 'text'
-  if (value === types.Description) return 'text'
   if (value === types.Title) return 'title'
   if (value === types.Button) return 'button'
   if (value === types.Link) return 'link'

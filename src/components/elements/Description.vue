@@ -1,5 +1,5 @@
 <template>
-    <div class="b-description"></div>
+    <div class="b-text"></div>
 </template>
 
 <script>
@@ -9,7 +9,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-description-one
+.b-text-one
   color: #000
   font-family: Helvetica, Arial, sans-serif
   width: 100%

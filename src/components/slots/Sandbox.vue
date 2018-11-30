@@ -8,6 +8,9 @@ export default {
     path: {
       type: String,
       required: true
+    },
+    direction: {
+      type: String
     }
   },
   data: () => ({
@@ -46,6 +49,9 @@ export default {
       this.showSettings = false
       document.removeEventListener('click', this.hideList, true)
     }
+  },
+  mounted () {
+    this.align({ 'flex-direction': 'column' }, this.direction)
   }
 }
 </script>
@@ -113,12 +119,13 @@ export default {
   </div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .b-slot
   display: flex
   flex-wrap: wrap
   justify-content: center
   align-items: center
+  flex-direction: column
   position: relative
   width: 100%
   height: 100%
