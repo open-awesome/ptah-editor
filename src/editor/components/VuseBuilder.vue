@@ -62,7 +62,17 @@
             <span class="menu-icon"><VuseIcon name="arrowDown"></VuseIcon></span>
           </div>
           <div class="menu-body">
-              <template v-for="(section, index) in group"><a class="menu-element" v-bind:key="index" @click="addSection(section)" @drag="currentSection = section"><img class="menu-elementImage" v-if="section.cover" :src="section.cover"/><span class="menu-elementTitle">{{ section.name }}</span></a></template>
+              <template v-for="(section, index) in group">
+                <a class="menu-element"
+                   v-bind:key="index"
+                   @click="addSection(section)"
+                   @drag="currentSection = section">
+                  <img class="menu-elementImage" v-if="section.cover" :src="section.cover"/>
+                  <span class="menu-elementTitle">
+                    {{ section.name }}
+                  </span>
+                </a>
+              </template>
           </div>
       </li>
     </ul>
@@ -370,26 +380,24 @@ export default {
           this.addTheme(Object.assign(this.data, this.currentLanding.theme))
         }
 
-        if (data.settings && Object.keys(data.settings).length) {
-          this.$builder.settings = data.settings
-          this.ogTags = data.settings.ogTags
-          this.bgVideo = data.settings.video
-          this.bgVideoFix = data.settings.videoPosition
-          this.pageTitle = data.settings.title
-          this.fullPageScroll = data.settings.fullPageScroll
-          this.pageBackgroundUrl = data.settings.styles.backgroundImage
-          this.pageBackgroundColor = data.settings.styles.backgroundColor
-          this.pageBackgroundPosX = data.settings.styles.backgroundPositionX
-          this.pageBackgroundPosY = data.settings.styles.backgroundPositionY
-          this.bgAttachment = data.settings.styles.backgroundAttachment
-          this.bgRepeat = data.settings.styles.backgroundRepeat
-          this.bgSize = data.settings.styles.backgroundSize
-          this.gtmId = data.settings.gtmId
-          this.gtag = data.settings.gtag
-          this.favicon = data.settings.favicon
-          if (this.$builder.settings.styles !== undefined) {
-            this.styleArtboard(this.$builder.settings.styles)
-          }
+        this.$builder.settings = data.settings
+        this.ogTags = data.settings.ogTags
+        this.bgVideo = data.settings.video
+        this.bgVideoFix = data.settings.videoPosition
+        this.pageTitle = data.settings.title
+        this.fullPageScroll = data.settings.fullPageScroll
+        this.pageBackgroundUrl = data.settings.styles.backgroundImage
+        this.pageBackgroundColor = data.settings.styles.backgroundColor
+        this.pageBackgroundPosX = data.settings.styles.backgroundPositionX
+        this.pageBackgroundPosY = data.settings.styles.backgroundPositionY
+        this.bgAttachment = data.settings.styles.backgroundAttachment
+        this.bgRepeat = data.settings.styles.backgroundRepeat
+        this.bgSize = data.settings.styles.backgroundSize
+        this.gtmId = data.settings.gtmId
+        this.gtag = data.settings.gtag
+        this.favicon = data.settings.favicon
+        if (this.$builder.settings.styles !== undefined) {
+          this.styleArtboard(this.$builder.settings.styles)
         }
 
         if (this.bgVideo.length) this.insertVideo(this.bgVideo)
@@ -622,7 +630,7 @@ export default {
   &-panel
     position: fixed
     z-index: 200
-    bottom: 3rem
+    bottom: 1rem
     right: 4rem
   &-input
     outline: none

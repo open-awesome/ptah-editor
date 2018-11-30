@@ -1,11 +1,5 @@
 <script>
-import VueScrollbar from 'vue2-scrollbar'
-require('vue2-scrollbar/dist/style/vue2-scrollbar.css')
-
 export default {
-  components: {
-    VueScrollbar
-  },
   props: {
     /* options */
     options: {
@@ -61,19 +55,21 @@ export default {
         </span>
       </div>
       <div class="b-pth-base-select__dropdown" v-if="showOptions">
-        <vue-scrollbar classes="b-pth-base-select__scrollbar">
+        <BaseScrollContainer classes="b-pth-base-select__scrollbar"
+          :styling="{ width: '100%', height: '10rem' }" backgroundBar="#474747"
+          >
           <ul class="b-pth-base-select__options">
             <li class="b-pth-base-select__options-item" v-for="(option, index) in options" :key="index" @click="selectOption(option)">
               {{ option.name }}
             </li>
           </ul>
-        </vue-scrollbar>
+        </BaseScrollContainer>
       </div>
     </div>
   </div>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .b-pth-base-select
   height: 2.5rem
   background-color: transparent
@@ -123,6 +119,7 @@ export default {
     margin: 0
     padding: 0
     min-height: 11rem
+    background: #fff
     &-item
       padding: 0 1.2rem
       height: 3.2rem
@@ -135,10 +132,6 @@ export default {
         border-bottom: none
       &:hover
         background-color: rgba(11, 153, 255, 0.25)
-  &__scrollbar
-    width: 100%
-    min-width: 20rem
-    height: 10rem
 
 .vue-scrollbar__scrollbar-vertical
   width: 0.4rem

@@ -1,10 +1,11 @@
 <template>
   <div class="b-base-text-field"
     :class="{'b-base-text-field_error': hasError}">
-    <label>
+    <label class="b-base-text-field__label">
 
-      <base-label v-if="label" :hasError="hasError" :hasFocus="hasFocus">
+      <base-label v-if="label || $slots.label" :hasError="hasError" :hasFocus="hasFocus">
         {{label}}
+        <slot name="label"></slot>
       </base-label>
 
       <input class="b-base-text-field__input" type="text"
@@ -76,6 +77,9 @@ export default {
 
   &_error
     color: #FF3737
+
+  &__label
+    display: block
 
   &__input
     background: transparent

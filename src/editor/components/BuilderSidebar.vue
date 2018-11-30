@@ -3,7 +3,7 @@
     <button
       class="b-builder-sidebar__back-button"
       title="Minimize panel"
-      @click="toggleSidebar">
+      @click="toggleSidebarAndHideContent">
 
       <IconBase
         slot="icon"
@@ -20,12 +20,6 @@
         :isSelected="expandedMenuItem === 'siteSettings'"
         :isExpandable="true"
         @click="toggleMenuItem('siteSettings')">
-        <IconBase
-          slot="icon"
-          name="hollowCircle"
-          color="transparent"
-          strokeColor="currentColor">
-        </IconBase>
         Site Settings
       </menu-item>
 
@@ -45,15 +39,21 @@
       <menu-item
         :isSelected="expandedMenuItem === 'sections'"
         :isExpandable="true"
-        @click="toggleMenuItem('sections')">
+        @click="toggleMenuItem('sections')"
+        >
 
-        <IconBase
-          slot="icon"
-          name="hollowCircle"
-          color="transparent"
-          strokeColor="currentColor" />
-
-        <span>Sections</span>
+          <span class="b-builder-sidebar__icon-add"
+            slot="icon"
+            @click="showAddSectionBar">
+            <IconBase
+              name="plus"
+              color="#355CCC"
+              strokeColor="transparent"
+            />
+          </span>
+          <span @click="isSectionsExpanded = !isSectionsExpanded">
+            Sections
+          </span>
       </menu-item>
 
       <!-- Sections CONTENTS -->
@@ -83,6 +83,16 @@
       </div>
     </transition>
 
+    <transition name="slide-fade">
+      <div class="b-builder-sidebar-add-section" v-show="isExpanded && isAddSectionExpanded">
+        <BuilderAddSectionBar
+          :builder="builder"
+          title="Add Section"
+          @requestClose="closeAddSectionBar">
+        </BuilderAddSectionBar>
+      </div>
+    </transition>
+
   </div>
 </template>
 
@@ -91,6 +101,7 @@ import Sortable from 'sortablejs'
 import MenuItem from './MenuItem.vue'
 import MenuSubitem from './MenuSubitem.vue'
 import BuilderSettingsBar from './BuilderSettingsBar.vue'
+import BuilderAddSectionBar from './BuilderAddSectionBar.vue'
 import { mapActions, mapState } from 'vuex'
 
 export default {
@@ -99,7 +110,8 @@ export default {
   components: {
     MenuItem,
     MenuSubitem,
-    BuilderSettingsBar
+    BuilderSettingsBar,
+    BuilderAddSectionBar
   },
 
   props: {
@@ -125,6 +137,9 @@ export default {
 
   data () {
     return {
+      isSectionsExpanded: false,
+      isAddSectionExpanded: false,
+      isSettingsOpenedisSettingsOpened: false,
       expandedMenuItem: ''
     }
   },
@@ -153,9 +168,13 @@ export default {
       'toggleSidebar'
     ]),
     ...mapActions('BuilderModalContent', {
-      setModalContentVisible: 'setContentVisible',
-      setModalContentID: 'setContentID'
+      setModalContent: 'setContent'
     }),
+
+    toggleSidebarAndHideContent () {
+      this.toggleSidebar()
+      this.setModalContent('')
+    },
 
     toggleMenuItem (name) {
       if (this.expandedMenuItem === name) {
@@ -184,14 +203,16 @@ export default {
       if (this.modalContentID === contentID) {
         this.closeSiteSettings()
       } else {
-        this.setModalContentID(contentID)
-        this.setModalContentVisible(true)
+        this.setModalContent(contentID)
       }
     },
 
     closeSiteSettings () {
-      this.setModalContentID('')
-      this.setModalContentVisible(false)
+      this.setModalContent('')
+    },
+
+    closeAddSectionBar () {
+      this.isAddSectionExpanded = false
     },
 
     updateSectionsOrder (event) {
@@ -200,6 +221,10 @@ export default {
 
     isActiveSection (id) {
       return this.settingObjectOptions.sectionId === id
+    },
+
+    showAddSectionBar () {
+      this.isAddSectionExpanded = !this.isAddSectionExpanded
     }
   }
 }
@@ -256,6 +281,25 @@ $top-panel-height: 7.2rem
     right: -24.8rem
     top: 0.8rem
     bottom: 0.8rem;
+    display: flex
+    flex-direction: column
+    flex-grow: 1
+
+  &__icon-add
+    width: 3.2rem
+    height: 3.2rem
+    background-color: #fff
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 100%
+
+  &-settings,
+  &-add-section
+    position: absolute
+    right: -248px
+    top: 0.8rem
+    bottom: 0.8rem
     display: flex
 
 // Animations down here
