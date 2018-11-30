@@ -10,7 +10,7 @@ export default {
 
 <style lang="sass" scoped>
 .b-delimiter
-  width: 100%
+  width: 4rem
   position: relative
   padding: 1rem 0
   display: flex

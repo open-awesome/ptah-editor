@@ -57,7 +57,7 @@ export default {
   methods: {
     onAddElement (element) {
       element.element.removable = true
-      this.$section.data.components.push(element)
+      this.$section.data.slots[0].components.push(element)
     }
   }
 }
@@ -97,7 +97,7 @@ $h: 100vh
 .b-hero
   position: relative
   width: 100%
-  height: #{$h}
+  min-height: #{$h}
   margin: 0
   padding: 1rem
   background-image: url(https://gn158.cdn.stg.gamenet.ru/0/7IahR/o_1thKM9.jpg)
@@ -109,7 +109,7 @@ $h: 100vh
   flex-direction: column
   transition: background 200ms
   &.is-editable
-    height: calc(#{$h} - 7.2rem)
+    min-height: calc(#{$h} - 7.2rem)
 .b-delimiter-test
   height: 25rem
 .b-logo-test
