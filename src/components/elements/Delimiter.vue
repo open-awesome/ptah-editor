@@ -1,5 +1,5 @@
 <template>
-    <div class="b-delimiter"></div>
+    <section class="b-delimiter"></section>
 </template>
 
 <script>
@@ -16,5 +16,5 @@ export default {
   display: flex
   align-items: center
   justify-content: center
-  min-height: 10rem
+  min-height: 4rem
 </style>

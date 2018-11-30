@@ -8,10 +8,10 @@ export default {
     return new Promise((resolve) => {
       resolve([
         {
-          slug: 'BaseSlot',
+          slug: 'Hero',
           theme: {
-            name: 'BaseSlot',
-            sections: ['BaseSlot']
+            name: 'Hero',
+            sections: ['Hero1']
           }
         },
         {

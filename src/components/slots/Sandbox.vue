@@ -51,13 +51,13 @@ export default {
 </script>
 
 <template>
-  <div class="slot">
-      <button class="slot__tune ptah-control" :class="{'active': showSettings}" @click.prevent="showList">
+  <div class="b-slot">
+      <button class="b-slot__tune ptah-control" :class="{'active': showSettings}" @click.prevent="showList">
         <img src="https://gn337.cdn.stg.gamenet.ru/0/79ndM/o_DXxZz.svg" alt="">
       </button>
-      <div class="slot__align ptah-control" v-if="showSettings">
+      <div class="b-slot__align ptah-control" v-if="showSettings">
         <div>{{ dir[0].title }}</div>
-        <ul class="slot__list">
+        <ul class="b-slot__list">
           <li>
             <a href="#" @click.prevent="align({ 'justify-content': 'flex-start' })" tooltip-position="top" tooltip="Align left">
               <img :src="dir[0].img1" alt="">
@@ -75,7 +75,7 @@ export default {
           </li>
         </ul>
         <div>{{ dir[1].title }}</div>
-        <ul class="slot__list">
+        <ul class="b-slot__list">
           <li>
             <a href="#" @click.prevent="align({ 'align-items': 'flex-start' })"  tooltip-position="top" tooltip="Align top">
               <img :src="dir[1].img1" alt="">
@@ -93,7 +93,7 @@ export default {
           </li>
         </ul>
         <div>Direction</div>
-        <ul class="slot__list">
+        <ul class="b-slot__list">
           <li>
             <a href="#" @click.prevent="align({ 'flex-direction': 'row' }, 'row')" tooltip-position="top" tooltip="Row">
               <img src="https://gn708.cdn.stg.gamenet.ru/0/786Mc/o_19bvcb.svg" alt="" style="transform: rotate(90deg)">
@@ -114,13 +114,14 @@ export default {
 </template>
 
 <style lang="sass">
-.slot
+.b-slot
   display: flex
   flex-wrap: wrap
   justify-content: center
   align-items: center
   position: relative
   width: 100%
+  height: 100%
   .is-editable &
     border: 1px dashed $green
   &__align

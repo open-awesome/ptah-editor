@@ -17,9 +17,7 @@ export default {
   height: 20rem
   .is-mobile &
     margin: 1rem auto
-    height: auto
   @media only screen and (max-width: 540px)
     &
       margin: 1rem auto
-      height: auto
 </style>

@@ -23,7 +23,6 @@ export function getTypeFromSchema (target, schema) {
   const tempTarget = target.split('.')
   tempTarget.shift()
   const value = _.get(schema, tempTarget.join('.'))
-  if (value === types.Grid) return 'grid'
   if (value === types.Text) return 'text'
   if (value === types.Description) return 'text'
   if (value === types.Title) return 'title'
@@ -34,8 +33,6 @@ export function getTypeFromSchema (target, schema) {
   if (value === types.Product) return 'product'
   if (value === types.Label) return 'text'
   if (value === types.Cost) return 'text'
-  if (value === String) return 'text'
-  if (value === Number) return 'text'
 
   return null
 }
@@ -159,7 +156,7 @@ export function gtagSetup (tag) {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-          
+
             gtag('config', '${tag}');
           </script>
           `

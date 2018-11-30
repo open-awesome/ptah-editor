@@ -23,8 +23,6 @@ import * as _ from 'lodash-es'
 
 export default {
   name: 'ElementsList',
-  props: {
-  },
   data: () => ({
     showList: false,
     elements: [
