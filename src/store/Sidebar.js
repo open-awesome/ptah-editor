@@ -105,12 +105,13 @@ export default {
       })
     },
 
-    setSettingElement ({ dispatch, commit }, { type, name, options, section }) {
+    setSettingElement ({ dispatch, commit }, { type, name, options, section, element }) {
       let elementOptions = {
         ...options,
         name,
         sectionId: section.id,
-        sectionName: section.name
+        sectionName: section.name,
+        element
       }
 
       commit('setSection', section)

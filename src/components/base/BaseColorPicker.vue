@@ -28,12 +28,7 @@ export default {
 
   watch: {
     value (value) {
-      this.pickerValue = {
-        hex: value
-      }
-    },
-    pickerValue (value) {
-      this.$emit('change', value)
+      this.pickerValue = value
     }
   },
 
@@ -43,6 +38,12 @@ export default {
       pickerValue: {
         hex: this.value
       }
+    }
+  },
+
+  methods: {
+    changeColor (color) {
+      this.$emit('change', color)
     }
   }
 }
@@ -64,7 +65,7 @@ export default {
     </div>
 
     <div class="b-picker__palette" v-show="expanded">
-      <Sketch v-model="pickerValue"></Sketch>
+      <Sketch :value="pickerValue" @input="changeColor"></Sketch>
     </div>
   </div>
 </template>
@@ -101,6 +102,7 @@ export default {
       position: absolute
       bottom: -302px
       left: -2.2rem
+      z-index: 10
     &__arrow
       transition: .3s ease-out
       &--turn

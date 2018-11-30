@@ -827,7 +827,8 @@ export default {
             type: this.$props.type,
             name: this.name,
             options: _.get(this.section.data, this.path).element,
-            section: this.section
+            section: this.section,
+            element: this.el
           })
           position = 'bottom'
           inner = false

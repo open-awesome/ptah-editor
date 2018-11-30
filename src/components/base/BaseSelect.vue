@@ -16,6 +16,9 @@ export default {
     value: {
       type: Object,
       default: () => {}
+    },
+    label: {
+      type: String
     }
   },
   data: () => ({
@@ -39,6 +42,9 @@ export default {
 
 <template>
   <div class="l-pth-base-select"  @click="showOptions = !showOptions" v-click-outside="onClickOutside">
+    <base-label v-if="label">
+      {{label}}
+    </base-label>
     <div class="b-pth-base-select">
       <div class="b-pth-base-select__container">
         <span class="b-pth-base-select__name">
@@ -109,7 +115,7 @@ export default {
     top: 100%
     left: -1.2rem
     right: -1.2rem
-    z-index: 0
+    z-index: 10
     margin: 0
     padding: 0
     box-shadow: 0 0.6rem 2.4rem 0 rgba(0, 0, 0, 0.15)
