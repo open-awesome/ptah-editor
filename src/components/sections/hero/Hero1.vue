@@ -98,7 +98,6 @@ export default {
       ref="sandbox"
       path="$sectionData.slots[0].container"
       direction="column"
-      v-styler:section="$sectionData.slots[0].container"
       :style="$sectionData.slots[0].container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>

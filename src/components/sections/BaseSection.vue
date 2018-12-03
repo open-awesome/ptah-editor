@@ -43,7 +43,6 @@ export default {
     <sandbox
       ref="sandbox"
       path="$sectionData.container"
-      v-styler:section="$sectionData.container"
       :style="$sectionData.container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
