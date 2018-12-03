@@ -1,16 +1,34 @@
 <template>
   <div class="b-base-image-upload">
-    <div class="b-base-image-upload__preview" @click="upload">
-      <img v-if="url" :src="url" width="48" alt="" @click.prevent="upload">
-      <span v-else class="b-base-image-upload__add-button">
-        <IconBase name="plus" width="16" height="16" color="#436FEE" />
+    <div class="b-base-image-upload__side">
+      <template v-if="url">
+        <span class="b-base-image-upload__button b-base-image-upload__button_preview">
+          <img class="b-base-image-upload-preview__image"
+            :src="url"
+            width="48"
+            height="48"
+            alt="">
+        </span>
+        <span
+          class="b-base-image-upload__button b-base-image-upload__button_remove"
+          @click="clearValue"
+          >
+          <IconBase name="close" width="14" height="14" color="#FFFFFF" />
+        </span>
+      </template>
+
+      <span
+        v-else
+        class="b-base-image-upload__button b-base-image-upload__button_add"
+        @click="chooseFile">
+        <IconBase name="upload" width="16" height="16" color="#436FEE" />
       </span>
       <input
         style="display: none;"
         type="file"
         accept="image/*"
         ref="uploadInput"
-        @change="onUploadClick"/>
+        @change="uploadFileAndHandleData"/>
     </div>
     <div class="b-base-image-upload__info">
       <p>{{label}}</p>
@@ -25,7 +43,7 @@ import api from '@store/api'
 export default {
   model: {
     prop: 'value',
-    event: 'upload'
+    event: 'change'
   },
 
   props: {
@@ -48,7 +66,7 @@ export default {
       this.url = value
     },
     url (value) {
-      this.$emit('upload', value)
+      this.$emit('change', value)
     }
   },
 
@@ -59,19 +77,22 @@ export default {
   },
 
   methods: {
-    onUploadClick (event) {
+    uploadFileAndHandleData (event) {
       this.uploadFile(event)
         .then((data) => { this.url = data.src })
         .catch((error) => console.warn(error))
     },
 
-    upload () {
-      this.url = ''
+    chooseFile () {
       this.$refs.uploadInput.click()
     },
 
     uploadFile (event) {
       return api.uploadFileFromInputFile(event)
+    },
+
+    clearValue () {
+      this.url = ''
     }
   }
 }
@@ -82,23 +103,45 @@ export default {
   display: flex
   flex-direction: row
 
-  &__preview
+  &__side
     cursor: pointer
     height: 4.8rem
     width: 4.8rem
-    margin-right: 2.4rem
+    margin-right: 1.4rem
     display: flex
     align-items: center
     justify-content: center
+    position: relative
 
-  &__add-button
-    background: rgba(#D5E0FF, 0.25)
+  &__button
+    border: 2px solid rgba(#888888, 0.2)
     height: 4.8rem
     width: 4.8rem
     border-radius: 50%
     display: flex
     align-items: center
     justify-content: center
+
+    &_preview
+      overflow: hidden
+
+    &_remove
+      z-index: 10
+      position: absolute
+      border-color: #FF3C5F
+      background: rgba(#FF3C5F, 0.65)
+      opacity: 0
+      transition: opacity 0.1s ease
+
+      .b-base-image-upload__side:hover &
+        opacity: 1
+
+    &_add
+      &:hover
+        border-color: #436FEE
+
+      svg
+        margin-bottom: 0.2rem
 
   &__info
     font-size: 1.4rem
@@ -111,4 +154,5 @@ export default {
 
       & + p
         margin-top: 0.6rem
+
 </style>

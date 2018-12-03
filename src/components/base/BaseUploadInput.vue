@@ -79,6 +79,8 @@ export default {
 
 <style lang="sass" scoped>
   .b-base-upload
+    width: 100%
+
     &__inner
       display: flex
       justify-content: space-between
@@ -91,6 +93,8 @@ export default {
       color: #272727
       font-size: 1.6rem
       width: 90%
+      &::placeholder
+        color: #CDCDCD;
     &__button
       height: 16px
       cursor: pointer
