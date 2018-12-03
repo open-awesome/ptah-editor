@@ -31,7 +31,8 @@ export default {
       bgSize: '',
       bgRepeat: '',
       bgVideo: '',
-      bgVideoPosition: ''
+      bgVideoPosition: '',
+      fullPageScroll: ''
     }
   },
 
@@ -64,7 +65,7 @@ export default {
         }
 
         if (value === 'tile') {
-          this.bgSize = 'contain'
+          this.bgSize = ''
           this.bgRepeat = 'repeat'
         }
       },
@@ -73,6 +74,15 @@ export default {
           return 'fill'
         }
         return 'tile'
+      }
+    },
+
+    fullPageScrollCheckbox: {
+      set (value) {
+        this.fullPageScroll = value ? 'yes' : 'no'
+      },
+      get () {
+        return this.fullPageScroll === 'yes'
       }
     }
   },
@@ -103,14 +113,22 @@ export default {
       this.bgSize = settings.styles.backgroundSize
       this.bgVideo = settings.video
       this.bgVideoPosition = settings.videoPosition
+      this.fullPageScroll = settings.fullPageScroll
     },
     applySettings () {
+      let backgroundColor
+      if (typeof this.pageBackgroundColor === 'string') {
+        backgroundColor = this.pageBackgroundColor
+      } else {
+        backgroundColor = _.get(this.pageBackgroundColor, 'hex', '')
+      }
       const data = {
         video: this.bgVideo || '',
         videoPosition: this.bgVideoPosition,
+        fullPageScroll: this.fullPageScroll,
         styles: {
+          backgroundColor,
           backgroundImage: this.pageBackgroundUrl || '',
-          backgroundColor: _.get(this.pageBackgroundColor, 'hex', ''),
           backgroundPositionX: this.pageBackgroundPositionX,
           backgroundPositionY: this.pageBackgroundPositionY,
           backgroundAttachment: this.bgAttachment,
@@ -134,6 +152,10 @@ export default {
       <base-fieldset>
         <base-fieldset-row width="short">
           <BaseColorPicker label="Background color" v-model="pageBackgroundColor" />
+        </base-fieldset-row>
+
+        <base-fieldset-row>
+          <BaseSwitcher v-model="fullPageScrollCheckbox" label="Full page scroll" />
         </base-fieldset-row>
       </base-fieldset>
 
