@@ -44,13 +44,13 @@ const DEFAULT_OPTIONS = {
  * @type {Map}
  */
 const data = new Map([
-  [types.Description, () => (_.merge({}, DEFAULT_OPTIONS, {
-    text: 'Your Game takes players on a grand adventure filled with detractors, monsters, gold hunters and grave danger. Dramatic events unfolded which overturned your life and now you have to fight for survival in a new hostile world. Discover, explore, and conquer as you survive through different dimensions of reality!',
+  [types.Title, () => (_.merge({}, DEFAULT_OPTIONS, {
+    text: 'Title',
     aligned: true,
     typography: true,
     styles: {
       'font-family': 'Roboto',
-      'font-size': 1.4,
+      'font-size': '3rem',
       'font-weight': false,
       'font-style': false,
       'text-decoration': false,
@@ -71,7 +71,7 @@ const data = new Map([
     typography: true,
     styles: {
       'font-family': 'Roboto',
-      'font-size': 1.4,
+      'font-size': '1.5rem',
       'font-weight': false,
       'font-style': false,
       'text-decoration': false,
@@ -86,7 +86,6 @@ const data = new Map([
       'justify-content': false
     }
   }))],
-  // [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
     removable: true,
@@ -160,7 +159,7 @@ const data = new Map([
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
-      resizable: false,
+      resizable: true,
       removable: true,
       background: true,
       styles: {
@@ -168,7 +167,10 @@ const data = new Map([
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
-        'background-color': false
+        'background-color': false,
+        'background': false,
+        'width': '',
+        'height': ''
       }
     })
   )],
@@ -296,8 +298,6 @@ const data = new Map([
       }
     })
   )],
-  [types.Grid, () => ({ mobile: '', tablet: '', desktop: '', widescreen: '' })],
-  [String, 'This is pretty neat'],
   [types.GalleryItem, () => (_.merge({}, DEFAULT_OPTIONS, {
     removable: true,
     resizable: false,
@@ -328,6 +328,17 @@ const data = new Map([
       'height': ''
     }
   }))],
+  [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      resizable: true,
+      removable: true,
+      styles: {
+        'width': '',
+        'height': ''
+      }
+    })
+  )]
 ])
 
 export default class Seeder {

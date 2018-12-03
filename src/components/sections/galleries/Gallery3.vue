@@ -1,5 +1,9 @@
 <template>
-  <section class="b-gallery-three" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="b-gallery-three"
+    v-styler:section="$sectionData.mainStyle"
+    :class="$sectionData.mainStyle.classes"
+    :style="$sectionData.mainStyle.styles"
+    >
       <div class="b-gallery-three__wrap">
         <div class="b-gallery-three-block flex flex_center">
           <div class="b-gallery-three-block__item flex flex_center flex_columns"
@@ -28,7 +32,7 @@
         </div>
       </div>
       <div gallery-three-popup="" class="l-popup l-popup_flex" v-show="true === $sectionData.isShowPopup">
-          <div gallery-three-popup-padd="" v-bind:style="$sectionData.popupStyles" class="l-popup__padd flex flex_columns">
+          <div gallery-three-popup-padd="" :style="$sectionData.popupStyles" class="l-popup__padd flex flex_columns">
               <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
               <div class="l-popup__logos">
                   <div class="b-logo" v-for="(logo, index) in $sectionData.logos"
@@ -43,7 +47,7 @@
                 <span class="b-gallery-three-btn-container__button"
                       v-styler="$sectionData.button"
                       v-text="$sectionData.button.text"
-                      v-bind:style="$sectionData.button.styles"
+                      :style="$sectionData.button.styles"
                   >
                   Начать игру
                 </span>

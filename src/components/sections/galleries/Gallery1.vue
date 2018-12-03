@@ -1,5 +1,9 @@
 <template>
-  <section class="b-gallery-one" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="b-gallery-one"
+    v-styler:section="$sectionData.mainStyle"
+    :class="$sectionData.mainStyle.classes"
+    :style="$sectionData.mainStyle.styles"
+    >
       <div class="b-gallery-one-list flex__item flex flex_center">
         <div class="b-gallery-one-list__tiles b-gallery-one-list__tiles_mobile">
           <div class="b-preview"

@@ -1,5 +1,10 @@
 <template>
-  <section class="b-gallery-two" v-on:resize="closePopup" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="b-gallery-two"
+    @resize="closePopup"
+    v-styler:section="$sectionData.mainStyle"
+    :class="$sectionData.mainStyle.classes"
+    :style="$sectionData.mainStyle.styles"
+    >
       <div class="b-gallery-two__wrap">
         <div class="b-gallery-two flex flex_center">
           <div class="b-gallery-two__item-wrap"
@@ -11,7 +16,7 @@
           >
             <a gallery-two-link="" :gallery-two-url="$sectionData.images[index].button.href" class="b-gallery-two__link"
                v-styler:for="{ el: $sectionData.images[index].button, path:`$sectionData.images[${index}].button`, type: 'button'}"
-               v-bind:style="$sectionData.images[index].button.styles"
+               :style="$sectionData.images[index].button.styles"
                @dblclick="onClick(item, index)"
               >
             </a>
@@ -19,7 +24,7 @@
         </div>
       </div>
       <div gallery-two-popup="" class="l-popup l-popup_flex" v-show="true === $sectionData.isShowPopup">
-        <div gallery-two-popup-padd="" class="l-popup__padd" v-bind:style="$sectionData.popupStyles">
+        <div gallery-two-popup-padd="" class="l-popup__padd" :style="$sectionData.popupStyles">
           <div gallery-two-popup-close="" class="l-popup__close" @click.prevent="closePopup"></div>
           <div gallery-two-popup-prev="" class="l-popup__arr l-popup__arr_prev" @click="clickArr('prev')" v-show="$sectionData.index > 0">
             <VuseIcon class="vuse-icon" name="arrowLeft"></VuseIcon>

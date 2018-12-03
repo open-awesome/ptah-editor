@@ -56,24 +56,25 @@ export default {
 
 <style lang="sass" scoped>
 .b-builder-settings-bar
-  width: 240px
+  width: 24rem
+  height: 100%
   background: #F5F5F5
-  padding: 28px 32px
+  padding: 2.8rem 3.2rem
   display: flex
   flex-direction: column
   height: 100%
 
   &__title
-    margin: 0 0 28px 0
+    margin: 0 0 2.8rem 0
     color: #272727
-    font-size: 18px
+    font-size: 1.8rem
     font-weight: bold
 
   &__closer
     position: absolute
-    right: 10px
-    top: 10px
-    padding: 6px 10px
+    right: 1rem
+    top: 1rem
+    padding: 0.6rem 1rem
     border: 0
     background: transparent
     cursor: pointer

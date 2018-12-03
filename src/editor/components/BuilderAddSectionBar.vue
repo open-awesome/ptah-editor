@@ -245,7 +245,7 @@ export default {
         width: 17.6rem
         height: 11.2rem
         box-sizing: border-box
-        background-color: #8189B1
+        background-color: #cccccc
         margin: 0 auto 3.2rem
         cursor: pointer
         display: flex

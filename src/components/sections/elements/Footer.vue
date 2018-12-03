@@ -1,5 +1,9 @@
 <template>
-  <section class="l-footer" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="l-footer"
+    v-styler:section="$sectionData.mainStyle"
+    :class="$sectionData.mainStyle.classes"
+    :style="$sectionData.mainStyle.styles"
+    >
     <footer class="b-footer">
       <div class="b-footer__group b-footer__group_1">
         <div class="b-footer__logo" v-for="(item, index) in $sectionData.images"

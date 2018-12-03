@@ -1,5 +1,9 @@
 <template>
-  <section class="l-products" v-styler:section="$sectionData.mainStyle" :class="$sectionData.mainStyle.classes" v-bind:style="$sectionData.mainStyle.styles">
+  <section class="l-products"
+    v-styler:section="$sectionData.mainStyle"
+    :class="$sectionData.mainStyle.classes"
+    :style="$sectionData.mainStyle.styles"
+    >
       <div class="b-products">
         <div class="b-products-list flex flex_justify-content-center flex_align-items-start">
           <div class="b-products-list__item flex flex_columns"
