@@ -162,8 +162,6 @@ export default {
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
     this.textHover = this.settingObjectOptions.pseudo['color'] || ''
-
-    console.log(this.settingObjectSection.data)
   },
 
   methods: {
