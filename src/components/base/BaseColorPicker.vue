@@ -88,10 +88,10 @@ export default {
       border: 2px solid #FFFFFF
       box-sizing: border-box
       box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
+      flex-shrink: 0
     &__text
       display: none
       color: #272727
-      text-transform: uppercase
       margin-left: .8rem
       flex-grow: 2
     &.full
