@@ -41,6 +41,7 @@ export default {
     v-styler:section="$sectionData.mainStyle"
     >
     <sandbox
+      class="b-sandbox"
       ref="sandbox"
       path="$sectionData.container"
       :style="$sectionData.container.styles"
@@ -61,7 +62,7 @@ export default {
   </section>
 </template>
 
-<style lang="sass">
+<style lang="sass" scoped>
 .b-sandbox
   height: 100%
   min-height: 20rem

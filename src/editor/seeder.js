@@ -328,6 +328,17 @@ const data = new Map([
       'height': ''
     }
   }))],
+  [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      resizable: true,
+      removable: true,
+      styles: {
+        'width': '',
+        'height': ''
+      }
+    })
+  )]
 ])
 
 export default class Seeder {

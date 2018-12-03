@@ -53,8 +53,8 @@ export default {
       },
       {
         name: 'Delimiter',
-        element: types.StyleObject,
-        type: 'section'
+        element: types.Delimiter,
+        type: 'delimiter'
       }
     ]
   }),

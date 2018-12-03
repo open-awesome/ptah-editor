@@ -16,6 +16,13 @@ const C_CUSTOM = [
 ]
 
 const SCHEMA_CUSTOM = {
+  mainStyle: {
+    styles: {
+      'background-image': 'url(https://gn158.cdn.stg.gamenet.ru/0/7IahR/o_1thKM9.jpg)',
+      'background-size': 'cover',
+      'background-repeat': 'no-repeat'
+    }
+  },
   components: _.merge({}, C_CUSTOM),
   edited: true
 }
@@ -36,8 +43,8 @@ export default {
       },
       {
         name: 'Delimiter',
-        element: types.StyleObject,
-        type: 'section',
+        element: types.Delimiter,
+        type: 'delimiter',
         class: 'b-delimiter-test'
       },
       {
@@ -48,8 +55,8 @@ export default {
       },
       {
         name: 'Delimiter',
-        element: types.StyleObject,
-        type: 'section'
+        element: types.Delimiter,
+        type: 'delimiter'
       },
       {
         name: 'Description',
@@ -87,10 +94,10 @@ export default {
     v-styler:section="$sectionData.mainStyle"
   >
     <sandbox
+      class="b-sandbox"
       ref="sandbox"
       path="$sectionData.container"
       direction="column"
-      :style="$sectionData.container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
       <component class="b-hero-component" v-for="(component, index) in $sectionData.components"
@@ -150,4 +157,11 @@ $h: 100vh
 .b-text-test
   color: rgb(255, 255, 255)
   font-size: 2rem
+
+.b-sandbox
+  height: 100%
+  min-height: 20rem
+  justify-content: center
+  align-items: center
+  flex-direction: column
 </style>
