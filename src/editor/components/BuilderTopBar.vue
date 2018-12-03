@@ -61,6 +61,16 @@ export default {
           :color="'light-gray'"
           :transparent="true"
           :size="'middle'"
+          @click="$emit('save', $event)"
+          tooltip="save"
+          tooltip-position="bottom"
+          >
+          Save
+        </BaseButton>
+        <BaseButton
+          :color="'light-gray'"
+          :transparent="true"
+          :size="'middle'"
           @click="$emit('preview', $event)"
           tooltip="preview"
           tooltip-position="bottom"
