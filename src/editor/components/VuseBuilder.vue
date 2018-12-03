@@ -3,6 +3,7 @@
     :builder="builder"
     @export="submit"
     @preview="preview"
+    @save="save"
     >
     <div class="artboard is-editable" id="artboard" ref="artboard"
       :class="{

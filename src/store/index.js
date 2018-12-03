@@ -16,7 +16,8 @@ const state = {
   currentLanding: {
     settings: {}
   },
-  isSaved: false
+  isSaved: false,
+  slug: ''
 }
 
 const getters = {
@@ -47,6 +48,8 @@ const actions = {
    * @param slug
    */
   getLandingData ({ state, commit }, slug) {
+    commit('slug', slug)
+
     return api.getLanding(slug)
       .then((data) => {
         const landing = data || {}
@@ -90,7 +93,7 @@ const actions = {
     }
     const resultDataString = JSON.stringify(mergedData)
 
-    return api.saveLanding(state.currentLanding.slug, resultDataString)
+    return api.saveLanding(state.slug, resultDataString)
       .then(() => {
         return commit('isSaved', true)
       })
@@ -126,6 +129,10 @@ const mutations = {
 
   isSaved (state, value) {
     state.isSaved = value
+  },
+
+  slug (state, value) {
+    state.slug = value
   }
 }
 
