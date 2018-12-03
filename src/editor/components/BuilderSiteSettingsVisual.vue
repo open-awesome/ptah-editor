@@ -31,7 +31,8 @@ export default {
       bgSize: '',
       bgRepeat: '',
       bgVideo: '',
-      bgVideoPosition: ''
+      bgVideoPosition: '',
+      fullPageScroll: ''
     }
   },
 
@@ -74,6 +75,15 @@ export default {
         }
         return 'tile'
       }
+    },
+
+    fullPageScrollCheckbox: {
+      set (value) {
+        this.fullPageScroll = value ? 'yes' : 'no'
+      },
+      get () {
+        return this.fullPageScroll === 'yes'
+      }
     }
   },
 
@@ -103,6 +113,7 @@ export default {
       this.bgSize = settings.styles.backgroundSize
       this.bgVideo = settings.video
       this.bgVideoPosition = settings.videoPosition
+      this.fullPageScroll = settings.fullPageScroll
     },
     applySettings () {
       let backgroundColor
@@ -114,6 +125,7 @@ export default {
       const data = {
         video: this.bgVideo || '',
         videoPosition: this.bgVideoPosition,
+        fullPageScroll: this.fullPageScroll,
         styles: {
           backgroundColor,
           backgroundImage: this.pageBackgroundUrl || '',
@@ -140,6 +152,10 @@ export default {
       <base-fieldset>
         <base-fieldset-row width="short">
           <BaseColorPicker label="Background color" v-model="pageBackgroundColor" />
+        </base-fieldset-row>
+
+        <base-fieldset-row>
+          <BaseSwitcher v-model="fullPageScrollCheckbox" label="Full page scroll" />
         </base-fieldset-row>
       </base-fieldset>
 

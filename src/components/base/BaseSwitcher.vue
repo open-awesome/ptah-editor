@@ -27,8 +27,8 @@ export default {
     classObject () {
       const { value, disabled } = this
       return {
-        'b-base-switcher-core_checked': value,
-        'b-base-switcher-core_disabled': disabled
+        'b-base-switcher_checked': value,
+        'b-base-switcher_disabled': disabled
       }
     }
   }
@@ -36,7 +36,7 @@ export default {
 </script>
 
 <template>
-  <label class="b-base-switcher">
+  <label class="b-base-switcher" :class="classObject">
     <div class="b-base-switcher__label" v-if="$slots.label || label">
       <slot name="label"></slot>
       {{label}}
@@ -68,6 +68,30 @@ export default {
   &__label
     color: #272727
     font-size: 1.6rem
+
+  &_checked
+    .b-base-switcher-core__body:after
+      background-color: #99D848
+      transform: translateX(-3.9rem);
+
+    .b-base-switcher-core-texts__on
+      color: #fff
+
+  &_disabled
+    background: #fff
+    cursor: default
+
+    .b-base-switcher__label
+      color: #CDCDCD
+
+    .b-base-switcher-core__body:after
+      background: transparent
+      border: 1px solid #e2e2e2
+      box-shadow: none
+
+    .b-base-switcher-core-texts__on,
+    .b-base-switcher-core-texts__off
+      color: rgba(#CDCDCD, 0.5)
 
 .b-base-switcher-core
   position: relative
@@ -129,24 +153,4 @@ export default {
     &__off
       color: #747474
 
-  &_checked
-    .b-base-switcher-core__body:after
-      background-color: #99D848
-      transform: translateX(-3.9rem);
-
-    .b-base-switcher-core-texts__on
-      color: #fff
-
-  &_disabled
-    background: #fff
-    cursor: default
-
-    .b-base-switcher-core__body:after
-      background: transparent
-      border: 1px solid #e2e2e2
-      box-shadow: none
-
-    .b-base-switcher-core-texts__on,
-    .b-base-switcher-core-texts__off
-      color: rgba(#CDCDCD, 0.5)
 </style>
