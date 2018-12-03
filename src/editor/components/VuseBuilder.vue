@@ -296,13 +296,14 @@ export default {
     },
     styleArtboard (styles) {
       Object.keys(styles).forEach((styleName) => {
-        let value
+        let value = styles[styleName]
         if (styleName === 'backgroundImage') {
-          value = `url(${styles[styleName]})`
-        } else if (styleName === 'backgroundPositionX' || styleName === 'backgroundPositionY') {
-          value = `${styles[styleName]}px`
-        } else {
-          value = styles[styleName]
+          value = `url(${value})`
+        } else if (
+          (styleName === 'backgroundPositionX' || styleName === 'backgroundPositionY') &&
+            /[^0-9]/.test()
+        ) {
+          value = `${value}rem`
         }
         this.$refs.artboard.style[styleName] = value
       })

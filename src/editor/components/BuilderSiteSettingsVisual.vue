@@ -171,10 +171,18 @@ export default {
 
         <base-fieldset-row>
           <base-fieldset-item>
-            <BaseTextField label="X position" v-model="pageBackgroundPositionX" />
+            <BaseTextField
+              label="X position"
+              v-model="pageBackgroundPositionX"
+              placeholder="0px"
+            />
           </base-fieldset-item>
           <base-fieldset-item>
-            <BaseTextField label="Y position" v-model="pageBackgroundPositionY" />
+            <BaseTextField
+              label="Y position"
+              v-model="pageBackgroundPositionY"
+              placeholder="0px"
+            />
           </base-fieldset-item>
         </base-fieldset-row>
 
