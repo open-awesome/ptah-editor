@@ -1,10 +1,5 @@
 <script>
-import VuseIcon from '../VuseIcon'
-
 export default {
-  components: {
-    VuseIcon
-  },
   props: {
     isBox: {
       type: Boolean,
@@ -13,22 +8,42 @@ export default {
   },
   data: () => ({
     flex: {
-      left: ['justify-content', 'flex-start', 'flex-start'],
-      center: ['justify-content', 'center', 'center'],
-      right: ['justify-content', 'flex-end', 'flex-end']
+      left: ['justify-content', 'flex-start'],
+      center: ['justify-content', 'center'],
+      right: ['justify-content', 'flex-end']
     },
     text: {
-      left: ['text-align', 'left', 'left'],
-      center: ['text-align', 'center', 'center'],
-      right: ['text-align', 'right', 'right']
+      left: ['text-align', 'left'],
+      center: ['text-align', 'center'],
+      right: ['text-align', 'right']
+    },
+    align: {
+      list: [
+        {
+          iconName: 'alignLeft',
+          tooltipText: 'Align left',
+          value: 'left'
+        },
+        {
+          iconName: 'alignCenter',
+          tooltipText: 'Align center',
+          value: 'center'
+        },
+        {
+          iconName: 'alignRight',
+          tooltipText: 'Align right',
+          value: 'right'
+        }
+      ],
+      value: ''
     }
   }),
   methods: {
-    align (value) {
+    aligned () {
       if (this.isBox) {
-        this.$emit('boxAligned', this.flex[value])
+        this.$emit('boxAligned', this.flex[this.align.value])
       } else {
-        this.$emit('textAligned', this.text[value])
+        this.$emit('textAligned', this.text[this.align.value])
       }
     }
   }
@@ -36,21 +51,5 @@ export default {
 </script>
 
 <template>
-  <ul class="align">
-    <li>
-    <button class="styler-button" @click="align('left')" title="Align left">
-      <VuseIcon name="left"></VuseIcon>
-    </button>
-    </li>
-    <li>
-      <button class="styler-button" @click="align('center')" title="Align center">
-        <VuseIcon name="center"></VuseIcon>
-      </button>
-    </li>
-    <li>
-      <button class="styler-button" @click="align('right')" title="Align right">
-        <VuseIcon name="right"></VuseIcon>
-      </button>
-    </li>
-  </ul>
+  <BaseButtonTabs :list="align.list" v-model="align.value" @change="aligned"/>
 </template>

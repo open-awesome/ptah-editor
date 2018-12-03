@@ -18,6 +18,8 @@
 
 <script>
 import BuilderSettingsBarSection from './BuilderSettingsBarSection'
+import BuilderSettingsBarElement from './BuilderSettingsBarElement'
+
 import { mapState } from 'vuex'
 
 export default {
@@ -46,7 +48,8 @@ export default {
   },
 
   components: {
-    BuilderSettingsBarSection
+    BuilderSettingsBarSection,
+    BuilderSettingsBarElement
   }
 }
 </script>
@@ -59,6 +62,7 @@ export default {
   padding: 2.8rem 3.2rem
   display: flex
   flex-direction: column
+  height: 100%
 
   &__title
     margin: 0 0 2.8rem 0

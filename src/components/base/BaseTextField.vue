@@ -11,6 +11,7 @@
       <input class="b-base-text-field__input" type="text"
         v-bind="$attrs"
         v-model="innerValue"
+        :placeholder="placeholder"
         @input="$emit('input', innerValue)"
         @focus="$emit('focus', $event), hasFocus = true"
         @blur="$emit('blur', $event), hasFocus = false" />
@@ -45,6 +46,10 @@ export default {
       default: ''
     },
     label: {
+      type: String,
+      default: ''
+    },
+    placeholder: {
       type: String,
       default: ''
     }

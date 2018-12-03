@@ -17,16 +17,11 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import ControlColorPicker from './controls/ControlColorPicker.vue'
 
 import * as _ from 'lodash-es'
 
 export default {
   name: 'BuilderSettingsBarSection',
-
-  components: {
-    ControlColorPicker
-  },
 
   props: {
     builder: {
@@ -51,7 +46,8 @@ export default {
 
   created () {
     this.sectionBgColor = this.settingObjectOptions.styles['background-color']
-    this.sectionBgUrl = this.settingObjectOptions.styles['background-image'].match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0]
+    let image = this.settingObjectOptions.styles['background-image']
+    this.sectionBgUrl = image.length > 0 ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
   },
 
   watch: {
@@ -66,9 +62,10 @@ export default {
     ]),
 
     updateBgColor () {
+      const color = Object.values(this.sectionBgColor.rgba).toString()
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
         styles: {
-          'background-color': this.sectionBgColor.hex
+          'background-color': `rgba(${color})`
         }
       }))
     },
