@@ -3,39 +3,25 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 
-let slot1 = {
-  container: types.StyleObject,
+const SLOT_CUSTOM = {
   components: [
+    {},
+    {},
     {
-      name: 'Logo',
-      element: types.Logo,
-      type: 'image',
-      class: 'b-logo-test'
+      element: { text: 'Button' }
     },
+    {},
     {
-      name: 'Delimiter',
-      element: types.StyleObject,
-      type: 'section',
-      class: 'b-delimiter-test'
-    },
-    {
-      name: 'Button',
-      element: _.merge({ text: 'Button' }, types.Button),
-      type: 'button',
-      class: 'b-button-test'
-    },
-    {
-      name: 'Delimiter',
-      element: types.StyleObject,
-      type: 'section'
-    },
-    {
-      name: 'Description',
-      element: _.merge({ text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }, types.Text),
-      type: 'text',
-      class: 'b-text-test'
+      element: { text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }
     }
   ]
+}
+
+const SCHEMA_CUSTOM = {
+  slots: [
+    _.merge({}, SLOT_CUSTOM)
+  ],
+  edited: true
 }
 
 export default {
@@ -45,7 +31,40 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     slots: [
-      Seeder.seed(slot1)
+      {
+        container: types.StyleObject,
+        components: [
+          {
+            name: 'Logo',
+            element: types.Logo,
+            type: 'image',
+            class: 'b-logo-test'
+          },
+          {
+            name: 'Delimiter',
+            element: types.StyleObject,
+            type: 'section',
+            class: 'b-delimiter-test'
+          },
+          {
+            name: 'Button',
+            element: types.Button,
+            type: 'button',
+            class: 'b-button-test'
+          },
+          {
+            name: 'Delimiter',
+            element: types.StyleObject,
+            type: 'section'
+          },
+          {
+            name: 'Description',
+            element: types.Text,
+            type: 'text',
+            class: 'b-text-test'
+          }
+        ]
+      }
     ]
   },
   props: {
@@ -58,6 +77,11 @@ export default {
     onAddElement (element) {
       element.element.removable = true
       this.$section.data.slots[0].components.push(element)
+    }
+  },
+  created () {
+    if (this.$sectionData.edited === undefined) {
+      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
   }
 }
