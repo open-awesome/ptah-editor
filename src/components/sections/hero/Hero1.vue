@@ -3,24 +3,20 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 
-const SLOT_CUSTOM = {
-  components: [
-    {},
-    {},
-    {
-      element: { text: 'Button' }
-    },
-    {},
-    {
-      element: { text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }
-    }
-  ]
-}
+const C_CUSTOM = [
+  {},
+  {},
+  {
+    element: { text: 'Button' }
+  },
+  {},
+  {
+    element: { text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }
+  }
+]
 
 const SCHEMA_CUSTOM = {
-  slots: [
-    _.merge({}, SLOT_CUSTOM)
-  ],
+  components: _.merge({}, C_CUSTOM),
   edited: true
 }
 
@@ -30,40 +26,36 @@ export default {
   group: 'Hero',
   $schema: {
     mainStyle: types.StyleObject,
-    slots: [
+    container: types.StyleObject,
+    components: [
       {
-        container: types.StyleObject,
-        components: [
-          {
-            name: 'Logo',
-            element: types.Logo,
-            type: 'image',
-            class: 'b-logo-test'
-          },
-          {
-            name: 'Delimiter',
-            element: types.StyleObject,
-            type: 'section',
-            class: 'b-delimiter-test'
-          },
-          {
-            name: 'Button',
-            element: types.Button,
-            type: 'button',
-            class: 'b-button-test'
-          },
-          {
-            name: 'Delimiter',
-            element: types.StyleObject,
-            type: 'section'
-          },
-          {
-            name: 'Description',
-            element: types.Text,
-            type: 'text',
-            class: 'b-text-test'
-          }
-        ]
+        name: 'Logo',
+        element: types.Logo,
+        type: 'image',
+        class: 'b-logo-test'
+      },
+      {
+        name: 'Delimiter',
+        element: types.StyleObject,
+        type: 'section',
+        class: 'b-delimiter-test'
+      },
+      {
+        name: 'Button',
+        element: types.Button,
+        type: 'button',
+        class: 'b-button-test'
+      },
+      {
+        name: 'Delimiter',
+        element: types.StyleObject,
+        type: 'section'
+      },
+      {
+        name: 'Description',
+        element: types.Text,
+        type: 'text',
+        class: 'b-text-test'
       }
     ]
   },
@@ -76,7 +68,7 @@ export default {
   methods: {
     onAddElement (element) {
       element.element.removable = true
-      this.$section.data.slots[0].components.push(element)
+      this.$section.data.components.push(element)
     }
   },
   created () {
@@ -96,20 +88,20 @@ export default {
   >
     <sandbox
       ref="sandbox"
-      path="$sectionData.slots[0].container"
+      path="$sectionData.container"
       direction="column"
-      :style="$sectionData.slots[0].container.styles"
+      :style="$sectionData.container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
-      <component class="b-hero-component" v-for="(component, index) in $sectionData.slots[0].components"
-        v-if="$sectionData.slots[0].components.length !== 0"
+      <component class="b-hero-component" v-for="(component, index) in $sectionData.components"
+        v-if="$sectionData.components.length !== 0"
         :is="component.name"
         :key="index"
-        :href="$sectionData.slots[0].components[index].element.href"
-        v-html="$sectionData.slots[0].components[index].element.text"
-        :style="$sectionData.slots[0].components[index].element.styles"
-        :class="[$sectionData.slots[0].components[index].element.classes, $sectionData.slots[0].components[index].class]"
-        v-styler:for="{ el: $sectionData.slots[0].components[index].element, path: `$sectionData.slots[0].components[${index}].element`, type: $sectionData.slots[0].components[index].type }"
+        :href="$sectionData.components[index].element.href"
+        v-html="$sectionData.components[index].element.text"
+        :style="$sectionData.components[index].element.styles"
+        :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+        v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
         >
       </component>
     </sandbox>
