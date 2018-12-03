@@ -25,14 +25,14 @@ export default {
 .b-base-label
   font-size: 1.4rem
   line-height: 1.7rem
-  color: #888888
-  margin-bottom: 0.6rem
+  color: #747474
+  margin-bottom: 0.8rem
   transition: color 0.1s ease
   display: flex
   align-items: center
 
   &_focus
-    color: rgba(#888888, 0.5)
+    color: rgba(#747474, 0.5)
 
   &_error
     color: #FF3737

@@ -112,6 +112,9 @@ export default {
     &-layout
       transition: width 0.2s
       margin: 0 auto
+      position: relative
+      z-index: 5
+
       &.is-desktop
         width: 100%
       &.is-laptop
