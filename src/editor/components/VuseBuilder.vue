@@ -19,37 +19,6 @@
         </template>
       </div>
     </div>
-    <div class="controller">
-        <div class="controller-panel">
-          <button class="controller-button is-green" tooltip-position="top" tooltip="Page settings" @click="showSettings = !showSettings">
-            <VuseIcon name="cog"></VuseIcon>
-          </button>
-          <button class="controller-button is-green" tooltip-position="top" tooltip="save" @click="save">
-            <VuseIcon name="floppy"></VuseIcon>
-          </button>
-          <button class="controller-button is-green" tooltip-position="top" tooltip="preview" @click="preview">
-              <VuseIcon name="eye"></VuseIcon>
-          </button>
-          <button class="controller-button is-green" tooltip-position="top" tooltip="export" @click="submit">
-              <VuseIcon name="download"></VuseIcon>
-          </button>
-          <button class="controller-button is-red" v-if="!tempSections" tooltip-position="top" tooltip="clear sections" @click="clearSections">
-              <VuseIcon name="trash"></VuseIcon>
-          </button>
-          <button class="controller-button is-gray" v-if="tempSections" tooltip-position="top" tooltip="undo" @click="undo">
-              <VuseIcon name="undo"></VuseIcon>
-          </button>
-          <button class="controller-button is-blue" tooltip-position="top" tooltip="sorting" :class="{ 'is-red': $builder.isSorting }" @click="toggleSort">
-              <VuseIcon name="sort"></VuseIcon>
-          </button>
-          <button class="controller-button is-blue" tooltip-position="top" tooltip="add section" :class="{ 'is-red': listShown, 'is-rotated': listShown }" :disabled="!$builder.isEditing" @click="newSection">
-              <VuseIcon name="plus"></VuseIcon>
-          </button>
-          <button class="controller-button is-dark" tooltip-position="top" tooltip="Back to landings" @click="backToLandings">
-            <VuseIcon name="back"></VuseIcon>
-          </button>
-        </div>
-    </div>
     <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
       <li v-if="$builder.sections.length">
         <ul class="page-sections" ref="scope">
@@ -242,7 +211,6 @@ export default {
     return {
       title: null,
       listShown: false,
-      tempSections: null,
       sections: this.getSections(),
       currentSection: '',
       groups: {},
@@ -414,16 +382,6 @@ export default {
     addSection (section, position) {
       this.$builder.add(section, position)
       this.toggleListVisibility()
-    },
-    clearSections () {
-      this.tempSections = this.$builder.clear()
-      setTimeout(() => {
-        this.tempSections = null
-      }, 5000)
-    },
-    undo () {
-      this.$builder.sections = this.tempSections
-      this.tempSections = null
     },
     addTheme (theme) {
       this.$builder.set(theme)
