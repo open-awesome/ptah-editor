@@ -1,6 +1,5 @@
 <template>
   <div class="b-elem-settings">
-
     <!-- text align -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
       <control-align
@@ -40,6 +39,12 @@
         @setClass="selectAnimation"></control-link>
     </div>
 
+    <!-- sort -->
+    <div class="b-elem-settings__control temp-sort-buttons" v-if="isArrayEl">
+      <base-button color="light-gray" @click="sort('up')" size="middle" v-if="!isFirstInArray">Up</base-button>
+      <base-button color="light-gray" @click="sort('down')" size="middle" v-if="!isLastInArray">Down</base-button>
+    </div>
+
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
       <base-button color="light-gray" @click="deleteElement">Delete</base-button>
@@ -50,7 +55,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import { getPseudoTemplate, randomPoneId } from '../util'
+import { getPseudoTemplate, randomPoneId, correctArray } from '../util'
 import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
 import ControlBackground from './controls/TheControlBackground'
@@ -97,7 +102,25 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection'
-    ])
+    ]),
+    // find path to element
+    path () {
+      let path = _.split(this.settingObjectOptions.name, '.')[1]
+      return _.toPath(path)
+    },
+
+    isArrayEl () {
+      return this.settingObjectOptions.name.indexOf('[') > 0
+    },
+
+    isFirstInArray () {
+      return Object.keys(this.settingObjectSection.data[this.path[0]]).indexOf(this.path[1]) === 0
+    },
+
+    isLastInArray () {
+      const els = Object.keys(this.settingObjectSection.data[this.path[0]])
+      return els.indexOf(this.path[1]) === (els.length - 1)
+    }
   },
 
   created () {
@@ -133,12 +156,14 @@ export default {
     this.elRadius = styles['border-radius'] || 0
 
     /* Link */
-    this.elLink = this.settingObjectOptions.href
+    this.elLink = this.settingObjectOptions.href || ''
     this.elTarget = !!this.settingObjectOptions.target
 
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
     this.textHover = this.settingObjectOptions.pseudo['color'] || ''
+
+    console.log(this.settingObjectSection.data)
   },
 
   methods: {
@@ -215,6 +240,23 @@ export default {
       }
 
       this.clearSettingObject()
+    },
+
+    sort (direction) {
+      let container = this.path[0]
+      let index = parseInt(this.path[1])
+      let newIndex = null
+
+      if (direction === 'up') {
+        newIndex = index - 1
+      } else {
+        newIndex = index + 1
+      }
+
+      if (newIndex >= 0 && newIndex < this.settingObjectSection.data[container].length) {
+        correctArray(this.settingObjectSection.data[container], [index, newIndex])
+        correctArray(this.settingObjectSection.schema[container], [index, newIndex])
+      }
     }
   }
 }
@@ -231,4 +273,8 @@ export default {
       flex-grow: 2
       align-items: flex-end
       display: flex
+  // TODO: временное решение для кнопок сортировки
+  .temp-sort-buttons
+    button
+      width: 8rem
 </style>
