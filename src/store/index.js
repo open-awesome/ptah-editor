@@ -63,9 +63,9 @@ const actions = {
             backgroundColor: '',
             backgroundPositionX: '',
             backgroundPositionY: '',
-            backgroundAttachment: '',
+            backgroundAttachment: 'fixed',
             backgroundRepeat: 'no-repeat',
-            backgroundSize: ''
+            backgroundSize: 'cover'
           }
         })
         commit('isSaved', false)

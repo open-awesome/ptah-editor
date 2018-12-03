@@ -1,6 +1,6 @@
 <template>
   <div class="b-base-dropdown">
-    <slide-up-down :active="isOpened" :duration="200">
+    <slide-up-down :active="isOpenedInner" :duration="200">
       <slot></slot>
     </slide-up-down>
   </div>
@@ -20,6 +20,26 @@ export default {
       type: Boolean,
       required: true
     }
+  },
+
+  watch: {
+    isOpened (value) {
+      this.isOpenedInner = value
+    }
+  },
+
+  data () {
+    return {
+      isOpenedInner: false
+    }
+  },
+
+  mounted () {
+    // We need this to fix dropdown height when it's opened right from the start
+    // it happens because SlideUpDown gets height before all the interface is painted
+    this.$nextTick(() => {
+      this.isOpenedInner = this.isOpened
+    })
   }
 }
 </script>

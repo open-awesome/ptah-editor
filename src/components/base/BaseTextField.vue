@@ -86,6 +86,9 @@ export default {
     border-bottom: 1px solid #e2e2e2
     transition: border-color 0.1s ease
 
+    &::placeholder
+      color: #CDCDCD;
+
     .b-base-text-field_error &
       border-color: #FF3737
 
