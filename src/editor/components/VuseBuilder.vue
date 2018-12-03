@@ -192,15 +192,15 @@ export default {
   },
   methods: {
     initSettings () {
+      const settings = this.currentLanding.settings
       this.$builder.landing = this.$route.params.slug
+      this.$builder.settings = settings
       // Open current landing/preset
       if (this.currentLanding.sections) {
         this.addTheme(this.currentLanding)
       } else {
         this.addTheme(Object.assign(this.data, this.currentLanding.theme))
       }
-
-      const settings = this.currentLanding.settings
 
       this.styleArtboard(settings.styles)
       this.updateVideo()
