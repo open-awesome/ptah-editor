@@ -299,6 +299,8 @@ export default {
         let value
         if (styleName === 'backgroundImage') {
           value = `url(${styles[styleName]})`
+        } else if (styleName === 'backgroundPositionX' || styleName === 'backgroundPositionY') {
+          value = `${styles[styleName]}px`
         } else {
           value = styles[styleName]
         }

@@ -65,7 +65,7 @@ export default {
         }
 
         if (value === 'tile') {
-          this.bgSize = 'contain'
+          this.bgSize = ''
           this.bgRepeat = 'repeat'
         }
       },
