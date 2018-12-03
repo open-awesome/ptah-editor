@@ -2,7 +2,8 @@
 export default {
   props: {
     link: {
-      type: String
+      type: String,
+      required: true
     },
     target: {
       type: [String, Boolean]
@@ -75,7 +76,7 @@ export default {
     <div class="b-link-controls__header" @click="controlOpen = !controlOpen">
       <span>Link</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
-    <base-dropdown :isOpened="controlOpen" :class="{ 'open': controlOpen }">
+    <base-dropdown :isOpened="controlOpen"  :hasOverflow="controlOpen">
       <div class="b-link-controls__control">
         <base-text-field v-model="elLink" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
       </div>

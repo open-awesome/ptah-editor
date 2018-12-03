@@ -1,5 +1,5 @@
 <template>
-  <div class="b-base-dropdown">
+  <div class="b-base-dropdown" :class="{ 'visible': hasOverflow }">
     <slide-up-down :active="isOpened" :duration="200">
       <slot></slot>
     </slide-up-down>
@@ -19,6 +19,9 @@ export default {
     isOpened: {
       type: Boolean,
       required: true
+    },
+    hasOverflow: {
+      type: Boolean
     }
   }
 }
@@ -28,6 +31,11 @@ export default {
 .b-base-dropdown
   overflow-y: auto
   width: 100%
+  &.visible
+    overflow: visible !important
+    /deep/
+      > div
+        overflow: visible !important
 
 // Animations down here
 .slide-fade

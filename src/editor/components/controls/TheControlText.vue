@@ -122,7 +122,7 @@ export default {
     <div class="b-text-controls__header" @click="controlOpen = !controlOpen">
       <span>Text</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
-    <base-dropdown :isOpened="controlOpen" :class="{ 'open': controlOpen }">
+    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-text-controls__control">
         <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont"></base-select>
       </div>

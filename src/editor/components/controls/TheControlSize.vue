@@ -57,7 +57,7 @@ export default {
     <div class="b-size-controls__header" @click="controlOpen = !controlOpen">
       <span>Visual</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
-    <base-dropdown :isOpened="controlOpen" :class="{ 'open': controlOpen }">
+    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-size-controls__control">
         <base-range-slider v-model="elHeight" label="Height" step="1" min="0" max="1280" @change="changeHeight">
           {{elHeight}} px

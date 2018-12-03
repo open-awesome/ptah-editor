@@ -56,7 +56,7 @@ export default {
     <div class="b-bg-controls__header" @click="controlOpen = !controlOpen">
       <span>Background</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
-    <base-dropdown :isOpened="controlOpen" :class="{ 'open': controlOpen }">
+    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-bg-controls__control">
         <base-color-picker label="Background color" v-model="bgColor" @change="changeColor"></base-color-picker>
       </div>

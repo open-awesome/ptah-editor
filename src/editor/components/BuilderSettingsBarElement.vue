@@ -3,11 +3,11 @@
 
     <!-- text align -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
-      <ControlAlign
+      <control-align
         :isBox="settingObjectOptions.box"
         @boxAligned="styleChange"
         @textAligned="styleChange">
-      </ControlAlign>
+      </control-align>
     </div>
 
     <!-- size -->
@@ -42,7 +42,7 @@
 
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
-      <base-button :color="'light-gray'" @click="deleteElement">Delete</base-button>
+      <base-button color="light-gray" @click="deleteElement">Delete</base-button>
     </div>
   </div>
 </template>
@@ -93,6 +93,13 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions',
+      'settingObjectSection'
+    ])
+  },
+
   created () {
     const styles = this.settingObjectOptions.styles
 
@@ -132,13 +139,6 @@ export default {
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
     this.textHover = this.settingObjectOptions.pseudo['color'] || ''
-  },
-
-  computed: {
-    ...mapState('Sidebar', [
-      'settingObjectOptions',
-      'settingObjectSection'
-    ])
   },
 
   methods: {
@@ -231,10 +231,4 @@ export default {
       flex-grow: 2
       align-items: flex-end
       display: flex
-    /deep/
-      .b-base-dropdown
-        &.open
-          overflow: visible !important
-          > div
-            overflow: visible !important
 </style>

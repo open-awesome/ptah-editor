@@ -61,6 +61,7 @@ export default {
   padding: 28px 32px
   display: flex
   flex-direction: column
+  height: 100%
 
   &__title
     margin: 0 0 28px 0
