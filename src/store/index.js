@@ -48,7 +48,8 @@ const actions = {
    */
   getLandingData ({ state, commit }, slug) {
     return api.getLanding(slug)
-      .then((landing) => {
+      .then((data) => {
+        const landing = data || {}
         landing.settings = _.defaultsDeep(landing.settings, {
           ogTags: [{ property: '', content: '' }],
           video: '',
