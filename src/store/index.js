@@ -51,7 +51,7 @@ const actions = {
       .then((data) => {
         const landing = data || {}
         landing.settings = _.defaultsDeep(landing.settings, {
-          ogTags: [{ property: '', content: '' }],
+          ogTags: [],
           video: '',
           videoPosition: '',
           title: '',
@@ -83,12 +83,14 @@ const actions = {
    */
   saveLanding ({ state, commit }, data) {
     // @todo save all data in the store properyly
-    // const parsedData = JSON.parse(data)
-    // _.merge(parsedData, {
-    //   settings: state.currentLanding.settings
-    // })
+    const parsedData = JSON.parse(data)
+    const mergedData = {
+      ...parsedData,
+      settings: state.currentLanding.settings
+    }
+    const resultDataString = JSON.stringify(mergedData)
 
-    return api.saveLanding(state.currentLanding.slug, data)
+    return api.saveLanding(state.currentLanding.slug, resultDataString)
       .then(() => {
         return commit('isSaved', true)
       })

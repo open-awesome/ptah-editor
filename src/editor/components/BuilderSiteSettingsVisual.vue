@@ -105,12 +105,18 @@ export default {
       this.bgVideoPosition = settings.videoPosition
     },
     applySettings () {
+      let backgroundColor
+      if (typeof this.pageBackgroundColor === 'string') {
+        backgroundColor = this.pageBackgroundColor
+      } else {
+        backgroundColor = _.get(this.pageBackgroundColor, 'hex', '')
+      }
       const data = {
         video: this.bgVideo || '',
         videoPosition: this.bgVideoPosition,
         styles: {
+          backgroundColor,
           backgroundImage: this.pageBackgroundUrl || '',
-          backgroundColor: _.get(this.pageBackgroundColor, 'hex', ''),
           backgroundPositionX: this.pageBackgroundPositionX,
           backgroundPositionY: this.pageBackgroundPositionY,
           backgroundAttachment: this.bgAttachment,
