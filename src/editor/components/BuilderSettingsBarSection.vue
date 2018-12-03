@@ -62,9 +62,10 @@ export default {
     ]),
 
     updateBgColor () {
+      const color = Object.values(this.sectionBgColor.rgba).toString()
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
         styles: {
-          'background-color': this.sectionBgColor.hex
+          'background-color': `rgba(${color})`
         }
       }))
     },

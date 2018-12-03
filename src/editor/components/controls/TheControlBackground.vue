@@ -37,7 +37,8 @@ export default {
 
   methods: {
     changeColor () {
-      this.$emit('change', ['background-color', this.bgColor.hex])
+      const color = Object.values(this.bgColor.rgba).toString()
+      this.$emit('change', ['background-color', `rgba(${color})`])
     },
 
     changeImage () {

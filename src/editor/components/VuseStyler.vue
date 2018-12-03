@@ -823,11 +823,10 @@ export default {
           position = 'left-start'
           inner = true
         } else {
-          // console.log(this.name, this.$props.type, this.options)
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
             name: this.name,
-            options: _.get(this.section.data, this.path).element,
+            options: _.get(this.section.data, this.path).element || this.options,
             section: this.section,
             element: this.el
           })
