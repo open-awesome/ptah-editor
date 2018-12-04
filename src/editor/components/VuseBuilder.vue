@@ -304,11 +304,12 @@ export default {
     styleArtboard (styles) {
       Object.keys(styles).forEach((styleName) => {
         let value = styles[styleName]
-        if (styleName === 'backgroundImage') {
+        if (styleName === 'backgroundImage' && value) {
           value = `url(${value})`
         } else if (
           (styleName === 'backgroundPositionX' || styleName === 'backgroundPositionY') &&
-            !isNaN(Number(value))
+            !isNaN(Number(value)) &&
+            value
         ) {
           value = `${value}rem`
         }
