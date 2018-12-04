@@ -8,9 +8,11 @@ const C_CUSTOM = [
     element: {
       styles: {
         'background-image': 'url("https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg")',
-        'background-color': 'transparent',
-        'width': '11rem',
-        'height': '6.4rem'
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '110px',
+        'height': '64px'
       }
     }
   },
@@ -19,7 +21,8 @@ const C_CUSTOM = [
       text: 'This is a short header',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '4.8rem'
+        'font-size': '4.8rem',
+        'color': '#ffffff'
       }
     }
   },
@@ -30,7 +33,8 @@ const C_CUSTOM = [
       '<div>Oh children provided to mr elegance marriage strongly.</div>',
       styles: {
         'font-family': 'Lato',
-        'font-size': '2rem'
+        'font-size': '2rem',
+        'color': 'rgba(255, 255, 255, 0.3)'
       }
     }
   },
@@ -39,10 +43,13 @@ const C_CUSTOM = [
     element: {
       text: 'Call to Action',
       styles: {
+        'background-color': '#FF6D64',
         'color': '#ffffff',
-        'border-radius': '0.2rem',
         'font-family': 'Lato',
-        'text-align': 'center'
+        'text-align': 'center',
+        'width': '352px',
+        'height': '64px',
+        'border-radius': '2px'
       }
     }
   }
@@ -61,7 +68,7 @@ const SCHEMA_CUSTOM = {
 }
 
 export default {
-  name: 'HeroUnit1',
+  name: 'HeroUnit',
   cover: '/img/covers/hero-unit.png',
   group: 'Hero',
   $schema: {
@@ -177,7 +184,7 @@ $h: 100vh
 .b-logo
   margin: 0 0 5.5rem
 .b-title
-  color: #fff
+  color: rgb(255, 255, 255)
   font-style: normal
   font-weight: 800
   line-height: 6.7rem
@@ -221,7 +228,6 @@ $h: 100vh
   height: 6.4rem
   background: #FF6D64
   box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
-  border-radius: 0.2rem
   .is-mobile &,
   .is-tablet &
     width: 80%
