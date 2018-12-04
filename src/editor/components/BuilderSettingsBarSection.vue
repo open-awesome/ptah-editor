@@ -40,8 +40,7 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectSection',
-      'clearSettingObject'
+      'settingObjectSection'
     ])
   },
 
@@ -59,14 +58,15 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'updateSettingOptions'
+      'updateSettingOptions',
+      'clearSettingObject'
     ]),
 
     updateBgColor () {
-      const color = Object.values(this.sectionBgColor.rgba).toString()
+      const color = this.sectionBgColor.rgba ? `rgba(${Object.values(this.sectionBgColor.rgba).toString()}` : this.sectionBgColor
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
         styles: {
-          'background-color': `rgba(${color})`
+          'background-color': color
         }
       }))
     },
