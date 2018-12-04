@@ -338,6 +338,14 @@ const data = new Map([
         'height': ''
       }
     })
+  )],
+  [types.YoutubeVideo, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      removable: false,
+      hasVideo: true,
+      videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
+      title: 'World of Warcraft: Battle for Azeroth'
+    })
   )]
 ])
 

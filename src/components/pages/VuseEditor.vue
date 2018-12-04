@@ -35,6 +35,7 @@ import Restrictions from '@components/sections/elements/Restrictions'
 import Slogan from '@components/sections/elements/Slogan'
 import Social from '@components/sections/elements/Social'
 import System from '@components/sections/elements/System'
+import YoutubeVideo from '@components/sections/video/YoutubeVideo'
 
 import store from '@store'
 
@@ -65,6 +66,7 @@ Vuse.component('Restrictions', Restrictions)
 Vuse.component('Slogan', Slogan)
 Vuse.component('Social', Social)
 Vuse.component('System', System)
+Vuse.component('YoutubeVideo', YoutubeVideo)
 
 Vuse.use(pwa)
 

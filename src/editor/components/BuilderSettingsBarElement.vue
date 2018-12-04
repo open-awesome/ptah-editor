@@ -45,9 +45,31 @@
       <base-button color="light-gray" @click="sort('down')" size="middle" v-if="!isLastInArray">Down</base-button>
     </div>
 
+    <!-- Title -->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasVideo">
+      <BaseTextField
+        v-model="title"
+        label="Title"
+        @input="updateSimpleValue('title', title)"
+      />
+    </div>
+
+    <!-- VideoUrl -->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasVideo">
+      <BaseTextField
+        v-model="videoUrl"
+        label="Video URL"
+        @input="updateSimpleValue('videoUrl', videoUrl)"
+      />
+    </div>
+
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
-      <base-button color="light-gray" @click="deleteElement">Delete</base-button>
+      <base-button
+        v-if="settingObjectOptions.removable"
+        color="light-gray"
+        @click="deleteElement"
+      >Delete</base-button>
     </div>
   </div>
 </template>
@@ -94,7 +116,9 @@ export default {
       elRadius: 0,
       elLink: '',
       bgHover: '',
-      textHover: ''
+      textHover: '',
+      title: '',
+      videoUrl: ''
     }
   },
 
@@ -162,6 +186,10 @@ export default {
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
     this.textHover = this.settingObjectOptions.pseudo['color'] || ''
+
+    /* Video */
+    this.title = this.settingObjectOptions.title
+    this.videoUrl = this.settingObjectOptions.videoUrl
   },
 
   methods: {
@@ -181,6 +209,12 @@ export default {
       let styles = {}
       styles[prop] = value
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+    },
+
+    updateSimpleValue (propName, value) {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        [propName]: value
+      }))
     },
 
     setOption (option) {
