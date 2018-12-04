@@ -275,7 +275,7 @@ class Vuse {
             <title>${this.settings.title}</title>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
-            <link href="https://fonts.googleapis.com/css?family=Anton|Kodchasan|Open+Sans|Oswald|Roboto" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Anton|Kodchasan|Open+Sans|Oswald|Roboto|Lato|Montserrat:800&amp;subset=cyrillic" rel="stylesheet">
             ${scrollSetup.style}
             <style>
               ${styles}
