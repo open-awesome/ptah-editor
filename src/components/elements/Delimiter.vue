@@ -11,10 +11,10 @@ export default {
 <style lang="sass" scoped>
 .b-delimiter
   width: 4rem
+  height: 4rem
   position: relative
-  padding: 1rem 0
+  padding: 0
   display: flex
   align-items: center
   justify-content: center
-  min-height: 4rem
 </style>

@@ -4,21 +4,54 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 
 const C_CUSTOM = [
-  {},
-  {},
   {
-    element: { text: 'Button' }
+    element: {
+      styles: {
+        'background-image': 'url("https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg")',
+        'background-color': 'transparent',
+        'width': '11rem',
+        'height': '6.4rem'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'This is a short header',
+      styles: {
+        'font-family': 'Montserrat',
+        'font-size': '4.8rem'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'An sincerity so extremity he additions. Her yet there truth merit.' +
+      '<div>Mrs all projecting favourable now unpleasing. Son law garden chatty temper</div>' +
+      '<div>Oh children provided to mr elegance marriage strongly.</div>',
+      styles: {
+        'font-family': 'Lato',
+        'font-size': '2rem'
+      }
+    }
   },
   {},
   {
-    element: { text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }
+    element: {
+      text: 'Call to Action',
+      styles: {
+        'color': '#ffffff',
+        'border-radius': '0.2rem',
+        'font-family': 'Lato',
+        'text-align': 'center'
+      }
+    }
   }
 ]
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn158.cdn.stg.gamenet.ru/0/7IahR/o_1thKM9.jpg)',
+      'background-image': 'url(https://gn987.cdn.stg.gamenet.ru/0/7K0NZ/o_1zKuK8.png)',
       'background-size': 'cover',
       'background-repeat': 'no-repeat'
     }
@@ -28,8 +61,8 @@ const SCHEMA_CUSTOM = {
 }
 
 export default {
-  name: 'Hero1',
-  cover: '/img/covers/hero1.jpg',
+  name: 'HeroUnit1',
+  cover: '/img/covers/hero-unit.png',
   group: 'Hero',
   $schema: {
     mainStyle: types.StyleObject,
@@ -39,30 +72,31 @@ export default {
         name: 'Logo',
         element: types.Logo,
         type: 'image',
-        class: 'b-logo-test'
+        class: 'b-logo'
+      },
+      {
+        name: 'Title',
+        element: types.Title,
+        type: 'text',
+        class: 'b-title'
+      },
+      {
+        name: 'Description',
+        element: types.Text,
+        type: 'text',
+        class: 'b-text'
       },
       {
         name: 'Delimiter',
         element: types.Delimiter,
         type: 'delimiter',
-        class: 'b-delimiter-test'
+        class: 'b-delimiter'
       },
       {
         name: 'Button',
         element: types.Button,
         type: 'button',
         class: 'b-button-test'
-      },
-      {
-        name: 'Delimiter',
-        element: types.Delimiter,
-        type: 'delimiter'
-      },
-      {
-        name: 'Description',
-        element: types.Text,
-        type: 'text',
-        class: 'b-text-test'
       }
     ]
   },
@@ -123,9 +157,6 @@ $h: 100vh
   min-height: #{$h}
   margin: 0
   padding: 1rem
-  background-image: url(https://gn158.cdn.stg.gamenet.ru/0/7IahR/o_1thKM9.jpg)
-  background-size: cover
-  background-repeat: no-repeat
   display: flex
   text-align: center
   justify-content: center
@@ -135,29 +166,68 @@ $h: 100vh
     min-height: calc(#{$h} - 7.2rem)
   &-component
     margin: 1.2rem
-.b-delimiter-test
-  height: 25rem
-.b-logo-test
-  background-position: center center !important
-  background-repeat: no-repeat !important
-  background-size: contain !important
-  background-color: rgba(0, 0, 0, 0) !important
-  margin: 0
-.b-button-test
-  color: rgb(0, 0, 0)
-  border-radius: 0
-  font-family: Roboto
+.b-delimiter
+  height: 2rem
+  .is-mobile &,
+  .is-tablet &
+    display: none
+  @media only screen and (max-width: 768px)
+    &
+      display: none
+.b-logo
+  margin: 0 0 5.5rem
+.b-title
+  color: #fff
+  font-style: normal
+  font-weight: 800
+  line-height: 6.7rem
+  font-size: 4.8rem
   text-align: center
-  background-color: rgb(245, 166, 35)
-  border-color: rgb(245, 166, 35)
-  font-weight: bold
-  width: 28rem
-  height: 8rem
-  font-size: 4rem
-.b-text-test
-  color: rgb(255, 255, 255)
+  letter-spacing: 0.15em
+  text-transform: uppercase
+  margin: 0 0 2rem
+  .is-mobile &,
+  .is-tablet &
+    font-size: 2rem !important
+    line-height: 4rem
+  @media only screen and (max-width: 768px)
+    &
+      font-size: 2rem !important
+      line-height: 4rem
+.b-text
+  color: rgba(255, 255, 255, 0.3)
   font-size: 2rem
-
+  line-height: 4rem
+  text-align: center
+  .is-mobile &,
+  .is-tablet &
+    font-size: 1.4rem !important
+    line-height: 2rem
+  @media only screen and (max-width: 768px)
+    &
+      font-size: 1.4rem !important
+      line-height: 2rem
+.b-button
+  color: #fff
+  font-family: Lato
+  font-style: normal
+  font-weight: bold
+  line-height: 3.2rem
+  font-size: 1.6rem
+  text-align: center
+  letter-spacing: 0.28em
+  text-transform: uppercase
+  width: 35.2rem
+  height: 6.4rem
+  background: #FF6D64
+  box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
+  border-radius: 0.2rem
+  .is-mobile &,
+  .is-tablet &
+    width: 80%
+  @media only screen and (max-width: 768px)
+    &
+      width: 80%
 .b-sandbox
   height: 100%
   min-height: 20rem
