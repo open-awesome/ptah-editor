@@ -3,8 +3,14 @@
     :builder="builder"
     @export="submit"
     @preview="preview"
+    @save="save"
     >
-    <div class="artboard is-editable" id="artboard" ref="artboard" :class="[{ 'is-sorting': $builder.isSorting, 'is-editable': $builder.isEditing, 'fp-scroll': fullPageScroll === 'yes'}]">
+    <div class="artboard is-editable" id="artboard" ref="artboard"
+      :class="{
+        'is-sorting': $builder.isSorting,
+        'is-editable': $builder.isEditing,
+        'fp-scroll': currentLanding.settings.fullPageScroll === 'yes'
+      }">
       <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
       <div class="controller-intro" v-if="emptySections">
         <h3>&larr; Choose layout from the menu</h3>
@@ -45,139 +51,6 @@
           </div>
       </li>
     </ul>
-    <aside class="page-settings" :class="{ 'is-visiable': showSettings }">
-      <form v-on:submit.prevent="applySettings">
-        <div class="page-settings__tabs">
-          <a href="" v-for="(tab, index) in tabs"
-             :key="index"
-             :class="{'is-active': showTab === index}"
-             class="page-settings__tab-button"
-             @click.prevent="showTab = index">{{tab}}</a>
-        </div>
-        <div class="page-settings__tab-content" v-if="showTab === 0">
-          <fieldset>
-            <legend>Page title</legend>
-            <input type="text" v-model="pageTitle" placeholder="type awesome title">
-            <div class="page-settings__favicon">
-              <div class="page-settings__favicon--preview">
-                <img :src="favicon" alt="">
-              </div>
-              <div>
-                <span class="page-settings__label">Page icon (32x32 ico, png, gif)</span>
-                <input
-                  style="display: none;"
-                  type="file"
-                  accept="image/*,video/mp4,video/x-m4v,video/*"
-                  v-bind:ref="'choseIconContentInput'"
-                  @change="onChooseIcon"/>
-                <button class="styler-button" @click.prevent="choseIcon" title="Upload image">
-                  <VuseIcon name="upload"></VuseIcon>
-                </button>
-              </div>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>OpenGraph</legend>
-            <div v-for="(item, index) in ogTags" :key="index" class="og-tag">
-              <select v-model="item.property" class="og-input">
-                <option value="og:title" selected>og:title</option>
-                <option value="og:description">og:description</option>
-                <option value="og:image">og:image</option>
-                <option value="og:type">og:type</option>
-                <option value="og:url">og:url</option>
-                <option value="og:locale">og:locale</option>
-                <option value="og:locale:alternate">og:locale:alternate</option>
-                <option value="og:video">og:video</option>
-              </select>
-              <input type="text" v-model="item.content" placeholder="content" class="og-input">
-              <button class="controller-button" @click.prevent="deleteTag(index)" v-if="index !== ogTags.length-1 ">
-                <VuseIcon name="trash"></VuseIcon>
-              </button>
-              <button class="controller-button is-green" tooltip-position="top" tooltip="add tag" @click.prevent="addTag" v-if="index === ogTags.length-1 ">
-                <VuseIcon name="plus"></VuseIcon>
-              </button>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>GTM container ID <a href="https://developers.google.com/tag-manager/quickstart" target="_blank" class="help">?</a> </legend>
-            <input type="text" v-model="gtmId" placeholder="GTM-XXXXXX">
-          </fieldset>
-          <fieldset>
-            <legend>Google site tag </legend>
-            <input type="text" v-model="gtag" placeholder="UA-XXXXXXXX-X">
-          </fieldset>
-        </div>
-        <div class="page-settings__tab-content" v-if="showTab === 1">
-          <fieldset>
-            <legend>Page background</legend>
-            <div class="page-settings__upload">
-              <input type="text" v-model="pageBackgroundUrl" placeholder="background url">
-              <input
-                style="display: none;"
-                type="file"
-                accept="image/*,video/mp4,video/x-m4v,video/*"
-                v-bind:ref="'choseBackgroundContentInput'"
-                @change="onChooseBackground"/>
-              <button class="styler-button" @click.prevent="choseBackground" title="Upload image">
-                <VuseIcon name="upload"></VuseIcon>
-              </button>
-            </div>
-            <div><input type="text" v-model="pageBackgroundColor" placeholder="background color (#000000)"></div>
-            <div>
-              <span class="page-settings__label">Background position</span>
-              <input type="text" v-model="pageBackgroundPosX" placeholder="x" class="small">
-              <input type="text" v-model="pageBackgroundPosY" placeholder="y" class="small">
-            </div>
-            <div>
-              <span class="page-settings__label">Background size</span>
-              <select name="background-size" id="" v-model="bgSize">
-                <option value="cover">cover</option>
-                <option value="contain">contain</option>
-              </select>
-            </div>
-            <div>
-              <input type="checkbox" v-model="bgRepeat" true-value="repeat" false-value="no-repeat" name="bgrepeat" id="bgrepeat">
-              <label for="bgrepeat">Repeat</label>
-            </div>
-            <div>
-              <input type="checkbox" v-model="bgAttachment" true-value="fixed" false-value="scroll" name="bgfix" id="bgfix">
-              <label for="bgfix">Fixed</label>
-            </div>
-            <br><br>
-            <div>
-            <span class="page-settings__label">
-              Video background
-            </span>
-              <div class="page-settings__upload">
-                <input type="text" v-model="bgVideo" placeholder="video url (*.mp4)">
-                <input
-                  style="display: none;"
-                  type="file"
-                  accept="image/*,video/mp4,video/x-m4v,video/*"
-                  v-bind:ref="'choseVideoBackgroundContentInput'"
-                  @change="onChooseVideoBackground"/>
-                <button class="styler-button" @click.prevent="choseVideoBackground" title="Upload image">
-                  <VuseIcon name="upload"></VuseIcon>
-                </button>
-              </div>
-            </div>
-            <div>
-              <input type="checkbox" v-model="bgVideoFix" true-value="fixed" false-value="" name="bgvidfix" id="bgvidfix">
-              <label for="bgvidfix">Fixed</label>
-            </div>
-          </fieldset>
-          <fieldset>
-            <legend>Full page scroll</legend>
-            <input type="checkbox" id="fpscroll" v-model="fullPageScroll" true-value="yes" false-value="no">
-            <label for="fpscroll">Enabled</label>
-          </fieldset>
-        </div>
-        <div class="page-settings__controls">
-          <input type="submit" value="Save" class="page-settings__save">
-          <button class="page-settings__cancel">Cancel</button>
-        </div>
-      </form>
-    </aside>
   </BuilderLayout>
 </template>
 
@@ -185,8 +58,7 @@
 import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
 import BuilderLayout from './BuilderLayout.vue'
-import { mapState, mapActions } from 'vuex'
-import api from '@store/api'
+import { mapState } from 'vuex'
 
 export default {
   name: 'VuseBuilder',
@@ -214,24 +86,20 @@ export default {
       sections: this.getSections(),
       currentSection: '',
       groups: {},
-      showSettings: false,
-      pageTitle: '',
-      pageBackgroundUrl: '',
-      pageBackgroundColor: '',
-      pageBackgroundPosX: '',
-      pageBackgroundPosY: '',
-      bgSize: '',
-      bgAttachment: '',
-      bgRepeat: 'no-repeat',
-      bgVideo: '',
-      bgVideoFix: '',
-      fullPageScroll: 'no',
-      ogTags: [ { property: '', content: '' } ],
-      gtmId: '',
-      gtag: '',
-      favicon: 'https://protocol.one/wp-content/uploads/2018/09/03.png',
-      tabs: ['SEO', 'View'],
-      showTab: 0
+      isSectionsInited: false
+    }
+  },
+
+  computed: {
+    ...mapState([
+      'currentLanding'
+    ]),
+    emptySections: function () {
+      return !this.showIntro && !this.$builder.sections.length
+    },
+
+    builder () {
+      return this.$builder
     }
   },
 
@@ -244,6 +112,9 @@ export default {
       if (value) {
         this.listShown = true
       }
+    },
+    currentLanding (value) {
+      this.initSettings()
     }
   },
   created () {
@@ -256,18 +127,6 @@ export default {
 
     if (this.$route.params.slug !== 'new') {
 
-    }
-  },
-  computed: {
-    ...mapState([
-      'currentLanding'
-    ]),
-    emptySections: function () {
-      return !this.showIntro && !this.$builder.sections.length
-    },
-
-    builder () {
-      return this.$builder
     }
   },
   mounted () {
@@ -304,8 +163,7 @@ export default {
       }
     })
 
-    this.getSettings()
-    this.applySettings()
+    this.initSettings()
   },
 
   updated () {
@@ -335,41 +193,25 @@ export default {
     this.$builder.clear()
   },
   methods: {
-    ...mapActions([
-      'getLandingData'
-    ]),
-    getSettings () {
-      this.getLandingData(this.$route.params.slug).then((data) => {
-        this.$builder.landing = this.$route.params.slug
-        // Open current landing/preset
+    initSettings () {
+      const settings = this.currentLanding.settings
+      this.$builder.landing = this.$route.params.slug
+      this.$builder.settings = settings
+
+      // Open current landing/preset
+      if (!this.isSectionsInited) {
+        // We need to do it only once
+        // otherwise sections will be overwriten on Site Settings save
         if (this.currentLanding.sections) {
           this.addTheme(this.currentLanding)
         } else {
           this.addTheme(Object.assign(this.data, this.currentLanding.theme))
         }
+        this.isSectionsInited = true
+      }
 
-        this.$builder.settings = data.settings
-        this.ogTags = data.settings.ogTags
-        this.bgVideo = data.settings.video
-        this.bgVideoFix = data.settings.videoPosition
-        this.pageTitle = data.settings.title
-        this.fullPageScroll = data.settings.fullPageScroll
-        this.pageBackgroundUrl = data.settings.styles.backgroundImage
-        this.pageBackgroundColor = data.settings.styles.backgroundColor
-        this.pageBackgroundPosX = data.settings.styles.backgroundPositionX
-        this.pageBackgroundPosY = data.settings.styles.backgroundPositionY
-        this.bgAttachment = data.settings.styles.backgroundAttachment
-        this.bgRepeat = data.settings.styles.backgroundRepeat
-        this.bgSize = data.settings.styles.backgroundSize
-        this.gtmId = data.settings.gtmId
-        this.gtag = data.settings.gtag
-        this.favicon = data.settings.favicon
-        if (this.$builder.settings.styles !== undefined) {
-          this.styleArtboard(this.$builder.settings.styles)
-        }
-
-        if (this.bgVideo.length) this.insertVideo(this.bgVideo)
-      })
+      this.styleArtboard(settings.styles)
+      this.updateVideo()
     },
     newSection () {
       // add the section immediatly if none are present.
@@ -459,98 +301,41 @@ export default {
       this.save()
       this.$router.push({ path: `/dashboard` })
     },
-    applySettings () {
-      const data = {
-        title: this.pageTitle || '',
-        video: this.bgVideo || '',
-        videoPosition: this.bgVideoFix,
-        ogTags: this.ogTags,
-        fullPageScroll: this.fullPageScroll,
-        gtmId: this.gtmId,
-        gtag: this.gtag,
-        favicon: this.favicon,
-        styles: {
-          backgroundImage: this.pageBackgroundUrl || '',
-          backgroundColor: this.pageBackgroundColor || '',
-          backgroundAttachment: this.bgAttachment,
-          backgroundRepeat: this.bgRepeat,
-          backgroundSize: this.bgSize,
-          backgroundPositionX: this.pageBackgroundPosX,
-          backgroundPositionY: this.pageBackgroundPosY
-        }
-      }
-      this.styleArtboard(data.styles)
-      if (data.video) this.insertVideo(data.video)
-      this.$builder.settings = data
-
-      this.showSettings = false
-    },
     styleArtboard (styles) {
-      Object.keys(styles).forEach((style) => {
-        if (styles[style] && style !== 'backgroundImage') this.$refs.artboard.style[style] = styles[style]
-        if (styles[style] && style === 'backgroundImage') this.$refs.artboard.style[style] = `url(${styles[style]})`
+      Object.keys(styles).forEach((styleName) => {
+        let value = styles[styleName]
+        if (styleName === 'backgroundImage' && value) {
+          value = `url(${value})`
+        } else if (
+          (styleName === 'backgroundPositionX' || styleName === 'backgroundPositionY') &&
+            !isNaN(Number(value)) &&
+            value
+        ) {
+          value = `${value}rem`
+        }
+        this.$refs.artboard.style[styleName] = value
       })
     },
-    insertVideo (video) {
+    updateVideo () {
+      const settings = this.currentLanding.settings
       if (document.getElementById('video_bg')) {
         document.getElementById('video_bg').remove() // rm old video if exist
       }
 
-      let node = document.createElement('video')
+      if (!settings.video) {
+        return
+      }
+
+      const node = document.createElement('video')
       node.id = 'video_bg'
       node.setAttribute('autoplay', 'autoplay')
       node.setAttribute('loop', 'loop')
       node.setAttribute('muted', true)
-      if (this.bgVideoFix.length > 0) node.classList.add(this.bgVideoFix)
-      node.innerHTML = `<source src="${video}" type="video/mp4"></source>`
-      this.$refs.artboard.appendChild(node)
-    },
-    addTag () {
-      this.ogTags.push({ property: '', content: '' })
-    },
-    deleteTag (index) {
-      this.ogTags.splice(index, 1)
-    },
-    choseIcon () {
-      this['$refs']['choseIconContentInput'].click()
-    },
-    onChooseIcon (event) {
-      this.uploadFile(event)
-        .then((data) => { this.favicon = data.src })
-        .catch((error) => console.warn(error))
-    },
-    choseBackground: function () {
-      this.backgroundUrl = ''
-      this['$refs']['choseBackgroundContentInput'].click()
-    },
-    onChooseBackground (event) {
-      this.uploadFile(event)
-        .then((data) => { this.pageBackgroundUrl = data.src })
-        .catch((error) => console.warn(error))
-    },
-    choseVideoBackground: function () {
-      this.backgroundUrl = ''
-      this['$refs']['choseVideoBackgroundContentInput'].click()
-    },
-    onChooseVideoBackground (event) {
-      this.uploadFile(event)
-        .then((data) => { this.bgVideo = data.src })
-        .catch((error) => console.warn(error))
-    },
-    uploadFile (event) {
-      let file = event.target.files || event.dataTransfer.files
-
-      if (!file.length) {
-        return
+      if (settings.videoPosition) {
+        node.classList.add(settings.videoPosition)
       }
-
-      let request = new FormData()
-
-      request.append('file[]', file[0])
-      request.append('method', 'storefront.upload')
-      request.append('format', 'json')
-
-      return api.uploadFile(request)
+      node.innerHTML = `<source src="${settings.video}" type="video/mp4"></source>`
+      this.$refs.artboard.appendChild(node)
     }
   }
 }
@@ -800,125 +585,6 @@ export default {
 .floatHover
   cursor: pointer
   box-shadow: 0 14px 28px opacify($black, 0.125), 0 10px 10px opacify($black, 0.1)
-
-.page-settings
-  user-select: none
-  -moz-user-select: none
-  position: fixed
-  top: 0
-  right: 0
-  bottom: 0
-  margin: 0
-  width: 45rem
-  background: #fff
-  padding: 2rem 1rem 8rem
-  display: flex
-  flex-direction: column
-  overflow-y: auto
-  list-style: none
-  transition: 0.4s
-  box-shadow: 0.1rem 0 1rem #323c47
-  transform: translate3d(100%, 0, 0)
-  z-index: 999
-  &.is-visiable
-    transform: translate3d(0, 0, 0)
-  &__upload
-    display: flex
-    justify-content: space-between
-    input[type="text"]
-      width: 87% !important
-  &__label
-    display: block
-    margin-bottom: 5px
-  &__controls
-    padding: 0 21px
-  &__save, &__cancel
-    border: none
-    font-size: 14px
-    border-radius: 3px
-    color: #fff
-    padding: 5px 10px
-    margin-right: 8px
-    cursor: pointer
-    &:active
-      position: relative
-      top: 1px
-  &__save
-    background: $green
-    &:hover
-      background: lighten($green, 10%)
-  &__cancel
-    background: $dark
-    &:hover
-      background: lighten($dark, 10%)
-  &__favicon
-    display: flex
-    justify-content: flex-start
-    &--preview
-      width: 64px
-      height: 64px
-      margin-right: 10px
-      display: flex
-      justify-content: center
-      align-items: center
-      background: $color-border-dark
-      img
-        max-width: 32px
-  &__tabs
-    padding-left: 21px
-    margin-bottom: 25px
-    border-bottom: 2px solid lighten($dark, 20%)
-  &__tab-button
-    text-decoration: none
-    display: inline-block
-    margin: 0 10px 10px 0
-    border-radius: 4px
-    padding: 7px 12px
-    color: #fff
-    background: lighten($dark, 20%)
-    &.is-active
-      background: $dark
-  fieldset
-    border: 1px solid #e7e8eb
-    border-radius: 3px
-    padding: 15px 20px
-    margin-bottom: 20px
-  legend
-    font-size: 18px
-    position: relative
-  input[type="text"], select
-    border: 1px solid #e7e8eb
-    border-radius: 3px
-    padding: 5px 10px
-    font-size: 14px
-    width: 100%
-    margin-bottom: 10px
-  input[type="checkbox"]
-    position: relative
-    top: 1px
-  .small
-    width: 20% !important
-    margin-right: 10px
-  .og-input
-    width: 87% !important
-  .og-tag
-    position: relative
-    .controller-button
-      position: absolute
-      right: 0
-      top: 20px
-  .help
-    display: flex
-    justify-content: center
-    align-items: center
-    width: 20px
-    height: 20px
-    color: #fff
-    background: $green
-    border-radius: 50%
-    position: absolute
-    top: -2px
-    right: -21px
 
 .page-sections
   list-style: none

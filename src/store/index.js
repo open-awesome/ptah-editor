@@ -16,7 +16,8 @@ const state = {
   currentLanding: {
     settings: {}
   },
-  isSaved: false
+  isSaved: false,
+  slug: ''
 }
 
 const getters = {
@@ -47,11 +48,13 @@ const actions = {
    * @param slug
    */
   getLandingData ({ state, commit }, slug) {
+    commit('slug', slug)
+
     return api.getLanding(slug)
       .then((data) => {
         const landing = data || {}
         landing.settings = _.defaultsDeep(landing.settings, {
-          ogTags: [{ property: '', content: '' }],
+          ogTags: [],
           video: '',
           videoPosition: '',
           title: '',
@@ -83,12 +86,14 @@ const actions = {
    */
   saveLanding ({ state, commit }, data) {
     // @todo save all data in the store properyly
-    // const parsedData = JSON.parse(data)
-    // _.merge(parsedData, {
-    //   settings: state.currentLanding.settings
-    // })
+    const parsedData = JSON.parse(data)
+    const mergedData = {
+      ...parsedData,
+      settings: state.currentLanding.settings
+    }
+    const resultDataString = JSON.stringify(mergedData)
 
-    return api.saveLanding(state.currentLanding.slug, data)
+    return api.saveLanding(state.slug, resultDataString)
       .then(() => {
         return commit('isSaved', true)
       })
@@ -124,6 +129,10 @@ const mutations = {
 
   isSaved (state, value) {
     state.isSaved = value
+  },
+
+  slug (state, value) {
+    state.slug = value
   }
 }
 

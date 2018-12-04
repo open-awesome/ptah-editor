@@ -2,6 +2,7 @@
   <builder-modal-content-layout>
     <div class="b-builder-site-settings-version-history">
       <base-heading level="2">Version History</base-heading>
+      <p>Development is in progress</p>
     </div>
   </builder-modal-content-layout>
 </template>
@@ -17,7 +18,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-.builder-site-settings-version-history
-</style>

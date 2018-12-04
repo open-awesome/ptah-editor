@@ -4,7 +4,7 @@
 
 <script>
 import Vue from 'vue'
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import Vuse from '@editor/vuse'
 import pwa from '@editor/plugins/pwa'
 import Uploader from '@editor/plugins/Uploader.vue'
@@ -35,6 +35,8 @@ import Restrictions from '@components/sections/elements/Restrictions'
 import Slogan from '@components/sections/elements/Slogan'
 import Social from '@components/sections/elements/Social'
 import System from '@components/sections/elements/System'
+
+import store from '@store'
 
 Vuse.mix({
   components: {
@@ -67,20 +69,18 @@ Vuse.component('System', System)
 Vuse.use(pwa)
 
 export default {
-  methods: {
-    ...mapActions([
-      'saveLanding'
-    ]),
-    onDownload (builder) {
-      builder.export('pwa')
-    },
-    onPreview: function (builder) {
-      builder.export('preview')
-    },
-    onSave (builder) {
-      this.saveLanding(builder.export('json'))
+  computed: {
+    // TODO: delete this when CRUD UI is complete
+    showIntro () {
+      return this.$route.params.slug === 'new'
     }
   },
+
+  async beforeRouteEnter (to, from, next) {
+    await store.dispatch('getLandingData', to.params.slug)
+    next()
+  },
+
   created () {
     let themes = []
 
@@ -89,13 +89,19 @@ export default {
       themes: themes
     })
   },
-  computed: {
-    ...mapState([
-      'currentLanding'
+
+  methods: {
+    ...mapActions([
+      'saveLanding'
     ]),
-    // TODO: delete this when CRUD UI is complete
-    showIntro: function () {
-      return this.$route.params.slug === 'new'
+    onDownload (builder) {
+      builder.export('pwa')
+    },
+    onPreview (builder) {
+      builder.export('preview')
+    },
+    onSave (builder) {
+      this.saveLanding(builder.export('json'))
     }
   }
 }

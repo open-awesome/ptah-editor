@@ -74,6 +74,7 @@ export default {
 .b-base-text-field
   font-size: 1.4rem
   line-height: 1.7rem
+  width: 100%
 
   &_error
     color: #FF3737
