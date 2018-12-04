@@ -40,7 +40,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectSection'
+      'settingObjectSection',
+      'clearSettingObject'
     ])
   },
 
@@ -80,6 +81,7 @@ export default {
 
     deleteSection () {
       this.builder.remove(this.settingObjectSection)
+      this.clearSettingObject()
     }
   }
 }
