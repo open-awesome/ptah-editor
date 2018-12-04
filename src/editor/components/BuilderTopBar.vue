@@ -1,5 +1,6 @@
 <script>
 import MenuPlatforms from './menu/MenuPlatforms.vue'
+import { mapState } from 'vuex'
 
 export default {
   components: {
@@ -15,6 +16,10 @@ export default {
   data: () => ({
     device: null
   }),
+
+  computed: {
+    ...mapState(['currentLanding'])
+  },
 
   methods: {
     setDevice (type) {
@@ -45,7 +50,7 @@ export default {
     <div class="b-top-bar-right-menu">
       <div class="b-top-bar-right-menu__left">
         <div class="b-top-bar__logo-game">
-          <!-- insert logo game -->
+          <img :src="currentLanding.settings.favicon" alt="">
         </div>
         <div class="b-top-bar__site-name">
           {{ landingName }}
@@ -164,6 +169,8 @@ export default {
     overflow: hidden
     border-radius: 100%
     margin: 0 1rem 0 2.9rem
+    img
+      max-width: 100%
   &__site-name
     color: #474747
     font-size: 1.8rem

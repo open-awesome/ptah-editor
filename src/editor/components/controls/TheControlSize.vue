@@ -85,6 +85,7 @@ export default {
       color: #272727
       display: flex
       align-items: center
+      cursor: pointer
       i
         margin-left: 5px
         margin-bottom: -5px

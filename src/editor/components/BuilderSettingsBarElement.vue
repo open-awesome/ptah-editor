@@ -151,8 +151,8 @@ export default {
     this.bgRepeat = styles['background-repeat'] || 'no-repeat'
 
     /* Get element size */
-    this.elHeight = styles['height'] || 0 // TODO: get el offsetHeight
-    this.elWidth = styles['width'] || 0
+    this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetWidth
+    this.elWidth = styles['width'] || this.settingObjectOptions.element.offsetHeight
     this.elRadius = styles['border-radius'] || 0
 
     /* Link */
