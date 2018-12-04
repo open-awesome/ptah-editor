@@ -301,7 +301,7 @@ export default {
           value = `url(${value})`
         } else if (
           (styleName === 'backgroundPositionX' || styleName === 'backgroundPositionY') &&
-            /[^0-9]/.test()
+            !isNaN(Number(value))
         ) {
           value = `${value}rem`
         }
