@@ -57,7 +57,6 @@ export default {
 .b-builder-modal-content
   display: flex
   position: fixed
-  right: 1rem
   bottom: 0.8rem
   left: 24.8rem
   top: 8rem

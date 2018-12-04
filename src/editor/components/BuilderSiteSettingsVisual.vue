@@ -171,10 +171,18 @@ export default {
 
         <base-fieldset-row>
           <base-fieldset-item>
-            <BaseTextField label="X position" v-model="pageBackgroundPositionX" />
+            <BaseTextField
+              label="X position"
+              v-model="pageBackgroundPositionX"
+              placeholder="0px"
+            />
           </base-fieldset-item>
           <base-fieldset-item>
-            <BaseTextField label="Y position" v-model="pageBackgroundPositionY" />
+            <BaseTextField
+              label="Y position"
+              v-model="pageBackgroundPositionY"
+              placeholder="0px"
+            />
           </base-fieldset-item>
         </base-fieldset-row>
 
@@ -203,7 +211,7 @@ export default {
     </div>
 
     <div slot="controls">
-      <BaseButton color="gray" @click="$emit('requestClose')">Cancel</BaseButton>
+      <BaseButton color="gray" :transparent="true" @click="$emit('requestClose')">Cancel</BaseButton>
       <BaseButton @click="applySettings">Save</BaseButton>
     </div>
   </builder-modal-content-layout>
