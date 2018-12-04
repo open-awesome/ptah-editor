@@ -14,7 +14,7 @@
               description="32 x 32 px, .ico, .bmp or .png" />
           </base-fieldset-row>
 
-          <base-fieldset-row width="wide">
+          <base-fieldset-row>
             <BaseTextField label="Page Title" v-model="pageTitle" />
           </base-fieldset-row>
         </base-fieldset>
@@ -71,7 +71,7 @@
     </div>
 
     <div slot="controls">
-      <BaseButton color="gray" @click="$emit('requestClose')" >Cancel</BaseButton>
+      <BaseButton color="gray" :transparent="true" @click="$emit('requestClose')">Cancel</BaseButton>
       <BaseButton @click="applySettings">Save</BaseButton>
     </div>
   </builder-modal-content-layout>

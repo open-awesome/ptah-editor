@@ -85,7 +85,8 @@ export default {
       listShown: false,
       sections: this.getSections(),
       currentSection: '',
-      groups: {}
+      groups: {},
+      isSectionsInited: false
     }
   },
 
@@ -196,11 +197,17 @@ export default {
       const settings = this.currentLanding.settings
       this.$builder.landing = this.$route.params.slug
       this.$builder.settings = settings
+
       // Open current landing/preset
-      if (this.currentLanding.sections) {
-        this.addTheme(this.currentLanding)
-      } else {
-        this.addTheme(Object.assign(this.data, this.currentLanding.theme))
+      if (!this.isSectionsInited) {
+        // We need to do it only once
+        // otherwise sections will be overwriten on Site Settings save
+        if (this.currentLanding.sections) {
+          this.addTheme(this.currentLanding)
+        } else {
+          this.addTheme(Object.assign(this.data, this.currentLanding.theme))
+        }
+        this.isSectionsInited = true
       }
 
       this.styleArtboard(settings.styles)

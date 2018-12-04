@@ -19,7 +19,7 @@ export default {
 .b-builder-modal-content-layout
   display: flex
   flex-direction: column
-  flex-grow: 1;
+  flex-grow: 1
 
   &__inner
     padding: 4rem

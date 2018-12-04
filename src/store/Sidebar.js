@@ -15,11 +15,11 @@ export default {
       {
         id: 'seoSettings',
         name: 'SEO settings'
-      },
-      {
-        id: 'versionHistory',
-        name: 'Version history'
       }
+      // {
+      //   id: 'versionHistory',
+      //   name: 'Version history'
+      // }
     ]
   },
 
