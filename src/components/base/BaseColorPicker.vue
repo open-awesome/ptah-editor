@@ -11,7 +11,7 @@ export default {
   },
   props: {
     value: {
-      default: '#000'
+      default: 'rgba(0,0,0,1)'
     },
     showTextValue: {
       type: Boolean,
@@ -23,7 +23,7 @@ export default {
   },
   watch: {
     value (value) {
-      this.pickerValue = this.getPreparedValue(value)
+      this.pickerValue = this.getPreparedValue(this.value)
     }
   },
   data () {
@@ -34,10 +34,9 @@ export default {
   },
   methods: {
     getPreparedValue (value) {
-      if (typeof value === 'string' && value.charAt(0) === '#') {
-        return {
-          hex: value
-        }
+      if (typeof value === 'object' && !!value.rgba) {
+        const color = Object.values(value.rgba).toString()
+        return `rgba(${color})`
       }
       return value
     },
@@ -54,9 +53,9 @@ export default {
       {{label}}
     </base-label>
     <div class="b-picker__value-string" @click="expanded = !expanded">
-      <div class="b-picker__circle" :style="{ 'background-color': pickerValue.hex }"></div>
+      <div class="b-picker__circle" :style="{ 'background-color': pickerValue.rgba || pickerValue }"></div>
       <div class="b-picker__text">
-        {{pickerValue.hex || 'Choose color' }}
+        {{ pickerValue.rgba || pickerValue || 'Choose color' }}
       </div>
       <div class="b-picker__arrow" :class="{ 'b-picker__arrow--turn': expanded}">
         <icon-base name="arrowDropDown" width="6" color="#888888" />

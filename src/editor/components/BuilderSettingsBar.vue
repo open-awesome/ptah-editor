@@ -7,8 +7,11 @@
         <path d="M7.79775 6.82118C8.06742 7.09085 8.06742 7.52808 7.79775 7.79775C7.52808 8.06742 7.09085 8.06742 6.82118 7.79775L0.202254 1.17882C-0.0674168 0.909146 -0.0674165 0.471923 0.202254 0.202253C0.471925 -0.0674177 0.909147 -0.0674176 1.17882 0.202253L7.79775 6.82118Z" fill="#888888" fill-opacity="0.5"/>
       </svg>
     </button>
-    <h6 class="b-builder-settings-bar__title">
+    <h6 class="b-builder-settings-bar__title" :class="{ 'subtitle': elementSettings }">
       {{title}}
+    </h6>
+    <h6 class="b-builder-settings-bar__title" v-if="elementSettings">
+      {{ settingObjectType }}
     </h6>
     <div class="b-builder-settings-bar__contents" v-if="title">
       <component :is="settingComponent" :builder="builder"></component>
@@ -44,6 +47,10 @@ export default {
     settingComponent () {
       const suffix = this.settingObjectType === 'section' ? 'Section' : 'Element'
       return `BuilderSettingsBar${suffix}`
+    },
+
+    elementSettings () {
+      return this.settingObjectType !== 'section'
     }
   },
 
@@ -69,6 +76,13 @@ export default {
     color: #272727
     font-size: 1.8rem
     font-weight: bold
+    &:first-letter
+      text-transform: uppercase
+    &.subtitle
+      color: rgba(39, 39, 39, 0.5)
+      font-size: 1.4rem
+      font-weight: normal
+      margin: 0 0 1rem
 
   &__closer
     position: absolute

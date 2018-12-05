@@ -1,5 +1,5 @@
 <template>
-    <div class="b-button is-editable"></div>
+    <a class="b-button is-editable"></a>
 </template>
 
 <script>
@@ -27,6 +27,7 @@ export default {
   user-select: none
   cursor: pointer
   transition: background-color 200ms
+  text-decoration: none
   &:hover
     filter: brightness(120%)
   &:active

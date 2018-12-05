@@ -37,8 +37,8 @@ export default {
 
   methods: {
     changeColor () {
-      const color = Object.values(this.bgColor.rgba).toString()
-      this.$emit('change', ['background-color', `rgba(${color})`])
+      const color = this.bgColor.rgba ? `rgba(${Object.values(this.bgColor.rgba).toString()}` : this.bgColor
+      this.$emit('change', ['background-color', color])
     },
 
     changeImage () {
@@ -47,13 +47,17 @@ export default {
 
     changeRepeat () {
       this.$emit('change', ['background-repeat', this.bgRepeat])
+    },
+
+    onClickOutside () {
+      this.controlOpen = false
     }
   }
 }
 </script>
 
 <template>
-  <div class="b-bg-controls">
+  <div class="b-bg-controls" v-click-outside="onClickOutside">
     <div class="b-bg-controls__header" @click="controlOpen = !controlOpen">
       <span>Background</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
@@ -79,6 +83,7 @@ export default {
       color: #272727
       display: flex
       align-items: center
+      cursor: pointer
       i
         margin-left: 5px
         margin-bottom: -5px

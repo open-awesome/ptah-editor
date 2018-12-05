@@ -11,7 +11,7 @@ export default {
           slug: 'Hero',
           theme: {
             name: 'Hero',
-            sections: ['Hero1']
+            sections: ['HeroUnit']
           }
         },
         {

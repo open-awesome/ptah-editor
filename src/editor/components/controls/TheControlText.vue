@@ -102,7 +102,8 @@ export default {
       this.$emit('change', ['font-size', `${this.size.value}rem`])
     },
     changeColor () {
-      this.$emit('change', ['color', this.color.hex])
+      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
+      this.$emit('change', ['color', color])
     },
     changeStyle () {
       this.style.forEach((style) => {
@@ -147,6 +148,7 @@ export default {
       color: #272727
       display: flex
       align-items: center
+      cursor: pointer
       i
         margin-left: 5px
         margin-bottom: -5px
