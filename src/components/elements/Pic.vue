@@ -11,7 +11,7 @@ export default {
 <style lang="sass" scoped>
 .b-image
   display: inline-block
-  margin: 1rem auto
+  margin: 0
   text-align: center
   width: 40rem
   height: 40rem
