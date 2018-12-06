@@ -197,12 +197,14 @@ export default {
     },
 
     updateStyle (prop, value) {
+      this.updateText()
       let styles = {}
       styles[prop] = value
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
     },
 
     setOption (option) {
+      this.updateText()
       let obj = {}
       obj[option[0]] = option[1]
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
@@ -214,6 +216,8 @@ export default {
      * @param pseudoClass {string}
      */
     changePseudoStyle (style, pseudoClass = 'hover') {
+      this.updateText()
+
       const poneId = randomPoneId()
       let pseudoClassValue = {}
       pseudoClassValue[pseudoClass] = style
@@ -229,6 +233,8 @@ export default {
      * Add animation to element
      */
     selectAnimation (className) {
+      this.updateText()
+
       let animations = this.settingObjectOptions.classes.slice(0)
 
       animations.forEach((name, index) => {
@@ -260,6 +266,8 @@ export default {
     },
 
     sort (direction) {
+      this.updateText()
+
       let container = this.path[0]
       let index = parseInt(this.path[1])
       let newIndex = null
@@ -285,6 +293,15 @@ export default {
             this.expanded[key] = false
           }
         }
+      }
+    },
+
+    updateText () {
+      // TODO: Lost 'settingObjectOptions' from the store at the time of execution 'beforeDestroy'.
+      // Text also saved at VuseStyler -> hideStyler
+      if (this.settingObjectOptions.element) {
+        const el = this.settingObjectOptions.element
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
     }
   }
