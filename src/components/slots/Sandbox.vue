@@ -51,8 +51,6 @@ export default {
     }
   },
   mounted () {
-    console.log(this.direction)
-    console.log(this.path)
     this.align({ 'flex-direction': this.direction }, this.direction)
   }
 }

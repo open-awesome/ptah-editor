@@ -138,6 +138,10 @@ export default {
     onAddElement2 (element) {
       element.element.removable = true
       this.$section.data.components2.push(element)
+    },
+    onAddElement3 (element) {
+      element.element.removable = true
+      this.$section.data.components3.push(element)
     }
   },
   created () {
