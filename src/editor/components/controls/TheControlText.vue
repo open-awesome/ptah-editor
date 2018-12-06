@@ -14,7 +14,8 @@ const LIST_FONTS = [
   'Verdana',
   'Cambria',
   'Georgia',
-  'Times New Roman'
+  'Times New Roman',
+  'Montserrat'
 ]
 
 export default {

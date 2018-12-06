@@ -51,7 +51,7 @@ export default {
     }
   },
   mounted () {
-    this.align({ 'flex-direction': 'column' }, this.direction)
+    this.align({ 'flex-direction': this.direction }, this.direction)
   }
 }
 </script>
@@ -125,10 +125,9 @@ export default {
   flex-wrap: wrap
   justify-content: center
   align-items: center
-  flex-direction: column
   position: relative
   width: 100%
-  height: 100%
+  min-height: 20rem
   .is-editable &
     border: 1px dashed $green
   &__align

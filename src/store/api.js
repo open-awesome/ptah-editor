@@ -15,6 +15,13 @@ export default {
           }
         },
         {
+          slug: 'Columns',
+          theme: {
+            name: 'ThreeColumns',
+            sections: ['ThreeColumns']
+          }
+        },
+        {
           slug: 'Products',
           theme: {
             name: 'Products',

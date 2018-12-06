@@ -116,7 +116,7 @@ function download (assets) {
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="shortcut icon" href="${icon}"/>
-            <link href="https://fonts.googleapis.com/css?family=Anton|Kodchasan|Open+Sans|Oswald|Roboto" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Anton|Kodchasan|Open+Sans|Oswald|Roboto|Lato|Montserrat:400,800&amp;subset=cyrillic" rel="stylesheet">
             ${scrollSetup.style}
             ${og}
             <style>
