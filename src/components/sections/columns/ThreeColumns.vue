@@ -264,6 +264,7 @@ $h: 100vh
   letter-spacing: 0.15em
   text-transform: uppercase
   margin: 0 0 2rem
+  text-shadow: 0 .4rem 1.9rem rgba(0, 0, 0, 0.9)
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important
