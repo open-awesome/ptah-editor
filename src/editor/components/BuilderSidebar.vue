@@ -44,7 +44,7 @@
 
           <span class="b-builder-sidebar__icon-add"
             slot="icon"
-            @click="showAddSectionBar">
+            @click.stop="showAddSectionBar">
             <IconBase
               name="plus"
               color="#355CCC"
@@ -199,6 +199,7 @@ export default {
 
     toggleSiteSettings (contentID) {
       this.closeSettingsBar()
+      this.closeAddSectionBar()
 
       if (this.modalContentID === contentID) {
         this.closeSiteSettings()
@@ -224,6 +225,7 @@ export default {
     },
 
     showAddSectionBar () {
+      this.closeSiteSettings()
       this.isAddSectionExpanded = !this.isAddSectionExpanded
     }
   }

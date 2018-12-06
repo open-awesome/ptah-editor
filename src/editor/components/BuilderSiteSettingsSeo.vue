@@ -51,7 +51,7 @@
             Open Graph
             <a class="b-builder-site-settings-seo__help"
               target="_blank"
-              href="#">
+              href="https://en.wikipedia.org/wiki/Facebook_Platform#Open_Graph_protocol">
               <IconBase name="questionCircle" width="16" height="16" color="#436FEE" />
             </a>
           </base-heading>

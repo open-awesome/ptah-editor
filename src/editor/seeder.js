@@ -338,6 +338,15 @@ const data = new Map([
         'height': ''
       }
     })
+  )],
+  [types.Video, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      removable: false,
+      hasVideo: true,
+      videoUrl: 'https://gn967.cdn.stg.gamenet.ru/0/7KSrW/o_159yiU.mp4',
+      // videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
+      title: 'World of Warcraft: Battle for Azeroth'
+    })
   )]
 ])
 

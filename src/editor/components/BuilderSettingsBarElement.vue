@@ -56,9 +56,38 @@
       <base-button color="light-gray" @click="sort('down')" size="middle" v-if="!isLastInArray">Down</base-button>
     </div>
 
+    <!-- Title -->
+    <template v-if="settingObjectOptions.hasVideo">
+      <div class="b-elem-settings__control">
+        <BaseTextField
+          v-model="title"
+          label="Title"
+          @input="updateSimpleValue('title', title)"
+        />
+      </div>
+
+      <!-- VideoUrl -->
+      <div class="b-elem-settings__control">
+        <BaseUploadInput
+          v-model="videoUrl"
+          label="Video URL"
+          @upload="updateSimpleValue('videoUrl', videoUrl)"
+        />
+      </div>
+
+      <div class="b-elem-settings__description">
+        YouTube video url or any mp4 file url is allowed.<br>
+        To play the video please use Preview button.
+      </div>
+    </template>
+
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
-      <base-button color="light-gray" @click="deleteElement">Delete</base-button>
+      <base-button
+        v-if="settingObjectOptions.removable"
+        color="light-gray"
+        @click="deleteElement"
+      >Delete</base-button>
     </div>
   </div>
 </template>
@@ -107,6 +136,8 @@ export default {
       elLink: '',
       bgHover: '',
       textHover: '',
+      title: '',
+      videoUrl: '',
       expanded: {
         size: false,
         font: false,
@@ -181,6 +212,10 @@ export default {
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
     this.textHover = this.settingObjectOptions.pseudo['color'] || ''
+
+    /* Video */
+    this.title = this.settingObjectOptions.title
+    this.videoUrl = this.settingObjectOptions.videoUrl
   },
 
   methods: {
@@ -199,6 +234,12 @@ export default {
       let styles = {}
       styles[prop] = value
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+    },
+
+    updateSimpleValue (propName, value) {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        [propName]: value
+      }))
     },
 
     setOption (option) {
@@ -312,6 +353,11 @@ export default {
     display: flex
     flex-direction: column
     &__control
+      margin-bottom: 1.6rem
+    &__description
+      font-size: 1.4rem
+      line-height: 1.7rem
+      color: #747474
       margin-bottom: 1.6rem
     &__buttons
       flex-grow: 2
