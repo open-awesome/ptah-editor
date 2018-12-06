@@ -118,6 +118,7 @@ $border-color: rgba(#888888, 0.25)
   padding: 0 1.5rem
   font-size: 1.4rem
   line-height: 34px
+  white-space: nowrap
 
   &:first-child
     border-radius: 0.4rem 0 0 0.4rem

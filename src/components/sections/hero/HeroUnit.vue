@@ -139,6 +139,7 @@ export default {
       ref="sandbox"
       path="$sectionData.container"
       direction="column"
+      :style="$sectionData.container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
       <component class="b-hero-component" v-for="(component, index) in $sectionData.components"

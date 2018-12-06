@@ -54,10 +54,11 @@ export default {
     selectSection (section) {
       this.selectedSection = section
     },
-    addSection (position) {
+    addSection () {
       let section = this.selectedSection
-      this.builder.add(section, position)
+      this.builder.add(section, this.builder.sections.length + 1)
       this.selectedSection = null
+      this.closeAddSectionBar()
     },
     getSections () {
       let sections = []

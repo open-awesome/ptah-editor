@@ -11,7 +11,7 @@
 
     <!-- size -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
-      <control-size :height="elHeight" :width="elWidth" @change="styleChange"></control-size>
+      <control-size :height="elHeight" :width="elWidth" :expand="expanded.size" @open="onExpand" @change="styleChange"></control-size>
     </div>
 
     <!-- font -->
@@ -21,12 +21,21 @@
         :fontFamily="fontFamily"
         :fontColor="fontColor"
         :fontStyles="styles"
+        :expand="expanded.font"
+        @open="onExpand"
         @change="styleChange"></control-text>
     </div>
 
     <!-- background -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
-      <control-background :color="bgColor" :image="bgImage" :repeat="bgRepeat" @change="styleChange"></control-background>
+      <control-background
+        :color="bgColor"
+        :image="bgImage"
+        :repeat="bgRepeat"
+        :size="bgSize"
+        :expand="expanded.bg"
+        @open="onExpand"
+        @change="styleChange"></control-background>
     </div>
 
     <!-- Link -->
@@ -34,6 +43,8 @@
       <control-link
         :link="elLink"
         :hoverBgColor="bgHover"
+        :expand="expanded.link"
+        @open="onExpand"
         @setOption="setOption"
         @setPseudo="changePseudoStyle"
         @setClass="selectAnimation"></control-link>
@@ -118,6 +129,7 @@ export default {
       bgColor: '',
       bgImage: '',
       bgRepeat: '',
+      bgSize: '',
       elHeight: 0,
       elWidth: 0,
       elRadius: 0,
@@ -125,7 +137,13 @@ export default {
       bgHover: '',
       textHover: '',
       title: '',
-      videoUrl: ''
+      videoUrl: '',
+      expanded: {
+        size: false,
+        font: false,
+        bg: false,
+        link: false
+      }
     }
   },
 
@@ -180,6 +198,7 @@ export default {
     }
     this.bgImage = styles['background-image'] || ''
     this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+    this.bgSize = styles['background-size'] || 'cover'
 
     /* Get element size */
     this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetWidth
@@ -206,13 +225,12 @@ export default {
     ]),
 
     styleChange (value) {
-      this.updateStyle(value[0], value[1])
-      if (value[2]) {
-        this[value[2]] = value[1]
-      }
+      this.updateStyle(_.kebabCase(value[0]), value[1])
+      this[value[0]] = value[1]
     },
 
     updateStyle (prop, value) {
+      this.updateText()
       let styles = {}
       styles[prop] = value
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
@@ -225,6 +243,7 @@ export default {
     },
 
     setOption (option) {
+      this.updateText()
       let obj = {}
       obj[option[0]] = option[1]
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
@@ -236,6 +255,8 @@ export default {
      * @param pseudoClass {string}
      */
     changePseudoStyle (style, pseudoClass = 'hover') {
+      this.updateText()
+
       const poneId = randomPoneId()
       let pseudoClassValue = {}
       pseudoClassValue[pseudoClass] = style
@@ -251,6 +272,8 @@ export default {
      * Add animation to element
      */
     selectAnimation (className) {
+      this.updateText()
+
       let animations = this.settingObjectOptions.classes.slice(0)
 
       animations.forEach((name, index) => {
@@ -282,6 +305,8 @@ export default {
     },
 
     sort (direction) {
+      this.updateText()
+
       let container = this.path[0]
       let index = parseInt(this.path[1])
       let newIndex = null
@@ -295,6 +320,27 @@ export default {
       if (newIndex >= 0 && newIndex < this.settingObjectSection.data[container].length) {
         correctArray(this.settingObjectSection.data[container], [index, newIndex])
         correctArray(this.settingObjectSection.schema[container], [index, newIndex])
+      }
+    },
+
+    onExpand (value) {
+      this.expanded[value[0]] = value[1]
+
+      if (value[1]) {
+        for (let key in this.expanded) {
+          if (key !== value[0]) {
+            this.expanded[key] = false
+          }
+        }
+      }
+    },
+
+    updateText () {
+      // TODO: Lost 'settingObjectOptions' from the store at the time of execution 'beforeDestroy'.
+      // Text also saved at VuseStyler -> hideStyler
+      if (this.settingObjectOptions.element) {
+        const el = this.settingObjectOptions.element
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
     }
   }
