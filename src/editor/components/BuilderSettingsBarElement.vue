@@ -46,22 +46,29 @@
     </div>
 
     <!-- Title -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasVideo">
-      <BaseTextField
-        v-model="title"
-        label="Title"
-        @input="updateSimpleValue('title', title)"
-      />
-    </div>
+    <template v-if="settingObjectOptions.hasVideo">
+      <div class="b-elem-settings__control">
+        <BaseTextField
+          v-model="title"
+          label="Title"
+          @input="updateSimpleValue('title', title)"
+        />
+      </div>
 
-    <!-- VideoUrl -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasVideo">
-      <BaseTextField
-        v-model="videoUrl"
-        label="Video URL"
-        @input="updateSimpleValue('videoUrl', videoUrl)"
-      />
-    </div>
+      <!-- VideoUrl -->
+      <div class="b-elem-settings__control">
+        <BaseUploadInput
+          v-model="videoUrl"
+          label="Video URL"
+          @upload="updateSimpleValue('videoUrl', videoUrl)"
+        />
+      </div>
+
+      <div class="b-elem-settings__description">
+        YouTube video url or any mp4 file url is allowed.<br>
+        To play the video please use Preview button.
+      </div>
+    </template>
 
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
@@ -300,6 +307,11 @@ export default {
     display: flex
     flex-direction: column
     &__control
+      margin-bottom: 1.6rem
+    &__description
+      font-size: 1.4rem
+      line-height: 1.7rem
+      color: #747474
       margin-bottom: 1.6rem
     &__buttons
       flex-grow: 2
