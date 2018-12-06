@@ -1,8 +1,10 @@
 <template>
   <div class="b-builder-modal-content-layout">
-    <div class="b-builder-modal-content-layout__inner">
-      <slot></slot>
-    </div>
+    <base-scroll-container class="b-scrolled-content" backgroundBar="#999">
+      <div class="b-scrolled-content__inner">
+        <slot></slot>
+      </div>
+    </base-scroll-container>
     <div class="b-builder-modal-content-layout__controls" v-if="$slots.controls">
       <slot name="controls"></slot>
     </div>
@@ -21,17 +23,19 @@ export default {
   flex-direction: column
   flex-grow: 1
 
-  &__inner
-    padding: 4rem
-    overflow-y: auto
-    flex-grow: 1
-
   &__controls
     display: flex
     flex-shrink: 0
     border-top: 1px solid #E2E2E2
     padding: 1.6rem
     justify-content: flex-end
-    box-shadow: 0 -0.3rem 0.3rem rgba(0,0,0,0.08)
+    box-shadow: 0 -0.6rem 1.5rem rgba(0,0,0,0.1)
+
+.b-scrolled-content
+  margin: 0
+  flex-grow: 1
+
+  &__inner
+    padding: 4rem
 
 </style>
