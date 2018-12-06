@@ -7,33 +7,33 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg")',
+        'background-image': 'url("https://gn560.cdn.stg.gamenet.ru/0/7KUKv/o_6j0hJ.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '110px',
-        'height': '64px'
+        'width': '256px',
+        'height': '221px'
       }
     }
   },
   {
     element: {
-      text: 'This is a short header',
+      text: 'This is a header',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '4.8rem',
+        'font-size': '2.4rem',
         'color': '#ffffff'
       }
     }
   },
   {
     element: {
-      text: 'An sincerity so extremity he additions. Her yet there truth merit.' +
-      '<div>Mrs all projecting favourable now unpleasing. Son law garden chatty temper</div>' +
-      '<div>Oh children provided to mr elegance marriage strongly.</div>',
+      text: 'An sincerity so extremity he additions.' +
+      '<div>Her yet there truth merit.</div>' +
+      '<div>Mrs all projecting favourable now unpleasing.</div>',
       styles: {
         'font-family': 'Lato',
-        'font-size': '2rem',
+        'font-size': '1.6rem',
         'color': 'rgba(255, 255, 255, 0.3)'
       }
     }
@@ -41,14 +41,15 @@ const C_CUSTOM = [
   {},
   {
     element: {
-      text: 'Call to Action',
+      text: 'Secondary',
       styles: {
-        'background-color': '#FF6D64',
+        'background-color': 'transparent',
         'color': '#ffffff',
         'font-family': 'Lato',
+        'font-size:': '1.4rem',
         'text-align': 'center',
-        'width': '352px',
-        'height': '64px',
+        'width': '224px',
+        'height': '56px',
         'border-radius': '2px'
       }
     }
@@ -170,6 +171,7 @@ export default {
             ref="sandbox"
             path="$sectionData.container"
             direction="column"
+            :style="$sectionData.container.styles"
             >
             <elements-list @addEl="onAddElement"></elements-list>
             <component class="b-columns3-component" v-for="(component, index) in $sectionData.components"
@@ -191,6 +193,7 @@ export default {
             ref="sandbox"
             path="$sectionData.container2"
             direction="column"
+            :style="$sectionData.container2.styles"
             >
             <elements-list @addEl="onAddElement2"></elements-list>
             <component class="b-columns3-component" v-for="(component, index) in $sectionData.components2"
@@ -210,8 +213,9 @@ export default {
           <sandbox
             class="b-sandbox"
             ref="sandbox"
-            path="$sectionData.container2"
+            path="$sectionData.container3"
             direction="column"
+            :style="$sectionData.container3.styles"
             >
             <elements-list @addEl="onAddElement3"></elements-list>
             <component class="b-columns3-component" v-for="(component, index) in $sectionData.components3"
@@ -277,13 +281,13 @@ $h: 100vh
     &
       display: none
 .b-logo
-  margin: 0 0 5.5rem
+  margin: 0 0 4rem
 .b-title
   color: rgb(255, 255, 255)
   font-style: normal
-  font-weight: 800
-  line-height: 6.7rem
-  font-size: 4.8rem
+  font-size: 2.4rem
+  font-weight: 400
+  line-height: 4rem
   text-align: center
   letter-spacing: 0.15em
   text-transform: uppercase
@@ -298,8 +302,8 @@ $h: 100vh
       line-height: 4rem
 .b-text
   color: rgba(255, 255, 255, 0.3)
-  font-size: 2rem
-  line-height: 4rem
+  font-size: 1.6rem
+  line-height: 2.8rem
   text-align: center
   .is-mobile &,
   .is-tablet &
@@ -313,16 +317,17 @@ $h: 100vh
   color: #fff
   font-family: Lato
   font-style: normal
-  font-weight: bold
-  line-height: 3.2rem
-  font-size: 1.6rem
+  font-size: 1.4rem
+  line-height: 2.8rem
   text-align: center
   letter-spacing: 0.28em
   text-transform: uppercase
-  width: 35.2rem
-  height: 6.4rem
-  background: #FF6D64
-  box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
+
+  width: 22.4rem
+  height: 5.6rem
+  border: 0.2rem solid rgba(255, 125, 125, 0.5)
+  box-sizing: border-box
+  border-radius: 0.2rem
   .is-mobile &,
   .is-tablet &
     width: 80%
@@ -334,5 +339,4 @@ $h: 100vh
   min-height: 20rem
   justify-content: center
   align-items: center
-  flex-direction: column
 </style>
