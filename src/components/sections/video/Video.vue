@@ -6,12 +6,7 @@ export default {
   name: 'Video',
   group: 'video',
   $schema: {
-    mainStyle: types.StyleObject,
-    container: types.StyleObject,
-    content: {
-      name: 'Video',
-      element: types.Video
-    }
+    mainStyle: types.Video
   },
   props: {
     id: {
@@ -23,19 +18,23 @@ export default {
     return {
       player: null,
       videoUrl: '',
-      youtubeVideoId: '',
+      youtubeVideoUrl: '',
       videoType: ''
     }
   },
 
   watch: {
-    '$sectionData.content.element.videoUrl' (value) {
-      this.updateVideoData(value)
+    '$sectionData.mainStyle' (value) {
+      // To refresh DOM
+      this.videoType = ''
+      this.$nextTick(() => {
+        this.updateVideoData(value)
+      })
     }
   },
 
   mounted () {
-    this.updateVideoData(this.$sectionData.content.element.videoUrl)
+    this.updateVideoData(this.$sectionData.mainStyle)
   },
 
   methods: {
@@ -43,10 +42,19 @@ export default {
      * Computed properties somehow doesn't work here (because of Vuse?)
      * Have to do everything manually
      */
-    updateVideoData (videoUrl) {
+    updateVideoData ({ videoUrl, autoplay, loop }) {
       this.videoUrl = videoUrl
-      this.youtubeVideoId = getYoutubeVideoIdFromUrl(this.videoUrl)
-      this.videoType = this.youtubeVideoId ? 'youtube' : 'custom'
+
+      const youtubeVideoId = getYoutubeVideoIdFromUrl(this.videoUrl)
+      if (youtubeVideoId) {
+        // Looping one video on itself requires playlist param with its ID passed
+        const loopValue = loop ? `&loop=1&playlist=${youtubeVideoId}` : '&loop=0'
+        this.videoType = 'youtube'
+        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?disablekb=0&controls=1${loopValue}&autoplay=${autoplay ? '1' : '0'}&showinfo=0&modestbranding=1&enablejsapi=1`
+      } else {
+        this.videoType = 'custom'
+        this.youtubeVideoUrl = ''
+      }
     }
   }
 }
@@ -59,39 +67,45 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
     >
+    <div class="b-video-section__inner">
+      <div class="b-header">{{$sectionData.mainStyle.videoTitle}}</div>
+      <div class="b-content"></div>
 
-    <div class="b-header">{{$sectionData.content.element.title}}</div>
-    <div class="b-content" v-styler:content="$sectionData.content.element"></div>
+      <iframe
+        v-if="videoType === 'youtube'"
+        frameborder="0"
+        allowfullscreen="1"
+        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        width="1184"
+        height="666"
+        :src="youtubeVideoUrl"></iframe>
 
-    <iframe
-      v-if="videoType === 'youtube'"
-      frameborder="0"
-      allowfullscreen="1"
-      allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
-      width="1920"
-      height="1080"
-      :src="`https://www.youtube.com/embed/${youtubeVideoId}?disablekb=0&controls=1&loop=0&showinfo=0&modestbranding=1&enablejsapi=1`" id="widget2"></iframe>
-
-    <video
-      v-if="videoType === 'custom'"
-      ref="custom"
-      :src="videoUrl"
-      type="video/mp4"
-      controls
-      ></video>
+      <video
+        v-if="videoType === 'custom'"
+        ref="custom"
+        :src="videoUrl"
+        :loop="$sectionData.mainStyle.loop"
+        :autoplay="$sectionData.mainStyle.autoplay"
+        type="video/mp4"
+        controls
+        ></video>
+    </div>
   </section>
 
 </template>
 
 <style lang="sass" scoped>
 .b-video-section
-  width: 100%
-  height: 0
-  padding-bottom: 56.25%
-  position: relative
+  max-width: 118.4rem
+  margin: 0 auto
 
-  /deep/ iframe,
-  /deep/ video
+  &__inner
+    height: 0
+    padding-bottom: 56.25%
+    position: relative
+
+  iframe,
+  video
     border: 0
     position: absolute
     z-index: 1
