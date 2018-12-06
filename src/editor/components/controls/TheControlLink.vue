@@ -16,6 +16,10 @@ export default {
     },
     animationClass: {
       type: String
+    },
+    expand: {
+      type: Boolean,
+      required: true
     }
   },
 
@@ -48,6 +52,10 @@ export default {
   watch: {
     elTarget (oldVal, newVal) {
       this.$emit('setOption', ['target', this.elTarget ? '_blank' : '_self'])
+    },
+
+    expand () {
+      this.controlOpen = this.expand
     }
   },
 
@@ -66,6 +74,10 @@ export default {
 
     changeAinmation () {
       this.$emit('setClass', this.animation.value)
+    },
+
+    onClickTitle () {
+      this.$emit('open', ['link', !this.controlOpen])
     }
   }
 }
@@ -73,7 +85,7 @@ export default {
 
 <template>
   <div class="b-link-controls">
-    <div class="b-link-controls__header" @click="controlOpen = !controlOpen">
+    <div class="b-link-controls__header" @click="onClickTitle">
       <span>Link</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen"  :hasOverflow="controlOpen">

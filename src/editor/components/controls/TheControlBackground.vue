@@ -16,6 +16,10 @@ export default {
     size: { // background-size
       type: String,
       required: true
+    },
+    expand: {
+      type: Boolean,
+      required: true
     }
   },
 
@@ -45,6 +49,12 @@ export default {
     this.bgSize = this.size === 'cover' ? this.sizeList[0] : this.sizeList[1]
   },
 
+  watch: {
+    expand () {
+      this.controlOpen = this.expand
+    }
+  },
+
   methods: {
     changeColor () {
       const color = this.bgColor.rgba ? `rgba(${Object.values(this.bgColor.rgba).toString()}` : this.bgColor
@@ -65,6 +75,10 @@ export default {
 
     onClickOutside () {
       this.controlOpen = false
+    },
+
+    onClickTitle () {
+      this.$emit('open', ['bg', !this.controlOpen])
     }
   }
 }
@@ -72,7 +86,7 @@ export default {
 
 <template>
   <div class="b-bg-controls" v-click-outside="onClickOutside">
-    <div class="b-bg-controls__header" @click="controlOpen = !controlOpen">
+    <div class="b-bg-controls__header" @click="onClickTitle">
       <span>Background</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">

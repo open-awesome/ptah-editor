@@ -11,7 +11,7 @@
 
     <!-- size -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
-      <control-size :height="elHeight" :width="elWidth" @change="styleChange"></control-size>
+      <control-size :height="elHeight" :width="elWidth" :expand="expanded.size" @open="onExpand" @change="styleChange"></control-size>
     </div>
 
     <!-- font -->
@@ -21,12 +21,21 @@
         :fontFamily="fontFamily"
         :fontColor="fontColor"
         :fontStyles="styles"
+        :expand="expanded.font"
+        @open="onExpand"
         @change="styleChange"></control-text>
     </div>
 
     <!-- background -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
-      <control-background :color="bgColor" :image="bgImage" :repeat="bgRepeat" :size="bgSize" @change="styleChange"></control-background>
+      <control-background
+        :color="bgColor"
+        :image="bgImage"
+        :repeat="bgRepeat"
+        :size="bgSize"
+        :expand="expanded.bg"
+        @open="onExpand"
+        @change="styleChange"></control-background>
     </div>
 
     <!-- Link -->
@@ -34,6 +43,8 @@
       <control-link
         :link="elLink"
         :hoverBgColor="bgHover"
+        :expand="expanded.link"
+        @open="onExpand"
         @setOption="setOption"
         @setPseudo="changePseudoStyle"
         @setClass="selectAnimation"></control-link>
@@ -95,7 +106,13 @@ export default {
       elRadius: 0,
       elLink: '',
       bgHover: '',
-      textHover: ''
+      textHover: '',
+      expanded: {
+        size: false,
+        font: false,
+        bg: false,
+        link: false
+      }
     }
   },
 
@@ -256,6 +273,18 @@ export default {
       if (newIndex >= 0 && newIndex < this.settingObjectSection.data[container].length) {
         correctArray(this.settingObjectSection.data[container], [index, newIndex])
         correctArray(this.settingObjectSection.schema[container], [index, newIndex])
+      }
+    },
+
+    onExpand (value) {
+      this.expanded[value[0]] = value[1]
+
+      if (value[1]) {
+        for (let key in this.expanded) {
+          if (key !== value[0]) {
+            this.expanded[key] = false
+          }
+        }
       }
     }
   }

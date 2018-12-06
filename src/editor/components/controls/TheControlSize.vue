@@ -12,6 +12,10 @@ export default {
     radius: {
       type: [Number, String],
       require: true
+    },
+    expand: {
+      type: Boolean,
+      required: true
     }
   },
 
@@ -28,6 +32,12 @@ export default {
     this.elHeight = this.height ? parseInt(this.height) : 0
     this.elWidth = this.width ? parseInt(this.width) : 0
     this.elRadius = this.radius ? parseInt(this.radius) : 0
+  },
+
+  watch: {
+    expand () {
+      this.controlOpen = this.expand
+    }
   },
 
   methods: {
@@ -47,6 +57,10 @@ export default {
       if (this.elRadius > 0) {
         this.$emit('change', ['border-radius', `${this.elRadius}px`])
       }
+    },
+
+    onClickTitle () {
+      this.$emit('open', ['size', !this.controlOpen])
     }
   }
 }
@@ -54,7 +68,7 @@ export default {
 
 <template>
   <div class="b-size-controls">
-    <div class="b-size-controls__header" @click="controlOpen = !controlOpen">
+    <div class="b-size-controls__header" @click="onClickTitle">
       <span>Visual</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
