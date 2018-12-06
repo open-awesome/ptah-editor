@@ -245,7 +245,6 @@ $h: 100vh
 .b-columns3
   position: relative
   width: 100%
-  min-height: #{$h}
   margin: 0
   padding: 1rem
   display: flex
@@ -340,8 +339,8 @@ $h: 100vh
     &
       width: 80%
 .b-sandbox
-  height: 100%
   min-height: 20rem
+  display: flex
   justify-content: center
   align-items: center
 </style>

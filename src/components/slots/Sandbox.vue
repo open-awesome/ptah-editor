@@ -127,7 +127,7 @@ export default {
   align-items: center
   position: relative
   width: 100%
-  height: 100%
+  min-height: 20rem
   .is-editable &
     border: 1px dashed $green
   &__align
