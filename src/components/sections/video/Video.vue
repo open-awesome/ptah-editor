@@ -42,7 +42,7 @@ export default {
      * Computed properties somehow doesn't work here (because of Vuse?)
      * Have to do everything manually
      */
-    updateVideoData ({ videoUrl, autoplay, loop }) {
+    updateVideoData ({ videoUrl, loop }) {
       this.videoUrl = videoUrl
 
       const youtubeVideoId = getYoutubeVideoIdFromUrl(this.videoUrl)
@@ -50,7 +50,7 @@ export default {
         // Looping one video on itself requires playlist param with its ID passed
         const loopValue = loop ? `&loop=1&playlist=${youtubeVideoId}` : '&loop=0'
         this.videoType = 'youtube'
-        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?disablekb=0&controls=1${loopValue}&autoplay=${autoplay ? '1' : '0'}&showinfo=0&modestbranding=1&enablejsapi=1`
+        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?disablekb=0&controls=1${loopValue}&autoplay=0&showinfo=0&modestbranding=1&enablejsapi=1`
       } else {
         this.videoType = 'custom'
         this.youtubeVideoUrl = ''
@@ -75,7 +75,7 @@ export default {
         v-if="videoType === 'youtube'"
         frameborder="0"
         allowfullscreen="1"
-        allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture"
+        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
         width="1184"
         height="666"
         :src="youtubeVideoUrl"></iframe>
@@ -85,7 +85,6 @@ export default {
         ref="custom"
         :src="videoUrl"
         :loop="$sectionData.mainStyle.loop"
-        :autoplay="$sectionData.mainStyle.autoplay"
         type="video/mp4"
         controls
         ></video>

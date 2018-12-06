@@ -346,7 +346,6 @@ const data = new Map([
       // videoUrl: 'https://gn967.cdn.stg.gamenet.ru/0/7KSrW/o_159yiU.mp4',
       videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
       videoTitle: 'World of Warcraft: Battle for Azeroth',
-      autoplay: false,
       loop: false
     })
   )]

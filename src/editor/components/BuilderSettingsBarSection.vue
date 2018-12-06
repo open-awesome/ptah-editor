@@ -36,14 +36,6 @@
 
       <div class="b-section-settings__control">
         <BaseSwitcher
-          v-model="autoplay"
-          label="Autoplay"
-          @change="updateSimpleValue('autoplay', autoplay)"
-        />
-      </div>
-
-      <div class="b-section-settings__control">
-        <BaseSwitcher
           v-model="loop"
           label="Loop"
           @change="updateSimpleValue('loop', loop)"
@@ -81,7 +73,6 @@ export default {
       videoTitle: '',
       videoUrl: '',
 
-      autoplay: false,
       loop: false
     }
   },
@@ -101,7 +92,6 @@ export default {
     /* Video */
     this.videoTitle = this.settingObjectOptions.videoTitle
     this.videoUrl = this.settingObjectOptions.videoUrl
-    this.autoplay = this.settingObjectOptions.autoplay
     this.loop = this.settingObjectOptions.loop
   },
 
