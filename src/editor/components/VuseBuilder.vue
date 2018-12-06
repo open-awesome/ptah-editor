@@ -25,37 +25,10 @@
         </template>
       </div>
     </div>
-    <ul class="menu" :class="{ 'is-visiable': listShown }" ref="menu">
-      <li v-if="$builder.sections.length">
-        <ul class="page-sections" ref="scope">
-          <li v-for="section in $builder.sections" :key="section.id">{{ section.name }}</li>
-        </ul>
-      </li>
-      <li class="menu-group" v-for="(group, name) in groups" v-bind:key="name" v-if="group.length">
-          <div class="menu-header" @click="toggleGroupVisibility">
-            <span class="menu-title">{{ name }}</span>
-            <span class="menu-icon"><VuseIcon name="arrowDown"></VuseIcon></span>
-          </div>
-          <div class="menu-body">
-              <template v-for="(section, index) in group">
-                <a class="menu-element"
-                   v-bind:key="index"
-                   @click="addSection(section)"
-                   @drag="currentSection = section">
-                  <img class="menu-elementImage" v-if="section.cover" :src="section.cover"/>
-                  <span class="menu-elementTitle">
-                    {{ section.name }}
-                  </span>
-                </a>
-              </template>
-          </div>
-      </li>
-    </ul>
   </BuilderLayout>
 </template>
 
 <script>
-import Sortable from 'sortablejs'
 import VuseIcon from './VuseIcon'
 import BuilderLayout from './BuilderLayout.vue'
 import { mapState } from 'vuex'
@@ -82,9 +55,6 @@ export default {
   data () {
     return {
       title: null,
-      listShown: false,
-      sections: this.getSections(),
-      currentSection: '',
       groups: {},
       isSectionsInited: false
     }
@@ -108,11 +78,6 @@ export default {
       this.$builder.title = value
       document.title = value
     },
-    emptySections (value) {
-      if (value) {
-        this.listShown = true
-      }
-    },
     currentLanding (value) {
       this.initSettings()
     }
@@ -123,7 +88,6 @@ export default {
     this.$builder.settings = {}
     this.title = this.$builder.title
     this.themes = this.$builder.themes
-    this.generateGroups()
 
     if (this.$route.params.slug !== 'new') {
 
@@ -131,61 +95,12 @@ export default {
   },
   mounted () {
     this.$builder.rootEl = this.$refs.artboard
-    const groups = this.$refs.menu.querySelectorAll('.menu-body')
-    const _self = this
-    groups.forEach((group) => {
-      Sortable.create(group, {
-        group: {
-          name: 'sections-group',
-          put: false,
-          pull: 'clone'
-        },
-        sort: false
-      })
-    })
-    this.sortable = Sortable.create(this.$refs.artboard, {
-      group: {
-        name: 'artboard',
-        put: 'sections-group'
-      },
-      animation: 150,
-      scroll: true,
-      scrollSpeed: 10,
-      sort: false,
-      disabled: true,
-      preventOnFilter: false,
-      onAdd (evt) {
-        _self.addSection(_self.currentSection, evt.newIndex)
-        evt.item.remove()
-      },
-      onUpdate (evt) {
-        _self.$builder.sort(evt.oldIndex, evt.newIndex)
-      }
-    })
-
     this.initSettings()
   },
 
   updated () {
-    const _self = this
-
     if (this.$builder.scrolling) {
       this.$builder.scrolling(this.$refs.artboard)
-    }
-
-    if (this.$builder.sections.length) {
-      this.sortable = Sortable.create(this.$refs.scope, {
-        group: {
-          name: 'scope'
-        },
-        animation: 150,
-        sort: true,
-        disabled: false,
-        preventOnFilter: false,
-        onUpdate (evt) {
-          _self.$builder.sort(evt.oldIndex, evt.newIndex)
-        }
-      })
     }
   },
 
@@ -213,18 +128,6 @@ export default {
       this.styleArtboard(settings.styles)
       this.updateVideo()
     },
-    newSection () {
-      // add the section immediatly if none are present.
-      if (this.sections.length === 1) {
-        this.addSection(this.sections[0])
-        return
-      }
-      this.toggleListVisibility()
-    },
-    addSection (section, position) {
-      this.$builder.add(section, position)
-      this.toggleListVisibility()
-    },
     addTheme (theme) {
       this.$builder.set(theme)
     },
@@ -239,18 +142,6 @@ export default {
       this.sortable.option('disabled', false)
       this.sortable.option('sort', true)
     },
-    toggleListVisibility () {
-      this.listShown = !this.listShown
-      this.sortable.option('disabled', !this.listShown)
-    },
-    showList () {
-      this.listShown = true
-      this.sortable.option('disabled', false)
-    },
-    hideList () {
-      this.listShown = false
-      this.sortable.option('disabled', true)
-    },
     toggleGroupVisibility (e) {
       const element = e.target
       const group = element.closest('.menu-group')
@@ -264,38 +155,6 @@ export default {
     },
     preview: function () {
       this.$emit('preview', this.$builder)
-    },
-    generateGroups () {
-      let groups = { random: [] }
-
-      // group sections together
-      this.sections.forEach((section) => {
-        let sectionGroup = section.group
-        if (!sectionGroup) {
-          groups.random.push(section)
-          return
-        }
-        if (!groups[sectionGroup]) {
-          groups[sectionGroup] = [section]
-          return
-        }
-        groups[sectionGroup].push(section)
-      })
-      this.groups = groups
-    },
-    getSections () {
-      let sections = []
-
-      // get sections data
-      sections = Object.keys(this.$builder.components).map((sec) => {
-        return {
-          name: sec,
-          group: this.$builder.components[sec].options.group,
-          cover: this.$builder.components[sec].options.cover,
-          schema: this.$builder.components[sec].options.$schema
-        }
-      })
-      return sections
     },
     backToLandings () {
       this.save()
@@ -452,100 +311,6 @@ export default {
     font-size: 1.6rem
     &:hover
       border-color: $blue
-.menu
-  $self: &
-  user-select: none
-  -moz-user-select: none
-  position: fixed
-  z-index: 1000
-  top: 0
-  left: 0
-  bottom: 0
-  margin: 0
-  width: 25rem
-  background: $white
-  padding: 2rem 1rem
-  display: flex
-  flex-direction: column
-  overflow-y: auto
-  list-style: none
-  transition: 0.4s
-  box-shadow: 0.1rem 0 1rem rgba($dark, 20%)
-  transform: translate3d(-100%, 0, 0)
-  &.is-visiable
-    transform: translate3d(0, 0, 0)
-  &-body
-    display: none
-    padding: 0
-    margin: 0
-    list-style: none
-    #{$self}-group &
-      width: 100%
-      margin: 0.5rem auto
-    #{$self}-group.is-visiable &
-      display: block
-  &-icon
-    width: 2rem
-    height: 2rem
-    fill: $gray
-    transition: 0.2s
-    cursor: pointer
-    #{$self}-group.is-visiable &
-      transform: rotate(180deg)
-
-  &-element
-    position: relative
-    display: inline-flex
-    justify-content: center
-    align-items: center
-    width: 100%
-    min-height: 5rem
-    margin: 0.5rem
-    background: darken($gray, 10%)
-    transition: 0.3s
-    cursor: pointer
-    color: $white
-    overflow: hidden
-    user-select: none
-    -moz-user-select: none
-    &:not(:last-child)
-      margin-bottom: 1rem
-    &:hover
-      @extends $floatHover
-
-  &-elementImage
-    max-width: 100%
-    pointer-events: none
-    +
-      #{$self}-elementTitle
-        position: absolute
-        right: 0
-        bottom: 0
-        left: 0
-        text-shadow: 0.1rem 0.1rem 0.2rem rgba($black, 80%)
-        text-align: center
-        padding: 0.5rem
-        display: none
-        #{$self}-element:hover &
-          display: inline-block
-
-  &-header
-    display: flex
-    justify-content: space-between
-    align-items: center
-    padding: 1rem 0.5rem
-    border-bottom: 0.1rem solid rgba($gray, 5%)
-    cursor: pointer
-
-.sortable-ghost
-  opacity: 0.3
-  box-shadow: 0 0 0.2rem 0.1rem $blue
-
-.main-panel
-  position: fixed
-  z-index: 200
-  bottom: 3rem
-  left: 4rem
 
 .b-landing-constructor__button
   width: 100%
