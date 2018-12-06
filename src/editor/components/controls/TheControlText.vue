@@ -35,6 +35,10 @@ export default {
     fontStyles: {
       type: Array,
       required: true
+    },
+    expand: {
+      type: Boolean,
+      required: true
     }
   },
 
@@ -80,9 +84,15 @@ export default {
 
   created () {
     this.fontName = { name: this.fontFamily, value: this.fontFamily }
-    this.size = { name: ((parseInt(this.fontSize) * 10) + 'px'), value: this.fontSize }
+    this.size = find(this.sizes, { value: parseFloat(this.fontSize) })
     this.color = this.fontColor
     this.styles = this.fontStyles
+  },
+
+  watch: {
+    expand () {
+      this.controlOpen = this.expand
+    }
   },
 
   computed: {
@@ -115,6 +125,10 @@ export default {
           this.$emit('change', [style.value.prop, style.value.base])
         }
       })
+    },
+
+    onClickTitle () {
+      this.$emit('open', ['font', !this.controlOpen])
     }
   }
 }
@@ -122,7 +136,7 @@ export default {
 
 <template>
   <div class="b-text-controls">
-    <div class="b-text-controls__header" @click="controlOpen = !controlOpen">
+    <div class="b-text-controls__header" @click="onClickTitle">
       <span>Text</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">

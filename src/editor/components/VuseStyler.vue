@@ -277,12 +277,9 @@ export default {
       document.removeEventListener('click', this.hideStyler, true)
       document.removeEventListener('blur', this.hideStyler, true)
 
-      if (this.type === 'section' || this.type === 'grid') {
-        return
-      }
-
       this.section.set(`${this.name}.text`, this.el.innerHTML)
     },
+
     /**
      * Add style to pseudocalss
      * @param style {object}

@@ -1,6 +1,6 @@
 <script>
 import MenuPlatforms from './menu/MenuPlatforms.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   components: {
@@ -22,8 +22,17 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'clearSettingObject'
+    ]),
+
     setDevice (type) {
       this.$emit('setDevice', type)
+    },
+
+    backToLandings ($event) {
+      this.clearSettingObject()
+      this.$emit('backToLandings', $event)
     }
   }
 }
@@ -36,7 +45,7 @@ export default {
       :color="'light-gray'"
       :transparent="true"
       :size="'middle'"
-      @click="$emit('backToLandings', $event)"
+      @click="backToLandings"
       class="b-top-bar__btn-back"
       tooltip="back to landings"
       tooltip-position="bottom"

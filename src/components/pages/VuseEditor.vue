@@ -36,6 +36,7 @@ import Slogan from '@components/sections/elements/Slogan'
 import Social from '@components/sections/elements/Social'
 import System from '@components/sections/elements/System'
 import ThreeColumns from '@components/sections/columns/ThreeColumns'
+import Video from '@components/sections/video/Video'
 
 import store from '@store'
 
@@ -67,6 +68,7 @@ Vuse.component('Slogan', Slogan)
 Vuse.component('Social', Social)
 Vuse.component('System', System)
 Vuse.component('ThreeColumns', ThreeColumns)
+Vuse.component('Video', Video)
 
 Vuse.use(pwa)
 
