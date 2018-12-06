@@ -9,7 +9,11 @@ export default {
       type: String,
       required: true
     },
-    repeat: {
+    repeat: { // background-repeat
+      type: String,
+      required: true
+    },
+    size: { // background-size
       type: String,
       required: true
     }
@@ -21,9 +25,14 @@ export default {
       bgColor: '',
       bgImage: '',
       bgRepeat: '',
+      bgSize: '',
       list: [
-        { text: 'Tile', value: 'no-repeat' },
-        { text: 'Fill', value: 'repeat' }
+        { text: 'No-repeat', value: 'no-repeat' },
+        { text: 'Repeat', value: 'repeat' }
+      ],
+      sizeList: [
+        { text: 'Tile', value: 'cover' },
+        { text: 'Fill', value: 'contain' }
       ]
     }
   },
@@ -32,7 +41,8 @@ export default {
     this.bgColor = this.color ? this.color : ''
     let image = this.image
     this.bgImage = image.length > 0 ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
-    this.bgRepeat = this.repeat === 'no-repeat' ? this.list[0] : this.list[1]
+    this.bgRepeat = this.repeat === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
+    this.bgSize = this.size === 'cover' ? this.sizeList[0] : this.sizeList[1]
   },
 
   methods: {
@@ -47,6 +57,10 @@ export default {
 
     changeRepeat () {
       this.$emit('change', ['background-repeat', this.bgRepeat])
+    },
+
+    changeSize () {
+      this.$emit('change', ['background-size', this.bgSize])
     },
 
     onClickOutside () {
@@ -70,6 +84,9 @@ export default {
       </div>
       <div class="b-bg-controls__control">
         <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+      </div>
+      <div class="b-bg-controls__control">
+        <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
       </div>
     </base-dropdown>
   </div>

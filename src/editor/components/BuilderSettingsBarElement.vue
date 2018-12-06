@@ -26,7 +26,7 @@
 
     <!-- background -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
-      <control-background :color="bgColor" :image="bgImage" :repeat="bgRepeat" @change="styleChange"></control-background>
+      <control-background :color="bgColor" :image="bgImage" :repeat="bgRepeat" :size="bgSize" @change="styleChange"></control-background>
     </div>
 
     <!-- Link -->
@@ -89,6 +89,7 @@ export default {
       bgColor: '',
       bgImage: '',
       bgRepeat: '',
+      bgSize: '',
       elHeight: 0,
       elWidth: 0,
       elRadius: 0,
@@ -149,6 +150,7 @@ export default {
     }
     this.bgImage = styles['background-image'] || ''
     this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+    this.bgSize = styles['background-size'] || 'cover'
 
     /* Get element size */
     this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetWidth
