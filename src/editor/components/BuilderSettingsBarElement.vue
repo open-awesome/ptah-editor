@@ -190,10 +190,8 @@ export default {
     ]),
 
     styleChange (value) {
-      this.updateStyle(value[0], value[1])
-      if (value[2]) {
-        this[value[2]] = value[1]
-      }
+      this.updateStyle(_.kebabCase(value[0]), value[1])
+      this[value[0]] = value[1]
     },
 
     updateStyle (prop, value) {

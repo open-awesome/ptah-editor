@@ -83,7 +83,7 @@ export default {
 
   created () {
     this.fontName = { name: this.fontFamily, value: this.fontFamily }
-    this.size = { name: ((parseInt(this.fontSize) * 10) + 'px'), value: this.fontSize }
+    this.size = find(this.sizes, { value: parseFloat(this.fontSize) })
     this.color = this.fontColor
     this.styles = this.fontStyles
   },
