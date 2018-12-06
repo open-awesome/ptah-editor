@@ -185,7 +185,8 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'setSettingSection',
-      'setSettingElement'
+      'setSettingElement',
+      'clearSettingObject'
     ]),
     setInitialValue () {
       if (this.type === 'button') {
@@ -241,22 +242,25 @@ export default {
       this.section.data[path[0]].push(obj)
     },
     showStyler (event) {
+      this.clearSettingObject()
       event.stopPropagation()
 
       if (this.isVisible) return
       this.isVisible = true
 
-      if (this.$props.type === 'section') {
-        this.setSettingSection(this.section)
-      } else {
-        this.setSettingElement({
-          type: this.$props.type, // TODO: $props.type !== type ?
-          name: this.name,
-          options: _.get(this.section.data, this.path).element || this.options,
-          section: this.section,
-          element: this.el
-        })
-      }
+      setTimeout(() => {
+        if (this.$props.type === 'section') {
+          this.setSettingSection(this.section)
+        } else {
+          this.setSettingElement({
+            type: this.$props.type, // TODO: $props.type !== type ?
+            name: this.name,
+            options: _.get(this.section.data, this.path).element || this.options,
+            section: this.section,
+            element: this.el
+          })
+        }
+      }, 0)
 
       document.addEventListener('click', this.hideStyler, true)
       // TODO: this work incorrectly

@@ -2,6 +2,7 @@
 import find from 'lodash-es/find'
 
 const LIST_FONTS = [
+  'Lato',
   'Open Sans',
   'Roboto',
   'Oswald',
