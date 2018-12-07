@@ -341,11 +341,12 @@ const data = new Map([
   )],
   [types.Video, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      removable: false,
+      background: false,
       hasVideo: true,
-      videoUrl: 'https://gn967.cdn.stg.gamenet.ru/0/7KSrW/o_159yiU.mp4',
-      // videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
-      title: 'World of Warcraft: Battle for Azeroth'
+      // videoUrl: 'https://gn967.cdn.stg.gamenet.ru/0/7KSrW/o_159yiU.mp4',
+      videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
+      videoTitle: 'World of Warcraft: Battle for Azeroth',
+      loop: false
     })
   )]
 ])

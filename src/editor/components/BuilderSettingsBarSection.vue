@@ -1,12 +1,47 @@
 <template>
   <div class="b-section-settings">
-    <div class="b-section-settings__control">
-      <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
-    </div>
+    <template v-if="settingObjectOptions.background">
+      <div class="b-section-settings__control">
+        <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
+      </div>
 
-    <div class="b-section-settings__control">
-      <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
-    </div>
+      <div class="b-section-settings__control">
+        <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
+      </div>
+    </template>
+
+    <!-- Title -->
+    <template v-if="settingObjectOptions.hasVideo">
+      <div class="b-section-settings__control">
+        <BaseTextField
+          v-model="videoTitle"
+          label="Video title"
+          @input="updateSimpleValue('videoTitle', videoTitle)"
+        />
+      </div>
+
+      <!-- VideoUrl -->
+      <div class="b-section-settings__control">
+        <BaseUploadInput
+          v-model="videoUrl"
+          label="Video URL"
+          @upload="updateSimpleValue('videoUrl', videoUrl)"
+        />
+      </div>
+
+      <div class="b-section-settings__description">
+        YouTube video url or any mp4 file url is allowed.<br>
+        To play the video please use Preview button.
+      </div>
+
+      <div class="b-section-settings__control">
+        <BaseSwitcher
+          v-model="loop"
+          label="Loop"
+          @change="updateSimpleValue('loop', loop)"
+        />
+      </div>
+    </template>
 
     <div class="b-section-settings__buttons">
       <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
@@ -33,7 +68,12 @@ export default {
   data () {
     return {
       sectionBgColor: '',
-      sectionBgUrl: ''
+      sectionBgUrl: '',
+
+      videoTitle: '',
+      videoUrl: '',
+
+      loop: false
     }
   },
 
@@ -48,6 +88,11 @@ export default {
     this.sectionBgColor = this.settingObjectOptions.styles['background-color']
     let image = this.settingObjectOptions.styles['background-image']
     this.sectionBgUrl = image.length > 0 ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
+
+    /* Video */
+    this.videoTitle = this.settingObjectOptions.videoTitle
+    this.videoUrl = this.settingObjectOptions.videoUrl
+    this.loop = this.settingObjectOptions.loop
   },
 
   watch: {
@@ -82,6 +127,12 @@ export default {
     deleteSection () {
       this.builder.remove(this.settingObjectSection)
       this.clearSettingObject()
+    },
+
+    updateSimpleValue (propName, value) {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        [propName]: value
+      }))
     }
   }
 }
@@ -99,5 +150,11 @@ export default {
       button
         max-width: 100%
     &__control
-      margin-bottom: 3rem
+      margin-bottom: 2rem
+    &__description
+      font-size: 1.4rem
+      line-height: 1.7rem
+      color: #747474
+      margin-bottom: 2rem
+      margin-top: -1rem
 </style>
