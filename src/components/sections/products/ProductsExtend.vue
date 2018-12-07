@@ -238,14 +238,12 @@ export default {
   cover: '/img/covers/productsExtend.png',
   group: 'products',
   $schema: {
-    mainStyle: types.StyleObject,
+    mainStyle: types.ProductSection,
     products: [
       _.merge({}, PRODUCT),
       _.merge({}, PRODUCT)
     ],
-    defObj: {
-      products: _.merge({}, PRODUCT)
-    }
+    defObj: PRODUCT
   },
   props: {
     id: {

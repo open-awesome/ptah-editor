@@ -10,6 +10,7 @@
       </div>
     </template>
 
+    <!-- Video Section Controls-->
     <!-- Title -->
     <template v-if="settingObjectOptions.hasVideo">
       <div class="b-section-settings__control">
@@ -43,6 +44,9 @@
       </div>
     </template>
 
+    <!-- Products Section Controls -->
+    <control-section-products v-if="settingObjectOptions.hasProdusct"></control-section-products>
+
     <div class="b-section-settings__buttons">
       <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
     </div>
@@ -54,8 +58,10 @@
 import { mapState, mapActions } from 'vuex'
 
 import * as _ from 'lodash-es'
+import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 
 export default {
+  components: { ControlSectionProducts },
   name: 'BuilderSettingsBarSection',
 
   props: {
