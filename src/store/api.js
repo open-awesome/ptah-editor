@@ -17,8 +17,8 @@ export default {
         {
           slug: 'Columns',
           theme: {
-            name: 'ThreeColumns',
-            sections: ['ThreeColumns']
+            name: 'TwoColumns',
+            sections: ['TwoColumns']
           }
         },
         {
