@@ -79,6 +79,13 @@ export default {
       state.settingObjectSection.set(path, options)
     },
 
+    /* Update section data prop */
+    updateSectionData ({ commit, state }, { prop, data }) {
+      let section = _.merge(state.settingObjectSection)
+      section.data[prop] = data
+      commit('setSection', section)
+    },
+
     /**
      * Open and set section settings
      * @param dispatch
