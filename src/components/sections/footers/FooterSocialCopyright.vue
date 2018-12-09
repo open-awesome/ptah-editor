@@ -163,12 +163,12 @@ const COMPONENTS_C = [
 ]
 
 export default {
-  name: 'FooterSocialCopyright',
+  name: 'SocialCopyright',
   components: {
     VuseIcon
   },
   cover: '/img/covers/footer-social-copyright.jpg',
-  group: 'Columns',
+  group: 'Footers',
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,

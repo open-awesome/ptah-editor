@@ -86,7 +86,7 @@ const SCHEMA_CUSTOM = {
 }
 
 export default {
-  name: 'FooterAvailableRestrictions',
+  name: 'AvailableRestrictions',
   components: {
     VuseIcon
   },
