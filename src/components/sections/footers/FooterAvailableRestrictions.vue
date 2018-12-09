@@ -86,7 +86,7 @@ const SCHEMA_CUSTOM = {
 }
 
 export default {
-  name: 'FooterSocialRestrictions',
+  name: 'FooterAvailableRestrictions',
   components: {
     VuseIcon
   },
@@ -244,7 +244,7 @@ export default {
     <div class="b-grid">
       <div class="b-grid__row">
         <div class="b-grid__col-5 b-grid__col-m-12">
-          <div class="b-socials flex flex_center">
+          <div class="b-socials">
             <div class="b-socials__item"
                v-for="(value, key) in $sectionData.socials" :key="key"
                :class="{ 'b-socials__item_opacity' : false === $sectionData.socials[key].visible }"
@@ -272,7 +272,6 @@ export default {
         <div class="b-grid__col-5 b-grid__col-m-12">
           <div class="b-restrictions">
             <div class="b-restrictions__item"
-               v-styler="$sectionData.image"
                v-for="(value, key) in $sectionData.restrictions" :key="key"
                :class="{ 'b-restrictions__item_opacity' : false === $sectionData.restrictions[key].visible }"
               >
@@ -400,6 +399,11 @@ $h: 100vh
   width: 95%
   max-width: 100rem
   margin: 0 auto
+  display: flex
+  text-align: center
+  justify-content: center
+  align-items: center
+  height: 100%
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     height: auto !important
@@ -457,6 +461,7 @@ $h: 100vh
   text-align: center
   justify-content: flex-end
   align-items: center
+  height: 100%
   .is-tablet &,
   .is-mobile &
     flex-wrap: wrap

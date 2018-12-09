@@ -25,7 +25,7 @@ export default {
           slug: 'Footers',
           theme: {
             name: 'Footers',
-            sections: ['FooterSocialRestrictions']
+            sections: ['FooterAvailableRestrictions', 'FooterSocialCopyright']
           }
         },
         {
