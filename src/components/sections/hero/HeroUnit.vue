@@ -162,7 +162,7 @@ $h: 100vh
 .b-hero
   position: relative
   width: 100%
-  min-height: #{$h}
+  min-height: 70rem
   margin: 0
   padding: 1rem
   display: flex
@@ -170,8 +170,6 @@ $h: 100vh
   justify-content: center
   flex-direction: column
   transition: background 200ms
-  &.is-editable
-    min-height: calc(#{$h} - 7.2rem)
   &-component
     margin: 1.2rem
 .b-delimiter

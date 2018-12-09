@@ -22,6 +22,13 @@ export default {
           }
         },
         {
+          slug: 'Footers',
+          theme: {
+            name: 'Footers',
+            sections: ['FooterSocialRestrictions']
+          }
+        },
+        {
           slug: 'Products',
           theme: {
             name: 'Products',

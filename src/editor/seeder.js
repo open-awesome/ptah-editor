@@ -279,7 +279,7 @@ const data = new Map([
       resizable: true,
       hasLink: true,
       background: true,
-      colorFill: true,
+      fillColor: true,
       shape: true,
       target: '_blank',
       text: '',
@@ -290,9 +290,9 @@ const data = new Map([
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
-        'background-color': '#333',
-        'fill': false,
-        'border-radius': '100%',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'fill': '#fff',
+        'border-radius': '0',
         'width': '',
         'height': ''
       }

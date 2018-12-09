@@ -245,6 +245,7 @@ $h: 100vh
 .b-columns3
   position: relative
   width: 100%
+  min-height: 76rem
   margin: 0
   padding: 1rem
   display: flex
@@ -252,8 +253,6 @@ $h: 100vh
   justify-content: center
   flex-direction: column
   transition: background 200ms
-  &.is-editable
-    min-height: calc(#{$h} - 7.2rem)
   &-component
     margin: 1.2rem
 .b-header

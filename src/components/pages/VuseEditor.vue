@@ -38,6 +38,7 @@ import System from '@components/sections/elements/System'
 import ThreeColumns from '@components/sections/columns/ThreeColumns'
 import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
+import FooterSocialRestrictions from '@components/sections/footers/FooterSocialRestrictions'
 
 import store from '@store'
 
@@ -71,6 +72,7 @@ Vuse.component('System', System)
 Vuse.component('ThreeColumns', ThreeColumns)
 Vuse.component('TwoColumns', TwoColumns)
 Vuse.component('Video', Video)
+Vuse.component('FooterSocialRestrictions', FooterSocialRestrictions)
 
 Vuse.use(pwa)
 
