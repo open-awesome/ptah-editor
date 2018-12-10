@@ -47,6 +47,7 @@ export default {
     this.bgImage = image.length > 0 ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
     this.bgRepeat = this.repeat === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
     this.bgSize = this.size === 'cover' ? this.sizeList[0] : this.sizeList[1]
+    this.controlOpen = this.expand
   },
 
   watch: {

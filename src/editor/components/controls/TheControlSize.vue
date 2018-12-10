@@ -32,6 +32,7 @@ export default {
     this.elHeight = this.height ? parseInt(this.height) : 0
     this.elWidth = this.width ? parseInt(this.width) : 0
     this.elRadius = this.radius ? parseInt(this.radius) : 0
+    this.controlOpen = this.expand
   },
 
   watch: {

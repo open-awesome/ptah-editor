@@ -87,6 +87,7 @@ export default {
     this.size = find(this.sizes, { value: parseFloat(this.fontSize) })
     this.color = this.fontColor
     this.styles = this.fontStyles
+    this.controlOpen = this.expand
   },
 
   watch: {

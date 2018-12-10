@@ -99,6 +99,7 @@ export default {
     padding: 5px
     overflow: hidden
     opacity: .3
+    z-index: 1
     &:hover
       opacity: 1
     ul

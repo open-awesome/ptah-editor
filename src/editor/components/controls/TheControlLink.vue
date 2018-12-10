@@ -47,6 +47,7 @@ export default {
     this.bgHoverColor = this.hoverBgColor
     this.textHoverColor = this.hoverTextColor
     this.animation = this.animationClass
+    this.controlOpen = this.expand
   },
 
   watch: {
