@@ -305,7 +305,6 @@ export default {
     },
 
     onExpand (value) {
-      console.log(value)
       this.expanded[value[0]] = value[1]
 
       if (value[1]) {
