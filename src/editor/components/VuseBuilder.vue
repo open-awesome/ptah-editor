@@ -281,6 +281,10 @@ export default {
       background-color: $gray
       &:hover
         background-color: darken($gray, 20%)
+    &.is-transparent
+      background-color: transparent
+      &:hover
+        background-color: transparent
   &-intro
     width: 100%
     max-width: 50rem

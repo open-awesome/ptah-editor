@@ -258,7 +258,7 @@ export default {
                 >
                 <VuseIcon :name="key"></VuseIcon>
               </a>
-              <button class="b-socials__item-eye controller-button is-blue is-editable-show"
+              <button class="b-socials__item-eye controller-button is-transparent is-editable-show"
                 @click="$sectionData.socials[key].visible = !$sectionData.socials[key].visible"
                 title="Show / Hide"
                 >
@@ -289,7 +289,7 @@ export default {
                   </option>
                 </select>
               </div>
-              <button class="b-restrictions__item-eye controller-button is-blue is-editable-show"
+              <button class="b-restrictions__item-eye controller-button is-transparent is-editable-show"
                 @click="$sectionData.restrictions[key].visible = !$sectionData.restrictions[key].visible"
                 title="Show / Hide"
                 >
@@ -388,7 +388,6 @@ $h: 100vh
       height: 4rem !important
       font-size: 1.4rem !important
 .b-sandbox
-  height: 100%
   min-height: 36.5rem
   padding: 5rem 0
   justify-content: flex-start
@@ -403,7 +402,6 @@ $h: 100vh
   text-align: center
   justify-content: center
   align-items: center
-  height: 100%
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     height: auto !important
@@ -461,7 +459,6 @@ $h: 100vh
   text-align: center
   justify-content: flex-end
   align-items: center
-  height: 100%
   .is-tablet &,
   .is-mobile &
     flex-wrap: wrap
@@ -513,4 +510,8 @@ $h: 100vh
   display: none
   .is-editable &
     display: inline-block
+
+.vuse-icon_eye
+  fill: rgb(129, 150, 227)
+
 </style>
