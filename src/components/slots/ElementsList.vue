@@ -104,6 +104,9 @@ export default {
   position: absolute
   top: 0
   right: 0
+  opacity: .3
+  &:hover
+    opacity: 1
   &__show-list
     border: none
     background: $color-gray

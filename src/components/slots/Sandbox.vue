@@ -98,6 +98,9 @@ export default {
     right: 0px
     padding: 5px
     overflow: hidden
+    opacity: .3
+    &:hover
+      opacity: 1
     ul
       list-style: none
       margin: 0
