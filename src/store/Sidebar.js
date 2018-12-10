@@ -81,7 +81,7 @@ export default {
 
     /* Update section data prop */
     updateSectionData ({ commit, state }, { prop, data }) {
-      let section = _.merge({}, state.settingObjectSection)
+      let section = _.cloneDeep(state.settingObjectSection)
       section.data[prop] = data
       commit('setSection', section)
     },

@@ -62,6 +62,14 @@
       <icon-base name="platformLaptop"></icon-base>
       <icon-base name="platformMobile"></icon-base>
       <icon-base name="plus"></icon-base>
+      <icon-base name="groupBottom"></icon-base>
+      <icon-base name="groupTop"></icon-base>
+      <icon-base name="groupCenterVertical"></icon-base>
+      <icon-base name="groupCenterHorizontal"></icon-base>
+      <icon-base name="groupLeft"></icon-base>
+      <icon-base name="groupRight"></icon-base>
+      <icon-base name="groupRow"></icon-base>
+      <icon-base name="groupColumn"></icon-base>
     </div>
 
     <hr>

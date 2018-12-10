@@ -30,10 +30,9 @@ export default {
         products.splice(newValue - 1, 1)
       } else {
         if (products.length < 4) {
-          let product = this.settingObjectSection.data.defObj
-          for (let i = 0; i < newValue - oldValue; i++) {
-            products.push(_.merge({}, product))
-          }
+          const product = this.settingObjectSection.data.defObj
+          const newProducts = Array(newValue - oldValue).map(() => _.cloneDeep(product))
+          products.push(...newProducts)
         }
       }
 
