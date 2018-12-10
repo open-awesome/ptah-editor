@@ -80,10 +80,8 @@ export default {
     },
 
     /* Update section data prop */
-    updateSectionData ({ commit, state }, { prop, data }) {
-      let section = _.cloneDeep(state.settingObjectSection)
-      section.data[prop] = data
-      commit('setSection', section)
+    updateSectionData ({ state }, { prop, data }) {
+      state.settingObjectSection.set(`$sectionData.${prop}`, data)
     },
 
     /**
