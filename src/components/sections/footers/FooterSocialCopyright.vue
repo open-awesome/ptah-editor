@@ -312,7 +312,7 @@ export default {
                   >
                   <VuseIcon :name="key"></VuseIcon>
                 </a>
-                <button class="b-socials__item-eye controller-button is-blue is-editable-show"
+                <button class="b-socials__item-eye controller-button is-transparent is-editable-show"
                   @click="$sectionData.socials[key].visible = !$sectionData.socials[key].visible"
                   title="Show / Hide"
                   >
@@ -438,7 +438,7 @@ $h: 100vh
   display: flex
   text-align: center
   justify-content: center
-  height: 100%
+
   .is-tablet &,
   .is-mobile &
     flex-wrap: wrap
@@ -494,4 +494,7 @@ $h: 100vh
   display: none
   .is-editable &
     display: inline-block
+
+.vuse-icon_eye
+  fill: rgb(129, 150, 227)
 </style>
