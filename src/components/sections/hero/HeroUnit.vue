@@ -162,7 +162,7 @@ $h: 100vh
 .b-hero
   position: relative
   width: 100%
-  min-height: #{$h}
+  min-height: 70rem
   margin: 0
   padding: 1rem
   display: flex
@@ -170,8 +170,6 @@ $h: 100vh
   justify-content: center
   flex-direction: column
   transition: background 200ms
-  &.is-editable
-    min-height: calc(#{$h} - 7.2rem)
   &-component
     margin: 1.2rem
 .b-delimiter
@@ -199,10 +197,12 @@ $h: 100vh
   .is-tablet &
     font-size: 2rem !important
     line-height: 4rem
+    padding: 0 1rem
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem !important
       line-height: 4rem
+      padding: 0 1rem
 .b-text
   color: rgba(255, 255, 255, 0.3)
   font-size: 2rem
@@ -232,10 +232,14 @@ $h: 100vh
   box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
   .is-mobile &,
   .is-tablet &
-    width: 80%
+    width: 80% !important
+    height: 4rem !important
+    font-size: 1.4rem !important
   @media only screen and (max-width: 768px)
     &
-      width: 80%
+      width: 80% !important
+      height: 4rem !important
+      font-size: 1.4rem !important
 .b-sandbox
   height: 100%
   min-height: 20rem
