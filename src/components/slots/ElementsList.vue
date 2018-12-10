@@ -1,16 +1,17 @@
 <template>
   <div class="b-elements is-editable">
     <button class="b-elements__show-list ptah-control" @click="openList" :class="{'active': showList}">
-      <img src="https://gn423.cdn.stg.gamenet.ru/0/79nas/o_1mRf76.svg" alt="">
+      <icon-base name="plus"></icon-base>
     </button>
     <aside class="b-elements__list ptah-control" v-if="showList">
+      <div class="b-elements__title">Add Item</div>
       <ul>
-        <li><a href="#" @click.prevent="addButton" class="b-elements__button">Add button</a></li>
-        <li><a href="#" @click.prevent="addTitle" class="b-elements__button">Add title</a></li>
-        <li><a href="#" @click.prevent="addText" class="b-elements__button">Add text</a></li>
-        <li><a href="#" @click.prevent="addImage" class="b-elements__button">Add image</a></li>
-        <li><a href="#" @click.prevent="addDelimiter" class="b-elements__button">Add delimiter</a></li>
-        <li><a href="#" @click.prevent="addLogo" class="b-elements__button">Add logo</a></li>
+        <li><a href="#" @click.prevent="addButton" class="b-elements__button">Button</a></li>
+        <li><a href="#" @click.prevent="addTitle" class="b-elements__button">Title</a></li>
+        <li><a href="#" @click.prevent="addText" class="b-elements__button">Text</a></li>
+        <li><a href="#" @click.prevent="addImage" class="b-elements__button">Image</a></li>
+        <li><a href="#" @click.prevent="addDelimiter" class="b-elements__button">Delimiter</a></li>
+        <li><a href="#" @click.prevent="addLogo" class="b-elements__button">Logo</a></li>
       </ul>
     </aside>
   </div>
@@ -101,45 +102,74 @@ export default {
 <style lang="sass">
 .b-elements
   position: absolute
-  top: 3rem
+  top: 0
   right: 0
+  opacity: .3
+  &:hover
+    opacity: 1
   &__show-list
     border: none
-    background: lighten($color-form-text, 20%)
-    width: 3rem
-    height: 3rem
+    background: $color-gray
+    width: $slot-step
+    height: $slot-step
     display: flex
     justify-content: center
     align-items: center
     padding: 0.5rem
     cursor: pointer
+    color: $color-dark-100
     &:hover, &.active
-      background: $color-form-text
+      background: #fff
+      color: $king-blue-300
     img
       width: 2rem
       height: 2rem
   &__list
-    width: 11rem
+    width: 18rem
     position: absolute
     z-index: 20
-    right: 3rem
-    top: 0px
-    background: $color-form-text
-    color: #fff
-    padding: 1rem 1rem 0
-    border-radius: 0.4rem 0 0.4rem 0.4rem
+    right: 7.3rem
+    top: -2.2rem
+    background: #fff
+    color: $color-dark-100
+    padding: 1.6rem
     ul
       margin: 0
       padding: 0
       list-style: none
     li
       padding-bottom: 0.5rem
+  &__title
+    padding: .9rem 0 0rem 1.6rem
+    font-weight: bold
+    line-height: 4.3rem
+    font-size: 1.8rem
+    letter-spacing: 0.02em
+    text-align: left
+    position: relative
+    &:after
+      content: ''
+      display: block
+      position: absolute
+      width: 2.4rem
+      height: 2.4rem
+      transform: rotate(45deg)
+      top: 1.9rem
+      right: -2.8rem
+      background: #fff
   &__button
     display: block
-    background: $dark
-    color: white
+    background: transparent
+    color: $color-dark-100
     border-radius: 0.4rem
-    padding: 0.8rem 0.5rem
+    padding: 0.8rem 1.6rem
     width: 100%
+    height: $slot-step
     text-decoration: none
+    font-size: 1.4rem
+    line-height: 3.4rem
+    letter-spacing: -0.02em
+    text-align: left
+    &:hover
+      background: rgba(67, 111, 238, 0.15)
 </style>

@@ -67,6 +67,7 @@ const data = new Map([
   }))],
   [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
     text: 'Enter your text',
+    removable: true,
     aligned: true,
     typography: true,
     styles: {
@@ -188,6 +189,7 @@ const data = new Map([
       text: 'Click Me!',
       classes: [],
       href: '',
+      removable: true,
       styles: {
         'background-image': false,
         'background-position': false,
