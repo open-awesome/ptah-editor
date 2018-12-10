@@ -15,6 +15,13 @@ export default {
           }
         },
         {
+          slug: 'Skull',
+          theme: {
+            name: 'Skull',
+            sections: ['HeroSkull']
+          }
+        },
+        {
           slug: 'Columns',
           theme: {
             name: 'Columns',
