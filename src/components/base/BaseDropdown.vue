@@ -1,8 +1,8 @@
 <template>
   <div class="b-base-dropdown" :class="{ 'visible': hasOverflow }">
-    <slide-up-down :active="isOpenedInner" :duration="200">
+    <base-slide-down :active="isOpenedInner" :duration="200">
       <slot></slot>
-    </slide-up-down>
+    </base-slide-down>
   </div>
 </template>
 
