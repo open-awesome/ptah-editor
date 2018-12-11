@@ -40,6 +40,7 @@ import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
 import AvailableRestrictions from '@components/sections/footers/FooterAvailableRestrictions'
 import SocialCopyright from '@components/sections/footers/FooterSocialCopyright'
+import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
 
 import store from '@store'
 
@@ -75,6 +76,7 @@ Vuse.component('TwoColumns', TwoColumns)
 Vuse.component('Video', Video)
 Vuse.component('AvailableRestrictions', AvailableRestrictions)
 Vuse.component('SocialCopyright', SocialCopyright)
+Vuse.component('GalleryCarousel', GalleryCarousel)
 
 Vuse.use(pwa)
 

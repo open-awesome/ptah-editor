@@ -25,11 +25,17 @@ export default {
 
   watch: {
     '$sectionData.mainStyle' (value) {
-      // To refresh DOM
-      this.videoType = ''
       this.$nextTick(() => {
         this.updateVideoData(value)
       })
+    },
+
+    // To refresh DOM
+    '$sectionData.mainStyle.videoUrl' () {
+      this.videoType = ''
+    },
+    '$sectionData.mainStyle.loop' () {
+      this.videoType = ''
     }
   },
 
