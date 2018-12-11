@@ -57,13 +57,17 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
 
 
 @each $modifier, $breakpoint in $map-grid-props
-  @if($modifier == '')
-    $modifier: '-m'
-  @include create-mq($breakpoint - 1, 'min')
-    .hidden#{$modifier}-down
-      display: none !important
   @include create-mq($breakpoint, 'max')
-    .hidden#{$modifier}-up
+    .hidden#{$modifier}
+      display: none !important
+  @if($breakpoint == $grid__bp-m)
+    .is-mobile .hidden#{$modifier}
+      display: none !important
+  @if($breakpoint == $grid__bp-l)
+    .is-laptop .hidden#{$modifier}
+      display: none !important
+  @if($breakpoint == $grid__bp-d)
+    .is-desktop .hidden#{$modifier}
       display: none !important
 
 .b-grid

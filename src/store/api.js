@@ -8,10 +8,10 @@ export default {
     return new Promise((resolve) => {
       resolve([
         {
-          slug: 'Hero',
+          slug: 'Landing',
           theme: {
-            name: 'Hero',
-            sections: ['HeroUnit']
+            name: 'Landing',
+            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns', 'AvailableRestrictions', 'SocialCopyright']
           }
         },
         {
@@ -19,6 +19,13 @@ export default {
           theme: {
             name: 'Columns',
             sections: ['ThreeColumns', 'TwoColumns']
+          }
+        },
+        {
+          slug: 'Footers',
+          theme: {
+            name: 'Footers',
+            sections: ['AvailableRestrictions', 'SocialCopyright']
           }
         },
         {

@@ -38,6 +38,15 @@
         @change="styleChange"></control-background>
     </div>
 
+    <!-- color fill-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.fillColor">
+      <control-color-fill
+        :fillColor="fillColor"
+        :expand="expanded.fillColor"
+        @open="onExpand"
+        @change="styleChange"></control-color-fill>
+    </div>
+
     <!-- Link -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
       <control-link
@@ -76,6 +85,7 @@ import ControlText from './controls/TheControlText'
 import ControlBackground from './controls/TheControlBackground'
 import ControlSize from './controls/TheControlSize'
 import ControlLink from './controls/TheControlLink'
+import ControlColorFill from './controls/TheControlColorFill'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -92,7 +102,8 @@ export default {
     ControlText,
     ControlBackground,
     ControlSize,
-    ControlLink
+    ControlLink,
+    ControlColorFill
   },
 
   data () {
@@ -102,6 +113,7 @@ export default {
       fontColor: '',
       styles: [],
       bgColor: '',
+      fillColor: '',
       bgImage: '',
       bgRepeat: '',
       bgSize: '',
@@ -114,7 +126,8 @@ export default {
       expandedSize: false,
       expandedFont: false,
       expandedBg: false,
-      expandedLink: false
+      expandedLink: false,
+      expandFillColor: false
     }
   },
 
@@ -161,6 +174,11 @@ export default {
 
     if (styles['font-weight']) {
       this.styles.push({ prop: 'font-weight', value: styles['font-weight'] })
+    }
+
+    /* get fill color */
+    if (styles['fill']) {
+      this.fillColor = styles['fill']
     }
 
     /* get background */
@@ -285,7 +303,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'FillColor']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 
