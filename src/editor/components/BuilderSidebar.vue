@@ -167,7 +167,7 @@ export default {
       'clearSettingObject',
       'toggleSidebar',
       'toggleAddSectionMenu',
-      'setExpandedMenuItem'
+      'setMenuItem'
     ]),
     ...mapActions('BuilderModalContent', {
       setModalContent: 'setContent'
@@ -180,9 +180,9 @@ export default {
 
     toggleMenuItem (name) {
       if (this.expandedMenuItem === name) {
-        this.setExpandedMenuItem('')
+        this.setMenuItem('')
       } else {
-        this.setExpandedMenuItem(name)
+        this.setMenuItem(name)
       }
     },
 

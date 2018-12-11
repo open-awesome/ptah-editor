@@ -147,6 +147,7 @@ export default {
       }
 
       commit('setSection', section)
+      commit('setExpandedMenuItem', 'sections')
 
       dispatch('setSettingObject', {
         type,
