@@ -44,6 +44,24 @@
       </div>
     </template>
 
+    <!-- Header -->
+    <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
+      <BaseTextField
+        v-model="header"
+        label="Header"
+        @input="updateSimpleValue('header', header)"
+      />
+    </div>
+
+    <!-- Images Multiple Upload -->
+    <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
+      <BaseImageUploadMultiple
+        label="Images upload"
+        :data-images="galleryImages"
+        @change="updateGalleryImages"
+      />
+    </div>
+
     <!-- Products Section Controls -->
     <control-section-products v-if="settingObjectOptions.hasProdusct"></control-section-products>
 
@@ -79,7 +97,9 @@ export default {
       videoTitle: '',
       videoUrl: '',
 
-      loop: false
+      loop: false,
+
+      galleryImages: []
     }
   },
 
@@ -99,6 +119,11 @@ export default {
     this.videoTitle = this.settingObjectOptions.videoTitle
     this.videoUrl = this.settingObjectOptions.videoUrl
     this.loop = this.settingObjectOptions.loop
+
+    this.header = this.settingObjectOptions.header || ''
+
+    /** Gallery */
+    this.galleryImages = this.settingObjectOptions.galleryImages || []
   },
 
   watch: {
@@ -139,6 +164,12 @@ export default {
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
         [propName]: value
       }))
+    },
+    updateGalleryImages (galleryImages) {
+      this.updateSettingOptions({
+        ..._.cloneDeep(this.settingObjectOptions),
+        galleryImages
+      })
     }
   }
 }

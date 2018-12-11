@@ -16,3 +16,5 @@ export class ImageNoResize { }
 export class Delimiter { }
 export class Video { }
 export class ProductSection { }
+
+export class GallerySlider { }

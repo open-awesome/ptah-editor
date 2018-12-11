@@ -106,6 +106,16 @@ export default {
     request.append('format', 'json')
 
     return this.uploadFile(request)
+  },
+
+  uploadFileByFile (file) {
+    let request = new FormData()
+
+    request.append('file[]', file)
+    request.append('method', 'storefront.upload')
+    request.append('format', 'json')
+
+    return this.uploadFile(request)
   }
 
 }

@@ -353,23 +353,35 @@ const data = new Map([
     })
   )],
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
-      {
-        hasProdusct: true,
-        box: true,
-        resizable: true,
-        removable: true,
-        background: true,
-        styles: {
-          'background-image': '',
-          'background-position': false,
-          'background-repeat': false,
-          'background-size': false,
-          'background-color': false,
-          'background': false,
-          'width': '',
-          'height': ''
-        }
-      })
+    {
+      hasProdusct: true,
+      box: true,
+      resizable: true,
+      removable: true,
+      background: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false,
+        'width': '',
+        'height': ''
+      }
+    })
+  )],
+  [types.GallerySlider, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      resizable: true,
+      removable: true,
+      background: true,
+      hasMultipleImages: true,
+      hasHeader: true,
+      galleryImages: [],
+      header: 'This is a short header'
+    })
   )]
 ])
 
