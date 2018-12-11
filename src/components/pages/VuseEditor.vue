@@ -15,6 +15,7 @@ import ElementsList from '@components/slots/ElementsList'
 
 // elements
 import Button from '@components/elements/Button'
+import Link from '@components/elements/Link'
 import Title from '@components/elements/Title'
 import Description from '@components/elements/Description'
 import Pic from '@components/elements/Pic'
@@ -50,6 +51,7 @@ Vuse.mix({
     Sandbox,
     ElementsList,
     Button,
+    Link,
     Title,
     Description,
     Pic,
