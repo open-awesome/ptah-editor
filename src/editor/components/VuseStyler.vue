@@ -156,6 +156,10 @@ export default {
     this.el.addEventListener('click', this.showStyler)
     this.el.addEventListener('focus', this.showStyler)
 
+    if (this.type === 'section') {
+      this.el.id = `section_${this.section.id}`
+    }
+
     this.setInitialValue()
 
     // Restoring from a snapshot
@@ -186,7 +190,7 @@ export default {
     ...mapActions('Sidebar', [
       'setSettingSection',
       'setSettingElement',
-      'clearSettingObject'
+      'clearSettingObjectLight'
     ]),
     setInitialValue () {
       if (this.type === 'button') {
@@ -242,7 +246,7 @@ export default {
       this.section.data[path[0]].push(obj)
     },
     showStyler (event) {
-      this.clearSettingObject()
+      this.clearSettingObjectLight()
       event.stopPropagation()
 
       if (this.isVisible) return
@@ -250,7 +254,8 @@ export default {
 
       setTimeout(() => {
         if (this.$props.type === 'section') {
-          this.setSettingSection(this.section)
+          // Do not show section settings on click
+          // this.setSettingSection(this.section)
         } else {
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
@@ -259,6 +264,8 @@ export default {
             section: this.section,
             element: this.el
           })
+
+          this.el.classList.add('styler-active')
         }
       }, 0)
 
@@ -271,6 +278,8 @@ export default {
       if (event && isParentTo(event.target, this.$el)) {
         return
       }
+
+      this.el.classList.remove('styler-active')
 
       this.isVisible = false
 

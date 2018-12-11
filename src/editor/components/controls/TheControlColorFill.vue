@@ -37,7 +37,7 @@ export default {
     },
 
     onClickTitle () {
-      this.$emit('open', ['fillColor', !this.controlOpen])
+      this.$emit('open', ['FillColor', !this.controlOpen])
     }
   }
 }

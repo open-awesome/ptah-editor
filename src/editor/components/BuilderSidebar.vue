@@ -51,7 +51,7 @@
               strokeColor="transparent"
             />
           </span>
-          <span @click="isSectionsExpanded = !isSectionsExpanded">
+          <span>
             Sections
           </span>
       </menu-item>
@@ -62,6 +62,7 @@
         <div ref="sections">
           <MenuSubitem
             v-for="(section, index) in builder.sections"
+            v-scroll-to="`#section_${section.id}`"
             :key="section.id"
             :isSelected="isActiveSection(section.id)"
             :hasDraggableIcon="true"
@@ -131,16 +132,15 @@ export default {
     ...mapState('Sidebar', [
       'isSettingsExpanded',
       'settingObjectOptions',
-      'siteSettingsMenu'
+      'siteSettingsMenu',
+      'isAddSectionExpanded',
+      'expandedMenuItem'
     ])
   },
 
   data () {
     return {
-      isSectionsExpanded: false,
-      isAddSectionExpanded: false,
-      isSettingsOpenedisSettingsOpened: false,
-      expandedMenuItem: ''
+      isSettingsOpenedisSettingsOpened: false
     }
   },
 
@@ -165,7 +165,9 @@ export default {
     ...mapActions('Sidebar', [
       'setSettingSection',
       'clearSettingObject',
-      'toggleSidebar'
+      'toggleSidebar',
+      'toggleAddSectionMenu',
+      'setMenuItem'
     ]),
     ...mapActions('BuilderModalContent', {
       setModalContent: 'setContent'
@@ -178,9 +180,9 @@ export default {
 
     toggleMenuItem (name) {
       if (this.expandedMenuItem === name) {
-        this.expandedMenuItem = ''
+        this.setMenuItem('')
       } else {
-        this.expandedMenuItem = name
+        this.setMenuItem(name)
       }
     },
 
@@ -199,7 +201,6 @@ export default {
 
     toggleSiteSettings (contentID) {
       this.closeSettingsBar()
-      this.closeAddSectionBar()
 
       if (this.modalContentID === contentID) {
         this.closeSiteSettings()
@@ -213,7 +214,7 @@ export default {
     },
 
     closeAddSectionBar () {
-      this.isAddSectionExpanded = false
+      this.toggleAddSectionMenu(false)
     },
 
     updateSectionsOrder (event) {
@@ -226,7 +227,7 @@ export default {
 
     showAddSectionBar () {
       this.closeSiteSettings()
-      this.isAddSectionExpanded = !this.isAddSectionExpanded
+      this.toggleAddSectionMenu()
     }
   }
 }

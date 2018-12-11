@@ -4,6 +4,8 @@ export default {
   state: {
     isExpanded: true,
     isSettingsExpanded: false, // 2nd level menu
+    isAddSectionExpanded: false, // add section menu
+    expandedMenuItem: 'sections', // submenu item
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectOptions: {},
     settingObjectSection: {},
@@ -29,6 +31,15 @@ export default {
     },
     isSettingsExpanded (state, value) {
       state.isSettingsExpanded = value
+      if (value) {
+        state.isAddSectionExpanded = false
+      }
+    },
+    isAddSectionExpanded (state, value) {
+      state.isAddSectionExpanded = value
+      if (value) {
+        state.isSettingsExpanded = false
+      }
     },
     setSettingObjectType (state, value) {
       state.settingObjectType = value
@@ -38,12 +49,23 @@ export default {
     },
     setSection (state, section) {
       state.settingObjectSection = section
+    },
+    setExpandedMenuItem (state, item) {
+      state.expandedMenuItem = item
     }
   },
 
   actions: {
     toggleSidebar ({ state, commit }) {
       commit('isExpanded', !state.isExpanded)
+    },
+
+    toggleAddSectionMenu ({ state, commit }, value) {
+      commit('isAddSectionExpanded', value || !state.isAddSectionExpanded)
+    },
+
+    setMenuItem ({ commit }, value) {
+      commit('setExpandedMenuItem', value)
     },
 
     /**
@@ -63,6 +85,11 @@ export default {
      */
     clearSettingObject ({ commit }) {
       commit('isSettingsExpanded', false)
+      commit('setSettingObjectType', '')
+      commit('setSettingObjectOptions', {})
+    },
+
+    clearSettingObjectLight ({ commit }) {
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
     },
@@ -120,6 +147,7 @@ export default {
       }
 
       commit('setSection', section)
+      commit('setExpandedMenuItem', 'sections')
 
       dispatch('setSettingObject', {
         type,

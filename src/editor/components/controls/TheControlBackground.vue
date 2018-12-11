@@ -79,7 +79,7 @@ export default {
     },
 
     onClickTitle () {
-      this.$emit('open', ['bg', !this.controlOpen])
+      this.$emit('open', ['Bg', !this.controlOpen])
     }
   }
 }

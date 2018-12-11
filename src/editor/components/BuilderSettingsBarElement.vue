@@ -11,7 +11,7 @@
 
     <!-- size -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
-      <control-size :height="elHeight" :width="elWidth" :expand="expanded.size" @open="onExpand" @change="styleChange"></control-size>
+      <control-size :height="elHeight" :width="elWidth" :expand="expandedSize" @open="onExpand" @change="styleChange"></control-size>
     </div>
 
     <!-- font -->
@@ -21,7 +21,7 @@
         :fontFamily="fontFamily"
         :fontColor="fontColor"
         :fontStyles="styles"
-        :expand="expanded.font"
+        :expand="expandedFont"
         @open="onExpand"
         @change="styleChange"></control-text>
     </div>
@@ -33,7 +33,7 @@
         :image="bgImage"
         :repeat="bgRepeat"
         :size="bgSize"
-        :expand="expanded.bg"
+        :expand="expandedBg"
         @open="onExpand"
         @change="styleChange"></control-background>
     </div>
@@ -42,7 +42,7 @@
     <div class="b-elem-settings__control" v-if="settingObjectOptions.fillColor">
       <control-color-fill
         :fillColor="fillColor"
-        :expand="expanded.fillColor"
+        :expand="expandFillColor"
         @open="onExpand"
         @change="styleChange"></control-color-fill>
     </div>
@@ -52,7 +52,7 @@
       <control-link
         :link="elLink"
         :hoverBgColor="bgHover"
-        :expand="expanded.link"
+        :expand="expandedLink"
         @open="onExpand"
         @setOption="setOption"
         @setPseudo="changePseudoStyle"
@@ -123,13 +123,11 @@ export default {
       elLink: '',
       bgHover: '',
       textHover: '',
-      expanded: {
-        size: false,
-        font: false,
-        bg: false,
-        link: false,
-        fillColor: false
-      }
+      expandedSize: false,
+      expandedFont: false,
+      expandedBg: false,
+      expandedLink: false,
+      expandFillColor: false
     }
   },
 
@@ -305,14 +303,16 @@ export default {
     },
 
     onExpand (value) {
-      this.expanded[value[0]] = value[1]
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'FillColor']
+      const prop = `expanded${value[0]}`
+      this[prop] = value[1]
 
       if (value[1]) {
-        for (let key in this.expanded) {
-          if (key !== value[0]) {
-            this.expanded[key] = false
+        accordeon.forEach((item) => {
+          if (item !== value[0]) {
+            this[`expanded${item}`] = false
           }
-        }
+        })
       }
     },
 
