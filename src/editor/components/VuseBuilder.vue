@@ -209,8 +209,8 @@ export default {
   position: relative
   &.is-editable .is-editable
     outline: none
-    &:hover
-      box-shadow: inset 0 0 0.5rem 0.2rem $color-green
+    &:hover, &.styler-active
+      box-shadow: inset 0 0 0.5rem 0.2rem #6BC1FF
   &.fp-scroll section
     height: 100vh !important
   &:before,
