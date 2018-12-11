@@ -61,7 +61,7 @@ export default {
     },
 
     onClickTitle () {
-      this.$emit('open', ['size', !this.controlOpen])
+      this.$emit('open', ['Size', !this.controlOpen])
     }
   }
 }

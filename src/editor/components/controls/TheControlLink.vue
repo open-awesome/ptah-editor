@@ -78,7 +78,7 @@ export default {
     },
 
     onClickTitle () {
-      this.$emit('open', ['link', !this.controlOpen])
+      this.$emit('open', ['Link', !this.controlOpen])
     }
   }
 }

@@ -129,7 +129,7 @@ export default {
     },
 
     onClickTitle () {
-      this.$emit('open', ['font', !this.controlOpen])
+      this.$emit('open', ['Font', !this.controlOpen])
     }
   }
 }
