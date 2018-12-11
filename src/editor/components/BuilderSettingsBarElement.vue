@@ -42,7 +42,7 @@
     <div class="b-elem-settings__control" v-if="settingObjectOptions.fillColor">
       <control-color-fill
         :fillColor="fillColor"
-        :expand="expanded.fillColor"
+        :expand="expandFillColor"
         @open="onExpand"
         @change="styleChange"></control-color-fill>
     </div>

@@ -201,7 +201,6 @@ export default {
 
     toggleSiteSettings (contentID) {
       this.closeSettingsBar()
-      this.closeAddSectionBar()
 
       if (this.modalContentID === contentID) {
         this.closeSiteSettings()
