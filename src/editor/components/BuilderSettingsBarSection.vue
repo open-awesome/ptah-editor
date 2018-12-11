@@ -1,74 +1,78 @@
 <template>
   <div class="b-section-settings">
-    <template v-if="settingObjectOptions.background">
-      <div class="b-section-settings__control">
-        <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
-      </div>
+  <base-scroll-container backgroundBar="#999">
+    <div class="b-section-settings__inner">
+      <template v-if="settingObjectOptions.background">
+        <div class="b-section-settings__control">
+          <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
+        </div>
 
-      <div class="b-section-settings__control">
-        <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
-      </div>
-    </template>
+        <div class="b-section-settings__control">
+          <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
+        </div>
+      </template>
 
-    <!-- Video Section Controls-->
-    <!-- Title -->
-    <template v-if="settingObjectOptions.hasVideo">
-      <div class="b-section-settings__control">
+      <!-- Video Section Controls-->
+      <!-- Title -->
+      <template v-if="settingObjectOptions.hasVideo">
+        <div class="b-section-settings__control">
+          <BaseTextField
+            v-model="videoTitle"
+            label="Video title"
+            @input="updateSimpleValue('videoTitle', videoTitle)"
+          />
+        </div>
+
+        <!-- VideoUrl -->
+        <div class="b-section-settings__control">
+          <BaseUploadInput
+            v-model="videoUrl"
+            label="Video URL"
+            @upload="updateSimpleValue('videoUrl', videoUrl)"
+          />
+        </div>
+
+        <div class="b-section-settings__description">
+          YouTube video url or any mp4 file url is allowed.<br>
+          To play the video please use Preview button.
+        </div>
+
+        <div class="b-section-settings__control">
+          <BaseSwitcher
+            v-model="loop"
+            label="Loop"
+            @change="updateSimpleValue('loop', loop)"
+          />
+        </div>
+      </template>
+
+      <!-- Header -->
+      <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
         <BaseTextField
-          v-model="videoTitle"
-          label="Video title"
-          @input="updateSimpleValue('videoTitle', videoTitle)"
+          v-model="header"
+          label="Header"
+          @input="updateSimpleValue('header', header)"
         />
       </div>
 
-      <!-- VideoUrl -->
-      <div class="b-section-settings__control">
-        <BaseUploadInput
-          v-model="videoUrl"
-          label="Video URL"
-          @upload="updateSimpleValue('videoUrl', videoUrl)"
+      <!-- Images Multiple Upload -->
+      <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
+        <BaseImageUploadMultiple
+          label="Images upload"
+          :data-images="galleryImages"
+          @change="updateGalleryImages"
         />
       </div>
 
-      <div class="b-section-settings__description">
-        YouTube video url or any mp4 file url is allowed.<br>
-        To play the video please use Preview button.
-      </div>
-
-      <div class="b-section-settings__control">
-        <BaseSwitcher
-          v-model="loop"
-          label="Loop"
-          @change="updateSimpleValue('loop', loop)"
-        />
-      </div>
-    </template>
-
-    <!-- Header -->
-    <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
-      <BaseTextField
-        v-model="header"
-        label="Header"
-        @input="updateSimpleValue('header', header)"
-      />
+      <!-- Products Section Controls -->
+      <control-section-products v-if="settingObjectOptions.hasProdusct"></control-section-products>
     </div>
 
-    <!-- Images Multiple Upload -->
-    <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
-      <BaseImageUploadMultiple
-        label="Images upload"
-        :data-images="galleryImages"
-        @change="updateGalleryImages"
-      />
-    </div>
-
-    <!-- Products Section Controls -->
-    <control-section-products v-if="settingObjectOptions.hasProdusct"></control-section-products>
+  </base-scroll-container>
 
     <div class="b-section-settings__buttons">
       <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
     </div>
-
   </div>
 </template>
 
@@ -180,6 +184,10 @@ export default {
     display: flex
     flex-direction: column
     align-items: stretch
+    padding-bottom: 4.5rem
+
+    &__inner
+      padding-right: 2.5rem
     &__buttons
       position: absolute
       bottom: 1rem

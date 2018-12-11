@@ -331,6 +331,8 @@ export default {
 <style lang="sass" scoped>
   .b-elem-settings
     height: 100%
+    width: 100%
+    padding-right: 2.5rem
     display: flex
     flex-direction: column
     &__control
