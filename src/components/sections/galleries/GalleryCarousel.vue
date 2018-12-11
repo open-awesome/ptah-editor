@@ -1,6 +1,5 @@
 <script>
 import * as types from '@editor/types'
-import Draggable from 'vuedraggable'
 import _ from 'lodash'
 
 export default {
@@ -10,9 +9,6 @@ export default {
     mainStyle: types.GallerySlider
   },
 
-  components: {
-    Draggable
-  },
   props: {
     id: {
       type: Number, required: true
@@ -21,11 +17,6 @@ export default {
 
   data () {
     return {
-      player: null,
-      videoUrl: '',
-      youtubeVideoUrl: '',
-      videoType: '',
-
       galleryImages: []
     }
   },
