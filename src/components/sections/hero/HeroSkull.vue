@@ -231,6 +231,18 @@ export default {
     onAddElement (element) {
       element.element.removable = true
       this.$section.data.components.push(element)
+    },
+    onAddElement2 (element) {
+      element.element.removable = true
+      this.$section.data.components2.push(element)
+    },
+    onAddElement3 (element) {
+      element.element.removable = true
+      this.$section.data.components3.push(element)
+    },
+    onAddElement4 (element) {
+      element.element.removable = true
+      this.$section.data.components4.push(element)
     }
   },
   created () {
@@ -279,7 +291,7 @@ export default {
               direction="row"
               :style="$sectionData.container2.styles"
               >
-              <elements-list @addEl="onAddElement"></elements-list>
+              <elements-list @addEl="onAddElement2"></elements-list>
               <component v-for="(component, index) in $sectionData.components2"
                 v-if="$sectionData.components2.length !== 0"
                 :is="component.name"
@@ -301,7 +313,7 @@ export default {
               direction="column"
               :style="$sectionData.container3.styles"
               >
-              <elements-list @addEl="onAddElement"></elements-list>
+              <elements-list @addEl="onAddElement3"></elements-list>
               <component v-for="(component, index) in $sectionData.components3"
                 v-if="$sectionData.components3.length !== 0"
                 :is="component.name"
@@ -323,7 +335,7 @@ export default {
               direction="row"
               :style="$sectionData.container4.styles"
               >
-              <elements-list @addEl="onAddElement"></elements-list>
+              <elements-list @addEl="onAddElement4"></elements-list>
               <component v-for="(component, index) in $sectionData.components4"
                 v-if="$sectionData.components4.length !== 0"
                 :is="component.name"
