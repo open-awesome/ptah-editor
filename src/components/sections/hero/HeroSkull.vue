@@ -255,7 +255,6 @@ export default {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
-    console.log(this.$sectionData)
   }
 }
 </script>

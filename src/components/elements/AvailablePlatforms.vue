@@ -39,8 +39,8 @@ export default {
   },
 
   watch: {
-    platforms (newValue, oldValue) {
-      console.log('watch component el: ', newValue)
+    content (newValue, oldValue) {
+      this.platforms = newValue
     }
   }
 }
