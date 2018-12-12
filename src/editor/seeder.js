@@ -47,6 +47,7 @@ const data = new Map([
   [types.Title, () => (_.merge({}, DEFAULT_OPTIONS, {
     text: 'Title',
     aligned: true,
+    removable: true,
     typography: true,
     styles: {
       'font-family': 'Roboto',

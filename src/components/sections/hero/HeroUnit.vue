@@ -84,7 +84,7 @@ export default {
       {
         name: 'Title',
         element: types.Title,
-        type: 'text',
+        type: 'title',
         class: 'b-title'
       },
       {

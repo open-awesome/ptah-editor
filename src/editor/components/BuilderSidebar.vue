@@ -308,10 +308,10 @@ $top-panel-height: 7.2rem
 // Animations down here
 .slide-fade
   &-enter-active
-    transition: all .2s ease
+    transition: all .3s ease
 
   &-leave-active
-    transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+    transition: all .4s cubic-bezier(1.0, 0.5, 0.8, 1.0)
 
   &-enter,
   &-leave-to

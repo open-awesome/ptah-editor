@@ -1,5 +1,10 @@
 <template>
   <div class="b-section-settings">
+    <div class="b-section-settings__control">
+      <base-label>Full screen height</base-label>
+      <BaseSwitcher v-model="fullScreen" @change="setHeight" />
+    </div>
+
     <template v-if="settingObjectOptions.background">
       <div class="b-section-settings__control">
         <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
@@ -8,6 +13,19 @@
       <div class="b-section-settings__control">
         <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
       </div>
+
+      <template v-if="sectionBgUrl.length">
+        <div class="b-section-settings__control">
+          <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+        </div>
+        <div class="b-section-settings__control">
+          <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
+        </div>
+        <div class="b-section-settings__control">
+          <base-label>Fixed while scrolling</base-label>
+          <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
+        </div>
+      </template>
     </template>
 
     <!-- Video Section Controls-->
@@ -73,8 +91,21 @@ export default {
 
   data () {
     return {
+      fullScreen: false,
+
       sectionBgColor: '',
       sectionBgUrl: '',
+      bgRepeat: '',
+      bgSize: '',
+      bgAttachment: '',
+      list: [
+        { text: 'No-repeat', value: 'no-repeat' },
+        { text: 'Repeat', value: 'repeat' }
+      ],
+      sizeList: [
+        { text: 'Tile', value: 'cover' },
+        { text: 'Fill', value: 'contain' }
+      ],
 
       videoTitle: '',
       videoUrl: '',
@@ -87,13 +118,26 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection'
-    ])
+    ]),
+    bgAttachmentCheckbox: {
+      set (value) {
+        this.bgAttachment = value ? 'fixed' : 'scroll'
+      },
+      get () {
+        return this.bgAttachment === 'fixed'
+      }
+    }
   },
 
   created () {
-    this.sectionBgColor = this.settingObjectOptions.styles['background-color']
-    let image = this.settingObjectOptions.styles['background-image']
-    this.sectionBgUrl = image.length > 0 ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
+    let styles = this.settingObjectOptions.styles
+
+    this.sectionBgColor = styles['background-color']
+    let image = styles['background-image']
+    this.sectionBgUrl = image.length > 0 && image !== 'none' ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
+    this.bgRepeat = styles['background-repeat'] === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
+    this.bgSize = styles['background-size'] === 'cover' ? this.sizeList[0] : this.sizeList[1]
+    this.bgAttachment = styles['background-attachment'] === 'fixed'
 
     /* Video */
     this.videoTitle = this.settingObjectOptions.videoTitle
@@ -130,15 +174,47 @@ export default {
       }))
     },
 
+    changeRepeat () {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        styles: {
+          'background-repeat': this.bgRepeat
+        }
+      }))
+    },
+
+    changeSize () {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        styles: {
+          'background-size': this.bgSize
+        }
+      }))
+    },
+
+    changeAttachment () {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        styles: {
+          'background-attachment': this.bgAttachment ? 'fixed' : 'scroll'
+        }
+      }))
+    },
+
     deleteSection () {
       this.builder.remove(this.settingObjectSection)
       this.clearSettingObject()
     },
 
+    setHeight () {
+      if (this.fullScreen) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: ['full-height'] }))
+      } else {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: [] }))
+      }
+    },
+
+    // TODO: не работает!
     updateSimpleValue (propName, value) {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        [propName]: value
-      }))
+      let styles = { [propName]: value }
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
     }
   }
 }
