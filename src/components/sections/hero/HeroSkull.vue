@@ -208,8 +208,8 @@ export default {
   components: {
     VuseIcon
   },
-  cover: '/img/covers/footer-social-restrictions.jpg',
-  group: 'Footers',
+  cover: '/img/covers/hero-skull.jpg',
+  group: 'Hero',
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
