@@ -7,6 +7,7 @@
       <div class="b-elements__title">Add Item</div>
       <ul>
         <li><a href="#" @click.prevent="addButton" class="b-elements__button">Button</a></li>
+        <li><a href="#" @click.prevent="addLink" class="b-elements__button">Link</a></li>
         <li><a href="#" @click.prevent="addTitle" class="b-elements__button">Title</a></li>
         <li><a href="#" @click.prevent="addText" class="b-elements__button">Text</a></li>
         <li><a href="#" @click.prevent="addImage" class="b-elements__button">Image</a></li>
@@ -30,6 +31,11 @@ export default {
       {
         name: 'Button',
         element: types.Button,
+        type: 'button'
+      },
+      {
+        name: 'Link',
+        element: types.Link,
         type: 'button'
       },
       {
@@ -67,24 +73,28 @@ export default {
       const el = _.merge({}, Seeder.seed(this.elements[0]))
       this.$emit('addEl', el)
     },
-    addTitle () {
+    addLink () {
       const el = _.merge({}, Seeder.seed(this.elements[1]))
       this.$emit('addEl', el)
     },
+    addTitle () {
+      const el = _.merge({}, Seeder.seed(this.elements[2]))
+      this.$emit('addEl', el)
+    },
     addText () {
-      const el = _.merge({ text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }, Seeder.seed(this.elements[2]))
+      const el = _.merge({ text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }, Seeder.seed(this.elements[3]))
       this.$emit('addEl', el)
     },
     addImage () {
-      const el = _.merge({}, Seeder.seed(this.elements[3]))
-      this.$emit('addEl', el)
-    },
-    addLogo () {
       const el = _.merge({}, Seeder.seed(this.elements[4]))
       this.$emit('addEl', el)
     },
-    addDelimiter () {
+    addLogo () {
       const el = _.merge({}, Seeder.seed(this.elements[5]))
+      this.$emit('addEl', el)
+    },
+    addDelimiter () {
+      const el = _.merge({}, Seeder.seed(this.elements[6]))
       this.$emit('addEl', el)
     },
     openList () {

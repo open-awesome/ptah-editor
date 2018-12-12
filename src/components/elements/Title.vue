@@ -17,8 +17,8 @@ export default {
   text-align: center
   display: flex
   align-items: center
-  min-height: 10rem
   font-size: 2.5rem
+  margin: 1.6rem
   display: block
   &::selection, & ::selection
     color: #ff0

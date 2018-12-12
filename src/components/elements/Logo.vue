@@ -11,13 +11,8 @@ export default {
 <style lang="sass" scoped>
 .b-logo
   display: inline-block
-  margin: 1rem auto
+  margin: 1.6rem
   text-align: center
   width: 20rem
   height: 20rem
-  .is-mobile &
-    margin: 1rem auto
-  @media only screen and (max-width: 540px)
-    &
-      margin: 1rem auto
 </style>
