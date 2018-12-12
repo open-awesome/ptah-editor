@@ -102,6 +102,7 @@ export default {
       commit('setSettingObjectOptions', options)
       const path = state.settingObjectType === 'section' ? '$sectionData.mainStyle' : state.settingObjectOptions.name
       state.settingObjectSection.set(path, options)
+      console.log(path)
     },
 
     /* Update section data prop */

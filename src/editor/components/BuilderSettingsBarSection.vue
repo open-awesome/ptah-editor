@@ -82,7 +82,11 @@
       </div>
 
       <!-- Products Section Controls -->
-      <control-section-products v-if="settingObjectOptions.hasProdusct"></control-section-products>
+      <control-section-products
+        v-if="settingObjectOptions.hasProdusct"
+        >
+      </control-section-products>
+
     </div>
 
   </base-scroll-container>
@@ -100,7 +104,9 @@ import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 
 export default {
-  components: { ControlSectionProducts },
+  components: {
+    ControlSectionProducts
+  },
   name: 'BuilderSettingsBarSection',
 
   props: {

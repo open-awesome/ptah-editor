@@ -31,7 +31,6 @@ import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
 import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
-import Available from '@components/sections/elements/Available'
 import Footer from '@components/sections/elements/Footer'
 import Restrictions from '@components/sections/elements/Restrictions'
 import Slogan from '@components/sections/elements/Slogan'
@@ -43,6 +42,9 @@ import Video from '@components/sections/video/Video'
 import AvailableRestrictions from '@components/sections/footers/FooterAvailableRestrictions'
 import SocialCopyright from '@components/sections/footers/FooterSocialCopyright'
 import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
+
+// new elements
+import AvailablePlatforms from '@components/elements/AvailablePlatforms'
 
 import store from '@store'
 
@@ -57,7 +59,8 @@ Vuse.mix({
     Description,
     Pic,
     Logo,
-    Delimiter
+    Delimiter,
+    AvailablePlatforms
   }
 })
 
@@ -69,7 +72,6 @@ Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
 Vuse.component('Products', Products)
 Vuse.component('ProductsExtend', ProductsExtend)
-Vuse.component('Available', Available)
 Vuse.component('Footer', Footer)
 Vuse.component('Restrictions', Restrictions)
 Vuse.component('Slogan', Slogan)

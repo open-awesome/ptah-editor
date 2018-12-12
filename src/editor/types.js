@@ -18,3 +18,4 @@ export class Video { }
 export class ProductSection { }
 
 export class GallerySlider { }
+export class AvailablePlatforms { }

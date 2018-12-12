@@ -59,6 +59,15 @@
         @setClass="selectAnimation"></control-link>
     </div>
 
+    <!-- Available Platforms Control-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
+      <control-available-platforms
+        :content="availablePlatforms"
+        @setOption="setOption"
+        >
+      </control-available-platforms>
+    </div>
+
     <!-- sort -->
     <div class="b-elem-settings__control temp-sort-buttons" v-if="isArrayEl">
       <base-button color="light-gray" @click="sort('up')" size="middle" v-if="!isFirstInArray">Up</base-button>
@@ -73,6 +82,7 @@
         @click="deleteElement"
       >Delete</base-button>
     </div>
+
   </div>
 </template>
 
@@ -86,6 +96,8 @@ import ControlBackground from './controls/TheControlBackground'
 import ControlSize from './controls/TheControlSize'
 import ControlLink from './controls/TheControlLink'
 import ControlColorFill from './controls/TheControlColorFill'
+// control for new elements
+import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.vue'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -103,7 +115,8 @@ export default {
     ControlBackground,
     ControlSize,
     ControlLink,
-    ControlColorFill
+    ControlColorFill,
+    ControlAvailablePlatforms
   },
 
   data () {
@@ -127,7 +140,8 @@ export default {
       expandedFont: false,
       expandedBg: false,
       expandedLink: false,
-      expandFillColor: false
+      expandFillColor: false,
+      availablePlatforms: []
     }
   },
 
@@ -201,6 +215,9 @@ export default {
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
     this.textHover = this.settingObjectOptions.pseudo['color'] || ''
+
+    /* Available platforms */
+    this.availablePlatforms = this.settingObjectOptions.availablePlatforms || []
   },
 
   methods: {
@@ -324,6 +341,10 @@ export default {
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
     }
+  },
+
+  mounted () {
+    console.log('this.settingObjectOptions: ', this.settingObjectOptions)
   }
 }
 </script>

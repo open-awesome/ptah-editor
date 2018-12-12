@@ -119,7 +119,6 @@ const data = new Map([
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
-    removable: true,
     alt: 'Default logo',
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     background: true,
@@ -383,6 +382,45 @@ const data = new Map([
       hasHeader: true,
       galleryImages: [],
       header: 'This is a short header'
+    })
+  )],
+  [types.AvailablePlatforms, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      removable: true,
+      background: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false,
+        'colorFill': '#fff'
+      },
+      hasPlatforms: true,
+      availablePlatforms: {
+        'windows': {
+          name: 'Windows',
+          visible: true
+        },
+        'apple': {
+          name: 'Apple',
+          visible: true
+        },
+        'linuxfull': {
+          name: 'Linux',
+          visible: true
+        },
+        'steam': {
+          name: 'Steam',
+          visible: true
+        },
+        'gog': {
+          name: 'GOG Galaxy',
+          visible: true
+        }
+      }
     })
   )]
 ])
