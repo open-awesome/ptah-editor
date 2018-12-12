@@ -159,6 +159,9 @@ export default {
         }
       })
     }
+
+    // hack for update dropdown component
+    window.dispatchEvent(new Event('resize'))
   },
 
   methods: {
