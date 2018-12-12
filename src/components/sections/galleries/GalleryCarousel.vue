@@ -37,9 +37,9 @@ export default {
       if (items.length <= 1) {
         this.galleryImages = this.$sectionData.mainStyle.galleryImages
       } else {
-        const lastItem = items.splice(_.size(items) - 1, 1)
+        const lastItemArray = items.splice(_.size(items) - 1, 1)
         this.galleryImages = [
-          lastItem,
+          ...lastItemArray,
           ...items
         ]
       }
