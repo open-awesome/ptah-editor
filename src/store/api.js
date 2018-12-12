@@ -15,6 +15,13 @@ export default {
           }
         },
         {
+          slug: 'Skull',
+          theme: {
+            name: 'Skull',
+            sections: ['HeroSkull']
+          }
+        },
+        {
           slug: 'Columns',
           theme: {
             name: 'Columns',
@@ -102,6 +109,16 @@ export default {
     let request = new FormData()
 
     request.append('file[]', file[0])
+    request.append('method', 'storefront.upload')
+    request.append('format', 'json')
+
+    return this.uploadFile(request)
+  },
+
+  uploadFileByFile (file) {
+    let request = new FormData()
+
+    request.append('file[]', file)
     request.append('method', 'storefront.upload')
     request.append('format', 'json')
 

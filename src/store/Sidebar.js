@@ -1,5 +1,3 @@
-import * as _ from 'lodash-es'
-
 export default {
   state: {
     isExpanded: true,
@@ -119,7 +117,7 @@ export default {
      */
     setSettingSection ({ dispatch, commit }, section) {
       let options = {
-        ..._.find(section.stylers, { name: '$sectionData.mainStyle' }).options,
+        ...section.data.mainStyle,
         sectionId: section.id,
         sectionName: section.name
       }

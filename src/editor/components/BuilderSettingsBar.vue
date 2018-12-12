@@ -66,7 +66,7 @@ export default {
   width: 24rem
   height: 100%
   background: #F5F5F5
-  padding: 2.8rem 3.2rem
+  padding: 2.8rem 0.5rem 2.8rem 3.2rem
   display: flex
   flex-direction: column
   height: 100%
@@ -95,4 +95,5 @@ export default {
 
   &__contents
     flex-grow: 2
+    display: flex
 </style>

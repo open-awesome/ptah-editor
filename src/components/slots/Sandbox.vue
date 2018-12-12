@@ -77,7 +77,7 @@ export default {
 
 .b-slot
   display: flex
-  flex-wrap: wrap
+  // flex-wrap: wrap
   justify-content: center
   align-items: center
   position: relative

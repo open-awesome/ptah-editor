@@ -261,7 +261,7 @@ export default {
             :style="$sectionData.container.styles"
             >
             <elements-list @addEl="onAddElement"></elements-list>
-            <component class="b-footer-social-restrions-component" v-for="(component, index) in $sectionData.components"
+            <component v-for="(component, index) in $sectionData.components"
               v-if="$sectionData.components.length !== 0"
               :is="component.name"
               :key="index"
@@ -364,8 +364,6 @@ $h: 100vh
   justify-content: flex-start
   flex-direction: column
   transition: background 200ms
-  &-component
-    margin: 1.2rem
   &__socials
     border-top: 0.2rem solid #0E1330
     border-bottom: 0.2rem solid #0E1330

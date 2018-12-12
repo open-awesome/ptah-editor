@@ -20,7 +20,7 @@ export default {
   line-height: 1.4
   display: block
   max-width: 100rem
-  margin: 0 auto
+  margin: 1.6rem
   &::selection, & ::selection
     color: #ff0
     background: #000

@@ -38,6 +38,7 @@ export default {
   width: 1000px
   padding: 40px
   display: flex
+  flex-wrap: wrap
   font-family: Helvetica Neue, Helvetica, Arial
   &__item
     width: 200px
