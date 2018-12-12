@@ -59,6 +59,7 @@ export default {
       this.builder.add(section, this.builder.sections.length + 1)
       this.selectedSection = null
       this.closeAddSectionBar()
+      this.$emit('add')
     },
     getSections () {
       let sections = []

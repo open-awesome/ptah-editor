@@ -119,6 +119,7 @@ const data = new Map([
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
+    removable: true,
     alt: 'Default logo',
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     background: true,
