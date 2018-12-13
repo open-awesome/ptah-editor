@@ -156,7 +156,7 @@ export default {
                    :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                    v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
         >
-        { $sectionData.components[index].element.text }
+          <span v-html="$sectionData.components[index].element.text"></span>
         </component>
       </draggable>
     </sandbox>
