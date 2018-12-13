@@ -167,19 +167,37 @@ export function gtagSetup(tag) {
  * @param _arr
  * @param _param {Array} - [index, newIndex]
  */
-export function correctArray(_arr, _param) {
+export function correctArray (_arr, _param) {
   _arr[_param[1]] = _arr.splice(_param[0], 1, _arr[_param[1]])[0]
 }
 
 /**
  * Retrives youtubeId from youtube video url
  * Example: https://www.youtube.com/watch?v=Xv1JzYDKoc8 -> Xv1JzYDKoc8
- * 
- * @param {String} url 
+ *
+ * @param {String} url
  * @return {String}
  */
-export function getYoutubeVideoIdFromUrl(url) {
+export function getYoutubeVideoIdFromUrl (url) {
   const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
   const match = url.match(regExp)
   return (match && match[7].length === 11) ? match[7] : false
+}
+
+export function placeCaretAtEnd (el) {
+  el.focus();
+  if (typeof window.getSelection != "undefined"
+    && typeof document.createRange != "undefined") {
+    var range = document.createRange();
+    range.selectNodeContents(el);
+    range.collapse(false);
+    var sel = window.getSelection();
+    sel.removeAllRanges();
+    sel.addRange(range);
+  } else if (typeof document.body.createTextRange != "undefined") {
+    var textRange = document.body.createTextRange();
+    textRange.moveToElementText(el);
+    textRange.collapse(false);
+    textRange.select();
+  }
 }

@@ -74,7 +74,6 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-
 .b-slot
   display: flex
   // flex-wrap: wrap
@@ -114,4 +113,7 @@ export default {
         cursor: pointer
         &:hover
           background: rgba(67, 111, 238, 0.15)
+  /deep/
+    .b-draggable-slot
+      display: flex
 </style>
