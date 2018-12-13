@@ -5,9 +5,10 @@
       :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"
       >
       <a class="b-available-platforms__item-button flex flex_center"
+        :style="{ fill: colorFill['color'] }"
         :title="platforms[key].name"
         >
-        <VuseIcon :name="key"></VuseIcon>
+        <VuseIcon title="asd" :name="key"></VuseIcon>
       </a>
     </div>
   </div>
@@ -32,6 +33,9 @@ export default {
   computed: {
     platforms () {
       return this.$section.get(`$sectionData.${this.path}.availablePlatforms`)
+    },
+    colorFill () {
+      return this.$section.get(`$sectionData.${this.path}.colorFill`)
     }
   }
 }
@@ -42,7 +46,7 @@ export default {
 .b-available-platforms
   width: 100%
   max-width: 100rem
-  margin: 0 auto
+  margin: 1.6rem
   min-height: 5rem
   display: flex
   justify-content: center
@@ -64,7 +68,7 @@ export default {
       height: 5rem
       padding: 1rem
       border: none
-      postition: relative
+      position: relative
       &:hover
         filter: brightness(120%)
       &:active
@@ -72,6 +76,6 @@ export default {
       .vuse-icon
          width: 100%
          height: auto
-         fill: #fff
+         fill: inherit
 
 </style>

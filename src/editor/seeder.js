@@ -386,7 +386,6 @@ const data = new Map([
   )],
   [types.AvailablePlatforms, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       removable: true,
       background: true,
       styles: {
@@ -395,8 +394,7 @@ const data = new Map([
         'background-repeat': false,
         'background-size': false,
         'background-color': false,
-        'background': false,
-        'colorFill': '#fff'
+        'background': false
       },
       hasPlatforms: true,
       availablePlatforms: {
@@ -420,6 +418,9 @@ const data = new Map([
           name: 'GOG Galaxy',
           visible: true
         }
+      },
+      colorFill: {
+        color:  '#fff'
       }
     })
   )]

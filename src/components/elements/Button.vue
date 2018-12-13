@@ -19,7 +19,7 @@ export default {
   width: 20rem
   min-width: 10rem
   min-height: 5rem
-  margin: 2rem
+  margin: 1.6rem
   color: #000
   background-color: #a7a1a1
   display: flex

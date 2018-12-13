@@ -142,17 +142,19 @@ export default {
       :style="$sectionData.container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
-      <component class="b-hero-component" v-for="(component, index) in $sectionData.components"
-        v-if="$sectionData.components.length !== 0"
-        :is="component.name"
-        :key="index"
-        :href="$sectionData.components[index].element.href"
-        v-html="$sectionData.components[index].element.text"
-        :style="$sectionData.components[index].element.styles"
-        :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-        v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
-        >
-      </component>
+      <template v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0">
+        <component
+          :is="component.name"
+          :key="index"
+          :href="$sectionData.components[index].element.href"
+          :style="$sectionData.components[index].element.styles"
+          :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+          :path="`components[${index}].element`"
+          v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+          >
+          { $sectionData.components[index].element.text }
+        </component>
+      </template>
     </sandbox>
   </section>
 </template>

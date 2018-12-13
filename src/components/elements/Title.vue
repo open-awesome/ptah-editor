@@ -1,5 +1,5 @@
 <template>
-  <div class="b-title">
+  <div class="b-title is-editable">
     <slot></slot>
   </div>
 </template>

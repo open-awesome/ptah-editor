@@ -1,5 +1,5 @@
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState } from 'vuex'
 import VuseIcon from '@editor/components/VuseIcon'
 export default {
   name: 'ControlAvailablePlatforms',
@@ -8,57 +8,118 @@ export default {
     VuseIcon
   },
 
+  props: {
+    expand: {
+      type: Boolean,
+      required: true
+    }
+  },
+
+  data () {
+    return {
+      controlOpen: false,
+      color: ''
+    }
+  },
+
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions',
-      'settingObjectSection'
+      'settingObjectOptions'
     ]),
 
     platforms () {
       return this.settingObjectOptions.availablePlatforms
+    },
+
+    colorFill () {
+      return this.settingObjectOptions.colorFill
     }
   },
+
+  watch: {
+    expand () {
+      this.controlOpen = this.expand
+    }
+  },
+
   methods: {
-    ...mapActions('Sidebar', [
-      'updateSectionData',
-      'updateSettingOptions'
-    ]),
     visible (key) {
       this.platforms[key].visible = !this.platforms[key].visible
+    },
+    changeColor () {
+      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
+      this.colorFill['color'] = color
+    },
+    onClickTitle () {
+      this.$emit('open', ['AvailablePlatforms', !this.controlOpen])
     }
+  },
+
+  mounted () {
+    this.color = this.colorFill.color
   }
 }
 </script>
 
 <template>
-  <div class="b-available-platforms">
-    <div class="b-available-platforms__item is-editable"
-      v-for="(value, key) in platforms" :key="key"
-      :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"
-      >
-
-      <button class="b-socials__item-eye"
-              @click="visible(key)"
-              title="Show / Hide"
-        >
-        <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
-      </button>
-
-      <a class="b-available-platforms__item-button"
-        :title="platforms[key].name"
-        >
-        <VuseIcon :name="key"></VuseIcon>
-      </a>
-
+  <div class="b-text-controls">
+    <div class="b-text-controls__header" @click="onClickTitle">
+      <span>Icons settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
+    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
+      <div class="b-text-controls__control">
+        <base-color-picker label="Color icons" v-model="color" @change="changeColor"></base-color-picker>
+      </div>
+      <div class="b-text-controls__control">
+        <div>Visible platforms</div>
+        <div class="b-available-platforms">
+          <div class="b-available-platforms__item is-editable"
+            v-for="(value, key) in platforms" :key="key"
+            :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"
+            @click="visible(key)"
+            >
+
+            <span class="b-socials__item-eye"
+              title="Show / Hide"
+              >
+              <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
+            </span>
+
+            <a class="b-available-platforms__item-button"
+              :title="platforms[key].name"
+              >
+              {{ platforms[key].name }}
+            </a>
+
+          </div>
+        </div><!--/.b-available-platforms-->
+      </div>
+    </base-dropdown>
   </div>
 </template>
 
 <style lang="sass" scoped>
+.b-text-controls
+  &__header
+    font-size: 1.6rem
+    height: 3.2rem
+    color: #272727
+    display: flex
+    align-items: center
+    cursor: pointer
+    i
+      margin-left: 5px
+      margin-bottom: -5px
+      transform: rotate(180deg)
+      &.dropped
+        transform: rotate(0deg)
+  &__control
+    margin-top: 2.2rem
+
 .b-available-platforms
   width: 100%
   max-width: 100rem
-  margin: 0 auto
+  margin: 1rem auto
   display: inline-block
   min-height: 5rem
   .is-tablet &,
@@ -79,28 +140,30 @@ export default {
       margin: 2rem 0
   &__item
     position: relative
-    margin: 1rem
+    margin: 0.5rem 0
     display: block
+    color: #4D7DD8
+    fill: #4D7DD8
+    cursor: pointer
     &_opacity
       opacity: 0.2
+      color: #000
+      fill: #000
     &-button
-      width: 5rem
-      height: 5rem
-      padding: 1rem
+      padding: 0 1rem
       border: none
       position: relative
       display: inline-block
+      user-select: none
       &:hover
         filter: brightness(120%)
       &:active
         filter: brightness(50%)
       .vuse-icon
          width: 100%
-         fill: #000
     &-eye
-      position: absolute
-      top: -2rem
-      left: -2rem
-      z-index: 1
-
+      border: none
+      background: transparent
+      padding: 0 0.5rem
+      display: inline-block
 </style>

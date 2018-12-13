@@ -284,7 +284,7 @@ export default {
           :path="`components[${index}].element`"
           v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
           >
-          {{$sectionData.components[index].element.text}}
+            <span v-html="$sectionData.components[index].element.text"></span>
         </component>
       </template>
     </sandbox>
@@ -305,11 +305,12 @@ export default {
                 :is="component.name"
                 :key="index"
                 :href="$sectionData.components2[index].element.href"
-                v-html="$sectionData.components2[index].element.text"
                 :style="$sectionData.components2[index].element.styles"
                 :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                :path="`components2[${index}].element`"
                 v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
                 >
+                {{$sectionData.components2[index].element.text}}
               </component>
             </sandbox>
           </div>
@@ -327,11 +328,12 @@ export default {
                 :is="component.name"
                 :key="index"
                 :href="$sectionData.components3[index].element.href"
-                v-html="$sectionData.components3[index].element.text"
                 :style="$sectionData.components3[index].element.styles"
                 :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
+                :path="`components3[${index}].element`"
                 v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
                 >
+                {{$sectionData.components3[index].element.text}}
               </component>
             </sandbox>
           </div>
@@ -349,11 +351,12 @@ export default {
                 :is="component.name"
                 :key="index"
                 :href="$sectionData.components4[index].element.href"
-                v-html="$sectionData.components4[index].element.text"
                 :style="$sectionData.components4[index].element.styles"
                 :class="[$sectionData.components4[index].element.classes, $sectionData.components4[index].class]"
+                :path="`components4[${index}].element`"
                 v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type }"
                 >
+                {{$sectionData.components4[index].element.text}}
               </component>
             </sandbox>
           </div>
@@ -364,21 +367,17 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-$h: 100vh
 .b-hero-skull
   position: relative
   width: 100%
-  height: #{$h}
   min-height: 56rem
   margin: 0
-  padding: 8.2rem 0 1rem
   display: flex
   text-align: center
-  justify-content: flex-start
+  justify-content: center
+  align-items: center
   flex-direction: column
   transition: background 200ms
-  &.is-editable
-    height: calc(#{$h} - 7.2rem)
   .is-mobile &,
   .is-tablet &
     position: relative
@@ -390,10 +389,10 @@ $h: 100vh
       height: auto
       padding: 2rem 0 1rem
 .b-logo
-  margin: 3rem 0 8rem
+  margin: 0
   .is-mobile &,
   .is-tablet &
-    margin: 3rem 0 3rem
+    margin: 0
   @media only screen and (max-width: 768px)
     &
       margin: 3rem 0 3rem
