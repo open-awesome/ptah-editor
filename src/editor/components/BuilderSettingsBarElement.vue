@@ -59,12 +59,6 @@
       </control-available-platforms>
     </div>
 
-    <!-- sort -->
-    <div class="b-elem-settings__control temp-sort-buttons" v-if="isArrayEl">
-      <base-button color="light-gray" @click="sort('up')" size="middle" v-if="!isFirstInArray">Up</base-button>
-      <base-button color="light-gray" @click="sort('down')" size="middle" v-if="!isLastInArray">Down</base-button>
-    </div>
-
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
       <base-button
