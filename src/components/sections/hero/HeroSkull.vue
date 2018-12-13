@@ -276,24 +276,13 @@ export default {
       <elements-list @addEl="onAddElement"></elements-list>
       <template v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0">
         <component
-          v-if="component.name !== 'AvailablePlatforms'"
           :is="component.name"
           :key="index"
           :href="$sectionData.components[index].element.href"
           v-html="$sectionData.components[index].element.text"
           :style="$sectionData.components[index].element.styles"
           :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-          v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
-          >
-        </component>
-        <component
-          v-if="component.name === 'AvailablePlatforms'"
-          :is="component.name"
-          :key="index"
-          :content="$sectionData.components[index].element.availablePlatforms"
-          :href="$sectionData.components[index].element.href"
-          :style="$sectionData.components[index].element.styles"
-          :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+          :path="`components[${index}].element`"
           v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
           >
         </component>

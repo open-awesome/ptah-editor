@@ -1,5 +1,6 @@
 <template>
   <div class="b-available-platforms">
+    {{platforms}}
     <div class="b-available-platforms__item"
       v-for="(value, key) in platforms" :key="key"
       :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"
@@ -18,29 +19,20 @@ import VuseIcon from '@editor/components/VuseIcon'
 
 export default {
   name: 'AvailablePlatforms',
+  inject: ['$section'],
   components: {
     VuseIcon
   },
 
-  data () {
-    return {
-      platforms: []
-    }
-  },
-
   props: {
-    content: {
-      type: Object
+    path: {
+      type: String
     }
   },
 
-  created () {
-    this.platforms = this.content
-  },
-
-  watch: {
-    content (newValue, oldValue) {
-      this.platforms = newValue
+  computed: {
+    platforms () {
+      return this.$section.get(`$sectionData.${this.path}.availablePlatforms`)
     }
   }
 }
