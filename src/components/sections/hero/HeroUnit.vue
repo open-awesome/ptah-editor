@@ -145,7 +145,7 @@ export default {
       direction="column"
       >
       <elements-list @addEl="onAddElement"></elements-list>
-      <draggable v-model="$sectionData.components" :style="$sectionData.container.styles">
+      <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
         <component class="b-hero-component" v-for="(component, index) in $sectionData.components"
                    v-if="$sectionData.components.length !== 0"
                    :is="component.name"
@@ -250,4 +250,8 @@ $h: 100vh
   min-height: 20rem
   justify-content: center
   align-items: center
+
+/deep/
+  .b-draggable-slot
+    align-items: center
 </style>
