@@ -421,6 +421,9 @@ const data = new Map([
       },
       colorFill: {
         color:  '#fff'
+      },
+      sizeIcons: {
+        width: 24
       }
     })
   )]

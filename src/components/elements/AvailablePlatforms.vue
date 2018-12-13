@@ -5,10 +5,10 @@
       :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"
       >
       <a class="b-available-platforms__item-button flex flex_center"
-        :style="{ fill: colorFill['color'] }"
+        :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px'  }"
         :title="platforms[key].name"
         >
-        <VuseIcon title="asd" :name="key"></VuseIcon>
+        <VuseIcon :name="key"></VuseIcon>
       </a>
     </div>
   </div>
@@ -36,6 +36,9 @@ export default {
     },
     colorFill () {
       return this.$section.get(`$sectionData.${this.path}.colorFill`)
+    },
+    sizeIcons () {
+      return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
     }
   }
 }
@@ -64,9 +67,6 @@ export default {
     &_opacity
       display: none
     &-button
-      width: 5rem
-      height: 5rem
-      padding: 1rem
       border: none
       position: relative
       &:hover

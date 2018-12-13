@@ -18,7 +18,8 @@ export default {
   data () {
     return {
       controlOpen: false,
-      color: ''
+      color: '',
+      elWidth: 0
     }
   },
 
@@ -33,6 +34,10 @@ export default {
 
     colorFill () {
       return this.settingObjectOptions.colorFill
+    },
+
+    sizeIcons () {
+      return this.settingObjectOptions.sizeIcons
     }
   },
 
@@ -50,6 +55,11 @@ export default {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.colorFill['color'] = color
     },
+    changeWidth () {
+      if (this.elWidth > 0) {
+        this.sizeIcons['width'] = this.elWidth
+      }
+    },
     onClickTitle () {
       this.$emit('open', ['AvailablePlatforms', !this.controlOpen])
     }
@@ -57,6 +67,7 @@ export default {
 
   mounted () {
     this.color = this.colorFill.color
+    this.elWidth = this.sizeIcons.width
   }
 }
 </script>
@@ -67,6 +78,11 @@ export default {
       <span>Icons settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
+      <div class="b-size-controls__control">
+        <base-range-slider v-model="elWidth" label="Width" step="8" min="16" max="128" @change="changeWidth">
+          {{elWidth}} px
+        </base-range-slider>
+      </div>
       <div class="b-text-controls__control">
         <base-color-picker label="Color icons" v-model="color" @change="changeColor"></base-color-picker>
       </div>

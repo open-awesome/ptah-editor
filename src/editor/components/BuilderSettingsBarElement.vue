@@ -125,6 +125,7 @@ export default {
       index: null,
       expandedAvailablePlatforms: false,
       colorFill: {},
+      sizeIcons: {},
       availablePlatforms: []
     }
   },
@@ -185,6 +186,7 @@ export default {
     /* Available platforms */
     this.availablePlatforms = this.settingObjectOptions.availablePlatforms || []
     this.colorFill = this.settingObjectOptions.colorFill || {}
+    this.sizeIcons = this.settingObjectOptions.sizeIcons || {}
   },
 
   methods: {
