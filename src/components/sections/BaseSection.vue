@@ -7,18 +7,7 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    components: [
-      {
-        name: 'Button',
-        element: types.Button,
-        type: 'button'
-      },
-      {
-        name: 'Title',
-        element: types.Text,
-        type: 'text'
-      }
-    ]
+    components: []
   },
   props: {
     id: {
@@ -52,11 +41,12 @@ export default {
         :is="component.name"
         :key="index"
         :href="$sectionData.components[index].element.href"
-        v-html="$sectionData.components[index].element.text"
+        :path="`components[${index}].element`"
         :style="$sectionData.components[index].element.styles"
         :class="$sectionData.components[index].element.classes"
         v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
         >
+        <span v-html="$sectionData.components[index].element.text"></span>
       </component>
     </sandbox>
   </section>
