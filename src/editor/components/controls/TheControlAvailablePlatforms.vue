@@ -79,7 +79,7 @@ export default {
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-size-controls__control">
-        <base-range-slider v-model="elWidth" label="Width" step="8" min="16" max="128" @change="changeWidth">
+        <base-range-slider v-model="elWidth" label="Width icons" step="8" min="16" max="128" @change="changeWidth">
           {{elWidth}} px
         </base-range-slider>
       </div>

@@ -63,7 +63,7 @@ export default {
       height: auto !important
   &__item
     position: relative
-    margin: 1rem
+    margin: 1.6rem
     &_opacity
       display: none
     &-button
