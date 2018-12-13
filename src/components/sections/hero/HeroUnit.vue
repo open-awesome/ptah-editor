@@ -2,6 +2,7 @@
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
+import Draggable from 'vuedraggable'
 
 const C_CUSTOM = [
   {
@@ -69,6 +70,9 @@ const SCHEMA_CUSTOM = {
 
 export default {
   name: 'HeroUnit',
+  components: {
+    Draggable
+  },
   cover: '/img/covers/hero-unit.png',
   group: 'Hero',
   $schema: {
@@ -139,22 +143,22 @@ export default {
       ref="sandbox"
       path="$sectionData.container"
       direction="column"
-      :style="$sectionData.container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
-      <template v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0">
-        <component
-          :is="component.name"
-          :key="index"
-          :href="$sectionData.components[index].element.href"
-          :style="$sectionData.components[index].element.styles"
-          :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-          :path="`components[${index}].element`"
-          v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
-          >
-          { $sectionData.components[index].element.text }
+      <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+        <component class="b-hero-component" v-for="(component, index) in $sectionData.components"
+                   v-if="$sectionData.components.length !== 0"
+                   :is="component.name"
+                   :key="index"
+                   :href="$sectionData.components[index].element.href"
+                   :path="`components[${index}].element`"
+                   :style="$sectionData.components[index].element.styles"
+                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+        >
+        { $sectionData.components[index].element.text }
         </component>
-      </template>
+      </draggable>
     </sandbox>
   </section>
 </template>
@@ -247,4 +251,8 @@ $h: 100vh
   min-height: 20rem
   justify-content: center
   align-items: center
+
+/deep/
+  .b-draggable-slot
+    align-items: center
 </style>
