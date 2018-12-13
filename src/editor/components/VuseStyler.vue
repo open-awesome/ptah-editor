@@ -5,7 +5,7 @@
 </template>
 
 <script>
-import { isParentTo, randomPoneId, getPseudoTemplate } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate, placeCaretAtEnd } from '../util'
 import * as _ from 'lodash-es'
 import { mapActions } from 'vuex'
 
@@ -248,6 +248,8 @@ export default {
       if (this.type === 'button') {
         this.el.contentEditable = 'true'
       }
+
+      placeCaretAtEnd(this.el)
 
       if (this.isVisible) return
       this.isVisible = true
