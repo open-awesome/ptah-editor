@@ -47,7 +47,7 @@ export default {
 <style lang="sass" scoped="scoped">
 
 .b-available-platforms
-  width: 100%
+  width: auto
   max-width: 100rem
   margin: 1.6rem
   min-height: 5rem
@@ -69,10 +69,6 @@ export default {
     &-button
       border: none
       position: relative
-      &:hover
-        filter: brightness(120%)
-      &:active
-        filter: brightness(50%)
       .vuse-icon
          width: 100%
          height: auto
