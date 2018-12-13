@@ -14,7 +14,7 @@ export default {
 .b-link
   position: relative
   font-size: 1.6rem
-  font-family: 'Roboto'
+  font-family: 'Lato'
   line-height: 1
   margin: 1.6rem
   color: #fff

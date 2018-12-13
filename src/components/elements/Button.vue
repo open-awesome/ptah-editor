@@ -14,7 +14,7 @@ export default {
 .b-button
   position: relative
   font-size: 3rem
-  font-family: 'Roboto'
+  font-family: 'Lato'
   line-height: 1
   width: 20rem
   min-width: 10rem

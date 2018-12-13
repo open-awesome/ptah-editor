@@ -231,12 +231,14 @@ export default {
               :is="component.name"
               :key="index"
               :href="$sectionData.components[index].element.href"
-              v-html="$sectionData.components[index].element.text"
+              :path="`components[${index}].element`"
               :style="$sectionData.components[index].element.styles"
               :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
               v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
               >
-            </component>          </sandbox>
+              <span v-html="$sectionData.components[index].element.text"></span>
+            </component>
+          </sandbox>
         </div>
         <div class="b-grid__col-6 b-grid__col-m-12">
           <sandbox
@@ -252,11 +254,12 @@ export default {
               :is="component.name"
               :key="index"
               :href="$sectionData.components2[index].element.href"
-              v-html="$sectionData.components2[index].element.text"
+              :path="`components2[${index}].element`"
               :style="$sectionData.components2[index].element.styles"
               :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
               v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
               >
+              <span v-html="$sectionData.components2[index].element.text"></span>
             </component>
           </sandbox>
         </div>

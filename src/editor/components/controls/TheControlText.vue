@@ -3,19 +3,9 @@ import find from 'lodash-es/find'
 
 const LIST_FONTS = [
   'Lato',
-  'Open Sans',
-  'Roboto',
-  'Oswald',
-  'Kodchasan',
-  'Anton',
-  'Helvetica',
-  'Arial',
-  'Tahoma',
-  'Verdana',
-  'Cambria',
-  'Georgia',
-  'Times New Roman',
-  'Montserrat'
+  'Montserrat',
+  'Heebo',
+  'PT Serif'
 ]
 
 export default {
