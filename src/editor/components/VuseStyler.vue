@@ -154,7 +154,6 @@ export default {
     if (this.$builder && !this.$builder.isEditing) return
 
     this.el.addEventListener('click', this.showStyler)
-    this.el.addEventListener('focus', this.showStyler)
 
     if (this.type === 'section') {
       this.el.id = `section_${this.section.id}`
@@ -188,7 +187,6 @@ export default {
   },
   methods: {
     ...mapActions('Sidebar', [
-      'setSettingSection',
       'setSettingElement',
       'clearSettingObjectLight'
     ]),

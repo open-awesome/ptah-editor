@@ -127,7 +127,8 @@ export default {
       expandedFont: false,
       expandedBg: false,
       expandedLink: false,
-      expandFillColor: false
+      expandFillColor: false,
+      index: null
     }
   },
 
@@ -157,6 +158,7 @@ export default {
   },
 
   created () {
+    this.index = +this.path[1]
     const styles = this.settingObjectOptions.styles
 
     /* Get font settings */
@@ -287,19 +289,20 @@ export default {
       this.updateText()
 
       let container = this.path[0]
-      let index = parseInt(this.path[1])
       let newIndex = null
 
       if (direction === 'up') {
-        newIndex = index - 1
+        newIndex = this.index - 1
       } else {
-        newIndex = index + 1
+        newIndex = this.index + 1
       }
 
       if (newIndex >= 0 && newIndex < this.settingObjectSection.data[container].length) {
-        correctArray(this.settingObjectSection.data[container], [index, newIndex])
-        correctArray(this.settingObjectSection.schema[container], [index, newIndex])
+        correctArray(this.settingObjectSection.data[container], [this.index, newIndex])
       }
+
+      this.index = newIndex
+      this.path[1] = newIndex
     },
 
     onExpand (value) {
