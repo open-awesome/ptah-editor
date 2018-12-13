@@ -1,6 +1,5 @@
 <template>
   <div class="b-available-platforms">
-    {{platforms}}
     <div class="b-available-platforms__item"
       v-for="(value, key) in platforms" :key="key"
       :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"

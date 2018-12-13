@@ -1,5 +1,7 @@
 <template>
-  <div class="b-title"></div>
+  <div class="b-title">
+    <slot></slot>
+  </div>
 </template>
 
 <script>

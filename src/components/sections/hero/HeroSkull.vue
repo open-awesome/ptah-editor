@@ -279,12 +279,12 @@ export default {
           :is="component.name"
           :key="index"
           :href="$sectionData.components[index].element.href"
-          v-html="$sectionData.components[index].element.text"
           :style="$sectionData.components[index].element.styles"
           :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
           :path="`components[${index}].element`"
           v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
           >
+          {{$sectionData.components[index].element.text}}
         </component>
       </template>
     </sandbox>
