@@ -59,12 +59,6 @@
         @setClass="selectAnimation"></control-link>
     </div>
 
-    <!-- sort -->
-    <div class="b-elem-settings__control temp-sort-buttons" v-if="isArrayEl">
-      <base-button color="light-gray" @click="sort('up')" size="middle" v-if="!isFirstInArray">Up</base-button>
-      <base-button color="light-gray" @click="sort('down')" size="middle" v-if="!isLastInArray">Down</base-button>
-    </div>
-
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
       <base-button
@@ -79,7 +73,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import { getPseudoTemplate, randomPoneId, correctArray } from '../util'
+import { getPseudoTemplate, randomPoneId } from '../util'
 import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
 import ControlBackground from './controls/TheControlBackground'
@@ -141,24 +135,10 @@ export default {
     path () {
       let path = _.split(this.settingObjectOptions.name, '.')[1]
       return _.toPath(path)
-    },
-
-    isArrayEl () {
-      return this.settingObjectOptions.name.indexOf('[') > 0
-    },
-
-    isFirstInArray () {
-      return Object.keys(this.settingObjectSection.data[this.path[0]]).indexOf(this.path[1]) === 0
-    },
-
-    isLastInArray () {
-      const els = Object.keys(this.settingObjectSection.data[this.path[0]])
-      return els.indexOf(this.path[1]) === (els.length - 1)
     }
   },
 
   created () {
-    this.index = +this.path[1]
     const styles = this.settingObjectOptions.styles
 
     /* Get font settings */
@@ -283,26 +263,6 @@ export default {
       }
 
       this.clearSettingObject()
-    },
-
-    sort (direction) {
-      this.updateText()
-
-      let container = this.path[0]
-      let newIndex = null
-
-      if (direction === 'up') {
-        newIndex = this.index - 1
-      } else {
-        newIndex = this.index + 1
-      }
-
-      if (newIndex >= 0 && newIndex < this.settingObjectSection.data[container].length) {
-        correctArray(this.settingObjectSection.data[container], [this.index, newIndex])
-      }
-
-      this.index = newIndex
-      this.path[1] = newIndex
     },
 
     onExpand (value) {

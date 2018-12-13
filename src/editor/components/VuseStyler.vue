@@ -134,19 +134,6 @@ export default {
     }
   },
   created () {
-    if (this.type === 'text') {
-      this.el.contentEditable = 'true'
-    }
-    if (this.type === 'title') {
-      this.el.contentEditable = 'true'
-    }
-    if (this.type === 'link') {
-      this.el.contentEditable = 'true'
-    }
-    if (this.type === 'button') {
-      this.el.contentEditable = 'true'
-    }
-
     this.dimensions.width = this.el.offsetWidth
     this.dimensions.height = this.el.offsetHeight
   },
@@ -244,8 +231,23 @@ export default {
       this.section.data[path[0]].push(obj)
     },
     showStyler (event) {
-      this.clearSettingObjectLight()
+      event.preventDefault()
       event.stopPropagation()
+
+      this.clearSettingObjectLight()
+
+      if (this.type === 'text') {
+        this.el.contentEditable = 'true'
+      }
+      if (this.type === 'title') {
+        this.el.contentEditable = 'true'
+      }
+      if (this.type === 'link') {
+        this.el.contentEditable = 'true'
+      }
+      if (this.type === 'button') {
+        this.el.contentEditable = 'true'
+      }
 
       if (this.isVisible) return
       this.isVisible = true
@@ -273,6 +275,7 @@ export default {
       // this.currentOption = ''
     },
     hideStyler (event) {
+      this.el.contentEditable = 'false'
       if (event && isParentTo(event.target, this.$el)) {
         return
       }
