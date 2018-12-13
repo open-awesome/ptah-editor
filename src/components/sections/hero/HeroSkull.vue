@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import VuseIcon from '@editor/components/VuseIcon'
+import Draggable from 'vuedraggable'
 
 const COMPONENTS = [
   {
@@ -212,7 +213,8 @@ const SCHEMA_CUSTOM = {
 export default {
   name: 'HeroSkull',
   components: {
-    VuseIcon
+    VuseIcon,
+    Draggable
   },
   cover: '/img/covers/hero-skull.jpg',
   group: 'Hero',
@@ -271,22 +273,23 @@ export default {
       ref="sandbox"
       path="$sectionData.container"
       direction="column"
-      :style="$sectionData.container.styles"
       >
       <elements-list @addEl="onAddElement"></elements-list>
-      <template v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0">
-        <component
-          :is="component.name"
-          :key="index"
-          :href="$sectionData.components[index].element.href"
-          :style="$sectionData.components[index].element.styles"
-          :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-          :path="`components[${index}].element`"
-          v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
-          >
+      <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+        <template v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0">
+          <component
+            :is="component.name"
+            :key="index"
+            :href="$sectionData.components[index].element.href"
+            :style="$sectionData.components[index].element.styles"
+            :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+            :path="`components[${index}].element`"
+            v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+            >
             <span v-html="$sectionData.components[index].element.text"></span>
-        </component>
-      </template>
+          </component>
+        </template>
+      </draggable>
     </sandbox>
     <div class="b-footer">
       <div class="b-grid">
@@ -461,6 +464,8 @@ export default {
   justify-content: flex-start
   align-items: center
   background-color: rgba(0, 0, 0, 0.1)
+  max-width: 118.4rem
+  width: 100%
   .is-mobile &,
   .is-tablet &
     padding: 1rem 0
@@ -492,5 +497,14 @@ export default {
     &
       position: relative
       height: auto
+
+/deep/
+  .b-draggable-slot
+    width: 100%
+    display: flex
+    text-align: center
+    justify-content: center
+    align-items: center
+    flex-direction: column
 
 </style>
