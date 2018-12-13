@@ -1,35 +1,76 @@
 <script>
-import VuseIcon from '../VuseIcon'
-import { Sketch } from 'vue-color'
-
 export default {
-  components: {
-    VuseIcon,
-    SketchColorPecker: Sketch
+  props: {
+    fillColor: {
+      type: String,
+      required: true
+    },
+    expand: {
+      type: Boolean,
+      required: true
+    }
   },
-  data: () => ({
-    textSelectColor: '#000'
-  }),
+
+  data () {
+    return {
+      controlOpen: false,
+      size: {},
+      color: '',
+      styles: []
+    }
+  },
+
+  created () {
+    this.color = this.fillColor
+  },
+
+  watch: {
+    expand () {
+      this.controlOpen = this.expand
+    }
+  },
+
   methods: {
-    /**
-     * Modify box styles
-     * @param type {string} values: fill
-     * @param value {string}
-     * @param unit {string} values: %, rem, ''
-     */
-    boxMode (type, value, unit) {
-      this.$emit('boxStyled', { type, value, unit })
+    changeColor () {
+      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
+      this.$emit('change', ['fill', color])
+    },
+
+    onClickTitle () {
+      this.$emit('open', ['FillColor', !this.controlOpen])
     }
   }
 }
 </script>
 
 <template>
-  <div>
-    <div class="b-styler__bg_options_container">
-      <div class="b-styler__bg_options__item">
-        <sketch-color-pecker @click.native="boxMode('fill', textSelectColor.hex, '')" v-model="textSelectColor"></sketch-color-pecker>
-      </div>
+  <div class="b-text-controls">
+    <div class="b-text-controls__header" @click="onClickTitle">
+      <span>Fill icon</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
+    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
+      <div class="b-text-controls__control">
+        <base-color-picker label="Color fill" v-model="color" @change="changeColor"></base-color-picker>
+      </div>
+    </base-dropdown>
   </div>
 </template>
+
+<style lang="sass" scoped>
+  .b-text-controls
+    &__header
+      font-size: 1.6rem
+      height: 3.2rem
+      color: #272727
+      display: flex
+      align-items: center
+      cursor: pointer
+      i
+        margin-left: 5px
+        margin-bottom: -5px
+        transform: rotate(180deg)
+        &.dropped
+          transform: rotate(0deg)
+    &__control
+      margin-top: 2.2rem
+</style>

@@ -5,7 +5,26 @@ import * as _ from 'lodash-es'
 const DEFAULT_OPTIONS = {
   text: '',
   classes: [],
-  styles: {},
+  styles: {
+    'background-image': false,
+    'background-position': false,
+    'background-repeat': false,
+    'background-size': false,
+    'background-color': false,
+    'background': false,
+    'color': '#000',
+    'border-color': false,
+    'font-size': '1.6rem',
+    'border-radius': 0,
+    'font-weight': false,
+    'font-style': false,
+    'font-family': 'Roboto',
+    'text-decoration': false,
+    'justify-content': false,
+    'text-align': 'center',
+    'width': '',
+    'height': ''
+  },
   resizable: false,
   hasLink: false,
   removable: false,
@@ -25,13 +44,14 @@ const DEFAULT_OPTIONS = {
  * @type {Map}
  */
 const data = new Map([
-  [types.Description, () => (_.merge({}, DEFAULT_OPTIONS, {
-    text: 'Your Game takes players on a grand adventure filled with detractors, monsters, gold hunters and grave danger. Dramatic events unfolded which overturned your life and now you have to fight for survival in a new hostile world. Discover, explore, and conquer as you survive through different dimensions of reality!',
+  [types.Title, () => (_.merge({}, DEFAULT_OPTIONS, {
+    text: 'Title',
     aligned: true,
+    removable: true,
     typography: true,
     styles: {
-      'font-family': 'Open Sans',
-      'font-size': 1.4,
+      'font-family': 'Roboto',
+      'font-size': '3rem',
       'font-weight': false,
       'font-style': false,
       'text-decoration': false,
@@ -48,11 +68,12 @@ const data = new Map([
   }))],
   [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
     text: 'Enter your text',
+    removable: true,
     aligned: true,
     typography: true,
     styles: {
-      'font-family': 'Open Sans',
-      'font-size': 1.4,
+      'font-family': 'Roboto',
+      'font-size': '1.5rem',
       'font-weight': false,
       'font-style': false,
       'text-decoration': false,
@@ -67,7 +88,6 @@ const data = new Map([
       'justify-content': false
     }
   }))],
-  // [types.Image, 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png'],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
     removable: true,
@@ -99,6 +119,7 @@ const data = new Map([
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
+    removable: true,
     alt: 'Default logo',
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     background: true,
@@ -106,7 +127,7 @@ const data = new Map([
       'background-image': 'url(https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png)',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
-      'background-size': 'contain',
+      'background-size': 'cover',
       'background-color': '#fff',
       'width': '',
       'height': ''
@@ -121,7 +142,7 @@ const data = new Map([
     href: '',
     target: '_blank',
     styles: {
-      'font-family': 'Open Sans',
+      'font-family': 'Roboto',
       'font-size': 1.4,
       'font-weight': false,
       'font-style': false,
@@ -141,7 +162,7 @@ const data = new Map([
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
-      resizable: false,
+      resizable: true,
       removable: true,
       background: true,
       styles: {
@@ -149,7 +170,10 @@ const data = new Map([
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
-        'background-color': false
+        'background-color': false,
+        'background': false,
+        'width': '',
+        'height': ''
       }
     })
   )],
@@ -167,6 +191,7 @@ const data = new Map([
       text: 'Click Me!',
       classes: [],
       href: '',
+      removable: true,
       styles: {
         'background-image': false,
         'background-position': false,
@@ -180,7 +205,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': 'Open Sans',
+        'font-family': 'Roboto',
         'text-decoration': false,
         'justify-content': false,
         'text-align': 'center',
@@ -213,7 +238,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': 'Open Sans',
+        'font-family': 'Roboto',
         'text-decoration': false,
         'justify-content': false,
         'width': '',
@@ -244,7 +269,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': 'Open Sans',
+        'font-family': 'Roboto',
         'text-decoration': false,
         'justify-content': false,
         'width': '',
@@ -258,7 +283,7 @@ const data = new Map([
       resizable: true,
       hasLink: true,
       background: true,
-      colorFill: true,
+      fillColor: true,
       shape: true,
       target: '_blank',
       text: '',
@@ -269,16 +294,14 @@ const data = new Map([
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
-        'background-color': '#333',
-        'fill': false,
-        'border-radius': '100%',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'fill': '#fff',
+        'border-radius': '0',
         'width': '',
         'height': ''
       }
     })
   )],
-  [types.Grid, () => ({ mobile: '', tablet: '', desktop: '', widescreen: '' })],
-  [String, 'This is pretty neat'],
   [types.GalleryItem, () => (_.merge({}, DEFAULT_OPTIONS, {
     removable: true,
     resizable: false,
@@ -309,6 +332,59 @@ const data = new Map([
       'height': ''
     }
   }))],
+  [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      resizable: true,
+      removable: true,
+      styles: {
+        'width': '',
+        'height': ''
+      }
+    })
+  )],
+  /* === Custom sections === */
+  [types.Video, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      background: false,
+      hasVideo: true,
+      // videoUrl: 'https://gn967.cdn.stg.gamenet.ru/0/7KSrW/o_159yiU.mp4',
+      videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
+      videoTitle: 'World of Warcraft: Battle for Azeroth',
+      loop: false
+    })
+  )],
+  [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      hasProdusct: true,
+      box: true,
+      resizable: true,
+      removable: true,
+      background: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false,
+        'width': '',
+        'height': ''
+      }
+    })
+  )],
+  [types.GallerySlider, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      resizable: true,
+      removable: true,
+      background: true,
+      hasMultipleImages: true,
+      hasHeader: true,
+      galleryImages: [],
+      header: 'This is a short header'
+    })
+  )]
 ])
 
 export default class Seeder {

@@ -8,18 +8,31 @@ export default {
     return new Promise((resolve) => {
       resolve([
         {
-          slug: 'Landing1',
+          slug: 'Landing',
           theme: {
-            name: 'Layout 1',
-            title: 'Awesome title',
-            sections: ['Logo', 'Delimiter', 'Title1', 'Description', 'Button', 'Delimiter', 'Title1', 'Description', 'Gallery1', 'Button', 'Delimiter', 'Title1', 'Gallery2', 'Button', 'Delimiter', 'Footer']
+            name: 'Landing',
+            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns', 'AvailableRestrictions', 'SocialCopyright']
           }
         },
         {
-          slug: 'Landing2',
+          slug: 'Skull',
           theme: {
-            name: 'Layout 2',
-            sections: ['Logo', 'Slogan', 'Description', 'Button', 'Available', 'Delimiter', 'Gallery2', 'Delimiter', 'Title1', 'Description', 'Picture', 'Description', 'Delimiter', 'Gallery3', 'Delimiter', 'System', 'Logo', 'Button', 'Title1', 'Social', 'Logo', 'Restrictions']
+            name: 'Skull',
+            sections: ['HeroSkull']
+          }
+        },
+        {
+          slug: 'Columns',
+          theme: {
+            name: 'Columns',
+            sections: ['ThreeColumns', 'TwoColumns']
+          }
+        },
+        {
+          slug: 'Footers',
+          theme: {
+            name: 'Footers',
+            sections: ['AvailableRestrictions', 'SocialCopyright']
           }
         },
         {
@@ -79,6 +92,37 @@ export default {
 
         return response['data']['response']['data'][0]
       })
+  },
+
+  /**
+   * Uploads a file by event from input-file
+   *
+   * @param {Event} event native dom-event
+   */
+  uploadFileFromInputFile (event) {
+    let file = event.target.files || event.dataTransfer.files
+
+    if (!file.length) {
+      return
+    }
+
+    let request = new FormData()
+
+    request.append('file[]', file[0])
+    request.append('method', 'storefront.upload')
+    request.append('format', 'json')
+
+    return this.uploadFile(request)
+  },
+
+  uploadFileByFile (file) {
+    let request = new FormData()
+
+    request.append('file[]', file)
+    request.append('method', 'storefront.upload')
+    request.append('format', 'json')
+
+    return this.uploadFile(request)
   }
 
 }

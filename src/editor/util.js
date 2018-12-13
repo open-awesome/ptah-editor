@@ -1,11 +1,11 @@
 import * as _ from 'lodash-es'
 import * as types from './types'
 
-export function isObject (obj) {
+export function isObject(obj) {
   return obj && typeof obj === 'object' && obj !== null && !Array.isArray(obj)
 }
 
-export function isParentTo (target, parent) {
+export function isParentTo(target, parent) {
   let currentNode = target
   while (currentNode !== null) {
     if (currentNode === parent) return true
@@ -19,13 +19,11 @@ export function isParentTo (target, parent) {
  * @param {String} target
  * @param {Object} schema
  */
-export function getTypeFromSchema (target, schema) {
+export function getTypeFromSchema(target, schema) {
   const tempTarget = target.split('.')
   tempTarget.shift()
   const value = _.get(schema, tempTarget.join('.'))
-  if (value === types.Grid) return 'grid'
   if (value === types.Text) return 'text'
-  if (value === types.Description) return 'text'
   if (value === types.Title) return 'title'
   if (value === types.Button) return 'button'
   if (value === types.Link) return 'link'
@@ -34,13 +32,12 @@ export function getTypeFromSchema (target, schema) {
   if (value === types.Product) return 'product'
   if (value === types.Label) return 'text'
   if (value === types.Cost) return 'text'
-  if (value === String) return 'text'
-  if (value === Number) return 'text'
+  if (value === types.Delimiter) return 'delimiter'
 
   return null
 }
 
-export function getImageBlob (URL) {
+export function getImageBlob(URL) {
   return new Promise((resolve, reject) => {
     const xhr = new XMLHttpRequest()
     xhr.open('GET', URL)
@@ -57,7 +54,7 @@ export function getImageBlob (URL) {
   })
 }
 
-export function getTypeFromTagName (tagName) {
+export function getTypeFromTagName(tagName) {
   tagName = tagName.toUpperCase()
   switch (tagName) {
     case 'H1':
@@ -91,7 +88,7 @@ export function getTypeFromTagName (tagName) {
   }
 }
 
-export function cleanDOM (artboard) {
+export function cleanDOM(artboard) {
   const editables = Array.from(artboard.querySelectorAll('.is-editable'))
   const uploaders = Array.from(artboard.querySelectorAll('.uploader'))
   const stylers = Array.from(artboard.querySelectorAll('.styler'))
@@ -117,7 +114,7 @@ export function cleanDOM (artboard) {
   })
 }
 
-export function randomPoneId () {
+export function randomPoneId() {
   return `pone${Math.random().toString().substring(2, 7)}`
 }
 
@@ -152,14 +149,14 @@ export function getPseudoTemplate(poneId, data) {
  * Return Google site tag template
  * @param tag
  */
-export function gtagSetup (tag) {
+export function gtagSetup(tag) {
   if (tag === '') return tag
   return `<script async src="https://www.googletagmanager.com/gtag/js?id=${tag}"></script>
           <script>
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-          
+
             gtag('config', '${tag}');
           </script>
           `
@@ -170,6 +167,19 @@ export function gtagSetup (tag) {
  * @param _arr
  * @param _param {Array} - [index, newIndex]
  */
-export function correctArray (_arr, _param) {
+export function correctArray(_arr, _param) {
   _arr[_param[1]] = _arr.splice(_param[0], 1, _arr[_param[1]])[0]
+}
+
+/**
+ * Retrives youtubeId from youtube video url
+ * Example: https://www.youtube.com/watch?v=Xv1JzYDKoc8 -> Xv1JzYDKoc8
+ * 
+ * @param {String} url 
+ * @return {String}
+ */
+export function getYoutubeVideoIdFromUrl(url) {
+  const regExp = /^.*((youtu.be\/)|(v\/)|(\/u\/\w\/)|(embed\/)|(watch\?))\??v?=?([^#&?]*).*/
+  const match = url.match(regExp)
+  return (match && match[7].length === 11) ? match[7] : false
 }

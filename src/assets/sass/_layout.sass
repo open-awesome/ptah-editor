@@ -1,0 +1,96 @@
+*
+  box-sizing: border-box
+  &:before, &:after
+    box-sizing: border-box
+
+html
+  font-size: 10px
+
+@media only screen and (max-width: 1100px)
+  html
+    font-size: 8px
+
+@media only screen and (max-width: 768px)
+  html
+    font-size: 10px
+
+::selection
+  color: #ff0 !important
+  background: #000 !important
+
+body
+  line-height: 1
+  font-weight: 400
+  color: $color-form-text
+  background-color: #9E9E9E
+  font-size: 1.4rem
+  margin: 0
+  -webkit-font-smoothing: subpixel-antialiased
+  -moz-osx-font-smoothing: auto
+  overflow-y: scroll
+  font-family: Lato, Roboto, Helvetica, Arial, sans-serif
+  overflow-x: hidden
+.b-body
+  &_preview
+    background-color: $color-white
+    position: relative
+    overflow-x: hidden
+
+.b-page
+  min-height: 100vh
+  position: relative
+  &__header, &__content, &__footer
+    position: relative
+    z-index: 5
+  &__header, &__footer
+    height: 5rem
+    background-color: $color-white
+    border: 1px solid $color-red
+  &__footer
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 0
+  &__content
+    flex-grow: 1
+
+section
+  z-index: 1
+
+#video_bg
+  position: absolute
+  top: 0
+  left: 50%
+  right: 0
+  z-index: 0
+  width: 120%
+  margin: 0 0 0 -60%
+  height: auto
+  .is-tablet &,
+  .is-mobile &
+    position: absolute
+    min-height: 10rem
+    z-index: -1
+  @media only screen and (max-width: 768px)
+    &
+      position: absolute
+      width: 100%
+      margin: 0
+      left: 0
+      min-height: 10rem
+  &.fixed
+    position: fixed
+    height: auto
+    min-height: 100vh
+    @media only screen and (max-width: 768px)
+      &
+        width: auto
+
+section
+  &.is-editable
+    border: 0.2rem rgba(255, 255, 255, 0.1) dashed
+  &.full-height
+    height: 100vh !important
+
+

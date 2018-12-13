@@ -4,80 +4,99 @@
 
 <script>
 import Vue from 'vue'
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 import Vuse from '@editor/vuse'
 import pwa from '@editor/plugins/pwa'
 import Uploader from '@editor/plugins/Uploader.vue'
 
-import gallery1 from '@components/landings/galleries/gallery1.vue'
-import gallery2 from '@components/landings/galleries/gallery2.vue'
-import gallery3 from '@components/landings/galleries/gallery3.vue'
-import button from '@components/landings/buttons/button'
-import title1 from '@components/landings/texts/title1'
-import delimiter from '@components/landings/delimiters/delimiter'
-import logo from '@components/landings/logos/logo'
-import footer from '@components/landings/footers/footer'
-import system from '@components/landings/elements/system'
-import social from '@components/landings/elements/social'
-import available from '@components/landings/elements/available'
-import restrictions from '@components/landings/elements/restrictions'
-import image from '@components/landings/images/image'
-import description from '@components/landings/texts/description'
-import products from '@components/landings/products/products'
-import productsExtend from '@components/landings/products/productsExtend'
-import Slogan from '@components/landings/texts/slogan'
-import bob from '@components/landings/test/slots'
-import PartButton from '@components/landings/test/partButton'
-import PartTitle from '@components/landings/test/partTitle'
-import Sandbox from '@components/landings/test/sandbox'
-import ElementsList from '@components/landings/test/elementsList'
+// slot base
+import Sandbox from '@components/slots/Sandbox'
+import ElementsList from '@components/slots/ElementsList'
+
+// elements
+import Button from '@components/elements/Button'
+import Link from '@components/elements/Link'
+import Title from '@components/elements/Title'
+import Description from '@components/elements/Description'
+import Pic from '@components/elements/Pic'
+import Logo from '@components/elements/Logo'
+import Delimiter from '@components/elements/Delimiter'
+
+// sections
+import BaseSection from '@components/sections/BaseSection'
+import HeroUnit from '@components/sections/hero/HeroUnit'
+import HeroSkull from '@components/sections/hero/HeroSkull'
+import Gallery1 from '@components/sections/galleries/Gallery1'
+import Gallery2 from '@components/sections/galleries/Gallery2'
+import Gallery3 from '@components/sections/galleries/Gallery3'
+import Products from '@components/sections/products/Products'
+import ProductsExtend from '@components/sections/products/ProductsExtend'
+import Available from '@components/sections/elements/Available'
+import Footer from '@components/sections/elements/Footer'
+import Restrictions from '@components/sections/elements/Restrictions'
+import Slogan from '@components/sections/elements/Slogan'
+import Social from '@components/sections/elements/Social'
+import System from '@components/sections/elements/System'
+import ThreeColumns from '@components/sections/columns/ThreeColumns'
+import TwoColumns from '@components/sections/columns/TwoColumns'
+import Video from '@components/sections/video/Video'
+import AvailableRestrictions from '@components/sections/footers/FooterAvailableRestrictions'
+import SocialCopyright from '@components/sections/footers/FooterSocialCopyright'
+import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
+
+import store from '@store'
 
 Vuse.mix({
   components: {
     Uploader,
     Sandbox,
     ElementsList,
-    PartButton,
-    PartTitle
+    Button,
+    Link,
+    Title,
+    Description,
+    Pic,
+    Logo,
+    Delimiter
   }
 })
 
-Vuse.component('Gallery1', gallery1)
-Vuse.component('Gallery2', gallery2)
-Vuse.component('Gallery3', gallery3)
-Vuse.component('Button', button)
-Vuse.component('Footer', footer)
-Vuse.component('Title1', title1)
-Vuse.component('Delimiter', delimiter)
-Vuse.component('Logo', logo)
-Vuse.component('System', system)
-Vuse.component('Social', social)
-Vuse.component('Available', available)
-Vuse.component('Restrictions', restrictions)
-Vuse.component('Picture', image)
-Vuse.component('Description', description)
-Vuse.component('Products', products)
-Vuse.component('ProductsExtend', productsExtend)
+Vuse.component('BaseSection', BaseSection)
+Vuse.component('HeroUnit', HeroUnit)
+Vuse.component('HeroSkull', HeroSkull)
+Vuse.component('Gallery1', Gallery1)
+Vuse.component('Gallery2', Gallery2)
+Vuse.component('Gallery3', Gallery3)
+Vuse.component('Products', Products)
+Vuse.component('ProductsExtend', ProductsExtend)
+Vuse.component('Available', Available)
+Vuse.component('Footer', Footer)
+Vuse.component('Restrictions', Restrictions)
 Vuse.component('Slogan', Slogan)
-Vuse.component('Bob', bob)
+Vuse.component('Social', Social)
+Vuse.component('System', System)
+Vuse.component('ThreeColumns', ThreeColumns)
+Vuse.component('TwoColumns', TwoColumns)
+Vuse.component('Video', Video)
+Vuse.component('AvailableRestrictions', AvailableRestrictions)
+Vuse.component('SocialCopyright', SocialCopyright)
+Vuse.component('GalleryCarousel', GalleryCarousel)
 
 Vuse.use(pwa)
 
 export default {
-  methods: {
-    ...mapActions([
-      'saveLanding'
-    ]),
-    onDownload (builder) {
-      builder.export('pwa')
-    },
-    onPreview: function (builder) {
-      builder.export('preview')
-    },
-    onSave (builder) {
-      this.saveLanding(builder.export('json'))
+  computed: {
+    // TODO: delete this when CRUD UI is complete
+    showIntro () {
+      return this.$route.params.slug === 'new'
     }
   },
+
+  async beforeRouteEnter (to, from, next) {
+    await store.dispatch('getLandingData', to.params.slug)
+    next()
+  },
+
   created () {
     let themes = []
 
@@ -86,13 +105,19 @@ export default {
       themes: themes
     })
   },
-  computed: {
-    ...mapState([
-      'currentLanding'
+
+  methods: {
+    ...mapActions([
+      'saveLanding'
     ]),
-    // TODO: delete this when CRUD UI is complete
-    showIntro: function () {
-      return this.$route.params.slug === 'new'
+    onDownload (builder) {
+      builder.export('pwa')
+    },
+    onPreview (builder) {
+      builder.export('preview')
+    },
+    onSave (builder) {
+      this.saveLanding(builder.export('json'))
     }
   }
 }

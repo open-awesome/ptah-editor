@@ -24,9 +24,12 @@ export default {
 
 <template>
   <div class="b-page__content dashboard">
-      <figure v-for="(item, index) in landings" :key="index" class="dashboard__item" @click="openLanding(item)">
-        {{item.slug}}
-      </figure>
+    <figure v-for="(item, index) in landings" :key="index" class="dashboard__item" @click="openLanding(item)">
+      {{item.slug}}
+    </figure>
+    <figure class="dashboard__item" @click="$router.push({ path: '_sandbox' })">
+      Sandbox
+    </figure>
   </div>
 </template>
 
@@ -35,6 +38,7 @@ export default {
   width: 1000px
   padding: 40px
   display: flex
+  flex-wrap: wrap
   font-family: Helvetica Neue, Helvetica, Arial
   &__item
     width: 200px

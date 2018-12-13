@@ -1,13 +1,14 @@
 <script>
 export default {
   props: {
-    /* color variant button */
-    variant: {
+    /* variant button */
+    color: {
       default: 'black',
       type: String,
       validator (value) {
         const values = [
           'black',
+          'blue',
           'gray',
           'light-gray'
         ]
@@ -19,7 +20,10 @@ export default {
       default: 'default',
       type: String,
       validator (value) {
-        const values = ['default']
+        const values = [
+          'default',
+          'middle'
+        ]
         return values.indexOf(value) !== -1
       }
     },
@@ -51,7 +55,7 @@ export default {
   computed: {
     btnClasses () {
       const name = 'b-pth-base-button'
-      const classes = [`${name}_${this.variant}`, `${name}_${this.size}`]
+      const classes = [`${name}_${this.color}`, `${name}_${this.size}`]
       if (this.pressed) {
         classes.push(name + '_pressed')
       }
@@ -70,6 +74,7 @@ export default {
     :type="type"
     :disabled="disabled"
     :transparent="transparent"
+    @click="$emit('click', $event)"
     >
     <slot></slot>
   </button>
@@ -77,36 +82,42 @@ export default {
 
 <style lang="sass">
 .b-pth-base-button
-  border-radius: 0.2rem
+  border-radius: 0.4rem
   border: 0.2rem transparent solid
   outline: none
-  transition: all .3s cubic-bezier(.2,.85,.4,1.275)
+  transition: color .3s cubic-bezier(.2,.85,.4,1.275)
   font-size: 1.6rem
   line-height: 4.4rem
   margin: 0.4rem
   =active
-    background-color: #165c8f
-    border-color: #165c8f
-    color: #fafafa
+    background-color: #436FEE
+    border-color: #436FEE
+    color: #fff
   &:hover
     cursor: pointer
     +active
   &_default
     width: 20.8rem
     height: 4.8rem
+  &_middle
+    width: 11rem
+    height: 4rem
+    line-height: 3.6rem
   &_pressed
     +active
   &_black
     color: #eee
     background-color: #202020
-  &_grey
-    color: #eee
-    background-color: #383838
-    border: 0.2rem #dedede solid
-  &_light-gray
+  &_blue
+   +active
+  &_gray
     color: #888
+    background-color: #383838
+    border: 0.2rem rgba(0, 0, 0, 0.07) solid
+  &_light-gray
+    color: #474747
     background-color: #fafafa
-    border: 0.2rem #dedede solid
+    border: 0.2rem #fff solid
   &_transparent
     background-color: transparent
 </style>
