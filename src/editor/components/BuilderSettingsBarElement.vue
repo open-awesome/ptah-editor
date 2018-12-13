@@ -62,7 +62,6 @@
     <!-- Available Platforms Control-->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
       <control-available-platforms
-        :content="availablePlatforms"
         @setOption="setOption"
         >
       </control-available-platforms>
@@ -341,10 +340,6 @@ export default {
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
     }
-  },
-
-  mounted () {
-    console.log('this.settingObjectOptions: ', this.settingObjectOptions)
   }
 }
 </script>

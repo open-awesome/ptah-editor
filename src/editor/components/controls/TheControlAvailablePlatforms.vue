@@ -1,8 +1,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import VuseIcon from '@editor/components/VuseIcon'
-// import * as _ from 'lodash-es'
-
 export default {
   name: 'ControlAvailablePlatforms',
 
@@ -10,35 +8,16 @@ export default {
     VuseIcon
   },
 
-  data () {
-    return {
-      platforms: []
-    }
-  },
-
-  props: {
-    content: {
-      type: Object
-    }
-  },
-
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection'
-    ])
-  },
+    ]),
 
-  created () {
-    this.platforms = this.content
-  },
-
-  watch: {
-    content (newValue, oldValue) {
-      this.platforms = this.newValue
+    platforms () {
+      return this.settingObjectOptions.availablePlatforms
     }
   },
-
   methods: {
     ...mapActions('Sidebar', [
       'updateSectionData',
@@ -46,7 +25,6 @@ export default {
     ]),
     visible (key) {
       this.platforms[key].visible = !this.platforms[key].visible
-      this.$emit('setOption', ['availablePlatforms', this.platforms])
     }
   }
 }
