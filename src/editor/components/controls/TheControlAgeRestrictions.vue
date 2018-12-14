@@ -3,7 +3,7 @@ import { mapState } from 'vuex'
 import VuseIcon from '@editor/components/VuseIcon'
 
 export default {
-  name: 'ControlAvailablePlatforms',
+  name: 'ControlAgeRestrionctions',
 
   components: {
     VuseIcon
@@ -19,7 +19,6 @@ export default {
   data () {
     return {
       controlOpen: false,
-      color: '',
       elWidth: 0
     }
   },
@@ -29,12 +28,8 @@ export default {
       'settingObjectOptions'
     ]),
 
-    platforms () {
-      return this.settingObjectOptions.availablePlatforms
-    },
-
-    colorFill () {
-      return this.settingObjectOptions.colorFill
+    restrictions () {
+      return this.settingObjectOptions.ageRestrictions
     },
 
     sizeIcons () {
@@ -50,11 +45,7 @@ export default {
 
   methods: {
     visible (key) {
-      this.platforms[key].visible = !this.platforms[key].visible
-    },
-    changeColor () {
-      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
-      this.colorFill['color'] = color
+      this.restrictions[key].visible = !this.restrictions[key].visible
     },
     changeWidth () {
       if (this.elWidth > 0) {
@@ -62,12 +53,11 @@ export default {
       }
     },
     onClickTitle () {
-      this.$emit('open', ['AvailablePlatforms', !this.controlOpen])
+      this.$emit('open', ['AgeRestrictions', !this.controlOpen])
     }
   },
 
   mounted () {
-    this.color = this.colorFill.color
     this.elWidth = this.sizeIcons.width
   }
 }
@@ -76,7 +66,7 @@ export default {
 <template>
   <div class="b-text-controls">
     <div class="b-text-controls__header" @click="onClickTitle">
-      <span>Icons settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+      <span>Setting restrictions</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-size-controls__control">
@@ -85,31 +75,37 @@ export default {
         </base-range-slider>
       </div>
       <div class="b-text-controls__control">
-        <base-color-picker label="Color icons" v-model="color" @change="changeColor"></base-color-picker>
-      </div>
-      <div class="b-text-controls__control">
-        <div>Visible platforms</div>
-        <div class="b-available-platforms">
-          <div class="b-available-platforms__item is-editable"
-            v-for="(value, key) in platforms" :key="key"
-            :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"
-            @click="visible(key)"
+        <div>Visible restrictions</div>
+        <div class="b-age-restrictions">
+          <div class="b-age-restrictions__item is-editable"
+            v-for="(value, key) in restrictions" :key="key"
+            :class="{ 'b-age-restrictions__item_opacity' : false === restrictions[key].visible }"
             >
 
-            <span class="b-socials__item-eye"
+            <span class="b-age-restrictions__item-eye"
               title="Show / Hide"
+              @click="visible(key)"
               >
               <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
             </span>
 
-            <a class="b-available-platforms__item-button"
-              :title="platforms[key].name"
+            <a class="b-age-restrictions__item-button"
+              :title="restrictions[key].name"
+              @click="visible(key)"
               >
-              {{ platforms[key].name }}
+              {{ restrictions[key].name }}
             </a>
 
+            <div class="b-age-restrictions__item-select" v-if="restrictions[key].visible">
+              <BaseSelect
+                :options="restrictions[key].options"
+                v-model="restrictions[key].selected"
+                :value="restrictions[key].selected"
+                >
+              </BaseSelect>
+            </div>
           </div>
-        </div><!--/.b-available-platforms-->
+        </div><!--/.b-age-restrictions-->
       </div>
     </base-dropdown>
   </div>
@@ -133,7 +129,7 @@ export default {
   &__control
     margin-top: 2.2rem
 
-.b-available-platforms
+.b-age-restrictions
   width: 100%
   max-width: 100rem
   margin: 1rem auto
@@ -149,8 +145,9 @@ export default {
       height: auto !important
   &__item
     position: relative
-    margin: 0.5rem 0
-    display: block
+    margin: 0
+    min-height: 4.5rem
+    display: flex
     color: #4D7DD8
     fill: #4D7DD8
     cursor: pointer
@@ -164,12 +161,20 @@ export default {
       position: relative
       display: inline-block
       user-select: none
+      width: 10rem
+      overflow: hidden
+
       &:hover
         filter: brightness(120%)
       &:active
         filter: brightness(50%)
       .vuse-icon
          width: 100%
+    &-select
+      width: 15rem
+      position: absolute
+      left: 4rem
+      bottom: 1rem
     &-eye
       border: none
       background: transparent

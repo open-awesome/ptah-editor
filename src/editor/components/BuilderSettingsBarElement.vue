@@ -51,12 +51,21 @@
     </div>
 
     <!-- Available Platforms Control-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms && settingObjectOptions.colorFill">
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
       <control-available-platforms
         :expand="expandedAvailablePlatforms"
         @open="onExpand"
         >
       </control-available-platforms>
+    </div>
+
+    <!-- Age Restrictions Control-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasRestrictions">
+      <control-age-restrictions
+        :expand="expandedAgeRestrictions"
+        @open="onExpand"
+        >
+      </control-age-restrictions>
     </div>
 
     <!-- BOTTOM button -->
@@ -82,6 +91,7 @@ import ControlSize from './controls/TheControlSize'
 import ControlLink from './controls/TheControlLink'
 // control for new elements
 import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.vue'
+import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -99,11 +109,13 @@ export default {
     ControlBackground,
     ControlSize,
     ControlLink,
-    ControlAvailablePlatforms
+    ControlAvailablePlatforms,
+    ControlAgeRestrictions
   },
 
   data () {
     return {
+      index: null,
       fontSize: null,
       fontFamily: '',
       fontColor: '',
@@ -122,11 +134,12 @@ export default {
       expandedFont: false,
       expandedBg: false,
       expandedLink: false,
-      index: null,
       expandedAvailablePlatforms: false,
+      expandedAgeRestrictions: false,
       colorFill: {},
       sizeIcons: {},
-      availablePlatforms: []
+      availablePlatforms: {},
+      ageRestrictions: {}
     }
   },
 
@@ -184,9 +197,14 @@ export default {
     this.textHover = this.settingObjectOptions.pseudo['color'] || ''
 
     /* Available platforms */
-    this.availablePlatforms = this.settingObjectOptions.availablePlatforms || []
+    this.availablePlatforms = this.settingObjectOptions.availablePlatforms || {}
     this.colorFill = this.settingObjectOptions.colorFill || {}
+
+    /* Size icons */
     this.sizeIcons = this.settingObjectOptions.sizeIcons || {}
+
+    /* Age restrictions */
+    this.ageRestrictions = this.settingObjectOptions.ageRestrictions || {}
   },
 
   methods: {

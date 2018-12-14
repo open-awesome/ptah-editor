@@ -15,7 +15,7 @@ export default {
   position: relative
   font-size: 3rem
   font-family: 'Lato'
-  line-height: 1
+  line-height: 1.4
   width: 20rem
   min-width: 10rem
   min-height: 5rem
