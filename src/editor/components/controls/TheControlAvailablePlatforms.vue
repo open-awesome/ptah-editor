@@ -56,11 +56,6 @@ export default {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.colorFill['color'] = color
     },
-    changeWidth () {
-      if (this.elWidth > 0) {
-        this.sizeIcons['width'] = this.elWidth
-      }
-    },
     onClickTitle () {
       this.$emit('open', ['AvailablePlatforms', !this.controlOpen])
     }
@@ -80,8 +75,8 @@ export default {
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-size-controls__control">
-        <base-range-slider v-model="elWidth" label="Width icons" step="8" min="16" max="128" @change="changeWidth">
-          {{elWidth}} px
+        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="8" min="16" max="128">
+          {{ sizeIcons.width }} px
         </base-range-slider>
       </div>
       <div class="b-text-controls__control">

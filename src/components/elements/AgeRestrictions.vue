@@ -39,10 +39,6 @@ export default {
     sizeIcons () {
       return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
     }
-  },
-
-  mounted () {
-    console.log(this.path)
   }
 }
 </script>
