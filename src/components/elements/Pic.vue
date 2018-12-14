@@ -1,5 +1,5 @@
 <template>
-  <div class="b-image"></div>
+  <div class="b-image is-editable"></div>
 </template>
 
 <script>

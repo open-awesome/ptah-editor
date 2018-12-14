@@ -18,7 +18,7 @@ const DEFAULT_OPTIONS = {
     'border-radius': 0,
     'font-weight': false,
     'font-style': false,
-    'font-family': 'Roboto',
+    'font-family': 'Lato',
     'text-decoration': false,
     'justify-content': false,
     'text-align': 'center',
@@ -35,7 +35,8 @@ const DEFAULT_OPTIONS = {
   canCopy: false,
   background: false,
   shape: false, // border-radius prop
-  pseudo: false // can have a pseudo-class
+  pseudo: false, // can have a pseudo-class
+  isComplex: false
 }
 
 /**
@@ -50,7 +51,7 @@ const data = new Map([
     removable: true,
     typography: true,
     styles: {
-      'font-family': 'Roboto',
+      'font-family': 'Lato',
       'font-size': '3rem',
       'font-weight': false,
       'font-style': false,
@@ -72,7 +73,7 @@ const data = new Map([
     aligned: true,
     typography: true,
     styles: {
-      'font-family': 'Roboto',
+      'font-family': 'Lato',
       'font-size': '1.5rem',
       'font-weight': false,
       'font-style': false,
@@ -119,7 +120,6 @@ const data = new Map([
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
-    removable: true,
     alt: 'Default logo',
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     background: true,
@@ -142,7 +142,7 @@ const data = new Map([
     href: '',
     target: '_blank',
     styles: {
-      'font-family': 'Roboto',
+      'font-family': 'Lato',
       'font-size': 1.4,
       'font-weight': false,
       'font-style': false,
@@ -205,7 +205,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': 'Roboto',
+        'font-family': 'Lato',
         'text-decoration': false,
         'justify-content': false,
         'text-align': 'center',
@@ -238,7 +238,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': 'Roboto',
+        'font-family': 'Lato',
         'text-decoration': false,
         'justify-content': false,
         'width': '',
@@ -269,7 +269,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': 'Roboto',
+        'font-family': 'Lato',
         'text-decoration': false,
         'justify-content': false,
         'width': '',
@@ -383,6 +383,50 @@ const data = new Map([
       hasHeader: true,
       galleryImages: [],
       header: 'This is a short header'
+    })
+  )],
+  [types.AvailablePlatforms, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      removable: true,
+      background: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false
+      },
+      hasPlatforms: true,
+      availablePlatforms: {
+        'windows': {
+          name: 'Windows',
+          visible: true
+        },
+        'apple': {
+          name: 'Apple',
+          visible: true
+        },
+        'linuxfull': {
+          name: 'Linux',
+          visible: true
+        },
+        'steam': {
+          name: 'Steam',
+          visible: true
+        },
+        'gog': {
+          name: 'GOG Galaxy',
+          visible: true
+        }
+      },
+      colorFill: {
+        color:  '#fff'
+      },
+      sizeIcons: {
+        width: 24
+      },
+      isComplex: true
     })
   )]
 ])

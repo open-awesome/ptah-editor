@@ -89,8 +89,7 @@
         <BuilderAddSectionBar
           :builder="builder"
           title="Add Section"
-          @requestClose="closeAddSectionBar"
-          @add="onAddSection">
+          @requestClose="closeAddSectionBar">
         </BuilderAddSectionBar>
       </div>
     </transition>
@@ -232,12 +231,6 @@ export default {
     showAddSectionBar () {
       this.closeSiteSettings()
       this.toggleAddSectionMenu()
-    },
-
-    onAddSection () {
-      setTimeout(() => {
-        this.$refs.sections.lastChild.dispatchEvent(new Event('click'))
-      }, 100)
     }
   }
 }
@@ -293,7 +286,7 @@ $top-panel-height: 7.2rem
     position: absolute
     right: -24.8rem
     top: 0.8rem
-    bottom: 0.8rem
+    bottom: 0.8rem;
     display: flex
     flex-direction: column
     flex-grow: 1

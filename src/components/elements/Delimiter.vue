@@ -1,5 +1,5 @@
 <template>
-    <div class="b-delimiter"></div>
+    <div class="b-delimiter is-editable"></div>
 </template>
 
 <script>

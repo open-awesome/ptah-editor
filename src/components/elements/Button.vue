@@ -1,5 +1,7 @@
 <template>
-    <a class="b-button is-editable"></a>
+    <a class="b-button is-editable">
+      <slot></slot>
+    </a>
 </template>
 
 <script>
@@ -12,12 +14,12 @@ export default {
 .b-button
   position: relative
   font-size: 3rem
-  font-family: 'Roboto'
+  font-family: 'Lato'
   line-height: 1
   width: 20rem
   min-width: 10rem
   min-height: 5rem
-  margin: 2rem
+  margin: 1.6rem
   color: #000
   background-color: #a7a1a1
   display: flex

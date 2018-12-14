@@ -1,5 +1,7 @@
 <template>
-    <div class="b-text"></div>
+    <div class="b-text is-editable">
+      <slot></slot>
+    </div>
 </template>
 
 <script>
@@ -9,13 +11,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-text-one
+.b-text
   color: #000
   font-family: Helvetica, Arial, sans-serif
-  width: 100%
   position: relative
   text-align: center
-  min-height: 17rem
   font-size: 1.4rem
   line-height: 1.4
   display: block

@@ -38,15 +38,6 @@
         @change="styleChange"></control-background>
     </div>
 
-    <!-- color fill-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.fillColor">
-      <control-color-fill
-        :fillColor="fillColor"
-        :expand="expandFillColor"
-        @open="onExpand"
-        @change="styleChange"></control-color-fill>
-    </div>
-
     <!-- Link -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
       <control-link
@@ -59,6 +50,15 @@
         @setClass="selectAnimation"></control-link>
     </div>
 
+    <!-- Available Platforms Control-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms && settingObjectOptions.colorFill">
+      <control-available-platforms
+        :expand="expandedAvailablePlatforms"
+        @open="onExpand"
+        >
+      </control-available-platforms>
+    </div>
+
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
       <base-button
@@ -67,6 +67,7 @@
         @click="deleteElement"
       >Delete</base-button>
     </div>
+
   </div>
 </template>
 
@@ -79,7 +80,8 @@ import ControlText from './controls/TheControlText'
 import ControlBackground from './controls/TheControlBackground'
 import ControlSize from './controls/TheControlSize'
 import ControlLink from './controls/TheControlLink'
-import ControlColorFill from './controls/TheControlColorFill'
+// control for new elements
+import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.vue'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -97,7 +99,7 @@ export default {
     ControlBackground,
     ControlSize,
     ControlLink,
-    ControlColorFill
+    ControlAvailablePlatforms
   },
 
   data () {
@@ -107,7 +109,6 @@ export default {
       fontColor: '',
       styles: [],
       bgColor: '',
-      fillColor: '',
       bgImage: '',
       bgRepeat: '',
       bgSize: '',
@@ -121,8 +122,11 @@ export default {
       expandedFont: false,
       expandedBg: false,
       expandedLink: false,
-      expandFillColor: false,
-      index: null
+      index: null,
+      expandedAvailablePlatforms: false,
+      colorFill: {},
+      sizeIcons: {},
+      availablePlatforms: []
     }
   },
 
@@ -158,11 +162,6 @@ export default {
       this.styles.push({ prop: 'font-weight', value: styles['font-weight'] })
     }
 
-    /* get fill color */
-    if (styles['fill']) {
-      this.fillColor = styles['fill']
-    }
-
     /* get background */
     if (styles['background-color']) {
       this.bgColor = styles['background-color']
@@ -183,6 +182,11 @@ export default {
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
     this.textHover = this.settingObjectOptions.pseudo['color'] || ''
+
+    /* Available platforms */
+    this.availablePlatforms = this.settingObjectOptions.availablePlatforms || []
+    this.colorFill = this.settingObjectOptions.colorFill || {}
+    this.sizeIcons = this.settingObjectOptions.sizeIcons || {}
   },
 
   methods: {
@@ -266,7 +270,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'FillColor']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 

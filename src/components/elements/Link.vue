@@ -1,5 +1,7 @@
 <template>
-    <a class="b-link is-editable"></a>
+    <a class="b-link is-editable">
+      <slot></slot>
+    </a>
 </template>
 
 <script>
@@ -12,7 +14,7 @@ export default {
 .b-link
   position: relative
   font-size: 1.6rem
-  font-family: 'Roboto'
+  font-family: 'Lato'
   line-height: 1
   margin: 1.6rem
   color: #fff

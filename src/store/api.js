@@ -11,7 +11,7 @@ export default {
           slug: 'Landing',
           theme: {
             name: 'Landing',
-            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns', 'AvailableRestrictions', 'SocialCopyright']
+            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns']
           }
         },
         {
@@ -19,34 +19,6 @@ export default {
           theme: {
             name: 'Skull',
             sections: ['HeroSkull']
-          }
-        },
-        {
-          slug: 'Columns',
-          theme: {
-            name: 'Columns',
-            sections: ['ThreeColumns', 'TwoColumns']
-          }
-        },
-        {
-          slug: 'Footers',
-          theme: {
-            name: 'Footers',
-            sections: ['AvailableRestrictions', 'SocialCopyright']
-          }
-        },
-        {
-          slug: 'Products',
-          theme: {
-            name: 'Products',
-            sections: ['Products', 'ProductsExtend']
-          }
-        },
-        {
-          slug: 'System',
-          theme: {
-            name: 'System',
-            sections: ['System']
           }
         }
       ])

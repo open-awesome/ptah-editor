@@ -28,7 +28,7 @@ body
   -webkit-font-smoothing: subpixel-antialiased
   -moz-osx-font-smoothing: auto
   overflow-y: scroll
-  font-family: Lato, Roboto, Helvetica, Arial, sans-serif
+  font-family: Lato, Helvetica, Arial, sans-serif
   overflow-x: hidden
 .b-body
   &_preview
@@ -92,4 +92,11 @@ section
     border: 0.2rem rgba(255, 255, 255, 0.1) dashed
   &.full-height
     height: 100vh !important
+    .is-tablet &,
+    .is-mobile &
+      height: auto !important
+    @media only screen and (max-width: 768px)
+      &
+        height: auto !important
+
 

@@ -138,27 +138,45 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
-    <sandbox
-      class="b-sandbox"
-      ref="sandbox"
-      path="$sectionData.container"
-      direction="column"
-      >
-      <elements-list @addEl="onAddElement"></elements-list>
-      <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
-        <component class="b-hero-component" v-for="(component, index) in $sectionData.components"
-                   v-if="$sectionData.components.length !== 0"
-                   :is="component.name"
-                   :key="index"
-                   :href="$sectionData.components[index].element.href"
-                   v-html="$sectionData.components[index].element.text"
-                   :style="$sectionData.components[index].element.styles"
-                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
-        >
-        </component>
-      </draggable>
-    </sandbox>
+    <div class="b-grid">
+      <div class="b-grid__row">
+        <div class="b-grid__col-12">
+          <sandbox
+            class="b-sandbox"
+            ref="sandbox"
+            path="$sectionData.container"
+            direction="column"
+            >
+            <elements-list @addEl="onAddElement"></elements-list>
+            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+              <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+                <component class="b-hero-component"
+                  v-if="$sectionData.components[index].element.isComplex"
+                  :is="component.name"
+                  :href="$sectionData.components[index].element.href"
+                  :path="`components[${index}].element`"
+                  :style="$sectionData.components[index].element.styles"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  >
+                </component>
+                <component class="b-hero-component"
+                  v-if="!$sectionData.components[index].element.isComplex"
+                  :is="component.name"
+                  :href="$sectionData.components[index].element.href"
+                  v-html="$sectionData.components[index].element.text"
+                  :path="`components[${index}].element`"
+                  :style="$sectionData.components[index].element.styles"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  >
+                </component>
+              </div>
+            </draggable>
+          </sandbox>
+        </div>
+      </div>
+    </div>
   </section>
 </template>
 
