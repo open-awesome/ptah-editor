@@ -47,9 +47,13 @@ export default {
 .b-age-restrictions
   max-width: 100rem
   margin: 0 auto
+  min-height: 5rem
+  min-width: 5rem
   display: flex
   justify-content: center
   align-items: center
+  &.is-editable
+    border: 1px dashed #18d88b
   .is-tablet &,
   .is-mobile &
     flex-wrap: wrap

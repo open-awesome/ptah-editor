@@ -55,6 +55,8 @@ export default {
   display: flex
   justify-content: center
   align-items: center
+  &.is-editable
+    border: 1px dashed #18d88b
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     height: auto !important
