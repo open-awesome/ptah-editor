@@ -35,7 +35,8 @@ const DEFAULT_OPTIONS = {
   canCopy: false,
   background: false,
   shape: false, // border-radius prop
-  pseudo: false // can have a pseudo-class
+  pseudo: false, // can have a pseudo-class
+  isComplex: false
 }
 
 /**
@@ -424,7 +425,8 @@ const data = new Map([
       },
       sizeIcons: {
         width: 24
-      }
+      },
+      isComplex: true
     })
   )]
 ])

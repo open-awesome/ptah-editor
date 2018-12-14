@@ -11,10 +11,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-title-one
+.b-title
   color: #000
   font-family: Helvetica, Arial, sans-serif
-  width: 100%
   position: relative
   text-align: center
   display: flex

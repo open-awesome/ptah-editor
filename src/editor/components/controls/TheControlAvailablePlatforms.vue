@@ -1,6 +1,7 @@
 <script>
 import { mapState } from 'vuex'
 import VuseIcon from '@editor/components/VuseIcon'
+
 export default {
   name: 'ControlAvailablePlatforms',
 

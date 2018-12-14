@@ -76,7 +76,7 @@ export default {
 <style lang="sass" scoped>
 .b-slot
   display: flex
-  // flex-wrap: wrap
+  flex-wrap: wrap
   justify-content: center
   align-items: center
   position: relative
@@ -116,4 +116,7 @@ export default {
   /deep/
     .b-draggable-slot
       display: flex
+      flex-wrap: wrap
+      justify-content: center
+      align-items: center
 </style>
