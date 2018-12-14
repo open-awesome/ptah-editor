@@ -244,7 +244,6 @@ $h: 100vh
   font-family: Lato
   font-style: normal
   font-weight: bold
-  line-height: 3.2rem
   font-size: 1.6rem
   text-align: center
   letter-spacing: 0.28em
