@@ -32,50 +32,42 @@ export default {
       {
         name: 'Button',
         element: types.Button,
-        type: 'button',
-        isComplex: false
+        type: 'button'
       },
       {
         name: 'Link',
         element: types.Link,
-        type: 'button',
-        isComplex: false
+        type: 'button'
       },
       {
         name: 'Title',
         element: types.Title,
-        type: 'text',
-        isComplex: false
+        type: 'text'
       },
       {
         name: 'Description',
         element: types.Text,
-        type: 'text',
-        isComplex: false
+        type: 'text'
       },
       {
         name: 'Pic',
         element: types.Image,
-        type: 'image',
-        isComplex: false
+        type: 'image'
       },
       {
         name: 'Logo',
         element: types.Logo,
-        type: 'image',
-        isComplex: false
+        type: 'image'
       },
       {
         name: 'Delimiter',
         element: types.Delimiter,
-        type: 'delimiter',
-        isComplex: false
+        type: 'delimiter'
       },
       {
         name: 'AvailablePlatforms',
         element: types.AvailablePlatforms,
-        type: 'available',
-        isComplex: true
+        type: 'available'
       }
     ]
   }),

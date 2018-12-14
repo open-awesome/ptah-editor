@@ -44,11 +44,10 @@ export default {
             >
             <elements-list @addEl="onAddElement"></elements-list>
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
-              <template v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0">
+              <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
-                  v-if="component.isComplex"
+                  v-if="$sectionData.components[index].element.isComplex"
                   :is="component.name"
-                  :key="index"
                   :href="$sectionData.components[index].element.href"
                   :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
@@ -57,9 +56,8 @@ export default {
                   >
                 </component>
                 <component
-                  v-if="!component.isComplex"
+                  v-if="!$sectionData.components[index].element.isComplex"
                   :is="component.name"
-                  :key="index"
                   :href="$sectionData.components[index].element.href"
                   v-html="$sectionData.components[index].element.text"
                   :path="`components[${index}].element`"
@@ -68,7 +66,7 @@ export default {
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
                   >
                 </component>
-              </template>
+              </div>
             </draggable>
           </sandbox>
         </div>
