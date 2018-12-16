@@ -153,7 +153,9 @@ export default {
   min-width: 33%
   padding: 1.6rem 0 1.6rem 1.6rem
   flex-grow: 1
-  opacity: 0.3
+
+  &_transparent
+    opacity: .3
 
   &_active
     opacity: 1
