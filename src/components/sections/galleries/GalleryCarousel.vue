@@ -57,19 +57,24 @@ export default {
     >
       <div class="b-header">{{$sectionData.mainStyle.header}}</div>
       <div class="b-gallery-carousel-body">
-        <span class="b-gallery-carousel-body__arrow-prev">
-          <IconBase name="slidePrev" width="24" height="47" color="white" />
-        </span>
-        <span class="b-gallery-carousel-body__arrow-next">
-          <IconBase name="slidePrev" width="24" height="47" color="white" />
-        </span>
+        <template v-if="galleryImages.length > 1">
+          <span class="b-gallery-carousel-body__arrow-prev">
+            <IconBase name="slidePrev" width="24" height="47" color="white" />
+          </span>
+          <span class="b-gallery-carousel-body__arrow-next">
+            <IconBase name="slidePrev" width="24" height="47" color="white" />
+          </span>
+        </template>
         <div class="b-gallery-carousel-body__inner" :style="{transform: 'translateX(0%)'}">
           <div class="b-gallery-carousel-body__items">
             <div
               class="b-gallery-carousel-body-item"
               v-for="(item, index) in galleryImages"
               :key="index"
-              :class="{'b-gallery-carousel-body-item_active': index === 1}"
+              :class="{
+                'b-gallery-carousel-body-item_active': index === 1,
+                'b-gallery-carousel-body-item_transparent': galleryImages.length > 1
+              }"
             >
               <div class="b-gallery-carousel-body-item__img" :style="{backgroundImage: `url(${item.path})`}">
               </div>
