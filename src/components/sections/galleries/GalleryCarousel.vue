@@ -138,10 +138,14 @@ export default {
 
   &__arrow-prev
     left: 6%
+    @media (max-width: 800px)
+      left: 0
 
   &__arrow-next
     right: 6%
-    transform: rotate(180deg);
+    transform: rotate(180deg)
+    @media (max-width: 800px)
+      right: 0
 
 .b-gallery-carousel-body-item
   height: 100%
