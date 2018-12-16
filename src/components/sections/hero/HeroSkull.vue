@@ -25,16 +25,16 @@ const COMPONENTS = [
     class: 'b-text'
   },
   {
-    name: 'AvailablePlatforms',
-    element: types.AvailablePlatforms,
-    type: 'available',
-    class: 'b-available-platforms'
-  },
-  {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button'
+  },
+  {
+    name: 'AvailablePlatforms',
+    element: types.AvailablePlatforms,
+    type: 'available',
+    class: 'b-available-platforms'
   }
 ]
 
@@ -68,6 +68,12 @@ const COMPONENTS_2 = [
     element: types.Link,
     type: 'button',
     class: 'b-footer-link'
+  },
+  {
+    name: 'AgeRestrictions',
+    element: types.AgeRestrictions,
+    type: 'restrictions',
+    class: 'b-age-restrictions'
   }
 ]
 
@@ -104,7 +110,6 @@ const C_CUSTOM = [
       }
     }
   },
-  {},
   {
     element: {
       text: 'Call to Action',
@@ -357,7 +362,6 @@ export default {
   color: rgb(255, 255, 255)
   font-style: normal
   font-weight: 800
-  line-height: 4.8rem
   font-size: 3.2rem
   text-align: center
   letter-spacing: 0.2em
@@ -366,31 +370,25 @@ export default {
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important
-    line-height: 4rem
     padding: 0 1rem
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem !important
-      line-height: 4rem
       padding: 0 1rem
 .b-text
   color: rgba(255, 255, 255, 0.3)
   font-size: 2rem
-  line-height: 4rem
   text-align: center
   .is-mobile &,
   .is-tablet &
     font-size: 1.4rem !important
-    line-height: 2rem
   @media only screen and (max-width: 768px)
     &
       font-size: 1.4rem !important
-      line-height: 2rem
 .b-button
   color: #fff
   font-family: Heebo
   font-style: normal
-  line-height: 2.7
   font-size: 1.6rem
   text-align: center
   letter-spacing: 0.2em
@@ -439,7 +437,6 @@ export default {
   &-logo,
   &-game-logo
   &-copyright
-    line-height: 1.4
   .is-mobile &,
   .is-tablet &
     position: relative

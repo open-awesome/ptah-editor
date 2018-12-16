@@ -19,6 +19,7 @@ export default {
   display: flex
   align-items: center
   font-size: 2.5rem
+  line-height: 1.4
   margin: 1.6rem
   display: block
   &::selection, & ::selection

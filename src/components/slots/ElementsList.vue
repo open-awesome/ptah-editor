@@ -14,6 +14,7 @@
         <li><a href="#" @click.prevent="addDelimiter" class="b-elements__button">Delimiter</a></li>
         <li><a href="#" @click.prevent="addLogo" class="b-elements__button">Logo</a></li>
         <li><a href="#" @click.prevent="addAvailable" class="b-elements__button">Available</a></li>
+        <li><a href="#" @click.prevent="addRestrictions" class="b-elements__button">Age restrictions</a></li>
       </ul>
     </aside>
   </div>
@@ -68,6 +69,11 @@ export default {
         name: 'AvailablePlatforms',
         element: types.AvailablePlatforms,
         type: 'available'
+      },
+      {
+        name: 'AgeRestrictions',
+        element: types.AgeRestrictions,
+        type: 'restrictions'
       }
     ]
   }),
@@ -105,6 +111,10 @@ export default {
     },
     addAvailable () {
       const el = _.merge({}, Seeder.seed(this.elements[7]))
+      this.$emit('addEl', el)
+    },
+    addRestrictions () {
+      const el = _.merge({}, Seeder.seed(this.elements[8]))
       this.$emit('addEl', el)
     },
     openList () {

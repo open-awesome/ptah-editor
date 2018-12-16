@@ -320,7 +320,6 @@ $h: 100vh
   color: rgb(255, 255, 255)
   font-style: normal
   font-weight: 800
-  line-height: 6.7rem
   font-size: 4.8rem
   text-align: center
   letter-spacing: 0.15em
@@ -330,11 +329,9 @@ $h: 100vh
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important
-    line-height: 4rem
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem !important
-      line-height: 4rem
 .b-delimiter
   height: 2rem
   .is-mobile &,
@@ -349,7 +346,6 @@ $h: 100vh
   font-style: normal
   font-size: 2.4rem
   font-weight: 400
-  line-height: 4rem
   text-align: center
   letter-spacing: 0.15em
   text-transform: uppercase
@@ -357,15 +353,12 @@ $h: 100vh
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important
-    line-height: 4rem
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem !important
-      line-height: 4rem
 .b-text
   color: rgba(255, 255, 255, 0.3)
   font-size: 1.6rem
-  line-height: 2.8rem
   text-align: center
   .is-mobile &,
   .is-tablet &
@@ -380,7 +373,6 @@ $h: 100vh
   font-family: Lato
   font-style: normal
   font-size: 1.4rem
-  line-height: 2.8rem
   text-align: center
   letter-spacing: 0.28em
   text-transform: uppercase

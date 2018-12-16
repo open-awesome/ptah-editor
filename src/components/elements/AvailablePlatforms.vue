@@ -2,7 +2,7 @@
   <div class="b-available-platforms">
     <div class="b-available-platforms__item"
       v-for="(value, key) in platforms" :key="key"
-      :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"
+      v-if="platforms[key].visible"
       >
       <a class="b-available-platforms__item-button flex flex_center"
         :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px'  }"
@@ -51,9 +51,12 @@ export default {
   max-width: 100rem
   margin: 1.6rem
   min-height: 5rem
+  min-width: 5rem
   display: flex
   justify-content: center
   align-items: center
+  &.is-editable
+    border: 1px dashed #18d88b
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     height: auto !important
@@ -64,8 +67,6 @@ export default {
   &__item
     position: relative
     margin: 1.6rem
-    &_opacity
-      display: none
     &-button
       border: none
       position: relative
