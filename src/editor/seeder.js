@@ -526,7 +526,7 @@ const data = new Map([
         'instagram': {
           name: 'Instagram',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         },
         'vk': {
@@ -550,13 +550,13 @@ const data = new Map([
         'kickstarter': {
           name: 'Kickstarter',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         },
         'wechat': {
           name: 'Wechat',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         }
       },
