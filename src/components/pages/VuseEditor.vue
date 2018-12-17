@@ -46,6 +46,7 @@ import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
 // new elements
 import AvailablePlatforms from '@components/elements/AvailablePlatforms'
 import AgeRestrictions from '@components/elements/AgeRestrictions'
+import SocialNetworks from '@components/elements/SocialNetworks'
 
 import store from '@store'
 
@@ -62,7 +63,8 @@ Vuse.mix({
     Logo,
     Delimiter,
     AvailablePlatforms,
-    AgeRestrictions
+    AgeRestrictions,
+    SocialNetworks
   }
 })
 

@@ -68,6 +68,15 @@
       </control-age-restrictions>
     </div>
 
+    <!-- Social Networks Control-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasNetworks">
+      <control-social-networks
+        :expand="expandedSocialNetworks"
+        @open="onExpand"
+        >
+      </control-social-networks>
+    </div>
+
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
       <base-button
@@ -92,6 +101,7 @@ import ControlLink from './controls/TheControlLink'
 // control for new elements
 import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.vue'
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
+import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -110,7 +120,8 @@ export default {
     ControlSize,
     ControlLink,
     ControlAvailablePlatforms,
-    ControlAgeRestrictions
+    ControlAgeRestrictions,
+    ControlSocialNetworks
   },
 
   data () {
@@ -136,10 +147,12 @@ export default {
       expandedLink: false,
       expandedAvailablePlatforms: false,
       expandedAgeRestrictions: false,
+      expandedSocialNetworks: false,
       colorFill: {},
       sizeIcons: {},
       availablePlatforms: {},
-      ageRestrictions: {}
+      ageRestrictions: {},
+      socialNetworks: {}
     }
   },
 
@@ -198,6 +211,11 @@ export default {
 
     /* Available platforms */
     this.availablePlatforms = this.settingObjectOptions.availablePlatforms || {}
+
+    /* Social networks */
+    this.socialNetworks = this.settingObjectOptions.socialNetworks || {}
+
+    /* Color for svg icons */
     this.colorFill = this.settingObjectOptions.colorFill || {}
 
     /* Size icons */

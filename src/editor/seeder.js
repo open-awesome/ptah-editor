@@ -499,7 +499,68 @@ const data = new Map([
       },
       isComplex: true
     })
-  )]
+  )],
+  [types.SocialNetworks, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      removable: true,
+      target: '_blank',
+      href: '',
+      background: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false
+      },
+      hasNetworks: true,
+      socialNetworks: {
+        'facebook': {
+          name: 'Facebook',
+          visible: true,
+          button: types.Icon
+        },
+        'instagram': {
+          name: 'Instagram',
+          visible: true,
+          button: types.Icon
+        },
+        'vk': {
+          name: 'Vk',
+          visible: true,
+          button: types.Icon
+        },
+        'twitter': {
+          name: 'Twitter',
+          visible: true,
+          button: types.Icon
+        },
+        'youtube': {
+          name: 'Youtube',
+          visible: true,
+          button: types.Icon
+        },
+        'kickstarter': {
+          name: 'Kickstarter',
+          visible: true,
+          button: types.Icon
+        },
+        'wechat': {
+          name: 'Wechat',
+          visible: true,
+          button: types.Icon
+        }
+      },
+      colorFill: {
+        color:  '#fff'
+      },
+      sizeIcons: {
+        width: 24
+      },
+      isComplex: true
+    })
+  )],
 ])
 
 export default class Seeder {
