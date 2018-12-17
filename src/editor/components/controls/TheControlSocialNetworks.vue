@@ -1,0 +1,253 @@
+<script>
+import { mapState } from 'vuex'
+import VuseIcon from '@editor/components/VuseIcon'
+
+export default {
+  name: 'ControlSocialNetworks',
+
+  components: {
+    VuseIcon
+  },
+
+  props: {
+    expand: {
+      type: Boolean,
+      required: true
+    }
+  },
+
+  data () {
+    return {
+      controlOpen: false,
+      color: '',
+      elWidth: 0,
+      vTarget: '',
+      networks: []
+    }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ]),
+
+    socialNetworks () {
+      return this.settingObjectOptions.socialNetworks
+    },
+
+    colorFill () {
+      return this.settingObjectOptions.colorFill
+    },
+
+    sizeIcons () {
+      return this.settingObjectOptions.sizeIcons
+    },
+
+    settings () {
+      return this.settingObjectOptions.settings
+    }
+  },
+
+  watch: {
+    expand () {
+      this.controlOpen = this.expand
+    }
+  },
+
+  methods: {
+    visible (key) {
+      this.closeModal()
+      this.networks[key].visible = !this.networks[key].visible
+    },
+    changeColor () {
+      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
+      this.colorFill['color'] = color
+    },
+    onClickTitle () {
+      this.$emit('open', ['SocialNetworks', !this.controlOpen])
+    },
+    changeTarget () {
+      this.settings.target = this.vTarget ? '_blank' : '_self'
+    },
+    closeModal () {
+      for (var key in this.networks) {
+        this.networks[key].expand = false
+      }
+    },
+    applyLink () {
+      this.closeModal()
+    },
+    openModal (key) {
+      this.closeModal()
+      this.$nextTick(function () {
+        this.networks[key].expand = !this.networks[key].expand
+      })
+    }
+  },
+
+  mounted () {
+    this.color = this.colorFill.color
+    this.elWidth = this.sizeIcons.width
+    this.vTarget = this.settings.target
+    this.networks = this.socialNetworks
+  }
+}
+</script>
+
+<template>
+  <div class="b-text-controls">
+    <div class="b-text-controls__header" @click="onClickTitle">
+      <span>Icons settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+    </div>
+    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
+      <div class="b-size-controls__control">
+        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="8" min="16" max="128">
+          {{ sizeIcons.width }} px
+        </base-range-slider>
+      </div>
+      <div class="b-text-controls__control">
+        <base-color-picker label="Color icons" v-model="color" @change="changeColor"></base-color-picker>
+      </div>
+      <div class="b-text-controls__control">
+        <div>Visible networks</div>
+        <div class="b-social-networks">
+          <div class="b-social-networks__item is-editable"
+            v-for="(value, key) in networks" :key="key"
+            :class="{ 'b-social-networks__item_opacity' : false === networks[key].visible, 'b-social-networks__item_select' : networks[key].expand }"
+            >
+
+            <span class="b-socials-networks__item-eye"
+              @click="visible(key)"
+              title="Show / Hide"
+              >
+              <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
+            </span>
+
+            <a class="b-social-networks__item-button"
+              @click="visible(key)"
+              :title="networks[key].name"
+              >
+              {{ networks[key].name }}
+            </a>
+
+            <a class="b-social-networks__item-set-link"
+              v-if="networks[key].visible"
+              @click="openModal(key)"
+              :class="{ 'b-social-networks__item-set-link_color' : networks[key].url !== '' }"
+              >
+              <icon-base name="link" width="15" color="black"></icon-base>
+            </a>
+
+            <div class="b-social-networks__item-set-link-modal" v-if="networks[key].expand">
+              <div class="b-link-controls__control">
+                <base-text-field v-model="networks[key].url" label="URL" placeholder="Type link here"></base-text-field>
+                <BaseButton
+                  :color="'blue'"
+                  :transparent="false"
+                  size="small"
+                  @click="applyLink"
+                  >
+                  Apply
+                </BaseButton>
+              </div>
+            </div>
+
+          </div>
+        </div><!--/.b-social-networks-->
+      </div>
+      <div class="b-link-controls__control">
+        <input type="checkbox" id="target" v-model="vTarget" @change="changeTarget">
+        <label for="target">open links in new window</label>
+      </div>
+    </base-dropdown>
+  </div>
+</template>
+
+<style lang="sass" scoped>
+.b-text-controls
+  &__header
+    font-size: 1.6rem
+    height: 3.2rem
+    color: #272727
+    display: flex
+    align-items: center
+    cursor: pointer
+    i
+      margin-left: 5px
+      margin-bottom: -5px
+      transform: rotate(180deg)
+      &.dropped
+        transform: rotate(0deg)
+  &__control
+    margin-top: 2.2rem
+
+.b-social-networks
+  width: 100%
+  max-width: 100rem
+  margin: 1rem auto
+  display: inline-block
+  min-height: 5rem
+  .is-tablet &,
+  .is-mobile &
+    flex-wrap: wrap
+    height: auto !important
+  @media only screen and (max-width: 768px)
+    &
+      flex-wrap: wrap
+      height: auto !important
+  &__item
+    position: relative
+    margin: 0.5rem 0
+    display: block
+    color: #4D7DD8
+    fill: #4D7DD8
+    display: flex
+    justify-content: flex-start
+    align-items: center
+    cursor: pointer
+    &_opacity
+      opacity: 0.2
+      color: #000
+      fill: #000
+    &-button
+      padding: 0 1rem
+      border: none
+      position: relative
+      display: inline-block
+      user-select: none
+      text-align: left
+      width: 15rem
+      &:hover
+        filter: brightness(120%)
+      &:active
+        filter: brightness(50%)
+      .vuse-icon
+         width: 100%
+    &-eye
+      border: none
+      background: transparent
+      padding: 0 0.5rem
+      display: inline-block
+    &-set-link
+      &-modal
+        width: 24rem
+        background: #fff
+        position: absolute
+        right: -25rem
+        top: -1.5rem
+        z-index: 1
+        box-shadow: 0px 0.4rem 1rem rgba(0, 0, 0, 0.35)
+        padding: 1.6rem
+        &:before
+          content: ""
+          position: absolute
+          width: 1.4rem
+          height: 1.4rem
+          top: 1.7rem
+          left: -.7rem
+          background: #FFFFFF
+          transform: rotate(-45deg)
+          z-index: 2
+      &_color *
+        fill: #4D7DD8
+</style>

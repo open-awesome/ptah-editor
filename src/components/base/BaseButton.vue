@@ -22,7 +22,8 @@ export default {
       validator (value) {
         const values = [
           'default',
-          'middle'
+          'middle',
+          'small'
         ]
         return values.indexOf(value) !== -1
       }
@@ -87,7 +88,7 @@ export default {
   outline: none
   transition: color .3s cubic-bezier(.2,.85,.4,1.275)
   font-size: 1.6rem
-  line-height: 4.4rem
+  line-height: 2.2
   margin: 0.4rem
   =active
     background-color: #436FEE
@@ -98,11 +99,13 @@ export default {
     +active
   &_default
     width: 20.8rem
-    height: 4.8rem
   &_middle
     width: 11rem
-    height: 4rem
-    line-height: 3.6rem
+  &_small
+    font-size: 1.2rem
+    line-height: 2
+    width: 8rem
+    height: auto
   &_pressed
     +active
   &_black

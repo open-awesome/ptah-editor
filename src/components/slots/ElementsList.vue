@@ -15,6 +15,7 @@
         <li><a href="#" @click.prevent="addLogo" class="b-elements__button">Logo</a></li>
         <li><a href="#" @click.prevent="addAvailable" class="b-elements__button">Available</a></li>
         <li><a href="#" @click.prevent="addRestrictions" class="b-elements__button">Age restrictions</a></li>
+        <li><a href="#" @click.prevent="addSocial" class="b-elements__button">Social nets</a></li>
       </ul>
     </aside>
   </div>
@@ -74,6 +75,11 @@ export default {
         name: 'AgeRestrictions',
         element: types.AgeRestrictions,
         type: 'restrictions'
+      },
+      {
+        name: 'SocialNetworks',
+        element: types.SocialNetworks,
+        type: 'networks'
       }
     ]
   }),
@@ -115,6 +121,10 @@ export default {
     },
     addRestrictions () {
       const el = _.merge({}, Seeder.seed(this.elements[8]))
+      this.$emit('addEl', el)
+    },
+    addSocial () {
+      const el = _.merge({}, Seeder.seed(this.elements[9]))
       this.$emit('addEl', el)
     },
     openList () {
@@ -194,10 +204,9 @@ export default {
     border-radius: 0.4rem
     padding: 0.8rem 1.6rem
     width: 100%
-    height: $slot-step
     text-decoration: none
     font-size: 1.4rem
-    line-height: 3.4rem
+    line-height: 1
     letter-spacing: -0.02em
     text-align: left
     &:hover
