@@ -75,6 +75,7 @@ export default {
 
 <style lang="sass" scoped>
 .b-slot
+  $this: &
   display: flex
   flex-wrap: wrap
   justify-content: center
@@ -95,12 +96,14 @@ export default {
     position: absolute
     top: 5.2rem
     right: 0px
-    padding: 5px
+    padding: 0.5rem
     overflow: hidden
-    opacity: .3
+    opacity: 0
     z-index: 1
-    &:hover
-      opacity: 1
+    #{$this}:hover &
+      opacity: 0.3
+      &:hover
+        opacity: 1
     ul
       list-style: none
       margin: 0
@@ -109,7 +112,7 @@ export default {
       &:last-child
         border-bottom: none
       li
-        padding: .8rem
+        padding: .4rem
         cursor: pointer
         &:hover
           background: rgba(67, 111, 238, 0.15)

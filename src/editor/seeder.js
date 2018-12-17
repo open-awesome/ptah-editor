@@ -503,8 +503,9 @@ const data = new Map([
   [types.SocialNetworks, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       removable: true,
-      target: '_blank',
-      href: '',
+      settings: {
+        target : '_blank'
+      },
       background: true,
       styles: {
         'background-image': '',
@@ -518,38 +519,45 @@ const data = new Map([
       socialNetworks: {
         'facebook': {
           name: 'Facebook',
+          expand: false,
           visible: true,
-          button: types.Icon
+          url: ''
         },
         'instagram': {
           name: 'Instagram',
+          expand: false,
           visible: true,
-          button: types.Icon
+          url: ''
         },
         'vk': {
           name: 'Vk',
+          expand: false,
           visible: true,
-          button: types.Icon
+          url: ''
         },
         'twitter': {
           name: 'Twitter',
+          expand: false,
           visible: true,
-          button: types.Icon
+          url: ''
         },
         'youtube': {
           name: 'Youtube',
+          expand: false,
           visible: true,
-          button: types.Icon
+          url: ''
         },
         'kickstarter': {
           name: 'Kickstarter',
+          expand: false,
           visible: true,
-          button: types.Icon
+          url: ''
         },
         'wechat': {
           name: 'Wechat',
+          expand: false,
           visible: true,
-          button: types.Icon
+          url: ''
         }
       },
       colorFill: {

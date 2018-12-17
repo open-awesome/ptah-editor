@@ -20,7 +20,9 @@ export default {
     return {
       controlOpen: false,
       color: '',
-      elWidth: 0
+      elWidth: 0,
+      vTarget: '',
+      networks: []
     }
   },
 
@@ -29,7 +31,7 @@ export default {
       'settingObjectOptions'
     ]),
 
-    networks () {
+    socialNetworks () {
       return this.settingObjectOptions.socialNetworks
     },
 
@@ -39,6 +41,10 @@ export default {
 
     sizeIcons () {
       return this.settingObjectOptions.sizeIcons
+    },
+
+    settings () {
+      return this.settingObjectOptions.settings
     }
   },
 
@@ -50,6 +56,7 @@ export default {
 
   methods: {
     visible (key) {
+      this.closeModal()
       this.networks[key].visible = !this.networks[key].visible
     },
     changeColor () {
@@ -58,12 +65,31 @@ export default {
     },
     onClickTitle () {
       this.$emit('open', ['SocialNetworks', !this.controlOpen])
+    },
+    changeTarget () {
+      this.settings.target = this.vTarget ? '_blank' : '_self'
+    },
+    closeModal () {
+      for (var key in this.networks) {
+        this.networks[key].expand = false
+      }
+    },
+    applyLink () {
+      this.closeModal()
+    },
+    openModal (key) {
+      this.closeModal()
+      this.$nextTick(function () {
+        this.networks[key].expand = !this.networks[key].expand
+      })
     }
   },
 
   mounted () {
     this.color = this.colorFill.color
     this.elWidth = this.sizeIcons.width
+    this.vTarget = this.settings.target
+    this.networks = this.socialNetworks
   }
 }
 </script>
@@ -87,24 +113,51 @@ export default {
         <div class="b-social-networks">
           <div class="b-social-networks__item is-editable"
             v-for="(value, key) in networks" :key="key"
-            :class="{ 'b-social-networks__item_opacity' : false === networks[key].visible }"
-            @click="visible(key)"
+            :class="{ 'b-social-networks__item_opacity' : false === networks[key].visible, 'b-social-networks__item_select' : networks[key].expand }"
             >
 
             <span class="b-socials-networks__item-eye"
+              @click="visible(key)"
               title="Show / Hide"
               >
               <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
             </span>
 
             <a class="b-social-networks__item-button"
+              @click="visible(key)"
               :title="networks[key].name"
               >
               {{ networks[key].name }}
             </a>
 
+            <a class="b-social-networks__item-set-link"
+              v-if="networks[key].visible"
+              @click="openModal(key)"
+              :class="{ 'b-social-networks__item-set-link_color' : networks[key].url !== '' }"
+              >
+              <icon-base name="link" width="15" color="black"></icon-base>
+            </a>
+
+            <div class="b-social-networks__item-set-link-modal" v-if="networks[key].expand">
+              <div class="b-link-controls__control">
+                <base-text-field v-model="networks[key].url" label="URL" placeholder="Type link here"></base-text-field>
+                <BaseButton
+                  :color="'blue'"
+                  :transparent="false"
+                  size="small"
+                  @click="applyLink"
+                  >
+                  Apply
+                </BaseButton>
+              </div>
+            </div>
+
           </div>
         </div><!--/.b-social-networks-->
+      </div>
+      <div class="b-link-controls__control">
+        <input type="checkbox" id="target" v-model="vTarget" @change="changeTarget">
+        <label for="target">open links in new window</label>
       </div>
     </base-dropdown>
   </div>
@@ -148,6 +201,9 @@ export default {
     display: block
     color: #4D7DD8
     fill: #4D7DD8
+    display: flex
+    justify-content: flex-start
+    align-items: center
     cursor: pointer
     &_opacity
       opacity: 0.2
@@ -159,6 +215,8 @@ export default {
       position: relative
       display: inline-block
       user-select: none
+      text-align: left
+      width: 15rem
       &:hover
         filter: brightness(120%)
       &:active
@@ -170,4 +228,26 @@ export default {
       background: transparent
       padding: 0 0.5rem
       display: inline-block
+    &-set-link
+      &-modal
+        width: 24rem
+        background: #fff
+        position: absolute
+        right: -25rem
+        top: -1.5rem
+        z-index: 1
+        box-shadow: 0px 0.4rem 1rem rgba(0, 0, 0, 0.35)
+        padding: 1.6rem
+        &:before
+          content: ""
+          position: absolute
+          width: 1.4rem
+          height: 1.4rem
+          top: 1.7rem
+          left: -.7rem
+          background: #FFFFFF
+          transform: rotate(-45deg)
+          z-index: 2
+      &_color *
+        fill: #4D7DD8
 </style>

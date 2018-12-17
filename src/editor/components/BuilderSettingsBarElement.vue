@@ -152,7 +152,8 @@ export default {
       sizeIcons: {},
       availablePlatforms: {},
       ageRestrictions: {},
-      socialNetworks: {}
+      socialNetworks: {},
+      settings: ''
     }
   },
 
@@ -214,6 +215,7 @@ export default {
 
     /* Social networks */
     this.socialNetworks = this.settingObjectOptions.socialNetworks || {}
+    this.settings = this.settingObjectOptions.settings || {}
 
     /* Color for svg icons */
     this.colorFill = this.settingObjectOptions.colorFill || {}

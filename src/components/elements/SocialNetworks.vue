@@ -6,8 +6,8 @@
       >
       <a class="b-social-networks__item-button flex flex_center"
         :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px'  }"
-        :target="networks[key].button.target"
-        :href="networks[key].button.href"
+        :target="target"
+        :href="networks[key].url"
         :title="networks[key].name"
         >
         <VuseIcon :name="key"></VuseIcon>
@@ -41,6 +41,9 @@ export default {
     },
     sizeIcons () {
       return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
+    },
+    target () {
+      return this.$section.get(`$sectionData.${this.path}.settings.target`)
     }
   }
 }
