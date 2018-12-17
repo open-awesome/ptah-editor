@@ -43,7 +43,7 @@ export default {
 
   created () {
     this.elLink = this.link
-    this.elTarget = !!this.target
+    this.elTarget = this.target === '_blank'
     this.bgHoverColor = this.hoverBgColor
     this.textHoverColor = this.hoverTextColor
     this.animation = this.animationClass
@@ -51,8 +51,9 @@ export default {
   },
 
   watch: {
-    elTarget (oldVal, newVal) {
-      this.$emit('setOption', ['target', this.elTarget ? '_blank' : '_self'])
+    elTarget (value) {
+      let target = (value) ? '_blank' : '_self'
+      this.$emit('setOption', ['target', target])
     },
 
     expand () {
