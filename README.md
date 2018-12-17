@@ -2,7 +2,7 @@
 
 # Ptah? What is this?
 
-Ptah is a free, powerful and open source Web Builder Framework helping you to fast create moderl cross browser landing pages for the games and e-commerce. Mainly Ptah designed to be used as a separate product or like edit component inside CMS to speed up the creation of landing pages. 
+Ptah is a free, powerful and open source Web Builder Framework helping you to fast create modern cross browser landing pages for the games and e-commerce. Mainly Ptah designed to be used as a separate product or like edit component inside CMS to speed up the creation of landing pages. 
 
 Editor and components based on Vue components, created as editable sections with slot elements in it. Editor allow you both to create page prototypes and ready to use pages which are ready to export as [PWA](https://developers.google.com/web/progressive-web-apps/) projects in zip arhives ready to deploy on your server. 
 
