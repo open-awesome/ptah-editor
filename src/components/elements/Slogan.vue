@@ -22,7 +22,7 @@ export default {
   background-repeat: no-repeat
   max-width: 98rem
   max-height: 90%
-  font-size: 4rem
+  font-size: 4.8rem
   line-height: 1.2
   padding: 3.2rem 6.4rem
   color: #fff

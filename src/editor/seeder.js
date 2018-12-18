@@ -586,7 +586,7 @@ const data = new Map([
       typography: true,
       styles: {
         'font-family': 'Lato',
-        'font-size':  2,
+        'font-size':  4.8,
         'font-weight': false,
         'font-style': false,
         'text-decoration': false,

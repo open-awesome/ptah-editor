@@ -64,6 +64,7 @@ export default {
   mounted () {
     this.color = this.colorFill.color
     this.elWidth = this.sizeIcons.width
+    this.controlOpen = this.expand
   }
 }
 </script>

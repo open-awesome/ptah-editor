@@ -146,9 +146,9 @@ export default {
       expandedFont: false,
       expandedBg: false,
       expandedLink: false,
-      expandedAvailablePlatforms: false,
-      expandedAgeRestrictions: false,
-      expandedSocialNetworks: false,
+      expandedAvailablePlatforms: true,
+      expandedAgeRestrictions: true,
+      expandedSocialNetworks: true,
       colorFill: {},
       sizeIcons: {},
       availablePlatforms: {},
@@ -311,7 +311,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 

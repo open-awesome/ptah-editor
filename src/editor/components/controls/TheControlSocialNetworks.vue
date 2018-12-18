@@ -90,6 +90,7 @@ export default {
     this.elWidth = this.sizeIcons.width
     this.vTarget = this.settings.target
     this.networks = this.socialNetworks
+    this.controlOpen = this.expand
   }
 }
 </script>
