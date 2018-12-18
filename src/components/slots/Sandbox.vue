@@ -37,9 +37,8 @@ export default {
      * @param value {string} - css rule value
      * @param dir {boolean} - true - vertical, false - horizontal
      */
-    align (value, dir) {
-      let rule = (dir) ? 'justify-content' : 'align-items'
-      this.setStyle({ [rule]: value })
+    align (value) {
+      this.setStyle({ 'align-items': value })
     },
     changeDirection (target, dir) {
       target = target.closest('li')
@@ -61,18 +60,18 @@ export default {
   <div class="b-slot">
       <div class="b-slot__tune ptah-control">
         <ul v-show="isRowDir">
-          <li @click.stop="align('flex-start', true)"><icon-base name="groupTop"></icon-base></li>
-          <li @click.stop="align('center', true)"><icon-base name="groupCenterVertical"></icon-base></li>
-          <li @click.stop="align('flex-end', true)"><icon-base name="groupBottom"></icon-base></li>
+          <li @click.stop="align('flex-start')"><icon-base name="groupTop"></icon-base></li>
+          <li @click.stop="align('center')"><icon-base name="groupCenterVertical"></icon-base></li>
+          <li @click.stop="align('flex-end')"><icon-base name="groupBottom"></icon-base></li>
         </ul>
         <ul v-show="isColumnDir">
-          <li @click.stop="align('flex-end', false)"><icon-base name="groupRight"></icon-base></li>
-          <li @click.stop="align('center', false)"><icon-base name="groupCenterHorizontal"></icon-base></li>
-          <li @click.stop="align('flex-start', false)"><icon-base name="groupLeft"></icon-base></li>
+          <li @click.stop="align('flex-end')"><icon-base name="groupRight"></icon-base></li>
+          <li @click.stop="align('center')"><icon-base name="groupCenterHorizontal"></icon-base></li>
+          <li @click.stop="align('flex-start')"><icon-base name="groupLeft"></icon-base></li>
         </ul>
         <ul>
-          <li :class="{ active: isColumnDir }" @click.stop="changeDirection($event.target, 'column')"><icon-base name="groupColumn"></icon-base></li>
-          <li :class="{ active: isRowDir }" @click.stop="changeDirection($event.target, 'row')"><icon-base name="groupRow"></icon-base></li>
+          <li :class="{ active: isRowDir }" @click.stop="changeDirection($event.target, 'row')"><icon-base name="groupColumn"></icon-base></li>
+          <li :class="{ active: isColumnDir }" @click.stop="changeDirection($event.target, 'column')"><icon-base name="groupRow"></icon-base></li>
         </ul>
       </div>
       <slot>
