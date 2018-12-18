@@ -44,6 +44,7 @@
         :link="elLink"
         :hoverBgColor="bgHover"
         :expand="expandedLink"
+        :target="elTarget"
         @open="onExpand"
         @setOption="setOption"
         @setPseudo="changePseudoStyle"
@@ -204,7 +205,7 @@ export default {
 
     /* Link */
     this.elLink = this.settingObjectOptions.href || ''
-    this.elTarget = !!this.settingObjectOptions.target
+    this.elTarget = this.settingObjectOptions.target
 
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
@@ -249,7 +250,9 @@ export default {
       this.updateText()
       let obj = {}
       obj[option[0]] = option[1]
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
+      let merge = _.merge({}, this.settingObjectOptions, obj)
+      delete merge.element
+      this.updateSettingOptions(merge)
     },
 
     /**
