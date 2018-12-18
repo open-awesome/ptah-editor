@@ -16,6 +16,7 @@
         <li><a href="#" @click.prevent="addAvailable" class="b-elements__button">Available</a></li>
         <li><a href="#" @click.prevent="addRestrictions" class="b-elements__button">Age restrictions</a></li>
         <li><a href="#" @click.prevent="addSocial" class="b-elements__button">Social nets</a></li>
+        <li><a href="#" @click.prevent="addSlogan" class="b-elements__button">Slogan</a></li>
       </ul>
     </aside>
   </div>
@@ -80,6 +81,11 @@ export default {
         name: 'SocialNetworks',
         element: types.SocialNetworks,
         type: 'networks'
+      },
+      {
+        name: 'Slogan',
+        element: types.Slogan,
+        type: 'slogan'
       }
     ]
   }),
@@ -125,6 +131,10 @@ export default {
     },
     addSocial () {
       const el = _.merge({}, Seeder.seed(this.elements[9]))
+      this.$emit('addEl', el)
+    },
+    addSlogan () {
+      const el = _.merge({}, Seeder.seed(this.elements[10]))
       this.$emit('addEl', el)
     },
     openList () {

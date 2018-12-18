@@ -575,6 +575,35 @@ const data = new Map([
       isComplex: true
     })
   )],
+  [types.Slogan, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      resizable: true,
+      removable: true,
+      background: true,
+      text: 'Enter game slogan',
+      aligned: true,
+      typography: true,
+      styles: {
+        'font-family': 'Lato',
+        'font-size':  2,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'text-align': false,
+        'color': '#fff',
+        'background-image': 'url(https://gn793.cdn.stg.gamenet.ru/0/79yeF/o_1PRuEc.png)',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'justify-content': false,
+        'width': 320,
+        'height': 64,
+        'border-radius': 0
+      }
+    })
+  )],
 ])
 
 export default class Seeder {

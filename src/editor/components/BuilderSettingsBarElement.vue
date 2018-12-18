@@ -199,8 +199,8 @@ export default {
     this.bgSize = styles['background-size'] || 'cover'
 
     /* Get element size */
-    this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetWidth
-    this.elWidth = styles['width'] || this.settingObjectOptions.element.offsetHeight
+    this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetHeight
+    this.elWidth = styles['width'] || this.settingObjectOptions.element.offsetWidth
     this.elRadius = styles['border-radius'] || 0
 
     /* Link */
