@@ -89,6 +89,7 @@
         <BuilderAddSectionBar
           :builder="builder"
           title="Add Section"
+          @add="onAddSection"
           @requestClose="closeAddSectionBar">
         </BuilderAddSectionBar>
       </div>
@@ -231,6 +232,12 @@ export default {
     showAddSectionBar () {
       this.closeSiteSettings()
       this.toggleAddSectionMenu()
+    },
+
+    onAddSection () {
+      setTimeout(() => {
+        this.$refs.sections.lastChild.dispatchEvent(new Event('click'))
+      }, 100)
     }
   }
 }
