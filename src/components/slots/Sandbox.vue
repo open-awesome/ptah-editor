@@ -70,8 +70,8 @@ export default {
           <li @click.stop="align('flex-start')"><icon-base name="groupLeft"></icon-base></li>
         </ul>
         <ul>
-          <li :class="{ active: isRowDir }" @click.stop="changeDirection($event.target, 'row')"><icon-base name="groupColumn"></icon-base></li>
-          <li :class="{ active: isColumnDir }" @click.stop="changeDirection($event.target, 'column')"><icon-base name="groupRow"></icon-base></li>
+          <li :class="{ active: isRowDir }" @click.stop="changeDirection($event.target, 'row')"><icon-base name="groupRow"></icon-base></li>
+          <li :class="{ active: isColumnDir }" @click.stop="changeDirection($event.target, 'column')"><icon-base name="groupColumn"></icon-base></li>
         </ul>
       </div>
       <slot>
