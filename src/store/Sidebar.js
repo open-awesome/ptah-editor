@@ -20,7 +20,9 @@ export default {
       //   id: 'versionHistory',
       //   name: 'Version history'
       // }
-    ]
+    ],
+    builderSections: [],
+    builderGroups: []
   },
 
   mutations: {
@@ -50,6 +52,12 @@ export default {
     },
     setExpandedMenuItem (state, item) {
       state.expandedMenuItem = item
+    },
+    setBuilderSections (state, array) {
+      state.builderSections = array
+    },
+    setBuilderGroups (state, groups) {
+      state.builderGroups = groups
     }
   },
 
@@ -151,6 +159,14 @@ export default {
         type,
         options: elementOptions
       })
+    },
+
+    updateBuilderSections ({ commit }, sectionsArray) {
+      commit('setBuilderSections', sectionsArray)
+    },
+
+    updateBuilderGroups ({ commit }, groups) {
+      commit('setBuilderGroups', groups)
     }
   },
 

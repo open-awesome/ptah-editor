@@ -3,6 +3,10 @@
   <base-scroll-container backgroundBar="#999">
     <div class="b-section-settings__inner">
       <div class="b-section-settings__control">
+        <control-section-layouts :builder="builder"></control-section-layouts>
+      </div>
+
+      <div class="b-section-settings__control">
         <base-label>Full screen height</base-label>
         <BaseSwitcher v-model="fullScreen" @change="setHeight" />
       </div>
@@ -98,9 +102,10 @@ import { mapState, mapActions } from 'vuex'
 
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
+import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
 
 export default {
-  components: { ControlSectionProducts },
+  components: { ControlSectionProducts, ControlSectionLayouts },
   name: 'BuilderSettingsBarSection',
 
   props: {
