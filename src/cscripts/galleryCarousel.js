@@ -31,7 +31,7 @@ export function initGalleryCarousel() {
             carouselBody.querySelector('.b-gallery-carousel-body__items').appendChild(item);
           }
 
-          if (index === 2) {
+          if ((items.length === 2 && index === 0) || index === 2) {
             item.classList.add('b-gallery-carousel-body-item_active')
           }
         })
