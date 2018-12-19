@@ -18,7 +18,7 @@ const DEFAULT_OPTIONS = {
     'border-radius': 0,
     'font-weight': false,
     'font-style': false,
-    'font-family': 'Roboto',
+    'font-family': 'Lato',
     'text-decoration': false,
     'justify-content': false,
     'text-align': 'center',
@@ -35,7 +35,8 @@ const DEFAULT_OPTIONS = {
   canCopy: false,
   background: false,
   shape: false, // border-radius prop
-  pseudo: false // can have a pseudo-class
+  pseudo: false, // can have a pseudo-class
+  isComplex: false
 }
 
 /**
@@ -50,7 +51,7 @@ const data = new Map([
     removable: true,
     typography: true,
     styles: {
-      'font-family': 'Roboto',
+      'font-family': 'Lato',
       'font-size': '3rem',
       'font-weight': false,
       'font-style': false,
@@ -72,7 +73,7 @@ const data = new Map([
     aligned: true,
     typography: true,
     styles: {
-      'font-family': 'Roboto',
+      'font-family': 'Lato',
       'font-size': '1.5rem',
       'font-weight': false,
       'font-style': false,
@@ -119,7 +120,6 @@ const data = new Map([
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
-    removable: true,
     alt: 'Default logo',
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     background: true,
@@ -142,7 +142,7 @@ const data = new Map([
     href: '',
     target: '_blank',
     styles: {
-      'font-family': 'Roboto',
+      'font-family': 'Lato',
       'font-size': 1.4,
       'font-weight': false,
       'font-style': false,
@@ -205,7 +205,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': 'Roboto',
+        'font-family': 'Lato',
         'text-decoration': false,
         'justify-content': false,
         'text-align': 'center',
@@ -238,7 +238,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': 'Roboto',
+        'font-family': 'Lato',
         'text-decoration': false,
         'justify-content': false,
         'width': '',
@@ -269,7 +269,7 @@ const data = new Map([
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
-        'font-family': 'Roboto',
+        'font-family': 'Lato',
         'text-decoration': false,
         'justify-content': false,
         'width': '',
@@ -384,7 +384,197 @@ const data = new Map([
       galleryImages: [],
       header: 'This is a short header'
     })
-  )]
+  )],
+  [types.AvailablePlatforms, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      removable: true,
+      background: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false
+      },
+      hasPlatforms: true,
+      availablePlatforms: {
+        'windows': {
+          name: 'Windows',
+          visible: true
+        },
+        'apple': {
+          name: 'Apple',
+          visible: true
+        },
+        'linuxfull': {
+          name: 'Linux',
+          visible: true
+        },
+        'steam': {
+          name: 'Steam',
+          visible: true
+        },
+        'gog': {
+          name: 'GOG Galaxy',
+          visible: true
+        }
+      },
+      colorFill: {
+        color:  '#fff'
+      },
+      sizeIcons: {
+        width: 24
+      },
+      isComplex: true
+    })
+  )],
+  [types.AgeRestrictions, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      removable: true,
+      background: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false
+      },
+      hasRestrictions: true,
+      ageRestrictions: {
+        'age': {
+          name: 'Age',
+          visible: true,
+          selected: { name: '0+', img: 'https://gn215.cdn.stg.gamenet.ru/0/759Ga/o_20S5qo.svg' },
+          options: [
+            { name: '0+', img: 'https://gn215.cdn.stg.gamenet.ru/0/759Ga/o_20S5qo.svg' },
+            { name: '6+', img: 'https://gn215.cdn.stg.gamenet.ru/0/759H0/o_1KX2IR.svg' },
+            { name: '12+', img: 'https://gn695.cdn.stg.gamenet.ru/0/759HF/o_DNNg8.svg' },
+            { name: '18+', img: 'https://gn24.cdn.stg.gamenet.ru/0/759HU/o_1AgXj1.svg' },
+            { name: '21+', img: 'https://gn822.cdn.stg.gamenet.ru/0/759Hf/o_299afp.svg' }
+          ]
+        },
+        'pegi': {
+          name: 'Pegi',
+          visible: false,
+          selected: { name: '3', img: 'https://gn875.cdn.stg.gamenet.ru/0/759I0/o_13iwpA.svg' },
+          options: [
+            { name: '3', img: 'https://gn875.cdn.stg.gamenet.ru/0/759I0/o_13iwpA.svg' },
+            { name: '7', img: 'https://gn414.cdn.stg.gamenet.ru/0/759ID/o_vuop.svg' },
+            { name: '12', img: 'https://gn793.cdn.stg.gamenet.ru/0/759IR/o_1S1h6M.svg' },
+            { name: '16', img: 'https://gn800.cdn.stg.gamenet.ru/0/759Il/o_ANYUX.svg' },
+            { name: '18', img: 'https://gn653.cdn.stg.gamenet.ru/0/759Ix/o_Xqb9n.svg' }
+          ]
+        },
+        'usk': {
+          name: 'USK',
+          visible: false,
+          selected: { name: '0', img: 'https://gn191.cdn.stg.gamenet.ru/0/759JH/o_1g38pS.svg' },
+          options: [
+            { name: '0', img: 'https://gn191.cdn.stg.gamenet.ru/0/759JH/o_1g38pS.svg' },
+            { name: '6', img: 'https://gn182.cdn.stg.gamenet.ru/0/759JS/o_25hRrV.svg' },
+            { name: '12', img: 'https://gn972.cdn.stg.gamenet.ru/0/759Jf/o_amDyU.svg' },
+            { name: '16', img: 'https://gn972.cdn.stg.gamenet.ru/0/759Jf/o_amDyU.svg' },
+            { name: '18', img: 'https://gn320.cdn.stg.gamenet.ru/0/759K2/o_x4V42.svg' }
+          ]
+        },
+        'cero': {
+          name: 'CERO',
+          visible: false,
+          selected: { name: 'All ages', img: 'https://gn773.cdn.stg.gamenet.ru/0/759KN/o_sazoN.svg' },
+          options: [
+            { name: 'All ages', img: 'https://gn773.cdn.stg.gamenet.ru/0/759KN/o_sazoN.svg' },
+            { name: 'Ages 12 and up only', img: 'https://gn925.cdn.stg.gamenet.ru/0/759LL/o_zwWo0.svg' },
+            { name: 'Ages 15 and up only', img: 'https://gn572.cdn.stg.gamenet.ru/0/759LZ/o_qfcL4.svg' },
+            { name: 'Ages 17 and up only', img: 'https://gn959.cdn.stg.gamenet.ru/0/759Lq/o_FHJmm.svg' },
+            { name: 'Ages 18 and up only', img: 'https://gn640.cdn.stg.gamenet.ru/0/759MA/o_4FtnT.svg' },
+            { name: 'Education/Database', img: 'https://gn119.cdn.stg.gamenet.ru/0/759MN/o_18ADS5.svg' },
+            { name: 'Rating pending', img: 'https://gn801.cdn.stg.gamenet.ru/0/759MZ/o_1b7UOI.svg' }
+          ]
+        }
+      },
+      sizeIcons: {
+        width: 48
+      },
+      isComplex: true
+    })
+  )],
+  [types.SocialNetworks, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      removable: true,
+      settings: {
+        target : '_blank'
+      },
+      background: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false
+      },
+      hasNetworks: true,
+      socialNetworks: {
+        'facebook': {
+          name: 'Facebook',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'instagram': {
+          name: 'Instagram',
+          expand: false,
+          visible: false,
+          url: ''
+        },
+        'vk': {
+          name: 'Vk',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'twitter': {
+          name: 'Twitter',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'youtube': {
+          name: 'Youtube',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'discord': {
+          name: 'Discord',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'kickstarter': {
+          name: 'Kickstarter',
+          expand: false,
+          visible: false,
+          url: ''
+        },
+        'wechat': {
+          name: 'Wechat',
+          expand: false,
+          visible: false,
+          url: ''
+        }
+      },
+      colorFill: {
+        color:  '#fff'
+      },
+      sizeIcons: {
+        width: 24
+      },
+      isComplex: true
+    })
+  )],
 ])
 
 export default class Seeder {

@@ -1,5 +1,5 @@
 <template>
-  <div class="b-logo"></div>
+  <div class="b-logo is-editable"></div>
 </template>
 
 <script>

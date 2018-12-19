@@ -2,6 +2,7 @@
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
+import Draggable from 'vuedraggable'
 
 const C_CUSTOM_1 = [
   {
@@ -166,6 +167,9 @@ const COMPONENTS = [
 
 export default {
   name: 'TwoColumns',
+  components: {
+    Draggable
+  },
   cover: '/img/covers/columns2.jpg',
   group: 'Columns',
   $schema: {
@@ -226,17 +230,32 @@ export default {
             :style="$sectionData.container.styles"
             >
             <elements-list @addEl="onAddElement"></elements-list>
-            <component class="b-columns2-component" v-for="(component, index) in $sectionData.components"
-              v-if="$sectionData.components.length !== 0"
-              :is="component.name"
-              :key="index"
-              :href="$sectionData.components[index].element.href"
-              v-html="$sectionData.components[index].element.text"
-              :style="$sectionData.components[index].element.styles"
-              :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-              v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
-              >
-            </component>          </sandbox>
+            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+              <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+                <component class="b-columns2-component"
+                  v-if="$sectionData.components[index].element.isComplex"
+                  :is="component.name"
+                  :href="$sectionData.components[index].element.href"
+                  :path="`components[${index}].element`"
+                  :style="$sectionData.components[index].element.styles"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  >
+                </component>
+                <component class="b-columns2-component"
+                  v-if="!$sectionData.components[index].element.isComplex"
+                  :is="component.name"
+                  :href="$sectionData.components[index].element.href"
+                  v-html="$sectionData.components[index].element.text"
+                  :path="`components[${index}].element`"
+                  :style="$sectionData.components[index].element.styles"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  >
+                </component>
+              </div>
+            </draggable>
+          </sandbox>
         </div>
         <div class="b-grid__col-6 b-grid__col-m-12">
           <sandbox
@@ -247,17 +266,31 @@ export default {
             :style="$sectionData.container2.styles"
             >
             <elements-list @addEl="onAddElement2"></elements-list>
-            <component class="b-columns2-component" v-for="(component, index) in $sectionData.components2"
-              v-if="$sectionData.components2.length !== 0"
-              :is="component.name"
-              :key="index"
-              :href="$sectionData.components2[index].element.href"
-              v-html="$sectionData.components2[index].element.text"
-              :style="$sectionData.components2[index].element.styles"
-              :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-              v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
-              >
-            </component>
+            <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
+              <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
+                <component class="b-columns2-component"
+                  v-if="$sectionData.components2[index].element.isComplex"
+                  :is="component.name"
+                  :href="$sectionData.components2[index].element.href"
+                  :path="`components2[${index}].element`"
+                  :style="$sectionData.components2[index].element.styles"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                  >
+                </component>
+                <component class="b-columns2-component"
+                  v-if="!$sectionData.components2[index].element.isComplex"
+                  :is="component.name"
+                  :href="$sectionData.components2[index].element.href"
+                  v-html="$sectionData.components2[index].element.text"
+                  :path="`components2[${index}].element`"
+                  :style="$sectionData.components2[index].element.styles"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                  >
+                </component>
+              </div>
+            </draggable>
           </sandbox>
         </div>
       </div>
@@ -287,7 +320,6 @@ $h: 100vh
   color: rgb(255, 255, 255)
   font-style: normal
   font-weight: 800
-  line-height: 6.7rem
   font-size: 4.8rem
   text-align: center
   letter-spacing: 0.15em
@@ -297,11 +329,9 @@ $h: 100vh
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important
-    line-height: 4rem
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem !important
-      line-height: 4rem
 .b-delimiter
   height: 2rem
   .is-mobile &,
@@ -311,13 +341,11 @@ $h: 100vh
     &
       display: none
 .b-logo
-  margin: 0 0 4rem
 .b-title
   color: rgb(255, 255, 255)
   font-style: normal
   font-size: 2.4rem
   font-weight: 400
-  line-height: 4rem
   text-align: center
   letter-spacing: 0.15em
   text-transform: uppercase
@@ -325,15 +353,12 @@ $h: 100vh
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important
-    line-height: 4rem
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem !important
-      line-height: 4rem
 .b-text
   color: rgba(255, 255, 255, 0.3)
   font-size: 1.6rem
-  line-height: 2.8rem
   text-align: center
   .is-mobile &,
   .is-tablet &
@@ -348,11 +373,9 @@ $h: 100vh
   font-family: Lato
   font-style: normal
   font-size: 1.4rem
-  line-height: 2.8rem
   text-align: center
   letter-spacing: 0.28em
   text-transform: uppercase
-
   width: 22.4rem
   height: 5.6rem
   border: 0.2rem solid rgba(255, 125, 125, 0.5)

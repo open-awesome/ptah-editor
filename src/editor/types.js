@@ -18,3 +18,6 @@ export class Video { }
 export class ProductSection { }
 
 export class GallerySlider { }
+export class AvailablePlatforms { }
+export class AgeRestrictions { }
+export class SocialNetworks { }

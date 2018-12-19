@@ -1,5 +1,7 @@
 <template>
-  <div class="b-title"></div>
+  <div class="b-title is-editable">
+    <slot></slot>
+  </div>
 </template>
 
 <script>
@@ -9,15 +11,15 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-title-one
+.b-title
   color: #000
   font-family: Helvetica, Arial, sans-serif
-  width: 100%
   position: relative
   text-align: center
   display: flex
   align-items: center
   font-size: 2.5rem
+  line-height: 1.4
   margin: 1.6rem
   display: block
   &::selection, & ::selection

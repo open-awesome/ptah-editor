@@ -38,25 +38,44 @@
         @change="styleChange"></control-background>
     </div>
 
-    <!-- color fill-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.fillColor">
-      <control-color-fill
-        :fillColor="fillColor"
-        :expand="expandFillColor"
-        @open="onExpand"
-        @change="styleChange"></control-color-fill>
-    </div>
-
     <!-- Link -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
       <control-link
         :link="elLink"
         :hoverBgColor="bgHover"
         :expand="expandedLink"
+        :target="elTarget"
         @open="onExpand"
         @setOption="setOption"
         @setPseudo="changePseudoStyle"
         @setClass="selectAnimation"></control-link>
+    </div>
+
+    <!-- Available Platforms Control-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
+      <control-available-platforms
+        :expand="expandedAvailablePlatforms"
+        @open="onExpand"
+        >
+      </control-available-platforms>
+    </div>
+
+    <!-- Age Restrictions Control-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasRestrictions">
+      <control-age-restrictions
+        :expand="expandedAgeRestrictions"
+        @open="onExpand"
+        >
+      </control-age-restrictions>
+    </div>
+
+    <!-- Social Networks Control-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasNetworks">
+      <control-social-networks
+        :expand="expandedSocialNetworks"
+        @open="onExpand"
+        >
+      </control-social-networks>
     </div>
 
     <!-- BOTTOM button -->
@@ -67,6 +86,7 @@
         @click="deleteElement"
       >Delete</base-button>
     </div>
+
   </div>
 </template>
 
@@ -79,7 +99,10 @@ import ControlText from './controls/TheControlText'
 import ControlBackground from './controls/TheControlBackground'
 import ControlSize from './controls/TheControlSize'
 import ControlLink from './controls/TheControlLink'
-import ControlColorFill from './controls/TheControlColorFill'
+// control for new elements
+import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.vue'
+import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
+import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -97,17 +120,19 @@ export default {
     ControlBackground,
     ControlSize,
     ControlLink,
-    ControlColorFill
+    ControlAvailablePlatforms,
+    ControlAgeRestrictions,
+    ControlSocialNetworks
   },
 
   data () {
     return {
+      index: null,
       fontSize: null,
       fontFamily: '',
       fontColor: '',
       styles: [],
       bgColor: '',
-      fillColor: '',
       bgImage: '',
       bgRepeat: '',
       bgSize: '',
@@ -121,8 +146,15 @@ export default {
       expandedFont: false,
       expandedBg: false,
       expandedLink: false,
-      expandFillColor: false,
-      index: null
+      expandedAvailablePlatforms: false,
+      expandedAgeRestrictions: false,
+      expandedSocialNetworks: false,
+      colorFill: {},
+      sizeIcons: {},
+      availablePlatforms: {},
+      ageRestrictions: {},
+      socialNetworks: {},
+      settings: ''
     }
   },
 
@@ -158,11 +190,6 @@ export default {
       this.styles.push({ prop: 'font-weight', value: styles['font-weight'] })
     }
 
-    /* get fill color */
-    if (styles['fill']) {
-      this.fillColor = styles['fill']
-    }
-
     /* get background */
     if (styles['background-color']) {
       this.bgColor = styles['background-color']
@@ -178,11 +205,27 @@ export default {
 
     /* Link */
     this.elLink = this.settingObjectOptions.href || ''
-    this.elTarget = !!this.settingObjectOptions.target
+    this.elTarget = this.settingObjectOptions.target
 
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
     this.textHover = this.settingObjectOptions.pseudo['color'] || ''
+
+    /* Available platforms */
+    this.availablePlatforms = this.settingObjectOptions.availablePlatforms || {}
+
+    /* Social networks */
+    this.socialNetworks = this.settingObjectOptions.socialNetworks || {}
+    this.settings = this.settingObjectOptions.settings || {}
+
+    /* Color for svg icons */
+    this.colorFill = this.settingObjectOptions.colorFill || {}
+
+    /* Size icons */
+    this.sizeIcons = this.settingObjectOptions.sizeIcons || {}
+
+    /* Age restrictions */
+    this.ageRestrictions = this.settingObjectOptions.ageRestrictions || {}
   },
 
   methods: {
@@ -207,7 +250,9 @@ export default {
       this.updateText()
       let obj = {}
       obj[option[0]] = option[1]
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
+      let merge = _.merge({}, this.settingObjectOptions, obj)
+      delete merge.element
+      this.updateSettingOptions(merge)
     },
 
     /**
@@ -266,7 +311,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'FillColor']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 

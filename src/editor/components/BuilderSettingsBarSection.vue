@@ -86,7 +86,11 @@
       </div>
 
       <!-- Products Section Controls -->
-      <control-section-products v-if="settingObjectOptions.hasProdusct"></control-section-products>
+      <control-section-products
+        v-if="settingObjectOptions.hasProdusct"
+        >
+      </control-section-products>
+
     </div>
 
   </base-scroll-container>
@@ -249,10 +253,10 @@ export default {
       }
     },
 
-    // TODO: не работает!
     updateSimpleValue (propName, value) {
-      let styles = { [propName]: value }
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, { [propName]: value })
+      )
     },
 
     updateGalleryImages (galleryImages) {

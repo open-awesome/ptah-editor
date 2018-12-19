@@ -84,6 +84,6 @@ export default {
     font-size: 4rem
     line-height: 1.2
     color: #fff
-    font-family: 'Roboto'
+    font-family: 'Lato'
     text-align: center
 </style>

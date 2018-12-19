@@ -79,7 +79,7 @@ export default {
   cursor: pointer
   position: relative
   width: 100%
-  font-family: Lato, Roboto, Helvetica, Arial, sans-serif
+  font-family: Lato, Helvetica, Arial, sans-serif
   & *
     user-select: none
   &__container
