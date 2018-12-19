@@ -39,9 +39,17 @@ import BuilderModalContent from './BuilderModalContent.vue'
 export default {
   name: 'BuilderLayout',
 
-  data: () => ({
-    device: 'desktop'
-  }),
+  provide () {
+    let device = {}
+    Object.defineProperty(device, 'type', { enumerable: true, get: () => this.device })
+    return { device }
+  },
+
+  data () {
+    return {
+      device: 'desktop'
+    }
+  },
 
   props: {
     builder: {
