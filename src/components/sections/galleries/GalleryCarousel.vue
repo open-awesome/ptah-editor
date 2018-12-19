@@ -76,7 +76,7 @@ export default {
               v-for="(item, index) in galleryImages"
               :key="index"
               :class="{
-                'b-gallery-carousel-body-item_grow': galleryImages.length > 2,
+                'b-gallery-carousel-body-item_grow': galleryImages.length === 1 || galleryImages.length > 2,
                 'b-gallery-carousel-body-item_active': index === 1,
                 'b-gallery-carousel-body-item_transparent': galleryImages.length > 1
               }"
