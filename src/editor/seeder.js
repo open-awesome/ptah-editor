@@ -604,6 +604,53 @@ const data = new Map([
       }
     })
   )],
+  [types.SystemRequirements, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      name: 'System Requirements',
+      removable: false,
+      background: false,
+      hasSystemRequirements: true,
+      systemRequirements: {
+        'windows': {
+          visible: true,
+          hideTextTitle: false
+        },
+        'apple': {
+          visible: true,
+          hideTextTitle: false
+        },
+        'linux': {
+          visible: false,
+          hideTextTitle: false
+        }
+      },
+      rowsRequirements: {
+        'OS': { visible: true },
+        'Processor': { visible: true },
+        'Memory': { visible: true },
+        'Graphics': { visible: true },
+        'Direct X': { visible: true },
+        'Storage': { visible: true },
+        'Sound Card': { visible: false }
+      },
+      colorFill: {
+        color:  '#fff'
+      },
+      sizeIcons: {
+        width: 24
+      },
+      typography: true,
+      styles: {
+        'font-family': 'Lato',
+        'font-size':  4.8,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'text-align': false,
+        'color': '#fff'
+      }
+    })
+  )]
 ])
 
 export default class Seeder {

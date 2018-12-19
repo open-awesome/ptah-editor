@@ -21,3 +21,4 @@ export class AvailablePlatforms { }
 export class AgeRestrictions { }
 export class SocialNetworks { }
 export class Slogan { }
+export class SystemRequirements { }

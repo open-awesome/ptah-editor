@@ -3,7 +3,7 @@ import { mapState } from 'vuex'
 import VuseIcon from '@editor/components/VuseIcon'
 
 export default {
-  name: 'ControlSocialNetworks',
+  name: 'ControlSystemRequirements',
 
   components: {
     VuseIcon
@@ -20,9 +20,8 @@ export default {
     return {
       controlOpen: false,
       color: '',
-      elWidth: 0,
-      vTarget: '',
-      networks: []
+      requirements: {},
+      requirementsRows: {}
     }
   },
 
@@ -31,20 +30,20 @@ export default {
       'settingObjectOptions'
     ]),
 
-    socialNetworks () {
-      return this.settingObjectOptions.socialNetworks
+    systemRequirements () {
+      return this.settingObjectOptions.systemRequirements
     },
 
-    colorFill () {
-      return this.settingObjectOptions.colorFill
+    rowsRequirements () {
+      return this.settingObjectOptions.rowsRequirements
     },
 
     sizeIcons () {
       return this.settingObjectOptions.sizeIcons
     },
 
-    settings () {
-      return this.settingObjectOptions.settings
+    colorFill () {
+      return this.settingObjectOptions.colorFill
     }
   },
 
@@ -56,40 +55,25 @@ export default {
 
   methods: {
     visible (key) {
-      this.closeModal()
-      this.networks[key].visible = !this.networks[key].visible
+      this.requirements[key].visible = !this.requirements[key].visible
+    },
+    visibleRows (key) {
+      this.requirementsRows[key].visible = !this.requirementsRows[key].visible
     },
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.colorFill['color'] = color
     },
     onClickTitle () {
-      this.$emit('open', ['SocialNetworks', !this.controlOpen])
-    },
-    changeTarget () {
-      this.settings.target = this.vTarget ? '_blank' : '_self'
-    },
-    closeModal () {
-      for (var key in this.networks) {
-        this.networks[key].expand = false
-      }
-    },
-    applyLink () {
-      this.closeModal()
-    },
-    openModal (key) {
-      this.closeModal()
-      this.$nextTick(function () {
-        this.networks[key].expand = !this.networks[key].expand
-      })
+      this.$emit('open', ['SystemRequirements', !this.controlOpen])
     }
   },
 
   mounted () {
     this.color = this.colorFill.color
     this.elWidth = this.sizeIcons.width
-    this.vTarget = this.settings.target || '_blank'
-    this.networks = this.socialNetworks
+    this.requirements = this.systemRequirements
+    this.requirementsRows = this.rowsRequirements
     this.controlOpen = this.expand
   }
 }
@@ -98,7 +82,7 @@ export default {
 <template>
   <div class="b-text-controls">
     <div class="b-text-controls__header" @click="onClickTitle">
-      <span>Icons settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+      <span>Table settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-size-controls__control">
@@ -110,55 +94,54 @@ export default {
         <base-color-picker label="Color icons" v-model="color" @change="changeColor"></base-color-picker>
       </div>
       <div class="b-text-controls__control">
-        <div>Visible networks</div>
-        <div class="b-social-networks">
-          <div class="b-social-networks__item is-editable"
-            v-for="(value, key) in networks" :key="key"
-            :class="{ 'b-social-networks__item_opacity' : false === networks[key].visible, 'b-social-networks__item_select' : networks[key].expand }"
+        <div>OS</div>
+        <div class="b-system-requirements">
+          <div class="b-system-requirements__item is-editable"
+            v-for="(value, key) in requirements" :key="key"
+            :class="{ 'b-system-requirements__item_opacity' : false === requirements[key].visible }"
             >
 
-            <span class="b-socials-networks__item-eye"
+            <span class="b-socials-requirements__item-eye"
               @click="visible(key)"
               title="Show / Hide"
               >
               <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
             </span>
 
-            <a class="b-social-networks__item-button"
+            <a class="b-system-requirements__item-button"
               @click="visible(key)"
-              :title="networks[key].name"
+              :title="key"
               >
-              {{ networks[key].name }}
+              {{ key }}
             </a>
-
-            <a class="b-social-networks__item-set-link"
-              v-if="networks[key].visible"
-              @click="openModal(key)"
-              :class="{ 'b-social-networks__item-set-link_color' : networks[key].url !== '' }"
-              >
-              <icon-base name="link" width="15" color="black"></icon-base>
-            </a>
-
-            <div class="b-social-networks__item-set-link-modal" v-if="networks[key].expand">
-              <div class="b-link-controls__control">
-                <base-text-field v-model="networks[key].url" label="URL" placeholder="Type link here"></base-text-field>
-                <BaseButton
-                  :color="'blue'"
-                  :transparent="false"
-                  size="small"
-                  @click="applyLink"
-                  >
-                  Apply
-                </BaseButton>
-              </div>
-            </div>
 
           </div>
-        </div><!--/.b-social-networks-->
+        </div><!--/.b-system-requirements-->
       </div>
-      <div class="b-link-controls__control">
-        <input type="checkbox" id="target" v-model="vTarget" @change="changeTarget">
-        <label for="target">open links in new window</label>
+      <div class="b-text-controls__control">
+        <div>Requirements</div>
+        <div class="b-system-requirements">
+          <div class="b-system-requirements__item is-editable"
+            v-for="(value, key) in requirementsRows" :key="key"
+            :class="{ 'b-system-requirements__item_opacity' : false === requirementsRows[key].visible }"
+            >
+
+            <span class="b-socials-requirements__item-eye"
+              @click="visibleRows(key)"
+              title="Show / Hide"
+              >
+              <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
+            </span>
+
+            <a class="b-system-requirements__item-button"
+              @click="visibleRows(key)"
+              :title="key"
+              >
+              {{ key }}
+            </a>
+
+          </div>
+        </div><!--/.b-system-requirements-->
       </div>
     </base-dropdown>
   </div>
@@ -182,7 +165,7 @@ export default {
   &__control
     margin-top: 2.2rem
 
-.b-social-networks
+.b-system-requirements
   width: 100%
   max-width: 100rem
   margin: 1rem auto

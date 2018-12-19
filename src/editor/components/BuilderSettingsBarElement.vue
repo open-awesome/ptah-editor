@@ -78,6 +78,15 @@
       </control-social-networks>
     </div>
 
+    <!-- System Requirements-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasSystemRequirements">
+      <control-system-requirements
+        :expand="expandedSystemRequirements"
+        @open="onExpand"
+        >
+      </control-system-requirements>
+    </div>
+
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
       <base-button
@@ -103,6 +112,7 @@ import ControlLink from './controls/TheControlLink'
 import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.vue'
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
+import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -122,7 +132,8 @@ export default {
     ControlLink,
     ControlAvailablePlatforms,
     ControlAgeRestrictions,
-    ControlSocialNetworks
+    ControlSocialNetworks,
+    ControlSystemRequirements
   },
 
   data () {
@@ -149,11 +160,14 @@ export default {
       expandedAvailablePlatforms: true,
       expandedAgeRestrictions: true,
       expandedSocialNetworks: true,
+      expandedSystemRequirements: true,
       colorFill: {},
       sizeIcons: {},
       availablePlatforms: {},
       ageRestrictions: {},
       socialNetworks: {},
+      systemRequirements: {},
+      rowsRequirements: {},
       settings: ''
     }
   },
@@ -205,7 +219,7 @@ export default {
 
     /* Link */
     this.elLink = this.settingObjectOptions.href || ''
-    this.elTarget = this.settingObjectOptions.target
+    this.elTarget = this.settingObjectOptions.target || ''
 
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
@@ -226,6 +240,10 @@ export default {
 
     /* Age restrictions */
     this.ageRestrictions = this.settingObjectOptions.ageRestrictions || {}
+
+    /* System Requirements */
+    this.systemRequirements = this.settingObjectOptions.systemRequirements || {}
+    this.rowsRequirements = this.settingObjectOptions.rowsRequirements || {}
   },
 
   methods: {
@@ -311,7 +329,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks', 'SystemRequirements']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 
