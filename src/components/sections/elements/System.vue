@@ -5,13 +5,13 @@ import Seeder from '@editor/seeder'
 import * as _ from 'lodash-es'
 
 const REQUIREMENTS = {
-  'OS': { text: types.Text, min: types.Text, max: types.Text },
-  'Processor': { text: types.Text, min: types.Text, max: types.Text },
-  'Memory': { text: types.Text, min: types.Text, max: types.Text },
-  'Graphics': { text: types.Text, min: types.Text, max: types.Text },
-  'Direct X': { text: types.Text, min: types.Text, max: types.Text },
-  'Storage': { text: types.Text, min: types.Text, max: types.Text },
-  'Sound Card': { text: types.Text, min: types.Text, max: types.Text }
+  'OS': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
+  'Processor': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
+  'Memory': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
+  'Graphics': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
+  'Direct X': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
+  'Storage': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
+  'Sound Card': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit }
 }
 
 const REQUIREMENTS_WINDOWS = {
@@ -144,6 +144,21 @@ const PLATFORMS_CUSTOM = {
 }
 
 const SCHEMA_CUSTOM = {
+  mainStyle: {
+    styles: {
+      'background-image': 'url(https://gn819.cdn.stg.gamenet.ru/0/7L5P8/o_Dyakc.png)',
+      'background-color': '#151C44',
+      'background-position': 'center center',
+      'background-size': 'cover',
+      'font-family': 'Lato',
+      'font-size': 1.4,
+      'font-weight': false,
+      'font-style': false,
+      'text-decoration': false,
+      'text-align': 'center',
+      'color': '#fff'
+    }
+  },
   platforms: _.merge({}, PLATFORMS_CUSTOM),
   edited: true
 }
@@ -160,28 +175,28 @@ export default {
     platforms: {
       'windows': {
         name: 'Windows',
-        element: types.Text,
+        element: types.TextInherit,
         requirements: _.merge({}, REQUIREMENTS),
-        text: types.Text,
-        min: types.Text,
-        rec: types.Text
+        text: types.TextInherit,
+        min: types.TextInherit,
+        rec: types.TextInherit
       },
       'apple': {
         name: 'Apple',
-        element: types.Text,
+        element: types.TextInherit,
         requirements: _.merge({}, REQUIREMENTS),
-        text: types.Text,
-        min: types.Text,
-        rec: types.Text
+        text: types.TextInherit,
+        min: types.TextInherit,
+        rec: types.TextInherit
       },
       'linux': {
         name: 'Linux',
-        element: types.Text,
+        element: types.TextInherit,
         requirements: _.merge({}, REQUIREMENTS),
         button: types.Button,
-        text: types.Text,
-        min: types.Text,
-        rec: types.Text
+        text: types.TextInherit,
+        min: types.TextInherit,
+        rec: types.TextInherit
       }
     },
     isPlatform: null
@@ -339,7 +354,8 @@ export default {
   &-platforms
    justify-content: space-around
    padding: 2rem 0
-   border-bottom: 0.2rem solid #333
+   border-bottom: 0.2rem solid inherit
+   border-color: inherit
    &__item
      font-weight: bold
      transition: all 200ms
@@ -373,9 +389,11 @@ export default {
            width: 100%
            height: auto
            fill: inherit
-     &:hover, &_active
-       border: dotted #333 0.2rem
-       background: rgba(255, 255, 255, 0.8)
+     &:hover,
+     &_active
+       border: dotted inherit 0.2rem
+       border-color: inherit
+       filter: invert(10%)
 
 .b-system-requirements
   &__table
@@ -385,6 +403,7 @@ export default {
       font-weight: bold
     &-row
       border-bottom: 0.1rem dotted #333
+      border-color: inherit
       &_opacity
         display: none
         .is-editable &

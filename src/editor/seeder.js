@@ -657,7 +657,21 @@ const data = new Map([
         'color': '#fff'
       }
     })
-  )]
+  )],
+  [types.TextInherit, () => (_.merge({}, DEFAULT_OPTIONS, {
+    text: 'Enter your text',
+    aligned: true,
+    typography: true,
+    styles: {
+        'font-family': 'inherit',
+        'font-size': 'inherit',
+        'font-weight': 'inherit',
+        'font-style': 'inherit',
+        'text-decoration': 'inherit',
+        'text-align': 'inherit',
+        'color': 'inherit'
+    }
+}))],
 ])
 
 export default class Seeder {
