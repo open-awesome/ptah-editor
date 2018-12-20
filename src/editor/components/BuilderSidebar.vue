@@ -64,6 +64,7 @@
             v-for="(section, index) in builder.sections"
             v-scroll-to="`#section_${section.id}`"
             :key="section.id"
+            :id="`menu-item-${section.id}`"
             :isSelected="isActiveSection(section.id)"
             :hasDraggableIcon="true"
             @click="toggleSettingsBar(section)">
@@ -288,6 +289,7 @@ $top-panel-height: 7.2rem
     display: flex
     flex-direction: column
     min-height: 0
+    overflow: auto
 
   &-settings
     position: absolute
