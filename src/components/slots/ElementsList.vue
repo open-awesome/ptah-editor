@@ -166,7 +166,10 @@ export default {
       height: 2rem
   &__list
     width: 18rem
+    height: 100%
+    height: -moz-available
     height: -webkit-fill-available
+    height: fill-available
     position: absolute
     z-index: 20
     right: 7.3rem
