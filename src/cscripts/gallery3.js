@@ -39,7 +39,7 @@ export function galleryThree() {
         var url = href !== '' ? href : defUrl;
         m = matchYoutubeUrl(url);
         if (m) {
-            content = '<iframe id="contentGalleryThreePopup"  width="100%" height="100%" src="https://www.youtube.com/embed/' + m + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+            content = '<iframe id="contentGalleryThreePopup" width="100%" height="100%" src="https://www.youtube.com/embed/' + m + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
         } else {
             content = '<img id="contentGalleryThreePopup" width="100%"  height="100%" src="' + url + '"></img>'
         }
@@ -54,7 +54,7 @@ export function galleryThree() {
         popup.style.display = "flex";
         var c = document.getElementById('contentGalleryThreePopup');
         var actualWidth = c.clientWidth;
-        var calcHeight = actualWidth * 0.5625;
+        var calcHeight = actualWidth * 0.4899999; // old - 0.5625
         c.style.height =  calcHeight + 'px';
     }
 
