@@ -170,6 +170,10 @@ export default {
     height: -moz-available
     height: -webkit-fill-available
     height: fill-available
+    max-height: intrinsic
+    max-height: -moz-max-content
+    max-height: -webkit-max-content
+    max-height: fit-content
     position: absolute
     z-index: 20
     right: 7.3rem
