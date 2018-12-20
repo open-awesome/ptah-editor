@@ -11,7 +11,12 @@
         'is-editable': $builder.isEditing,
         'fp-scroll': currentLanding.settings.fullPageScroll === 'yes'
       }">
-      <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
+      <component
+          v-for="section in $builder.sections"
+          :key="section.id"
+          :is="section.name"
+          :id="section.id"
+          @click.native="selectSidebarSection(section)"/>
       <div class="controller-intro" v-if="emptySections">
         <h3>&larr; Choose layout from the menu</h3>
       </div>
@@ -195,6 +200,16 @@ export default {
       }
       node.innerHTML = `<source src="${settings.video}" type="video/mp4"></source>`
       this.$refs.artboard.appendChild(node)
+    },
+
+    async selectSidebarSection (section) {
+      let menuItem = document.getElementById(`menu-item-${section.id}`)
+      if (!menuItem) {
+        return
+      }
+      // --- coz directive v-scroll-to is called
+      await this.$nextTick()
+      menuItem.click()
     }
   }
 }
