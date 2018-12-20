@@ -3,6 +3,7 @@ import Vuex from 'vuex'
 import _ from 'lodash'
 import api from '@store/api'
 import Sidebar from './Sidebar'
+import Landing from './Landing'
 import vOutsideEvents from 'vue-outside-events'
 import BuilderModalContent from './BuilderModalContent'
 import PageTweaks from './PageTweaks/PageTweaks'
@@ -139,7 +140,8 @@ const mutations = {
 const modules = {
   Sidebar,
   BuilderModalContent,
-  PageTweaks
+  PageTweaks,
+  Landing
 }
 
 export default new Vuex.Store({

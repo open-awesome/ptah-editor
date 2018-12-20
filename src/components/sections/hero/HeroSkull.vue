@@ -4,6 +4,7 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import VuseIcon from '@editor/components/VuseIcon'
 import Draggable from 'vuedraggable'
+import { mapState, mapActions } from 'vuex'
 
 const COMPONENTS = [
   {
@@ -202,6 +203,8 @@ const SCHEMA_CUSTOM = {
   edited: true
 }
 
+const GROUP_NAME = 'Hero'
+
 export default {
   name: 'HeroSkull',
   components: {
@@ -223,7 +226,17 @@ export default {
       required: true
     }
   },
+
+  computed: {
+    ...mapState('Landing', [
+      'groupData'
+    ])
+  },
+
   methods: {
+    ...mapActions('Landing', [
+      'updateGroupData'
+    ]),
     onAddElement (element) {
       element.element.removable = true
       this.$section.data.components.push(element)
@@ -231,12 +244,31 @@ export default {
     onAddElement2 (element) {
       element.element.removable = true
       this.$section.data.components2.push(element)
-    }
+    },
+
+    storeTextData: _.after(2, () => {
+      let data = {}
+      this.$sectionData.components.forEach(component => {
+        data[component.name] = component.element.text
+      })
+      this.updateGroupData({ name: GROUP_NAME, data })
+    })
   },
+
   created () {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
+
+    if (this.groupData) {
+      _.forEach(this.groupData, (name, text) => {
+        _.find(this.$sectionData.components, { name }).element.text = text
+      })
+    }
+  },
+
+  updated () {
+    this.storeTextData()
   }
 }
 </script>

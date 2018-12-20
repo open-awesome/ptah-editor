@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
+import { mapState, mapActions } from 'vuex'
 
 const C_CUSTOM = [
   {
@@ -68,6 +69,8 @@ const SCHEMA_CUSTOM = {
   edited: true
 }
 
+const GROUP_NAME = 'Hero'
+
 export default {
   name: 'HeroUnit',
   components: {
@@ -117,16 +120,54 @@ export default {
       required: true
     }
   },
+
+  data () {
+    return {
+      group: 'Hero'
+    }
+  },
+
+  computed: {
+    ...mapState('Landing', [
+      'groupData'
+    ])
+  },
+
   methods: {
+    ...mapActions('Landing', [
+      'updateGroupData'
+    ]),
+
     onAddElement (element) {
       element.element.removable = true
       this.$section.data.components.push(element)
-    }
+    },
+
+    storeTextData: _.after(2, () => {
+      let data = {}
+      this.$sectionData.components.forEach(component => {
+        data[component.name] = component.element.text
+      })
+      this.updateGroupData({ name: GROUP_NAME, data })
+    })
   },
+
   created () {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
+
+    console.log('created', this.groupData)
+
+    if (this.groupData) {
+      _.forEach(this.groupData, (name, text) => {
+        _.find(this.$sectionData.components, { name }).element.text = text
+      })
+    }
+  },
+
+  updated () {
+    this.storeTextData()
   }
 }
 </script>
