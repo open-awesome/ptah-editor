@@ -87,6 +87,12 @@
         >
       </control-section-products>
 
+      <!-- System requirements -->
+      <control-system-requirements
+        v-if="settingObjectOptions.hasSystemRequirements"
+        >
+      </control-system-requirements>
+
     </div>
 
   </base-scroll-container>
@@ -102,10 +108,12 @@ import { mapState, mapActions } from 'vuex'
 
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
+import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 
 export default {
   components: {
-    ControlSectionProducts
+    ControlSectionProducts,
+    ControlSystemRequirements
   },
   name: 'BuilderSettingsBarSection',
 
@@ -139,7 +147,10 @@ export default {
 
       loop: false,
 
-      galleryImages: []
+      galleryImages: [],
+      /* vars for control system requirements */
+      systemRequirements: {},
+      rowsRequirements: {}
     }
   },
 
@@ -181,6 +192,10 @@ export default {
     if (this.settingObjectOptions.classes.indexOf('full-height') !== -1) {
       this.fullScreen = true
     }
+
+    /* System Requirements */
+    this.systemRequirements = this.settingObjectOptions.systemRequirements || {}
+    this.rowsRequirements = this.settingObjectOptions.rowsRequirements || {}
   },
 
   watch: {
@@ -262,6 +277,7 @@ export default {
         galleryImages
       })
     }
+
   }
 }
 </script>

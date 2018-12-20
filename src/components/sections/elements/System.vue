@@ -156,8 +156,7 @@ export default {
   cover: '/img/covers/system.png',
   group: 'elements',
   $schema: {
-    mainStyle: types.StyleObject,
-    system: types.SystemRequirements,
+    mainStyle: types.SystemRequirements,
     platforms: {
       'windows': {
         name: 'Windows',
@@ -194,7 +193,7 @@ export default {
   },
   methods: {
     selectPlatform (key) {
-      if (!this.$sectionData.system.systemRequirements[key].visible) {
+      if (!this.$sectionData.mainStyle.systemRequirements[key].visible) {
         return
       }
 
@@ -232,19 +231,17 @@ export default {
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     >
-    <div class="b-system"
-      v-styler:for="{ el: $sectionData.system, path: `$sectionData.system`}"
-      >
+    <div class="b-system">
       <div class="b-system-platforms flex flex_center">
         <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
-             v-if="$sectionData.system.systemRequirements[key].visible"
+             v-if="$sectionData.mainStyle.systemRequirements[key].visible"
              :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.isPlatform }">
           <div
             class="b-system-platforms__item__tab"
             @click="selectPlatform(key)"
             >
             <span class="b-system-platforms__item__tab-icon"
-              :style="{ width: $sectionData.system.sizeIcons.width + 'px', fill: $sectionData.system.colorFill.color }"
+              :style="{ width: $sectionData.mainStyle.sizeIcons.width + 'px', fill: $sectionData.mainStyle.colorFill.color }"
               >
               <VuseIcon :name="key"></VuseIcon>
             </span>
@@ -262,7 +259,7 @@ export default {
       <div class="b-system-requirements">
         <div class="b-system-requirements__table">
           <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
-              v-show="$sectionData.isPlatform === key && $sectionData.system.systemRequirements[key].visible">
+              v-show="$sectionData.isPlatform === key && $sectionData.mainStyle.systemRequirements[key].visible">
             <div>
               <div class="b-system-requirements__table-row  flex flex_center">
                 <div class="b-system-requirements__table-col">
@@ -281,7 +278,7 @@ export default {
               </div><!--/.b-system-requirements__table-row-->
               <div class="b-system-requirements__table-row flex flex_center"
                 v-for="(v, index) in value.requirements" :key="index"
-                v-if="$sectionData.system.rowsRequirements[index].visible"
+                v-if="$sectionData.mainStyle.rowsRequirements[index].visible"
                 >
                 <div class="b-system-requirements__table-col"
                   v-styler:for="{ el: $sectionData.platforms[key].requirements[index].text, path: `$sectionData.platforms[${key}].requirements[${index}].text`}"

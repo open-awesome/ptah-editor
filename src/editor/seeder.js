@@ -606,9 +606,10 @@ const data = new Map([
   )],
   [types.SystemRequirements, () => (_.merge({}, DEFAULT_OPTIONS,
     {
+      box: true,
       name: 'System Requirements',
-      removable: false,
-      background: false,
+      removable: true,
+      background: true,
       hasSystemRequirements: true,
       systemRequirements: {
         'windows': {
@@ -641,8 +642,14 @@ const data = new Map([
       },
       typography: true,
       styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false,
         'font-family': 'Lato',
-        'font-size':  4.8,
+        'font-size':  1.6,
         'font-weight': false,
         'font-style': false,
         'text-decoration': false,
