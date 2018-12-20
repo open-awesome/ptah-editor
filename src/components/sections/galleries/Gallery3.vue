@@ -325,6 +325,7 @@ export default {
   content: ''
   position: absolute
   top: 23px
+  right: 0
   width: 50px
   height: 3px
   background-color: #fcff00

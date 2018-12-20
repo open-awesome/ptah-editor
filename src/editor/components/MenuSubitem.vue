@@ -45,6 +45,14 @@ export default {
       type: Boolean,
       default: false
     }
+  },
+
+  watch: {
+    isSelected (value) {
+      if (value === true) {
+        this.$el.scrollIntoView()
+      }
+    }
   }
 }
 </script>
