@@ -87,8 +87,22 @@
         >
       </control-section-products>
 
+      <!-- font -->
+      <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+        <control-text
+          :fontSize="fontSize"
+          :fontFamily="fontFamily"
+          :fontColor="fontColor"
+          :fontStyles="styles"
+          :expand="expandedFont"
+          @open="onExpand"
+          @change="styleChange"></control-text>
+      </div>
+
       <!-- System requirements -->
       <control-system-requirements
+        :expand="expandedSystemRequirements"
+        @open="onExpand"
         v-if="settingObjectOptions.hasSystemRequirements"
         >
       </control-system-requirements>
@@ -109,11 +123,13 @@ import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
+import ControlText from './controls/TheControlText'
 
 export default {
   components: {
     ControlSectionProducts,
-    ControlSystemRequirements
+    ControlSystemRequirements,
+    ControlText
   },
   name: 'BuilderSettingsBarSection',
 
@@ -148,9 +164,19 @@ export default {
       loop: false,
 
       galleryImages: [],
+
       /* vars for control system requirements */
       systemRequirements: {},
-      rowsRequirements: {}
+      rowsRequirements: {},
+      expandedSystemRequirements: true,
+
+      /* text styles */
+      fontSize: null,
+      fontFamily: '',
+      fontColor: '',
+      expandedFont: false,
+
+      styles: []
     }
   },
 
@@ -186,7 +212,7 @@ export default {
 
     this.header = this.settingObjectOptions.header || ''
 
-    /** Gallery */
+    /* Gallery */
     this.galleryImages = this.settingObjectOptions.galleryImages || []
 
     if (this.settingObjectOptions.classes.indexOf('full-height') !== -1) {
@@ -196,6 +222,15 @@ export default {
     /* System Requirements */
     this.systemRequirements = this.settingObjectOptions.systemRequirements || {}
     this.rowsRequirements = this.settingObjectOptions.rowsRequirements || {}
+
+    /* Get font settings */
+    this.fontFamily = styles['font-family'] || ''
+    this.fontSize = styles['font-size'] || 1.6
+    this.fontColor = styles['color'] || '#000000'
+
+    if (styles['font-style']) {
+      this.styles.push({ prop: 'font-style', value: styles['font-style'] })
+    }
   },
 
   watch: {
@@ -276,6 +311,41 @@ export default {
         ..._.cloneDeep(this.settingObjectOptions),
         galleryImages
       })
+    },
+
+    styleChange (value) {
+      this.updateStyle(_.kebabCase(value[0]), value[1])
+      this[value[0]] = value[1]
+    },
+
+    updateStyle (prop, value) {
+      this.updateText()
+      let styles = {}
+      styles[prop] = value
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+    },
+
+    onExpand (value) {
+      const accordeon = ['Font', 'SystemRequirements']
+      const prop = `expanded${value[0]}`
+      this[prop] = value[1]
+
+      if (value[1]) {
+        accordeon.forEach((item) => {
+          if (item !== value[0]) {
+            this[`expanded${item}`] = false
+          }
+        })
+      }
+    },
+
+    updateText () {
+      // TODO: Lost 'settingObjectOptions' from the store at the time of execution 'beforeDestroy'.
+      // Text also saved at VuseStyler -> hideStyler
+      if (this.settingObjectOptions.element) {
+        const el = this.settingObjectOptions.element
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
+      }
     }
 
   }

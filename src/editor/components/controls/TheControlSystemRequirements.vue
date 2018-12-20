@@ -9,8 +9,16 @@ export default {
     VuseIcon
   },
 
+  props: {
+    expand: {
+      type: Boolean,
+      required: true
+    }
+  },
+
   data () {
     return {
+      controlOpen: false,
       color: '',
       requirements: {},
       requirementsRows: {}
@@ -39,6 +47,12 @@ export default {
     }
   },
 
+  watch: {
+    expand () {
+      this.controlOpen = this.expand
+    }
+  },
+
   methods: {
     visible (key) {
       this.requirements[key].visible = !this.requirements[key].visible
@@ -60,13 +74,17 @@ export default {
     this.elWidth = this.sizeIcons.width
     this.requirements = this.systemRequirements
     this.requirementsRows = this.rowsRequirements
+    this.controlOpen = this.expand
   }
 }
 </script>
 
 <template>
   <div class="b-text-controls">
-    <div>
+    <div class="b-text-controls__header" @click="onClickTitle">
+      <span>Table settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+    </div>
+    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-size-controls__control">
         <base-range-slider v-model="sizeIcons.width" label="Width icons" step="8" min="16" max="128">
           {{ sizeIcons.width }} px
@@ -125,7 +143,7 @@ export default {
           </div>
         </div><!--/.b-system-requirements-->
       </div>
-    </div>
+    </base-dropdown>
   </div>
 </template>
 
@@ -138,7 +156,7 @@ export default {
     display: flex
     align-items: center
     cursor: pointer
-    margin: 3.2rem 0 1.6rem
+    margin: 1.6rem 0
     i
       margin-left: 5px
       margin-bottom: -5px
