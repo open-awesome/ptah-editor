@@ -547,6 +547,12 @@ const data = new Map([
           visible: true,
           url: ''
         },
+        'discord': {
+          name: 'Discord',
+          expand: false,
+          visible: true,
+          url: ''
+        },
         'kickstarter': {
           name: 'Kickstarter',
           expand: false,
