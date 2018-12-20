@@ -42,14 +42,15 @@
                 </span>
               </div>
               <div>
-                <span class="b-products-list__item-button" contenteditable="true"
+                <span
                   v-styler:for="{ el: $sectionData.products[index].button, path:`$sectionData.products[${index}].button`, type: 'button' }"
                   v-html="$sectionData.products[index].button.text"
-                  @click.prevent="openLink(item)" :target="$sectionData.products[index].button.target"
-                  :style="$sectionData.products[index].button.styles"
-                  v-bind:class="$sectionData.products[index].button.classes"
+                  :class="$sectionData.products[index].button.classes"
                   :href="$sectionData.products[index].button.href"
-                  >
+                  :target="$sectionData.products[index].button.target"
+                  :style="$sectionData.products[index].button.styles"
+                  class="b-products-list__item-button js-element-link"
+                  contenteditable="true">
                 </span>
               </div>
               <div>
@@ -182,19 +183,6 @@ export default {
     }
   },
   methods: {
-    openLink (el) {
-      if (this.$builder.isEditing) return
-
-      if (!el) {
-        return
-      }
-
-      const href = el.href
-
-      if (el && undefined !== href) {
-        window.open(href)
-      }
-    },
     deleteRow (index, indexB, indexR) {
       this.$sectionData.products[index].blocks[indexB].rows.splice(indexR, 1)
     },
