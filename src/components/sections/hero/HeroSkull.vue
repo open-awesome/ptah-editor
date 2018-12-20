@@ -4,7 +4,7 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import VuseIcon from '@editor/components/VuseIcon'
 import Draggable from 'vuedraggable'
-import { mapState, mapActions } from 'vuex'
+import { mapActions } from 'vuex'
 
 const COMPONENTS = [
   {
@@ -227,12 +227,6 @@ export default {
     }
   },
 
-  computed: {
-    ...mapState('Landing', [
-      'groupData'
-    ])
-  },
-
   methods: {
     ...mapActions('Landing', [
       'updateGroupData'
@@ -246,12 +240,12 @@ export default {
       this.$section.data.components2.push(element)
     },
 
-    storeTextData: _.after(2, () => {
+    storeTextData: _.after(2, (self) => {
       let data = {}
-      this.$sectionData.components.forEach(component => {
+      self.$sectionData.components.forEach(component => {
         data[component.name] = component.element.text
       })
-      this.updateGroupData({ name: GROUP_NAME, data })
+      self.updateGroupData({ name: GROUP_NAME, data })
     })
   },
 
@@ -260,15 +254,16 @@ export default {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
 
-    if (this.groupData) {
-      _.forEach(this.groupData, (name, text) => {
-        _.find(this.$sectionData.components, { name }).element.text = text
-      })
-    }
+    _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (text, name) => {
+      let elementObj = _.find(this.$sectionData.components, { name })
+      if (elementObj) {
+        elementObj.element.text = text
+      }
+    })
   },
 
   updated () {
-    this.storeTextData()
+    this.storeTextData(this)
   }
 }
 </script>
