@@ -330,6 +330,7 @@ export default {
     content: ''
     position: absolute
     top: 2.3rem
+    right: 0
     width: 5rem
     height: 0.3rem
     background-color: #fcff00

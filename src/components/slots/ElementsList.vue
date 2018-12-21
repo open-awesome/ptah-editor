@@ -166,13 +166,23 @@ export default {
       height: 2rem
   &__list
     width: 18rem
+    height: 100%
+    height: -moz-available
+    height: -webkit-fill-available
+    height: fill-available
+    max-height: intrinsic
+    max-height: -moz-max-content
+    max-height: -webkit-max-content
+    max-height: fit-content
     position: absolute
     z-index: 20
-    right: 7.3rem
-    top: -2.2rem
+    right: 5rem
+    top: 0
     background: #fff
     color: $color-dark-100
     padding: 1.6rem
+    overflow: auto
+    overflow-x: hidden
     ul
       margin: 0
       padding: 0

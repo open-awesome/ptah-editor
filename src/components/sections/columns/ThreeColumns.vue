@@ -186,23 +186,25 @@ export default {
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-columns3-component"
                   v-if="$sectionData.components[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
                   :is="component.name"
                   :href="$sectionData.components[index].element.href"
+                  :target="$sectionData.components[index].element.target"
                   :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
                   >
                 </component>
                 <component class="b-columns3-component"
                   v-if="!$sectionData.components[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-html="$sectionData.components[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components[index].element.href"
-                  v-html="$sectionData.components[index].element.text"
+                  :target="$sectionData.components[index].element.target"
                   :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
                   >
                 </component>
               </div>
@@ -222,23 +224,25 @@ export default {
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component class="b-columns3-component"
                   v-if="$sectionData.components2[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
                   :is="component.name"
                   :href="$sectionData.components2[index].element.href"
+                  :target="$sectionData.components2[index].element.target"
                   :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
                   :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
                   >
                 </component>
                 <component class="b-columns3-component"
                   v-if="!$sectionData.components2[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                  v-html="$sectionData.components2[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components2[index].element.href"
-                  v-html="$sectionData.components2[index].element.text"
+                  :target="$sectionData.components2[index].element.target"
                   :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
                   :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
                   >
                 </component>
               </div>
@@ -258,23 +262,25 @@ export default {
               <div v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
                 <component class="b-columns3-component"
                   v-if="$sectionData.components3[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
                   :is="component.name"
                   :href="$sectionData.components3[index].element.href"
+                  :target="$sectionData.components3[index].element.target"
                   :path="`components3[${index}].element`"
                   :style="$sectionData.components3[index].element.styles"
                   :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
-                  v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
                   >
                 </component>
                 <component class="b-columns3-component"
                   v-if="!$sectionData.components3[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
+                  v-html="$sectionData.components3[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components3[index].element.href"
-                  v-html="$sectionData.components3[index].element.text"
+                  :target="$sectionData.components3[index].element.target"
                   :path="`components3[${index}].element`"
                   :style="$sectionData.components3[index].element.styles"
                   :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
-                  v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
                   >
                 </component>
               </div>

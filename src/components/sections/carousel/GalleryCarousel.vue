@@ -4,10 +4,14 @@ import _ from 'lodash'
 
 export default {
   name: 'GalleryCarousel',
+
   group: 'Carousel',
+
   $schema: {
     mainStyle: types.GallerySlider
   },
+
+  inject: ['device'],
 
   props: {
     id: {
@@ -51,11 +55,11 @@ export default {
 <template>
   <section
     class="b-gallery-carousel"
-    :class="$sectionData.mainStyle.classes"
+    :class="[$sectionData.mainStyle.classes, device.type]"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
     >
-      <div class="b-header">{{$sectionData.mainStyle.header}}</div>
+      <div class="b-header">{{ $sectionData.mainStyle.header }}</div>
       <div class="b-gallery-carousel-body">
         <template v-if="galleryImages.length > 1">
           <span class="b-gallery-carousel-body__arrow-prev">
@@ -72,6 +76,7 @@ export default {
               v-for="(item, index) in galleryImages"
               :key="index"
               :class="{
+                'b-gallery-carousel-body-item_grow': galleryImages.length === 1 || galleryImages.length > 2,
                 'b-gallery-carousel-body-item_active': index === 1,
                 'b-gallery-carousel-body-item_transparent': galleryImages.length > 1
               }"
@@ -93,7 +98,7 @@ export default {
 
 .b-header
   margin-bottom: 3.5rem
-  font-family: Montserrat;
+  font-family: Montserrat
   font-style: normal
   font-weight: bold
   line-height: 4.8rem
@@ -152,7 +157,9 @@ export default {
   width: 33%
   min-width: 33%
   padding: 1.6rem 0 1.6rem 1.6rem
-  flex-grow: 1
+
+  &_grow
+    flex-grow: 1
 
   &_transparent
     opacity: .3
@@ -166,4 +173,10 @@ export default {
     background-size: contain
     background-repeat: no-repeat
     background-position: center
+
+.is-mobile .b-gallery-carousel-body__arrow-prev
+  left: 0
+
+.is-mobile .b-gallery-carousel-body__arrow-next
+  right: 0
 </style>

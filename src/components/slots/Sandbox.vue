@@ -16,6 +16,17 @@ export default {
     styles: {},
     innerDir: ''
   }),
+
+  computed: {
+    isRowDir () {
+      return this.innerDir === 'row'
+    },
+
+    isColumnDir () {
+      return this.innerDir === 'column'
+    }
+  },
+
   methods: {
     setStyle (data) {
       this.styles = Object.assign(this.styles, this.$section.get(this.path + '.styles'), data)
@@ -26,18 +37,14 @@ export default {
      * @param value {string} - css rule value
      * @param dir {boolean} - true - vertical, false - horizontal
      */
-    align (value, dir) {
-      let rule = ''
-      let style = {}
-      if (dir && this.innerDir === 'column') {
-        rule = 'justify-content'
-      } else {
-        rule = 'align-items'
-      }
-      style[rule] = value
-      this.setStyle(style)
+    align (value) {
+      this.setStyle({ 'align-items': value })
     },
-    changeDirection (dir) {
+    changeDirection (target, dir) {
+      target = target.closest('li')
+      if (target.classList.contains('active')) {
+        return
+      }
       this.innerDir = dir
       this.setStyle({ 'flex-direction': dir })
     }
@@ -52,19 +59,19 @@ export default {
 <template>
   <div class="b-slot">
       <div class="b-slot__tune ptah-control">
-        <ul>
-          <li @click.stop="align('flex-start', true)"><icon-base name="groupTop"></icon-base></li>
-          <li @click.stop="align('center', true)"><icon-base name="groupCenterVertical"></icon-base></li>
-          <li @click.stop="align('flex-end', true)"><icon-base name="groupBottom"></icon-base></li>
+        <ul v-show="isRowDir">
+          <li @click.stop="align('flex-start')"><icon-base name="groupTop"></icon-base></li>
+          <li @click.stop="align('center')"><icon-base name="groupCenterVertical"></icon-base></li>
+          <li @click.stop="align('flex-end')"><icon-base name="groupBottom"></icon-base></li>
+        </ul>
+        <ul v-show="isColumnDir">
+          <li @click.stop="align('flex-end')"><icon-base name="groupRight"></icon-base></li>
+          <li @click.stop="align('center')"><icon-base name="groupCenterHorizontal"></icon-base></li>
+          <li @click.stop="align('flex-start')"><icon-base name="groupLeft"></icon-base></li>
         </ul>
         <ul>
-          <li @click.stop="align('flex-end', false)"><icon-base name="groupRight"></icon-base></li>
-          <li @click.stop="align('center', false)"><icon-base name="groupCenterHorizontal"></icon-base></li>
-          <li @click.stop="align('flex-start', false)"><icon-base name="groupLeft"></icon-base></li>
-        </ul>
-        <ul>
-          <li @click.stop="changeDirection('column')"><icon-base name="groupColumn"></icon-base></li>
-          <li @click.stop="changeDirection('row')"><icon-base name="groupRow"></icon-base></li>
+          <li :class="{ active: isRowDir }" @click.stop="changeDirection($event.target, 'row')"><icon-base name="groupRow"></icon-base></li>
+          <li :class="{ active: isColumnDir }" @click.stop="changeDirection($event.target, 'column')"><icon-base name="groupColumn"></icon-base></li>
         </ul>
       </div>
       <slot>
@@ -114,8 +121,12 @@ export default {
       li
         padding: .4rem
         cursor: pointer
-        &:hover
+        &:hover,
+        &.active
           background: rgba(67, 111, 238, 0.15)
+        &.active
+          color: $gray-light
+          cursor: default
   /deep/
     .b-draggable-slot
       display: flex
