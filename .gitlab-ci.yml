@@ -106,6 +106,7 @@ review:
   except:
     - master
     - develop
+  when: manual    
 
 stop_review:
   image: p1hub/kubernetes-helm:2.11.0
