@@ -454,7 +454,6 @@ export default {
   padding: 5rem 0
   justify-content: flex-start
   align-items: center
-  background-color: rgba(0, 0, 0, 0.1)
   max-width: 118.4rem
   width: 100%
   .is-mobile &,
@@ -464,7 +463,7 @@ export default {
     &
       padding: 1rem 0
 .b-footer
-  overflow: hidden
+  // overflow: hidden
   position: absolute
   bottom: 0
   left: 0
