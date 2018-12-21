@@ -204,15 +204,16 @@ const SCHEMA_CUSTOM = {
 }
 
 const GROUP_NAME = 'Hero'
+const NAME = 'HeroSkull'
 
 export default {
-  name: 'HeroSkull',
+  name: NAME,
   components: {
     VuseIcon,
     Draggable
   },
   cover: '/img/covers/hero-skull.jpg',
-  group: 'Hero',
+  group: GROUP_NAME,
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
@@ -229,7 +230,8 @@ export default {
 
   methods: {
     ...mapActions('Landing', [
-      'updateGroupData'
+      'updateGroupData',
+      'updateSectionData'
     ]),
     onAddElement (element) {
       element.element.removable = true
@@ -240,30 +242,37 @@ export default {
       this.$section.data.components2.push(element)
     },
 
-    storeTextData: _.after(2, (self) => {
+    storeData: _.after(2, (self) => {
       let data = {}
       self.$sectionData.components.forEach(component => {
         data[component.name] = component.element.text
       })
       self.updateGroupData({ name: GROUP_NAME, data })
+      self.updateSectionData({
+        name: NAME,
+        data: _.cloneDeep(self.$sectionData)
+      })
     })
   },
 
   created () {
     if (this.$sectionData.edited === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+      let data = this.$store.state.Landing.sectionData[NAME] ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
+      Seeder.seed(_.merge(this.$sectionData, data))
     }
 
-    _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (text, name) => {
-      let elementObj = _.find(this.$sectionData.components, { name })
-      if (elementObj) {
-        elementObj.element.text = text
-      }
-    })
+    if (this.$store.state.Landing.groupData[GROUP_NAME]) {
+      _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (text, name) => {
+        let elementObj = _.find(this.$sectionData.components, { name })
+        if (elementObj) {
+          elementObj.element.text = text
+        }
+      })
+    }
   },
 
   updated () {
-    this.storeTextData(this)
+    this.storeData(this)
   }
 }
 </script>

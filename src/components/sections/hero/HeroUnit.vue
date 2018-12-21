@@ -70,14 +70,15 @@ const SCHEMA_CUSTOM = {
 }
 
 const GROUP_NAME = 'Hero'
+const NAME = 'HeroUnit'
 
 export default {
-  name: 'HeroUnit',
+  name: NAME,
   components: {
     Draggable
   },
   cover: '/img/covers/hero-unit.png',
-  group: 'Hero',
+  group: GROUP_NAME,
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
@@ -123,7 +124,8 @@ export default {
 
   methods: {
     ...mapActions('Landing', [
-      'updateGroupData'
+      'updateGroupData',
+      'updateSectionData'
     ]),
 
     onAddElement (element) {
@@ -131,18 +133,23 @@ export default {
       this.$section.data.components.push(element)
     },
 
-    storeTextData: _.after(2, (self) => {
+    storeData: _.after(2, (self) => {
       let data = {}
       self.$sectionData.components.forEach(component => {
         data[component.name] = component.element.text
       })
       self.updateGroupData({ name: GROUP_NAME, data })
+      self.updateSectionData({
+        name: NAME,
+        data: _.cloneDeep(self.$sectionData)
+      })
     })
   },
 
   created () {
     if (this.$sectionData.edited === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+      let data = this.$store.state.Landing.sectionData[NAME] ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
+      Seeder.seed(_.merge(this.$sectionData, data))
     }
 
     _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (text, name) => {
@@ -154,7 +161,7 @@ export default {
   },
 
   updated () {
-    this.storeTextData(this)
+    this.storeData(this)
   }
 }
 </script>
