@@ -312,7 +312,7 @@ $top-panel-height: 7.2rem
   &-settings,
   &-add-section
     position: absolute
-    right: -248px
+    left: 25rem
     top: 0.8rem
     bottom: 0.8rem
     display: flex

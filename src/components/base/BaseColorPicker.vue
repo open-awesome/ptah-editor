@@ -98,10 +98,7 @@ export default {
       .b-picker__text
         display: block
     &__palette
-      position: absolute
-      bottom: -302px
-      left: -2.2rem
-      z-index: 10
+      margin-top: .5rem
     &__arrow
       transition: .3s ease-out
       &--turn
