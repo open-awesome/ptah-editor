@@ -23,7 +23,6 @@ import Logo from '@components/elements/Logo'
 import Delimiter from '@components/elements/Delimiter'
 
 // sections
-import BaseSection from '@components/sections/BaseSection'
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
 import Gallery1 from '@components/sections/galleries/Gallery1'
@@ -41,7 +40,7 @@ import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
 // import AvailableRestrictions from '@components/sections/footers/FooterAvailableRestrictions'
 // import SocialCopyright from '@components/sections/footers/FooterSocialCopyright'
-import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
+import GalleryCarousel from '@components/sections/carousel/GalleryCarousel'
 
 // new elements
 import AvailablePlatforms from '@components/elements/AvailablePlatforms'
@@ -68,7 +67,6 @@ Vuse.mix({
   }
 })
 
-Vuse.component('BaseSection', BaseSection)
 Vuse.component('HeroUnit', HeroUnit)
 Vuse.component('HeroSkull', HeroSkull)
 Vuse.component('Gallery1', Gallery1)

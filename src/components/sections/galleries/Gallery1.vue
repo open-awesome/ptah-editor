@@ -55,6 +55,7 @@
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import { galleryPreviewClick } from '@cscripts/gallery1'
+import { mapActions } from 'vuex'
 
 const GALLERY_ITEM = {
   preview: types.GalleryItem,
@@ -64,10 +65,13 @@ const GALLERY_ITEM = {
   text: types.Text
 }
 
+const GROUP_NAME = 'galleries'
+const NAME = 'Gallery1'
+
 export default {
-  name: 'Gallery1',
+  name: NAME,
   cover: '/img/covers/gallery1.png',
-  group: 'galleries',
+  group: GROUP_NAME,
   $schema: {
     mainStyle: types.StyleObject,
     images: [
@@ -79,11 +83,13 @@ export default {
       images: _.merge({}, GALLERY_ITEM)
     }
   },
+
   props: {
     id: {
       type: Number, required: true
     }
   },
+
   watch: {
     $sectionData: {
       handler: function () {
@@ -92,16 +98,53 @@ export default {
       deep: true
     }
   },
+
   methods: {
+    ...mapActions('Landing', [
+      'updateGroupData',
+      'updateSectionData'
+    ]),
+
     bindingClickPreview (index) {
       galleryPreviewClick(index)
-    }
+    },
+
+    storeData: _.after(2, (self) => {
+      let data = {}
+      self.$sectionData.images.forEach((component, key) => {
+        data[key] = component.preview.styles['background-image']
+      })
+      self.updateGroupData({ name: GROUP_NAME, data })
+      self.updateSectionData({
+        name: NAME,
+        data: _.cloneDeep(self.$sectionData)
+      })
+    })
   },
+
+  created () {
+    let data = this.$store.state.Landing.sectionData[NAME]
+
+    if (data) {
+      _.merge(this.$sectionData, data)
+    }
+
+    _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (image, key) => {
+      let elementObj = this.$sectionData.images[key]
+      if (elementObj) {
+        elementObj.preview.styles['background-image'] = image
+      }
+    })
+  },
+
   mounted: function () {
     this.bindingClickPreview(0)
   },
+
   updated: function () {
+    console.log(222, this.$store.state.Sidebar.settingObjectSection.data.images[0].preview.url)
     this.bindingClickPreview(this.index)
+    this.storeData(this)
   }
 }
 </script>

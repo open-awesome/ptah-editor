@@ -117,7 +117,7 @@ export default {
     Draggable
   },
   cover: '/img/covers/columns3.jpg',
-  group: 'Columns',
+  group: 'Three Columns',
   $schema: {
     mainStyle: types.StyleObject,
     header: types.Title,

@@ -42,6 +42,7 @@
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import VuseIcon from '@editor/components/VuseIcon'
+import { mapActions } from 'vuex'
 
 const GALLERY_ITEM = {
   preview: types.Image,
@@ -49,13 +50,16 @@ const GALLERY_ITEM = {
   button: types.Button
 }
 
+const GROUP_NAME = 'galleries'
+const NAME = 'Gallery2'
+
 export default {
-  name: 'Gallery2',
+  name: NAME,
   components: {
     VuseIcon
   },
   cover: '/img/covers/gallery2.png',
-  group: 'galleries',
+  group: GROUP_NAME,
   $schema: {
     mainStyle: types.StyleObject,
     button: types.Button,
@@ -84,6 +88,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Landing', [
+      'updateGroupData',
+      'updateSectionData'
+    ]),
     onClick (el, index) {
       let m = false
       let href = el.button.href
@@ -151,7 +159,38 @@ export default {
       el = this.$sectionData.images[num]
 
       this.onClick(el, num)
+    },
+
+    storeData: _.after(2, (self) => {
+      let data = {}
+      self.$sectionData.images.forEach((component, key) => {
+        data[key] = component.preview.styles['background-image']
+      })
+      self.updateGroupData({ name: GROUP_NAME, data })
+      self.updateSectionData({
+        name: NAME,
+        data: _.cloneDeep(self.$sectionData)
+      })
+    })
+  },
+
+  created () {
+    let data = this.$store.state.Landing.sectionData[NAME]
+
+    if (data) {
+      _.merge(this.$sectionData, data)
     }
+
+    _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (image, key) => {
+      let elementObj = this.$sectionData.images[key]
+      if (elementObj) {
+        elementObj.preview.styles['background-image'] = image
+      }
+    })
+  },
+
+  updated () {
+    this.storeData(this)
   }
 }
 </script>
