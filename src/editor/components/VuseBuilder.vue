@@ -16,7 +16,7 @@
           :key="section.id"
           :is="section.name"
           :id="section.id"
-          @click.native.self="selectSidebarSection(section)"/>
+          @click.native="selectSidebarSection(section)"/>
       <div class="controller-intro" v-if="emptySections">
         <h3>&larr; Choose layout from the menu</h3>
       </div>
@@ -209,7 +209,13 @@ export default {
       }
       // --- coz directive v-scroll-to is called
       await this.$nextTick()
-      menuItem.click()
+      // --- rm class/es from menu items
+      document
+        .querySelectorAll('.b-menu-subitem_selected')
+        .forEach(el => el.classList.remove('b-menu-subitem_selected'))
+      // --- add selected class and scroll to el
+      menuItem.classList.add('b-menu-subitem_selected')
+      menuItem.scrollIntoView()
     }
   }
 }
