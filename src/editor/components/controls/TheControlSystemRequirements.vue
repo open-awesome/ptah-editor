@@ -38,6 +38,10 @@ export default {
       return this.settingObjectOptions.rowsRequirements
     },
 
+    selectPlatform () {
+      return this.settingObjectOptions.selectPlatform
+    },
+
     sizeIcons () {
       return this.settingObjectOptions.sizeIcons
     },
@@ -56,6 +60,17 @@ export default {
   methods: {
     visible (key) {
       this.requirements[key].visible = !this.requirements[key].visible
+      this.selectPlatform.name = key
+
+      if (this.requirements[key].visible === true) {
+        return
+      }
+
+      for (let p in this.requirements) {
+        if (this.requirements[p].visible === true) {
+          this.selectPlatform.name = p
+        }
+      }
     },
     visibleRows (key) {
       this.requirementsRows[key].visible = !this.requirementsRows[key].visible
@@ -202,6 +217,7 @@ export default {
       user-select: none
       text-align: left
       width: 15rem
+      text-transform: capitalize
       &:hover
         filter: brightness(120%)
       &:active

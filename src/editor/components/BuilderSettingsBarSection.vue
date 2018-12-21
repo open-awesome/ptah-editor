@@ -2,12 +2,41 @@
   <div class="b-section-settings">
   <base-scroll-container backgroundBar="#999">
     <div class="b-section-settings__inner">
+
       <div class="b-section-settings__control">
+        <div class="b-section-settings__header">
+          <span>Heights</span>
+        </div>
         <base-label>Full screen height</base-label>
         <BaseSwitcher v-model="fullScreen" @change="setHeight" />
       </div>
 
+      <!-- System requirements -->
+      <control-system-requirements
+        :expand="expandedSystemRequirements"
+        @open="onExpand"
+        v-if="settingObjectOptions.hasSystemRequirements"
+        >
+      </control-system-requirements>
+
+     <!-- font -->
+      <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+        <control-text
+          :fontSize="fontSize"
+          :fontFamily="fontFamily"
+          :fontColor="fontColor"
+          :fontStyles="styles"
+          :expand="expandedFont"
+          @open="onExpand"
+          @change="styleChange"></control-text>
+      </div>
+
       <template v-if="settingObjectOptions.background">
+
+        <div class="b-section-settings__header">
+          <span>Background</span>
+        </div>
+
         <div class="b-section-settings__control">
           <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
         </div>
@@ -87,26 +116,6 @@
         >
       </control-section-products>
 
-      <!-- font -->
-      <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-        <control-text
-          :fontSize="fontSize"
-          :fontFamily="fontFamily"
-          :fontColor="fontColor"
-          :fontStyles="styles"
-          :expand="expandedFont"
-          @open="onExpand"
-          @change="styleChange"></control-text>
-      </div>
-
-      <!-- System requirements -->
-      <control-system-requirements
-        :expand="expandedSystemRequirements"
-        @open="onExpand"
-        v-if="settingObjectOptions.hasSystemRequirements"
-        >
-      </control-system-requirements>
-
     </div>
 
   </base-scroll-container>
@@ -168,6 +177,7 @@ export default {
       /* vars for control system requirements */
       systemRequirements: {},
       rowsRequirements: {},
+      selectPlatform: {},
       expandedSystemRequirements: true,
 
       /* text styles */
@@ -222,6 +232,7 @@ export default {
     /* System Requirements */
     this.systemRequirements = this.settingObjectOptions.systemRequirements || {}
     this.rowsRequirements = this.settingObjectOptions.rowsRequirements || {}
+    this.selectPlatform = this.settingObjectOptions.selectPlatform || {}
 
     /* Get font settings */
     this.fontFamily = styles['font-family'] || ''
@@ -358,9 +369,22 @@ export default {
     flex-direction: column
     align-items: stretch
     padding-bottom: 4.5rem
-
     &__inner
-      padding-right: 2.5rem
+      padding: 0 2.5rem 2rem 0
+    &__header
+      font-size: 1.6rem
+      height: 3.2rem
+      color: #272727
+      display: flex
+      align-items: center
+      cursor: pointer
+      margin: 1.6rem 0
+      i
+        margin-left: 5px
+        margin-bottom: -5px
+        transform: rotate(180deg)
+        &.dropped
+          transform: rotate(0deg)
     &__buttons
       position: absolute
       bottom: 1rem

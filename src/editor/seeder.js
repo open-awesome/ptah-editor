@@ -634,6 +634,9 @@ const data = new Map([
         'Storage': { visible: true },
         'Sound Card': { visible: false }
       },
+      selectPlatform: {
+        name: 'apple'
+      },
       colorFill: {
         color:  '#fff'
       },

@@ -174,7 +174,6 @@ export default {
     mainStyle: types.SystemRequirements,
     platforms: {
       'windows': {
-        name: 'Windows',
         element: types.TextInherit,
         requirements: _.merge({}, REQUIREMENTS),
         text: types.TextInherit,
@@ -182,7 +181,6 @@ export default {
         rec: types.TextInherit
       },
       'apple': {
-        name: 'Apple',
         element: types.TextInherit,
         requirements: _.merge({}, REQUIREMENTS),
         text: types.TextInherit,
@@ -190,7 +188,6 @@ export default {
         rec: types.TextInherit
       },
       'linux': {
-        name: 'Linux',
         element: types.TextInherit,
         requirements: _.merge({}, REQUIREMENTS),
         button: types.Button,
@@ -198,8 +195,7 @@ export default {
         min: types.TextInherit,
         rec: types.TextInherit
       }
-    },
-    isPlatform: null
+    }
   },
   props: {
     id: {
@@ -212,21 +208,7 @@ export default {
         return
       }
 
-      this.$sectionData.isPlatform = key
-    },
-    visiblePlatform (key) {
-      this.$sectionData.platforms[key].visible = !this.$sectionData.platforms[key].visible
-      this.selectPlatform(key)
-
-      if (this.$sectionData.platforms.visible === true) {
-        return
-      }
-
-      for (let p in this.$sectionData.platforms) {
-        if (this.$sectionData.platforms[p].visible === true) {
-          this.selectPlatform(p)
-        }
-      }
+      this.$sectionData.mainStyle.selectPlatform.name = key
     }
   },
   created () {
@@ -250,7 +232,7 @@ export default {
       <div class="b-system-platforms flex flex_center">
         <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
              v-if="$sectionData.mainStyle.systemRequirements[key].visible"
-             :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.isPlatform }">
+             :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.mainStyle.selectPlatform.name }">
           <div
             class="b-system-platforms__item__tab"
             @click="selectPlatform(key)"
@@ -274,7 +256,7 @@ export default {
       <div class="b-system-requirements">
         <div class="b-system-requirements__table">
           <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
-              v-show="$sectionData.isPlatform === key && $sectionData.mainStyle.systemRequirements[key].visible">
+              v-show="$sectionData.mainStyle.selectPlatform.name === key && $sectionData.mainStyle.systemRequirements[key].visible">
             <div>
               <div class="b-system-requirements__table-row  flex flex_center">
                 <div class="b-system-requirements__table-col">
@@ -413,6 +395,7 @@ export default {
       padding: 1rem
       width: 38%
       text-align: center
+      word-break: break-all
       &:nth-child(1)
         text-align: left
         width: 20%
