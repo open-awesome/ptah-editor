@@ -23,7 +23,7 @@
           </div>
         </div>
       </div>
-      <div gallery-two-popup="" class="l-popup l-popup_flex" v-show="true === $sectionData.isShowPopup">
+      <div v-show="$sectionData.isShowPopup" ref="gallery-container" class="l-popup l-popup_flex" gallery-two-popup="">
         <div gallery-two-popup-padd="" class="l-popup__padd" :style="$sectionData.popupStyles">
           <div gallery-two-popup-close="" class="l-popup__close" @click.prevent="closePopup"></div>
           <div gallery-two-popup-prev="" class="l-popup__arr l-popup__arr_prev" @click="clickArr('prev')" v-show="$sectionData.index > 0">
@@ -81,6 +81,13 @@ export default {
     id: {
       type: Number,
       required: true
+    }
+  },
+  mounted () {
+    try {
+      document.body.appendChild(this.$refs['gallery-container'])
+    } catch (error) {
+      console.error(error)
     }
   },
   methods: {
