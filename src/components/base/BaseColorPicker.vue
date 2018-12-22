@@ -98,10 +98,10 @@ export default {
       .b-picker__text
         display: block
     &__palette
-      position: absolute
-      bottom: -302px
-      left: -2.2rem
-      z-index: 10
+      margin-top: .5rem
+      .vc-sketch
+        border: .1rem solid rgba(0, 0, 0, .15)
+        box-shadow: none
     &__arrow
       transition: .3s ease-out
       &--turn
