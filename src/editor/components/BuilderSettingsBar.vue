@@ -64,20 +64,14 @@ export default {
 <style lang="sass" scoped>
 .b-builder-settings-bar
   position: relative
-
   min-width: 24rem
   max-width: 34rem
-  width: intrinsic
-  width: -moz-max-content
-  width: -webkit-max-content
+  width: 100%
   height: 100%
-
   display: flex
   flex-direction: column
   padding: 2.8rem 0.5rem 2.8rem 3.2rem
-
   background: #F5F5F5
-
   &__title
     margin: 0 0 2.8rem 0
     color: #272727
@@ -90,7 +84,6 @@ export default {
       font-size: 1.4rem
       font-weight: normal
       margin: 0 0 1rem
-
   &__closer
     position: absolute
     right: 1rem
@@ -99,7 +92,6 @@ export default {
     border: 0
     background: transparent
     cursor: pointer
-
   &__contents
     flex-grow: 2
     display: flex
