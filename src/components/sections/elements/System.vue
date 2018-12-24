@@ -168,7 +168,7 @@ export default {
   components: {
     VuseIcon
   },
-  cover: '/img/covers/system.png',
+  cover: '/img/covers/system.jpg',
   group: 'elements',
   $schema: {
     mainStyle: types.SystemRequirements,
