@@ -26,6 +26,7 @@ import Delimiter from '@components/elements/Delimiter'
 import BaseSection from '@components/sections/BaseSection'
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
+import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
@@ -42,6 +43,7 @@ import Video from '@components/sections/video/Video'
 // import AvailableRestrictions from '@components/sections/footers/FooterAvailableRestrictions'
 // import SocialCopyright from '@components/sections/footers/FooterSocialCopyright'
 import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
+import MenuBas from '@components/sections/stickyMenus/MenuBAS'
 
 // new elements
 import AvailablePlatforms from '@components/elements/AvailablePlatforms'
@@ -71,6 +73,7 @@ Vuse.mix({
 Vuse.component('BaseSection', BaseSection)
 Vuse.component('HeroUnit', HeroUnit)
 Vuse.component('HeroSkull', HeroSkull)
+Vuse.component('HeroBAS', HeroBAS)
 Vuse.component('Gallery1', Gallery1)
 Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
@@ -87,6 +90,7 @@ Vuse.component('Video', Video)
 // Vuse.component('AvailableRestrictions', AvailableRestrictions)
 // Vuse.component('SocialCopyright', SocialCopyright)
 Vuse.component('GalleryCarousel', GalleryCarousel)
+Vuse.component('MenuBas', MenuBas)
 
 Vuse.use(pwa)
 
