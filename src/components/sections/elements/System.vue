@@ -352,7 +352,7 @@ export default {
          display: block
      &__tab
        border: dotted transparent 0.1rem
-       padding: 0.5rem 2rem
+       padding: 0.5rem 1rem
        z-index: 0
        position: relative
        max-width: 20rem
@@ -360,10 +360,10 @@ export default {
        white-space: nowrap
        overflow: hidden
        .is-mobile &
-         max-width: 12rem
+         max-width: 16rem
        @media only screen and (max-width: 540px)
          &
-           max-width: 12rem
+           max-width: 16rem
        &-icon
          display: inline-block
          margin: 0.8rem
@@ -398,6 +398,7 @@ export default {
       word-break: break-all
       &:nth-child(1)
         text-align: left
-        width: 20%
+        width: 24%
+        white-space: nowrap
 
 </style>
