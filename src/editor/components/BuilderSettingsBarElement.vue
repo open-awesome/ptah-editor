@@ -1,6 +1,5 @@
 <template>
   <div class="b-elem-settings">
-    {{ settingObjectType }}
     <!-- text align -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
       <control-align
