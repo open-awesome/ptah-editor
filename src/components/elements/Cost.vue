@@ -1,28 +1,28 @@
 <template>
-  <div class="b-title is-editable">
-    <slot></slot>
-  </div>
+    <div class="b-cost is-editable">
+      <slot></slot>
+    </div>
 </template>
 
 <script>
 export default {
-  name: 'Title'
+  name: 'ProductCost'
 }
 </script>
 
 <style lang="sass" scoped>
-.b-title
-  color: #000
+.b-cost
+  color: #e4a11e
   font-family: 'Lato'
   position: relative
   text-align: center
-  display: flex
-  align-items: center
-  font-size: 2.5rem
+  font-size: 4rem
   line-height: 1.4
-  margin: 1.6rem
   display: block
-  &::selection, & ::selection
+  max-width: 100rem
+  margin: 1.6rem
+  &::selection,
+  & ::selection
     color: #ff0
     background: #000
 </style>

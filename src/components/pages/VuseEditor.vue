@@ -21,6 +21,9 @@ import Description from '@components/elements/Description'
 import Pic from '@components/elements/Pic'
 import Logo from '@components/elements/Logo'
 import Delimiter from '@components/elements/Delimiter'
+import Slogan from '@components/elements/Slogan'
+import Cost from '@components/elements/Cost'
+import IconWithText from '@components/elements/IconWithText'
 
 // sections
 import BaseSection from '@components/sections/BaseSection'
@@ -33,6 +36,7 @@ import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
 // import Footer from '@components/sections/footers/Footer'
 import System from '@components/sections/elements/System'
+import ProductsColumns from '@components/sections/products/ProductsColumns'
 import ThreeColumns from '@components/sections/columns/ThreeColumns'
 import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
@@ -42,7 +46,6 @@ import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
 import AvailablePlatforms from '@components/elements/AvailablePlatforms'
 import AgeRestrictions from '@components/elements/AgeRestrictions'
 import SocialNetworks from '@components/elements/SocialNetworks'
-import Slogan from '@components/elements/Slogan'
 
 import store from '@store'
 
@@ -61,7 +64,9 @@ Vuse.mix({
     AvailablePlatforms,
     AgeRestrictions,
     SocialNetworks,
-    Slogan
+    Slogan,
+    Cost,
+    IconWithText
   }
 })
 
@@ -73,6 +78,7 @@ Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
 Vuse.component('Products', Products)
 Vuse.component('ProductsExtend', ProductsExtend)
+Vuse.component('ProductsColumns', ProductsColumns)
 // Vuse.component('Footer', Footer)
 Vuse.component('System', System)
 Vuse.component('ThreeColumns', ThreeColumns)

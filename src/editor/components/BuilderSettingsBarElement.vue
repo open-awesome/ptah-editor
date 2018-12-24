@@ -78,6 +78,15 @@
       </control-social-networks>
     </div>
 
+    <!-- Text With Icon-->
+    <div class="b-elem-settings__control" v-if="settingObjectOptions.isIconWithText">
+      <control-icon-with-text
+        :expand="expandedIconWithText"
+        @open="onExpand"
+        >
+      </control-icon-with-text>
+    </div>
+
     <!-- BOTTOM button -->
     <div class="b-elem-settings__buttons">
       <base-button
@@ -103,6 +112,7 @@ import ControlLink from './controls/TheControlLink'
 import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.vue'
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
+import ControlIconWithText from './controls/TheControlIconWithText.vue'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -122,7 +132,8 @@ export default {
     ControlLink,
     ControlAvailablePlatforms,
     ControlAgeRestrictions,
-    ControlSocialNetworks
+    ControlSocialNetworks,
+    ControlIconWithText
   },
 
   data () {
@@ -149,6 +160,7 @@ export default {
       expandedAvailablePlatforms: true,
       expandedAgeRestrictions: true,
       expandedSocialNetworks: true,
+      expandedIconWithText: true,
       colorFill: {},
       sizeIcons: {},
       availablePlatforms: {},
@@ -311,7 +323,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks', 'IconWithText']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 

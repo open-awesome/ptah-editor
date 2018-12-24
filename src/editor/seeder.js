@@ -5,26 +5,7 @@ import * as _ from 'lodash-es'
 const DEFAULT_OPTIONS = {
   text: '',
   classes: [],
-  styles: {
-    'background-image': false,
-    'background-position': false,
-    'background-repeat': false,
-    'background-size': false,
-    'background-color': false,
-    'background': false,
-    'color': '#000',
-    'border-color': false,
-    'font-size': '1.6rem',
-    'border-radius': 0,
-    'font-weight': false,
-    'font-style': false,
-    'font-family': 'Lato',
-    'text-decoration': false,
-    'justify-content': false,
-    'text-align': 'center',
-    'width': '',
-    'height': ''
-  },
+  styles: {},
   resizable: false,
   hasLink: false,
   removable: false,
@@ -170,7 +151,7 @@ const data = new Map([
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
-        'background-color': false,
+        'background-color': 'inherit',
         'background': false,
         'width': '',
         'height': ''
@@ -249,45 +230,24 @@ const data = new Map([
   [types.Cost, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
-      resizable: true,
       typography: true,
-      background: true,
       aligned: true,
       text: '$90',
-      classes: [],
       href: '',
       styles: {
-        'background-image': false,
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false,
         'color': '#e4a11e',
-        'border-color': false,
-        'font-size': 2,
-        'border-radius': 0,
+        'font-size': '4rem',
         'font-weight': false,
         'font-style': false,
         'font-family': 'Lato',
-        'text-decoration': false,
-        'justify-content': false,
-        'width': '',
-        'height': ''
+        'text-decoration': false
       }
     })
   )],
   [types.Icon, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: false,
-      resizable: true,
-      hasLink: true,
-      background: true,
-      fillColor: true,
-      shape: true,
-      target: '_blank',
+      box: true,
       text: '',
-      classes: [],
       href: '',
       styles: {
         'background-image': false,
@@ -295,11 +255,37 @@ const data = new Map([
         'background-repeat': false,
         'background-size': false,
         'background-color': 'rgba(0, 0, 0, 0)',
-        'fill': '#fff',
         'border-radius': '0',
         'width': '',
         'height': ''
       }
+    })
+  )],
+  [types.IconWithText, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: false,
+      aligned: true,
+      styles: {
+        'text-align': 'left',
+        'font-family': 'inherit',
+        'font-size': 'inherit',
+        'font-weight': 'inherit',
+        'font-style': 'inherit',
+        'color': 'inherit'
+      },
+      isIconWithText: true,
+      colorFill: {
+        color:  '#fff'
+      },
+      sizeIcons: {
+        width: 14
+      },
+      icon: {
+        name: 'checkMark',
+        text: 'Default icon text',
+        visible: true
+      },
+      isComplex: true
     })
   )],
   [types.GalleryItem, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -322,6 +308,7 @@ const data = new Map([
     removable: true,
     resizable: true,
     background: true,
+    visible: true,
     styles: {
       'background-image': false,
       'background-position': false,
@@ -356,11 +343,17 @@ const data = new Map([
   )],
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      hasProdusct: true,
       box: true,
       resizable: true,
       removable: true,
       background: true,
+      hasProducts: true,
+      products: {
+        'Standart': { visible: true },
+        'Full': { visible: true },
+        'Deluxe': { visible: false },
+        'Ultimate': { visible: false }
+      },
       styles: {
         'background-image': '',
         'background-position': false,
@@ -370,6 +363,22 @@ const data = new Map([
         'background': false,
         'width': '',
         'height': ''
+      },
+      typography: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false,
+        'font-family': 'Lato',
+        'font-size':  1.4,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'text-align': false,
+        'color': '#fff'
       }
     })
   )],
