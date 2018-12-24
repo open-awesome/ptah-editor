@@ -124,7 +124,7 @@ export default {
     VuseIcon,
     Draggable
   },
-  cover: '/img/covers/hero-skull.jpg',
+  cover: '/img/covers/footer.jpg',
   group: 'footers',
   $schema: {
     mainStyle: types.StyleObject,
