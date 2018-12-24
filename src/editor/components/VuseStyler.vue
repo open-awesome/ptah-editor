@@ -266,8 +266,11 @@ export default {
             section: this.section,
             element: this.el
           })
-
           this.el.classList.add('styler-active')
+          // --- rm class/es from menu items
+          document
+            .querySelectorAll('.b-menu-subitem_selected')
+            .forEach(el => el.classList.remove('b-menu-subitem_selected'))
         }
       }, 0)
 
