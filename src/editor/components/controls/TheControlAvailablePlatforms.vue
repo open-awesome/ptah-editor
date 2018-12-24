@@ -43,8 +43,11 @@ export default {
   },
 
   watch: {
-    expand () {
-      this.controlOpen = this.expand
+    expand: {
+      immediate: true,
+      handler (value) {
+        this.controlOpen = value
+      }
     }
   },
 
