@@ -3,11 +3,11 @@
       <div class="b-text-icon__item" v-if="icon.visible"
         >
         <span class="b-text-icon__icon" :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px'  }">
-          <icon-base :name="icon.name"></icon-base>
+          <icon-base :name="icon.value"></icon-base>
         </span>
       </div>
       <div class="b-text-icon__item">
-        <span v-text="icon.text"></span>
+        <span v-text="icon.text" :style="{ color: colorFill['color'] }"></span>
       </div>
     </div>
 </template>
@@ -58,7 +58,7 @@ export default {
     padding: 0 1.6rem
   &__icon
     position: absolute
-    top: 0.2rem
+    top: 0rem
     left: 0.8rem
     svg
       fill: inherit

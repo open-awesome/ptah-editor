@@ -32,8 +32,7 @@ import HeroSkull from '@components/sections/hero/HeroSkull'
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
-import Products from '@components/sections/products/Products'
-import ProductsExtend from '@components/sections/products/ProductsExtend'
+// import ProductsExtend from '@components/sections/products/ProductsExtend'
 // import Footer from '@components/sections/footers/Footer'
 import System from '@components/sections/elements/System'
 import ProductsColumns from '@components/sections/products/ProductsColumns'
@@ -76,8 +75,7 @@ Vuse.component('HeroSkull', HeroSkull)
 Vuse.component('Gallery1', Gallery1)
 Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
-Vuse.component('Products', Products)
-Vuse.component('ProductsExtend', ProductsExtend)
+// Vuse.component('ProductsExtend', ProductsExtend)
 Vuse.component('ProductsColumns', ProductsColumns)
 // Vuse.component('Footer', Footer)
 Vuse.component('System', System)

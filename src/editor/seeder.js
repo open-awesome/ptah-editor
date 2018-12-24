@@ -33,7 +33,7 @@ const data = new Map([
     typography: true,
     styles: {
       'font-family': 'Lato',
-      'font-size': '3rem',
+      'font-size': 3.2,
       'font-weight': false,
       'font-style': false,
       'text-decoration': false,
@@ -55,7 +55,7 @@ const data = new Map([
     typography: true,
     styles: {
       'font-family': 'Lato',
-      'font-size': '1.5rem',
+      'font-size': 1.6,
       'font-weight': false,
       'font-style': false,
       'text-decoration': false,
@@ -182,7 +182,7 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': 3,
+        'font-size': 3.2,
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
@@ -215,7 +215,7 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': 1,
+        'font-size': 1.2,
         'border-radius': 0,
         'font-weight': false,
         'font-style': false,
@@ -233,10 +233,9 @@ const data = new Map([
       typography: true,
       aligned: true,
       text: '$90',
-      href: '',
       styles: {
         'color': '#e4a11e',
-        'font-size': '4rem',
+        'font-size': 3.2,
         'font-weight': false,
         'font-style': false,
         'font-family': 'Lato',
@@ -271,7 +270,6 @@ const data = new Map([
         'font-size': 'inherit',
         'font-weight': 'inherit',
         'font-style': 'inherit',
-        'color': 'inherit'
       },
       isIconWithText: true,
       colorFill: {
@@ -281,6 +279,7 @@ const data = new Map([
         width: 14
       },
       icon: {
+        value: 'checkMark',
         name: 'checkMark',
         text: 'Default icon text',
         visible: true
@@ -360,25 +359,7 @@ const data = new Map([
         'background-repeat': false,
         'background-size': false,
         'background-color': false,
-        'background': false,
-        'width': '',
-        'height': ''
-      },
-      typography: true,
-      styles: {
-        'background-image': '',
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false,
-        'font-family': 'Lato',
-        'font-size':  1.4,
-        'font-weight': false,
-        'font-style': false,
-        'text-decoration': false,
-        'text-align': false,
-        'color': '#fff'
+        'background': false
       }
     })
   )],

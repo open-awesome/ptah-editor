@@ -2,6 +2,12 @@
 import { mapState } from 'vuex'
 import VuseIcon from '@editor/components/VuseIcon'
 
+const LIST_ICONS = [
+  'checkMark',
+  'close',
+  'plus'
+]
+
 export default {
   name: 'ControlTextWithIcon',
 
@@ -20,6 +26,7 @@ export default {
     return {
       controlOpen: false,
       color: '',
+      iconName: {},
       elWidth: 0
     }
   },
@@ -39,6 +46,15 @@ export default {
 
     sizeIcons () {
       return this.settingObjectOptions.sizeIcons
+    },
+
+    icons () {
+      const options = LIST_ICONS.map((icon) => {
+        return { name: icon, value: icon }
+      })
+      return {
+        options
+      }
     }
   },
 
@@ -56,6 +72,11 @@ export default {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.colorFill['color'] = color
     },
+    changeIcon () {
+      this.icon.name = this.iconName.value
+      this.icon.value = this.iconName.value
+      console.log(this.icon)
+    },
     onClickTitle () {
       this.$emit('open', ['IconWithText', !this.controlOpen])
     }
@@ -64,6 +85,7 @@ export default {
   mounted () {
     this.color = this.colorFill.color
     this.elWidth = this.sizeIcons.width
+    this.iconName = this.icon
     this.controlOpen = this.expand
   }
 }
@@ -75,13 +97,16 @@ export default {
       <span>Icon settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
-      <div class="b-size-controls__control">
-        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="2" min="4" max="34">
+      <div class="b-text-controls__control">
+        <base-select label="Icon" :options="icons.options" :value="iconName" v-model="iconName" @input="changeIcon"></base-select>
+      </div>
+      <div class="b-text-controls__control">
+        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="2" min="14" max="34">
           {{ sizeIcons.width }} px
         </base-range-slider>
       </div>
       <div class="b-text-controls__control">
-        <base-color-picker label="Color icons" v-model="color" @change="changeColor"></base-color-picker>
+        <base-color-picker label="Color" v-model="color" @change="changeColor"></base-color-picker>
       </div>
       <div class="b-text-controls__control">
         <div>Visible icon</div>

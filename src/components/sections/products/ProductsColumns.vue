@@ -44,28 +44,48 @@ const C_CUSTOM = [
   },
   {
     element: {
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
       icon: {
+        value: 'checkMark',
+        name: 'checkMark',
         text: 'Suit of Legacy Armor'
       }
     }
   },
   {
     element: {
+      colorFill: {
+        color: 'rgba(74,74,74,1)'
+      },
       icon: {
+        value: 'close',
+        name: 'close',
         text: 'Mithril Box'
       }
     }
   },
   {
     element: {
+      colorFill: {
+        color: 'rgba(74,74,74,1)'
+      },
       icon: {
+        value: 'close',
+        name: 'close',
         text: 'Heroic Boosters'
       }
     }
   },
   {
     element: {
+      colorFill: {
+        color: 'rgba(208,2,27,1)'
+      },
       icon: {
+        value: 'close',
+        name: 'close',
         text: 'Summon Mistfire Wolf Elite Skil'
       }
     }
@@ -112,9 +132,50 @@ const C_CUSTOM_2 = [
   },
   {
     element: {
-      text: 'An sincerity so extremity he additions.' +
-      '<div>Her yet there truth merit.</div>' +
-      '<div>Mrs all projecting favourable now unpleasing.</div>'
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
+      icon: {
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Suit of Legacy Armor'
+      }
+    }
+  },
+  {
+    element: {
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
+      icon: {
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Mithril Box'
+      }
+    }
+  },
+  {
+    element: {
+      colorFill: {
+        color: 'rgba(74,74,74,1)'
+      },
+      icon: {
+        value: 'close',
+        name: 'close',
+        text: 'Heroic Boosters'
+      }
+    }
+  },
+  {
+    element: {
+      colorFill: {
+        color: 'rgba(74,74,74,1)'
+      },
+      icon: {
+        value: 'close',
+        name: 'close',
+        text: 'Summon Mistfire Wolf Elite Skil'
+      }
     }
   }
 ]
@@ -159,9 +220,50 @@ const C_CUSTOM_3 = [
   },
   {
     element: {
-      text: 'An sincerity so extremity he additions.' +
-      '<div>Her yet there truth merit.</div>' +
-      '<div>Mrs all projecting favourable now unpleasing.</div>'
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
+      icon: {
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Suit of Legacy Armor'
+      }
+    }
+  },
+  {
+    element: {
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
+      icon: {
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Mithril Box'
+      }
+    }
+  },
+  {
+    element: {
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
+      icon: {
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Heroic Boosters'
+      }
+    }
+  },
+  {
+    element: {
+      colorFill: {
+        color: 'rgba(74,74,74,1)'
+      },
+      icon: {
+        value: 'close',
+        name: 'close',
+        text: 'Summon Mistfire Wolf Elite Skil'
+      }
     }
   }
 ]
@@ -206,9 +308,50 @@ const C_CUSTOM_4 = [
   },
   {
     element: {
-      text: 'An sincerity so extremity he additions.' +
-      '<div>Her yet there truth merit.</div>' +
-      '<div>Mrs all projecting favourable now unpleasing.</div>'
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
+      icon: {
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Suit of Legacy Armor'
+      }
+    }
+  },
+  {
+    element: {
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
+      icon: {
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Mithril Box'
+      }
+    }
+  },
+  {
+    element: {
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
+      icon: {
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Heroic Boosters'
+      }
+    }
+  },
+  {
+    element: {
+      colorFill: {
+        color: 'rgba(245,166,35,1)'
+      },
+      icon: {
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Summon Mistfire Wolf Elite Skil'
+      }
     }
   }
 ]
@@ -283,8 +426,8 @@ export default {
   components: {
     Draggable
   },
-  cover: '/img/covers/columns3.jpg',
-  group: 'Products',
+  cover: '/img/covers/products.jpg',
+  group: 'products',
   $schema: {
     mainStyle: types.ProductSection,
     header: types.Title,

@@ -188,7 +188,7 @@ export default {
     /* Get font settings */
     this.fontFamily = styles['font-family'] || ''
     this.fontSize = styles['font-size'] || 1.6
-    this.fontColor = styles['color'] || '#000000'
+    this.fontColor = styles['color'] || ''
 
     if (styles['font-style']) {
       this.styles.push({ prop: 'font-style', value: styles['font-style'] })
