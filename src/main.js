@@ -1,4 +1,6 @@
 import 'es6-promise/auto'
+import 'setimmediate'
+
 import VueRouter from 'vue-router'
 import Vue from 'vue'
 import Vuex from 'vuex'
