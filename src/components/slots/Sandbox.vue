@@ -135,4 +135,7 @@ export default {
       justify-content: center
       align-items: center
       color: inherit
+      &_100
+        width: 100%
+        flex-wrap: nowrap
 </style>

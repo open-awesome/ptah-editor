@@ -2,7 +2,7 @@
 export function productExtendPreviewClick(num) {
   const TARGET_PREVIEW = 'product-extend-preview';
   const TARGET_STAGE = 'product-extend-stage';
-  const PREVIEW_ACTIVE_CLASS = 'b-products-list__item_active';
+  const PREVIEW_ACTIVE_CLASS = 'b-products-columns-extend__right-item_active';
   var previews = document.querySelectorAll('[' + TARGET_PREVIEW + ']'),
     stages = document.querySelectorAll('[' + TARGET_STAGE + ']');
 

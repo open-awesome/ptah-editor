@@ -231,6 +231,8 @@ const data = new Map([
     {
       box: true,
       typography: true,
+      removable: true,
+      resizable: true,
       aligned: true,
       text: '$90',
       styles: {
@@ -264,12 +266,16 @@ const data = new Map([
     {
       box: false,
       aligned: true,
+      removable: true,
+      resizable: true,
       styles: {
         'text-align': 'left',
         'font-family': 'inherit',
         'font-size': 'inherit',
         'font-weight': 'inherit',
         'font-style': 'inherit',
+        'width': '',
+        'height': ''
       },
       isIconWithText: true,
       colorFill: {

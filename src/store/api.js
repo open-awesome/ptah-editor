@@ -25,7 +25,7 @@ export default {
           slug: 'Products',
           theme: {
             name: 'Products',
-            sections: ['ProductsColumns']
+            sections: ['ProductsColumnsExtend']
           }
         },
         {
