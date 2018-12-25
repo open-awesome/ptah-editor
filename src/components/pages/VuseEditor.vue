@@ -27,6 +27,7 @@ import BaseSection from '@components/sections/BaseSection'
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
 import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
+import HeroHunt from '@components/sections/hero/HeroHunt'
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
@@ -74,6 +75,7 @@ Vuse.component('BaseSection', BaseSection)
 Vuse.component('HeroUnit', HeroUnit)
 Vuse.component('HeroSkull', HeroSkull)
 Vuse.component('HeroBAS', HeroBAS)
+Vuse.component('HeroHunt', HeroHunt)
 Vuse.component('Gallery1', Gallery1)
 Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
