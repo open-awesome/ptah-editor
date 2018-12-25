@@ -205,7 +205,8 @@ export default {
     'settingObjectOptions.styles': {
       immediate: true,
       handler (value) {
-        let bggradient = value['background-image'].match(/linear-gradient(\(.*\))/g)
+        let image = (typeof value['background-image'] === 'string') ? value['background-image'] : ''
+        let bggradient = image.match(/linear-gradient(\(.*\))/g)
         if (bggradient) {
           this.backgroundPickers = bggradient[0]
             .replace(/^linear-gradient[(]/, '')
@@ -227,7 +228,8 @@ export default {
     updateBgColor () {
       let settings = this.settingObjectOptions
       let pickers = this.backgroundPickers
-      let bgimage = settings.styles['background-image'].match(/url\((.*?)\)/)
+      let image = (typeof settings.styles['background-image'] === 'string') ? settings.styles['background-image'] : ''
+      let bgimage = image.match(/url\((.*?)\)/)
       let styles = { 'background-color': '' }
 
       switch (pickers.length) {
