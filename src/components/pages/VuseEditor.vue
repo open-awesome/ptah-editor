@@ -21,6 +21,11 @@ import Description from '@components/elements/Description'
 import Pic from '@components/elements/Pic'
 import Logo from '@components/elements/Logo'
 import Delimiter from '@components/elements/Delimiter'
+// new elements
+import AvailablePlatforms from '@components/elements/AvailablePlatforms'
+import AgeRestrictions from '@components/elements/AgeRestrictions'
+import SocialNetworks from '@components/elements/SocialNetworks'
+import Slogan from '@components/elements/Slogan'
 
 // sections
 import BaseSection from '@components/sections/BaseSection'
@@ -31,20 +36,12 @@ import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
 import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
+import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
-// import Restrictions from '@components/sections/elements/Restrictions'
-// import Slogan from '@components/sections/elements/Slogan'
-// import Social from '@components/sections/elements/Social'
-// import System from '@components/sections/elements/System'
 import ThreeColumns from '@components/sections/columns/ThreeColumns'
 import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
 import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
-
-// new elements
-import AvailablePlatforms from '@components/elements/AvailablePlatforms'
-import AgeRestrictions from '@components/elements/AgeRestrictions'
-import SocialNetworks from '@components/elements/SocialNetworks'
 
 import store from '@store'
 
@@ -62,7 +59,8 @@ Vuse.mix({
     Delimiter,
     AvailablePlatforms,
     AgeRestrictions,
-    SocialNetworks
+    SocialNetworks,
+    Slogan
   }
 })
 
@@ -74,11 +72,8 @@ Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
 Vuse.component('Products', Products)
 Vuse.component('ProductsExtend', ProductsExtend)
+Vuse.component('System', System)
 Vuse.component('Footer', Footer)
-// Vuse.component('Restrictions', Restrictions)
-// Vuse.component('Slogan', Slogan)
-// Vuse.component('Social', Social)
-// Vuse.component('System', System)
 Vuse.component('ThreeColumns', ThreeColumns)
 Vuse.component('TwoColumns', TwoColumns)
 Vuse.component('Video', Video)

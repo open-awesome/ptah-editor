@@ -5,7 +5,6 @@ export class Image { }
 export class Link { }
 export class ClassList { }
 export class Button { }
-export class Slogan { }
 export class GalleryItem { }
 export class StyleObject { }
 export class Icon { }
@@ -21,3 +20,6 @@ export class GallerySlider { }
 export class AvailablePlatforms { }
 export class AgeRestrictions { }
 export class SocialNetworks { }
+export class Slogan { }
+export class SystemRequirements { }
+export class TextInherit { }

@@ -57,6 +57,7 @@ export default {
 
   mounted () {
     this.elWidth = this.sizeIcons.width
+    this.controlOpen = this.expand
   }
 }
 </script>

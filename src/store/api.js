@@ -20,6 +20,13 @@ export default {
             name: 'Skull',
             sections: ['HeroSkull']
           }
+        },
+        {
+          slug: 'Game',
+          theme: {
+            name: 'Game',
+            sections: ['System']
+          }
         }
       ])
     })
