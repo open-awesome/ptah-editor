@@ -66,7 +66,7 @@ export default {
   position: relative
 
   min-width: 24rem
-  max-width: 34rem
+  max-width: 40rem
   width: intrinsic
   width: -moz-max-content
   width: -webkit-max-content

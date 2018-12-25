@@ -8,8 +8,19 @@
       </div>
 
       <template v-if="settingObjectOptions.background">
-        <div class="b-section-settings__control">
-          <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
+        <div class="b-section-settings__control picker">
+          <base-label class="picker__label">
+            Background color
+            <base-button @click="addBackgroundPicker" color="light-gray" class="picker__button">
+              <icon-plus width="10" height="10" class="picker__icon"/>
+            </base-button>
+          </base-label>
+          <div v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`" class="picker__item">
+            <base-color-picker v-model="backgroundPickers[index]" @change="updateBgColor"/>
+            <base-button v-show="backgroundPickers.length > 1" @click="removeBackgroundPicker(index)" color="light-gray" class="picker__button">
+              <i class="picker__icon picker__icon--minus">-</i>
+            </base-button>
+          </div>
         </div>
 
         <div class="b-section-settings__control">
@@ -99,9 +110,15 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
+
+function getPickerColor (color) {
+  if (typeof color === 'object' && color.hasOwnProperty('rgba')) {
+    return `rgba(${Object.values(color.rgba).toString()})`
+  }
+  return color
+}
 
 export default {
   components: {
@@ -139,7 +156,8 @@ export default {
 
       loop: false,
 
-      galleryImages: []
+      galleryImages: [],
+      backgroundPickers: []
     }
   },
 
@@ -184,8 +202,19 @@ export default {
   },
 
   watch: {
-    settingObjectOptions (newValue, oldValue) {
-      this.sectionBgColor = newValue.styles['background-color']
+    'settingObjectOptions.styles': {
+      immediate: true,
+      handler (value) {
+        let bggradient = value['background-image'].match(/linear-gradient(\(.*\))/g)
+        if (bggradient) {
+          this.backgroundPickers = bggradient[0]
+            .replace(/^linear-gradient[(]/, '')
+            .replace(/[)]$/, '')
+            .split(', ')
+        } else {
+          this.backgroundPickers = [value['background-color']]
+        }
+      }
     }
   },
 
@@ -196,12 +225,29 @@ export default {
     ]),
 
     updateBgColor () {
-      const color = this.sectionBgColor.rgba ? `rgba(${Object.values(this.sectionBgColor.rgba).toString()})` : this.sectionBgColor
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-color': color
-        }
-      }))
+      let settings = this.settingObjectOptions
+      let pickers = this.backgroundPickers
+      let bgimage = settings.styles['background-image'].match(/url\((.*?)\)/)
+      let styles = { 'background-color': '' }
+
+      switch (pickers.length) {
+        case 0:
+          break
+        case 1:
+          styles['background-color'] = getPickerColor(pickers[0])
+          styles['background-image'] = (bgimage) ? bgimage[0] : ''
+          break
+        default:
+          let colors = pickers.filter(Boolean).map(getPickerColor)
+          if (colors.length) {
+            let mappedColor = [...colors.splice(0, 1), ...(colors || []).map(c => ` ${c}`)]
+            let gradient = `linear-gradient(${mappedColor})`
+            styles['background-image'] = (bgimage) ? (bgimage[0] + `, ${gradient}`) : gradient
+          }
+          break
+      }
+
+      this.updateSettingOptions(_.merge({}, settings, { styles }))
     },
 
     updateBgUrl () {
@@ -261,32 +307,66 @@ export default {
         ..._.cloneDeep(this.settingObjectOptions),
         galleryImages
       })
+    },
+
+    addBackgroundPicker () {
+      this.backgroundPickers.push('rgba(0,0,0,1)')
+      this.updateBgColor()
+    },
+
+    removeBackgroundPicker (index) {
+      this.backgroundPickers.splice(index, 1)
+      this.updateBgColor()
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-  .b-section-settings
-    display: flex
-    flex-direction: column
-    align-items: stretch
-    padding-bottom: 4.5rem
+.b-section-settings
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  padding-bottom: 4.5rem
 
-    &__inner
-      padding-right: 2.5rem
-    &__buttons
-      position: absolute
-      bottom: 1rem
-      left: 1rem
-      button
-        max-width: 100%
-    &__control
-      margin-bottom: 2rem
-    &__description
-      font-size: 1.4rem
-      line-height: 1.7rem
-      color: #747474
-      margin-bottom: 2rem
-      margin-top: -1rem
+  &__inner
+    padding-right: 2.5rem
+
+  &__buttons
+    position: absolute
+    bottom: 1rem
+    left: 1rem
+    button
+      max-width: 100%
+
+  &__control
+    margin-bottom: 2rem
+
+  &__description
+    font-size: 1.4rem
+    line-height: 1.7rem
+    color: #747474
+    margin-bottom: 2rem
+    margin-top: -1rem
+
+  .picker
+
+    &__label
+      display: flex
+      align-items: center
+      justify-content: space-between
+
+    &__button
+      width: 3rem
+      padding: .4rem
+      line-height: 1
+
+    &__item
+      display: flex
+      align-items: baseline
+      justify-content: space-between
+      .b-picker + .picker__button
+        margin-left: 1rem
+      ~ .picker__item
+        margin-top: .4rem
 </style>
