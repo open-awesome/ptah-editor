@@ -1,7 +1,8 @@
 export default {
   state: {
     groupData: {}, // group text
-    sectionData: {} // saved section data
+    sectionData: {}, // saved section data,
+    groups: [] // landings sections groups
   },
 
   mutations: {
@@ -11,6 +12,10 @@ export default {
 
     updateSectionData (state, section) {
       state.sectionData[section.name] = section.data
+    },
+
+    updateGroups (state, groups) {
+      state.groups = groups
     },
 
     clear (state) {
@@ -25,6 +30,10 @@ export default {
 
     updateSectionData ({ commit }, { name, data }) {
       commit('updateSectionData', { name, data })
+    },
+
+    updateGroups ({ commit }, groups) {
+      commit('updateGroups', groups)
     }
   },
 

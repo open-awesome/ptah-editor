@@ -170,13 +170,17 @@ export default {
         name: NAME,
         data: _.cloneDeep(self.$sectionData)
       })
-    })
+    }),
+
+    canRestore () {
+      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
+    }
   },
 
   created () {
     let data = this.$store.state.Landing.sectionData[NAME]
 
-    if (data) {
+    if (data && this.canRestore()) {
       _.merge(this.$sectionData, data)
     }
 

@@ -37,6 +37,7 @@
 import VuseIcon from './VuseIcon'
 import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
+import * as _ from 'lodash-es'
 
 export default {
   name: 'VuseBuilder',
@@ -112,6 +113,12 @@ export default {
     if (this.$builder.scrolling) {
       this.$builder.scrolling(this.$refs.artboard)
     }
+
+    let groupList = this.$builder.sections.map(section => {
+      return _.find(this.sections, { name: section.name }).group
+    })
+
+    this.$store.dispatch('Landing/updateGroups', groupList)
   },
 
   beforeDestroy () {

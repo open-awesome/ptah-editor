@@ -252,12 +252,16 @@ export default {
         name: NAME,
         data: _.cloneDeep(self.$sectionData)
       })
-    })
+    }),
+
+    canRestore () {
+      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
+    }
   },
 
   created () {
     if (this.$sectionData.edited === undefined) {
-      let data = this.$store.state.Landing.sectionData[NAME] ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
+      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
       Seeder.seed(_.merge(this.$sectionData, data))
     }
 
