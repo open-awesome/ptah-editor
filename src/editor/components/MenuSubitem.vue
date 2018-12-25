@@ -1,7 +1,7 @@
 <template>
   <div class="b-menu-subitem"
     :class="{'b-menu-subitem_selected': isSelected}"
-    @click="$emit('click', $event)">
+    @click="handleClick">
     <div class="b-menu-subitem__inner">
       <span class="b-menu-subitem__drag-icon">
         <IconBase
@@ -47,11 +47,13 @@ export default {
     }
   },
 
-  watch: {
-    isSelected (value) {
-      if (value === true) {
-        this.$el.scrollIntoView()
-      }
+  methods: {
+    handleClick (event) {
+      // --- rm class/es from menu items
+      document
+        .querySelectorAll('.b-menu-subitem_selected')
+        .forEach(el => el.classList.remove('b-menu-subitem_selected'))
+      this.$emit('click', event)
     }
   }
 }

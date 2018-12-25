@@ -31,7 +31,7 @@
           </div>
         </div>
       </div>
-      <div gallery-three-popup="" class="l-popup l-popup_flex" v-show="true === $sectionData.isShowPopup">
+      <div v-show="$sectionData.isShowPopup" ref="gallery-container" class="l-popup l-popup_flex" gallery-three-popup="">
           <div gallery-three-popup-padd="" :style="$sectionData.popupStyles" class="l-popup__padd flex flex_columns">
               <div gallery-three-popup-close="" class="l-popup__close" v-bind:class="{'is-editable': $builder.isEditing}" @click.prevent="closePopup"></div>
               <div class="l-popup__logos">
@@ -97,6 +97,13 @@ export default {
     id: {
       type: Number,
       required: true
+    }
+  },
+  mounted () {
+    try {
+      document.body.appendChild(this.$refs['gallery-container'])
+    } catch (error) {
+      console.error(error)
     }
   },
   methods: {
