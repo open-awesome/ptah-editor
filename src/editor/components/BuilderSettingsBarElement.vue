@@ -173,7 +173,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectSection'
+      'settingObjectSection',
+      'settingObjectType'
     ]),
     // find path to element
     path () {
@@ -238,6 +239,9 @@ export default {
 
     /* Age restrictions */
     this.ageRestrictions = this.settingObjectOptions.ageRestrictions || {}
+
+    // --- expand dropdown dep. by type
+    this.expandDropdown(this.settingObjectType)
   },
 
   methods: {
@@ -245,6 +249,16 @@ export default {
       'updateSettingOptions',
       'clearSettingObject'
     ]),
+
+    expandDropdown (type) {
+      this.expandedSize = (type === 'delimiter')
+      this.expandedFont = (type === 'text')
+      this.expandedBg = (['image', 'galleryItem', 'product'].includes(type))
+      this.expandedLink = (type === 'button')
+      this.expandedAvailablePlatforms = (type === 'available')
+      this.expandedAgeRestrictions = (type === 'restrictions')
+      this.expandedSocialNetworks = (type === 'socials')
+    },
 
     styleChange (value) {
       this.updateStyle(_.kebabCase(value[0]), value[1])
