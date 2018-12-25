@@ -44,6 +44,27 @@ const C_CUSTOM_1 = [
     }
   }
 ]
+
+const C_CUSTOM_1_M = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '160px',
+        'height': '130px'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'Start Edition'
+    }
+  }
+]
+
 const C_CUSTOM_1D = [
   {
     element: {
@@ -134,6 +155,27 @@ const C_CUSTOM_2 = [
     }
   }
 ]
+
+const C_CUSTOM_2_M = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '160px',
+        'height': '130px'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'Full Edition'
+    }
+  }
+]
+
 const C_CUSTOM_2D = [
   {
     element: {
@@ -224,6 +266,27 @@ const C_CUSTOM_3 = [
     }
   }
 ]
+
+const C_CUSTOM_3_M = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '160px',
+        'height': '130px'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'Deluxe Edition'
+    }
+  }
+]
+
 const C_CUSTOM_3D = [
   {
     element: {
@@ -314,6 +377,27 @@ const C_CUSTOM_4 = [
     }
   }
 ]
+
+const C_CUSTOM_4_M = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '160px',
+        'height': '130px'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'Ultimate Edition'
+    }
+  }
+]
+
 const C_CUSTOM_4D = [
   {
     element: {
@@ -373,12 +457,16 @@ const SCHEMA_CUSTOM = {
     }
   },
   components1: _.merge({}, C_CUSTOM_1),
+  components1m: _.merge({}, C_CUSTOM_1_M),
   components1d: _.merge({}, C_CUSTOM_1D),
   components2: _.merge({}, C_CUSTOM_2),
+  components2m: _.merge({}, C_CUSTOM_2_M),
   components2d: _.merge({}, C_CUSTOM_2D),
   components3: _.merge({}, C_CUSTOM_3),
+  components3m: _.merge({}, C_CUSTOM_3_M),
   components3d: _.merge({}, C_CUSTOM_3D),
   components4: _.merge({}, C_CUSTOM_4),
+  components4m: _.merge({}, C_CUSTOM_4_M),
   components4d: _.merge({}, C_CUSTOM_4D),
   edited: true
 }
@@ -391,10 +479,10 @@ const COMPONENTS = [
     class: 'b-logo'
   },
   {
-    name: 'Title',
-    element: types.IconWithText,
+    name: 'Text',
+    element: types.TextInherit,
     type: 'text',
-    class: 'b-title'
+    class: 'b-text'
   },
   {
     name: 'Cost',
@@ -409,6 +497,22 @@ const COMPONENTS = [
     class: 'b-button-test'
   }
 ]
+
+const COMPONENTS_M = [
+  {
+    name: 'Logo',
+    element: types.Logo,
+    type: 'image',
+    class: 'b-logo'
+  },
+  {
+    name: 'Text',
+    element: types.TextInherit,
+    type: 'text',
+    class: 'b-text'
+  }
+]
+
 const COMPONENTS_D = [
   {
     name: 'IconWithText',
@@ -441,26 +545,33 @@ export default {
   components: {
     Draggable
   },
-  cover: '/img/covers/products.jpg',
+  cover: '/img/covers/products_e.jpg',
   group: 'products',
   $schema: {
     mainStyle: types.ProductSection,
-    header: types.Title,
     container1: types.StyleObject,
+    container1m: types.StyleObject,
     container1d: types.StyleObject,
     container2: types.StyleObject,
+    container2m: types.StyleObject,
     container2d: types.StyleObject,
     container3: types.StyleObject,
+    container3m: types.StyleObject,
     container3d: types.StyleObject,
     container4: types.StyleObject,
+    container4m: types.StyleObject,
     container4d: types.StyleObject,
     components1: COMPONENTS,
+    components1m: COMPONENTS_M,
     components1d: COMPONENTS_D,
     components2: COMPONENTS,
+    components2m: COMPONENTS_M,
     components2d: COMPONENTS_D,
     components3: COMPONENTS,
+    components3m: COMPONENTS_M,
     components3d: COMPONENTS_D,
     components4: COMPONENTS,
+    components4m: COMPONENTS_M,
     components4d: COMPONENTS_D
   },
   props: {
@@ -510,6 +621,22 @@ export default {
       element.element.removable = true
       this.$section.data.components4d.push(element)
     },
+    onAddElement1m (element) {
+      element.element.removable = true
+      this.$section.data.components1m.push(element)
+    },
+    onAddElement2m (element) {
+      element.element.removable = true
+      this.$section.data.components2m.push(element)
+    },
+    onAddElement3m (element) {
+      element.element.removable = true
+      this.$section.data.components3m.push(element)
+    },
+    onAddElement4m (element) {
+      element.element.removable = true
+      this.$section.data.components4m.push(element)
+    },
     bindingProductExtendPreviewClick (index) {
       productExtendPreviewClick(index)
     }
@@ -540,173 +667,173 @@ export default {
         <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__left hidden-m">
           <!-- b-products-columns-extend__left -->
           <div class="b-grid__row b-products-columns-extend__row">
-            <div class="b-grid__col-6 b-grid__col-m-12 "
+            <div class="b-grid__col-6 b-products-columns-extend__left-item"
               v-if="$sectionData.mainStyle.products['Standart'].visible"
+              :data-index="0"
+              :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              >
+              <sandbox
+                class="b-sandbox"
+                ref="sandbox"
+                path="$sectionData.container1m"
+                direction="column"
+                :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
+                >
+                <elements-list @addEl="onAddElement1m"></elements-list>
+                <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1m.styles">
+                  <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                    v-for="(component, index) in $sectionData.components1m"
+                    v-if="$sectionData.components1m.length !== 0" :key="index">
+                    <component class="b-products-columns-component"
+                      v-if="$sectionData.components1m[index].element.isComplex"
+                      v-styler:for="{ el: $sectionData.components1m[index].element, path: `$sectionData.components1m[${index}].element`, type: $sectionData.components1m[index].type }"
+                      :is="component.name"
+                      :href="$sectionData.components1m[index].element.href"
+                      :target="$sectionData.components1m[index].element.target"
+                      :path="`components1m[${index}].element`"
+                      :style="$sectionData.components1m[index].element.styles"
+                      :class="[$sectionData.components1m[index].element.classes, $sectionData.components1m[index].class]"
+                      >
+                    </component>
+                    <component class="b-products-columns-component"
+                      v-if="!$sectionData.components1m[index].element.isComplex"
+                      v-styler:for="{ el: $sectionData.components1m[index].element, path: `$sectionData.components1m[${index}].element`, type: $sectionData.components1m[index].type }"
+                      v-html="$sectionData.components1m[index].element.text"
+                      :is="component.name"
+                      :href="$sectionData.components1m[index].element.href"
+                      :target="$sectionData.components1m[index].element.target"
+                      :path="`components1m[${index}].element`"
+                      :style="$sectionData.components1m[index].element.styles"
+                      :class="[$sectionData.components1m[index].element.classes, $sectionData.components1m[index].class]"
+                      >
+                    </component>
+                  </div>
+                </draggable>
+              </sandbox>
+            </div>
+            <div class="b-grid__col-6 b-products-columns-extend__left-item"
+              v-if="$sectionData.mainStyle.products['Full'].visible"
               :data-index="1"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
               >
               <sandbox
                 class="b-sandbox"
                 ref="sandbox"
-                path="$sectionData.container1"
+                path="$sectionData.container2m"
                 direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
-                <elements-list @addEl="onAddElement1"></elements-list>
-                <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1.styles">
+                <elements-list @addEl="onAddElement2m"></elements-list>
+                <draggable v-model="$sectionData.components2m" class="b-draggable-slot" :style="$sectionData.container2m.styles">
                   <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
-                    v-for="(component, index) in $sectionData.components1"
-                    v-if="$sectionData.components1.length !== 0" :key="index">
+                       v-for="(component, index) in $sectionData.components2m" v-if="$sectionData.components2m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
-                      v-if="$sectionData.components1[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type }"
+                      v-if="$sectionData.components2m[index].element.isComplex"
+                      v-styler:for="{ el: $sectionData.components2m[index].element, path: `$sectionData.components2m[${index}].element`, type: $sectionData.components2m[index].type }"
                       :is="component.name"
-                      :href="$sectionData.components1[index].element.href"
-                      :target="$sectionData.components1[index].element.target"
-                      :path="`components1[${index}].element`"
-                      :style="$sectionData.components1[index].element.styles"
-                      :class="[$sectionData.components1[index].element.classes, $sectionData.components1[index].class]"
+                      :href="$sectionData.components2m[index].element.href"
+                      :target="$sectionData.components2m[index].element.target"
+                      :path="`components2m[${index}].element`"
+                      :style="$sectionData.components2m[index].element.styles"
+                      :class="[$sectionData.components2m[index].element.classes, $sectionData.components2m[index].class]"
                       >
                     </component>
                     <component class="b-products-columns-component"
-                      v-if="!$sectionData.components1[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type }"
-                      v-html="$sectionData.components1[index].element.text"
+                      v-if="!$sectionData.components2m[index].element.isComplex"
+                      v-styler:for="{ el: $sectionData.components2m[index].element, path: `$sectionData.components2m[${index}].element`, type: $sectionData.components2m[index].type }"
+                      v-html="$sectionData.components2m[index].element.text"
                       :is="component.name"
-                      :href="$sectionData.components1[index].element.href"
-                      :target="$sectionData.components1[index].element.target"
-                      :path="`components1[${index}].element`"
-                      :style="$sectionData.components1[index].element.styles"
-                      :class="[$sectionData.components1[index].element.classes, $sectionData.components1[index].class]"
+                      :href="$sectionData.components2m[index].element.href"
+                      :target="$sectionData.components2m[index].element.target"
+                      :path="`components2m[${index}].element`"
+                      :style="$sectionData.components2m[index].element.styles"
+                      :class="[$sectionData.components2m[index].element.classes, $sectionData.components2m[index].class]"
                       >
                     </component>
                   </div>
                 </draggable>
               </sandbox>
             </div>
-            <div class="b-grid__col-6 b-grid__col-m-12"
-              v-if="$sectionData.mainStyle.products['Full'].visible"
+            <div class="b-grid__col-6 b-products-columns-extend__left-item"
+              v-if="$sectionData.mainStyle.products['Deluxe'].visible"
               :data-index="2"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
               >
               <sandbox
                 class="b-sandbox"
                 ref="sandbox"
-                path="$sectionData.container2"
+                path="$sectionData.container3m"
                 direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
-                <elements-list @addEl="onAddElement2"></elements-list>
-                <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
+                <elements-list @addEl="onAddElement3m"></elements-list>
+                <draggable v-model="$sectionData.components3m" class="b-draggable-slot" :style="$sectionData.container3m.styles">
                   <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
-                       v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
+                       v-for="(component, index) in $sectionData.components3m" v-if="$sectionData.components3m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
-                      v-if="$sectionData.components2[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                      v-if="$sectionData.components3m[index].element.isComplex"
+                      v-styler:for="{ el: $sectionData.components3m[index].element, path: `$sectionData.components3m[${index}].element`, type: $sectionData.components3m[index].type }"
                       :is="component.name"
-                      :href="$sectionData.components2[index].element.href"
-                      :target="$sectionData.components2[index].element.target"
-                      :path="`components2[${index}].element`"
-                      :style="$sectionData.components2[index].element.styles"
-                      :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                      :href="$sectionData.components3m[index].element.href"
+                      :target="$sectionData.components3m[index].element.target"
+                      :path="`components3m[${index}].element`"
+                      :style="$sectionData.components3m[index].element.styles"
+                      :class="[$sectionData.components3m[index].element.classes, $sectionData.components3m[index].class]"
                       >
                     </component>
                     <component class="b-products-columns-component"
-                      v-if="!$sectionData.components2[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
-                      v-html="$sectionData.components2[index].element.text"
+                      v-if="!$sectionData.components3m[index].element.isComplex"
+                      v-styler:for="{ el: $sectionData.components3m[index].element, path: `$sectionData.components3m[${index}].element`, type: $sectionData.components3m[index].type }"
+                      v-html="$sectionData.components3m[index].element.text"
                       :is="component.name"
-                      :href="$sectionData.components2[index].element.href"
-                      :target="$sectionData.components2[index].element.target"
-                      :path="`components2[${index}].element`"
-                      :style="$sectionData.components2[index].element.styles"
-                      :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                      :href="$sectionData.components3m[index].element.href"
+                      :target="$sectionData.components3m[index].element.target"
+                      :path="`components3m[${index}].element`"
+                      :style="$sectionData.components3m[index].element.styles"
+                      :class="[$sectionData.components3m[index].element.classes, $sectionData.components3m[index].class]"
                       >
                     </component>
                   </div>
                 </draggable>
               </sandbox>
             </div>
-            <div class="b-grid__col-6 b-grid__col-m-12"
-              v-if="$sectionData.mainStyle.products['Deluxe'].visible"
+            <div class="b-grid__col-6 b-products-columns-extend__left-item"
+              v-if="$sectionData.mainStyle.products['Ultimate'].visible"
               :data-index="3"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
               >
               <sandbox
                 class="b-sandbox"
                 ref="sandbox"
-                path="$sectionData.container3"
+                path="$sectionData.container4m"
                 direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
-                <elements-list @addEl="onAddElement3"></elements-list>
-                <draggable v-model="$sectionData.components3" class="b-draggable-slot" :style="$sectionData.container3.styles">
+                <elements-list @addEl="onAddElement4m"></elements-list>
+                <draggable v-model="$sectionData.components4m" class="b-draggable-slot" :style="$sectionData.container4m.styles">
                   <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
-                       v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
+                       v-for="(component, index) in $sectionData.components4m" v-if="$sectionData.components4m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
-                      v-if="$sectionData.components3[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
+                      v-if="$sectionData.components4m[index].element.isComplex"
+                      v-styler:for="{ el: $sectionData.components4m[index].element, path: `$sectionData.components4m[${index}].element`, type: $sectionData.components4m[index].type }"
                       :is="component.name"
-                      :href="$sectionData.components3[index].element.href"
-                      :target="$sectionData.components3[index].element.target"
-                      :path="`components3[${index}].element`"
-                      :style="$sectionData.components3[index].element.styles"
-                      :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
+                      :href="$sectionData.components4m[index].element.href"
+                      :target="$sectionData.components4m[index].element.target"
+                      :path="`components4m[${index}].element`"
+                      :style="$sectionData.components4m[index].element.styles"
+                      :class="[$sectionData.components4m[index].element.classes, $sectionData.components4m[index].class]"
                       >
                     </component>
                     <component class="b-products-columns-component"
-                      v-if="!$sectionData.components3[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
-                      v-html="$sectionData.components3[index].element.text"
+                      v-if="!$sectionData.components4m[index].element.isComplex"
+                      v-styler:for="{ el: $sectionData.components4m[index].element, path: `$sectionData.components4m[${index}].element`, type: $sectionData.components4m[index].type }"
+                      v-html="$sectionData.components4m[index].element.text"
                       :is="component.name"
-                      :href="$sectionData.components3[index].element.href"
-                      :target="$sectionData.components3[index].element.target"
-                      :path="`components3[${index}].element`"
-                      :style="$sectionData.components3[index].element.styles"
-                      :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
-                      >
-                    </component>
-                  </div>
-                </draggable>
-              </sandbox>
-            </div>
-            <div class="b-grid__col-6 b-grid__col-m-12"
-              v-if="$sectionData.mainStyle.products['Ultimate'].visible"
-              :data-index="4"
-              :product-extend-preview="'b-products-columns-extend__right-item_active'"
-              >
-              <sandbox
-                class="b-sandbox"
-                ref="sandbox"
-                path="$sectionData.container4"
-                direction="column"
-                :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                >
-                <elements-list @addEl="onAddElement4"></elements-list>
-                <draggable v-model="$sectionData.components4" class="b-draggable-slot" :style="$sectionData.container4.styles">
-                  <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
-                       v-for="(component, index) in $sectionData.components4" v-if="$sectionData.components4.length !== 0" :key="index">
-                    <component class="b-products-columns-component"
-                      v-if="$sectionData.components4[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type }"
-                      :is="component.name"
-                      :href="$sectionData.components4[index].element.href"
-                      :target="$sectionData.components4[index].element.target"
-                      :path="`components4[${index}].element`"
-                      :style="$sectionData.components4[index].element.styles"
-                      :class="[$sectionData.components4[index].element.classes, $sectionData.components4[index].class]"
-                      >
-                    </component>
-                    <component class="b-products-columns-component"
-                      v-if="!$sectionData.components4[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type }"
-                      v-html="$sectionData.components4[index].element.text"
-                      :is="component.name"
-                      :href="$sectionData.components4[index].element.href"
-                      :target="$sectionData.components4[index].element.target"
-                      :path="`components3[${index}].element`"
-                      :style="$sectionData.components4[index].element.styles"
-                      :class="[$sectionData.components4[index].element.classes, $sectionData.components4[index].class]"
+                      :href="$sectionData.components4m[index].element.href"
+                      :target="$sectionData.components4m[index].element.target"
+                      :path="`components4m[${index}].element`"
+                      :style="$sectionData.components4m[index].element.styles"
+                      :class="[$sectionData.components4m[index].element.classes, $sectionData.components4m[index].class]"
                       >
                     </component>
                   </div>
@@ -720,7 +847,7 @@ export default {
                 <div class="b-grid__row">
                   <div class="b-grid__col-12 b-products-columns-extend__right-item"
                     v-if="$sectionData.mainStyle.products['Standart'].visible"
-                    :product-extend-stage="1"
+                    :product-extend-stage="0"
                     >
                     <sandbox
                       class="b-sandbox"
@@ -801,7 +928,7 @@ export default {
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
                     v-if="$sectionData.mainStyle.products['Full'].visible"
-                    :product-extend-stage="2"
+                    :product-extend-stage="1"
                     >
                     <sandbox
                       class="b-sandbox"
@@ -880,7 +1007,7 @@ export default {
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
                     v-if="$sectionData.mainStyle.products['Deluxe'].visible"
-                    :product-extend-stage="3"
+                    :product-extend-stage="2"
                     >
                     <sandbox
                       class="b-sandbox"
@@ -959,7 +1086,7 @@ export default {
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
                     v-if="$sectionData.mainStyle.products['Ultimate'].visible"
-                    :product-extend-stage="4"
+                    :product-extend-stage="3"
                     >
                     <sandbox
                       class="b-sandbox"
@@ -1065,11 +1192,58 @@ $h: 100vh
     width: 100%
     color: inherit
     font-family: inherit
-  &__right
+  &__left
     &-item
+      &:hover,
+      &_active
+        & .b-slot
+          box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.8)
+          cursor: pointer
+  &__right
+    position: relative
+    min-height: 60rem
+    display: flex
+    text-align: center
+    justify-content: center
+    .is-mobile &
+      width: 100%
+      height: 100%
+      min-height: auto
+    .is-tablet &
+      height: auto
+      min-height: auto
+    @media only screen and (max-width: 768px)
+      &
+        height: auto
+        min-height: auto
+    &-item
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+      padding: 0
       visibility: hidden
+      display: flex
+      justify-content: center
+      align-items: flex-start
+      flex-direction: column
       &_active
         visibility: visible
+      .is-mobile &,
+      .is-tablet &
+        width: 100%
+        height: auto
+        position: relative
+        visibility: visible
+        margin: 1.6rem 0
+      @media only screen and (max-width: 768px)
+        &
+          width: 100%
+          height: auto
+          position: relative
+          visibility: visible
+          margin: 1.6rem 0
   .b-delimiter
     height: 2rem
     .is-mobile &,

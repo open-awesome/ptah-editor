@@ -151,7 +151,7 @@ const data = new Map([
         'background-position': false,
         'background-repeat': false,
         'background-size': false,
-        'background-color': 'inherit',
+        'background-color': 'rgba(0,0,0,0)',
         'background': false,
         'width': '',
         'height': ''
@@ -267,15 +267,12 @@ const data = new Map([
       box: false,
       aligned: true,
       removable: true,
-      resizable: true,
       styles: {
         'text-align': 'left',
         'font-family': 'inherit',
         'font-size': 'inherit',
         'font-weight': 'inherit',
-        'font-style': 'inherit',
-        'width': '',
-        'height': ''
+        'font-style': 'inherit'
       },
       isIconWithText: true,
       colorFill: {

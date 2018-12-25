@@ -137,5 +137,4 @@ export default {
       color: inherit
       &_100
         width: 100%
-        flex-wrap: nowrap
 </style>

@@ -48,7 +48,7 @@ export default {
   line-height: 1.4
   display: block
   max-width: 100rem
-  margin: 1.6rem
+  margin: 0.8rem
   padding: 0 1.6rem 0 3.2rem
   &::selection,
   & ::selection
