@@ -381,7 +381,6 @@ export default {
       })
     },
 
-
     addBackgroundPicker () {
       this.backgroundPickers.push('rgba(0,0,0,1)')
       this.updateBgColor()
@@ -391,7 +390,7 @@ export default {
       this.backgroundPickers.splice(index, 1)
       this.updateBgColor()
     },
-    
+
     styleChange (value) {
       this.updateStyle(_.kebabCase(value[0]), value[1])
       this[value[0]] = value[1]
