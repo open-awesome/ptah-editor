@@ -5,7 +5,7 @@ import _ from 'lodash'
 export default {
   name: 'GalleryCarousel',
 
-  group: 'galleries',
+  group: 'Carousel',
 
   $schema: {
     mainStyle: types.GallerySlider

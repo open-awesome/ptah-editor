@@ -4,6 +4,7 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import VuseIcon from '@editor/components/VuseIcon'
 import Draggable from 'vuedraggable'
+import { mapActions } from 'vuex'
 
 const COMPONENTS = [
   {
@@ -202,14 +203,17 @@ const SCHEMA_CUSTOM = {
   edited: true
 }
 
+const GROUP_NAME = 'Hero'
+const NAME = 'HeroSkull'
+
 export default {
-  name: 'HeroSkull',
+  name: NAME,
   components: {
     VuseIcon,
     Draggable
   },
   cover: '/img/covers/hero-skull.jpg',
-  group: 'Hero',
+  group: GROUP_NAME,
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
@@ -223,7 +227,12 @@ export default {
       required: true
     }
   },
+
   methods: {
+    ...mapActions('Landing', [
+      'updateGroupData',
+      'updateSectionData'
+    ]),
     onAddElement (element) {
       element.element.removable = true
       this.$section.data.components.push(element)
@@ -231,12 +240,43 @@ export default {
     onAddElement2 (element) {
       element.element.removable = true
       this.$section.data.components2.push(element)
+    },
+
+    storeData: _.after(2, (self) => {
+      let data = {}
+      self.$sectionData.components.forEach(component => {
+        data[component.name] = component.element.text
+      })
+      self.updateGroupData({ name: GROUP_NAME, data })
+      self.updateSectionData({
+        name: NAME,
+        data: _.cloneDeep(self.$sectionData)
+      })
+    }),
+
+    canRestore () {
+      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
     }
   },
+
   created () {
     if (this.$sectionData.edited === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
+      Seeder.seed(_.merge(this.$sectionData, data))
     }
+
+    if (this.$store.state.Landing.groupData[GROUP_NAME]) {
+      _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (text, name) => {
+        let elementObj = _.find(this.$sectionData.components, { name })
+        if (elementObj) {
+          elementObj.element.text = text
+        }
+      })
+    }
+  },
+
+  updated () {
+    this.storeData(this)
   }
 }
 </script>
@@ -418,7 +458,6 @@ export default {
   padding: 5rem 0
   justify-content: flex-start
   align-items: center
-  background-color: rgba(0, 0, 0, 0.1)
   max-width: 118.4rem
   width: 100%
   .is-mobile &,
@@ -428,7 +467,7 @@ export default {
     &
       padding: 1rem 0
 .b-footer
-  overflow: hidden
+  // overflow: hidden
   position: absolute
   bottom: 0
   left: 0

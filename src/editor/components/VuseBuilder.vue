@@ -36,7 +36,8 @@
 <script>
 import VuseIcon from './VuseIcon'
 import BuilderLayout from './BuilderLayout.vue'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import * as _ from 'lodash-es'
 
 export default {
   name: 'VuseBuilder',
@@ -61,7 +62,8 @@ export default {
     return {
       title: null,
       groups: {},
-      isSectionsInited: false
+      isSectionsInited: false,
+      sections: this.getSections()
     }
   },
 
@@ -97,6 +99,10 @@ export default {
     if (this.$route.params.slug !== 'new') {
 
     }
+
+    this.groups = this.generateGroups()
+    this.updateBuilderSections(this.sections)
+    this.updateBuilderGroups(this.groups)
   },
   mounted () {
     this.$builder.rootEl = this.$refs.artboard
@@ -107,12 +113,22 @@ export default {
     if (this.$builder.scrolling) {
       this.$builder.scrolling(this.$refs.artboard)
     }
+
+    let groupList = this.$builder.sections.map(section => {
+      return _.find(this.sections, { name: section.name }).group
+    })
+
+    this.$store.dispatch('Landing/updateGroups', groupList)
   },
 
   beforeDestroy () {
     this.$builder.clear()
   },
   methods: {
+    ...mapActions('Sidebar', [
+      'updateBuilderSections',
+      'updateBuilderGroups'
+    ]),
     initSettings () {
       const settings = this.currentLanding.settings
       this.$builder.landing = this.$route.params.slug
@@ -200,6 +216,37 @@ export default {
       }
       node.innerHTML = `<source src="${settings.video}" type="video/mp4"></source>`
       this.$refs.artboard.appendChild(node)
+    },
+    getSections () {
+      let sections = []
+      // get sections data
+      sections = Object.keys(this.$builder.components).map((sec) => {
+        return {
+          name: sec,
+          group: this.$builder.components[sec].options.group,
+          cover: this.$builder.components[sec].options.cover,
+          schema: this.$builder.components[sec].options.$schema
+        }
+      })
+      return sections
+    },
+
+    generateGroups () {
+      let groups = { random: [] }
+      // group sections together
+      this.sections.forEach((section) => {
+        let sectionGroup = section.group
+        if (!sectionGroup) {
+          groups.random.push(section)
+          return
+        }
+        if (!groups[sectionGroup]) {
+          groups[sectionGroup] = [section]
+          return
+        }
+        groups[sectionGroup].push(section)
+      })
+      return groups
     },
 
     async selectSidebarSection (section) {

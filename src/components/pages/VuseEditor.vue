@@ -28,7 +28,6 @@ import SocialNetworks from '@components/elements/SocialNetworks'
 import Slogan from '@components/elements/Slogan'
 
 // sections
-import BaseSection from '@components/sections/BaseSection'
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
 import Gallery1 from '@components/sections/galleries/Gallery1'
@@ -41,7 +40,7 @@ import Footer from '@components/sections/footers/Footer'
 import ThreeColumns from '@components/sections/columns/ThreeColumns'
 import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
-import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
+import GalleryCarousel from '@components/sections/carousel/GalleryCarousel'
 
 import store from '@store'
 
@@ -64,7 +63,6 @@ Vuse.mix({
   }
 })
 
-Vuse.component('BaseSection', BaseSection)
 Vuse.component('HeroUnit', HeroUnit)
 Vuse.component('HeroSkull', HeroSkull)
 Vuse.component('Gallery1', Gallery1)
