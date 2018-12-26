@@ -178,10 +178,15 @@ export default {
 
   created () {
     let styles = this.settingObjectOptions.styles
+    let image = (typeof styles['background-image'] === 'string') ? styles['background-image'] : ''
+    let bgimage = image.match(/url\((.*?)\)/)
+
+    if (bgimage) {
+      bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+    }
 
     this.sectionBgColor = styles['background-color']
-    let image = styles['background-image']
-    this.sectionBgUrl = image.length > 0 && image !== 'none' ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
+    this.sectionBgUrl = bgimage || ''
     this.bgRepeat = styles['background-repeat'] === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
     this.bgSize = styles['background-size'] === 'cover' ? this.sizeList[0] : this.sizeList[1]
     this.bgAttachment = styles['background-attachment'] === 'fixed'
@@ -215,6 +220,12 @@ export default {
         } else {
           this.backgroundPickers = [value['background-color']]
         }
+        // TODO: this crashed storage with linear-gradient
+        // let bgimage = image.match(/url\((.*?)\)/)
+        // if (bgimage) {
+        //   bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+        // }
+        // this.sectionBgUrl = bgimage || ''
       }
     }
   },
@@ -244,7 +255,10 @@ export default {
           if (colors.length) {
             let mappedColor = [...colors.splice(0, 1), ...(colors || []).map(c => ` ${c}`)]
             let gradient = `linear-gradient(${mappedColor})`
-            styles['background-image'] = (bgimage) ? (bgimage[0] + `, ${gradient}`) : gradient
+            if (bgimage) {
+              bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+            }
+            styles['background-image'] = (bgimage) ? (bgimage + `, ${gradient}`) : gradient
           }
           break
       }
