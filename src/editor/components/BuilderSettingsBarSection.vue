@@ -139,6 +139,8 @@ import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlText from './controls/TheControlText'
 
+const DEFAULT_COLOR = 'rgba(0,0,0,0)'
+
 function getPickerColor (color) {
   if (typeof color === 'object' && color.hasOwnProperty('rgba')) {
     return `rgba(${Object.values(color.rgba).toString()})`
@@ -274,7 +276,7 @@ export default {
             .replace(/[)]$/, '')
             .split(', ')
         } else {
-          this.backgroundPickers = [value['background-color']]
+          this.backgroundPickers = [value['background-color'] || DEFAULT_COLOR]
         }
         // TODO: this crashed storage with linear-gradient
         // let bgimage = image.match(/url\((.*?)\)/)
@@ -382,7 +384,7 @@ export default {
     },
 
     addBackgroundPicker () {
-      this.backgroundPickers.push('rgba(0,0,0,1)')
+      this.backgroundPickers.push(DEFAULT_COLOR)
       this.updateBgColor()
     },
 
