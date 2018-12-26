@@ -390,10 +390,10 @@ const COMPONENTS = [
     class: 'b-logo'
   },
   {
-    name: 'Title',
-    element: types.IconWithText,
+    name: 'Description',
+    element: types.Text,
     type: 'text',
-    class: 'b-title'
+    class: 'b-text'
   },
   {
     name: 'Cost',
@@ -412,25 +412,25 @@ const COMPONENTS_D = [
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'text',
+    type: 'icon',
     class: 'b-text-icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'text',
+    type: 'icon',
     class: 'b-text-icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'text',
+    type: 'icon',
     class: 'b-text-icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'text',
+    type: 'icon',
     class: 'b-text-icon'
   }
 ]

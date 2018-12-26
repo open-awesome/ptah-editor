@@ -479,8 +479,8 @@ const COMPONENTS = [
     class: 'b-logo'
   },
   {
-    name: 'Text',
-    element: types.TextInherit,
+    name: 'Description',
+    element: types.Text,
     type: 'text',
     class: 'b-text'
   },
@@ -506,8 +506,8 @@ const COMPONENTS_M = [
     class: 'b-logo'
   },
   {
-    name: 'Text',
-    element: types.TextInherit,
+    name: 'Description',
+    element: types.Text,
     type: 'text',
     class: 'b-text'
   }
@@ -517,25 +517,25 @@ const COMPONENTS_D = [
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'text',
+    type: 'icon',
     class: 'b-text-icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'text',
+    type: 'icon',
     class: 'b-text-icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'text',
+    type: 'icon',
     class: 'b-text-icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'text',
+    type: 'icon',
     class: 'b-text-icon'
   }
 ]
@@ -578,14 +578,6 @@ export default {
     id: {
       type: Number,
       required: true
-    }
-  },
-  watch: {
-    $sectionData: {
-      handler: function () {
-        setTimeout(this.bindingProductExtendPreviewClick(), 1000)
-      },
-      deep: true
     }
   },
   methods: {
