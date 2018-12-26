@@ -1,4 +1,6 @@
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'BuilderAddSectionBar',
 
@@ -17,62 +19,33 @@ export default {
     return {
       groups: {},
       selectedGroup: [],
-      sections: this.getSections(),
+      sections: {},
       selectedSection: null,
       isVisibleBar: false
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'builderSections',
+      'builderGroups'
+    ])
+  },
+
   created () {
-    this.generateGroups()
+    this.groups = this.builderGroups
+    this.sections = this.builderSections
   },
 
   methods: {
-    generateGroups () {
-      let groups = { random: [] }
-      // group sections together
-      this.sections.forEach((section) => {
-        let sectionGroup = section.group
-        if (!sectionGroup) {
-          groups.random.push(section)
-          return
-        }
-        if (!groups[sectionGroup]) {
-          groups[sectionGroup] = [section]
-          return
-        }
-        groups[sectionGroup].push(section)
-      })
-      this.groups = groups
-    },
     selectGroup (group) {
       this.selectedGroup = group
-      this.selectedSection = null
-      this.isVisibleBar = false
-      setTimeout(() => { this.isVisibleBar = true }, 150)
+      this.selectedSection = group[0]
+      this.builder.add(this.selectedSection, this.builder.sections.length + 1)
+      this.closeAddSectionBar()
     },
     selectSection (section) {
       this.selectedSection = section
-    },
-    addSection () {
-      let section = this.selectedSection
-      this.builder.add(section, this.builder.sections.length + 1)
-      this.selectedSection = null
-      this.closeAddSectionBar()
-      this.$emit('add')
-    },
-    getSections () {
-      let sections = []
-      // get sections data
-      sections = Object.keys(this.builder.components).map((sec) => {
-        return {
-          name: sec,
-          group: this.builder.components[sec].options.group,
-          cover: this.builder.components[sec].options.cover,
-          schema: this.builder.components[sec].options.$schema
-        }
-      })
-      return sections
     },
     closeAddSectionBar () {
       this.$emit('requestClose')
@@ -139,15 +112,6 @@ export default {
           @click="closeAddSectionBar"
           >
           Cancel
-        </BaseButton>
-        <BaseButton
-          class="b-add-section-footer__bt"
-          :color="'blue'"
-          :transparent="false"
-          @click="addSection"
-          v-if="selectedSection !== null"
-          >
-          Add
         </BaseButton>
       </div>
     </div>

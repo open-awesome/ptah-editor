@@ -2,6 +2,9 @@
   <div class="b-section-settings">
   <base-scroll-container backgroundBar="#999">
     <div class="b-section-settings__inner">
+      <div class="b-section-settings__control">
+        <control-section-layouts :builder="builder"></control-section-layouts>
+      </div>
 
       <div class="b-section-settings__control">
         <div class="b-section-settings__header">
@@ -135,12 +138,14 @@ import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlText from './controls/TheControlText'
+import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
 
 export default {
   components: {
     ControlSectionProducts,
     ControlSystemRequirements,
-    ControlText
+    ControlText,
+    ControlSectionLayouts
   },
   name: 'BuilderSettingsBarSection',
 

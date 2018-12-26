@@ -11,7 +11,7 @@ export default {
           slug: 'Landing',
           theme: {
             name: 'Landing',
-            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns']
+            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns', 'Footer']
           }
         },
         {

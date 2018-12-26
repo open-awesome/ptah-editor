@@ -21,30 +21,26 @@ import Description from '@components/elements/Description'
 import Pic from '@components/elements/Pic'
 import Logo from '@components/elements/Logo'
 import Delimiter from '@components/elements/Delimiter'
+// new elements
+import AvailablePlatforms from '@components/elements/AvailablePlatforms'
+import AgeRestrictions from '@components/elements/AgeRestrictions'
+import SocialNetworks from '@components/elements/SocialNetworks'
 import Slogan from '@components/elements/Slogan'
-import Cost from '@components/elements/Cost'
-import IconWithText from '@components/elements/IconWithText'
 
 // sections
-import BaseSection from '@components/sections/BaseSection'
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
-// import Footer from '@components/sections/footers/Footer'
+import Products from '@components/sections/products/Products'
+import ProductsExtend from '@components/sections/products/ProductsExtend'
 import System from '@components/sections/elements/System'
-import ProductsColumns from '@components/sections/products/ProductsColumns'
-import ProductsColumnsExtend from '@components/sections/products/ProductsColumnsExtend'
+import Footer from '@components/sections/footers/Footer'
 import ThreeColumns from '@components/sections/columns/ThreeColumns'
 import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
-import GalleryCarousel from '@components/sections/galleries/GalleryCarousel'
-
-// new elements
-import AvailablePlatforms from '@components/elements/AvailablePlatforms'
-import AgeRestrictions from '@components/elements/AgeRestrictions'
-import SocialNetworks from '@components/elements/SocialNetworks'
+import GalleryCarousel from '@components/sections/carousel/GalleryCarousel'
 
 import store from '@store'
 
@@ -63,22 +59,19 @@ Vuse.mix({
     AvailablePlatforms,
     AgeRestrictions,
     SocialNetworks,
-    Slogan,
-    Cost,
-    IconWithText
+    Slogan
   }
 })
 
-Vuse.component('BaseSection', BaseSection)
 Vuse.component('HeroUnit', HeroUnit)
 Vuse.component('HeroSkull', HeroSkull)
 Vuse.component('Gallery1', Gallery1)
 Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
-Vuse.component('ProductsColumnsExtend', ProductsColumnsExtend)
-Vuse.component('ProductsColumns', ProductsColumns)
-// Vuse.component('Footer', Footer)
+Vuse.component('Products', Products)
+Vuse.component('ProductsExtend', ProductsExtend)
 Vuse.component('System', System)
+Vuse.component('Footer', Footer)
 Vuse.component('ThreeColumns', ThreeColumns)
 Vuse.component('TwoColumns', TwoColumns)
 Vuse.component('Video', Video)
