@@ -33,6 +33,8 @@ export function getTypeFromSchema(target, schema) {
   if (value === types.Label) return 'text'
   if (value === types.Cost) return 'text'
   if (value === types.Delimiter) return 'delimiter'
+  if (value === types.SystemRequirements) return 'section'
+  if (value === types.TextInherit) return 'text'
 
   return null
 }

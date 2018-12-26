@@ -146,9 +146,9 @@ export default {
       expandedFont: false,
       expandedBg: false,
       expandedLink: false,
-      expandedAvailablePlatforms: false,
-      expandedAgeRestrictions: false,
-      expandedSocialNetworks: false,
+      expandedAvailablePlatforms: true,
+      expandedAgeRestrictions: true,
+      expandedSocialNetworks: true,
       colorFill: {},
       sizeIcons: {},
       availablePlatforms: {},
@@ -200,13 +200,13 @@ export default {
     this.bgSize = styles['background-size'] || 'cover'
 
     /* Get element size */
-    this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetWidth
-    this.elWidth = styles['width'] || this.settingObjectOptions.element.offsetHeight
+    this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetHeight
+    this.elWidth = styles['width'] || this.settingObjectOptions.element.offsetWidth
     this.elRadius = styles['border-radius'] || 0
 
     /* Link */
     this.elLink = this.settingObjectOptions.href || ''
-    this.elTarget = this.settingObjectOptions.target
+    this.elTarget = this.settingObjectOptions.target || ''
 
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
@@ -325,7 +325,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 
