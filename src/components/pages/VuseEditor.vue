@@ -21,6 +21,11 @@ import Description from '@components/elements/Description'
 import Pic from '@components/elements/Pic'
 import Logo from '@components/elements/Logo'
 import Delimiter from '@components/elements/Delimiter'
+// new elements
+import AvailablePlatforms from '@components/elements/AvailablePlatforms'
+import AgeRestrictions from '@components/elements/AgeRestrictions'
+import SocialNetworks from '@components/elements/SocialNetworks'
+import Slogan from '@components/elements/Slogan'
 
 // sections
 import HeroUnit from '@components/sections/hero/HeroUnit'
@@ -30,22 +35,12 @@ import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
 import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
-// import Footer from '@components/sections/elements/Footer'
-// import Restrictions from '@components/sections/elements/Restrictions'
-// import Slogan from '@components/sections/elements/Slogan'
-// import Social from '@components/sections/elements/Social'
-// import System from '@components/sections/elements/System'
+import System from '@components/sections/elements/System'
+import Footer from '@components/sections/footers/Footer'
 import ThreeColumns from '@components/sections/columns/ThreeColumns'
 import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
-// import AvailableRestrictions from '@components/sections/footers/FooterAvailableRestrictions'
-// import SocialCopyright from '@components/sections/footers/FooterSocialCopyright'
 import GalleryCarousel from '@components/sections/carousel/GalleryCarousel'
-
-// new elements
-import AvailablePlatforms from '@components/elements/AvailablePlatforms'
-import AgeRestrictions from '@components/elements/AgeRestrictions'
-import SocialNetworks from '@components/elements/SocialNetworks'
 
 import store from '@store'
 
@@ -63,7 +58,8 @@ Vuse.mix({
     Delimiter,
     AvailablePlatforms,
     AgeRestrictions,
-    SocialNetworks
+    SocialNetworks,
+    Slogan
   }
 })
 
@@ -74,16 +70,11 @@ Vuse.component('Gallery2', Gallery2)
 Vuse.component('Gallery3', Gallery3)
 Vuse.component('Products', Products)
 Vuse.component('ProductsExtend', ProductsExtend)
-// Vuse.component('Footer', Footer)
-// Vuse.component('Restrictions', Restrictions)
-// Vuse.component('Slogan', Slogan)
-// Vuse.component('Social', Social)
-// Vuse.component('System', System)
+Vuse.component('System', System)
+Vuse.component('Footer', Footer)
 Vuse.component('ThreeColumns', ThreeColumns)
 Vuse.component('TwoColumns', TwoColumns)
 Vuse.component('Video', Video)
-// Vuse.component('AvailableRestrictions', AvailableRestrictions)
-// Vuse.component('SocialCopyright', SocialCopyright)
 Vuse.component('GalleryCarousel', GalleryCarousel)
 
 Vuse.use(pwa)

@@ -575,6 +575,106 @@ const data = new Map([
       isComplex: true
     })
   )],
+  [types.Slogan, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      resizable: true,
+      removable: true,
+      background: true,
+      text: 'Enter game slogan',
+      aligned: true,
+      typography: true,
+      styles: {
+        'font-family': 'Lato',
+        'font-size':  4.8,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'text-align': false,
+        'color': '#fff',
+        'background-image': 'url(https://gn793.cdn.stg.gamenet.ru/0/79yeF/o_1PRuEc.png)',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'justify-content': false,
+        'width': 320,
+        'height': 64,
+        'border-radius': 0
+      }
+    })
+  )],
+  [types.SystemRequirements, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      box: true,
+      name: 'System Requirements',
+      removable: true,
+      background: true,
+      hasSystemRequirements: true,
+      systemRequirements: {
+        'windows': {
+          visible: true,
+          hideTextTitle: false
+        },
+        'apple': {
+          visible: true,
+          hideTextTitle: false
+        },
+        'linux': {
+          visible: false,
+          hideTextTitle: false
+        }
+      },
+      rowsRequirements: {
+        'OS': { visible: true },
+        'Processor': { visible: true },
+        'Memory': { visible: true },
+        'Graphics': { visible: true },
+        'Direct X': { visible: true },
+        'Storage': { visible: true },
+        'Sound Card': { visible: false }
+      },
+      selectPlatform: {
+        name: 'apple'
+      },
+      colorFill: {
+        color:  '#fff'
+      },
+      sizeIcons: {
+        width: 24
+      },
+      typography: true,
+      styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false,
+        'font-family': 'Lato',
+        'font-size':  1.6,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'text-align': false,
+        'color': '#fff'
+      }
+    })
+  )],
+  [types.TextInherit, () => (_.merge({}, DEFAULT_OPTIONS, {
+    text: 'Enter your text',
+    aligned: true,
+    typography: true,
+    styles: {
+        'font-family': 'inherit',
+        'font-size': 'inherit',
+        'font-weight': 'inherit',
+        'font-style': 'inherit',
+        'text-decoration': 'inherit',
+        'text-align': 'inherit',
+        'color': 'inherit'
+    }
+}))],
 ])
 
 export default class Seeder {

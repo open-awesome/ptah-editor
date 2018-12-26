@@ -1,4 +1,6 @@
 import 'es6-promise/auto'
+import 'setimmediate'
+
 import VueRouter from 'vue-router'
 import Vue from 'vue'
 import Vuex from 'vuex'
@@ -20,7 +22,7 @@ Vue.use(VueScrollTo, {
   container: 'body',
   duration: 500,
   easing: 'ease',
-  offset: 0,
+  offset: -80,
   force: true,
   cancelable: true,
   onStart: false,
