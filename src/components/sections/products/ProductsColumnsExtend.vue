@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
+import { mapActions } from 'vuex'
 import { productExtendPreviewClick } from '@cscripts/productExtend'
 
 const C_CUSTOM_1 = [
@@ -540,13 +541,16 @@ const COMPONENTS_D = [
   }
 ]
 
+const GROUP_NAME = 'Products'
+const NAME = 'ProductsColumnsExtend'
+
 export default {
-  name: 'ProductsColumnsExtend',
+  name: NAME,
   components: {
     Draggable
   },
   cover: '/img/covers/products_e.jpg',
-  group: 'products',
+  group: GROUP_NAME,
   $schema: {
     mainStyle: types.ProductSection,
     container1: types.StyleObject,
@@ -572,7 +576,8 @@ export default {
     components3d: COMPONENTS_D,
     components4: COMPONENTS,
     components4m: COMPONENTS_M,
-    components4d: COMPONENTS_D
+    components4d: COMPONENTS_D,
+    listComponents: {}
   },
   props: {
     id: {
@@ -581,6 +586,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Landing', [
+      'updateGroupData',
+      'updateSectionData'
+    ]),
     onAddElement1 (element) {
       element.element.removable = true
       this.$section.data.components1.push(element)
@@ -631,17 +640,57 @@ export default {
     },
     bindingProductExtendPreviewClick (index) {
       productExtendPreviewClick(index)
+    },
+
+    storeData: _.after(2, (self) => {
+      let data = self.$sectionData.listComponents
+      for (var key in data) {
+        self.$sectionData[key].forEach(component => {
+          data[key].push(component)
+        })
+      }
+      self.updateGroupData({ name: GROUP_NAME, data })
+      self.updateSectionData({
+        name: NAME,
+        data: _.cloneDeep(self.$sectionData)
+      })
+    }),
+
+    canRestore () {
+      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
+    },
+
+    setListComponents () {
+      for (var key in this.$sectionData) {
+        if (key.indexOf('components') !== -1) {
+          this.$sectionData.listComponents[key] = []
+        }
+      }
     }
   },
+
   created () {
     if (this.$sectionData.edited === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
+      Seeder.seed(_.merge(this.$sectionData, data))
     }
+
+    if (this.$store.state.Landing.groupData[GROUP_NAME]) {
+      _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (arrComponents, name) => {
+        this.$sectionData[name] = arrComponents
+      })
+    }
+
+    this.setListComponents()
   },
+
   mounted: function () {
     this.bindingProductExtendPreviewClick(0)
   },
+
   updated: function () {
+    this.setListComponents()
+    this.storeData(this)
     this.bindingProductExtendPreviewClick(this.index)
   }
 }

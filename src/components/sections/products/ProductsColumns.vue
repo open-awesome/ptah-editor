@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
+import { mapActions } from 'vuex'
 
 const C_CUSTOM_1 = [
   {
@@ -34,15 +35,36 @@ const C_CUSTOM_1 = [
         'background-color': 'rgba(245,166,35,1)',
         'color': '#000',
         'font-family': 'Lato',
-        'font-size:': '1.4rem',
+        'font-size:': 1.2,
         'text-align': 'center',
-        'width': '224px',
-        'height': '56px',
+        'width': '64px',
+        'height': '52px',
         'border-radius': '2px'
       }
     }
   }
 ]
+
+const C_CUSTOM_1_M = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '160px',
+        'height': '130px'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'Start Edition'
+    }
+  }
+]
+
 const C_CUSTOM_1D = [
   {
     element: {
@@ -124,15 +146,36 @@ const C_CUSTOM_2 = [
         'background-color': 'rgba(245,166,35,1)',
         'color': '#000',
         'font-family': 'Lato',
-        'font-size:': '1.4rem',
+        'font-size:': 1.2,
         'text-align': 'center',
-        'width': '224px',
-        'height': '56px',
+        'width': '64px',
+        'height': '52px',
         'border-radius': '2px'
       }
     }
   }
 ]
+
+const C_CUSTOM_2_M = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '160px',
+        'height': '130px'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'Full Edition'
+    }
+  }
+]
+
 const C_CUSTOM_2D = [
   {
     element: {
@@ -214,15 +257,36 @@ const C_CUSTOM_3 = [
         'background-color': 'rgba(245,166,35,1)',
         'color': '#000',
         'font-family': 'Lato',
-        'font-size:': '1.4rem',
+        'font-size:': 1.2,
         'text-align': 'center',
-        'width': '224px',
-        'height': '56px',
+        'width': '64px',
+        'height': '52px',
         'border-radius': '2px'
       }
     }
   }
 ]
+
+const C_CUSTOM_3_M = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '160px',
+        'height': '130px'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'Deluxe Edition'
+    }
+  }
+]
+
 const C_CUSTOM_3D = [
   {
     element: {
@@ -304,15 +368,36 @@ const C_CUSTOM_4 = [
         'background-color': 'rgba(245,166,35,1)',
         'color': '#000',
         'font-family': 'Lato',
-        'font-size:': '1.4rem',
+        'font-size:': 1.2,
         'text-align': 'center',
-        'width': '224px',
-        'height': '56px',
+        'width': '64px',
+        'height': '52px',
         'border-radius': '2px'
       }
     }
   }
 ]
+
+const C_CUSTOM_4_M = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '160px',
+        'height': '130px'
+      }
+    }
+  },
+  {
+    element: {
+      text: 'Ultimate Edition'
+    }
+  }
+]
+
 const C_CUSTOM_4D = [
   {
     element: {
@@ -372,12 +457,16 @@ const SCHEMA_CUSTOM = {
     }
   },
   components1: _.merge({}, C_CUSTOM_1),
+  components1m: _.merge({}, C_CUSTOM_1_M),
   components1d: _.merge({}, C_CUSTOM_1D),
   components2: _.merge({}, C_CUSTOM_2),
+  components2m: _.merge({}, C_CUSTOM_2_M),
   components2d: _.merge({}, C_CUSTOM_2D),
   components3: _.merge({}, C_CUSTOM_3),
+  components3m: _.merge({}, C_CUSTOM_3_M),
   components3d: _.merge({}, C_CUSTOM_3D),
   components4: _.merge({}, C_CUSTOM_4),
+  components4m: _.merge({}, C_CUSTOM_4_M),
   components4d: _.merge({}, C_CUSTOM_4D),
   edited: true
 }
@@ -408,6 +497,22 @@ const COMPONENTS = [
     class: 'b-button-test'
   }
 ]
+
+const COMPONENTS_M = [
+  {
+    name: 'Logo',
+    element: types.Logo,
+    type: 'image',
+    class: 'b-logo'
+  },
+  {
+    name: 'Description',
+    element: types.Text,
+    type: 'text',
+    class: 'b-text'
+  }
+]
+
 const COMPONENTS_D = [
   {
     name: 'IconWithText',
@@ -435,32 +540,43 @@ const COMPONENTS_D = [
   }
 ]
 
+const GROUP_NAME = 'Products'
+const NAME = 'ProductsColumns'
+
 export default {
-  name: 'ProductsColumns',
+  name: NAME,
   components: {
     Draggable
   },
   cover: '/img/covers/products.jpg',
-  group: 'products',
+  group: GROUP_NAME,
   $schema: {
     mainStyle: types.ProductSection,
-    header: types.Title,
     container1: types.StyleObject,
+    container1m: types.StyleObject,
     container1d: types.StyleObject,
     container2: types.StyleObject,
+    container2m: types.StyleObject,
     container2d: types.StyleObject,
     container3: types.StyleObject,
+    container3m: types.StyleObject,
     container3d: types.StyleObject,
     container4: types.StyleObject,
+    container4m: types.StyleObject,
     container4d: types.StyleObject,
     components1: COMPONENTS,
+    components1m: COMPONENTS_M,
     components1d: COMPONENTS_D,
     components2: COMPONENTS,
+    components2m: COMPONENTS_M,
     components2d: COMPONENTS_D,
     components3: COMPONENTS,
+    components3m: COMPONENTS_M,
     components3d: COMPONENTS_D,
     components4: COMPONENTS,
-    components4d: COMPONENTS_D
+    components4m: COMPONENTS_M,
+    components4d: COMPONENTS_D,
+    listComponents: {}
   },
   props: {
     id: {
@@ -469,6 +585,10 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Landing', [
+      'updateGroupData',
+      'updateSectionData'
+    ]),
     onAddElement1 (element) {
       element.element.removable = true
       this.$section.data.components1.push(element)
@@ -500,12 +620,53 @@ export default {
     onAddElement4d (element) {
       element.element.removable = true
       this.$section.data.components4d.push(element)
+    },
+
+    storeData: _.after(2, (self) => {
+      let data = self.$sectionData.listComponents
+      for (var key in data) {
+        self.$sectionData[key].forEach(component => {
+          data[key].push(component)
+        })
+      }
+      self.updateGroupData({ name: GROUP_NAME, data })
+      self.updateSectionData({
+        name: NAME,
+        data: _.cloneDeep(self.$sectionData)
+      })
+    }),
+
+    canRestore () {
+      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
+    },
+
+    setListComponents () {
+      for (var key in this.$sectionData) {
+        if (key.indexOf('components') !== -1) {
+          this.$sectionData.listComponents[key] = []
+        }
+      }
     }
   },
+
   created () {
     if (this.$sectionData.edited === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
+      Seeder.seed(_.merge(this.$sectionData, data))
     }
+
+    if (this.$store.state.Landing.groupData[GROUP_NAME]) {
+      _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (arrComponents, name) => {
+        this.$sectionData[name] = arrComponents
+      })
+    }
+
+    this.setListComponents()
+  },
+
+  updated () {
+    this.setListComponents()
+    this.storeData(this)
   }
 }
 </script>
