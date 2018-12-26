@@ -146,9 +146,9 @@ export default {
       expandedFont: false,
       expandedBg: false,
       expandedLink: false,
-      expandedAvailablePlatforms: false,
-      expandedAgeRestrictions: false,
-      expandedSocialNetworks: false,
+      expandedAvailablePlatforms: true,
+      expandedAgeRestrictions: true,
+      expandedSocialNetworks: true,
       colorFill: {},
       sizeIcons: {},
       availablePlatforms: {},
@@ -161,7 +161,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectSection'
+      'settingObjectSection',
+      'settingObjectType'
     ]),
     // find path to element
     path () {
@@ -199,13 +200,13 @@ export default {
     this.bgSize = styles['background-size'] || 'cover'
 
     /* Get element size */
-    this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetWidth
-    this.elWidth = styles['width'] || this.settingObjectOptions.element.offsetHeight
+    this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetHeight
+    this.elWidth = styles['width'] || this.settingObjectOptions.element.offsetWidth
     this.elRadius = styles['border-radius'] || 0
 
     /* Link */
     this.elLink = this.settingObjectOptions.href || ''
-    this.elTarget = this.settingObjectOptions.target
+    this.elTarget = this.settingObjectOptions.target || ''
 
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
@@ -226,6 +227,9 @@ export default {
 
     /* Age restrictions */
     this.ageRestrictions = this.settingObjectOptions.ageRestrictions || {}
+
+    // --- expand dropdown dep. by type
+    this.expandDropdown(this.settingObjectType)
   },
 
   methods: {
@@ -233,6 +237,16 @@ export default {
       'updateSettingOptions',
       'clearSettingObject'
     ]),
+
+    expandDropdown (type) {
+      this.expandedSize = (type === 'delimiter')
+      this.expandedFont = (type === 'text')
+      this.expandedBg = (['image', 'galleryItem', 'product'].includes(type))
+      this.expandedLink = (type === 'button')
+      this.expandedAvailablePlatforms = (type === 'available')
+      this.expandedAgeRestrictions = (type === 'restrictions')
+      this.expandedSocialNetworks = (type === 'socials')
+    },
 
     styleChange (value) {
       this.updateStyle(_.kebabCase(value[0]), value[1])
@@ -311,7 +325,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 

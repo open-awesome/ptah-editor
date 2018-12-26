@@ -43,8 +43,11 @@ export default {
   },
 
   watch: {
-    expand () {
-      this.controlOpen = this.expand
+    expand: {
+      immediate: true,
+      handler (value) {
+        this.controlOpen = value
+      }
     }
   },
 
@@ -64,6 +67,7 @@ export default {
   mounted () {
     this.color = this.colorFill.color
     this.elWidth = this.sizeIcons.width
+    this.controlOpen = this.expand
   }
 }
 </script>

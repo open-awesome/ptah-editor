@@ -11,7 +11,7 @@ export default {
           slug: 'Landing',
           theme: {
             name: 'Landing',
-            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns']
+            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns', 'Footer']
           }
         },
         {
@@ -19,6 +19,13 @@ export default {
           theme: {
             name: 'Skull',
             sections: ['HeroSkull']
+          }
+        },
+        {
+          slug: 'Game',
+          theme: {
+            name: 'Game',
+            sections: ['System']
           }
         }
       ])
