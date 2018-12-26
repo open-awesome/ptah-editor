@@ -37,7 +37,12 @@ export default {
         { name: 'shake', value: 'ptah-a-shake' },
         { name: 'bounce', value: 'ptah-a-bounce' }
       ],
-      animation: {}
+      animation: {},
+      actionList: [
+        { name: 'Open URL', value: '' },
+        { name: 'Open video popup', value: 'ptah-d-video' }
+      ],
+      action: {}
     }
   },
 
@@ -88,7 +93,7 @@ export default {
 <template>
   <div class="b-link-controls">
     <div class="b-link-controls__header" @click="onClickTitle">
-      <span>Link</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+      <span>Action</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen"  :hasOverflow="controlOpen">
       <div class="b-link-controls__control">
