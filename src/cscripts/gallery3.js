@@ -24,13 +24,17 @@ export function galleryThree() {
         };
     });
 
-    popupX.onclick = function(e) {
-      closePopup();
-    };
+    if (popupX) {
+      popupX.onclick = function(e) {
+        closePopup();
+      };
+    }
 
-    popup.onclick = function(e) {
-      closePopup();
-    };
+    if (popup) {
+      popup.onclick = function(e) {
+        closePopup();
+      };
+    }
 
     function clickLink (el) {
         var content = '';
