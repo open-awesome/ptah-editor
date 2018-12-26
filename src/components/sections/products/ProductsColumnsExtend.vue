@@ -722,7 +722,7 @@ export default {
                 >
                 <elements-list @addEl="onAddElement1m"></elements-list>
                 <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1m.styles">
-                  <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                  <div
                     v-for="(component, index) in $sectionData.components1m"
                     v-if="$sectionData.components1m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
@@ -766,7 +766,7 @@ export default {
                 >
                 <elements-list @addEl="onAddElement2m"></elements-list>
                 <draggable v-model="$sectionData.components2m" class="b-draggable-slot" :style="$sectionData.container2m.styles">
-                  <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                  <div
                        v-for="(component, index) in $sectionData.components2m" v-if="$sectionData.components2m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
                       v-if="$sectionData.components2m[index].element.isComplex"
@@ -809,7 +809,7 @@ export default {
                 >
                 <elements-list @addEl="onAddElement3m"></elements-list>
                 <draggable v-model="$sectionData.components3m" class="b-draggable-slot" :style="$sectionData.container3m.styles">
-                  <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                  <div
                        v-for="(component, index) in $sectionData.components3m" v-if="$sectionData.components3m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
                       v-if="$sectionData.components3m[index].element.isComplex"
@@ -852,7 +852,7 @@ export default {
                 >
                 <elements-list @addEl="onAddElement4m"></elements-list>
                 <draggable v-model="$sectionData.components4m" class="b-draggable-slot" :style="$sectionData.container4m.styles">
-                  <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                  <div
                        v-for="(component, index) in $sectionData.components4m" v-if="$sectionData.components4m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
                       v-if="$sectionData.components4m[index].element.isComplex"
@@ -899,7 +899,7 @@ export default {
                       >
                       <elements-list @addEl="onAddElement1"></elements-list>
                       <draggable v-model="$sectionData.components1" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container1.styles">
-                        <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                        <div
                           v-for="(component, index) in $sectionData.components1"
                           v-if="$sectionData.components1.length !== 0" :key="index">
                           <component class="b-products-columns-component"
@@ -937,7 +937,7 @@ export default {
                       >
                       <elements-list @addEl="onAddElement1d"></elements-list>
                       <draggable v-model="$sectionData.components1d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container1d.styles">
-                        <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                        <div
                           v-for="(component, index) in $sectionData.components1d"
                           v-if="$sectionData.components1d.length !== 0" :key="index">
                           <component class="b-products-columns-component"
@@ -980,7 +980,7 @@ export default {
                       >
                       <elements-list @addEl="onAddElement2"></elements-list>
                       <draggable v-model="$sectionData.components2" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles">
-                        <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                        <div
                              v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components2[index].element.isComplex"
@@ -1017,7 +1017,7 @@ export default {
                       >
                       <elements-list @addEl="onAddElement2d"></elements-list>
                       <draggable v-model="$sectionData.components2d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2d.styles">
-                        <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                        <div
                              v-for="(component, index) in $sectionData.components2d" v-if="$sectionData.components2d.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components2d[index].element.isComplex"
@@ -1059,7 +1059,7 @@ export default {
                       >
                       <elements-list @addEl="onAddElement3"></elements-list>
                       <draggable v-model="$sectionData.components3" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3.styles">
-                        <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                        <div
                              v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components3[index].element.isComplex"
@@ -1096,7 +1096,7 @@ export default {
                       >
                       <elements-list @addEl="onAddElement3d"></elements-list>
                       <draggable v-model="$sectionData.components3d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3d.styles">
-                        <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                        <div
                              v-for="(component, index) in $sectionData.components3d" v-if="$sectionData.components3d.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components3d[index].element.isComplex"
@@ -1138,7 +1138,7 @@ export default {
                       >
                       <elements-list @addEl="onAddElement4"></elements-list>
                       <draggable v-model="$sectionData.components4" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container4.styles">
-                        <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                        <div
                              v-for="(component, index) in $sectionData.components4" v-if="$sectionData.components4.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components4[index].element.isComplex"
@@ -1175,7 +1175,7 @@ export default {
                       >
                       <elements-list @addEl="onAddElement4d"></elements-list>
                       <draggable v-model="$sectionData.components4d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container4d.styles">
-                        <div :class="{ 'b-products-columns-extend__icon-with-text' : component.name === 'IconWithText' }"
+                        <div
                              v-for="(component, index) in $sectionData.components4d" v-if="$sectionData.components4d.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components4d[index].element.isComplex"
@@ -1230,7 +1230,6 @@ $h: 100vh
     justify-content: center
     align-items: center
   &__icon-with-text
-    width: 100%
     color: inherit
     font-family: inherit
   &__left

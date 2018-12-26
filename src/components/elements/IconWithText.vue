@@ -46,10 +46,12 @@ export default {
   text-align: center
   font-size: 1.4rem
   line-height: 1.4
-  display: block
+  display: inline-block
   max-width: 100rem
   margin: 0.8rem
   padding: 0 1.6rem 0 3.2rem
+  color: inherit
+  font-family: inherit
   &::selection,
   & ::selection
     color: #ff0
