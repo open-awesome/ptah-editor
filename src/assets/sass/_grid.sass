@@ -35,7 +35,6 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
         flex-basis: (100 / ($grid-cols / $i) ) * 1%
         padding: $basis / 2 * 1px
         box-sizing: border-box
-        overflow: hidden
         @if($breakpoint == $grid__bp-m)
           padding: $basis / 2 * 1px 0
       &__col#{$modifier}-offset-#{$i}
@@ -49,7 +48,6 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
         flex-basis: (100 / ($grid-cols / $i) ) * 1%
         padding: $basis / 2 * 1px
         box-sizing: border-box
-        overflow: hidden
         @if($breakpoint == $grid__bp-m)
           padding: $basis / 2 * 1px 0
       &__col#{$modifier}-offset-#{$i}

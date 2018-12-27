@@ -167,7 +167,7 @@ export default {
     VuseIcon
   },
   cover: '/img/covers/products.png',
-  group: 'products',
+  group: 'editions',
   $schema: {
     mainStyle: types.ProductSection,
     products: [

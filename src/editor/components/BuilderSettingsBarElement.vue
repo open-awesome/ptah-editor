@@ -243,12 +243,12 @@ export default {
 
     expandDropdown (type) {
       this.expandedSize = (type === 'delimiter')
-      this.expandedFont = (type === 'text')
-      this.expandedBg = (['image', 'galleryItem', 'product'].includes(type))
+      this.expandedFont = ['text', 'title'].includes(type)
+      this.expandedBg = ['image', 'galleryItem', 'product'].includes(type)
       this.expandedLink = (type === 'button')
       this.expandedAvailablePlatforms = (type === 'available')
       this.expandedAgeRestrictions = (type === 'restrictions')
-      this.expandedSocialNetworks = (type === 'socials')
+      this.expandedSocialNetworks = ['networks', 'socials'].includes(type)
     },
 
     styleChange (value) {
