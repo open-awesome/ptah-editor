@@ -405,12 +405,8 @@ export default {
         let reader = new FileReader()
         await reader.readAsDataURL(file)
         await new Promise((resolve, reject) => {
-          try {
-            name = file.name
-            reader.onloadend = resolve
-          } catch (error) {
-            reject(error)
-          }
+          name = file.name
+          reader.onloadend = resolve
         }).then(({ target: { result } }) => { data = result })
       }
 
