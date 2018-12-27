@@ -94,7 +94,14 @@ export default {
     background-color: #436FEE
     border-color: #436FEE
     color: #fff
-  &:hover
+  &[disabled]
+    cursor: not-allowed
+    background-color: #b6b6b6
+    border-color: #b6b6b6
+    color: #b6b6b6
+    > svg
+      fill: #8f8686
+  &:hover:not([disabled])
     cursor: pointer
     +active
   &_default

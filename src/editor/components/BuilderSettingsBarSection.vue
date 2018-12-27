@@ -35,7 +35,7 @@
         <div class="b-section-settings__control picker">
           <base-label class="picker__label">
             Background color
-            <base-button @click="addBackgroundPicker" color="light-gray" class="picker__button">
+            <base-button :disabled="!backgroundPickers[0]" @click="addBackgroundPicker" color="light-gray" class="picker__button">
               <icon-plus width="10" height="10" class="picker__icon"/>
             </base-button>
           </base-label>
@@ -139,7 +139,7 @@ import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlText from './controls/TheControlText'
 
-const DEFAULT_COLOR = 'rgba(0,0,0,0)'
+const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
 function getPickerColor (color) {
   if (typeof color === 'object' && color.hasOwnProperty('rgba')) {
@@ -276,7 +276,7 @@ export default {
             .replace(/[)]$/, '')
             .split(', ')
         } else {
-          this.backgroundPickers = [value['background-color'] || DEFAULT_COLOR]
+          this.backgroundPickers = [value['background-color']]
         }
         // TODO: this crashed storage with linear-gradient
         // let bgimage = image.match(/url\((.*?)\)/)

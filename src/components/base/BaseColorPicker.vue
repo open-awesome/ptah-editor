@@ -1,6 +1,6 @@
 <script>
 import { Sketch } from 'vue-color'
-const DEFAULT_COLOR = 'rgba(0,0,0,0)'
+const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 export default {
   name: 'BaseColorPicker',
   model: {
@@ -35,7 +35,6 @@ export default {
   },
   methods: {
     getPreparedValue (value) {
-      value = value || DEFAULT_COLOR
       if (typeof value === 'object' && !!value.rgba) {
         const color = Object.values(value.rgba).toString()
         return `rgba(${color})`
@@ -57,7 +56,7 @@ export default {
     <div class="b-picker__value-string" @click="expanded = !expanded">
       <div class="b-picker__circle" :style="{ 'background-color': pickerValue.rgba || pickerValue }"></div>
       <div class="b-picker__text">
-        {{ pickerValue.rgba || pickerValue }}
+        {{ pickerValue.rgba || pickerValue || 'Choose color' }}
       </div>
       <div class="b-picker__arrow" :class="{ 'b-picker__arrow--turn': expanded}">
         <icon-base name="arrowDropDown" width="6" color="#888888" />
