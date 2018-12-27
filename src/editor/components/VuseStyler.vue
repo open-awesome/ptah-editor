@@ -161,6 +161,10 @@ export default {
       if (name.indexOf('ptah-a-') > -1) {
         this.animation = _.find(this.animationList, ['className', name])
       }
+
+      if (name.indexOf('ptah-d-video') > -1) {
+        this.el.dataset.video = this.options.video
+      }
     })
 
     this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)

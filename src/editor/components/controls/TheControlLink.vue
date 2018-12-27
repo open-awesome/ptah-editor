@@ -1,9 +1,14 @@
 <script>
+import { getYoutubeVideoIdFromUrl } from '@editor/util'
+
 export default {
   props: {
     link: {
       type: String,
       required: true
+    },
+    videoLink: {
+      type: [String, Boolean]
     },
     target: {
       type: [String, Boolean]
@@ -28,6 +33,7 @@ export default {
       controlOpen: false,
       elLink: '',
       elTarget: '',
+      elVideoLink: '',
       bgHoverColor: '',
       textHoverColor: '',
       animationList: [
@@ -42,7 +48,7 @@ export default {
         { name: 'Open URL', value: '' },
         { name: 'Open video popup', value: 'ptah-d-video' }
       ],
-      action: {}
+      action: { name: 'Open URL', value: '' }
     }
   },
 
@@ -53,6 +59,10 @@ export default {
     this.textHoverColor = this.hoverTextColor
     this.animation = this.animationClass
     this.controlOpen = this.expand
+    this.elVideoLink = this.videoLink
+    if (this.videoLink.length) {
+      this.action = this.actionList[1]
+    }
   },
 
   watch: {
@@ -68,7 +78,15 @@ export default {
 
   methods: {
     setUrl () {
-      this.$emit('setOption', ['href', this.elLink])
+      this.$emit('setAction', ['href', this.elLink])
+    },
+
+    setVideoUrl () {
+      let ytId = getYoutubeVideoIdFromUrl(this.elVideoLink)
+
+      if (ytId) {
+        this.$emit('setAction', ['video', ytId])
+      }
     },
 
     changeBgColor () {
@@ -96,12 +114,24 @@ export default {
       <span>Action</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen"  :hasOverflow="controlOpen">
+      <!-- action -->
       <div class="b-link-controls__control">
+        <base-select label="Action" :options="actionList" v-model="action"></base-select>
+      </div>
+
+      <!-- open link -->
+      <div class="b-link-controls__control" v-if="action.value === ''">
         <base-text-field v-model="elLink" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
       </div>
-      <div class="b-link-controls__control">
+      <div class="b-link-controls__control" v-if="action.value === ''">
         <input type="checkbox" id="target" v-model="elTarget"> <label for="target">open in new window</label>
       </div>
+
+      <!-- video popup -->
+      <div class="b-link-controls__control" v-if="action.value === 'ptah-d-video'">
+        <base-text-field v-model="elVideoLink" label="Video" @input="setVideoUrl" placeholder="Youtube video url"></base-text-field>
+      </div>
+
       <div class="b-link-controls__control">
         <base-color-picker label="Background hover color" v-model="bgHoverColor" @change="changeBgColor"></base-color-picker>
       </div>
