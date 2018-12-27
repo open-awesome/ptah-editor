@@ -4,6 +4,7 @@
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     >
+      <slot name="video"/>
       <div class="b-products">
         <div class="b-products-list flex flex_justify-content-center flex_align-items-start">
           <div class="b-products-list__item flex flex_columns"

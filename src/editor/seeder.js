@@ -36,7 +36,17 @@ const DEFAULT_OPTIONS = {
   background: false,
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
-  isComplex: false
+  isComplex: false,
+
+  // --- Background type
+  // --- variants: 'default' (default css background), 'video' (video background)
+  backgroundType: 'default',
+
+  // --- background video data
+  backgroundVideo: {
+    name: null,
+    data: null
+  }
 }
 
 /**

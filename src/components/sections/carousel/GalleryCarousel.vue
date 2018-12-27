@@ -59,6 +59,7 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
     >
+      <slot name="video"/>
       <div class="b-header">{{ $sectionData.mainStyle.header }}</div>
       <div class="b-gallery-carousel-body">
         <template v-if="galleryImages.length > 1">

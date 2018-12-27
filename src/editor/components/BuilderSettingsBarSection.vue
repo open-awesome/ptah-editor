@@ -41,24 +41,49 @@
         </div>
 
         <div class="b-section-settings__control">
-          <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
+          <base-label>Use video as background</base-label>
+          <base-switcher
+            :value="backgroundType === 'video'"
+            @change="toggleBackgroundType"/>
         </div>
 
-        <div class="b-section-settings__control">
-          <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
+        <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
+          <base-label v-text="settingObjectOptions.backgroundVideo.name || 'Upload video'"/>
+          <a v-if="settingObjectOptions.backgroundVideo.data" @click.prevent="removeVideo">
+            <icon-base name="close" width="12" color="#436FEE" title="Remove video"/>
+          </a>
+          <label v-else for="video-input">
+            <icon-base name="download" width="12" color="#436FEE" title="Upload video"/>
+          </label>
+          <input
+              @change="uploadVideo($event.target.files[0])"
+              id="video-input"
+              type="file"
+              placeholder="Upload video"
+              hidden>
         </div>
-        <template v-if="sectionBgUrl.length">
+
+        <template v-else>
           <div class="b-section-settings__control">
-            <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+            <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
           </div>
           <div class="b-section-settings__control">
-            <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
+            <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
           </div>
-          <div class="b-section-settings__control">
-            <base-label>Fixed while scrolling</base-label>
-            <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
-          </div>
+          <template v-if="sectionBgUrl.length">
+            <div class="b-section-settings__control">
+              <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+            </div>
+            <div class="b-section-settings__control">
+              <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
+            </div>
+            <div class="b-section-settings__control">
+              <base-label>Fixed while scrolling</base-label>
+              <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
+            </div>
+          </template>
         </template>
+
       </template>
 
       <!-- Video Section Controls-->
@@ -207,14 +232,17 @@ export default {
       get () {
         return this.bgAttachment === 'fixed'
       }
+    },
+    backgroundType () {
+      return this.settingObjectOptions.backgroundType
     }
   },
 
   created () {
     let styles = this.settingObjectOptions.styles
+    let image = styles['background-image']
 
     this.sectionBgColor = styles['background-color']
-    let image = styles['background-image']
     this.sectionBgUrl = image.length > 0 && image !== 'none' ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
     this.bgRepeat = styles['background-repeat'] === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
     this.bgSize = styles['background-size'] === 'cover' ? this.sizeList[0] : this.sizeList[1]
@@ -362,8 +390,55 @@ export default {
         const el = this.settingObjectOptions.element
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
-    }
+    },
 
+    toggleBackgroundType (value) {
+      let backgroundType = (value) ? 'video' : 'default'
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, { backgroundType })
+      )
+    },
+
+    async uploadVideo (file) {
+      let [data, name] = [null, null]
+
+      if (file) {
+        let reader = new FileReader()
+        await reader.readAsDataURL(file)
+        await new Promise((resolve, reject) => {
+          try {
+            name = file.name
+            reader.onloadend = resolve
+          } catch (error) {
+            reject(error)
+          }
+        }).then(({ target: { result } }) => { data = result })
+      }
+
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          backgroundVideo: { name, data }
+        })
+      )
+
+      await this.$nextTick()
+
+      let videos = document.querySelectorAll('video[id^="bg-video"]')
+      for (let i = 0, len = videos.length; i < len; i += 1) {
+        let video = videos[i]
+        await video.pause()
+        await video.load()
+        await video.play()
+      }
+    },
+
+    removeVideo () {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          backgroundVideo: { name: null, data: null }
+        })
+      )
+    }
   }
 }
 </script>
@@ -398,6 +473,18 @@ export default {
         max-width: 100%
     &__control
       margin-bottom: 2rem
+      &--video
+        display: flex
+        align-items: center
+        justify-content: space-between
+        line-height: 1.5
+        .b-base-label
+          display: inline-block
+          max-width: 18rem
+          padding: .6rem .2rem .4rem 0
+          overflow: hidden
+          white-space: nowrap
+          text-overflow: ellipsis
     &__description
       font-size: 1.4rem
       line-height: 1.7rem
