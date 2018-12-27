@@ -59,7 +59,6 @@
               @change="uploadVideo($event.target.files[0])"
               id="video-input"
               type="file"
-              placeholder="Upload video"
               hidden>
         </div>
 
