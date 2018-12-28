@@ -42,11 +42,8 @@ const DEFAULT_OPTIONS = {
   // --- variants: 'default' (default css background), 'video' (video background)
   backgroundType: 'default',
 
-  // --- background video data
-  backgroundVideo: {
-    name: null,
-    data: null
-  }
+  // --- background video
+  backgroundVideo: null
 }
 
 /**

@@ -48,18 +48,11 @@
         </div>
 
         <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
-          <base-label v-text="settingObjectOptions.backgroundVideo.name || 'Upload video'"/>
-          <a v-if="settingObjectOptions.backgroundVideo.data" @click.prevent="removeVideo">
-            <icon-base name="close" width="12" color="#436FEE" title="Remove video"/>
-          </a>
-          <label v-else for="video-input">
-            <icon-base name="download" width="12" color="#436FEE" title="Upload video"/>
-          </label>
-          <input
-              @change="uploadVideo($event.target.files[0])"
-              id="video-input"
-              type="file"
-              hidden>
+          <BaseUploadInput
+            :value="settingObjectOptions.backgroundVideo"
+            @upload="uploadVideo"
+            label="Background video"
+            placeholder="paste Video URL" />
         </div>
 
         <template v-else>
@@ -277,8 +270,8 @@ export default {
   },
 
   watch: {
-    settingObjectOptions (newValue, oldValue) {
-      this.sectionBgColor = newValue.styles['background-color']
+    settingObjectOptions ({ styles }) {
+      this.sectionBgColor = styles['background-color']
     }
   },
 
@@ -398,41 +391,16 @@ export default {
       )
     },
 
-    async uploadVideo (file) {
-      let [data, name] = [null, null]
-
-      if (file) {
-        let reader = new FileReader()
-        await reader.readAsDataURL(file)
-        await new Promise((resolve, reject) => {
-          name = file.name
-          reader.onloadend = resolve
-        }).then(({ target: { result } }) => { data = result })
-      }
-
+    uploadVideo (url) {
       this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, {
-          backgroundVideo: { name, data }
-        })
+        _.merge({}, this.settingObjectOptions, { backgroundVideo: url || null })
       )
-
-      await this.$nextTick()
-
-      let videos = document.querySelectorAll('video[id^="bg-video"]')
-      for (let i = 0, len = videos.length; i < len; i += 1) {
-        let video = videos[i]
-        await video.pause()
-        await video.load()
-        await video.play()
-      }
-    },
-
-    removeVideo () {
-      this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, {
-          backgroundVideo: { name: null, data: null }
-        })
-      )
+      // --- update video player
+      document.querySelectorAll('video[id^="bg-video"]').forEach(video => {
+        video.pause()
+        video.load()
+        video.play()
+      })
     }
   }
 }

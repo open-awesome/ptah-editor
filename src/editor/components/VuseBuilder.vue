@@ -19,13 +19,13 @@
           :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
           @click.native="selectSidebarSection(section)">
           <video
-              v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo.data"
+              v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
               :id="`bg-video-${ section.id }`"
               slot="video"
               autoplay
               muted
               loop>
-            <source :src="section.data.mainStyle.backgroundVideo.data">
+            <source :src="section.data.mainStyle.backgroundVideo">
           </video>
       </component>
       <div class="controller-intro" v-if="emptySections">
