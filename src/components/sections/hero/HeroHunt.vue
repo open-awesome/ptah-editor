@@ -81,10 +81,13 @@ const SCHEMA_CUSTOM = {
   edited: true
 }
 
-export default {
-  name: 'HeroHunt',
+const GROUP_NAME = 'Hero'
+const NAME = 'HeroHunt'
 
-  group: 'Hero',
+export default {
+  name: NAME,
+
+  group: GROUP_NAME,
 
   cover: 'https://gn805.cdn.stg.gamenet.ru/0/7RcdN/o_WboBn.png',
 
@@ -132,12 +135,41 @@ export default {
     onAddElement (element) {
       element.element.removable = true
       this.$section.data.components.push(element)
+    },
+
+    storeData: _.after(2, (self) => {
+      let data = {}
+      self.$sectionData.components.forEach(component => {
+        data[component.name] = component.element.text
+      })
+      self.updateGroupData({ name: GROUP_NAME, data })
+      self.updateSectionData({
+        name: NAME,
+        data: _.cloneDeep(self.$sectionData)
+      })
+    }),
+
+    canRestore () {
+      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
     }
   },
+
   created () {
     if (this.$sectionData.edited === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
+      Seeder.seed(_.merge(this.$sectionData, data))
     }
+
+    _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (text, name) => {
+      let elementObj = _.find(this.$sectionData.components, { name })
+      if (elementObj) {
+        elementObj.element.text = text
+      }
+    })
+  },
+
+  updated () {
+    this.storeData(this)
   }
 }
 </script>
