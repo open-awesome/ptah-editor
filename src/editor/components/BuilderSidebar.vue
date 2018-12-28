@@ -58,7 +58,7 @@
 
       <!-- Sections CONTENTS -->
       <BaseDropdown
-        :isOpened="expandedMenuItem === 'sections'">
+        :isOpened="expandedMenuItem === 'sections'" id="sections_contents">
         <div ref="sections">
           <MenuSubitem
             v-for="(section, index) in builder.sections"
