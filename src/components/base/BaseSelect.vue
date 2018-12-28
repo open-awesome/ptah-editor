@@ -37,7 +37,7 @@ export default {
 <template>
   <div class="l-pth-base-select"  @click="showOptions = !showOptions" v-click-outside="onClickOutside">
     <base-label v-if="label">
-      {{label}}
+      {{ label }}
     </base-label>
     <div class="b-pth-base-select">
       <div class="b-pth-base-select__container">

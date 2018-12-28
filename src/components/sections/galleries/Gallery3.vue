@@ -105,11 +105,12 @@ export default {
     }
   },
   mounted () {
-    try {
-      document.body.appendChild(this.$refs['gallery-container'])
-    } catch (error) {
-      console.error(error)
-    }
+    // TODO: crached for preview/export
+    // try {
+    //   document.body.appendChild(this.$refs['gallery-container'])
+    // } catch (error) {
+    //   console.error(error)
+    // }
   },
   methods: {
     ...mapActions('Landing', [

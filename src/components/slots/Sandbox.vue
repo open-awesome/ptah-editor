@@ -121,6 +121,7 @@ export default {
       li
         padding: .4rem
         cursor: pointer
+        color: #000 !important
         &:hover,
         &.active
           background: rgba(67, 111, 238, 0.15)
@@ -133,4 +134,7 @@ export default {
       flex-wrap: wrap
       justify-content: center
       align-items: center
+      color: inherit
+      &_100
+        width: 100%
 </style>
