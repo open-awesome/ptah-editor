@@ -93,7 +93,7 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
     this.updateSettings()
   },
 
@@ -163,10 +163,7 @@ export default {
         <base-heading level="3">Background Image</base-heading>
 
         <base-fieldset-row>
-          <BaseUploadInput
-            v-model="pageBackgroundUrl"
-            label="Background image"
-            placeholder="paste Image URL" />
+          <base-uploader v-model="pageBackgroundUrl" label="Background image"/>
         </base-fieldset-row>
 
         <base-fieldset-row>
@@ -198,10 +195,10 @@ export default {
         <base-heading level="3">Background Video</base-heading>
 
         <base-fieldset-row>
-          <BaseUploadInput
-            v-model="bgVideo"
-            label="Background video"
-            placeholder="paste Video URL" />
+          <base-uploader
+              v-model="bgVideo"
+              label="Background video"
+              type="video"/>
         </base-fieldset-row>
 
         <base-fieldset-row>

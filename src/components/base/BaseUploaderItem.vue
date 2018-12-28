@@ -5,7 +5,7 @@
 
   <figcaption v-show="progress === 100" class="b-uploader-item__caption">
 
-    <template v-if="item">
+    <template v-if="hasPreview">
       <label>
         <span
           class="
@@ -16,7 +16,7 @@
               b-uploader-item__button--span
               b-uploader-item__button--link
             ">
-          Replace file
+          Replace {{ type }}
         </span>
         <input
           @change="uploadFile($event.target.files[0])"
@@ -24,7 +24,7 @@
           hidden>
       </label>
       <base-button
-          v-text="'Remove file'"
+          v-text="`Remove ${ type }`"
           @click="$emit('remove')"
           size="middle"
           color="orange"
@@ -40,7 +40,7 @@
             b-uploader-item__button
             b-uploader-item__button--span
           ">
-        Add file
+        Add {{ type }}
       </span>
       <input
           :multiple="multiple"
@@ -55,8 +55,6 @@
 </template>
 
 <script>
-const VALID_TYPES = ['image', 'video']
-
 function getFormData (file) {
   let formData = new FormData()
   formData.append('file[]', file)
@@ -71,11 +69,8 @@ export default {
   props: {
     item: Object,
     multiple: Boolean,
-    type: {
-      type: String,
-      default: VALID_TYPES[0],
-      validator: value => VALID_TYPES.includes(value)
-    }
+    src: String,
+    type: String
   },
 
   data () {
@@ -85,17 +80,21 @@ export default {
   },
 
   computed: {
+    hasPreview () {
+      return this.item || this.src
+    },
+
     pattern () {
       return new RegExp(`^${this.type}`)
     },
 
     style () {
-      let item = this.item
-      if (!item) {
+      let { item, src, type } = this
+      if ((!item && !src) || type === 'video') {
         return null
       }
       return {
-        background: `url(${item.path}) no-repeat center`
+        background: `url(${src || item.path}) no-repeat center`
       }
     }
   },
@@ -115,7 +114,7 @@ export default {
             try {
               let { response } = JSON.parse(xhr.response)
               let { name, src: path } = response.data[0]
-              this.loadImage(path)
+              this.clearProgress(path)
               resolve({ name, path })
             } catch (error) {
               reject(error)
@@ -128,10 +127,14 @@ export default {
       })
     },
 
-    loadImage (path) {
-      let image = new Image()
-      image.src = path
-      image.onload = () => { this.progress = 100 }
+    clearProgress (path) {
+      if (this.type === 'image') {
+        let image = new Image()
+        image.src = path
+        image.onload = () => requestAnimationFrame(() => { this.progress = 100 })
+        return
+      }
+      requestAnimationFrame(() => { this.progress = 100 })
     },
 
     loadingProgress ({ loaded, total }) {
@@ -162,7 +165,7 @@ export default {
   align-items: center
   justify-content: center
 
-  width: 100%
+  width: calc(100% - 1rem)
   height: 10rem
   margin: .5rem
 
@@ -187,6 +190,13 @@ export default {
     &:not(:last-of-type)
       margin-bottom: 0
 
+  .b-pth-base-button
+    font-size: 1.3rem
+
+  span.b-pth-base-button
+    font-size: 1.4rem
+
   &:not(:last-child)
+    margin-right: 0
     margin-bottom: 0
 </style>

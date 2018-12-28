@@ -1,5 +1,5 @@
 <template>
-  <div class="b-section-settings">
+<div class="b-section-settings">
   <base-scroll-container backgroundBar="#999">
     <div class="b-section-settings__inner">
       <div class="b-section-settings__control">
@@ -19,7 +19,7 @@
         :expand="expandedSystemRequirements"
         @open="onExpand"
         v-if="settingObjectOptions.hasSystemRequirements"
-        >
+      >
       </control-system-requirements>
 
       <!-- Products Section Controls -->
@@ -27,10 +27,10 @@
         :expand="expandedProducts"
         @open="onExpand"
         v-if="settingObjectOptions.hasProducts"
-        >
+      >
       </control-section-products>
 
-     <!-- font -->
+      <!-- font -->
       <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
         <control-text
           :fontSize="fontSize"
@@ -59,7 +59,10 @@
         </div>
 
         <div class="b-section-settings__control">
-          <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
+          <base-uploader
+              v-model="sectionBgUrl"
+              @change="updateBgUrl"
+              label="Background image"/>
         </div>
         <template v-if="sectionBgUrl.length">
           <div class="b-section-settings__control">
@@ -121,20 +124,20 @@
       <!-- Images Multiple Upload -->
       <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
         <base-uploader
-            :value="galleryImages"
-            @change="updateGalleryImages"
-            label="Images upload"
-            multiple/>
+          :value="galleryImages"
+          @change="updateGalleryImages"
+          label="Images upload"
+          multiple/>
       </div>
 
     </div>
 
   </base-scroll-container>
 
-    <div class="b-section-settings__buttons">
-      <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
-    </div>
+  <div class="b-section-settings__buttons">
+    <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
   </div>
+</div>
 </template>
 
 <script>
@@ -338,7 +341,8 @@ export default {
       this.updateSettingOptions(_.merge({}, settings, { styles }))
     },
 
-    updateBgUrl () {
+    updateBgUrl (value) {
+      this.sectionBgUrl = value || ''
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
         styles: {
           'background-image': `url(${this.sectionBgUrl})`
@@ -446,7 +450,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-
 .b-section-settings
   display: flex
   flex-direction: column
