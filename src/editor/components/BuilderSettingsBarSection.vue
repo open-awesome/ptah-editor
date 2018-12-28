@@ -120,6 +120,7 @@
 
       <!-- Images Multiple Upload -->
       <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
+        <base-uploader :value="galleryImages" label="Images upload" multiple/>
         <BaseImageUploadMultiple
           label="Images upload"
           :data-images="galleryImages"
@@ -144,6 +145,7 @@ import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
+import BaseUploader from '../../components/base/BaseUploader'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -156,6 +158,7 @@ function getPickerColor (color) {
 
 export default {
   components: {
+    BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
     ControlText,
