@@ -65,8 +65,11 @@ export default {
 .b-builder-settings-bar
   position: relative
   min-width: 24rem
-  max-width: 34rem
+  max-width: 40rem
   width: 100%
+  width: intrinsic
+  width: -moz-max-content
+  width: -webkit-max-content
   height: 100%
   display: flex
   flex-direction: column

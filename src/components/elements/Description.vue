@@ -13,7 +13,7 @@ export default {
 <style lang="sass" scoped>
 .b-text
   color: #000
-  font-family: Helvetica, Arial, sans-serif
+  font-family: 'Lato'
   position: relative
   text-align: center
   font-size: 1.4rem

@@ -22,6 +22,13 @@ export default {
           }
         },
         {
+          slug: 'Products',
+          theme: {
+            name: 'Products',
+            sections: ['ProductsColumns']
+          }
+        },
+        {
           slug: 'Game',
           theme: {
             name: 'Game',

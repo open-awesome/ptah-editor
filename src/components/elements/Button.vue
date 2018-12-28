@@ -17,8 +17,8 @@ export default {
   font-family: 'Lato'
   line-height: 1.4
   width: 20rem
-  min-width: 10rem
-  min-height: 5rem
+  min-width: 6.4rem
+  min-height: 2rem
   margin: 1.6rem
   color: #000
   background-color: #a7a1a1
