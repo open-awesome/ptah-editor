@@ -35,13 +35,19 @@
       </div>
 
       <template v-if="settingObjectOptions.background">
-
-        <div class="b-section-settings__header">
-          <span>Background</span>
-        </div>
-
-        <div class="b-section-settings__control">
-          <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
+        <div class="b-section-settings__control picker">
+          <base-label class="picker__label">
+            Background color
+            <base-button :disabled="!backgroundPickers[0]" @click="addBackgroundPicker" color="light-gray" class="picker__button">
+              <icon-plus width="10" height="10" class="picker__icon"/>
+            </base-button>
+          </base-label>
+          <div v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`" class="picker__item">
+            <base-color-picker v-model="backgroundPickers[index]" @change="updateBgColor"/>
+            <base-button v-show="backgroundPickers.length > 1" @click="removeBackgroundPicker(index)" color="light-gray" class="picker__button">
+              <i class="picker__icon picker__icon--minus">-</i>
+            </base-button>
+          </div>
         </div>
 
         <div class="b-section-settings__control">
@@ -131,12 +137,20 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
+
+const DEFAULT_COLOR = 'rgba(0,0,0,1)'
+
+function getPickerColor (color) {
+  if (typeof color === 'object' && color.hasOwnProperty('rgba')) {
+    return `rgba(${Object.values(color.rgba).toString()})`
+  }
+  return color
+}
 
 export default {
   components: {
@@ -178,6 +192,7 @@ export default {
       loop: false,
 
       galleryImages: [],
+      backgroundPickers: [],
 
       /* vars for control system requirements */
       systemRequirements: {},
@@ -212,10 +227,15 @@ export default {
 
   created () {
     let styles = this.settingObjectOptions.styles
+    let image = (typeof styles['background-image'] === 'string') ? styles['background-image'] : ''
+    let bgimage = image.match(/url\((.*?)\)/)
+
+    if (bgimage) {
+      bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+    }
 
     this.sectionBgColor = styles['background-color']
-    let image = styles['background-image']
-    this.sectionBgUrl = image.length > 0 && image !== 'none' ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
+    this.sectionBgUrl = bgimage || ''
     this.bgRepeat = styles['background-repeat'] === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
     this.bgSize = styles['background-size'] === 'cover' ? this.sizeList[0] : this.sizeList[1]
     this.bgAttachment = styles['background-attachment'] === 'fixed'
@@ -250,8 +270,26 @@ export default {
   },
 
   watch: {
-    settingObjectOptions (newValue, oldValue) {
-      this.sectionBgColor = newValue.styles['background-color']
+    'settingObjectOptions.styles': {
+      immediate: true,
+      handler (value) {
+        let image = (typeof value['background-image'] === 'string') ? value['background-image'] : ''
+        let bggradient = image.match(/linear-gradient(\(.*\))/g)
+        if (bggradient) {
+          this.backgroundPickers = bggradient[0]
+            .replace(/^linear-gradient[(]/, '')
+            .replace(/[)]$/, '')
+            .split(', ')
+        } else {
+          this.backgroundPickers = [value['background-color']]
+        }
+        // TODO: this crashed storage with linear-gradient
+        // let bgimage = image.match(/url\((.*?)\)/)
+        // if (bgimage) {
+        //   bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+        // }
+        // this.sectionBgUrl = bgimage || ''
+      }
     }
   },
 
@@ -262,12 +300,33 @@ export default {
     ]),
 
     updateBgColor () {
-      const color = this.sectionBgColor.rgba ? `rgba(${Object.values(this.sectionBgColor.rgba).toString()})` : this.sectionBgColor
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-color': color
-        }
-      }))
+      let settings = this.settingObjectOptions
+      let pickers = this.backgroundPickers
+      let image = (typeof settings.styles['background-image'] === 'string') ? settings.styles['background-image'] : ''
+      let bgimage = image.match(/url\((.*?)\)/)
+      let styles = { 'background-color': '' }
+
+      switch (pickers.length) {
+        case 0:
+          break
+        case 1:
+          styles['background-color'] = getPickerColor(pickers[0])
+          styles['background-image'] = (bgimage) ? bgimage[0] : ''
+          break
+        default:
+          let colors = pickers.filter(Boolean).map(getPickerColor)
+          if (colors.length) {
+            let mappedColor = [...colors.splice(0, 1), ...(colors || []).map(c => ` ${c}`)]
+            let gradient = `linear-gradient(${mappedColor})`
+            if (bgimage) {
+              bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+            }
+            styles['background-image'] = (bgimage) ? (bgimage + `, ${gradient}`) : gradient
+          }
+          break
+      }
+
+      this.updateSettingOptions(_.merge({}, settings, { styles }))
     },
 
     updateBgUrl () {
@@ -329,6 +388,16 @@ export default {
       })
     },
 
+    addBackgroundPicker () {
+      this.backgroundPickers.push(DEFAULT_COLOR)
+      this.updateBgColor()
+    },
+
+    removeBackgroundPicker (index) {
+      this.backgroundPickers.splice(index, 1)
+      this.updateBgColor()
+    },
+
     styleChange (value) {
       this.updateStyle(_.kebabCase(value[0]), value[1])
       this[value[0]] = value[1]
@@ -363,45 +432,56 @@ export default {
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
     }
-
   }
 }
 </script>
 
 <style lang="sass" scoped>
-  .b-section-settings
-    display: flex
-    flex-direction: column
-    align-items: stretch
-    padding-bottom: 4.5rem
-    &__inner
-      padding: 0 2.5rem 2rem 0
-    &__header
-      font-size: 1.6rem
-      height: 3.2rem
-      color: #272727
+
+.b-section-settings
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  padding-bottom: 4.5rem
+
+  &__inner
+    padding-right: 2.5rem
+
+  &__buttons
+    position: absolute
+    bottom: 1rem
+    left: 1rem
+    button
+      max-width: 100%
+
+  &__control
+    margin-bottom: 2rem
+
+  &__description
+    font-size: 1.4rem
+    line-height: 1.7rem
+    color: #747474
+    margin-bottom: 2rem
+    margin-top: -1rem
+
+  .picker
+
+    &__label
       display: flex
       align-items: center
-      cursor: pointer
-      margin: 1.6rem 0
-      i
-        margin-left: 5px
-        margin-bottom: -5px
-        transform: rotate(180deg)
-        &.dropped
-          transform: rotate(0deg)
-    &__buttons
-      position: absolute
-      bottom: 1rem
-      left: 1rem
-      button
-        max-width: 100%
-    &__control
-      margin-bottom: 2rem
-    &__description
-      font-size: 1.4rem
-      line-height: 1.7rem
-      color: #747474
-      margin-bottom: 2rem
-      margin-top: -1rem
+      justify-content: space-between
+
+    &__button
+      width: 3rem
+      padding: .4rem
+      line-height: 1
+
+    &__item
+      display: flex
+      align-items: baseline
+      justify-content: space-between
+      .b-picker + .picker__button
+        margin-left: 1rem
+      ~ .picker__item
+        margin-top: .4rem
 </style>

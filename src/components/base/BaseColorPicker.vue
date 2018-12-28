@@ -1,5 +1,6 @@
 <script>
 import { Sketch } from 'vue-color'
+const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 export default {
   name: 'BaseColorPicker',
   model: {
@@ -11,7 +12,7 @@ export default {
   },
   props: {
     value: {
-      default: 'rgba(0,0,0,1)'
+      default: DEFAULT_COLOR
     },
     showTextValue: {
       type: Boolean,
