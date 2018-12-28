@@ -43,6 +43,7 @@ export default {
       this.selectedSection = group[0]
       this.builder.add(this.selectedSection, this.builder.sections.length + 1)
       this.closeAddSectionBar()
+      this.$emit('add')
     },
     selectSection (section) {
       this.selectedSection = section

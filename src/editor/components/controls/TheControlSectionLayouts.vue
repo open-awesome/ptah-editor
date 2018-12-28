@@ -46,10 +46,16 @@ export default {
       }
 
       let index = _.findIndex(this.builder.sections, ['name', this.selectedSection])
-      console.log(this.builder.sections[0].name, index)
       this.builder.remove(this.settingObjectSection)
       this.clearSettingObject()
       this.builder.add(section, index)
+
+      setTimeout(() => {
+        document
+          .getElementById('sections_contents')
+          .querySelectorAll('.b-menu-subitem')[index]
+          .dispatchEvent(new Event('click'))
+      }, 250)
     }
   }
 }
