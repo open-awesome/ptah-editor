@@ -1,7 +1,9 @@
 <template>
 <figure :style="style" class="b-uploader-item">
 
-  <figcaption class="b-uploader-item__caption">
+  <progress v-show="progress !== 100" :value="progress" :max="100"></progress>
+
+  <figcaption v-show="progress === 100" class="b-uploader-item__caption">
 
     <template v-if="item">
       <label>
@@ -53,8 +55,6 @@
 </template>
 
 <script>
-import api from '@store/api'
-
 const VALID_TYPES = ['image', 'video']
 
 function getFormData (file) {
@@ -63,17 +63,6 @@ function getFormData (file) {
   formData.append('method', 'storefront.upload')
   formData.append('format', 'json')
   return formData
-}
-
-async function getFileData (file) {
-  let response
-  try {
-    let { name, src: path } = await api.uploadFile(getFormData(file))
-    response = { name, path }
-  } catch (error) {
-    console.error(error)
-  }
-  return response
 }
 
 export default {
@@ -89,6 +78,12 @@ export default {
     }
   },
 
+  data () {
+    return {
+      progress: 100
+    }
+  },
+
   computed: {
     pattern () {
       return new RegExp(`^${this.type}`)
@@ -100,18 +95,54 @@ export default {
         return null
       }
       return {
-        background: `url(${item.path}) no-repeat center`,
-        backgroundSize: 'cover'
+        background: `url(${item.path}) no-repeat center`
       }
     }
   },
 
   methods: {
+    async getFileData (file) {
+      this.progress = 0
+      return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest()
+
+        xhr.upload.onprogress = this.loadingProgress // --- uploading progress
+        xhr.open('POST', 'http://images.stg.gamenet.ru/restapi')
+        xhr.send(getFormData(file))
+
+        xhr.onload = xhr.onerror = () => {
+          if (xhr.status === 200) {
+            try {
+              let { response } = JSON.parse(xhr.response)
+              let { name, src: path } = response.data[0]
+              this.loadImage(path)
+              resolve({ name, path })
+            } catch (error) {
+              reject(error)
+            }
+          } else {
+            let error = { status: xhr.status, statusText: xhr.statusText }
+            reject(error)
+          }
+        }
+      })
+    },
+
+    loadImage (path) {
+      let image = new Image()
+      image.src = path
+      image.onload = () => { this.progress = 100 }
+    },
+
+    loadingProgress ({ loaded, total }) {
+      this.progress = (loaded === total) ? 99 : (loaded / total * 100)
+    },
+
     async uploadFiles (fileList) {
       let pattern = this.pattern
       let files = [...fileList].filter(({ type }) => type.match(pattern))
       for (let file of files) {
-        this.$emit('add', await getFileData(file))
+        this.$emit('add', await this.getFileData(file))
       }
     },
 
@@ -119,7 +150,7 @@ export default {
       if (!(file && file.type.match(this.pattern))) {
         return
       }
-      this.$emit('replace', await getFileData(file))
+      this.$emit('replace', await this.getFileData(file))
     }
   }
 }
@@ -135,9 +166,11 @@ export default {
   height: 10rem
   margin: .5rem
 
-  background-color: $white
   border: .1rem solid $gray-dark
   border-radius: .4rem
+
+  background-color: $white
+  background-size: cover !important
 
   &__caption
     display: inline-flex
