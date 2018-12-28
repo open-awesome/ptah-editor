@@ -30,6 +30,7 @@ const C_CUSTOM = [
   {
     element: {
       text: 'Watch the trailer',
+      video: 'Qg4n9IpjMg0',
       styles: {
         'background-color': 'transparent',
         'background-image': 'url(https://gn267.cdn.stg.gamenet.ru/0/7RbUP/o_KcVd3.png)',

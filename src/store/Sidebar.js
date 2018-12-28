@@ -1,3 +1,5 @@
+import * as _ from 'lodash-es'
+
 export default {
   state: {
     isExpanded: true,
@@ -6,6 +8,7 @@ export default {
     expandedMenuItem: 'sections', // submenu item
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectOptions: {},
+    settingObjectElement: false,
     settingObjectSection: {},
     siteSettingsMenu: [
       {
@@ -58,6 +61,9 @@ export default {
     },
     setBuilderGroups (state, groups) {
       state.builderGroups = groups
+    },
+    setElement (state, el) {
+      state.settingObjectElement = el
     }
   },
 
@@ -154,6 +160,7 @@ export default {
 
       commit('setSection', section)
       commit('setExpandedMenuItem', 'sections')
+      commit('setElement', element)
 
       dispatch('setSettingObject', {
         type,
@@ -167,6 +174,17 @@ export default {
 
     updateBuilderGroups ({ commit }, groups) {
       commit('setBuilderGroups', groups)
+    },
+
+    setElement ({ commit }, element) {
+      commit('setElement', element)
+    },
+
+    updateText ({ state, dispatch }) {
+      if (state.settingObjectElement) {
+        const el = state.settingObjectElement
+        dispatch('updateSettingOptions', _.merge({}, state.settingObjectOptions, { text: el.innerHTML }))
+      }
     }
   },
 

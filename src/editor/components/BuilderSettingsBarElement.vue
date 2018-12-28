@@ -48,8 +48,7 @@
         :target="elTarget"
         @open="onExpand"
         @setPseudo="changePseudoStyle"
-        @setClass="selectAnimation"
-        @setAction="setAction"></control-link>
+        @setClass="selectAnimation"></control-link>
     </div>
 
     <!-- Available Platforms Control-->
@@ -268,7 +267,7 @@ export default {
       let obj = {}
       obj[option[0]] = option[1]
       let merge = _.merge({}, this.settingObjectOptions, obj)
-      // delete merge.element
+      delete merge.element
       this.updateSettingOptions(merge)
     },
 
@@ -347,26 +346,6 @@ export default {
       if (this.settingObjectOptions.element) {
         const el = this.settingObjectOptions.element
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
-      }
-    },
-
-    setAction (value) {
-      let action = value[0]
-      let classes = this.settingObjectOptions.classes
-
-      classes.forEach((name, index) => {
-        // remove other animation classes
-        if (name.indexOf('ptah-d') > -1) {
-          classes.splice(index, 1)
-        }
-      })
-
-      if (action === 'href') {
-        this.setOption(value)
-      } else {
-        classes.push('ptah-d-video')
-        this.settingObjectOptions.element.dataset.video = value[1]
-        this.setOption(value)
       }
     }
   }

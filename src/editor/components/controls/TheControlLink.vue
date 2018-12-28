@@ -1,4 +1,6 @@
 <script>
+import { mapState, mapActions } from 'vuex'
+import * as _ from 'lodash-es'
 import { getYoutubeVideoIdFromUrl } from '@editor/util'
 
 export default {
@@ -33,7 +35,7 @@ export default {
       controlOpen: false,
       elLink: '',
       elTarget: '',
-      elVideoLink: '',
+      videoId: '',
       bgHoverColor: '',
       textHoverColor: '',
       animationList: [
@@ -52,6 +54,13 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions',
+      'settingObjectElement'
+    ])
+  },
+
   created () {
     this.elLink = this.link
     this.elTarget = this.target === '_blank'
@@ -59,9 +68,9 @@ export default {
     this.textHoverColor = this.hoverTextColor
     this.animation = this.animationClass
     this.controlOpen = this.expand
-    this.elVideoLink = this.videoLink
-    if (this.videoLink.length) {
-      this.action = this.actionList[1]
+    this.videoId = this.videoLink
+    if (this.videoId.length) {
+      this.action = { name: 'Open video popup', value: 'ptah-d-video' }
     }
   },
 
@@ -77,15 +86,22 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions',
+      'updateText'
+    ]),
+
     setUrl () {
-      this.$emit('setAction', ['href', this.elLink])
+      // this.$emit('setAction', ['href', this.elLink])
+      this.setElAction(['href', this.elLink])
     },
 
     setVideoUrl () {
-      let ytId = getYoutubeVideoIdFromUrl(this.elVideoLink)
+      let ytId = getYoutubeVideoIdFromUrl(this.videoId)
 
       if (ytId) {
-        this.$emit('setAction', ['video', ytId])
+        // this.$emit('setAction', ['video', ytId])
+        this.setElAction(['video', ytId])
       }
     },
 
@@ -103,6 +119,34 @@ export default {
 
     onClickTitle () {
       this.$emit('open', ['Link', !this.controlOpen])
+    },
+
+    setElAction (value) {
+      let action = value[0]
+      let classes = this.settingObjectOptions.classes
+
+      classes.forEach((name, index) => {
+        if (name.indexOf('ptah-d') > -1) {
+          classes.splice(index, 1)
+        }
+      })
+
+      if (action === 'href') {
+        this.setOption(value)
+      } else {
+        classes.push('ptah-d-video')
+        this.settingObjectElement.dataset.video = value[1]
+        this.setOption(value.slice())
+      }
+    },
+
+    setOption (option) {
+      this.updateText()
+      let obj = {}
+      obj[option[0]] = option[1]
+      let merge = _.merge({}, this.settingObjectOptions, obj)
+      delete merge.element
+      this.updateSettingOptions(merge)
     }
   }
 }
@@ -129,7 +173,7 @@ export default {
 
       <!-- video popup -->
       <div class="b-link-controls__control" v-if="action.value === 'ptah-d-video'">
-        <base-text-field v-model="elVideoLink" label="Video" @input="setVideoUrl" placeholder="Youtube video url"></base-text-field>
+        <base-text-field v-model="videoId" label="Video" @input="setVideoUrl" placeholder="Youtube video url"></base-text-field>
       </div>
 
       <div class="b-link-controls__control">

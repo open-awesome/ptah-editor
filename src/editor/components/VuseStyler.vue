@@ -167,6 +167,11 @@ export default {
       }
     })
 
+    if (this.options.video) {
+      this.el.classList.add('ptah-d-video')
+      this.el.dataset.video = this.options.video
+    }
+
     this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
   },
   beforeDestroy () {

@@ -36,7 +36,8 @@ const DEFAULT_OPTIONS = {
   background: false,
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
-  isComplex: false
+  isComplex: false,
+  video: false
 }
 
 /**
