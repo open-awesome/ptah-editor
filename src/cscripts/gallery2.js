@@ -30,17 +30,23 @@ export function galleryTwo() {
     };
   });
 
-  popupX.onclick = function (e) {
-    closePopup();
-  };
+  if (popupX) {
+    popupX.onclick = function (e) {
+      closePopup();
+    };
+  }
 
-  prev.onclick = function (e) {
-    clickArr(index - 1);
-  };
+  if (prev) {
+    prev.onclick = function (e) {
+      clickArr(index - 1);
+    };
+  }
 
-  next.onclick = function (e) {
-    clickArr(index + 1);
-  };
+  if (next) {
+    next.onclick = function (e) {
+      clickArr(index + 1);
+    };
+  }
 
   function clickLink(el, i) {
     var content = '';
