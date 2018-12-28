@@ -120,12 +120,11 @@
 
       <!-- Images Multiple Upload -->
       <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
-        <base-uploader :value="galleryImages" label="Images upload" multiple/>
-        <BaseImageUploadMultiple
-          label="Images upload"
-          :data-images="galleryImages"
-          @change="updateGalleryImages"
-        />
+        <base-uploader
+            :value="galleryImages"
+            @change="updateGalleryImages"
+            label="Images upload"
+            multiple/>
       </div>
 
     </div>

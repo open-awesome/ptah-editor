@@ -3,21 +3,25 @@
 
   <base-label v-if="label" v-text="label" class="b-uploader__label"/>
 
-  <div class="b-uploader__container">
+    <draggable
+        v-model="items"
+        :options="{ draggable: '.draggable' }"
+        class="b-uploader__container">
 
-    <draggable v-model="items">
       <base-uploader-item
-        v-for="(item, index) in items"
-        :key="`b-uploader-item-${ _uid }-${ index }`"
-        :item="item"/>
-    </draggable>
+          v-for="(item, index) in items"
+          :key="`b-uploader-item-${ _uid }-${ index }`"
+          :item="item"
+          @replace="replaceFile($event, index)"
+          @remove="removeFile(index)"
+          class="draggable"/>
 
-    <base-uploader-item
+      <base-uploader-item
         v-if="hasAddMore"
         :multiple="multiple"
         @add="addFile"/>
 
-  </div>
+    </draggable>
 
 </div>
 </template>
@@ -25,6 +29,7 @@
 <script>
 import Draggable from 'vuedraggable'
 import BaseUploaderItem from './BaseUploaderItem'
+import { cloneDeep } from 'lodash-es'
 
 export default {
   name: 'BaseUploader',
@@ -49,9 +54,28 @@ export default {
     }
   },
 
-  methods: {
-    addFile () {
+  watch: {
+    items (value) {
+      this.$emit('change', value)
+    }
+  },
 
+  created () {
+    let items = (Array.isArray(this.value)) ? this.value : [this.value]
+    this.items = cloneDeep(items)
+  },
+
+  methods: {
+    addFile (file) {
+      this.items.push(file)
+    },
+
+    replaceFile (newFile, index) {
+      this.items = this.items.map((item, i) => (i === index) ? newFile : item)
+    },
+
+    removeFile (index) {
+      this.items.splice(index, 1)
     }
   }
 }
@@ -59,6 +83,7 @@ export default {
 
 <style lang="sass" scoped>
 .b-uploader
+  max-width: 25rem
   margin: .5rem 0
 
   &__container
