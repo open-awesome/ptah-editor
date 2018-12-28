@@ -22,6 +22,14 @@
         >
       </control-system-requirements>
 
+      <!-- Products Section Controls -->
+      <control-section-products
+        :expand="expandedProducts"
+        @open="onExpand"
+        v-if="settingObjectOptions.hasProducts"
+        >
+      </control-section-products>
+
      <!-- font -->
       <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
         <control-text
@@ -119,12 +127,6 @@
         />
       </div>
 
-      <!-- Products Section Controls -->
-      <control-section-products
-        v-if="settingObjectOptions.hasProdusct"
-        >
-      </control-section-products>
-
     </div>
 
   </base-scroll-container>
@@ -206,7 +208,9 @@ export default {
       fontColor: '',
       expandedFont: false,
 
-      styles: []
+      styles: [],
+      productsCount: 0,
+      expandedProducts: true
     }
   },
 
@@ -267,6 +271,9 @@ export default {
     if (styles['font-style']) {
       this.styles.push({ prop: 'font-style', value: styles['font-style'] })
     }
+
+    /* Products */
+    this.products = this.settingObjectOptions.products || {}
   },
 
   watch: {
@@ -411,7 +418,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Font', 'SystemRequirements']
+      const accordeon = ['Font', 'SystemRequirements', 'Products']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 

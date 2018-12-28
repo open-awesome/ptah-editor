@@ -17,6 +17,8 @@
         <li><a href="#" @click.prevent="addRestrictions" class="b-elements__button">Age restrictions</a></li>
         <li><a href="#" @click.prevent="addSocial" class="b-elements__button">Social nets</a></li>
         <li><a href="#" @click.prevent="addSlogan" class="b-elements__button">Slogan</a></li>
+        <li><a href="#" @click.prevent="addCost" class="b-elements__button">Cost</a></li>
+        <li><a href="#" @click.prevent="addTextWithIcon" class="b-elements__button">Text with icon</a></li>
       </ul>
     </aside>
   </div>
@@ -86,6 +88,16 @@ export default {
         name: 'Slogan',
         element: types.Slogan,
         type: 'slogan'
+      },
+      {
+        name: 'Cost',
+        element: types.Cost,
+        type: 'text'
+      },
+      {
+        name: 'IconWithText',
+        element: types.IconWithText,
+        type: 'icon'
       }
     ]
   }),
@@ -135,6 +147,14 @@ export default {
     },
     addSlogan () {
       const el = _.merge({}, Seeder.seed(this.elements[10]))
+      this.$emit('addEl', el)
+    },
+    addCost () {
+      const el = _.merge({}, Seeder.seed(this.elements[11]))
+      this.$emit('addEl', el)
+    },
+    addTextWithIcon () {
+      const el = _.merge({}, Seeder.seed(this.elements[12]))
       this.$emit('addEl', el)
     },
     openList () {
