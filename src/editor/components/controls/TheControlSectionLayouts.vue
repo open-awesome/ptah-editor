@@ -49,6 +49,13 @@ export default {
       this.builder.remove(this.settingObjectSection)
       this.clearSettingObject()
       this.builder.add(section, index)
+
+      setTimeout(() => {
+        document
+          .getElementById('sections_contents')
+          .querySelectorAll('.b-menu-subitem')[index]
+          .dispatchEvent(new Event('click'))
+      }, 250)
     }
   }
 }
