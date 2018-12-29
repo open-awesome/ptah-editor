@@ -27,10 +27,6 @@
     <!-- Text -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
       <control-text
-        :fontSize="fontSize"
-        :fontFamily="fontFamily"
-        :fontColor="fontColor"
-        :fontStyles="styles"
         :expand="expandedFont"
         @open="onExpand"
         @change="styleChange"></control-text>
@@ -152,7 +148,8 @@ export default {
       fontSize: null,
       fontFamily: '',
       fontColor: '',
-      styles: [],
+      elStyles: [],
+      styles: {},
       bgColor: '',
       bgImage: '',
       bgRepeat: '',
@@ -202,23 +199,23 @@ export default {
     this.fontColor = styles['color'] || '#000'
 
     if (styles['font-style']) {
-      this.styles.push({ prop: 'font-style', value: styles['font-style'] })
+      this.elStyles.push({ prop: 'font-style', value: styles['font-style'], base: 'normal' })
     }
 
     if (styles['text-decoration']) {
-      this.styles.push({ prop: 'text-decoration', value: styles['text-decoration'] })
+      this.elStyles.push({ prop: 'text-decoration', value: styles['text-decoration'], base: 'none' })
     }
 
     if (styles['font-weight']) {
-      this.styles.push({ prop: 'font-weight', value: styles['font-weight'] })
+      this.elStyles.push({ prop: 'font-weight', value: styles['font-weight'], base: 'normal' })
     }
 
     /* Get align */
     if (styles['text-align']) {
-      this.styles.push({ prop: 'text-align', value: styles['text-align'] })
+      this.elStyles.push({ prop: 'text-align', value: styles['text-align'] })
     }
     if (styles['justify-content']) {
-      this.styles.push({ prop: 'justify-content', value: styles['justify-content'] })
+      this.elStyles.push({ prop: 'justify-content', value: styles['justify-content'] })
     }
 
     /* Get background */
@@ -257,6 +254,9 @@ export default {
 
     /* Age restrictions */
     this.ageRestrictions = this.settingObjectOptions.ageRestrictions || {}
+
+    /* Styles */
+    this.styles = this.settingObjectOptions.styles || {}
 
     // --- expand dropdown dep. by type
     this.expandDropdown(this.settingObjectType)

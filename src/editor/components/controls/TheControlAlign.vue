@@ -46,7 +46,6 @@ export default {
   }),
   methods: {
     aligned () {
-      console.log(this.align.value)
       if (this.isBox) {
         this.$emit('boxAligned', this.flex[this.align.value])
       } else {

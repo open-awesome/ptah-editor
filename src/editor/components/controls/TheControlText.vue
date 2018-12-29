@@ -1,4 +1,5 @@
 <script>
+import { mapState } from 'vuex'
 import find from 'lodash-es/find'
 
 const LIST_FONTS = [
@@ -10,22 +11,6 @@ const LIST_FONTS = [
 
 export default {
   props: {
-    fontSize: {
-      type: [Number, String],
-      required: true
-    },
-    fontFamily: {
-      type: String,
-      required: true
-    },
-    fontColor: {
-      type: String,
-      required: true
-    },
-    fontStyles: {
-      type: Array,
-      required: true
-    },
     expand: {
       type: Boolean,
       required: true
@@ -53,34 +38,37 @@ export default {
         { name: '72px', value: 7.2 }
       ],
       color: '',
-      style: [
-        {
-          iconName: 'fontUnderline',
-          tooltipText: 'Underline',
-          value: { prop: 'text-decoration', value: 'underline', base: 'none' }
-        },
-        {
-          iconName: 'fontItalic',
-          tooltipText: 'Italic',
-          value: { prop: 'font-style', value: 'italic', base: 'normal' }
-        },
-        {
-          iconName: 'fontBold',
-          tooltipText: 'Bold',
-          value: { prop: 'font-weight', value: 'bold', base: 'normal' }
-        }
-      ],
-      styles: []
+      td: { prop: 'text-decoration', value: 'underline', base: 'none' },
+      fs: { prop: 'font-style', value: 'italic', base: 'normal' },
+      fw: { prop: 'font-weight', value: 'bold', base: 'normal' },
+      style: {
+        list: [
+          {
+            iconName: 'fontUnderline',
+            tooltipText: 'Underline',
+            value: {}
+          },
+          {
+            iconName: 'fontItalic',
+            tooltipText: 'Italic',
+            value: {}
+          },
+          {
+            iconName: 'fontBold',
+            tooltipText: 'Bold',
+            value: {}
+          }
+        ],
+        valueMultiple: []
+      },
+      temp: {}
     }
   },
 
   created () {
-    this.fontName = { name: this.fontFamily, value: this.fontFamily }
-    this.size = find(this.sizes, { value: parseFloat(this.fontSize) })
-    this.color = this.fontColor
-    this.styles = this.fontStyles
-    console.log(this.styles)
-    this.changeStyle()
+    this.fontName = { name: this.styles['font-family'], value: this.styles['font-family'] }
+    this.size = find(this.sizes, { value: parseFloat(this.styles['font-size']) })
+    this.color = this.styles['color']
     this.controlOpen = this.expand
   },
 
@@ -91,6 +79,14 @@ export default {
   },
 
   computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ]),
+
+    styles () {
+      return this.settingObjectOptions.styles
+    },
+
     fonts () {
       const options = LIST_FONTS.map((font) => {
         return { name: font, value: font }
@@ -103,27 +99,40 @@ export default {
 
   methods: {
     changeFont () {
-      this.$emit('change', ['fontFamily', this.fontName.value])
+      this.styles['font-family'] = this.fontName.value
     },
     changeSize () {
-      this.$emit('change', ['font-size', `${this.size.value}rem`])
+      this.styles['font-size'] = this.size.value
     },
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
-      this.$emit('change', ['color', color])
+      this.styles['color'] = color
     },
     changeStyle () {
-      this.style.forEach((style) => {
-        if (find(this.styles, style.value)) {
-          this.$emit('change', [style.value.prop, style.value.value])
+      this.style.list.forEach((style) => {
+        if (find(this.style.valueMultiple, style.value)) {
+          this.styles[style.value.prop] = style.value.value
         } else {
-          this.$emit('change', [style.value.prop, style.value.base])
+          this.styles[style.value.prop] = style.value.base
         }
       })
     },
-
     onClickTitle () {
       this.$emit('open', ['Font', !this.controlOpen])
+    }
+  },
+
+  mounted () {
+    this.style.list[0].value = this.td
+    this.style.list[1].value = this.fs
+    this.style.list[2].value = this.fw
+    this.temp['text-decoration'] = this.td
+    this.temp['font-style'] = this.fs
+    this.temp['font-weight'] = this.fw
+    for (let key in this.temp) {
+      if (this.styles[key] !== this.temp[key].base) {
+        this.style.valueMultiple.push(this.temp[key])
+      }
     }
   }
 }
@@ -145,7 +154,7 @@ export default {
         <base-color-picker label="Font color" v-model="color" @change="changeColor"></base-color-picker>
       </div>
       <div class="b-text-controls__control">
-        <BaseButtonTabs :list="style" v-model="styles" @change="changeStyle"/>
+        <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
       </div>
     </base-dropdown>
   </div>
