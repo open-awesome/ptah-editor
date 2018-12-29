@@ -16,7 +16,18 @@
           :key="section.id"
           :is="section.name"
           :id="section.id"
-          @click.native="selectSidebarSection(section)"/>
+          :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
+          @click.native="selectSidebarSection(section)">
+          <video
+              v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
+              :id="`bg-video-${ section.id }`"
+              slot="video"
+              autoplay
+              muted
+              loop>
+            <source :src="section.data.mainStyle.backgroundVideo">
+          </video>
+      </component>
       <div class="controller-intro" v-if="emptySections">
         <h3>&larr; Choose layout from the menu</h3>
       </div>
@@ -41,10 +52,12 @@ import * as _ from 'lodash-es'
 
 export default {
   name: 'VuseBuilder',
+
   components: {
     VuseIcon,
     BuilderLayout
   },
+
   props: {
     showIntro: {
       type: Boolean,
@@ -431,4 +444,18 @@ export default {
     margin: 0 0 4px
     padding: 1rem 0.5rem
     background: lighten($green, 40%)
+
+// --- video background styles
+.video-background
+  position: relative !important
+  background: none !important
+  overflow: hidden !important
+  video
+    position: absolute
+    top: 0
+    left: 0
+    min-width: 100%
+    min-height: 100%
+    + .b-footer
+      background: none !important
 </style>
