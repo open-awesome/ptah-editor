@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
+import { mapActions } from 'vuex'
 
 const C_CUSTOM = [
   {
@@ -109,6 +110,11 @@ export default {
   },
 
   methods: {
+    ...mapActions('Landing', [
+      'updateGroupData',
+      'updateSectionData'
+    ]),
+
     onAddElement (element) {
       element.element.removable = true
       this.$section.data.components.push(element)
@@ -214,7 +220,7 @@ export default {
             path="$sectionData.container2"
             direction="column"
           >
-            <elements-list @addEl="onAddElement"></elements-list>
+            <elements-list @addEl="onAddElement2"></elements-list>
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component class="b-hero-component"
@@ -261,4 +267,10 @@ export default {
   align-items: center
   .b-div
     height: 4rem
+.b-logo
+  .is-mobile &
+    max-width: 25rem !important
+  @media only screen and (max-width: 768px)
+    &
+      max-width: 25rem !important
 </style>

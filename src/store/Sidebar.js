@@ -154,8 +154,7 @@ export default {
         ...options,
         name,
         sectionId: section.id,
-        sectionName: section.name,
-        element
+        sectionName: section.name
       }
 
       commit('setSection', section)

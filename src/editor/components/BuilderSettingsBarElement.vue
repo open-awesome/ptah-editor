@@ -175,7 +175,8 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection',
-      'settingObjectType'
+      'settingObjectType',
+      'settingObjectElement'
     ]),
     // find path to element
     path () {
@@ -213,8 +214,8 @@ export default {
     this.bgSize = styles['background-size'] || 'cover'
 
     /* Get element size */
-    this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetHeight
-    this.elWidth = styles['width'] || this.settingObjectOptions.element.offsetWidth
+    this.elHeight = styles['height'] || this.settingObjectElement.offsetHeight
+    this.elWidth = styles['width'] || this.settingObjectElement.offsetWidth
     this.elRadius = styles['border-radius'] || 0
 
     /* Link */
@@ -294,7 +295,7 @@ export default {
       const poneId = randomPoneId()
       let pseudoClassValue = {}
       pseudoClassValue[pseudoClass] = style
-      this.settingObjectOptions.element.dataset.pone = poneId
+      this.settingObjectElement.dataset.pone = poneId
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { pseudo: pseudoClassValue }))
 
       let styleTemplate = getPseudoTemplate(poneId, this.settingObjectOptions.pseudo)
@@ -355,8 +356,8 @@ export default {
     updateText () {
       // TODO: Lost 'settingObjectOptions' from the store at the time of execution 'beforeDestroy'.
       // Text also saved at VuseStyler -> hideStyler
-      if (this.settingObjectOptions.element) {
-        const el = this.settingObjectOptions.element
+      if (this.settingObjectElement) {
+        const el = this.settingObjectElement
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
     }

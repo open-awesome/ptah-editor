@@ -217,7 +217,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectSection'
+      'settingObjectSection',
+      'settingObjectElement'
     ]),
     bgAttachmentCheckbox: {
       set (value) {
@@ -434,8 +435,8 @@ export default {
     updateText () {
       // TODO: Lost 'settingObjectOptions' from the store at the time of execution 'beforeDestroy'.
       // Text also saved at VuseStyler -> hideStyler
-      if (this.settingObjectOptions.element) {
-        const el = this.settingObjectOptions.element
+      if (this.settingObjectElement) {
+        const el = this.settingObjectElement
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
     }

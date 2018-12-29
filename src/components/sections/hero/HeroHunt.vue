@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
+import { mapActions } from 'vuex'
 
 const C_CUSTOM = [
   {
@@ -132,6 +133,11 @@ export default {
     }
   },
   methods: {
+    ...mapActions('Landing', [
+      'updateGroupData',
+      'updateSectionData'
+    ]),
+
     onAddElement (element) {
       element.element.removable = true
       this.$section.data.components.push(element)
@@ -183,7 +189,7 @@ export default {
   >
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-5">
+        <div class="b-grid__col-5 b-grid__col-m-12">
           <sandbox
             class="b-sandbox b-hunt-sandbox"
             ref="sandbox"
@@ -229,11 +235,11 @@ export default {
 .b-hunt
   .b-grid,
   .b-grid__row
-    height: 100%
+    height: 90vh
   .b-hunt-sandbox
-    height: 100%
+    height: 90vh
     /deep/
       .b-draggable-slot
-        height: 100%
+        height: 90vh
         justify-content: flex-end
 </style>
