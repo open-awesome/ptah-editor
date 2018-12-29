@@ -181,8 +181,8 @@ export default {
 
   &__button
     &--link
-      background-color: rgba(255, 255, 255, .5)
-      color: $black
+      background-color: rgba(190, 190, 190, .85)
+      color: lighten($black, 15%)
     &--span
       display: inline-block
       text-align: center
