@@ -48,6 +48,8 @@ export default {
         { name: '32px', value: 3.2 },
         { name: '36px', value: 3.6 },
         { name: '48px', value: 4.8 },
+        { name: '56px', value: 5.6 },
+        { name: '64px', value: 6.4 },
         { name: '72px', value: 7.2 }
       ],
       color: '',
@@ -77,6 +79,8 @@ export default {
     this.size = find(this.sizes, { value: parseFloat(this.fontSize) })
     this.color = this.fontColor
     this.styles = this.fontStyles
+    console.log(this.styles)
+    this.changeStyle()
     this.controlOpen = this.expand
   },
 

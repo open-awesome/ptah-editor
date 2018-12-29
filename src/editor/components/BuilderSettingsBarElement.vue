@@ -4,6 +4,8 @@
     <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
       <control-align
         :isBox="settingObjectOptions.box"
+        :alignText="settingObjectOptions.styles['text-align']"
+        :alignFlex="settingObjectOptions.styles['justify-content']"
         @boxAligned="styleChange"
         @textAligned="styleChange">
       </control-align>
@@ -11,10 +13,18 @@
 
     <!-- size -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
-      <control-size :height="elHeight" :width="elWidth" :expand="expandedSize" @open="onExpand" @change="styleChange"></control-size>
+      <control-size
+        :height="elHeight"
+        :width="elWidth"
+        :radius="elRadius"
+        :expand="expandedSize"
+        @open="onExpand"
+        @change="styleChange"
+        >
+      </control-size>
     </div>
 
-    <!-- font -->
+    <!-- Text -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
       <control-text
         :fontSize="fontSize"
@@ -187,9 +197,9 @@ export default {
     const styles = this.settingObjectOptions.styles
 
     /* Get font settings */
-    this.fontFamily = styles['font-family'] || ''
+    this.fontFamily = styles['font-family'] || 'lato'
     this.fontSize = styles['font-size'] || 1.6
-    this.fontColor = styles['color'] || ''
+    this.fontColor = styles['color'] || '#000'
 
     if (styles['font-style']) {
       this.styles.push({ prop: 'font-style', value: styles['font-style'] })
@@ -203,11 +213,19 @@ export default {
       this.styles.push({ prop: 'font-weight', value: styles['font-weight'] })
     }
 
-    /* get background */
+    /* Get align */
+    if (styles['text-align']) {
+      this.styles.push({ prop: 'text-align', value: styles['text-align'] })
+    }
+    if (styles['justify-content']) {
+      this.styles.push({ prop: 'justify-content', value: styles['justify-content'] })
+    }
+
+    /* Get background */
     if (styles['background-color']) {
       this.bgColor = styles['background-color']
     }
-    this.bgImage = styles['background-image'] || ''
+    this.bgImage = styles['background-image'] || 'none'
     this.bgRepeat = styles['background-repeat'] || 'no-repeat'
     this.bgSize = styles['background-size'] || 'cover'
 
@@ -218,7 +236,7 @@ export default {
 
     /* Link */
     this.elLink = this.settingObjectOptions.href || ''
-    this.elTarget = this.settingObjectOptions.target || ''
+    this.elTarget = this.settingObjectOptions.target || '_self'
 
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''

@@ -12,7 +12,7 @@ const DEFAULT_OPTIONS = {
   aligned: false,
   typography: false,
   colorize: false,
-  box: false, // (colorer)
+  box: true, // (align text or align flex justify-content)
   canCopy: false,
   background: false,
   shape: false, // border-radius prop
@@ -34,18 +34,12 @@ const data = new Map([
     styles: {
       'font-family': 'Lato',
       'font-size': 3.2,
-      'font-weight': false,
-      'font-style': false,
-      'text-decoration': false,
-      'text-align': false,
-      'color': false,
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': false,
-      'background': false,
-      'justify-content': false
+      'font-weight': 'normal',
+      'font-style': 'normal',
+      'text-decoration': 'none',
+      'text-align': 'center',
+      'color': '#000',
+      'justify-content': 'center'
     }
   }))],
   [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -56,18 +50,12 @@ const data = new Map([
     styles: {
       'font-family': 'Lato',
       'font-size': 1.6,
-      'font-weight': false,
-      'font-style': false,
-      'text-decoration': false,
-      'text-align': false,
-      'color': false,
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': false,
-      'background': false,
-      'justify-content': false
+      'font-weight': 'normal',
+      'font-style': 'normal',
+      'text-decoration': 'none',
+      'text-align': 'center',
+      'color': '#000',
+      'justify-content': 'center'
     }
   }))],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -125,24 +113,23 @@ const data = new Map([
     styles: {
       'font-family': 'Lato',
       'font-size': 1.4,
-      'font-weight': false,
-      'font-style': false,
-      'text-decoration': false,
-      'text-align': false,
-      'color': false,
+      'font-weight': 'normal',
+      'font-style': 'normal',
+      'text-decoration': 'none',
+      'text-align': 'center',
+      'color': '#000',
       'background-image': false,
       'background-position': false,
       'background-repeat': false,
       'background-size': false,
       'background-color': false,
       'background': false,
-      'justify-content': false
+      'justify-content': 'center'
     }
   })
   )],
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       removable: true,
       background: true,
@@ -160,7 +147,6 @@ const data = new Map([
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: false,
       canCopy: true,
       resizable: true,
       hasLink: true,
@@ -184,11 +170,11 @@ const data = new Map([
         'border-color': false,
         'font-size': 3.2,
         'border-radius': 0,
-        'font-weight': false,
-        'font-style': false,
+        'font-weight': 'normal',
+        'font-style': 'normal',
         'font-family': 'Lato',
-        'text-decoration': false,
-        'justify-content': false,
+        'text-decoration': 'none',
+        'justify-content': 'center',
         'text-align': 'center',
         'width': '',
         'height': ''
@@ -197,7 +183,6 @@ const data = new Map([
   )],
   [types.Label, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       typography: true,
       background: true,
@@ -217,11 +202,11 @@ const data = new Map([
         'border-color': false,
         'font-size': 1.2,
         'border-radius': 0,
-        'font-weight': false,
-        'font-style': false,
+        'font-weight': 'normal',
+        'font-style': 'normal',
         'font-family': 'Lato',
-        'text-decoration': false,
-        'justify-content': false,
+        'text-decoration': 'none',
+        'justify-content': 'center',
         'width': '',
         'height': ''
       }
@@ -229,7 +214,6 @@ const data = new Map([
   )],
   [types.Cost, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       typography: true,
       removable: true,
       resizable: true,
@@ -238,8 +222,8 @@ const data = new Map([
       styles: {
         'color': '#e4a11e',
         'font-size': 3.2,
-        'font-weight': false,
-        'font-style': false,
+        'font-weight': 'normal',
+        'font-style': 'normal',
         'font-family': 'Lato',
         'text-decoration': false
       }
@@ -247,7 +231,6 @@ const data = new Map([
   )],
   [types.Icon, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       text: '',
       href: '',
       styles: {
@@ -264,7 +247,6 @@ const data = new Map([
   )],
   [types.IconWithText, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: false,
       aligned: true,
       removable: true,
       styles: {
@@ -323,7 +305,6 @@ const data = new Map([
   }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       removable: true,
       styles: {
@@ -345,7 +326,6 @@ const data = new Map([
   )],
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       removable: true,
       background: true,
@@ -368,7 +348,6 @@ const data = new Map([
   )],
   [types.GallerySlider, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       removable: true,
       background: true,
@@ -570,7 +549,6 @@ const data = new Map([
   )],
   [types.Slogan, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       removable: true,
       background: true,
@@ -580,17 +558,17 @@ const data = new Map([
       styles: {
         'font-family': 'Lato',
         'font-size':  4.8,
-        'font-weight': false,
-        'font-style': false,
-        'text-decoration': false,
-        'text-align': false,
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'text-decoration': 'none',
+        'text-align': 'center',
         'color': '#fff',
         'background-image': 'url(https://gn793.cdn.stg.gamenet.ru/0/79yeF/o_1PRuEc.png)',
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'background-color': 'rgba(0, 0, 0, 0)',
-        'justify-content': false,
+        'justify-content': 'center',
         'width': 320,
         'height': 64,
         'border-radius': 0
@@ -599,7 +577,6 @@ const data = new Map([
   )],
   [types.SystemRequirements, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       name: 'System Requirements',
       removable: true,
       background: true,
@@ -646,10 +623,10 @@ const data = new Map([
         'background': false,
         'font-family': 'Lato',
         'font-size':  1.6,
-        'font-weight': false,
-        'font-style': false,
-        'text-decoration': false,
-        'text-align': false,
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'text-decoration': 'none',
+        'text-align': 'center',
         'color': '#fff'
       }
     })

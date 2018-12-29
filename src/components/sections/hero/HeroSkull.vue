@@ -96,7 +96,7 @@ const C_CUSTOM = [
       text: 'This is a short header',
       styles: {
         'font-family': 'Heebo',
-        'font-size': '5.6rem',
+        'font-size': 5.6,
         'color': '#ffffff'
       }
     }
@@ -106,7 +106,7 @@ const C_CUSTOM = [
       text: 'This is a short description',
       styles: {
         'font-family': 'PT Serif',
-        'font-size': '2rem',
+        'font-size': 2,
         'color': 'rgba(255, 255, 255, 0.3)'
       }
     }
@@ -119,7 +119,7 @@ const C_CUSTOM = [
         'color': '#ffffff',
         'font-family': 'Heebo',
         'text-align': 'center',
-        'font-size': '2rem',
+        'font-size': 2,
         'width': '352px',
         'height': '64px',
         'border-radius': '2px'
@@ -146,7 +146,7 @@ const C_CUSTOM_2 = [
       text: '2018—2019. Some text for footer',
       styles: {
         'font-family': 'PT Serif',
-        'font-size': '1.6rem',
+        'font-size': 1.6,
         'color': 'rgba(255, 255, 255, 0.3)'
       }
     }
@@ -159,7 +159,7 @@ const C_CUSTOM_2 = [
         'color': '#FF6D64',
         'font-family': 'PT Serif',
         'text-align': 'center',
-        'font-size': '1.6rem'
+        'font-size': 1.6
       }
     }
   },
@@ -171,7 +171,7 @@ const C_CUSTOM_2 = [
         'color': '#FF6D64',
         'font-family': 'PT Serif',
         'text-align': 'center',
-        'font-size': '1.6rem'
+        'font-size': 1.6
       }
     }
   },
@@ -183,7 +183,7 @@ const C_CUSTOM_2 = [
         'color': '#FF6D64',
         'font-family': 'PT Serif',
         'text-align': 'center',
-        'font-size': '1.6rem'
+        'font-size': 1.6
       }
     }
   }
