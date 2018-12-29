@@ -315,6 +315,9 @@ class Vuse {
         if (this.settings.styles[i] && i === 'backgroundImage')
           styles =  styles + `${_.kebabCase(i)}: url(${this.settings.styles[i]});`
       })
+      if (this.settings.fullPageScroll === 'yes') {
+        styles += `overflow:hidden!important;`
+      }
       return styles
     } else {
       return ''
