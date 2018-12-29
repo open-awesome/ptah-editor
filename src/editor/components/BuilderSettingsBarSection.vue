@@ -244,7 +244,7 @@ export default {
   },
 
   created () {
-    let styles = this.settingObjectOptions.styles['background-image']
+    let styles = this.settingObjectOptions.styles
     let image = (typeof styles['background-image'] === 'string') ? styles['background-image'] : ''
     let bgimage = image.match(/url\((.*?)\)/)
 
