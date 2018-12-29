@@ -38,6 +38,10 @@ export default {
     }
   },
 
+  created () {
+    this.closeContent()
+  },
+
   mounted () {
     this.setScrollbarVisible(!this.isContentVisible)
   },
