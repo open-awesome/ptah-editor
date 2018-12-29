@@ -70,7 +70,7 @@ const C_CUSTOM = [
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn88.cdn.stg.gamenet.ru/0/7RaWm/o_1lKIVY.jpg)',
+      'background-image': 'url(https://gn157.cdn.stg.gamenet.ru/0/7T30j/o_1zIylP.jpg)',
       'background-size': 'cover',
       'background-repeat': 'no-repeat'
     },
