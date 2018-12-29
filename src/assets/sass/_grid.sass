@@ -81,6 +81,6 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
     flex-wrap: wrap
     width: 100%
     box-sizing: border-box
-    padding: 0 $basis / 2 * 1
+    padding: 0 $basis / 2 * 1px
   @each $modifier , $breakpoint in $map-grid-props
     @include create-col-classes($modifier, $grid__cols, $breakpoint)
