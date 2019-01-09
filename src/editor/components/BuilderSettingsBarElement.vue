@@ -50,7 +50,6 @@
         :expand="expandedLink"
         @open="onExpand"
         @setOption="setOption"
-        @setPseudo="changePseudoStyle"
         @setClass="selectAnimation"></control-link>
     </div>
 
@@ -105,7 +104,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import { getPseudoTemplate, randomPoneId } from '../util'
 import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
 import ControlBackground from './controls/TheControlBackground'
@@ -232,8 +230,7 @@ export default {
     this.elLink = this.settingObjectOptions.link || {}
 
     /* Hover this.settingObjectOptions.pseudo */
-    this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
-    this.textHover = this.settingObjectOptions.pseudo['color'] || ''
+    this.pseudo = this.settingObjectOptions.pseudo || {}
 
     /* Available platforms */
     this.availablePlatforms = this.settingObjectOptions.availablePlatforms || {}
@@ -293,25 +290,6 @@ export default {
       let merge = _.merge({}, this.settingObjectOptions, obj)
       delete merge.element
       this.updateSettingOptions(merge)
-    },
-
-    /**
-     * Add style to pseudocalss
-     * @param style {object}
-     * @param pseudoClass {string}
-     */
-    changePseudoStyle (style, pseudoClass = 'hover') {
-      this.updateText()
-
-      const poneId = randomPoneId()
-      let pseudoClassValue = {}
-      pseudoClassValue[pseudoClass] = style
-      this.settingObjectOptions.element.dataset.pone = poneId
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { pseudo: pseudoClassValue }))
-
-      let styleTemplate = getPseudoTemplate(poneId, this.settingObjectOptions.pseudo)
-
-      document.head.insertAdjacentHTML('beforeend', styleTemplate)
     },
 
     /**

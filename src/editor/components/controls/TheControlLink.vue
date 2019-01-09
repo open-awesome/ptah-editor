@@ -1,5 +1,6 @@
 <script>
-import { mapState } from 'vuex'
+import { getPseudoTemplate, randomPoneId } from '../../util'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   props: {
@@ -28,20 +29,18 @@ export default {
   },
 
   created () {
-    this.link = this.elLink
-    this.target = this.elTarget === '_blank'
-    this.bgH = this.bghover
-    this.textH = this.textHover
+    let pBackgroundColor = this.pseudo['hover']['background-color']
+    let pColor = this.pseudo['hover']['color']
+
+    this.link = this.elLink.href
+    this.target = this.elLink.target === '_blank'
+    this.bgH = pBackgroundColor.split('!')[0] || this.styles['background-color']
+    this.textH = pColor.split('!')[0] || this.styles['color']
     this.animationClass = this.animation
     this.controlOpen = this.expand
   },
 
   watch: {
-    elTarget (value) {
-      let target = (value) ? '_blank' : '_self'
-      this.$emit('setOption', ['target', target])
-    },
-
     expand () {
       this.controlOpen = this.expand
     }
@@ -52,20 +51,16 @@ export default {
       'settingObjectOptions'
     ]),
 
+    styles () {
+      return this.settingObjectOptions.styles
+    },
+
     elLink () {
-      return this.settingObjectOptions.elLink
+      return this.settingObjectOptions.link
     },
 
-    elTarget () {
-      return this.settingObjectOptions.elTarget
-    },
-
-    bgHover () {
-      return this.settingObjectOptions.bgHover
-    },
-
-    textHover () {
-      return this.settingObjectOptions.textHover
+    pseudo () {
+      return this.settingObjectOptions.pseudo
     },
 
     animation () {
@@ -75,20 +70,26 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     setUrl () {
-      this.elLink.href = this.link
+      this.elLink['href'] = this.link
     },
 
     changeTarget () {
-      this.elLink.target = this.target
+      this.elLink['target'] = this.target === true ? '_blank' : '_self'
     },
 
     changeBgColor () {
-      this.$emit('setPseudo', { 'background-color': this.bgH.hex + '!important' })
+      this.changePseudoStyle('background-color', this.bgH.hex + '!important')
+      this.pseudo['hover']['background-color'] = this.bgH.hex + ' !important'
     },
 
     changeTextColor () {
-      this.$emit('setPseudo', { 'color': this.textH.hex + '!important' })
+      this.changePseudoStyle('color', this.textH.hex + '!important')
+      this.pseudo['hover']['color'] = this.textH.hex + ' !important'
     },
 
     changeAinmation () {
@@ -97,6 +98,21 @@ export default {
 
     onClickTitle () {
       this.$emit('open', ['Link', !this.controlOpen])
+    },
+
+    /**
+     * Add style to pseudocalss
+     * @param style {object}
+     * @param pseudoClass {string}
+     */
+    changePseudoStyle (attr, style, pseudoClass = 'hover') {
+      const poneId = randomPoneId()
+      this.pseudo[pseudoClass][attr] = style
+      this.settingObjectOptions.element.dataset.pone = poneId
+
+      let styleTemplate = getPseudoTemplate(poneId, this.settingObjectOptions.pseudo)
+
+      document.head.insertAdjacentHTML('beforeend', styleTemplate)
     }
   }
 }

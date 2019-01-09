@@ -8,6 +8,10 @@ const DEFAULT_OPTIONS = {
   styles: {},
   resizable: false,
   hasLink: false,
+  link: {
+    href: '',
+    target: '_blank'
+  },
   removable: false,
   aligned: false,
   typography: false,
@@ -155,7 +159,12 @@ const data = new Map([
       typography: true,
       background: true,
       shape: true,
-      pseudo: {},
+      pseudo: {
+        hover: {
+          'background-color': '',
+          'color': ''
+        }
+      },
       text: 'Click Me!',
       classes: [],
       link: {
@@ -239,10 +248,6 @@ const data = new Map([
   [types.Icon, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       text: '',
-      link: {
-        href: '',
-        target: '_blank'
-      },
       styles: {
         'background-image': false,
         'background-position': false,
