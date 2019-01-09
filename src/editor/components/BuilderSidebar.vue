@@ -206,7 +206,9 @@ export default {
 
     toggleSiteSettings (contentID) {
       this.closeSettingsBar()
-
+      if (this.isAddSectionExpanded) {
+        this.toggleAddSectionMenu()
+      }
       if (this.modalContentID === contentID) {
         this.closeSiteSettings()
       } else {
