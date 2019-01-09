@@ -23,19 +23,19 @@ export default {
       fontName: {},
       size: {},
       sizes: [
-        { name: '12px', value: 1.2 },
-        { name: '14px', value: 1.4 },
-        { name: '16px', value: 1.6 },
-        { name: '18px', value: 1.8 },
-        { name: '20px', value: 2 },
-        { name: '24px', value: 2.4 },
-        { name: '28px', value: 2.8 },
-        { name: '32px', value: 3.2 },
-        { name: '36px', value: 3.6 },
-        { name: '48px', value: 4.8 },
-        { name: '56px', value: 5.6 },
-        { name: '64px', value: 6.4 },
-        { name: '72px', value: 7.2 }
+        { name: '12px', value: '1.2rem' },
+        { name: '14px', value: '1.4rem' },
+        { name: '16px', value: '1.6rem' },
+        { name: '18px', value: '1.8rem' },
+        { name: '20px', value: '2rem' },
+        { name: '24px', value: '2.4rem' },
+        { name: '28px', value: '2.8rem' },
+        { name: '32px', value: '3.2rem' },
+        { name: '36px', value: '3.6rem' },
+        { name: '48px', value: '4.8rem' },
+        { name: '56px', value: '5.6rem' },
+        { name: '64px', value: '6.4rem' },
+        { name: '72px', value: '7.2rem' }
       ],
       color: '',
       td: { prop: 'text-decoration', value: 'underline', base: 'none' },
@@ -67,7 +67,7 @@ export default {
 
   created () {
     this.fontName = { name: this.styles['font-family'], value: this.styles['font-family'] }
-    this.size = find(this.sizes, { value: parseFloat(this.styles['font-size']) })
+    this.size = find(this.sizes, { value: this.styles['font-size'] })
     this.color = this.styles['color']
     this.controlOpen = this.expand
   },

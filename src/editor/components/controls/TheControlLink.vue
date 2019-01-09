@@ -1,22 +1,8 @@
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
-    link: {
-      type: String,
-      required: true
-    },
-    target: {
-      type: [String, Boolean]
-    },
-    hoverBgColor: {
-      type: String
-    },
-    hoverTextColor: {
-      type: String
-    },
-    animationClass: {
-      type: String
-    },
     expand: {
       type: Boolean,
       required: true
@@ -61,9 +47,36 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ]),
+
+    link () {
+      return this.settingObjectOptions.link
+    },
+
+    target () {
+      return this.settingObjectOptions.target
+    },
+
+    hoverBgColor () {
+      return this.settingObjectOptions.hoverBgColor
+    },
+
+    hoverTextColor () {
+      return this.settingObjectOptions.hoverTextColor
+    },
+
+    animationBt () {
+      return this.settingObjectOptions.animation
+    }
+
+  },
+
   methods: {
     setUrl () {
-      this.$emit('setOption', ['href', this.elLink])
+      this.link = this.elLink
     },
 
     changeBgColor () {

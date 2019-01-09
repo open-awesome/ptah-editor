@@ -12,7 +12,7 @@ const DEFAULT_OPTIONS = {
   aligned: false,
   typography: false,
   colorize: false,
-  box: true, // (align text or align flex justify-content)
+  box: false, // (align text or align flex justify-content)
   canCopy: false,
   background: false,
   shape: false, // border-radius prop
@@ -33,7 +33,7 @@ const data = new Map([
     typography: true,
     styles: {
       'font-family': 'Lato',
-      'font-size': 3.2,
+      'font-size': '3.2rem',
       'font-weight': 'normal',
       'font-style': 'normal',
       'text-decoration': 'none',
@@ -49,7 +49,7 @@ const data = new Map([
     typography: true,
     styles: {
       'font-family': 'Lato',
-      'font-size': 1.6,
+      'font-size': '1.6rem',
       'font-weight': 'normal',
       'font-style': 'normal',
       'text-decoration': 'none',
@@ -112,7 +112,7 @@ const data = new Map([
     target: '_blank',
     styles: {
       'font-family': 'Lato',
-      'font-size': 1.4,
+      'font-size': '1.4rem',
       'font-weight': 'normal',
       'font-style': 'normal',
       'text-decoration': 'none',
@@ -123,8 +123,7 @@ const data = new Map([
       'background-repeat': false,
       'background-size': false,
       'background-color': false,
-      'background': false,
-      'justify-content': 'center'
+      'background': false
     }
   })
   )],
@@ -168,7 +167,7 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': 3.2,
+        'font-size': '3.2rem',
         'border-radius': 0,
         'font-weight': 'normal',
         'font-style': 'normal',
@@ -200,7 +199,7 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': 1.2,
+        'font-size': '1.2rem',
         'border-radius': 0,
         'font-weight': 'normal',
         'font-style': 'normal',
@@ -221,7 +220,7 @@ const data = new Map([
       text: '$90',
       styles: {
         'color': '#e4a11e',
-        'font-size': 3.2,
+        'font-size': '3.2rem',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-family': 'Lato',
@@ -557,7 +556,7 @@ const data = new Map([
       typography: true,
       styles: {
         'font-family': 'Lato',
-        'font-size':  4.8,
+        'font-size':  '4.8rem',
         'font-weight': 'normal',
         'font-style': 'normal',
         'text-decoration': 'none',
@@ -622,7 +621,7 @@ const data = new Map([
         'background-color': false,
         'background': false,
         'font-family': 'Lato',
-        'font-size':  1.6,
+        'font-size':  '1.6rem',
         'font-weight': 'normal',
         'font-style': 'normal',
         'text-decoration': 'none',

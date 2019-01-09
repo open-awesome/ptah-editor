@@ -219,6 +219,7 @@ export default {
       'settingObjectOptions',
       'settingObjectSection'
     ]),
+
     bgAttachmentCheckbox: {
       set (value) {
         this.bgAttachment = value ? 'fixed' : 'scroll'
@@ -240,8 +241,8 @@ export default {
 
     this.sectionBgColor = styles['background-color']
     this.sectionBgUrl = bgimage || ''
-    this.bgRepeat = styles['background-repeat'] === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
-    this.bgSize = styles['background-size'] === 'cover' ? this.sizeList[0] : this.sizeList[1]
+    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+    this.bgSize = styles['background-size'] || 'cover'
     this.bgAttachment = styles['background-attachment'] === 'fixed'
 
     /* Video */
