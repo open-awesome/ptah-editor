@@ -47,10 +47,7 @@
     <!-- Link -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
       <control-link
-        :link="elLink"
-        :hoverBgColor="bgHover"
         :expand="expandedLink"
-        :target="elTarget"
         @open="onExpand"
         @setOption="setOption"
         @setPseudo="changePseudoStyle"
@@ -157,7 +154,7 @@ export default {
       elHeight: 0,
       elWidth: 0,
       elRadius: 0,
-      elLink: '',
+      elLink: {},
       bgHover: '',
       textHover: '',
       expandedSize: false,
@@ -232,8 +229,7 @@ export default {
     this.elRadius = styles['border-radius'] || 0
 
     /* Link */
-    this.elLink = this.settingObjectOptions.href || ''
-    this.elTarget = this.settingObjectOptions.target || '_self'
+    this.elLink = this.settingObjectOptions.link || {}
 
     /* Hover this.settingObjectOptions.pseudo */
     this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''

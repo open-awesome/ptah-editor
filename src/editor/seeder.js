@@ -108,8 +108,10 @@ const data = new Map([
     removable: true,
     typography: true,
     text: 'Click Me!',
-    href: '',
-    target: '_blank',
+    link: {
+      href: '',
+      target: '_blank'
+    },
     styles: {
       'font-family': 'Lato',
       'font-size': '1.4rem',
@@ -156,7 +158,10 @@ const data = new Map([
       pseudo: {},
       text: 'Click Me!',
       classes: [],
-      href: '',
+      link: {
+        href: '',
+        target: '_blank'
+      },
       removable: true,
       styles: {
         'background-image': false,
@@ -189,7 +194,10 @@ const data = new Map([
       shape: true,
       text: 'Label',
       classes: [],
-      href: '',
+      link: {
+        href: '',
+        target: '_blank'
+      },
       styles: {
         'background-image': false,
         'background-position': false,
@@ -231,7 +239,10 @@ const data = new Map([
   [types.Icon, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       text: '',
-      href: '',
+      link: {
+        href: '',
+        target: '_blank'
+      },
       styles: {
         'background-image': false,
         'background-position': false,

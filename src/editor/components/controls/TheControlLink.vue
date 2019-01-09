@@ -12,10 +12,10 @@ export default {
   data () {
     return {
       controlOpen: false,
-      elLink: '',
-      elTarget: '',
-      bgHoverColor: '',
-      textHoverColor: '',
+      link: '',
+      target: '',
+      bgH: '',
+      textH: '',
       animationList: [
         { name: 'none', value: '' },
         { name: 'tada', value: 'ptah-a-tada' },
@@ -23,16 +23,16 @@ export default {
         { name: 'shake', value: 'ptah-a-shake' },
         { name: 'bounce', value: 'ptah-a-bounce' }
       ],
-      animation: {}
+      animationClass: {}
     }
   },
 
   created () {
-    this.elLink = this.link
-    this.elTarget = this.target === '_blank'
-    this.bgHoverColor = this.hoverBgColor
-    this.textHoverColor = this.hoverTextColor
-    this.animation = this.animationClass
+    this.link = this.elLink
+    this.target = this.elTarget === '_blank'
+    this.bgH = this.bghover
+    this.textH = this.textHover
+    this.animationClass = this.animation
     this.controlOpen = this.expand
   },
 
@@ -52,23 +52,23 @@ export default {
       'settingObjectOptions'
     ]),
 
-    link () {
-      return this.settingObjectOptions.link
+    elLink () {
+      return this.settingObjectOptions.elLink
     },
 
-    target () {
-      return this.settingObjectOptions.target
+    elTarget () {
+      return this.settingObjectOptions.elTarget
     },
 
-    hoverBgColor () {
-      return this.settingObjectOptions.hoverBgColor
+    bgHover () {
+      return this.settingObjectOptions.bgHover
     },
 
-    hoverTextColor () {
-      return this.settingObjectOptions.hoverTextColor
+    textHover () {
+      return this.settingObjectOptions.textHover
     },
 
-    animationBt () {
+    animation () {
       return this.settingObjectOptions.animation
     }
 
@@ -76,19 +76,23 @@ export default {
 
   methods: {
     setUrl () {
-      this.link = this.elLink
+      this.elLink.href = this.link
+    },
+
+    changeTarget () {
+      this.elLink.target = this.target
     },
 
     changeBgColor () {
-      this.$emit('setPseudo', { 'background-color': this.bgHoverColor.hex + '!important' })
+      this.$emit('setPseudo', { 'background-color': this.bgH.hex + '!important' })
     },
 
     changeTextColor () {
-      this.$emit('setPseudo', { 'color': this.textHoverColor.hex + '!important' })
+      this.$emit('setPseudo', { 'color': this.textH.hex + '!important' })
     },
 
     changeAinmation () {
-      this.$emit('setClass', this.animation.value)
+      this.$emit('setClass', this.animationClass.value)
     },
 
     onClickTitle () {
@@ -105,19 +109,19 @@ export default {
     </div>
     <base-dropdown :isOpened="controlOpen"  :hasOverflow="controlOpen">
       <div class="b-link-controls__control">
-        <base-text-field v-model="elLink" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
+        <base-text-field v-model="link" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
       </div>
       <div class="b-link-controls__control">
-        <input type="checkbox" id="target" v-model="elTarget"> <label for="target">open in new window</label>
+        <input type="checkbox" id="target" v-model="target" @change="changeTarget"> <label for="target">open in new window</label>
       </div>
       <div class="b-link-controls__control">
-        <base-color-picker label="Background hover color" v-model="bgHoverColor" @change="changeBgColor"></base-color-picker>
+        <base-color-picker label="Background hover color" v-model="bgH" @change="changeBgColor"></base-color-picker>
       </div>
       <div class="b-link-controls__control">
-        <base-color-picker label="Text hover color" v-model="textHoverColor" @change="changeTextColor"></base-color-picker>
+        <base-color-picker label="Text hover color" v-model="textH" @change="changeTextColor"></base-color-picker>
       </div>
       <div class="b-link-controls__control">
-        <base-select label="Animation" :options="animationList" v-model="animation" @input="changeAinmation"></base-select>
+        <base-select label="Animation" :options="animationList" v-model="animationClass" @input="changeAinmation"></base-select>
       </div>
     </base-dropdown>
   </div>
