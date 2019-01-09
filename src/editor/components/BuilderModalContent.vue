@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import BuilderSiteSettingsSeo from './BuilderSiteSettingsSeo'
 import BuilderSiteSettingsVersionHistory from './BuilderSiteSettingsVersionHistory'
 import BuilderSiteSettingsVisual from './BuilderSiteSettingsVisual'
@@ -51,12 +51,14 @@ export default {
   },
 
   methods: {
+    ...mapMutations('Sidebar', ['isAddSectionExpanded']),
     ...mapActions('BuilderModalContent', ['setContent']),
     ...mapActions('PageTweaks', ['setScrollbarVisible']),
     ...mapActions('Sidebar', ['toggleAddSectionMenu']),
 
     closeContent () {
       this.setContent('')
+      this.isAddSectionExpanded(false)
     }
   }
 }
