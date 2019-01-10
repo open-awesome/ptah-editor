@@ -4,7 +4,9 @@ import * as _ from 'lodash-es'
 
 const DEFAULT_OPTIONS = {
   text: '',
-  classes: [],
+  classes: {
+    list: []
+  },
   styles: {},
   resizable: false,
   hasLink: false,
@@ -38,7 +40,7 @@ const data = new Map([
     styles: {
       'font-family': 'Lato',
       'font-size': '3.2rem',
-      'font-weight': 'normal',
+      'font-weight': 'bold',
       'font-style': 'normal',
       'text-decoration': 'none',
       'text-align': 'center',
@@ -166,7 +168,9 @@ const data = new Map([
         }
       },
       text: 'Click Me!',
-      classes: [],
+      animation: {
+        value: ''
+      },
       link: {
         href: '',
         target: '_blank'
@@ -181,7 +185,7 @@ const data = new Map([
         'background': false,
         'color': '#000',
         'border-color': false,
-        'font-size': '3.2rem',
+        'font-size': '1.6rem',
         'border-radius': 0,
         'font-weight': 'normal',
         'font-style': 'normal',
@@ -202,7 +206,6 @@ const data = new Map([
       aligned: true,
       shape: true,
       text: 'Label',
-      classes: [],
       link: {
         href: '',
         target: '_blank'

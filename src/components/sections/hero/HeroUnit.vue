@@ -197,7 +197,7 @@ export default {
                   :target="$sectionData.components[index].element.link.target"
                   :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  :class="[$sectionData.components[index].element.classes.list, $sectionData.components[index].class]"
                   >
                 </component>
                 <component class="b-hero-component"
@@ -209,7 +209,7 @@ export default {
                   :target="$sectionData.components[index].element.link.target"
                   :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  :class="[$sectionData.components[index].element.classes.list, $sectionData.components[index].class]"
                   >
                 </component>
               </div>

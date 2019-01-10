@@ -157,7 +157,7 @@ export default {
     }
 
     // Apply animation to element
-    this.options.classes.forEach((name, index) => {
+    this.options.classes.list.forEach((name, index) => {
       if (name.indexOf('ptah-a-') > -1) {
         this.animation = _.find(this.animationList, ['className', name])
       }

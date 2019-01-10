@@ -1,4 +1,5 @@
 <script>
+import * as _ from 'lodash-es'
 import { getPseudoTemplate, randomPoneId } from '../../util'
 import { mapState, mapActions } from 'vuex'
 
@@ -28,18 +29,6 @@ export default {
     }
   },
 
-  created () {
-    let pBackgroundColor = this.pseudo['hover']['background-color']
-    let pColor = this.pseudo['hover']['color']
-
-    this.link = this.elLink.href
-    this.target = this.elLink.target === '_blank'
-    this.bgH = pBackgroundColor.split('!')[0] || this.styles['background-color']
-    this.textH = pColor.split('!')[0] || this.styles['color']
-    this.animationClass = this.animation
-    this.controlOpen = this.expand
-  },
-
   watch: {
     expand () {
       this.controlOpen = this.expand
@@ -59,12 +48,16 @@ export default {
       return this.settingObjectOptions.link
     },
 
+    animation () {
+      return this.settingObjectOptions.animation
+    },
+
     pseudo () {
       return this.settingObjectOptions.pseudo
     },
 
-    animation () {
-      return this.settingObjectOptions.animation
+    classes () {
+      return this.settingObjectOptions.classes
     }
 
   },
@@ -92,8 +85,8 @@ export default {
       this.pseudo['hover']['color'] = this.textH.hex + ' !important'
     },
 
-    changeAinmation () {
-      this.$emit('setClass', this.animationClass.value)
+    changeAnimation () {
+      this.selectAnimation(this.animationClass.value)
     },
 
     onClickTitle () {
@@ -102,7 +95,8 @@ export default {
 
     /**
      * Add style to pseudocalss
-     * @param style {object}
+     * @param attr {string}
+     * @param style {string}
      * @param pseudoClass {string}
      */
     changePseudoStyle (attr, style, pseudoClass = 'hover') {
@@ -113,7 +107,43 @@ export default {
       let styleTemplate = getPseudoTemplate(poneId, this.settingObjectOptions.pseudo)
 
       document.head.insertAdjacentHTML('beforeend', styleTemplate)
+    },
+
+    /**
+     * Add animation to element
+     */
+    selectAnimation (className) {
+      let animations = this.classes.list.slice(0)
+
+      animations.forEach((name, index) => {
+        // remove other animation classes
+        if (name.indexOf('ptah-a') > -1) {
+          animations.splice(index, 1)
+        }
+      })
+      animations.push(className)
+
+      this.classes.list = _.merge([], this.classes.list, animations)
+      this.animation['value'] = animations[0]
     }
+  },
+
+  mounted () {
+    let self = this
+    let pBackgroundColor = this.pseudo['hover']['background-color']
+    let pColor = this.pseudo['hover']['color']
+
+    this.link = this.elLink.href
+    this.target = this.elLink.target === '_blank'
+    this.bgH = pBackgroundColor.split('!')[0] || this.styles['background-color']
+    this.textH = pColor.split('!')[0] || this.styles['color']
+    this.controlOpen = this.expand
+
+    this.animationList.forEach(function (item, i, arr) {
+      if (self.animation.value !== undefined && self.animation.value === self.animationList[i].value) {
+        self.animationClass = item
+      }
+    })
   }
 }
 </script>
@@ -137,7 +167,7 @@ export default {
         <base-color-picker label="Text hover color" v-model="textH" @change="changeTextColor"></base-color-picker>
       </div>
       <div class="b-link-controls__control">
-        <base-select label="Animation" :options="animationList" v-model="animationClass" @input="changeAinmation"></base-select>
+        <base-select label="Animation" :options="animationList" v-model="animationClass" @input="changeAnimation"></base-select>
       </div>
     </base-dropdown>
   </div>

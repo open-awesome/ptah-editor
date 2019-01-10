@@ -49,8 +49,8 @@
       <control-link
         :expand="expandedLink"
         @open="onExpand"
-        @setOption="setOption"
-        @setClass="selectAnimation"></control-link>
+        >
+      </control-link>
     </div>
 
     <!-- Available Platforms Control-->
@@ -141,6 +141,8 @@ export default {
     return {
       index: null,
       fontSize: null,
+      animation: '',
+      classes: [],
       fontFamily: '',
       fontColor: '',
       elStyles: [],
@@ -229,6 +231,12 @@ export default {
     /* Link */
     this.elLink = this.settingObjectOptions.link || {}
 
+    /* Animation */
+    this.animation = this.settingObjectOptions.animation || {}
+
+    /* Animation */
+    this.classes = this.settingObjectOptions.classes || []
+
     /* Hover this.settingObjectOptions.pseudo */
     this.pseudo = this.settingObjectOptions.pseudo || {}
 
@@ -290,25 +298,6 @@ export default {
       let merge = _.merge({}, this.settingObjectOptions, obj)
       delete merge.element
       this.updateSettingOptions(merge)
-    },
-
-    /**
-     * Add animation to element
-     */
-    selectAnimation (className) {
-      this.updateText()
-
-      let animations = this.settingObjectOptions.classes.slice(0)
-
-      animations.forEach((name, index) => {
-        // remove other animation classes
-        if (name.indexOf('ptah-a') > -1) {
-          animations.splice(index, 1)
-        }
-      })
-      animations.push(className)
-
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: animations }))
     },
 
     deleteElement () {
