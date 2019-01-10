@@ -71,6 +71,10 @@ const actions = {
             backgroundAttachment: 'fixed',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
+          },
+          cookiesPolicy: {
+            enabled: false,
+            pdf: null
           }
         })
         commit('isSaved', false)
