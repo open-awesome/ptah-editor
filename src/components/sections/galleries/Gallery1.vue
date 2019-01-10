@@ -1,7 +1,7 @@
 <template>
   <section class="b-gallery-one"
     v-styler:section="$sectionData.mainStyle"
-    :class="$sectionData.mainStyle.classes"
+    :class="$sectionData.mainStyle.classes.list"
     :style="$sectionData.mainStyle.styles"
     >
       <div class="b-gallery-one-list flex__item flex flex_center">

@@ -69,7 +69,7 @@ export default {
 <template>
   <section
     class="b-video-section"
-    :class="$sectionData.mainStyle.classes"
+    :class="$sectionData.mainStyle.classes.list"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
     >

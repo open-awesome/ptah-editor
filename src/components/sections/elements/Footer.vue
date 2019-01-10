@@ -1,7 +1,7 @@
 <template>
   <section class="l-footer"
     v-styler:section="$sectionData.mainStyle"
-    :class="$sectionData.mainStyle.classes"
+    :class="$sectionData.mainStyle.classes.list"
     :style="$sectionData.mainStyle.styles"
     >
     <footer class="b-footer">

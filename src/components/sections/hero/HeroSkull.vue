@@ -284,7 +284,7 @@ export default {
 <template>
   <section
     class="b-hero-skull"
-    :class="$sectionData.mainStyle.classes"
+    :class="$sectionData.mainStyle.classes.list"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >

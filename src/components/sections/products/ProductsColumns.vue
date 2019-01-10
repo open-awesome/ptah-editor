@@ -674,7 +674,7 @@ export default {
 <template>
   <section
     class="b-products-colums"
-    :class="$sectionData.mainStyle.classes"
+    :class="$sectionData.mainStyle.classes.list"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >

@@ -1,7 +1,7 @@
 <template>
   <section class="b-gallery-three"
     v-styler:section="$sectionData.mainStyle"
-    :class="$sectionData.mainStyle.classes"
+    :class="$sectionData.mainStyle.classes.list"
     :style="$sectionData.mainStyle.styles"
     >
       <div class="b-gallery-three__wrap">
