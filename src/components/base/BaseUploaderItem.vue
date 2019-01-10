@@ -106,7 +106,7 @@ export default {
         let xhr = new XMLHttpRequest()
 
         xhr.upload.onprogress = this.loadingProgress // --- uploading progress
-        xhr.open('POST', 'http://images.stg.gamenet.ru/restapi')
+        xhr.open('POST', '//images.stg.gamenet.ru/restapi')
         xhr.send(getFormData(file))
 
         xhr.onload = xhr.onerror = () => {
