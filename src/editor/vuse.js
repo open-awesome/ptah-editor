@@ -300,7 +300,7 @@ class Vuse {
             <div class="main">
               ${artboard.innerHTML}
             </div>
-            ${this.getCookiesScript(cookiesPolicy)}
+            ${this.getCookiesPreview(cookiesPolicy)}
             <script src="${window.location.origin + '/js/cjs.js'}"></script>
             ${scrollSetup.setup}
           <body>
@@ -308,7 +308,7 @@ class Vuse {
     )
   }
 
-  getCookiesScript ({ enabled, pdf }) {
+  getCookiesPreview ({ enabled, pdf }) {
     if (!enabled || !pdf) {
       return ''
     }
