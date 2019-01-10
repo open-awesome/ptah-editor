@@ -247,9 +247,20 @@ class Vuse {
       slug: this.landing,
       title: this.title,
       settings: this.settings,
-      sections: this.sections.map(s => ({
-        name: s.name,
-        data: s.data
+      sections: this.sections.map(({ name, data }) => ({
+        name,
+        data: _.mapValues(data, (value, key) => {
+          // --- coz html element in component's array has circular structure
+          if (key.match(/^components/)) {
+            return value.map(c => {
+              if (c.element.hasOwnProperty('element') && c.element.element instanceof HTMLElement) {
+                c.element.element = c.element.element.cloneNode(true)
+              }
+              return c
+            })
+          }
+          return value
+        })
       }))
     })
   }
@@ -315,6 +326,9 @@ class Vuse {
         if (this.settings.styles[i] && i === 'backgroundImage')
           styles =  styles + `${_.kebabCase(i)}: url(${this.settings.styles[i]});`
       })
+      if (this.settings.fullPageScroll === 'yes') {
+        styles += `overflow:hidden!important;`
+      }
       return styles
     } else {
       return ''

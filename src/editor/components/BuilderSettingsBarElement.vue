@@ -224,8 +224,9 @@ export default {
     this.elVideoLink = this.settingObjectOptions.video || '' // YuoTube video ID
 
     /* Hover this.settingObjectOptions.pseudo */
-    this.bgHover = this.settingObjectOptions.pseudo['background-color'] || ''
-    this.textHover = this.settingObjectOptions.pseudo['color'] || ''
+    let hoverStyles = this.settingObjectOptions.pseudo.hover || {}
+    this.bgHover = (hoverStyles['background-color'] || '').replace('!important', '')
+    this.textHover = (hoverStyles.color || '').replace('!important', '')
 
     /* Available platforms */
     this.availablePlatforms = this.settingObjectOptions.availablePlatforms || {}
@@ -279,9 +280,7 @@ export default {
       this.updateText()
       let obj = {}
       obj[option[0]] = option[1]
-      let merge = _.merge({}, this.settingObjectOptions, obj)
-      delete merge.element
-      this.updateSettingOptions(merge)
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
     },
 
     /**

@@ -228,6 +228,7 @@ export default {
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     >
+    <slot name="video"/>
     <div class="b-system">
       <div class="b-system-platforms flex flex_center">
         <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"

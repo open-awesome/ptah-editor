@@ -177,6 +177,7 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
+    <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
         <div class="b-grid__col-12">
