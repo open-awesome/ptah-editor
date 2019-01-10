@@ -644,10 +644,14 @@ export default {
     storeData: _.after(2, (self) => {
       let data = self.$sectionData.listComponents
       for (var key in data) {
+        if (!Array.isArray(self.$sectionData[key])) {
+          return
+        }
         self.$sectionData[key].forEach(component => {
           data[key].push(component)
         })
       }
+      data['mainStyle'] = self.$sectionData['mainStyle']
       self.updateGroupData({ name: GROUP_NAME, data })
       self.updateSectionData({
         name: NAME,
