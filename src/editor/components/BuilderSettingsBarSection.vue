@@ -6,13 +6,13 @@
         <control-section-layouts :builder="builder"></control-section-layouts>
       </div>
 
-      <div class="b-section-settings__control">
-        <div class="b-section-settings__header">
-          <span>Heights</span>
-        </div>
-        <base-label>Full screen height</base-label>
-        <BaseSwitcher v-model="fullScreen" @change="setHeight" />
-      </div>
+      <!-- Products Section Controls -->
+      <control-section-products
+        :expand="expandedProducts"
+        @open="onExpand"
+        v-if="settingObjectOptions.hasProducts"
+        >
+      </control-section-products>
 
       <!-- System requirements -->
       <control-system-requirements
@@ -22,15 +22,7 @@
         >
       </control-system-requirements>
 
-      <!-- Products Section Controls -->
-      <control-section-products
-        :expand="expandedProducts"
-        @open="onExpand"
-        v-if="settingObjectOptions.hasProducts"
-        >
-      </control-section-products>
-
-     <!-- font -->
+     <!-- Font -->
       <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
         <control-text
           :fontSize="fontSize"
@@ -40,6 +32,14 @@
           :expand="expandedFont"
           @open="onExpand"
           @change="styleChange"></control-text>
+      </div>
+
+      <div class="b-section-settings__control">
+        <div class="b-section-settings__header">
+          <span>Heights</span>
+        </div>
+        <base-label>Full screen height</base-label>
+        <BaseSwitcher v-model="fullScreen" @change="setHeight" />
       </div>
 
       <template v-if="settingObjectOptions.background">
@@ -220,8 +220,9 @@ export default {
       expandedFont: false,
 
       styles: [],
-      productsCount: 0,
-      expandedProducts: true
+      products: {},
+      selectProduct: {},
+      expandedProducts: false
     }
   },
 
@@ -291,6 +292,7 @@ export default {
 
     /* Products */
     this.products = this.settingObjectOptions.products || {}
+    this.selectProduct = this.settingObjectOptions.selectProduct || {}
   },
 
   watch: {
@@ -485,10 +487,24 @@ export default {
   flex-direction: column
   align-items: stretch
   padding-bottom: 4.5rem
-
+  &__header
+    font-size: 1.6rem
+    height: 3.2rem
+    color: #272727
+    display: flex
+    align-items: center
+    cursor: pointer
+    i
+      margin-left: 5px
+      margin-bottom: -5px
+      transform: rotate(180deg)
+      &.dropped
+        transform: rotate(0deg)
+  &__control
+    margin-top: 2.2rem
   &__inner
     padding-right: 2.5rem
-
+    padding-bottom: 5rem
   &__buttons
     position: absolute
     bottom: 1rem

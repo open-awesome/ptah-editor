@@ -29,7 +29,6 @@ export function getTypeFromSchema(target, schema) {
   if (value === types.Link) return 'link'
   if (value === types.ClassList) return 'section'
   if (value === types.StyleObject) return 'section'
-  if (value === types.Product) return 'product'
   if (value === types.Label) return 'text'
   if (value === types.Cost) return 'text'
   if (value === types.Delimiter) return 'delimiter'

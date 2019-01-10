@@ -4,7 +4,6 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
 import { mapActions } from 'vuex'
-import { productExtendPreviewClick } from '@cscripts/productExtend'
 
 const C_CUSTOM_1 = [
   {
@@ -638,8 +637,8 @@ export default {
       element.element.removable = true
       this.$section.data.components4m.push(element)
     },
-    bindingProductExtendPreviewClick (index) {
-      productExtendPreviewClick(index)
+    selectProduct (key) {
+      this.$sectionData.mainStyle.selectProduct.name = key
     },
 
     storeData: _.after(2, (self) => {
@@ -684,14 +683,9 @@ export default {
     this.setListComponents()
   },
 
-  mounted: function () {
-    this.bindingProductExtendPreviewClick(0)
-  },
-
   updated: function () {
     this.setListComponents()
     this.storeData(this)
-    this.bindingProductExtendPreviewClick(this.index)
   }
 }
 </script>
@@ -712,6 +706,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Standart'].visible"
               :data-index="0"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Standart')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -756,6 +752,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Full'].visible"
               :data-index="1"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Full')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Full' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -799,6 +797,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Deluxe'].visible"
               :data-index="2"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Deluxe')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -842,6 +842,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Ultimate'].visible"
               :data-index="3"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Ultimate')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -887,7 +889,8 @@ export default {
                <!-- b-products-columns-extend__right -->
                 <div class="b-grid__row">
                   <div class="b-grid__col-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Standart'].visible"
+                    v-if="$sectionData.mainStyle.selectProduct.name === 'Standart' && $sectionData.mainStyle.products['Standart'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' }"
                     :product-extend-stage="0"
                     >
                     <sandbox
@@ -968,7 +971,8 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Full'].visible"
+                    v-if="$sectionData.mainStyle.selectProduct.name === 'Full' && $sectionData.mainStyle.products['Full'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Full' }"
                     :product-extend-stage="1"
                     >
                     <sandbox
@@ -1047,7 +1051,8 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Deluxe'].visible"
+                    v-if="$sectionData.mainStyle.selectProduct.name === 'Deluxe' && $sectionData.mainStyle.products['Deluxe'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' }"
                     :product-extend-stage="2"
                     >
                     <sandbox
@@ -1126,7 +1131,8 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Ultimate'].visible"
+                    v-if="$sectionData.mainStyle.selectProduct.name === 'Ultimate' && $sectionData.mainStyle.products['Ultimate'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate' }"
                     :product-extend-stage="3"
                     >
                     <sandbox

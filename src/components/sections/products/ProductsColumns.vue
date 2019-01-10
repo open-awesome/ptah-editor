@@ -480,7 +480,7 @@ const COMPONENTS = [
   },
   {
     name: 'Description',
-    element: types.Text,
+    element: types.TextInherit,
     type: 'text',
     class: 'b-text'
   },
@@ -726,6 +726,7 @@ export default {
             ref="sandbox"
             path="$sectionData.container1d"
             direction="column"
+            alignItems="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
             <elements-list @addEl="onAddElement1d"></elements-list>
@@ -805,6 +806,7 @@ export default {
             ref="sandbox"
             path="$sectionData.container2d"
             direction="column"
+            alignItems="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
             <elements-list @addEl="onAddElement2d"></elements-list>
@@ -883,6 +885,7 @@ export default {
             ref="sandbox"
             path="$sectionData.container3d"
             direction="column"
+            alignItems="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
             <elements-list @addEl="onAddElement3d"></elements-list>
@@ -961,6 +964,7 @@ export default {
             ref="sandbox"
             path="$sectionData.container4d"
             direction="column"
+            alignItems="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
             <elements-list @addEl="onAddElement4d"></elements-list>

@@ -10,6 +10,10 @@ export default {
     direction: {
       type: String,
       default: 'row'
+    },
+    alignItems: {
+      type: String,
+      default: 'center'
     }
   },
   data: () => ({
@@ -52,6 +56,7 @@ export default {
   mounted () {
     this.innerDir = this.direction
     this.setStyle({ 'flex-direction': this.direction })
+    this.setStyle({ 'align-items': this.alignItems })
   }
 }
 </script>

@@ -95,6 +95,7 @@ const data = new Map([
   }))],
   [types.ImageNoResize, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: false,
+    removable: true,
     alt: 'Default image',
     url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     background: true,
@@ -108,6 +109,7 @@ const data = new Map([
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
+    removable: true,
     alt: 'Default logo',
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     background: true,
@@ -239,7 +241,6 @@ const data = new Map([
       box: true,
       typography: true,
       removable: true,
-      resizable: true,
       aligned: true,
       text: '$90',
       styles: {
@@ -313,21 +314,6 @@ const data = new Map([
       'height': ''
     }
   }))],
-  [types.Product, () => (_.merge({}, DEFAULT_OPTIONS, {
-    removable: true,
-    resizable: true,
-    background: true,
-    visible: true,
-    styles: {
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': '#363636',
-      'width': '',
-      'height': ''
-    }
-  }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
@@ -353,8 +339,6 @@ const data = new Map([
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,
-      resizable: true,
-      removable: true,
       background: true,
       hasProducts: true,
       products: {
@@ -363,7 +347,24 @@ const data = new Map([
         'Deluxe': { visible: false },
         'Ultimate': { visible: false }
       },
+      selectProduct: {
+        name: 'Standart'
+      },
+      typography: true,
       styles: {
+        'background-image': '',
+        'background-position': false,
+        'background-repeat': false,
+        'background-size': false,
+        'background-color': false,
+        'background': false,
+        'font-family': 'Lato',
+        'font-size':  1.6,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'text-align': false,
+        'color': '#fff',
         'background-image': '',
         'background-position': false,
         'background-repeat': false,

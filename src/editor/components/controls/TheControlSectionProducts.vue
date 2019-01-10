@@ -31,6 +31,10 @@ export default {
 
     products () {
       return this.settingObjectOptions.products
+    },
+
+    selectProduct () {
+      return this.settingObjectOptions.selectProduct
     }
 
   },
@@ -44,6 +48,17 @@ export default {
   methods: {
     visible (key) {
       this.products[key].visible = !this.products[key].visible
+
+      if (this.products[key].visible === true) {
+        this.selectProduct.name = key
+        return
+      }
+
+      for (let p in this.products) {
+        if (this.products[p].visible === true) {
+          this.selectProduct.name = p
+        }
+      }
     },
 
     onClickTitle () {
