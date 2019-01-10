@@ -153,6 +153,7 @@ const data = new Map([
       resizable: true,
       removable: true,
       background: true,
+      absorb: 0,
       styles: {
         'background-image': '',
         'background-position': false,
