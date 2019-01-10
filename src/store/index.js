@@ -74,7 +74,7 @@ const actions = {
           },
           cookiesPolicy: {
             enabled: false,
-            pdf: null
+            pdf: 'https://gn338.cdn.stg.gamenet.ru/0/7XSEU/o_1ohKcv.pdf'
           }
         })
         commit('isSaved', false)
