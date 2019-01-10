@@ -5,8 +5,8 @@
         <span class="b-base-image-upload__button b-base-image-upload__button_preview">
           <img class="b-base-image-upload-preview__image"
             :src="url"
-            width="48"
-            height="48"
+            width="32"
+            height="32"
             alt="">
         </span>
         <span
@@ -102,6 +102,10 @@ export default {
 .b-base-image-upload
   display: flex
   flex-direction: row
+
+  &-preview__image
+    width: 100%
+    height: 100%
 
   &__side
     cursor: pointer

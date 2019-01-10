@@ -28,6 +28,7 @@ export default {
 
   computed: {
     ...mapState('BuilderModalContent', ['isContentVisible']),
+    ...mapState('Sidebar', ['isAddSectionExpanded']),
     ...mapGetters('BuilderModalContent', ['contentComponent']),
     ...mapGetters('PageTweaks', ['fakeScrollbarWidth'])
   },
@@ -35,7 +36,14 @@ export default {
   watch: {
     isContentVisible (value) {
       this.setScrollbarVisible(!value)
+      if (this.isAddSectionExpanded && value) {
+        this.toggleAddSectionMenu(false)
+      }
     }
+  },
+
+  created () {
+    this.closeContent()
   },
 
   mounted () {
@@ -45,9 +53,13 @@ export default {
   methods: {
     ...mapActions('BuilderModalContent', ['setContent']),
     ...mapActions('PageTweaks', ['setScrollbarVisible']),
+    ...mapActions('Sidebar', ['toggleAddSectionMenu']),
 
     closeContent () {
       this.setContent('')
+      if (this.isAddSectionExpanded) {
+        this.toggleAddSectionMenu(false)
+      }
     }
   }
 }
