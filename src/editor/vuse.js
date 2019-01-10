@@ -276,7 +276,7 @@ class Vuse {
 
     void cleanDOM(frag)
 
-    let { video, title, cookiesPolicy } = this.settings
+    let { video, title } = this.settings
     let styles = this.getCss(frag)
     let bodyStyles = this.getBodyStyles()
     let scrollSetup = this.getScrollSetup()
@@ -300,7 +300,7 @@ class Vuse {
             <div class="main">
               ${artboard.innerHTML}
             </div>
-            ${this.getCookiesPreview(cookiesPolicy)}
+            ${this.getCookiesPreview()}
             <script src="${window.location.origin + '/js/cjs.js'}"></script>
             ${scrollSetup.setup}
           <body>
@@ -308,7 +308,8 @@ class Vuse {
     )
   }
 
-  getCookiesPreview ({ enabled, pdf }) {
+  getCookiesPreview () {
+    let { enabled, pdf } = this.settings.cookiesPolicy
     if (!enabled || !pdf) {
       return ''
     }
