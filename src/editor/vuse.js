@@ -273,17 +273,20 @@ class Vuse {
     const artboard = frag.querySelector('#artboard')
     const printPreview = window.open('about:blank', 'print_preview')
     const printDocument = printPreview.document
-    cleanDOM(frag)
+
+    void cleanDOM(frag)
+
+    let { video, title, cookiesPolicy } = this.settings
     let styles = this.getCss(frag)
     let bodyStyles = this.getBodyStyles()
-    let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
     let scrollSetup = this.getScrollSetup()
+
     printDocument.open()
     printDocument.write(
       `<!DOCTYPE html>
         <html>
           <head>
-            <title>${this.settings.title}</title>
+            <title>${title}</title>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link href="https://fonts.googleapis.com/css?family=Lato|Heebo|PT+Serif|Montserrat:400,800&amp;subset=cyrillic" rel="stylesheet">
@@ -293,15 +296,33 @@ class Vuse {
             </style>
           </head>
           <body class="b-body_preview" style="${bodyStyles}">
-            ${video}
+            ${(video) ? this.getVideoBg(video) : ''}
             <div class="main">
               ${artboard.innerHTML}
             </div>
+            ${this.getCookiesScript(cookiesPolicy)}
             <script src="${window.location.origin + '/js/cjs.js'}"></script>
             ${scrollSetup.setup}
           <body>
         </html>`
     )
+  }
+
+  getCookiesScript ({ enabled, pdf }) {
+    if (!enabled || !pdf) {
+      return ''
+    }
+    return `
+      <div id="cookies-policy" class="cookies-policy">
+        <span id="cookies-policy-close" class="cookies-policy__close">&times;</span>
+        <h2 class="cookies-policy__title">Cookies policy</h2>
+        <p class="cookies-policy__description">
+          This website uses cookies.
+          If you do not wish us to set cookies on your device, please do not use the website.
+          Please read the <a href="${pdf}" target="_blank">Cookies Policy</a> for more information.
+        </p>
+      </div>
+    `
   }
 
   getCss (fragment) {
