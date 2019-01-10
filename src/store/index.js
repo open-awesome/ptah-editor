@@ -71,6 +71,10 @@ const actions = {
             backgroundAttachment: 'fixed',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'
+          },
+          cookiesPolicy: {
+            enabled: false,
+            pdf: 'https://gn338.cdn.stg.gamenet.ru/0/7XSEU/o_1ohKcv.pdf'
           }
         })
         commit('isSaved', false)
