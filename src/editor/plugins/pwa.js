@@ -129,6 +129,7 @@ function download (assets) {
               ${artboard.innerHTML}
             </div>
             ${video}
+            ${this.getCookiesPreview()}
           <script src="js/cjs.js"></script>
           ${scrollSetup.setup}
           </body>
