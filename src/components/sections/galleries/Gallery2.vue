@@ -5,6 +5,7 @@
     :class="$sectionData.mainStyle.classes.list"
     :style="$sectionData.mainStyle.styles"
     >
+      <slot name="video"/>
       <div class="b-gallery-two__wrap">
         <div class="b-gallery-two flex flex_center">
           <div class="b-gallery-two__item-wrap"

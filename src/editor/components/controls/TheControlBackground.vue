@@ -92,7 +92,10 @@ export default {
         <base-color-picker label="Background color" v-model="bgColor" @change="changeColor"></base-color-picker>
       </div>
       <div class="b-bg-controls__control">
-        <base-upload-input v-model="bgImage" @upload="changeImage" label="Background image" placeholder="Image Url"></base-upload-input>
+        <base-uploader
+            v-model="bgImage"
+            @change="changeImage"
+            label="Background image"/>
       </div>
       <div class="b-bg-controls__control">
         <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>

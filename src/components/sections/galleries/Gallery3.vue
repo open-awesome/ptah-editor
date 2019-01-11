@@ -4,6 +4,7 @@
     :class="$sectionData.mainStyle.classes.list"
     :style="$sectionData.mainStyle.styles"
     >
+      <slot name="video"/>
       <div class="b-gallery-three__wrap">
         <div class="b-gallery-three-block flex flex_center">
           <div class="b-gallery-three-block__item flex flex_center flex_columns"

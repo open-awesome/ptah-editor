@@ -1,6 +1,6 @@
 <template>
   <div class="b-elem-settings">
-    <!-- text align -->
+    <!-- Text align -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
       <control-align
         :isBox="settingObjectOptions.box"
@@ -11,7 +11,7 @@
       </control-align>
     </div>
 
-    <!-- size -->
+    <!-- Size -->
     <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
       <control-size
         :height="elHeight"
@@ -192,7 +192,7 @@ export default {
 
     /* Get font settings */
     this.fontFamily = styles['font-family'] || 'lato'
-    this.fontSize = styles['font-size'] || 1.6
+    this.fontSize = styles['font-size'] || '1.6rem'
     this.fontColor = styles['color'] || '#000'
 
     if (styles['font-style']) {

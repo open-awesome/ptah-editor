@@ -15,6 +15,10 @@ export default {
       {
         id: 'seoSettings',
         name: 'SEO settings'
+      },
+      {
+        id: 'cookiesSettings',
+        name: 'Cookies settings'
       }
       // {
       //   id: 'versionHistory',
@@ -67,7 +71,7 @@ export default {
     },
 
     toggleAddSectionMenu ({ state, commit }, value) {
-      commit('isAddSectionExpanded', value || !state.isAddSectionExpanded)
+      commit('isAddSectionExpanded', (typeof value !== 'undefined') ? value : !state.isAddSectionExpanded)
     },
 
     setMenuItem ({ commit }, value) {

@@ -1,5 +1,5 @@
 <template>
-  <div class="b-section-settings">
+<div class="b-section-settings">
   <base-scroll-container backgroundBar="#999">
     <div class="b-section-settings__inner">
       <div class="b-section-settings__control">
@@ -19,7 +19,7 @@
         :expand="expandedSystemRequirements"
         @open="onExpand"
         v-if="settingObjectOptions.hasSystemRequirements"
-        >
+      >
       </control-system-requirements>
 
       <!-- Products Section Controls -->
@@ -27,10 +27,10 @@
         :expand="expandedProducts"
         @open="onExpand"
         v-if="settingObjectOptions.hasProducts"
-        >
+      >
       </control-section-products>
 
-     <!-- font -->
+      <!-- font -->
       <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
         <control-text
           :fontSize="fontSize"
@@ -43,36 +43,47 @@
       </div>
 
       <template v-if="settingObjectOptions.background">
-        <div class="b-section-settings__control picker">
-          <base-label class="picker__label">
-            Background color
-            <base-button :disabled="!backgroundPickers[0]" @click="addBackgroundPicker" color="light-gray" class="picker__button">
-              <icon-plus width="10" height="10" class="picker__icon"/>
-            </base-button>
-          </base-label>
-          <div v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`" class="picker__item">
-            <base-color-picker v-model="backgroundPickers[index]" @change="updateBgColor"/>
-            <base-button v-show="backgroundPickers.length > 1" @click="removeBackgroundPicker(index)" color="light-gray" class="picker__button">
-              <i class="picker__icon picker__icon--minus">-</i>
-            </base-button>
-          </div>
+
+        <div class="b-section-settings__header">
+          <span>Background</span>
         </div>
 
         <div class="b-section-settings__control">
-          <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
+          <base-label>Use video as background</base-label>
+          <base-switcher
+            :value="backgroundType === 'video'"
+            @change="toggleBackgroundType"/>
         </div>
-        <template v-if="sectionBgUrl.length">
+
+        <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
+          <BaseUploadInput
+            :value="settingObjectOptions.backgroundVideo"
+            @upload="uploadVideo"
+            label="Background video"
+            placeholder="paste Video URL" />
+        </div>
+
+        <template v-else>
           <div class="b-section-settings__control">
-            <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+            <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
           </div>
           <div class="b-section-settings__control">
-            <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
+            <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Background image"/>
           </div>
-          <div class="b-section-settings__control">
-            <base-label>Fixed while scrolling</base-label>
-            <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
-          </div>
+          <template v-if="sectionBgUrl.length">
+            <div class="b-section-settings__control">
+              <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+            </div>
+            <div class="b-section-settings__control">
+              <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
+            </div>
+            <div class="b-section-settings__control">
+              <base-label>Fixed while scrolling</base-label>
+              <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
+            </div>
+          </template>
         </template>
+
       </template>
 
       <!-- Video Section Controls-->
@@ -120,21 +131,21 @@
 
       <!-- Images Multiple Upload -->
       <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
-        <BaseImageUploadMultiple
-          label="Images upload"
-          :data-images="galleryImages"
+        <base-uploader
+          :value="galleryImages"
           @change="updateGalleryImages"
-        />
+          label="Images upload"
+          multiple/>
       </div>
 
     </div>
 
   </base-scroll-container>
 
-    <div class="b-section-settings__buttons">
-      <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
-    </div>
+  <div class="b-section-settings__buttons">
+    <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
   </div>
+</div>
 </template>
 
 <script>
@@ -144,6 +155,7 @@ import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
+import BaseUploader from '../../components/base/BaseUploader'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -156,6 +168,7 @@ function getPickerColor (color) {
 
 export default {
   components: {
+    BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
     ControlText,
@@ -227,6 +240,9 @@ export default {
       get () {
         return this.bgAttachment === 'fixed'
       }
+    },
+    backgroundType () {
+      return this.settingObjectOptions.backgroundType
     }
   },
 
@@ -307,7 +323,7 @@ export default {
       'clearSettingObject'
     ]),
 
-    updateBgColor () {
+    updateBgColor (value) {
       let settings = this.settingObjectOptions
       let pickers = this.backgroundPickers
       let image = (typeof settings.styles['background-image'] === 'string') ? settings.styles['background-image'] : ''
@@ -318,7 +334,7 @@ export default {
         case 0:
           break
         case 1:
-          styles['background-color'] = getPickerColor(pickers[0])
+          styles['background-color'] = getPickerColor(value)
           styles['background-image'] = (bgimage) ? bgimage[0] : ''
           break
         default:
@@ -337,7 +353,8 @@ export default {
       this.updateSettingOptions(_.merge({}, settings, { styles }))
     },
 
-    updateBgUrl () {
+    updateBgUrl (value) {
+      this.sectionBgUrl = value || ''
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
         styles: {
           'background-image': `url(${this.sectionBgUrl})`
@@ -439,13 +456,31 @@ export default {
         const el = this.settingObjectOptions.element
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
+    },
+
+    toggleBackgroundType (value) {
+      let backgroundType = (value) ? 'video' : 'default'
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, { backgroundType })
+      )
+    },
+
+    uploadVideo (url) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, { backgroundVideo: url || null })
+      )
+      // --- update video player
+      document.querySelectorAll('video[id^="bg-video"]').forEach(video => {
+        video.pause()
+        video.load()
+        video.play()
+      })
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-
 .b-section-settings
   display: flex
   flex-direction: column
@@ -477,6 +512,40 @@ export default {
     &__label
       display: flex
       align-items: center
+      cursor: pointer
+      margin: 1.6rem 0
+      i
+        margin-left: 5px
+        margin-bottom: -5px
+        transform: rotate(180deg)
+        &.dropped
+          transform: rotate(0deg)
+    &__buttons
+      position: absolute
+      bottom: 1rem
+      left: 1rem
+      button
+        max-width: 100%
+    &__control
+      margin-bottom: 2rem
+      &--video
+        display: flex
+        align-items: center
+        justify-content: space-between
+        line-height: 1.5
+        .b-base-label
+          display: inline-block
+          max-width: 18rem
+          padding: .6rem .2rem .4rem 0
+          overflow: hidden
+          white-space: nowrap
+          text-overflow: ellipsis
+    &__description
+      font-size: 1.4rem
+      line-height: 1.7rem
+      color: #747474
+      margin-bottom: 2rem
+      margin-top: -1rem
       justify-content: space-between
 
     &__button

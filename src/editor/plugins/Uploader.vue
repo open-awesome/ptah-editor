@@ -55,7 +55,7 @@ export default {
 
       $form[0].reset()
 
-      axios.post('http://images.stg.gamenet.ru/restapi', request)
+      axios.post('//images.stg.gamenet.ru/restapi', request)
         .then(function (response) {
           if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response') ||
                     !response['data']['response'].hasOwnProperty('data') ||

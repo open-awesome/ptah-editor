@@ -211,6 +211,7 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
+    <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
         <h2 class="b-header"
@@ -396,4 +397,11 @@ $h: 100vh
   display: flex
   justify-content: center
   align-items: center
+.b-draggable-slot,
+.b-draggable-slot > div
+  max-width: 100%
+  max-height: 100%
+.b-draggable-slot .b-logo
+  max-width: calc(100% - 2.4rem)
+  max-height: calc(100% - 2.4rem)
 </style>
