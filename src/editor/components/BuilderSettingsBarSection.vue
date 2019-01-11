@@ -1,5 +1,5 @@
 <template>
-  <div class="b-section-settings">
+<div class="b-section-settings">
   <base-scroll-container backgroundBar="#999">
     <div class="b-section-settings__inner">
       <div class="b-section-settings__control">
@@ -19,8 +19,16 @@
         :expand="expandedSystemRequirements"
         @open="onExpand"
         v-if="settingObjectOptions.hasSystemRequirements"
-        >
+      >
       </control-system-requirements>
+
+      <!-- Products Section Controls -->
+      <control-section-products
+        :expand="expandedProducts"
+        @open="onExpand"
+        v-if="settingObjectOptions.hasProducts"
+      >
+      </control-section-products>
 
      <!-- Font -->
       <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
@@ -68,7 +76,7 @@
             <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
           </div>
           <div class="b-section-settings__control">
-            <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
+            <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Background image"/>
           </div>
           <template v-if="sectionBgUrl.length">
             <div class="b-section-settings__control">
@@ -131,21 +139,21 @@
 
       <!-- Images Multiple Upload -->
       <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
-        <BaseImageUploadMultiple
-          label="Images upload"
-          :data-images="galleryImages"
+        <base-uploader
+          :value="galleryImages"
           @change="updateGalleryImages"
-        />
+          label="Images upload"
+          multiple/>
       </div>
 
     </div>
 
   </base-scroll-container>
 
-    <div class="b-section-settings__buttons">
-      <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
-    </div>
+  <div class="b-section-settings__buttons">
+    <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
   </div>
+</div>
 </template>
 
 <script>
@@ -155,6 +163,7 @@ import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
+import BaseUploader from '../../components/base/BaseUploader'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -167,6 +176,7 @@ function getPickerColor (color) {
 
 export default {
   components: {
+    BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
     ControlText,
@@ -249,9 +259,6 @@ export default {
     let image = (typeof styles['background-image'] === 'string') ? styles['background-image'] : ''
     let bgimage = image.match(/url\((.*?)\)/)
 
-    this.sectionBgColor = styles['background-color']
-    this.sectionBgUrl = image.length > 0 && image !== 'none' ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
-
     if (bgimage) {
       bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
     }
@@ -325,7 +332,7 @@ export default {
       'clearSettingObject'
     ]),
 
-    updateBgColor () {
+    updateBgColor (value) {
       let settings = this.settingObjectOptions
       let pickers = this.backgroundPickers
       let image = (typeof settings.styles['background-image'] === 'string') ? settings.styles['background-image'] : ''
@@ -336,7 +343,7 @@ export default {
         case 0:
           break
         case 1:
-          styles['background-color'] = getPickerColor(pickers[0])
+          styles['background-color'] = getPickerColor(value)
           styles['background-image'] = (bgimage) ? bgimage[0] : ''
           break
         default:
@@ -355,7 +362,8 @@ export default {
       this.updateSettingOptions(_.merge({}, settings, { styles }))
     },
 
-    updateBgUrl () {
+    updateBgUrl (value) {
+      this.sectionBgUrl = value || ''
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
         styles: {
           'background-image': `url(${this.sectionBgUrl})`
