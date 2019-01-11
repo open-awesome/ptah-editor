@@ -221,7 +221,7 @@ export default {
     }
     this.bgImage = styles['background-image'] || 'none'
     this.bgRepeat = styles['background-repeat'] || 'no-repeat'
-    this.bgSize = styles['background-size'] || 'cover'
+    this.bgSize = styles['background-size'] || 'contain'
 
     /* Get element size */
     this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetHeight
