@@ -357,20 +357,13 @@ const data = new Map([
         'background-repeat': false,
         'background-size': false,
         'background-color': false,
-        'background': false,
         'font-family': 'Lato',
         'font-size':  1.6,
         'font-weight': false,
         'font-style': false,
         'text-decoration': false,
         'text-align': false,
-        'color': '#fff',
-        'background-image': '',
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false
+        'color': '#fff'
       }
     })
   )],
