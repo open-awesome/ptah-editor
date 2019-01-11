@@ -381,7 +381,7 @@ const data = new Map([
       background: true,
       hasMultipleImages: true,
       hasHeader: true,
-
+      galleryImages: [],
       header: 'This is a short header',
       // --- swiper options
       swiper: {
