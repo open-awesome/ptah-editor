@@ -893,8 +893,7 @@ export default {
                <!-- b-products-columns-extend__right -->
                 <div class="b-grid__row">
                   <div class="b-grid__col-12 b-products-columns-extend__right-item"
-                    v-show="$sectionData.mainStyle.selectProduct.name === 'Standart' && $sectionData.mainStyle.products['Standart'].visible"
-                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' }"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' && $sectionData.mainStyle.products['Standart'].visible }"
                     :product-extend-stage="0"
                     >
                     <sandbox
@@ -975,8 +974,7 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-show="$sectionData.mainStyle.selectProduct.name === 'Full' && $sectionData.mainStyle.products['Full'].visible"
-                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Full' }"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Full'  && $sectionData.mainStyle.products['Full'].visible}"
                     :product-extend-stage="1"
                     >
                     <sandbox
@@ -1055,8 +1053,7 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-show="$sectionData.mainStyle.selectProduct.name === 'Deluxe' && $sectionData.mainStyle.products['Deluxe'].visible"
-                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' }"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' && $sectionData.mainStyle.products['Deluxe'].visible }"
                     :product-extend-stage="2"
                     >
                     <sandbox
@@ -1135,8 +1132,7 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-show="$sectionData.mainStyle.selectProduct.name === 'Ultimate' && $sectionData.mainStyle.products['Ultimate'].visible"
-                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate' }"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate'  && $sectionData.mainStyle.products['Ultimate'].visible}"
                     :product-extend-stage="3"
                     >
                     <sandbox
