@@ -85,11 +85,12 @@ export default {
   },
 
   created () {
+    let value = (this.value === 'null') ? null : this.value
     if (this.multiple) {
-      let items = (Array.isArray(this.value)) ? this.value : [this.value]
+      let items = (Array.isArray(value)) ? value : [value]
       this.items = cloneDeep(items)
     } else {
-      this.src = this.value
+      this.src = value
     }
   },
 
