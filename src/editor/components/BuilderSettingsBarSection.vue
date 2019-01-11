@@ -6,14 +6,6 @@
         <control-section-layouts :builder="builder"></control-section-layouts>
       </div>
 
-      <!-- Products Section Controls -->
-      <control-section-products
-        :expand="expandedProducts"
-        @open="onExpand"
-        v-if="settingObjectOptions.hasProducts"
-        >
-      </control-section-products>
-
       <!-- System requirements -->
       <control-system-requirements
         :expand="expandedSystemRequirements"
