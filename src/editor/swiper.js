@@ -6,8 +6,8 @@ export default {
 
   coreflow: {
     effect: 'coverflow',
-    grabCursor: true,
     centeredSlides: true,
+    simulateTouch: false,
     slidesPerView: 3,
     spaceBetween: 30,
     coverflowEffect: {
@@ -39,6 +39,7 @@ export default {
 
   autoplay: {
     loop: true,
+    simulateTouch: false,
     autoplay: {
       disableOnInteraction: false,
       waitForTransition: false,
