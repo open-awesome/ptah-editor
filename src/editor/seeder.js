@@ -381,8 +381,12 @@ const data = new Map([
       background: true,
       hasMultipleImages: true,
       hasHeader: true,
-      galleryImages: [],
-      header: 'This is a short header'
+
+      header: 'This is a short header',
+      // --- swiper options
+      swiper: {
+        delay: 2000
+      }
     })
   )],
   [types.AvailablePlatforms, () => (_.merge({}, DEFAULT_OPTIONS,

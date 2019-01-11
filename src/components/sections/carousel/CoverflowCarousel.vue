@@ -89,7 +89,7 @@ export default {
 
   methods: {
     updateImages (value) {
-      let items = cloneDeep(value)
+      let items = cloneDeep(value || [])
       let length = items.length
       this.images = (length)
         ? [...items]

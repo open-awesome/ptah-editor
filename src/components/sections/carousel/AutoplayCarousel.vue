@@ -79,6 +79,16 @@ export default {
     async 'device.type' () {
       await this.$nextTick()
       setImmediate(this.swiper.update)
+    },
+
+    '$store.state.Sidebar.settingObjectSection.data': {
+      deep: true,
+      immediate: true,
+      handler (value) {
+        if (value && value.hasOwnProperty('mainStyle')) {
+          this.initSwiper(value.mainStyle.swiper.delay)
+        }
+      }
     }
   },
 
@@ -88,16 +98,27 @@ export default {
 
   methods: {
     updateImages (value) {
-      let items = cloneDeep(value)
+      let items = cloneDeep(value || [])
       let length = items.length
       this.images = (length)
         ? [...items]
         : [...items.splice(length - 1, 1), ...items]
     },
 
-    initSwiper () {
+    initSwiper (delay) {
       this.container = this.$el.querySelector(container)
       this.options = merge(autoplay, { pagination: { el: this.$el.querySelector(pagination) } })
+
+      if (this.swiper) {
+        this.swiper.destroy(true, true)
+      }
+
+      if (delay) {
+        this.options.autoplay.delay = delay
+      } else {
+        this.options.autoplay.delay = this.$sectionData.mainStyle.swiper.delay
+      }
+
       this.swiper = new Swiper(this.container, this.options)
     },
 
