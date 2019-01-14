@@ -232,7 +232,7 @@ export default {
     <div class="b-system">
       <div class="b-system-platforms flex flex_center">
         <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
-             v-if="$sectionData.mainStyle.systemRequirements[key].visible"
+             v-show="$sectionData.mainStyle.systemRequirements[key].visible"
              :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.mainStyle.selectPlatform.name }">
           <div
             class="b-system-platforms__item__tab"
@@ -257,7 +257,7 @@ export default {
       <div class="b-system-requirements">
         <div class="b-system-requirements__table">
           <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
-              v-show="$sectionData.mainStyle.selectPlatform.name === key && $sectionData.mainStyle.systemRequirements[key].visible">
+              v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
             <div>
               <div class="b-system-requirements__table-row  flex flex_center">
                 <div class="b-system-requirements__table-col">
