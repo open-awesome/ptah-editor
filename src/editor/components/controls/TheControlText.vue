@@ -1,6 +1,6 @@
 <script>
 import find from 'lodash-es/find'
-
+import { mapState } from 'vuex'
 const LIST_FONTS = [
   'Lato',
   'Montserrat',
@@ -90,6 +90,9 @@ export default {
   },
 
   computed: {
+    ...mapState('Sidebar', [
+      'settingObjectSection'
+    ]),
     fonts () {
       const options = LIST_FONTS.map((font) => {
         return { name: font, value: font }
@@ -103,13 +106,25 @@ export default {
   methods: {
     changeFont () {
       this.$emit('change', ['fontFamily', this.fontName.value])
+
+      if (this.isComplexText) {
+        this.changeStyleAll('font-family', this.fontName.value)
+      }
     },
     changeSize () {
       this.$emit('change', ['font-size', `${this.size.value}rem`])
+
+      if (this.isComplexText) {
+        this.changeStyleAll('font-size', `${this.size.value}rem`)
+      }
     },
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.$emit('change', ['color', color])
+
+      if (this.isComplexText) {
+        this.changeStyleAll('color', color)
+      }
     },
     changeStyle () {
       this.style.forEach((style) => {
@@ -120,9 +135,25 @@ export default {
         }
       })
     },
-
     onClickTitle () {
       this.$emit('open', ['Font', !this.controlOpen])
+    },
+    changeStyleAll (style, value) {
+      let data = this.settingObjectSection.data
+
+      for (var key in data) {
+        if (key.indexOf('components') !== -1) {
+          let components = data[key]
+
+          components.forEach((component, index) => {
+            for (var keyEl in component.element.styles) {
+              if (keyEl.indexOf(style) !== -1 && keyEl.indexOf('back') === -1) {
+                this.settingObjectSection.data[key][index].element.styles[keyEl] = value
+              }
+            }
+          })
+        }
+      }
     }
   }
 }

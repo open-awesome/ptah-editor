@@ -225,7 +225,9 @@ export default {
       styles: [],
       products: {},
       selectProduct: {},
-      expandedProducts: false
+      expandedProducts: false,
+
+      isComplexText: false
     }
   },
 
@@ -244,9 +246,6 @@ export default {
     },
     backgroundType () {
       return this.settingObjectOptions.backgroundType
-    },
-    isComplexText () {
-      return this.hasProducts
     }
   },
 
@@ -299,6 +298,7 @@ export default {
 
     /* */
     this.selectProduct = this.settingObjectOptions.selectProduct || {}
+    this.isComplexText = this.settingObjectOptions.hasProducts || false
   },
 
   watch: {
@@ -494,6 +494,7 @@ export default {
   flex-direction: column
   align-items: stretch
   padding-bottom: 4.5rem
+  min-width: 24rem
   &__header
     font-size: 1.6rem
     height: 3.2rem
@@ -528,9 +529,9 @@ export default {
     color: #747474
     margin-bottom: 2rem
     margin-top: -1rem
-
+  .vue-scrollbar__wrapper
+    margin: 0
   .picker
-
     &__label
       display: flex
       align-items: center

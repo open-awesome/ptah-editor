@@ -480,7 +480,7 @@ const COMPONENTS = [
   },
   {
     name: 'Description',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'text',
     class: 'b-text'
   },
@@ -507,7 +507,7 @@ const COMPONENTS_M = [
   },
   {
     name: 'Description',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'text',
     class: 'b-text'
   }
