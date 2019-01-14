@@ -132,6 +132,8 @@ export default {
     })
 
     this.$store.dispatch('Landing/updateGroups', groupList)
+
+    this.observeGroups()
   },
 
   beforeDestroy () {
@@ -276,6 +278,41 @@ export default {
       // --- add selected class and scroll to el
       menuItem.classList.add('b-menu-subitem_selected')
       menuItem.scrollIntoView()
+    },
+
+    observeGroups () {
+      let groups = []
+
+      this.$builder.sections.forEach((section, index) => {
+        if (section.data.mainStyle.absorb > 0) {
+          let group = {}
+          group.main = section
+          group.main_element = this.$refs.artboard.children[index]
+          group.absorb = section.data.mainStyle.absorb
+          group.children = Array
+            .from(this.$refs.artboard.children)
+            .slice(index + 1, index + section.data.mainStyle.absorb + 1)
+
+          groups.push(group)
+        }
+      })
+
+      this.calculateGroups(groups)
+    },
+
+    calculateGroups (groups) {
+      groups.forEach((group) => {
+        let padding = group.children.reduce((sum, el) => sum + el.offsetHeight, 0)
+        group.main_element.style.paddingBottom = padding + 'px'
+
+        group.children.forEach((el) => {
+          let height = el.offsetHeight
+          let style = el.style
+          style.position = 'relative'
+          style.top = `-${height}px`
+          style.marginBottom = `-${height}px`
+        })
+      })
     }
   }
 }

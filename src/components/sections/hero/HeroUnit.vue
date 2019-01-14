@@ -162,6 +162,8 @@ export default {
         elementObj.element.text = text
       }
     })
+
+    this.$sectionData.mainStyle.absorb = 1
   },
 
   updated () {
