@@ -10,7 +10,8 @@ export default {
           'black',
           'blue',
           'gray',
-          'light-gray'
+          'light-gray',
+          'orange'
         ]
         return values.indexOf(value) !== -1
       }
@@ -128,6 +129,14 @@ export default {
     color: #474747
     background-color: #fafafa
     border: 0.2rem #fff solid
+  &_orange
+    color: $white
+    background-color: $orange-dark
+    border-radius: .4rem
+    &:hover
+      background-color: $orange-dark !important
+      border-color: $orange-dark !important
+      opacity: .8
   &_transparent
     background-color: transparent
 </style>

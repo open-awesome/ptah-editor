@@ -14,16 +14,18 @@
 <script>
 import { mapState, mapGetters, mapActions } from 'vuex'
 import BuilderSiteSettingsSeo from './BuilderSiteSettingsSeo'
-import BuilderSiteSettingsVersionHistory from './BuilderSiteSettingsVersionHistory'
 import BuilderSiteSettingsVisual from './BuilderSiteSettingsVisual'
+import BuilderSiteSettingsCookies from './BuilderSiteSettingsCookies'
+import BuilderSiteSettingsVersionHistory from './BuilderSiteSettingsVersionHistory'
 
 export default {
   name: 'BuilderModalContent',
 
   components: {
     BuilderSiteSettingsSeo,
-    BuilderSiteSettingsVersionHistory,
-    BuilderSiteSettingsVisual
+    BuilderSiteSettingsCookies,
+    BuilderSiteSettingsVisual,
+    BuilderSiteSettingsVersionHistory
   },
 
   computed: {

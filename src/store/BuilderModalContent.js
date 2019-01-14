@@ -1,6 +1,7 @@
 const contentComponentMap = {
   visualSettings: 'BuilderSiteSettingsVisual',
   seoSettings: 'BuilderSiteSettingsSeo',
+  cookiesSettings: 'BuilderSiteSettingsCookies',
   versionHistory: 'BuilderSiteSettingsVersionHistory'
 }
 

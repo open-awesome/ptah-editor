@@ -11,12 +11,7 @@
         ></BuilderTopBar>
     </div>
     <div class="b-builder-layout-content">
-      <main class="b-builder-layout-content__main">
-        <div class="b-builder-layout-content__main-layout" :class="device">
-          <slot></slot>
-        </div>
-        <BuilderModalContent />
-      </main>
+
       <aside
         class="b-builder-layout-content__sidebar"
         :class="{'b-builder-layout-content__sidebar_expanded': isExpanded}">
@@ -26,6 +21,14 @@
           :isExpanded="isExpanded"
           ></BuilderSidebar>
       </aside>
+
+      <main class="b-builder-layout-content__main">
+        <div class="b-builder-layout-content__main-layout" :class="device">
+          <slot></slot>
+        </div>
+        <BuilderModalContent />
+      </main>
+
     </div>
   </div>
 </template>
@@ -101,14 +104,17 @@ export default {
     order: 1
     width: 2rem
     flex-shrink: 0
-    width: 2rem
     min-height: 5rem
     position: relative
     z-index: 20
     transition: width 0.3s ease-in-out
+    + .b-builder-layout-content__main
+      width: calc(100% - 2rem)
 
     &_expanded
       width: 24rem
+      + .b-builder-layout-content__main
+        width: calc(100% - 24rem)
 
   &__main
     order: 2
@@ -117,6 +123,7 @@ export default {
     margin: 7.2rem 0
     position: relative
     z-index: 10
+    transition: width 0.3s ease-in-out
 
     &-layout
       transition: width 0.2s
@@ -128,6 +135,8 @@ export default {
         width: 100%
       &.is-laptop
         width: 120rem
+        max-width: 100%
       &.is-mobile
         width: 37rem
+        max-width: 100%
 </style>

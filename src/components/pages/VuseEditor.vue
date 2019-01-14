@@ -41,7 +41,9 @@ import Footer from '@components/sections/footers/Footer'
 import ThreeColumns from '@components/sections/columns/ThreeColumns'
 import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
-import GalleryCarousel from '@components/sections/carousel/GalleryCarousel'
+import DefaultCarousel from '@components/sections/carousel/DefaultCarousel'
+import CoverflowCarousel from '@components/sections/carousel/CoverflowCarousel'
+import AutoplayCarousel from '@components/sections/carousel/AutoplayCarousel'
 
 import store from '@store'
 
@@ -78,7 +80,9 @@ Vuse.component('Footer', Footer)
 Vuse.component('ThreeColumns', ThreeColumns)
 Vuse.component('TwoColumns', TwoColumns)
 Vuse.component('Video', Video)
-Vuse.component('GalleryCarousel', GalleryCarousel)
+Vuse.component('DefaultCarousel', DefaultCarousel)
+Vuse.component('CoverflowCarousel', CoverflowCarousel)
+Vuse.component('AutoplayCarousel', AutoplayCarousel)
 
 Vuse.use(pwa)
 

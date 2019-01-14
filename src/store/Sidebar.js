@@ -15,6 +15,10 @@ export default {
       {
         id: 'seoSettings',
         name: 'SEO settings'
+      },
+      {
+        id: 'cookiesSettings',
+        name: 'Cookies settings'
       }
       // {
       //   id: 'versionHistory',
