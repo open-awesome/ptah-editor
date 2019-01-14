@@ -30,6 +30,7 @@
           :fontColor="fontColor"
           :fontStyles="styles"
           :expand="expandedFont"
+          :isComplexText="isComplexText"
           @open="onExpand"
           @change="styleChange"></control-text>
       </div>
@@ -243,6 +244,9 @@ export default {
     },
     backgroundType () {
       return this.settingObjectOptions.backgroundType
+    },
+    isComplexText () {
+      return this.hasProducts
     }
   },
 
@@ -291,6 +295,9 @@ export default {
 
     /* Products */
     this.products = this.settingObjectOptions.products || {}
+    this.selectProduct = this.settingObjectOptions.selectProduct || {}
+
+    /* */
     this.selectProduct = this.settingObjectOptions.selectProduct || {}
   },
 

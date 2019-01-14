@@ -7,7 +7,7 @@
         </span>
       </div>
       <div class="b-text-icon__item">
-        <span v-text="icon.text" :style="{ color: colorFill['color'] }"></span>
+        <span v-text="icon.text"></span>
       </div>
     </div>
 </template>

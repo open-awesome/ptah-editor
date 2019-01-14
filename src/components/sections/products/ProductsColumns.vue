@@ -507,7 +507,7 @@ const COMPONENTS_M = [
   },
   {
     name: 'Description',
-    element: types.Text,
+    element: types.TextInherit,
     type: 'text',
     class: 'b-text'
   }

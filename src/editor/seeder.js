@@ -658,7 +658,6 @@ const data = new Map([
   [types.TextInherit, () => (_.merge({}, DEFAULT_OPTIONS, {
     text: 'Enter your text',
     aligned: true,
-    typography: true,
     styles: {
         'font-family': 'inherit',
         'font-size': 'inherit',

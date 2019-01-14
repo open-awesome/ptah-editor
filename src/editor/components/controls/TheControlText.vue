@@ -29,6 +29,9 @@ export default {
     expand: {
       type: Boolean,
       required: true
+    },
+    isComplexText: {
+      type: Boolean
     }
   },
 
