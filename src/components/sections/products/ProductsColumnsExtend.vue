@@ -541,7 +541,7 @@ const COMPONENTS_D = [
 ]
 
 const GROUP_NAME = 'Products'
-const NAME = 'ProductsColumnsExtend'
+const NAME = 'ProductsColumns'
 
 export default {
   name: NAME,
@@ -575,8 +575,7 @@ export default {
     components3d: COMPONENTS_D,
     components4: COMPONENTS,
     components4m: COMPONENTS_M,
-    components4d: COMPONENTS_D,
-    listComponents: {}
+    components4d: COMPONENTS_D
   },
   props: {
     id: {
@@ -642,53 +641,22 @@ export default {
     },
 
     storeData: _.after(2, (self) => {
-      let data = self.$sectionData.listComponents
-      for (var key in data) {
-        if (!Array.isArray(self.$sectionData[key])) {
-          return
-        }
-        self.$sectionData[key].forEach(component => {
-          data[key].push(component)
-        })
-      }
-      data['mainStyle'] = self.$sectionData['mainStyle']
-      self.updateGroupData({ name: GROUP_NAME, data })
       self.updateSectionData({
         name: NAME,
         data: _.cloneDeep(self.$sectionData)
       })
-    }),
-
-    canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
-    },
-
-    setListComponents () {
-      for (var key in this.$sectionData) {
-        if (key.indexOf('components') !== -1) {
-          this.$sectionData.listComponents[key] = []
-        }
-      }
-    }
+    })
   },
 
   created () {
-    if (this.$sectionData.edited === undefined) {
-      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
-      Seeder.seed(_.merge(this.$sectionData, data))
+    if (this.$sectionData.edited === undefined && !!this.$store.state.Landing.sectionData[NAME] === false) {
+      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    } else {
+      Seeder.seed(_.merge(this.$sectionData, this.$store.state.Landing.sectionData[NAME]))
     }
-
-    if (this.$store.state.Landing.groupData[GROUP_NAME]) {
-      _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (arrComponents, name) => {
-        this.$sectionData[name] = arrComponents
-      })
-    }
-
-    this.setListComponents()
   },
 
   updated: function () {
-    this.setListComponents()
     this.storeData(this)
   }
 }
@@ -940,6 +908,7 @@ export default {
                       ref="sandbox"
                       path="$sectionData.container1d"
                       direction="column"
+                      alignItems="flex-start"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
                       <elements-list @addEl="onAddElement1d"></elements-list>
@@ -1021,6 +990,7 @@ export default {
                       ref="sandbox"
                       path="$sectionData.container2d"
                       direction="column"
+                      alignItems="flex-start"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
                       <elements-list @addEl="onAddElement2d"></elements-list>
@@ -1101,6 +1071,7 @@ export default {
                       ref="sandbox"
                       path="$sectionData.container3d"
                       direction="column"
+                      alignItems="flex-start"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
                       <elements-list @addEl="onAddElement3d"></elements-list>
@@ -1181,6 +1152,7 @@ export default {
                       ref="sandbox"
                       path="$sectionData.container4d"
                       direction="column"
+                      alignItems="flex-start"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
                       <elements-list @addEl="onAddElement4d"></elements-list>
