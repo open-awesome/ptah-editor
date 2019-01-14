@@ -136,6 +136,15 @@
           @change="updateGalleryImages"
           label="Images upload"
           multiple/>
+        <br>
+        <base-range-slider
+            v-if="settingObjectSection.name === 'AutoplayCarousel'"
+            :value="settingObjectSection.data.mainStyle.swiper.delay"
+            :label="`Autoplay slides delay (${settingObjectSection.data.mainStyle.swiper.delay})`"
+            @change="changeSwiperDelay"
+            step="1000"
+            min="1000"
+            max="10000"/>
       </div>
 
     </div>
@@ -411,6 +420,14 @@ export default {
         ..._.cloneDeep(this.settingObjectOptions),
         galleryImages
       })
+    },
+
+    changeSwiperDelay (delay) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          swiper: { delay }
+        })
+      )
     },
 
     addBackgroundPicker () {

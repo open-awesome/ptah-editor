@@ -75,7 +75,7 @@
 
     </div>
     <transition name="slide-fade">
-      <div class="b-builder-sidebar-settings" v-show="isExpanded && isSettingsExpanded">
+      <div class="b-builder-sidebar-settings" v-if="isExpanded && isSettingsExpanded">
         <BuilderSettingsBar
           :title="settingObjectOptions.sectionName"
           :builder="builder"
@@ -86,7 +86,7 @@
     </transition>
 
     <transition name="slide-fade">
-      <div class="b-builder-sidebar-add-section" v-show="isExpanded && isAddSectionExpanded">
+      <div class="b-builder-sidebar-add-section" v-if="isExpanded && isAddSectionExpanded">
         <BuilderAddSectionBar
           :builder="builder"
           title="Add Section"
