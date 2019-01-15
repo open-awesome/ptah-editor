@@ -122,7 +122,7 @@ export default {
     changePseudo (attr, style, pseudoClass = 'hover') {
       if (style !== '') {
         this.changePseudoStyle(attr, style + '!important')
-        this.pseudo[pseudoClass][attr] = style + ' !important'
+        this.pseudo[pseudoClass][attr] = style + '!important'
       }
     },
 
@@ -165,7 +165,9 @@ export default {
     let self = this
     let pBackgroundColor = this.pseudo['hover']['background-color'].split('!')[0]
     let pBackgroundImage = this.pseudo['hover']['background-image'].split('!')[0]
-    let pColor = this.pseudo['hover']['color']
+    let pBackgroundRepeat = this.pseudo['hover']['background-repeat'].split('!')[0]
+    let pBackgroundSize = this.pseudo['hover']['background-size'].split('!')[0]
+    let pColor = this.pseudo['hover']['color'].split('!')[0]
 
     this.link = this.elLink.href
     this.target = this.elLink.target === '_blank'
@@ -173,10 +175,11 @@ export default {
     this.bgH = pBackgroundColor || this.styles['background-color']
     this.bgHoverImage = pBackgroundImage.length > 0 ? pBackgroundImage.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
 
-    this.textH = pColor.split('!')[0] || this.styles['color']
+    this.textH = pColor || this.styles['color']
 
-    this.bgRepeat = this.styles['background-repeat'] || 'no-repeat'
-    this.bgSize = this.styles['background-size'] || 'cover'
+    this.bgRepeat = pBackgroundRepeat || 'no-repeat'
+    this.bgSize = pBackgroundSize || 'cover'
+
     this.animationList.forEach(function (item, i, arr) {
       if (self.animation.value !== undefined && self.animation.value === self.animationList[i].value) {
         self.animationClass = item
