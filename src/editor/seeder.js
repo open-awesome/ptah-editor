@@ -4,9 +4,7 @@ import * as _ from 'lodash-es'
 
 const DEFAULT_OPTIONS = {
   text: '',
-  classes: {
-    list: []
-  },
+  classes: [],
   styles: {},
   resizable: false,
   hasLink: false,
@@ -137,8 +135,16 @@ const data = new Map([
       'background-position': false,
       'background-repeat': false,
       'background-size': false,
-      'background-color': false,
-      'background': false
+      'background-color': false
+    },
+    pseudo: {
+      hover: {
+        'background-color': '',
+        'color': ''
+      }
+    },
+    animation: {
+      value: ''
     }
   })
   )],

@@ -55,7 +55,7 @@ export default {
 <template>
   <section
     class="b-gallery-carousel"
-    :class="[$sectionData.mainStyle.classes.list, device.type]"
+    :class="[$sectionData.mainStyle.classes, device.type]"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
     >

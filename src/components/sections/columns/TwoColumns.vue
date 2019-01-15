@@ -207,7 +207,7 @@ export default {
 <template>
   <section
     class="b-columns2"
-    :class="$sectionData.mainStyle.classes.list"
+    :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
@@ -241,7 +241,7 @@ export default {
                   :target="$sectionData.components[index].element.link.target"
                   :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes.list, $sectionData.components[index].class]"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   >
                 </component>
                 <component class="b-columns2-component"
@@ -253,7 +253,7 @@ export default {
                   :target="$sectionData.components[index].element.link.target"
                   :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes.list, $sectionData.components[index].class]"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   >
                 </component>
               </div>
@@ -279,7 +279,7 @@ export default {
                   :target="$sectionData.components2[index].element.link.target"
                   :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
-                  :class="[$sectionData.components2[index].element.classes.list, $sectionData.components2[index].class]"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                   >
                 </component>
                 <component class="b-columns2-component"
@@ -291,7 +291,7 @@ export default {
                   :target="$sectionData.components2[index].element.link.target"
                   :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
-                  :class="[$sectionData.components2[index].element.classes.list, $sectionData.components2[index].class]"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                   >
                 </component>
               </div>

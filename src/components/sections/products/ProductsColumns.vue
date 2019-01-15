@@ -674,7 +674,7 @@ export default {
 <template>
   <section
     class="b-products-colums"
-    :class="$sectionData.mainStyle.classes.list"
+    :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
@@ -703,7 +703,7 @@ export default {
                   :target="$sectionData.components1[index].element.link.target"
                   :path="`components1[${index}].element`"
                   :style="$sectionData.components1[index].element.styles"
-                  :class="[$sectionData.components1[index].element.classes.list, $sectionData.components1[index].class]"
+                  :class="[$sectionData.components1[index].element.classes, $sectionData.components1[index].class]"
                   >
                 </component>
                 <component class="b-products-colums-component"
@@ -715,7 +715,7 @@ export default {
                   :target="$sectionData.components1[index].element.link.target"
                   :path="`components1[${index}].element`"
                   :style="$sectionData.components1[index].element.styles"
-                  :class="[$sectionData.components1[index].element.classes.list, $sectionData.components1[index].class]"
+                  :class="[$sectionData.components1[index].element.classes, $sectionData.components1[index].class]"
                   >
                 </component>
               </div>
@@ -741,7 +741,7 @@ export default {
                   :target="$sectionData.components1d[index].element.link.target"
                   :path="`components1d[${index}].element`"
                   :style="$sectionData.components1d[index].element.styles"
-                  :class="[$sectionData.components1d[index].element.classes.list, $sectionData.components1d[index].class]"
+                  :class="[$sectionData.components1d[index].element.classes, $sectionData.components1d[index].class]"
                   >
                 </component>
                 <component class="b-products-colums-component"
@@ -753,7 +753,7 @@ export default {
                   :target="$sectionData.components1d[index].element.link.target"
                   :path="`components1d[${index}].element`"
                   :style="$sectionData.components1d[index].element.styles"
-                  :class="[$sectionData.components1d[index].element.classes.list, $sectionData.components1d[index].class]"
+                  :class="[$sectionData.components1d[index].element.classes, $sectionData.components1d[index].class]"
                   >
                 </component>
               </div>
@@ -782,7 +782,7 @@ export default {
                   :target="$sectionData.components2[index].element.link.target"
                   :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
-                  :class="[$sectionData.components2[index].element.classes.list, $sectionData.components2[index].class]"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                   >
                 </component>
                 <component class="b-products-colums-component"
@@ -794,7 +794,7 @@ export default {
                   :target="$sectionData.components2[index].element.link.target"
                   :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
-                  :class="[$sectionData.components2[index].element.classes.list, $sectionData.components2[index].class]"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                   >
                 </component>
               </div>
@@ -819,7 +819,7 @@ export default {
                   :target="$sectionData.components2d[index].element.link.target"
                   :path="`components2d[${index}].element`"
                   :style="$sectionData.components2d[index].element.styles"
-                  :class="[$sectionData.components2d[index].element.classes.list, $sectionData.components2d[index].class]"
+                  :class="[$sectionData.components2d[index].element.classes, $sectionData.components2d[index].class]"
                   >
                 </component>
                 <component class="b-products-colums-component"
@@ -831,7 +831,7 @@ export default {
                   :target="$sectionData.components2d[index].element.link.target"
                   :path="`components2d[${index}].element`"
                   :style="$sectionData.components2d[index].element.styles"
-                  :class="[$sectionData.components2d[index].element.classes.list, $sectionData.components2d[index].class]"
+                  :class="[$sectionData.components2d[index].element.classes, $sectionData.components2d[index].class]"
                   >
                 </component>
               </div>
@@ -860,7 +860,7 @@ export default {
                   :target="$sectionData.components3[index].element.link.target"
                   :path="`components3[${index}].element`"
                   :style="$sectionData.components3[index].element.styles"
-                  :class="[$sectionData.components3[index].element.classes.list, $sectionData.components3[index].class]"
+                  :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
                   >
                 </component>
                 <component class="b-products-colums-component"
@@ -872,7 +872,7 @@ export default {
                   :target="$sectionData.components3[index].element.link.target"
                   :path="`components3[${index}].element`"
                   :style="$sectionData.components3[index].element.styles"
-                  :class="[$sectionData.components3[index].element.classes.list, $sectionData.components3[index].class]"
+                  :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
                   >
                 </component>
               </div>
@@ -897,7 +897,7 @@ export default {
                   :target="$sectionData.components3d[index].element.link.target"
                   :path="`components3d[${index}].element`"
                   :style="$sectionData.components3d[index].element.styles"
-                  :class="[$sectionData.components3d[index].element.classes.list, $sectionData.components3d[index].class]"
+                  :class="[$sectionData.components3d[index].element.classes, $sectionData.components3d[index].class]"
                   >
                 </component>
                 <component class="b-products-colums-component"
@@ -909,7 +909,7 @@ export default {
                   :target="$sectionData.components3d[index].element.link.target"
                   :path="`components3d[${index}].element`"
                   :style="$sectionData.components3d[index].element.styles"
-                  :class="[$sectionData.components3d[index].element.classes.list, $sectionData.components3d[index].class]"
+                  :class="[$sectionData.components3d[index].element.classes, $sectionData.components3d[index].class]"
                   >
                 </component>
               </div>
@@ -938,7 +938,7 @@ export default {
                   :target="$sectionData.components4[index].element.link.target"
                   :path="`components4[${index}].element`"
                   :style="$sectionData.components4[index].element.styles"
-                  :class="[$sectionData.components4[index].element.classes.list, $sectionData.components4[index].class]"
+                  :class="[$sectionData.components4[index].element.classes, $sectionData.components4[index].class]"
                   >
                 </component>
                 <component class="b-products-colums-component"
@@ -950,7 +950,7 @@ export default {
                   :target="$sectionData.components4[index].element.link.target"
                   :path="`components3[${index}].element`"
                   :style="$sectionData.components4[index].element.styles"
-                  :class="[$sectionData.components4[index].element.classes.list, $sectionData.components4[index].class]"
+                  :class="[$sectionData.components4[index].element.classes, $sectionData.components4[index].class]"
                   >
                 </component>
               </div>
@@ -975,7 +975,7 @@ export default {
                   :target="$sectionData.components4d[index].element.link.target"
                   :path="`components4d[${index}].element`"
                   :style="$sectionData.components4d[index].element.styles"
-                  :class="[$sectionData.components4d[index].element.classes.list, $sectionData.components4d[index].class]"
+                  :class="[$sectionData.components4d[index].element.classes, $sectionData.components4d[index].class]"
                   >
                 </component>
                 <component class="b-products-colums-component"
@@ -987,7 +987,7 @@ export default {
                   :target="$sectionData.components4d[index].element.link.target"
                   :path="`components4d[${index}].element`"
                   :style="$sectionData.components4d[index].element.styles"
-                  :class="[$sectionData.components4d[index].element.classes.list, $sectionData.components4d[index].class]"
+                  :class="[$sectionData.components4d[index].element.classes, $sectionData.components4d[index].class]"
                   >
                 </component>
               </div>

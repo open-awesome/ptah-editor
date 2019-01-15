@@ -55,19 +55,19 @@ const COMPONENTS_2 = [
   {
     name: 'Link',
     element: types.Link,
-    type: 'button',
+    type: 'link',
     class: 'b-footer-link'
   },
   {
     name: 'Link',
     element: types.Link,
-    type: 'button',
+    type: 'link',
     class: 'b-footer-link'
   },
   {
     name: 'Link',
     element: types.Link,
-    type: 'button',
+    type: 'link',
     class: 'b-footer-link'
   },
   {
@@ -284,7 +284,7 @@ export default {
 <template>
   <section
     class="b-hero-skull"
-    :class="$sectionData.mainStyle.classes.list"
+    :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
@@ -308,7 +308,7 @@ export default {
                   :href="$sectionData.components[index].element.link.href"
                   :target="$sectionData.components[index].element.link.target"
                   :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes.list, $sectionData.components[index].class]"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
                   >
                 </component>
@@ -320,7 +320,7 @@ export default {
                   :href="$sectionData.components[index].element.link.href"
                   :target="$sectionData.components[index].element.link.target"
                   :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes.list, $sectionData.components[index].class]"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
                   >
                 </component>
@@ -351,7 +351,7 @@ export default {
                     :href="$sectionData.components2[index].element.link.href"
                     :target="$sectionData.components2[index].element.link.target"
                     :style="$sectionData.components2[index].element.styles"
-                    :class="[$sectionData.components2[index].element.classes.list, $sectionData.components2[index].class]"
+                    :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                     :path="`components2[${index}].element`"
                     class="b-footer-component"
                     >
@@ -364,7 +364,7 @@ export default {
                     :href="$sectionData.components2[index].element.link.href"
                     :target="$sectionData.components2[index].element.link.target"
                     :style="$sectionData.components2[index].element.styles"
-                    :class="[$sectionData.components2[index].element.classes.list, $sectionData.components2[index].class]"
+                    :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                     :path="`components2[${index}].element`"
                     class="b-footer-component"
                     >

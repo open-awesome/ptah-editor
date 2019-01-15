@@ -154,7 +154,7 @@ export default {
 <template>
   <section
     class="b-section-footer"
-    :class="$sectionData.mainStyle.classes.list"
+    :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
@@ -180,7 +180,7 @@ export default {
                     :href="$sectionData.components[index].element.link.href"
                     :target="$sectionData.components[index].element.link.target"
                     :style="$sectionData.components[index].element.styles"
-                    :class="[$sectionData.components[index].element.classes.list, $sectionData.components[index].class]"
+                    :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                     :path="`components[${index}].element`"
                     class="b-footer-component"
                     >
@@ -193,7 +193,7 @@ export default {
                     :href="$sectionData.components[index].element.link.href"
                     :target="$sectionData.components[index].element.link.target"
                     :style="$sectionData.components[index].element.styles"
-                    :class="[$sectionData.components[index].element.classes.list, $sectionData.components[index].class]"
+                    :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                     :path="`components[${index}].element`"
                     class="b-footer-component"
                     >

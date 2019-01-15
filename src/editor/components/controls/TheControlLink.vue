@@ -56,8 +56,13 @@ export default {
       return this.settingObjectOptions.pseudo
     },
 
-    classes () {
-      return this.settingObjectOptions.classes
+    classes: {
+      get: function () {
+        return this.settingObjectOptions.classes
+      },
+      set: function (newValue) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: newValue }))
+      }
     }
 
   },
@@ -113,7 +118,7 @@ export default {
      * Add animation to element
      */
     selectAnimation (className) {
-      let animations = this.classes.list.slice(0)
+      let animations = this.classes.slice(0)
 
       animations.forEach((name, index) => {
         // remove other animation classes
@@ -123,7 +128,7 @@ export default {
       })
       animations.push(className)
 
-      this.classes.list = _.merge([], this.classes.list, animations)
+      this.classes = _.merge([], this.classes, animations)
       this.animation['value'] = animations[0]
     }
   },

@@ -2,7 +2,7 @@
   <section class="b-gallery-two"
     @resize="closePopup"
     v-styler:section="$sectionData.mainStyle"
-    :class="$sectionData.mainStyle.classes.list"
+    :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     >
       <slot name="video"/>

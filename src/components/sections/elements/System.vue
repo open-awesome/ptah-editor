@@ -225,7 +225,7 @@ export default {
 <template>
   <section class="l-system"
     v-styler:section="$sectionData.mainStyle"
-    :class="$sectionData.mainStyle.classes.list"
+    :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     >
     <slot name="video"/>
