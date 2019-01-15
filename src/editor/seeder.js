@@ -131,15 +131,19 @@ const data = new Map([
       'text-decoration': 'none',
       'text-align': 'center',
       'color': '#000',
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': false
+      'background-image': '',
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      'background-color': ''
     },
     pseudo: {
       hover: {
         'background-color': '',
+        'background-image': '',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
         'color': ''
       }
     },
@@ -177,6 +181,10 @@ const data = new Map([
       pseudo: {
         hover: {
           'background-color': '',
+          'background-image': '',
+          'background-position': 'center center',
+          'background-repeat': 'no-repeat',
+          'background-size': 'cover',
           'color': ''
         }
       },
@@ -190,13 +198,13 @@ const data = new Map([
       },
       removable: true,
       styles: {
-        'background-image': false,
+        'background-image': '',
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
+        'background-color': '',
         'color': '#000',
-        'border-color': false,
+        'border-color': '',
         'font-size': '1.6rem',
         'border-radius': 0,
         'font-weight': 'normal',
@@ -223,13 +231,13 @@ const data = new Map([
         target: '_blank'
       },
       styles: {
-        'background-image': false,
+        'background-image': '',
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
+        'background-color': '',
         'color': '#000',
-        'border-color': false,
+        'border-color': '',
         'font-size': '1.2rem',
         'border-radius': 0,
         'font-weight': 'normal',
@@ -255,7 +263,7 @@ const data = new Map([
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-family': 'Lato',
-        'text-decoration': false
+        'text-decoration': ''
       }
     })
   )],
@@ -263,7 +271,7 @@ const data = new Map([
     {
       text: '',
       styles: {
-        'background-image': false,
+        'background-image': '',
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
@@ -323,7 +331,7 @@ const data = new Map([
     background: true,
     visible: true,
     styles: {
-      'background-image': false,
+      'background-image': '',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
@@ -370,7 +378,7 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
+        'background-color': '',
       }
     })
   )],
@@ -398,9 +406,8 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
-        'background': false
-      },
+        'background-color': ''
+         },
       hasPlatforms: true,
       availablePlatforms: {
         'windows': {
@@ -442,8 +449,7 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
-        'background': false
+        'background-color': ''
       },
       hasRestrictions: true,
       ageRestrictions: {
@@ -516,8 +522,7 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
-        'background': false
+        'background-color': ''
       },
       hasNetworks: true,
       socialNetworks: {
@@ -651,8 +656,7 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
-        'background': false,
+        'background-color':'',
         'font-family': 'Lato',
         'font-size':  '1.6rem',
         'font-weight': 'normal',

@@ -17,6 +17,7 @@ export default {
       link: '',
       target: '',
       bgH: '',
+      bgHoverImage: '',
       textH: '',
       animationList: [
         { name: 'none', value: '' },
@@ -85,6 +86,13 @@ export default {
       this.pseudo['hover']['background-color'] = this.bgH.hex + ' !important'
     },
 
+    changeBgImage () {
+      if (this.bgHoverImage !== '') {
+        this.changePseudoStyle('background-image', 'url(' + this.bgHoverImage + ') !important')
+        this.pseudo['hover']['background-image'] = 'url(' + this.bgHoverImage + ') !important'
+      }
+    },
+
     changeTextColor () {
       this.changePseudoStyle('color', this.textH.hex + '!important')
       this.pseudo['hover']['color'] = this.textH.hex + ' !important'
@@ -133,14 +141,18 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
     let self = this
-    let pBackgroundColor = this.pseudo['hover']['background-color']
+    let pBackgroundColor = this.pseudo['hover']['background-color'].split('!')[0]
+    let pBackgroundImage = this.pseudo['hover']['background-image'].split('!')[0]
     let pColor = this.pseudo['hover']['color']
 
     this.link = this.elLink.href
     this.target = this.elLink.target === '_blank'
-    this.bgH = pBackgroundColor.split('!')[0] || this.styles['background-color']
+
+    this.bgH = pBackgroundColor || this.styles['background-color']
+    this.bgHoverImage = pBackgroundImage.length > 0 ? pBackgroundImage.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
+
     this.textH = pColor.split('!')[0] || this.styles['color']
     this.controlOpen = this.expand
 
@@ -167,6 +179,13 @@ export default {
       </div>
       <div class="b-link-controls__control">
         <base-color-picker label="Background hover color" v-model="bgH" @change="changeBgColor"></base-color-picker>
+      </div>
+      <div class="b-link-controls__control">
+        <base-uploader
+          v-model="bgHoverImage"
+          @change="changeBgImage"
+          label="Background hover image">
+        </base-uploader>
       </div>
       <div class="b-link-controls__control">
         <base-color-picker label="Text hover color" v-model="textH" @change="changeTextColor"></base-color-picker>

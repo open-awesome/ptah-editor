@@ -30,7 +30,7 @@ export default {
   created () {
     this.bgColor = this.styles['background-color']
     let image = this.styles['background-image']
-    this.bgImage = !image && image !== 'none' && image.length > 0 ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
+    this.bgImage = image.length > 0 ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
     this.bgRepeat = this.styles['background-repeat'] || 'no-repeat'
     this.bgSize = this.styles['background-size'] || 'cover'
     this.controlOpen = this.expand
@@ -60,7 +60,9 @@ export default {
     },
 
     changeImage () {
-      this.styles['background-image'] = `url(${this.bgImage})`
+      if (this.bgImage !== '') {
+        this.styles['background-image'] = `url(${this.bgImage})`
+      }
     },
 
     changeRepeat () {

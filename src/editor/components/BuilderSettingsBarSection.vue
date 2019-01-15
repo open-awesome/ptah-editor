@@ -506,6 +506,7 @@ export default {
 
   &__inner
     padding-right: 2.5rem
+    padding-bottom: 10rem
 
   &__buttons
     position: absolute
