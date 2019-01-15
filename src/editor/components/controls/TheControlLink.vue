@@ -26,7 +26,17 @@ export default {
         { name: 'shake', value: 'ptah-a-shake' },
         { name: 'bounce', value: 'ptah-a-bounce' }
       ],
-      animationClass: {}
+      animationClass: {},
+      bgRepeat: '',
+      bgSize: '',
+      list: [
+        { text: 'No-repeat', value: 'no-repeat' },
+        { text: 'Repeat', value: 'repeat' }
+      ],
+      sizeList: [
+        { text: 'Tile', value: 'cover' },
+        { text: 'Fill', value: 'contain' }
+      ]
     }
   },
 
@@ -82,20 +92,23 @@ export default {
     },
 
     changeBgColor () {
-      this.changePseudoStyle('background-color', this.bgH.hex + '!important')
-      this.pseudo['hover']['background-color'] = this.bgH.hex + ' !important'
+      this.changePseudo('background-color', this.bgH.hex)
     },
 
     changeBgImage () {
-      if (this.bgHoverImage !== '') {
-        this.changePseudoStyle('background-image', 'url(' + this.bgHoverImage + ') !important')
-        this.pseudo['hover']['background-image'] = 'url(' + this.bgHoverImage + ') !important'
-      }
+      this.changePseudo('background-image', 'url(' + this.bgHoverImage + ')')
+    },
+
+    changeRepeat () {
+      this.changePseudo('background-repeat', this.bgRepeat)
+    },
+
+    changeSize () {
+      this.changePseudo('background-size', this.bgSize)
     },
 
     changeTextColor () {
-      this.changePseudoStyle('color', this.textH.hex + '!important')
-      this.pseudo['hover']['color'] = this.textH.hex + ' !important'
+      this.changePseudo('color', this.textH.hex)
     },
 
     changeAnimation () {
@@ -104,6 +117,13 @@ export default {
 
     onClickTitle () {
       this.$emit('open', ['Link', !this.controlOpen])
+    },
+
+    changePseudo (attr, style, pseudoClass = 'hover') {
+      if (style !== '') {
+        this.changePseudoStyle(attr, style + '!important')
+        this.pseudo[pseudoClass][attr] = style + ' !important'
+      }
     },
 
     /**
@@ -154,13 +174,16 @@ export default {
     this.bgHoverImage = pBackgroundImage.length > 0 ? pBackgroundImage.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
 
     this.textH = pColor.split('!')[0] || this.styles['color']
-    this.controlOpen = this.expand
 
+    this.bgRepeat = this.styles['background-repeat'] || 'no-repeat'
+    this.bgSize = this.styles['background-size'] || 'cover'
     this.animationList.forEach(function (item, i, arr) {
       if (self.animation.value !== undefined && self.animation.value === self.animationList[i].value) {
         self.animationClass = item
       }
     })
+
+    this.controlOpen = this.expand
   }
 }
 </script>
@@ -186,6 +209,12 @@ export default {
           @change="changeBgImage"
           label="Background hover image">
         </base-uploader>
+      </div>
+      <div class="b-link-controls__control">
+        <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+      </div>
+      <div class="b-link-controls__control">
+        <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
       </div>
       <div class="b-link-controls__control">
         <base-color-picker label="Text hover color" v-model="textH" @change="changeTextColor"></base-color-picker>
