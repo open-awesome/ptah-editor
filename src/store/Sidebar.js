@@ -26,7 +26,8 @@ export default {
       // }
     ],
     builderSections: [],
-    builderGroups: []
+    builderGroups: [],
+    sectionsGroups: []
   },
 
   mutations: {
@@ -62,6 +63,9 @@ export default {
     },
     setBuilderGroups (state, groups) {
       state.builderGroups = groups
+    },
+    setSectionsGroups (state, groups) {
+      state.sectionsGroups = groups
     }
   },
 
@@ -171,6 +175,10 @@ export default {
 
     updateBuilderGroups ({ commit }, groups) {
       commit('setBuilderGroups', groups)
+    },
+
+    updateSectionGroups ({ commit }, groups) {
+      commit('setSectionGroups', groups)
     }
   },
 

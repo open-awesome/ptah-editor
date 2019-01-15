@@ -50,6 +50,8 @@ import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 
+import { sectionsGroups } from '@cscripts/sectionsGroups'
+
 export default {
   name: 'VuseBuilder',
 
@@ -98,10 +100,12 @@ export default {
       this.$builder.title = value
       document.title = value
     },
+
     currentLanding (value) {
       this.initSettings()
     }
   },
+
   created () {
     // sets the initial data.
     this.$builder.set(this.data)
@@ -142,7 +146,8 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'updateBuilderSections',
-      'updateBuilderGroups'
+      'updateBuilderGroups',
+      'updateSectionGroups'
     ]),
     initSettings () {
       const settings = this.currentLanding.settings
@@ -282,36 +287,37 @@ export default {
 
     observeGroups () {
       let groups = []
+      let sectionsNodes = Array.from(this.$refs.artboard.children)
+
+      this.removeGroupClasses(sectionsNodes)
 
       this.$builder.sections.forEach((section, index) => {
         if (section.data.mainStyle.absorb > 0) {
           let group = {}
           group.main = section
-          group.main_element = this.$refs.artboard.children[index]
+          group.main_element = sectionsNodes[index]
           group.absorb = section.data.mainStyle.absorb
-          group.children = Array
-            .from(this.$refs.artboard.children)
-            .slice(index + 1, index + section.data.mainStyle.absorb + 1)
+          group.children = sectionsNodes.slice(index + 1, index + section.data.mainStyle.absorb + 1)
+
+          // set attrs to calculate
+          group.main_element.classList.add('ptah-g-main')
+          group.main_element.dataset.absorb = group.absorb
+          group.children.forEach((el) => el.classList.add('ptah-g-child'))
 
           groups.push(group)
         }
       })
 
-      this.calculateGroups(groups)
+      sectionsGroups()
+
+      // store groups
+      this.updateSectionGroups(groups)
     },
 
-    calculateGroups (groups) {
-      groups.forEach((group) => {
-        let padding = group.children.reduce((sum, el) => sum + el.offsetHeight, 0)
-        group.main_element.style.paddingBottom = padding + 'px'
-
-        group.children.forEach((el) => {
-          let height = el.offsetHeight
-          let style = el.style
-          style.position = 'relative'
-          style.top = `-${height}px`
-          style.marginBottom = `-${height}px`
-        })
+    removeGroupClasses (nodes) {
+      nodes.forEach((node) => {
+        node.classList.remove('ptah-g-main')
+        node.classList.remove('ptah-g-child')
       })
     }
   }
