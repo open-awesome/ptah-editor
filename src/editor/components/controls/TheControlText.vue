@@ -129,9 +129,17 @@ export default {
     changeStyle () {
       this.style.forEach((style) => {
         if (find(this.styles, style.value)) {
-          this.$emit('change', [style.value.prop, style.value.value])
+          if (this.isComplexText) {
+            this.changeStyleAll(style.value.prop, style.value.value)
+          } else {
+            this.$emit('change', [style.value.prop, style.value.value])
+          }
         } else {
-          this.$emit('change', [style.value.prop, style.value.base])
+          if (this.isComplexText) {
+            this.changeStyleAll(style.value.prop, style.value.base)
+          } else {
+            this.$emit('change', [style.value.prop, style.value.base])
+          }
         }
       })
     },
