@@ -27,8 +27,8 @@
       <div class="b-footer__group b-footer__group_3">
         <span v-for="(item, index) in $sectionData.links" :key="index">
           <a @click.prevent="openLink(item)" class="b-footer__link"
-            :target="$sectionData.links[index].element.target"
-            :href="$sectionData.links[index].element.href"
+            :target="$sectionData.links[index].element.link.target"
+            :href="$sectionData.links[index].element.link.href"
             v-html="$sectionData.links[index].element.text"
             v-styler:for="{ el:$sectionData.links[index].element, path: `$sectionData.links[${index}].element`}"
             :style="$sectionData.links[index].element.styles">
