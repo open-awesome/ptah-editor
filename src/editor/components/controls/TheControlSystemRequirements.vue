@@ -20,8 +20,7 @@ export default {
     return {
       controlOpen: false,
       color: '',
-      requirements: {},
-      requirementsRows: {}
+      elWidth: ''
     }
   },
 
@@ -30,7 +29,7 @@ export default {
       'settingObjectOptions'
     ]),
 
-    systemRequirements () {
+    requirements () {
       return this.settingObjectOptions.systemRequirements
     },
 
@@ -60,20 +59,19 @@ export default {
   methods: {
     visible (key) {
       this.requirements[key].visible = !this.requirements[key].visible
-      this.selectPlatform.name = key
 
       if (this.requirements[key].visible === true) {
-        return
-      }
-
-      for (let p in this.requirements) {
-        if (this.requirements[p].visible === true) {
-          this.selectPlatform.name = p
+        this.selectPlatform.name = key
+      } else {
+        for (let p in this.requirements) {
+          if (this.requirements[p].visible === true) {
+            this.selectPlatform.name = p
+          }
         }
       }
     },
     visibleRows (key) {
-      this.requirementsRows[key].visible = !this.requirementsRows[key].visible
+      this.rowsRequirements[key].visible = !this.rowsRequirements[key].visible
     },
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
@@ -87,8 +85,6 @@ export default {
   mounted () {
     this.color = this.colorFill.color
     this.elWidth = this.sizeIcons.width
-    this.requirements = this.systemRequirements
-    this.requirementsRows = this.rowsRequirements
     this.controlOpen = this.expand
   }
 }
@@ -137,8 +133,8 @@ export default {
         <div>Requirements</div>
         <div class="b-system-requirements">
           <div class="b-system-requirements__item is-editable"
-            v-for="(value, key) in requirementsRows" :key="key"
-            :class="{ 'b-system-requirements__item_opacity' : false === requirementsRows[key].visible }"
+            v-for="(value, key) in rowsRequirements" :key="key"
+            :class="{ 'b-system-requirements__item_opacity' : false === rowsRequirements[key].visible }"
             >
 
             <span class="b-socials-requirements__item-eye"

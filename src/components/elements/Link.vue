@@ -22,6 +22,7 @@ export default {
   cursor: pointer
   transition: background-color 200ms
   text-decoration: none
+  display: inline-block
   &:hover
     filter: brightness(120%)
   &:active

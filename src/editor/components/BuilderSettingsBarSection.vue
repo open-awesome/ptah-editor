@@ -137,6 +137,15 @@
           @change="updateGalleryImages"
           label="Images upload"
           multiple/>
+        <br>
+        <base-range-slider
+            v-if="settingObjectSection.name === 'AutoplayCarousel'"
+            :value="settingObjectSection.data.mainStyle.swiper.delay"
+            :label="`Autoplay slides delay (${settingObjectSection.data.mainStyle.swiper.delay})`"
+            @change="changeSwiperDelay"
+            step="1000"
+            min="1000"
+            max="10000"/>
       </div>
 
     </div>
@@ -236,6 +245,7 @@ export default {
       'settingObjectOptions',
       'settingObjectSection'
     ]),
+
     bgAttachmentCheckbox: {
       set (value) {
         this.bgAttachment = value ? 'fixed' : 'scroll'
@@ -260,8 +270,8 @@ export default {
 
     this.sectionBgColor = styles['background-color']
     this.sectionBgUrl = bgimage || ''
-    this.bgRepeat = styles['background-repeat'] === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
-    this.bgSize = styles['background-size'] === 'cover' ? this.sizeList[0] : this.sizeList[1]
+    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+    this.bgSize = styles['background-size'] || 'cover'
     this.bgAttachment = styles['background-attachment'] === 'fixed'
 
     /* Video */
@@ -294,9 +304,6 @@ export default {
 
     /* Products */
     this.products = this.settingObjectOptions.products || {}
-    this.selectProduct = this.settingObjectOptions.selectProduct || {}
-
-    /* */
     this.selectProduct = this.settingObjectOptions.selectProduct || {}
     this.isComplexText = this.settingObjectOptions.hasProducts || false
   },
@@ -401,9 +408,9 @@ export default {
 
     setHeight () {
       if (this.fullScreen) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: ['full-height'] }))
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: { list: ['full-height'] } }))
       } else {
-        let classesObj = this.settingObjectOptions.classes
+        let classesObj = this.settingObjectOptions.classes['list']
         classesObj.splice(classesObj.indexOf('full-height'), 1)
       }
     },
@@ -419,6 +426,14 @@ export default {
         ..._.cloneDeep(this.settingObjectOptions),
         galleryImages
       })
+    },
+
+    changeSwiperDelay (delay) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          swiper: { delay }
+        })
+      )
     },
 
     addBackgroundPicker () {

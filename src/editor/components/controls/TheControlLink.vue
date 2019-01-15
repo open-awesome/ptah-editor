@@ -1,22 +1,10 @@
 <script>
+import * as _ from 'lodash-es'
+import { getPseudoTemplate, randomPoneId } from '../../util'
+import { mapState, mapActions } from 'vuex'
+
 export default {
   props: {
-    link: {
-      type: String,
-      required: true
-    },
-    target: {
-      type: [String, Boolean]
-    },
-    hoverBgColor: {
-      type: String
-    },
-    hoverTextColor: {
-      type: String
-    },
-    animationClass: {
-      type: String
-    },
     expand: {
       type: Boolean,
       required: true
@@ -26,10 +14,10 @@ export default {
   data () {
     return {
       controlOpen: false,
-      elLink: '',
-      elTarget: '',
-      bgHoverColor: '',
-      textHoverColor: '',
+      link: '',
+      target: '',
+      bgH: '',
+      textH: '',
       animationList: [
         { name: 'none', value: '' },
         { name: 'tada', value: 'ptah-a-tada' },
@@ -37,50 +25,130 @@ export default {
         { name: 'shake', value: 'ptah-a-shake' },
         { name: 'bounce', value: 'ptah-a-bounce' }
       ],
-      animation: {}
+      animationClass: {}
     }
   },
 
-  created () {
-    this.elLink = this.link
-    this.elTarget = this.target === '_blank'
-    this.bgHoverColor = this.hoverBgColor
-    this.textHoverColor = this.hoverTextColor
-    this.animation = this.animationClass
-    this.controlOpen = this.expand
-  },
-
   watch: {
-    elTarget (value) {
-      let target = (value) ? '_blank' : '_self'
-      this.$emit('setOption', ['target', target])
-    },
-
     expand () {
       this.controlOpen = this.expand
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ]),
+
+    styles () {
+      return this.settingObjectOptions.styles
+    },
+
+    elLink () {
+      return this.settingObjectOptions.link
+    },
+
+    animation () {
+      return this.settingObjectOptions.animation
+    },
+
+    pseudo () {
+      return this.settingObjectOptions.pseudo
+    },
+
+    classes: {
+      get: function () {
+        return this.settingObjectOptions.classes
+      },
+      set: function (newValue) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: newValue }))
+      }
+    }
+
+  },
+
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     setUrl () {
-      this.$emit('setOption', ['href', this.elLink])
+      this.elLink['href'] = this.link
+    },
+
+    changeTarget () {
+      this.elLink['target'] = this.target === true ? '_blank' : '_self'
     },
 
     changeBgColor () {
-      this.$emit('setPseudo', { 'background-color': this.bgHoverColor.hex + '!important' })
+      this.changePseudoStyle('background-color', this.bgH.hex + '!important')
+      this.pseudo['hover']['background-color'] = this.bgH.hex + ' !important'
     },
 
     changeTextColor () {
-      this.$emit('setPseudo', { 'color': this.textHoverColor.hex + '!important' })
+      this.changePseudoStyle('color', this.textH.hex + '!important')
+      this.pseudo['hover']['color'] = this.textH.hex + ' !important'
     },
 
-    changeAinmation () {
-      this.$emit('setClass', this.animation.value)
+    changeAnimation () {
+      this.selectAnimation(this.animationClass.value)
     },
 
     onClickTitle () {
       this.$emit('open', ['Link', !this.controlOpen])
+    },
+
+    /**
+     * Add style to pseudocalss
+     * @param attr {string}
+     * @param style {string}
+     * @param pseudoClass {string}
+     */
+    changePseudoStyle (attr, style, pseudoClass = 'hover') {
+      const poneId = randomPoneId()
+      this.pseudo[pseudoClass][attr] = style
+      this.settingObjectOptions.element.dataset.pone = poneId
+
+      let styleTemplate = getPseudoTemplate(poneId, this.settingObjectOptions.pseudo)
+
+      document.head.insertAdjacentHTML('beforeend', styleTemplate)
+    },
+
+    /**
+     * Add animation to element
+     */
+    selectAnimation (className) {
+      let animations = this.classes.slice(0)
+
+      animations.forEach((name, index) => {
+        // remove other animation classes
+        if (name.indexOf('ptah-a') > -1) {
+          animations.splice(index, 1)
+        }
+      })
+      animations.push(className)
+
+      this.classes = _.merge([], this.classes, animations)
+      this.animation['value'] = animations[0]
     }
+  },
+
+  mounted () {
+    let self = this
+    let pBackgroundColor = this.pseudo['hover']['background-color']
+    let pColor = this.pseudo['hover']['color']
+
+    this.link = this.elLink.href
+    this.target = this.elLink.target === '_blank'
+    this.bgH = pBackgroundColor.split('!')[0] || this.styles['background-color']
+    this.textH = pColor.split('!')[0] || this.styles['color']
+    this.controlOpen = this.expand
+
+    this.animationList.forEach(function (item, i, arr) {
+      if (self.animation.value !== undefined && self.animation.value === self.animationList[i].value) {
+        self.animationClass = item
+      }
+    })
   }
 }
 </script>
@@ -92,19 +160,19 @@ export default {
     </div>
     <base-dropdown :isOpened="controlOpen"  :hasOverflow="controlOpen">
       <div class="b-link-controls__control">
-        <base-text-field v-model="elLink" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
+        <base-text-field v-model="link" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
       </div>
       <div class="b-link-controls__control">
-        <input type="checkbox" id="target" v-model="elTarget"> <label for="target">open in new window</label>
+        <input type="checkbox" id="target" v-model="target" @change="changeTarget"> <label for="target">open in new window</label>
       </div>
       <div class="b-link-controls__control">
-        <base-color-picker label="Background hover color" v-model="bgHoverColor" @change="changeBgColor"></base-color-picker>
+        <base-color-picker label="Background hover color" v-model="bgH" @change="changeBgColor"></base-color-picker>
       </div>
       <div class="b-link-controls__control">
-        <base-color-picker label="Text hover color" v-model="textHoverColor" @change="changeTextColor"></base-color-picker>
+        <base-color-picker label="Text hover color" v-model="textH" @change="changeTextColor"></base-color-picker>
       </div>
       <div class="b-link-controls__control">
-        <base-select label="Animation" :options="animationList" v-model="animation" @input="changeAinmation"></base-select>
+        <base-select label="Animation" :options="animationList" v-model="animationClass" @input="changeAnimation"></base-select>
       </div>
     </base-dropdown>
   </div>
