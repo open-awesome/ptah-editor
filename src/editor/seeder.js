@@ -318,21 +318,6 @@ const data = new Map([
       'height': ''
     }
   }))],
-  [types.Product, () => (_.merge({}, DEFAULT_OPTIONS, {
-    removable: true,
-    resizable: true,
-    background: true,
-    visible: true,
-    styles: {
-      'background-image': false,
-      'background-position': 'center center',
-      'background-repeat': 'no-repeat',
-      'background-size': 'cover',
-      'background-color': '#363636',
-      'width': '',
-      'height': ''
-    }
-  }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       resizable: true,

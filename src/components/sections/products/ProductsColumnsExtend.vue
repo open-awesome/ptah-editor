@@ -20,7 +20,10 @@ const C_CUSTOM_1 = [
   },
   {
     element: {
-      text: 'Start Edition'
+      text: 'Start Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -60,7 +63,10 @@ const C_CUSTOM_1_M = [
   },
   {
     element: {
-      text: 'Start Edition'
+      text: 'Start Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -131,7 +137,10 @@ const C_CUSTOM_2 = [
   },
   {
     element: {
-      text: 'Full Edition'
+      text: 'Full Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -171,7 +180,10 @@ const C_CUSTOM_2_M = [
   },
   {
     element: {
-      text: 'Full Edition'
+      text: 'Full Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -242,7 +254,10 @@ const C_CUSTOM_3 = [
   },
   {
     element: {
-      text: 'Deluxe Edition'
+      text: 'Deluxe Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -282,7 +297,10 @@ const C_CUSTOM_3_M = [
   },
   {
     element: {
-      text: 'Deluxe Edition'
+      text: 'Deluxe Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -353,7 +371,10 @@ const C_CUSTOM_4 = [
   },
   {
     element: {
-      text: 'Ultimate Edition'
+      text: 'Ultimate Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -393,7 +414,10 @@ const C_CUSTOM_4_M = [
   },
   {
     element: {
-      text: 'Ultimate Edition'
+      text: 'Ultimate Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -449,6 +473,27 @@ const C_CUSTOM_4D = [
   }
 ]
 
+const C_CUSTOM_CONTAINER = {
+  styles: {
+    'flex-direction': 'row',
+    'align-items': 'center'
+  }
+}
+
+const C_CUSTOM_CONTAINER_M = {
+  styles: {
+    'flex-direction': 'column',
+    'align-items': 'center'
+  }
+}
+
+const C_CUSTOM_CONTAINER_D = {
+  styles: {
+    'flex-direction': 'column',
+    'align-items': 'flex-start'
+  }
+}
+
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
@@ -456,6 +501,18 @@ const SCHEMA_CUSTOM = {
       'background-color': 'rgba(21,28,68,0.73)'
     }
   },
+  container1: _.merge({}, C_CUSTOM_CONTAINER),
+  container1m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container1d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container2: _.merge({}, C_CUSTOM_CONTAINER),
+  container2m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container2d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container3: _.merge({}, C_CUSTOM_CONTAINER),
+  container3m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container3d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container4: _.merge({}, C_CUSTOM_CONTAINER),
+  container4m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container4d: _.merge({}, C_CUSTOM_CONTAINER_D),
   components1: _.merge({}, C_CUSTOM_1),
   components1m: _.merge({}, C_CUSTOM_1_M),
   components1d: _.merge({}, C_CUSTOM_1D),
@@ -588,6 +645,11 @@ export default {
       'updateGroupData',
       'updateSectionData'
     ]),
+
+    selectProduct (key) {
+      this.$sectionData.mainStyle.selectProduct.name = key
+    },
+
     storeData: _.after(2, (self) => {
       self.updateSectionData({
         name: NAME,
