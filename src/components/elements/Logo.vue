@@ -15,4 +15,6 @@ export default {
   text-align: center
   width: 20rem
   height: 20rem
+  &.is-editable
+    border: 1px dashed #18d88b
 </style>

@@ -35,7 +35,7 @@ const C_CUSTOM_1 = [
         'background-color': 'rgba(245,166,35,1)',
         'color': '#000',
         'font-family': 'Lato',
-        'font-size:': 1.2,
+        'font-size:': '1.2rem',
         'text-align': 'center',
         'width': '64px',
         'height': '52px',
@@ -146,7 +146,7 @@ const C_CUSTOM_2 = [
         'background-color': 'rgba(245,166,35,1)',
         'color': '#000',
         'font-family': 'Lato',
-        'font-size:': 1.2,
+        'font-size:': '1.2rem',
         'text-align': 'center',
         'width': '64px',
         'height': '52px',
@@ -257,7 +257,7 @@ const C_CUSTOM_3 = [
         'background-color': 'rgba(245,166,35,1)',
         'color': '#000',
         'font-family': 'Lato',
-        'font-size:': 1.2,
+        'font-size:': '1.2rem',
         'text-align': 'center',
         'width': '64px',
         'height': '52px',
@@ -368,7 +368,7 @@ const C_CUSTOM_4 = [
         'background-color': 'rgba(245,166,35,1)',
         'color': '#000',
         'font-family': 'Lato',
-        'font-size:': 1.2,
+        'font-size:': '1.2rem',
         'text-align': 'center',
         'width': '64px',
         'height': '52px',
@@ -699,8 +699,8 @@ export default {
                   v-if="$sectionData.components1[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type }"
                   :is="component.name"
-                  :href="$sectionData.components1[index].element.href"
-                  :target="$sectionData.components1[index].element.target"
+                  :href="$sectionData.components1[index].element.link.href"
+                  :target="$sectionData.components1[index].element.link.target"
                   :path="`components1[${index}].element`"
                   :style="$sectionData.components1[index].element.styles"
                   :class="[$sectionData.components1[index].element.classes, $sectionData.components1[index].class]"
@@ -711,8 +711,8 @@ export default {
                   v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type }"
                   v-html="$sectionData.components1[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components1[index].element.href"
-                  :target="$sectionData.components1[index].element.target"
+                  :href="$sectionData.components1[index].element.link.href"
+                  :target="$sectionData.components1[index].element.link.target"
                   :path="`components1[${index}].element`"
                   :style="$sectionData.components1[index].element.styles"
                   :class="[$sectionData.components1[index].element.classes, $sectionData.components1[index].class]"
@@ -737,8 +737,8 @@ export default {
                   v-if="$sectionData.components1d[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components1d[index].element, path: `$sectionData.components1d[${index}].element`, type: $sectionData.components1d[index].type }"
                   :is="component.name"
-                  :href="$sectionData.components1d[index].element.href"
-                  :target="$sectionData.components1d[index].element.target"
+                  :href="$sectionData.components1d[index].element.link.href"
+                  :target="$sectionData.components1d[index].element.link.target"
                   :path="`components1d[${index}].element`"
                   :style="$sectionData.components1d[index].element.styles"
                   :class="[$sectionData.components1d[index].element.classes, $sectionData.components1d[index].class]"
@@ -749,8 +749,8 @@ export default {
                   v-styler:for="{ el: $sectionData.components1d[index].element, path: `$sectionData.components1d[${index}].element`, type: $sectionData.components1d[index].type }"
                   v-html="$sectionData.components1d[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components1d[index].element.href"
-                  :target="$sectionData.components1d[index].element.target"
+                  :href="$sectionData.components1d[index].element.link.href"
+                  :target="$sectionData.components1d[index].element.link.target"
                   :path="`components1d[${index}].element`"
                   :style="$sectionData.components1d[index].element.styles"
                   :class="[$sectionData.components1d[index].element.classes, $sectionData.components1d[index].class]"
@@ -778,8 +778,8 @@ export default {
                   v-if="$sectionData.components2[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
                   :is="component.name"
-                  :href="$sectionData.components2[index].element.href"
-                  :target="$sectionData.components2[index].element.target"
+                  :href="$sectionData.components2[index].element.link.href"
+                  :target="$sectionData.components2[index].element.link.target"
                   :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
                   :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
@@ -790,8 +790,8 @@ export default {
                   v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
                   v-html="$sectionData.components2[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components2[index].element.href"
-                  :target="$sectionData.components2[index].element.target"
+                  :href="$sectionData.components2[index].element.link.href"
+                  :target="$sectionData.components2[index].element.link.target"
                   :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
                   :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
@@ -815,8 +815,8 @@ export default {
                   v-if="$sectionData.components2d[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components2d[index].element, path: `$sectionData.components2d[${index}].element`, type: $sectionData.components2d[index].type }"
                   :is="component.name"
-                  :href="$sectionData.components2d[index].element.href"
-                  :target="$sectionData.components2d[index].element.target"
+                  :href="$sectionData.components2d[index].element.link.href"
+                  :target="$sectionData.components2d[index].element.link.target"
                   :path="`components2d[${index}].element`"
                   :style="$sectionData.components2d[index].element.styles"
                   :class="[$sectionData.components2d[index].element.classes, $sectionData.components2d[index].class]"
@@ -827,8 +827,8 @@ export default {
                   v-styler:for="{ el: $sectionData.components2d[index].element, path: `$sectionData.components2d[${index}].element`, type: $sectionData.components2d[index].type }"
                   v-html="$sectionData.components2d[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components2d[index].element.href"
-                  :target="$sectionData.components2d[index].element.target"
+                  :href="$sectionData.components2d[index].element.link.href"
+                  :target="$sectionData.components2d[index].element.link.target"
                   :path="`components2d[${index}].element`"
                   :style="$sectionData.components2d[index].element.styles"
                   :class="[$sectionData.components2d[index].element.classes, $sectionData.components2d[index].class]"
@@ -856,8 +856,8 @@ export default {
                   v-if="$sectionData.components3[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
                   :is="component.name"
-                  :href="$sectionData.components3[index].element.href"
-                  :target="$sectionData.components3[index].element.target"
+                  :href="$sectionData.components3[index].element.link.href"
+                  :target="$sectionData.components3[index].element.link.target"
                   :path="`components3[${index}].element`"
                   :style="$sectionData.components3[index].element.styles"
                   :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
@@ -868,8 +868,8 @@ export default {
                   v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
                   v-html="$sectionData.components3[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components3[index].element.href"
-                  :target="$sectionData.components3[index].element.target"
+                  :href="$sectionData.components3[index].element.link.href"
+                  :target="$sectionData.components3[index].element.link.target"
                   :path="`components3[${index}].element`"
                   :style="$sectionData.components3[index].element.styles"
                   :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
@@ -893,8 +893,8 @@ export default {
                   v-if="$sectionData.components3d[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components3d[index].element, path: `$sectionData.components3d[${index}].element`, type: $sectionData.components3d[index].type }"
                   :is="component.name"
-                  :href="$sectionData.components3d[index].element.href"
-                  :target="$sectionData.components3d[index].element.target"
+                  :href="$sectionData.components3d[index].element.link.href"
+                  :target="$sectionData.components3d[index].element.link.target"
                   :path="`components3d[${index}].element`"
                   :style="$sectionData.components3d[index].element.styles"
                   :class="[$sectionData.components3d[index].element.classes, $sectionData.components3d[index].class]"
@@ -905,8 +905,8 @@ export default {
                   v-styler:for="{ el: $sectionData.components3d[index].element, path: `$sectionData.components3d[${index}].element`, type: $sectionData.components3d[index].type }"
                   v-html="$sectionData.components3d[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components3d[index].element.href"
-                  :target="$sectionData.components3d[index].element.target"
+                  :href="$sectionData.components3d[index].element.link.href"
+                  :target="$sectionData.components3d[index].element.link.target"
                   :path="`components3d[${index}].element`"
                   :style="$sectionData.components3d[index].element.styles"
                   :class="[$sectionData.components3d[index].element.classes, $sectionData.components3d[index].class]"
@@ -934,8 +934,8 @@ export default {
                   v-if="$sectionData.components4[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type }"
                   :is="component.name"
-                  :href="$sectionData.components4[index].element.href"
-                  :target="$sectionData.components4[index].element.target"
+                  :href="$sectionData.components4[index].element.link.href"
+                  :target="$sectionData.components4[index].element.link.target"
                   :path="`components4[${index}].element`"
                   :style="$sectionData.components4[index].element.styles"
                   :class="[$sectionData.components4[index].element.classes, $sectionData.components4[index].class]"
@@ -946,8 +946,8 @@ export default {
                   v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type }"
                   v-html="$sectionData.components4[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components4[index].element.href"
-                  :target="$sectionData.components4[index].element.target"
+                  :href="$sectionData.components4[index].element.link.href"
+                  :target="$sectionData.components4[index].element.link.target"
                   :path="`components3[${index}].element`"
                   :style="$sectionData.components4[index].element.styles"
                   :class="[$sectionData.components4[index].element.classes, $sectionData.components4[index].class]"
@@ -971,8 +971,8 @@ export default {
                   v-if="$sectionData.components4d[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components4d[index].element, path: `$sectionData.components4d[${index}].element`, type: $sectionData.components4d[index].type }"
                   :is="component.name"
-                  :href="$sectionData.components4d[index].element.href"
-                  :target="$sectionData.components4d[index].element.target"
+                  :href="$sectionData.components4d[index].element.link.href"
+                  :target="$sectionData.components4d[index].element.link.target"
                   :path="`components4d[${index}].element`"
                   :style="$sectionData.components4d[index].element.styles"
                   :class="[$sectionData.components4d[index].element.classes, $sectionData.components4d[index].class]"
@@ -983,8 +983,8 @@ export default {
                   v-styler:for="{ el: $sectionData.components4d[index].element, path: `$sectionData.components4d[${index}].element`, type: $sectionData.components4d[index].type }"
                   v-html="$sectionData.components4d[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components4d[index].element.href"
-                  :target="$sectionData.components4d[index].element.target"
+                  :href="$sectionData.components4d[index].element.link.href"
+                  :target="$sectionData.components4d[index].element.link.target"
                   :path="`components4d[${index}].element`"
                   :style="$sectionData.components4d[index].element.styles"
                   :class="[$sectionData.components4d[index].element.classes, $sectionData.components4d[index].class]"
