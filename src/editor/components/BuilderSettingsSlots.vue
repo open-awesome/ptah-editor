@@ -1,79 +1,83 @@
 <template>
 <div class="b-builder-settings-slots">
 
-  <header class="b-builder-settings-slots__header">
+  <div class="b-builder-settings-slots__top">
+    <header class="b-builder-settings-slots__header">
 
-    <h6 class="b-builder-settings-slots__title">
-      {{ title }}
-    </h6>
+      <h6 class="b-builder-settings-slots__title">
+        {{ title }}
+      </h6>
 
-    <button v-if="!options.sectionName" class="b-builder-settings-slots__closer" @click="$emit('requestClose')">
-      <icon-base width="10" height="10" name="close"/>
-    </button>
+      <button v-if="!options.sectionName" class="b-builder-settings-slots__closer" @click="$emit('requestClose')">
+        <icon-base width="10" height="10" name="close"/>
+      </button>
 
-    <elements-list @addEl="addElement"/>
+      <elements-list @addEl="addElement"/>
 
-  </header>
+    </header>
 
-  <div class="b-builder-settings-slots__direction">
+    <div class="b-builder-settings-slots__direction">
 
-    <h6 class="b-builder-settings-slots__subtitle">Section direction</h6>
+      <h6 class="b-builder-settings-slots__subtitle">Section direction</h6>
 
-    <ul>
-      <li :class="{ active: isRowDir }" @click="changeDirection('row')">
-        <icon-base name="groupRow"/>
-      </li>
-      <li :class="{ active: isColumnDir }" @click="changeDirection('column')">
-        <icon-base name="groupColumn"/>
-      </li>
-    </ul>
+      <ul>
+        <li :class="{ active: isRowDir }" @click="changeDirection('row')">
+          <icon-base name="groupRow"/>
+        </li>
+        <li :class="{ active: isColumnDir }" @click="changeDirection('column')">
+          <icon-base name="groupColumn"/>
+        </li>
+      </ul>
 
-    <h6 v-show="direction" class="b-builder-settings-slots__subtitle">Content direction</h6>
+      <h6 v-show="direction" class="b-builder-settings-slots__subtitle">Content direction</h6>
 
-    <ul v-show="isRowDir">
-      <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
-        <icon-base name="groupTop"/>
-      </li>
-      <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
-        <icon-base name="groupCenterVertical"/>
-      </li>
-      <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
-        <icon-base name="groupBottom"/>
-      </li>
-    </ul>
+      <ul v-show="isRowDir">
+        <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
+          <icon-base name="groupTop"/>
+        </li>
+        <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
+          <icon-base name="groupCenterVertical"/>
+        </li>
+        <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
+          <icon-base name="groupBottom"/>
+        </li>
+      </ul>
 
-    <ul v-show="isColumnDir">
-      <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
-        <icon-base name="groupRight"/>
-      </li>
-      <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
-        <icon-base name="groupCenterHorizontal"/>
-      </li>
-      <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
-        <icon-base name="groupLeft"/>
-      </li>
-    </ul>
+      <ul v-show="isColumnDir">
+        <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
+          <icon-base name="groupRight"/>
+        </li>
+        <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
+          <icon-base name="groupCenterHorizontal"/>
+        </li>
+        <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
+          <icon-base name="groupLeft"/>
+        </li>
+      </ul>
 
+    </div>
+
+    <h6 class="b-builder-settings-slots__subtitle">Slots</h6>
   </div>
 
-  <h6 class="b-builder-settings-slots__subtitle">Slots</h6>
-
-  <draggable v-model="components" element="ul" class="b-builder-settings-slots__list">
-    <li
-        v-for="(component, index) in components"
-        :key="`${component.name}-${index}`"
-        @click="selectSlot(component, index)"
-        class="b-builder-settings-slots__item">
-      {{ component.name }}
-      <base-button
-          v-text="'-'"
-          :disabled="!component.element.removable"
-          @click.native.stop="removeElement(index)"
-          size="small"
-          color="light-gray"
-          class="b-builder-settings-slots__button"/>
-    </li>
-  </draggable>
+  <div class="b-builder-settings-slots__bottom">
+    <draggable v-model="components" element="ul" class="b-builder-settings-slots__list">
+      <li
+          v-for="(component, index) in components"
+          :key="`${component.name}-${index}`"
+          @click="selectSlot(component, index)"
+          class="b-builder-settings-slots__item">
+        {{ component.name }}
+        <base-button
+            v-text="'-'"
+            :disabled="!component.element.removable"
+            @click.native.stop="removeElement(index)"
+            size="small"
+            color="light-gray"
+            class="b-builder-settings-slots__button"/>
+      </li>
+    </draggable>
+  </div>
 
 </div>
 </template>
@@ -152,8 +156,10 @@ export default {
     selectSlot (component, index) {
       try {
         let slotContainer = this.sectionElement.querySelector('.b-draggable-slot.active')
-        let slotElement = slotContainer.children[index].firstElementChild
-        slotElement.click()
+        if (slotContainer) {
+          let slotElement = slotContainer.children[index].firstElementChild
+          slotElement.click()
+        }
       } catch (error) {
         console.error(error)
       }
@@ -198,6 +204,9 @@ export default {
   flex-direction: column
   padding: .8rem 0.5rem 2.8rem 3.2rem
   background: #F5F5F5
+
+  &__bottom
+    overflow: auto
 
   &__header
     width: 100%
@@ -303,6 +312,7 @@ export default {
     width: auto
     height: auto
     margin: 0
+    margin-left: .8rem
     padding: .2rem .8rem
     font-size: 2rem
     line-height: 1em
