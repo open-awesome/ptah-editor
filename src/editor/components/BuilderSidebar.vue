@@ -191,6 +191,14 @@ export default {
     window.dispatchEvent(new Event('resize'))
   },
 
+  watch: {
+    isAddSectionExpanded (value) {
+      if (value) {
+        this.toggleSandboxSidebar(false)
+      }
+    }
+  },
+
   methods: {
     ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
 
@@ -341,8 +349,6 @@ $top-panel-height: 7.2rem
       flex-direction: row
       .slots-settings__list
         margin-right: .8rem
-      .slots-settings__preview
-        min-width: 30rem
 
   &__icon-add
     width: 3.2rem

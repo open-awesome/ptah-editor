@@ -28,6 +28,7 @@
 import * as types from '@editor/types'
 import Seeder from '@editor/seeder'
 import * as _ from 'lodash-es'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'ElementsList',
@@ -105,6 +106,8 @@ export default {
     this.elements = Seeder.seed(this.elements)
   },
   methods: {
+    ...mapActions('Sidebar', ['clearSettingObjectLight']),
+
     addButton () {
       const el = _.merge({}, Seeder.seed(this.elements[0]))
       this.$emit('addEl', el)
@@ -159,6 +162,7 @@ export default {
     },
     openList () {
       this.showList = true
+      this.clearSettingObjectLight()
       document.addEventListener('click', this.hideList, true)
     },
     hideList () {

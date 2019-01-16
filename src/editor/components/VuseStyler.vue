@@ -175,6 +175,7 @@ export default {
   methods: {
     ...mapMutations('Sidebar', ['toggleSandboxSidebar', 'setSandboxPaths']),
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight']),
+    ...mapActions('BuilderModalContent', ['setContent']),
 
     setInitialValue () {
       if (this.type === 'button') {
@@ -238,6 +239,7 @@ export default {
       event.stopPropagation()
 
       this.toggleSandboxSidebar(false)
+      this.setContent(null)
       this.clearSettingObjectLight()
 
       if (this.type === 'text') {
@@ -271,7 +273,9 @@ export default {
           )
           if (hasSlotsData) {
             let target = event.target.closest('.b-draggable-slot')
-            target.classList.add('active')
+            if (target) {
+              target.classList.add('active')
+            }
             // --- TODO: bad idea
             // --- fix in future
             // --- coz data storage is unstable

@@ -217,6 +217,7 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container"
             components-path="$sectionData.components"
+            direction="column"
             :style="$sectionData.container.styles"
             >
 
@@ -254,6 +255,7 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
+            direction="column"
             :style="$sectionData.container2.styles"
             >
 

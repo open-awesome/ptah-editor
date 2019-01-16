@@ -8,7 +8,7 @@
 </template>
 
 <script>
-import { mapMutations } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Sandbox',
@@ -17,7 +17,15 @@ export default {
 
   props: {
     containerPath: String,
-    componentsPath: String
+    componentsPath: String,
+    direction: {
+      type: String,
+      default: 'row'
+    },
+    align: {
+      type: String,
+      default: 'center'
+    }
   },
 
   computed: {
@@ -30,20 +38,42 @@ export default {
     }
   },
 
+  created () {
+    this.styles['flex-direction'] = this.styles['flex-direction'] || this.direction
+    this.styles['align-items'] = this.styles['align-items'] || this.align
+  },
+
   methods: {
     ...mapMutations('Sidebar', [
       'toggleSandboxSidebar',
       'setSandboxPaths',
-      'setSection'
+      'setSection',
+      'isAddSectionExpanded'
     ]),
 
-    showSandboxSidebar () {
+    ...mapActions('BuilderModalContent', ['setContent']),
+
+    showSandboxSidebar (e) {
+      this.setContent(null)
+      this.isAddSectionExpanded(false)
+
+      // --- clear active classes
+      document.querySelectorAll('.b-draggable-slot.active')
+        .forEach(el => el.classList.remove('active'))
+
       this.setSection(this.$section)
       this.setSandboxPaths({
         components: this.componentsPath,
         container: this.containerPath
       })
-      setImmediate(() => this.toggleSandboxSidebar(true))
+
+      setImmediate(() => {
+        let target = e.target.closest('.sandbox-equalizer').nextElementSibling
+        if (target) {
+          target.classList.add('active')
+        }
+        this.toggleSandboxSidebar(true)
+      })
     }
   }
 }

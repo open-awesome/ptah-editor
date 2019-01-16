@@ -670,6 +670,7 @@ export default {
                 class="b-sandbox"
                 container-path="$sectionData.container1m"
                 components-path="$sectionData.components1"
+                direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
 
@@ -713,6 +714,7 @@ export default {
                 class="b-sandbox"
                 container-path="$sectionData.container2m"
                 components-path="$sectionData.components2m"
+                direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
 
@@ -755,6 +757,7 @@ export default {
                 class="b-sandbox"
                 container-path="$sectionData.container3m"
                 components-path="$sectionData.components3m"
+                direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
 
@@ -797,6 +800,7 @@ export default {
                 class="b-sandbox"
                 container-path="$sectionData.container4m"
                 components-path="$sectionData.components4m"
+                direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
 
@@ -843,6 +847,7 @@ export default {
                       class="b-sandbox"
                       container-path="$sectionData.container1"
                       components-path="$sectionData.components1"
+                      direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
 
@@ -880,6 +885,8 @@ export default {
                       class="b-sandbox"
                       container-path="$sectionData.container1d"
                       components-path="$sectionData.components1d"
+                      direction="column"
+                      align="flex-start"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
 
@@ -922,6 +929,7 @@ export default {
                       class="b-sandbox"
                       container-path="$sectionData.container2"
                       components-path="$sectionData.components2"
+                      direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
                       <draggable v-model="$sectionData.components2" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles">
@@ -957,6 +965,7 @@ export default {
                       class="b-sandbox"
                       container-path="$sectionData.container2d"
                       components-path="$sectionData.components2d"
+                      direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
 
@@ -998,6 +1007,7 @@ export default {
                       class="b-sandbox"
                       container-path="$sectionData.container3"
                       components-path="$sectionData.components3"
+                      direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
 
@@ -1034,6 +1044,7 @@ export default {
                       class="b-sandbox"
                       container-path="$sectionData.container3d"
                       components-path="$sectionData.components3d"
+                      direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
 
@@ -1075,6 +1086,7 @@ export default {
                       class="b-sandbox"
                       container-path="$sectionData.container4"
                       components-path="$sectionData.components4"
+                      direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
 
@@ -1111,6 +1123,7 @@ export default {
                       class="b-sandbox"
                       container-path="$sectionData.container4d"
                       components-path="$sectionData.components4d"
+                      direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
 

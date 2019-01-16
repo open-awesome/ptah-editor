@@ -1,8 +1,8 @@
 <template>
   <transition name="slide-fade">
     <div
-      class="b-builder-modal-content"
       v-if="isContentVisible"
+      class="b-builder-modal-content"
       :style="{'margin-right': `${fakeScrollbarWidth}px`}">
       <component
         :is="contentComponent"
@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
 import BuilderSiteSettingsSeo from './BuilderSiteSettingsSeo'
 import BuilderSiteSettingsVisual from './BuilderSiteSettingsVisual'
 import BuilderSiteSettingsCookies from './BuilderSiteSettingsCookies'
@@ -30,7 +30,7 @@ export default {
 
   computed: {
     ...mapState('BuilderModalContent', ['isContentVisible']),
-    ...mapState('Sidebar', ['isAddSectionExpanded']),
+    ...mapState('Sidebar', ['isAddSectionExpanded', 'sandbox']),
     ...mapGetters('BuilderModalContent', ['contentComponent']),
     ...mapGetters('PageTweaks', ['fakeScrollbarWidth'])
   },
@@ -40,6 +40,9 @@ export default {
       this.setScrollbarVisible(!value)
       if (this.isAddSectionExpanded && value) {
         this.toggleAddSectionMenu(false)
+      }
+      if (this.sandbox.expanded) {
+        this.toggleSandboxSidebar(false)
       }
     }
   },
@@ -53,6 +56,7 @@ export default {
   },
 
   methods: {
+    ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
     ...mapActions('BuilderModalContent', ['setContent']),
     ...mapActions('PageTweaks', ['setScrollbarVisible']),
     ...mapActions('Sidebar', ['toggleAddSectionMenu']),
@@ -61,6 +65,9 @@ export default {
       this.setContent('')
       if (this.isAddSectionExpanded) {
         this.toggleAddSectionMenu(false)
+      }
+      if (this.sandbox.expanded) {
+        this.toggleSandboxSidebar(false)
       }
     }
   }
