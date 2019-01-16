@@ -181,7 +181,7 @@ export default {
 
     addElement (element) {
       element.element.removable = true
-      this.section.data.components.push(element)
+      this.components = [...this.components, element]
     },
 
     removeElement (index) {
