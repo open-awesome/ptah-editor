@@ -134,20 +134,6 @@ export default {
       required: true
     }
   },
-  methods: {
-    onAddElement (element) {
-      element.element.removable = true
-      this.$section.data.components.push(element)
-    },
-    onAddElement2 (element) {
-      element.element.removable = true
-      this.$section.data.components2.push(element)
-    },
-    onAddElement3 (element) {
-      element.element.removable = true
-      this.$section.data.components3.push(element)
-    }
-  },
   created () {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
@@ -177,12 +163,10 @@ export default {
         <div class="b-grid__col-4 b-grid__col-m-12 ">
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container"
-            direction="column"
+            container-path="$sectionData.container"
+            components-path="$sectionData.components"
             :style="$sectionData.container.styles"
             >
-            <elements-list @addEl="onAddElement"></elements-list>
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-columns3-component"
@@ -215,12 +199,10 @@ export default {
         <div class="b-grid__col-4 b-grid__col-m-12">
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container2"
-            direction="column"
+            container-path="$sectionData.container2"
+            components-path="$sectionData.components2"
             :style="$sectionData.container2.styles"
             >
-            <elements-list @addEl="onAddElement2"></elements-list>
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component class="b-columns3-component"
@@ -253,12 +235,10 @@ export default {
         <div class="b-grid__col-4 b-grid__col-m-12">
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container3"
-            direction="column"
+            container-path="$sectionData.container3"
+            components-path="$sectionData.components3"
             :style="$sectionData.container3.styles"
             >
-            <elements-list @addEl="onAddElement3"></elements-list>
             <draggable v-model="$sectionData.components3" class="b-draggable-slot" :style="$sectionData.container3.styles">
               <div v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
                 <component class="b-columns3-component"

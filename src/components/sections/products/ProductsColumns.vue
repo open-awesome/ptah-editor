@@ -589,38 +589,6 @@ export default {
       'updateGroupData',
       'updateSectionData'
     ]),
-    onAddElement1 (element) {
-      element.element.removable = true
-      this.$section.data.components1.push(element)
-    },
-    onAddElement2 (element) {
-      element.element.removable = true
-      this.$section.data.components2.push(element)
-    },
-    onAddElement3 (element) {
-      element.element.removable = true
-      this.$section.data.components3.push(element)
-    },
-    onAddElement4 (element) {
-      element.element.removable = true
-      this.$section.data.components4.push(element)
-    },
-    onAddElement1d (element) {
-      element.element.removable = true
-      this.$section.data.components1d.push(element)
-    },
-    onAddElement2d (element) {
-      element.element.removable = true
-      this.$section.data.components2d.push(element)
-    },
-    onAddElement3d (element) {
-      element.element.removable = true
-      this.$section.data.components3d.push(element)
-    },
-    onAddElement4d (element) {
-      element.element.removable = true
-      this.$section.data.components4d.push(element)
-    },
 
     storeData: _.after(2, (self) => {
       let data = self.$sectionData.listComponents
@@ -685,12 +653,11 @@ export default {
           >
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container1"
-            direction="column"
-            :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
+            container-path="$sectionData.container1"
+            components-path="$sectionData.components1"
+            :style="{ backgroundColor : $sectionData.mainStyle.styles['background-color'] }"
             >
-            <elements-list @addEl="onAddElement1"></elements-list>
+
             <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1.styles">
               <div
                 v-for="(component, index) in $sectionData.components1"
@@ -723,12 +690,10 @@ export default {
           </sandbox>
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container1d"
-            direction="column"
+            container-path="$sectionData.container1d"
+            components-path="$sectionData.components1d"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-            <elements-list @addEl="onAddElement1d"></elements-list>
             <draggable v-model="$sectionData.components1d" class="b-draggable-slot" :style="$sectionData.container1d.styles">
               <div
                 v-for="(component, index) in $sectionData.components1d"
@@ -765,12 +730,11 @@ export default {
           >
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container2"
-            direction="column"
+            container-path="$sectionData.container2"
+            components-path="$sectionData.components2"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-            <elements-list @addEl="onAddElement2"></elements-list>
+
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
               <div
                    v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
@@ -802,12 +766,10 @@ export default {
           </sandbox>
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container2d"
-            direction="column"
+            container-path="$sectionData.container2d"
+            components-path="$sectionData.components2d"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-            <elements-list @addEl="onAddElement2d"></elements-list>
             <draggable v-model="$sectionData.components2d" class="b-draggable-slot" :style="$sectionData.container2d.styles">
               <div
                    v-for="(component, index) in $sectionData.components2d" v-if="$sectionData.components2d.length !== 0" :key="index">
@@ -843,12 +805,11 @@ export default {
           >
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container3"
-            direction="column"
+            container-path="$sectionData.container3"
+            components-path="$sectionData.components3"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-            <elements-list @addEl="onAddElement3"></elements-list>
+
             <draggable v-model="$sectionData.components3" class="b-draggable-slot" :style="$sectionData.container3.styles">
               <div
                    v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
@@ -880,12 +841,11 @@ export default {
           </sandbox>
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container3d"
-            direction="column"
+            container-path="$sectionData.container3d"
+            components-path="$sectionData.components3d"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-            <elements-list @addEl="onAddElement3d"></elements-list>
+
             <draggable v-model="$sectionData.components3d" class="b-draggable-slot" :style="$sectionData.container3d.styles">
               <div
                    v-for="(component, index) in $sectionData.components3d" v-if="$sectionData.components3d.length !== 0" :key="index">
@@ -921,12 +881,11 @@ export default {
           >
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container4"
-            direction="column"
+            container-path="$sectionData.container4"
+            components-path="$sectionData.components4"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-            <elements-list @addEl="onAddElement4"></elements-list>
+
             <draggable v-model="$sectionData.components4" class="b-draggable-slot" :style="$sectionData.container4.styles">
               <div
                    v-for="(component, index) in $sectionData.components4" v-if="$sectionData.components4.length !== 0" :key="index">
@@ -958,12 +917,11 @@ export default {
           </sandbox>
           <sandbox
             class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container4d"
-            direction="column"
+            container-path="$sectionData.container4d"
+            components-path="$sectionData.components4d"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-            <elements-list @addEl="onAddElement4d"></elements-list>
+
             <draggable v-model="$sectionData.components4d" class="b-draggable-slot" :style="$sectionData.container4d.styles">
               <div
                    v-for="(component, index) in $sectionData.components4d" v-if="$sectionData.components4d.length !== 0" :key="index">

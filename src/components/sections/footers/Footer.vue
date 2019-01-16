@@ -137,12 +137,6 @@ export default {
       required: true
     }
   },
-  methods: {
-    onAddElement (element) {
-      element.element.removable = true
-      this.$section.data.components.push(element)
-    }
-  },
   created () {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
@@ -164,13 +158,11 @@ export default {
         <div class="b-grid__row b-footer__row">
           <div class="b-grid__col-12 b-grid__col-m-12">
             <sandbox
-              class="b-footer__col b-footer__col_1"
-              ref="sandbox"
-              path="$sectionData.container"
-              direction="row"
-              :style="$sectionData.container.styles"
-              >
-              <elements-list @addEl="onAddElement"></elements-list>
+                :style="$sectionData.container.styles"
+                container-path="$sectionData.container"
+                components-path="$sectionData.components"
+                class="b-footer__col b-footer__col_1">
+
               <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
                 <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                   <component

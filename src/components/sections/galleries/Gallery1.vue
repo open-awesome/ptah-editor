@@ -147,7 +147,6 @@ export default {
   },
 
   updated: function () {
-    console.log(222, this.$store.state.Sidebar.settingObjectSection.data.images[0].preview.url)
     this.bindingClickPreview(this.index)
     this.storeData(this)
   }
