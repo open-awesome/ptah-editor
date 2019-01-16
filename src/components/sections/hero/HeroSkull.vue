@@ -55,19 +55,19 @@ const COMPONENTS_2 = [
   {
     name: 'Link',
     element: types.Link,
-    type: 'button',
+    type: 'link',
     class: 'b-footer-link'
   },
   {
     name: 'Link',
     element: types.Link,
-    type: 'button',
+    type: 'link',
     class: 'b-footer-link'
   },
   {
     name: 'Link',
     element: types.Link,
-    type: 'button',
+    type: 'link',
     class: 'b-footer-link'
   },
   {
@@ -295,8 +295,8 @@ export default {
                   v-if="$sectionData.components[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
                   :is="component.name"
-                  :href="$sectionData.components[index].element.href"
-                  :target="$sectionData.components[index].element.target"
+                  :href="$sectionData.components[index].element.link.href"
+                  :target="$sectionData.components[index].element.link.target"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
@@ -307,8 +307,8 @@ export default {
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
                   v-html="$sectionData.components[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components[index].element.href"
-                  :target="$sectionData.components[index].element.target"
+                  :href="$sectionData.components[index].element.link.href"
+                  :target="$sectionData.components[index].element.link.target"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
@@ -336,8 +336,8 @@ export default {
                     v-if="$sectionData.components2[index].element.isComplex"
                     v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
                     :is="component.name"
-                    :href="$sectionData.components2[index].element.href"
-                    :target="$sectionData.components2[index].element.target"
+                    :href="$sectionData.components2[index].element.link.href"
+                    :target="$sectionData.components2[index].element.link.target"
                     :style="$sectionData.components2[index].element.styles"
                     :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                     :path="`components2[${index}].element`"
@@ -349,8 +349,8 @@ export default {
                     v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
                     v-html="$sectionData.components2[index].element.text"
                     :is="component.name"
-                    :href="$sectionData.components2[index].element.href"
-                    :target="$sectionData.components2[index].element.target"
+                    :href="$sectionData.components2[index].element.link.href"
+                    :target="$sectionData.components2[index].element.link.target"
                     :style="$sectionData.components2[index].element.styles"
                     :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                     :path="`components2[${index}].element`"

@@ -1,22 +1,8 @@
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
-    color: {
-      type: String,
-      required: true
-    },
-    image: {
-      type: String,
-      required: true
-    },
-    repeat: { // background-repeat
-      type: String,
-      required: true
-    },
-    size: { // background-size
-      type: String,
-      required: true
-    },
     expand: {
       type: Boolean,
       required: true
@@ -42,11 +28,11 @@ export default {
   },
 
   created () {
-    this.bgColor = this.color ? this.color : ''
-    let image = this.image
-    this.bgImage = image.length > 0 ? (image.match(/url\(.+(?=\))/g) || []).map(url => url.replace(/url\(/, ''))[0] : ''
-    this.bgRepeat = this.repeat === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
-    this.bgSize = this.size === 'cover' ? this.sizeList[0] : this.sizeList[1]
+    this.bgColor = this.styles['background-color']
+    let image = this.styles['background-image']
+    this.bgImage = !image && image !== 'none' && image.length > 0 ? (image.match(/url\(.+(?=\))/g)|| []).map(url => url.replace(/url\(/, ''))[0] : ''
+    this.bgRepeat = this.styles['background-repeat'] || 'no-repeat'
+    this.bgSize = this.styles['background-size'] || 'cover'
     this.controlOpen = this.expand
   },
 
@@ -56,23 +42,33 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ]),
+
+    styles () {
+      return this.settingObjectOptions.styles
+    }
+
+  },
+
   methods: {
     changeColor () {
       const color = this.bgColor.rgba ? `rgba(${Object.values(this.bgColor.rgba).toString()}` : this.bgColor
-      this.$emit('change', ['background-color', color])
+      this.styles['background-color'] = color
     },
 
-    changeImage (value) {
-      this.bgImage = value
-      this.$emit('change', ['background-image', `url(${this.bgImage})`])
+    changeImage () {
+      this.styles['background-image'] = `url(${this.bgImage})`
     },
 
     changeRepeat () {
-      this.$emit('change', ['background-repeat', this.bgRepeat])
+      this.styles['background-repeat'] = this.bgRepeat
     },
 
     changeSize () {
-      this.$emit('change', ['background-size', this.bgSize])
+      this.styles['background-size'] = this.bgSize
     },
 
     onClickOutside () {

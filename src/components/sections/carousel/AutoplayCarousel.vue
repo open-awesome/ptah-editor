@@ -60,7 +60,8 @@ export default {
       images: [],
       swiper: null,
       container: null,
-      options: null
+      options: null,
+      mounted: false
     }
   },
 
@@ -93,6 +94,7 @@ export default {
   },
 
   mounted () {
+    this.mounted = true
     this.initSwiper()
   },
 
@@ -106,6 +108,10 @@ export default {
     },
 
     initSwiper (delay) {
+      if (!this.mounted) {
+        return
+      }
+
       this.container = this.$el.querySelector(container)
       this.options = merge(autoplay, { pagination: { el: this.$el.querySelector(pagination) } })
 

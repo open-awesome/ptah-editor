@@ -6,14 +6,6 @@
         <control-section-layouts :builder="builder"></control-section-layouts>
       </div>
 
-      <div class="b-section-settings__control">
-        <div class="b-section-settings__header">
-          <span>Heights</span>
-        </div>
-        <base-label>Full screen height</base-label>
-        <BaseSwitcher v-model="fullScreen" @change="setHeight" />
-      </div>
-
       <!-- System requirements -->
       <control-system-requirements
         :expand="expandedSystemRequirements"
@@ -29,6 +21,14 @@
         v-if="settingObjectOptions.hasProducts"
       >
       </control-section-products>
+
+      <div class="b-section-settings__control">
+        <div class="b-section-settings__header">
+          <span>Heights</span>
+        </div>
+        <base-label>Full screen height</base-label>
+        <BaseSwitcher v-model="fullScreen" @change="setHeight" />
+      </div>
 
       <!-- font -->
       <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
@@ -241,6 +241,7 @@ export default {
       'settingObjectOptions',
       'settingObjectSection'
     ]),
+
     bgAttachmentCheckbox: {
       set (value) {
         this.bgAttachment = value ? 'fixed' : 'scroll'
@@ -265,8 +266,8 @@ export default {
 
     this.sectionBgColor = styles['background-color']
     this.sectionBgUrl = bgimage || ''
-    this.bgRepeat = styles['background-repeat'] === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
-    this.bgSize = styles['background-size'] === 'cover' ? this.sizeList[0] : this.sizeList[1]
+    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+    this.bgSize = styles['background-size'] || 'cover'
     this.bgAttachment = styles['background-attachment'] === 'fixed'
 
     /* Video */
@@ -401,9 +402,9 @@ export default {
 
     setHeight () {
       if (this.fullScreen) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: ['full-height'] }))
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: { list: ['full-height'] } }))
       } else {
-        let classesObj = this.settingObjectOptions.classes
+        let classesObj = this.settingObjectOptions.classes['list']
         classesObj.splice(classesObj.indexOf('full-height'), 1)
       }
     },

@@ -173,7 +173,8 @@ export default {
   border-radius: .4rem
 
   background-color: $white
-  background-size: cover !important
+  background-size: contain !important
+  background-position: middle middle
 
   &__caption
     display: inline-flex
