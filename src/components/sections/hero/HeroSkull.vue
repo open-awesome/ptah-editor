@@ -233,14 +233,6 @@ export default {
       'updateGroupData',
       'updateSectionData'
     ]),
-    onAddElement (element) {
-      element.element.removable = true
-      this.$section.data.components.push(element)
-    },
-    onAddElement2 (element) {
-      element.element.removable = true
-      this.$section.data.components2.push(element)
-    },
 
     storeData: _.after(2, (self) => {
       let data = {}
@@ -293,12 +285,10 @@ export default {
       <div class="b-grid__row">
         <div class="b-grid__col-12">
           <sandbox
-            class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container"
-            direction="column"
-            >
-            <elements-list @addEl="onAddElement"></elements-list>
+              container-path="$sectionData.container"
+              components-path="$sectionData.components"
+              class="b-sandbox">
+
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
@@ -335,13 +325,11 @@ export default {
         <div class="b-grid__row b-footer__row">
           <div class="b-grid__col-12 b-grid__col-m-12">
             <sandbox
-              class="b-footer__col b-footer__col_1"
-              ref="sandbox"
-              path="$sectionData.container2"
-              direction="row"
               :style="$sectionData.container2.styles"
-              >
-              <elements-list @addEl="onAddElement2"></elements-list>
+              container-path="$sectionData.container2"
+              components-path="$sectionData.components2"
+              class="b-footer__col b-footer__col_1">
+
               <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
                 <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                   <component
