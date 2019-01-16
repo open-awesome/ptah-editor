@@ -1,7 +1,7 @@
 <template>
 <div class="b-section-settings">
   <base-scroll-container backgroundBar="#999">
-    <div class="b-section-settings__inner">
+    <div class="b-section-settings__inner" v-show="!isGrouping">
       <div class="b-section-settings__control">
         <control-section-layouts :builder="builder"></control-section-layouts>
       </div>
@@ -147,8 +147,29 @@
             max="10000"/>
       </div>
 
-    </div>
+      <!-- Group -->
+      <div class="b-section-settings__control">
+        <BaseButton
+          :color="'gray'"
+          :transparent="true"
+          @click="toggleGrouping(true)"
+        >
+          Group sections
+        </BaseButton>
+      </div>
 
+    </div>
+    <div class="b-section-settings__inner" v-show="isGrouping">
+      <h3>Grouping</h3>
+
+      <BaseButton
+        :color="'gray'"
+        :transparent="true"
+        @click="toggleGrouping(false)"
+      >
+        Cancel
+      </BaseButton>
+    </div>
   </base-scroll-container>
 
   <div class="b-section-settings__buttons">
@@ -239,7 +260,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectSection'
+      'settingObjectSection',
+      'isGrouping'
     ]),
     bgAttachmentCheckbox: {
       set (value) {
@@ -328,7 +350,8 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'updateSettingOptions',
-      'clearSettingObject'
+      'clearSettingObject',
+      'toggleGrouping'
     ]),
 
     updateBgColor (value) {

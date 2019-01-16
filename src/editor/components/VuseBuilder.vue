@@ -297,14 +297,21 @@ export default {
           group.main = section
           group.main_element = sectionsNodes[index]
           group.absorb = section.data.mainStyle.absorb
-          group.children = sectionsNodes.slice(index + 1, index + section.data.mainStyle.absorb + 1)
+          group.childrenNodes = sectionsNodes.slice(index + 1, index + section.data.mainStyle.absorb + 1)
+          group.children = this.$builder.sections
+            .slice(index + 1, index + section.data.mainStyle.absorb + 1)
+            .map(section => section.id)
 
           // set attrs to calculate
           group.main_element.classList.add('ptah-g-main')
           group.main_element.dataset.absorb = group.absorb
-          group.children.forEach((el) => el.classList.add('ptah-g-child'))
+          group.childrenNodes.forEach((el) => el.classList.add('ptah-g-child'))
+
+          section.isMain = true
 
           groups.push(group)
+        } else {
+          section.isMain = false
         }
       })
 

@@ -1,6 +1,6 @@
 <template>
   <div class="b-menu-subitem"
-    :class="{'b-menu-subitem_selected': isSelected}"
+    :class="{'b-menu-subitem_selected': isSelected, 'b-menu-subitem__main': isMain, 'child': isChild}"
     @click="handleClick">
     <div class="b-menu-subitem__inner">
       <span class="b-menu-subitem__drag-icon">
@@ -29,6 +29,8 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
+
 export default {
   name: 'MenuSubitem',
 
@@ -41,9 +43,43 @@ export default {
       default: false
     },
 
+    isMain: {
+      type: Boolean,
+      default: false
+    },
+
     hasDraggableIcon: {
       type: Boolean,
       default: false
+    },
+
+    sectionId: {
+      type: Number
+    }
+  },
+
+  data () {
+    return {
+      isChild: false
+    }
+  },
+
+  computed: {
+    ...mapState('Sidebar', ['sectionsGroups'])
+  },
+
+  watch: {
+    // watch for child sections
+    'sectionsGroups': {
+      handler (value) {
+        this.isChild = false
+
+        value.forEach((obj) => {
+          if (obj.children.indexOf(this.sectionId) > -1) {
+            this.isChild = true
+          }
+        })
+      }
     }
   },
 
@@ -66,7 +102,8 @@ $selected-bg-color: rgba(#202020, 0.35)
   cursor: pointer
   color: #474747
   font-size: 1.4rem
-  padding: 0.4rem
+  padding: 0.4rem 0.4rem 0.4rem 0
+  border-left: 7px solid transparent
 
   &:hover:not(.b-menu-subitem_selected)
     background: rgba(#202020, 0.08)
@@ -99,4 +136,10 @@ $selected-bg-color: rgba(#202020, 0.35)
     .b-menu-subitem_selected &
       visibility: visible
 
+  &__main
+    border-left: 7px solid #436FEE
+
+  &.child
+    border-left: 7px solid rgba(67, 111, 238, .3)
+    padding-left: 1.4em
 </style>

@@ -3,6 +3,7 @@ export default {
     isExpanded: true,
     isSettingsExpanded: false, // 2nd level menu
     isAddSectionExpanded: false, // add section menu
+    isGrouping: false, // section grouping interface
     expandedMenuItem: 'sections', // submenu item
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectOptions: {},
@@ -66,6 +67,9 @@ export default {
     },
     setSectionsGroups (state, groups) {
       state.sectionsGroups = groups
+    },
+    isGrouping (state, value) {
+      state.isGrouping = value
     }
   },
 
@@ -178,7 +182,11 @@ export default {
     },
 
     updateSectionGroups ({ commit }, groups) {
-      commit('setSectionGroups', groups)
+      commit('setSectionsGroups', groups)
+    },
+
+    toggleGrouping ({ commit, state }, value) {
+      commit('isGrouping', (typeof value !== 'undefined') ? value : !state.isGrouping)
     }
   },
 

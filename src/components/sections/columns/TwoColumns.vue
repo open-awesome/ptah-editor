@@ -200,8 +200,6 @@ export default {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
-
-    this.$sectionData.mainStyle.absorb = 1
   }
 }
 </script>
