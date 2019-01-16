@@ -17,12 +17,25 @@
       <div
           v-for="(item, index) in images"
           :key="`slide-${index}-${_uid}`"
+          :class="{ 'swiper-slide-active': index === 0 }"
           class="swiper-slide b-gallery-carousel-body-item">
         <div :style="`background-image:url(${item.path})`" class="swiper-slide-item"></div>
       </div>
     </div>
 
-    <div class="swiper-pagination"></div>
+    <div v-show="images.length > 1" class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+      <span
+          v-for="(_, index) in images"
+          :key="`bullet-${index}-${_uid}`">
+          <span
+              :class="{ 'swiper-pagination-bullet-active': index === 0 }"
+              :aria-label="`Go to slide ${index + 1}`"
+              class="swiper-pagination-bullet"
+              tabindex="0"
+              role="button">
+          </span>
+      </span>
+    </div>
 
   </div>
 
@@ -33,11 +46,10 @@
 import { GallerySlider as mainStyle } from '@editor/types'
 import { cloneDeep, merge } from 'lodash-es'
 
-import Swiper from 'swiper'
 import 'swiper/dist/css/swiper.min.css'
 import swiperOptions from '@editor/swiper'
 
-const { container, pagination, autoplay } = swiperOptions
+const { pagination, autoplay } = swiperOptions
 
 export default {
   name: 'AutoplayCarousel',
@@ -58,10 +70,7 @@ export default {
   data () {
     return {
       images: [],
-      swiper: null,
-      container: null,
-      options: null,
-      mounted: false
+      container: null
     }
   },
 
@@ -70,32 +79,8 @@ export default {
       immediate: true,
       async handler (value) {
         this.updateImages(value)
-        await this.$nextTick()
-        if (this.swiper) {
-          this.initSwiper()
-        }
-      }
-    },
-
-    async 'device.type' () {
-      await this.$nextTick()
-      setImmediate(this.swiper.update)
-    },
-
-    '$store.state.Sidebar.settingObjectSection.data': {
-      deep: true,
-      immediate: true,
-      handler (value) {
-        if (value && value.hasOwnProperty('mainStyle')) {
-          this.initSwiper(value.mainStyle.swiper.delay)
-        }
       }
     }
-  },
-
-  mounted () {
-    this.mounted = true
-    this.initSwiper()
   },
 
   methods: {
@@ -107,30 +92,9 @@ export default {
         : [...items.splice(length - 1, 1), ...items]
     },
 
-    initSwiper (delay) {
-      if (!this.mounted) {
-        return
-      }
-
-      this.container = this.$el.querySelector(container)
-      this.options = merge(autoplay, { pagination: { el: this.$el.querySelector(pagination) } })
-
-      if (this.swiper) {
-        this.swiper.destroy(true, true)
-      }
-
-      if (delay) {
-        this.options.autoplay.delay = delay
-      } else {
-        this.options.autoplay.delay = this.$sectionData.mainStyle.swiper.delay
-      }
-
-      this.swiper = new Swiper(this.container, this.options)
-    },
-
     getOptions () {
       return JSON.stringify(
-        merge(this.options, { pagination: { el: pagination } })
+        merge(autoplay, { pagination: { el: pagination } })
       )
     }
   }
@@ -142,11 +106,14 @@ export default {
   width: 100%
   height: 100%
 
-  background-size: cover
+  background-size: contain
   background-position: center
   background-repeat: no-repeat
 
 .swiper-pagination
+  width: 100%
   bottom: 2.5rem
   padding-left: 2.5rem
+  &-bullet
+    margin: 0 .4rem
 </style>
