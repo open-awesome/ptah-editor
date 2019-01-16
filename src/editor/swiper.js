@@ -10,12 +10,16 @@ export default {
     simulateTouch: false,
     slidesPerView: 3,
     spaceBetween: 30,
+    pagination: {
+      type: 'bullets',
+      clickable: true
+    },
     coverflowEffect: {
       rotate: 30,
       stretch: 50,
       depth: 100,
       modifier: 1,
-      slideShadows : true
+      slideShadows: false
     },
     breakpoints: {
       1024: {
