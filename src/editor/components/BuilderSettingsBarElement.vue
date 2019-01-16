@@ -89,15 +89,6 @@
       </control-icon-with-text>
     </div>
 
-    <!-- BOTTOM button -->
-    <div class="b-elem-settings__buttons">
-      <base-button
-        v-if="settingObjectOptions.removable"
-        color="light-gray"
-        @click="deleteElement"
-      >Delete</base-button>
-    </div>
-
   </div>
 </template>
 
@@ -345,7 +336,7 @@ export default {
 
 <style lang="sass" scoped>
   .b-elem-settings
-    height: 100%
+    height: auto
     width: 100%
     padding-right: 2.5rem
     display: flex

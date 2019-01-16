@@ -68,6 +68,7 @@ export default {
   padding: 2.8rem 0.5rem 2.8rem 3.2rem
   background: #F5F5F5
   &__title
+    min-width: 25rem
     margin: 0 0 2.8rem 0
     color: #272727
     font-size: 1.8rem
@@ -88,6 +89,7 @@ export default {
     background: transparent
     cursor: pointer
   &__contents
-    flex-grow: 2
     display: flex
+    flex-grow: 2
+    overflow: auto
 </style>

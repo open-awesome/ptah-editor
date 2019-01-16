@@ -655,6 +655,7 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container1"
             components-path="$sectionData.components1"
+            direction="column"
             :style="{ backgroundColor : $sectionData.mainStyle.styles['background-color'] }"
             >
 
@@ -692,6 +693,8 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container1d"
             components-path="$sectionData.components1d"
+            direction="column"
+            align="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
             <draggable v-model="$sectionData.components1d" class="b-draggable-slot" :style="$sectionData.container1d.styles">
@@ -732,6 +735,7 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
+            direction="column"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
 
@@ -768,6 +772,8 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container2d"
             components-path="$sectionData.components2d"
+            direction="column"
+            align="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
             <draggable v-model="$sectionData.components2d" class="b-draggable-slot" :style="$sectionData.container2d.styles">
@@ -807,6 +813,7 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container3"
             components-path="$sectionData.components3"
+            direction="column"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
 
@@ -843,6 +850,8 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container3d"
             components-path="$sectionData.components3d"
+            direction="column"
+            align="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
 
@@ -883,6 +892,7 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container4"
             components-path="$sectionData.components4"
+            direction="column"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
 
@@ -919,6 +929,8 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container4d"
             components-path="$sectionData.components4d"
+            direction="column"
+            align="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
 
