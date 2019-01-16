@@ -408,9 +408,9 @@ export default {
 
     setHeight () {
       if (this.fullScreen) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: { list: ['full-height'] } }))
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: ['full-height'] }))
       } else {
-        let classesObj = this.settingObjectOptions.classes['list']
+        let classesObj = this.settingObjectOptions.classes
         classesObj.splice(classesObj.indexOf('full-height'), 1)
       }
     },
