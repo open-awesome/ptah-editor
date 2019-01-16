@@ -28,7 +28,12 @@ export default {
     ],
     builderSections: [],
     builderGroups: [],
-    sectionsGroups: []
+    sectionsGroups: [],
+    sandbox: {
+      expanded: false, // sandbox sidebar expand state
+      components: [], // sandbox current section's components
+      styles: {} // sandbox current section's styles
+    }
   },
 
   mutations: {
@@ -70,6 +75,12 @@ export default {
     },
     isGrouping (state, value) {
       state.isGrouping = value
+    },
+    toggleSandboxSidebar ({ sandbox }, value = !sandbox.expanded) {
+      sandbox.expanded = value
+    },
+    setSandboxPaths (state, paths) {
+      state.sandbox = { ...state.sandbox, ...paths }
     }
   },
 
@@ -103,6 +114,7 @@ export default {
      */
     clearSettingObject ({ commit }) {
       commit('isSettingsExpanded', false)
+      commit('toggleSandboxSidebar', false)
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
     },

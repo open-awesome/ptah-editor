@@ -128,11 +128,6 @@ export default {
       'updateSectionData'
     ]),
 
-    onAddElement (element) {
-      element.element.removable = true
-      this.$section.data.components.push(element)
-    },
-
     storeData: _.after(2, (self) => {
       let data = {}
       self.$sectionData.components.forEach(component => {
@@ -184,12 +179,10 @@ export default {
       <div class="b-grid__row">
         <div class="b-grid__col-12">
           <sandbox
-            class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container"
-            direction="column"
-            >
-            <elements-list @addEl="onAddElement"></elements-list>
+              container-path="$sectionData.container"
+              components-path="$sectionData.components"
+              class="b-sandbox">
+
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"

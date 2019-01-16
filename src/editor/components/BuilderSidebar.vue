@@ -73,17 +73,30 @@
             {{`${index + 1}.`}} {{section.name}}
           </MenuSubitem>
         </div>
-      </BaseDropdown>
-
+      </BaseDropdown>=
     </div>
+
     <transition name="slide-fade">
-      <div class="b-builder-sidebar-settings" v-if="isExpanded && isSettingsExpanded">
-        <BuilderSettingsBar
-          :title="settingObjectOptions.sectionName"
-          :builder="builder"
-          @requestClose="closeSettingsBar"
-          v-if="settingObjectOptions.sectionName">
-        </BuilderSettingsBar>
+      <div
+          v-if="isExpanded && (isSettingsExpanded || sandbox.expanded)"
+          :class="{ 'slots-settings': isSlotsSettings }"
+          class="b-builder-sidebar-settings">
+
+        <builder-settings-slots
+            v-if="sandbox.expanded"
+            :path="sandbox.path"
+            :section="settingObjectSection"
+            :options="settingObjectOptions"
+            @requestClose="closeSlotsBar"
+            class="slots-settings__list"/>
+
+        <builder-settings-bar
+            v-if="settingObjectOptions.sectionName"
+            :title="settingObjectOptions.sectionName"
+            :builder="builder"
+            @requestClose="closeSettingsBar"
+            class="slots-settings__preview"/>
+
       </div>
     </transition>
 
@@ -103,11 +116,12 @@
 
 <script>
 import Sortable from 'sortablejs'
-import MenuItem from './MenuItem.vue'
-import MenuSubitem from './MenuSubitem.vue'
-import BuilderSettingsBar from './BuilderSettingsBar.vue'
-import BuilderAddSectionBar from './BuilderAddSectionBar.vue'
-import { mapActions, mapState } from 'vuex'
+import MenuItem from './MenuItem'
+import MenuSubitem from './MenuSubitem'
+import BuilderSettingsBar from './BuilderSettingsBar'
+import BuilderSettingsSlots from './BuilderSettingsSlots'
+import BuilderAddSectionBar from './BuilderAddSectionBar'
+import { mapMutations, mapActions, mapState } from 'vuex'
 
 export default {
   name: 'BuilderSidebar',
@@ -116,6 +130,7 @@ export default {
     MenuItem,
     MenuSubitem,
     BuilderSettingsBar,
+    BuilderSettingsSlots,
     BuilderAddSectionBar
   },
 
@@ -133,13 +148,21 @@ export default {
     ...mapState('BuilderModalContent', {
       modalContentID: 'contentID'
     }),
+
     ...mapState('Sidebar', [
       'isSettingsExpanded',
       'settingObjectOptions',
+      'settingObjectSection',
       'siteSettingsMenu',
       'isAddSectionExpanded',
-      'expandedMenuItem'
-    ])
+      'expandedMenuItem',
+      'settingObjectType',
+      'sandbox'
+    ]),
+
+    isSlotsSettings () {
+      return this.settingObjectType !== 'section'
+    }
   },
 
   data () {
@@ -169,13 +192,17 @@ export default {
   },
 
   methods: {
+    ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
+
     ...mapActions('Sidebar', [
       'setSettingSection',
       'clearSettingObject',
+      'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
       'setMenuItem'
     ]),
+
     ...mapActions('BuilderModalContent', {
       setModalContent: 'setContent'
     }),
@@ -196,14 +223,20 @@ export default {
     toggleSettingsBar (section) {
       this.closeSiteSettings()
       this.clearSettingObject()
+      this.toggleSandboxSidebar(false)
 
       if (!this.isActiveSection(section.id)) {
         this.setSettingSection(section)
       }
     },
 
-    closeSettingsBar () {
+    closeSlotsBar () {
       this.clearSettingObject()
+      this.toggleSandboxSidebar(false)
+    },
+
+    closeSettingsBar () {
+      this.clearSettingObjectLight()
     },
 
     toggleSiteSettings (contentID) {
@@ -289,6 +322,7 @@ $top-panel-height: 7.2rem
       background: rgba(#202020, 0.08)
 
   &__content
+    height: 100%
     box-shadow: inset 1px 3px 8px 0 rgba(#888888, 0.15)
     display: flex
     flex-direction: column
@@ -303,6 +337,12 @@ $top-panel-height: 7.2rem
     display: flex
     flex-direction: column
     flex-grow: 1
+    &.slots-settings
+      flex-direction: row
+      .slots-settings__list
+        margin-right: .8rem
+      .slots-settings__preview
+        min-width: 30rem
 
   &__icon-add
     width: 3.2rem

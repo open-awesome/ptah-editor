@@ -11,7 +11,6 @@ import Uploader from '@editor/plugins/Uploader.vue'
 
 // slot base
 import Sandbox from '@components/slots/Sandbox'
-import ElementsList from '@components/slots/ElementsList'
 
 // elements
 import Button from '@components/elements/Button'
@@ -51,7 +50,6 @@ Vuse.mix({
   components: {
     Uploader,
     Sandbox,
-    ElementsList,
     Button,
     Link,
     Title,
