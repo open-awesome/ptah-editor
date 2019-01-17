@@ -96,7 +96,9 @@ export default {
     },
 
     changeBgImage () {
-      this.changePseudo('background-image', 'url(' + this.bgHoverImage + ')')
+      if (this.bgHoverImage !== '') {
+        this.changePseudo('background-image', 'url(' + this.bgHoverImage + ')')
+      }
     },
 
     changeRepeat () {
