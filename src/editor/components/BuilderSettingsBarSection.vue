@@ -527,7 +527,7 @@ export default {
     margin-top: 2.2rem
   &__inner
     padding-right: 2.5rem
-    padding-bottom: 5rem
+    padding-bottom: 10rem
   &__buttons
     position: absolute
     bottom: 1rem

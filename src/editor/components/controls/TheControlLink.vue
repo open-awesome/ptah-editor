@@ -17,6 +17,7 @@ export default {
       link: '',
       target: '',
       bgH: '',
+      bgHoverImage: '',
       textH: '',
       animationList: [
         { name: 'none', value: '' },
@@ -25,7 +26,17 @@ export default {
         { name: 'shake', value: 'ptah-a-shake' },
         { name: 'bounce', value: 'ptah-a-bounce' }
       ],
-      animationClass: {}
+      animationClass: {},
+      bgRepeat: '',
+      bgSize: '',
+      list: [
+        { text: 'No-repeat', value: 'no-repeat' },
+        { text: 'Repeat', value: 'repeat' }
+      ],
+      sizeList: [
+        { text: 'Tile', value: 'cover' },
+        { text: 'Fill', value: 'contain' }
+      ]
     }
   },
 
@@ -81,13 +92,27 @@ export default {
     },
 
     changeBgColor () {
-      this.changePseudoStyle('background-color', this.bgH.hex + '!important')
-      this.pseudo['hover']['background-color'] = this.bgH.hex + ' !important'
+      this.changePseudo('background-color', this.bgH.hex)
+    },
+
+    changeBgImage () {
+      let bg = 'none'
+      if (this.bgHoverImage !== null && this.bgHoverImage !== '') {
+        bg = 'url(' + this.bgHoverImage + ')'
+      }
+      this.changePseudo('background-image', bg)
+    },
+
+    changeRepeat () {
+      this.changePseudo('background-repeat', this.bgRepeat)
+    },
+
+    changeSize () {
+      this.changePseudo('background-size', this.bgSize)
     },
 
     changeTextColor () {
-      this.changePseudoStyle('color', this.textH.hex + '!important')
-      this.pseudo['hover']['color'] = this.textH.hex + ' !important'
+      this.changePseudo('color', this.textH.hex)
     },
 
     changeAnimation () {
@@ -96,6 +121,13 @@ export default {
 
     onClickTitle () {
       this.$emit('open', ['Link', !this.controlOpen])
+    },
+
+    changePseudo (attr, style, pseudoClass = 'hover') {
+      if (style !== '') {
+        this.changePseudoStyle(attr, style + '!important')
+        this.pseudo[pseudoClass][attr] = style + '!important'
+      }
     },
 
     /**
@@ -133,22 +165,37 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
     let self = this
-    let pBackgroundColor = this.pseudo['hover']['background-color']
-    let pColor = this.pseudo['hover']['color']
+    let pBackgroundColor = this.pseudo['hover']['background-color'].split('!')[0]
+    let pBackgroundImage = this.pseudo['hover']['background-image'].split('!')[0]
+    let pBackgroundRepeat = this.pseudo['hover']['background-repeat'].split('!')[0]
+    let pBackgroundSize = this.pseudo['hover']['background-size'].split('!')[0]
+    let pColor = this.pseudo['hover']['color'].split('!')[0]
 
     this.link = this.elLink.href
     this.target = this.elLink.target === '_blank'
-    this.bgH = pBackgroundColor.split('!')[0] || this.styles['background-color']
-    this.textH = pColor.split('!')[0] || this.styles['color']
-    this.controlOpen = this.expand
+
+    this.bgH = pBackgroundColor || this.styles['background-color']
+
+    if (pBackgroundImage && pBackgroundImage !== 'none') {
+      let images = pBackgroundImage.match(/url\(.+(?=\))/g) || []
+      let result = images.map(url => url.replace(/url\(/, ''))[0]
+      this.bgHoverImage = (result.match(/^("")|("")$/)) ? JSON.parse(result) : result
+    }
+
+    this.textH = pColor || this.styles['color']
+
+    this.bgRepeat = pBackgroundRepeat || 'no-repeat'
+    this.bgSize = pBackgroundSize || 'cover'
 
     this.animationList.forEach(function (item, i, arr) {
       if (self.animation.value !== undefined && self.animation.value === self.animationList[i].value) {
         self.animationClass = item
       }
     })
+
+    this.controlOpen = this.expand
   }
 }
 </script>
@@ -167,6 +214,19 @@ export default {
       </div>
       <div class="b-link-controls__control">
         <base-color-picker label="Background hover color" v-model="bgH" @change="changeBgColor"></base-color-picker>
+      </div>
+      <div class="b-link-controls__control">
+        <base-uploader
+          v-model="bgHoverImage"
+          @change="changeBgImage"
+          label="Background hover image">
+        </base-uploader>
+      </div>
+      <div class="b-link-controls__control">
+        <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+      </div>
+      <div class="b-link-controls__control">
+        <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
       </div>
       <div class="b-link-controls__control">
         <base-color-picker label="Text hover color" v-model="textH" @change="changeTextColor"></base-color-picker>

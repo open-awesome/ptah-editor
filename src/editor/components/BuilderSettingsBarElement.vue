@@ -1,93 +1,98 @@
 <template>
   <div class="b-elem-settings">
-    <!-- Text align -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
-      <control-align
-        :isBox="settingObjectOptions.box"
-        :alignText="settingObjectOptions.styles['text-align']"
-        :alignFlex="settingObjectOptions.styles['justify-content']"
-        @boxAligned="styleChange"
-        @textAligned="styleChange">
-      </control-align>
-    </div>
+    <base-scroll-container backgroundBar="#999">
+      <div class="b-elem-settings__inner">
+            <!-- Text align -->
+            <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
+              <control-align
+                :isBox="settingObjectOptions.box"
+                :alignText="settingObjectOptions.styles['text-align']"
+                :alignFlex="settingObjectOptions.styles['justify-content']"
+                @boxAligned="styleChange"
+                @textAligned="styleChange">
+              </control-align>
+            </div>
 
-    <!-- Size -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
-      <control-size
-        :height="elHeight"
-        :width="elWidth"
-        :radius="elRadius"
-        :expand="expandedSize"
-        @open="onExpand"
-        @change="styleChange"
-        >
-      </control-size>
-    </div>
+            <!-- Size -->
+            <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
+              <control-size
+                :height="elHeight"
+                :width="elWidth"
+                :radius="elRadius"
+                :expand="expandedSize"
+                @open="onExpand"
+                @change="styleChange"
+                >
+              </control-size>
+            </div>
 
-    <!-- Text -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-      <control-text
-        :expand="expandedFont"
-        @open="onExpand"
-        @change="styleChange"></control-text>
-    </div>
+            <!-- Text -->
+            <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+              <control-text
+                :expand="expandedFont"
+                @open="onExpand"
+                @change="styleChange"></control-text>
+            </div>
 
-    <!-- background -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
-      <control-background
-        :color="bgColor"
-        :image="bgImage"
-        :repeat="bgRepeat"
-        :size="bgSize"
-        :expand="expandedBg"
-        @open="onExpand"
-        @change="styleChange"></control-background>
-    </div>
+            <!-- background -->
+            <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
+              <control-background
+                :color="bgColor"
+                :image="bgImage"
+                :repeat="bgRepeat"
+                :size="bgSize"
+                :expand="expandedBg"
+                @open="onExpand"
+                @change="styleChange"></control-background>
+            </div>
 
-    <!-- Link -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
-      <control-link
-        :expand="expandedLink"
-        @open="onExpand"
-        >
-      </control-link>
-    </div>
+            <!-- Link -->
+            <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
+              <control-link
+                :expand="expandedLink"
+                @open="onExpand"
+                >
+              </control-link>
+            </div>
 
-    <!-- Available Platforms Control-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
-      <control-available-platforms
-        :expand="expandedAvailablePlatforms"
-        @open="onExpand"
-        >
-      </control-available-platforms>
-    </div>
+            <!-- Available Platforms Control-->
+            <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
+              <control-available-platforms
+                :expand="expandedAvailablePlatforms"
+                @open="onExpand"
+                >
+              </control-available-platforms>
+            </div>
 
-    <!-- Age Restrictions Control-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasRestrictions">
-      <control-age-restrictions
-        :expand="expandedAgeRestrictions"
-        @open="onExpand"
-        >
-      </control-age-restrictions>
-    </div>
+            <!-- Age Restrictions Control-->
+            <div class="b-elem-settings__control" v-if="settingObjectOptions.hasRestrictions">
+              <control-age-restrictions
+                :expand="expandedAgeRestrictions"
+                @open="onExpand"
+                >
+              </control-age-restrictions>
+            </div>
 
-    <!-- Social Networks Control-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasNetworks">
-      <control-social-networks
-        :expand="expandedSocialNetworks"
-        @open="onExpand"
-        >
-      </control-social-networks>
-    </div>
+            <!-- Social Networks Control-->
+            <div class="b-elem-settings__control" v-if="settingObjectOptions.hasNetworks">
+              <control-social-networks
+                :expand="expandedSocialNetworks"
+                @open="onExpand"
+                >
+              </control-social-networks>
+            </div>
 
-    <!-- Text With Icon-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.isIconWithText">
-      <control-icon-with-text
-        :expand="expandedIconWithText"
-        @open="onExpand"
-        >
-      </control-icon-with-text>
-    </div>
+            <!-- Text With Icon-->
+            <div class="b-elem-settings__control" v-if="settingObjectOptions.isIconWithText">
+              <control-icon-with-text
+                :expand="expandedIconWithText"
+                @open="onExpand"
+                >
+              </control-icon-with-text>
+            </div>
+
+      </div>
+    </base-scroll-container>
 
   </div>
 </template>
@@ -210,9 +215,9 @@ export default {
     if (styles['background-color']) {
       this.bgColor = styles['background-color']
     }
-    this.bgImage = styles['background-image'] || 'none'
-    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
-    this.bgSize = styles['background-size'] || 'contain'
+    this.bgImage = styles['background-image'] || ''
+    this.bgRepeat = styles['background-repeat'] || ''
+    this.bgSize = styles['background-size'] || ''
 
     /* Get element size */
     this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetHeight
@@ -336,17 +341,18 @@ export default {
 
 <style lang="sass" scoped>
   .b-elem-settings
-    height: auto
-    width: 100%
-    padding-right: 2.5rem
+    padding-bottom: 4.5rem
     display: flex
     flex-direction: column
+    height: auto
+    width: 100%
+    align-items: stretch
+    &__inner
+      min-width: 24rem
+      padding-right: 2.5rem
+      padding-bottom: 10rem
     &__control
       margin-bottom: 1.6rem
-    &__buttons
-      flex-grow: 2
-      align-items: flex-end
-      display: flex
   // TODO: временное решение для кнопок сортировки
   .temp-sort-buttons
     button

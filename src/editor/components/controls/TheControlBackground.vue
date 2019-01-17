@@ -64,7 +64,11 @@ export default {
     },
 
     changeImage () {
-      this.styles['background-image'] = `url(${this.bgImage})`
+      let bg = 'none'
+      if (this.bgImage !== null && this.bgImage !== '') {
+        bg = `url(${this.bgImage})`
+      }
+      this.styles['background-image'] = bg
     },
 
     changeRepeat () {
