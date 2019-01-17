@@ -96,9 +96,11 @@ export default {
     },
 
     changeBgImage () {
-      if (this.bgHoverImage !== '') {
-        this.changePseudo('background-image', 'url(' + this.bgHoverImage + ')')
+      let bg = 'none'
+      if (this.bgHoverImage !== null && this.bgHoverImage !== '') {
+        bg = 'url(' + this.bgHoverImage + ')'
       }
+      this.changePseudo('background-image', bg)
     },
 
     changeRepeat () {
@@ -175,7 +177,12 @@ export default {
     this.target = this.elLink.target === '_blank'
 
     this.bgH = pBackgroundColor || this.styles['background-color']
-    this.bgHoverImage = pBackgroundImage.length > 0 ? pBackgroundImage.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
+
+    if (pBackgroundImage && pBackgroundImage !== 'none') {
+      let images = pBackgroundImage.match(/url\(.+(?=\))/g) || []
+      let result = images.map(url => url.replace(/url\(/, ''))[0]
+      this.bgHoverImage = (result.match(/^("")|("")$/)) ? JSON.parse(result) : result
+    }
 
     this.textH = pColor || this.styles['color']
 
