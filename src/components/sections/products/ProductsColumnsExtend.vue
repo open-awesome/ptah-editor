@@ -4,7 +4,6 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
 import { mapActions } from 'vuex'
-import { productExtendPreviewClick } from '@cscripts/productExtend'
 
 const C_CUSTOM_1 = [
   {
@@ -21,7 +20,10 @@ const C_CUSTOM_1 = [
   },
   {
     element: {
-      text: 'Start Edition'
+      text: 'Start Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -61,7 +63,10 @@ const C_CUSTOM_1_M = [
   },
   {
     element: {
-      text: 'Start Edition'
+      text: 'Start Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -132,7 +137,10 @@ const C_CUSTOM_2 = [
   },
   {
     element: {
-      text: 'Full Edition'
+      text: 'Full Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -172,7 +180,10 @@ const C_CUSTOM_2_M = [
   },
   {
     element: {
-      text: 'Full Edition'
+      text: 'Full Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -243,7 +254,10 @@ const C_CUSTOM_3 = [
   },
   {
     element: {
-      text: 'Deluxe Edition'
+      text: 'Deluxe Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -283,7 +297,10 @@ const C_CUSTOM_3_M = [
   },
   {
     element: {
-      text: 'Deluxe Edition'
+      text: 'Deluxe Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -354,7 +371,10 @@ const C_CUSTOM_4 = [
   },
   {
     element: {
-      text: 'Ultimate Edition'
+      text: 'Ultimate Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -394,7 +414,10 @@ const C_CUSTOM_4_M = [
   },
   {
     element: {
-      text: 'Ultimate Edition'
+      text: 'Ultimate Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -450,6 +473,27 @@ const C_CUSTOM_4D = [
   }
 ]
 
+const C_CUSTOM_CONTAINER = {
+  styles: {
+    'flex-direction': 'row',
+    'align-items': 'center'
+  }
+}
+
+const C_CUSTOM_CONTAINER_M = {
+  styles: {
+    'flex-direction': 'column',
+    'align-items': 'center'
+  }
+}
+
+const C_CUSTOM_CONTAINER_D = {
+  styles: {
+    'flex-direction': 'column',
+    'align-items': 'flex-start'
+  }
+}
+
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
@@ -457,6 +501,18 @@ const SCHEMA_CUSTOM = {
       'background-color': 'rgba(21,28,68,0.73)'
     }
   },
+  container1: _.merge({}, C_CUSTOM_CONTAINER),
+  container1m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container1d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container2: _.merge({}, C_CUSTOM_CONTAINER),
+  container2m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container2d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container3: _.merge({}, C_CUSTOM_CONTAINER),
+  container3m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container3d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container4: _.merge({}, C_CUSTOM_CONTAINER),
+  container4m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container4d: _.merge({}, C_CUSTOM_CONTAINER_D),
   components1: _.merge({}, C_CUSTOM_1),
   components1m: _.merge({}, C_CUSTOM_1_M),
   components1d: _.merge({}, C_CUSTOM_1D),
@@ -542,7 +598,7 @@ const COMPONENTS_D = [
 ]
 
 const GROUP_NAME = 'Products'
-const NAME = 'ProductsColumnsExtend'
+const NAME = 'ProductsColumns'
 
 export default {
   name: NAME,
@@ -576,8 +632,7 @@ export default {
     components3d: COMPONENTS_D,
     components4: COMPONENTS,
     components4m: COMPONENTS_M,
-    components4d: COMPONENTS_D,
-    listComponents: {}
+    components4d: COMPONENTS_D
   },
   props: {
     id: {
@@ -591,60 +646,28 @@ export default {
       'updateSectionData'
     ]),
 
-    bindingProductExtendPreviewClick (index) {
-      productExtendPreviewClick(index)
+    selectProduct (key) {
+      this.$sectionData.mainStyle.selectProduct.name = key
     },
 
     storeData: _.after(2, (self) => {
-      let data = self.$sectionData.listComponents
-      for (var key in data) {
-        self.$sectionData[key].forEach(component => {
-          data[key].push(component)
-        })
-      }
-      self.updateGroupData({ name: GROUP_NAME, data })
       self.updateSectionData({
         name: NAME,
         data: _.cloneDeep(self.$sectionData)
       })
-    }),
-
-    canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
-    },
-
-    setListComponents () {
-      for (var key in this.$sectionData) {
-        if (key.indexOf('components') !== -1) {
-          this.$sectionData.listComponents[key] = []
-        }
-      }
-    }
+    })
   },
 
   created () {
-    if (this.$sectionData.edited === undefined) {
-      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
-      Seeder.seed(_.merge(this.$sectionData, data))
+    if (this.$sectionData.edited === undefined && !!this.$store.state.Landing.sectionData[NAME] === false) {
+      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    } else {
+      Seeder.seed(_.merge(this.$sectionData, this.$store.state.Landing.sectionData[NAME]))
     }
-
-    if (this.$store.state.Landing.groupData[GROUP_NAME]) {
-      _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (arrComponents, name) => {
-        this.$sectionData[name] = arrComponents
-      })
-    }
-
-    this.setListComponents()
-  },
-
-  mounted: function () {
-    this.bindingProductExtendPreviewClick(0)
   },
 
   updated: function () {
-    this.setListComponents()
     this.storeData(this)
-    this.bindingProductExtendPreviewClick(this.index)
   }
 }
 </script>
@@ -665,6 +688,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Standart'].visible"
               :data-index="0"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Standart')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -673,7 +698,6 @@ export default {
                 direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
-
                 <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1m.styles">
                   <div
                     v-for="(component, index) in $sectionData.components1m"
@@ -709,6 +733,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Full'].visible"
               :data-index="1"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Full')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Full' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -752,6 +778,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Deluxe'].visible"
               :data-index="2"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Deluxe')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -760,7 +788,6 @@ export default {
                 direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
-
                 <draggable v-model="$sectionData.components3m" class="b-draggable-slot" :style="$sectionData.container3m.styles">
                   <div
                        v-for="(component, index) in $sectionData.components3m" v-if="$sectionData.components3m.length !== 0" :key="index">
@@ -795,6 +822,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Ultimate'].visible"
               :data-index="3"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Ultimate')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -840,7 +869,8 @@ export default {
                <!-- b-products-columns-extend__right -->
                 <div class="b-grid__row">
                   <div class="b-grid__col-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Standart'].visible"
+                    v-show="$sectionData.mainStyle.selectProduct.name === 'Standart' && $sectionData.mainStyle.products['Standart'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' }"
                     :product-extend-stage="0"
                     >
                     <sandbox
@@ -850,7 +880,6 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components1" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container1.styles">
                         <div
                           v-for="(component, index) in $sectionData.components1"
@@ -889,7 +918,6 @@ export default {
                       align="flex-start"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components1d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container1d.styles">
                         <div
                           v-for="(component, index) in $sectionData.components1d"
@@ -922,7 +950,8 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Full'].visible"
+                    v-show="$sectionData.mainStyle.selectProduct.name === 'Full' && $sectionData.mainStyle.products['Full'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Full' }"
                     :product-extend-stage="1"
                     >
                     <sandbox
@@ -1000,7 +1029,8 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Deluxe'].visible"
+                    v-show="$sectionData.mainStyle.selectProduct.name === 'Deluxe' && $sectionData.mainStyle.products['Deluxe'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' }"
                     :product-extend-stage="2"
                     >
                     <sandbox
@@ -1010,7 +1040,6 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components3" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3.styles">
                         <div
                              v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
@@ -1047,7 +1076,6 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components3d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3d.styles">
                         <div
                              v-for="(component, index) in $sectionData.components3d" v-if="$sectionData.components3d.length !== 0" :key="index">
@@ -1079,7 +1107,8 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Ultimate'].visible"
+                    v-show="$sectionData.mainStyle.selectProduct.name === 'Ultimate' && $sectionData.mainStyle.products['Ultimate'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate' }"
                     :product-extend-stage="3"
                     >
                     <sandbox
@@ -1089,7 +1118,6 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components4" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container4.styles">
                         <div
                              v-for="(component, index) in $sectionData.components4" v-if="$sectionData.components4.length !== 0" :key="index">
@@ -1126,7 +1154,6 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components4d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container4d.styles">
                         <div
                              v-for="(component, index) in $sectionData.components4d" v-if="$sectionData.components4d.length !== 0" :key="index">

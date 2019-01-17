@@ -1,7 +1,6 @@
 <script>
 import { mapState } from 'vuex'
 import find from 'lodash-es/find'
-
 const LIST_FONTS = [
   'Lato',
   'Montserrat',
@@ -14,6 +13,9 @@ export default {
     expand: {
       type: Boolean,
       required: true
+    },
+    isComplexText: {
+      type: Boolean
     }
   },
 
@@ -80,6 +82,7 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
+      'settingObjectSection',
       'settingObjectOptions'
     ]),
 
@@ -87,6 +90,9 @@ export default {
       return this.settingObjectOptions.styles
     },
 
+    ...mapState('Sidebar', [
+      'settingObjectSection'
+    ]),
     fonts () {
       const options = LIST_FONTS.map((font) => {
         return { name: font, value: font }
@@ -100,25 +106,62 @@ export default {
   methods: {
     changeFont () {
       this.styles['font-family'] = this.fontName.value
+          
+      if (this.isComplexText) {
+        this.changeStyleAll('font-family', this.fontName.value)
+      }    
     },
     changeSize () {
       this.styles['font-size'] = this.size.value
+          
+      if (this.isComplexText) {
+        this.changeStyleAll('font-size', `${this.size.value}rem`)
+      }
     },
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.styles['color'] = color
+          
+      if (this.isComplexText) {
+        this.changeStyleAll('color', color)
+      }
     },
     changeStyle () {
       this.style.list.forEach((style) => {
         if (find(this.style.valueMultiple, style.value)) {
-          this.styles[style.value.prop] = style.value.value
+          if (this.isComplexText) {
+            this.changeStyleAll(style.value.prop, style.value.value)
+          } else {
+            this.styles[style.value.prop] = style.value.value
+          }
         } else {
-          this.styles[style.value.prop] = style.value.base
+          if (this.isComplexText) {
+            this.changeStyleAll(style.value.prop, style.value.base)
+          } else {
+            this.styles[style.value.prop] = style.value.base
+          }    
         }
       })
     },
     onClickTitle () {
       this.$emit('open', ['Font', !this.controlOpen])
+    },
+    changeStyleAll (style, value) {
+      let data = this.settingObjectSection.data
+
+      for (var key in data) {
+        if (key.indexOf('components') !== -1) {
+          let components = data[key]
+
+          components.forEach((component, index) => {
+            for (var keyEl in component.element.styles) {
+              if (keyEl.indexOf(style) !== -1 && keyEl.indexOf('back') === -1) {
+                this.settingObjectSection.data[key][index].element.styles[keyEl] = value
+              }
+            }
+          })
+        }
+      }
     }
   },
 
