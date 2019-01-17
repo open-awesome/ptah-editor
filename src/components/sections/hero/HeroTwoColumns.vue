@@ -15,7 +15,6 @@
         <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             align="flex-start"
             class="b-sandbox">
           <draggable
@@ -128,12 +127,12 @@ import { StyleObject, Logo, Title, Text, Delimiter, Button } from '@editor/types
 import { mapActions } from 'vuex'
 import { merge, forEach, find, after, cloneDeep } from 'lodash-es'
 
-const [name, group, cover] = ['HeroTwoColumns', 'Hero', '/img/covers/hero-two-columns.jpg']
+const [name, group, cover] = ['HeroTwoColumns', 'Hero', '/img/covers/hero-two-columns.png']
 const defaultColumnComponents1 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg")',
+        'background-image': 'url(https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -164,7 +163,8 @@ const defaultColumnComponents2 = [
       styles: {
         'font-family': 'Lato',
         'font-size': '2rem',
-        'color': 'rgba(255, 255, 255, .3)'
+        'line-height': '1.5',
+        'color': '#FFF'
       }
     }
   },
@@ -178,6 +178,7 @@ const defaultColumnComponents2 = [
         'font-family': 'Lato',
         'text-align': 'center',
         'width': '352px',
+        'max-width': '100%',
         'height': '64px',
         'border-radius': '2px'
       }
@@ -187,9 +188,10 @@ const defaultColumnComponents2 = [
 const defaultSchema = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn987.cdn.stg.gamenet.ru/0/7K0NZ/o_1zKuK8.png)',
+      'background-image': 'url(https://gn367.cdn.stg.gamenet.ru/0/7a0MG/o_1SlgxQ.jpg)',
       'background-size': 'cover',
-      'background-repeat': 'no-repeat'
+      'background-repeat': 'no-repeat',
+      'background-position': '75% 50%'
     }
   },
   components: merge({}, defaultColumnComponents1),
@@ -273,7 +275,110 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+$h: 100vh
+
 .b-sandbox,
 .b-draggable-slot
+  max-width: 100%
   height: 100%
+
+.b-sandbox
+  min-height: 20rem
+  justify-content: center
+  align-items: center
+
+.b-draggable-slot
+  padding: 1.6rem .8rem
+
+.b-hero
+  position: relative
+  width: 100%
+  min-height: 60rem
+  margin: 0
+  padding: 1rem
+  display: flex
+  text-align: center
+  justify-content: center
+  flex-direction: column
+  transition: background 200ms
+  &-component
+    margin: 1.2rem
+  .is-mobile &,
+  .is-tablet &
+    background-position: 25% 50% !important
+  @media only screen and (max-width: 768px)
+    &
+      background-position: 25% 50% !important
+
+.b-delimiter
+  height: 2rem
+  .is-mobile &,
+  .is-tablet &
+    display: none
+  @media only screen and (max-width: 768px)
+    &
+      display: none
+
+.b-logo
+  margin: 0 0 5.5rem
+
+.b-title
+  color: rgb(255, 255, 255)
+  font-style: normal
+  font-weight: 800
+  line-height: 6.7rem
+  font-size: 4.8rem
+  text-align: center
+  letter-spacing: 0.15em
+  text-transform: uppercase
+  margin: 0 0 2rem
+  text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
+  .is-mobile &,
+  .is-tablet &
+    font-size: 2rem !important
+    line-height: 4rem
+    padding: 0 1rem
+  @media only screen and (max-width: 768px)
+    &
+      font-size: 2rem !important
+      line-height: 4rem
+      padding: 0 1rem
+
+.b-text
+  color: rgba(255, 255, 255, 0.3)
+  font-size: 2rem
+  line-height: 4rem
+  text-align: center
+  .is-mobile &,
+  .is-tablet &
+    font-size: 1.4rem !important
+    line-height: 2rem
+  @media only screen and (max-width: 768px)
+    &
+      font-size: 1.4rem !important
+      line-height: 2rem
+
+.b-button
+  color: #fff
+  font-family: Lato
+  font-style: normal
+  font-weight: bold
+  font-size: 1.6rem
+  text-align: center
+  letter-spacing: 0.28em
+  text-transform: uppercase
+  width: 35.2rem
+  height: 6.4rem
+  background: #FF6D64
+  box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
+  .is-mobile &,
+  .is-tablet &
+    width: 80% !important
+    height: 4rem !important
+    font-size: 1.4rem !important
+  @media only screen and (max-width: 768px)
+    &
+      width: 80% !important
+      height: 4rem !important
+      font-size: 1.4rem !important
 </style>
