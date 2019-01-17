@@ -12,18 +12,18 @@
 
       <div
           v-for="(prefix, index) in prefixes"
-          :key="`hero-two-column-${ _uid }-${ index }`"
+          :key="`hero-three-column-${ _uid }-${ index }`"
           :class="{
-            'b-grid__col-4': prefix === '',
-            'b-grid__col-8': prefix === '2'
+            'b-grid__col-6': prefix === '2',
+            'b-grid__col-3': prefix !== '2'
           }"
           class="b-grid__col-m-12">
 
         <sandbox
             :container-path="`$sectionData.container${ prefix }`"
             :components-path="`$sectionData.components${ prefix }`"
-            :align="(prefix === '') ? 'flex-start' : ''"
-            :direction="(prefix === '') ? '' : 'column'"
+            :align="(['', '3'].includes(prefix)) ? 'center' : ''"
+            :direction="(['', '3'].includes(prefix)) ? '' : 'column'"
             class="b-sandbox">
 
           <draggable
@@ -88,17 +88,17 @@ import { StyleObject, Logo, Title, Text, Delimiter, Button } from '@editor/types
 import { mapActions } from 'vuex'
 import { merge, forEach, find, after, cloneDeep } from 'lodash-es'
 
-const [name, group, cover] = ['HeroTwoColumns', 'Hero', '/img/covers/hero-two-columns.png']
+const [name, group, cover] = ['HeroThreeColumns', 'Hero', '/img/covers/hero-three-columns.png']
 const defaultColumnComponents1 = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg)',
+        'background-image': 'url(https://gn215.cdn.stg.gamenet.ru/0/7a2Pg/o_20SELE.png)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '110px',
-        'height': '64px'
+        'width': '22rem',
+        'height': '15rem'
       }
     }
   }
@@ -118,7 +118,6 @@ const defaultColumnComponents2 = [
     element: {
       text: `
         An sincerity so extremity he additions. Her yet there truth merit.
-        <span>Mrs all projecting favourable now unpleasing. Son law garden chatty temper</span>
         <span>Oh children provided to mr elegance marriage strongly.</span>
       `,
       styles: {
@@ -138,10 +137,24 @@ const defaultColumnComponents2 = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '352px',
+        'width': '30rem',
         'max-width': '100%',
         'height': '64px',
         'border-radius': '2px'
+      }
+    }
+  }
+]
+const defaultColumnComponents3 = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url(https://gn673.cdn.stg.gamenet.ru/0/7a2Oy/o_ZmvP7.png)',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '22rem',
+        'height': '15rem'
       }
     }
   }
@@ -157,6 +170,7 @@ const defaultSchema = {
   },
   components: merge({}, defaultColumnComponents1),
   components2: merge({}, defaultColumnComponents2),
+  components3: merge({}, defaultColumnComponents3),
   edited: true
 }
 
@@ -169,6 +183,7 @@ export default {
     mainStyle: StyleObject,
     container: StyleObject,
     container2: StyleObject,
+    container3: StyleObject,
     components: [
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' }
     ],
@@ -177,6 +192,9 @@ export default {
       { name: 'Description', element: Text, type: 'text', class: 'b-text', label: 'description' },
       { name: 'Delimiter', element: Delimiter, type: 'delimiter', class: 'b-delimiter', label: 'delimiter' },
       { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button' }
+    ],
+    components3: [
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' }
     ]
   },
 
@@ -191,7 +209,7 @@ export default {
 
   data () {
     return {
-      prefixes: ['', '2']
+      prefixes: ['', '2', '3']
     }
   },
 

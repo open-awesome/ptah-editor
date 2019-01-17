@@ -32,6 +32,7 @@ import IconWithText from '@components/elements/IconWithText'
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
 import HeroTwoColumns from '@components/sections/hero/HeroTwoColumns'
+import HeroThreeColumns from '@components/sections/hero/HeroThreeColumns'
 // --- gallery
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
@@ -75,6 +76,7 @@ const COMPONENTS = {
   HeroUnit,
   HeroSkull,
   HeroTwoColumns,
+  HeroThreeColumns,
   Gallery1,
   Gallery2,
   Gallery3,

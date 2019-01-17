@@ -105,6 +105,7 @@ export default {
   position: absolute
   top: 0
   right: 0
+  z-index: 1
 
   width: auto
   height: auto

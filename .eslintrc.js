@@ -13,7 +13,8 @@ module.exports = {
     'no-trailing-spaces': 0,
     'no-return-await': 0,
     'operator-linebreak': 0,
-    'no-useless-call': 0
+    'no-useless-call': 0,
+    'vue/valid-v-model': 'warn'
   },
   parserOptions: {
     parser: 'babel-eslint',
