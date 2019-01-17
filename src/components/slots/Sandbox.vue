@@ -1,6 +1,6 @@
 <template>
   <div class="b-slot">
-    <base-button @click="showSandboxSidebar" class="sandbox-equalizer" color="light-gray">
+    <base-button @click="showSandboxSidebar" class="sandbox-equalizer ptah-control" color="light-gray">
       <icon-base name="equalizer"/>
     </base-button>
     <slot/>

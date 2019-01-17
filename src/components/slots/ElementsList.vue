@@ -38,67 +38,80 @@ export default {
       {
         name: 'Button',
         element: types.Button,
-        type: 'button'
+        type: 'button',
+        label: 'button'
       },
       {
         name: 'Link',
         element: types.Link,
-        type: 'button'
+        type: 'button',
+        label: 'link'
       },
       {
         name: 'Title',
         element: types.Title,
-        type: 'text'
+        type: 'text',
+        label: 'title'
       },
       {
         name: 'Description',
         element: types.Text,
-        type: 'text'
+        type: 'text',
+        label: 'description'
       },
       {
         name: 'Pic',
         element: types.Image,
-        type: 'image'
+        type: 'image',
+        label: 'pic'
       },
       {
         name: 'Logo',
         element: types.Logo,
-        type: 'image'
+        type: 'image',
+        label: 'logo'
       },
       {
         name: 'Delimiter',
         element: types.Delimiter,
-        type: 'delimiter'
+        type: 'delimiter',
+        label: 'delimiter'
       },
       {
         name: 'AvailablePlatforms',
         element: types.AvailablePlatforms,
-        type: 'available'
+        type: 'available',
+        label: 'available platforms'
       },
       {
         name: 'AgeRestrictions',
         element: types.AgeRestrictions,
-        type: 'restrictions'
+        type: 'restrictions',
+        label: 'age restrictions'
       },
       {
         name: 'SocialNetworks',
         element: types.SocialNetworks,
-        type: 'networks'
+        type: 'networks',
+        label: 'social networks'
       },
       {
         name: 'Slogan',
         element: types.Slogan,
-        type: 'slogan'
+        type: 'slogan',
+        label: 'slogan'
       },
       {
         name: 'Cost',
         element: types.Cost,
-        type: 'text'
+        type: 'text',
+        label: 'cost'
       },
       {
         name: 'IconWithText',
         element: types.IconWithText,
-        type: 'icon'
+        type: 'icon',
+        label: 'icon with text'
       }
     ]
   }),
