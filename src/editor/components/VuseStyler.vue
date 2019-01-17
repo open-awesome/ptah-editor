@@ -44,7 +44,8 @@ export default {
     options: {
       type: Object,
       required: true
-    }
+    },
+    label: String
   },
   data: () => ({
     oldColorerColor: '',
@@ -289,6 +290,7 @@ export default {
           }
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
+            label: this.$props.label,
             name: this.name,
             options: _.get(this.section.data, this.path).element || this.options,
             section: this.section,
