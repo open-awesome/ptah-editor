@@ -348,6 +348,7 @@ export default {
     width: 100%
     align-items: stretch
     &__inner
+      min-width: 24rem
       padding-right: 2.5rem
       padding-bottom: 10rem
     &__control
