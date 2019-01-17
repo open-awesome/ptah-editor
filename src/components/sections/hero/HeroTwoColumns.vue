@@ -22,8 +22,8 @@
         <sandbox
             :container-path="`$sectionData.container${ prefix }`"
             :components-path="`$sectionData.components${ prefix }`"
-            :align="(prefix === '') ? 'flex-start' : ''"
-            :direction="(prefix === '') ? '' : 'column'"
+            :align="(prefix === '') ? 'flex-start' : 'center'"
+            :direction="(prefix === '') ? 'row' : 'column'"
             class="b-sandbox">
 
           <!-- eslint-disable-next-line vue/valid-v-model -->`

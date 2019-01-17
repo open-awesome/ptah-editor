@@ -22,8 +22,8 @@
         <sandbox
             :container-path="`$sectionData.container${ prefix }`"
             :components-path="`$sectionData.components${ prefix }`"
-            :align="(['', '3'].includes(prefix)) ? 'center' : ''"
-            :direction="(['', '3'].includes(prefix)) ? '' : 'column'"
+            :direction="(['', '3'].includes(prefix)) ? 'row' : 'column'"
+            align="center"
             class="b-sandbox">
 
           <!-- eslint-disable-next-line vue/valid-v-model -->`
