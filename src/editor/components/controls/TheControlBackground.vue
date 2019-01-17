@@ -28,9 +28,13 @@ export default {
   },
 
   created () {
-    this.bgColor = this.styles['background-color']
     let image = this.styles['background-image']
-    this.bgImage = image.length > 0 ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
+    if (image && image !== 'none') {
+      let images = image.match(/url\(.+(?=\))/g) || []
+      let result = images.map(url => url.replace(/url\(/, ''))[0]
+      this.bgImage = (result.match(/^("")|("")$/)) ? JSON.parse(result) : result
+    }
+    this.bgColor = this.styles['background-color']
     this.bgRepeat = this.styles['background-repeat'] || 'no-repeat'
     this.bgSize = this.styles['background-size'] || 'cover'
     this.controlOpen = this.expand

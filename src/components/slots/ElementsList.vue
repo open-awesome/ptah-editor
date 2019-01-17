@@ -1,7 +1,7 @@
 <template>
   <div class="b-elements is-editable">
     <button class="b-elements__show-list ptah-control" @click="openList" :class="{'active': showList}">
-      <icon-base name="plus"></icon-base>
+      <icon-base width="10" height="10" name="plus"></icon-base>
     </button>
     <aside class="b-elements__list ptah-control" v-if="showList">
       <div class="b-elements__title">Add Item</div>
@@ -28,6 +28,7 @@
 import * as types from '@editor/types'
 import Seeder from '@editor/seeder'
 import * as _ from 'lodash-es'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'ElementsList',
@@ -105,6 +106,8 @@ export default {
     this.elements = Seeder.seed(this.elements)
   },
   methods: {
+    ...mapActions('Sidebar', ['clearSettingObjectLight']),
+
     addButton () {
       const el = _.merge({}, Seeder.seed(this.elements[0]))
       this.$emit('addEl', el)
@@ -159,6 +162,7 @@ export default {
     },
     openList () {
       this.showList = true
+      this.clearSettingObjectLight()
       document.addEventListener('click', this.hideList, true)
     },
     hideList () {
@@ -171,21 +175,17 @@ export default {
 
 <style lang="sass">
 .b-elements
-  position: absolute
-  top: 0
-  right: 0
-  opacity: .3
-  &:hover
-    opacity: 1
+
   &__show-list
     border: none
     background: $color-gray
-    width: $slot-step
-    height: $slot-step
+    width: 3.5rem
+    height: 3.5rem
     display: flex
     justify-content: center
     align-items: center
     padding: 0.5rem
+    margin-top: .1rem
     cursor: pointer
     color: $color-dark-100
     &:hover, &.active
@@ -206,9 +206,10 @@ export default {
     max-height: fit-content
     position: absolute
     z-index: 20
-    right: 5rem
-    top: 0
+    top: .8rem
+    left: calc(100% - .8rem)
     background: #fff
+    border: .1px solid lightgray
     color: $color-dark-100
     padding: 1.6rem
     overflow: auto
@@ -220,23 +221,13 @@ export default {
     li
       padding-bottom: 0.5rem
   &__title
-    padding: .9rem 0 0rem 1.6rem
+    padding: 0 0 0 1.6rem
     font-weight: bold
     line-height: 4.3rem
     font-size: 1.8rem
     letter-spacing: 0.02em
     text-align: left
     position: relative
-    &:after
-      content: ''
-      display: block
-      position: absolute
-      width: 2.4rem
-      height: 2.4rem
-      transform: rotate(45deg)
-      top: 1.9rem
-      right: -2.8rem
-      background: #fff
   &__button
     display: block
     background: transparent
