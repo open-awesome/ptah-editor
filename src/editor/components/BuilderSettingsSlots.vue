@@ -67,7 +67,7 @@
           :key="`${component.name}-${index}`"
           @click="selectSlot(component, index)"
           class="b-builder-settings-slots__item">
-        {{ component.name }}
+        {{ getComponentLabel(component.name) }}
         <base-button
             v-text="'-'"
             :disabled="!component.element.removable"
@@ -189,6 +189,13 @@ export default {
     removeElement (index) {
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
+    },
+
+    getComponentLabel (value) {
+      return value
+        .split(/(?=[A-Z])/)
+        .map((text, index) => (index === 0) ? text : text.toLowerCase())
+        .join(' ')
     }
   }
 }
