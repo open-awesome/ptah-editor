@@ -44,14 +44,14 @@
       </ul>
 
       <ul v-show="isColumnDir">
-        <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
-          <icon-base name="groupRight"/>
+        <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
+          <icon-base name="groupLeft"/>
         </li>
         <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
           <icon-base name="groupCenterHorizontal"/>
         </li>
-        <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
-          <icon-base name="groupLeft"/>
+        <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
+          <icon-base name="groupRight"/>
         </li>
       </ul>
 
