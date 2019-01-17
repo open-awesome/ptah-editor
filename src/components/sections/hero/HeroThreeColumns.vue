@@ -160,7 +160,7 @@ const defaultColumnComponents3 = [
 const defaultSchema = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn367.cdn.stg.gamenet.ru/0/7a0MG/o_1SlgxQ.jpg)',
+      'background-image': 'url(https://gn565.cdn.stg.gamenet.ru/0/7a2gZ/o_1hCEY8.png)',
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
       'background-position': '75% 50%'
