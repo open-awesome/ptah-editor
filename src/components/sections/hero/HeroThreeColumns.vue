@@ -26,10 +26,8 @@
             :direction="(['', '3'].includes(prefix)) ? '' : 'column'"
             class="b-sandbox">
 
-          <draggable
-              v-model="$sectionData[`components${ prefix }`]"
-              :style="$sectionData[`container${ prefix }`].styles"
-              class="b-draggable-slot">
+          <!-- eslint-disable-next-line vue/valid-v-model -->`
+          <draggable v-model="$sectionData[`components${ prefix }`]" :style="$sectionData[`container${ prefix }`].styles" class="b-draggable-slot">
 
             <div
                 v-for="(component, index) in $sectionData[`components${ prefix }`]"
