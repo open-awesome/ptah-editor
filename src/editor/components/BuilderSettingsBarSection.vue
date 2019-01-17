@@ -22,15 +22,7 @@
       >
       </control-section-products>
 
-      <div class="b-section-settings__control">
-        <div class="b-section-settings__header">
-          <span>Heights</span>
-        </div>
-        <base-label>Full screen height</base-label>
-        <BaseSwitcher v-model="fullScreen" @change="setHeight" />
-      </div>
-
-      <!-- font -->
+     <!-- Font -->
       <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
         <control-text
           :fontSize="fontSize"
@@ -38,8 +30,17 @@
           :fontColor="fontColor"
           :fontStyles="styles"
           :expand="expandedFont"
+          :isComplexText="isComplexText"
           @open="onExpand"
           @change="styleChange"></control-text>
+      </div>
+
+      <div class="b-section-settings__control">
+        <div class="b-section-settings__header">
+          <span>Heights</span>
+        </div>
+        <base-label>Full screen height</base-label>
+        <BaseSwitcher v-model="fullScreen" @change="setHeight" />
       </div>
 
       <template v-if="settingObjectOptions.background">
@@ -231,8 +232,11 @@ export default {
       expandedFont: false,
 
       styles: [],
-      productsCount: 0,
-      expandedProducts: true
+      products: {},
+      selectProduct: {},
+      expandedProducts: false,
+
+      isComplexText: false
     }
   },
 
@@ -300,6 +304,8 @@ export default {
 
     /* Products */
     this.products = this.settingObjectOptions.products || {}
+    this.selectProduct = this.settingObjectOptions.selectProduct || {}
+    this.isComplexText = this.settingObjectOptions.hasProducts || false
   },
 
   watch: {
@@ -503,10 +509,25 @@ export default {
   flex-direction: column
   align-items: stretch
   padding-bottom: 4.5rem
-
+  min-width: 24rem
+  &__header
+    font-size: 1.6rem
+    height: 3.2rem
+    color: #272727
+    display: flex
+    align-items: center
+    cursor: pointer
+    i
+      margin-left: 5px
+      margin-bottom: -5px
+      transform: rotate(180deg)
+      &.dropped
+        transform: rotate(0deg)
+  &__control
+    margin-top: 2.2rem
   &__inner
     padding-right: 2.5rem
-
+    padding-bottom: 5rem
   &__buttons
     position: absolute
     bottom: 1rem
@@ -523,9 +544,9 @@ export default {
     color: #747474
     margin-bottom: 2rem
     margin-top: -1rem
-
+  .vue-scrollbar__wrapper
+    margin: 0
   .picker
-
     &__label
       display: flex
       align-items: center

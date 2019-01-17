@@ -106,7 +106,7 @@ export default {
         </base-range-slider>
       </div>
       <div class="b-text-controls__control">
-        <base-color-picker label="Color" v-model="color" @change="changeColor"></base-color-picker>
+        <base-color-picker label="Color icon" v-model="color" @change="changeColor"></base-color-picker>
       </div>
       <div class="b-text-controls__control">
         <div>Visible icon</div>

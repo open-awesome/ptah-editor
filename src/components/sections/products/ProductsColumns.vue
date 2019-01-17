@@ -20,7 +20,10 @@ const C_CUSTOM_1 = [
   },
   {
     element: {
-      text: 'Start Edition'
+      text: 'Start Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -60,7 +63,10 @@ const C_CUSTOM_1_M = [
   },
   {
     element: {
-      text: 'Start Edition'
+      text: 'Start Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -131,7 +137,10 @@ const C_CUSTOM_2 = [
   },
   {
     element: {
-      text: 'Full Edition'
+      text: 'Full Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -171,7 +180,10 @@ const C_CUSTOM_2_M = [
   },
   {
     element: {
-      text: 'Full Edition'
+      text: 'Full Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -242,7 +254,10 @@ const C_CUSTOM_3 = [
   },
   {
     element: {
-      text: 'Deluxe Edition'
+      text: 'Deluxe Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -282,7 +297,10 @@ const C_CUSTOM_3_M = [
   },
   {
     element: {
-      text: 'Deluxe Edition'
+      text: 'Deluxe Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -353,7 +371,10 @@ const C_CUSTOM_4 = [
   },
   {
     element: {
-      text: 'Ultimate Edition'
+      text: 'Ultimate Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -393,7 +414,10 @@ const C_CUSTOM_4_M = [
   },
   {
     element: {
-      text: 'Ultimate Edition'
+      text: 'Ultimate Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -449,6 +473,27 @@ const C_CUSTOM_4D = [
   }
 ]
 
+const C_CUSTOM_CONTAINER = {
+  styles: {
+    'flex-direction': 'column',
+    'align-items': 'center'
+  }
+}
+
+const C_CUSTOM_CONTAINER_M = {
+  styles: {
+    'flex-direction': 'column',
+    'align-items': 'flex-start'
+  }
+}
+
+const C_CUSTOM_CONTAINER_D = {
+  styles: {
+    'flex-direction': 'column',
+    'align-items': 'flex-start'
+  }
+}
+
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
@@ -456,6 +501,18 @@ const SCHEMA_CUSTOM = {
       'background-color': 'rgba(21,28,68,0.73)'
     }
   },
+  container1: _.merge({}, C_CUSTOM_CONTAINER),
+  container1m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container1d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container2: _.merge({}, C_CUSTOM_CONTAINER),
+  container2m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container2d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container3: _.merge({}, C_CUSTOM_CONTAINER),
+  container3m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container3d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container4: _.merge({}, C_CUSTOM_CONTAINER),
+  container4m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container4d: _.merge({}, C_CUSTOM_CONTAINER_D),
   components1: _.merge({}, C_CUSTOM_1),
   components1m: _.merge({}, C_CUSTOM_1_M),
   components1d: _.merge({}, C_CUSTOM_1D),
@@ -575,8 +632,7 @@ export default {
     components3d: COMPONENTS_D,
     components4: COMPONENTS,
     components4m: COMPONENTS_M,
-    components4d: COMPONENTS_D,
-    listComponents: {}
+    components4d: COMPONENTS_D
   },
   props: {
     id: {
@@ -591,49 +647,22 @@ export default {
     ]),
 
     storeData: _.after(2, (self) => {
-      let data = self.$sectionData.listComponents
-      for (var key in data) {
-        self.$sectionData[key].forEach(component => {
-          data[key].push(component)
-        })
-      }
-      self.updateGroupData({ name: GROUP_NAME, data })
       self.updateSectionData({
         name: NAME,
         data: _.cloneDeep(self.$sectionData)
       })
-    }),
-
-    canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
-    },
-
-    setListComponents () {
-      for (var key in this.$sectionData) {
-        if (key.indexOf('components') !== -1) {
-          this.$sectionData.listComponents[key] = []
-        }
-      }
-    }
+    })
   },
 
   created () {
-    if (this.$sectionData.edited === undefined) {
-      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
-      Seeder.seed(_.merge(this.$sectionData, data))
+    if (this.$sectionData.edited === undefined && !!this.$store.state.Landing.sectionData[NAME] === false) {
+      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    } else {
+      Seeder.seed(_.merge(this.$sectionData, this.$store.state.Landing.sectionData[NAME]))
     }
-
-    if (this.$store.state.Landing.groupData[GROUP_NAME]) {
-      _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (arrComponents, name) => {
-        this.$sectionData[name] = arrComponents
-      })
-    }
-
-    this.setListComponents()
   },
 
   updated () {
-    this.setListComponents()
     this.storeData(this)
   }
 }
@@ -658,7 +687,6 @@ export default {
             direction="column"
             :style="{ backgroundColor : $sectionData.mainStyle.styles['background-color'] }"
             >
-
             <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1.styles">
               <div
                 v-for="(component, index) in $sectionData.components1"
@@ -738,7 +766,6 @@ export default {
             direction="column"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
               <div
                    v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
@@ -816,7 +843,6 @@ export default {
             direction="column"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-
             <draggable v-model="$sectionData.components3" class="b-draggable-slot" :style="$sectionData.container3.styles">
               <div
                    v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
@@ -854,7 +880,6 @@ export default {
             align="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-
             <draggable v-model="$sectionData.components3d" class="b-draggable-slot" :style="$sectionData.container3d.styles">
               <div
                    v-for="(component, index) in $sectionData.components3d" v-if="$sectionData.components3d.length !== 0" :key="index">
@@ -895,7 +920,6 @@ export default {
             direction="column"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-
             <draggable v-model="$sectionData.components4" class="b-draggable-slot" :style="$sectionData.container4.styles">
               <div
                    v-for="(component, index) in $sectionData.components4" v-if="$sectionData.components4.length !== 0" :key="index">
@@ -933,7 +957,6 @@ export default {
             align="flex-start"
             :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
             >
-
             <draggable v-model="$sectionData.components4d" class="b-draggable-slot" :style="$sectionData.container4d.styles">
               <div
                    v-for="(component, index) in $sectionData.components4d" v-if="$sectionData.components4d.length !== 0" :key="index">
