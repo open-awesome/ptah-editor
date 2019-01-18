@@ -7,7 +7,7 @@
 
   <slot name="video"/>
 
-  <div class="b-header">
+  <div class="b-grid b-header">
     <div class="b-grid__row b-footer__row">
       <div class="b-grid__col-12 b-grid__col-m-12">
 
@@ -23,7 +23,8 @@
             <div
                 v-for="(component, index) in $sectionData.components"
                 v-if="$sectionData.components.length !== 0"
-                :key="`component-${ _uid }-${ index }`">
+                :key="`component-${ _uid }-${ index }`"
+                :style="component.styles">
 
               <component
                   v-if="component.element.isComplex"
@@ -88,6 +89,9 @@ import { merge } from 'lodash-es'
 const [name, group, cover] = ['Header1', 'header', '/img/covers/header-1.png']
 const defaultComponents = [
   {
+    styles: {
+      'margin-right': 'auto'
+    },
     element: {
       styles: {
         'background-image': 'url(https://gn120.cdn.stg.gamenet.ru/0/7aITH/o_1vTdxd.png)',
@@ -95,27 +99,8 @@ const defaultComponents = [
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'width': '20rem',
-        'height': '10rem',
-        'margin-bottom': '1.6rem'
-      }
-    }
-  },
-  {
-    element: {
-      text: 'Link 2',
-      styles: {
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
-        'background-color': '#FF6D64',
-        'color': '#ffffff',
-        'font-family': 'Lato',
-        'text-align': 'center',
-        'width': '30rem',
-        'height': '6.4rem',
-        'max-width': '100%',
-        'border-radius': '2px',
-        'font-size': '1.8rem'
+        'height': '8rem',
+        'margin': '.8rem 1.6rem'
       }
     }
   },
@@ -126,13 +111,11 @@ const defaultComponents = [
         'display': 'flex',
         'align-items': 'center',
         'justify-content': 'center',
-        'background-color': '#FF6D64',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '30rem',
+        'min-width': '10rem',
         'height': '6.4rem',
-        'max-width': '100%',
         'border-radius': '2px',
         'font-size': '1.8rem'
       }
@@ -140,13 +123,33 @@ const defaultComponents = [
   },
   {
     element: {
+      text: 'Link 2',
+      styles: {
+        'display': 'flex',
+        'align-items': 'center',
+        'justify-content': 'center',
+        'color': '#ffffff',
+        'font-family': 'Lato',
+        'text-align': 'center',
+        'min-width': '10rem',
+        'height': '6.4rem',
+        'border-radius': '2px',
+        'font-size': '1.8rem'
+      }
+    }
+  },
+  {
+    styles: {
+      'margin-left': 'auto'
+    },
+    element: {
       text: 'Button',
       styles: {
         'background-color': '#FF6D64',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '30rem',
+        'width': '20rem',
         'height': '6.4rem',
         'max-width': '100%',
         'border-radius': '2px'
@@ -177,9 +180,9 @@ export default {
     container: StyleObject,
     components: [
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' },
-      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button' },
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' }
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
+      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button' }
     ]
   },
 
@@ -207,5 +210,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-sandbox
+  min-height: 10rem
 
+.b-draggable-slot
+  width: 100%
 </style>
