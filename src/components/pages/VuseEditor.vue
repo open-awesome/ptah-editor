@@ -29,6 +29,8 @@ import IconWithText from '@components/elements/IconWithText'
 import VideoElement from '@components/elements/Video'
 
 // sections
+// --- header
+import Header1 from '@components/sections/header/Header1'
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
@@ -77,22 +79,29 @@ const ELEMENTS = {
 }
 
 const COMPONENTS = {
+  Header1,
+
   HeroUnit,
   HeroSkull,
   HeroTwoColumns,
   HeroThreeColumns,
   HeroArtRight,
   HeroArtLeft,
+
   Gallery1,
   Gallery2,
   Gallery3,
+
   ProductsColumns,
   ProductsColumnsExtend,
+
   TwoColumns,
   ThreeColumns,
+
   DefaultCarousel,
   CoverflowCarousel,
   AutoplayCarousel,
+
   Footer,
   System,
   Video
