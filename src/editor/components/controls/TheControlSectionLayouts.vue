@@ -61,10 +61,12 @@ export default {
       this.builder.add(section, index)
 
       setTimeout(() => {
-        document
+        let subitem = document
           .getElementById('sections_contents')
           .querySelectorAll('.b-menu-subitem')[index]
-          .dispatchEvent(new Event('click'))
+        if (subitem) {
+          subitem.dispatchEvent(new Event('click'))
+        }
       }, 250)
     }
   }
