@@ -27,7 +27,7 @@ export default {
       // }
     ],
     builderSections: [],
-    builderGroups: [],
+    builderGroups: [], // section layouts
     sectionsGroups: [],
     sandbox: {
       expanded: false, // sandbox sidebar expand state
@@ -117,6 +117,7 @@ export default {
       commit('toggleSandboxSidebar', false)
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
+      commit('isGrouping', false)
     },
 
     clearSettingObjectLight ({ commit }) {

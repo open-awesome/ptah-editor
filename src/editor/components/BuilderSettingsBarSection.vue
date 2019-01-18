@@ -1,7 +1,7 @@
 <template>
 <div class="b-section-settings">
-  <base-scroll-container backgroundBar="#999">
-    <div class="b-section-settings__inner" v-show="!isGrouping">
+  <base-scroll-container backgroundBar="#999" v-show="!isGrouping">
+    <div class="b-section-settings__inner">
       <div class="b-section-settings__control">
         <control-section-layouts :builder="builder"></control-section-layouts>
       </div>
@@ -148,7 +148,7 @@
       </div>
 
       <!-- Group -->
-      <div class="b-section-settings__control">
+      <div class="b-section-settings__control" v-if="!isSlaveSection()">
         <BaseButton
           :color="'gray'"
           :transparent="true"
@@ -159,18 +159,25 @@
       </div>
 
     </div>
-    <div class="b-section-settings__inner" v-show="isGrouping">
-      <h3>Grouping</h3>
-
-      <BaseButton
-        :color="'gray'"
-        :transparent="true"
-        @click="toggleGrouping(false)"
-      >
-        Cancel
-      </BaseButton>
-    </div>
   </base-scroll-container>
+
+  <div class="b-section-settings__inner" v-show="isGrouping">
+    <h3>Grouping</h3>
+
+    <builder-settings-bar-group
+      :builder="builder"
+      :master="isMasterSection()"
+      :slave="isSlaveSection()"
+      v-if="isGrouping"></builder-settings-bar-group>
+
+    <BaseButton
+      :color="'gray'"
+      :transparent="true"
+      @click="toggleGrouping(false)"
+    >
+      Cancel
+    </BaseButton>
+  </div>
 
   <div class="b-section-settings__buttons">
     <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
@@ -186,6 +193,7 @@ import ControlSystemRequirements from './controls/TheControlSystemRequirements.v
 import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
 import BaseUploader from '../../components/base/BaseUploader'
+import BuilderSettingsBarGroup from './BuilderSettingsBarGroup'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -198,6 +206,7 @@ function getPickerColor (color) {
 
 export default {
   components: {
+    BuilderSettingsBarGroup,
     BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
@@ -261,6 +270,7 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection',
+      'sectionsGroups',
       'isGrouping'
     ]),
 
@@ -274,6 +284,10 @@ export default {
     },
     backgroundType () {
       return this.settingObjectOptions.backgroundType
+    },
+
+    sectionId () {
+      return this.settingObjectSection.id
     }
   },
 
@@ -515,6 +529,14 @@ export default {
         video.load()
         video.play()
       })
+    },
+
+    isMasterSection () {
+      return !!_.find(this.sectionsGroups, o => o.main.id === this.sectionId)
+    },
+
+    isSlaveSection () {
+      return !!_.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1)
     }
   }
 }

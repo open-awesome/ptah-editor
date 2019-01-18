@@ -1,4 +1,4 @@
-import { throttle } from 'lodash-es'
+import { throttle, forEachRight } from 'lodash-es'
 
 export function sectionsGroups () {
   let groups = []
@@ -32,11 +32,14 @@ export function sectionsGroups () {
       let padding = group.children.reduce((sum, el) => sum + el.offsetHeight, 0)
       group.main.style.paddingBottom = padding + 'px'
 
-      group.children.forEach((el) => {
+      let offset = 0
+
+      forEachRight(group.children, (el) => {
         let height = el.offsetHeight
         let style = el.style
+        offset = offset + height
         style.position = 'relative'
-        style.top = `-${height}px`
+        style.top = `-${offset}px`
         style.marginBottom = `-${height}px`
       })
     })
