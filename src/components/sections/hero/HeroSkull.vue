@@ -11,31 +11,36 @@ const COMPONENTS = [
     name: 'Logo',
     element: types.Logo,
     type: 'image',
-    class: 'b-logo'
+    class: 'b-logo',
+    label: 'logo'
   },
   {
     name: 'Title',
     element: types.Title,
     type: 'text',
-    class: 'b-title'
+    class: 'b-title',
+    label: 'title'
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
-    class: 'b-text'
+    class: 'b-text',
+    label: 'description'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
-    class: 'b-button'
+    class: 'b-button',
+    label: 'button'
   },
   {
     name: 'AvailablePlatforms',
     element: types.AvailablePlatforms,
     type: 'available',
-    class: 'b-available-platforms'
+    class: 'b-available-platforms',
+    label: 'available platforms'
   }
 ]
 
@@ -44,37 +49,43 @@ const COMPONENTS_2 = [
     name: 'Logo',
     element: types.Logo,
     type: 'image',
-    class: 'b-footer-game-logo'
+    class: 'b-footer-game-logo',
+    label: 'logo'
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
-    class: 'b-footer-copyright'
+    class: 'b-footer-copyright',
+    label: 'description'
   },
   {
     name: 'Link',
     element: types.Link,
     type: 'link',
-    class: 'b-footer-link'
+    class: 'b-footer-link',
+    label: 'link'
   },
   {
     name: 'Link',
     element: types.Link,
     type: 'link',
-    class: 'b-footer-link'
+    class: 'b-footer-link',
+    label: 'link'
   },
   {
     name: 'Link',
     element: types.Link,
     type: 'link',
-    class: 'b-footer-link'
+    class: 'b-footer-link',
+    label: 'link'
   },
   {
     name: 'AgeRestrictions',
     element: types.AgeRestrictions,
     type: 'restrictions',
-    class: 'b-age-restrictions'
+    class: 'b-age-restrictions',
+    label: 'age restrictions'
   }
 ]
 
@@ -294,7 +305,7 @@ export default {
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
                   v-if="$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
                   :target="$sectionData.components[index].element.link.target"
@@ -305,7 +316,7 @@ export default {
                 </component>
                 <component
                   v-if="!$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                   v-html="$sectionData.components[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
@@ -335,7 +346,7 @@ export default {
                 <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                   <component
                     v-if="$sectionData.components2[index].element.isComplex"
-                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                     :is="component.name"
                     :href="$sectionData.components2[index].element.link.href"
                     :target="$sectionData.components2[index].element.link.target"
@@ -347,7 +358,7 @@ export default {
                   </component>
                   <component
                     v-if="!$sectionData.components2[index].element.isComplex"
-                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                     v-html="$sectionData.components2[index].element.text"
                     :is="component.name"
                     :href="$sectionData.components2[index].element.link.href"

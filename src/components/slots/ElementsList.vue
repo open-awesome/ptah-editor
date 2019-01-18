@@ -9,16 +9,16 @@
         <li><a href="#" @click.prevent="addButton" class="b-elements__button">Button</a></li>
         <li><a href="#" @click.prevent="addLink" class="b-elements__button">Link</a></li>
         <li><a href="#" @click.prevent="addTitle" class="b-elements__button">Title</a></li>
-        <li><a href="#" @click.prevent="addText" class="b-elements__button">Text</a></li>
-        <li><a href="#" @click.prevent="addImage" class="b-elements__button">Image</a></li>
+        <li><a href="#" @click.prevent="addText" class="b-elements__button">Description</a></li>
+        <li><a href="#" @click.prevent="addImage" class="b-elements__button">Pic</a></li>
         <li><a href="#" @click.prevent="addDelimiter" class="b-elements__button">Delimiter</a></li>
         <li><a href="#" @click.prevent="addLogo" class="b-elements__button">Logo</a></li>
-        <li><a href="#" @click.prevent="addAvailable" class="b-elements__button">Available</a></li>
+        <li><a href="#" @click.prevent="addAvailable" class="b-elements__button">Available platforms</a></li>
         <li><a href="#" @click.prevent="addRestrictions" class="b-elements__button">Age restrictions</a></li>
-        <li><a href="#" @click.prevent="addSocial" class="b-elements__button">Social nets</a></li>
+        <li><a href="#" @click.prevent="addSocial" class="b-elements__button">Social networks</a></li>
         <li><a href="#" @click.prevent="addSlogan" class="b-elements__button">Slogan</a></li>
         <li><a href="#" @click.prevent="addCost" class="b-elements__button">Cost</a></li>
-        <li><a href="#" @click.prevent="addTextWithIcon" class="b-elements__button">Text with icon</a></li>
+        <li><a href="#" @click.prevent="addTextWithIcon" class="b-elements__button">Icon with text</a></li>
       </ul>
     </aside>
   </div>
@@ -38,67 +38,80 @@ export default {
       {
         name: 'Button',
         element: types.Button,
-        type: 'button'
+        type: 'button',
+        label: 'button'
       },
       {
         name: 'Link',
         element: types.Link,
-        type: 'button'
+        type: 'button',
+        label: 'link'
       },
       {
         name: 'Title',
         element: types.Title,
-        type: 'text'
+        type: 'text',
+        label: 'title'
       },
       {
         name: 'Description',
         element: types.Text,
-        type: 'text'
+        type: 'text',
+        label: 'description'
       },
       {
         name: 'Pic',
         element: types.Image,
-        type: 'image'
+        type: 'image',
+        label: 'pic'
       },
       {
         name: 'Logo',
         element: types.Logo,
-        type: 'image'
+        type: 'image',
+        label: 'logo'
       },
       {
         name: 'Delimiter',
         element: types.Delimiter,
-        type: 'delimiter'
+        type: 'delimiter',
+        label: 'delimiter'
       },
       {
         name: 'AvailablePlatforms',
         element: types.AvailablePlatforms,
-        type: 'available'
+        type: 'available',
+        label: 'available platforms'
       },
       {
         name: 'AgeRestrictions',
         element: types.AgeRestrictions,
-        type: 'restrictions'
+        type: 'restrictions',
+        label: 'age restrictions'
       },
       {
         name: 'SocialNetworks',
         element: types.SocialNetworks,
-        type: 'networks'
+        type: 'networks',
+        label: 'social networks'
       },
       {
         name: 'Slogan',
         element: types.Slogan,
-        type: 'slogan'
+        type: 'slogan',
+        label: 'slogan'
       },
       {
         name: 'Cost',
         element: types.Cost,
-        type: 'text'
+        type: 'text',
+        label: 'cost'
       },
       {
         name: 'IconWithText',
         element: types.IconWithText,
-        type: 'icon'
+        type: 'icon',
+        label: 'icon with text'
       }
     ]
   }),

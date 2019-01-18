@@ -137,31 +137,36 @@ const COMPONENTS = [
     name: 'Logo',
     element: types.Logo,
     type: 'image',
-    class: 'b-logo'
+    class: 'b-logo',
+    label: 'logo'
   },
   {
     name: 'Title',
     element: types.Title,
     type: 'text',
-    class: 'b-title'
+    class: 'b-title',
+    label: 'title'
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
-    class: 'b-text'
+    class: 'b-text',
+    label: 'description'
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
-    class: 'b-delimiter'
+    class: 'b-delimiter',
+    label: 'delimiter'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
-    class: 'b-button-test'
+    class: 'b-button-test',
+    label: 'button'
   }
 ]
 
@@ -225,7 +230,7 @@ export default {
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-columns2-component"
                   v-if="$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
                   :target="$sectionData.components[index].element.link.target"
@@ -236,7 +241,7 @@ export default {
                 </component>
                 <component class="b-columns2-component"
                   v-if="!$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                   v-html="$sectionData.components[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
@@ -263,7 +268,7 @@ export default {
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component class="b-columns2-component"
                   v-if="$sectionData.components2[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                   :is="component.name"
                   :href="$sectionData.components2[index].element.link.href"
                   :target="$sectionData.components2[index].element.link.target"
@@ -274,7 +279,7 @@ export default {
                 </component>
                 <component class="b-columns2-component"
                   v-if="!$sectionData.components2[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                   v-html="$sectionData.components2[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components2[index].element.link.href"
