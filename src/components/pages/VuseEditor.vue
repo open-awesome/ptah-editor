@@ -26,6 +26,7 @@ import SocialNetworks from '@components/elements/SocialNetworks'
 import Slogan from '@components/elements/Slogan'
 import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
+import VideoElement from '@components/elements/Video'
 
 // sections
 // --- hero
@@ -33,6 +34,8 @@ import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
 import HeroTwoColumns from '@components/sections/hero/HeroTwoColumns'
 import HeroThreeColumns from '@components/sections/hero/HeroThreeColumns'
+import HeroArtRight from '@components/sections/hero/HeroArtRight'
+import HeroArtLeft from '@components/sections/hero/HeroArtLeft'
 // --- gallery
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
@@ -69,7 +72,8 @@ const ELEMENTS = {
   SocialNetworks,
   Slogan,
   Cost,
-  IconWithText
+  IconWithText,
+  'Video': VideoElement
 }
 
 const COMPONENTS = {
@@ -77,6 +81,8 @@ const COMPONENTS = {
   HeroSkull,
   HeroTwoColumns,
   HeroThreeColumns,
+  HeroArtRight,
+  HeroArtLeft,
   Gallery1,
   Gallery2,
   Gallery3,

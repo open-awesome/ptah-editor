@@ -89,6 +89,15 @@
       </control-icon-with-text>
     </div>
 
+    <!-- Video -->
+    <div v-if="settingObjectOptions.hasVideo" class="b-elem-settings__control">
+      <control-video
+          :src="settingObjectOptions.src"
+          :expand="expandedVideo"
+          @toggle="onExpand"
+          @change="changeVideoSrc"/>
+    </div>
+
   </div>
 </template>
 
@@ -105,6 +114,7 @@ import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.v
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 import ControlIconWithText from './controls/TheControlIconWithText.vue'
+import ControlVideo from './controls/ControlVideo'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -125,7 +135,8 @@ export default {
     ControlAvailablePlatforms,
     ControlAgeRestrictions,
     ControlSocialNetworks,
-    ControlIconWithText
+    ControlIconWithText,
+    ControlVideo
   },
 
   data () {
@@ -156,6 +167,7 @@ export default {
       expandedAgeRestrictions: true,
       expandedSocialNetworks: true,
       expandedIconWithText: true,
+      expandedVideo: true,
       colorFill: {},
       sizeIcons: {},
       availablePlatforms: {},
@@ -280,6 +292,12 @@ export default {
       let styles = {}
       styles[prop] = value
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+    },
+
+    changeVideoSrc (value) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, { src: value })
+      )
     },
 
     setOption (option) {
