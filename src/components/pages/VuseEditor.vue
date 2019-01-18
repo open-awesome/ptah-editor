@@ -31,6 +31,9 @@ import VideoElement from '@components/elements/Video'
 // sections
 // --- header
 import Header1 from '@components/sections/header/Header1'
+import Header2 from '@components/sections/header/Header2'
+import Header3 from '@components/sections/header/Header3'
+import Header4 from '@components/sections/header/Header4'
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
@@ -80,6 +83,9 @@ const ELEMENTS = {
 
 const COMPONENTS = {
   Header1,
+  Header2,
+  Header3,
+  Header4,
 
   HeroUnit,
   HeroSkull,
