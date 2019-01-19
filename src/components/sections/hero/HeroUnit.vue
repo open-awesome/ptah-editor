@@ -5,6 +5,43 @@ import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
 import { mapActions } from 'vuex'
 
+const GROUP_NAME = 'Hero'
+const NAME = 'HeroUnit'
+const BG_SECTION = 'url(https://gn987.cdn.stg.gamenet.ru/0/7K0NZ/o_1zKuK8.png)'
+
+const COMPONENTS = [
+  {
+    name: 'Logo',
+    element: types.Logo,
+    type: 'image',
+    class: 'b-logo'
+  },
+  {
+    name: 'Title',
+    element: types.Title,
+    type: 'text',
+    class: 'b-title'
+  },
+  {
+    name: 'Description',
+    element: types.Text,
+    type: 'text',
+    class: 'b-text'
+  },
+  {
+    name: 'Button',
+    element: types.Button,
+    type: 'button',
+    class: 'b-button'
+  },
+  {
+    name: 'AvailablePlatforms',
+    element: types.AvailablePlatforms,
+    type: 'available',
+    class: 'b-available-platforms'
+  }
+]
+
 const C_CUSTOM = [
   {
     element: {
@@ -40,7 +77,6 @@ const C_CUSTOM = [
       }
     }
   },
-  {},
   {
     element: {
       text: 'Call to Action',
@@ -60,7 +96,7 @@ const C_CUSTOM = [
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn987.cdn.stg.gamenet.ru/0/7K0NZ/o_1zKuK8.png)',
+      'background-image': BG_SECTION,
       'background-size': 'cover',
       'background-repeat': 'no-repeat'
     }
@@ -68,9 +104,6 @@ const SCHEMA_CUSTOM = {
   components: _.merge({}, C_CUSTOM),
   edited: true
 }
-
-const GROUP_NAME = 'Hero'
-const NAME = 'HeroUnit'
 
 export default {
   name: NAME,
@@ -82,38 +115,8 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    components: [
-      {
-        name: 'Logo',
-        element: types.Logo,
-        type: 'image',
-        class: 'b-logo'
-      },
-      {
-        name: 'Title',
-        element: types.Title,
-        type: 'title',
-        class: 'b-title'
-      },
-      {
-        name: 'Description',
-        element: types.Text,
-        type: 'text',
-        class: 'b-text'
-      },
-      {
-        name: 'Delimiter',
-        element: types.Delimiter,
-        type: 'delimiter',
-        class: 'b-delimiter'
-      },
-      {
-        name: 'Button',
-        element: types.Button,
-        type: 'button',
-        class: 'b-button-test'
-      }
-    ]
+    components: COMPONENTS,
+    groupDataStore: {}
   },
   props: {
     id: {
@@ -128,39 +131,94 @@ export default {
       'updateSectionData'
     ]),
 
-    storeData: _.after(2, (self) => {
+    checkSectionProps (newProps, oldProps, nameObj) {
+      let props = {}
+      props[nameObj] = {}
+
+      for (let key in newProps) {
+        if (key === 'styles') {
+          for (let style in newProps[key]) {
+            if (JSON.stringify(newProps[key][style]) !== JSON.stringify(oldProps[key][style])) {
+              props[nameObj][key] = {}
+              props[nameObj][key][style] = newProps[key][style]
+            }
+          }
+        } else {
+          if (JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
+            props[nameObj][key] = newProps[key]
+          }
+        }
+      }
+      return props
+    },
+
+    storeData: _.after(2, function () {
+      let self = this
       let data = {}
-      self.$sectionData.components.forEach(component => {
-        data[component.name] = component.element.text
+      let ms = {}
+      let mainStyle = this.$sectionData.mainStyle
+      let groupDataStore = self.$sectionData.groupDataStore
+      let components = this.$sectionData.components
+      let temp = self.$sectionData.temp
+
+      // get change props of compoents
+      groupDataStore.components = []
+      components.forEach(function (item, i, arr) {
+        let change = {}
+        groupDataStore.components.push({})
+        change = self.checkSectionProps(components[i].element, temp.components[i].element, 'element')
+        groupDataStore.components[i] = change
       })
-      self.updateGroupData({ name: GROUP_NAME, data })
-      self.updateSectionData({
+
+      // get change props of section styles
+      ms = self.checkSectionProps(mainStyle, temp.mainStyle, 'mainStyle')
+
+      _.merge(data, groupDataStore, ms)
+
+      this.updateGroupData({ name: GROUP_NAME, data })
+      this.updateSectionData({
         name: NAME,
-        data: _.cloneDeep(self.$sectionData)
+        data: _.cloneDeep(this.$sectionData)
       })
     }),
 
     canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
+      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) !== -1 && !!this.$store.state.Landing.sectionData[NAME]
     }
   },
 
   created () {
-    if (this.$sectionData.edited === undefined) {
-      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
-      Seeder.seed(_.merge(this.$sectionData, data))
+    let groupData = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionData = this.$store.state.Landing.sectionData[NAME]
+
+    if (sectionData !== undefined && sectionData.edited !== undefined) {
+      this.$sectionData.edited = sectionData.edited
     }
 
-    _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (text, name) => {
-      let elementObj = _.find(this.$sectionData.components, { name })
-      if (elementObj) {
-        elementObj.element.text = text
+    // set temp section data
+    if (this.$sectionData.edited === undefined) {
+      let data = this.canRestore() ? sectionData : SCHEMA_CUSTOM
+      Seeder.seed(_.merge(this.$sectionData, data))
+      if (groupData) {
+        Seeder.seed(_.merge(this.$sectionData, groupData))
+        _.merge(this.$sectionData.groupDataStore, groupData)
       }
-    })
+    } else {
+      if (this.canRestore()) {
+        Seeder.seed(_.merge(this.$sectionData, sectionData))
+      }
+      if (groupData) {
+        Seeder.seed(_.merge(this.$sectionData, groupData))
+        _.merge(this.$sectionData.groupDataStore, groupData)
+      }
+    }
+
+    // set temp section data for get the differences after change props
+    this.$sectionData.temp = _.merge({}, this.$sectionData)
   },
 
   updated () {
-    this.storeData(this)
+    this.storeData()
   }
 }
 </script>

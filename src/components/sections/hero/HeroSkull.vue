@@ -6,6 +6,10 @@ import VuseIcon from '@editor/components/VuseIcon'
 import Draggable from 'vuedraggable'
 import { mapActions } from 'vuex'
 
+const GROUP_NAME = 'Hero'
+const NAME = 'HeroSkull'
+const BG_SECTION = 'url(https://gn685.cdn.stg.gamenet.ru/0/7MZzz/o_bJr44.jpg)'
+
 const COMPONENTS = [
   {
     name: 'Logo',
@@ -36,45 +40,6 @@ const COMPONENTS = [
     element: types.AvailablePlatforms,
     type: 'available',
     class: 'b-available-platforms'
-  }
-]
-
-const COMPONENTS_2 = [
-  {
-    name: 'Logo',
-    element: types.Logo,
-    type: 'image',
-    class: 'b-footer-game-logo'
-  },
-  {
-    name: 'Description',
-    element: types.Text,
-    type: 'text',
-    class: 'b-footer-copyright'
-  },
-  {
-    name: 'Link',
-    element: types.Link,
-    type: 'link',
-    class: 'b-footer-link'
-  },
-  {
-    name: 'Link',
-    element: types.Link,
-    type: 'link',
-    class: 'b-footer-link'
-  },
-  {
-    name: 'Link',
-    element: types.Link,
-    type: 'link',
-    class: 'b-footer-link'
-  },
-  {
-    name: 'AgeRestrictions',
-    element: types.AgeRestrictions,
-    type: 'restrictions',
-    class: 'b-age-restrictions'
   }
 ]
 
@@ -128,83 +93,18 @@ const C_CUSTOM = [
   }
 ]
 
-const C_CUSTOM_2 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn341.cdn.stg.gamenet.ru/0/7MZTn/o_21pVfk.svg")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'width': '153px',
-        'height': '71px'
-      }
-    }
-  },
-  {
-    element: {
-      text: '2018—2019. Some text for footer',
-      styles: {
-        'font-family': 'PT Serif',
-        'font-size': '1.6rem',
-        'color': 'rgba(255, 255, 255, 0.3)'
-      }
-    }
-  },
-  {
-    element: {
-      text: 'Information',
-      styles: {
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'color': '#FF6D64',
-        'font-family': 'PT Serif',
-        'text-align': 'center',
-        'font-size': '1.6rem'
-      }
-    }
-  },
-  {
-    element: {
-      text: 'Legal',
-      styles: {
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'color': '#FF6D64',
-        'font-family': 'PT Serif',
-        'text-align': 'center',
-        'font-size': '1.6rem'
-      }
-    }
-  },
-  {
-    element: {
-      text: 'Something',
-      styles: {
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'color': '#FF6D64',
-        'font-family': 'PT Serif',
-        'text-align': 'center',
-        'font-size': '1.6rem'
-      }
-    }
-  }
-]
-
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn685.cdn.stg.gamenet.ru/0/7MZzz/o_bJr44.jpg)',
+      'background-image': BG_SECTION,
       'background-color': '#151C44',
       'background-size': 'cover',
       'background-repeat': 'no-repeat'
     }
   },
   components: _.merge({}, C_CUSTOM),
-  components2: _.merge({}, C_CUSTOM_2),
   edited: true
 }
-
-const GROUP_NAME = 'Hero'
-const NAME = 'HeroSkull'
 
 export default {
   name: NAME,
@@ -217,9 +117,9 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    container2: types.StyleObject,
     components: COMPONENTS,
-    components2: COMPONENTS_2
+    groupDataStore: {},
+    temp: {}
   },
   props: {
     id: {
@@ -234,41 +134,94 @@ export default {
       'updateSectionData'
     ]),
 
-    storeData: _.after(2, (self) => {
+    checkSectionProps (newProps, oldProps, nameObj) {
+      let props = {}
+      props[nameObj] = {}
+
+      for (let key in newProps) {
+        if (key === 'styles') {
+          for (let style in newProps[key]) {
+            if (JSON.stringify(newProps[key][style]) !== JSON.stringify(oldProps[key][style])) {
+              props[nameObj][key] = {}
+              props[nameObj][key][style] = newProps[key][style]
+            }
+          }
+        } else {
+          if (JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
+            props[nameObj][key] = newProps[key]
+          }
+        }
+      }
+      return props
+    },
+
+    storeData: _.after(2, function () {
+      let self = this
       let data = {}
-      self.$sectionData.components.forEach(component => {
-        data[component.name] = component.element.text
+      let ms = {}
+      let mainStyle = this.$sectionData.mainStyle
+      let groupDataStore = self.$sectionData.groupDataStore
+      let components = this.$sectionData.components
+      let temp = self.$sectionData.temp
+
+      // get change props of compoents
+      groupDataStore.components = []
+      components.forEach(function (item, i, arr) {
+        let change = {}
+        groupDataStore.components.push({})
+        change = self.checkSectionProps(components[i].element, temp.components[i].element, 'element')
+        groupDataStore.components[i] = change
       })
-      self.updateGroupData({ name: GROUP_NAME, data })
-      self.updateSectionData({
+
+      // get change props of section styles
+      ms = self.checkSectionProps(mainStyle, temp.mainStyle, 'mainStyle')
+
+      _.merge(data, groupDataStore, ms)
+
+      this.updateGroupData({ name: GROUP_NAME, data })
+      this.updateSectionData({
         name: NAME,
-        data: _.cloneDeep(self.$sectionData)
+        data: _.cloneDeep(this.$sectionData)
       })
     }),
 
     canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
+      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) !== -1 && !!this.$store.state.Landing.sectionData[NAME]
     }
   },
 
   created () {
-    if (this.$sectionData.edited === undefined) {
-      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
-      Seeder.seed(_.merge(this.$sectionData, data))
+    let groupData = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionData = this.$store.state.Landing.sectionData[NAME]
+
+    if (sectionData !== undefined && sectionData.edited !== undefined) {
+      this.$sectionData.edited = sectionData.edited
     }
 
-    if (this.$store.state.Landing.groupData[GROUP_NAME]) {
-      _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (text, name) => {
-        let elementObj = _.find(this.$sectionData.components, { name })
-        if (elementObj) {
-          elementObj.element.text = text
-        }
-      })
+    // set temp section data
+    if (this.$sectionData.edited === undefined) {
+      let data = this.canRestore() ? sectionData : SCHEMA_CUSTOM
+      Seeder.seed(_.merge(this.$sectionData, data))
+      if (groupData) {
+        Seeder.seed(_.merge(this.$sectionData, groupData))
+        _.merge(this.$sectionData.groupDataStore, groupData)
+      }
+    } else {
+      if (this.canRestore()) {
+        Seeder.seed(_.merge(this.$sectionData, sectionData))
+      }
+      if (groupData) {
+        Seeder.seed(_.merge(this.$sectionData, groupData))
+        _.merge(this.$sectionData.groupDataStore, groupData)
+      }
     }
+
+    // set temp section data for get the differences after change props
+    this.$sectionData.temp = _.merge({}, this.$sectionData)
   },
 
   updated () {
-    this.storeData(this)
+    this.storeData()
   }
 }
 </script>
@@ -321,50 +274,6 @@ export default {
         </div>
       </div>
     </div>
-    <div class="b-footer">
-      <div class="b-grid">
-        <div class="b-grid__row b-footer__row">
-          <div class="b-grid__col-12 b-grid__col-m-12">
-            <sandbox
-              :style="$sectionData.container2.styles"
-              container-path="$sectionData.container2"
-              components-path="$sectionData.components2"
-              class="b-footer__col b-footer__col_1">
-
-              <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
-                <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
-                  <component
-                    v-if="$sectionData.components2[index].element.isComplex"
-                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
-                    :is="component.name"
-                    :href="$sectionData.components2[index].element.link.href"
-                    :target="$sectionData.components2[index].element.link.target"
-                    :style="$sectionData.components2[index].element.styles"
-                    :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                    :path="`components2[${index}].element`"
-                    class="b-footer-component"
-                    >
-                  </component>
-                  <component
-                    v-if="!$sectionData.components2[index].element.isComplex"
-                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
-                    v-html="$sectionData.components2[index].element.text"
-                    :is="component.name"
-                    :href="$sectionData.components2[index].element.link.href"
-                    :target="$sectionData.components2[index].element.link.target"
-                    :style="$sectionData.components2[index].element.styles"
-                    :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                    :path="`components2[${index}].element`"
-                    class="b-footer-component"
-                    >
-                  </component>
-                </div>
-              </draggable>
-            </sandbox>
-          </div>
-        </div><!--/.b-grid__row.b-footer__row-->
-      </div><!--/.b-grid-->
-    </div><!--/.b-footer-->
   </section>
 </template>
 
