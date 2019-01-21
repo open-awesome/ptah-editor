@@ -158,6 +158,16 @@
         </BaseButton>
       </div>
 
+      <div class="b-section-settings__control" v-if="isSlaveSection()">
+        <BaseButton
+          :color="'gray'"
+          :transparent="true"
+          @click="openSlaveGrouping()"
+        >
+          Group sections
+        </BaseButton>
+      </div>
+
     </div>
   </base-scroll-container>
 
@@ -186,7 +196,7 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
@@ -366,8 +376,12 @@ export default {
     ...mapActions('Sidebar', [
       'updateSettingOptions',
       'clearSettingObject',
-      'toggleGrouping'
+      'toggleGrouping',
+      'setSettingSection',
+      'clearSettingObject'
     ]),
+
+    ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
 
     updateBgColor (value) {
       let settings = this.settingObjectOptions
@@ -537,6 +551,19 @@ export default {
 
     isSlaveSection () {
       return !!_.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1)
+    },
+
+    /*
+     * Show master section grouping settings
+     */
+    openSlaveGrouping () {
+      let masterId = _.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1).main.id
+      let masterSection = _.find(this.builder.sections, o => o.id === masterId)
+
+      this.toggleSandboxSidebar(false)
+      this.clearSettingObject()
+      this.setSettingSection(masterSection)
+      this.toggleGrouping(true)
     }
   }
 }
