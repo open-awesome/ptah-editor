@@ -227,7 +227,7 @@ export default {
             >
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
-              <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+              <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-columns2-component"
                   v-if="$sectionData.components[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
@@ -265,7 +265,7 @@ export default {
             >
 
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
-              <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
+              <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component class="b-columns2-component"
                   v-if="$sectionData.components2[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
@@ -341,6 +341,12 @@ $h: 100vh
     &
       display: none
 .b-logo
+  .is-mobile &,
+  .is-tablet &
+    width: 100% !important
+  @media only screen and (max-width: 768px)
+    &
+      width: 100% !important
 .b-title
   color: rgb(255, 255, 255)
   font-style: normal
@@ -381,22 +387,44 @@ $h: 100vh
   border: 0.2rem solid rgba(255, 125, 125, 0.5)
   box-sizing: border-box
   border-radius: 0.2rem
-  .is-mobile &,
-  .is-tablet &
-    width: 80%
+  .is-tablet &,
+  .is-mobile &
+    width: 100% !important
   @media only screen and (max-width: 768px)
     &
-      width: 80%
+      width: 100% !important
 .b-sandbox
   min-height: 20rem
   display: flex
   justify-content: center
   align-items: center
 .b-draggable-slot,
-.b-draggable-slot > div
-  max-width: 100%
-  max-height: 100%
-.b-draggable-slot .b-logo
-  max-width: calc(100% - 2.4rem)
-  max-height: calc(100% - 2.4rem)
+.b-draggable-slot
+  & > div
+    max-width: 100%
+    max-height: 100%
+    & > div,
+    & > a
+      .is-mobile &,
+      .is-tablet &
+        margin: 1.2rem 0 !important
+      @media only screen and (max-width: 768px)
+        &
+          margin: 1.2rem 0 !important
+    .is-mobile &,
+    .is-tablet &
+      margin: 1.2rem 0 !important
+    @media only screen and (max-width: 768px)
+      &
+        margin: 1.2rem 0 !important
+  &__image,
+  &__logo,
+  &__slogan,
+  &__button
+    .is-mobile &,
+    .is-tablet &
+      width: 100% !important
+    @media only screen and (max-width: 768px)
+      &
+        width: 100% !important
 </style>
