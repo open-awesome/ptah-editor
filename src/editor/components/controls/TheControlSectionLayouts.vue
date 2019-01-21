@@ -56,9 +56,7 @@ export default {
       }
 
       let index = _.findIndex(this.builder.sections, ['name', this.selectedSection])
-      this.builder.remove(this.settingObjectSection)
-      this.clearSettingObject()
-      this.builder.add(section, index)
+      this.builder.replacement(this.settingObjectSection, section, index)
 
       setTimeout(() => {
         document
