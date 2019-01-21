@@ -182,8 +182,7 @@ export default {
 
       // get change props of section styles
       ms = self.checkSectionProps(mainStyle, temp.mainStyle, 'mainStyle')
-
-      _.merge(data, ms)
+      _.merge(data, { mainStyle: groupDataStore.mainStyle }, ms)
 
       if (groupDataStore.components) {
         groupDataStore.components.forEach(function (item, i, arr) {
