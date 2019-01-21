@@ -135,7 +135,6 @@ const defaultColumnComponents = [
         'display': 'flex',
         'align-items': 'center',
         'justify-content': 'center',
-        'background-color': '#FF6D64',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
@@ -274,6 +273,9 @@ $h: 100vh
 
 .b-logo
   margin: 0 0 5.5rem
+
+.b-link:hover
+  text-decoration: underline !important
 
 .b-title
   color: rgb(255, 255, 255)
