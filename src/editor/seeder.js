@@ -87,6 +87,7 @@ const data = new Map([
   }))],
   [types.ImageNoResize, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: false,
+    removable: true,
     alt: 'Default image',
     url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     background: true,
@@ -100,6 +101,7 @@ const data = new Map([
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
+    removable: true,
     alt: 'Default logo',
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     background: true,
@@ -131,15 +133,19 @@ const data = new Map([
       'text-decoration': 'none',
       'text-align': 'center',
       'color': '#000',
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': false
+      'background-image': '',
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      'background-color': ''
     },
     pseudo: {
       hover: {
         'background-color': '',
+        'background-image': '',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
         'color': ''
       }
     },
@@ -178,6 +184,10 @@ const data = new Map([
       pseudo: {
         hover: {
           'background-color': '',
+          'background-image': '',
+          'background-position': 'center center',
+          'background-repeat': 'no-repeat',
+          'background-size': 'cover',
           'color': ''
         }
       },
@@ -191,13 +201,13 @@ const data = new Map([
       },
       removable: true,
       styles: {
-        'background-image': false,
+        'background-image': '',
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
+        'background-color': '',
         'color': '#000',
-        'border-color': false,
+        'border-color': '',
         'font-size': '1.6rem',
         'border-radius': 0,
         'font-weight': 'normal',
@@ -224,13 +234,13 @@ const data = new Map([
         target: '_blank'
       },
       styles: {
-        'background-image': false,
+        'background-image': '',
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
+        'background-color': '',
         'color': '#000',
-        'border-color': false,
+        'border-color': '',
         'font-size': '1.2rem',
         'border-radius': 0,
         'font-weight': 'normal',
@@ -247,7 +257,6 @@ const data = new Map([
     {
       typography: true,
       removable: true,
-      resizable: true,
       aligned: true,
       text: '$90',
       styles: {
@@ -256,7 +265,7 @@ const data = new Map([
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-family': 'Lato',
-        'text-decoration': false
+        'text-decoration': ''
       }
     })
   )],
@@ -264,7 +273,7 @@ const data = new Map([
     {
       text: '',
       styles: {
-        'background-image': false,
+        'background-image': '',
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
@@ -318,21 +327,6 @@ const data = new Map([
       'height': ''
     }
   }))],
-  [types.Product, () => (_.merge({}, DEFAULT_OPTIONS, {
-    removable: true,
-    resizable: true,
-    background: true,
-    visible: true,
-    styles: {
-      'background-image': false,
-      'background-position': 'center center',
-      'background-repeat': 'no-repeat',
-      'background-size': 'cover',
-      'background-color': '#363636',
-      'width': '',
-      'height': ''
-    }
-  }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       resizable: true,
@@ -356,6 +350,7 @@ const data = new Map([
   )],
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
     {
+      box: true,
       resizable: true,
       removable: true,
       background: true,
@@ -366,12 +361,23 @@ const data = new Map([
         'Deluxe': { visible: false },
         'Ultimate': { visible: false }
       },
+      selectProduct: {
+        name: 'Standart'
+      },
+      typography: true,
       styles: {
         'background-image': '',
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
+        'background-color': '',
+        'font-family': 'Lato',
+        'font-size':  1.6,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'text-align': false,
+        'color': '#fff'
       }
     })
   )],
@@ -399,9 +405,8 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
-        'background': false
-      },
+        'background-color': ''
+         },
       hasPlatforms: true,
       availablePlatforms: {
         'windows': {
@@ -443,8 +448,7 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
-        'background': false
+        'background-color': ''
       },
       hasRestrictions: true,
       ageRestrictions: {
@@ -517,8 +521,7 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
-        'background': false
+        'background-color': ''
       },
       hasNetworks: true,
       socialNetworks: {
@@ -652,8 +655,7 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': false,
-        'background': false,
+        'background-color':'',
         'font-family': 'Lato',
         'font-size':  '1.6rem',
         'font-weight': 'normal',
@@ -667,7 +669,6 @@ const data = new Map([
   [types.TextInherit, () => (_.merge({}, DEFAULT_OPTIONS, {
     text: 'Enter your text',
     aligned: true,
-    typography: true,
     styles: {
         'font-family': 'inherit',
         'font-size': 'inherit',

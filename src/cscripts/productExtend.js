@@ -19,6 +19,7 @@ export function productExtendPreviewClick(num) {
     [].forEach.call(stages, function (el, i) {
       if (i == index) {
         el.classList.add(target);
+        el.style.display = "flex";
       } else if (el.classList.contains(target)) {
         el.classList.remove(target);
       }

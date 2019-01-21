@@ -4,7 +4,6 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
 import { mapActions } from 'vuex'
-import { productExtendPreviewClick } from '@cscripts/productExtend'
 
 const C_CUSTOM_1 = [
   {
@@ -21,7 +20,10 @@ const C_CUSTOM_1 = [
   },
   {
     element: {
-      text: 'Start Edition'
+      text: 'Start Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -61,7 +63,10 @@ const C_CUSTOM_1_M = [
   },
   {
     element: {
-      text: 'Start Edition'
+      text: 'Start Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -132,7 +137,10 @@ const C_CUSTOM_2 = [
   },
   {
     element: {
-      text: 'Full Edition'
+      text: 'Full Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -172,7 +180,10 @@ const C_CUSTOM_2_M = [
   },
   {
     element: {
-      text: 'Full Edition'
+      text: 'Full Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -243,7 +254,10 @@ const C_CUSTOM_3 = [
   },
   {
     element: {
-      text: 'Deluxe Edition'
+      text: 'Deluxe Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -283,7 +297,10 @@ const C_CUSTOM_3_M = [
   },
   {
     element: {
-      text: 'Deluxe Edition'
+      text: 'Deluxe Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -354,7 +371,10 @@ const C_CUSTOM_4 = [
   },
   {
     element: {
-      text: 'Ultimate Edition'
+      text: 'Ultimate Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   },
   {
@@ -394,7 +414,10 @@ const C_CUSTOM_4_M = [
   },
   {
     element: {
-      text: 'Ultimate Edition'
+      text: 'Ultimate Edition',
+      styles: {
+        'color': '#fff'
+      }
     }
   }
 ]
@@ -450,6 +473,27 @@ const C_CUSTOM_4D = [
   }
 ]
 
+const C_CUSTOM_CONTAINER = {
+  styles: {
+    'flex-direction': 'row',
+    'align-items': 'center'
+  }
+}
+
+const C_CUSTOM_CONTAINER_M = {
+  styles: {
+    'flex-direction': 'column',
+    'align-items': 'center'
+  }
+}
+
+const C_CUSTOM_CONTAINER_D = {
+  styles: {
+    'flex-direction': 'column',
+    'align-items': 'flex-start'
+  }
+}
+
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
@@ -457,6 +501,18 @@ const SCHEMA_CUSTOM = {
       'background-color': 'rgba(21,28,68,0.73)'
     }
   },
+  container1: _.merge({}, C_CUSTOM_CONTAINER),
+  container1m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container1d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container2: _.merge({}, C_CUSTOM_CONTAINER),
+  container2m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container2d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container3: _.merge({}, C_CUSTOM_CONTAINER),
+  container3m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container3d: _.merge({}, C_CUSTOM_CONTAINER_D),
+  container4: _.merge({}, C_CUSTOM_CONTAINER),
+  container4m: _.merge({}, C_CUSTOM_CONTAINER_M),
+  container4d: _.merge({}, C_CUSTOM_CONTAINER_D),
   components1: _.merge({}, C_CUSTOM_1),
   components1m: _.merge({}, C_CUSTOM_1_M),
   components1d: _.merge({}, C_CUSTOM_1D),
@@ -477,25 +533,29 @@ const COMPONENTS = [
     name: 'Logo',
     element: types.Logo,
     type: 'image',
-    class: 'b-logo'
+    class: 'b-logo',
+    label: 'logo'
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
-    class: 'b-text'
+    class: 'b-text',
+    label: 'description'
   },
   {
     name: 'Cost',
     element: types.Cost,
     type: 'text',
-    class: 'b-cost'
+    class: 'b-cost',
+    label: 'cost'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
-    class: 'b-button-test'
+    class: 'b-button-test',
+    label: 'button'
   }
 ]
 
@@ -504,13 +564,15 @@ const COMPONENTS_M = [
     name: 'Logo',
     element: types.Logo,
     type: 'image',
-    class: 'b-logo'
+    class: 'b-logo',
+    label: 'logo'
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
-    class: 'b-text'
+    class: 'b-text',
+    label: 'description'
   }
 ]
 
@@ -519,30 +581,34 @@ const COMPONENTS_D = [
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
-    class: 'b-text-icon'
+    class: 'b-text-icon',
+    label: 'icon with text'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
-    class: 'b-text-icon'
+    class: 'b-text-icon',
+    label: 'icon with text'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
-    class: 'b-text-icon'
+    class: 'b-text-icon',
+    label: 'icon with text'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
-    class: 'b-text-icon'
+    class: 'b-text-icon',
+    label: 'icon with text'
   }
 ]
 
 const GROUP_NAME = 'Products'
-const NAME = 'ProductsColumnsExtend'
+const NAME = 'ProductsColumns'
 
 export default {
   name: NAME,
@@ -576,8 +642,7 @@ export default {
     components3d: COMPONENTS_D,
     components4: COMPONENTS,
     components4m: COMPONENTS_M,
-    components4d: COMPONENTS_D,
-    listComponents: {}
+    components4d: COMPONENTS_D
   },
   props: {
     id: {
@@ -591,60 +656,28 @@ export default {
       'updateSectionData'
     ]),
 
-    bindingProductExtendPreviewClick (index) {
-      productExtendPreviewClick(index)
+    selectProduct (key) {
+      this.$sectionData.mainStyle.selectProduct.name = key
     },
 
     storeData: _.after(2, (self) => {
-      let data = self.$sectionData.listComponents
-      for (var key in data) {
-        self.$sectionData[key].forEach(component => {
-          data[key].push(component)
-        })
-      }
-      self.updateGroupData({ name: GROUP_NAME, data })
       self.updateSectionData({
         name: NAME,
         data: _.cloneDeep(self.$sectionData)
       })
-    }),
-
-    canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
-    },
-
-    setListComponents () {
-      for (var key in this.$sectionData) {
-        if (key.indexOf('components') !== -1) {
-          this.$sectionData.listComponents[key] = []
-        }
-      }
-    }
+    })
   },
 
   created () {
-    if (this.$sectionData.edited === undefined) {
-      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
-      Seeder.seed(_.merge(this.$sectionData, data))
+    if (this.$sectionData.edited === undefined && !!this.$store.state.Landing.sectionData[NAME] === false) {
+      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    } else {
+      Seeder.seed(_.merge(this.$sectionData, this.$store.state.Landing.sectionData[NAME]))
     }
-
-    if (this.$store.state.Landing.groupData[GROUP_NAME]) {
-      _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (arrComponents, name) => {
-        this.$sectionData[name] = arrComponents
-      })
-    }
-
-    this.setListComponents()
-  },
-
-  mounted: function () {
-    this.bindingProductExtendPreviewClick(0)
   },
 
   updated: function () {
-    this.setListComponents()
     this.storeData(this)
-    this.bindingProductExtendPreviewClick(this.index)
   }
 }
 </script>
@@ -665,6 +698,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Standart'].visible"
               :data-index="0"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Standart')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -673,14 +708,13 @@ export default {
                 direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
-
                 <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1m.styles">
                   <div
                     v-for="(component, index) in $sectionData.components1m"
                     v-if="$sectionData.components1m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
                       v-if="$sectionData.components1m[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components1m[index].element, path: `$sectionData.components1m[${index}].element`, type: $sectionData.components1m[index].type }"
+                      v-styler:for="{ el: $sectionData.components1m[index].element, path: `$sectionData.components1m[${index}].element`, type: $sectionData.components1m[index].type, label: $sectionData.components1m[index].label }"
                       :is="component.name"
                       :href="$sectionData.components1m[index].element.link.href"
                       :target="$sectionData.components1m[index].element.link.target"
@@ -691,7 +725,7 @@ export default {
                     </component>
                     <component class="b-products-columns-component"
                       v-if="!$sectionData.components1m[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components1m[index].element, path: `$sectionData.components1m[${index}].element`, type: $sectionData.components1m[index].type }"
+                      v-styler:for="{ el: $sectionData.components1m[index].element, path: `$sectionData.components1m[${index}].element`, type: $sectionData.components1m[index].type, label: $sectionData.components1m[index].label }"
                       v-html="$sectionData.components1m[index].element.text"
                       :is="component.name"
                       :href="$sectionData.components1m[index].element.link.href"
@@ -709,6 +743,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Full'].visible"
               :data-index="1"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Full')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Full' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -723,7 +759,7 @@ export default {
                        v-for="(component, index) in $sectionData.components2m" v-if="$sectionData.components2m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
                       v-if="$sectionData.components2m[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components2m[index].element, path: `$sectionData.components2m[${index}].element`, type: $sectionData.components2m[index].type }"
+                      v-styler:for="{ el: $sectionData.components2m[index].element, path: `$sectionData.components2m[${index}].element`, type: $sectionData.components2m[index].type, label: $sectionData.components2m[index].label }"
                       :is="component.name"
                       :href="$sectionData.components2m[index].element.link.href"
                       :target="$sectionData.components2m[index].element.link.target"
@@ -734,7 +770,7 @@ export default {
                     </component>
                     <component class="b-products-columns-component"
                       v-if="!$sectionData.components2m[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components2m[index].element, path: `$sectionData.components2m[${index}].element`, type: $sectionData.components2m[index].type }"
+                      v-styler:for="{ el: $sectionData.components2m[index].element, path: `$sectionData.components2m[${index}].element`, type: $sectionData.components2m[index].type, label: $sectionData.components2m[index].label }"
                       v-html="$sectionData.components2m[index].element.text"
                       :is="component.name"
                       :href="$sectionData.components2m[index].element.link.href"
@@ -752,6 +788,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Deluxe'].visible"
               :data-index="2"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Deluxe')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -760,13 +798,12 @@ export default {
                 direction="column"
                 :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                 >
-
                 <draggable v-model="$sectionData.components3m" class="b-draggable-slot" :style="$sectionData.container3m.styles">
                   <div
                        v-for="(component, index) in $sectionData.components3m" v-if="$sectionData.components3m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
                       v-if="$sectionData.components3m[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components3m[index].element, path: `$sectionData.components3m[${index}].element`, type: $sectionData.components3m[index].type }"
+                      v-styler:for="{ el: $sectionData.components3m[index].element, path: `$sectionData.components3m[${index}].element`, type: $sectionData.components3m[index].type, label: $sectionData.components3m[index].label }"
                       :is="component.name"
                       :href="$sectionData.components3m[index].element.link.href"
                       :target="$sectionData.components3m[index].element.link.target"
@@ -777,7 +814,7 @@ export default {
                     </component>
                     <component class="b-products-columns-component"
                       v-if="!$sectionData.components3m[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components3m[index].element, path: `$sectionData.components3m[${index}].element`, type: $sectionData.components3m[index].type }"
+                      v-styler:for="{ el: $sectionData.components3m[index].element, path: `$sectionData.components3m[${index}].element`, type: $sectionData.components3m[index].type, label: $sectionData.components3m[index].label }"
                       v-html="$sectionData.components3m[index].element.text"
                       :is="component.name"
                       :href="$sectionData.components3m[index].element.link.href"
@@ -795,6 +832,8 @@ export default {
               v-if="$sectionData.mainStyle.products['Ultimate'].visible"
               :data-index="3"
               :product-extend-preview="'b-products-columns-extend__right-item_active'"
+              @click="selectProduct('Ultimate')"
+              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate' }"
               >
               <sandbox
                 class="b-sandbox"
@@ -809,7 +848,7 @@ export default {
                        v-for="(component, index) in $sectionData.components4m" v-if="$sectionData.components4m.length !== 0" :key="index">
                     <component class="b-products-columns-component"
                       v-if="$sectionData.components4m[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components4m[index].element, path: `$sectionData.components4m[${index}].element`, type: $sectionData.components4m[index].type }"
+                      v-styler:for="{ el: $sectionData.components4m[index].element, path: `$sectionData.components4m[${index}].element`, type: $sectionData.components4m[index].type, label: $sectionData.components4m[index].label }"
                       :is="component.name"
                       :href="$sectionData.components4m[index].element.link.href"
                       :target="$sectionData.components4m[index].element.link.target"
@@ -820,7 +859,7 @@ export default {
                     </component>
                     <component class="b-products-columns-component"
                       v-if="!$sectionData.components4m[index].element.isComplex"
-                      v-styler:for="{ el: $sectionData.components4m[index].element, path: `$sectionData.components4m[${index}].element`, type: $sectionData.components4m[index].type }"
+                      v-styler:for="{ el: $sectionData.components4m[index].element, path: `$sectionData.components4m[${index}].element`, type: $sectionData.components4m[index].type, label: $sectionData.components4m[index].label }"
                       v-html="$sectionData.components4m[index].element.text"
                       :is="component.name"
                       :href="$sectionData.components4m[index].element.link.href"
@@ -840,7 +879,8 @@ export default {
                <!-- b-products-columns-extend__right -->
                 <div class="b-grid__row">
                   <div class="b-grid__col-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Standart'].visible"
+                    v-show="$sectionData.mainStyle.selectProduct.name === 'Standart' && $sectionData.mainStyle.products['Standart'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' }"
                     :product-extend-stage="0"
                     >
                     <sandbox
@@ -850,14 +890,13 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components1" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container1.styles">
                         <div
                           v-for="(component, index) in $sectionData.components1"
                           v-if="$sectionData.components1.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components1[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type }"
+                            v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type, label: $sectionData.components1[index].label }"
                             :is="component.name"
                             :href="$sectionData.components1[index].element.link.href"
                             :target="$sectionData.components1[index].element.link.target"
@@ -868,7 +907,7 @@ export default {
                           </component>
                           <component class="b-products-columns-component"
                             v-if="!$sectionData.components1[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type }"
+                            v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type, label: $sectionData.components1[index].label }"
                             v-html="$sectionData.components1[index].element.text"
                             :is="component.name"
                             :href="$sectionData.components1[index].element.link.href"
@@ -889,14 +928,13 @@ export default {
                       align="flex-start"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components1d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container1d.styles">
                         <div
                           v-for="(component, index) in $sectionData.components1d"
                           v-if="$sectionData.components1d.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components1d[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components1d[index].element, path: `$sectionData.components1d[${index}].element`, type: $sectionData.components1d[index].type }"
+                            v-styler:for="{ el: $sectionData.components1d[index].element, path: `$sectionData.components1d[${index}].element`, type: $sectionData.components1d[index].type, label: $sectionData.components1d[index].label }"
                             :is="component.name"
                             :href="$sectionData.components1d[index].element.link.href"
                             :target="$sectionData.components1d[index].element.link.target"
@@ -907,7 +945,7 @@ export default {
                           </component>
                           <component class="b-products-columns-component"
                             v-if="!$sectionData.components1d[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components1d[index].element, path: `$sectionData.components1d[${index}].element`, type: $sectionData.components1d[index].type }"
+                            v-styler:for="{ el: $sectionData.components1d[index].element, path: `$sectionData.components1d[${index}].element`, type: $sectionData.components1d[index].type, label: $sectionData.components1d[index].label }"
                             v-html="$sectionData.components1d[index].element.text"
                             :is="component.name"
                             :href="$sectionData.components1d[index].element.link.href"
@@ -922,7 +960,8 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Full'].visible"
+                    v-show="$sectionData.mainStyle.selectProduct.name === 'Full' && $sectionData.mainStyle.products['Full'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Full' }"
                     :product-extend-stage="1"
                     >
                     <sandbox
@@ -937,7 +976,7 @@ export default {
                              v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components2[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                            v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                             :is="component.name"
                             :href="$sectionData.components2[index].element.link.href"
                             :target="$sectionData.components2[index].element.link.target"
@@ -948,7 +987,7 @@ export default {
                           </component>
                           <component class="b-products-columns-component"
                             v-if="!$sectionData.components2[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                            v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                             v-html="$sectionData.components2[index].element.text"
                             :is="component.name"
                             :href="$sectionData.components2[index].element.link.href"
@@ -974,7 +1013,7 @@ export default {
                              v-for="(component, index) in $sectionData.components2d" v-if="$sectionData.components2d.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components2d[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components2d[index].element, path: `$sectionData.components2d[${index}].element`, type: $sectionData.components2d[index].type }"
+                            v-styler:for="{ el: $sectionData.components2d[index].element, path: `$sectionData.components2d[${index}].element`, type: $sectionData.components2d[index].type, label: $sectionData.components2d[index].label }"
                             :is="component.name"
                             :href="$sectionData.components2d[index].element.link.href"
                             :target="$sectionData.components2d[index].element.link.target"
@@ -985,7 +1024,7 @@ export default {
                           </component>
                           <component class="b-products-columns-component"
                             v-if="!$sectionData.components2d[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components2d[index].element, path: `$sectionData.components2d[${index}].element`, type: $sectionData.components2d[index].type }"
+                            v-styler:for="{ el: $sectionData.components2d[index].element, path: `$sectionData.components2d[${index}].element`, type: $sectionData.components2d[index].type, label: $sectionData.components2d[index].label }"
                             v-html="$sectionData.components2d[index].element.text"
                             :is="component.name"
                             :href="$sectionData.components2d[index].element.link.href"
@@ -1000,7 +1039,8 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Deluxe'].visible"
+                    v-show="$sectionData.mainStyle.selectProduct.name === 'Deluxe' && $sectionData.mainStyle.products['Deluxe'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' }"
                     :product-extend-stage="2"
                     >
                     <sandbox
@@ -1010,13 +1050,12 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components3" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3.styles">
                         <div
                              v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components3[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
+                            v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type, label: $sectionData.components3[index].label }"
                             :is="component.name"
                             :href="$sectionData.components3[index].element.link.href"
                             :target="$sectionData.components3[index].element.link.target"
@@ -1027,7 +1066,7 @@ export default {
                           </component>
                           <component class="b-products-columns-component"
                             v-if="!$sectionData.components3[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
+                            v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type, label: $sectionData.components3[index].label }"
                             v-html="$sectionData.components3[index].element.text"
                             :is="component.name"
                             :href="$sectionData.components3[index].element.link.href"
@@ -1047,13 +1086,12 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components3d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3d.styles">
                         <div
                              v-for="(component, index) in $sectionData.components3d" v-if="$sectionData.components3d.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components3d[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components3d[index].element, path: `$sectionData.components3d[${index}].element`, type: $sectionData.components3d[index].type }"
+                            v-styler:for="{ el: $sectionData.components3d[index].element, path: `$sectionData.components3d[${index}].element`, type: $sectionData.components3d[index].type, label: $sectionData.components3d[index].label }"
                             :is="component.name"
                             :href="$sectionData.components3d[index].element.link.href"
                             :target="$sectionData.components3d[index].element.link.target"
@@ -1064,7 +1102,7 @@ export default {
                           </component>
                           <component class="b-products-columns-component"
                             v-if="!$sectionData.components3d[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components3d[index].element, path: `$sectionData.components3d[${index}].element`, type: $sectionData.components3d[index].type }"
+                            v-styler:for="{ el: $sectionData.components3d[index].element, path: `$sectionData.components3d[${index}].element`, type: $sectionData.components3d[index].type, label: $sectionData.components3d[index].label }"
                             v-html="$sectionData.components3d[index].element.text"
                             :is="component.name"
                             :href="$sectionData.components3d[index].element.link.href"
@@ -1079,7 +1117,8 @@ export default {
                     </sandbox>
                   </div>
                   <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-if="$sectionData.mainStyle.products['Ultimate'].visible"
+                    v-show="$sectionData.mainStyle.selectProduct.name === 'Ultimate' && $sectionData.mainStyle.products['Ultimate'].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate' }"
                     :product-extend-stage="3"
                     >
                     <sandbox
@@ -1089,13 +1128,12 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components4" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container4.styles">
                         <div
                              v-for="(component, index) in $sectionData.components4" v-if="$sectionData.components4.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components4[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type }"
+                            v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type, label: $sectionData.components4[index].label }"
                             :is="component.name"
                             :href="$sectionData.components4[index].element.link.href"
                             :target="$sectionData.components4[index].element.link.target"
@@ -1106,7 +1144,7 @@ export default {
                           </component>
                           <component class="b-products-columns-component"
                             v-if="!$sectionData.components4[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type }"
+                            v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type, label: $sectionData.components4[index].label }"
                             v-html="$sectionData.components4[index].element.text"
                             :is="component.name"
                             :href="$sectionData.components4[index].element.link.href"
@@ -1126,13 +1164,12 @@ export default {
                       direction="column"
                       :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                       >
-
                       <draggable v-model="$sectionData.components4d" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container4d.styles">
                         <div
                              v-for="(component, index) in $sectionData.components4d" v-if="$sectionData.components4d.length !== 0" :key="index">
                           <component class="b-products-columns-component"
                             v-if="$sectionData.components4d[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components4d[index].element, path: `$sectionData.components4d[${index}].element`, type: $sectionData.components4d[index].type }"
+                            v-styler:for="{ el: $sectionData.components4d[index].element, path: `$sectionData.components4d[${index}].element`, type: $sectionData.components4d[index].type, label: $sectionData.components4d[index].label }"
                             :is="component.name"
                             :href="$sectionData.components4d[index].element.link.href"
                             :target="$sectionData.components4d[index].element.link.target"
@@ -1143,7 +1180,7 @@ export default {
                           </component>
                           <component class="b-products-columns-component"
                             v-if="!$sectionData.components4d[index].element.isComplex"
-                            v-styler:for="{ el: $sectionData.components4d[index].element, path: `$sectionData.components4d[${index}].element`, type: $sectionData.components4d[index].type }"
+                            v-styler:for="{ el: $sectionData.components4d[index].element, path: `$sectionData.components4d[${index}].element`, type: $sectionData.components4d[index].type, label: $sectionData.components4d[index].label }"
                             v-html="$sectionData.components4d[index].element.text"
                             :is="component.name"
                             :href="$sectionData.components4d[index].element.link.href"

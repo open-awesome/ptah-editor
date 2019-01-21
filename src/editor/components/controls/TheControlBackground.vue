@@ -32,7 +32,9 @@ export default {
     if (image && image !== 'none') {
       let images = image.match(/url\(.+(?=\))/g) || []
       let result = images.map(url => url.replace(/url\(/, ''))[0]
-      this.bgImage = (result.match(/^("")|("")$/)) ? JSON.parse(result) : result
+      if (result) {
+        this.bgImage = (result.match(/^("")|("")$/)) ? JSON.parse(result) : result
+      }
     }
     this.bgColor = this.styles['background-color']
     this.bgRepeat = this.styles['background-repeat'] || 'no-repeat'
@@ -64,7 +66,11 @@ export default {
     },
 
     changeImage () {
-      this.styles['background-image'] = `url(${this.bgImage})`
+      let bg = 'none'
+      if (this.bgImage !== null && this.bgImage !== '') {
+        bg = `url(${this.bgImage})`
+      }
+      this.styles['background-image'] = bg
     },
 
     changeRepeat () {

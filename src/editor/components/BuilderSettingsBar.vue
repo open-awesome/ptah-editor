@@ -4,7 +4,7 @@
       <icon-base width="10" height="10" name="close"/>
     </button>
     <h6 class="b-builder-settings-bar__title">
-      {{ (elementSettings) ? settingObjectType : title }}
+      {{ label }}
     </h6>
     <div v-if="title" class="b-builder-settings-bar__contents">
       <component :is="settingComponent" :builder="builder"/>
@@ -33,9 +33,14 @@ export default {
   },
 
   computed: {
-    ...mapState('Sidebar', [
-      'settingObjectType'
-    ]),
+    ...mapState('Sidebar', ['settingObjectType', 'settingObjectLabel']),
+
+    label () {
+      if (this.settingObjectLabel) {
+        return this.settingObjectLabel
+      }
+      return (this.elementSettings) ? this.settingObjectType : this.title
+    },
 
     settingComponent () {
       const suffix = this.settingObjectType === 'section' ? 'Section' : 'Element'

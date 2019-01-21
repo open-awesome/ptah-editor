@@ -6,6 +6,7 @@ export default {
     isGrouping: false, // section grouping interface
     expandedMenuItem: 'sections', // submenu item
     settingObjectType: '', // (Styler prop) section, button, text etc.
+    settingObjectLabel: '', // Styler slot label
     settingObjectOptions: {},
     settingObjectSection: {},
     siteSettingsMenu: [
@@ -54,6 +55,9 @@ export default {
     },
     setSettingObjectType (state, value) {
       state.settingObjectType = value
+    },
+    setSettingObjectLabel (state, value) {
+      state.settingObjectLabel = value
     },
     setSettingObjectOptions (state, options) {
       state.settingObjectOptions = options
@@ -104,6 +108,7 @@ export default {
      */
     setSettingObject ({ commit }, data) {
       commit('isSettingsExpanded', true)
+      commit('setSettingObjectLabel', data.label)
       commit('setSettingObjectType', data.type)
       commit('setSettingObjectOptions', data.options)
     },
@@ -168,7 +173,7 @@ export default {
       })
     },
 
-    setSettingElement ({ dispatch, commit }, { type, name, options, section, element }) {
+    setSettingElement ({ dispatch, commit }, { type, name, label, options, section, element }) {
       let elementOptions = {
         ...options,
         name,
@@ -182,6 +187,7 @@ export default {
 
       dispatch('setSettingObject', {
         type,
+        label,
         options: elementOptions
       })
     },
