@@ -14,31 +14,36 @@ const COMPONENTS = [
     name: 'Logo',
     element: types.Logo,
     type: 'image',
-    class: 'b-logo'
+    class: 'b-logo',
+    key: 0
   },
   {
     name: 'Title',
     element: types.Title,
     type: 'text',
-    class: 'b-title'
+    class: 'b-title',
+    key: 1
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
-    class: 'b-text'
+    class: 'b-text',
+    key: 2
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
-    class: 'b-button'
+    class: 'b-button',
+    key: 3
   },
   {
     name: 'AvailablePlatforms',
     element: types.AvailablePlatforms,
     type: 'available',
-    class: 'b-available-platforms'
+    class: 'b-available-platforms',
+    key: 4
   }
 ]
 
@@ -161,19 +166,33 @@ export default {
       let components = this.$sectionData.components
       let temp = self.$sectionData.temp
 
-      // get change props of compoents
-      groupDataStore.components = []
+      // get change props of componets
+      data.components = []
       components.forEach(function (item, i, arr) {
         let change = {}
-        groupDataStore.components.push({})
-        change = self.checkSectionProps(components[i].element, temp.components[i].element, 'element')
-        groupDataStore.components[i] = change
+        let tempEl = temp.components.filter(function (el, i) {
+          return item.key === el.key
+        })
+        if (tempEl[0] !== undefined && tempEl[0].element !== undefined) {
+          change = self.checkSectionProps(components[i].element, tempEl[0].element, 'element')
+          change['key'] = tempEl[0].key
+        }
+        data.components.push(change)
       })
 
       // get change props of section styles
       ms = self.checkSectionProps(mainStyle, temp.mainStyle, 'mainStyle')
 
-      _.merge(data, groupDataStore, ms)
+      _.merge(data, ms)
+
+      if (groupDataStore.components) {
+        groupDataStore.components.forEach(function (item, i, arr) {
+          let tempEl = data.components.filter(function (el, i) {
+            return item.key === el.key
+          })
+          if (tempEl[0]) _.merge(item, tempEl[0])
+        })
+      }
 
       this.updateGroupData({ name: GROUP_NAME, data })
       this.updateSectionData({
@@ -183,11 +202,27 @@ export default {
     }),
 
     canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) !== -1 && !!this.$store.state.Landing.sectionData[NAME]
+      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
+    },
+
+    groupDataMerge (groupData, sectionData) {
+      if (groupData) {
+        _.merge(this.$sectionData.mainStyle, groupData.mainStyle)
+        _.merge(this.$sectionData.groupDataStore, groupData)
+
+        // restore data of components of store groupData
+        this.$sectionData.components.forEach(function (item, i, arr) {
+          let tempEl = groupData.components.filter(function (el, i) {
+            return item.key === el.key
+          })
+          if (tempEl[0]) _.merge(item, tempEl[0])
+        })
+      }
     }
   },
 
   created () {
+    let self = this
     let groupData = this.$store.state.Landing.groupData[GROUP_NAME]
     let sectionData = this.$store.state.Landing.sectionData[NAME]
 
@@ -199,18 +234,47 @@ export default {
     if (this.$sectionData.edited === undefined) {
       let data = this.canRestore() ? sectionData : SCHEMA_CUSTOM
       Seeder.seed(_.merge(this.$sectionData, data))
-      if (groupData) {
-        Seeder.seed(_.merge(this.$sectionData, groupData))
-        _.merge(this.$sectionData.groupDataStore, groupData)
-      }
+      // merge group data in section data
+      this.groupDataMerge(groupData, sectionData)
+
+      // store data after first merge
+      this.storeData()
     } else {
-      if (this.canRestore()) {
-        Seeder.seed(_.merge(this.$sectionData, sectionData))
-      }
-      if (groupData) {
-        Seeder.seed(_.merge(this.$sectionData, groupData))
-        _.merge(this.$sectionData.groupDataStore, groupData)
-      }
+      _.merge(this.$sectionData.mainStyle, sectionData.mainStyle)
+
+      // restore data of components of store sectionData
+      sectionData.components.forEach(function (item, i, arr) {
+        let tempEl = self.$sectionData.components.filter(function (el, i) {
+          return item.key === el.key
+        })
+        if (tempEl[0]) {
+          _.merge(tempEl[0], item)
+        } else {
+          self.$sectionData.components.push(item)
+        }
+      })
+
+      // checking for component availability in section data
+      self.$sectionData.components.forEach(function (item, i, arr) {
+        let tempEl = sectionData.components.filter(function (el, i) {
+          return item.key === el.key
+        })
+        if (tempEl[0] === undefined) {
+          arr.splice(i, 1)
+        }
+      })
+
+      // restore sort of components
+      let orderObj = sectionData.components.reduce(function (a, c, i) {
+        if (c['key'] !== undefined) a[c.key] = i
+        return a
+      }, {})
+      self.$sectionData.components.sort(function (l, r) {
+        return orderObj[l.key] - orderObj[r.key]
+      })
+
+      // merge group data in section data
+      this.groupDataMerge(groupData, sectionData)
     }
 
     // set temp section data for get the differences after change props
