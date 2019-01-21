@@ -19,6 +19,7 @@
         <li><a href="#" @click.prevent="addSlogan" class="b-elements__button">Slogan</a></li>
         <li><a href="#" @click.prevent="addCost" class="b-elements__button">Cost</a></li>
         <li><a href="#" @click.prevent="addTextWithIcon" class="b-elements__button">Icon with text</a></li>
+        <li><a href="#" @click.prevent="AddVideo" class="b-elements__button">Video</a></li>
       </ul>
     </aside>
   </div>
@@ -112,6 +113,12 @@ export default {
         element: types.IconWithText,
         type: 'icon',
         label: 'icon with text'
+      },
+      {
+        name: 'Video',
+        element: types.Video,
+        type: 'video',
+        label: 'video'
       }
     ]
   }),
@@ -172,6 +179,9 @@ export default {
     addTextWithIcon () {
       const el = _.merge({}, Seeder.seed(this.elements[12]))
       this.$emit('addEl', el)
+    },
+    AddVideo () {
+      this.$emit('addEl', _.merge({}, Seeder.seed(this.elements[13])))
     },
     openList () {
       this.showList = true
