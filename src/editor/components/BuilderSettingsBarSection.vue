@@ -175,7 +175,7 @@
       :transparent="true"
       @click="toggleGrouping(false)"
     >
-      Cancel
+      Close
     </BaseButton>
   </div>
 

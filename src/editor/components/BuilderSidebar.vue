@@ -73,7 +73,7 @@
             {{`${index + 1}.`}} {{section.name}}
           </MenuSubitem>
         </div>
-      </BaseDropdown>=
+      </BaseDropdown>
     </div>
 
     <transition name="slide-fade">
