@@ -21,7 +21,7 @@ export function sectionsGroups () {
       if (section.classList.contains('ptah-g-main')) {
         let group = {}
         group.main = section
-        group.children = SECTIONS.slice(index + 1, index + parseInt(section.dataset.absorb) + 1)
+        group.children = SECTIONS.slice(index + 1, index + parseInt(section.dataset.absorb, 10) + 1)
 
         groups.push(group)
       }
