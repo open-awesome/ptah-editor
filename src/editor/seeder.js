@@ -342,7 +342,7 @@ const data = new Map([
     {
       background: false,
       hasVideo: true,
-      // videoUrl: 'https://gn967.cdn.stg.gamenet.ru/0/7KSrW/o_159yiU.mp4',
+      removable: true,
       videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
       videoTitle: 'World of Warcraft: Battle for Azeroth',
       loop: false

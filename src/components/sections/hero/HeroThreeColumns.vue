@@ -15,7 +15,8 @@
           :key="`hero-three-column-${ _uid }-${ index }`"
           :class="{
             'b-grid__col-6': prefix === '2',
-            'b-grid__col-3': prefix !== '2'
+            'b-grid__col-3': prefix !== '2',
+            'b-grid__logo': prefix !== '2'
           }"
           class="b-grid__col-m-12">
 
@@ -23,6 +24,7 @@
             :container-path="`$sectionData.container${ prefix }`"
             :components-path="`$sectionData.components${ prefix }`"
             :direction="(['', '3'].includes(prefix)) ? 'row' : 'column'"
+            :class="`b-sandbox__${ prefix || 1 }`"
             align="center"
             class="b-sandbox">
 
@@ -95,8 +97,8 @@ const defaultColumnComponents1 = [
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '22rem',
-        'height': '15rem'
+        'width': '220px',
+        'height': '150px'
       }
     }
   }
@@ -107,7 +109,7 @@ const defaultColumnComponents2 = [
       text: 'This is a short header',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '4.8rem',
+        'font-size': '48px',
         'color': '#ffffff'
       }
     }
@@ -120,7 +122,7 @@ const defaultColumnComponents2 = [
       `,
       styles: {
         'font-family': 'Lato',
-        'font-size': '2rem',
+        'font-size': '20px',
         'line-height': '1.5',
         'color': '#FFF'
       }
@@ -135,7 +137,7 @@ const defaultColumnComponents2 = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '30rem',
+        'width': '300px',
         'max-width': '100%',
         'height': '64px',
         'border-radius': '2px'
@@ -151,8 +153,8 @@ const defaultColumnComponents3 = [
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '22rem',
-        'height': '15rem'
+        'width': '220px',
+        'height': '150px'
       }
     }
   }
@@ -266,9 +268,11 @@ $h: 100vh
   height: 100%
 
 .b-sandbox
-  min-height: 20rem
   justify-content: center
   align-items: center
+  &__1,
+  &__3
+    min-height: auto
 
 .b-draggable-slot
   padding: 1.6rem .8rem
@@ -297,7 +301,47 @@ $h: 100vh
       display: none
 
 .b-logo
-  margin: 0 0 5.5rem
+  margin: 0
+
+.b-grid__col-6
+  .is-mobile &,
+  .is-tablet &
+    padding-top: 0
+    .b-draggable-slot
+      margin-top: -.8rem
+      padding-top: 0
+  @media only screen and (max-width: 768px)
+    padding-top: 0
+    .b-draggable-slot
+      margin-top: -.8rem
+      padding-top: 0
+
+.b-grid__logo
+  .is-mobile &,
+  .is-tablet &
+    width: 50%
+    flex-basis: 50%
+    order: -1
+    .b-draggable-slot
+      margin-top: -.8rem
+      padding-top: 0
+      > div
+        width: 100%
+      .b-logo
+        max-width: 100%
+        max-height: 100%
+  @media only screen and (max-width: 768px)
+    width: 50%
+    flex-basis: 50%
+    order: -1
+    .b-draggable-slot
+      margin-top: -.8rem
+      padding-top: 0
+      > div
+        width: 100%
+      .b-logo
+        max-width: 100%
+        max-height: 100%
 
 .b-title
   color: rgb(255, 255, 255)
