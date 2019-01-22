@@ -98,10 +98,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   },
@@ -115,10 +115,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   },
@@ -132,10 +132,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   }

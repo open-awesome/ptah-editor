@@ -98,10 +98,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   },
@@ -115,10 +115,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   },
@@ -129,9 +129,9 @@ const defaultComponents = [
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '20rem',
-        'height': '8rem',
-        'margin': '.8rem 1.6rem'
+        'width': '200px',
+        'height': '80px',
+        'margin': '8px 16px'
       }
     }
   },
@@ -145,10 +145,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   },
@@ -162,10 +162,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   }
