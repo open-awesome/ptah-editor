@@ -344,7 +344,7 @@ $h: 100vh
   .is-mobile &,
   .is-tablet &
     width: 100% !important
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 992px)
     &
       width: 100% !important
 .b-title
@@ -390,7 +390,7 @@ $h: 100vh
   .is-tablet &,
   .is-mobile &
     width: 100% !important
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 992px)
     &
       width: 100% !important
 .b-sandbox
@@ -424,7 +424,7 @@ $h: 100vh
     .is-mobile &,
     .is-tablet &
       width: 100% !important
-    @media only screen and (max-width: 768px)
+    @media only screen and (max-width: 992px)
       &
         width: 100% !important
 </style>
