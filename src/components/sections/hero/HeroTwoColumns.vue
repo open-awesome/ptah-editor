@@ -24,9 +24,10 @@
             :components-path="`$sectionData.components${ prefix }`"
             :align="(prefix === '') ? 'flex-start' : 'center'"
             :direction="(prefix === '') ? 'row' : 'column'"
+            :class="`b-sandbox__${ prefix || 1 }`"
             class="b-sandbox">
 
-          <!-- eslint-disable-next-line vue/valid-v-model -->`
+          <!-- eslint-disable-next-line vue/valid-v-model -->
           <draggable v-model="$sectionData[`components${ prefix }`]" :style="$sectionData[`container${ prefix }`].styles" class="b-draggable-slot">
 
             <div
@@ -107,7 +108,7 @@ const defaultColumnComponents2 = [
       text: 'This is a short header',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '4.8rem',
+        'font-size': '48px',
         'color': '#ffffff'
       }
     }
@@ -121,7 +122,7 @@ const defaultColumnComponents2 = [
       `,
       styles: {
         'font-family': 'Lato',
-        'font-size': '2rem',
+        'font-size': '20px',
         'line-height': '1.5',
         'color': '#FFF'
       }
@@ -248,9 +249,10 @@ $h: 100vh
   height: 100%
 
 .b-sandbox
-  min-height: 20rem
   justify-content: center
   align-items: center
+  &__1
+    min-height: auto
 
 .b-draggable-slot
   padding: 1.6rem .8rem
@@ -258,6 +260,7 @@ $h: 100vh
 .b-hero
   position: relative
   width: 100%
+  height: max-content
   min-height: 60rem
   margin: 0
   padding: 1rem
@@ -279,7 +282,14 @@ $h: 100vh
       display: none
 
 .b-logo
-  margin: 0 0 5.5rem
+  margin: 0
+
+.b-grid__col-8
+  .is-mobile &,
+  .is-tablet &
+    padding-top: 0
+  @media only screen and (max-width: 768px)
+    padding-top: 0
 
 .b-title
   color: rgb(255, 255, 255)
