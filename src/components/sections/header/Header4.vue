@@ -262,8 +262,10 @@ export default {
     padding-bottom: 10rem
     .b-logo
       position: absolute
-      top: -8rem
-      left: 0
+      top: -9rem
+      left: 50%
+      right: 50%
+      transform: translateX(-60%)
   &.active .b-draggable-slot
     display: flex
 
@@ -277,8 +279,10 @@ export default {
       padding-bottom: 10rem
       .b-logo
         position: absolute
-        top: -8rem
-        left: 0
+        top: -9rem
+        left: 50%
+        right: 50%
+        transform: translateX(-60%)
     &.active .b-draggable-slot
       display: flex
 </style>
