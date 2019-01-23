@@ -11,6 +11,8 @@ build:
   script:
     - docker build -t $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID .
     - (if [ -f Dockerfile.nginx ]; then docker build -t $CI_REGISTRY_IMAGE:"$CI_COMMIT_REF_SLUG"-static.$CI_PIPELINE_ID -f Dockerfile.nginx . ; else echo "Project without static content"; fi);
+  only:
+  - develop
 
 push:
   stage: push
@@ -21,6 +23,8 @@ push:
   script:
     - docker push $CI_REGISTRY_IMAGE:$CI_COMMIT_REF_SLUG.$CI_PIPELINE_ID
     - (if [ -f Dockerfile.nginx ]; then docker push $CI_REGISTRY_IMAGE:"$CI_COMMIT_REF_SLUG"-static.$CI_PIPELINE_ID ; else echo "Project without static content"; fi);
+  only:
+  - develop  
     
 deploy_production:
   stage: deploy

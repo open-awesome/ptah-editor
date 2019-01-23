@@ -153,12 +153,11 @@ export default {
         <div class="b-grid__col-4 b-menu-col">
           <!-- logo -->
           <sandbox
-            class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container2"
+            container-path="$sectionData.container2"
+            components-path="$sectionData.components2"
             direction="row"
+            class="b-sandbox"
           >
-            <elements-list @addEl="onAddElement"></elements-list>
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component class="b-hero-component"
@@ -192,10 +191,10 @@ export default {
         <div class="b-grid__col-8 b-menu-col">
           <!-- links -->
           <sandbox
-            class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container"
+            container-path="$sectionData.container"
+            components-path="$sectionData.components"
             direction="row"
+            class="b-sandbox"
           >
             <elements-list @addEl="onAddElement"></elements-list>
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">

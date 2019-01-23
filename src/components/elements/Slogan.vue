@@ -28,6 +28,8 @@ export default {
   color: #fff
   font-family: 'Lato'
   text-align: center
+  &.is-editable
+    border: 1px dashed #18d88b
   .is-mobile &
     margin: 1rem auto
     height: auto

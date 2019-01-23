@@ -11,31 +11,36 @@ const COMPONENTS = [
     name: 'Logo',
     element: types.Logo,
     type: 'image',
-    class: 'b-logo'
+    class: 'b-logo',
+    label: 'logo'
   },
   {
     name: 'Title',
     element: types.Title,
     type: 'text',
-    class: 'b-title'
+    class: 'b-title',
+    label: 'title'
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
-    class: 'b-text'
+    class: 'b-text',
+    label: 'description'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
-    class: 'b-button'
+    class: 'b-button',
+    label: 'button'
   },
   {
     name: 'AvailablePlatforms',
     element: types.AvailablePlatforms,
     type: 'available',
-    class: 'b-available-platforms'
+    class: 'b-available-platforms',
+    label: 'available platforms'
   }
 ]
 
@@ -44,37 +49,43 @@ const COMPONENTS_2 = [
     name: 'Logo',
     element: types.Logo,
     type: 'image',
-    class: 'b-footer-game-logo'
+    class: 'b-footer-game-logo',
+    label: 'logo'
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
-    class: 'b-footer-copyright'
+    class: 'b-footer-copyright',
+    label: 'description'
   },
   {
     name: 'Link',
     element: types.Link,
-    type: 'button',
-    class: 'b-footer-link'
+    type: 'link',
+    class: 'b-footer-link',
+    label: 'link'
   },
   {
     name: 'Link',
     element: types.Link,
-    type: 'button',
-    class: 'b-footer-link'
+    type: 'link',
+    class: 'b-footer-link',
+    label: 'link'
   },
   {
     name: 'Link',
     element: types.Link,
-    type: 'button',
-    class: 'b-footer-link'
+    type: 'link',
+    class: 'b-footer-link',
+    label: 'link'
   },
   {
     name: 'AgeRestrictions',
     element: types.AgeRestrictions,
     type: 'restrictions',
-    class: 'b-age-restrictions'
+    class: 'b-age-restrictions',
+    label: 'age restrictions'
   }
 ]
 
@@ -233,14 +244,6 @@ export default {
       'updateGroupData',
       'updateSectionData'
     ]),
-    onAddElement (element) {
-      element.element.removable = true
-      this.$section.data.components.push(element)
-    },
-    onAddElement2 (element) {
-      element.element.removable = true
-      this.$section.data.components2.push(element)
-    },
 
     storeData: _.after(2, (self) => {
       let data = {}
@@ -293,20 +296,19 @@ export default {
       <div class="b-grid__row">
         <div class="b-grid__col-12">
           <sandbox
-            class="b-sandbox"
-            ref="sandbox"
-            path="$sectionData.container"
-            direction="column"
-            >
-            <elements-list @addEl="onAddElement"></elements-list>
+              container-path="$sectionData.container"
+              components-path="$sectionData.components"
+              direction="column"
+              class="b-sandbox">
+
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
                   v-if="$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                   :is="component.name"
-                  :href="$sectionData.components[index].element.href"
-                  :target="$sectionData.components[index].element.target"
+                  :href="$sectionData.components[index].element.link.href"
+                  :target="$sectionData.components[index].element.link.target"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
@@ -314,11 +316,11 @@ export default {
                 </component>
                 <component
                   v-if="!$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                   v-html="$sectionData.components[index].element.text"
                   :is="component.name"
-                  :href="$sectionData.components[index].element.href"
-                  :target="$sectionData.components[index].element.target"
+                  :href="$sectionData.components[index].element.link.href"
+                  :target="$sectionData.components[index].element.link.target"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
@@ -335,21 +337,19 @@ export default {
         <div class="b-grid__row b-footer__row">
           <div class="b-grid__col-12 b-grid__col-m-12">
             <sandbox
-              class="b-footer__col b-footer__col_1"
-              ref="sandbox"
-              path="$sectionData.container2"
-              direction="row"
               :style="$sectionData.container2.styles"
-              >
-              <elements-list @addEl="onAddElement2"></elements-list>
+              container-path="$sectionData.container2"
+              components-path="$sectionData.components2"
+              class="b-footer__col b-footer__col_1">
+
               <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
                 <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                   <component
                     v-if="$sectionData.components2[index].element.isComplex"
-                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                     :is="component.name"
-                    :href="$sectionData.components2[index].element.href"
-                    :target="$sectionData.components2[index].element.target"
+                    :href="$sectionData.components2[index].element.link.href"
+                    :target="$sectionData.components2[index].element.link.target"
                     :style="$sectionData.components2[index].element.styles"
                     :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                     :path="`components2[${index}].element`"
@@ -358,11 +358,11 @@ export default {
                   </component>
                   <component
                     v-if="!$sectionData.components2[index].element.isComplex"
-                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                     v-html="$sectionData.components2[index].element.text"
                     :is="component.name"
-                    :href="$sectionData.components2[index].element.href"
-                    :target="$sectionData.components2[index].element.target"
+                    :href="$sectionData.components2[index].element.link.href"
+                    :target="$sectionData.components2[index].element.link.target"
                     :style="$sectionData.components2[index].element.styles"
                     :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                     :path="`components2[${index}].element`"

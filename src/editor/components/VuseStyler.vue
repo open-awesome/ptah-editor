@@ -7,7 +7,7 @@
 <script>
 import { isParentTo, randomPoneId, getPseudoTemplate, placeCaretAtEnd } from '../util'
 import * as _ from 'lodash-es'
-import { mapActions } from 'vuex'
+import { mapMutations, mapActions } from 'vuex'
 
 const DEFAULT_BACKGROUND_REPEAT = 'no-repeat'
 const DEFAULT_BACKGROUND_POSITION = 'center center'
@@ -44,7 +44,8 @@ export default {
     options: {
       type: Object,
       required: true
-    }
+    },
+    label: String
   },
   data: () => ({
     oldColorerColor: '',
@@ -169,6 +170,7 @@ export default {
 
     if (this.options.video) {
       this.el.classList.add('ptah-d-video')
+      console.log(this.el)
       this.el.dataset.video = this.options.video
     }
 
@@ -182,10 +184,10 @@ export default {
     document.removeEventListener('click', this.hideStyler, true)
   },
   methods: {
-    ...mapActions('Sidebar', [
-      'setSettingElement',
-      'clearSettingObjectLight'
-    ]),
+    ...mapMutations('Sidebar', ['toggleSandboxSidebar', 'setSandboxPaths']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight']),
+    ...mapActions('BuilderModalContent', ['setContent']),
+
     setInitialValue () {
       if (this.type === 'button') {
         // listen event change border-radius
@@ -240,9 +242,15 @@ export default {
       this.section.data[path[0]].push(obj)
     },
     showStyler (event) {
+      // --- clear active classes
+      document.querySelectorAll('.b-draggable-slot.active')
+        .forEach(el => el.classList.remove('active'))
+
       event.preventDefault()
       event.stopPropagation()
 
+      this.toggleSandboxSidebar(false)
+      this.setContent(null)
       this.clearSettingObjectLight()
 
       if (this.type === 'text') {
@@ -268,8 +276,31 @@ export default {
           // Do not show section settings on click
           // this.setSettingSection(this.section)
         } else {
+          // --- if section has components or slots
+          let keys = Object.keys(this.section.data)
+          let hasSlotsData = (
+            keys.some(key => Boolean(~key.indexOf('components'))) ||
+            keys.some(key => Boolean(~key.indexOf('container')))
+          )
+          if (hasSlotsData) {
+            let target = event.target.closest('.b-draggable-slot')
+            if (target) {
+              target.classList.add('active')
+            }
+            // --- TODO: bad idea
+            // --- fix in future
+            // --- coz data storage is unstable
+            let match = this.path[0].match(/\d+(?!\d+)/)
+            let index = (match) ? match[0] : ''
+            this.setSandboxPaths({
+              components: `$sectionData.components${index}`,
+              container: `$sectionData.container${index}`
+            })
+            this.toggleSandboxSidebar(true)
+          }
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
+            label: this.$props.label,
             name: this.name,
             options: _.get(this.section.data, this.path).element || this.options,
             section: this.section,

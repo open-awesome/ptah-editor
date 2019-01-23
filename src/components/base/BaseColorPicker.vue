@@ -99,6 +99,8 @@ export default {
       .b-picker__text
         display: block
     &__palette
+      position: absolute
+      z-index: 100
       margin-top: .5rem
       .vc-sketch
         border: .1rem solid rgba(0, 0, 0, .15)

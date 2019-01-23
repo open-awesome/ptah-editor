@@ -4,6 +4,12 @@ export default {
     isBox: {
       type: Boolean,
       required: true
+    },
+    alignText: {
+      type: String
+    },
+    alignFlex: {
+      type: String
     }
   },
   data: () => ({
@@ -45,6 +51,14 @@ export default {
       } else {
         this.$emit('textAligned', this.text[this.align.value])
       }
+    }
+  },
+
+  mounted () {
+    if (this.isBox) {
+      this.align.value = this.alignFlex
+    } else {
+      this.align.value = this.alignText
     }
   }
 }

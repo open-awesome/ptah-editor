@@ -17,7 +17,8 @@
           :is="section.name"
           :id="section.id"
           :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
-          @click.native="selectSidebarSection(section)">
+          @click.native="selectSidebarSection(section)"
+          @dblclick.native="showSettingsBar(section)">
           <video
               v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
               :id="`bg-video-${ section.id }`"
@@ -140,7 +141,8 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'updateBuilderSections',
-      'updateBuilderGroups'
+      'updateBuilderGroups',
+      'setSettingSection'
     ]),
     initSettings () {
       const settings = this.currentLanding.settings
@@ -276,6 +278,10 @@ export default {
       // --- add selected class and scroll to el
       menuItem.classList.add('b-menu-subitem_selected')
       menuItem.scrollIntoView()
+    },
+
+    showSettingsBar (section) {
+      this.setSettingSection(section)
     }
   }
 }

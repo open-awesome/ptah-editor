@@ -1,100 +1,108 @@
 <template>
   <div class="b-elem-settings">
-    <!-- text align -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
-      <control-align
-        :isBox="settingObjectOptions.box"
-        @boxAligned="styleChange"
-        @textAligned="styleChange">
-      </control-align>
-    </div>
+    <base-scroll-container backgroundBar="#999">
+      <div class="b-elem-settings__inner">
 
-    <!-- size -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
-      <control-size :height="elHeight" :width="elWidth" :expand="expandedSize" @open="onExpand" @change="styleChange"></control-size>
-    </div>
+        <!-- Text align -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
+          <control-align
+            :isBox="settingObjectOptions.box"
+            :alignText="settingObjectOptions.styles['text-align']"
+            :alignFlex="settingObjectOptions.styles['justify-content']"
+            @boxAligned="styleChange"
+            @textAligned="styleChange">
+          </control-align>
+        </div>
 
-    <!-- font -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-      <control-text
-        :fontSize="fontSize"
-        :fontFamily="fontFamily"
-        :fontColor="fontColor"
-        :fontStyles="styles"
-        :expand="expandedFont"
-        @open="onExpand"
-        @change="styleChange"></control-text>
-    </div>
+        <!-- Size -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
+          <control-size
+            :height="elHeight"
+            :width="elWidth"
+            :radius="elRadius"
+            :expand="expandedSize"
+            @open="onExpand"
+            @change="styleChange"
+            >
+          </control-size>
+        </div>
 
-    <!-- background -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
-      <control-background
-        :color="bgColor"
-        :image="bgImage"
-        :repeat="bgRepeat"
-        :size="bgSize"
-        :expand="expandedBg"
-        @open="onExpand"
-        @change="styleChange"></control-background>
-    </div>
+        <!-- Text -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+          <control-text
+            :expand="expandedFont"
+            @open="onExpand"
+            @change="styleChange"></control-text>
+        </div>
 
-    <!-- Link -->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
-      <control-link
-        :link="elLink"
-        :videoLink="elVideoLink"
-        :hoverBgColor="bgHover"
-        :expand="expandedLink"
-        :target="elTarget"
-        @open="onExpand"
-        @setPseudo="changePseudoStyle"
-        @setClass="selectAnimation"></control-link>
-    </div>
+        <!-- background -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
+          <control-background
+            :color="bgColor"
+            :image="bgImage"
+            :repeat="bgRepeat"
+            :size="bgSize"
+            :expand="expandedBg"
+            @open="onExpand"
+            @change="styleChange"></control-background>
+        </div>
 
-    <!-- Available Platforms Control-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
-      <control-available-platforms
-        :expand="expandedAvailablePlatforms"
-        @open="onExpand"
-        >
-      </control-available-platforms>
-    </div>
+        <!-- Link -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
+          <control-link
+            :expand="expandedLink"
+            @open="onExpand"
+            >
+          </control-link>
+        </div>
 
-    <!-- Age Restrictions Control-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasRestrictions">
-      <control-age-restrictions
-        :expand="expandedAgeRestrictions"
-        @open="onExpand"
-        >
-      </control-age-restrictions>
-    </div>
+        <!-- Available Platforms Control-->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
+          <control-available-platforms
+            :expand="expandedAvailablePlatforms"
+            @open="onExpand"
+            >
+          </control-available-platforms>
+        </div>
 
-    <!-- Social Networks Control-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.hasNetworks">
-      <control-social-networks
-        :expand="expandedSocialNetworks"
-        @open="onExpand"
-        >
-      </control-social-networks>
-    </div>
+        <!-- Age Restrictions Control-->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasRestrictions">
+          <control-age-restrictions
+            :expand="expandedAgeRestrictions"
+            @open="onExpand"
+            >
+          </control-age-restrictions>
+        </div>
 
-    <!-- Text With Icon-->
-    <div class="b-elem-settings__control" v-if="settingObjectOptions.isIconWithText">
-      <control-icon-with-text
-        :expand="expandedIconWithText"
-        @open="onExpand"
-        >
-      </control-icon-with-text>
-    </div>
+        <!-- Social Networks Control-->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasNetworks">
+          <control-social-networks
+            :expand="expandedSocialNetworks"
+            @open="onExpand"
+            >
+          </control-social-networks>
+        </div>
 
-    <!-- BOTTOM button -->
-    <div class="b-elem-settings__buttons">
-      <base-button
-        v-if="settingObjectOptions.removable"
-        color="light-gray"
-        @click="deleteElement"
-      >Delete</base-button>
-    </div>
+        <!-- Text With Icon-->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.isIconWithText">
+          <control-icon-with-text
+            :expand="expandedIconWithText"
+            @open="onExpand"
+            >
+          </control-icon-with-text>
+        </div>
+
+        <!-- Video -->
+        <div v-if="settingObjectOptions.hasVideo" class="b-elem-settings__control">
+          <control-video
+              :src="settingObjectOptions.src"
+              :expand="expandedVideo"
+              @toggle="onExpand"
+              @change="changeVideoSrc"/>
+        </div>
+
+      </div>
+    </base-scroll-container>
 
   </div>
 </template>
@@ -102,7 +110,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import { getPseudoTemplate, randomPoneId } from '../util'
 import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
 import ControlBackground from './controls/TheControlBackground'
@@ -113,6 +120,7 @@ import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.v
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 import ControlIconWithText from './controls/TheControlIconWithText.vue'
+import ControlVideo from './controls/ControlVideo'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -133,16 +141,20 @@ export default {
     ControlAvailablePlatforms,
     ControlAgeRestrictions,
     ControlSocialNetworks,
-    ControlIconWithText
+    ControlIconWithText,
+    ControlVideo
   },
 
   data () {
     return {
       index: null,
       fontSize: null,
+      animation: '',
+      classes: [],
       fontFamily: '',
       fontColor: '',
-      styles: [],
+      elStyles: [],
+      styles: {},
       bgColor: '',
       bgImage: '',
       bgRepeat: '',
@@ -150,8 +162,8 @@ export default {
       elHeight: 0,
       elWidth: 0,
       elRadius: 0,
-      elLink: '',
       elVideoLink: '',
+      elLink: {},
       bgHover: '',
       textHover: '',
       expandedSize: false,
@@ -162,6 +174,7 @@ export default {
       expandedAgeRestrictions: true,
       expandedSocialNetworks: true,
       expandedIconWithText: true,
+      expandedVideo: true,
       colorFill: {},
       sizeIcons: {},
       availablePlatforms: {},
@@ -189,29 +202,37 @@ export default {
     const styles = this.settingObjectOptions.styles
 
     /* Get font settings */
-    this.fontFamily = styles['font-family'] || ''
-    this.fontSize = styles['font-size'] || 1.6
-    this.fontColor = styles['color'] || ''
+    this.fontFamily = styles['font-family'] || 'lato'
+    this.fontSize = styles['font-size'] || '1.6rem'
+    this.fontColor = styles['color'] || '#000'
 
     if (styles['font-style']) {
-      this.styles.push({ prop: 'font-style', value: styles['font-style'] })
+      this.elStyles.push({ prop: 'font-style', value: styles['font-style'], base: 'normal' })
     }
 
     if (styles['text-decoration']) {
-      this.styles.push({ prop: 'text-decoration', value: styles['text-decoration'] })
+      this.elStyles.push({ prop: 'text-decoration', value: styles['text-decoration'], base: 'none' })
     }
 
     if (styles['font-weight']) {
-      this.styles.push({ prop: 'font-weight', value: styles['font-weight'] })
+      this.elStyles.push({ prop: 'font-weight', value: styles['font-weight'], base: 'normal' })
     }
 
-    /* get background */
+    /* Get align */
+    if (styles['text-align']) {
+      this.elStyles.push({ prop: 'text-align', value: styles['text-align'] })
+    }
+    if (styles['justify-content']) {
+      this.elStyles.push({ prop: 'justify-content', value: styles['justify-content'] })
+    }
+
+    /* Get background */
     if (styles['background-color']) {
       this.bgColor = styles['background-color']
     }
     this.bgImage = styles['background-image'] || ''
-    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
-    this.bgSize = styles['background-size'] || 'cover'
+    this.bgRepeat = styles['background-repeat'] || ''
+    this.bgSize = styles['background-size'] || ''
 
     /* Get element size */
     this.elHeight = styles['height'] || this.settingObjectElement.offsetHeight
@@ -219,14 +240,19 @@ export default {
     this.elRadius = styles['border-radius'] || 0
 
     /* Link */
-    this.elLink = this.settingObjectOptions.href || ''
-    this.elTarget = this.settingObjectOptions.target || ''
+    this.elLink = this.settingObjectOptions.link || {}
+
+    /* Animation */
+    this.animation = this.settingObjectOptions.animation || {}
+
+    /* Animation */
+    this.classes = this.settingObjectOptions.classes || []
+
+    /* Video */
     this.elVideoLink = this.settingObjectOptions.video || '' // YuoTube video ID
 
     /* Hover this.settingObjectOptions.pseudo */
-    let hoverStyles = this.settingObjectOptions.pseudo.hover || {}
-    this.bgHover = (hoverStyles['background-color'] || '').replace('!important', '')
-    this.textHover = (hoverStyles.color || '').replace('!important', '')
+    this.pseudo = this.settingObjectOptions.pseudo || {}
 
     /* Available platforms */
     this.availablePlatforms = this.settingObjectOptions.availablePlatforms || {}
@@ -243,6 +269,9 @@ export default {
 
     /* Age restrictions */
     this.ageRestrictions = this.settingObjectOptions.ageRestrictions || {}
+
+    /* Styles */
+    this.styles = this.settingObjectOptions.styles || {}
 
     // --- expand dropdown dep. by type
     this.expandDropdown(this.settingObjectType)
@@ -276,49 +305,19 @@ export default {
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
     },
 
+    changeVideoSrc (value) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, { src: value })
+      )
+    },
+
     setOption (option) {
       this.updateText()
       let obj = {}
       obj[option[0]] = option[1]
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
-    },
-
-    /**
-     * Add style to pseudocalss
-     * @param style {object}
-     * @param pseudoClass {string}
-     */
-    changePseudoStyle (style, pseudoClass = 'hover') {
-      this.updateText()
-
-      const poneId = randomPoneId()
-      let pseudoClassValue = {}
-      pseudoClassValue[pseudoClass] = style
-      this.settingObjectElement.dataset.pone = poneId
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { pseudo: pseudoClassValue }))
-
-      let styleTemplate = getPseudoTemplate(poneId, this.settingObjectOptions.pseudo)
-
-      document.head.insertAdjacentHTML('beforeend', styleTemplate)
-    },
-
-    /**
-     * Add animation to element
-     */
-    selectAnimation (className) {
-      this.updateText()
-
-      let animations = this.settingObjectOptions.classes.slice(0)
-
-      animations.forEach((name, index) => {
-        // remove other animation classes
-        if (name.indexOf('ptah-a') > -1) {
-          animations.splice(index, 1)
-        }
-      })
-      animations.push(className)
-
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: animations }))
+      let merge = _.merge({}, this.settingObjectOptions, obj)
+      delete merge.element
+      this.updateSettingOptions(merge)
     },
 
     deleteElement () {
@@ -366,17 +365,18 @@ export default {
 
 <style lang="sass" scoped>
   .b-elem-settings
-    height: 100%
-    width: 100%
-    padding-right: 2.5rem
+    padding-bottom: 4.5rem
     display: flex
     flex-direction: column
+    height: auto
+    width: 100%
+    align-items: stretch
+    &__inner
+      min-width: 24rem
+      padding-right: 2.5rem
+      padding-bottom: 10rem
     &__control
       margin-bottom: 1.6rem
-    &__buttons
-      flex-grow: 2
-      align-items: flex-end
-      display: flex
   // TODO: временное решение для кнопок сортировки
   .temp-sort-buttons
     button

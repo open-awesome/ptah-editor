@@ -7,6 +7,7 @@ export default {
     isAddSectionExpanded: false, // add section menu
     expandedMenuItem: 'sections', // submenu item
     settingObjectType: '', // (Styler prop) section, button, text etc.
+    settingObjectLabel: '', // Styler slot label
     settingObjectOptions: {},
     settingObjectElement: false,
     settingObjectSection: {},
@@ -18,6 +19,10 @@ export default {
       {
         id: 'seoSettings',
         name: 'SEO settings'
+      },
+      {
+        id: 'cookiesSettings',
+        name: 'Cookies settings'
       }
       // {
       //   id: 'versionHistory',
@@ -25,7 +30,12 @@ export default {
       // }
     ],
     builderSections: [],
-    builderGroups: []
+    builderGroups: [],
+    sandbox: {
+      expanded: false, // sandbox sidebar expand state
+      components: [], // sandbox current section's components
+      styles: {} // sandbox current section's styles
+    }
   },
 
   mutations: {
@@ -47,6 +57,9 @@ export default {
     setSettingObjectType (state, value) {
       state.settingObjectType = value
     },
+    setSettingObjectLabel (state, value) {
+      state.settingObjectLabel = value
+    },
     setSettingObjectOptions (state, options) {
       state.settingObjectOptions = options
     },
@@ -61,6 +74,12 @@ export default {
     },
     setBuilderGroups (state, groups) {
       state.builderGroups = groups
+    },
+    toggleSandboxSidebar ({ sandbox }, value = !sandbox.expanded) {
+      sandbox.expanded = value
+    },
+    setSandboxPaths (state, paths) {
+      state.sandbox = { ...state.sandbox, ...paths }
     },
     setElement (state, el) {
       state.settingObjectElement = el
@@ -87,6 +106,7 @@ export default {
      */
     setSettingObject ({ commit }, data) {
       commit('isSettingsExpanded', true)
+      commit('setSettingObjectLabel', data.label)
       commit('setSettingObjectType', data.type)
       commit('setSettingObjectOptions', data.options)
     },
@@ -97,6 +117,7 @@ export default {
      */
     clearSettingObject ({ commit }) {
       commit('isSettingsExpanded', false)
+      commit('toggleSandboxSidebar', false)
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
     },
@@ -149,7 +170,7 @@ export default {
       })
     },
 
-    setSettingElement ({ dispatch, commit }, { type, name, options, section, element }) {
+    setSettingElement ({ dispatch, commit }, { type, name, label, options, section, element }) {
       let elementOptions = {
         ...options,
         name,
@@ -163,6 +184,7 @@ export default {
 
       dispatch('setSettingObject', {
         type,
+        label,
         options: elementOptions
       })
     },

@@ -8,11 +8,15 @@ const DEFAULT_OPTIONS = {
   styles: {},
   resizable: false,
   hasLink: false,
+  link: {
+    href: '',
+    target: '_blank'
+  },
   removable: false,
   aligned: false,
   typography: false,
   colorize: false,
-  box: false, // (colorer)
+  box: false, // (align text or align flex justify-content)
   canCopy: false,
   background: false,
   shape: false, // border-radius prop
@@ -41,19 +45,13 @@ const data = new Map([
     typography: true,
     styles: {
       'font-family': 'Lato',
-      'font-size': 3.2,
-      'font-weight': false,
-      'font-style': false,
-      'text-decoration': false,
-      'text-align': false,
-      'color': false,
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': false,
-      'background': false,
-      'justify-content': false
+      'font-size': '3.2rem',
+      'font-weight': 'bold',
+      'font-style': 'normal',
+      'text-decoration': 'none',
+      'text-align': 'center',
+      'color': '#000',
+      'justify-content': 'center'
     }
   }))],
   [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -63,19 +61,13 @@ const data = new Map([
     typography: true,
     styles: {
       'font-family': 'Lato',
-      'font-size': 1.6,
-      'font-weight': false,
-      'font-style': false,
-      'text-decoration': false,
-      'text-align': false,
-      'color': false,
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': false,
-      'background': false,
-      'justify-content': false
+      'font-size': '1.6rem',
+      'font-weight': 'normal',
+      'font-style': 'normal',
+      'text-decoration': 'none',
+      'text-align': 'center',
+      'color': '#000',
+      'justify-content': 'center'
     }
   }))],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -96,6 +88,7 @@ const data = new Map([
   }))],
   [types.ImageNoResize, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: false,
+    removable: true,
     alt: 'Default image',
     url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     background: true,
@@ -109,6 +102,7 @@ const data = new Map([
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
+    removable: true,
     alt: 'Default logo',
     url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     background: true,
@@ -128,37 +122,49 @@ const data = new Map([
     removable: true,
     typography: true,
     text: 'Click Me!',
-    href: '',
-    target: '_blank',
+    link: {
+      href: '',
+      target: '_blank'
+    },
     styles: {
       'font-family': 'Lato',
-      'font-size': 1.4,
-      'font-weight': false,
-      'font-style': false,
-      'text-decoration': false,
-      'text-align': false,
-      'color': false,
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': false,
-      'background': false,
-      'justify-content': false
+      'font-size': '1.4rem',
+      'font-weight': 'normal',
+      'font-style': 'normal',
+      'text-decoration': 'none',
+      'text-align': 'center',
+      'color': '#000',
+      'background-image': '',
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      'background-color': ''
+    },
+    pseudo: {
+      hover: {
+        'background-color': '',
+        'background-image': '',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'color': ''
+      }
+    },
+    animation: {
+      value: ''
     }
   })
   )],
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       removable: true,
       background: true,
       styles: {
         'background-image': '',
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
         'background-color': 'rgba(0,0,0,0)',
         'background': false,
         'width': '',
@@ -168,7 +174,6 @@ const data = new Map([
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: false,
       canCopy: true,
       resizable: true,
       hasLink: true,
@@ -176,27 +181,40 @@ const data = new Map([
       typography: true,
       background: true,
       shape: true,
-      pseudo: {},
+      pseudo: {
+        hover: {
+          'background-color': '',
+          'background-image': '',
+          'background-position': 'center center',
+          'background-repeat': 'no-repeat',
+          'background-size': 'cover',
+          'color': ''
+        }
+      },
       text: 'Click Me!',
-      classes: [],
-      href: '',
+      animation: {
+        value: ''
+      },
+      link: {
+        href: '',
+        target: '_blank'
+      },
       removable: true,
       styles: {
-        'background-image': false,
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false,
+        'background-image': '',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-color': '',
         'color': '#000',
-        'border-color': false,
-        'font-size': 3.2,
+        'border-color': '',
+        'font-size': '1.6rem',
         'border-radius': 0,
-        'font-weight': false,
-        'font-style': false,
+        'font-weight': 'normal',
+        'font-style': 'normal',
         'font-family': 'Lato',
-        'text-decoration': false,
-        'justify-content': false,
+        'text-decoration': 'none',
+        'justify-content': 'center',
         'text-align': 'center',
         'width': '',
         'height': ''
@@ -205,31 +223,31 @@ const data = new Map([
   )],
   [types.Label, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       typography: true,
       background: true,
       aligned: true,
       shape: true,
       text: 'Label',
-      classes: [],
-      href: '',
+      link: {
+        href: '',
+        target: '_blank'
+      },
       styles: {
-        'background-image': false,
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false,
+        'background-image': '',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-color': '',
         'color': '#000',
-        'border-color': false,
-        'font-size': 1.2,
+        'border-color': '',
+        'font-size': '1.2rem',
         'border-radius': 0,
-        'font-weight': false,
-        'font-style': false,
+        'font-weight': 'normal',
+        'font-style': 'normal',
         'font-family': 'Lato',
-        'text-decoration': false,
-        'justify-content': false,
+        'text-decoration': 'none',
+        'justify-content': 'center',
         'width': '',
         'height': ''
       }
@@ -237,32 +255,28 @@ const data = new Map([
   )],
   [types.Cost, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       typography: true,
       removable: true,
-      resizable: true,
       aligned: true,
       text: '$90',
       styles: {
         'color': '#e4a11e',
-        'font-size': 3.2,
-        'font-weight': false,
-        'font-style': false,
+        'font-size': '3.2rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
         'font-family': 'Lato',
-        'text-decoration': false
+        'text-decoration': ''
       }
     })
   )],
   [types.Icon, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       text: '',
-      href: '',
       styles: {
-        'background-image': false,
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
+        'background-image': '',
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
         'background-color': 'rgba(0, 0, 0, 0)',
         'border-radius': '0',
         'width': '',
@@ -272,7 +286,6 @@ const data = new Map([
   )],
   [types.IconWithText, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: false,
       aligned: true,
       removable: true,
       styles: {
@@ -314,24 +327,8 @@ const data = new Map([
       'height': ''
     }
   }))],
-  [types.Product, () => (_.merge({}, DEFAULT_OPTIONS, {
-    removable: true,
-    resizable: true,
-    background: true,
-    visible: true,
-    styles: {
-      'background-image': false,
-      'background-position': false,
-      'background-repeat': false,
-      'background-size': false,
-      'background-color': '#363636',
-      'width': '',
-      'height': ''
-    }
-  }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       removable: true,
       styles: {
@@ -345,7 +342,7 @@ const data = new Map([
     {
       background: false,
       hasVideo: true,
-      // videoUrl: 'https://gn967.cdn.stg.gamenet.ru/0/7KSrW/o_159yiU.mp4',
+      removable: true,
       videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
       videoTitle: 'World of Warcraft: Battle for Azeroth',
       loop: false
@@ -364,26 +361,39 @@ const data = new Map([
         'Deluxe': { visible: false },
         'Ultimate': { visible: false }
       },
+      selectProduct: {
+        name: 'Standart'
+      },
+      typography: true,
       styles: {
         'background-image': '',
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-color': '',
+        'font-family': 'Lato',
+        'font-size':  1.6,
+        'font-weight': false,
+        'font-style': false,
+        'text-decoration': false,
+        'text-align': false,
+        'color': '#fff'
       }
     })
   )],
   [types.GallerySlider, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       removable: true,
       background: true,
       hasMultipleImages: true,
       hasHeader: true,
       galleryImages: [],
-      header: 'This is a short header'
+      header: 'This is a short header',
+      // --- swiper options
+      swiper: {
+        delay: 2000
+      }
     })
   )],
   [types.AvailablePlatforms, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -392,12 +402,11 @@ const data = new Map([
       background: true,
       styles: {
         'background-image': '',
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false
-      },
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-color': ''
+         },
       hasPlatforms: true,
       availablePlatforms: {
         'windows': {
@@ -436,11 +445,10 @@ const data = new Map([
       background: true,
       styles: {
         'background-image': '',
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-color': ''
       },
       hasRestrictions: true,
       ageRestrictions: {
@@ -510,11 +518,10 @@ const data = new Map([
       background: true,
       styles: {
         'background-image': '',
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-color': ''
       },
       hasNetworks: true,
       socialNetworks: {
@@ -578,7 +585,6 @@ const data = new Map([
   )],
   [types.Slogan, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       resizable: true,
       removable: true,
       background: true,
@@ -587,18 +593,18 @@ const data = new Map([
       typography: true,
       styles: {
         'font-family': 'Lato',
-        'font-size':  4.8,
-        'font-weight': false,
-        'font-style': false,
-        'text-decoration': false,
-        'text-align': false,
+        'font-size':  '4.8rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'text-decoration': 'none',
+        'text-align': 'center',
         'color': '#fff',
         'background-image': 'url(https://gn793.cdn.stg.gamenet.ru/0/79yeF/o_1PRuEc.png)',
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'background-color': 'rgba(0, 0, 0, 0)',
-        'justify-content': false,
+        'justify-content': 'center',
         'width': 320,
         'height': 64,
         'border-radius': 0
@@ -607,7 +613,6 @@ const data = new Map([
   )],
   [types.SystemRequirements, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
       name: 'System Requirements',
       removable: true,
       background: true,
@@ -647,17 +652,16 @@ const data = new Map([
       typography: true,
       styles: {
         'background-image': '',
-        'background-position': false,
-        'background-repeat': false,
-        'background-size': false,
-        'background-color': false,
-        'background': false,
+        'background-position': 'center center',
+        'background-repeat': 'no-repeat',
+        'background-size': 'cover',
+        'background-color':'',
         'font-family': 'Lato',
-        'font-size':  1.6,
-        'font-weight': false,
-        'font-style': false,
-        'text-decoration': false,
-        'text-align': false,
+        'font-size':  '1.6rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'text-decoration': 'none',
+        'text-align': 'center',
         'color': '#fff'
       }
     })
@@ -665,7 +669,6 @@ const data = new Map([
   [types.TextInherit, () => (_.merge({}, DEFAULT_OPTIONS, {
     text: 'Enter your text',
     aligned: true,
-    typography: true,
     styles: {
         'font-family': 'inherit',
         'font-size': 'inherit',

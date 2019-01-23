@@ -90,7 +90,7 @@ export default {
 
   group: GROUP_NAME,
 
-  cover: 'https://gn805.cdn.stg.gamenet.ru/0/7RcdN/o_WboBn.png',
+  cover: 'https://downloader.disk.yandex.ru/preview/80b0f98f9c378f3c18c16c0526ebf2993ed9ee90149a4b0ed3ba56f73a159d01/5c48421d/95QNuOT7MZ1p-kZH60-e3-rxVLfj1UCrZrV_hO3ZCcFqUYqfM-25NF65dQTQuE05o0EzqfW5m3TczmvcQthdEw%3D%3D?uid=0&filename=2019-01-23_10-47-56.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&size=2048x2048',
 
   components: {
     Draggable
@@ -191,12 +191,11 @@ export default {
       <div class="b-grid__row">
         <div class="b-grid__col-5 b-grid__col-m-12">
           <sandbox
-            class="b-sandbox b-hunt-sandbox"
-            ref="sandbox"
-            path="$sectionData.container"
+            container-path="$sectionData.container"
+            components-path="$sectionData.components"
             direction="column"
+            class="b-sandbox b-hunt-sandbox"
           >
-            <elements-list @addEl="onAddElement"></elements-list>
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"

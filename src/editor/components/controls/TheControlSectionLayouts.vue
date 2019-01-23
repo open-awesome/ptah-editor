@@ -14,9 +14,7 @@ export default {
   data () {
     return {
       controlOpen: true,
-      group: '',
-      layouts: [],
-      selectedSection: ''
+      layouts: []
     }
   },
 
@@ -25,14 +23,26 @@ export default {
       'builderSections',
       'builderGroups',
       'settingObjectSection'
-    ])
+    ]),
+
+    selectedSection () {
+      return this.settingObjectSection.name
+    },
+
+    group () {
+      let name = this.selectedSection
+      return _.find(this.builderSections, { name }).group
+    }
   },
 
   created () {
-    let name = this.settingObjectSection.name
-    this.selectedSection = name
-    this.group = _.find(this.builderSections, { name }).group
     this.layouts = this.builderGroups[this.group]
+  },
+
+  watch: {
+    settingObjectSection () {
+      this.layouts = this.builderGroups[this.group]
+    }
   },
 
   methods: {
@@ -51,10 +61,12 @@ export default {
       this.builder.add(section, index)
 
       setTimeout(() => {
-        document
+        let subitem = document
           .getElementById('sections_contents')
           .querySelectorAll('.b-menu-subitem')[index]
-          .dispatchEvent(new Event('click'))
+        if (subitem) {
+          subitem.dispatchEvent(new Event('click'))
+        }
       }, 250)
     }
   }

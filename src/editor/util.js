@@ -29,7 +29,6 @@ export function getTypeFromSchema(target, schema) {
   if (value === types.Link) return 'link'
   if (value === types.ClassList) return 'section'
   if (value === types.StyleObject) return 'section'
-  if (value === types.Product) return 'product'
   if (value === types.Label) return 'text'
   if (value === types.Cost) return 'text'
   if (value === types.Delimiter) return 'delimiter'
@@ -202,4 +201,61 @@ export function placeCaretAtEnd (el) {
     textRange.collapse(false);
     textRange.select();
   }
+}
+
+/**
+ * Set cookie
+ *
+ * @param {String} name
+ * @param {String} value
+ * @param {Object} options -> { path, domain, secure }
+ *
+ * path -> path for cookie
+ * domain -> domain for cookie
+ * secure -> secure policy
+ */
+export function setCookie (name, value, options = {}) {
+  let expires = options.expires
+
+  if (expires && typeof expires === 'number' && expires instanceof Number) {
+    let date = new Date()
+    date.setTime(date.getTime() + expires * 1000)
+    expires = options.expires = date
+    if (expires.toUTCString) {
+      options.expires = expires.toUTCString()
+    }
+  }
+
+  let updatedCookie = `${name}=${encodeURIComponent(value)}`
+
+  for (let propName in options) {
+    updatedCookie += `; ${propName}`
+    let propValue = options[propName]
+    if (propValue !== true) {
+      updatedCookie += `=${propValue}`
+    }
+  }
+
+  document.cookie = updatedCookie
+}
+
+/**
+ * Get cookie
+ *
+ * @param {String} name
+ */
+export function getCookie (name) {
+  let matches = document.cookie.match(new RegExp(
+    '(?:^|; )' + name.replace(/([.$?*|{}()\[\]\\\/+^])/g, '\\$1') + '=([^;]*)'
+  ));
+  return matches ? decodeURIComponent(matches[1]) : null
+}
+
+/**
+ * Delete cookie
+ *
+ * @param {String} name
+ */
+export function deleteCookie (name) {
+  void setCookie(name, '', { expires: -1 })
 }

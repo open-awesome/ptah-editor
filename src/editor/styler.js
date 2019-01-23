@@ -36,6 +36,7 @@ function installStyler ({ builder, Vue }) {
           section: section,
           type: (binding.arg !== 'index' && binding.arg !== 'for' && binding.arg) || type || getTypeFromSchema(name, section.schema) || getTypeFromTagName(el.tagName),
           options: binding.arg === 'for' || binding.arg === 'galleryItem'|| binding.arg === 'product' || binding.arg === 'system' ? binding.value.el : binding.value,
+          label: binding.value.label,
           name: name
         }
       }).$mount(newNode))

@@ -1,9 +1,38 @@
 <template>
-  <div class="b-section-settings">
+<div class="b-section-settings">
   <base-scroll-container backgroundBar="#999">
     <div class="b-section-settings__inner">
       <div class="b-section-settings__control">
         <control-section-layouts :builder="builder"></control-section-layouts>
+      </div>
+
+      <!-- System requirements -->
+      <control-system-requirements
+        :expand="expandedSystemRequirements"
+        @open="onExpand"
+        v-if="settingObjectOptions.hasSystemRequirements"
+      >
+      </control-system-requirements>
+
+      <!-- Products Section Controls -->
+      <control-section-products
+        :expand="expandedProducts"
+        @open="onExpand"
+        v-if="settingObjectOptions.hasProducts"
+      >
+      </control-section-products>
+
+     <!-- Font -->
+      <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+        <control-text
+          :fontSize="fontSize"
+          :fontFamily="fontFamily"
+          :fontColor="fontColor"
+          :fontStyles="styles"
+          :expand="expandedFont"
+          :isComplexText="isComplexText"
+          @open="onExpand"
+          @change="styleChange"></control-text>
       </div>
 
       <div class="b-section-settings__control">
@@ -12,34 +41,6 @@
         </div>
         <base-label>Full screen height</base-label>
         <BaseSwitcher v-model="fullScreen" @change="setHeight" />
-      </div>
-
-      <!-- System requirements -->
-      <control-system-requirements
-        :expand="expandedSystemRequirements"
-        @open="onExpand"
-        v-if="settingObjectOptions.hasSystemRequirements"
-        >
-      </control-system-requirements>
-
-      <!-- Products Section Controls -->
-      <control-section-products
-        :expand="expandedProducts"
-        @open="onExpand"
-        v-if="settingObjectOptions.hasProducts"
-        >
-      </control-section-products>
-
-     <!-- font -->
-      <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-        <control-text
-          :fontSize="fontSize"
-          :fontFamily="fontFamily"
-          :fontColor="fontColor"
-          :fontStyles="styles"
-          :expand="expandedFont"
-          @open="onExpand"
-          @change="styleChange"></control-text>
       </div>
 
       <template v-if="settingObjectOptions.background">
@@ -68,7 +69,7 @@
             <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
           </div>
           <div class="b-section-settings__control">
-            <base-upload-input v-model="sectionBgUrl" @upload="updateBgUrl" label="Background image" placeholder="Image Url"></base-upload-input>
+            <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Background image"/>
           </div>
           <template v-if="sectionBgUrl.length">
             <div class="b-section-settings__control">
@@ -131,21 +132,30 @@
 
       <!-- Images Multiple Upload -->
       <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
-        <BaseImageUploadMultiple
-          label="Images upload"
-          :data-images="galleryImages"
+        <base-uploader
+          :value="galleryImages"
           @change="updateGalleryImages"
-        />
+          label="Images upload"
+          multiple/>
+        <br>
+        <base-range-slider
+            v-if="settingObjectSection.name === 'AutoplayCarousel'"
+            :value="settingObjectSection.data.mainStyle.swiper.delay"
+            :label="`Autoplay slides delay (${settingObjectSection.data.mainStyle.swiper.delay})`"
+            @change="changeSwiperDelay"
+            step="1000"
+            min="1000"
+            max="10000"/>
       </div>
 
     </div>
 
   </base-scroll-container>
 
-    <div class="b-section-settings__buttons">
-      <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
-    </div>
+  <div class="b-section-settings__buttons">
+    <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
   </div>
+</div>
 </template>
 
 <script>
@@ -155,6 +165,7 @@ import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
+import BaseUploader from '../../components/base/BaseUploader'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -167,6 +178,7 @@ function getPickerColor (color) {
 
 export default {
   components: {
+    BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
     ControlText,
@@ -220,8 +232,11 @@ export default {
       expandedFont: false,
 
       styles: [],
-      productsCount: 0,
-      expandedProducts: true
+      products: {},
+      selectProduct: {},
+      expandedProducts: false,
+
+      isComplexText: false
     }
   },
 
@@ -231,6 +246,7 @@ export default {
       'settingObjectSection',
       'settingObjectElement'
     ]),
+
     bgAttachmentCheckbox: {
       set (value) {
         this.bgAttachment = value ? 'fixed' : 'scroll'
@@ -249,17 +265,14 @@ export default {
     let image = (typeof styles['background-image'] === 'string') ? styles['background-image'] : ''
     let bgimage = image.match(/url\((.*?)\)/)
 
-    this.sectionBgColor = styles['background-color']
-    this.sectionBgUrl = image.length > 0 && image !== 'none' ? image.match(/url\(.+(?=\))/g).map(url => url.replace(/url\(/, ''))[0] : ''
-
     if (bgimage) {
       bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
     }
 
     this.sectionBgColor = styles['background-color']
     this.sectionBgUrl = bgimage || ''
-    this.bgRepeat = styles['background-repeat'] === 'no-repeat' ? this.sizeList[0] : this.sizeList[1]
-    this.bgSize = styles['background-size'] === 'cover' ? this.sizeList[0] : this.sizeList[1]
+    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+    this.bgSize = styles['background-size'] || 'cover'
     this.bgAttachment = styles['background-attachment'] === 'fixed'
 
     /* Video */
@@ -292,6 +305,8 @@ export default {
 
     /* Products */
     this.products = this.settingObjectOptions.products || {}
+    this.selectProduct = this.settingObjectOptions.selectProduct || {}
+    this.isComplexText = this.settingObjectOptions.hasProducts || false
   },
 
   watch: {
@@ -324,7 +339,7 @@ export default {
       'clearSettingObject'
     ]),
 
-    updateBgColor () {
+    updateBgColor (value) {
       let settings = this.settingObjectOptions
       let pickers = this.backgroundPickers
       let image = (typeof settings.styles['background-image'] === 'string') ? settings.styles['background-image'] : ''
@@ -335,7 +350,7 @@ export default {
         case 0:
           break
         case 1:
-          styles['background-color'] = getPickerColor(pickers[0])
+          styles['background-color'] = getPickerColor(value)
           styles['background-image'] = (bgimage) ? bgimage[0] : ''
           break
         default:
@@ -354,7 +369,8 @@ export default {
       this.updateSettingOptions(_.merge({}, settings, { styles }))
     },
 
-    updateBgUrl () {
+    updateBgUrl (value) {
+      this.sectionBgUrl = value || ''
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
         styles: {
           'background-image': `url(${this.sectionBgUrl})`
@@ -411,6 +427,14 @@ export default {
         ..._.cloneDeep(this.settingObjectOptions),
         galleryImages
       })
+    },
+
+    changeSwiperDelay (delay) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          swiper: { delay }
+        })
+      )
     },
 
     addBackgroundPicker () {
@@ -486,10 +510,25 @@ export default {
   flex-direction: column
   align-items: stretch
   padding-bottom: 4.5rem
-
+  min-width: 24rem
+  &__header
+    font-size: 1.6rem
+    height: 3.2rem
+    color: #272727
+    display: flex
+    align-items: center
+    cursor: pointer
+    i
+      margin-left: 5px
+      margin-bottom: -5px
+      transform: rotate(180deg)
+      &.dropped
+        transform: rotate(0deg)
+  &__control
+    margin-top: 2.2rem
   &__inner
     padding-right: 2.5rem
-
+    padding-bottom: 10rem
   &__buttons
     position: absolute
     bottom: 1rem
@@ -506,9 +545,9 @@ export default {
     color: #747474
     margin-bottom: 2rem
     margin-top: -1rem
-
+  .vue-scrollbar__wrapper
+    margin: 0
   .picker
-
     &__label
       display: flex
       align-items: center
