@@ -280,6 +280,7 @@ $h: 100vh
 .b-hero
   position: relative
   width: 100%
+  height: max-content
   min-height: 60rem
   margin: 0
   padding: 1rem
@@ -317,6 +318,9 @@ $h: 100vh
       padding-top: 0
 
 .b-grid__logo
+  display: flex
+  align-items: center
+
   .is-mobile &,
   .is-tablet &
     width: 50%
@@ -330,6 +334,7 @@ $h: 100vh
       .b-logo
         max-width: 100%
         max-height: 100%
+
   @media only screen and (max-width: 768px)
     width: 50%
     flex-basis: 50%

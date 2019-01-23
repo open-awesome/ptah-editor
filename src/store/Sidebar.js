@@ -1,3 +1,5 @@
+import * as _ from 'lodash-es'
+
 export default {
   state: {
     isExpanded: true,
@@ -8,6 +10,7 @@ export default {
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectLabel: '', // Styler slot label
     settingObjectOptions: {},
+    settingObjectElement: false,
     settingObjectSection: {},
     siteSettingsMenu: [
       {
@@ -85,6 +88,9 @@ export default {
     },
     setSandboxPaths (state, paths) {
       state.sandbox = { ...state.sandbox, ...paths }
+    },
+    setElement (state, el) {
+      state.settingObjectElement = el
     }
   },
 
@@ -178,12 +184,12 @@ export default {
         ...options,
         name,
         sectionId: section.id,
-        sectionName: section.name,
-        element
+        sectionName: section.name
       }
 
       commit('setSection', section)
       commit('setExpandedMenuItem', 'sections')
+      commit('setElement', element)
 
       dispatch('setSettingObject', {
         type,
@@ -198,6 +204,17 @@ export default {
 
     updateBuilderGroups ({ commit }, groups) {
       commit('setBuilderGroups', groups)
+    },
+
+    setElement ({ commit }, element) {
+      commit('setElement', element)
+    },
+
+    updateText ({ state, dispatch }) {
+      if (state.settingObjectElement) {
+        const el = state.settingObjectElement
+        dispatch('updateSettingOptions', _.merge({}, state.settingObjectOptions, { text: el.innerHTML }))
+      }
     },
 
     updateSectionGroups ({ commit }, groups) {

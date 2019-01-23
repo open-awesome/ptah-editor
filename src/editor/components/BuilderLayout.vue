@@ -51,7 +51,7 @@ export default {
 
   data () {
     return {
-      device: 'desktop'
+      device: 'is-desktop'
     }
   },
 
