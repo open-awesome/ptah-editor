@@ -310,7 +310,7 @@ export default {
   .is-tablet &
     width: 100%
     flex-basis: 100%
-    
+
   @media only screen and (max-width: 768px)
     &
       width: 100%

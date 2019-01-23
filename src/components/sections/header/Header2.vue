@@ -10,7 +10,7 @@
   <div class="b-grid b-header js-hamburger">
     <div class="b-grid__row b-footer__row">
 
-      <div class="b-grid__col-3 b-grid__col-m-12">
+      <div class="b-grid__col-4 b-grid__col-m-12">
 
         <sandbox
             container-path="$sectionData.container"
@@ -87,7 +87,7 @@
 
       </div>
 
-      <div class="b-grid__col-9 b-grid__col-m-12 hamburger-container">
+      <div class="b-grid__col-8 b-grid__col-m-12 hamburger-container">
 
         <sandbox
             container-path="$sectionData.container2"
@@ -292,6 +292,16 @@ export default {
 <style lang="sass" scoped>
 .b-sandbox
   min-height: 10rem
+  &.hamburger-container__menu
+    padding-left: 2rem
+    .b-draggable-slot
+      justify-content: flex-start !important
+  .is-mobile &,
+  .is-tablet &
+    padding-left: 0
+  @media only screen and (max-width: 768px)
+    &
+      padding-left: 0
 
 .b-draggable-slot
   width: 100%
