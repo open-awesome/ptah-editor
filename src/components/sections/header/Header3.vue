@@ -231,7 +231,7 @@ export default {
   &.active .b-draggable-slot
     display: flex
 
-@media only screen and (max-width: 768px)
+@media only screen and (max-width: 1100px)
   .hamburger-container
     display: flex !important
     .b-draggable-slot

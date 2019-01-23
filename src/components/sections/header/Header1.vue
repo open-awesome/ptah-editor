@@ -311,7 +311,7 @@ export default {
     width: 100%
     flex-basis: 100%
 
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 1100px)
     &
       width: 100%
       flex-basis: 100%
@@ -323,7 +323,7 @@ export default {
   .is-mobile &,
   .is-tablet &
     padding-left: 0
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 1100px)
     &
       padding-left: 0
 
@@ -335,7 +335,7 @@ export default {
   .is-tablet &
     margin-left: 0 !important
 
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 1100px)
     &
       margin-left: 0 !important
 </style>

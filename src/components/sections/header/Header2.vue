@@ -299,7 +299,7 @@ export default {
   .is-mobile &,
   .is-tablet &
     padding-left: 0
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 1100px)
     &
       padding-left: 0
 
@@ -310,7 +310,7 @@ export default {
   .is-mobile &,
   .is-tablet &
     flex-basis: 100%
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 1100px)
     &
       flex-basis: 100%
 </style>
