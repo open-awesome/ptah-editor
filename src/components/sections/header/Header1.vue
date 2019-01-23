@@ -303,11 +303,14 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-grid__col-4
+.b-grid__col-4,
+.b-grid__col-8
+
   .is-mobile &,
   .is-tablet &
     width: 100%
     flex-basis: 100%
+    
   @media only screen and (max-width: 768px)
     &
       width: 100%
