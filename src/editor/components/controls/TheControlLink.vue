@@ -2,6 +2,7 @@
 import * as _ from 'lodash-es'
 import { getPseudoTemplate, randomPoneId } from '../../util'
 import { mapState, mapActions } from 'vuex'
+import { getYoutubeVideoIdFromUrl } from '@editor/util'
 
 export default {
   props: {
@@ -16,6 +17,7 @@ export default {
       controlOpen: false,
       link: '',
       target: '',
+      videoId: '',
       bgH: '',
       bgHoverImage: '',
       textH: '',
@@ -36,11 +38,21 @@ export default {
       sizeList: [
         { text: 'Tile', value: 'cover' },
         { text: 'Fill', value: 'contain' }
-      ]
+      ],
+      actionList: [
+        { name: 'Open URL', value: '' },
+        { name: 'Open video popup', value: 'ptah-d-video' }
+      ],
+      action: { name: 'Open URL', value: '' }
     }
   },
 
   watch: {
+    elTarget (value) {
+      let target = (value) ? '_blank' : '_self'
+      this.$emit('setOption', ['target', target])
+    },
+
     expand () {
       this.controlOpen = this.expand
     }
@@ -48,7 +60,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'settingObjectElement'
     ]),
 
     styles () {
@@ -74,13 +87,55 @@ export default {
       set: function (newValue) {
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: newValue }))
       }
+    },
+
+    videoLink () {
+      return this.settingObjectOptions.video
+    }
+  },
+
+  created () {
+    let self = this
+    let pBackgroundColor = this.pseudo['hover']['background-color'].split('!')[0]
+    let pBackgroundImage = this.pseudo['hover']['background-image'].split('!')[0]
+    let pBackgroundRepeat = this.pseudo['hover']['background-repeat'].split('!')[0]
+    let pBackgroundSize = this.pseudo['hover']['background-size'].split('!')[0]
+    let pColor = this.pseudo['hover']['color'].split('!')[0]
+
+    this.link = this.elLink.href
+    this.target = this.elLink.target === '_blank'
+
+    this.bgH = pBackgroundColor || this.styles['background-color']
+
+    if (pBackgroundImage && pBackgroundImage !== 'none') {
+      let images = pBackgroundImage.match(/url\(.+(?=\))/g) || []
+      let result = images.map(url => url.replace(/url\(/, ''))[0]
+      this.bgHoverImage = (result.match(/^("")|("")$/)) ? JSON.parse(result) : result
     }
 
+    this.textH = pColor || this.styles['color']
+
+    this.bgRepeat = pBackgroundRepeat || 'no-repeat'
+    this.bgSize = pBackgroundSize || 'cover'
+
+    this.animationList.forEach(function (item, i, arr) {
+      if (self.animation.value !== undefined && self.animation.value === self.animationList[i].value) {
+        self.animationClass = item
+      }
+    })
+
+    this.controlOpen = this.expand
+
+    this.videoId = this.videoLink || ''
+    if (this.videoId.length) {
+      this.action = { name: 'Open video popup', value: 'ptah-d-video' }
+    }
   },
 
   methods: {
     ...mapActions('Sidebar', [
-      'updateSettingOptions'
+      'updateSettingOptions',
+      'updateText'
     ]),
 
     setUrl () {
@@ -89,6 +144,17 @@ export default {
 
     changeTarget () {
       this.elLink['target'] = this.target === true ? '_blank' : '_self'
+      // this.$emit('setAction', ['href', this.elLink])
+      this.setElAction(['href', this.link])
+    },
+
+    setVideoUrl () {
+      let ytId = getYoutubeVideoIdFromUrl(this.videoId)
+
+      if (ytId) {
+        // this.$emit('setAction', ['video', ytId])
+        this.setElAction(['video', ytId])
+      }
     },
 
     changeBgColor () {
@@ -139,7 +205,7 @@ export default {
     changePseudoStyle (attr, style, pseudoClass = 'hover') {
       const poneId = randomPoneId()
       this.pseudo[pseudoClass][attr] = style
-      this.settingObjectOptions.element.dataset.pone = poneId
+      this.settingObjectElement.dataset.pone = poneId
 
       let styleTemplate = getPseudoTemplate(poneId, this.settingObjectOptions.pseudo)
 
@@ -162,40 +228,35 @@ export default {
 
       this.classes = _.merge([], this.classes, animations)
       this.animation['value'] = animations[0]
-    }
-  },
+    },
 
-  created () {
-    let self = this
-    let pBackgroundColor = this.pseudo['hover']['background-color'].split('!')[0]
-    let pBackgroundImage = this.pseudo['hover']['background-image'].split('!')[0]
-    let pBackgroundRepeat = this.pseudo['hover']['background-repeat'].split('!')[0]
-    let pBackgroundSize = this.pseudo['hover']['background-size'].split('!')[0]
-    let pColor = this.pseudo['hover']['color'].split('!')[0]
+    setElAction (value) {
+      let action = value[0]
+      let classes = this.settingObjectOptions.classes
 
-    this.link = this.elLink.href
-    this.target = this.elLink.target === '_blank'
+      classes.forEach((name, index) => {
+        if (name.indexOf('ptah-d') > -1) {
+          classes.splice(index, 1)
+        }
+      })
 
-    this.bgH = pBackgroundColor || this.styles['background-color']
-
-    if (pBackgroundImage && pBackgroundImage !== 'none') {
-      let images = pBackgroundImage.match(/url\(.+(?=\))/g) || []
-      let result = images.map(url => url.replace(/url\(/, ''))[0]
-      this.bgHoverImage = (result.match(/^("")|("")$/)) ? JSON.parse(result) : result
-    }
-
-    this.textH = pColor || this.styles['color']
-
-    this.bgRepeat = pBackgroundRepeat || 'no-repeat'
-    this.bgSize = pBackgroundSize || 'cover'
-
-    this.animationList.forEach(function (item, i, arr) {
-      if (self.animation.value !== undefined && self.animation.value === self.animationList[i].value) {
-        self.animationClass = item
+      if (action === 'href') {
+        this.setOption(value)
+      } else {
+        classes.push('ptah-d-video')
+        this.settingObjectElement.dataset.video = value[1]
+        this.setOption(value.slice())
       }
-    })
+    },
 
-    this.controlOpen = this.expand
+    setOption (option) {
+      this.updateText()
+      let obj = {}
+      obj[option[0]] = option[1]
+      let merge = _.merge({}, this.settingObjectOptions, obj)
+      delete merge.element
+      this.updateSettingOptions(merge)
+    }
   }
 }
 </script>
@@ -203,15 +264,27 @@ export default {
 <template>
   <div class="b-link-controls">
     <div class="b-link-controls__header" @click="onClickTitle">
-      <span>Link</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+      <span>Action</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
     <base-dropdown :isOpened="controlOpen"  :hasOverflow="controlOpen">
+      <!-- action -->
       <div class="b-link-controls__control">
+        <base-select label="Action" :options="actionList" v-model="action"></base-select>
+      </div>
+
+      <!-- open link -->
+      <div class="b-link-controls__control" v-if="action.value === ''">
         <base-text-field v-model="link" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
       </div>
-      <div class="b-link-controls__control">
+      <div class="b-link-controls__control" v-if="action.value === ''">
         <input type="checkbox" id="target" v-model="target" @change="changeTarget"> <label for="target">open in new window</label>
       </div>
+
+      <!-- video popup -->
+      <div class="b-link-controls__control" v-if="action.value === 'ptah-d-video'">
+        <base-text-field v-model="videoId" label="Video" @input="setVideoUrl" placeholder="Youtube video url"></base-text-field>
+      </div>
+
       <div class="b-link-controls__control">
         <base-color-picker label="Background hover color" v-model="bgH" @change="changeBgColor"></base-color-picker>
       </div>
