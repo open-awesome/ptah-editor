@@ -81,10 +81,6 @@ export default {
       this.styles['background-size'] = this.bgSize
     },
 
-    onClickOutside () {
-      this.controlOpen = false
-    },
-
     onClickTitle () {
       this.$emit('open', ['Bg', !this.controlOpen])
     }
@@ -93,7 +89,7 @@ export default {
 </script>
 
 <template>
-  <div class="b-bg-controls" v-click-outside="onClickOutside">
+  <div class="b-bg-controls">
     <div class="b-bg-controls__header" @click="onClickTitle">
       <span>Background</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
     </div>
