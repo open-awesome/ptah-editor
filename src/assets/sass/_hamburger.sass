@@ -1,0 +1,77 @@
+.hamburger-container
+  position: relative
+  transition: height .1s linear
+
+  .is-mobile &,
+  .is-tablet &
+    display: none
+    &:not(.active)
+      padding: 0
+
+  @media only screen and (max-width: 768px)
+    &
+      display: none
+      &:not(.active)
+        padding: 0
+
+  &.active
+    display: flex
+    padding-top: 0
+
+.hamburger-container__menu
+  .is-mobile &,
+  .is-tablet &
+    .b-draggable-slot
+      flex-direction: column !important
+      .b-link
+        font-size: 1.4rem !important
+        height: 30px !important
+
+  @media only screen and (max-width: 768px)
+    &
+      .b-draggable-slot
+        flex-direction: column !important
+      .b-link
+        font-size: 1.4rem !important
+        height: 30px !important
+
+.hamburger-button
+  position: absolute
+  top: 3rem
+  right: 1rem
+
+  width: auto
+  padding: .4rem
+
+  display: none
+
+  .is-mobile &,
+  .is-tablet &
+    display: inline-flex
+
+  @media only screen and (max-width: 768px)
+    &
+      display: inline-flex
+
+
+
+.hamburger-box
+  position: relative
+
+  width: 3rem
+
+  display: flex
+  flex-direction: column
+  align-items: center
+
+.hamburger-inner
+  width: 100%
+  height: .4rem
+
+  border-radius: .4rem
+  background-color: $white
+
+  transition: background-color 0s linear .13s
+
+  &:not(:last-of-type)
+    margin-bottom: .4rem

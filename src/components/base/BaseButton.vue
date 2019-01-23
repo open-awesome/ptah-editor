@@ -11,7 +11,8 @@ export default {
           'blue',
           'gray',
           'light-gray',
-          'orange'
+          'orange',
+          'transparent'
         ]
         return values.indexOf(value) !== -1
       }
