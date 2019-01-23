@@ -90,7 +90,7 @@ export default {
 
   group: GROUP_NAME,
 
-  cover: 'https://downloader.disk.yandex.ru/preview/80b0f98f9c378f3c18c16c0526ebf2993ed9ee90149a4b0ed3ba56f73a159d01/5c48421d/95QNuOT7MZ1p-kZH60-e3-rxVLfj1UCrZrV_hO3ZCcFqUYqfM-25NF65dQTQuE05o0EzqfW5m3TczmvcQthdEw%3D%3D?uid=0&filename=2019-01-23_10-47-56.png&disposition=inline&hash=&limit=0&content_type=image%2Fpng&tknv=v2&size=2048x2048',
+  cover: 'https://gn372.cdn.stg.gamenet.ru/0/7cELj/o_1DWDoa.png',
 
   components: {
     Draggable

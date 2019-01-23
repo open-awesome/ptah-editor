@@ -68,7 +68,7 @@ export default {
 
   group: GROUP_NAME,
 
-  cover: 'https://gn533.cdn.stg.gamenet.ru/0/7REYk/o_1tgFKS.png',
+  cover: 'https://gn811.cdn.stg.gamenet.ru/0/7cEKX/o_182BvQ.png',
 
   components: {
     Draggable
