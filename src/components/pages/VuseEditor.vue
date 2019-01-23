@@ -41,6 +41,8 @@ import HeroTwoColumns from '@components/sections/hero/HeroTwoColumns'
 import HeroThreeColumns from '@components/sections/hero/HeroThreeColumns'
 import HeroArtRight from '@components/sections/hero/HeroArtRight'
 import HeroArtLeft from '@components/sections/hero/HeroArtLeft'
+import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
+import HeroHunt from '@components/sections/hero/HeroHunt'
 // --- gallery
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
@@ -59,6 +61,7 @@ import AutoplayCarousel from '@components/sections/carousel/AutoplayCarousel'
 // --- other
 import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
+import MenuBas from '@components/sections/stickyMenus/MenuBAS'
 
 import store from '@store'
 
@@ -93,6 +96,8 @@ const COMPONENTS = {
   HeroThreeColumns,
   HeroArtRight,
   HeroArtLeft,
+  HeroBAS,
+  HeroHunt,
 
   Gallery1,
   Gallery2,
@@ -110,7 +115,8 @@ const COMPONENTS = {
 
   Footer,
   System,
-  Video
+  Video,
+  MenuBas
 }
 
 Vuse.mix({ components: ELEMENTS })
