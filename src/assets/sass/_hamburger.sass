@@ -5,12 +5,14 @@
   .is-mobile &,
   .is-tablet &
     display: none
+    padding: 1.6rem
     &:not(.active)
       padding: 0
 
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 1100px)
     &
       display: none
+      padding: 1.6rem
       &:not(.active)
         padding: 0
 
@@ -27,7 +29,7 @@
         font-size: 1.4rem !important
         height: 30px !important
 
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 1100px)
     &
       .b-draggable-slot
         flex-direction: column !important
@@ -49,7 +51,7 @@
   .is-tablet &
     display: inline-flex
 
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 1100px)
     &
       display: inline-flex
 
