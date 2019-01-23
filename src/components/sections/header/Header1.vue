@@ -303,6 +303,16 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-grid__col-4
+  .is-mobile &,
+  .is-tablet &
+    width: 100%
+    flex-basis: 100%
+  @media only screen and (max-width: 768px)
+    &
+      width: 100%
+      flex-basis: 100%
+
 .b-sandbox
   min-height: 10rem
   &.hamburger-container__menu
