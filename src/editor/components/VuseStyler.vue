@@ -170,7 +170,6 @@ export default {
 
     if (this.options.video) {
       this.el.classList.add('ptah-d-video')
-      console.log(this.el)
       this.el.dataset.video = this.options.video
     }
 

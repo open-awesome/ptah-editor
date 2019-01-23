@@ -140,12 +140,12 @@ export default {
 
     setUrl () {
       this.elLink['href'] = this.link
+      this.setOption(['href', this.link])
     },
 
     changeTarget () {
       this.elLink['target'] = this.target === true ? '_blank' : '_self'
-      // this.$emit('setAction', ['href', this.elLink])
-      this.setElAction(['href', this.link])
+      this.setOption(['target', this.target])
     },
 
     setVideoUrl () {
@@ -230,6 +230,12 @@ export default {
       this.animation['value'] = animations[0]
     },
 
+    changeAction () {
+      if (this.action.value === '') {
+        this.setElAction(['href', this.link])
+      }
+    },
+
     setElAction (value) {
       let action = value[0]
       let classes = this.settingObjectOptions.classes
@@ -241,7 +247,10 @@ export default {
       })
 
       if (action === 'href') {
+        this.videoId = ''
+        this.settingObjectElement.classList.remove('ptah-d-video')
         this.setOption(value)
+        this.setOption(['video', false])
       } else {
         classes.push('ptah-d-video')
         this.settingObjectElement.dataset.video = value[1]
@@ -269,7 +278,7 @@ export default {
     <base-dropdown :isOpened="controlOpen"  :hasOverflow="controlOpen">
       <!-- action -->
       <div class="b-link-controls__control">
-        <base-select label="Action" :options="actionList" v-model="action"></base-select>
+        <base-select label="Action" :options="actionList" v-model="action" @input="changeAction"></base-select>
       </div>
 
       <!-- open link -->
