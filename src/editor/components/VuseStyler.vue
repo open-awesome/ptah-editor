@@ -157,11 +157,13 @@ export default {
     }
 
     // Apply animation to element
-    this.options.classes.forEach((name, index) => {
-      if (name.indexOf('ptah-a-') > -1) {
-        this.animation = _.find(this.animationList, ['className', name])
-      }
-    })
+    if (this.options.classes !== undefined && this.options.classes.length) {
+      this.options.classes.forEach((name, index) => {
+        if (name.indexOf('ptah-a-') > -1) {
+          this.animation = _.find(this.animationList, ['className', name])
+        }
+      })
+    }
 
     this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
   },

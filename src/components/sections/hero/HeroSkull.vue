@@ -105,7 +105,8 @@ const SCHEMA_CUSTOM = {
       'background-image': BG_SECTION,
       'background-color': '#151C44',
       'background-size': 'cover',
-      'background-repeat': 'no-repeat'
+      'background-repeat': 'no-repeat',
+      'background-attachment': 'scroll'
     }
   },
   components: _.merge([], C_CUSTOM),
@@ -128,14 +129,11 @@ export default {
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
     let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    console.log(this.canRestore(GROUP_NAME, NAME))
     let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
     let $sectionData = this.$sectionData
 
     this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
-  },
-
-  updated () {
-    this.storeData(this)
   }
 }
 </script>

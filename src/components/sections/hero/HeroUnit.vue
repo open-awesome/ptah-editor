@@ -101,7 +101,9 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': BG_SECTION,
       'background-size': 'cover',
-      'background-repeat': 'no-repeat'
+      'background-color': '#000',
+      'background-repeat': 'no-repeat',
+      'background-attachment': 'scroll'
     }
   },
   components: _.merge({}, C_CUSTOM),
@@ -116,7 +118,9 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    components: COMPONENTS
+    components: COMPONENTS,
+    groupDataStore: {},
+    temp: {}
   },
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
@@ -125,10 +129,6 @@ export default {
     let $sectionData = this.$sectionData
 
     this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
-  },
-
-  updated () {
-    this.storeData(this)
   }
 }
 </script>
