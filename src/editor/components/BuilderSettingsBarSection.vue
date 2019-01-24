@@ -1,6 +1,6 @@
 <template>
 <div class="b-section-settings">
-  <base-scroll-container backgroundBar="#999" v-show="!isGrouping">
+  <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
     <div class="b-section-settings__inner">
       <div class="b-section-settings__control">
         <control-section-layouts :builder="builder"></control-section-layouts>
@@ -149,30 +149,32 @@
       </div>
 
       <!-- Group -->
-      <div class="b-section-settings__control" v-if="!isSlaveSection()">
-        <BaseButton
-          :color="'gray'"
-          :transparent="true"
-          @click="toggleGrouping(true)"
-        >
-          Group sections
-        </BaseButton>
-      </div>
+      <template v-if="!isLastSection()">
+        <div class="b-section-settings__control" v-if="!isSlaveSection()">
+          <BaseButton
+            :color="'gray'"
+            :transparent="true"
+            @click="toggleGrouping(true)"
+          >
+            Group sections
+          </BaseButton>
+        </div>
 
-      <div class="b-section-settings__control" v-if="isSlaveSection()">
-        <BaseButton
-          :color="'gray'"
-          :transparent="true"
-          @click="openSlaveGrouping()"
-        >
-          Group sections
-        </BaseButton>
-      </div>
+        <div class="b-section-settings__control" v-if="isSlaveSection()">
+          <BaseButton
+            :color="'gray'"
+            :transparent="true"
+            @click="openSlaveGrouping()"
+          >
+            Group sections
+          </BaseButton>
+        </div>
+      </template>
 
     </div>
   </base-scroll-container>
 
-  <div class="b-section-settings__inner" v-show="isGrouping">
+  <div class="b-section-settings__inner" v-if="isGrouping">
     <h3>Grouping</h3>
 
     <builder-settings-bar-group
@@ -454,6 +456,13 @@ export default {
     },
 
     deleteSection () {
+      // update group
+      if (this.isSlaveSection()) {
+        let master = _.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1).main
+        let absorb = master.data.mainStyle.absorb
+        master.set('$sectionData.mainStyle', { absorb: absorb - 1 })
+      }
+
       this.builder.remove(this.settingObjectSection)
       this.clearSettingObject()
     },
@@ -558,6 +567,10 @@ export default {
 
     isSlaveSection () {
       return !!_.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1)
+    },
+
+    isLastSection () {
+      return _.last(this.builder.sections) === this.settingObjectSection
     },
 
     /*
