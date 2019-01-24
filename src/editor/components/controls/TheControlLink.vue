@@ -5,7 +5,10 @@ import { mapState, mapActions } from 'vuex'
 import { getYoutubeVideoIdFromUrl } from '@editor/util'
 
 export default {
+  name: 'TheControlLink',
+
   props: {
+    builder: Object,
     expand: {
       type: Boolean,
       required: true
@@ -41,18 +44,15 @@ export default {
       ],
       actionList: [
         { name: 'Open URL', value: '' },
-        { name: 'Open video popup', value: 'ptah-d-video' }
+        { name: 'Open video popup', value: 'ptah-d-video' },
+        { name: 'Scroll into section', value: 'scroll-into-section' }
       ],
-      action: { name: 'Open URL', value: '' }
+      action: { name: 'Open URL', value: '' },
+      section: null
     }
   },
 
   watch: {
-    elTarget (value) {
-      let target = (value) ? '_blank' : '_self'
-      this.$emit('setOption', ['target', target])
-    },
-
     expand () {
       this.controlOpen = this.expand
     }
@@ -63,6 +63,10 @@ export default {
       'settingObjectOptions',
       'settingObjectElement'
     ]),
+
+    sections () {
+      return this.builder.sections.map(({ id, name }) => ({ name, value: `#section_${id}` }))
+    },
 
     styles () {
       return this.settingObjectOptions.styles
@@ -127,8 +131,17 @@ export default {
     this.controlOpen = this.expand
 
     this.videoId = this.videoLink || ''
+
     if (this.videoId.length) {
       this.action = { name: 'Open video popup', value: 'ptah-d-video' }
+    } else if (this.link && this.link.includes('#section')) {
+      let matches = this.link.match(/\d+(?!\d+)/)
+      if (matches) {
+        let id = Number(matches[0])
+        let section = this.builder.sections.find(section => section.id === id)
+        this.section = (section) ? { name: section.name, value: this.link } : null
+      }
+      this.action = { name: 'Scroll into section', value: 'scroll-into-section' }
     }
   },
 
@@ -236,6 +249,15 @@ export default {
       }
     },
 
+    changeScrollIntoSection ({ value }) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          href: value,
+          link: { href: value }
+        })
+      )
+    },
+
     setElAction (value) {
       let action = value[0]
       let classes = this.settingObjectOptions.classes
@@ -281,11 +303,20 @@ export default {
         <base-select label="Action" :options="actionList" v-model="action" @input="changeAction"></base-select>
       </div>
 
+      <!-- scroll into section -->
+      <div v-if="action.value === 'scroll-into-section'" class="b-link-controls__control">
+        <base-select
+          v-model="section"
+          :options="sections"
+          @input="changeScrollIntoSection"
+          label="Scroll to"/>
+      </div>
+
       <!-- open link -->
       <div class="b-link-controls__control" v-if="action.value === ''">
         <base-text-field v-model="link" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
       </div>
-      <div class="b-link-controls__control" v-if="action.value === ''">
+      <div class="b-link-controls__control" v-if="action.value === '' || action.value === 'scroll-into-section'">
         <input type="checkbox" id="target" v-model="target" @change="changeTarget"> <label for="target">open in new window</label>
       </div>
 

@@ -49,11 +49,7 @@
 
         <!-- Link -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
-          <control-link
-            :expand="expandedLink"
-            @open="onExpand"
-            >
-          </control-link>
+          <control-link :builder="builder" :expand="expandedLink" @open="onExpand"/>
         </div>
 
         <!-- Available Platforms Control-->
