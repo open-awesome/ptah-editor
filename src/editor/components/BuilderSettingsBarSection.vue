@@ -1,6 +1,6 @@
 <template>
 <div class="b-section-settings">
-  <base-scroll-container backgroundBar="#999">
+  <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
     <div class="b-section-settings__inner">
       <div class="b-section-settings__control">
         <control-section-layouts :builder="builder"></control-section-layouts>
@@ -148,9 +148,49 @@
             max="10000"/>
       </div>
 
-    </div>
+      <!-- Group -->
+      <template v-if="!isLastSection()">
+        <div class="b-section-settings__control" v-if="!isSlaveSection()">
+          <BaseButton
+            :color="'gray'"
+            :transparent="true"
+            @click="toggleGrouping(true)"
+          >
+            Group sections
+          </BaseButton>
+        </div>
 
+        <div class="b-section-settings__control" v-if="isSlaveSection()">
+          <BaseButton
+            :color="'gray'"
+            :transparent="true"
+            @click="openSlaveGrouping()"
+          >
+            Group sections
+          </BaseButton>
+        </div>
+      </template>
+
+    </div>
   </base-scroll-container>
+
+  <div class="b-section-settings__inner" v-if="isGrouping">
+    <h3>Grouping</h3>
+
+    <builder-settings-bar-group
+      :builder="builder"
+      :master="isMasterSection()"
+      :slave="isSlaveSection()"
+      v-if="isGrouping"></builder-settings-bar-group>
+
+    <BaseButton
+      :color="'gray'"
+      :transparent="true"
+      @click="toggleGrouping(false)"
+    >
+      Close
+    </BaseButton>
+  </div>
 
   <div class="b-section-settings__buttons">
     <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
@@ -159,13 +199,14 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
 import BaseUploader from '../../components/base/BaseUploader'
+import BuilderSettingsBarGroup from './BuilderSettingsBarGroup'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -178,6 +219,7 @@ function getPickerColor (color) {
 
 export default {
   components: {
+    BuilderSettingsBarGroup,
     BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
@@ -244,6 +286,8 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection',
+      'sectionsGroups',
+      'isGrouping',
       'settingObjectElement'
     ]),
 
@@ -257,6 +301,10 @@ export default {
     },
     backgroundType () {
       return this.settingObjectOptions.backgroundType
+    },
+
+    sectionId () {
+      return this.settingObjectSection.id
     }
   },
 
@@ -336,8 +384,13 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'updateSettingOptions',
+      'clearSettingObject',
+      'toggleGrouping',
+      'setSettingSection',
       'clearSettingObject'
     ]),
+
+    ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
 
     updateBgColor (value) {
       let settings = this.settingObjectOptions
@@ -403,6 +456,13 @@ export default {
     },
 
     deleteSection () {
+      // update group
+      if (this.isSlaveSection()) {
+        let master = _.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1).main
+        let absorb = master.data.mainStyle.absorb
+        master.set('$sectionData.mainStyle', { absorb: absorb - 1 })
+      }
+
       this.builder.remove(this.settingObjectSection)
       this.clearSettingObject()
     },
@@ -499,6 +559,31 @@ export default {
         video.load()
         video.play()
       })
+    },
+
+    isMasterSection () {
+      return !!_.find(this.sectionsGroups, o => o.main.id === this.sectionId)
+    },
+
+    isSlaveSection () {
+      return !!_.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1)
+    },
+
+    isLastSection () {
+      return _.last(this.builder.sections) === this.settingObjectSection
+    },
+
+    /*
+     * Show master section grouping settings
+     */
+    openSlaveGrouping () {
+      let masterId = _.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1).main.id
+      let masterSection = _.find(this.builder.sections, o => o.id === masterId)
+
+      this.toggleSandboxSidebar(false)
+      this.clearSettingObject()
+      this.setSettingSection(masterSection)
+      this.toggleGrouping(true)
     }
   }
 }

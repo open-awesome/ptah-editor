@@ -5,6 +5,7 @@ export default {
     isExpanded: true,
     isSettingsExpanded: false, // 2nd level menu
     isAddSectionExpanded: false, // add section menu
+    isGrouping: false, // section grouping interface
     expandedMenuItem: 'sections', // submenu item
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectLabel: '', // Styler slot label
@@ -30,7 +31,8 @@ export default {
       // }
     ],
     builderSections: [],
-    builderGroups: [],
+    builderGroups: [], // section layouts
+    sectionsGroups: [],
     sandbox: {
       expanded: false, // sandbox sidebar expand state
       components: [], // sandbox current section's components
@@ -74,6 +76,12 @@ export default {
     },
     setBuilderGroups (state, groups) {
       state.builderGroups = groups
+    },
+    setSectionsGroups (state, groups) {
+      state.sectionsGroups = groups
+    },
+    isGrouping (state, value) {
+      state.isGrouping = value
     },
     toggleSandboxSidebar ({ sandbox }, value = !sandbox.expanded) {
       sandbox.expanded = value
@@ -120,6 +128,7 @@ export default {
       commit('toggleSandboxSidebar', false)
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
+      commit('isGrouping', false)
     },
 
     clearSettingObjectLight ({ commit }) {
@@ -206,6 +215,14 @@ export default {
         const el = state.settingObjectElement
         dispatch('updateSettingOptions', _.merge({}, state.settingObjectOptions, { text: el.innerHTML }))
       }
+    },
+
+    updateSectionGroups ({ commit }, groups) {
+      commit('setSectionsGroups', groups)
+    },
+
+    toggleGrouping ({ commit, state }, value) {
+      commit('isGrouping', (typeof value !== 'undefined') ? value : !state.isGrouping)
     }
   },
 

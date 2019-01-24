@@ -17,6 +17,7 @@ export default class Section {
     this.schema = options.schema
     this.data = options.data || Seeder.seed(options.schema)
     this.stylers = []
+    this.isMain = false // flag for group
   }
 
   set (name, value) {

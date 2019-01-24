@@ -66,12 +66,14 @@
             :key="section.id"
             :id="`menu-item-${section.id}`"
             :isSelected="isActiveSection(section.id)"
+            :isMain="section.isMain"
             :hasDraggableIcon="true"
+            :sectionId="section.id"
             @click="toggleSettingsBar(section)">
             {{`${index + 1}.`}} {{section.name}}
           </MenuSubitem>
         </div>
-      </BaseDropdown>=
+      </BaseDropdown>
     </div>
 
     <transition name="slide-fade">
