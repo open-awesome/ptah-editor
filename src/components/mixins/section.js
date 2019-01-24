@@ -8,7 +8,6 @@ export default {
     Draggable
   },
   $schema: {
-    groupDataStore: {},
     temp: {},
     groupName: '',
     sectionName: '',
