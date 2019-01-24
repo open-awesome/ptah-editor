@@ -7,22 +7,26 @@
 
   <slot name="video"/>
 
-  <div class="b-grid b-header">
+  <div class="b-grid b-header js-hamburger">
     <div class="b-grid__row b-footer__row">
-      <div class="b-grid__col-12 b-grid__col-m-12">
+
+      <div class="b-grid__col-4 b-grid__col-m-12">
 
         <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="row"
-            align="center"
+            direction="column"
+            align="flex-start"
             class="b-sandbox">
 
-          <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot">
+          <draggable
+              v-model="$sectionData.components"
+              :style="$sectionData.container.styles"
+              class="b-draggable-slot">
 
             <div
                 v-for="(component, index) in $sectionData.components"
-                v-if="$sectionData.components.length !== 0"
+                v-if="$sectionData.components.length"
                 :key="`component-${ _uid }-${ index }`"
                 :style="component.styles">
 
@@ -71,9 +75,87 @@
 
           </draggable>
 
+          <base-button @click="showMenu" class="hamburger-button" color="transparent">
+            <div class="hamburger-box">
+              <span class="hamburger-inner"></span>
+              <span class="hamburger-inner"></span>
+              <span class="hamburger-inner"></span>
+            </div>
+          </base-button>
+
         </sandbox>
 
       </div>
+
+      <div class="b-grid__col-8 b-grid__col-m-12 hamburger-container">
+
+        <sandbox
+            container-path="$sectionData.container2"
+            components-path="$sectionData.components2"
+            direction="row"
+            align="center"
+            class="b-sandbox hamburger-container__menu">
+
+          <draggable
+              v-model="$sectionData.components2"
+              :style="$sectionData.container2.styles"
+              class="b-draggable-slot">
+
+            <div
+                v-for="(component, index) in $sectionData.components2"
+                v-if="$sectionData.components2.length"
+                :key="`component-${ _uid }-${ index }`"
+                :style="component.styles">
+
+              <component
+                  v-if="component.element.isComplex"
+                  v-styler:for="{
+                    el: component.element,
+                    type: component.type,
+                    label: component.label,
+                    path: `$sectionData.components2[${index}].element`
+                  }"
+                  :is="component.name"
+                  :href="component.element.link.href"
+                  :target="component.element.link.target"
+                  :style="component.element.styles"
+                  :src="component.element.src"
+                  :frameborder="component.element.frameborder"
+                  :allow="component.element.allow"
+                  :allowfullscreen="component.element.allowfullscreen"
+                  :class="[component.element.classes, component.class]"
+                  :path="`components2[${index}].element`"
+                  class="b-header-component"/>
+
+              <component
+                  v-else
+                  v-styler:for="{
+                    el: component.element,
+                    type: component.type,
+                    label: component.label,
+                    path: `$sectionData.components2[${index}].element`
+                  }"
+                  v-html="component.element.text"
+                  :is="component.name"
+                  :href="component.element.link.href"
+                  :target="component.element.link.target"
+                  :style="component.element.styles"
+                  :src="component.element.src"
+                  :frameborder="component.element.frameborder"
+                  :allow="component.element.allow"
+                  :allowfullscreen="component.element.allowfullscreen"
+                  :class="[component.element.classes, component.class]"
+                  :path="`components2[${index}].element`"
+                  class="b-header-component"/>
+
+            </div>
+
+          </draggable>
+
+        </sandbox>
+
+      </div>
+
     </div>
   </div>
 
@@ -95,15 +177,14 @@ const defaultComponents = [
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '20rem',
-        'height': '8rem',
-        'margin': '.8rem 1.6rem',
-        'position': 'absolute',
-        'top': '0',
-        'left': '0'
+        'width': '200px',
+        'height': '80px',
+        'margin': '8px 16px'
       }
     }
-  },
+  }
+]
+const defaultComponents2 = [
   {
     element: {
       text: 'Link 1',
@@ -114,10 +195,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   },
@@ -131,10 +212,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   }
@@ -149,6 +230,7 @@ const defaultSchema = {
     }
   },
   components: merge({}, defaultComponents),
+  components2: merge({}, defaultComponents2),
   edited: true
 }
 
@@ -160,12 +242,17 @@ export default {
   $schema: {
     mainStyle: StyleObject,
     container: StyleObject,
+    container2: StyleObject,
     components: [
-      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' },
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' }
+    ],
+    components2: [
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' }
     ]
   },
+
+  inject: ['device'],
 
   components: { Draggable },
 
@@ -173,6 +260,13 @@ export default {
     id: {
       type: Number,
       required: true
+    }
+  },
+
+  watch: {
+    'device.type' () {
+      this.$el.querySelector('.hamburger-container').classList.remove('active')
+      this.$el.querySelector('.hamburger-button').classList.remove('active')
     }
   },
 
@@ -185,6 +279,11 @@ export default {
       if (this.$sectionData.edited === undefined) {
         Seeder.seed(merge(this.$sectionData, defaultSchema))
       }
+    },
+
+    showMenu () {
+      this.$el.querySelector('.hamburger-container').classList.toggle('active')
+      this.$el.querySelector('.hamburger-button').classList.toggle('active')
     }
   }
 }
@@ -193,7 +292,25 @@ export default {
 <style lang="sass" scoped>
 .b-sandbox
   min-height: 10rem
+  &.hamburger-container__menu
+    padding-left: 2rem
+    .b-draggable-slot
+      justify-content: flex-start !important
+  .is-mobile &,
+  .is-tablet &
+    padding-left: 0
+  @media only screen and (max-width: 1100px)
+    &
+      padding-left: 0
 
 .b-draggable-slot
   width: 100%
+
+.b-grid__col-m-12
+  .is-mobile &,
+  .is-tablet &
+    flex-basis: 100%
+  @media only screen and (max-width: 1100px)
+    &
+      flex-basis: 100%
 </style>

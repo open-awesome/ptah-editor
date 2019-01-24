@@ -44,51 +44,6 @@ const COMPONENTS = [
   }
 ]
 
-const COMPONENTS_2 = [
-  {
-    name: 'Logo',
-    element: types.Logo,
-    type: 'image',
-    class: 'b-footer-game-logo',
-    label: 'logo'
-  },
-  {
-    name: 'Description',
-    element: types.Text,
-    type: 'text',
-    class: 'b-footer-copyright',
-    label: 'description'
-  },
-  {
-    name: 'Link',
-    element: types.Link,
-    type: 'link',
-    class: 'b-footer-link',
-    label: 'link'
-  },
-  {
-    name: 'Link',
-    element: types.Link,
-    type: 'link',
-    class: 'b-footer-link',
-    label: 'link'
-  },
-  {
-    name: 'Link',
-    element: types.Link,
-    type: 'link',
-    class: 'b-footer-link',
-    label: 'link'
-  },
-  {
-    name: 'AgeRestrictions',
-    element: types.AgeRestrictions,
-    type: 'restrictions',
-    class: 'b-age-restrictions',
-    label: 'age restrictions'
-  }
-]
-
 const C_CUSTOM = [
   {
     element: {
@@ -139,67 +94,6 @@ const C_CUSTOM = [
   }
 ]
 
-const C_CUSTOM_2 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn341.cdn.stg.gamenet.ru/0/7MZTn/o_21pVfk.svg")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'width': '153px',
-        'height': '71px'
-      }
-    }
-  },
-  {
-    element: {
-      text: '2018—2019. Some text for footer',
-      styles: {
-        'font-family': 'PT Serif',
-        'font-size': '1.6rem',
-        'color': 'rgba(255, 255, 255, 0.3)'
-      }
-    }
-  },
-  {
-    element: {
-      text: 'Information',
-      styles: {
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'color': '#FF6D64',
-        'font-family': 'PT Serif',
-        'text-align': 'center',
-        'font-size': '1.6rem'
-      }
-    }
-  },
-  {
-    element: {
-      text: 'Legal',
-      styles: {
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'color': '#FF6D64',
-        'font-family': 'PT Serif',
-        'text-align': 'center',
-        'font-size': '1.6rem'
-      }
-    }
-  },
-  {
-    element: {
-      text: 'Something',
-      styles: {
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'color': '#FF6D64',
-        'font-family': 'PT Serif',
-        'text-align': 'center',
-        'font-size': '1.6rem'
-      }
-    }
-  }
-]
-
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
@@ -210,7 +104,6 @@ const SCHEMA_CUSTOM = {
     }
   },
   components: _.merge({}, C_CUSTOM),
-  components2: _.merge({}, C_CUSTOM_2),
   edited: true
 }
 
@@ -228,9 +121,7 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    container2: types.StyleObject,
-    components: COMPONENTS,
-    components2: COMPONENTS_2
+    components: COMPONENTS
   },
   props: {
     id: {
@@ -332,50 +223,6 @@ export default {
         </div>
       </div>
     </div>
-    <div class="b-footer">
-      <div class="b-grid">
-        <div class="b-grid__row b-footer__row">
-          <div class="b-grid__col-12 b-grid__col-m-12">
-            <sandbox
-              :style="$sectionData.container2.styles"
-              container-path="$sectionData.container2"
-              components-path="$sectionData.components2"
-              class="b-footer__col b-footer__col_1">
-
-              <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
-                <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
-                  <component
-                    v-if="$sectionData.components2[index].element.isComplex"
-                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
-                    :is="component.name"
-                    :href="$sectionData.components2[index].element.link.href"
-                    :target="$sectionData.components2[index].element.link.target"
-                    :style="$sectionData.components2[index].element.styles"
-                    :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                    :path="`components2[${index}].element`"
-                    class="b-footer-component"
-                    >
-                  </component>
-                  <component
-                    v-if="!$sectionData.components2[index].element.isComplex"
-                    v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
-                    v-html="$sectionData.components2[index].element.text"
-                    :is="component.name"
-                    :href="$sectionData.components2[index].element.link.href"
-                    :target="$sectionData.components2[index].element.link.target"
-                    :style="$sectionData.components2[index].element.styles"
-                    :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                    :path="`components2[${index}].element`"
-                    class="b-footer-component"
-                    >
-                  </component>
-                </div>
-              </draggable>
-            </sandbox>
-          </div>
-        </div><!--/.b-grid__row.b-footer__row-->
-      </div><!--/.b-grid-->
-    </div><!--/.b-footer-->
   </section>
 </template>
 

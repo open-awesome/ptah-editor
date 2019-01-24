@@ -22,6 +22,7 @@ const DEFAULT_OPTIONS = {
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
   isComplex: false,
+  video: false,
 
   // --- Background type
   // --- variants: 'default' (default css background), 'video' (video background)
@@ -159,6 +160,7 @@ const data = new Map([
       resizable: true,
       removable: true,
       background: true,
+      absorb: 0,
       styles: {
         'background-image': '',
         'background-position': 'center center',

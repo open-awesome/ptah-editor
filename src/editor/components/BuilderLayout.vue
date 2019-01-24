@@ -38,6 +38,7 @@ import { mapState, mapGetters } from 'vuex'
 import BuilderSidebar from './BuilderSidebar.vue'
 import BuilderTopBar from './BuilderTopBar.vue'
 import BuilderModalContent from './BuilderModalContent.vue'
+import { sectionsGroups } from '@cscripts/sectionsGroups'
 
 export default {
   name: 'BuilderLayout',
@@ -50,7 +51,7 @@ export default {
 
   data () {
     return {
-      device: 'desktop'
+      device: 'is-desktop'
     }
   },
 
@@ -77,6 +78,9 @@ export default {
     },
     setDevice (device) {
       this.device = device
+      setTimeout(function () {
+        sectionsGroups()
+      }, 300)
     }
   }
 }

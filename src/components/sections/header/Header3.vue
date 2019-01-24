@@ -7,16 +7,16 @@
 
   <slot name="video"/>
 
-  <div class="b-grid b-header">
+  <div class="b-grid b-header js-hamburger">
     <div class="b-grid__row b-footer__row">
-      <div class="b-grid__col-12 b-grid__col-m-12">
+      <div class="b-grid__col-12 b-grid__col-m-12 hamburger-container">
 
         <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
             direction="row"
             align="center"
-            class="b-sandbox">
+            class="b-sandbox hamburger-container__menu">
 
           <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot">
 
@@ -71,6 +71,14 @@
 
           </draggable>
 
+          <base-button @click="showMenu" class="hamburger-button" color="transparent">
+            <div class="hamburger-box">
+              <span class="hamburger-inner"></span>
+              <span class="hamburger-inner"></span>
+              <span class="hamburger-inner"></span>
+            </div>
+          </base-button>
+
         </sandbox>
 
       </div>
@@ -98,10 +106,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   },
@@ -115,10 +123,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   },
@@ -132,10 +140,10 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '10rem',
-        'height': '6.4rem',
+        'min-width': '100px',
+        'height': '64px',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '18px'
       }
     }
   }
@@ -168,12 +176,21 @@ export default {
     ]
   },
 
+  inject: ['device'],
+
   components: { Draggable },
 
   props: {
     id: {
       type: Number,
       required: true
+    }
+  },
+
+  watch: {
+    'device.type' () {
+      this.$el.querySelector('.hamburger-container').classList.remove('active')
+      this.$el.querySelector('.hamburger-button').classList.remove('active')
     }
   },
 
@@ -186,6 +203,11 @@ export default {
       if (this.$sectionData.edited === undefined) {
         Seeder.seed(merge(this.$sectionData, defaultSchema))
       }
+    },
+
+    showMenu () {
+      this.$el.querySelector('.hamburger-container').classList.toggle('active')
+      this.$el.querySelector('.hamburger-button').classList.toggle('active')
     }
   }
 }
@@ -197,4 +219,26 @@ export default {
 
 .b-draggable-slot
   width: 100%
+
+.is-mobile .hamburger-container,
+.is-tablet .hamburger-container
+  display: flex !important
+  .b-draggable-slot
+    display: none
+    position: relative
+    top: 8rem
+    padding-bottom: 8rem
+  &.active .b-draggable-slot
+    display: flex
+
+@media only screen and (max-width: 1100px)
+  .hamburger-container
+    display: flex !important
+    .b-draggable-slot
+      display: none
+      position: relative
+      top: 8rem
+      padding-bottom: 8rem
+    &.active .b-draggable-slot
+      display: flex
 </style>
