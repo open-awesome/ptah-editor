@@ -56,7 +56,8 @@ const C_CUSTOM = [
         'width': '110px',
         'height': '64px'
       }
-    }
+    },
+    key: 0
   },
   {
     element: {
@@ -66,7 +67,8 @@ const C_CUSTOM = [
         'font-size': '4.8rem',
         'color': '#ffffff'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -78,7 +80,8 @@ const C_CUSTOM = [
         'font-size': '2rem',
         'color': 'rgba(255, 255, 255, 0.3)'
       }
-    }
+    },
+    key: 2
   },
   {
     element: {
@@ -92,7 +95,8 @@ const C_CUSTOM = [
         'height': '64px',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 3
   }
 ]
 

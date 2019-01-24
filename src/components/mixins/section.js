@@ -87,11 +87,10 @@ export default {
           data['edited'] = true
         }
       }
-      console.log(data)
       this.updateDataStore(data, $sectionData)
     }),
 
-    groupDataMerge (groupData, sectionData, $sectionData) {
+    groupDataMerge (groupData, $sectionData) {
       if (groupData) {
         for (let keyObj in $sectionData) {
           if (keyObj.indexOf('components') !== -1) {
@@ -128,13 +127,14 @@ export default {
             if (tempEl[0] !== undefined && tempEl[0].element !== undefined) {
               change = self.checkSectionProps($sectionData[keyObj][i].element, tempEl[0].element, 'element')
               change['key'] = tempEl[0].key
+            } else {
+              change = item
             }
             data[keyObj].push(change)
           })
         } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
           //
           ms = self.checkSectionProps($sectionData[keyObj], schemaCustom[keyObj], keyObj)
-          console.log(ms)
           _.merge(data, ms)
           data['edited'] = true
         }
@@ -163,14 +163,16 @@ export default {
       if ($sectionData.edited === undefined) {
         // merge default section data and restore data
         Seeder.seed(_.merge($sectionData, sectionData))
-        $sectionData.temp = _.merge({}, this.schemaCustom)
-        this.groupDataMerge(groupDataStore, sectionDataStore, $sectionData)
-        console.log(1)
-      } else if (sectionDataStore) {
+        // save temporary data to control changes in section
+        $sectionData.temp = _.merge({}, $sectionData)
+        // merge group data from store in section data
+        this.groupDataMerge(groupDataStore, $sectionData)
         //
+      } else if (sectionDataStore) {
+        //  merge section data from store in section data
         for (let keyObj in $sectionData) {
           if (keyObj.indexOf('components') !== -1) {
-            //
+            //  checking for component availability in section store
             sectionDataStore[keyObj].forEach(function (item, i, arr) {
               let tempEl = _.filter($sectionData[keyObj], function (el, i) {
                 return item.key === el.key
@@ -201,18 +203,18 @@ export default {
               return orderObj[l.key] - orderObj[r.key]
             })
           } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
-            //
+            // merge section properties
             _.merge($sectionData[keyObj], sectionDataStore[keyObj])
           }
         }
         // merge group data in section data
-        console.log(2)
-        this.groupDataMerge(groupDataStore, sectionDataStore, $sectionData)
+        this.groupDataMerge(groupDataStore, $sectionData)
+        // save temporary data to control changes in section
         $sectionData.temp = _.merge({}, $sectionData)
       } else {
-        console.log(3)
         this.checkDataAboutRestoreAfterSave($sectionData, this.schemaCustom)
-        $sectionData.temp = _.merge({}, $sectionData)
+        // save temporary data to control changes in section
+        $sectionData.temp = _.merge({}, $sectionData, this.schemaCustom)
       }
     }
 
