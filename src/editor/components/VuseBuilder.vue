@@ -17,7 +17,8 @@
           :is="section.name"
           :id="section.id"
           :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
-          @click.native="selectSidebarSection(section)">
+          @click.native="selectSidebarSection(section)"
+          @dblclick.native="showSettingsBar(section)">
           <video
               v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
               :id="`bg-video-${ section.id }`"
@@ -49,6 +50,8 @@ import VuseIcon from './VuseIcon'
 import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
+
+import { sectionsGroups } from '@cscripts/sectionsGroups'
 
 export default {
   name: 'VuseBuilder',
@@ -98,10 +101,12 @@ export default {
       this.$builder.title = value
       document.title = value
     },
+
     currentLanding (value) {
       this.initSettings()
     }
   },
+
   created () {
     // sets the initial data.
     this.$builder.set(this.data)
@@ -132,6 +137,8 @@ export default {
     })
 
     this.$store.dispatch('Landing/updateGroups', groupList)
+
+    this.observeGroups()
   },
 
   beforeDestroy () {
@@ -140,7 +147,9 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'updateBuilderSections',
-      'updateBuilderGroups'
+      'updateBuilderGroups',
+      'updateSectionGroups',
+      'setSettingSection'
     ]),
     initSettings () {
       const settings = this.currentLanding.settings
@@ -276,6 +285,53 @@ export default {
       // --- add selected class and scroll to el
       menuItem.classList.add('b-menu-subitem_selected')
       menuItem.scrollIntoView()
+    },
+
+    showSettingsBar (section) {
+      this.setSettingSection(section)
+    },
+
+    observeGroups () {
+      let groups = []
+      let sectionsNodes = Array.from(this.$refs.artboard.children)
+
+      this.removeGroupClasses(sectionsNodes)
+
+      this.$builder.sections.forEach((section, index) => {
+        if (section.data.mainStyle.absorb > 0) {
+          let group = {}
+          group.main = section
+          group.main_element = sectionsNodes[index]
+          group.absorb = section.data.mainStyle.absorb
+          group.childrenNodes = sectionsNodes.slice(index + 1, index + section.data.mainStyle.absorb + 1)
+          group.children = this.$builder.sections
+            .slice(index + 1, index + section.data.mainStyle.absorb + 1)
+            .map(section => section.id)
+
+          // set attrs to calculate
+          group.main_element.classList.add('ptah-g-main')
+          group.main_element.dataset.absorb = group.absorb
+          group.childrenNodes.forEach((el) => el.classList.add('ptah-g-child'))
+
+          section.isMain = true
+
+          groups.push(group)
+        } else {
+          section.isMain = false
+        }
+      })
+
+      sectionsGroups()
+
+      // store groups
+      this.updateSectionGroups(groups)
+    },
+
+    removeGroupClasses (nodes) {
+      nodes.forEach((node) => {
+        node.classList.remove('ptah-g-main')
+        node.classList.remove('ptah-g-child')
+      })
     }
   }
 }

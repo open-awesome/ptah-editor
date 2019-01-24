@@ -75,7 +75,6 @@ export default {
     changeIcon () {
       this.icon.name = this.iconName.value
       this.icon.value = this.iconName.value
-      console.log(this.icon)
     },
     onClickTitle () {
       this.$emit('open', ['IconWithText', !this.controlOpen])

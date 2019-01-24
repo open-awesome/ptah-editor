@@ -1,11 +1,16 @@
+import * as _ from 'lodash-es'
+
 export default {
   state: {
     isExpanded: true,
     isSettingsExpanded: false, // 2nd level menu
     isAddSectionExpanded: false, // add section menu
+    isGrouping: false, // section grouping interface
     expandedMenuItem: 'sections', // submenu item
     settingObjectType: '', // (Styler prop) section, button, text etc.
+    settingObjectLabel: '', // Styler slot label
     settingObjectOptions: {},
+    settingObjectElement: false,
     settingObjectSection: {},
     siteSettingsMenu: [
       {
@@ -26,7 +31,8 @@ export default {
       // }
     ],
     builderSections: [],
-    builderGroups: [],
+    builderGroups: [], // section layouts
+    sectionsGroups: [],
     sandbox: {
       expanded: false, // sandbox sidebar expand state
       components: [], // sandbox current section's components
@@ -53,6 +59,9 @@ export default {
     setSettingObjectType (state, value) {
       state.settingObjectType = value
     },
+    setSettingObjectLabel (state, value) {
+      state.settingObjectLabel = value
+    },
     setSettingObjectOptions (state, options) {
       state.settingObjectOptions = options
     },
@@ -68,11 +77,20 @@ export default {
     setBuilderGroups (state, groups) {
       state.builderGroups = groups
     },
+    setSectionsGroups (state, groups) {
+      state.sectionsGroups = groups
+    },
+    isGrouping (state, value) {
+      state.isGrouping = value
+    },
     toggleSandboxSidebar ({ sandbox }, value = !sandbox.expanded) {
       sandbox.expanded = value
     },
     setSandboxPaths (state, paths) {
       state.sandbox = { ...state.sandbox, ...paths }
+    },
+    setElement (state, el) {
+      state.settingObjectElement = el
     }
   },
 
@@ -96,6 +114,7 @@ export default {
      */
     setSettingObject ({ commit }, data) {
       commit('isSettingsExpanded', true)
+      commit('setSettingObjectLabel', data.label)
       commit('setSettingObjectType', data.type)
       commit('setSettingObjectOptions', data.options)
     },
@@ -109,6 +128,7 @@ export default {
       commit('toggleSandboxSidebar', false)
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
+      commit('isGrouping', false)
     },
 
     clearSettingObjectLight ({ commit }) {
@@ -159,20 +179,21 @@ export default {
       })
     },
 
-    setSettingElement ({ dispatch, commit }, { type, name, options, section, element }) {
+    setSettingElement ({ dispatch, commit }, { type, name, label, options, section, element }) {
       let elementOptions = {
         ...options,
         name,
         sectionId: section.id,
-        sectionName: section.name,
-        element
+        sectionName: section.name
       }
 
       commit('setSection', section)
       commit('setExpandedMenuItem', 'sections')
+      commit('setElement', element)
 
       dispatch('setSettingObject', {
         type,
+        label,
         options: elementOptions
       })
     },
@@ -183,6 +204,25 @@ export default {
 
     updateBuilderGroups ({ commit }, groups) {
       commit('setBuilderGroups', groups)
+    },
+
+    setElement ({ commit }, element) {
+      commit('setElement', element)
+    },
+
+    updateText ({ state, dispatch }) {
+      if (state.settingObjectElement) {
+        const el = state.settingObjectElement
+        dispatch('updateSettingOptions', _.merge({}, state.settingObjectOptions, { text: el.innerHTML }))
+      }
+    },
+
+    updateSectionGroups ({ commit }, groups) {
+      commit('setSectionsGroups', groups)
+    },
+
+    toggleGrouping ({ commit, state }, value) {
+      commit('isGrouping', (typeof value !== 'undefined') ? value : !state.isGrouping)
     }
   },
 

@@ -26,61 +26,104 @@ import SocialNetworks from '@components/elements/SocialNetworks'
 import Slogan from '@components/elements/Slogan'
 import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
+import VideoElement from '@components/elements/Video'
 
 // sections
+// --- header
+import Header1 from '@components/sections/header/Header1'
+import Header2 from '@components/sections/header/Header2'
+import Header3 from '@components/sections/header/Header3'
+import Header4 from '@components/sections/header/Header4'
+// --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
+import HeroTwoColumns from '@components/sections/hero/HeroTwoColumns'
+import HeroThreeColumns from '@components/sections/hero/HeroThreeColumns'
+import HeroArtRight from '@components/sections/hero/HeroArtRight'
+import HeroArtLeft from '@components/sections/hero/HeroArtLeft'
+import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
+import HeroHunt from '@components/sections/hero/HeroHunt'
+// --- gallery
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
 import Gallery3 from '@components/sections/galleries/Gallery3'
+// --- products
 import ProductsColumns from '@components/sections/products/ProductsColumns'
 import ProductsColumnsExtend from '@components/sections/products/ProductsColumnsExtend'
-import System from '@components/sections/elements/System'
-import Footer from '@components/sections/footers/Footer'
+// --- columns
 import ThreeColumns from '@components/sections/columns/ThreeColumns'
 import TwoColumns from '@components/sections/columns/TwoColumns'
 import Video from '@components/sections/video/Video'
+// --- carousel
 import DefaultCarousel from '@components/sections/carousel/DefaultCarousel'
 import CoverflowCarousel from '@components/sections/carousel/CoverflowCarousel'
 import AutoplayCarousel from '@components/sections/carousel/AutoplayCarousel'
+// --- other
+import System from '@components/sections/elements/System'
+import Footer from '@components/sections/footers/Footer'
+import MenuBas from '@components/sections/stickyMenus/MenuBAS'
 
 import store from '@store'
 
-Vuse.mix({
-  components: {
-    Uploader,
-    Sandbox,
-    Button,
-    Link,
-    Title,
-    Description,
-    Pic,
-    Logo,
-    Delimiter,
-    AvailablePlatforms,
-    AgeRestrictions,
-    SocialNetworks,
-    Slogan,
-    Cost,
-    IconWithText
-  }
-})
+const ELEMENTS = {
+  Uploader,
+  Sandbox,
+  Button,
+  Link,
+  Title,
+  Description,
+  Pic,
+  Logo,
+  Delimiter,
+  AvailablePlatforms,
+  AgeRestrictions,
+  SocialNetworks,
+  Slogan,
+  Cost,
+  IconWithText,
+  'Video': VideoElement
+}
 
-Vuse.component('HeroUnit', HeroUnit)
-Vuse.component('HeroSkull', HeroSkull)
-Vuse.component('Gallery1', Gallery1)
-Vuse.component('Gallery2', Gallery2)
-Vuse.component('Gallery3', Gallery3)
-Vuse.component('ProductsColumns', ProductsColumns)
-Vuse.component('ProductsColumnsExtend', ProductsColumnsExtend)
-Vuse.component('System', System)
-Vuse.component('Footer', Footer)
-Vuse.component('ThreeColumns', ThreeColumns)
-Vuse.component('TwoColumns', TwoColumns)
-Vuse.component('Video', Video)
-Vuse.component('DefaultCarousel', DefaultCarousel)
-Vuse.component('CoverflowCarousel', CoverflowCarousel)
-Vuse.component('AutoplayCarousel', AutoplayCarousel)
+const COMPONENTS = {
+  Header1,
+  Header2,
+  Header3,
+  Header4,
+
+  HeroUnit,
+  HeroSkull,
+  HeroTwoColumns,
+  HeroThreeColumns,
+  HeroArtRight,
+  HeroArtLeft,
+  HeroBAS,
+  HeroHunt,
+
+  Gallery1,
+  Gallery2,
+  Gallery3,
+
+  ProductsColumns,
+  ProductsColumnsExtend,
+
+  TwoColumns,
+  ThreeColumns,
+
+  DefaultCarousel,
+  CoverflowCarousel,
+  AutoplayCarousel,
+
+  Footer,
+  System,
+  Video,
+  MenuBas
+}
+
+Vuse.mix({ components: ELEMENTS })
+
+for (let component in COMPONENTS) {
+  Vuse.component(component, COMPONENTS[component])
+}
 
 Vuse.use(pwa)
 

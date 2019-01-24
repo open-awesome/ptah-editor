@@ -2,94 +2,104 @@
   <div class="b-elem-settings">
     <base-scroll-container backgroundBar="#999">
       <div class="b-elem-settings__inner">
-            <!-- Text align -->
-            <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
-              <control-align
-                :isBox="settingObjectOptions.box"
-                :alignText="settingObjectOptions.styles['text-align']"
-                :alignFlex="settingObjectOptions.styles['justify-content']"
-                @boxAligned="styleChange"
-                @textAligned="styleChange">
-              </control-align>
-            </div>
 
-            <!-- Size -->
-            <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
-              <control-size
-                :height="elHeight"
-                :width="elWidth"
-                :radius="elRadius"
-                :expand="expandedSize"
-                @open="onExpand"
-                @change="styleChange"
-                >
-              </control-size>
-            </div>
+        <!-- Text align -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
+          <control-align
+            :isBox="settingObjectOptions.box"
+            :alignText="settingObjectOptions.styles['text-align']"
+            :alignFlex="settingObjectOptions.styles['justify-content']"
+            @boxAligned="styleChange"
+            @textAligned="styleChange">
+          </control-align>
+        </div>
 
-            <!-- Text -->
-            <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-              <control-text
-                :expand="expandedFont"
-                @open="onExpand"
-                @change="styleChange"></control-text>
-            </div>
+        <!-- Size -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
+          <control-size
+            :height="elHeight"
+            :width="elWidth"
+            :radius="elRadius"
+            :expand="expandedSize"
+            @open="onExpand"
+            @change="styleChange"
+            >
+          </control-size>
+        </div>
 
-            <!-- background -->
-            <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
-              <control-background
-                :color="bgColor"
-                :image="bgImage"
-                :repeat="bgRepeat"
-                :size="bgSize"
-                :expand="expandedBg"
-                @open="onExpand"
-                @change="styleChange"></control-background>
-            </div>
+        <!-- Text -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+          <control-text
+            :expand="expandedFont"
+            @open="onExpand"
+            @change="styleChange"></control-text>
+        </div>
 
-            <!-- Link -->
-            <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
-              <control-link
-                :expand="expandedLink"
-                @open="onExpand"
-                >
-              </control-link>
-            </div>
+        <!-- background -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
+          <control-background
+            :color="bgColor"
+            :image="bgImage"
+            :repeat="bgRepeat"
+            :size="bgSize"
+            :expand="expandedBg"
+            @open="onExpand"
+            @change="styleChange"></control-background>
+        </div>
 
-            <!-- Available Platforms Control-->
-            <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
-              <control-available-platforms
-                :expand="expandedAvailablePlatforms"
-                @open="onExpand"
-                >
-              </control-available-platforms>
-            </div>
+        <!-- Link -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
+          <control-link
+            :expand="expandedLink"
+            @open="onExpand"
+            >
+          </control-link>
+        </div>
 
-            <!-- Age Restrictions Control-->
-            <div class="b-elem-settings__control" v-if="settingObjectOptions.hasRestrictions">
-              <control-age-restrictions
-                :expand="expandedAgeRestrictions"
-                @open="onExpand"
-                >
-              </control-age-restrictions>
-            </div>
+        <!-- Available Platforms Control-->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
+          <control-available-platforms
+            :expand="expandedAvailablePlatforms"
+            @open="onExpand"
+            >
+          </control-available-platforms>
+        </div>
 
-            <!-- Social Networks Control-->
-            <div class="b-elem-settings__control" v-if="settingObjectOptions.hasNetworks">
-              <control-social-networks
-                :expand="expandedSocialNetworks"
-                @open="onExpand"
-                >
-              </control-social-networks>
-            </div>
+        <!-- Age Restrictions Control-->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasRestrictions">
+          <control-age-restrictions
+            :expand="expandedAgeRestrictions"
+            @open="onExpand"
+            >
+          </control-age-restrictions>
+        </div>
 
-            <!-- Text With Icon-->
-            <div class="b-elem-settings__control" v-if="settingObjectOptions.isIconWithText">
-              <control-icon-with-text
-                :expand="expandedIconWithText"
-                @open="onExpand"
-                >
-              </control-icon-with-text>
-            </div>
+        <!-- Social Networks Control-->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasNetworks">
+          <control-social-networks
+            :expand="expandedSocialNetworks"
+            @open="onExpand"
+            >
+          </control-social-networks>
+        </div>
+
+        <!-- Text With Icon-->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.isIconWithText">
+          <control-icon-with-text
+            :expand="expandedIconWithText"
+            @open="onExpand"
+            >
+          </control-icon-with-text>
+        </div>
+
+        <!-- Video -->
+        <div v-if="settingObjectOptions.hasVideo" class="b-elem-settings__control">
+          <control-video
+              :src="settingObjectOptions.src"
+              :expand="expandedVideo"
+              @toggle="onExpand"
+              @change="changeVideoSrc"/>
+        </div>
 
       </div>
     </base-scroll-container>
@@ -110,6 +120,7 @@ import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.v
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 import ControlIconWithText from './controls/TheControlIconWithText.vue'
+import ControlVideo from './controls/ControlVideo'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -130,7 +141,8 @@ export default {
     ControlAvailablePlatforms,
     ControlAgeRestrictions,
     ControlSocialNetworks,
-    ControlIconWithText
+    ControlIconWithText,
+    ControlVideo
   },
 
   data () {
@@ -150,6 +162,7 @@ export default {
       elHeight: 0,
       elWidth: 0,
       elRadius: 0,
+      elVideoLink: '',
       elLink: {},
       bgHover: '',
       textHover: '',
@@ -161,6 +174,7 @@ export default {
       expandedAgeRestrictions: true,
       expandedSocialNetworks: true,
       expandedIconWithText: true,
+      expandedVideo: true,
       colorFill: {},
       sizeIcons: {},
       availablePlatforms: {},
@@ -174,7 +188,8 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection',
-      'settingObjectType'
+      'settingObjectType',
+      'settingObjectElement'
     ]),
     // find path to element
     path () {
@@ -220,8 +235,8 @@ export default {
     this.bgSize = styles['background-size'] || ''
 
     /* Get element size */
-    this.elHeight = styles['height'] || this.settingObjectOptions.element.offsetHeight
-    this.elWidth = styles['width'] || this.settingObjectOptions.element.offsetWidth
+    this.elHeight = styles['height'] || this.settingObjectElement.offsetHeight
+    this.elWidth = styles['width'] || this.settingObjectElement.offsetWidth
     this.elRadius = styles['border-radius'] || 0
 
     /* Link */
@@ -232,6 +247,9 @@ export default {
 
     /* Animation */
     this.classes = this.settingObjectOptions.classes || []
+
+    /* Video */
+    this.elVideoLink = this.settingObjectOptions.video || '' // YuoTube video ID
 
     /* Hover this.settingObjectOptions.pseudo */
     this.pseudo = this.settingObjectOptions.pseudo || {}
@@ -287,6 +305,12 @@ export default {
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
     },
 
+    changeVideoSrc (value) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, { src: value })
+      )
+    },
+
     setOption (option) {
       this.updateText()
       let obj = {}
@@ -330,8 +354,8 @@ export default {
     updateText () {
       // TODO: Lost 'settingObjectOptions' from the store at the time of execution 'beforeDestroy'.
       // Text also saved at VuseStyler -> hideStyler
-      if (this.settingObjectOptions.element) {
-        const el = this.settingObjectOptions.element
+      if (this.settingObjectElement) {
+        const el = this.settingObjectElement
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
     }

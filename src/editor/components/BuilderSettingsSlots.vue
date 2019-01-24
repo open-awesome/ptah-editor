@@ -32,26 +32,26 @@
       <h6 v-show="direction" class="b-builder-settings-slots__subtitle">Content direction</h6>
 
       <ul v-show="isRowDir">
-        <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
+        <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
           <icon-base name="groupTop"/>
         </li>
         <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
           <icon-base name="groupCenterVertical"/>
         </li>
-        <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
+        <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
           <icon-base name="groupBottom"/>
         </li>
       </ul>
 
       <ul v-show="isColumnDir">
-        <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
-          <icon-base name="groupRight"/>
+        <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
+          <icon-base name="groupLeft"/>
         </li>
         <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
           <icon-base name="groupCenterHorizontal"/>
         </li>
-        <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
-          <icon-base name="groupLeft"/>
+        <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
+          <icon-base name="groupRight"/>
         </li>
       </ul>
 
@@ -67,7 +67,7 @@
           :key="`${component.name}-${index}`"
           @click="selectSlot(component, index)"
           class="b-builder-settings-slots__item">
-        {{ component.name }}
+        {{ getComponentLabel(component.name) }}
         <base-button
             v-text="'-'"
             :disabled="!component.element.removable"
@@ -86,7 +86,7 @@
 import ElementsList from '@components/slots/ElementsList'
 import { randomPoneId } from '../../editor/util'
 import Draggable from 'vuedraggable'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'BuilderSettingsSlots',
@@ -154,6 +154,8 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', ['clearSettingObjectLight']),
+
     selectSlot (component, index) {
       try {
         let slotContainer = this.sectionElement.querySelector('.b-draggable-slot.active')
@@ -188,6 +190,14 @@ export default {
 
     removeElement (index) {
       this.components.splice(index, 1)
+      this.clearSettingObjectLight()
+    },
+
+    getComponentLabel (value) {
+      return value
+        .split(/(?=[A-Z])/)
+        .map((text, index) => (index === 0) ? text : text.toLowerCase())
+        .join(' ')
     }
   }
 }

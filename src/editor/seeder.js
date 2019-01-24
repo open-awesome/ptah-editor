@@ -22,6 +22,7 @@ const DEFAULT_OPTIONS = {
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
   isComplex: false,
+  video: false,
 
   // --- Background type
   // --- variants: 'default' (default css background), 'video' (video background)
@@ -159,6 +160,7 @@ const data = new Map([
       resizable: true,
       removable: true,
       background: true,
+      absorb: 0,
       styles: {
         'background-image': '',
         'background-position': 'center center',
@@ -341,7 +343,7 @@ const data = new Map([
     {
       background: false,
       hasVideo: true,
-      // videoUrl: 'https://gn967.cdn.stg.gamenet.ru/0/7KSrW/o_159yiU.mp4',
+      removable: true,
       videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
       videoTitle: 'World of Warcraft: Battle for Azeroth',
       loop: false

@@ -83,31 +83,36 @@ const COMPONENTS = [
     name: 'Logo',
     element: types.Logo,
     type: 'image',
-    class: 'b-logo'
+    class: 'b-logo',
+    label: 'logo'
   },
   {
     name: 'Title',
     element: types.Title,
     type: 'text',
-    class: 'b-title'
+    class: 'b-title',
+    label: 'title'
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
-    class: 'b-text'
+    class: 'b-text',
+    label: 'description'
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
-    class: 'b-delimiter'
+    class: 'b-delimiter',
+    label: 'delimiter'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
-    class: 'b-button-test'
+    class: 'b-button-test',
+    label: 'button'
   }
 ]
 
@@ -154,7 +159,7 @@ export default {
       <div class="b-grid__row">
         <h2 class="b-header"
             v-html="$sectionData.header.text"
-            v-styler:for="{ el: $sectionData.header, path: `$sectionData.header`}"
+            v-styler:for="{ el: $sectionData.header, path: `$sectionData.header` }"
             :style="$sectionData.header.styles"
             >
         </h2>
@@ -169,10 +174,10 @@ export default {
             :style="$sectionData.container.styles"
             >
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
-              <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+              <div :class="`b-draggable-slot__${component.type}`"  v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-columns3-component"
                   v-if="$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
                   :target="$sectionData.components[index].element.link.target"
@@ -183,7 +188,7 @@ export default {
                 </component>
                 <component class="b-columns3-component"
                   v-if="!$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                   v-html="$sectionData.components[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
@@ -206,10 +211,10 @@ export default {
             :style="$sectionData.container2.styles"
             >
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
-              <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
+              <div :class="`b-draggable-slot__${component.type}`"  v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component class="b-columns3-component"
                   v-if="$sectionData.components2[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                   :is="component.name"
                   :href="$sectionData.components2[index].element.link.href"
                   :target="$sectionData.components2[index].element.link.target"
@@ -220,7 +225,7 @@ export default {
                 </component>
                 <component class="b-columns3-component"
                   v-if="!$sectionData.components2[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type }"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
                   v-html="$sectionData.components2[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components2[index].element.link.href"
@@ -243,10 +248,10 @@ export default {
             :style="$sectionData.container3.styles"
             >
             <draggable v-model="$sectionData.components3" class="b-draggable-slot" :style="$sectionData.container3.styles">
-              <div v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
+              <div :class="`b-draggable-slot__${component.type}`"  v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
                 <component class="b-columns3-component"
                   v-if="$sectionData.components3[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
+                  v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type, label: $sectionData.components3[index].label }"
                   :is="component.name"
                   :href="$sectionData.components3[index].element.link.href"
                   :target="$sectionData.components3[index].element.link.target"
@@ -257,7 +262,7 @@ export default {
                 </component>
                 <component class="b-columns3-component"
                   v-if="!$sectionData.components3[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type }"
+                  v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type, label: $sectionData.components3[index].label }"
                   v-html="$sectionData.components3[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components3[index].element.link.href"
@@ -319,7 +324,12 @@ $h: 100vh
     &
       display: none
 .b-logo
-  margin: 0 0 4rem
+  .is-mobile &,
+  .is-tablet &
+    width: 100% !important
+  @media only screen and (max-width: 992px)
+    &
+      width: 100% !important
 .b-title
   color: rgb(255, 255, 255)
   font-style: normal
@@ -358,15 +368,39 @@ $h: 100vh
   border: 0.2rem solid rgba(255, 125, 125, 0.5)
   box-sizing: border-box
   border-radius: 0.2rem
-  .is-mobile &,
-  .is-tablet &
-    width: 80%
-  @media only screen and (max-width: 768px)
+  .is-tablet &,
+  .is-mobile &
+    width: 100% !important
+  @media only screen and (max-width: 992px)
     &
-      width: 80%
+      width: 100% !important
 .b-sandbox
   min-height: 20rem
   display: flex
   justify-content: center
   align-items: center
+
+.b-draggable-slot,
+.b-draggable-slot
+  & > div
+    max-width: 100%
+    max-height: 100%
+    & > div,
+    & > a
+      .is-mobile &,
+      .is-tablet &
+        margin: 1.2rem 0 !important
+      @media only screen and (max-width: 992px)
+        &
+          margin: 1.2rem 0 !important
+  &__image,
+  &__logo,
+  &__slogan,
+  &__button
+    .is-mobile &,
+    .is-tablet &
+      width: 100% !important
+    @media only screen and (max-width: 992px)
+      &
+        width: 100% !important
 </style>

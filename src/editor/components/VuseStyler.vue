@@ -44,7 +44,8 @@ export default {
     options: {
       type: Object,
       required: true
-    }
+    },
+    label: String
   },
   data: () => ({
     oldColorerColor: '',
@@ -162,7 +163,16 @@ export default {
         if (name.indexOf('ptah-a-') > -1) {
           this.animation = _.find(this.animationList, ['className', name])
         }
+
+        if (name.indexOf('ptah-d-video') > -1) {
+          this.el.dataset.video = this.options.video
+        }
       })
+    }
+
+    if (this.options.video) {
+      this.el.classList.add('ptah-d-video')
+      this.el.dataset.video = this.options.video
     }
 
     this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
@@ -291,6 +301,7 @@ export default {
           }
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
+            label: this.$props.label,
             name: this.name,
             options: _.get(this.section.data, this.path).element || this.options,
             section: this.section,
