@@ -20,7 +20,7 @@
         :isSelected="expandedMenuItem === 'siteSettings'"
         :isExpandable="true"
         @click="toggleMenuItem('siteSettings')">
-        Site Settings
+        {{ $t('menu.siteSettings') }}
       </menu-item>
 
       <!-- Site settings CONTENTS -->
@@ -52,7 +52,7 @@
             />
           </span>
           <span>
-            Sections
+            {{ $t('menu.sections') }}
           </span>
       </menu-item>
 

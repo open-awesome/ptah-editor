@@ -4,6 +4,7 @@ import 'setimmediate'
 import VueRouter from 'vue-router'
 import Vue from 'vue'
 import Vuex from 'vuex'
+import VueI18n from 'vue-i18n'
 import VueScrollTo from 'vue-scrollto'
 
 import '@components/_globals'
@@ -14,9 +15,13 @@ import { sync } from 'vuex-router-sync'
 import AppView from './App.vue'
 import VueCircleSlider from 'vue-circle-slider'
 
+import en from '@assets/lang/en.json'
+import ru from '@assets/lang/ru.json'
+
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(VueCircleSlider)
+Vue.use(VueI18n)
 
 Vue.use(VueScrollTo, {
   container: 'body',
@@ -34,11 +39,21 @@ Vue.use(VueScrollTo, {
 
 sync(store, router)
 
+const messages = {
+  en, ru
+}
+const i18n = new VueI18n({
+  locale: 'en',
+  messages,
+  fallbackLocale: 'en'
+})
+
 new Vue(
   {
     router: router,
     store: store,
     data: {},
-    render: h => h(AppView)
+    render: h => h(AppView),
+    i18n
   }
 ).$mount('#root')
