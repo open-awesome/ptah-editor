@@ -110,6 +110,7 @@ const SCHEMA_CUSTOM = {
     }
   },
   components: _.merge([], C_CUSTOM),
+  container: {},
   edited: true
 }
 
@@ -121,15 +122,12 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    components: COMPONENTS,
-    groupDataStore: {},
-    temp: {}
+    components: COMPONENTS
   },
 
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
     let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
-    console.log(this.canRestore(GROUP_NAME, NAME))
     let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
     let $sectionData = this.$sectionData
 

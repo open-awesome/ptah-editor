@@ -107,6 +107,7 @@ const SCHEMA_CUSTOM = {
     }
   },
   components: _.merge({}, C_CUSTOM),
+  container: {},
   edited: true
 }
 
@@ -118,9 +119,7 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    components: COMPONENTS,
-    groupDataStore: {},
-    temp: {}
+    components: COMPONENTS
   },
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]

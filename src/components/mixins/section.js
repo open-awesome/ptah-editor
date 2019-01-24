@@ -38,13 +38,13 @@ export default {
         if (key === 'styles') {
           props[nameObj][key] = {}
           for (let style in newProps[key]) {
-            if (newProps[key][style] !== oldProps[key][style]) {
+            if (oldProps[key] !== undefined && newProps[key][style] !== oldProps[key][style]) {
               props[nameObj][key][style] = newProps[key][style]
             }
           }
         } else {
           if (key !== 'classes') {
-            if (JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
+            if (oldProps[key] !== undefined && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
               props[nameObj][key] = newProps[key]
             }
           } else {
@@ -57,68 +57,88 @@ export default {
 
     storeData: _.after(2, function (self) {
       let $sectionData = self.$sectionData
-      let data = { components: [] }
+      let data = {}
       let ms = {}
-      let mainStyle = $sectionData.mainStyle !== undefined ? $sectionData.mainStyle : {}
-      let components = $sectionData.components !== undefined ? $sectionData.components : []
+      // let components = $sectionData.components !== undefined ? $sectionData.components : []
       let temp = $sectionData.temp || {}
 
-      // check changes components in section
-      components.forEach(function (item, i, arr) {
-        let change = {}
-        let tempEl = _.filter(temp.components, function (el, i) {
-          return item.key === el.key
-        })
-        if (tempEl[0] !== undefined && tempEl[0].element !== undefined) {
-          change = self.checkSectionProps(components[i].element, tempEl[0].element, 'element')
-          change['key'] = tempEl[0].key
+      for (let keyObj in $sectionData) {
+        // components list
+        if (keyObj.indexOf('components') !== -1) {
+          data[keyObj] = []
+          $sectionData[keyObj].forEach(function (item, i, arr) {
+            let change = {}
+            let tempEl = _.filter(temp[keyObj], function (el, i) {
+              return item.key === el.key
+            })
+            if (tempEl[0] !== undefined && tempEl[0].element !== undefined) {
+              change = self.checkSectionProps(item.element, tempEl[0].element, 'element')
+              change['key'] = tempEl[0].key
+            }
+            data[keyObj].push(change)
+          })
+        } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+          //
+          let tempKeyObj = {}
+          tempKeyObj = $sectionData[keyObj] !== undefined ? tempKeyObj[keyObj] = $sectionData[keyObj] : {}
+          let mainStyle = tempKeyObj
+          ms = self.checkSectionProps(mainStyle, temp[keyObj], keyObj)
+          _.merge(data, ms)
+          data['edited'] = true
         }
-        data.components.push(change)
-      })
-
-      // get change props of section styles
-      ms = self.checkSectionProps(mainStyle, temp.mainStyle, 'mainStyle')
-      _.merge(data, ms)
-      //
-
+      }
+      console.log(data)
       this.updateDataStore(data, $sectionData)
     }),
 
     groupDataMerge (groupData, sectionData, $sectionData) {
       if (groupData) {
-        _.merge($sectionData.mainStyle, groupData.mainStyle)
-        $sectionData.mainStyle.classes = groupData.mainStyle.classes
-
-        // restore data of components of store groupData
-        $sectionData.components.forEach(function (item, i, arr) {
-          let tempEl = groupData.components.filter(function (el, i) {
-            return item.key === el.key
-          })
-          if (tempEl[0]) _.merge(item, tempEl[0])
-        })
+        for (let keyObj in $sectionData) {
+          if (keyObj.indexOf('components') !== -1) {
+            //
+            $sectionData[keyObj].forEach(function (item, i, arr) {
+              let tempEl = groupData[keyObj].filter(function (el, i) {
+                return item.key === el.key
+              })
+              if (tempEl[0]) _.merge(item, tempEl[0])
+            })
+          } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+            //
+            _.merge($sectionData[keyObj], groupData[keyObj])
+            $sectionData[keyObj].classes = groupData[keyObj].classes
+          }
+        }
       }
     },
 
     checkDataAboutRestoreAfterSave ($sectionData, schemaCustom) {
       let self = this
-      let data = { components: [] }
+      let data = {}
       let ms = {}
 
-      $sectionData.components.forEach(function (item, i, arr) {
-        let change = {}
-        let tempEl = _.filter(schemaCustom.components, function (el, i) {
-          return item.key === el.key
-        })
-        if (tempEl[0] !== undefined && tempEl[0].element !== undefined) {
-          change = self.checkSectionProps($sectionData.components[i].element, tempEl[0].element, 'element')
-          change['key'] = tempEl[0].key
+      for (let keyObj in $sectionData) {
+        if (keyObj.indexOf('components') !== -1) {
+          //
+          data[keyObj] = []
+          $sectionData[keyObj].forEach(function (item, i, arr) {
+            let change = {}
+            let tempEl = _.filter(schemaCustom[keyObj], function (el, i) {
+              return item.key === el.key
+            })
+            if (tempEl[0] !== undefined && tempEl[0].element !== undefined) {
+              change = self.checkSectionProps($sectionData[keyObj][i].element, tempEl[0].element, 'element')
+              change['key'] = tempEl[0].key
+            }
+            data[keyObj].push(change)
+          })
+        } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+          //
+          ms = self.checkSectionProps($sectionData[keyObj], schemaCustom[keyObj], keyObj)
+          console.log(ms)
+          _.merge(data, ms)
+          data['edited'] = true
         }
-        data.components.push(change)
-      })
-
-      // get change props of section styles
-      ms = self.checkSectionProps($sectionData.mainStyle, schemaCustom.mainStyle, 'mainStyle')
-      _.merge(data, ms)
+      }
       this.updateDataStore(data)
     },
 
@@ -135,54 +155,62 @@ export default {
       this.sectionName = SECTION_NAME
       this.schemaCustom = SCHEMA_CUSTOM
 
-      if (sectionDataStore !== undefined && sectionDataStore.edited !== undefined) {
+      if (sectionDataStore !== undefined && sectionDataStore.edited) {
         $sectionData.edited = sectionData.edited
       }
 
       // set section data
       if ($sectionData.edited === undefined) {
         // merge default section data and restore data
-        $sectionData.temp = _.merge({}, sectionData)
         Seeder.seed(_.merge($sectionData, sectionData))
+        $sectionData.temp = _.merge({}, this.schemaCustom)
         this.groupDataMerge(groupDataStore, sectionDataStore, $sectionData)
+        console.log(1)
       } else if (sectionDataStore) {
-        _.merge($sectionData.mainStyle, sectionDataStore.mainStyle)
+        //
+        for (let keyObj in $sectionData) {
+          if (keyObj.indexOf('components') !== -1) {
+            //
+            sectionDataStore[keyObj].forEach(function (item, i, arr) {
+              let tempEl = _.filter($sectionData[keyObj], function (el, i) {
+                return item.key === el.key
+              })
+              if (tempEl[0]) {
+                _.merge(tempEl[0], item)
+              } else {
+                $sectionData[keyObj].push(item)
+              }
+            })
 
-        // restore data of components of store sectionData
-        sectionDataStore.components.forEach(function (item, i, arr) {
-          let tempEl = _.filter($sectionData.components, function (el, i) {
-            return item.key === el.key
-          })
-          if (tempEl[0]) {
-            _.merge(tempEl[0], item)
-          } else {
-            $sectionData.components.push(item)
+            // checking for component availability in section data
+            $sectionData[keyObj].forEach(function (item, i, arr) {
+              let tempEl = _.filter(sectionDataStore[keyObj], function (el, i) {
+                return item.key === el.key
+              })
+              if (tempEl[0] === undefined) {
+                arr.splice(i, 1)
+              }
+            })
+
+            // restore sort of components
+            let orderObj = sectionDataStore[keyObj].reduce(function (a, c, i) {
+              if (c['key'] !== undefined) a[c.key] = i
+              return a
+            }, {})
+            $sectionData[keyObj].sort(function (l, r) {
+              return orderObj[l.key] - orderObj[r.key]
+            })
+          } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+            //
+            _.merge($sectionData[keyObj], sectionDataStore[keyObj])
           }
-        })
-
-        // checking for component availability in section data
-        $sectionData.components.forEach(function (item, i, arr) {
-          let tempEl = _.filter(sectionDataStore.components, function (el, i) {
-            return item.key === el.key
-          })
-          if (tempEl[0] === undefined) {
-            arr.splice(i, 1)
-          }
-        })
-
-        // restore sort of components
-        let orderObj = sectionDataStore.components.reduce(function (a, c, i) {
-          if (c['key'] !== undefined) a[c.key] = i
-          return a
-        }, {})
-        $sectionData.components.sort(function (l, r) {
-          return orderObj[l.key] - orderObj[r.key]
-        })
-
+        }
         // merge group data in section data
+        console.log(2)
         this.groupDataMerge(groupDataStore, sectionDataStore, $sectionData)
         $sectionData.temp = _.merge({}, $sectionData)
       } else {
+        console.log(3)
         this.checkDataAboutRestoreAfterSave($sectionData, this.schemaCustom)
         $sectionData.temp = _.merge({}, $sectionData)
       }
