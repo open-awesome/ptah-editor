@@ -158,10 +158,9 @@
 </template>
 
 <script>
-import Seeder from '@editor/seeder'
-import Draggable from 'vuedraggable'
 import { StyleObject, Logo, Button, Link } from '@editor/types'
 import { merge } from 'lodash-es'
+import section from '../../mixins/section.js'
 
 const [name, group, cover] = ['Header1', 'header', '/img/covers/header-1.png']
 const defaultComponents = [
@@ -177,7 +176,8 @@ const defaultComponents = [
         'height': '80px',
         'margin': '8px 16px'
       }
-    }
+    },
+    key: 0
   }
 ]
 const defaultComponents2 = [
@@ -196,7 +196,8 @@ const defaultComponents2 = [
         'border-radius': '2px',
         'font-size': '18px'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -213,7 +214,8 @@ const defaultComponents2 = [
         'border-radius': '2px',
         'font-size': '18px'
       }
-    }
+    },
+    key: 2
   },
   {
     styles: { marginLeft: 'auto' },
@@ -229,7 +231,8 @@ const defaultComponents2 = [
         'max-width': '100%',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 5
   }
 ]
 const defaultSchema = {
@@ -251,30 +254,23 @@ export default {
   group,
   cover,
 
+  mixins: [section],
+
   $schema: {
     mainStyle: StyleObject,
     container: StyleObject,
     container2: StyleObject,
     components: [
-      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' }
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
     ],
     components2: [
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
-      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button' }
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 1 },
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 2 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 5 }
     ]
   },
 
   inject: ['device'],
-
-  components: { Draggable },
-
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
 
   watch: {
     'device.type' () {
@@ -284,16 +280,15 @@ export default {
   },
 
   created () {
-    this.seedData()
+    let groupDataStore = this.$store.state.Landing.groupData[group]
+    let sectionDataStore = this.$store.state.Landing.sectionData[name]
+    let sectionData = this.canRestore(group, name) ? sectionDataStore : defaultSchema
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, group, name, defaultSchema)
   },
 
   methods: {
-    seedData () {
-      if (this.$sectionData.edited === undefined) {
-        Seeder.seed(merge(this.$sectionData, defaultSchema))
-      }
-    },
-
     showMenu () {
       this.$el.querySelector('.hamburger-container').classList.toggle('active')
       this.$el.querySelector('.hamburger-button').classList.toggle('active')

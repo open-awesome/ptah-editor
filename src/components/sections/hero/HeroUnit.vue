@@ -13,6 +13,7 @@ const COMPONENTS = [
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
+    label: 'logo',
     key: 0
   },
   {
@@ -20,6 +21,7 @@ const COMPONENTS = [
     element: types.Title,
     type: 'text',
     class: 'b-title',
+    label: 'title',
     key: 1
   },
   {
@@ -27,6 +29,7 @@ const COMPONENTS = [
     element: types.Text,
     type: 'text',
     class: 'b-text',
+    label: 'description',
     key: 2
   },
   {
@@ -34,6 +37,7 @@ const COMPONENTS = [
     element: types.Button,
     type: 'button',
     class: 'b-button',
+    label: 'button',
     key: 3
   },
   {
@@ -41,6 +45,7 @@ const COMPONENTS = [
     element: types.AvailablePlatforms,
     type: 'available',
     class: 'b-available-platforms',
+    label: 'Available Platforms',
     key: 4
   }
 ]
@@ -117,14 +122,19 @@ const SCHEMA_CUSTOM = {
 
 export default {
   name: NAME,
-  mixins: [section],
-  cover: '/img/covers/hero-unit.png',
+
   group: GROUP_NAME,
+
+  mixins: [section],
+
+  cover: '/img/covers/hero-unit.png',
+
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
     components: COMPONENTS
   },
+
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
     let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
@@ -157,7 +167,7 @@ export default {
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"
                   v-if="$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
                   :target="$sectionData.components[index].element.link.target"
@@ -168,7 +178,7 @@ export default {
                 </component>
                 <component class="b-hero-component"
                   v-if="!$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                   v-html="$sectionData.components[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"

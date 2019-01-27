@@ -1,11 +1,26 @@
 <script>
 import * as types from '@editor/types'
 import _ from 'lodash'
+import section from '../../mixins/section.js'
+
+const GROUP_NAME = 'Carousel'
+const NAME = 'DefaultCarousel'
+
+const SCHEMA_CUSTOM = {
+  mainStyle: {
+    styles: {
+      'background-color': '#333'
+    }
+  },
+  edited: true
+}
 
 export default {
-  name: 'DefaultCarousel',
+  name: NAME,
 
-  group: 'Carousel',
+  group: GROUP_NAME,
+
+  mixins: [section],
 
   $schema: {
     mainStyle: types.GallerySlider
@@ -31,10 +46,6 @@ export default {
     }
   },
 
-  created () {
-    this.updateGalleryImages()
-  },
-
   methods: {
     updateGalleryImages () {
       const items = this.$sectionData.mainStyle.galleryImages.slice()
@@ -48,6 +59,17 @@ export default {
         ]
       }
     }
+  },
+
+  created () {
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
+
+    this.updateGalleryImages()
   }
 }
 </script>

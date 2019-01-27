@@ -48,16 +48,31 @@
 <script>
 import { GallerySlider as mainStyle } from '@editor/types'
 import { cloneDeep, merge } from 'lodash-es'
+import section from '../../mixins/section.js'
 
 import 'swiper/dist/css/swiper.min.css'
 import swiperOptions from '@editor/swiper'
 
 const { next, prev, pagination, coreflow } = swiperOptions
 
-export default {
-  name: 'CoverflowCarousel',
+const GROUP_NAME = 'Carousel'
+const NAME = 'CoverflowCarousel'
 
-  group: 'Carousel',
+const SCHEMA_CUSTOM = {
+  mainStyle: {
+    styles: {
+      'background-color': '#333'
+    }
+  },
+  edited: true
+}
+
+export default {
+  name: NAME,
+
+  group: GROUP_NAME,
+
+  mixins: [section],
 
   $schema: { mainStyle },
 
@@ -107,6 +122,15 @@ export default {
         })
       )
     }
+  },
+
+  created () {
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   }
 }
 </script>
