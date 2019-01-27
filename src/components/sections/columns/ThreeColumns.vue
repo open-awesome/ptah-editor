@@ -144,9 +144,9 @@ export default {
     container: types.StyleObject,
     container2: types.StyleObject,
     container3: types.StyleObject,
-    components: COMPONENTS,
-    components2: COMPONENTS,
-    components3: COMPONENTS
+    components: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }, { key: 4 }]),
+    components2: _.merge([], COMPONENTS, [{ key: 5 }, { key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
+    components3: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }, { key: 14 }])
   },
 
   created () {
