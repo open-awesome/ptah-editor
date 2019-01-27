@@ -44,7 +44,7 @@ const C_CUSTOM2 = [
         'border-radius': '2px'
       }
     },
-    key: 0
+    key: 3
   }
 ]
 
@@ -83,6 +83,7 @@ export default {
         element: types.Logo,
         type: 'image',
         class: 'b-logo',
+        label: 'logo',
         key: 0
       },
       {
@@ -90,6 +91,7 @@ export default {
         element: types.Title,
         type: 'title',
         class: 'b-title',
+        label: 'title',
         key: 1
       }
     ],
@@ -98,8 +100,9 @@ export default {
         name: 'Button',
         element: types.Button,
         type: 'button',
-        class: 'b-button-test',
-        key: 0
+        class: 'b-button',
+        label: 'button',
+        key: 3
       }
     ]
   },
