@@ -196,7 +196,6 @@ export default {
             direction="row"
             class="b-sandbox"
           >
-            <elements-list @addEl="onAddElement"></elements-list>
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"
