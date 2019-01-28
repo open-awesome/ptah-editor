@@ -179,7 +179,7 @@ export default {
       })
     },
 
-    setSettingElement ({ dispatch, commit }, { type, name, label, options, section, element }) {
+    setSettingElement ({ state, dispatch, commit }, { type, name, label, options, section, element }) {
       let elementOptions = {
         ...options,
         name,
