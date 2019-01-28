@@ -59,6 +59,8 @@ export default {
 
   group: 'Carousel',
 
+  cover: '/img/covers/coverflow-carousel.png',
+
   $schema: { mainStyle },
 
   inject: ['device'],
