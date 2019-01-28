@@ -19,6 +19,7 @@ export default {
     return {
       controlOpen: false,
       link: '',
+      behavior: '',
       target: '',
       videoId: '',
       bgH: '',
@@ -48,7 +49,13 @@ export default {
         { name: 'Scroll into section', value: 'scroll-into-section' }
       ],
       action: { name: 'Open URL', value: '' },
-      section: null
+      section: null,
+      scrollBehaviors: [
+        { name: 'Auto', value: 'auto' },
+        { name: 'Instant', value: 'instant' },
+        { name: 'Smooth', value: 'smooth' }
+      ],
+      scrollBehavior: { name: 'Auto', value: 'auto' }
     }
   },
 
@@ -111,6 +118,7 @@ export default {
     let pColor = this.pseudo['hover']['color'].split('!')[0]
 
     this.link = this.elLink.href
+    this.behavior = this.elLink.behavior
     this.target = this.elLink.target === '_blank'
 
     this.bgH = pBackgroundColor || this.styles['background-color']
@@ -146,6 +154,7 @@ export default {
         this.section = (section) ? { name: section.name, value: this.link } : null
       }
       this.action = { name: 'Scroll into section', value: 'scroll-into-section' }
+      this.scrollBehavior = this.scrollBehaviors.find(({ value }) => value === this.behavior) || this.scrollBehaviors[0]
     }
   },
 
@@ -263,6 +272,15 @@ export default {
       )
     },
 
+    changeScrollBehavior ({ value = 'auto' }) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          behavior: value,
+          link: { behavior: value }
+        })
+      )
+    },
+
     setElAction (value) {
       let action = value[0]
       let classes = this.settingObjectOptions.classes
@@ -310,11 +328,21 @@ export default {
 
       <!-- scroll into section -->
       <div v-if="action.value === 'scroll-into-section'" class="b-link-controls__control">
+
         <base-select
           v-model="section"
           :options="sections"
           @input="changeScrollIntoSection"
           label="Scroll to"/>
+
+        <br>
+
+        <base-select
+          v-model="scrollBehavior"
+          :options="scrollBehaviors"
+          @input="changeScrollBehavior"
+          label="Scroll behavior"/>
+
       </div>
 
       <!-- open link -->

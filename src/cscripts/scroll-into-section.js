@@ -12,7 +12,8 @@ export function scrollIntoSection (e) {
   let section = document.querySelector(target && target.getAttribute('href'))
 
   if (section) {
-    section.scrollIntoView({ block: 'start', behavior: 'smooth' })
+    let behavior = target.dataset.behavior
+    section.scrollIntoView({ block: 'start', behavior })
   }
 }
 

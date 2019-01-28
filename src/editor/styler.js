@@ -29,6 +29,10 @@ function installStyler ({ builder, Vue }) {
         type = binding.value.type
       }
 
+      if (binding.value.el && binding.value.el.behavior) {
+        el.dataset.behavior = binding.value.el.behavior || 'auto'
+      }
+
       section.stylers.push(new StylerInstance({
         store: vnode.context.$store,
         propsData: {
@@ -40,6 +44,13 @@ function installStyler ({ builder, Vue }) {
           name: name
         }
       }).$mount(newNode))
+    },
+
+    update (el, binding, vnode) {
+      console.log(binding.value.el)
+      if (binding.value.el && binding.value.el.behavior) {
+        el.dataset.behavior = binding.value.el.behavior || 'auto'
+      }
     }
   }
 }
