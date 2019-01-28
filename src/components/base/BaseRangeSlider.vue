@@ -88,7 +88,7 @@ $knob-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
   /deep/
     .range-slider
       box-sizing: border-box
-      padding: 0 1px
+      padding: 0 0.6rem
       height: $slider-height
       display: block
 
