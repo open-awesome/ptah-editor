@@ -61,11 +61,15 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectElement'
+      'settingObjectElement',
+      'settingObjectSection'
     ]),
 
     sections () {
-      return this.builder.sections.map(({ id, name }) => ({ name, value: `#section_${id}` }))
+      let currentSectionId = this.settingObjectSection.id
+      return this.builder.sections
+        .filter(({ id }) => id !== currentSectionId)
+        .map(({ id, name }) => ({ name, value: `#section_${id}` }))
     },
 
     styles () {
@@ -151,9 +155,9 @@ export default {
       'updateText'
     ]),
 
-    setUrl () {
-      this.elLink['href'] = this.link
-      this.setOption(['href', this.link])
+    setUrl (value = this.link) {
+      this.elLink['href'] = value
+      this.setOption(['href', value])
     },
 
     changeTarget () {
@@ -245,7 +249,8 @@ export default {
 
     changeAction () {
       if (this.action.value === '') {
-        this.setElAction(['href', this.link])
+        this.link = (this.link.includes('#section_')) ? '' : this.link
+        this.setUrl(this.link)
       }
     },
 
@@ -253,7 +258,7 @@ export default {
       this.updateSettingOptions(
         _.merge({}, this.settingObjectOptions, {
           href: value,
-          link: { href: value }
+          link: { href: value, target: '_self' }
         })
       )
     },
@@ -316,7 +321,7 @@ export default {
       <div class="b-link-controls__control" v-if="action.value === ''">
         <base-text-field v-model="link" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
       </div>
-      <div class="b-link-controls__control" v-if="action.value === '' || action.value === 'scroll-into-section'">
+      <div class="b-link-controls__control" v-if="action.value === ''">
         <input type="checkbox" id="target" v-model="target" @change="changeTarget"> <label for="target">open in new window</label>
       </div>
 
