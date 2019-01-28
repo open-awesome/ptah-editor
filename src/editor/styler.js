@@ -47,7 +47,6 @@ function installStyler ({ builder, Vue }) {
     },
 
     update (el, binding, vnode) {
-      console.log(binding.value.el)
       if (binding.value.el && binding.value.el.behavior) {
         el.dataset.behavior = binding.value.el.behavior || 'auto'
       }
