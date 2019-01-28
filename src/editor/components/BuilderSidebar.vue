@@ -208,7 +208,8 @@ export default {
       'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
-      'setMenuItem'
+      'setMenuItem',
+      'settingsExpanded'
     ]),
 
     ...mapActions('BuilderModalContent', {
