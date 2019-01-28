@@ -33,6 +33,10 @@ export default {
       let props = {}
       props[nameObj] = {}
 
+      if (oldProps === undefined) {
+        return
+      }
+
       for (let key in newProps) {
         if (key === 'styles') {
           props[nameObj][key] = {}
