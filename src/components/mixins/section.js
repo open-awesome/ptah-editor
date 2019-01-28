@@ -51,7 +51,7 @@ export default {
           }
         }
 
-        if (typeof props[nameObj][key] === 'object' && _.isEmpty(props[nameObj][key])) delete props[nameObj][key]
+        if (typeof props[nameObj][key] === 'object' && _.isEmpty(props[nameObj][key]) && key !== 'classes') delete props[nameObj][key]
       }
       return props
     },
@@ -102,8 +102,8 @@ export default {
                 return item.key === el.key
               })
               if (groupDataStoreEl[0]) {
-                let el = groupDataStoreEl[0].element
                 let itemEl = item.element
+                let el = groupDataStoreEl[0].element
                 for (let key in itemEl) {
                   if (el[key] !== undefined) {
                     if (Array.isArray(el[key])) {
@@ -118,9 +118,10 @@ export default {
               }
             })
           } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+            //
             for (let key in $sectionData[keyObj]) {
               if (groupDataStore[keyObj] !== undefined && groupDataStore[keyObj][key] !== undefined) {
-                if (Array.isArray(groupDataStore[keyObj][key]) && groupDataStore[keyObj][key].length > 0) {
+                if (Array.isArray(groupDataStore[keyObj][key])) {
                   $sectionData[keyObj][key] = groupDataStore[keyObj][key]
                 } else if (typeof groupDataStore[keyObj][key] === 'object' && _.isEmpty(groupDataStore[keyObj][key]) !== true) {
                   _.merge($sectionData[keyObj][key], groupDataStore[keyObj][key])
@@ -192,11 +193,13 @@ export default {
         //
       } else if (sectionDataStore) {
         //  merge section data from store in section data
+        let groupStore = _.merge({}, groupDataStore)
+        //
         for (let keyObj in $sectionData) {
           if (keyObj.indexOf('components') !== -1) {
             //  checking for component availability in section store
             $sectionData[keyObj].forEach(function (item) {
-              let sectionDataStoreEl = _.filter(sectionDataStore['components'], function (el) {
+              let sectionDataStoreEl = _.filter(sectionDataStore[keyObj], function (el) {
                 return item.key === el.key
               })
               if (sectionDataStoreEl[0]) {
@@ -213,14 +216,12 @@ export default {
                     }
                   }
                 }
-              } else {
-                $sectionData[keyObj].push(item)
               }
             })
 
             // checking for component availability in section data
             $sectionData[keyObj].forEach(function (item, i) {
-              let sectionDataStoreEl = _.filter(sectionDataStore['components'], function (el) {
+              let sectionDataStoreEl = _.filter(sectionDataStore[keyObj], function (el) {
                 return item.key === el.key
               })
               if (sectionDataStoreEl[0] === undefined) {
@@ -229,7 +230,7 @@ export default {
             })
 
             // restore sort of components
-            let orderObj = sectionDataStore['components'].reduce(function (a, c, i) {
+            let orderObj = sectionDataStore[keyObj].reduce(function (a, c, i) {
               if (c['key'] !== undefined) a[c.key] = i
               return a
             }, {})
@@ -242,7 +243,7 @@ export default {
           }
         }
         // merge group data in section data
-        this.groupDataMerge(groupDataStore, $sectionData)
+        this.groupDataMerge(groupStore, $sectionData)
         // save temporary data to control changes in section
         $sectionData.temp = _.merge({}, $sectionData, this.schemaCustom)
       } else {
