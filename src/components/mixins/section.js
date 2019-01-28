@@ -58,7 +58,7 @@ export default {
 
     storeData: _.after(2, function (self) {
       let $sectionData = self.$sectionData
-      let data = {}
+      let data = { components: [] }
       let ms = {}
       // let components = $sectionData.components !== undefined ? $sectionData.components : []
       let temp = $sectionData.temp || {}
