@@ -254,9 +254,8 @@ export default {
   group,
   cover,
 
-  isHeader: true,
-
   $schema: {
+    isHeader: true,
     mainStyle: StyleObject,
     container: StyleObject,
     container2: StyleObject,
