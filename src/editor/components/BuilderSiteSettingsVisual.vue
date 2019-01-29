@@ -15,11 +15,11 @@ export default {
       backgroundFillTypes: [
         {
           value: 'fill',
-          text: 'Fill'
+          text: this.$t('s.fill')
         },
         {
           value: 'tile',
-          text: 'Tile'
+          text: this.$t('s.tile')
         }
       ],
 
@@ -147,36 +147,36 @@ export default {
 <template>
   <builder-modal-content-layout>
     <div class="b-builder-site-settings-visual">
-      <base-heading level="2">Background</base-heading>
+      <base-heading level="2">{{ $t('s.backgroundColor') }}</base-heading>
 
       <base-fieldset>
         <base-fieldset-row width="short">
-          <BaseColorPicker label="Background color" v-model="pageBackgroundColor" />
+          <BaseColorPicker :label="$t('')" v-model="pageBackgroundColor" />
         </base-fieldset-row>
 
         <base-fieldset-row>
-          <BaseSwitcher v-model="fullPageScrollCheckbox" label="Full page scroll" />
+          <BaseSwitcher v-model="fullPageScrollCheckbox" :label="$t('s.fpScroll')" />
         </base-fieldset-row>
       </base-fieldset>
 
       <base-fieldset>
-        <base-heading level="3">Background Image</base-heading>
+        <base-heading level="3">{{ $t('s.backgroundImage') }}</base-heading>
 
         <base-fieldset-row>
-          <base-uploader v-model="pageBackgroundUrl" label="Background image"/>
+          <base-uploader v-model="pageBackgroundUrl" :label="$t('s.backgroundImage')"/>
         </base-fieldset-row>
 
         <base-fieldset-row>
           <base-fieldset-item>
             <BaseTextField
-              label="X position"
+              :label="$t('s.posX')"
               v-model="pageBackgroundPositionX"
               placeholder="0px"
             />
           </base-fieldset-item>
           <base-fieldset-item>
             <BaseTextField
-              label="Y position"
+              :label="$t('s.poxY')"
               v-model="pageBackgroundPositionY"
               placeholder="0px"
             />
@@ -187,29 +187,29 @@ export default {
           <BaseButtonTabs :list="backgroundFillTypes" v-model="backgroundFillValue" />
         </base-fieldset-row>
         <base-fieldset-row>
-          <BaseSwitcher v-model="bgAttachmentCheckbox" label="Fixed while scrolling" />
+          <BaseSwitcher v-model="bgAttachmentCheckbox" :label="$t('s.fixedScrolling')" />
         </base-fieldset-row>
       </base-fieldset>
 
       <base-fieldset>
-        <base-heading level="3">Background Video</base-heading>
+        <base-heading level="3">{{ $t('s.backgroundVideo') }}</base-heading>
 
         <base-fieldset-row>
           <base-uploader
               v-model="bgVideo"
-              label="Background video"
+              :label="$t('s.backgroundVideo')"
               type="video"/>
         </base-fieldset-row>
 
         <base-fieldset-row>
-          <BaseSwitcher v-model="bgVideoPositionCheckbox" label="Fixed while scrolling" />
+          <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
         </base-fieldset-row>
       </base-fieldset>
     </div>
 
     <div slot="controls">
-      <BaseButton color="gray" :transparent="true" @click="$emit('requestClose')">Cancel</BaseButton>
-      <BaseButton @click="applySettings">Save</BaseButton>
+      <BaseButton color="gray" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>

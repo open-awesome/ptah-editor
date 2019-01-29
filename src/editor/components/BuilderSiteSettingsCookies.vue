@@ -5,18 +5,18 @@
 
     <base-fieldset>
 
-      <base-heading level="2">Cookies policy</base-heading>
+      <base-heading level="2">{{ $t('s.cookiePolicy') }}</base-heading>
 
       <base-fieldset-row>
         <base-switcher
             v-model="useCookie"
-            label="Use cookies"/>
+            :label="$t('s.useCookie')"/>
       </base-fieldset-row>
 
       <base-fieldset-row>
         <base-upload-input
             v-model="pdfFile"
-            label="Cookies policy"
+            :label="$t('s.policyFile')"
             placeholder="Paste pdf file"/>
       </base-fieldset-row>
 
@@ -26,11 +26,11 @@
 
   <div slot="controls">
     <base-button
-      v-text="'Cancel'"
+      v-text="$t('nav.cancel')"
       :transparent="true"
       @click="$emit('requestClose')"
       color="gray"/>
-    <base-button v-text="'Save'" type="submit" form="cookies-form"/>
+    <base-button v-text="$t('nav.save')" type="submit" form="cookies-form"/>
   </div>
 
 </builder-modal-content-layout>
