@@ -80,20 +80,6 @@ class Vuse {
 
   /**
      * Removes a section with the specified id.
-     * @param {String|Number} id
-     */
-  replacement (section, options, position) {
-    const id = this.sections.findIndex(s => s.id === section.id)
-    this.sections.splice(id, 1)
-    section.destroy()
-    if (position !== undefined) {
-      this.sections.splice(position, 0, new Section(options))
-      return
-    }
-  }
-
-  /**
-     * Removes a section with the specified id.
      * @param {String|Number} oldIndex
      * @param {String|Number} newIndex
      */
