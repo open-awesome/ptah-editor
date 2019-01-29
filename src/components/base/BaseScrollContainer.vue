@@ -1,11 +1,8 @@
 <script>
-import VueScrollbar from 'vue2-scrollbar'
 import Vuebar from 'vuebar'
-require('vue2-scrollbar/dist/style/vue2-scrollbar.css')
 
 export default {
   components: {
-    VueScrollbar,
     Vuebar
   },
   props: {
