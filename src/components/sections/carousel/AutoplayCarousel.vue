@@ -56,6 +56,8 @@ export default {
 
   group: 'Carousel',
 
+  cover: '/img/covers/autoplay-carousel.png',
+
   $schema: { mainStyle },
 
   inject: ['device'],
