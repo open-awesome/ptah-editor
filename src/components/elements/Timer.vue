@@ -78,10 +78,10 @@ export default {
         clearInterval(this.interval)
         this.timeLeft = value - Date.now()
         this.interval = setInterval(() => {
-          this.timeLeft = this.timer.timestamp - Date.now()
-          if (!this.timeLeft || this.timeLeft < 0) {
+          if (!value || !this.timeLeft || !this.timeLeft < 0) {
             clearInterval(this.interval)
           }
+          this.timeLeft = value - Date.now()
         }, 1000)
       }
     }
