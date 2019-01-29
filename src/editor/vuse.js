@@ -227,7 +227,8 @@ class Vuse {
           sectionData = {
             name: component.name,
             schema: component.schema,
-            data: section.data
+            data: section.data,
+            isHeader: component.isHeader
           }
           if (!sectionData.schema) {
             sectionData.schema = this.components[sectionData.name].options.$schema

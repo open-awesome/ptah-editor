@@ -67,6 +67,7 @@
             :id="`menu-item-${section.id}`"
             :isSelected="isActiveSection(section.id)"
             :isMain="section.isMain"
+            :is-header="section.isHeader"
             :hasDraggableIcon="true"
             :sectionId="section.id"
             @click="toggleSettingsBar(section)">
