@@ -679,7 +679,22 @@ const data = new Map([
         'text-align': 'inherit',
         'color': 'inherit'
     }
-}))],
+  }))],
+  [types.Timer, () => (_.merge({}, DEFAULT_OPTIONS, {
+    isComplex: true,
+    timer: {
+      timestamp: null,
+      days: true,
+      hours: true,
+      minutes: true,
+      seconds: true
+    },
+    styles: {
+      'font-family': 'Lato',
+      'font-size':  '48px',
+      'color': '#FFF'
+    }
+  }))]
 ])
 
 export default class Seeder {

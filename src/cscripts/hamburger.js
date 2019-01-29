@@ -1,7 +1,7 @@
 import 'setimmediate'
 
 export function initHamburger () {
-  let buttons = [...document.getElementsByClassName('hamburger-button')]
+  let buttons = document.querySelectorAll('.hamburger-button')
   document.body.addEventListener('click', closeHamburger, false)
   buttons.forEach(btn => btn.onclick = toggleHamburgerMenu)
 }
@@ -27,7 +27,6 @@ function closeHamburger ({ target }) {
   if (target.closest('.hamburger-button') || target.closest('.hamburger-container')) {
     return
   }
-
   let elements = [
     ...document.querySelectorAll('.hamburger-container.active'),
     ...document.querySelectorAll('.hamburger-button.active')

@@ -14,9 +14,8 @@ export default {
       type: Boolean,
       required: true
     },
-    isComplexText: {
-      type: Boolean
-    }
+    isComplexText: Boolean,
+    isTimer: Boolean
   },
 
   data () {
@@ -183,8 +182,11 @@ export default {
 
 <template>
   <div class="b-text-controls">
-    <div class="b-text-controls__header" @click="onClickTitle">
-      <span>Text</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+    <div v-show="!isTimer" class="b-text-controls__header" @click="onClickTitle">
+      <span>Text</span>
+      <i :class="{ 'dropped': !controlOpen }">
+        <icon-base name="arrowDropDown" width="8"></icon-base>
+      </i>
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-text-controls__control">
@@ -196,7 +198,7 @@ export default {
       <div class="b-text-controls__control">
         <base-color-picker label="Font color" v-model="color" @change="changeColor"></base-color-picker>
       </div>
-      <div class="b-text-controls__control">
+      <div v-show="!isTimer" class="b-text-controls__control">
         <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
       </div>
     </base-dropdown>
