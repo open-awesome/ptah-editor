@@ -15,15 +15,15 @@ export default {
     siteSettingsMenu: [
       {
         id: 'visualSettings',
-        name: 'Visual settings'
+        name: 'menu.visualSettings'
       },
       {
         id: 'seoSettings',
-        name: 'SEO settings'
+        name: 'menu.seo'
       },
       {
         id: 'cookiesSettings',
-        name: 'Cookies settings'
+        name: 'menu.cookie'
       }
       // {
       //   id: 'versionHistory',

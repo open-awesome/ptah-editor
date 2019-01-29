@@ -7,6 +7,8 @@ export default {
 
   group: 'Carousel',
 
+  cover: '/img/covers/default-carousel.png',
+
   $schema: {
     mainStyle: types.GallerySlider
   },
