@@ -5,17 +5,17 @@
 
         <!-- Title & Favicon -->
         <base-fieldset>
-          <base-heading level="2">Title & Favicon</base-heading>
+          <base-heading level="2">{{ $t('s.title') }}</base-heading>
 
           <base-fieldset-row>
             <BaseImageUpload
               v-model="favicon"
-              label="Fav Icon"
+              :label="$t('s.favicon')"
               description="32 x 32 px, .ico, .bmp or .png" />
           </base-fieldset-row>
 
           <base-fieldset-row>
-            <BaseTextField label="Page Title" v-model="pageTitle" />
+            <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
           </base-fieldset-row>
         </base-fieldset>
 
@@ -71,8 +71,8 @@
     </div>
 
     <div slot="controls">
-      <BaseButton color="gray" :transparent="true" @click="$emit('requestClose')">Cancel</BaseButton>
-      <BaseButton @click="applySettings">Save</BaseButton>
+      <BaseButton color="gray" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>

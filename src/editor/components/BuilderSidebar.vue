@@ -31,7 +31,7 @@
           :key="siteSetting.id"
           :isSelected="modalContentID === siteSetting.id"
           @click="toggleSiteSettings(siteSetting.id)">
-          {{siteSetting.name}}
+          {{ $t(siteSetting.name) }}
         </MenuSubitem>
       </BaseDropdown>
 

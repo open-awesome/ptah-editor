@@ -1,6 +1,43 @@
 {
     "menu": {
-        "siteSettings":                 "Настройки страницы",
-        "sections":                     "Секции"
+        "siteSettings":                 "Настройки",
+        "sections":                     "Секции",
+        "visualSettings":               "Вид",
+        "seo":                          "Настройки SEO",
+        "cookie":                       "Настройки Cookie"
+    },
+    "nav": {
+        "backToDashbord":               "Назад к лендингам",
+        "save":                         "Сохранить",
+        "preview":                      "Просмотр",
+        "export":                       "Экспорт",
+        "cancel":                       "Отмена",
+        "delete":                       "Удалить"
+    },
+    "s": {
+        "background":                   "Фон",
+        "backgroundColor":              "Цвет фона",
+        "backgroundImage":              "Фоновое изображение",
+        "backgroundVideo":              "Видео фон",
+        "chooseColor":                  "Цвет",
+        "fill":                         "Заполнить",
+        "fixedScrolling":               "Зафиксировать при прокрутке",
+        "fpScroll":                     "Полностраничный скролл",
+        "posX":                         "смещение X",
+        "poxY":                         "смещение Y",
+        "tile":                         "Замостить",
+        "addImage":                     "Добавить изображение",
+        "addVideo":                     "Добавить видео",
+        "title":                        "Тайтл и фавикон",
+        "favicon":                      "Фавикон",
+        "pageTitle":                    "Заголовок страницы",
+        "cookiePolicy":                 "Политика Cookie",
+        "useCookie":                    "Использовать cookie",
+        "policyFile":                   "Политика Cookie (pdf файл)",
+        "layout":                       "Вид секции",
+        "height":                       "Высота",
+        "fullScreen":                   "Растянуть на весь экран",
+        "useVideoBg":                   "Видео фон",
+        "groupSections":                "Группировать секции"
     }
 }
