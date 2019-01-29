@@ -5,7 +5,10 @@ import { mapState, mapActions } from 'vuex'
 import { getYoutubeVideoIdFromUrl } from '@editor/util'
 
 export default {
+  name: 'TheControlLink',
+
   props: {
+    builder: Object,
     expand: {
       type: Boolean,
       required: true
@@ -16,6 +19,7 @@ export default {
     return {
       controlOpen: false,
       link: '',
+      behavior: '',
       target: '',
       videoId: '',
       bgH: '',
@@ -41,18 +45,21 @@ export default {
       ],
       actionList: [
         { name: 'Open URL', value: '' },
-        { name: 'Open video popup', value: 'ptah-d-video' }
+        { name: 'Open video popup', value: 'ptah-d-video' },
+        { name: 'Scroll into section', value: 'scroll-into-section' }
       ],
-      action: { name: 'Open URL', value: '' }
+      action: { name: 'Open URL', value: '' },
+      section: null,
+      scrollBehaviors: [
+        { name: 'Auto', value: 'auto' },
+        { name: 'Instant', value: 'instant' },
+        { name: 'Smooth', value: 'smooth' }
+      ],
+      scrollBehavior: { name: 'Auto', value: 'auto' }
     }
   },
 
   watch: {
-    elTarget (value) {
-      let target = (value) ? '_blank' : '_self'
-      this.$emit('setOption', ['target', target])
-    },
-
     expand () {
       this.controlOpen = this.expand
     }
@@ -61,8 +68,16 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectElement'
+      'settingObjectElement',
+      'settingObjectSection'
     ]),
+
+    sections () {
+      let currentSectionId = this.settingObjectSection.id
+      return this.builder.sections
+        .filter(({ id }) => id !== currentSectionId)
+        .map(({ id, name }) => ({ name, value: `#section_${id}` }))
+    },
 
     styles () {
       return this.settingObjectOptions.styles
@@ -103,6 +118,7 @@ export default {
     let pColor = this.pseudo['hover']['color'].split('!')[0]
 
     this.link = this.elLink.href
+    this.behavior = this.elLink.behavior
     this.target = this.elLink.target === '_blank'
 
     this.bgH = pBackgroundColor || this.styles['background-color']
@@ -127,8 +143,18 @@ export default {
     this.controlOpen = this.expand
 
     this.videoId = this.videoLink || ''
+
     if (this.videoId.length) {
       this.action = { name: 'Open video popup', value: 'ptah-d-video' }
+    } else if (this.link && this.link.includes('#section')) {
+      let matches = this.link.match(/\d+(?!\d+)/)
+      if (matches) {
+        let id = Number(matches[0])
+        let section = this.builder.sections.find(section => section.id === id)
+        this.section = (section) ? { name: section.name, value: this.link } : null
+      }
+      this.action = { name: 'Scroll into section', value: 'scroll-into-section' }
+      this.scrollBehavior = this.scrollBehaviors.find(({ value }) => value === this.behavior) || this.scrollBehaviors[0]
     }
   },
 
@@ -138,9 +164,9 @@ export default {
       'updateText'
     ]),
 
-    setUrl () {
-      this.elLink['href'] = this.link
-      this.setOption(['href', this.link])
+    setUrl (value = this.link) {
+      this.elLink['href'] = value
+      this.setOption(['href', value])
     },
 
     changeTarget () {
@@ -232,8 +258,27 @@ export default {
 
     changeAction () {
       if (this.action.value === '') {
-        this.setElAction(['href', this.link])
+        this.link = (this.link.includes('#section_')) ? '' : this.link
+        this.setUrl(this.link)
       }
+    },
+
+    changeScrollIntoSection ({ value }) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          href: value,
+          link: { href: value, target: '_self' }
+        })
+      )
+    },
+
+    changeScrollBehavior ({ value = 'auto' }) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          behavior: value,
+          link: { behavior: value }
+        })
+      )
     },
 
     setElAction (value) {
@@ -279,6 +324,25 @@ export default {
       <!-- action -->
       <div class="b-link-controls__control">
         <base-select label="Action" :options="actionList" v-model="action" @input="changeAction"></base-select>
+      </div>
+
+      <!-- scroll into section -->
+      <div v-if="action.value === 'scroll-into-section'" class="b-link-controls__control">
+
+        <base-select
+          v-model="section"
+          :options="sections"
+          @input="changeScrollIntoSection"
+          label="Scroll to"/>
+
+        <br>
+
+        <base-select
+          v-model="scrollBehavior"
+          :options="scrollBehaviors"
+          @input="changeScrollBehavior"
+          label="Scroll behavior"/>
+
       </div>
 
       <!-- open link -->

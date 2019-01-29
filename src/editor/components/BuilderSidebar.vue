@@ -20,7 +20,7 @@
         :isSelected="expandedMenuItem === 'siteSettings'"
         :isExpandable="true"
         @click="toggleMenuItem('siteSettings')">
-        Site Settings
+        {{ $t('menu.siteSettings') }}
       </menu-item>
 
       <!-- Site settings CONTENTS -->
@@ -31,7 +31,7 @@
           :key="siteSetting.id"
           :isSelected="modalContentID === siteSetting.id"
           @click="toggleSiteSettings(siteSetting.id)">
-          {{siteSetting.name}}
+          {{ $t(siteSetting.name) }}
         </MenuSubitem>
       </BaseDropdown>
 
@@ -52,7 +52,7 @@
             />
           </span>
           <span>
-            Sections
+            {{ $t('menu.sections') }}
           </span>
       </menu-item>
 

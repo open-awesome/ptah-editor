@@ -18,7 +18,7 @@
           :id="section.id"
           :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
           @click.native="selectSidebarSection(section)"
-          @dblclick.native="showSettingsBar(section)">
+          @dblclick.native="showSettingsBar($event, section)">
           <video
               v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
               :id="`bg-video-${ section.id }`"
@@ -287,7 +287,10 @@ export default {
       menuItem.scrollIntoView()
     },
 
-    showSettingsBar (section) {
+    showSettingsBar (event, section) {
+      if (event.target.closest('.styler-active')) {
+        return
+      }
       this.setSettingSection(section)
     },
 

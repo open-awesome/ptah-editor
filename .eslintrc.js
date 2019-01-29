@@ -14,7 +14,8 @@ module.exports = {
     'no-return-await': 0,
     'operator-linebreak': 0,
     'no-useless-call': 0,
-    'template-curly-spacing': 0
+    'template-curly-spacing': 0,
+    'brace-style': 0
   },
   parserOptions: {
     parser: 'babel-eslint',

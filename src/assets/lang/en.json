@@ -1,0 +1,43 @@
+{
+    "menu": {
+        "siteSettings":                 "Site Settings",
+        "sections":                     "Sections",
+        "visualSettings":               "Visual settings",
+        "seo":                          "SEO settings",
+        "cookie":                       "Cookies settings"
+    },
+    "nav": {
+        "backToDashbord":               "Back to landings",
+        "save":                         "Save",
+        "preview":                      "Preview",
+        "export":                       "Export",
+        "cancel":                       "Cancel",
+        "delete":                       "Delete"
+    },
+    "s": {
+        "background":                   "Background",
+        "backgroundColor":              "Background color",
+        "backgroundImage":              "Background Image",
+        "backgroundVideo":              "Background Video",
+        "chooseColor":                  "Choose color",
+        "fill":                         "Fill",
+        "fixedScrolling":               "Fixed while scrolling",
+        "fpScroll":                     "Full page scroll",
+        "posX":                         "X position",
+        "poxY":                         "Y position",
+        "tile":                         "Tile",
+        "addImage":                     "Add image",
+        "addVideo":                     "Add Video",
+        "title":                        "Title & Favicon",
+        "favicon":                      "Favicon",
+        "pageTitle":                    "Page Title",
+        "cookiePolicy":                 "Cookies policy",
+        "useCookie":                    "Use cookie",
+        "policyFile":                   "Cookie policy (pdf file)",
+        "layout":                       "Layout",
+        "height":                       "Heigh",
+        "fullScreen":                   "Full screen height",
+        "useVideoBg":                   "Use video as background",
+        "groupSections":                "Group sections"
+    }
+}
