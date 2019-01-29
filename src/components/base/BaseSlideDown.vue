@@ -56,8 +56,9 @@ export default {
 
       return {
         overflow: 'hidden',
-        'transition-property': 'height',
-        height: this.isMounted ? heightSize + 'px' : 'auto',
+        'transition-property': 'min-height',
+        'min-height': this.isMounted ? heightSize + 'px' : 0,
+        'height': this.active ? 'auto' : 0,
         'transition-duration': this.duration + 'ms'
       }
     },
