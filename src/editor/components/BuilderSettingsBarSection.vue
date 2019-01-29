@@ -465,7 +465,7 @@ export default {
       if (this.isSlaveSection()) {
         let master = _.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1).main
         let absorb = master.data.mainStyle.absorb
-        master.set('$sectionData.mainStyle', { absorb: absorb - 1 })
+        master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
       }
 
       this.builder.remove(this.settingObjectSection)

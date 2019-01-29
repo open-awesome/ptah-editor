@@ -325,6 +325,10 @@ export default {
       // this.currentOption = ''
     },
     hideStyler (event) {
+      if (!!event === false) {
+        return
+      }
+
       if (event.target === this.el) {
         this.isCurrentStyler = true
         return
