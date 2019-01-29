@@ -1,3 +1,12 @@
+import smoothscroll from 'smoothscroll-polyfill'
+
+try {
+  smoothscroll.polyfill()
+}
+catch (error) {
+  throw new Error(error)
+}
+
 export function initScrollIntoSection () {
   let links = document.querySelectorAll('a[href^="#section_"]')
   links.forEach(link => {
