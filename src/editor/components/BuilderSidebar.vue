@@ -303,11 +303,12 @@ export default {
       this.toggleAddSectionMenu()
     },
 
-    onAddSection (section) {
+    async onAddSection (section) {
+      await this.$nextTick()
       let target = (section.isHeader)
         ? this.$refs.header.lastElementChild
         : this.$refs.sections.lastElementChild
-      setImmediate(() => { target.click() })
+      target.click()
     }
   }
 }
