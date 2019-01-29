@@ -381,13 +381,18 @@ export default {
     }
   },
 
+  beforeDestroy () {
+    this.setSettingsExpanded(false)
+  },
+
   methods: {
     ...mapActions('Sidebar', [
       'updateSettingOptions',
       'clearSettingObject',
       'toggleGrouping',
       'setSettingSection',
-      'clearSettingObject'
+      'clearSettingObject',
+      'setSettingsExpanded'
     ]),
 
     ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
