@@ -1,7 +1,7 @@
 import 'setimmediate'
 
 export function initHamburger () {
-  let buttons = [...document.getElementsByClassName('hamburger-button')]
+  let buttons = document.querySelectorAll('.hamburger-button')
   document.body.addEventListener('click', closeHamburger, false)
   buttons.forEach(btn => btn.onclick = toggleHamburgerMenu)
 }

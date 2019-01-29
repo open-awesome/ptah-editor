@@ -185,7 +185,7 @@ export default {
   },
   methods: {
     ...mapMutations('Sidebar', ['toggleSandboxSidebar', 'setSandboxPaths']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setSettingsExpanded']),
     ...mapActions('BuilderModalContent', ['setContent']),
 
     setInitialValue () {
@@ -344,6 +344,7 @@ export default {
       document.removeEventListener('blur', this.hideStyler, true)
 
       this.section.set(`${this.name}.text`, this.el.innerHTML)
+      this.setSettingsExpanded(false)
     },
 
     /**

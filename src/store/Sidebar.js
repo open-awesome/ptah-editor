@@ -223,6 +223,10 @@ export default {
 
     toggleGrouping ({ commit, state }, value) {
       commit('isGrouping', (typeof value !== 'undefined') ? value : !state.isGrouping)
+    },
+
+    setSettingsExpanded ({ commit, state }, value) {
+      commit('isSettingsExpanded', (typeof value !== 'undefined') ? value : false)
     }
   },
 

@@ -7,9 +7,9 @@ RUN npm install gulp -g
 
 WORKDIR /app
 COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js webpack.mix.js yarn.lock /app/
-RUN yarn install 
+RUN yarn install
 COPY . /app/
-RUN yarn cjs && gulp public-image && yarn build
+RUN yarn cjs && gulp locale_sync && gulp public-image && yarn build
 
 FROM nginx:1.15.4
 
