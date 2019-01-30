@@ -74,6 +74,8 @@ export default {
 
   mixins: [section],
 
+  cover: '/img/covers/coverflow-carousel.png',
+
   $schema: { mainStyle },
 
   inject: ['device'],

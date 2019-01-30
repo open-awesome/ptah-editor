@@ -50,7 +50,7 @@ export default {
       tooltip="back to landings"
       tooltip-position="bottom"
       >
-      Back to landings
+      {{ $t('nav.backToDashbord') }}
       <span class="b-top-bar__btn-back-arrow-a"/>
       <span class="b-top-bar__btn-back-arrow-b"/>
     </BaseButton>
@@ -79,7 +79,7 @@ export default {
           tooltip="save"
           tooltip-position="bottom"
           >
-          Save
+          {{ $t('nav.save') }}
         </BaseButton>
         <BaseButton
           :color="'light-gray'"
@@ -89,7 +89,7 @@ export default {
           tooltip="preview"
           tooltip-position="bottom"
           >
-          Preview
+          {{ $t('nav.preview') }}
         </BaseButton>
         <BaseButton
           :color="'light-gray'"
@@ -99,7 +99,7 @@ export default {
           tooltip="export"
           tooltip-position="bottom"
           >
-          Export
+          {{ $t('nav.export') }}
         </BaseButton>
       </div>
     </div>

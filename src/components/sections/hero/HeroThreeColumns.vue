@@ -280,6 +280,10 @@ $h: 100vh
       margin-top: -.8rem
       padding-top: 0
 
+.b-grid__col-6
+  @media only screen and (max-width: 1123px)
+    flex-basis: 100%
+
 .b-grid__logo
   display: flex
   align-items: center
@@ -298,7 +302,7 @@ $h: 100vh
         max-width: 100%
         max-height: 100%
 
-  @media only screen and (max-width: 768px)
+  @media only screen and (max-width: 1123px)
     width: 50%
     flex-basis: 50%
     order: -1

@@ -15,15 +15,15 @@ export default {
     siteSettingsMenu: [
       {
         id: 'visualSettings',
-        name: 'Visual settings'
+        name: 'menu.visualSettings'
       },
       {
         id: 'seoSettings',
-        name: 'SEO settings'
+        name: 'menu.seo'
       },
       {
         id: 'cookiesSettings',
-        name: 'Cookies settings'
+        name: 'menu.cookie'
       }
       // {
       //   id: 'versionHistory',
@@ -223,6 +223,10 @@ export default {
 
     toggleGrouping ({ commit, state }, value) {
       commit('isGrouping', (typeof value !== 'undefined') ? value : !state.isGrouping)
+    },
+
+    setSettingsExpanded ({ commit, state }, value) {
+      commit('isSettingsExpanded', (typeof value !== 'undefined') ? value : false)
     }
   },
 

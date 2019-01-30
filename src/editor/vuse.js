@@ -227,7 +227,8 @@ class Vuse {
           sectionData = {
             name: component.name,
             schema: component.schema,
-            data: section.data
+            data: section.data,
+            isHeader: component.isHeader
           }
           if (!sectionData.schema) {
             sectionData.schema = this.components[sectionData.name].options.$schema
@@ -401,6 +402,20 @@ class Vuse {
     }
 
     return setup
+  }
+
+  getManifest () {
+    let manifest = {
+      name: this.settings.title,
+      description: _.find(this.settings.ogTags, o => o.property === 'og:description').content || '',
+      icons: [{
+        src: this.settings.favicon,
+        sizes: '64x64'
+      }],
+      start_url: '.'
+    }
+
+    return JSON.stringify(manifest)
   }
 
   /**

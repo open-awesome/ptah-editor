@@ -71,6 +71,8 @@ export default {
 
   mixins: [section],
 
+  cover: '/img/covers/autoplay-carousel.png',
+
   $schema: { mainStyle },
 
   inject: ['device'],

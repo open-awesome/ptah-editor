@@ -3,6 +3,9 @@ const gutil = require('gulp-util')
 const webpack = require('webpack')
 const path = require('path')
 
+const i18nConvertor = require('./utils/i18nConvertor')
+const gsheetsDataProvider = require('./utils/gsheetsDataProvider')
+
 gulp.task('cjs', function (callback) {
   var myConfig = {
     entry: {
@@ -33,4 +36,14 @@ gulp.task('public-image', function () {
     './src/assets/img/**/*.gif',
     './src/assets/img/**/*.svg'])
     .pipe(gulp.dest('./public/img'))
+})
+
+gulp.task('locale_sync', (callback) => {
+  // update locales from google sheets API
+  gsheetsDataProvider.getLocales((rawData) => {
+    const jsonData = JSON.parse(rawData)
+    i18nConvertor.fromAllLocaleDataToFiles(jsonData)
+
+    callback()
+  })
 })

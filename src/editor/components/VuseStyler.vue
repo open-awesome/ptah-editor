@@ -48,6 +48,7 @@ export default {
     label: String
   },
   data: () => ({
+    isCurrentStyler: false,
     oldColorerColor: '',
     colorerColor: '',
     mouseTarget: '',
@@ -186,7 +187,7 @@ export default {
   },
   methods: {
     ...mapMutations('Sidebar', ['toggleSandboxSidebar', 'setSandboxPaths']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setSettingsExpanded']),
     ...mapActions('BuilderModalContent', ['setContent']),
 
     setInitialValue () {
@@ -243,12 +244,17 @@ export default {
       this.section.data[path[0]].push(obj)
     },
     showStyler (event) {
+      event.preventDefault()
+      event.stopPropagation()
+
+      if (this.isCurrentStyler) {
+        this.isCurrentStyler = false
+        return
+      }
+
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
         .forEach(el => el.classList.remove('active'))
-
-      event.preventDefault()
-      event.stopPropagation()
 
       this.toggleSandboxSidebar(false)
       this.setContent(null)
@@ -321,7 +327,13 @@ export default {
       // this.currentOption = ''
     },
     hideStyler (event) {
+      if (event && event.target === this.el) {
+        this.isCurrentStyler = true
+        return
+      }
+
       this.el.contentEditable = 'false'
+      
       if (event && isParentTo(event.target, this.$el)) {
         return
       }
@@ -334,6 +346,7 @@ export default {
       document.removeEventListener('blur', this.hideStyler, true)
 
       this.section.set(`${this.name}.text`, this.el.innerHTML)
+      this.setSettingsExpanded(false)
     },
 
     /**

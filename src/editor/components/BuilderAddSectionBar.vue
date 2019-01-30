@@ -1,4 +1,5 @@
 <script>
+import { omit } from 'lodash-es'
 import { mapState } from 'vuex'
 
 export default {
@@ -17,24 +18,29 @@ export default {
 
   data () {
     return {
-      groups: {},
       selectedGroup: [],
-      sections: {},
       selectedSection: null,
       isVisibleBar: false
     }
   },
 
   computed: {
-    ...mapState('Sidebar', [
-      'builderSections',
-      'builderGroups'
-    ])
-  },
+    ...mapState('Sidebar', ['builderSections', 'builderGroups']),
 
-  created () {
-    this.groups = this.builderGroups
-    this.sections = this.builderSections
+    hasHeader () {
+      return this.builder.sections.some(section => section.isHeader)
+    },
+
+    groups () {
+      if (this.hasHeader) {
+        return omit(this.builderGroups, 'header')
+      }
+      return this.builderGroups
+    },
+
+    sections () {
+      return this.builderSections
+    }
   },
 
   methods: {
@@ -43,7 +49,7 @@ export default {
       this.selectedSection = group[0]
       this.builder.add(this.selectedSection, this.builder.sections.length + 1)
       this.closeAddSectionBar()
-      this.$emit('add')
+      this.$emit('add', this.builder.sections[this.builder.sections.length - 1])
     },
     selectSection (section) {
       this.selectedSection = section
