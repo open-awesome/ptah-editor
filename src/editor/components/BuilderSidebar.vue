@@ -68,7 +68,8 @@
               :id="`menu-item-${ headerSection.id }`"
               :is-selected="isActiveSection(headerSection.id)"
               :section-id="headerSection.id"
-              @click="toggleSettingsBar(headerSection)">
+              @click="toggleSettingsBar(headerSection)"
+              class="b-menu-subitem--header">
             # - {{ headerSection.name }}
           </menu-subitem>
         </div>
