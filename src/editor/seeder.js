@@ -687,7 +687,11 @@ const data = new Map([
       days: true,
       hours: true,
       minutes: true,
-      seconds: true
+      seconds: true,
+      showLabels: true,
+      language: 'en',
+      labelPosition: 'top',
+      timeZone: new Date().getTimezoneOffset() / -60
     },
     styles: {
       'font-family': 'Lato',
