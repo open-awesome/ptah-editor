@@ -7,9 +7,11 @@ import Landing from './Landing'
 import vOutsideEvents from 'vue-outside-events'
 import BuilderModalContent from './BuilderModalContent'
 import PageTweaks from './PageTweaks/PageTweaks'
+import Vuebar from 'vuebar'
 
 Vue.use(Vuex)
 Vue.use(vOutsideEvents)
+Vue.use(Vuebar)
 
 const state = {
   storefrontPreview: false,
