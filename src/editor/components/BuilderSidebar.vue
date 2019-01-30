@@ -59,19 +59,36 @@
       <!-- Sections CONTENTS -->
       <BaseDropdown
         :isOpened="expandedMenuItem === 'sections'" id="sections_contents">
-        <div ref="sections">
-          <MenuSubitem
-            v-for="(section, index) in builder.sections"
-            v-scroll-to="`#section_${section.id}`"
-            :key="section.id"
-            :id="`menu-item-${section.id}`"
-            :isSelected="isActiveSection(section.id)"
-            :isMain="section.isMain"
-            :hasDraggableIcon="true"
-            :sectionId="section.id"
-            @click="toggleSettingsBar(section)">
-            {{`${index + 1}.`}} {{section.name}}
-          </MenuSubitem>
+
+        <!-- header -->
+        <div class="no-sortable" ref="header">
+          <menu-subitem
+              v-if="headerSection"
+              v-scroll-to="`#section_${ headerSection.id }`"
+              :id="`menu-item-${ headerSection.id }`"
+              :is-selected="isActiveSection(headerSection.id)"
+              :section-id="headerSection.id"
+              @click="toggleSettingsBar(headerSection)">
+            # - {{ headerSection.name }}
+          </menu-subitem>
+        </div>
+
+        <div class="sortable" ref="sections">
+
+          <!-- sections -->
+          <menu-subitem
+              v-for="(section, index) in builderSections"
+              v-scroll-to="`#section_${section.id}`"
+              :key="section.id"
+              :id="`menu-item-${section.id}`"
+              :is-selected="isActiveSection(section.id)"
+              :is-main="section.isMain"
+              :has-draggable-icon="true"
+              :section-id="section.id"
+              @click="toggleSettingsBar(section)">
+            {{`${ index + 1 } - `}} {{ section.name }}
+          </menu-subitem>
+
         </div>
       </BaseDropdown>
     </div>
@@ -160,6 +177,14 @@ export default {
       'sandbox'
     ]),
 
+    headerSection () {
+      return this.builder.sections.find(section => section.isHeader)
+    },
+
+    builderSections () {
+      return this.builder.sections.filter(section => !section.isHeader)
+    },
+
     isSlotsSettings () {
       return this.settingObjectType !== 'section'
     }
@@ -172,11 +197,9 @@ export default {
   },
 
   updated () {
-    if (this.$refs.sections && this.builder.sections.length) {
+    if (this.$refs.sections && this.builderSections.length) {
       Sortable.create(this.$refs.sections, {
-        group: {
-          name: 'sections'
-        },
+        group: { name: 'sections' },
         animation: 150,
         sort: true,
         disabled: false,
@@ -280,10 +303,12 @@ export default {
       this.toggleAddSectionMenu()
     },
 
-    onAddSection () {
-      setTimeout(() => {
-        this.$refs.sections.lastChild.dispatchEvent(new Event('click'))
-      }, 100)
+    async onAddSection (section) {
+      await this.$nextTick()
+      let target = (section.isHeader)
+        ? this.$refs.header.lastElementChild
+        : this.$refs.sections.lastElementChild
+      target.click()
     }
   }
 }

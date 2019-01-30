@@ -18,11 +18,14 @@
             align="center"
             class="b-sandbox hamburger-container__menu">
 
-          <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot">
+          <draggable
+              v-if="$sectionData.components.length"
+              v-model="$sectionData.components"
+              :style="$sectionData.container.styles"
+              class="b-draggable-slot">
 
             <div
                 v-for="(component, index) in $sectionData.components"
-                v-if="$sectionData.components.length !== 0"
                 :key="`component-${ _uid }-${ index }`"
                 :style="component.styles">
 
@@ -197,6 +200,7 @@ export default {
   cover,
 
   $schema: {
+    isHeader: true,
     mainStyle: StyleObject,
     container: StyleObject,
     components: [

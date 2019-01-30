@@ -325,16 +325,13 @@ export default {
       // this.currentOption = ''
     },
     hideStyler (event) {
-      if (!!event === false) {
-        return
-      }
-
-      if (event.target === this.el) {
+      if (event && event.target === this.el) {
         this.isCurrentStyler = true
         return
       }
 
       this.el.contentEditable = 'false'
+      
       if (event && isParentTo(event.target, this.$el)) {
         return
       }
