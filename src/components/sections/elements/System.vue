@@ -1,8 +1,8 @@
 <script>
 import * as types from '@editor/types'
-import VuseIcon from '@editor/components/VuseIcon'
-import Seeder from '@editor/seeder'
 import * as _ from 'lodash-es'
+import VuseIcon from '@editor/components/VuseIcon'
+import section from '../../mixins/section.js'
 
 const REQUIREMENTS = {
   'OS': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
@@ -163,13 +163,22 @@ const SCHEMA_CUSTOM = {
   edited: true
 }
 
+const GROUP_NAME = 'System'
+const NAME = 'System'
+
 export default {
-  name: 'System',
+  name: NAME,
+
+  group: GROUP_NAME,
+
+  mixins: [section],
+
+  cover: '/img/covers/system.jpg',
+
   components: {
     VuseIcon
   },
-  cover: '/img/covers/system.jpg',
-  group: 'elements',
+
   $schema: {
     mainStyle: types.SystemRequirements,
     platforms: {
@@ -197,11 +206,7 @@ export default {
       }
     }
   },
-  props: {
-    id: {
-      type: Number, required: true
-    }
-  },
+
   methods: {
     selectPlatform (key) {
       if (!this.$sectionData.mainStyle.systemRequirements[key].visible) {
@@ -211,11 +216,16 @@ export default {
       this.$sectionData.mainStyle.selectPlatform.name = key
     }
   },
+
   created () {
-    if (this.$sectionData['edited'] === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
-    }
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   },
+
   mounted () {
     this.selectPlatform('apple')
   }

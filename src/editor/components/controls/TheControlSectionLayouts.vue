@@ -59,7 +59,6 @@ export default {
       this.builder.remove(this.settingObjectSection)
       this.clearSettingObject()
       this.builder.add(section, index)
-
       setTimeout(() => {
         let subitem = document
           .getElementById('sections_contents')

@@ -1,9 +1,7 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import Seeder from '@editor/seeder'
-import Draggable from 'vuedraggable'
-import { mapActions } from 'vuex'
+import section from '../../mixins/section.js'
 
 const C_CUSTOM_1 = [
   {
@@ -16,7 +14,8 @@ const C_CUSTOM_1 = [
         'width': '160px',
         'height': '130px'
       }
-    }
+    },
+    key: 0
   },
   {
     element: {
@@ -24,12 +23,14 @@ const C_CUSTOM_1 = [
       styles: {
         'color': '#fff'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
       text: '39$'
-    }
+    },
+    key: 2
   },
   {
     element: {
@@ -44,7 +45,8 @@ const C_CUSTOM_1 = [
         'height': '52px',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 3
   }
 ]
 
@@ -59,7 +61,8 @@ const C_CUSTOM_1_M = [
         'width': '160px',
         'height': '130px'
       }
-    }
+    },
+    key: 4
   },
   {
     element: {
@@ -67,7 +70,8 @@ const C_CUSTOM_1_M = [
       styles: {
         'color': '#fff'
       }
-    }
+    },
+    key: 5
   }
 ]
 
@@ -82,7 +86,8 @@ const C_CUSTOM_1D = [
         name: 'checkMark',
         text: 'Suit of Legacy Armor'
       }
-    }
+    },
+    key: 6
   },
   {
     element: {
@@ -94,7 +99,8 @@ const C_CUSTOM_1D = [
         name: 'close',
         text: 'Mithril Box'
       }
-    }
+    },
+    key: 7
   },
   {
     element: {
@@ -106,7 +112,8 @@ const C_CUSTOM_1D = [
         name: 'close',
         text: 'Heroic Boosters'
       }
-    }
+    },
+    key: 8
   },
   {
     element: {
@@ -118,7 +125,8 @@ const C_CUSTOM_1D = [
         name: 'close',
         text: 'Summon Mistfire Wolf Elite Skil'
       }
-    }
+    },
+    key: 9
   }
 ]
 
@@ -133,7 +141,8 @@ const C_CUSTOM_2 = [
         'width': '160px',
         'height': '130px'
       }
-    }
+    },
+    key: 10
   },
   {
     element: {
@@ -141,12 +150,14 @@ const C_CUSTOM_2 = [
       styles: {
         'color': '#fff'
       }
-    }
+    },
+    key: 11
   },
   {
     element: {
       text: '49$'
-    }
+    },
+    key: 12
   },
   {
     element: {
@@ -161,7 +172,8 @@ const C_CUSTOM_2 = [
         'height': '52px',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 13
   }
 ]
 
@@ -176,7 +188,8 @@ const C_CUSTOM_2_M = [
         'width': '160px',
         'height': '130px'
       }
-    }
+    },
+    key: 14
   },
   {
     element: {
@@ -184,7 +197,8 @@ const C_CUSTOM_2_M = [
       styles: {
         'color': '#fff'
       }
-    }
+    },
+    key: 15
   }
 ]
 
@@ -199,7 +213,8 @@ const C_CUSTOM_2D = [
         name: 'checkMark',
         text: 'Suit of Legacy Armor'
       }
-    }
+    },
+    key: 16
   },
   {
     element: {
@@ -211,7 +226,8 @@ const C_CUSTOM_2D = [
         name: 'checkMark',
         text: 'Mithril Box'
       }
-    }
+    },
+    key: 17
   },
   {
     element: {
@@ -223,7 +239,8 @@ const C_CUSTOM_2D = [
         name: 'close',
         text: 'Heroic Boosters'
       }
-    }
+    },
+    key: 18
   },
   {
     element: {
@@ -235,7 +252,8 @@ const C_CUSTOM_2D = [
         name: 'close',
         text: 'Summon Mistfire Wolf Elite Skil'
       }
-    }
+    },
+    key: 19
   }
 ]
 
@@ -250,7 +268,8 @@ const C_CUSTOM_3 = [
         'width': '160px',
         'height': '130px'
       }
-    }
+    },
+    key: 20
   },
   {
     element: {
@@ -258,12 +277,14 @@ const C_CUSTOM_3 = [
       styles: {
         'color': '#fff'
       }
-    }
+    },
+    key: 21
   },
   {
     element: {
       text: '59$'
-    }
+    },
+    key: 22
   },
   {
     element: {
@@ -278,7 +299,8 @@ const C_CUSTOM_3 = [
         'height': '52px',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 23
   }
 ]
 
@@ -293,7 +315,8 @@ const C_CUSTOM_3_M = [
         'width': '160px',
         'height': '130px'
       }
-    }
+    },
+    key: 24
   },
   {
     element: {
@@ -301,7 +324,8 @@ const C_CUSTOM_3_M = [
       styles: {
         'color': '#fff'
       }
-    }
+    },
+    key: 25
   }
 ]
 
@@ -316,7 +340,8 @@ const C_CUSTOM_3D = [
         name: 'checkMark',
         text: 'Suit of Legacy Armor'
       }
-    }
+    },
+    key: 26
   },
   {
     element: {
@@ -328,7 +353,8 @@ const C_CUSTOM_3D = [
         name: 'checkMark',
         text: 'Mithril Box'
       }
-    }
+    },
+    key: 27
   },
   {
     element: {
@@ -340,7 +366,8 @@ const C_CUSTOM_3D = [
         name: 'checkMark',
         text: 'Heroic Boosters'
       }
-    }
+    },
+    key: 28
   },
   {
     element: {
@@ -352,7 +379,8 @@ const C_CUSTOM_3D = [
         name: 'close',
         text: 'Summon Mistfire Wolf Elite Skil'
       }
-    }
+    },
+    key: 29
   }
 ]
 
@@ -367,7 +395,8 @@ const C_CUSTOM_4 = [
         'width': '160px',
         'height': '130px'
       }
-    }
+    },
+    key: 30
   },
   {
     element: {
@@ -375,12 +404,14 @@ const C_CUSTOM_4 = [
       styles: {
         'color': '#fff'
       }
-    }
+    },
+    key: 31
   },
   {
     element: {
       text: '79$'
-    }
+    },
+    key: 32
   },
   {
     element: {
@@ -395,7 +426,8 @@ const C_CUSTOM_4 = [
         'height': '52px',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 33
   }
 ]
 
@@ -410,7 +442,8 @@ const C_CUSTOM_4_M = [
         'width': '160px',
         'height': '130px'
       }
-    }
+    },
+    key: 34
   },
   {
     element: {
@@ -418,7 +451,8 @@ const C_CUSTOM_4_M = [
       styles: {
         'color': '#fff'
       }
-    }
+    },
+    key: 35
   }
 ]
 
@@ -433,7 +467,8 @@ const C_CUSTOM_4D = [
         name: 'checkMark',
         text: 'Suit of Legacy Armor'
       }
-    }
+    },
+    key: 36
   },
   {
     element: {
@@ -445,7 +480,8 @@ const C_CUSTOM_4D = [
         name: 'checkMark',
         text: 'Mithril Box'
       }
-    }
+    },
+    key: 37
   },
   {
     element: {
@@ -457,7 +493,8 @@ const C_CUSTOM_4D = [
         name: 'checkMark',
         text: 'Heroic Boosters'
       }
-    }
+    },
+    key: 37
   },
   {
     element: {
@@ -469,7 +506,8 @@ const C_CUSTOM_4D = [
         name: 'checkMark',
         text: 'Summon Mistfire Wolf Elite Skil'
       }
-    }
+    },
+    key: 39
   }
 ]
 
@@ -612,11 +650,13 @@ const NAME = 'ProductsColumns'
 
 export default {
   name: NAME,
-  components: {
-    Draggable
-  },
-  cover: '/img/covers/products.jpg',
+
   group: GROUP_NAME,
+
+  mixins: [section],
+
+  cover: '/img/covers/products.jpg',
+
   $schema: {
     mainStyle: types.ProductSection,
     container1: types.StyleObject,
@@ -631,49 +671,27 @@ export default {
     container4: types.StyleObject,
     container4m: types.StyleObject,
     container4d: types.StyleObject,
-    components1: COMPONENTS,
-    components1m: COMPONENTS_M,
-    components1d: COMPONENTS_D,
-    components2: COMPONENTS,
-    components2m: COMPONENTS_M,
-    components2d: COMPONENTS_D,
-    components3: COMPONENTS,
-    components3m: COMPONENTS_M,
-    components3d: COMPONENTS_D,
-    components4: COMPONENTS,
-    components4m: COMPONENTS_M,
-    components4d: COMPONENTS_D
-  },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
-  methods: {
-    ...mapActions('Landing', [
-      'updateGroupData',
-      'updateSectionData'
-    ]),
-
-    storeData: _.after(2, (self) => {
-      self.updateSectionData({
-        name: NAME,
-        data: _.cloneDeep(self.$sectionData)
-      })
-    })
+    components1: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }]),
+    components1m: _.merge([], COMPONENTS_M, [{ key: 4 }, { key: 5 }]),
+    components1d: _.merge([], COMPONENTS_D, [{ key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
+    components2: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }]),
+    components2m: _.merge([], COMPONENTS_M, [{ key: 14 }, { key: 15 }]),
+    components2d: _.merge([], COMPONENTS_D, [{ key: 16 }, { key: 17 }, { key: 18 }, { key: 19 }]),
+    components3: _.merge([], COMPONENTS, [{ key: 20 }, { key: 21 }, { key: 22 }, { key: 23 }]),
+    components3m: _.merge([], COMPONENTS_M, [{ key: 24 }, { key: 25 }]),
+    components3d: _.merge([], COMPONENTS_D, [{ key: 26 }, { key: 27 }, { key: 28 }, { key: 29 }]),
+    components4: _.merge([], COMPONENTS, [{ key: 30 }, { key: 31 }, { key: 32 }, { key: 33 }]),
+    components4m: _.merge([], COMPONENTS_M, [{ key: 34 }, { key: 35 }]),
+    components4d: _.merge([], COMPONENTS_D, [{ key: 36 }, { key: 37 }, { key: 38 }, { key: 39 }])
   },
 
   created () {
-    if (this.$sectionData.edited === undefined && !!this.$store.state.Landing.sectionData[NAME] === false) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
-    } else {
-      Seeder.seed(_.merge(this.$sectionData, this.$store.state.Landing.sectionData[NAME]))
-    }
-  },
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
 
-  updated () {
-    this.storeData(this)
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   }
 }
 </script>

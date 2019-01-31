@@ -43,7 +43,7 @@
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import VuseIcon from '@editor/components/VuseIcon'
-import { mapActions } from 'vuex'
+import section from '../../mixins/section.js'
 
 const GALLERY_ITEM = {
   preview: types.Image,
@@ -51,16 +51,34 @@ const GALLERY_ITEM = {
   button: types.Button
 }
 
-const GROUP_NAME = 'galleries'
+const GROUP_NAME = 'Galleries'
 const NAME = 'Gallery2'
+
+const SCHEMA_CUSTOM = {
+  mainStyle: {
+    styles: {
+      'background-color': 'rgba(21,28,68,0.07)'
+    },
+    classes: [
+      'full-height'
+    ]
+  },
+  edited: true
+}
 
 export default {
   name: NAME,
+
+  group: GROUP_NAME,
+
+  mixins: [section],
+
   components: {
     VuseIcon
   },
+
   cover: '/img/covers/gallery2.png',
-  group: GROUP_NAME,
+
   $schema: {
     mainStyle: types.StyleObject,
     button: types.Button,
@@ -82,12 +100,7 @@ export default {
     url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
     content: ''
   },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
+
   mounted () {
     // TODO: crached for preview/export
     // try {
@@ -96,11 +109,8 @@ export default {
     //   console.error(error)
     // }
   },
+
   methods: {
-    ...mapActions('Landing', [
-      'updateGroupData',
-      'updateSectionData'
-    ]),
     onClick (el, index) {
       let m = false
       let href = el.button.href
@@ -117,14 +127,17 @@ export default {
       this.openPopup(this.$sectionData.content)
       this.setIndex(index)
     },
+
     setIndex (index) {
       this.$sectionData.index = index
     },
+
     openPopup () {
       setTimeout(() => {
         this.setHeight()
       }, 100)
     },
+
     setHeight () {
       this.$sectionData.isShowPopup = true
 
@@ -142,10 +155,12 @@ export default {
       this.$sectionData.popupStyles['width'] = actualWidth + 'px'
       this.$sectionData.popupStyles['margin'] = '0 ' + calcMargin + 'px'
     },
+
     closePopup () {
       this.$sectionData.isShowPopup = false
       this.$sectionData.content = ''
     },
+
     matchYoutubeUrl (url) {
       let p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
       let matches = url.match(p)
@@ -154,6 +169,7 @@ export default {
       }
       return false
     },
+
     clickArr (type) {
       let index = this.$sectionData.index
       let num = null
@@ -168,42 +184,16 @@ export default {
       el = this.$sectionData.images[num]
 
       this.onClick(el, num)
-    },
-
-    storeData: _.after(2, (self) => {
-      let data = {}
-      self.$sectionData.images.forEach((component, key) => {
-        data[key] = component.preview.styles['background-image']
-      })
-      self.updateGroupData({ name: GROUP_NAME, data })
-      self.updateSectionData({
-        name: NAME,
-        data: _.cloneDeep(self.$sectionData)
-      })
-    }),
-
-    canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
     }
   },
 
   created () {
-    let data = this.$store.state.Landing.sectionData[NAME]
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
 
-    if (data && this.canRestore()) {
-      _.merge(this.$sectionData, data)
-    }
-
-    _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (image, key) => {
-      let elementObj = this.$sectionData.images[key]
-      if (elementObj) {
-        elementObj.preview.styles['background-image'] = image
-      }
-    })
-  },
-
-  updated () {
-    this.storeData(this)
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   }
 }
 </script>
