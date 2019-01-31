@@ -1,24 +1,54 @@
+<i18n>
+{
+  "ru": {
+    "days": "Дней",
+    "hours": "Часов",
+    "minutes": "Минут",
+    "seconds": "Секунд"
+  },
+  "en": {
+    "days": "Days",
+    "hours": "Hours",
+    "minutes": "Minutes",
+    "seconds": "Seconds"
+  },
+  "de": {
+    "days": "Tage",
+    "hours": "Stunden",
+    "minutes": "Minuten",
+    "seconds": "Sekunden"
+  }
+}
+</i18n>  
+
 <template>
-<div :data-timestamp="timer.timestamp" class="b-timer js-timer">
+<div
+    :class="{
+      'b-timer--labels-reverse': (labels.position === 'top'),
+      'b-timer--labels-hidden': !labels.show
+    }"
+    :data-timestamp="timer.timestamp"
+    :data-utc-offset="timer.UTC"
+    class="b-timer is-editable js-timer">
 
   <div v-show="timer.days" class="b-timer__days js-timer-days">
     <span class="b-timer__number js-timer-number">{{ parse(days) | check }}</span>
-    <span class="b-timer__format">Days</span>
+    <span class="b-timer__format">{{ $t('days') }}</span>
   </div>
 
   <div v-show="timer.hours" class="b-timer__hours js-timer-hours">
     <span class="b-timer__number js-timer-number">{{ parse(hours, 24) | check }}</span>
-    <span class="b-timer__format">Hours</span>
+    <span class="b-timer__format">{{ $t('hours') }}</span>
   </div>
 
   <div v-show="timer.minutes" class="b-timer__minutes js-timer-minutes">
     <span class="b-timer__number js-timer-number">{{ parse(minutes, 60) | check }}</span>
-    <span class="b-timer__format">Minutes</span>
+    <span class="b-timer__format">{{ $t('minutes') }}</span>
   </div>
 
   <div v-show="timer.seconds" class="b-timer__seconds js-timer-seconds">
     <span class="b-timer__number js-timer-number">{{ parse(seconds, 60) | check }}</span>
-    <span class="b-timer__format">Seconds</span>
+    <span class="b-timer__format">{{ $t('seconds') }}</span>
   </div>
 
 </div>
@@ -54,6 +84,10 @@ export default {
       return this.$section.get(`$sectionData.${ this.path }.timer`)
     },
 
+    labels () {
+      return this.timer.labels
+    },
+
     seconds () {
       return this.timeLeft / 1000
     },
@@ -72,22 +106,36 @@ export default {
   },
 
   watch: {
-    'timer.timestamp': {
+    timer: {
       immediate: true,
-      handler (value) {
+      deep: true,
+      handler ({ labels, UTC, timestamp }) {
         clearInterval(this.interval)
-        this.timeLeft = value - Date.now()
+
+        this.$i18n.locale = labels.language
+        this.timeLeft = timestamp - this.getTimestampWithUTCOffset(UTC)
+
         this.interval = setInterval(() => {
-          if (!value || !this.timeLeft || !this.timeLeft < 0) {
+          if (!timestamp || !this.timeLeft || !this.timeLeft < 0) {
             clearInterval(this.interval)
           }
-          this.timeLeft = value - Date.now()
+          this.timeLeft = timestamp - this.getTimestampWithUTCOffset(UTC)
         }, 1000)
       }
     }
   },
 
   methods: {
+    getTimestampWithUTCOffset (UTCOffset) {
+      let now = new Date()
+      let currentTzOffset = -(now.getTimezoneOffset() / 60)
+      let deltaTzOffset = UTCOffset - currentTzOffset
+      let nowTimestamp = now.getTime() 
+      let deltaTzOffsetMilli = deltaTzOffset * 1000 * 60 * 60
+      let dateWithUTCOffset = new Date(nowTimestamp + deltaTzOffsetMilli)
+      return dateWithUTCOffset.getTime()
+    },
+
     parse (value, remainder) {
       value = Math.floor(value)
       return (remainder) ? value % remainder : value
@@ -103,6 +151,7 @@ export default {
   justify-content: center
   color: $white
   text-align: center
+  font-size: 5rem
 
   &.is-editable
     border: .1rem dashed $green
@@ -121,6 +170,9 @@ export default {
     font-weight: 300
     opacity: .9
 
+    .b-timer--labels-reverse &
+      flex-direction: column-reverse
+
   &__number
     display: inline-flex
     justify-content: center
@@ -129,11 +181,21 @@ export default {
     padding: .2rem .3rem
     border-radius: .4rem
     background: rgba(51, 51, 51, .5)
+    font-size: 1.3em
+
+    .b-timer--labels-reverse &
+      margin-bottom: 0
 
   &__format
     display: inline-flex
     justify-content: center
     width: 100%
-    font-size: .5em
+    font-size: .4em
     opacity: .9
+
+    .b-timer--labels-reverse &
+      margin-bottom: .8rem
+
+    .b-timer--labels-hidden &
+      display: none
 </style>

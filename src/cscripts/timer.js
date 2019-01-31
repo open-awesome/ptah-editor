@@ -2,14 +2,18 @@ const timers = document.querySelectorAll('.js-timer')
 
 export function initTimer (timers) {
   timers.forEach((timer, index) => {
-    let timestamp = timer.dataset.timestamp
+    let timestamp = Number(timer.dataset.timestamp)
+    let UTCOffset = Number(timer.dataset.utcOffset)
+
     let days = timer.querySelector('.js-timer-days > .js-timer-number')
     let hours = timer.querySelector('.js-timer-hours > .js-timer-number')
     let minutes = timer.querySelector('.js-timer-minutes > .js-timer-number')
     let seconds = timer.querySelector('.js-timer-seconds > .js-timer-number')
 
+    clearInterval(initTimer[index])
+
     initTimer[index] = setInterval(() => {
-      let timeLeft = getTimeLeft(timestamp)
+      let timeLeft = getTimeLeft(timestamp, UTCOffset)
 
       seconds.innerText = checkTime(getSeconds(timeLeft))
       minutes.innerText = checkTime(getMinutes(timeLeft))
@@ -23,8 +27,14 @@ export function initTimer (timers) {
   })
 }
 
-function getTimeLeft (timestamp) {
-  return timestamp - Date.now()
+function getTimeLeft (timestamp, UTCOffset) {
+  let now = new Date()
+  let currentTzOffset = -(now.getTimezoneOffset() / 60)
+  let deltaTzOffset = UTCOffset - currentTzOffset
+  let nowTimestamp = now.getTime() 
+  let deltaTzOffsetMilli = deltaTzOffset * 1000 * 60 * 60
+  let dateWithUTCOffset = new Date(nowTimestamp + deltaTzOffsetMilli)
+  return timestamp - dateWithUTCOffset.getTime()
 }
 
 function getSeconds (timestamp) {

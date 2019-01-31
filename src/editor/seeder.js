@@ -683,20 +683,27 @@ const data = new Map([
   [types.Timer, () => (_.merge({}, DEFAULT_OPTIONS, {
     isComplex: true,
     timer: {
+      // --- timer timestamp
       timestamp: null,
+      // --- show days
       days: true,
+      // --- show hours
       hours: true,
+      // --- show minutes
       minutes: true,
+      // --- show seconds
       seconds: true,
-      showLabels: true,
-      language: 'en',
-      labelPosition: 'top',
-      timeZone: new Date().getTimezoneOffset() / -60
-    },
-    styles: {
-      'font-family': 'Lato',
-      'font-size':  '48px',
-      'color': '#FFF'
+      // --- current UTC offset
+      UTC: new Date().getTimezoneOffset() / 60 * (-1),
+      // --- labels options
+      labels: {
+        // --- show labels
+        show: true,
+        // --- labels translation
+        language: 'en',
+        // --- labels position
+        position: 'top'
+      }
     }
   }))]
 ])

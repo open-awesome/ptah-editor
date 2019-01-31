@@ -4,6 +4,15 @@ module.exports = {
   configureWebpack: {
     resolve: {
       alias: require('./aliases.config').webpack
+    },
+    module: {
+      rules: [
+        {
+          resourceQuery: /blockType=i18n/,
+          type: 'javascript/auto',
+          loader: '@kazupon/vue-i18n-loader'
+        }
+      ]
     }
   },
   pluginOptions: {

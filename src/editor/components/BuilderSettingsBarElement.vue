@@ -2,41 +2,9 @@
   <div class="b-elem-settings">
 
     <!-- Timer -->
-    <div v-if="settingObjectOptions.timer" class="b-elem-settings__timer">
-
-      <base-label v-text="'Set timer'"/>
-      <date-picker
-          v-model="settingObjectOptions.timer.timestamp"
-          :minuteStep="10"
-          :editable="false"
-          :disabled-days="getDisabledDays"
-          widht="300px"
-          type="datetime"
-          format="DD.MM.YYYY hh:mm a"
-          value-type="timestamp"
-          placeholder="Select date and time"
-          lang="en"
-          confirm/>
-
-      <base-switcher
-          v-model="settingObjectOptions.timer.days"
-          label="Show days"/>
-
-      <base-switcher
-          v-model="settingObjectOptions.timer.hours"
-          label="Show hours"/>
-
-      <base-switcher
-          v-model="settingObjectOptions.timer.minutes"
-          label="Show minutes"/>
-
-      <base-switcher
-          v-model="settingObjectOptions.timer.seconds"
-          label="Show seconds"/>
-
-      <control-text @change="timerStyleChange" is-timer expand/>
-          
-    </div>
+    <builder-settings-bar-element-timer
+        v-if="settingObjectOptions.timer"
+        :timer="settingObjectOptions.timer"/>
 
     <base-scroll-container
         v-show="!settingObjectOptions.timer"
@@ -148,7 +116,7 @@
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 
-import DatePicker from 'vue2-datepicker'
+import BuilderSettingsBarElementTimer from './BuilderSettingsBarElementTimer'
 
 import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
@@ -173,7 +141,7 @@ export default {
   },
 
   components: {
-    DatePicker,
+    BuilderSettingsBarElementTimer,
     ControlAlign,
     ControlText,
     ControlBackground,
@@ -334,19 +302,9 @@ export default {
       this.expandedSocialNetworks = ['networks', 'socials'].includes(type)
     },
 
-    getDisabledDays (date) {
-      return new Date() >= date
-    },
-
     styleChange (value) {
       this.updateStyle(_.kebabCase(value[0]), value[1])
       this[value[0]] = value[1]
-    },
-
-    timerStyleChange ([key, value]) {
-      let styles = { [key]: value }
-      console.log(styles)
-      // this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
     },
 
     updateStyle (prop, value) {
@@ -422,11 +380,6 @@ export default {
   height: auto
   width: 100%
   align-items: stretch
-
-  &__timer
-    padding-right: .8rem
-    > *
-      margin-bottom: .8rem
 
   &__inner
     min-width: 24rem
