@@ -1,48 +1,79 @@
 <template>
-  <BuilderLayout
+
+<builder-layout
     :builder="builder"
     @export="submit"
     @preview="preview"
-    @save="save"
-    >
-    <div class="artboard is-editable" id="artboard" ref="artboard"
+    @save="save">
+    
+  <div
       :class="{
         'is-sorting': $builder.isSorting,
         'is-editable': $builder.isEditing,
         'fp-scroll': currentLanding.settings.fullPageScroll === 'yes'
-      }">
-      <component
-          v-for="section in $builder.sections"
-          :key="section.id"
-          :is="section.name"
-          :id="section.id"
-          :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
-          @click.native="selectSidebarSection(section)"
-          @dblclick.native="showSettingsBar($event, section)">
-          <video
-              v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
-              :id="`bg-video-${ section.id }`"
-              slot="video"
-              autoplay
-              muted
-              loop>
-            <source :src="section.data.mainStyle.backgroundVideo">
-          </video>
-      </component>
-      <div class="controller-intro" v-if="emptySections">
-        <h3>&larr; Choose layout from the menu</h3>
-      </div>
-      <div class="controller-intro" v-if="showIntro && !this.$builder.sections.length">
-        <label for="projectName">Hello, start your project</label>
-        <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
-        <template v-if="themes">
-          <div class="controller-themes">
-            <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
-          </div>
-        </template>
-      </div>
+      }"
+      id="artboard"
+      class="artboard"
+      ref="artboard">
+
+    <component
+        v-if="headerSection"
+        :is="headerSection.name"
+        :id="headerSection.id"
+        :class="{ 'video-background': headerSection.data.mainStyle.backgroundType === 'video' }"
+        @click.native="selectSidebarSection(headerSection)"
+        @dblclick.native="showSettingsBar($event, headerSection)">
+
+      <video
+          v-if="headerSection.data.mainStyle.backgroundType === 'video' && headerSection.data.mainStyle.backgroundVideo"
+          :id="`bg-video-${ headerSection.id }`"
+          slot="video"
+          autoplay
+          muted
+          loop>
+        <source :src="headerSection.data.mainStyle.backgroundVideo">
+      </video>
+
+    </component>
+
+    <component
+        v-for="section in builderSections"
+        :key="section.id"
+        :is="section.name"
+        :id="section.id"
+        :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
+        @click.native="selectSidebarSection(section)"
+        @dblclick.native="showSettingsBar($event, section)">
+
+        <video
+            v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
+            :id="`bg-video-${ section.id }`"
+            slot="video"
+            autoplay
+            muted
+            loop>
+          <source :src="section.data.mainStyle.backgroundVideo">
+        </video>
+
+    </component>
+    
+    <div v-show="emptySections" class="controller-intro">
+      <h3>&larr; Choose layout from the menu</h3>
     </div>
-  </BuilderLayout>
+
+    <div v-show="showIntro && !builder.sections.length" class="controller-intro">
+      <label for="projectName">Hello, start your project</label>
+      <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
+      <template v-if="themes">
+        <div class="controller-themes">
+          <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
+        </div>
+      </template>
+    </div>
+    
+  </div>
+
+</builder-layout>
 </template>
 
 <script>
@@ -74,6 +105,7 @@ export default {
       })
     }
   },
+
   data () {
     return {
       title: null,
@@ -84,15 +116,22 @@ export default {
   },
 
   computed: {
-    ...mapState([
-      'currentLanding'
-    ]),
-    emptySections: function () {
-      return !this.showIntro && !this.$builder.sections.length
-    },
+    ...mapState(['currentLanding']),
 
     builder () {
       return this.$builder
+    },
+
+    emptySections () {
+      return !this.showIntro && !this.builder.sections.length
+    },
+
+    headerSection () {
+      return this.builder.sections.find(section => section.isHeader)
+    },
+
+    builderSections () {
+      return this.builder.sections.filter(section => !section.isHeader)
     }
   },
 

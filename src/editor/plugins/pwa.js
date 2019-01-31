@@ -84,6 +84,7 @@ function download (assets) {
   const zip = new JSZip()
   const output = zip.folder('project')
   const jsFolder = output.folder('js/')
+  const manifest = this.getManifest()
 
   var promise = new Promise((resolve, reject) => {
     const assetsClient = new XMLHttpRequest()
@@ -96,6 +97,9 @@ function download (assets) {
     .then((content) => {
       jsFolder.file('cjs.js', content)
       return content
+    })
+    .then(() => {
+      return output.file('manifest.json', manifest)
     })
     .then(() => {
       cleanDOM(frag)
@@ -116,6 +120,7 @@ function download (assets) {
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="shortcut icon" href="${icon}"/>
+            <link rel="manifest" href="/manifest.json">
             <link href="https://fonts.googleapis.com/css?family=Lato|Heebo|PT+Serif|Montserrat:400,800&amp;subset=cyrillic" rel="stylesheet">
             ${scrollSetup.style}
             ${og}
