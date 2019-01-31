@@ -272,6 +272,9 @@ export default {
       if (this.type === 'button') {
         this.el.contentEditable = 'true'
       }
+      if (this.type === 'slogan') {
+        this.el.contentEditable = 'true'
+      }
 
       placeCaretAtEnd(this.el)
 
@@ -333,7 +336,7 @@ export default {
       }
 
       this.el.contentEditable = 'false'
-      
+
       if (event && isParentTo(event.target, this.$el)) {
         return
       }
