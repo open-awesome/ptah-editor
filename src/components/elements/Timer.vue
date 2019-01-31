@@ -170,7 +170,9 @@ export default {
     flex-direction: column
     min-width: 2em
     font-weight: 300
+    font-size: 1em
     opacity: .9
+
     + .b-timer__divider
       margin-top: .4rem
 
@@ -178,6 +180,13 @@ export default {
       flex-direction: column-reverse
       + .b-timer__divider
         margin-top: 3rem
+        .is-mobile &
+          margin-top: 1.4rem
+          font-size: 1.5rem
+        @media only screen and (max-width: 600px)
+          margin-top: 2.5rem
+        @media only screen and (max-width: 450px)
+          margin-top: 1.4rem
 
   &__divider
     margin: 0 .6rem
@@ -204,7 +213,28 @@ export default {
 
     .b-timer--labels-reverse &
       margin-bottom: .8rem
+      .is-mobile &
+        margin-bottom: .4rem
+      @media only screen and (max-width: 450px)
+        margin-bottom: .4rem
 
     .b-timer--labels-hidden &
       display: none
+      
+  // --- media
+
+  .is-mobile &
+    font-size: 1.5rem
+
+  @media only screen and (max-width: 600px)
+    font-size: 3.5rem
+
+  @media only screen and (max-width: 500px)
+    font-size: 3rem
+
+  @media only screen and (max-width: 450px)
+    font-size: 2.5rem
+
+  @media only screen and (max-width: 450px)
+    font-size: 1.5rem
 </style>
