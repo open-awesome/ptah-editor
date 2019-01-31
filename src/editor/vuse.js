@@ -79,6 +79,18 @@ class Vuse {
   }
 
   /**
+     * Replacea section with the specified id.
+     * @param {String|Number} id
+     */
+  replacement (section, options, position) {
+    // this.sections.splice(id, 1)
+    // section.destroy()
+    this.sections[position] = new Section(options)
+    console.log(this.sections[position])
+    console.log(new Section(options))
+  }
+
+  /**
      * Removes a section with the specified id.
      * @param {String|Number} oldIndex
      * @param {String|Number} newIndex
@@ -215,6 +227,7 @@ class Vuse {
           component = this.components[section].options
           sectionData = {
             name: component.name,
+            group: component.group,
             schema: component.schema,
             data: component.data
           }
@@ -226,6 +239,7 @@ class Vuse {
           component = this.components[section.name].options
           sectionData = {
             name: component.name,
+            group: component.group,
             schema: component.schema,
             data: section.data,
             isHeader: component.isHeader
