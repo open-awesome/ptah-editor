@@ -31,22 +31,28 @@
     :data-utc-offset="timer.UTC"
     class="b-timer is-editable js-timer">
 
-  <div v-show="timer.days" class="b-timer__days js-timer-days">
+  <div class="b-timer__days js-timer-days">
     <span class="b-timer__number js-timer-number">{{ parse(days) | check }}</span>
     <span class="b-timer__format">{{ $t('days') }}</span>
   </div>
 
-  <div v-show="timer.hours" class="b-timer__hours js-timer-hours">
+  <span class="b-timer__divider">:</span>
+
+  <div class="b-timer__hours js-timer-hours">
     <span class="b-timer__number js-timer-number">{{ parse(hours, 24) | check }}</span>
     <span class="b-timer__format">{{ $t('hours') }}</span>
   </div>
 
-  <div v-show="timer.minutes" class="b-timer__minutes js-timer-minutes">
+  <span class="b-timer__divider">:</span>
+
+  <div class="b-timer__minutes js-timer-minutes">
     <span class="b-timer__number js-timer-number">{{ parse(minutes, 60) | check }}</span>
     <span class="b-timer__format">{{ $t('minutes') }}</span>
   </div>
 
-  <div v-show="timer.seconds" class="b-timer__seconds js-timer-seconds">
+  <span class="b-timer__divider">:</span>
+
+  <div class="b-timer__seconds js-timer-seconds">
     <span class="b-timer__number js-timer-number">{{ parse(seconds, 60) | check }}</span>
     <span class="b-timer__format">{{ $t('seconds') }}</span>
   </div>
@@ -156,29 +162,32 @@ export default {
   &.is-editable
     border: .1rem dashed $green
 
-  > *:not(:last-child)
-    margin-right: 0
-
   &__days,
   &__minutes,
   &__hours,
   &__seconds
     display: inline-flex
     flex-direction: column
-    width: 2em
-    margin: .8rem
+    min-width: 2em
     font-weight: 300
     opacity: .9
+    + .b-timer__divider
+      margin-top: .4rem
 
     .b-timer--labels-reverse &
       flex-direction: column-reverse
+      + .b-timer__divider
+        margin-top: 3rem
+
+  &__divider
+    margin: 0 .6rem
 
   &__number
     display: inline-flex
     justify-content: center
     width: 100%
     margin-bottom: .8rem
-    padding: .2rem .3rem
+    padding: .3rem .6rem
     border-radius: .4rem
     background: rgba(51, 51, 51, .5)
     font-size: 1.3em

@@ -405,9 +405,10 @@ class Vuse {
   }
 
   getManifest () {
+    let description = _.find(this.settings.ogTags, o => o.property === 'og:description') || { content: '' }
     let manifest = {
       name: this.settings.title,
-      description: _.find(this.settings.ogTags, o => o.property === 'og:description').content || '',
+      description: description.content,
       icons: [{
         src: this.settings.favicon,
         sizes: '64x64'

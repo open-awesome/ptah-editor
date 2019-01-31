@@ -685,14 +685,6 @@ const data = new Map([
     timer: {
       // --- timer timestamp
       timestamp: null,
-      // --- show days
-      days: true,
-      // --- show hours
-      hours: true,
-      // --- show minutes
-      minutes: true,
-      // --- show seconds
-      seconds: true,
       // --- current UTC offset
       UTC: new Date().getTimezoneOffset() / 60 * (-1),
       // --- labels options

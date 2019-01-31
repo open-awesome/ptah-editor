@@ -6,6 +6,8 @@
       v-model="timer.timestamp"
       :minuteStep="10"
       :editable="false"
+      :not-before="notBeforeDate"
+      :not-after="notAfterDate"
       :disabled-days="getDisabledDays"
       style="width:100%"
       type="datetime"
@@ -31,13 +33,9 @@
       :options="UTCOptions"
       :value="UTC"
       @input="UTC = $event.value"
-      label="Labels language"/>
+      label="Time zone"/>
 
   <base-switcher v-model="labels.show" label="Show labels"/>
-  <base-switcher v-model="timer.days" label="Show days"/>
-  <base-switcher v-model="timer.hours" label="Show hours"/>
-  <base-switcher v-model="timer.minutes" label="Show minutes"/>
-  <base-switcher v-model="timer.seconds" label="Show seconds"/>
 
 </div>
 </template>
@@ -59,6 +57,7 @@ export default {
 
   data () {
     return {
+      maxDays: 999,
       languageOptions: [
         { name: 'Russian', value: 'ru' },
         { name: 'English', value: 'en' },
@@ -98,6 +97,15 @@ export default {
   },
 
   computed: {
+    notBeforeDate () {
+      return new Date()
+    },
+
+    notAfterDate () {
+      let maxms = new Date().setMilliseconds(this.maxDays * 24 * 60 * 60 * 1000)
+      return new Date(maxms)
+    },
+
     labels () {
       return this.timer.labels
     },
@@ -133,14 +141,14 @@ export default {
   },
 
   methods: {
+    getDisabledDays (date) {
+      return new Date() >= date
+    },
+
     getLabelsOption (name) {
       let value = this.labels[name]
       let option = this[`${ name }Options`].find(option => option.value === value)
       return { name: option.name, value }
-    },
-
-    getDisabledDays (date) {
-      return new Date() >= date
     }
   }
 }
