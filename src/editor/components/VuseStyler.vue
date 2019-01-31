@@ -159,15 +159,17 @@ export default {
     }
 
     // Apply animation to element
-    this.options.classes.forEach((name, index) => {
-      if (name.indexOf('ptah-a-') > -1) {
-        this.animation = _.find(this.animationList, ['className', name])
-      }
+    if (this.options.classes !== undefined && this.options.classes.length) {
+      this.options.classes.forEach((name, index) => {
+        if (name.indexOf('ptah-a-') > -1) {
+          this.animation = _.find(this.animationList, ['className', name])
+        }
 
-      if (name.indexOf('ptah-d-video') > -1) {
-        this.el.dataset.video = this.options.video
-      }
-    })
+        if (name.indexOf('ptah-d-video') > -1) {
+          this.el.dataset.video = this.options.video
+        }
+      })
+    }
 
     if (this.options.video) {
       this.el.classList.add('ptah-d-video')
@@ -270,6 +272,9 @@ export default {
       if (this.type === 'button') {
         this.el.contentEditable = 'true'
       }
+      if (this.type === 'slogan') {
+        this.el.contentEditable = 'true'
+      }
 
       placeCaretAtEnd(this.el)
 
@@ -331,7 +336,7 @@ export default {
       }
 
       this.el.contentEditable = 'false'
-      
+
       if (event && isParentTo(event.target, this.$el)) {
         return
       }

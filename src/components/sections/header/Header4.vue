@@ -92,10 +92,9 @@
 </template>
 
 <script>
-import Seeder from '@editor/seeder'
-import Draggable from 'vuedraggable'
 import { StyleObject, Link, Logo } from '@editor/types'
 import { merge } from 'lodash-es'
+import section from '../../mixins/section.js'
 
 const [name, group, cover] = ['Header4', 'header', '/img/covers/header-4.png']
 const defaultComponents = [
@@ -114,7 +113,8 @@ const defaultComponents = [
         'border-radius': '2px',
         'font-size': '18px'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -131,7 +131,8 @@ const defaultComponents = [
         'border-radius': '2px',
         'font-size': '18px'
       }
-    }
+    },
+    key: 2
   },
   {
     element: {
@@ -144,7 +145,8 @@ const defaultComponents = [
         'height': '80px',
         'margin': '8px 16px'
       }
-    }
+    },
+    key: 0
   },
   {
     element: {
@@ -161,7 +163,8 @@ const defaultComponents = [
         'border-radius': '2px',
         'font-size': '18px'
       }
-    }
+    },
+    key: 3
   },
   {
     element: {
@@ -178,7 +181,8 @@ const defaultComponents = [
         'border-radius': '2px',
         'font-size': '18px'
       }
-    }
+    },
+    key: 4
   }
 ]
 const defaultSchema = {
@@ -199,29 +203,22 @@ export default {
   group,
   cover,
 
+  mixins: [section],
+
   $schema: {
     isHeader: true,
     mainStyle: StyleObject,
     container: StyleObject,
     components: [
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
-      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' }
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 1 },
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 2 },
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 3 },
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 4 }
     ]
   },
 
   inject: ['device'],
-
-  components: { Draggable },
-
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
 
   watch: {
     'device.type' () {
@@ -231,16 +228,15 @@ export default {
   },
 
   created () {
-    this.seedData()
+    let groupDataStore = this.$store.state.Landing.groupData[group]
+    let sectionDataStore = this.$store.state.Landing.sectionData[name]
+    let sectionData = this.canRestore(group, name) ? sectionDataStore : defaultSchema
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, group, name, defaultSchema)
   },
 
   methods: {
-    seedData () {
-      if (this.$sectionData.edited === undefined) {
-        Seeder.seed(merge(this.$sectionData, defaultSchema))
-      }
-    },
-
     showMenu () {
       this.$el.querySelector('.hamburger-container').classList.toggle('active')
       this.$el.querySelector('.hamburger-button').classList.toggle('active')

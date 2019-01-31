@@ -333,7 +333,7 @@ export default {
     /* Gallery */
     this.galleryImages = this.settingObjectOptions.galleryImages || []
 
-    if (this.settingObjectOptions.classes.indexOf('full-height') !== -1) {
+    if (this.settingObjectOptions.classes !== undefined && this.settingObjectOptions.classes.indexOf('full-height') !== -1) {
       this.fullScreen = true
     }
 

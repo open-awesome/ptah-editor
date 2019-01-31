@@ -1,8 +1,7 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import Seeder from '@editor/seeder'
-import Draggable from 'vuedraggable'
+import section from '../../mixins/section.js'
 
 const C_CUSTOM = [
   {
@@ -15,7 +14,8 @@ const C_CUSTOM = [
         'width': '256px',
         'height': '221px'
       }
-    }
+    },
+    key: 0
   },
   {
     element: {
@@ -25,7 +25,8 @@ const C_CUSTOM = [
         'font-size': '2.4rem',
         'color': '#ffffff'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -37,9 +38,12 @@ const C_CUSTOM = [
         'font-size': '1.6rem',
         'color': 'rgba(255, 255, 255, 0.3)'
       }
-    }
+    },
+    key: 2
   },
-  {},
+  {
+    key: 3
+  },
   {
     element: {
       text: 'Secondary',
@@ -53,7 +57,8 @@ const C_CUSTOM = [
         'height': '56px',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 4
   }
 ]
 
@@ -84,65 +89,73 @@ const COMPONENTS = [
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo'
+    label: 'logo',
+    key: 0
   },
   {
     name: 'Title',
     element: types.Title,
     type: 'text',
     class: 'b-title',
-    label: 'title'
+    label: 'title',
+    key: 1
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description'
+    label: 'description',
+    key: 2
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter'
+    label: 'delimiter',
+    key: 3
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button-test',
-    label: 'button'
+    label: 'button',
+    key: 4
   }
 ]
 
+const GROUP_NAME = 'ThreeColumns'
+const NAME = 'ThreeColumns'
+
 export default {
-  name: 'ThreeColumns',
-  components: {
-    Draggable
-  },
+  name: NAME,
+
+  group: GROUP_NAME,
+
+  mixins: [section],
+
   cover: '/img/covers/columns3.jpg',
-  group: 'Three Columns',
+
   $schema: {
     mainStyle: types.StyleObject,
     header: types.Title,
     container: types.StyleObject,
     container2: types.StyleObject,
     container3: types.StyleObject,
-    components: COMPONENTS,
-    components2: COMPONENTS,
-    components3: COMPONENTS
+    components: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }, { key: 4 }]),
+    components2: _.merge([], COMPONENTS, [{ key: 5 }, { key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
+    components3: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }, { key: 14 }])
   },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
+
   created () {
-    if (this.$sectionData.edited === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
-    }
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   }
 }
 </script>
