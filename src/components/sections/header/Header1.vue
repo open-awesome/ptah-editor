@@ -18,11 +18,14 @@
             align="center"
             class="b-sandbox">
 
-          <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot">
+          <draggable
+              v-if="$sectionData.components.length"
+              v-model="$sectionData.components"
+              :style="$sectionData.container.styles"
+              class="b-draggable-slot">
 
             <div
                 v-for="(component, index) in $sectionData.components"
-                v-if="$sectionData.components.length"
                 :key="`component-${ _uid }-${ index }`"
                 :style="component.styles">
 
@@ -92,13 +95,13 @@
             class="b-sandbox hamburger-container__menu">
 
           <draggable
+              v-if="$sectionData.components2.length"
               v-model="$sectionData.components2"
               :style="$sectionData.container2.styles"
               class="b-draggable-slot">
 
             <div
                 v-for="(component, index) in $sectionData.components2"
-                v-if="$sectionData.components2.length"
                 :key="`component-${ _uid }-${ index }`"
                 :style="component.styles"
                 :class="{ 'b-button-container': component.name === 'Button' }">
@@ -252,6 +255,7 @@ export default {
   cover,
 
   $schema: {
+    isHeader: true,
     mainStyle: StyleObject,
     container: StyleObject,
     container2: StyleObject,
