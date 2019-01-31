@@ -181,8 +181,7 @@ export default {
       + .b-timer__divider
         margin-top: 3rem
         .is-mobile &
-          margin-top: 1.4rem
-          font-size: 1.5rem
+          margin-top: 1.5rem
         @media only screen and (max-width: 600px)
           margin-top: 2.5rem
         @media only screen and (max-width: 450px)
