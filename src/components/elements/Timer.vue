@@ -223,7 +223,7 @@ export default {
   // --- media
 
   .is-mobile &
-    font-size: 1.5rem
+    font-size: 2rem
 
   @media only screen and (max-width: 600px)
     font-size: 3.5rem
