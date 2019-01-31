@@ -304,7 +304,6 @@ $h: 100vh
       height: 4rem !important
       font-size: 1.4rem !important
 .b-sandbox
-  height: 100%
   min-height: 20rem
   justify-content: center
   align-items: center
