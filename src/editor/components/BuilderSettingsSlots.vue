@@ -84,6 +84,7 @@
 
 <script>
 import ElementsList from '@components/slots/ElementsList'
+import { randomPoneId } from '../../editor/util'
 import Draggable from 'vuedraggable'
 import { mapState, mapActions } from 'vuex'
 
@@ -183,6 +184,7 @@ export default {
 
     addElement (element) {
       element.element.removable = true
+      element.key = randomPoneId()
       this.components = [...this.components, element]
     },
 

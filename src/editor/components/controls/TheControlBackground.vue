@@ -61,7 +61,7 @@ export default {
 
   methods: {
     changeColor () {
-      const color = this.bgColor.rgba ? `rgba(${Object.values(this.bgColor.rgba).toString()}` : this.bgColor
+      const color = this.bgColor.rgba ? `rgba(${Object.values(this.bgColor.rgba).toString()})` : this.bgColor
       this.styles['background-color'] = color
     },
 

@@ -81,11 +81,9 @@
 </template>
 
 <script>
-import Seeder from '@editor/seeder'
-import Draggable from 'vuedraggable'
 import { StyleObject, Logo, Title, Text, Delimiter, Button } from '@editor/types'
-import { mapActions } from 'vuex'
-import { merge, forEach, find, after, cloneDeep } from 'lodash-es'
+import { merge } from 'lodash-es'
+import section from '../../mixins/section.js'
 
 const [name, group, cover] = ['HeroTwoColumns', 'Hero', '/img/covers/hero-two-columns.png']
 const defaultColumnComponents1 = [
@@ -99,7 +97,8 @@ const defaultColumnComponents1 = [
         'width': '110px',
         'height': '64px'
       }
-    }
+    },
+    key: 0
   }
 ]
 const defaultColumnComponents2 = [
@@ -111,7 +110,8 @@ const defaultColumnComponents2 = [
         'font-size': '48px',
         'color': '#ffffff'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -126,9 +126,12 @@ const defaultColumnComponents2 = [
         'line-height': '1.5',
         'color': '#FFF'
       }
-    }
+    },
+    key: 2
   },
-  {},
+  {
+    key: 8
+  },
   {
     element: {
       text: 'Call to Action',
@@ -142,7 +145,8 @@ const defaultColumnComponents2 = [
         'height': '64px',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 3
   }
 ]
 const defaultSchema = {
@@ -164,28 +168,21 @@ export default {
   group,
   cover,
 
+  mixins: [section],
+
   $schema: {
     mainStyle: StyleObject,
     container: StyleObject,
     container2: StyleObject,
     components: [
-      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' }
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
     ],
     components2: [
-      { name: 'Title', element: Title, type: 'title', class: 'b-title', label: 'title' },
-      { name: 'Description', element: Text, type: 'text', class: 'b-text', label: 'description' },
-      { name: 'Delimiter', element: Delimiter, type: 'delimiter', class: 'b-delimiter', label: 'delimiter' },
-      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button' }
+      { name: 'Title', element: Title, type: 'title', class: 'b-title', label: 'title', key: 1 },
+      { name: 'Description', element: Text, type: 'text', class: 'b-text', label: 'description', key: 2 },
+      { name: 'Delimiter', element: Delimiter, type: 'delimiter', class: 'b-delimiter', label: 'delimiter', key: 8 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 }
     ]
-  },
-
-  components: { Draggable },
-
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
   },
 
   data () {
@@ -194,48 +191,13 @@ export default {
     }
   },
 
-  computed: {
-    canRestore () {
-      let { groups, sectionData } = this.$store.state.Landing
-      return ~groups.indexOf(group) && Boolean(sectionData[name])
-    }
-  },
-
   created () {
-    this.seedData()
-    this.setGroupDataText()
-  },
+    let groupDataStore = this.$store.state.Landing.groupData[group]
+    let sectionDataStore = this.$store.state.Landing.sectionData[name]
+    let sectionData = this.canRestore(group, name) ? sectionDataStore : defaultSchema
+    let $sectionData = this.$sectionData
 
-  updated () {
-    this.storeData.call(this)
-  },
-
-  methods: {
-    ...mapActions('Landing', ['updateGroupData', 'updateSectionData']),
-
-    seedData () {
-      if (this.$sectionData.edited === undefined) {
-        let data = (this.canRestore) ? this.section : defaultSchema
-        Seeder.seed(merge(this.$sectionData, data))
-      }
-    },
-
-    setGroupDataText () {
-      let groupData = this.$store.state.Landing.groupData[group]
-      forEach(groupData, (text, name) => {
-        let component = find(this.$sectionData.components, { name })
-        if (component) {
-          component.element.text = text
-        }
-      })
-    },
-
-    storeData: after(2, function () {
-      let groupData = this.$sectionData.components.map(({ name, element }) => ({ [name]: element.text }))
-      let sectionData = cloneDeep(this.$sectionData)
-      this.updateGroupData({ name, data: groupData })
-      this.updateSectionData({ name, data: sectionData })
-    })
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, group, name, defaultSchema)
   }
 }
 </script>

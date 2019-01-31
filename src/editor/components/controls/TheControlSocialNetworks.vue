@@ -72,11 +72,6 @@ export default {
     changeTarget () {
       this.settings.target = this.vTarget ? '_blank' : '_self'
     },
-    closeModal () {
-      for (var key in this.networks) {
-        this.networks[key].expand = false
-      }
-    },
     applyLink () {
       this.closeModal()
     },
@@ -85,6 +80,11 @@ export default {
       this.$nextTick(function () {
         this.networks[key].expand = !this.networks[key].expand
       })
+    },
+    closeModal () {
+      for (var key in this.networks) {
+        this.networks[key].expand = false
+      }
     }
   },
 
@@ -120,6 +120,7 @@ export default {
             :class="{ 'b-social-networks__item_opacity' : false === networks[key].visible, 'b-social-networks__item_select' : networks[key].expand }"
             >
 
+            <div>
             <span class="b-socials-networks__item-eye"
               @click="visible(key)"
               title="Show / Hide"
@@ -128,6 +129,7 @@ export default {
             </span>
 
             <a class="b-social-networks__item-button"
+              v-if="!networks[key].expand"
               @click="visible(key)"
               :title="networks[key].name"
               >
@@ -135,16 +137,17 @@ export default {
             </a>
 
             <a class="b-social-networks__item-set-link"
-              v-if="networks[key].visible"
+              v-if="networks[key].visible && !networks[key].expand"
               @click="openModal(key)"
               :class="{ 'b-social-networks__item-set-link_color' : networks[key].url !== '' }"
               >
               <icon-base name="link" width="15" color="black"></icon-base>
             </a>
+            </div>
 
             <div class="b-social-networks__item-set-link-modal" v-if="networks[key].expand">
               <div class="b-link-controls__control">
-                <base-text-field v-model="networks[key].url" label="URL" placeholder="Type link here"></base-text-field>
+                <base-text-field v-model="networks[key].url" placeholder="Type link here"></base-text-field>
                 <BaseButton
                   :color="'blue'"
                   :transparent="false"
@@ -202,6 +205,7 @@ export default {
   &__item
     position: relative
     margin: 0.5rem 0
+    min-height: 2.6rem
     display: block
     color: #4D7DD8
     fill: #4D7DD8
@@ -234,24 +238,29 @@ export default {
       display: inline-block
     &-set-link
       &-modal
-        width: 24rem
-        background: #fff
+        margin-left: 1rem
         position: absolute
-        right: -25rem
-        top: -1.5rem
+        top: -0.4rem
+        left: 1.5rem
+        background: #436FEE
+        padding: 0 0 0 0.5rem
         z-index: 1
-        box-shadow: 0px 0.4rem 1rem rgba(0, 0, 0, 0.35)
-        padding: 1.6rem
-        &:before
-          content: ""
-          position: absolute
-          width: 1.4rem
-          height: 1.4rem
-          top: 1.7rem
-          left: -.7rem
-          background: #FFFFFF
-          transform: rotate(-45deg)
-          z-index: 2
+        & .b-link-controls__control
+          display: flex
+          justify-content: flex-start
+          align-items: center
+        /deep/
+          .b-base-text-field__input,
+          & input
+            font-size: 1.4rem !important
+            color: #fff
+            background-color: #436FEE
+            border-color: #436FEE
+          .b-pth-base-button
+            margin: 0
+            background-color: #ffffff
+            border-color: #436FEE
+            color: #436fee
       &_color *
         fill: #4D7DD8
 </style>
