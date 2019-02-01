@@ -646,7 +646,7 @@ const COMPONENTS_D = [
 ]
 
 const GROUP_NAME = 'Products'
-const NAME = 'ProductsColumns'
+const NAME = 'ProductsColumnsExtand'
 
 export default {
   name: NAME,
