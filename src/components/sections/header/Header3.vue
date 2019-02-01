@@ -12,16 +12,16 @@
       <div class="b-grid__col-12 b-grid__col-m-12 hamburger-container">
 
         <sandbox
-            container-path="$sectionData.container2"
-            components-path="$sectionData.components2"
+            container-path="$sectionData.container"
+            components-path="$sectionData.components"
             direction="row"
             align="center"
             class="b-sandbox hamburger-container__menu">
 
           <draggable
-              v-if="$sectionData.components2.length"
-              v-model="$sectionData.components2"
-              :style="$sectionData.container2.styles"
+              v-if="$sectionData.components.length"
+              v-model="$sectionData.components"
+              :style="$sectionData.container.styles"
               class="b-draggable-slot">
 
             <div
@@ -35,7 +35,7 @@
                     el: component.element,
                     type: component.type,
                     label: component.label,
-                    path: `$sectionData.components2[${index}].element`
+                    path: `$sectionData.components[${index}].element`
                   }"
                   :is="component.name"
                   :href="component.element.link.href"
@@ -46,7 +46,7 @@
                   :allow="component.element.allow"
                   :allowfullscreen="component.element.allowfullscreen"
                   :class="[component.element.classes, component.class]"
-                  :path="`components2[${index}].element`"
+                  :path="`components[${index}].element`"
                   class="b-header-component"/>
 
               <component
@@ -55,7 +55,7 @@
                     el: component.element,
                     type: component.type,
                     label: component.label,
-                    path: `$sectionData.components2[${index}].element`
+                    path: `$sectionData.components[${index}].element`
                   }"
                   v-html="component.element.text"
                   :is="component.name"
@@ -67,7 +67,7 @@
                   :allow="component.element.allow"
                   :allowfullscreen="component.element.allowfullscreen"
                   :class="[component.element.classes, component.class]"
-                  :path="`components2[${index}].element`"
+                  :path="`components[${index}].element`"
                   class="b-header-component"/>
 
             </div>
@@ -162,7 +162,7 @@ const defaultSchema = {
       'background-size': 'cover'
     }
   },
-  components2: merge({}, defaultComponents),
+  components: merge({}, defaultComponents),
   edited: true
 }
 
@@ -176,8 +176,8 @@ export default {
   $schema: {
     isHeader: true,
     mainStyle: StyleObject,
-    container2: StyleObject,
-    components2: [
+    container: StyleObject,
+    components: [
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 1 },
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 2 },
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 3 }
