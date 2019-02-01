@@ -12,16 +12,16 @@
       <div class="b-grid__col-12 b-grid__col-m-12 hamburger-container">
 
         <sandbox
-            container-path="$sectionData.container"
-            components-path="$sectionData.components"
+            container-path="$sectionData.container2"
+            components-path="$sectionData.components2"
             direction="row"
             align="center"
             class="b-sandbox hamburger-container__menu">
 
           <draggable
-              v-if="$sectionData.components.length"
-              v-model="$sectionData.components"
-              :style="$sectionData.container.styles"
+              v-if="$sectionData.components2.length"
+              v-model="$sectionData.components2"
+              :style="$sectionData.container2.styles"
               class="b-draggable-slot">
 
             <div
@@ -35,7 +35,7 @@
                     el: component.element,
                     type: component.type,
                     label: component.label,
-                    path: `$sectionData.components[${index}].element`
+                    path: `$sectionData.components2[${index}].element`
                   }"
                   :is="component.name"
                   :href="component.element.link.href"
@@ -46,7 +46,7 @@
                   :allow="component.element.allow"
                   :allowfullscreen="component.element.allowfullscreen"
                   :class="[component.element.classes, component.class]"
-                  :path="`components[${index}].element`"
+                  :path="`components2[${index}].element`"
                   class="b-header-component"/>
 
               <component
@@ -55,7 +55,7 @@
                     el: component.element,
                     type: component.type,
                     label: component.label,
-                    path: `$sectionData.components[${index}].element`
+                    path: `$sectionData.components2[${index}].element`
                   }"
                   v-html="component.element.text"
                   :is="component.name"
@@ -67,7 +67,7 @@
                   :allow="component.element.allow"
                   :allowfullscreen="component.element.allowfullscreen"
                   :class="[component.element.classes, component.class]"
-                  :path="`components[${index}].element`"
+                  :path="`components2[${index}].element`"
                   class="b-header-component"/>
 
             </div>
@@ -92,10 +92,9 @@
 </template>
 
 <script>
-import Seeder from '@editor/seeder'
-import Draggable from 'vuedraggable'
 import { StyleObject, Link } from '@editor/types'
 import { merge } from 'lodash-es'
+import section from '../../mixins/section.js'
 
 const [name, group, cover] = ['Header3', 'header', '/img/covers/header-3.png']
 const defaultComponents = [
@@ -114,7 +113,8 @@ const defaultComponents = [
         'border-radius': '2px',
         'font-size': '18px'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -131,7 +131,8 @@ const defaultComponents = [
         'border-radius': '2px',
         'font-size': '18px'
       }
-    }
+    },
+    key: 2
   },
   {
     element: {
@@ -148,7 +149,8 @@ const defaultComponents = [
         'border-radius': '2px',
         'font-size': '18px'
       }
-    }
+    },
+    key: 3
   }
 ]
 const defaultSchema = {
@@ -160,7 +162,7 @@ const defaultSchema = {
       'background-size': 'cover'
     }
   },
-  components: merge({}, defaultComponents),
+  components2: merge({}, defaultComponents),
   edited: true
 }
 
@@ -169,27 +171,20 @@ export default {
   group,
   cover,
 
+  mixins: [section],
+
   $schema: {
     isHeader: true,
     mainStyle: StyleObject,
-    container: StyleObject,
-    components: [
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' }
+    container2: StyleObject,
+    components2: [
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 1 },
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 2 },
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 3 }
     ]
   },
 
   inject: ['device'],
-
-  components: { Draggable },
-
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
 
   watch: {
     'device.type' () {
@@ -199,16 +194,15 @@ export default {
   },
 
   created () {
-    this.seedData()
+    let groupDataStore = this.$store.state.Landing.groupData[group]
+    let sectionDataStore = this.$store.state.Landing.sectionData[name]
+    let sectionData = this.canRestore(group, name) ? sectionDataStore : defaultSchema
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, group, name, defaultSchema)
   },
 
   methods: {
-    seedData () {
-      if (this.$sectionData.edited === undefined) {
-        Seeder.seed(merge(this.$sectionData, defaultSchema))
-      }
-    },
-
     showMenu () {
       this.$el.querySelector('.hamburger-container').classList.toggle('active')
       this.$el.querySelector('.hamburger-button').classList.toggle('active')

@@ -1,8 +1,7 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import Seeder from '@editor/seeder'
-import Draggable from 'vuedraggable'
+import section from '../../mixins/section.js'
 
 const C_CUSTOM_LINKS = [
   {
@@ -13,7 +12,8 @@ const C_CUSTOM_LINKS = [
         'font-size': '10px',
         'color': '#e1c543'
       }
-    }
+    },
+    key: 0
   },
   {
     element: {
@@ -23,7 +23,8 @@ const C_CUSTOM_LINKS = [
         'font-size': '10px',
         'color': '#e1c543'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -33,7 +34,8 @@ const C_CUSTOM_LINKS = [
         'font-size': '10px',
         'color': '#e1c543'
       }
-    }
+    },
+    key: 2
   },
   {
     element: {
@@ -43,7 +45,8 @@ const C_CUSTOM_LINKS = [
         'font-size': '10px',
         'color': '#e1c543'
       }
-    }
+    },
+    key: 3
   }
 ]
 
@@ -58,7 +61,8 @@ const C_CUSTOM_LOGO = [
         'width': '160px',
         'height': '23px'
       }
-    }
+    },
+    key: 4
   }
 ]
 
@@ -73,14 +77,15 @@ const SCHEMA_CUSTOM = {
   edited: true
 }
 
+const GROUP_NAME = 'Sticky menu'
+const NAME = 'MenuBAS'
+
 export default {
-  name: 'MenuBAS',
+  name: NAME,
 
-  group: 'Sticky menu',
+  group: GROUP_NAME,
 
-  components: {
-    Draggable
-  },
+  mixins: [section],
 
   $schema: {
     mainStyle: types.StyleObject,
@@ -91,25 +96,29 @@ export default {
         name: 'Link',
         element: types.Link,
         type: 'button',
-        class: 'b-menu-link'
+        class: 'b-menu-link',
+        key: 0
       },
       {
         name: 'Link',
         element: types.Link,
         type: 'button',
-        class: 'b-menu-link'
+        class: 'b-menu-link',
+        key: 1
       },
       {
         name: 'Link',
         element: types.Link,
         type: 'button',
-        class: 'b-menu-link'
+        class: 'b-menu-link',
+        key: 2
       },
       {
         name: 'Link',
         element: types.Link,
         type: 'button',
-        class: 'b-menu-link'
+        class: 'b-menu-link',
+        key: 3
       }
     ],
     components2: [
@@ -117,28 +126,19 @@ export default {
         name: 'Logo',
         element: types.Logo,
         type: 'image',
-        class: 'b-menu-logo'
+        class: 'b-menu-logo',
+        key: 4
       }
     ]
   },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
-
-  methods: {
-    onAddElement (element) {
-      element.element.removable = true
-      this.$section.data.components.push(element)
-    }
-  },
 
   created () {
-    if (this.$sectionData.edited === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
-    }
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   }
 }
 </script>
@@ -196,7 +196,6 @@ export default {
             direction="row"
             class="b-sandbox"
           >
-            <elements-list @addEl="onAddElement"></elements-list>
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"

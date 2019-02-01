@@ -80,11 +80,9 @@
 </template>
 
 <script>
-import Seeder from '@editor/seeder'
-import Draggable from 'vuedraggable'
 import { StyleObject, Logo, Video, Slogan, Button, Link } from '@editor/types'
-import { mapActions } from 'vuex'
-import { merge, forEach, find, after, cloneDeep } from 'lodash-es'
+import { merge } from 'lodash-es'
+import section from '../../mixins/section.js'
 
 const [name, group, cover] = ['HeroArtRight', 'Hero', '/img/covers/hero-art-right.png']
 const defaultColumnComponents = [
@@ -99,17 +97,20 @@ const defaultColumnComponents = [
         'height': '15rem',
         'margin-bottom': '1.6rem'
       }
-    }
+    },
+    key: 0
   },
   {
     element: {
       src: 'https://gn553.cdn.stg.gamenet.ru/0/7aJD3/o_1Od7Vf.mp4'
-    }
+    },
+    key: 5
   },
   {
     element: {
       text: 'The Caaat!'
-    }
+    },
+    key: 6
   },
   {
     element: {
@@ -124,7 +125,8 @@ const defaultColumnComponents = [
         'max-width': '100%',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 3
   },
   {
     element: {
@@ -142,7 +144,8 @@ const defaultColumnComponents = [
         'border-radius': '2px',
         'font-size': '1.8rem'
       }
-    }
+    },
+    key: 7
   }
 ]
 const defaultSchema = {
@@ -163,69 +166,27 @@ export default {
   group,
   cover,
 
+  mixins: [section],
+
   $schema: {
     mainStyle: StyleObject,
     container: StyleObject,
     components: [
-      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' },
-      { name: 'Video', element: Video, type: 'video', class: 'b-video', label: 'video' },
-      { name: 'Slogan', element: Slogan, type: 'slogan', class: 'b-slogan', label: 'slogan' },
-      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button' },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link' }
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
+      { name: 'Video', element: Video, type: 'video', class: 'b-video', label: 'video', key: 5 },
+      { name: 'Slogan', element: Slogan, type: 'slogan', class: 'b-slogan', label: 'slogan', key: 6 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 },
+      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 7 }
     ]
   },
 
-  components: { Draggable },
-
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
-
-  computed: {
-    canRestore () {
-      let { groups, sectionData } = this.$store.state.Landing
-      return ~groups.indexOf(group) && Boolean(sectionData[name])
-    }
-  },
-
   created () {
-    this.seedData()
-    this.setGroupDataText()
-  },
+    let groupDataStore = this.$store.state.Landing.groupData[group]
+    let sectionDataStore = this.$store.state.Landing.sectionData[name]
+    let sectionData = this.canRestore(group, name) ? sectionDataStore : defaultSchema
+    let $sectionData = this.$sectionData
 
-  updated () {
-    this.storeData.call(this)
-  },
-
-  methods: {
-    ...mapActions('Landing', ['updateGroupData', 'updateSectionData']),
-
-    seedData () {
-      if (this.$sectionData.edited === undefined) {
-        let data = (this.canRestore) ? this.section : defaultSchema
-        Seeder.seed(merge(this.$sectionData, data))
-      }
-    },
-
-    setGroupDataText () {
-      let groupData = this.$store.state.Landing.groupData[group]
-      forEach(groupData, (text, name) => {
-        let component = find(this.$sectionData.components, { name })
-        if (component) {
-          component.element.text = text
-        }
-      })
-    },
-
-    storeData: after(2, function () {
-      let groupData = this.$sectionData.components.map(({ name, element }) => ({ [name]: element.text }))
-      let sectionData = cloneDeep(this.$sectionData)
-      this.updateGroupData({ name, data: groupData })
-      this.updateSectionData({ name, data: sectionData })
-    })
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, group, name, defaultSchema)
   }
 }
 </script>

@@ -56,7 +56,7 @@
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import { galleryPreviewClick } from '@cscripts/gallery1'
-import { mapActions } from 'vuex'
+import section from '../../mixins/section.js'
 
 const GALLERY_ITEM = {
   preview: types.GalleryItem,
@@ -66,13 +66,30 @@ const GALLERY_ITEM = {
   text: types.Text
 }
 
-const GROUP_NAME = 'galleries'
+const GROUP_NAME = 'Galleries'
 const NAME = 'Gallery1'
+
+const SCHEMA_CUSTOM = {
+  mainStyle: {
+    styles: {
+      'background-color': 'rgba(21,28,68,0.07)'
+    },
+    classes: [
+      'full-height'
+    ]
+  },
+  edited: true
+}
 
 export default {
   name: NAME,
-  cover: '/img/covers/gallery1.png',
+
   group: GROUP_NAME,
+
+  mixins: [section],
+
+  cover: '/img/covers/gallery1.png',
+
   $schema: {
     mainStyle: types.StyleObject,
     images: [
@@ -82,12 +99,6 @@ export default {
     ],
     defObj: {
       images: _.merge({}, GALLERY_ITEM)
-    }
-  },
-
-  props: {
-    id: {
-      type: Number, required: true
     }
   },
 
@@ -101,45 +112,18 @@ export default {
   },
 
   methods: {
-    ...mapActions('Landing', [
-      'updateGroupData',
-      'updateSectionData'
-    ]),
-
     bindingClickPreview (index) {
       galleryPreviewClick(index)
-    },
-
-    storeData: _.after(2, (self) => {
-      let data = {}
-      self.$sectionData.images.forEach((component, key) => {
-        data[key] = component.preview.styles['background-image']
-      })
-      self.updateGroupData({ name: GROUP_NAME, data })
-      self.updateSectionData({
-        name: NAME,
-        data: _.cloneDeep(self.$sectionData)
-      })
-    }),
-
-    canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
     }
   },
 
   created () {
-    let data = this.$store.state.Landing.sectionData[NAME]
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
 
-    if (data && this.canRestore()) {
-      _.merge(this.$sectionData, data)
-    }
-
-    _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (image, key) => {
-      let elementObj = this.$sectionData.images[key]
-      if (elementObj) {
-        elementObj.preview.styles['background-image'] = image
-      }
-    })
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   },
 
   mounted: function () {
@@ -148,7 +132,6 @@ export default {
 
   updated: function () {
     this.bindingClickPreview(this.index)
-    this.storeData(this)
   }
 }
 </script>
@@ -167,9 +150,6 @@ export default {
   color: #000
   padding: 1rem
   min-height: 63rem
-  &.is-editable
-    // resize: vertical
-    // overflow: hidden
   @media only screen and (max-width: 768px)
     &
       height: auto !important
@@ -401,8 +381,5 @@ h2
       filter: brightness(120%)
     &:active
       filter: brightness(80%)
-    &.is-editable
-      // resize: both
-      // overflow: hidden
 // end button layout2 styles
 </style>
