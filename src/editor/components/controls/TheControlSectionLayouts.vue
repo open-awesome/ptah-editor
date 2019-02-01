@@ -1,7 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import Section from './../../section'
+import Section from '@editor/section'
 
 export default {
   name: 'ControlSectionLayouts',
