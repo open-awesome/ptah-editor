@@ -19,7 +19,8 @@
         <li><a href="#" @click.prevent="addSlogan" class="b-elements__button">Slogan</a></li>
         <li><a href="#" @click.prevent="addCost" class="b-elements__button">Cost</a></li>
         <li><a href="#" @click.prevent="addTextWithIcon" class="b-elements__button">Icon with text</a></li>
-        <li><a href="#" @click.prevent="AddVideo" class="b-elements__button">Video</a></li>
+        <li><a href="#" @click.prevent="addVideo" class="b-elements__button">Video</a></li>
+        <li><a href="#" @click.prevent="addTimer" class="b-elements__button">Timer</a></li>
       </ul>
     </aside>
   </div>
@@ -119,6 +120,12 @@ export default {
         element: types.Video,
         type: 'video',
         label: 'video'
+      },
+      {
+        name: 'Timer',
+        element: types.Timer,
+        type: 'timer',
+        label: 'timer'
       }
     ]
   }),
@@ -180,8 +187,11 @@ export default {
       const el = _.merge({}, Seeder.seed(this.elements[12]))
       this.$emit('addEl', el)
     },
-    AddVideo () {
+    addVideo () {
       this.$emit('addEl', _.merge({}, Seeder.seed(this.elements[13])))
+    },
+    addTimer () {
+      this.$emit('addEl', _.merge({}, Seeder.seed(this.elements[14])))
     },
     openList () {
       this.showList = true
