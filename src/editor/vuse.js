@@ -79,14 +79,6 @@ class Vuse {
   }
 
   /**
-     * Replace section after changed layout it
-     * @param {String|Number} id
-     */
-  replacement (section, options, position) {
-    this.sections[position] = new Section(options)
-  }
-
-  /**
      * Removes a section with the specified id.
      * @param {String|Number} oldIndex
      * @param {String|Number} newIndex
