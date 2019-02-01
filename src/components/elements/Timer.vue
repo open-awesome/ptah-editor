@@ -160,26 +160,22 @@ export default {
 $main-font-size: 6rem
 
 @mixin tabletFontSize ($property)
-  font-size: $property - 1
+  .is-tablet &
+    font-size: $property - 1
+  @media (max-width: 800px)
+    font-size: $property - 1
 
 @mixin mobileFontSize ($property)
-  font-size: $property - 1.5
+  .is-mobile &
+    font-size: $property - 1.5
+  @media (max-width: 400px)
+    font-size: $property - 1.5
 
 @mixin columnsFontSize ($index, $font_size)
   .b-columns#{$index} &
     font-size: $font_size
-
-    .is-tablet &
-      @include tabletFontSize($font_size)
-
-    .is-mobile &
-      @include mobileFontSize($font_size)
-
-    @media (max-width: 800px)
-      @include tabletFontSize($font_size)
-
-    @media (max-width: 400px)
-      @include mobileFontSize($font_size)
+    @include tabletFontSize($font_size)
+    @include mobileFontSize($font_size)
 
 // --- main
 .b-timer
@@ -189,20 +185,11 @@ $main-font-size: 6rem
   &.is-editable
     border: .1rem dashed $green
 
-  .is-tablet &
-    @include tabletFontSize($main-font-size)
+  @include tabletFontSize($main-font-size)
+  @include mobileFontSize($main-font-size)
 
-  .is-mobile &
-    @include mobileFontSize($main-font-size)
-
-  @media (max-width: 800px)
-    @include tabletFontSize($main-font-size)
-
-  @media (max-width: 400px)
-    @include mobileFontSize($main-font-size)
-
-  @include columnsFontSize(2, 4rem)
-  @include columnsFontSize(3, 3rem)
+  @include columnsFontSize(2, 3.8rem)
+  @include columnsFontSize(3, 2.8rem)
 
 .label
   font-size: .4em
