@@ -79,15 +79,11 @@ class Vuse {
   }
 
   /**
-     * Replacea section with the specified id.
+     * Replace section after changed layout it
      * @param {String|Number} id
      */
   replacement (section, options, position) {
-    // this.sections.splice(id, 1)
-    // section.destroy()
     this.sections[position] = new Section(options)
-    console.log(this.sections[position])
-    console.log(new Section(options))
   }
 
   /**
