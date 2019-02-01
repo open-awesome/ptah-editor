@@ -17,10 +17,10 @@ function calculateTime (timer, interval) {
   let timestamp = Number(timer.dataset.timestamp)
   let UTCOffset = Number(timer.dataset.utcOffset)
 
-  let days = timer.querySelector('.js-timer-days > .js-timer-number')
-  let hours = timer.querySelector('.js-timer-hours > .js-timer-number')
-  let minutes = timer.querySelector('.js-timer-minutes > .js-timer-number')
-  let seconds = timer.querySelector('.js-timer-seconds > .js-timer-number')
+  let days = timer.querySelector('.js-timer-days')
+  let hours = timer.querySelector('.js-timer-hours')
+  let minutes = timer.querySelector('.js-timer-minutes')
+  let seconds = timer.querySelector('.js-timer-seconds')
 
   let timeLeft = getTimeLeft(timestamp, UTCOffset)
 
@@ -38,7 +38,7 @@ function getTimeLeft (timestamp, UTCOffset) {
   let now = new Date()
   let currentTzOffset = -(now.getTimezoneOffset() / 60)
   let deltaTzOffset = UTCOffset - currentTzOffset
-  let nowTimestamp = now.getTime() 
+  let nowTimestamp = now.getTime()
   let deltaTzOffsetMilli = deltaTzOffset * 1000 * 60 * 60
   let dateWithUTCOffset = new Date(nowTimestamp + deltaTzOffsetMilli)
   return timestamp - dateWithUTCOffset.getTime()
