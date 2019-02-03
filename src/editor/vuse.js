@@ -279,6 +279,7 @@ class Vuse {
 
     let { video, title } = this.settings
     let styles = this.getCss(frag)
+    let script = this.getJsScript()
     let bodyStyles = this.getBodyStyles()
     let scrollSetup = this.getScrollSetup()
 
@@ -304,6 +305,9 @@ class Vuse {
             ${this.getCookiesPreview()}
             <script src="${window.location.origin + '/js/cjs.js'}"></script>
             ${scrollSetup.setup}
+            <script>
+              ${script}
+            </script>
           <body>
         </html>`
     )
@@ -334,6 +338,14 @@ class Vuse {
     }
 
     return styles
+  }
+
+  getJsScript () {
+    if (!!this.settings.script) {
+      return this.settings.script
+    } else {
+      return ''
+    }
   }
 
   /**
