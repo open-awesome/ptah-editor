@@ -7,7 +7,6 @@ export function initMobileMenu () {
   }
   habmurger.addEventListener('click', toggleMobileMenu, false)
   document.body.addEventListener('click', closeMobileMenu, false)
-  document.body.style.paddingTop = '80px'
 }
 
 function toggleMobileMenu (e) {

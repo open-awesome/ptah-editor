@@ -308,6 +308,13 @@ export default {
 
 <style lang="sass" scoped>
 .b-section-header
+  position: sticky
+  z-index: 9999
+  border-bottom: .1rem solid rgba(219, 219, 219, .5)
+
+  ~ section[class^="b-"]
+    z-index: 1
+
   @media (max-width: 800px)
     position: fixed
     top: 0
