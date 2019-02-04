@@ -148,13 +148,12 @@ export default {
 
     checkDataAboutRestoreAfterSave ($sectionData, schemaCustom) {
       let self = this
-      let data = {}
+      let data = { components: [] } // new data for save in state
       let ms = {}
 
       for (let keyObj in $sectionData) {
         if (keyObj.indexOf('components') !== -1) {
           //
-          data[keyObj] = []
           $sectionData[keyObj].forEach(function (item, i, arr) {
             let change = {}
             let tempEl = _.filter(schemaCustom[keyObj], function (el, i) {
