@@ -67,6 +67,18 @@ export default {
     },
 
     moveSections () {
+      let holes = this.findHoles()
+
+      holes.forEach((hole) => {
+        this.builder.sort(hole.index, hole.index + 1)
+      })
+
+      if (this.findHoles().length) {
+        this.moveSections()
+      }
+    },
+
+    findHoles () {
       let holes = []
       let stop = 0
 
@@ -78,14 +90,7 @@ export default {
         }
       }
 
-      holes.forEach((hole) => {
-        for (let i = hole.index + 1; i < this.builder.sections.length; i++) {
-          if (!find(holes, (o) => o.index === i) && !find(holes, (o) => o.fill === i)) {
-            hole.fill = i
-            this.builder.sort(hole.index, hole.fill)
-          }
-        }
-      })
+      return holes
     }
   }
 }
