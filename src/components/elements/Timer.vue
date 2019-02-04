@@ -161,26 +161,27 @@ $main-font-size: 6rem
 
 @mixin tabletFontSize ($property)
   .is-tablet &
-    font-size: $property - 1
+    font-size: $property - 1.5
   @media (max-width: 800px)
-    font-size: $property - 1
+    font-size: $property - 1.5
 
 @mixin mobileFontSize ($property)
   .is-mobile &
-    font-size: $property - 1.5
+    font-size: $property - 2.5
   @media (max-width: 400px)
-    font-size: $property - 1.5
+    font-size: $property - 2.5
 
 @mixin columnsFontSize ($index, $font_size)
   .b-columns#{$index} &
     font-size: $font_size
-    @include tabletFontSize($font_size)
-    @include mobileFontSize($font_size)
+    @include tabletFontSize($font_size - .5)
+    @include mobileFontSize($font_size + 1.5)
 
 // --- main
 .b-timer
   color: $white
   font-size: $main-font-size
+  text-align: center
 
   &.is-editable
     border: .1rem dashed $green
@@ -188,18 +189,11 @@ $main-font-size: 6rem
   @include tabletFontSize($main-font-size)
   @include mobileFontSize($main-font-size)
 
-  @include columnsFontSize(2, 3.8rem)
-  @include columnsFontSize(3, 2.8rem)
+  @include columnsFontSize(2, $main-font-size)
+  @include columnsFontSize(3, $main-font-size - 2)
 
 .label
   font-size: .4em
-
-  &-divider
-    .is-tablet &,
-    .is-mobile &
-      display: none
-    @media (max-width: 800px)
-      display: none
 
 .number
   min-width: 1.5em
@@ -216,13 +210,4 @@ $main-font-size: 6rem
       content: ':'
       position: relative
       top: -.1em
-
-    .is-tablet &,
-    .is-mobile &
-      display: none
-      padding: inherit
-
-    @media (max-width: 800px)
-      display: none
-      padding: inherit
 </style>
