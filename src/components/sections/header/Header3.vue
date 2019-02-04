@@ -7,9 +7,24 @@
 
   <slot name="video"/>
 
-  <div class="b-grid b-header js-hamburger">
+  <div class="b-grid b-header">
+
+    <button
+      id="js-hamburger"
+      class="hamburger hamburger--slider"
+      type="button"
+      :data-target="`#mobile-menu-${ _uid }`"
+      @click.stop>
+
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+
+    </button>
+
     <div class="b-grid__row b-footer__row">
-      <div class="b-grid__col-12 b-grid__col-m-12 hamburger-container">
+
+      <div class="b-grid__col-12 b-grid__col-m-12 mobile-header">
 
         <sandbox
             container-path="$sectionData.container"
@@ -74,17 +89,81 @@
 
           </draggable>
 
-          <base-button @click="showMenu" class="hamburger-button" color="transparent">
-            <div class="hamburger-box">
-              <span class="hamburger-inner"></span>
-              <span class="hamburger-inner"></span>
-              <span class="hamburger-inner"></span>
+        </sandbox>
+
+      </div>
+
+      <div
+          :id="`mobile-menu-${ _uid }`"
+          class="b-grid__col-12 b-grid__col-m-12 mobile-menu">
+
+        <sandbox
+          container-path="$sectionData.container"
+          components-path="$sectionData.components"
+          direction="row"
+          align="center"
+          class="b-sandbox hamburger-container__menu">
+
+          <draggable
+            v-if="$sectionData.components.length"
+            v-model="$sectionData.components"
+            :style="$sectionData.container.styles"
+            class="b-draggable-slot">
+
+            <div
+              v-for="(component, index) in $sectionData.components"
+              :key="`component-${ _uid }-${ index }`"
+              :style="component.styles">
+
+              <component
+                v-if="component.element.isComplex"
+                v-styler:for="{
+                    el: component.element,
+                    type: component.type,
+                    label: component.label,
+                    path: `$sectionData.components[${index}].element`
+                  }"
+                :is="component.name"
+                :href="component.element.link.href"
+                :target="component.element.link.target"
+                :style="component.element.styles"
+                :src="component.element.src"
+                :frameborder="component.element.frameborder"
+                :allow="component.element.allow"
+                :allowfullscreen="component.element.allowfullscreen"
+                :class="[component.element.classes, component.class]"
+                :path="`components[${index}].element`"
+                class="b-header-component"/>
+
+              <component
+                v-else
+                v-styler:for="{
+                    el: component.element,
+                    type: component.type,
+                    label: component.label,
+                    path: `$sectionData.components[${index}].element`
+                  }"
+                v-html="component.element.text"
+                :is="component.name"
+                :href="component.element.link.href"
+                :target="component.element.link.target"
+                :style="component.element.styles"
+                :src="component.element.src"
+                :frameborder="component.element.frameborder"
+                :allow="component.element.allow"
+                :allowfullscreen="component.element.allowfullscreen"
+                :class="[component.element.classes, component.class]"
+                :path="`components[${index}].element`"
+                class="b-header-component"/>
+
             </div>
-          </base-button>
+
+          </draggable>
 
         </sandbox>
 
       </div>
+
     </div>
   </div>
 
@@ -184,15 +263,6 @@ export default {
     ]
   },
 
-  inject: ['device'],
-
-  watch: {
-    'device.type' () {
-      this.$el.querySelector('.hamburger-container').classList.remove('active')
-      this.$el.querySelector('.hamburger-button').classList.remove('active')
-    }
-  },
-
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[group]
     let sectionDataStore = this.$store.state.Landing.sectionData[name]
@@ -200,43 +270,29 @@ export default {
     let $sectionData = this.$sectionData
 
     this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, group, name, defaultSchema)
-  },
-
-  methods: {
-    showMenu () {
-      this.$el.querySelector('.hamburger-container').classList.toggle('active')
-      this.$el.querySelector('.hamburger-button').classList.toggle('active')
-    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-.b-sandbox
-  min-height: 10rem
+.b-grid__col-12
+  padding: .8rem 1.6rem
 
-.b-draggable-slot
-  width: 100%
-
-.is-mobile .hamburger-container,
-.is-tablet .hamburger-container
-  display: flex !important
-  .b-draggable-slot
+.mobile-header
+  .is-tablet &,
+  .is-mobile &
     display: none
-    position: relative
-    top: 8rem
-    padding-bottom: 8rem
-  &.active .b-draggable-slot
-    display: flex
+  @media (max-width: 800px)
+    display: none
 
-@media only screen and (max-width: 1100px)
-  .hamburger-container
-    display: flex !important
-    .b-draggable-slot
-      display: none
-      position: relative
-      top: 8rem
-      padding-bottom: 8rem
-    &.active .b-draggable-slot
-      display: flex
+.mobile-menu
+  display: none
+
+  .is-tablet &,
+  .is-mobile &
+    display: block
+
+  .b-builder-layout &
+    @media (max-width: 800px)
+      display: block
 </style>
