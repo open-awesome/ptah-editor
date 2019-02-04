@@ -283,4 +283,11 @@ export default {
 .b-grid__col-8 .b-draggable-slot
   justify-content: flex-start
   padding-left: 4rem
+
+  .is-tablet &,
+  .is-mobile &
+    padding-left: 0
+
+  @media (max-width: 800px)
+    padding-left: 0
 </style>
