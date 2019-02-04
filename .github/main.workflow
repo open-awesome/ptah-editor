@@ -1,4 +1,4 @@
-workflow "New workflow" {
+workflow "Trigger gitlab mirroring" {
   on = "push"
   resolves = ["HTTP client"]
 }
