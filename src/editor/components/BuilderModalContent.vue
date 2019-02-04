@@ -17,6 +17,7 @@ import BuilderSiteSettingsSeo from './BuilderSiteSettingsSeo'
 import BuilderSiteSettingsVisual from './BuilderSiteSettingsVisual'
 import BuilderSiteSettingsCookies from './BuilderSiteSettingsCookies'
 import BuilderSiteSettingsVersionHistory from './BuilderSiteSettingsVersionHistory'
+import BuilderSiteSettingsAddJsScripts from './BuilderSiteSettingsAddJsScripts'
 
 export default {
   name: 'BuilderModalContent',
@@ -25,7 +26,8 @@ export default {
     BuilderSiteSettingsSeo,
     BuilderSiteSettingsCookies,
     BuilderSiteSettingsVisual,
-    BuilderSiteSettingsVersionHistory
+    BuilderSiteSettingsVersionHistory,
+    BuilderSiteSettingsAddJsScripts
   },
 
   computed: {

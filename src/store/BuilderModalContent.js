@@ -2,7 +2,8 @@ const contentComponentMap = {
   visualSettings: 'BuilderSiteSettingsVisual',
   seoSettings: 'BuilderSiteSettingsSeo',
   cookiesSettings: 'BuilderSiteSettingsCookies',
-  versionHistory: 'BuilderSiteSettingsVersionHistory'
+  versionHistory: 'BuilderSiteSettingsVersionHistory',
+  addJsScrips: 'BuilderSiteSettingsAddJsScripts'
 }
 
 export default {
