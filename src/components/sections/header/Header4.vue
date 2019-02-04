@@ -7,16 +7,36 @@
 
   <slot name="video"/>
 
-  <div class="b-grid b-header js-hamburger">
+  <div class="b-grid b-header">
     <div class="b-grid__row b-footer__row">
-      <div class="b-grid__col-12 b-grid__col-m-12 hamburger-container">
+
+      <div class="b-grid__col-12 b-grid__col-m-12 mobile-header">
+
+        <button
+            id="js-hamburger"
+            class="hamburger hamburger--slider"
+            type="button"
+            :data-target="`#mobile-menu-${ _uid }`"
+            @click.stop>
+
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+
+        </button>
+
+      </div>
+
+      <div
+          :id="`mobile-menu-${ _uid }`"
+          class="b-grid__col-12 b-grid__col-m-12 mobile-menu">
 
         <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
             direction="row"
             align="center"
-            class="b-sandbox hamburger-container__menu">
+            class="b-sandbox">
 
           <draggable
               v-if="$sectionData.components.length"
@@ -27,7 +47,8 @@
             <div
                 v-for="(component, index) in $sectionData.components"
                 :key="`component-${ _uid }-${ index }`"
-                :style="component.styles">
+                :style="component.styles"
+                :class="{ 'b-logo-one': isOnlyOneLogo(component) }">
 
               <component
                   v-if="component.element.isComplex"
@@ -74,14 +95,6 @@
 
           </draggable>
 
-          <base-button @click="showMenu" class="hamburger-button" color="transparent">
-            <div class="hamburger-box">
-              <span class="hamburger-inner"></span>
-              <span class="hamburger-inner"></span>
-              <span class="hamburger-inner"></span>
-            </div>
-          </base-button>
-
         </sandbox>
 
       </div>
@@ -109,9 +122,10 @@ const defaultComponents = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 1
@@ -127,9 +141,10 @@ const defaultComponents = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 2
@@ -141,9 +156,9 @@ const defaultComponents = [
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '200px',
-        'height': '80px',
-        'margin': '8px 16px'
+        'width': '150px',
+        'height': '50px',
+        'margin': '8px 0'
       }
     },
     key: 0
@@ -159,9 +174,10 @@ const defaultComponents = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 3
@@ -177,9 +193,10 @@ const defaultComponents = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 4
@@ -218,12 +235,12 @@ export default {
     ]
   },
 
-  inject: ['device'],
-
-  watch: {
-    'device.type' () {
-      this.$el.querySelector('.hamburger-container').classList.remove('active')
-      this.$el.querySelector('.hamburger-button').classList.remove('active')
+  computed: {
+    logoSlot () {
+      let elements = this.$sectionData.components || []
+      let component = elements.find(element => element.name === 'Logo')
+      let index = elements.findIndex(element => element.name === 'Logo')
+      return (component) ? { component, index } : null
     }
   },
 
@@ -237,52 +254,35 @@ export default {
   },
 
   methods: {
-    showMenu () {
-      this.$el.querySelector('.hamburger-container').classList.toggle('active')
-      this.$el.querySelector('.hamburger-button').classList.toggle('active')
+    isOnlyOneLogo ({ name }) {
+      if (name !== 'Logo') {
+        return false
+      }
+      let logos = this.$sectionData.components.filter(({ name }) => name === 'Logo')
+      return logos.length === 1
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-.b-sandbox
-  min-height: 10rem
+.b-grid__col-12
+  padding: .8rem 1.6rem
 
-.b-draggable-slot
-  width: 100%
+.mobile-header
+  padding: 0
 
-.is-mobile .hamburger-container,
-.is-tablet .hamburger-container
-  display: flex !important
-  .b-draggable-slot
-    display: none
-    position: relative
-    top: 10rem
-    padding-bottom: 10rem
-    .b-logo
-      position: absolute
-      top: -9rem
-      left: 50%
-      right: 50%
-      transform: translateX(-60%)
-  &.active .b-draggable-slot
-    display: flex
+.b-logo
+  .is-mobile &
+    background-position: center !important
+  @media (max-width: 800px)
+    background-position: center !important
 
-@media only screen and (max-width: 1100px)
-  .hamburger-container
-    display: flex !important
-    .b-draggable-slot
-      display: none
-      position: relative
-      top: 10rem
-      padding-bottom: 10rem
-      .b-logo
-        position: absolute
-        top: -9rem
-        left: 50%
-        right: 50%
-        transform: translateX(-60%)
-    &.active .b-draggable-slot
-      display: flex
+.b-logo-one
+  .is-mobile &
+    margin-top: auto !important
+    order: 1
+  @media (max-width: 800px)
+    margin-top: auto !important
+    order: 1
 </style>

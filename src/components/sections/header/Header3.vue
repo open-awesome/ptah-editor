@@ -9,22 +9,26 @@
 
   <div class="b-grid b-header">
 
-    <button
-      id="js-hamburger"
-      class="hamburger hamburger--slider"
-      type="button"
-      :data-target="`#mobile-menu-${ _uid }`"
-      @click.stop>
-
-      <span class="hamburger-box">
-        <span class="hamburger-inner"></span>
-      </span>
-
-    </button>
-
     <div class="b-grid__row b-footer__row">
 
       <div class="b-grid__col-12 b-grid__col-m-12 mobile-header">
+
+        <button
+            id="js-hamburger"
+            class="hamburger hamburger--slider"
+            type="button"
+            :data-target="`#mobile-menu-${ _uid }`"
+            @click.stop>
+
+          <span class="hamburger-box">
+            <span class="hamburger-inner"></span>
+          </span>
+
+        </button>
+
+      </div>
+
+      <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-12 b-grid__col-m-12 mobile-menu">
 
         <sandbox
             container-path="$sectionData.container"
@@ -93,77 +97,6 @@
 
       </div>
 
-      <div
-          :id="`mobile-menu-${ _uid }`"
-          class="b-grid__col-12 b-grid__col-m-12 mobile-menu">
-
-        <sandbox
-          container-path="$sectionData.container"
-          components-path="$sectionData.components"
-          direction="row"
-          align="center"
-          class="b-sandbox hamburger-container__menu">
-
-          <draggable
-            v-if="$sectionData.components.length"
-            v-model="$sectionData.components"
-            :style="$sectionData.container.styles"
-            class="b-draggable-slot">
-
-            <div
-              v-for="(component, index) in $sectionData.components"
-              :key="`component-${ _uid }-${ index }`"
-              :style="component.styles">
-
-              <component
-                v-if="component.element.isComplex"
-                v-styler:for="{
-                    el: component.element,
-                    type: component.type,
-                    label: component.label,
-                    path: `$sectionData.components[${index}].element`
-                  }"
-                :is="component.name"
-                :href="component.element.link.href"
-                :target="component.element.link.target"
-                :style="component.element.styles"
-                :src="component.element.src"
-                :frameborder="component.element.frameborder"
-                :allow="component.element.allow"
-                :allowfullscreen="component.element.allowfullscreen"
-                :class="[component.element.classes, component.class]"
-                :path="`components[${index}].element`"
-                class="b-header-component"/>
-
-              <component
-                v-else
-                v-styler:for="{
-                    el: component.element,
-                    type: component.type,
-                    label: component.label,
-                    path: `$sectionData.components[${index}].element`
-                  }"
-                v-html="component.element.text"
-                :is="component.name"
-                :href="component.element.link.href"
-                :target="component.element.link.target"
-                :style="component.element.styles"
-                :src="component.element.src"
-                :frameborder="component.element.frameborder"
-                :allow="component.element.allow"
-                :allowfullscreen="component.element.allowfullscreen"
-                :class="[component.element.classes, component.class]"
-                :path="`components[${index}].element`"
-                class="b-header-component"/>
-
-            </div>
-
-          </draggable>
-
-        </sandbox>
-
-      </div>
-
     </div>
   </div>
 
@@ -188,9 +121,10 @@ const defaultComponents = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 1
@@ -206,9 +140,10 @@ const defaultComponents = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 2
@@ -224,9 +159,10 @@ const defaultComponents = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 3
@@ -279,20 +215,5 @@ export default {
   padding: .8rem 1.6rem
 
 .mobile-header
-  .is-tablet &,
-  .is-mobile &
-    display: none
-  @media (max-width: 800px)
-    display: none
-
-.mobile-menu
-  display: none
-
-  .is-tablet &,
-  .is-mobile &
-    display: block
-
-  .b-builder-layout &
-    @media (max-width: 800px)
-      display: block
+  padding: 0
 </style>
