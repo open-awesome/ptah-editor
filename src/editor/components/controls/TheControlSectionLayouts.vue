@@ -1,6 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
+import Section from '@editor/section'
 
 export default {
   name: 'ControlSectionLayouts',
@@ -55,18 +56,17 @@ export default {
         return false
       }
 
-      let index = _.findIndex(this.builder.sections, ['name', this.selectedSection])
+      let index = _.findIndex(this.builder.sections, ['group', section.group])
 
-      this.builder.remove(this.settingObjectSection)
-      this.clearSettingObject()
-      this.builder.add(section, index)
+      this.builder.sections[index] = new Section(section)
+      this.builder.set(this.builder)
 
       await this.$nextTick()
 
       let target = document
         .getElementById('sections_contents')
         .querySelectorAll('.b-menu-subitem:not(.b-menu-subitem--header)')[index]
-        
+
       if (section.schema.isHeader) {
         target = document.querySelector('.b-menu-subitem--header')
       }
