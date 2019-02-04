@@ -33,7 +33,7 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
     @for $i from 1 through $grid-cols
       &__col#{$modifier}-#{$i}
         max-width: 100%
-        flex-basis: (100 / ($grid-cols / $i) ) * 1%
+        flex: 1 1 (100 / ($grid-cols / $i) ) * 1%
         padding: $basis / 2 * 1px
         box-sizing: border-box
         @if($breakpoint == $grid__bp-m)

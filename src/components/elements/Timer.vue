@@ -173,7 +173,7 @@ $main-font-size: 6rem
 
 @mixin columnsFontSize ($index, $font_size)
   .b-columns#{$index} &
-    font-size: $font_size
+    font-size: $font_size - .5
     @include tabletFontSize($font_size - .5)
     @include mobileFontSize($font_size + 1.5)
 
