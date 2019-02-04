@@ -7,10 +7,24 @@
 
   <slot name="video"/>
 
-  <div class="b-grid b-header js-hamburger">
+  <div class="b-grid b-header">
+
+    <button
+      id="js-hamburger"
+      class="hamburger hamburger--slider"
+      type="button"
+      :data-target="`#mobile-menu-${ _uid }`"
+      @click.stop>
+
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+
+    </button>
+
     <div class="b-grid__row b-footer__row">
 
-      <div class="b-grid__col-4 b-grid__col-m-12">
+      <div class="b-grid__col-4 b-grid__col-m-12 mobile-header">
 
         <sandbox
             container-path="$sectionData.container"
@@ -75,26 +89,18 @@
 
           </draggable>
 
-          <base-button @click="showMenu" class="hamburger-button" color="transparent">
-            <div class="hamburger-box">
-              <span class="hamburger-inner"></span>
-              <span class="hamburger-inner"></span>
-              <span class="hamburger-inner"></span>
-            </div>
-          </base-button>
-
         </sandbox>
 
       </div>
 
-      <div class="b-grid__col-8 b-grid__col-m-12 hamburger-container">
+      <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-8 b-grid__col-m-12 mobile-menu">
 
         <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
             direction="row"
             align="center"
-            class="b-sandbox hamburger-container__menu">
+            class="b-sandbox">
 
           <draggable
               v-if="$sectionData.components2.length"
@@ -176,8 +182,8 @@ const defaultComponents = [
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '200px',
-        'height': '80px',
+        'width': '150px',
+        'height': '50px',
         'margin': '8px 16px'
       }
     },
@@ -196,9 +202,10 @@ const defaultComponents2 = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 1
@@ -214,9 +221,10 @@ const defaultComponents2 = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 2
@@ -256,15 +264,6 @@ export default {
     ]
   },
 
-  inject: ['device'],
-
-  watch: {
-    'device.type' () {
-      this.$el.querySelector('.hamburger-container').classList.remove('active')
-      this.$el.querySelector('.hamburger-button').classList.remove('active')
-    }
-  },
-
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[group]
     let sectionDataStore = this.$store.state.Landing.sectionData[name]
@@ -272,39 +271,16 @@ export default {
     let $sectionData = this.$sectionData
 
     this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, group, name, defaultSchema)
-  },
-
-  methods: {
-    showMenu () {
-      this.$el.querySelector('.hamburger-container').classList.toggle('active')
-      this.$el.querySelector('.hamburger-button').classList.toggle('active')
-    }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-.b-sandbox
-  min-height: 10rem
-  &.hamburger-container__menu
-    padding-left: 2rem
-    .b-draggable-slot
-      justify-content: flex-start !important
-  .is-mobile &,
-  .is-tablet &
-    padding-left: 0
-  @media only screen and (max-width: 1100px)
-    &
-      padding-left: 0
+.b-grid__col-4,
+.b-grid__col-8
+  padding: .8rem 1.6rem
 
-.b-draggable-slot
-  width: 100%
-
-.b-grid__col-m-12
-  .is-mobile &,
-  .is-tablet &
-    flex-basis: 100%
-  @media only screen and (max-width: 1100px)
-    &
-      flex-basis: 100%
+.b-grid__col-8 .b-draggable-slot
+  justify-content: flex-start
+  padding-left: 4rem
 </style>

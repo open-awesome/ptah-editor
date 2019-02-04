@@ -283,8 +283,6 @@ export default {
     ]
   },
 
-  inject: ['device'],
-
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[group]
     let sectionDataStore = this.$store.state.Landing.sectionData[name]
@@ -307,47 +305,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-section-header
-  position: sticky
-  z-index: 9999
-  border-bottom: .1rem solid rgba(219, 219, 219, .5)
-
-  ~ section[class^="b-"]
-    z-index: 1
-
-  @media (max-width: 800px)
-    position: fixed
-    top: 0
-    left: 0
-    z-index: 9999
-    width: 100vw
-
 .b-grid__col-3,
 .b-grid__col-9
   padding: .8rem 1.6rem
-
-.b-sandbox
-  min-height: 7rem
-
-.b-draggable-slot
-  width: 100%
-
-.b-link,
-.b-button
-  .is-tablet &
-    font-size: 1.6rem !important
-  .is-mobile &
-    font-size: 1.4rem !important
-  @media (max-width: 1024px)
-    font-size: 1.6rem !important
-  @media (max-width: 800px)
-    font-size: 1.4rem !important
-
-.b-logo
-  .is-mobile &
-    background-position: left center !important
-  @media (max-width: 800px)
-    background-position: left center !important
 
 .b-button-one
   .is-mobile &
