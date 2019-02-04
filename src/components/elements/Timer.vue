@@ -189,7 +189,7 @@ $main-font-size: 6rem
   @include tabletFontSize($main-font-size)
   @include mobileFontSize($main-font-size)
 
-  @include columnsFontSize(2, $main-font-size)
+  @include columnsFontSize(2, $main-font-size - 1.5)
   @include columnsFontSize(3, $main-font-size - 2)
 
 .label
