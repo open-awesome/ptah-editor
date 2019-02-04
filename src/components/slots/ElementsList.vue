@@ -211,7 +211,7 @@ export default {
 
   &__show-list
     border: none
-    background: $color-gray
+    background: #D8D8D8
     width: 3.5rem
     height: 3.5rem
     display: flex
@@ -220,10 +220,10 @@ export default {
     padding: 0.5rem
     margin-top: .1rem
     cursor: pointer
-    color: $color-dark-100
+    color: #474747
     &:hover, &.active
       background: #fff
-      color: $king-blue-300
+      color: #355CCC
     img
       width: 2rem
       height: 2rem
@@ -243,7 +243,7 @@ export default {
     left: calc(100% - .8rem)
     background: #fff
     border: .1px solid lightgray
-    color: $color-dark-100
+    color: #474747
     padding: 1.6rem
     overflow: auto
     overflow-x: hidden
@@ -264,7 +264,7 @@ export default {
   &__button
     display: block
     background: transparent
-    color: $color-dark-100
+    color: #474747
     border-radius: 0.4rem
     padding: 0.8rem 1.6rem
     width: 100%

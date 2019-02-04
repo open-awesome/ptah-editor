@@ -19,7 +19,7 @@
     "seconds": "Sekunden"
   }
 }
-</i18n>  
+</i18n>
 
 <template>
 <div
@@ -136,7 +136,7 @@ export default {
       let now = new Date()
       let currentTzOffset = -(now.getTimezoneOffset() / 60)
       let deltaTzOffset = UTCOffset - currentTzOffset
-      let nowTimestamp = now.getTime() 
+      let nowTimestamp = now.getTime()
       let deltaTzOffsetMilli = deltaTzOffset * 1000 * 60 * 60
       let dateWithUTCOffset = new Date(nowTimestamp + deltaTzOffsetMilli)
       return dateWithUTCOffset.getTime()
@@ -155,12 +155,12 @@ export default {
   display: flex
   flex-wrap: wrap
   justify-content: center
-  color: $white
+  color: #fff
   text-align: center
   font-size: 5rem
 
   &.is-editable
-    border: .1rem dashed $green
+    border: .1rem dashed #18d88b
 
   &__days,
   &__minutes,
@@ -219,7 +219,7 @@ export default {
 
     .b-timer--labels-hidden &
       display: none
-      
+
   // --- media
 
   .is-mobile &

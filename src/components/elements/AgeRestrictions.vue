@@ -67,8 +67,8 @@ export default {
     margin: 1.6rem
     text-align: center
     &-select
-      background: $white
-      color: $dark
+      background: #fff
+      color: #323c47
       border: 0
       outline: 0
       width: auto

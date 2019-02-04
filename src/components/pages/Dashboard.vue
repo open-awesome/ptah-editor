@@ -45,12 +45,10 @@ export default {
     height: 100px
     display: flex
     cursor: pointer
-    background: $dark
-    color: $green
+    background: #323c47
+    color: #18d88b
     font-size: 30px
     justify-content: center
     align-items: center
     margin: 10px
-    &:hover
-      background: $color-blue-bg
 </style>

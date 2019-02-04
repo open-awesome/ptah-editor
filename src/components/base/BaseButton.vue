@@ -131,12 +131,12 @@ export default {
     background-color: #fafafa
     border: 0.2rem #fff solid
   &_orange
-    color: $white
-    background-color: $orange-dark
+    color: #fff
+    background-color: #DB4E2B
     border-radius: .4rem
     &:hover
-      background-color: $orange-dark !important
-      border-color: $orange-dark !important
+      background-color: #DB4E2B !important
+      border-color: #DB4E2B !important
       opacity: .8
   &_transparent
     background-color: transparent

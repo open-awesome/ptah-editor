@@ -293,7 +293,7 @@ export default {
         &.active
           background: rgba(67, 111, 238, 0.15)
         &.active
-          color: $gray-light
+          color: #c1c1c1
           cursor: default
 
   &__list
