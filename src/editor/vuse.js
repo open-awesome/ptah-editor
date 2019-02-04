@@ -215,6 +215,7 @@ class Vuse {
           component = this.components[section].options
           sectionData = {
             name: component.name,
+            group: component.group,
             schema: component.schema,
             data: component.data
           }
@@ -226,6 +227,7 @@ class Vuse {
           component = this.components[section.name].options
           sectionData = {
             name: component.name,
+            group: component.group,
             schema: component.schema,
             data: section.data,
             isHeader: component.isHeader

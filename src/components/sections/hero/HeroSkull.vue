@@ -260,6 +260,8 @@ export default {
   box-shadow: none
   margin: 1.6rem
   padding: 0
+  width: 35.2rem
+  height: 6.4rem
   min-width: auto
   min-height: auto
   text-transform: uppercase
