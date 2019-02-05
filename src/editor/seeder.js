@@ -349,6 +349,13 @@ const data = new Map([
       loop: false
     })
   )],
+  [types.Form, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      resizable: true,
+      removable: true,
+      form: true
+    })
+  )],
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,

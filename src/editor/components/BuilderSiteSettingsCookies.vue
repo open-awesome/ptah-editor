@@ -1,39 +1,39 @@
 <template>
-<builder-modal-content-layout id="settings-cookies">
+  <builder-modal-content-layout id="settings-cookies">
 
-  <form id="cookies-form" @submit.prevent="savePolicy">
+    <form id="cookies-form" @submit.prevent="savePolicy">
 
-    <base-fieldset>
+      <base-fieldset>
 
-      <base-heading level="2">{{ $t('s.cookiePolicy') }}</base-heading>
+        <base-heading level="2">{{ $t('s.cookiePolicy') }}</base-heading>
 
-      <base-fieldset-row>
-        <base-switcher
-            v-model="useCookie"
-            :label="$t('s.useCookie')"/>
-      </base-fieldset-row>
+        <base-fieldset-row>
+          <base-switcher
+              v-model="useCookie"
+              :label="$t('s.useCookie')"/>
+        </base-fieldset-row>
 
-      <base-fieldset-row>
-        <base-upload-input
-            v-model="pdfFile"
-            :label="$t('s.policyFile')"
-            placeholder="Paste pdf file"/>
-      </base-fieldset-row>
+        <base-fieldset-row>
+          <base-upload-input
+              v-model="pdfFile"
+              :label="$t('s.policyFile')"
+              placeholder="Paste pdf file"/>
+        </base-fieldset-row>
 
-    </base-fieldset>
+      </base-fieldset>
 
-  </form>
+    </form>
 
-  <div slot="controls">
-    <base-button
-      v-text="$t('nav.cancel')"
-      :transparent="true"
-      @click="$emit('requestClose')"
-      color="gray"/>
-    <base-button v-text="$t('nav.save')" type="submit" form="cookies-form"/>
-  </div>
+    <div slot="controls">
+      <base-button
+        v-text="$t('nav.cancel')"
+        :transparent="true"
+        @click="$emit('requestClose')"
+        color="gray"/>
+      <base-button v-text="$t('nav.save')" type="submit" form="cookies-form"/>
+    </div>
 
-</builder-modal-content-layout>
+  </builder-modal-content-layout>
 </template>
 
 <script>

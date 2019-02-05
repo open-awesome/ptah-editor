@@ -27,6 +27,7 @@ import Slogan from '@components/elements/Slogan'
 import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
 import VideoElement from '@components/elements/Video'
+import Form from '@components/elements/Form'
 
 // sections
 // --- header
@@ -81,7 +82,8 @@ const ELEMENTS = {
   Slogan,
   Cost,
   IconWithText,
-  'Video': VideoElement
+  'Video': VideoElement,
+  Form
 }
 
 const COMPONENTS = {
