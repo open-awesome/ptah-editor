@@ -4,7 +4,8 @@
         "sections":                     "Секции",
         "visualSettings":               "Вид",
         "seo":                          "Настройки SEO",
-        "cookie":                       "Настройки Cookie"
+        "cookie":                       "Настройки Cookie",
+        "addJs":                        "Добавить JS код"
     },
     "nav": {
         "backToDashbord":               "Назад к лендингам",

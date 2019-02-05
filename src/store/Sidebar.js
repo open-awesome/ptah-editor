@@ -27,7 +27,7 @@ export default {
       },
       {
         id: 'addJsScrips',
-        name: 'Add JS'
+        name: 'menu.addJs'
       }
       // {
       //   id: 'versionHistory',
