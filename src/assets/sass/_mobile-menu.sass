@@ -1,4 +1,5 @@
 \:root
+  --vh: 100vh
   --mobile-header-height: 8rem
 
 .mobile-header
@@ -25,7 +26,7 @@
 
     display: none
     width: 100vw
-    height: calc(100vh - var(--mobile-header-height))
+    height: calc(var(--vh, 1vh) * 100 - var(--mobile-header-height))
     flex-basis: 100%
 
     border: 0

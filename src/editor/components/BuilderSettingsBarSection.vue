@@ -43,7 +43,7 @@
         <BaseSwitcher v-model="fullScreen" @change="setHeight" />
       </div>
 
-      <template v-if="!isHeader && settingObjectOptions.background">
+      <template v-if="settingObjectOptions.background">
 
         <div class="b-section-settings__header">
           <span>Background</span>
@@ -78,7 +78,7 @@
             <div class="b-section-settings__control">
               <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
             </div>
-            <div class="b-section-settings__control">
+            <div v-if="!isHeader" class="b-section-settings__control">
               <base-label>Fixed while scrolling</base-label>
               <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
             </div>

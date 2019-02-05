@@ -5,11 +5,13 @@ export function initMobileMenu () {
   if (!habmurger) {
     return
   }
+
   habmurger.addEventListener('click', toggleMobileMenu, false)
   document.body.addEventListener('click', closeMobileMenu, false)
+  window.addEventListener('resize', calculateViewportHeight, false)
 }
 
-function toggleMobileMenu (e) {
+function toggleMobileMenu () {
   menu = document.querySelector(this.dataset.target)
 
   if (!menu) {
@@ -18,6 +20,7 @@ function toggleMobileMenu (e) {
 
   this.classList.toggle('is-active')
   menu.classList.toggle('is-active')
+  document.body.style.overflow = (this.classList.contains('is-active')) ? 'hidden' : ''
 }
 
 function closeMobileMenu ({ target }) {
@@ -28,6 +31,13 @@ function closeMobileMenu ({ target }) {
     menu.classList.remove('is-active')
   }
   habmurger.classList.remove('is-active')
+  document.body.style.overflow = ''
+}
+
+function calculateViewportHeight () {
+  let vh = (window.innerHeight * 0.01)
+  document.documentElement.style.setProperty('--vh', `${ vh }px`)
 }
 
 void initMobileMenu()
+void calculateViewportHeight()
