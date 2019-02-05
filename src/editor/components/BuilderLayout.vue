@@ -89,9 +89,9 @@ export default {
 <style lang="sass" scoped>
 .b-builder-layout
   &__top-bar
-    height: 7.2rem
+    height: 8rem
     max-width: 100vw
-    background-color: #CDCDCD
+    background-color: $white
     position: fixed
     top: 0
     right: 0

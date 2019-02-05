@@ -40,29 +40,28 @@ export default {
 
 <template>
 <div class="b-top-bar">
-  <div class="b-top-bar__left">
-    <BaseButton
-      :color="'light-gray'"
-      :transparent="true"
-      :size="'middle'"
-      @click="backToLandings"
-      class="b-top-bar__btn-back"
-      tooltip="back to landings"
-      tooltip-position="bottom"
-      >
-      {{ $t('nav.backToDashbord') }}
-      <span class="b-top-bar__btn-back-arrow-a"/>
-      <span class="b-top-bar__btn-back-arrow-b"/>
-    </BaseButton>
-  </div>
+
   <div class="b-top-bar__right">
     <div class="b-top-bar-right-menu">
       <div class="b-top-bar-right-menu__left">
-        <div class="b-top-bar__logo-game">
-          <img :src="currentLanding.settings.favicon" alt="">
+        <div class="b-page__header-menu">
+          <icon-base name="hamburger" :color="colorHamburger"></icon-base>
         </div>
-        <div class="b-top-bar__site-name">
-          {{ landingName }}
+        <div class="b-page__header-crumbs">
+          <span class="b-page__header-crumbs-home b-page__header-crumbs-link"
+                @click="backToLandings"
+            >
+            <icon-base name="home" :color="colorHome"></icon-base>
+          </span>
+          <span class="b-page__header-crumbs-link" @click="backToLandings">
+            All sites
+          </span>
+          <span class="b-page__header-crumbs-arrow">
+            →
+          </span>
+          <span>
+            {{ landingName }}
+          </span>
         </div>
       </div>
       <div class="b-top-bar-right-menu__middle">
@@ -72,31 +71,31 @@ export default {
       </div>
       <div class="b-top-bar-right-menu__right">
         <BaseButton
-          :color="'light-gray'"
+          :color="'gray'"
           :transparent="true"
           :size="'middle'"
           @click="$emit('save', $event)"
-          tooltip="save"
+          tooltip="click for save"
           tooltip-position="bottom"
           >
           {{ $t('nav.save') }}
         </BaseButton>
         <BaseButton
-          :color="'light-gray'"
+          :color="'gray'"
           :transparent="true"
           :size="'middle'"
           @click="$emit('preview', $event)"
-          tooltip="preview"
+          tooltip="click for preview"
           tooltip-position="bottom"
           >
           {{ $t('nav.preview') }}
         </BaseButton>
         <BaseButton
-          :color="'light-gray'"
+          :color="'gray'"
           :transparent="true"
           :size="'middle'"
           @click="$emit('export', $event)"
-          tooltip="export"
+          tooltip="click for export"
           tooltip-position="bottom"
           >
           {{ $t('nav.export') }}
@@ -109,15 +108,16 @@ export default {
 
 <style lang="sass" scoped>
 .b-top-bar
-  background-color: #CDCDCD
+  width: 100%
+  height: 100%
+  padding: 2.4rem 3.2rem
+
   display: flex
   align-items: center
   justify-content: center
-  width: 100%
-  height: 100%
   &__left
     order: 1
-    width: 24rem
+    width: 17rem
   &__right
     order: 2
     flex-grow: 1
@@ -125,7 +125,6 @@ export default {
     display: flex
     align-items: center
     justify-content: space-between
-    padding: 0.8rem
     &__left
       order: 1
       width: 50%
@@ -139,51 +138,15 @@ export default {
       order: 3
       width: 50%
       text-align: right
-  &__btn-back
-    $self: &
-    position: relative
-    width: 20rem
-    margin: 0 0 0 3rem
-    border-left-color: transparent
-    &-arrow-a,
-    &-arrow-b
-      content: ''
-      position: absolute
-      left: -1.4rem
-      top: 50%
-      width: 2.8rem
-      height: 2.8rem
-      margin-top: -1.4rem
-      border-left: 0.2rem solid #fff
-      border-bottom: 0.2rem solid #fff
-      z-index: -1
-      transform: rotate(45deg)
-    &-arrow-b
-      z-index: 1
-      box-shadow: none
+
+.b-page__header-crumbs
+  color: $dark-grey
+  opacity: 0.5
+  &-arrow
+    padding: 0 1rem
+  &-link
+    opacity: 0.5
     &:hover
-      #{$self}-arrow-a,
-      #{$self}-arrow-b
-        border-left: 0.2rem solid #436FEE
-        border-bottom: 0.2rem  solid #436FEE
-        background-color: #436FEE
-        border-color: #436FEE
-        color: #fafafa
-      #{$self}-arrow-b
-        z-index: 1
-  &__logo-game
-    width: 4rem
-    height: 4rem
-    background: #fff
-    overflow: hidden
-    border-radius: 100%
-    margin: 0 1rem 0 2.9rem
-    img
-      min-width: 100%
-  &__site-name
-    color: #474747
-    font-size: 1.8rem
-    line-height: 4rem
-    letter-spacing: 2%
-    font-weight: bold
+      opacity: 1 !important
+      cursor: pointer
 </style>
