@@ -15,15 +15,15 @@ html
     font-size: 10px
 
 ::selection
-  color: #ff0 !important
-  background: #000 !important
+  color: $white !important
+  background: $black !important
 
 body
   line-height: 1
   font-weight: 400
-  color: #000
-  background-color: #3b6880
-  font-size: 1.4rem
+  color: $dark-grey
+  background-color: #5D7899
+  font-size: 1.6rem
   margin: 0
   -webkit-font-smoothing: subpixel-antialiased
   -moz-osx-font-smoothing: auto
@@ -32,7 +32,7 @@ body
   overflow-x: hidden
 .b-body
   &_preview
-    background-color: #fff
+    background-color: $white
     position: relative
     overflow-x: hidden
 
@@ -43,15 +43,19 @@ body
     position: relative
     z-index: 5
   &__header, &__footer
-    height: 5rem
-    background-color: #fff
-    border: 1px solid #d21313
+    height: 8rem
+  &__header
+    background-color: $white
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0px -1px 0px rgba(0, 0, 0, 0.07)
   &__footer
     position: absolute
     bottom: 0
     left: 0
     right: 0
     z-index: 0
+    height: 4rem
+
+    background-color: $dark-blue
   &__content
     flex-grow: 1
 
