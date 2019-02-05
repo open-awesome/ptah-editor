@@ -35,7 +35,7 @@
           @change="styleChange"></control-text>
       </div>
 
-      <div class="b-section-settings__control">
+      <div v-if="!isHeader" class="b-section-settings__control">
         <div class="b-section-settings__header">
           <span>Heights</span>
         </div>
@@ -43,7 +43,7 @@
         <BaseSwitcher v-model="fullScreen" @change="setHeight" />
       </div>
 
-      <template v-if="settingObjectOptions.background">
+      <template v-if="!isHeader && settingObjectOptions.background">
 
         <div class="b-section-settings__header">
           <span>Background</span>
@@ -299,12 +299,17 @@ export default {
         return this.bgAttachment === 'fixed'
       }
     },
+
     backgroundType () {
       return this.settingObjectOptions.backgroundType
     },
 
     sectionId () {
       return this.settingObjectSection.id
+    },
+
+    isHeader () {
+      return this.settingObjectSection.isHeader
     }
   },
 
