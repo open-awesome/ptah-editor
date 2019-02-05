@@ -127,7 +127,7 @@ export default {
     justify-content: space-between
     &__left
       order: 1
-      width: 50%
+      width: 75%
       display: flex
       align-items: center
       justify-content: flex-start
