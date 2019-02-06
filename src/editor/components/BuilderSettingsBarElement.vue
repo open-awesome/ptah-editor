@@ -1,6 +1,15 @@
 <template>
   <div class="b-elem-settings">
-    <base-scroll-container backgroundBar="#999">
+
+    <!-- Timer -->
+    <builder-settings-bar-element-timer
+        v-if="settingObjectOptions.timer"
+        :timer="settingObjectOptions.timer"/>
+
+    <base-scroll-container
+        v-show="!settingObjectOptions.timer"
+        backgroundBar="#999">
+
       <div class="b-elem-settings__inner">
 
         <!-- Text align -->
@@ -97,6 +106,11 @@
               @change="changeVideoSrc"/>
         </div>
 
+        <!-- Form -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.form">
+          <control-form></control-form>
+        </div>
+
       </div>
     </base-scroll-container>
 
@@ -106,6 +120,9 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
+
+import BuilderSettingsBarElementTimer from './BuilderSettingsBarElementTimer'
+
 import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
 import ControlBackground from './controls/TheControlBackground'
@@ -117,6 +134,7 @@ import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 import ControlIconWithText from './controls/TheControlIconWithText.vue'
 import ControlVideo from './controls/ControlVideo'
+import ControlForm from './controls/TheControlForm'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -129,6 +147,7 @@ export default {
   },
 
   components: {
+    BuilderSettingsBarElementTimer,
     ControlAlign,
     ControlText,
     ControlBackground,
@@ -138,7 +157,8 @@ export default {
     ControlAgeRestrictions,
     ControlSocialNetworks,
     ControlIconWithText,
-    ControlVideo
+    ControlVideo,
+    ControlForm
   },
 
   data () {
@@ -360,21 +380,24 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  .b-elem-settings
-    padding-bottom: 4.5rem
-    display: flex
-    flex-direction: column
-    height: auto
-    width: 100%
-    align-items: stretch
-    &__inner
-      min-width: 24rem
-      padding-right: 2.5rem
-      padding-bottom: 10rem
-    &__control
-      margin-bottom: 1.6rem
-  // TODO: временное решение для кнопок сортировки
-  .temp-sort-buttons
-    button
-      width: 8rem
+.b-elem-settings
+  padding-bottom: 4.5rem
+  display: flex
+  flex-direction: column
+  height: auto
+  width: 100%
+  align-items: stretch
+
+  &__inner
+    min-width: 24rem
+    padding-right: 2.5rem
+    padding-bottom: 10rem
+
+  &__control
+    margin-bottom: 1.6rem
+
+// TODO: временное решение для кнопок сортировки
+.temp-sort-buttons
+  button
+    width: 8rem
 </style>

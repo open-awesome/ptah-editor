@@ -14,9 +14,7 @@ export default {
       type: Boolean,
       required: true
     },
-    isComplexText: {
-      type: Boolean
-    }
+    isComplexText: Boolean
   },
 
   data () {
@@ -184,7 +182,10 @@ export default {
 <template>
   <div class="b-text-controls">
     <div class="b-text-controls__header" @click="onClickTitle">
-      <span>Text</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+      <span>Text</span>
+      <i :class="{ 'dropped': !controlOpen }">
+        <icon-base name="arrowDropDown" width="8"></icon-base>
+      </i>
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-text-controls__control">

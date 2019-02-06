@@ -27,6 +27,7 @@ import Slogan from '@components/elements/Slogan'
 import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
 import VideoElement from '@components/elements/Video'
+import Timer from '@components/elements/Timer'
 import Form from '@components/elements/Form'
 
 // sections
@@ -59,6 +60,8 @@ import Video from '@components/sections/video/Video'
 import DefaultCarousel from '@components/sections/carousel/DefaultCarousel'
 import CoverflowCarousel from '@components/sections/carousel/CoverflowCarousel'
 import AutoplayCarousel from '@components/sections/carousel/AutoplayCarousel'
+// --- forms
+import FormCenter from '@components/sections/forms/FormCenter'
 // --- other
 import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
@@ -83,6 +86,7 @@ const ELEMENTS = {
   Cost,
   IconWithText,
   'Video': VideoElement,
+  Timer,
   Form
 }
 
@@ -114,6 +118,8 @@ const COMPONENTS = {
   DefaultCarousel,
   CoverflowCarousel,
   AutoplayCarousel,
+
+  FormCenter,
 
   Footer,
   System,

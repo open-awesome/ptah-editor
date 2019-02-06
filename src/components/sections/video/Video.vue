@@ -1,17 +1,29 @@
 <script>
 import * as types from '@editor/types'
 import { getYoutubeVideoIdFromUrl } from '@editor/util'
+import section from '../../mixins/section.js'
+
+const SCHEMA_CUSTOM = {
+  mainStyle: {
+    styles: {
+      'background-color': '#303030'
+    }
+  },
+  edited: true
+}
+
+const GROUP_NAME = 'Video'
+const NAME = 'Video'
 
 export default {
-  name: 'Video',
-  group: 'video',
+  name: NAME,
+
+  group: GROUP_NAME,
+
+  mixins: [section],
+
   $schema: {
     mainStyle: types.Video
-  },
-  props: {
-    id: {
-      type: Number, required: true
-    }
   },
 
   data () {
@@ -62,6 +74,15 @@ export default {
         this.youtubeVideoUrl = ''
       }
     }
+  },
+
+  created () {
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   }
 }
 </script>

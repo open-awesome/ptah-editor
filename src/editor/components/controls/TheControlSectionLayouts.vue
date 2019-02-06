@@ -1,6 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
+import Section from '@editor/section'
 
 export default {
   name: 'ControlSectionLayouts',
@@ -50,24 +51,28 @@ export default {
       'clearSettingObject'
     ]),
 
-    selectLayout (section) {
+    async selectLayout (section) {
       if (section.name === this.selectedSection) {
         return false
       }
 
-      let index = _.findIndex(this.builder.sections, ['name', this.selectedSection])
-      this.builder.remove(this.settingObjectSection)
-      this.clearSettingObject()
-      this.builder.add(section, index)
+      let index = _.findIndex(this.builder.sections, ['group', section.group])
 
-      setTimeout(() => {
-        let subitem = document
-          .getElementById('sections_contents')
-          .querySelectorAll('.b-menu-subitem')[index]
-        if (subitem) {
-          subitem.dispatchEvent(new Event('click'))
-        }
-      }, 250)
+      this.builder.sections[index] = new Section(section)
+      this.builder.set(this.builder)
+
+      await this.$nextTick()
+
+      let target = document
+        .getElementById('sections_contents')
+        .querySelectorAll('.b-menu-subitem:not(.b-menu-subitem--header)')[index]
+
+      if (section.schema.isHeader) {
+        target = document.querySelector('.b-menu-subitem--header')
+      }
+      if (target) {
+        target.click()
+      }
     }
   }
 }

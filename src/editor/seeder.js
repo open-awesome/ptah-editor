@@ -167,7 +167,7 @@ const data = new Map([
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': 'rgba(0,0,0,0)',
-        'background': false,
+        'background-attachment': 'scroll',
         'width': '',
         'height': ''
       }
@@ -353,7 +353,8 @@ const data = new Map([
     {
       resizable: true,
       removable: true,
-      form: true
+      form: true,
+      isComplex: true
     })
   )],
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -686,7 +687,25 @@ const data = new Map([
         'text-align': 'inherit',
         'color': 'inherit'
     }
-}))],
+  }))],
+  [types.Timer, () => (_.merge({}, DEFAULT_OPTIONS, {
+    isComplex: true,
+    timer: {
+      // --- timer timestamp
+      timestamp: null,
+      // --- current UTC offset
+      UTC: new Date().getTimezoneOffset() / 60 * (-1),
+      // --- labels options
+      labels: {
+        // --- show labels
+        show: true,
+        // --- labels translation
+        language: 'en',
+        // --- labels position
+        position: 'top'
+      }
+    }
+  }))]
 ])
 
 export default class Seeder {

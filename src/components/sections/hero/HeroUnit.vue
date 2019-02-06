@@ -1,9 +1,54 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import Seeder from '@editor/seeder'
-import Draggable from 'vuedraggable'
-import { mapActions } from 'vuex'
+import section from '../../mixins/section.js'
+
+const GROUP_NAME = 'Hero'
+const NAME = 'HeroUnit'
+const BG_SECTION = 'url(https://gn987.cdn.stg.gamenet.ru/0/7K0NZ/o_1zKuK8.png)'
+
+const COMPONENTS = [
+  {
+    name: 'Logo',
+    element: types.Logo,
+    type: 'image',
+    class: 'b-logo',
+    label: 'logo',
+    key: 0
+  },
+  {
+    name: 'Title',
+    element: types.Title,
+    type: 'text',
+    class: 'b-title',
+    label: 'title',
+    key: 1
+  },
+  {
+    name: 'Description',
+    element: types.Text,
+    type: 'text',
+    class: 'b-text',
+    label: 'description',
+    key: 2
+  },
+  {
+    name: 'Button',
+    element: types.Button,
+    type: 'button',
+    class: 'b-button',
+    label: 'button',
+    key: 3
+  },
+  {
+    name: 'AvailablePlatforms',
+    element: types.AvailablePlatforms,
+    type: 'available',
+    class: 'b-available-platforms',
+    label: 'Available Platforms',
+    key: 4
+  }
+]
 
 const C_CUSTOM = [
   {
@@ -16,7 +61,8 @@ const C_CUSTOM = [
         'width': '110px',
         'height': '64px'
       }
-    }
+    },
+    key: 0
   },
   {
     element: {
@@ -26,7 +72,8 @@ const C_CUSTOM = [
         'font-size': '4.8rem',
         'color': '#ffffff'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -38,9 +85,9 @@ const C_CUSTOM = [
         'font-size': '2rem',
         'color': 'rgba(255, 255, 255, 0.3)'
       }
-    }
+    },
+    key: 2
   },
-  {},
   {
     element: {
       text: 'Call to Action',
@@ -53,119 +100,48 @@ const C_CUSTOM = [
         'height': '64px',
         'border-radius': '2px'
       }
-    }
+    },
+    key: 3
   }
 ]
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn987.cdn.stg.gamenet.ru/0/7K0NZ/o_1zKuK8.png)',
+      'background-image': BG_SECTION,
       'background-size': 'cover',
-      'background-repeat': 'no-repeat'
+      'background-color': '#000',
+      'background-repeat': 'no-repeat',
+      'background-attachment': 'scroll'
     }
   },
   components: _.merge({}, C_CUSTOM),
+  container: {},
   edited: true
 }
 
-const GROUP_NAME = 'Hero'
-const NAME = 'HeroUnit'
-
 export default {
   name: NAME,
-  components: {
-    Draggable
-  },
-  cover: '/img/covers/hero-unit.png',
+
   group: GROUP_NAME,
+
+  mixins: [section],
+
+  cover: '/img/covers/hero-unit.png',
+
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    components: [
-      {
-        name: 'Logo',
-        element: types.Logo,
-        type: 'image',
-        class: 'b-logo',
-        label: 'logo'
-      },
-      {
-        name: 'Title',
-        element: types.Title,
-        type: 'title',
-        class: 'b-title',
-        label: 'title'
-      },
-      {
-        name: 'Description',
-        element: types.Text,
-        type: 'text',
-        class: 'b-text',
-        label: 'description'
-      },
-      {
-        name: 'Delimiter',
-        element: types.Delimiter,
-        type: 'delimiter',
-        class: 'b-delimiter',
-        label: 'delimiter'
-      },
-      {
-        name: 'Button',
-        element: types.Button,
-        type: 'button',
-        class: 'b-button-test',
-        label: 'button'
-      }
-    ]
-  },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
-
-  methods: {
-    ...mapActions('Landing', [
-      'updateGroupData',
-      'updateSectionData'
-    ]),
-
-    storeData: _.after(2, (self) => {
-      let data = {}
-      self.$sectionData.components.forEach(component => {
-        data[component.name] = component.element.text
-      })
-      self.updateGroupData({ name: GROUP_NAME, data })
-      self.updateSectionData({
-        name: NAME,
-        data: _.cloneDeep(self.$sectionData)
-      })
-    }),
-
-    canRestore () {
-      return this.$store.state.Landing.groups.indexOf(GROUP_NAME) === -1 && !!this.$store.state.Landing.sectionData[NAME]
-    }
+    components: COMPONENTS
   },
 
   created () {
-    if (this.$sectionData.edited === undefined) {
-      let data = this.canRestore() ? this.$store.state.Landing.sectionData[NAME] : SCHEMA_CUSTOM
-      Seeder.seed(_.merge(this.$sectionData, data))
-    }
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
 
-    _.forEach(this.$store.state.Landing.groupData[GROUP_NAME], (text, name) => {
-      let elementObj = _.find(this.$sectionData.components, { name })
-      if (elementObj) {
-        elementObj.element.text = text
-      }
-    })
-  },
-
-  updated () {
-    this.storeData(this)
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   }
 }
 </script>
@@ -191,7 +167,7 @@ export default {
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"
                   v-if="$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
                   :target="$sectionData.components[index].element.link.target"
@@ -202,7 +178,7 @@ export default {
                 </component>
                 <component class="b-hero-component"
                   v-if="!$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                   v-html="$sectionData.components[index].element.text"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
@@ -304,7 +280,6 @@ $h: 100vh
       height: 4rem !important
       font-size: 1.4rem !important
 .b-sandbox
-  height: 100%
   min-height: 20rem
   justify-content: center
   align-items: center

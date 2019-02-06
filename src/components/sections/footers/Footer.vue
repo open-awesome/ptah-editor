@@ -1,9 +1,7 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import Seeder from '@editor/seeder'
-import VuseIcon from '@editor/components/VuseIcon'
-import Draggable from 'vuedraggable'
+import section from '../../mixins/section.js'
 
 const COMPONENTS = [
   {
@@ -11,42 +9,48 @@ const COMPONENTS = [
     element: types.Logo,
     type: 'image',
     class: 'b-footer-game-logo',
-    label: 'logo'
+    label: 'logo',
+    key: 0
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
     class: 'b-footer-copyright',
-    label: 'description'
+    label: 'description',
+    key: 1
   },
   {
     name: 'Link',
     element: types.Link,
     type: 'button',
     class: 'b-footer-link',
-    label: 'link'
+    label: 'link',
+    key: 2
   },
   {
     name: 'Link',
     element: types.Link,
     type: 'button',
     class: 'b-footer-link',
-    label: 'link'
+    label: 'link',
+    key: 3
   },
   {
     name: 'Link',
     element: types.Link,
     type: 'button',
     class: 'b-footer-link',
-    label: 'link'
+    label: 'link',
+    key: 4
   },
   {
     name: 'AgeRestrictions',
     element: types.AgeRestrictions,
     type: 'restrictions',
     class: 'b-age-restrictions',
-    label: 'age restrictions'
+    label: 'age restrictions',
+    key: 5
   }
 ]
 
@@ -61,7 +65,8 @@ const C_CUSTOM = [
         'width': '153px',
         'height': '71px'
       }
-    }
+    },
+    key: 0
   },
   {
     element: {
@@ -71,7 +76,8 @@ const C_CUSTOM = [
         'font-size': '1.6rem',
         'color': 'rgba(255, 255, 255, 0.3)'
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -83,7 +89,8 @@ const C_CUSTOM = [
         'text-align': 'center',
         'font-size': '1.6rem'
       }
-    }
+    },
+    key: 2
   },
   {
     element: {
@@ -95,7 +102,8 @@ const C_CUSTOM = [
         'text-align': 'center',
         'font-size': '1.6rem'
       }
-    }
+    },
+    key: 3
   },
   {
     element: {
@@ -107,14 +115,19 @@ const C_CUSTOM = [
         'text-align': 'center',
         'font-size': '1.6rem'
       }
-    }
+    },
+    key: 4
   }
 ]
+
+const GROUP_NAME = 'Footer'
+const NAME = 'Footer'
+const BG_SECTION = 'url(https://gn685.cdn.stg.gamenet.ru/0/7MZzz/o_bJr44.jpg)'
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn685.cdn.stg.gamenet.ru/0/7MZzz/o_bJr44.jpg)',
+      'background-image': BG_SECTION,
       'background-color': '#151C44',
       'background-size': 'cover',
       'background-repeat': 'no-repeat'
@@ -125,28 +138,27 @@ const SCHEMA_CUSTOM = {
 }
 
 export default {
-  name: 'Footer',
-  components: {
-    VuseIcon,
-    Draggable
-  },
+  name: NAME,
+
+  group: GROUP_NAME,
+
+  mixins: [section],
+
   cover: '/img/covers/footer.jpg',
-  group: 'footers',
+
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
     components: COMPONENTS
   },
-  props: {
-    id: {
-      type: Number,
-      required: true
-    }
-  },
+
   created () {
-    if (this.$sectionData.edited === undefined) {
-      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
-    }
+    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
+    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
+    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
+    let $sectionData = this.$sectionData
+
+    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
   }
 }
 </script>

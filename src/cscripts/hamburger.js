@@ -27,7 +27,6 @@ function closeHamburger ({ target }) {
   if (target.closest('.hamburger-button') || target.closest('.hamburger-container')) {
     return
   }
-
   let elements = [
     ...document.querySelectorAll('.hamburger-container.active'),
     ...document.querySelectorAll('.hamburger-button.active')

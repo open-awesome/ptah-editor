@@ -184,7 +184,8 @@ export default {
     },
 
     changeBgColor () {
-      this.changePseudo('background-color', this.bgH.hex)
+      const color = this.bgH.rgba ? `rgba(${Object.values(this.bgH.rgba).toString()})` : this.bgH
+      this.changePseudo('background-color', color)
     },
 
     changeBgImage () {
@@ -204,7 +205,8 @@ export default {
     },
 
     changeTextColor () {
-      this.changePseudo('color', this.textH.hex)
+      const color = this.textH.rgba ? `rgba(${Object.values(this.textH.rgba).toString()})` : this.textH
+      this.changePseudo('color', color)
     },
 
     changeAnimation () {

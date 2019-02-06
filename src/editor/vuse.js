@@ -215,6 +215,7 @@ class Vuse {
           component = this.components[section].options
           sectionData = {
             name: component.name,
+            group: component.group,
             schema: component.schema,
             data: component.data
           }
@@ -226,6 +227,7 @@ class Vuse {
           component = this.components[section.name].options
           sectionData = {
             name: component.name,
+            group: component.group,
             schema: component.schema,
             data: section.data,
             isHeader: component.isHeader
@@ -279,6 +281,7 @@ class Vuse {
 
     let { video, title } = this.settings
     let styles = this.getCss(frag)
+    let script = this.getJsScript()
     let bodyStyles = this.getBodyStyles()
     let scrollSetup = this.getScrollSetup()
 
@@ -304,6 +307,9 @@ class Vuse {
             ${this.getCookiesPreview()}
             <script src="${window.location.origin + '/js/cjs.js'}"></script>
             ${scrollSetup.setup}
+            <script>
+              ${script}
+            </script>
           <body>
         </html>`
     )
@@ -334,6 +340,14 @@ class Vuse {
     }
 
     return styles
+  }
+
+  getJsScript () {
+    if (!!this.settings.script) {
+      return this.settings.script
+    } else {
+      return ''
+    }
   }
 
   /**
@@ -405,9 +419,10 @@ class Vuse {
   }
 
   getManifest () {
+    let description = _.find(this.settings.ogTags, o => o.property === 'og:description') || { content: '' }
     let manifest = {
       name: this.settings.title,
-      description: _.find(this.settings.ogTags, o => o.property === 'og:description').content || '',
+      description: description.content,
       icons: [{
         src: this.settings.favicon,
         sizes: '64x64'

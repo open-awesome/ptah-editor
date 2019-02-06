@@ -13,6 +13,7 @@ export class Cost { }
 export class ImageNoResize { }
 export class Delimiter { }
 export class Video { }
+export class Timer { }
 export class ProductSection { }
 export class Form { }
 

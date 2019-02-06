@@ -26,6 +26,10 @@ export default {
         name: 'menu.cookie'
       },
       {
+        id: 'addJsScrips',
+        name: 'Add JS'
+      },
+      {
         id: 'integrationsSettings',
         name: 'menu.integrations'
       }
