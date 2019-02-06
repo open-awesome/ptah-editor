@@ -1,40 +1,6 @@
 <template>
   <div class="b-builder-sidebar" :class="{'b-builder-sidebar_expanded': isExpanded}">
-    <button
-      class="b-builder-sidebar__back-button"
-      title="Minimize panel"
-      @click="toggleSidebarAndHideContent">
-
-      <IconBase
-        slot="icon"
-        name="turnAside"
-        width="10"
-        height="8"
-        color="none"
-        strokeColor="#888888"/>
-    </button>
-
     <div class="b-builder-sidebar__content">
-      <!-- Site settings -->
-      <menu-item
-        :isSelected="expandedMenuItem === 'siteSettings'"
-        :isExpandable="true"
-        @click="toggleMenuItem('siteSettings')">
-        {{ $t('menu.siteSettings') }}
-      </menu-item>
-
-      <!-- Site settings CONTENTS -->
-      <BaseDropdown
-        :isOpened="expandedMenuItem === 'siteSettings'">
-        <MenuSubitem
-          v-for="siteSetting in siteSettingsMenu"
-          :key="siteSetting.id"
-          :isSelected="modalContentID === siteSetting.id"
-          @click="toggleSiteSettings(siteSetting.id)">
-          {{ $t(siteSetting.name) }}
-        </MenuSubitem>
-      </BaseDropdown>
-
       <!-- Sections -->
       <menu-item
         :isSelected="expandedMenuItem === 'sections'"
@@ -269,18 +235,6 @@ export default {
 
     closeSettingsBar () {
       this.clearSettingObjectLight()
-    },
-
-    toggleSiteSettings (contentID) {
-      this.closeSettingsBar()
-      if (this.isAddSectionExpanded) {
-        this.toggleAddSectionMenu()
-      }
-      if (this.modalContentID === contentID) {
-        this.closeSiteSettings()
-      } else {
-        this.setModalContent(contentID)
-      }
     },
 
     closeSiteSettings () {

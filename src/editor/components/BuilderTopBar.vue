@@ -14,17 +14,31 @@ export default {
   },
 
   data: () => ({
-    device: null
+    device: null,
+    colorHamburger: '#333',
+    colorHome: '#333'
   }),
 
   computed: {
-    ...mapState(['currentLanding'])
+    ...mapState(['currentLanding']),
+    ...mapState('Sidebar', [
+      'expandedMenuItem'
+    ]),
+    ...mapState('BuilderModalContent', {
+      modalContentID: 'contentID'
+    })
   },
 
   methods: {
     ...mapActions('Sidebar', [
-      'clearSettingObject'
+      'clearSettingObject',
+      'setMenuItem',
+      'clearSettingObjectLight'
     ]),
+
+    ...mapActions('BuilderModalContent', {
+      setModalContent: 'setContent'
+    }),
 
     setDevice (type) {
       this.$emit('setDevice', type)
@@ -33,6 +47,31 @@ export default {
     backToLandings ($event) {
       this.clearSettingObject()
       this.$emit('backToLandings', $event)
+    },
+
+    toggleMenuItem (name) {
+      this.setMenuItem(name)
+      this.toggleSiteSettings('visualSettings')
+    },
+
+    closeSettingsBar () {
+      this.clearSettingObjectLight()
+    },
+
+    closeSiteSettings () {
+      this.setModalContent('')
+    },
+
+    toggleSiteSettings (contentID) {
+      this.closeSettingsBar()
+      if (this.isAddSectionExpanded) {
+        this.toggleAddSectionMenu()
+      }
+      if (this.modalContentID === contentID) {
+        this.closeSiteSettings()
+      } else {
+        this.setModalContent(contentID)
+      }
     }
   }
 }
@@ -70,6 +109,16 @@ export default {
           ></MenuPlatforms>
       </div>
       <div class="b-top-bar-right-menu__right">
+        <BaseButton
+          :color="'gray'"
+          :transparent="true"
+          :size="'middle'"
+          @click="toggleMenuItem('siteSettings')"
+          tooltip="show site settings"
+          tooltip-position="bottom"
+          >
+          {{ $t('menu.siteSettings') }}
+        </BaseButton>
         <BaseButton
           :color="'gray'"
           :transparent="true"

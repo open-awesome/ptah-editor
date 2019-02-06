@@ -102,6 +102,7 @@ $selected-bg-color: rgba(#202020, 0.35)
   cursor: pointer
   color: #474747
   font-size: 1.4rem
+  width: 100%
   padding: 0
 
   &:hover:not(.b-menu-subitem_selected)

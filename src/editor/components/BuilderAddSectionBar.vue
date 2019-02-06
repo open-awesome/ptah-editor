@@ -47,12 +47,20 @@ export default {
     selectGroup (group) {
       this.selectedGroup = group
       this.selectedSection = group[0]
+      this.addSection(this.selectedSection)
+    },
+    selectSection (section) {
+      this.selectedSection = section
+      this.addSection(this.selectedSection)
+    },
+    addSection (section) {
       this.builder.add(this.selectedSection, this.builder.sections.length + 1)
       this.closeAddSectionBar()
       this.$emit('add', this.builder.sections[this.builder.sections.length - 1])
     },
-    selectSection (section) {
-      this.selectedSection = section
+    showSelectSection (group) {
+      this.selectedGroup = group
+      this.isVisibleBar = true
     },
     closeAddSectionBar () {
       this.$emit('requestClose')
@@ -77,7 +85,7 @@ export default {
             v-for="(group, name) in groups"
             :key="name"
             v-if="group.length">
-          <div class="b-add-section__menu-header" @click="selectGroup(group)">
+          <div class="b-add-section__menu-header" @click="showSelectSection(group)">
             <span class="b-add-section__menu-title">{{ name }}</span>
           </div>
         </li>
