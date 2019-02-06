@@ -264,6 +264,10 @@ export default {
         ? this.$refs.header.lastElementChild
         : this.$refs.sections.lastElementChild
       target.click()
+    },
+
+    startScroll (x) {
+      console.log(x)
     }
   }
 }

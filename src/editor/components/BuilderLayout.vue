@@ -23,12 +23,12 @@
       </aside>
 
       <main class="b-builder-layout-content__main">
+        <base-scroll-container
+          backgroundBar="#fff">
         <div class="b-builder-layout-content__main-layout" :class="device">
-          <base-scroll-container
-            backgroundBar="#999">
-            <slot></slot>
-          </base-scroll-container>
+          <slot></slot>
         </div>
+        </base-scroll-container>
         <BuilderModalContent />
       </main>
 
@@ -136,6 +136,7 @@ export default {
       margin: 0 auto
       position: relative
       z-index: 5
+      height: calc(100vh - 7.2rem)
 
       &.is-desktop
         width: 100%

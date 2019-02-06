@@ -384,7 +384,7 @@ export default {
   transform-origin: top center
   margin: 0 auto
   transition: 0.2s
-  height: calc(100vh - 7.2rem)
+  // height: calc(100vh - 7.2rem)
   position: relative
   &.is-editable .is-editable
     outline: none
