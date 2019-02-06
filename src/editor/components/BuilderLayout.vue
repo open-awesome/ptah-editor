@@ -1,6 +1,6 @@
 <template>
   <div class="b-builder-layout">
-    <div class="b-builder-layout__top-bar" :style="{'margin-right': `${fakeScrollbarWidth}px`}">
+    <div class="b-builder-layout__top-bar">
       <BuilderTopBar
         @setDevice="setDevice"
         @backToLandings="backToLandings"
@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import BuilderSidebar from './BuilderSidebar.vue'
 import BuilderTopBar from './BuilderTopBar.vue'
 import BuilderModalContent from './BuilderModalContent.vue'
@@ -71,7 +71,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters('PageTweaks', ['fakeScrollbarWidth']),
     ...mapState('Sidebar', ['isExpanded'])
   },
 
