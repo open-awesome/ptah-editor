@@ -109,57 +109,5 @@ export default {
     request.append('format', 'json')
 
     return this.uploadFile(request)
-  },
-
-  /**
-   * https://developer.mailchimp.com/documentation/mailchimp/guides/how-to-use-oauth2/
-   * @param code
-   * @param clientId
-   * @param clientSecret
-   * @returns {AxiosPromise}
-   */
-  mailchimpLogin (code, clientId, clientSecret) {
-    let url = 'https://login.mailchimp.com/oauth2/token'
-    let data = {
-      grant_type: 'authorization_code',
-      client_id: clientId,
-      client_secret: clientSecret,
-      code
-    }
-    let token = ''
-
-    // get access token
-    return axios.post(url, data)
-      .then((response) => {
-        // get metadata
-        token = response.access_token
-        return this.getMetadata(token)
-      })
-      .then((metadata) => {
-        return { metadata, token }
-      })
-  },
-
-  /**
-   * {"dc":"us1","login_url":"https:\/\/login.mailchimp.com","api_endpoint":"https:\/\/us1.api.mailchimp.com"}
-   * @param token
-   * @returns {AxiosPromise}
-   */
-  getMetadata (token) {
-    return axios.get('https://login.mailchimp.com/oauth2/metadata', {
-      headers: {
-        'User-Agent': 'oauth2-draft-v10',
-        'Authorization': `OAuth ${token}`
-      }
-    })
-  },
-
-  getLists (url, token) {
-    return axios.get(url, {
-      headers: {
-        'Authorization': `OAuth ${token}`
-      }
-    })
   }
-
 }

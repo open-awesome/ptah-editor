@@ -7,7 +7,8 @@ const i18nConvertor = require('./utils/i18nConvertor')
 const gsheetsDataProvider = require('./utils/gsheetsDataProvider')
 
 gulp.task('cjs', function (callback) {
-  var myConfig = {
+  let myConfig = {
+    mode: (process.env.npm_config_development) ? 'development' : 'production',
     entry: {
       preload: './src/cscripts/index.js'
     },

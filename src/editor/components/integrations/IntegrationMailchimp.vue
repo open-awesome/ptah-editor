@@ -10,7 +10,6 @@
 </template>
 
 <script>
-import api from '@store/api'
 import { mapActions } from 'vuex'
 
 export default {
@@ -20,7 +19,7 @@ export default {
     return {
       clientId: '',
       clientSecret: '',
-      returnUri: 'http://127.0.0.1:8080/oauth_complete/'
+      returnUri: '/oauth_complete/'
     }
   },
 
@@ -38,32 +37,13 @@ export default {
     let frame = document.querySelector('#oauthMailchimp')
 
     frame.addEventListener('load', (e) => {
-      let code = localStorage.getItem('mc_code')
-      if (code) {
-        this.connect(code)
-      }
+      // let code = localStorage.getItem('mc_code')
+      // auth user and get lists
     })
   },
 
   methods: {
-    ...mapActions(['storeSettings']),
-
-    connect (code) {
-      api.mailchimpLogin(code, this.clientId, this.clientSecret)
-        .then((response) => {
-          console.log(response)
-          /* this.storeSettings({
-            mailchimp: response
-          }) */
-
-          let listsUrl = `${response.metadata.api_endpoint}/lists`
-
-          return api.getLists(listsUrl, response.token)
-        })
-        .then((lists) => {
-          console.log(lists)
-        })
-    }
+    ...mapActions(['storeSettings'])
   }
 }
 </script>
