@@ -4,7 +4,18 @@ import * as _ from 'lodash-es'
 import Draggable from 'vuedraggable'
 import section from '../../mixins/section.js'
 
-const COMPONENTS = [
+const COMPONENTS_1 = [
+  {
+    name: 'Logo',
+    element: types.Logo,
+    type: 'image',
+    class: 'b-logo',
+    label: 'logo',
+    key: 0
+  }
+]
+
+const COMPONENTS_2 = [
   {
     name: 'Title',
     element: types.Title,
@@ -30,18 +41,34 @@ const COMPONENTS = [
     name: 'Form',
     element: types.Form,
     type: 'form',
-    class: 'b-form-element--big',
+    class: 'b-form-element--medium',
     label: 'form'
   }
 ]
 
-const C_CUSTOM = [
+const C_CUSTOM_1 = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '110px',
+        'height': '64px'
+      }
+    },
+    key: 0
+  }
+]
+
+const C_CUSTOM_2 = [
   {
     element: {
       text: 'This is a short header',
       styles: {
         'font-family': 'Lato',
-        'font-size': '4.2rem',
+        'font-size': '2.8rem',
         'color': '#ffffff'
       }
     },
@@ -52,7 +79,7 @@ const C_CUSTOM = [
       text: 'An sincerity so extremity he additions. Her yet there truth merit.',
       styles: {
         'font-family': 'Lato',
-        'font-size': '2rem',
+        'font-size': '1.4rem',
         'color': 'rgba(255, 255, 255, 0.5)'
       }
     },
@@ -79,13 +106,25 @@ const SCHEMA_CUSTOM = {
       'background-attachment': 'scroll'
     }
   },
-  components: _.merge({}, C_CUSTOM),
-  container: {},
+  components: _.merge({}, C_CUSTOM_1),
+  components2: _.merge({}, C_CUSTOM_2),
+  container: {
+    styles: {
+      'align-items': 'flex-start'
+    }
+  },
+  container2: {
+    styles: {
+      'justify-content': 'flex-start',
+      'align-items': 'flex-start',
+      'width': '100%'
+    }
+  },
   edited: true
 }
 
 const GROUP_NAME = 'Forms'
-const NAME = 'FormCenter'
+const NAME = 'FormRight'
 
 export default {
   name: NAME,
@@ -103,7 +142,9 @@ export default {
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    components: COMPONENTS
+    container2: types.StyleObject,
+    components: COMPONENTS_1,
+    components2: COMPONENTS_2
   },
 
   created () {
@@ -127,12 +168,12 @@ export default {
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-12">
+        <div class="b-grid__col-6">
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
             direction="column"
-            class="b-sandbox">
+            class="b-sandbox b-form__left-col">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
@@ -163,58 +204,108 @@ export default {
             </draggable>
           </sandbox>
         </div>
+        <div class="b-grid__col-6">
+          <sandbox
+            container-path="$sectionData.container2"
+            components-path="$sectionData.components2"
+            direction="column"
+            class="b-sandbox">
+
+            <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
+              <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
+                <component class="b-hero-component"
+                           v-if="$sectionData.components2[index].element.isComplex"
+                           v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
+                           :is="component.name"
+                           :href="$sectionData.components2[index].element.link.href"
+                           :target="$sectionData.components2[index].element.link.target"
+                           :path="`components2[${index}].element`"
+                           :style="$sectionData.components2[index].element.styles"
+                           :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                >
+                </component>
+                <component class="b-hero-component"
+                           v-if="!$sectionData.components2[index].element.isComplex"
+                           v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
+                           v-html="$sectionData.components2[index].element.text"
+                           :is="component.name"
+                           :href="$sectionData.components2[index].element.link.href"
+                           :target="$sectionData.components2[index].element.link.target"
+                           :path="`components2[${index}].element`"
+                           :style="$sectionData.components2[index].element.styles"
+                           :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                >
+                </component>
+              </div>
+            </draggable>
+          </sandbox>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <style lang="sass" scoped>
-.b-form
-  position: relative
-  width: 100%
-  min-height: 70rem
-  margin: 0
-  padding: 1rem
-  display: flex
-  text-align: center
-  justify-content: center
-  flex-direction: column
-  transition: background 200ms
+  .b-form
+    position: relative
+    width: 100%
+    min-height: 70rem
+    margin: 0
+    padding: 1rem
+    display: flex
+    text-align: center
+    justify-content: center
+    flex-direction: column
+    transition: background 200ms
 
-.b-title
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-weight: 800
-  line-height: 6.7rem
-  font-size: 4.8rem
-  text-align: center
-  letter-spacing: 0.15em
-  text-transform: uppercase
-  margin: 0 0 2rem
-  text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-    line-height: 4rem
-    padding: 0 1rem
-  @media only screen and (max-width: 768px)
-    &
+    &__left-col
+      align-items: stretch
+
+  .b-title
+    color: rgb(255, 255, 255)
+    font-style: normal
+    font-weight: 800
+    line-height: 6.7rem
+    font-size: 2.8rem
+    text-align: center
+    letter-spacing: 0.15em
+    text-transform: uppercase
+    margin: 0 0 2rem
+    text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
+    .is-mobile &,
+    .is-tablet &
       font-size: 2rem !important
       line-height: 4rem
       padding: 0 1rem
+    @media only screen and (max-width: 768px)
+      &
+        font-size: 2rem !important
+        line-height: 4rem
+        padding: 0 1rem
 
-.b-text
-  color: rgba(255, 255, 255, 0.3)
-  font-size: 2rem
-  line-height: 4rem
-  text-align: center
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-    line-height: 2rem
-  @media only screen and (max-width: 768px)
-    &
+  .b-text
+    color: rgba(255, 255, 255, 0.3)
+    font-size: 1.8rem
+    line-height: 4rem
+    text-align: center
+    margin: 0
+    .is-mobile &,
+    .is-tablet &
       font-size: 1.4rem !important
       line-height: 2rem
+    @media only screen and (max-width: 768px)
+      &
+        font-size: 1.4rem !important
+        line-height: 2rem
 
+  .b-draggable-slot
+    width: 100%
+    height: 100%
+    height: -moz-available
+    height: -webkit-fill-available
+    height: fill-available
+    max-height: intrinsic
+    max-height: -moz-max-content
+    max-height: -webkit-max-content
+    max-height: fit-content
 </style>

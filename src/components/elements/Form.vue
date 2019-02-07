@@ -31,7 +31,6 @@ export default {
 
 <style lang="sass" scoped>
 .b-form-element
-  width: 70rem
   display: flex
   align-items: center
   justify-content: center
@@ -39,25 +38,19 @@ export default {
     &
       flex-direction: column
   input
-    width: 45rem
     border: 0.2rem solid rgba(255, 125, 125, 0.5)
     background: #fff
-    font-size: 2rem
     color: #2a2a2a
     border-radius: 2px
-    height: 64px
     padding: 10px
     @media only screen and (max-width: 768px)
       &
         max-width: 100%
   button
-    min-width: 22.4rem
     padding: 0 20px
     background-color: rgba(255, 109, 100, 1)
     color: #FFFFFF
-    font-size: 1.6rem
     border-radius: 2px
-    height: 64px
     border: none
     text-transform: uppercase
     font-family: 'Lato'
@@ -67,4 +60,24 @@ export default {
       &
         min-width: auto
         max-width: 100%
+  &--big
+    width: 70rem
+    input
+      width: 45rem
+      height: 64px
+      font-size: 2rem
+    button
+      min-width: 22.4rem
+      height: 64px
+      font-size: 1.6rem
+  &--medium
+    width: auto
+    input
+      width: 25rem
+      height: 40px
+      font-size: 1.6rem
+    button
+      min-width: 11rem
+      height: 40px
+      font-size: 1.4rem
 </style>

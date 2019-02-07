@@ -62,6 +62,7 @@ import CoverflowCarousel from '@components/sections/carousel/CoverflowCarousel'
 import AutoplayCarousel from '@components/sections/carousel/AutoplayCarousel'
 // --- forms
 import FormCenter from '@components/sections/forms/FormCenter'
+import FormRight from '@components/sections/forms/FormRightSide'
 // --- other
 import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
@@ -120,6 +121,7 @@ const COMPONENTS = {
   AutoplayCarousel,
 
   FormCenter,
+  FormRight,
 
   Footer,
   System,
