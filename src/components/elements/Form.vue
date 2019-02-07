@@ -46,6 +46,7 @@ export default {
     @media only screen and (max-width: 768px)
       &
         max-width: 100%
+        margin-bottom: 10px
   button
     padding: 0 20px
     background-color: rgba(255, 109, 100, 1)
@@ -60,12 +61,19 @@ export default {
       &
         min-width: auto
         max-width: 100%
+        margin-left: 0
   &--big
     width: 70rem
+    @media only screen and (max-width: 768px)
+      &
+        width: 30rem
     input
       width: 45rem
       height: 64px
       font-size: 2rem
+      @media only screen and (max-width: 768px)
+        &
+          width: 30rem
     button
       min-width: 22.4rem
       height: 64px

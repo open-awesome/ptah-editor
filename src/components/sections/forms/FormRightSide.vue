@@ -173,7 +173,7 @@ export default {
             container-path="$sectionData.container"
             components-path="$sectionData.components"
             direction="column"
-            class="b-sandbox b-form__left-col">
+            class="b-sandbox b-grid__col-m-12 b-form__left-col">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
@@ -204,7 +204,7 @@ export default {
             </draggable>
           </sandbox>
         </div>
-        <div class="b-grid__col-6">
+        <div class="b-grid__col-6 b-grid__col-m-12">
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
@@ -308,4 +308,7 @@ export default {
     max-height: -moz-max-content
     max-height: -webkit-max-content
     max-height: fit-content
+    @media only screen and (max-width: 768px)
+      &
+        align-items: center !important
 </style>

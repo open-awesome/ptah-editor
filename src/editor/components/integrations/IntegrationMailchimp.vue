@@ -18,8 +18,8 @@ export default {
 
   data () {
     return {
-      clientId: '462853669980',
-      clientSecret: '76db4d17f02fa0a036054278e08beaa0af50c328ba7e435b26',
+      clientId: '',
+      clientSecret: '',
       returnUri: 'http://127.0.0.1:8080/oauth_complete/'
     }
   },
