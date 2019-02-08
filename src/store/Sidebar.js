@@ -24,6 +24,10 @@ export default {
       {
         id: 'cookiesSettings',
         name: 'menu.cookie'
+      },
+      {
+        id: 'addJsScrips',
+        name: 'menu.addJs'
       }
       // {
       //   id: 'versionHistory',

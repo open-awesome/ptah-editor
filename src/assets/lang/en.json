@@ -4,7 +4,8 @@
         "sections":                     "Sections",
         "visualSettings":               "Visual settings",
         "seo":                          "SEO settings",
-        "cookie":                       "Cookies settings"
+        "cookie":                       "Cookies settings",
+        "addJs":                        "Add JS code"
     },
     "nav": {
         "backToDashbord":               "Back to landings",

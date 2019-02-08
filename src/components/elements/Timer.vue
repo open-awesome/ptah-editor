@@ -22,42 +22,48 @@
 </i18n>
 
 <template>
-<div
-    :class="{
-      'b-timer--labels-reverse': (labels.position === 'top'),
-      'b-timer--labels-hidden': !labels.show
-    }"
+<table
+    class="b-timer is-editable js-timer"
     :data-timestamp="timer.timestamp"
-    :data-utc-offset="timer.UTC"
-    class="b-timer is-editable js-timer">
+    :data-utc-offset="timer.UTC">
 
-  <div class="b-timer__days js-timer-days">
-    <span class="b-timer__number js-timer-number">{{ parse(days) | check }}</span>
-    <span class="b-timer__format">{{ $t('days') }}</span>
-  </div>
+  <thead v-show="labels.show && labels.position === 'top'" class="b-timer__labels">
+    <tr>
+      <td class="label">{{ $t('days') }}</td>
+      <td class="label-divider"></td>
+      <td class="label">{{ $t('hours') }}</td>
+      <td class="label-divider"></td>
+      <td class="label">{{ $t('minutes') }}</td>
+      <td class="label-divider"></td>
+      <td class="label">{{ $t('seconds') }}</td>
+    </tr>
+  </thead>
 
-  <span class="b-timer__divider">:</span>
+  <tbody>
+    <tr>
+      <td class="number js-timer-days">{{ parse(days) | check }}</td>
+      <td class="number-divider"></td>
+      <td class="number js-timer-hours">{{ parse(hours, 24) | check }}</td>
+      <td class="number-divider"></td>
+      <td class="number js-timer-minutes">{{ parse(minutes, 60) | check }}</td>
+      <td class="number-divider"></td>
+      <td class="number js-timer-seconds">{{ parse(seconds, 60) | check }}</td>
+    </tr>
+  </tbody>
 
-  <div class="b-timer__hours js-timer-hours">
-    <span class="b-timer__number js-timer-number">{{ parse(hours, 24) | check }}</span>
-    <span class="b-timer__format">{{ $t('hours') }}</span>
-  </div>
+  <tfoot v-show="labels.show && labels.position === 'bottom'" class="b-timer__labels">
+    <tr>
+      <td class="label">{{ $t('days') }}</td>
+      <td class="label-divider"></td>
+      <td class="label">{{ $t('hours') }}</td>
+      <td class="label-divider"></td>
+      <td class="label">{{ $t('minutes') }}</td>
+      <td class="label-divider"></td>
+      <td class="label">{{ $t('seconds') }}</td>
+    </tr>
+  </tfoot>
 
-  <span class="b-timer__divider">:</span>
-
-  <div class="b-timer__minutes js-timer-minutes">
-    <span class="b-timer__number js-timer-number">{{ parse(minutes, 60) | check }}</span>
-    <span class="b-timer__format">{{ $t('minutes') }}</span>
-  </div>
-
-  <span class="b-timer__divider">:</span>
-
-  <div class="b-timer__seconds js-timer-seconds">
-    <span class="b-timer__number js-timer-number">{{ parse(seconds, 60) | check }}</span>
-    <span class="b-timer__format">{{ $t('seconds') }}</span>
-  </div>
-
-</div>
+</table>
 </template>
 
 <script>
@@ -151,89 +157,57 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+$main-font-size: 6rem
+
+@mixin tabletFontSize ($property)
+  .is-tablet &
+    font-size: $property - 1.5
+  @media (max-width: 800px)
+    font-size: $property - 1.5
+
+@mixin mobileFontSize ($property)
+  .is-mobile &
+    font-size: $property - 2.5
+  @media (max-width: 400px)
+    font-size: $property - 2.5
+
+@mixin columnsFontSize ($index, $font_size)
+  .b-columns#{$index} &
+    font-size: $font_size - .5
+    @include tabletFontSize($font_size - .5)
+    @include mobileFontSize($font_size + 1.5)
+
+// --- main
 .b-timer
-  display: flex
-  flex-wrap: wrap
-  justify-content: center
   color: #fff
+  font-size: $main-font-size
   text-align: center
-  font-size: 5rem
 
   &.is-editable
     border: .1rem dashed #18d88b
 
-  &__days,
-  &__minutes,
-  &__hours,
-  &__seconds
-    display: inline-flex
-    flex-direction: column
-    min-width: 2em
-    font-weight: 300
+  @include tabletFontSize($main-font-size)
+  @include mobileFontSize($main-font-size)
+
+  @include columnsFontSize(2, $main-font-size - 1.5)
+  @include columnsFontSize(3, $main-font-size - 2)
+
+.label
+  font-size: .4em
+
+.number
+  min-width: 1.5em
+  padding: .5rem
+  border-radius: .4rem
+  background: rgba(51, 51, 51, .5)
+  font-size: 1em
+
+  &-divider
+    width: .3em
     font-size: 1em
-    opacity: .9
 
-    + .b-timer__divider
-      margin-top: .4rem
-
-    .b-timer--labels-reverse &
-      flex-direction: column-reverse
-      + .b-timer__divider
-        margin-top: 3rem
-        .is-mobile &
-          margin-top: 1.5rem
-        @media only screen and (max-width: 600px)
-          margin-top: 2.5rem
-        @media only screen and (max-width: 450px)
-          margin-top: 1.4rem
-
-  &__divider
-    margin: 0 .6rem
-
-  &__number
-    display: inline-flex
-    justify-content: center
-    width: 100%
-    margin-bottom: .8rem
-    padding: .3rem .6rem
-    border-radius: .4rem
-    background: rgba(51, 51, 51, .5)
-    font-size: 1.3em
-
-    .b-timer--labels-reverse &
-      margin-bottom: 0
-
-  &__format
-    display: inline-flex
-    justify-content: center
-    width: 100%
-    font-size: .4em
-    opacity: .9
-
-    .b-timer--labels-reverse &
-      margin-bottom: .8rem
-      .is-mobile &
-        margin-bottom: .4rem
-      @media only screen and (max-width: 450px)
-        margin-bottom: .4rem
-
-    .b-timer--labels-hidden &
-      display: none
-
-  // --- media
-
-  .is-mobile &
-    font-size: 2rem
-
-  @media only screen and (max-width: 600px)
-    font-size: 3.5rem
-
-  @media only screen and (max-width: 500px)
-    font-size: 3rem
-
-  @media only screen and (max-width: 450px)
-    font-size: 2.5rem
-
-  @media only screen and (max-width: 450px)
-    font-size: 1.5rem
+    &::before
+      content: ':'
+      position: relative
+      top: -.1em
 </style>

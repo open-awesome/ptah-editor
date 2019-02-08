@@ -7,9 +7,23 @@
 
   <slot name="video"/>
 
-  <div class="b-grid b-header js-hamburger">
+  <div class="b-grid b-header">
+
+    <button
+        id="js-hamburger"
+        class="hamburger hamburger--slider"
+        type="button"
+        :data-target="`#mobile-menu-${ _uid }`"
+        @click.stop>
+
+      <span class="hamburger-box">
+        <span class="hamburger-inner"></span>
+      </span>
+
+    </button>
+
     <div class="b-grid__row b-footer__row">
-      <div class="b-grid__col-4 b-grid__col-m-12">
+      <div class="b-grid__col-3 b-grid__col-m-12 mobile-header">
 
         <sandbox
             container-path="$sectionData.container"
@@ -74,25 +88,17 @@
 
           </draggable>
 
-          <base-button @click="showMenu" class="hamburger-button" color="transparent">
-            <div class="hamburger-box">
-              <span class="hamburger-inner"></span>
-              <span class="hamburger-inner"></span>
-              <span class="hamburger-inner"></span>
-            </div>
-          </base-button>
-
         </sandbox>
 
       </div>
-      <div class="b-grid__col-8 b-grid__col-m-12 hamburger-container">
+      <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-9 b-grid__col-m-12 mobile-menu">
 
         <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
             direction="row"
             align="center"
-            class="b-sandbox hamburger-container__menu">
+            class="b-sandbox">
 
           <draggable
               v-if="$sectionData.components2.length"
@@ -104,7 +110,7 @@
                 v-for="(component, index) in $sectionData.components2"
                 :key="`component-${ _uid }-${ index }`"
                 :style="component.styles"
-                :class="{ 'b-button-container': component.name === 'Button' }">
+                :class="{ 'b-button-one': isOnlyOneButton(component) }">
 
               <component
                   v-if="component.element.isComplex"
@@ -175,8 +181,8 @@ const defaultComponents = [
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '200px',
-        'height': '80px',
+        'width': '150px',
+        'height': '50px',
         'margin': '8px 16px'
       }
     },
@@ -195,9 +201,10 @@ const defaultComponents2 = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 1
@@ -213,9 +220,10 @@ const defaultComponents2 = [
         'font-family': 'Lato',
         'text-align': 'center',
         'min-width': '100px',
-        'height': '64px',
+        'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px'
+        'font-size': '18px',
+        'margin': '8px 16px'
       }
     },
     key: 2
@@ -229,10 +237,11 @@ const defaultComponents2 = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '200px',
-        'height': '64px',
+        'width': '150px',
+        'height': '50px',
         'max-width': '100%',
-        'border-radius': '2px'
+        'border-radius': '2px',
+        'margin': '8px 16px'
       }
     },
     key: 5
@@ -274,15 +283,6 @@ export default {
     ]
   },
 
-  inject: ['device'],
-
-  watch: {
-    'device.type' () {
-      this.$el.querySelector('.hamburger-container').classList.remove('active')
-      this.$el.querySelector('.hamburger-button').classList.remove('active')
-    }
-  },
-
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[group]
     let sectionDataStore = this.$store.state.Landing.sectionData[name]
@@ -293,48 +293,27 @@ export default {
   },
 
   methods: {
-    showMenu () {
-      this.$el.querySelector('.hamburger-container').classList.toggle('active')
-      this.$el.querySelector('.hamburger-button').classList.toggle('active')
+    isOnlyOneButton ({ name }) {
+      if (name !== 'Button') {
+        return false
+      }
+      let buttons = this.$sectionData.components2.filter(({ name }) => name === 'Button')
+      return buttons.length === 1
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
-.b-grid__col-4,
-.b-grid__col-8
+.b-grid__col-3,
+.b-grid__col-9
+  padding: .8rem 1.6rem
 
-  .is-mobile &,
-  .is-tablet &
-    width: 100%
-    flex-basis: 100%
-
-  @media only screen and (max-width: 1100px)
-    &
-      width: 100%
-      flex-basis: 100%
-
-.b-sandbox
-  min-height: 10rem
-  &.hamburger-container__menu
-    padding-left: 2rem
-  .is-mobile &,
-  .is-tablet &
-    padding-left: 0
-  @media only screen and (max-width: 1100px)
-    &
-      padding-left: 0
-
-.b-draggable-slot
-  width: 100%
-
-.b-button-container
-  .is-mobile &,
-  .is-tablet &
-    margin-left: 0 !important
-
-  @media only screen and (max-width: 1100px)
-    &
-      margin-left: 0 !important
+.b-button-one
+  .is-mobile &
+    margin-top: auto !important
+    order: 1
+  @media (max-width: 800px)
+    margin-top: auto !important
+    order: 1
 </style>

@@ -111,6 +111,8 @@ function download (assets) {
       let scrollSetup = this.getScrollSetup()
       let gtm = this.gtmSetup(this.settings.gtmId)
       let gtag = gtagSetup(this.settings.gtag)
+      let script = this.settings.script ? this.settings.script : ''
+
       output.file('index.html',
         `<html>
           <head>
@@ -137,6 +139,9 @@ function download (assets) {
             ${this.getCookiesPreview()}
           <script src="js/cjs.js"></script>
           ${scrollSetup.setup}
+          <script>
+            ${script}
+          </script>
           </body>
         </html>`)
 

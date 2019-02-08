@@ -33,6 +33,7 @@ import BuilderSiteSettingsSeo from './BuilderSiteSettingsSeo'
 import BuilderSiteSettingsVisual from './BuilderSiteSettingsVisual'
 import BuilderSiteSettingsCookies from './BuilderSiteSettingsCookies'
 import BuilderSiteSettingsVersionHistory from './BuilderSiteSettingsVersionHistory'
+import BuilderSiteSettingsAddJsScripts from './BuilderSiteSettingsAddJsScripts'
 import MenuSubitem from './MenuSubitem'
 
 export default {
@@ -43,6 +44,7 @@ export default {
     BuilderSiteSettingsCookies,
     BuilderSiteSettingsVisual,
     BuilderSiteSettingsVersionHistory,
+    BuilderSiteSettingsAddJsScripts,
     MenuSubitem
   },
 
