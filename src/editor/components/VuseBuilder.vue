@@ -380,11 +380,13 @@ export default {
 </script>
 
 <style lang="sass">
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .artboard
   transform-origin: top center
   margin: 0 auto
   transition: 0.2s
-  // height: calc(100vh - 7.2rem)
   position: relative
   &.is-editable .is-editable
     outline: none
@@ -395,7 +397,7 @@ export default {
   &:before,
   &:after
     content: ''
-    background-color: #9E9E9E
+    background-color: $ligth-grey
     position: absolute
     top: 0
     bottom: 0

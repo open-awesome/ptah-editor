@@ -89,6 +89,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-builder-layout
   &__top-bar
     height: 8rem
@@ -108,28 +111,27 @@ export default {
 
   &__sidebar
     order: 1
-    width: 2rem
+    width: $size-step*9
     flex-shrink: 0
-    min-height: 5rem
     position: relative
-    z-index: 20
+    z-index: 1000
+    display: none
     transition: width 0.3s ease-in-out
-    + .b-builder-layout-content__main
-      width: calc(100% - 2rem)
 
     &_expanded
-      width: 24rem
+      display: flex
       + .b-builder-layout-content__main
-        width: calc(100% - 24rem)
+        width: calc(100% - ($size-step*10))
 
   &__main
     order: 2
     flex-grow: 1
     min-height: 5rem
-    margin: 7.2rem 0 0
+    margin: 8rem 0 0
     position: relative
     z-index: 10
     transition: width 0.3s ease-in-out
+    background-color: $ligth-grey
 
     &-layout
       transition: width 0.2s

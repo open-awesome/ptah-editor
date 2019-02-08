@@ -27,7 +27,7 @@ export default {
       if (isVisible) {
         scrollbarTools.showBodyScrollbar()
       } else {
-        scrollbarTools.hideBodyScrollbar(state.scrollbarWidth)
+        // scrollbarTools.hideBodyScrollbar(state.scrollbarWidth)
       }
     }
   },

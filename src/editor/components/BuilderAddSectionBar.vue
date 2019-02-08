@@ -74,10 +74,19 @@ export default {
 
 <template>
   <div class="b-add-section">
+    <div class="b-add-section__header">
+      <div>
+        <h6 class="b-add-section__title">
+          {{ title }}
+        </h6>
+      </div>
+      <div>
+        <button class="b-add-section__header-close-bt" @click="closeAddSectionBar">
+          <icon-base width="10" height="10" color="#fff" name="close"/>
+        </button>
+      </div>
+    </div>
     <div class="b-add-section__padd">
-      <h6 class="b-add-section__title">
-        {{ title }}
-      </h6>
 
       <ul class="b-add-section__menu is-visiable" ref="menu">
         <li class="b-add-section__menu-group"
@@ -93,7 +102,7 @@ export default {
 
       <div class="b-add-section-bar" v-if="isVisibleBar">
         <BaseScrollContainer classes="b-add-section-bar__scrollbar"
-          :styling="{ width: '24rem', height: '100%' }" backgroundBar="white"
+          :styling="{ width: '28.8rem', height: '100%' }" backgroundBar="#333"
           >
         <div class="b-add-section-bar__menu">
           <template v-for="(section, index) in selectedGroup">
@@ -122,7 +131,7 @@ export default {
           :class="{ 'b-add-section-footer_add': isVisibleBar }">
         <BaseButton
           class="b-add-section-footer__bt"
-          :color="'gray'"
+          :color="'light-gray'"
           :transparent="true"
           @click="closeAddSectionBar"
           >
@@ -134,48 +143,37 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-add-section
-  width: 24rem
-  background: #fff
+  width: $size-step*9
+  background: $white
   position: relative
   z-index: 1
-  box-shadow: 0px 0.4rem 1rem rgba(0, 0, 0, 0.35)
+
+  background: $dark-blue
+  box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
+  &__header
+    height: 8rem
+
+    display: flex
+    justify-content: space-between
+    align-items: center
+
+    padding: $size-step/2 $size-step
+    &-close-bt
+      background: transparent
+      cursor: pointer
+      border: none
   &__padd
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    z-index: 1
-    background: #FFFFFF
-    padding: 2.8rem 3.2rem
+    padding: 2.8rem 0
+
     display: flex
     flex-direction: column
-  &:before
-    content: ""
-    position: absolute
-    width: 2.4rem
-    height: 2.4rem
-    top: 9rem
-    left: -1.2rem
-    background: #FFFFFF
-    transform: rotate(-45deg)
-    z-index: 2
-  &:after
-    content: ""
-    position: absolute
-    width: 2.4rem
-    height: 2.4rem
-    top: 9rem
-    left: -1.2rem
-    background: #FFFFFF
-    transform: rotate(-45deg)
-    box-shadow: 0 0.6rem 2.4rem 0 rgba(0, 0, 0, 0.15)
-    z-index: 0
 
   &__title
-    margin: 0 0 2.8rem 1.6rem
-    color: #2E2E2E
+    color: $white
     font-size: 1.8rem
     font-weight: bold
     letter-spacing: 0.02rem
@@ -194,19 +192,16 @@ export default {
     padding: 0
     margin: 0
     &-group
-      padding: 0 1.5rem
+      padding: 0 $size-step
       list-style: none
       height: 4.8rem
       line-height: 4.6rem
       font-size: 1.4rem
-      color: #474747
+      color: $white
       cursor: pointer
-      border: 0.1rem solid transparent
-      &_selected
-        background-color: rgba(67, 111, 238, 0.15)
-        border: 0.1rem solid transparent
+      &_selected,
       &:hover
-        border: 0.1rem solid rgba(67, 111, 238, 0.15)
+        background-color: $dark-blue-krayola
     &-title
       display: inline-block
       text-transform: capitalize
@@ -216,8 +211,8 @@ export default {
     top: 0
     bottom: 0
     left: 100%
-    width: 24rem
-    background-color: #8189B1
+    width: $size-step*9
+    background-color: $white
     transition: left 0.3s ease-in-out
     &__menu
       padding: 3.2rem 3.2rem 8rem
@@ -238,7 +233,6 @@ export default {
           border: 0.2rem solid #fff
         &_selected
           background-color: #436FEE
-          box-shadow: 0 0.6rem 2.4rem 0 rgba(0, 0, 0, 0.15)
           border: 0.2rem solid transparent
           color: #fff
           &:hover
@@ -247,7 +241,7 @@ export default {
             display: none
 
       &-image
-        height: 100%
+        width: 100%
 
   &-footer
     position: absolute
@@ -255,16 +249,13 @@ export default {
     right: 0
     left: 0
     height: 8rem
-    width: 24rem
-    background-color: #FFFFFF
     z-index: 100
     display: flex
     align-items: center
-    box-shadow: 0px -0.6rem 1.5rem rgba(0, 0, 0, 0.1)
     &_add
-      width: 48rem
+      width: $size-step*9
     &__bt
       width: 21.6rem
-      margin: 0 1.6rem
+      margin: 0 auto
 
 </style>

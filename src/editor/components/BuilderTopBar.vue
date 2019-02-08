@@ -33,7 +33,8 @@ export default {
     ...mapActions('Sidebar', [
       'clearSettingObject',
       'setMenuItem',
-      'clearSettingObjectLight'
+      'clearSettingObjectLight',
+      'toggleSidebar'
     ]),
 
     ...mapActions('BuilderModalContent', {
@@ -72,6 +73,10 @@ export default {
       } else {
         this.setModalContent(contentID)
       }
+    },
+
+    toggleSidebarSection () {
+      this.toggleSidebar()
     }
   }
 }
@@ -83,7 +88,7 @@ export default {
   <div class="b-top-bar__right">
     <div class="b-top-bar-right-menu">
       <div class="b-top-bar-right-menu__left">
-        <div class="b-page__header-menu">
+        <div class="b-page__header-menu" @click="toggleSidebarSection">
           <icon-base name="hamburger" :color="colorHamburger"></icon-base>
         </div>
         <div class="b-page__header-crumbs">

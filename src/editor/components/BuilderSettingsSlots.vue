@@ -204,18 +204,18 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-builder-settings-slots
   position: relative
-  max-width: 40rem
-  width: 100%
-  width: intrinsic
-  width: -moz-max-content
-  width: -webkit-max-content
+  width: $size-step*9
+  min-width: $size-step*9
   height: 100%
   display: flex
   flex-direction: column
   padding: .8rem 0.5rem 2.8rem 3.2rem
-  background: #F5F5F5
+  background: $white
 
   &__bottom
     overflow: auto
@@ -235,10 +235,9 @@ export default {
     text-overflow: ellipsis
     margin: 0
     padding-right: .8rem
-    color: #272727
     font-size: 1.8rem
     font-weight: bold
-    color: rgba(39, 39, 39, 0.5)
+    color: $black
     &:first-letter
       text-transform: uppercase
 
@@ -255,7 +254,7 @@ export default {
 
   &__subtitle
     margin: 0
-    color: #272727
+    color: $black
     font-size: 1.6rem
     font-weight: bold
     &:first-letter
@@ -288,7 +287,7 @@ export default {
       li
         padding: .8rem
         cursor: pointer
-        color: #000 !important
+        color: $black
         &:hover,
         &.active
           background: rgba(67, 111, 238, 0.15)
@@ -314,6 +313,7 @@ export default {
     padding: .8rem
     cursor: pointer
     transition: background-color .1s linear
+    color: $black
 
     &:hover,
     &.active

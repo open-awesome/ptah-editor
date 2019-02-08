@@ -1,5 +1,26 @@
 <template>
   <div class="b-builder-sidebar" :class="{'b-builder-sidebar_expanded': isExpanded}">
+    <div class="b-builder-sidebar-header">
+      <div class="b-builder-sidebar-header__ham">
+        <span @click="toggleSidebarSection">
+          <icon-base
+            name="hamburger"
+            color="#fff"
+            />
+        </span>
+      </div>
+      <div class="b-builder-sidebar-header__add">
+        <span class="b-builder-sidebar__icon-add"
+          slot="icon"
+          @click.stop="showAddSectionBar">
+           <IconBase
+            name="plus"
+            color="#fff"
+            strokeColor="transparent"
+           />
+        </span>
+      </div>
+    </div>
     <div class="b-builder-sidebar__content">
       <!-- Sections -->
       <menu-item
@@ -7,16 +28,6 @@
         :isExpandable="true"
         @click="toggleMenuItem('sections')"
         >
-
-          <span class="b-builder-sidebar__icon-add"
-            slot="icon"
-            @click.stop="showAddSectionBar">
-            <IconBase
-              name="plus"
-              color="#355CCC"
-              strokeColor="transparent"
-            />
-          </span>
           <span>
             {{ $t('menu.sections') }}
           </span>
@@ -268,54 +279,42 @@ export default {
 
     startScroll (x) {
       console.log(x)
+    },
+
+    toggleSidebarSection () {
+      this.toggleSidebar()
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 $top-panel-height: 7.2rem
 
 .b-builder-sidebar
-  width: 24rem
-  border-right: 1px solid rgba(#000000, 0.08)
-  background: #F1F1F1
+  width: $size-step*9
+  border-right: 1px solid rgba($black, 0.08)
+  background: $dark-blue
   position: fixed
-  top: $top-panel-height
-  left: -22rem
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05)
-  color: #888888
+  top: 0
+  left: 0
+  opacity: 0
+  box-shadow: inset 0 1px 0 rgba($white, 0.05)
+  color: $white
   transition: left 0.3s ease-in-out
-  height: calc(100vh - #{$top-panel-height})
+  height: 100vh
   display: flex
   flex-direction: column
 
   &_expanded
-    left: 0
-    transform: translateX(0px)
-
-  &__back-button
-    height: 2.4rem
-    padding: 0 0.8rem
-    width: 100%
-    border: 0
-    background: #F0F0F0
-    border-bottom: 2px solid rgba(#888888, 0.15)
-    cursor: pointer
-    text-align: right
-    flex-shrink: 0
-
-    // @todo remove maybe?
-    // drops margin from BaseIcon
-    svg
-      margin-bottom: 0
-
-    &:hover
-      background: rgba(#202020, 0.08)
+    opacity: 1
 
   &__content
     height: 100%
-    box-shadow: inset 1px 3px 8px 0 rgba(#888888, 0.15)
+    box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
     display: flex
     flex-direction: column
     min-height: 0
@@ -329,6 +328,7 @@ $top-panel-height: 7.2rem
     display: flex
     flex-direction: column
     flex-grow: 1
+    box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
     &.slots-settings
       flex-direction: row
       .slots-settings__list
@@ -337,19 +337,33 @@ $top-panel-height: 7.2rem
   &__icon-add
     width: 3.2rem
     height: 3.2rem
-    background-color: #fff
+    color: $white
     display: flex
     align-items: center
     justify-content: center
     border-radius: 100%
+    cursor: pointer
 
   &-settings,
   &-add-section
+    width: $size-step*9
     position: absolute
-    left: 25rem
-    top: 0.8rem
-    bottom: 0.8rem
+    left: 0
+    top: 0
+    bottom: 0
     display: flex
+
+  &-header
+   height: 8rem
+
+   display: flex
+   justify-content: space-between
+   align-items: center
+
+   padding: $size-step/2 $size-step
+   &__ham
+     &:hover
+       cursor: pointer
 
 // Animations down here
 .slide-fade

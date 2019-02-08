@@ -3,7 +3,7 @@
     <div
       v-if="isContentVisible"
       class="b-builder-modal-content"
-      :style="{'margin-right': `${fakeScrollbarWidth}px`}">
+      >
       <div class="b-builder-modal-content__padd">
         <div class="b-builder-modal-content__menu">
           <!-- Site settings CONTENTS -->
@@ -52,8 +52,7 @@ export default {
     ...mapState('BuilderModalContent', ['isContentVisible', 'contentID']),
     ...mapState('Sidebar', ['isAddSectionExpanded', 'sandbox', 'isSettingsExpanded', 'siteSettingsMenu']),
 
-    ...mapGetters('BuilderModalContent', ['contentComponent']),
-    ...mapGetters('PageTweaks', ['fakeScrollbarWidth'])
+    ...mapGetters('BuilderModalContent', ['contentComponent'])
   },
 
   watch: {
@@ -118,6 +117,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-builder-modal-content
   position: fixed
   bottom: 0.8rem
@@ -128,7 +130,7 @@ export default {
   height: 60rem
   margin-top: -30rem
   z-index: 10
-  background: #fff
+  background: $white
   &__padd
     display: flex
     flex-direction: column
@@ -146,6 +148,11 @@ export default {
     bottom: 0
     right: 0
     left: 0
+
+  & .b-menu-subitem,
+    color: $dark-grey
+    &:hover
+      color: $white
 
 // Animations down here
 .slide-fade

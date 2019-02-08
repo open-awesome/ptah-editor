@@ -96,23 +96,25 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 $selected-bg-color: rgba(#202020, 0.35)
 
 .b-menu-subitem
   cursor: pointer
-  color: #474747
+  color: $white
   font-size: 1.4rem
   width: 100%
   padding: 0
 
   &:hover:not(.b-menu-subitem_selected)
-    background: rgba(#202020, 0.08)
+    background: $dark-blue-krayola
 
   &__inner
     display: flex
     align-items: center
     height: 4.8rem
-    border-radius: 0.2rem
 
     &.item-main
       border-left: 7px solid #436FEE
@@ -124,7 +126,7 @@ $selected-bg-color: rgba(#202020, 0.35)
       border-radius: 0 0.2rem 0.2rem 0
 
     .b-menu-subitem_selected &
-      background: #4D7DD8
+      background: $dark-blue-krayola
       color: #ffffff
 
   &__drag-icon
