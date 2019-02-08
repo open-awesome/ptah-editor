@@ -5,7 +5,7 @@
     @export="submit"
     @preview="preview"
     @save="save">
-    
+
   <div
       :class="{
         'is-sorting': $builder.isSorting,
@@ -56,7 +56,9 @@
         </video>
 
     </component>
-    
+
+    <div class="builder-last"></div>
+
     <div v-show="emptySections" class="controller-intro">
       <h3>&larr; Choose layout from the menu</h3>
     </div>
@@ -70,7 +72,7 @@
         </div>
       </template>
     </div>
-    
+
   </div>
 
 </builder-layout>
@@ -556,4 +558,8 @@ export default {
     min-height: 100%
     + .b-footer
       background: none !important
+
+// --- dirty hack. normalize artboard size
+.builder-last
+  height: 1px
 </style>
