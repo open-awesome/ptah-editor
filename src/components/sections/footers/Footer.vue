@@ -270,7 +270,7 @@ export default {
       font-size: 1.4rem !important
 .b-button
   color: #fff
-  font-family: Heebo
+  font-family: 'Heebo', sans-serif
   font-style: normal
   font-size: 1.6rem
   text-align: center
@@ -285,7 +285,6 @@ export default {
   min-height: auto
   text-transform: uppercase
   border-radius: 2px
-  text-align: center
   .is-mobile &,
   .is-tablet &
     width: 80% !important
@@ -307,12 +306,6 @@ export default {
     &
       padding: 1rem 0
 .b-footer
-  overflow: hidden
-  position: absolute
-  bottom: 0
-  left: 0
-  right: 0
-  background-color: #0C173C
   &__row
     align-items: center
   &__col
