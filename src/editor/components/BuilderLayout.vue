@@ -124,7 +124,7 @@ export default {
     order: 2
     flex-grow: 1
     min-height: 5rem
-    margin: 7.2rem 0
+    margin: 7.2rem 0 0
     position: relative
     z-index: 10
     transition: width 0.3s ease-in-out
