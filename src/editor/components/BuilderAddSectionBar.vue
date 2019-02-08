@@ -82,7 +82,7 @@ export default {
       </div>
       <div>
         <button class="b-add-section__header-close-bt" @click="closeAddSectionBar">
-          <icon-base width="10" height="10" color="#fff" name="close"/>
+          <icon-base width="14" height="14" color="#fff" name="close"/>
         </button>
       </div>
     </div>

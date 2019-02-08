@@ -188,7 +188,8 @@ export default {
       'updateBuilderSections',
       'updateBuilderGroups',
       'updateSectionGroups',
-      'setSettingSection'
+      'setSettingSection',
+      'toggleSidebar'
     ]),
     initSettings () {
       const settings = this.currentLanding.settings
@@ -330,6 +331,7 @@ export default {
       if (event.target.closest('.styler-active')) {
         return
       }
+      this.toggleSidebar(true)
       this.setSettingSection(section)
     },
 

@@ -52,6 +52,7 @@ export default {
     ]),
 
     ...mapActions('BuilderModalContent', ['setContent']),
+    ...mapActions('Sidebar', ['toggleSidebar']),
 
     showSandboxSidebar (e) {
       this.setContent(null)
@@ -74,6 +75,8 @@ export default {
         }
         this.toggleSandboxSidebar(true)
       })
+
+      this.toggleSidebar(true)
     }
   }
 }

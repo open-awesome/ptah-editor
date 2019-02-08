@@ -99,8 +99,8 @@ export default {
   },
 
   actions: {
-    toggleSidebar ({ state, commit }) {
-      commit('isExpanded', !state.isExpanded)
+    toggleSidebar ({ state, commit }, value) {
+      commit('isExpanded', (typeof value !== 'undefined') ? value : !state.isExpanded)
     },
 
     toggleAddSectionMenu ({ state, commit }, value) {

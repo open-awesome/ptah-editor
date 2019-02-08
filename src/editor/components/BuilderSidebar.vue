@@ -4,8 +4,10 @@
       <div class="b-builder-sidebar-header__ham">
         <span @click="toggleSidebarSection">
           <icon-base
-            name="hamburger"
+            name="close"
             color="#fff"
+            width="14"
+            height="14"
             />
         </span>
       </div>
@@ -34,9 +36,6 @@
       </menu-item>
 
       <!-- Sections CONTENTS -->
-      <BaseDropdown
-        :isOpened="expandedMenuItem === 'sections'" id="sections_contents">
-
         <!-- header -->
         <div class="no-sortable" ref="header">
           <menu-subitem
@@ -68,7 +67,6 @@
           </menu-subitem>
 
         </div>
-      </BaseDropdown>
     </div>
 
     <transition name="slide-fade">
