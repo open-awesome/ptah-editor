@@ -57,16 +57,16 @@ export default {
             }
           }
         } else {
-          if (key !== 'classes') {
+          if (!Array.isArray(newProps[key])) {
             if (oldProps[key] !== undefined && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
-              props[nameObj][key] = newProps[key]
+              _.merge(props[nameObj][key], newProps[key])
             }
           } else {
             props[nameObj][key] = newProps[key]
           }
         }
 
-        if (typeof props[nameObj][key] === 'object' && _.isEmpty(props[nameObj][key]) && key !== 'classes') delete props[nameObj][key]
+        if (typeof props[nameObj][key] === 'object' && _.isEmpty(props[nameObj][key]) && key !== 'classes' && key !== 'galleryImages') delete props[nameObj][key]
       }
       // return object with modified parameters
       return props
