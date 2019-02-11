@@ -1,6 +1,5 @@
 <script>
 import * as types from '@editor/types'
-import _ from 'lodash'
 import section from '../../mixins/section.js'
 
 const GROUP_NAME = 'Carousel'
@@ -10,7 +9,8 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-color': '#333'
-    }
+    },
+    galleryImages: []
   },
   edited: true
 }
@@ -36,33 +36,6 @@ export default {
     }
   },
 
-  data () {
-    return {
-      galleryImages: []
-    }
-  },
-
-  watch: {
-    '$sectionData.mainStyle.galleryImages' (value) {
-      this.updateGalleryImages()
-    }
-  },
-
-  methods: {
-    updateGalleryImages () {
-      const items = this.$sectionData.mainStyle.galleryImages.slice()
-      if (items.length <= 1) {
-        this.galleryImages = this.$sectionData.mainStyle.galleryImages
-      } else {
-        const lastItemArray = items.splice(_.size(items) - 1, 1)
-        this.galleryImages = [
-          ...lastItemArray,
-          ...items
-        ]
-      }
-    }
-  },
-
   created () {
     let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
     let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
@@ -70,8 +43,6 @@ export default {
     let $sectionData = this.$sectionData
 
     this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
-
-    this.updateGalleryImages()
   }
 }
 </script>
@@ -86,7 +57,7 @@ export default {
       <slot name="video"/>
       <h3 class="b-header">{{ $sectionData.mainStyle.header }}</h3>
       <div class="b-gallery-carousel-body">
-        <template v-if="galleryImages.length > 1">
+        <template v-if="$sectionData.mainStyle.galleryImages.length > 1">
           <span class="b-gallery-carousel-body__arrow-prev">
             <IconBase name="slidePrev" width="24" height="47" color="white" />
           </span>
@@ -98,12 +69,12 @@ export default {
           <div class="b-gallery-carousel-body__items">
             <div
               class="b-gallery-carousel-body-item"
-              v-for="(item, index) in galleryImages"
+              v-for="(item, index) in $sectionData.mainStyle.galleryImages"
               :key="index"
               :class="{
-                'b-gallery-carousel-body-item_grow': galleryImages.length === 1 || galleryImages.length > 2,
+                'b-gallery-carousel-body-item_grow': $sectionData.mainStyle.galleryImages.length === 1 || $sectionData.mainStyle.galleryImages.length > 2,
                 'b-gallery-carousel-body-item_active': index === 1,
-                'b-gallery-carousel-body-item_transparent': galleryImages.length > 1
+                'b-gallery-carousel-body-item_transparent': $sectionData.mainStyle.galleryImages.length > 1
               }"
             >
               <div class="b-gallery-carousel-body-item__img" :style="{backgroundImage: `url(${item.path})`}">
