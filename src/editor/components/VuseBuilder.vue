@@ -57,6 +57,8 @@
 
     </component>
 
+    <div class="builder-last"></div>
+
     <div v-show="emptySections" class="controller-intro">
       <h3>&larr; Choose layout from the menu</h3>
     </div>
@@ -516,4 +518,8 @@ export default {
     min-height: 100%
     + .b-footer
       background: none !important
+
+// --- dirty hack. normalize artboard size
+.builder-last
+  height: 1px
 </style>

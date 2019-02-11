@@ -25,9 +25,9 @@
       <main class="b-builder-layout-content__main">
         <base-scroll-container
           backgroundBar="#fff">
-        <div class="b-builder-layout-content__main-layout" :class="device">
-          <slot></slot>
-        </div>
+          <div class="b-builder-layout-content__main-layout" :class="device">
+            <slot></slot>
+          </div>
         </base-scroll-container>
         <BuilderModalContent />
       </main>
