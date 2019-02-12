@@ -169,10 +169,10 @@ export default {
   height: 10rem
   margin: .5rem
 
-  border: .1rem solid $gray-dark
+  border: .1rem solid #c1c1c1
   border-radius: .4rem
 
-  background-color: $white
+  background-color: #fff
   background-size: contain !important
   background-position: middle middle
 
@@ -183,7 +183,7 @@ export default {
   &__button
     &--link
       background-color: rgba(190, 190, 190, .85)
-      color: lighten($black, 15%)
+      color: lighten(#000000, 15%)
     &--span
       display: inline-block
       text-align: center

@@ -60,20 +60,22 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-builder-settings-bar
   position: relative
-  max-width: 40rem
-  width: 100%
-  width: intrinsic
-  width: -moz-max-content
-  width: -webkit-max-content
+  width: $size-step*9
   height: 100%
+  padding: 2.8rem 0.5rem 2.8rem 3.2rem
+
   display: flex
   flex-direction: column
-  padding: 2.8rem 0.5rem 2.8rem 3.2rem
-  background: #F5F5F5
+
+  background: $white
+  box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
   &__title
-    min-width: 25rem
+    min-width: 28rem
     margin: 0 0 2.8rem 0
     color: #272727
     font-size: 1.8rem

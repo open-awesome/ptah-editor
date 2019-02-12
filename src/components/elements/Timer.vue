@@ -179,12 +179,12 @@ $main-font-size: 6rem
 
 // --- main
 .b-timer
-  color: $white
+  color: #fff
   font-size: $main-font-size
   text-align: center
 
   &.is-editable
-    border: .1rem dashed $green
+    border: .1rem dashed #18d88b
 
   @include tabletFontSize($main-font-size)
   @include mobileFontSize($main-font-size)

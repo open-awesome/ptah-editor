@@ -30,7 +30,7 @@
       :transparent="true"
       @click="$emit('requestClose')"
       color="gray"/>
-    <base-button v-text="$t('nav.save')" type="submit" form="cookies-form"/>
+    <base-button color="blue" v-text="$t('nav.save')" type="submit" form="cookies-form"/>
   </div>
 
 </builder-modal-content-layout>

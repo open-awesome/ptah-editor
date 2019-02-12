@@ -24,7 +24,7 @@ Vue.use(VueCircleSlider)
 Vue.use(VueI18n)
 
 Vue.use(VueScrollTo, {
-  container: 'body',
+  container: '.b-builder-layout-content__main .vb-content',
   duration: 500,
   easing: 'ease',
   offset: -80,

@@ -1,65 +1,41 @@
 <template>
   <div class="b-builder-sidebar" :class="{'b-builder-sidebar_expanded': isExpanded}">
-    <button
-      class="b-builder-sidebar__back-button"
-      title="Minimize panel"
-      @click="toggleSidebarAndHideContent">
-
-      <IconBase
-        slot="icon"
-        name="turnAside"
-        width="10"
-        height="8"
-        color="none"
-        strokeColor="#888888"/>
-    </button>
-
-    <div class="b-builder-sidebar__content">
-      <!-- Site settings -->
-      <menu-item
-        :isSelected="expandedMenuItem === 'siteSettings'"
-        :isExpandable="true"
-        @click="toggleMenuItem('siteSettings')">
-        {{ $t('menu.siteSettings') }}
-      </menu-item>
-
-      <!-- Site settings CONTENTS -->
-      <BaseDropdown
-        :isOpened="expandedMenuItem === 'siteSettings'">
-        <MenuSubitem
-          v-for="siteSetting in siteSettingsMenu"
-          :key="siteSetting.id"
-          :isSelected="modalContentID === siteSetting.id"
-          @click="toggleSiteSettings(siteSetting.id)">
-          {{ $t(siteSetting.name) }}
-        </MenuSubitem>
-      </BaseDropdown>
-
+    <div class="b-builder-sidebar-header">
+      <div class="b-builder-sidebar-header__ham">
+        <span @click="toggleSidebarSection">
+          <icon-base
+            name="close"
+            color="#fff"
+            width="14"
+            height="14"
+            />
+        </span>
+      </div>
+      <div class="b-builder-sidebar-header__add">
+        <span class="b-builder-sidebar__icon-add"
+          slot="icon"
+          @click.stop="showAddSectionBar">
+           <IconBase
+            name="plus"
+            color="#fff"
+            strokeColor="transparent"
+           />
+        </span>
+      </div>
+    </div>
+    <div class="b-builder-sidebar__content" id="sections_contents">
       <!-- Sections -->
       <menu-item
         :isSelected="expandedMenuItem === 'sections'"
         :isExpandable="true"
         @click="toggleMenuItem('sections')"
         >
-
-          <span class="b-builder-sidebar__icon-add"
-            slot="icon"
-            @click.stop="showAddSectionBar">
-            <IconBase
-              name="plus"
-              color="#355CCC"
-              strokeColor="transparent"
-            />
-          </span>
           <span>
             {{ $t('menu.sections') }}
           </span>
       </menu-item>
 
       <!-- Sections CONTENTS -->
-      <BaseDropdown
-        :isOpened="expandedMenuItem === 'sections'" id="sections_contents">
-
         <!-- header -->
         <div class="no-sortable" ref="header">
           <menu-subitem
@@ -91,7 +67,6 @@
           </menu-subitem>
 
         </div>
-      </BaseDropdown>
     </div>
 
     <transition name="slide-fade">
@@ -271,18 +246,6 @@ export default {
       this.clearSettingObjectLight()
     },
 
-    toggleSiteSettings (contentID) {
-      this.closeSettingsBar()
-      if (this.isAddSectionExpanded) {
-        this.toggleAddSectionMenu()
-      }
-      if (this.modalContentID === contentID) {
-        this.closeSiteSettings()
-      } else {
-        this.setModalContent(contentID)
-      }
-    },
-
     closeSiteSettings () {
       this.setModalContent('')
     },
@@ -310,54 +273,46 @@ export default {
         ? this.$refs.header.lastElementChild
         : this.$refs.sections.lastElementChild
       target.click()
+    },
+
+    startScroll (x) {
+      console.log(x)
+    },
+
+    toggleSidebarSection () {
+      this.toggleSidebar()
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 $top-panel-height: 7.2rem
 
 .b-builder-sidebar
-  width: 24rem
-  border-right: 1px solid rgba(#000000, 0.08)
-  background: #F1F1F1
+  width: $size-step*9
+  border-right: 1px solid rgba($black, 0.08)
+  background: $dark-blue
   position: fixed
-  top: $top-panel-height
-  left: -22rem
-  box-shadow: inset 0 1px 0 rgba(255,255,255,0.05)
-  color: #888888
+  top: 0
+  left: 0
+  opacity: 0
+  box-shadow: inset 0 1px 0 rgba($white, 0.05)
+  color: $white
   transition: left 0.3s ease-in-out
-  height: calc(100vh - #{$top-panel-height})
+  height: 100vh
   display: flex
   flex-direction: column
 
   &_expanded
-    left: 0
-    transform: translateX(0px)
-
-  &__back-button
-    height: 2.4rem
-    padding: 0 0.8rem
-    width: 100%
-    border: 0
-    background: #F0F0F0
-    border-bottom: 2px solid rgba(#888888, 0.15)
-    cursor: pointer
-    text-align: right
-    flex-shrink: 0
-
-    // @todo remove maybe?
-    // drops margin from BaseIcon
-    svg
-      margin-bottom: 0
-
-    &:hover
-      background: rgba(#202020, 0.08)
+    opacity: 1
 
   &__content
     height: 100%
-    box-shadow: inset 1px 3px 8px 0 rgba(#888888, 0.15)
+    box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
     display: flex
     flex-direction: column
     min-height: 0
@@ -371,6 +326,7 @@ $top-panel-height: 7.2rem
     display: flex
     flex-direction: column
     flex-grow: 1
+    box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
     &.slots-settings
       flex-direction: row
       .slots-settings__list
@@ -379,19 +335,33 @@ $top-panel-height: 7.2rem
   &__icon-add
     width: 3.2rem
     height: 3.2rem
-    background-color: #fff
+    color: $white
     display: flex
     align-items: center
     justify-content: center
     border-radius: 100%
+    cursor: pointer
 
   &-settings,
   &-add-section
+    width: $size-step*9
     position: absolute
-    left: 25rem
-    top: 0.8rem
-    bottom: 0.8rem
+    left: 0
+    top: 0
+    bottom: 0
     display: flex
+
+  &-header
+   height: 8rem
+
+   display: flex
+   justify-content: space-between
+   align-items: center
+
+   padding: $size-step/2 $size-step
+   &__ham
+     &:hover
+       cursor: pointer
 
 // Animations down here
 .slide-fade

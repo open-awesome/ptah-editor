@@ -15,5 +15,5 @@ export default {
   margin: 1.6rem .8rem
 
   &.is-editable
-    border: .1rem dashed $green
+    border: .1rem dashed #18d88b
 </style>
