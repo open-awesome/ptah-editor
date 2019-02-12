@@ -112,7 +112,7 @@ const data = new Map([
       'background-image': 'url(https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png)',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
-      'background-size': 'cover',
+      'background-size': 'contain',
       'background-color': '#fff',
       'width': '',
       'height': ''

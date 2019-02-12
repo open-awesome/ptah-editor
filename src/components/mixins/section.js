@@ -48,7 +48,7 @@ export default {
         return
       }
 
-      for (let key in newProps) {
+      for (let key in oldProps) {
         if (key === 'styles') {
           props[nameObj][key] = {}
           for (let style in newProps[key]) {
@@ -57,30 +57,30 @@ export default {
             }
           }
         } else {
-          if (_.isObject(newProps[key])) {
-            if (oldProps[key] !== undefined && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
-              _.merge(props[nameObj][key], newProps[key])
-            }
-          } else {
+          if (Array.isArray(newProps[key])) {
+            props[nameObj][key] = newProps[key]
+          }
+          if (_.isObject(newProps[key]) && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
+            _.merge(props[nameObj][key], newProps[key])
+          }
+          if (typeof oldProps[key] === 'string' && (newProps[key] !== oldProps[key])) {
             props[nameObj][key] = newProps[key]
           }
         }
 
-        if (typeof props[nameObj][key] === 'object'
-          && _.isEmpty(props[nameObj][key])
-          && key !== 'classes'
-          && key !== 'galleryImages'
-          && key !== 'absorb') delete props[nameObj][key]
+        if (typeof props[nameObj][key] === 'object' && _.isEmpty(props[nameObj][key])) delete props[nameObj][key]
       }
       // return object with modified parameters
       return props
     },
 
-    storeData: _.after(2, function (self) {
+    storeData: function (self) {
       let $sectionData = self.$sectionData
       let data = { components: [] } // new data for save in state
       let ms = {}
       let temp = $sectionData.temp || {} // section data after create component
+
+      console.log('storeData')
 
       for (let keyObj in $sectionData) {
         // components list
@@ -91,6 +91,7 @@ export default {
             let tempEl = _.filter(temp[keyObj], function (el, i) {
               return item.key === el.key
             })
+            if (item.key === 4) console.log(tempEl)
             if (tempEl[0] !== undefined && tempEl[0].element !== undefined) {
               change = self.checkSectionProps(item.element, tempEl[0].element, 'element')
               change['key'] = tempEl[0].key
@@ -110,7 +111,7 @@ export default {
         }
       }
       this.updateDataStore(data, $sectionData)
-    }),
+    },
 
     groupDataMerge (groupDataStore, $sectionData) {
       if (groupDataStore) {
@@ -126,10 +127,14 @@ export default {
                 let el = groupDataStoreEl[0].element
                 for (let key in itemEl) {
                   if (el[key] !== undefined) {
-                    if (Array.isArray(el[key]) || el[key] !== '') {
+                    if (Array.isArray(el[key])) {
                       itemEl[key] = el[key]
-                    } else if (typeof el[key] === 'object' && _.isEmpty(el[key]) !== true) {
+                    }
+                    if (typeof el[key] === 'object' && _.isEmpty(el[key]) !== true) {
                       _.merge(itemEl[key], el[key])
+                    }
+                    if (typeof el[key] === 'string' && el[key] !== '') {
+                      itemEl[key] = el[key]
                     }
                   }
                 }
@@ -142,7 +147,9 @@ export default {
                 if (typeof groupDataStore[keyObj][key] === 'object' && _.isEmpty(groupDataStore[keyObj][key]) !== true) {
                   _.merge($sectionData[keyObj][key], groupDataStore[keyObj][key])
                 } else {
-                  $sectionData[keyObj][key] = groupDataStore[keyObj][key]
+                  if (_.isEmpty(groupDataStore[keyObj][key]) !== true) {
+                    $sectionData[keyObj][key] = groupDataStore[keyObj][key]
+                  }
                 }
               }
             }

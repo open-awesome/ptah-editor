@@ -57,7 +57,7 @@ const C_CUSTOM = [
         'background-image': 'url("https://gn582.cdn.stg.gamenet.ru/0/7MYK7/o_Chxze.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
-        'background-size': 'cover',
+        'background-size': 'contain',
         'width': '74px',
         'height': '88px'
       }
