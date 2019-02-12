@@ -198,6 +198,7 @@ export default {
       color: $dark-grey
       opacity: 0.5
       padding: 0 $size-step
+      white-space: nowrap
       &-home
        padding: 0 $size-step/4
       &-arrow
