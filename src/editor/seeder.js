@@ -29,7 +29,9 @@ const DEFAULT_OPTIONS = {
   backgroundType: 'default',
 
   // --- background video
-  backgroundVideo: null
+  backgroundVideo: null,
+
+  absorb: 0
 }
 
 /**
