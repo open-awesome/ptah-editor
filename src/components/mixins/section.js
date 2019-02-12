@@ -138,6 +138,8 @@ export default {
                   $sectionData[keyObj][key] = groupDataStore[keyObj][key]
                 } else if (typeof groupDataStore[keyObj][key] === 'object' && _.isEmpty(groupDataStore[keyObj][key]) !== true) {
                   _.merge($sectionData[keyObj][key], groupDataStore[keyObj][key])
+                } else {
+                  $sectionData[keyObj][key] = groupDataStore[keyObj][key]
                 }
               }
             }
