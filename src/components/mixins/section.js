@@ -58,12 +58,15 @@ export default {
           }
         } else {
           if (Array.isArray(newProps[key])) {
+            props[nameObj][key] = []
             props[nameObj][key] = newProps[key]
           }
           if (_.isObject(newProps[key]) && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
+            props[nameObj][key] = {}
             _.merge(props[nameObj][key], newProps[key])
           }
           if (typeof oldProps[key] === 'string' && (newProps[key] !== oldProps[key])) {
+            props[nameObj][key] = ''
             props[nameObj][key] = newProps[key]
           }
         }
@@ -80,8 +83,6 @@ export default {
       let ms = {}
       let temp = $sectionData.temp || {} // section data after create component
 
-      console.log('storeData')
-
       for (let keyObj in $sectionData) {
         // components list
         if (keyObj.indexOf('components') !== -1) {
@@ -91,7 +92,6 @@ export default {
             let tempEl = _.filter(temp[keyObj], function (el, i) {
               return item.key === el.key
             })
-            if (item.key === 4) console.log(tempEl)
             if (tempEl[0] !== undefined && tempEl[0].element !== undefined) {
               change = self.checkSectionProps(item.element, tempEl[0].element, 'element')
               change['key'] = tempEl[0].key
