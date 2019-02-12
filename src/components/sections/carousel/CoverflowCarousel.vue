@@ -15,7 +15,7 @@
 
     <div class="swiper-wrapper b-gallery-carousel-body__items">
       <div
-          v-for="(item, index) in images"
+          v-for="(item, index) in $sectionData.mainStyle.galleryImages"
           :key="`slide-${index}-${_uid}`"
           :class="{ 'swiper-slide-active': index === 0 }"
           class="swiper-slide b-gallery-carousel-body-item">
@@ -23,12 +23,12 @@
       </div>
     </div>
 
-    <div v-show="images.length > 1" class="swiper-button-next"></div>
-    <div v-show="images.length > 1" class="swiper-button-prev"></div>
+    <div v-show="$sectionData.mainStyle.galleryImages.length > 1" class="swiper-button-next"></div>
+    <div v-show="$sectionData.mainStyle.galleryImages.length > 1" class="swiper-button-prev"></div>
 
-    <div v-show="images.length > 1" class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
+    <div v-show="$sectionData.mainStyle.galleryImages.length > 1" class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
       <span
-          v-for="(_, index) in images"
+          v-for="(_, index) in $sectionData.mainStyle.galleryImages"
           :key="`bullet-${index}-${_uid}`">
           <span
               :class="{ 'swiper-pagination-bullet-active': index === 0 }"
@@ -46,8 +46,8 @@
 </template>
 
 <script>
-import { GallerySlider as mainStyle } from '@editor/types'
-import { cloneDeep, merge } from 'lodash-es'
+import * as types from '@editor/types'
+import { merge } from 'lodash-es'
 import section from '../../mixins/section.js'
 
 import 'swiper/dist/css/swiper.min.css'
@@ -62,7 +62,8 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-color': '#333'
-    }
+    },
+    galleryImages: []
   },
   edited: true
 }
@@ -76,7 +77,9 @@ export default {
 
   cover: '/img/covers/coverflow-carousel.png',
 
-  $schema: { mainStyle },
+  $schema: {
+    mainStyle: types.GallerySlider
+  },
 
   inject: ['device'],
 
@@ -89,30 +92,12 @@ export default {
 
   data () {
     return {
-      images: [],
       container: null,
       options: null
     }
   },
 
-  watch: {
-    '$sectionData.mainStyle.galleryImages': {
-      immediate: true,
-      async handler (value) {
-        this.updateImages(value)
-      }
-    }
-  },
-
   methods: {
-    updateImages (value) {
-      let items = cloneDeep(value || [])
-      let length = items.length
-      this.images = (length)
-        ? [...items]
-        : [...items.splice(length - 1, 1), ...items]
-    },
-
     getOptions () {
       return JSON.stringify(
         merge(coreflow, {

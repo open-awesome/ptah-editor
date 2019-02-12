@@ -63,3 +63,4 @@ deploy_production:
   only:
   - develop
   when: on_success
+  
