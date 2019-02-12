@@ -121,7 +121,7 @@ export default {
     &_expanded
       display: flex
       + .b-builder-layout-content__main
-        width: calc(100% - ($size-step*10))
+        width: calc(100vw - #{$size-step*10})
 
   &__main
     order: 2
