@@ -23,7 +23,7 @@
         </span>
       </div>
     </div>
-    <div class="b-builder-sidebar__content">
+    <div class="b-builder-sidebar__content" id="sections_contents">
       <!-- Sections -->
       <menu-item
         :isSelected="expandedMenuItem === 'sections'"
