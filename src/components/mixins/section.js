@@ -57,7 +57,7 @@ export default {
             }
           }
         } else {
-          if (!Array.isArray(newProps[key])) {
+          if (_.isObject(newProps[key])) {
             if (oldProps[key] !== undefined && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
               _.merge(props[nameObj][key], newProps[key])
             }
@@ -66,7 +66,11 @@ export default {
           }
         }
 
-        if (typeof props[nameObj][key] === 'object' && _.isEmpty(props[nameObj][key]) && key !== 'classes' && key !== 'galleryImages') delete props[nameObj][key]
+        if (typeof props[nameObj][key] === 'object'
+          && _.isEmpty(props[nameObj][key])
+          && key !== 'classes'
+          && key !== 'galleryImages'
+          && key !== 'absorb') delete props[nameObj][key]
       }
       // return object with modified parameters
       return props
@@ -99,6 +103,7 @@ export default {
           let mainStyle = {}
           tempKeyObj = $sectionData[keyObj] !== undefined ? tempKeyObj[keyObj] = $sectionData[keyObj] : {}
           mainStyle = tempKeyObj
+
           ms = self.checkSectionProps(mainStyle, temp[keyObj], keyObj)
           _.merge(data, ms)
           data['edited'] = true
@@ -134,9 +139,7 @@ export default {
             //
             for (let key in $sectionData[keyObj]) {
               if (groupDataStore[keyObj] !== undefined && groupDataStore[keyObj][key] !== undefined) {
-                if (Array.isArray(groupDataStore[keyObj][key])) {
-                  $sectionData[keyObj][key] = groupDataStore[keyObj][key]
-                } else if (typeof groupDataStore[keyObj][key] === 'object' && _.isEmpty(groupDataStore[keyObj][key]) !== true) {
+                if (typeof groupDataStore[keyObj][key] === 'object' && _.isEmpty(groupDataStore[keyObj][key]) !== true) {
                   _.merge($sectionData[keyObj][key], groupDataStore[keyObj][key])
                 } else {
                   $sectionData[keyObj][key] = groupDataStore[keyObj][key]
