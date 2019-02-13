@@ -1,5 +1,6 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { merge } from 'lodash-es'
 
 export default {
   name: 'TheControlForm',
@@ -9,13 +10,29 @@ export default {
       'settingObjectOptions'
     ]),
 
-    button () {
-      return this.settingObjectOptions.buttonText
+    button: {
+      get () {
+        return this.settingObjectOptions.buttonText
+      },
+      set (value) {
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, { buttonText: value }))
+      }
     },
 
-    placeholder () {
-      return this.settingObjectOptions.placeholder
+    placeholder: {
+      get () {
+        return this.settingObjectOptions.placeholder
+      },
+      set (value) {
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, { placeholder: value }))
+      }
     }
+  },
+
+  methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ])
   }
 }
 </script>

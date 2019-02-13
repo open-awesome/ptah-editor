@@ -10,28 +10,32 @@ const COMPONENTS = [
     element: types.Title,
     type: 'title',
     class: 'b-title',
-    label: 'title'
+    label: 'title',
+    key: 1
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description'
+    label: 'description',
+    key: 2
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter'
+    label: 'delimiter',
+    key: 3
   },
   {
     name: 'Form',
     element: types.Form,
     type: 'form',
     class: 'b-form-element--big',
-    label: 'form'
+    label: 'form',
+    key: 4
   }
 ]
 
@@ -40,7 +44,7 @@ const C_CUSTOM = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Lato',
+        'font-family': 'Montserrat',
         'font-size': '4.2rem',
         'color': '#ffffff'
       }
@@ -96,7 +100,7 @@ export default {
 
   mixins: [section],
 
-  cover: '',
+  cover: 'https://gn678.cdn.stg.gamenet.ru/0/7ji6A/o_JtBcA.png',
 
   group: GROUP_NAME,
 

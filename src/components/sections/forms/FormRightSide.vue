@@ -67,7 +67,7 @@ const C_CUSTOM_2 = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Lato',
+        'font-family': 'Montserrat',
         'font-size': '2.8rem',
         'color': '#ffffff'
       }
@@ -135,7 +135,7 @@ export default {
 
   mixins: [section],
 
-  cover: '',
+  cover: 'https://gn191.cdn.stg.gamenet.ru/0/7ji7m/o_sTl93.png',
 
   group: GROUP_NAME,
 
