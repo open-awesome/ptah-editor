@@ -195,22 +195,33 @@ export default {
     },
 
     checkComponentInSectionStore ($sectionData, sectionDataStore, keyObj) {
-      $sectionData[keyObj].forEach(function (item) {
-        let sectionDataStoreEl = _.filter(sectionDataStore[keyObj], function (el) {
+      sectionDataStore[keyObj].forEach(function (item) {
+        let $sectionDataEl = _.filter($sectionData[keyObj], function (el) {
           return item.key === el.key
         })
-        if (sectionDataStoreEl[0]) {
-          let el = sectionDataStoreEl[0].element
-          let itemEl = item.element
+        if ($sectionDataEl[0]) {
+          let itemEl = $sectionDataEl[0].element
+          let el = item.element
           for (let key in itemEl) {
             if (el[key] !== undefined) {
-              if (Array.isArray(el[key]) || el[key] !== '') {
-                itemEl[key] = el[key]
-              } else if (typeof el[key] === 'object' && _.isEmpty(el[key]) !== true) {
+              if (typeof el[key] === 'object' && _.isEmpty(el[key]) !== true) {
                 _.merge(itemEl[key], el[key])
+              } else {
+                itemEl[key] = el[key]
               }
             }
           }
+        }
+      })
+    },
+
+    restoreAddedComponentFromSectionStore ($sectionData, sectionDataStore, keyObj) {
+      sectionDataStore[keyObj].forEach(function (item) {
+        let $sectionDataEl = _.filter($sectionData[keyObj], function (el) {
+          return item.key === el.key
+        })
+        if (!$sectionDataEl[0]) {
+          $sectionData[keyObj].push(item)
         }
       })
     },
@@ -268,10 +279,11 @@ export default {
         let groupStore = _.merge({}, groupDataStore)
         for (let keyObj in $sectionData) {
           if (keyObj.indexOf('components') !== -1) {
-            //  checking for component availability in section store
-            this.checkComponentInSectionStore($sectionData, sectionDataStore, keyObj)
             // checking for component availability in section data
             this.checkComponentInSectionData($sectionData, sectionDataStore, keyObj)
+            //  checking for component availability in section store
+            this.checkComponentInSectionStore($sectionData, sectionDataStore, keyObj)
+            this.restoreAddedComponentFromSectionStore($sectionData, sectionDataStore, keyObj)
             // restore sort of components
             this.restoreSortComponent($sectionData, sectionDataStore, keyObj)
           } else if (keyObj.indexOf('mainStyle') !== -1) {
@@ -285,7 +297,6 @@ export default {
         $sectionData.temp = _.merge({}, $sectionData, this.schemaCustom)
       } else {
         let data = _.merge({}, Seeder.seed({ 'mainStyle': StyleObject }), this.schemaCustom)
-        console.log(data)
         this.checkDataAboutRestoreAfterSave($sectionData, data)
         // save temporary data to control changes in section
         $sectionData.temp = _.merge({}, $sectionData, this.schemaCustom)
