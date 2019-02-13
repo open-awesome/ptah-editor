@@ -1,6 +1,6 @@
 <template>
   <div class="b-builder-layout">
-    <div class="b-builder-layout__top-bar" :style="{'margin-right': `${fakeScrollbarWidth}px`}">
+    <div class="b-builder-layout__top-bar">
       <BuilderTopBar
         @setDevice="setDevice"
         @backToLandings="backToLandings"
@@ -23,9 +23,12 @@
       </aside>
 
       <main class="b-builder-layout-content__main">
-        <div class="b-builder-layout-content__main-layout" :class="device">
-          <slot></slot>
-        </div>
+        <base-scroll-container
+          backgroundBar="#fff">
+          <div class="b-builder-layout-content__main-layout" :class="device">
+            <slot></slot>
+          </div>
+        </base-scroll-container>
         <BuilderModalContent />
       </main>
 
@@ -34,7 +37,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex'
+import { mapState } from 'vuex'
 import BuilderSidebar from './BuilderSidebar.vue'
 import BuilderTopBar from './BuilderTopBar.vue'
 import BuilderModalContent from './BuilderModalContent.vue'
@@ -68,7 +71,6 @@ export default {
   },
 
   computed: {
-    ...mapGetters('PageTweaks', ['fakeScrollbarWidth']),
     ...mapState('Sidebar', ['isExpanded'])
   },
 
@@ -87,11 +89,14 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-builder-layout
   &__top-bar
-    height: 7.2rem
+    height: 8rem
     max-width: 100vw
-    background-color: #CDCDCD
+    background-color: $white
     position: fixed
     top: 0
     right: 0
@@ -106,34 +111,34 @@ export default {
 
   &__sidebar
     order: 1
-    width: 2rem
+    width: $size-step*9
     flex-shrink: 0
-    min-height: 5rem
     position: relative
-    z-index: 20
+    z-index: 1000
+    display: none
     transition: width 0.3s ease-in-out
-    + .b-builder-layout-content__main
-      width: calc(100% - 2rem)
 
     &_expanded
-      width: 24rem
+      display: flex
       + .b-builder-layout-content__main
-        width: calc(100% - 24rem)
+        width: calc(100vw - #{$size-step*10})
 
   &__main
     order: 2
     flex-grow: 1
     min-height: 5rem
-    margin: 7.2rem 0 0
+    margin: 8rem 0 0
     position: relative
     z-index: 10
     transition: width 0.3s ease-in-out
+    background-color: $ligth-grey
 
     &-layout
       transition: width 0.2s
       margin: 0 auto
       position: relative
       z-index: 5
+      height: calc(100vh - 7.2rem)
 
       &.is-desktop
         width: 100%

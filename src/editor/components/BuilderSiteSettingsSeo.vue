@@ -72,7 +72,7 @@
 
     <div slot="controls">
       <BaseButton color="gray" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
-      <BaseButton @click="applySettings">{{ $t('nav.save') }}</BaseButton>
+      <BaseButton color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>

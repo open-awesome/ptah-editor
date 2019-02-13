@@ -22,13 +22,19 @@ export default {
   display: flex
   flex-direction: column
   flex-grow: 1
+  position: absolute
+  top: 0
+  bottom: 0
+  right: 0
+  left: 0
 
   &__controls
     display: flex
+    justify-content: space-between
     flex-shrink: 0
     border-top: 1px solid #E2E2E2
     padding: 1.6rem
-    justify-content: flex-end
+    justify-content: space-evenly
     box-shadow: 0 -0.6rem 1.5rem rgba(0,0,0,0.1)
 
 .b-scrolled-content

@@ -104,5 +104,5 @@ export default {
       &
         height: auto
   &:hover
-    box-shadow: 0 0 0 2px $color-green
+    box-shadow: 0 0 0 2px #18d88b
 </style>

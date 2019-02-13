@@ -14,17 +14,32 @@ export default {
   },
 
   data: () => ({
-    device: null
+    device: null,
+    colorHamburger: '#333',
+    colorHome: '#333'
   }),
 
   computed: {
-    ...mapState(['currentLanding'])
+    ...mapState(['currentLanding']),
+    ...mapState('Sidebar', [
+      'expandedMenuItem'
+    ]),
+    ...mapState('BuilderModalContent', {
+      modalContentID: 'contentID'
+    })
   },
 
   methods: {
     ...mapActions('Sidebar', [
-      'clearSettingObject'
+      'clearSettingObject',
+      'setMenuItem',
+      'clearSettingObjectLight',
+      'toggleSidebar'
     ]),
+
+    ...mapActions('BuilderModalContent', {
+      setModalContent: 'setContent'
+    }),
 
     setDevice (type) {
       this.$emit('setDevice', type)
@@ -33,6 +48,35 @@ export default {
     backToLandings ($event) {
       this.clearSettingObject()
       this.$emit('backToLandings', $event)
+    },
+
+    toggleMenuItem (name) {
+      this.setMenuItem(name)
+      this.toggleSiteSettings('visualSettings')
+    },
+
+    closeSettingsBar () {
+      this.clearSettingObjectLight()
+    },
+
+    closeSiteSettings () {
+      this.setModalContent('')
+    },
+
+    toggleSiteSettings (contentID) {
+      this.toggleSidebar(false)
+      if (this.isAddSectionExpanded) {
+        this.toggleAddSectionMenu()
+      }
+      if (this.modalContentID === contentID) {
+        this.closeSiteSettings()
+      } else {
+        this.setModalContent(contentID)
+      }
+    },
+
+    toggleSidebarSection () {
+      this.toggleSidebar()
     }
   }
 }
@@ -40,63 +84,72 @@ export default {
 
 <template>
 <div class="b-top-bar">
-  <div class="b-top-bar__left">
-    <BaseButton
-      :color="'light-gray'"
-      :transparent="true"
-      :size="'middle'"
-      @click="backToLandings"
-      class="b-top-bar__btn-back"
-      tooltip="back to landings"
-      tooltip-position="bottom"
-      >
-      {{ $t('nav.backToDashbord') }}
-      <span class="b-top-bar__btn-back-arrow-a"/>
-      <span class="b-top-bar__btn-back-arrow-b"/>
-    </BaseButton>
-  </div>
-  <div class="b-top-bar__right">
-    <div class="b-top-bar-right-menu">
-      <div class="b-top-bar-right-menu__left">
-        <div class="b-top-bar__logo-game">
-          <img :src="currentLanding.settings.favicon" alt="">
+
+  <div class="b-top-bar__padd">
+    <div class="b-top-bar-menu">
+      <div class="b-top-bar-menu__left">
+        <div class="b-top-bar-menu__ham" @click="toggleSidebarSection">
+          <icon-base name="hamburger" :color="colorHamburger"></icon-base>
         </div>
-        <div class="b-top-bar__site-name">
-          {{ landingName }}
+        <div class="b-top-bar-menu__crumbs">
+          <span class="b-top-bar-menu__crumbs-home b-top-bar-menu__crumbs-link"
+                @click="backToLandings"
+            >
+            <icon-base name="home" :color="colorHome"></icon-base>
+          </span>
+          <span class="b-top-bar-menu__crumbs-link" @click="backToLandings">
+            All sites
+          </span>
+          <span class="b-top-bar-menu__crumbs-arrow">
+            →
+          </span>
+          <span>
+            {{ landingName }}
+          </span>
         </div>
       </div>
-      <div class="b-top-bar-right-menu__middle">
+      <div class="b-top-bar-menu__middle">
         <MenuPlatforms
           @setDevice="setDevice"
           ></MenuPlatforms>
       </div>
-      <div class="b-top-bar-right-menu__right">
+      <div class="b-top-bar-menu__right">
         <BaseButton
-          :color="'light-gray'"
+          :color="'gray'"
+          :transparent="true"
+          :size="'middle'"
+          @click="toggleMenuItem('siteSettings')"
+          tooltip="show site settings"
+          tooltip-position="bottom"
+          >
+          {{ $t('menu.siteSettings') }}
+        </BaseButton>
+        <BaseButton
+          :color="'gray'"
           :transparent="true"
           :size="'middle'"
           @click="$emit('save', $event)"
-          tooltip="save"
+          tooltip="click for save"
           tooltip-position="bottom"
           >
           {{ $t('nav.save') }}
         </BaseButton>
         <BaseButton
-          :color="'light-gray'"
+          :color="'gray'"
           :transparent="true"
           :size="'middle'"
           @click="$emit('preview', $event)"
-          tooltip="preview"
+          tooltip="click for preview"
           tooltip-position="bottom"
           >
           {{ $t('nav.preview') }}
         </BaseButton>
         <BaseButton
-          :color="'light-gray'"
+          :color="'gray'"
           :transparent="true"
           :size="'middle'"
           @click="$emit('export', $event)"
-          tooltip="export"
+          tooltip="click for export"
           tooltip-position="bottom"
           >
           {{ $t('nav.export') }}
@@ -108,27 +161,26 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-top-bar
-  background-color: #CDCDCD
+  width: 100%
+  height: 100%
+  padding: 2.4rem 3.2rem
+
   display: flex
   align-items: center
   justify-content: center
-  width: 100%
-  height: 100%
-  &__left
-    order: 1
-    width: 24rem
-  &__right
-    order: 2
-    flex-grow: 1
-  &-right-menu
+  &__padd
+    width: 100%
+  &-menu
     display: flex
     align-items: center
     justify-content: space-between
-    padding: 0.8rem
     &__left
       order: 1
-      width: 50%
+      width: 45%
       display: flex
       align-items: center
       justify-content: flex-start
@@ -137,53 +189,23 @@ export default {
       width: 14rem
     &__right
       order: 3
-      width: 50%
+      width: 45%
       text-align: right
-  &__btn-back
-    $self: &
-    position: relative
-    width: 20rem
-    margin: 0 0 0 3rem
-    border-left-color: transparent
-    &-arrow-a,
-    &-arrow-b
-      content: ''
-      position: absolute
-      left: -1.4rem
-      top: 50%
-      width: 2.8rem
-      height: 2.8rem
-      margin-top: -1.4rem
-      border-left: 0.2rem solid #fff
-      border-bottom: 0.2rem solid #fff
-      z-index: -1
-      transform: rotate(45deg)
-    &-arrow-b
-      z-index: 1
-      box-shadow: none
-    &:hover
-      #{$self}-arrow-a,
-      #{$self}-arrow-b
-        border-left: 0.2rem solid #436FEE
-        border-bottom: 0.2rem  solid #436FEE
-        background-color: #436FEE
-        border-color: #436FEE
-        color: #fafafa
-      #{$self}-arrow-b
-        z-index: 1
-  &__logo-game
-    width: 4rem
-    height: 4rem
-    background: #fff
-    overflow: hidden
-    border-radius: 100%
-    margin: 0 1rem 0 2.9rem
-    img
-      min-width: 100%
-  &__site-name
-    color: #474747
-    font-size: 1.8rem
-    line-height: 4rem
-    letter-spacing: 2%
-    font-weight: bold
+
+    &__ham
+      cursor: pointer
+    &__crumbs
+      color: $dark-grey
+      opacity: 0.5
+      padding: 0 $size-step
+      white-space: nowrap
+      &-home
+       padding: 0 $size-step/4
+      &-arrow
+        padding: 0 1rem
+      &-link
+        opacity: 0.5
+        &:hover
+          opacity: 1 !important
+          cursor: pointer
 </style>

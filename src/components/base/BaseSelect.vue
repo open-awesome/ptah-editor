@@ -91,7 +91,7 @@ export default {
     font-size: 1.6rem
     line-height: 2.4rem
     color: #272727
-    padding: 0
+    padding: 0 0.6rem 0 0
     cursor: pointer
   &__arrow
     width: 0.8rem
@@ -110,7 +110,7 @@ export default {
     position: absolute
     top: 100%
     left: -1.2rem
-    right: -1.2rem
+    right: -0.4rem
     z-index: 10
     margin: 0
     padding: 0
@@ -118,7 +118,7 @@ export default {
   &__options
     margin: 0
     padding: 0
-    min-height: 11rem
+    min-height: 6rem
     background: #fff
     &-item
       padding: 0 1.2rem

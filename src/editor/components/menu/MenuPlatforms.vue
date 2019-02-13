@@ -2,8 +2,8 @@
 export default {
   data: () => ({
     device: '',
-    activeColor: '#474747',
-    inactiveColor: '#fff',
+    activeColor: '#2275D7',
+    inactiveColor: 'rgba(51, 51, 51, 0.3)',
     items: [
       {
         name: 'mobile',
@@ -70,8 +70,6 @@ export default {
 .b-menu-platforms
   width: 14rem
   height: 5.6rem
-  background: #CDCDCD
-  border-radius: 0.2rem
   border:
   padding: 1rem
   display: flex
@@ -79,24 +77,25 @@ export default {
   justify-content: center
   &__button
     background-color: transparent
-    border: none
-    outline: none
-    cursor: pointer
+
     padding: 0
     width: 4rem
     height: 4rem
+    border: none
+
     display: flex
     align-items: center
     justify-content: center
-    border: #fff 0.1rem solid
+
+    outline: none
+    cursor: pointer
     &_active
-      background-color: rgba(255, 255, 255, 0.5)
+      color: $dark-blue-krayola
+      opacity: 1
     &_mobile
       border-right: none
-      border-radius: 0.5rem 0 0 0.5rem
     &_laptop
     &_desktop
       border-left: none
-      border-radius: 0 0.5rem 0.5rem 0
 
 </style>

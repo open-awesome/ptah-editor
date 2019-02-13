@@ -6,7 +6,7 @@
   opacity: 0
   margin: 10px 0
   padding: 5px
-  background: $dark
+  background: #323c47
   border-radius: 26px
   display: flex
   flex-direction: column
@@ -20,8 +20,8 @@
     margin: 0
     padding: 0
   &-input
-    background: $white
-    color: $dark
+    background: #fff
+    color: #323c47
     border: 0
     outline: 0
     width: 3rem
@@ -37,16 +37,16 @@
     justify-content: center
     align-items: center
     outline: 0
-    background: $dark
+    background: #323c47
     border: 0
-    fill: $white
-    color: $white
+    fill: #fff
+    color: #fff
     width: 3rem
     height: 3rem
     border-radius: 3rem
     margin: 0 5px 0 0
     &:hover
-      background: darken($dark, 20%)
+      background: darken(#323c47, 20%)
     &:first-child
       margin-left: 5px
   &-selector
@@ -57,7 +57,7 @@
   .input-group
     margin: 5px
   & label
-    color: $white
+    color: #fff
 
 .align
   @extend .styler-list
@@ -73,23 +73,13 @@
     width: 30px
     height: 30px
     border-radius: 40px
-    border: 4px solid darken($dark, 20%)
+    border: 4px solid darken(#323c47, 20%)
     margin: 0 5px
     outline: none
     &:checked
-      border-color: lighten($dark, 20%)
+      border-color: lighten(#323c47, 20%)
     &:hover
-      border-color: lighten($dark, 20%)
-    &#colorRed
-      background: $red
-    &#colorBlue
-      background: $blue
-    &#colorGreen
-      background: $green
-    &#colorBlack
-      background: $black
-    &#colorWhite
-      background: $white
+      border-color: lighten(#323c47, 20%)
 
 .is-hidden
   display: none

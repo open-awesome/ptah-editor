@@ -132,7 +132,7 @@ export default {
     display: flex
     flex-wrap: wrap
 
-    border: .1rem dashed $gray-dark
+    border: .1rem dashed #c1c1c1
     border-radius: .4rem
 
   &__draggable

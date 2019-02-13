@@ -193,7 +193,7 @@
   </div>
 
   <div class="b-section-settings__buttons">
-    <base-button :color="'light-gray'" @click="deleteSection">Delete</base-button>
+    <base-button :color="'gray'" :transparent="true" @click="deleteSection">Delete</base-button>
   </div>
 </div>
 </template>
@@ -600,15 +600,17 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-section-settings
   display: flex
   flex-direction: column
   align-items: stretch
   padding-bottom: 4.5rem
-  min-width: 24rem
-  &__header
+  width: 100%
+  &-header
     font-size: 1.6rem
-    height: 3.2rem
     color: #272727
     display: flex
     align-items: center
@@ -628,9 +630,11 @@ export default {
     position: absolute
     bottom: 1rem
     left: 1rem
+    right: 1rem
     button
+      margin: 0 auto
       max-width: 100%
-
+      display: block
   &__control
     margin-bottom: 2rem
 
@@ -658,6 +662,7 @@ export default {
       position: absolute
       bottom: 1rem
       left: 1rem
+      right: 1
       button
         max-width: 100%
     &__control

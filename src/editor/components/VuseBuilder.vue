@@ -190,7 +190,8 @@ export default {
       'updateBuilderSections',
       'updateBuilderGroups',
       'updateSectionGroups',
-      'setSettingSection'
+      'setSettingSection',
+      'toggleSidebar'
     ]),
     initSettings () {
       const settings = this.currentLanding.settings
@@ -332,6 +333,7 @@ export default {
       if (event.target.closest('.styler-active')) {
         return
       }
+      this.toggleSidebar(true)
       this.setSettingSection(section)
     },
 
@@ -382,11 +384,13 @@ export default {
 </script>
 
 <style lang="sass">
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .artboard
   transform-origin: top center
   margin: 0 auto
   transition: 0.2s
-  min-height: 100vh
   position: relative
   &.is-editable .is-editable
     outline: none
@@ -397,7 +401,7 @@ export default {
   &:before,
   &:after
     content: ''
-    background-color: #9E9E9E
+    background-color: $ligth-grey
     position: absolute
     top: 0
     bottom: 0
@@ -410,62 +414,18 @@ export default {
 
 .controller
   box-sizing: border-box
-  &-panel
-    position: fixed
-    z-index: 200
-    bottom: 1rem
-    right: 4rem
   &-input
     outline: none
-    border: 1px solid $gray
+    border: 1px solid #c1c1c1
     padding: 0.5rem 1rem
     margin: 2rem 0
     border-radius: 4rem
     width: 100%
     font-size: 1.6rem
     &:focus
-      border-color: $blue
-      box-shadow: 0 0 0 0.2rem rgba($blue, 50%)
-  &-button
-    transition: 0.2s
-    border: none
-    outline: none
-    border-radius: 2rem
-    padding: 0.5rem
-    fill: $white
-    font-size: 1.6rem
-    svg
-      transition: 0.2s
-    &:not(:last-child)
-      margin-right: 2rem
-    &.is-rotated >svg
-      transform: rotate(45deg)
-    &:hover
-      @extends $floatHover
-    &.is-blue
-      background-color: $blue
-      &:hover
-        background-color: darken($blue, 20%)
-    &.is-red
-      background-color: $red
-      &:hover
-        background-color: darken($red, 20%)
-    &.is-green
-      background-color: $green
-      &:hover
-        background-color: darken($green, 20%)
-    &.is-dark
-      background-color: $dark
-      &:hover
-        background-color: darken($dark, 20%)
-    &.is-gray
-      background-color: $gray
-      &:hover
-        background-color: darken($gray, 20%)
-    &.is-transparent
-      background-color: transparent
-      &:hover
-        background-color: transparent
+      border-color: #0072FF
+      box-shadow: 0 0 0 0.2rem rgba(#0072FF, 50%)
+
   &-intro
     width: 100%
     max-width: 50rem
@@ -477,7 +437,7 @@ export default {
     padding: 7rem 5rem
     text-align: center
     font-size: 3rem
-    color: $dark
+    color: #323c47
 
   &-themes
     display: flex
@@ -485,9 +445,9 @@ export default {
     width: 100%
 
   &-theme
-    background-color: $white
-    color: $dark
-    border: 0.1rem solid $gray
+    background-color: #fff
+    color: #323c47
+    border: 0.1rem solid #c1c1c1
     margin: 0.5rem
     padding: 2rem
     border-radius: 0.4rem
@@ -495,7 +455,7 @@ export default {
     cursor: pointer
     font-size: 1.6rem
     &:hover
-      border-color: $blue
+      border-color: #0072FF
 
 .b-landing-constructor__button
   width: 100%
@@ -534,7 +494,7 @@ export default {
 
 .floatHover
   cursor: pointer
-  box-shadow: 0 14px 28px opacify($black, 0.125), 0 10px 10px opacify($black, 0.1)
+  box-shadow: 0 14px 28px opacify(#000000, 0.125), 0 10px 10px opacify(#000000, 0.1)
 
 .page-sections
   list-style: none
@@ -543,9 +503,9 @@ export default {
   li
     margin: 0 0 4px
     padding: 1rem 0.5rem
-    background: lighten($green, 40%)
+    background: lighten(#18d88b, 40%)
 
-// --- video background styles
+/* video background styles */
 .video-background
   position: relative !important
   background: none !important

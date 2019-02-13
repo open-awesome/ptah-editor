@@ -52,6 +52,7 @@ export default {
     ]),
 
     ...mapActions('BuilderModalContent', ['setContent']),
+    ...mapActions('Sidebar', ['toggleSidebar']),
 
     showSandboxSidebar (e) {
       this.setContent(null)
@@ -74,6 +75,8 @@ export default {
         }
         this.toggleSandboxSidebar(true)
       })
+
+      this.toggleSidebar(true)
     }
   }
 }
@@ -90,7 +93,7 @@ export default {
   width: 100%
   min-height: 20rem
   .is-editable &
-    border: 1px dashed $green
+    border: 1px dashed #18d88b
   /deep/
     .b-draggable-slot
       display: flex

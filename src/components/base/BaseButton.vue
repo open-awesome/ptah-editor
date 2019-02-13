@@ -3,7 +3,7 @@ export default {
   props: {
     /* variant button */
     color: {
-      default: 'black',
+      default: 'default',
       type: String,
       validator (value) {
         const values = [
@@ -84,18 +84,24 @@ export default {
 </template>
 
 <style lang="sass">
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-pth-base-button
-  border-radius: 0.4rem
-  border: 0.2rem transparent solid
-  outline: none
-  transition: color .3s cubic-bezier(.2,.85,.4,1.275)
+  font-family: 'Roboto', Helvetica, Arial, sans-serif
   font-size: 1.6rem
   line-height: 2.2
+
   margin: 0.4rem
+  border-radius: 1000px
+  border: 0.2rem transparent solid
+
+  transition: all .3s cubic-bezier(.2,.85,.4,1.275)
+  outline: none
   =active
-    background-color: #436FEE
-    border-color: #436FEE
-    color: #fff
+    background-color: $dark-blue-krayola
+    border-color: $dark-blue-krayola
+    color: $white
   &[disabled]
     cursor: not-allowed
     background-color: #b6b6b6
@@ -105,11 +111,12 @@ export default {
       fill: #8f8686
   &:hover:not([disabled])
     cursor: pointer
-    +active
+    border-color: $dark-blue-krayola
   &_default
     width: 20.8rem
   &_middle
     width: 11rem
+    font-size: 1.4rem
   &_small
     font-size: 1.2rem
     line-height: 2
@@ -123,20 +130,19 @@ export default {
   &_blue
    +active
   &_gray
-    color: #888
-    background-color: #383838
-    border: 0.2rem rgba(0, 0, 0, 0.07) solid
+    color: $dark-blue-krayola
+    border: 0.2rem rgba(0, 0, 0, 0.1) solid
   &_light-gray
-    color: #474747
-    background-color: #fafafa
-    border: 0.2rem #fff solid
-  &_orange
     color: $white
-    background-color: $orange-dark
+    background-color: rgba($white, 0.1)
+    border: 0.2rem rgba($white, 0.1) solid
+  &_orange
+    color: #fff
+    background-color: #DB4E2B
     border-radius: .4rem
     &:hover
-      background-color: $orange-dark !important
-      border-color: $orange-dark !important
+      background-color: #DB4E2B !important
+      border-color: #DB4E2B !important
       opacity: .8
   &_transparent
     background-color: transparent
