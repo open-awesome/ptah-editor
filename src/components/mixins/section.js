@@ -48,7 +48,7 @@ export default {
         return
       }
 
-      for (let key in oldProps) {
+      for (let key in newProps) {
         if (key === 'styles') {
           props[nameObj][key] = {}
           for (let style in newProps[key]) {
@@ -61,11 +61,11 @@ export default {
             props[nameObj][key] = []
             props[nameObj][key] = newProps[key]
           }
-          if (_.isObject(newProps[key]) && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
+          if (_.isObject(newProps[key]) && oldProps[key] !== undefined && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
             props[nameObj][key] = {}
             _.merge(props[nameObj][key], newProps[key])
           }
-          if (typeof oldProps[key] === 'string' && (newProps[key] !== oldProps[key])) {
+          if (typeof newProps[key] === 'string' && oldProps[key] !== undefined && (newProps[key] !== oldProps[key])) {
             props[nameObj][key] = ''
             props[nameObj][key] = newProps[key]
           }
