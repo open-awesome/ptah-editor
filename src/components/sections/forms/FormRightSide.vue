@@ -10,8 +10,7 @@ const COMPONENTS_1 = [
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo',
-    key: 0
+    label: 'logo'
   }
 ]
 

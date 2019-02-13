@@ -57,7 +57,7 @@ const C_CUSTOM_1 = [
         'padding-right': '4rem'
       }
     },
-    key: 0
+    key: 1
   },
   {
     element: {
@@ -68,7 +68,7 @@ const C_CUSTOM_1 = [
         'color': 'rgba(255, 255, 255, 0.5)'
       }
     },
-    key: 1
+    key: 2
   }
 ]
 
@@ -85,17 +85,17 @@ const C_CUSTOM_2 = [
         'margin': '0'
       }
     },
-    key: 1
+    key: 0
   },
   {
-    key: 2
+    key: 3
   },
   {
     element: {
       placeholder: 'email',
       buttonText: 'Submit'
     },
-    key: 3
+    key: 4
   }
 ]
 
@@ -126,7 +126,7 @@ const SCHEMA_CUSTOM = {
 }
 
 const GROUP_NAME = 'Forms'
-const NAME = 'FormRight'
+const NAME = 'FormRight2'
 
 export default {
   name: NAME,
