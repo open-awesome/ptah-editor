@@ -211,9 +211,11 @@ export default {
     top: 0
     bottom: 0
     left: 100%
-    width: $size-step*9
-    background-color: $white
+    width: calc(100vw - #{$size-step*9})
+    background-color: rgba(32, 61, 95, 0.45)
     transition: left 0.3s ease-in-out
+    &>div
+     background: #fff
     &__menu
       padding: 3.2rem 3.2rem 8rem
       &-element
