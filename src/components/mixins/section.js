@@ -11,6 +11,7 @@ import { mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
+import { StyleObject } from '@editor/types'
 
 export default {
   components: {
@@ -48,7 +49,7 @@ export default {
         return
       }
 
-      for (let key in newProps) {
+      for (let key in oldProps) {
         if (key === 'styles') {
           props[nameObj][key] = {}
           for (let style in newProps[key]) {
@@ -56,12 +57,12 @@ export default {
               props[nameObj][key][style] = newProps[key][style]
             }
           }
-        } else {
+        } else if (newProps[key] !== undefined) {
           if (Array.isArray(newProps[key])) {
             props[nameObj][key] = []
             props[nameObj][key] = newProps[key]
           }
-          if (_.isObject(newProps[key]) && oldProps[key] !== undefined && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
+          if (typeof newProps[key] === 'object' && oldProps[key] !== undefined) {
             props[nameObj][key] = {}
             _.merge(props[nameObj][key], newProps[key])
           }
@@ -98,7 +99,7 @@ export default {
             }
             data['components'].push(change)
           })
-        } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+        } else if (keyObj.indexOf('mainStyle') !== -1) {
           //
           let tempKeyObj = {}
           let mainStyle = {}
@@ -127,20 +128,16 @@ export default {
                 let el = groupDataStoreEl[0].element
                 for (let key in itemEl) {
                   if (el[key] !== undefined) {
-                    if (Array.isArray(el[key])) {
-                      itemEl[key] = el[key]
-                    }
                     if (typeof el[key] === 'object' && _.isEmpty(el[key]) !== true) {
                       _.merge(itemEl[key], el[key])
-                    }
-                    if (typeof el[key] === 'string' && el[key] !== '') {
+                    } else {
                       itemEl[key] = el[key]
                     }
                   }
                 }
               }
             })
-          } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+          } else if (keyObj.indexOf('mainStyle') !== -1) {
             //
             for (let key in $sectionData[keyObj]) {
               if (groupDataStore[keyObj] !== undefined && groupDataStore[keyObj][key] !== undefined) {
@@ -179,7 +176,7 @@ export default {
             }
             data['components'].push(change)
           })
-        } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+        } else if (keyObj.indexOf('mainStyle') !== -1) {
           //
           ms = self.checkSectionProps($sectionData[keyObj], schemaCustom[keyObj], keyObj)
           _.merge(data, ms)
@@ -277,7 +274,7 @@ export default {
             this.checkComponentInSectionData($sectionData, sectionDataStore, keyObj)
             // restore sort of components
             this.restoreSortComponent($sectionData, sectionDataStore, keyObj)
-          } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+          } else if (keyObj.indexOf('mainStyle') !== -1) {
             // merge section properties
             _.merge($sectionData[keyObj], sectionDataStore[keyObj])
           }
@@ -287,7 +284,9 @@ export default {
         // save temporary data to control changes in section
         $sectionData.temp = _.merge({}, $sectionData, this.schemaCustom)
       } else {
-        this.checkDataAboutRestoreAfterSave($sectionData, this.schemaCustom)
+        let data = _.merge({}, Seeder.seed({ 'mainStyle': StyleObject }), this.schemaCustom)
+        console.log(data)
+        this.checkDataAboutRestoreAfterSave($sectionData, data)
         // save temporary data to control changes in section
         $sectionData.temp = _.merge({}, $sectionData, this.schemaCustom)
       }
