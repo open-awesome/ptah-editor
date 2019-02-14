@@ -5,7 +5,8 @@
         "visualSettings":               "Visual settings",
         "seo":                          "SEO settings",
         "cookie":                       "Cookies settings",
-        "addJs":                        "Add JS code"
+        "addJs":                        "Add JS code",
+        "integrations":                 "Integrations"
     },
     "nav": {
         "backToDashbord":               "Back to landings",
@@ -39,6 +40,11 @@
         "height":                       "Heigh",
         "fullScreen":                   "Full screen height",
         "useVideoBg":                   "Use video as background",
-        "groupSections":                "Group sections"
+        "groupSections":                "Group sections",
+        "buttonText":                   "Button text",
+        "placeholder":                  "Placeholder text",
+        "add":                          "Add",
+        "fullScreenView":               "View on full screen",
+        "minimize":                     "Minimize"
     }
 }
