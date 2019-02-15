@@ -102,6 +102,39 @@ const C_CUSTOM = [
       }
     },
     key: 3
+  },
+  {
+    element: {
+      availablePlatforms: {
+        'windows': {
+          name: 'Windows',
+          visible: true
+        },
+        'apple': {
+          name: 'Apple',
+          visible: true
+        },
+        'linuxfull': {
+          name: 'Linux',
+          visible: false
+        },
+        'steam': {
+          name: 'Steam',
+          visible: false
+        },
+        'gog': {
+          name: 'GOG Galaxy',
+          visible: false
+        }
+      },
+      colorFill: {
+        color: '#fff'
+      },
+      sizeIcons: {
+        width: 15
+      }
+    },
+    key: 4
   }
 ]
 

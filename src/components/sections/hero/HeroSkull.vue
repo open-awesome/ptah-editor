@@ -57,7 +57,7 @@ const C_CUSTOM = [
         'background-image': 'url("https://gn582.cdn.stg.gamenet.ru/0/7MYK7/o_Chxze.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
-        'background-size': 'cover',
+        'background-size': 'contain',
         'width': '74px',
         'height': '88px'
       }
@@ -101,6 +101,39 @@ const C_CUSTOM = [
       }
     },
     key: 3
+  },
+  {
+    element: {
+      availablePlatforms: {
+        'windows': {
+          name: 'Windows',
+          visible: true
+        },
+        'apple': {
+          name: 'Apple',
+          visible: true
+        },
+        'linuxfull': {
+          name: 'Linux',
+          visible: false
+        },
+        'steam': {
+          name: 'Steam',
+          visible: false
+        },
+        'gog': {
+          name: 'GOG Galaxy',
+          visible: false
+        }
+      },
+      colorFill: {
+        color: '#fff'
+      },
+      sizeIcons: {
+        width: 15
+      }
+    },
+    key: 4
   }
 ]
 
