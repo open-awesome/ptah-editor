@@ -11,6 +11,7 @@ import { mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import Draggable from 'vuedraggable'
+import { StyleObject } from '@editor/types'
 
 export default {
   components: {
@@ -48,7 +49,7 @@ export default {
         return
       }
 
-      for (let key in newProps) {
+      for (let key in oldProps) {
         if (key === 'styles') {
           props[nameObj][key] = {}
           for (let style in newProps[key]) {
@@ -56,27 +57,28 @@ export default {
               props[nameObj][key][style] = newProps[key][style]
             }
           }
-        } else {
-          if (_.isObject(newProps[key])) {
-            if (oldProps[key] !== undefined && JSON.stringify(newProps[key]) !== JSON.stringify(oldProps[key])) {
-              _.merge(props[nameObj][key], newProps[key])
-            }
-          } else {
+        } else if (newProps[key] !== undefined) {
+          if (Array.isArray(newProps[key])) {
+            props[nameObj][key] = []
+            props[nameObj][key] = newProps[key]
+          }
+          if (typeof newProps[key] === 'object' && oldProps[key] !== undefined) {
+            props[nameObj][key] = {}
+            _.merge(props[nameObj][key], newProps[key])
+          }
+          if (typeof newProps[key] === 'string' && oldProps[key] !== undefined && (newProps[key] !== oldProps[key])) {
+            props[nameObj][key] = ''
             props[nameObj][key] = newProps[key]
           }
         }
 
-        if (typeof props[nameObj][key] === 'object'
-          && _.isEmpty(props[nameObj][key])
-          && key !== 'classes'
-          && key !== 'galleryImages'
-          && key !== 'absorb') delete props[nameObj][key]
+        if (typeof props[nameObj][key] === 'object' && _.isEmpty(props[nameObj][key])) delete props[nameObj][key]
       }
       // return object with modified parameters
       return props
     },
 
-    storeData: _.after(2, function (self) {
+    storeData: function (self) {
       let $sectionData = self.$sectionData
       let data = { components: [] } // new data for save in state
       let ms = {}
@@ -97,7 +99,7 @@ export default {
             }
             data['components'].push(change)
           })
-        } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+        } else if (keyObj.indexOf('mainStyle') !== -1) {
           //
           let tempKeyObj = {}
           let mainStyle = {}
@@ -110,7 +112,7 @@ export default {
         }
       }
       this.updateDataStore(data, $sectionData)
-    }),
+    },
 
     groupDataMerge (groupDataStore, $sectionData) {
       if (groupDataStore) {
@@ -126,23 +128,25 @@ export default {
                 let el = groupDataStoreEl[0].element
                 for (let key in itemEl) {
                   if (el[key] !== undefined) {
-                    if (Array.isArray(el[key]) || el[key] !== '') {
-                      itemEl[key] = el[key]
-                    } else if (typeof el[key] === 'object' && _.isEmpty(el[key]) !== true) {
+                    if (typeof el[key] === 'object' && _.isEmpty(el[key]) !== true) {
                       _.merge(itemEl[key], el[key])
+                    } else {
+                      itemEl[key] = el[key]
                     }
                   }
                 }
               }
             })
-          } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+          } else if (keyObj.indexOf('mainStyle') !== -1) {
             //
             for (let key in $sectionData[keyObj]) {
               if (groupDataStore[keyObj] !== undefined && groupDataStore[keyObj][key] !== undefined) {
                 if (typeof groupDataStore[keyObj][key] === 'object' && _.isEmpty(groupDataStore[keyObj][key]) !== true) {
                   _.merge($sectionData[keyObj][key], groupDataStore[keyObj][key])
                 } else {
-                  $sectionData[keyObj][key] = groupDataStore[keyObj][key]
+                  if (_.isEmpty(groupDataStore[keyObj][key]) !== true) {
+                    $sectionData[keyObj][key] = groupDataStore[keyObj][key]
+                  }
                 }
               }
             }
@@ -172,7 +176,7 @@ export default {
             }
             data['components'].push(change)
           })
-        } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+        } else if (keyObj.indexOf('mainStyle') !== -1) {
           //
           ms = self.checkSectionProps($sectionData[keyObj], schemaCustom[keyObj], keyObj)
           _.merge(data, ms)
@@ -191,22 +195,33 @@ export default {
     },
 
     checkComponentInSectionStore ($sectionData, sectionDataStore, keyObj) {
-      $sectionData[keyObj].forEach(function (item) {
-        let sectionDataStoreEl = _.filter(sectionDataStore[keyObj], function (el) {
+      sectionDataStore[keyObj].forEach(function (item) {
+        let $sectionDataEl = _.filter($sectionData[keyObj], function (el) {
           return item.key === el.key
         })
-        if (sectionDataStoreEl[0]) {
-          let el = sectionDataStoreEl[0].element
-          let itemEl = item.element
+        if ($sectionDataEl[0]) {
+          let itemEl = $sectionDataEl[0].element
+          let el = item.element
           for (let key in itemEl) {
             if (el[key] !== undefined) {
-              if (Array.isArray(el[key]) || el[key] !== '') {
-                itemEl[key] = el[key]
-              } else if (typeof el[key] === 'object' && _.isEmpty(el[key]) !== true) {
+              if (typeof el[key] === 'object' && _.isEmpty(el[key]) !== true) {
                 _.merge(itemEl[key], el[key])
+              } else {
+                itemEl[key] = el[key]
               }
             }
           }
+        }
+      })
+    },
+
+    restoreAddedComponentFromSectionStore ($sectionData, sectionDataStore, keyObj) {
+      sectionDataStore[keyObj].forEach(function (item) {
+        let $sectionDataEl = _.filter($sectionData[keyObj], function (el) {
+          return item.key === el.key
+        })
+        if (!$sectionDataEl[0]) {
+          $sectionData[keyObj].push(item)
         }
       })
     },
@@ -264,13 +279,14 @@ export default {
         let groupStore = _.merge({}, groupDataStore)
         for (let keyObj in $sectionData) {
           if (keyObj.indexOf('components') !== -1) {
-            //  checking for component availability in section store
-            this.checkComponentInSectionStore($sectionData, sectionDataStore, keyObj)
             // checking for component availability in section data
             this.checkComponentInSectionData($sectionData, sectionDataStore, keyObj)
+            //  checking for component availability in section store
+            this.checkComponentInSectionStore($sectionData, sectionDataStore, keyObj)
+            this.restoreAddedComponentFromSectionStore($sectionData, sectionDataStore, keyObj)
             // restore sort of components
             this.restoreSortComponent($sectionData, sectionDataStore, keyObj)
-          } else if (keyObj.indexOf('mainStyle') !== -1 || keyObj.indexOf('container') !== -1) {
+          } else if (keyObj.indexOf('mainStyle') !== -1) {
             // merge section properties
             _.merge($sectionData[keyObj], sectionDataStore[keyObj])
           }
@@ -280,7 +296,8 @@ export default {
         // save temporary data to control changes in section
         $sectionData.temp = _.merge({}, $sectionData, this.schemaCustom)
       } else {
-        this.checkDataAboutRestoreAfterSave($sectionData, this.schemaCustom)
+        let data = _.merge({}, Seeder.seed({ 'mainStyle': StyleObject }), this.schemaCustom)
+        this.checkDataAboutRestoreAfterSave($sectionData, data)
         // save temporary data to control changes in section
         $sectionData.temp = _.merge({}, $sectionData, this.schemaCustom)
       }
