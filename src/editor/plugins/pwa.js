@@ -130,7 +130,7 @@ function download (assets) {
               ${styles}
             </style>
           </head>
-          <body style="${bodyStyles}">
+          <body class="b-body_export" style="${bodyStyles}">
             ${gtm.body}
             <div class="main">
               ${artboard.innerHTML}
