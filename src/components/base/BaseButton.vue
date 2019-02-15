@@ -90,7 +90,7 @@ export default {
 .b-pth-base-button
   font-family: 'Roboto', Helvetica, Arial, sans-serif
   font-size: 1.6rem
-  line-height: 2.2
+  line-height: 2.4
 
   margin: 0.4rem
   border-radius: 1000px
@@ -104,11 +104,11 @@ export default {
     color: $white
   &[disabled]
     cursor: not-allowed
-    background-color: #b6b6b6
-    border-color: #b6b6b6
-    color: #b6b6b6
+    background-color: rgba($white, 0.1)
+    border-color: rgba($white, 0.1)
+    color: rgba($white, 0.1)
     > svg
-      fill: #8f8686
+      fill: rgba($white, 0.1)
   &:hover:not([disabled])
     cursor: pointer
     border-color: $dark-blue-krayola
@@ -126,23 +126,23 @@ export default {
     +active
   &_black
     color: #eee
-    background-color: #202020
+    background-color: $dark-grey
   &_blue
    +active
   &_gray
     color: $dark-blue-krayola
-    border: 0.2rem rgba(0, 0, 0, 0.1) solid
+    border: 0.2rem rgba($black, 0.1) solid
   &_light-gray
     color: $white
     background-color: rgba($white, 0.1)
     border: 0.2rem rgba($white, 0.1) solid
   &_orange
     color: #fff
-    background-color: #DB4E2B
+    background-color: $orange
     border-radius: .4rem
     &:hover
-      background-color: #DB4E2B !important
-      border-color: #DB4E2B !important
+      background-color: $orange !important
+      border-color: $orange !important
       opacity: .8
   &_transparent
     background-color: transparent

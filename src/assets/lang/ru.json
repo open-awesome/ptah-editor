@@ -3,9 +3,10 @@
         "siteSettings":                 "Настройки",
         "sections":                     "Секции",
         "visualSettings":               "Вид",
-        "seo":                          "Настройки SEO",
-        "cookie":                       "Настройки Cookie",
-        "addJs":                        "Добавить JS код"
+        "seo":                          "SEO",
+        "cookie":                       "Cookie",
+        "addJs":                        "Добавить JS",
+        "integrations":                 "Интеграции"
     },
     "nav": {
         "backToDashbord":               "Назад к лендингам",
@@ -39,6 +40,11 @@
         "height":                       "Высота",
         "fullScreen":                   "Растянуть на весь экран",
         "useVideoBg":                   "Видео фон",
-        "groupSections":                "Группировать секции"
+        "groupSections":                "Группировать секции",
+        "buttonText":                   "Текст на кнопке",
+        "placeholder":                  "Подсказка",
+        "add":                          "Добавить",
+        "fullScreenView":               "На весь экран",
+        "minimize":                     "Свернуть"
     }
 }
