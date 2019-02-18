@@ -7,7 +7,7 @@
         <base-fieldset>
           <base-heading level="2">{{ $t('s.title') }}</base-heading>
 
-          <base-fieldset-row>
+          <base-fieldset-row width="wide">
             <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
           </base-fieldset-row>
 
