@@ -7,6 +7,14 @@ RUN npm install gulp -g
 
 WORKDIR /app
 
+COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js webpack.mix.js yarn.lock /app/
+# RUN npm install && npm prune --production
+RUN yarn install
+COPY . /app/
+RUN yarn cjs && gulp locale_sync && gulp public-image && yarn build
+
+RUN chmod +x start.sh
+
 ENV NODE_ENV=production \
     AUTH1_AUTHORIZE_URL="" \
     AUTH1_CLIENT_ID="" \
@@ -33,20 +41,6 @@ ENV NODE_ENV=production \
     SESSION_COOKIE_SIGN_KEY="" \
     SERVER_PORT=80
 
+EXPOSE 80
 
-COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js webpack.mix.js yarn.lock /app/
-# RUN npm install && npm prune --production
-RUN yarn install
-COPY . /app/
-RUN yarn cjs && gulp locale_sync && gulp public-image && yarn build
-
-# RUN chmod +x start.sh
-
-# EXPOSE 80
-
-# CMD ["./start.sh"]
-
-FROM nginx:1.15.4
-
-WORKDIR /usr/share/nginx/html
-COPY --from=node /app/dist /usr/share/nginx/html
+CMD ["./start.sh"]

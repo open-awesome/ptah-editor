@@ -9,7 +9,12 @@ prodRelease: false
 
 ingress:
   hostname: storefront.tst.protocol.one
-  path: /
+  pathFrontend: 
+   - /css
+   - /img
+   - /js
+  pathBackend: 
+   - /
 
 certIssuer:
   email: admin@protocol.one
@@ -27,6 +32,43 @@ frontend:
     protocol: TCP
   configMap: 
     mountPath: /etc/nginx/conf.d/
+
+backend:    
+  name: nodejs
+  role: backend
+  image: "p1hub/storefront.protocol.one-nodejs"
+  imageTag: latest
+  port: 8080
+  replicas: 1
+  service: 
+    type: ClusterIP
+    port: 8080
+    protocol: TCP
+  env:
+  - AUTH1_AUTHORIZE_URL
+  - AUTH1_CLIENT_ID
+  - AUTH1_CLIENT_SCOPE
+  - AUTH1_CLIENT_SECRET
+  - AUTH1_TOKEN_URL
+  - AUTH1_USERINFO_URL
+  - DB_AUTH_METHOD
+  - DB_HOST
+  - DB_NAME
+  - DB_PASS
+  - DB_PORT
+  - DB_USER
+  - MAILCHIMP_AUTHORIZE_URL
+  - MAILCHIMP_CLIENT_ID
+  - MAILCHIMP_CLIENT_SECRET
+  - MAILCHIMP_TOKEN_URL
+  - PUBLIC_HOST
+  - REDIS_HOST
+  - REDIS_PORT
+  - ROUTES_PREFIX
+  - SENTRY_DSN
+  - SESSION_COOKIE_NAME
+  - SESSION_COOKIE_SIGN_KEY
+  - SERVER_PORT
   
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
