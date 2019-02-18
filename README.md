@@ -28,7 +28,8 @@ Each ready to use block (we named it `section`) could be tuned with custom eleme
 * `NODE_ENV={string=production} AUTH1_AUTHORIZE_URL={string} AUTH1_CLIENT_ID={string} 
 AUTH1_CLIENT_SCOPE={string="openid,offline"} AUTH1_CLIENT_SECRET={string} AUTH1_TOKEN_URL={string} 
 AUTH1_USERINFO_URL={string} DB_AUTH_METHOD={string="SCRAM-SHA-256"} DB_HOST={string} DB_NAME={string="ptah"} 
-DB_PASS={string} DB_PORT={string=27017} DB_USER={string} PUBLIC_HOST={string} REDIS_HOST={string} 
+DB_PASS={string} DB_PORT={string=27017} DB_USER={string} MAILCHIMP_AUTHORIZE_URL={string} MAILCHIMP_CLIENT_ID={string} 
+MAILCHIMP_CLIENT_SECRET={string} MAILCHIMP_TOKEN_URL={string} PUBLIC_HOST={string} REDIS_HOST={string} 
 REDIS_PORT={string="6379"} ROUTES_PREFIX={string=""} SENTRY_DSN={string} SESSION_COOKIE_NAME={string="ptahsid"} 
 SESSION_COOKIE_SIGN_KEY={string} SERVER_PORT={string=80} node ./index.js`
 
@@ -59,6 +60,14 @@ Where:
 {DB_PORT} - MongoDB port
 
 {DB_USER} - MongoDB user name (must be an empty string if auth is not used)
+
+{MAILCHIMP_CLIENT_ID} - client id for OAuth2 authentication in Mailchimp service
+
+{MAILCHIMP_CLIENT_SECRET} - client secret for OAuth2 authentication in Mailchimp service
+
+{MAILCHIMP_AUTHORIZE_URL} - full url of Mailchimp authorize endpoint 
+
+{MAILCHIMP_TOKEN_URL} - full url of Mailchimp token endpoint
 
 {PUBLIC_HOST} - Public host url, for example https://landings.protocol.one
 
@@ -94,3 +103,12 @@ For refresh you must send GET request to `/auth1/refresh`, and you will get json
 For logout you must send refresh token as "refresh" header and access token as bearer authorization in GET request to 
 `/auth1/logout`
 
+## Mailchimp linking
+
+For link user accounts in mailchimp and use maillists on your landing page, you must open an `/mailchimp/login` url
+in iframe.
+All process of authorization will go in that frame, and finally you receive a postMessage from iframe, 
+with result of authorization. 
+
+Result will be an json-serialized object with success sign and error code (if it occures). 
+Actual structure of object you may see in `backend/templates/mailchimp.postmessage.html.template` file.

@@ -6,12 +6,14 @@ const Router = require('koa-router')
 const config = require('../../config/config')
 
 const auth1Middleware = require('./auth1.oauth2')
+const mailchimpAuthMiddleware = require('./mailchimp.oauth2')
 
 const router = new Router({
   prefix: config.routesPrefix
 })
 
 const auth1RoutesNamespace = config.auth1RoutesNamespace
+const mailchimpRoutesNamespace = config.mailchimpRoutesNamespace
 
 const indexContent = fs.readFileSync(config.indexHtmlPath).toString('utf8')
 
@@ -30,6 +32,9 @@ router
   .get(`${auth1RoutesNamespace}/callback`, auth1Middleware.authorized)
   .get(`${auth1RoutesNamespace}/refresh`, auth1Middleware.refresh)
   .get(`${auth1RoutesNamespace}/logout`, auth1Middleware.logout)
+
+  .get(`${mailchimpRoutesNamespace}/login`, mailchimpAuthMiddleware.login)
+  .get(`${mailchimpRoutesNamespace}/callback`, mailchimpAuthMiddleware.authorized)
 
 module.exports.routes = function () {
   return router.routes()
