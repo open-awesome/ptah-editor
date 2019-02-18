@@ -3,9 +3,7 @@
 # Declare variables to be passed into your templates.
 
 enableCertIssuer: true
-
-# to release to production environment set prodRelease = true
-prodRelease: false
+enableRedis: true
 
 ingress:
   hostname: storefront.tst.protocol.one
