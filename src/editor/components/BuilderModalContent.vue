@@ -50,6 +50,8 @@ import BuilderSiteSettingsVisual from './BuilderSiteSettingsVisual'
 import BuilderSiteSettingsCookies from './BuilderSiteSettingsCookies'
 import BuilderSiteSettingsVersionHistory from './BuilderSiteSettingsVersionHistory'
 import BuilderSiteSettingsAddJsScripts from './BuilderSiteSettingsAddJsScripts'
+import BuilderSiteSettingsIntegrations from './BuilderSiteSettingsIntegrations'
+import BuilderSiteSettingsOpenGraph from './BuilderSiteSettingsOpenGraph'
 import MenuSubitem from './MenuSubitem'
 import TabItem from './TabItem'
 
@@ -62,6 +64,8 @@ export default {
     BuilderSiteSettingsVisual,
     BuilderSiteSettingsVersionHistory,
     BuilderSiteSettingsAddJsScripts,
+    BuilderSiteSettingsIntegrations,
+    BuilderSiteSettingsOpenGraph,
     MenuSubitem,
     TabItem
   },
@@ -109,6 +113,10 @@ export default {
       if (this.sandbox.expanded) {
         this.toggleSandboxSidebar(false)
       }
+    },
+
+    closeSiteSettings () {
+      this.setModalContent('')
     },
 
     closeSettingsBar () {

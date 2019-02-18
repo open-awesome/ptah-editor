@@ -3,7 +3,9 @@ const contentComponentMap = {
   seoSettings: 'BuilderSiteSettingsSeo',
   cookiesSettings: 'BuilderSiteSettingsCookies',
   versionHistory: 'BuilderSiteSettingsVersionHistory',
-  addJsScrips: 'BuilderSiteSettingsAddJsScripts'
+  addJsScrips: 'BuilderSiteSettingsAddJsScripts',
+  integrations: 'BuilderSiteSettingsIntegrations',
+  openGraph: 'BuilderSiteSettingsOpenGraph'
 }
 
 export default {

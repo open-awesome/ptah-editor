@@ -6,7 +6,8 @@
         "seo":                          "SEO",
         "cookie":                       "Cookies",
         "addJs":                        "Add JS ",
-        "integrations":                 "Integrations"
+        "integrations":                 "Integrations",
+        "openGraph":                    "Open Graph"
     },
     "nav": {
         "backToDashbord":               "Back to landings",
@@ -45,6 +46,8 @@
         "placeholder":                  "Placeholder text",
         "add":                          "Add",
         "fullScreenView":               "View on full screen",
-        "minimize":                     "Minimize"
+        "minimize":                     "Minimize",
+        "openGraph":                    "Open Graph",
+        "integrations":                 "Integrations"
     }
 }

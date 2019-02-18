@@ -8,65 +8,18 @@
           <base-heading level="2">{{ $t('s.title') }}</base-heading>
 
           <base-fieldset-row>
+            <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
+          </base-fieldset-row>
+
+          <base-fieldset-row>
             <BaseImageUpload
               v-model="favicon"
               :label="$t('s.favicon')"
               description="32 x 32 px, .ico, .bmp or .png" />
           </base-fieldset-row>
 
-          <base-fieldset-row>
-            <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
-          </base-fieldset-row>
         </base-fieldset>
 
-        <!-- Google -->
-        <base-fieldset>
-          <base-heading level="2">Google</base-heading>
-
-          <base-fieldset-row width="short">
-            <base-text-field
-              v-model="gtmId"
-              placeholder="GTM-XXXXXX">
-
-              <template slot="label">
-                GTM container ID
-                <a class="b-builder-site-settings-seo__help"
-                  target="_blank"
-                  href="https://developers.google.com/tag-manager/quickstart">
-                  <IconBase name="questionCircle" width="16" height="16" color="#436FEE" />
-                </a>
-              </template>
-
-            </base-text-field>
-          </base-fieldset-row>
-
-          <base-fieldset-row width="short">
-            <BaseTextField label="Google site tag" v-model="gtag" placeholder="UA-XXXXXXXX-X" />
-          </base-fieldset-row>
-        </base-fieldset>
-
-        <!-- Open Graph -->
-        <base-fieldset :hasToggle="true" :isOpened="false">
-          <base-heading slot="heading" level="2">
-            Open Graph
-            <a class="b-builder-site-settings-seo__help"
-              target="_blank"
-              href="https://en.wikipedia.org/wiki/Facebook_Platform#Open_Graph_protocol">
-              <IconBase name="questionCircle" width="16" height="16" color="#436FEE" />
-            </a>
-          </base-heading>
-
-          <base-fieldset-row
-            v-for="ogField in ogFields"
-            :key="ogField.id">
-
-            <base-text-field
-              v-model="ogField.value"
-              :placeholder="ogField.placeholder"
-              :label="ogField.label">
-            </base-text-field>
-          </base-fieldset-row>
-        </base-fieldset>
       </form>
     </div>
 
@@ -92,60 +45,7 @@ export default {
   data () {
     return {
       pageTitle: '',
-      favicon: '',
-      gtmId: '',
-      gtag: '',
-
-      ogFields: [
-        {
-          id: 'og:title',
-          label: 'Title',
-          placeholder: 'Game name',
-          value: ''
-        },
-        {
-          id: 'og:description',
-          label: 'Description',
-          placeholder: 'Video Game',
-          value: ''
-        },
-        {
-          id: 'og:image',
-          label: 'Image',
-          placeholder: 'http://www.mydomain.com/image.png',
-          value: ''
-        },
-        {
-          id: 'og:type',
-          label: 'Type',
-          placeholder: 'Profile',
-          value: ''
-        },
-        {
-          id: 'og:url',
-          label: 'URL',
-          placeholder: 'http://www.mydomain.com/',
-          value: ''
-        },
-        {
-          id: 'og:locale',
-          label: 'Locale',
-          placeholder: 'en_GB',
-          value: ''
-        },
-        {
-          id: 'og:locale:alternate',
-          label: 'Locale : Alternate',
-          placeholder: 'fr_FR',
-          value: ''
-        },
-        {
-          id: 'og:video',
-          label: 'Video',
-          placeholder: 'http://www.mydomain.com/video.mp4',
-          value: ''
-        }
-      ]
+      favicon: ''
     }
   },
 

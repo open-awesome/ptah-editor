@@ -6,7 +6,8 @@
         "seo":                          "SEO",
         "cookie":                       "Cookie",
         "addJs":                        "Добавить JS",
-        "integrations":                 "Интеграции"
+        "integrations":                 "Интеграции",
+        "openGraph":                    "Open Graph"
     },
     "nav": {
         "backToDashbord":               "Назад к лендингам",
@@ -45,6 +46,8 @@
         "placeholder":                  "Подсказка",
         "add":                          "Добавить",
         "fullScreenView":               "На весь экран",
-        "minimize":                     "Свернуть"
+        "minimize":                     "Свернуть",
+        "openGraph":                    "Open Graph",
+        "integrations":                 "Интеграции"
     }
 }
