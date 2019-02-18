@@ -7,20 +7,51 @@
           {{  $t('s.openGraph') }}
           <base-help
             :hasLink="false"
-            link="https://en.wikipedia.org/wiki/Facebook_Platform#Open_Graph_protocol"
+            link="//ogp.me/"
             >
-            The Open Graph protocol enables developers to integrate their pages into Facebook
+            The Open Graph protocol enables any web page to become a rich object in a social graph.
           </base-help>
         </base-heading>
+
         <base-fieldset-row
+          width="wide"
           v-for="ogField in ogFields"
           :key="ogField.id">
-           <base-text-field
+
+          <base-text-field
+            v-if="ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 || ogField.id.indexOf('locale') !== -1"
             v-model="ogField.value"
             :placeholder="ogField.placeholder"
             :label="ogField.label">
           </base-text-field>
+
+          <base-uploader
+            v-if="ogField.id.indexOf('image') !== -1"
+            v-model="ogField.value"
+            label="Image"
+          />
+
+          <base-text-field
+            v-if="ogField.id.indexOf('url') !== -1"
+            v-model="ogField.value"
+            :label="ogField.label"
+            :hasError="error.url"
+            @input="validUrl(ogField.value)"
+            >
+            <span slot="error">
+              Please enter a valid URL
+            </span>
+          </base-text-field>
+
+          <base-uploader
+            v-if="ogField.id.indexOf('video') !== -1"
+            v-model="ogField.value"
+            label="Video"
+            type="video"
+          />
+
         </base-fieldset-row>
+
       </base-fieldset>
     </div>
     <div slot="controls">
@@ -66,8 +97,8 @@ export default {
         {
           id: 'og:type',
           label: 'Type',
-          placeholder: 'Profile',
-          value: ''
+          placeholder: 'Type',
+          value: 'Game'
         },
         {
           id: 'og:url',
@@ -93,7 +124,10 @@ export default {
           placeholder: 'http://www.mydomain.com/video.mp4',
           value: ''
         }
-      ]
+      ],
+      error: {
+        url: false
+      }
     }
   },
 
@@ -107,7 +141,7 @@ export default {
     }
   },
 
-  mounted () {
+  created () {
     this.updateSettings()
   },
 
@@ -133,11 +167,20 @@ export default {
         }
       })
       const data = {
-        ogTags
+        ogTags: ogTags
       }
 
       this.storeSettings(data)
       this.$emit('requestClose')
+    },
+    validUrl (str) {
+      let pattern = new RegExp(/(^https?:\/\/)?[a-z0-9~_\-.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/i)
+
+      if (!pattern.test(str)) {
+        this.error.url = true
+      } else {
+        this.error.url = false
+      }
     }
   }
 }

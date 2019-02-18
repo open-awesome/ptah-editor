@@ -32,7 +32,6 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import _ from 'lodash'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 
 export default {
@@ -70,30 +69,12 @@ export default {
     updateSettings () {
       const settings = this.currentLanding.settings
 
-      _.map(settings.ogTags, ({ property, content }) => {
-        const item = _.find(this.ogFields, { id: property })
-        if (item) {
-          item.value = content
-        }
-      })
-
       this.pageTitle = settings.title
-      this.gtmId = settings.gtmId
-      this.gtag = settings.gtag
       this.favicon = settings.favicon
     },
     applySettings () {
-      const ogTags = this.ogFields.filter(({ value }) => value).map(({ id, value }) => {
-        return {
-          property: id,
-          content: value
-        }
-      })
       const data = {
-        ogTags,
         title: this.pageTitle,
-        gtmId: this.gtmId,
-        gtag: this.gtag,
         favicon: this.favicon
       }
 

@@ -135,7 +135,6 @@ export default {
       height: $size-step*1.5
       width: $size-step*1.5
       margin: 0 auto
-      border-radius: 100%
 
     &_remove
       z-index: 10
