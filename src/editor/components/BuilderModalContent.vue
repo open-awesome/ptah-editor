@@ -48,6 +48,12 @@ export default {
     MenuSubitem
   },
 
+  props: {
+    builder: {
+      required: true
+    }
+  },
+
   computed: {
     ...mapState('BuilderModalContent', ['isContentVisible', 'contentID']),
     ...mapState('Sidebar', ['isAddSectionExpanded', 'sandbox', 'isSettingsExpanded', 'siteSettingsMenu']),
