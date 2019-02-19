@@ -1,8 +1,34 @@
 <template>
   <builder-modal-content-layout>
     <div class="b-integrations">
+      <div class="b-integrations__item"
+        v-if="!isIntegrationVisible"
+        v-for="integration in integrations"
+        :key="integration.name"
+        @click="selectIntegration(integration.name)"
+        >
+        <div class="b-integrations__item-icon"
+          :style="{'background-image': 'url(' + integration.icon + ')'}"
+          >
+        </div>
+        <div class="b-integrations__item-label">
+          {{ integration.label }}
+        </div>
+        <span class="b-integrations__item-settings">
+          <icon-base name="settings" color="#2275D7"></icon-base>
+        </span>
+      </div>
+
+      <div style="width: 100%"
+        v-if="isIntegrationVisible"
+        >
+        <component
+          :is="integrationComponent">
+        </component>
+      </div>
+
       <!-- Google -->
-      <base-fieldset>
+      <!--base-fieldset>
         <base-heading level="2">Google</base-heading>
         <base-fieldset-row width="short">
           <base-text-field
@@ -22,7 +48,7 @@
        <base-fieldset-row width="short">
           <BaseTextField label="Google site tag" v-model="gtag" placeholder="UA-XXXXXXXX-X" />
         </base-fieldset-row>
-      </base-fieldset>
+      </base-fieldset-->
     </div>
     <div slot="controls">
       <BaseButton color="gray" size="middle" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
@@ -32,25 +58,51 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
+import BuilderSiteSettingsIntegrationsGoogleTag from './BuilderSiteSettingsIntegrationsGoogleTag'
+import BuilderSiteSettingsIntegrationsGoogleAnalitycs from './BuilderSiteSettingsIntegrationsGoogleAnalitycs'
+import BuilderSiteSettingsIntegrationsMailchimp from './BuilderSiteSettingsIntegrationsMailchimp'
 
 export default {
   name: 'BuilderSiteSettingsIntegrations',
 
   components: {
-    BuilderModalContentLayout
+    BuilderModalContentLayout,
+    BuilderSiteSettingsIntegrationsGoogleTag,
+    BuilderSiteSettingsIntegrationsGoogleAnalitycs,
+    BuilderSiteSettingsIntegrationsMailchimp
   },
 
   data () {
     return {
+      integrations: [
+        {
+          name: 'googleTag',
+          label: 'Add Google Tag',
+          icon: 'https://gn926.cdn.stg.gamenet.ru/0/7m0Jd/o_kfsYQ.png'
+        },
+        {
+          name: 'googleAnalitycs',
+          label: 'Add Google Analitycs',
+          icon: 'https://gn517.cdn.stg.gamenet.ru/0/7m0Iw/o_2Gb9Ul.png'
+        },
+        {
+          name: 'mailchimp',
+          label: 'Add Mailchimp',
+          icon: 'https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png'
+        }
+      ],
       gtmId: '',
       gtag: ''
     }
   },
 
   computed: {
-    ...mapState(['currentLanding'])
+    ...mapState(['currentLanding']),
+
+    ...mapState('BuilderModalContent', ['isIntegrationVisible', 'integrationID']),
+    ...mapGetters('BuilderModalContent', ['integrationComponent'])
   },
 
   watch: {
@@ -67,6 +119,9 @@ export default {
     ...mapActions([
       'storeSettings'
     ]),
+    ...mapActions('BuilderModalContent', {
+      setIntegrationContent: 'setIntegration'
+    }),
 
     updateIntegrations () {
       const settings = this.currentLanding.settings
@@ -83,6 +138,11 @@ export default {
 
       this.storeSettings(data)
       this.$emit('requestClose')
+    },
+
+    selectIntegration (integrationID) {
+      this.isIntegrationVisible = true
+      this.setIntegrationContent(integrationID)
     }
   }
 }
@@ -94,6 +154,47 @@ export default {
 
 .b-integrations
   height: $size-step*5
+
+  display: flex
+  &__item
+    width: $size-step*6
+    height: $size-step*5
+
+    background-color: $ligth-grey
+    background-position: center center
+    border-radius: 0.4rem
+    margin: $size-step/2
+
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+
+    position: relative
+
+    cursor: pointer
+    &:hover
+      background-color: $grey
+      transition: all .3s cubic-bezier(.2,.85,.4,1.275)
+    &:first-child
+      margin-left: 0
+    &-last-child
+      margin-right: 0
+    &-icon
+      display: inline-block
+      width: $size-step*2
+      height: $size-step*2
+    &-label
+      font-size: 1.6rem
+      color: $dark-grey
+    &-settings
+      display: none
+      position: absolute
+      top: $size-step/2
+      left: $size-step/2
+    &:hover
+      .b-integrations__item-settings
+        display: block
   &__textarea
     width: 100%
     height: 100%
