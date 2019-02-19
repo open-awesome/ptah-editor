@@ -12,7 +12,8 @@ export default {
           'gray',
           'light-gray',
           'orange',
-          'transparent'
+          'transparent',
+          'white'
         ]
         return values.indexOf(value) !== -1
       }
@@ -146,4 +147,11 @@ export default {
       opacity: .8
   &_transparent
     background-color: transparent
+  &_white
+    border: 0.2rem white solid
+    color: $dark-blue-krayola
+    background: $white
+    box-shadow: 0px 4px 16px rgba($black, 0.25)
+    &:hover
+      border: 0.2rem $dark-blue-krayola solid
 </style>

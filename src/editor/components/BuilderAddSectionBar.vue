@@ -4,7 +4,6 @@ import { mapState } from 'vuex'
 
 export default {
   name: 'BuilderAddSectionBar',
-
   props: {
     builder: {
       type: Object,
@@ -20,7 +19,10 @@ export default {
     return {
       selectedGroup: [],
       selectedSection: null,
-      isVisibleBar: false
+      isVisibleBar: false,
+      fullScreenView: false,
+      search: '', // filter sections,
+      processing: false
     }
   },
 
@@ -40,6 +42,16 @@ export default {
 
     sections () {
       return this.builderSections
+    },
+
+    barWidth () {
+      return this.fullScreenView ? '100%' : '28.8rem'
+    },
+
+    filteredSeciton () {
+      return this.fullScreenView ?
+        this.selectedGroup.filter((section) => ~section.name.toLowerCase().indexOf(this.search.toLowerCase())) :
+        this.selectedGroup
     }
   },
 
@@ -50,6 +62,11 @@ export default {
       this.addSection(this.selectedSection)
     },
     selectSection (section) {
+      if (this.processing) {
+        return
+      }
+
+      this.processing = true
       this.selectedSection = section
       this.addSection(this.selectedSection)
     },
@@ -67,6 +84,12 @@ export default {
       this.isVisibleBar = false
       this.selectedSection = null
       this.selectedGroup = null
+    },
+    toggleView () {
+      this.fullScreenView = !this.fullScreenView
+      if (!this.fullScreenView) {
+        this.search = ''
+      }
     }
   }
 }
@@ -74,6 +97,18 @@ export default {
 
 <template>
   <div class="b-add-section">
+
+    <base-button
+      v-if="isVisibleBar"
+      color="white"
+      :transparent="true"
+      size="middle"
+      class="b-add-section__toggle-bar"
+      @click="toggleView()">
+      <template v-if="fullScreenView">{{ $t('s.minimize') }}</template>
+      <template v-if="!fullScreenView">{{ $t('s.fullScreenView') }}</template>
+    </base-button>
+
     <div class="b-add-section__header">
       <div>
         <h6 class="b-add-section__title">
@@ -87,40 +122,50 @@ export default {
       </div>
     </div>
     <div class="b-add-section__padd">
+      <BaseScrollContainer
+        :styling="{ width: barWidth, height: '100%' }"
+        backgroundBar="#fff"
+      >
+        <ul class="b-add-section__menu is-visiable" ref="menu">
+          <li class="b-add-section__menu-group"
+              :class="{ 'b-add-section__menu-group_selected': group === selectedGroup }"
+              v-for="(group, name) in groups"
+              :key="name"
+              v-if="group.length">
+            <div class="b-add-section__menu-header" @click="showSelectSection(group)">
+              <span class="b-add-section__menu-title">{{ name }}</span>
+            </div>
+          </li>
+        </ul>
+      </BaseScrollContainer>
 
-      <ul class="b-add-section__menu is-visiable" ref="menu">
-        <li class="b-add-section__menu-group"
-            :class="{ 'b-add-section__menu-group_selected': group === selectedGroup }"
-            v-for="(group, name) in groups"
-            :key="name"
-            v-if="group.length">
-          <div class="b-add-section__menu-header" @click="showSelectSection(group)">
-            <span class="b-add-section__menu-title">{{ name }}</span>
-          </div>
-        </li>
-      </ul>
+      <div class="b-add-section-bar" v-if="isVisibleBar" :class="{'full-screen': fullScreenView}">
+        <div class="b-add-section-bar__header" v-if="fullScreenView">
+          <div class="b-add-section-bar__header--title">{{ selectedGroup[0].group }}</div>
+          <base-text-field
+            class="b-add-section-bar__header--search"
+            placeholder="Search ..."
+            v-model="search"></base-text-field>
+        </div>
 
-      <div class="b-add-section-bar" v-if="isVisibleBar">
         <BaseScrollContainer classes="b-add-section-bar__scrollbar"
-          :styling="{ width: '28.8rem', height: '100%' }" backgroundBar="#333"
+          :styling="{ width: barWidth, height: '100%' }" backgroundBar="#333"
           >
         <div class="b-add-section-bar__menu">
-          <template v-for="(section, index) in selectedGroup">
+          <template v-for="(section, index) in filteredSeciton">
             <div class="b-add-section-bar__menu-element"
                  :class="{ 'b-add-section-bar__menu-element_selected': section === selectedSection }"
                  v-bind:key="index"
                  @click="selectSection(section)">
-              <img class="b-add-section-bar__menu-image" v-if="section.cover" :src="section.cover"/>
-              <icon-base
-                v-if="section === selectedSection"
-                name="checkMark"
-                :width="17"
-                :height="12"
-                color="#fff">
-              </icon-base>
-              <span class="b-add-section-bar__menu-title" v-if="!section.cover">
-                {{ section.name }}
-              </span>
+              <div class="b-add-section-bar__menu-imageholder">
+                <img class="b-add-section-bar__menu-image" v-if="section.cover" :src="section.cover"/>
+                <span class="b-add-section-bar__menu-title">
+                  {{ section.name }}
+                </span>
+              </div>
+              <div class="b-add-section-bar__menu-button">
+                <span>{{ $t('s.add') }}</span>
+              </div>
             </div>
           </template>
         </div>
@@ -154,6 +199,14 @@ export default {
 
   background: $dark-blue
   box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
+
+  &__toggle-bar
+    position: absolute
+    top: 1.5rem
+    left: 61rem
+    z-index: 20
+    width: 17rem
+
   &__header
     height: 8rem
 
@@ -167,7 +220,8 @@ export default {
       cursor: pointer
       border: none
   &__padd
-    padding: 2.8rem 0
+    padding: 2.8rem 0 8rem
+    height: calc(100% - 8rem)
 
     display: flex
     flex-direction: column
@@ -211,37 +265,85 @@ export default {
     top: 0
     bottom: 0
     left: 100%
-    width: $size-step*9
-    background-color: $white
+    width: calc(100vw - #{$size-step*9})
+    background-color: rgba($dark-blue, 0.45)
     transition: left 0.3s ease-in-out
+    &>div
+     background: $white
+     transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
     &__menu
-      padding: 3.2rem 3.2rem 8rem
+      padding: 3.2rem 0 8rem
       &-element
         overflow: hidden
-        width: 17.6rem
-        height: 11.2rem
         box-sizing: border-box
-        background-color: #cccccc
-        margin: 0 auto 3.2rem
+        background-color: $white
+        margin: 0
         cursor: pointer
         display: flex
         align-items: center
         justify-content: center
         border: 0.2rem solid transparent
         transition: all 0.1s ease-in-out
-        &:hover
-          border: 0.2rem solid #fff
+        position: relative
+        &:hover .b-add-section-bar__menu-button
+          display: flex
         &_selected
           background-color: #436FEE
           border: 0.2rem solid transparent
-          color: #fff
+          color: $white
           &:hover
             border: 0.2rem solid transparent
           & img
             display: none
 
+      &-imageholder
+        background: url("https://gn790.cdn.stg.gamenet.ru/0/7k3Ee/o_jGfAw.png") no-repeat
+        width: 24rem
+        height: 18.6rem
+        padding: 1.2rem .2rem 0
+        margin: 2.1rem 2.1rem 1.1rem
+        position: relative
       &-image
-        width: 100%
+        max-width: 100%
+      &-title
+        font-size: 1.6rem
+        color: $black
+      &-button
+        display: none
+        position: absolute
+        top: 0
+        bottom: 0
+        left: 0
+        right: 0
+        background: rgba(47,110,205,.2)
+        justify-content: center
+        align-items: center
+        span
+          background: $dark-blue-krayola
+          height: 4rem
+          line-height: 4rem
+          border-radius: 20px
+          padding: 0 4rem
+          color: white
+    &__header
+      height: 7.3rem
+      display: flex
+      justify-content: space-between
+      align-items: center
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15)
+      &--title
+        font-size: 2.4rem
+        letter-spacing: -0.02rem
+        margin-left: 3.7rem
+        color: $black
+        text-transform: capitalize
+      &--search
+        width: 19rem
+        margin-right: 3.2rem
+        /deep/
+          & input
+              padding-left: 3.6rem
+              background: url("https://gn118.cdn.stg.gamenet.ru/0/7k6JU/o_ItVIs.png") no-repeat left center
 
   &-footer
     position: absolute
@@ -257,5 +359,19 @@ export default {
     &__bt
       width: 21.6rem
       margin: 0 auto
-
+.full-screen
+  .b-add-section-bar__menu
+    display: flex
+    flex-wrap: wrap
+    padding: 0
+    &-element
+      flex-basis: 20%
+      border-bottom: 1px solid rgba(0, 0, 0, 0.15)
+      border-right: 1px solid rgba(0, 0, 0, 0.15)
+      @media only screen and (max-width: 1900px)
+        &
+          flex-basis: 25%
+      @media only screen and (max-width: 1600px)
+        &
+          flex-basis: 33.3%
 </style>
