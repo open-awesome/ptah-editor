@@ -28,29 +28,6 @@
           >
         </component>
       </div>
-
-      <!-- Google -->
-      <!--base-fieldset>
-        <base-heading level="2">Google</base-heading>
-        <base-fieldset-row width="short">
-          <base-text-field
-            v-model="gtmId"
-            placeholder="GTM-XXXXXX">
-            <template slot="label">
-              GTM container ID
-              <base-help
-                :hasLink="true"
-                link="https://developers.google.com/tag-manager/quickstart"
-                >
-              </base-help>
-            </template>
-          </base-text-field>
-       </base-fieldset-row>
-
-       <base-fieldset-row width="short">
-          <BaseTextField label="Google site tag" v-model="gtag" placeholder="UA-XXXXXXXX-X" />
-        </base-fieldset-row>
-      </base-fieldset-->
     </div>
     <div slot="controls">
       <BaseButton color="gray" size="middle" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
@@ -201,6 +178,8 @@ export default {
     &:hover
       .b-integrations__item-settings
         display: block
+      .b-integrations__item-label
+        color: $dark-blue-krayola
   &__textarea
     width: 100%
     height: 100%
