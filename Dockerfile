@@ -20,6 +20,7 @@ ENV NODE_ENV=production \
     AUTH1_CLIENT_ID="" \
     AUTH1_CLIENT_SCOPE="openid,offline" \
     AUTH1_CLIENT_SECRET="" \
+    AUTH1_REVOKE_TOKEN_URL="" \
     AUTH1_TOKEN_URL="" \
     AUTH1_USERINFO_URL="" \
     DB_AUTH_METHOD="SCRAM-SHA-256" \

@@ -7,6 +7,9 @@ const buildUrl = require('build-url')
 
 const config = require('../../config/config')
 const createMiddleware = require('./oauth2')
+const RedisOauthCache = require('./redis-oauth-cache')
+
+const redisOauthCache = new RedisOauthCache(config.redisPort, config.redisHost)
 
 const auth1PostmessageHtmlTemplate = fs.readFileSync(config.auth1PostmessageHtmlTemplatePath).toString('utf8')
 
@@ -16,6 +19,7 @@ const callbackUrl = buildUrl(config.publicHost, {
 
 const authorizeUrl = urlParse(config.auth1AuthorizeUrl)
 const tokenUrl = urlParse(config.auth1TokenUrl)
+const revokeUrl = urlParse(config.auth1RevokeTokenUrl)
 
 const oauthConfig = {
   // Client ID and secret for OAuth provider
@@ -39,7 +43,8 @@ const oauthConfig = {
       tokenHost: tokenUrl.origin,
       tokenPath: tokenUrl.pathname,
       authorizeHost: authorizeUrl.origin,
-      authorizePath: authorizeUrl.pathname
+      authorizePath: authorizeUrl.pathname,
+      revokePath: revokeUrl.pathname
     }
   },
 
@@ -91,6 +96,10 @@ const refresh = async (ctx) => {
 const logout = async (ctx) => {
   try {
     await oauthMiddleware.logout(ctx)
+
+    // remove token introspection result from redis cache after token revocation
+    const oauthToken = oauthMiddleware.getTokenFromSession(ctx)
+    await redisOauthCache.destroy(oauthToken.token.access_token, ctx)
   } catch (err) {
     ctx.log.error(err)
   }

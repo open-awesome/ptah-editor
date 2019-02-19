@@ -39,6 +39,7 @@ const config = {
   auth1Scope: getEnvVariableArray('AUTH1_CLIENT_SCOPE', 'openid,offline'),
   auth1AuthorizeUrl: getEnvVariable('AUTH1_AUTHORIZE_URL', 'http://192.168.99.100:4444/oauth2/auth'),
   auth1TokenUrl: getEnvVariable('AUTH1_TOKEN_URL', 'http://192.168.99.100:4444/oauth2/token'),
+  auth1RevokeTokenUrl: getEnvVariable('AUTH1_REVOKE_TOKEN_URL', 'http://192.168.99.100:4444/oauth2/revoke'),
   auth1UserinfoUrl: getEnvVariable('AUTH1_USERINFO_URL', 'http://192.168.99.100:4444/userinfo'),
   auth1PostmessageHtmlTemplatePath: path.resolve('backend/templates/auth1.postmessage.html.template'),
 

@@ -26,7 +26,7 @@ Each ready to use block (we named it `section`) could be tuned with custom eleme
 * `yarn build`
 * `node ./node_modules/migrate-mongo/bin/migrate-mongo.js up -f backend/migrations/migrate-mongo-config.js`
 * `NODE_ENV={string=production} AUTH1_AUTHORIZE_URL={string} AUTH1_CLIENT_ID={string} 
-AUTH1_CLIENT_SCOPE={string="openid,offline"} AUTH1_CLIENT_SECRET={string} AUTH1_TOKEN_URL={string} 
+AUTH1_CLIENT_SCOPE={string="openid,offline"} AUTH1_CLIENT_SECRET={string} AUTH1_REVOKE_TOKEN_URL={string} AUTH1_TOKEN_URL={string} 
 AUTH1_USERINFO_URL={string} DB_AUTH_METHOD={string="SCRAM-SHA-256"} DB_HOST={string} DB_NAME={string="ptah"} 
 DB_PASS={string} DB_PORT={string=27017} DB_USER={string} MAILCHIMP_AUTHORIZE_URL={string} MAILCHIMP_CLIENT_ID={string} 
 MAILCHIMP_CLIENT_SECRET={string} MAILCHIMP_TOKEN_URL={string} PUBLIC_HOST={string} REDIS_HOST={string} 
@@ -45,7 +45,9 @@ Where:
 
 {AUTH1_CLIENT_SCOPE} - required client scope for OAuth2 authentication through Auth1 service
 
-{AUTH1_AUTHORIZE_URL} - full url of Auth1 authorize endpoint 
+{AUTH1_AUTHORIZE_URL} - full url of Auth1 authorize endpoint
+
+{AUTH1_REVOKE_TOKEN_URL} - full url of Auth1 revoke token endpoint
 
 {AUTH1_TOKEN_URL} - full url of Auth1 token endpoint
 

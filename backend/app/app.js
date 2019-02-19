@@ -14,7 +14,7 @@ const config = require('../config/config')
 const router = require('./middleware/router')
 
 const mongo = require('./middleware/mongo')
-const RedisStore = require('./middleware/redis')
+const RedisStore = require('./middleware/redis-session-store')
 
 Sentry.init({
   dsn: config.sentryDsn,
