@@ -10,32 +10,28 @@ const COMPONENTS = [
     element: types.Title,
     type: 'title',
     class: 'b-title',
-    label: 'title',
-    key: 1
+    label: 'title'
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description',
-    key: 2
+    label: 'description'
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter',
-    key: 3
+    label: 'delimiter'
   },
   {
     name: 'Form',
     element: types.Form,
     type: 'form',
     class: 'b-form-element--big',
-    label: 'form',
-    key: 4
+    label: 'form'
   }
 ]
 
