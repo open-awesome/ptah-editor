@@ -23,7 +23,9 @@
         v-if="isIntegrationVisible"
         >
         <component
-          :is="integrationComponent">
+          :is="integrationComponent"
+          @back="back"
+          >
         </component>
       </div>
 
@@ -141,8 +143,12 @@ export default {
     },
 
     selectIntegration (integrationID) {
-      this.isIntegrationVisible = true
       this.setIntegrationContent(integrationID)
+    },
+
+    back () {
+      console.log('setIntegrationContent')
+      this.setIntegrationContent('')
     }
   }
 }

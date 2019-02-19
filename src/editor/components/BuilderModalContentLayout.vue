@@ -6,7 +6,7 @@
       </div>
     </base-scroll-container>
     <div class="b-builder-modal-content-layout__controls" v-if="$slots.controls">
-      <slot name="controls"></slot>
+      <slot class="b-builder-modal-content-layout__controls-slot" name="controls"></slot>
     </div>
   </div>
 </template>
@@ -28,12 +28,13 @@ export default {
   height: 40rem
 
   &__controls
-    display: flex
-    justify-content: flex-end
-    flex-shrink: 0
+    & > div
+      border-top: 1px solid $ligth-grey
+      padding: $size-step/2
 
-    border-top: 1px solid $ligth-grey
-    padding: $size-step/2
+      display: flex
+      justify-content: flex-end
+      flex-shrink: 0
 
 .b-scrolled-content
   margin: 0

@@ -15,7 +15,9 @@
         "preview":                      "Preview",
         "export":                       "Export",
         "cancel":                       "Cancel",
-        "delete":                       "Delete"
+        "delete":                       "Delete",
+        "apply":                        "Apply",
+        "back":                         "Back"
     },
     "s": {
         "background":                   "Background",
