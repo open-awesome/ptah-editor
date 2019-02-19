@@ -19,7 +19,7 @@
           :key="ogField.id">
 
           <base-text-field
-            v-if="ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 || ogField.id.indexOf('locale') !== -1"
+            v-if="ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 && ogField.id.indexOf('locale') === -1"
             v-model="ogField.value"
             :placeholder="ogField.placeholder"
             :label="ogField.label">
@@ -43,6 +43,36 @@
             </span>
           </base-text-field>
 
+          <div class="b-open-graph__width"
+            v-if="ogField.id.indexOf('locale') !== -1"
+            >
+            <base-label>
+              {{ ogField.label }}
+            </base-label>
+            <div class="b-open-graph__row">
+              <div class="b-open-graph__col">
+                <BaseSelect
+                  class="b-open-graph__select"
+                  :options="locale[`${ogField.id}`].language.options"
+                  v-model="locale[`${ogField.id}`].language.selected"
+                  :search="true"
+                  >
+                </BaseSelect>
+              </div>
+              <div class="b-open-graph__col b-open-graph__select">
+                <BaseSelect
+                  :options="locale[`${ogField.id}`].territory.options"
+                  v-model="locale[`${ogField.id}`].territory.selected"
+                  :search="true"
+                  >
+                </BaseSelect>
+              </div>
+              <div class="b-open-graph__col"
+                v-text="localeSelected[`${ogField.id}`]"
+              />
+            </div>
+          </div>
+
           <base-uploader
             v-if="ogField.id.indexOf('video') !== -1"
             v-model="ogField.value"
@@ -65,6 +95,20 @@
 import { mapState, mapActions } from 'vuex'
 import _ from 'lodash'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
+
+const LIST_LANG = [
+  { name: 'English', value: 'en' },
+  { name: 'Russian', value: 'ru' },
+  { name: 'French', value: 'fr' },
+  { name: 'Chinese', value: 'zh' }
+]
+
+const LIST_TERR = [
+  { name: 'United Kingdom', value: 'GB' },
+  { name: 'Russian Federation', value: 'RU' },
+  { name: 'China', value: 'CN' },
+  { name: 'France', value: 'FR' }
+]
 
 export default {
   name: 'BuilderSiteSettingsOpenGraph',
@@ -125,6 +169,28 @@ export default {
           value: ''
         }
       ],
+      locale: {
+        'og:locale': {
+          language: {
+            options: _.merge([], LIST_LANG),
+            selected: { name: 'English', value: 'en' }
+          },
+          territory: {
+            options: _.merge([], LIST_TERR),
+            selected: { name: 'United Kingdom', value: 'GB' }
+          }
+        },
+        'og:locale:alternate': {
+          language: {
+            options: _.merge([], LIST_LANG),
+            selected: { name: 'English', value: 'en' }
+          },
+          territory: {
+            options: _.merge([], LIST_TERR),
+            selected: { name: 'United Kingdom', value: 'GB' }
+          }
+        }
+      },
       error: {
         url: false
       }
@@ -132,12 +198,26 @@ export default {
   },
 
   computed: {
-    ...mapState(['currentLanding'])
+    ...mapState(['currentLanding']),
+    localeSelected () {
+      return {
+        'og:locale': this.locale['og:locale'].language.selected.value + '_' + this.locale['og:locale'].territory.selected.value,
+        'og:locale:alternate': this.locale['og:locale:alternate'].language.selected.value + '_' + this.locale['og:locale:alternate'].territory.selected.value
+      }
+    }
   },
 
   watch: {
     currentLanding () {
       this.updateSettings()
+    },
+    localeSelected (value) {
+      for (let key in value) {
+        let item = _.find(this.ogFields, { id: key })
+        if (item) {
+          item.value = value[key]
+        }
+      }
     }
   },
 
@@ -155,7 +235,23 @@ export default {
       _.map(settings.ogTags, ({ property, content }) => {
         const item = _.find(this.ogFields, { id: property })
         if (item) {
-          item.value = content
+          if (property.indexOf('locale') !== -1) {
+            let arr = content.split('_')
+            let l = arr[0]
+            let t = arr[1]
+
+            let lName = _.find(LIST_LANG, { value: arr[0] })
+            this.locale[property].language.selected.name = lName.name
+            this.locale[property].language.selected.value = l
+
+            let lTerr = _.find(LIST_TERR, { value: arr[1] })
+            this.locale[property].territory.selected.name = lTerr.name
+            this.locale[property].territory.selected.value = t
+
+            item.value = content
+          } else {
+            item.value = content
+          }
         }
       })
     },
@@ -194,4 +290,18 @@ export default {
   height: $size-step*5
   &__help
     margin-left: 1rem
+  &__width
+    width: 100%
+    display: flex
+    flex-direction: column
+  &__row
+    display: flex
+    min-width: 100%
+  &__col
+    margin-right: 2rem
+  &__select
+
+/deep/
+  .b-pth-base-select__name
+     width: 20rem !important
 </style>
