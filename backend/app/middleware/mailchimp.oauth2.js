@@ -56,6 +56,7 @@ const login = async (ctx) => {
   try {
     await getUser(ctx)
   } catch (err) {
+    ctx.log.error(err)
     return oauthMiddleware.sendHtmlResponse(ctx, { errorCode: 'logged-user-required' })
   }
   try {
@@ -71,6 +72,7 @@ const authorized = async (ctx) => {
   try {
     user = await getUser(ctx)
   } catch (err) {
+    ctx.log.error(err)
     return oauthMiddleware.sendHtmlResponse(ctx, { errorCode: 'logged-user-required' })
   }
 

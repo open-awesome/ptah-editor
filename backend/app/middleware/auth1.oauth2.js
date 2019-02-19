@@ -84,7 +84,7 @@ const refresh = async (ctx) => {
       expiresIn: oauthToken.token.expires_in
     }
   } catch (err) {
-    ctx.log.error(err)
+    throw err
   }
 }
 
