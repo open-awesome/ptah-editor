@@ -21,7 +21,8 @@ export default {
       selectedSection: null,
       isVisibleBar: false,
       fullScreenView: false,
-      search: '' // filter sections
+      search: '', // filter sections,
+      processing: false
     }
   },
 
@@ -61,6 +62,11 @@ export default {
       this.addSection(this.selectedSection)
     },
     selectSection (section) {
+      if (this.processing) {
+        return
+      }
+
+      this.processing = true
       this.selectedSection = section
       this.addSection(this.selectedSection)
     },
@@ -116,18 +122,22 @@ export default {
       </div>
     </div>
     <div class="b-add-section__padd">
-
-      <ul class="b-add-section__menu is-visiable" ref="menu">
-        <li class="b-add-section__menu-group"
-            :class="{ 'b-add-section__menu-group_selected': group === selectedGroup }"
-            v-for="(group, name) in groups"
-            :key="name"
-            v-if="group.length">
-          <div class="b-add-section__menu-header" @click="showSelectSection(group)">
-            <span class="b-add-section__menu-title">{{ name }}</span>
-          </div>
-        </li>
-      </ul>
+      <BaseScrollContainer
+        :styling="{ width: barWidth, height: '100%' }"
+        backgroundBar="#fff"
+      >
+        <ul class="b-add-section__menu is-visiable" ref="menu">
+          <li class="b-add-section__menu-group"
+              :class="{ 'b-add-section__menu-group_selected': group === selectedGroup }"
+              v-for="(group, name) in groups"
+              :key="name"
+              v-if="group.length">
+            <div class="b-add-section__menu-header" @click="showSelectSection(group)">
+              <span class="b-add-section__menu-title">{{ name }}</span>
+            </div>
+          </li>
+        </ul>
+      </BaseScrollContainer>
 
       <div class="b-add-section-bar" v-if="isVisibleBar" :class="{'full-screen': fullScreenView}">
         <div class="b-add-section-bar__header" v-if="fullScreenView">
@@ -210,7 +220,8 @@ export default {
       cursor: pointer
       border: none
   &__padd
-    padding: 2.8rem 0
+    padding: 2.8rem 0 8rem
+    height: calc(100% - 8rem)
 
     display: flex
     flex-direction: column
