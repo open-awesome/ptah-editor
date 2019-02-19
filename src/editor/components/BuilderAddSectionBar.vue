@@ -266,17 +266,17 @@ export default {
     bottom: 0
     left: 100%
     width: calc(100vw - #{$size-step*9})
-    background-color: rgba(32, 61, 95, 0.45)
+    background-color: rgba($dark-blue, 0.45)
     transition: left 0.3s ease-in-out
     &>div
-     background: #fff
+     background: $white
      transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
     &__menu
       padding: 3.2rem 0 8rem
       &-element
         overflow: hidden
         box-sizing: border-box
-        background-color: #fff
+        background-color: $white
         margin: 0
         cursor: pointer
         display: flex
@@ -290,7 +290,7 @@ export default {
         &_selected
           background-color: #436FEE
           border: 0.2rem solid transparent
-          color: #fff
+          color: $white
           &:hover
             border: 0.2rem solid transparent
           & img
@@ -307,7 +307,7 @@ export default {
         max-width: 100%
       &-title
         font-size: 1.6rem
-        color: #000
+        color: $black
       &-button
         display: none
         position: absolute
@@ -335,7 +335,7 @@ export default {
         font-size: 2.4rem
         letter-spacing: -0.02rem
         margin-left: 3.7rem
-        color: #000000
+        color: $black
         text-transform: capitalize
       &--search
         width: 19rem
