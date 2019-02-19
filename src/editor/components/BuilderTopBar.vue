@@ -128,16 +128,6 @@ export default {
           :color="'gray'"
           :transparent="true"
           :size="'middle'"
-          @click="$emit('save', $event)"
-          tooltip="click for save"
-          tooltip-position="bottom"
-          >
-          {{ $t('nav.save') }}
-        </BaseButton>
-        <BaseButton
-          :color="'gray'"
-          :transparent="true"
-          :size="'middle'"
           @click="$emit('preview', $event)"
           tooltip="click for preview"
           tooltip-position="bottom"
