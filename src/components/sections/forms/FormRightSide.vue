@@ -10,7 +10,8 @@ const COMPONENTS_1 = [
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo'
+    label: 'logo',
+    key: 0
   }
 ]
 
@@ -20,28 +21,32 @@ const COMPONENTS_2 = [
     element: types.Title,
     type: 'title',
     class: 'b-title',
-    label: 'title'
+    label: 'title',
+    key: 1
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description'
+    label: 'description',
+    key: 2
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter'
+    label: 'delimiter',
+    key: 3
   },
   {
     name: 'Form',
     element: types.Form,
     type: 'form',
     class: 'b-form-element--medium',
-    label: 'form'
+    label: 'form',
+    key: 4
   }
 ]
 
@@ -134,7 +139,7 @@ export default {
 
   mixins: [section],
 
-  cover: 'https://gn191.cdn.stg.gamenet.ru/0/7ji7m/o_sTl93.png',
+  cover: 'https://gn550.cdn.stg.gamenet.ru/TY0Xv53wUG/7mHAD/o_1HEQ3v.png',
 
   group: GROUP_NAME,
 

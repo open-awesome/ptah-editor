@@ -10,14 +10,16 @@ const COMPONENTS_1 = [
     element: types.Title,
     type: 'title',
     class: 'b-title',
-    label: 'title'
+    label: 'title',
+    key: 1
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description'
+    label: 'description',
+    key: 2
   }
 ]
 
@@ -27,21 +29,24 @@ const COMPONENTS_2 = [
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo'
+    label: 'logo',
+    key: 0
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter'
+    label: 'delimiter',
+    key: 3
   },
   {
     name: 'Form',
     element: types.Form,
     type: 'form',
     class: 'b-form-element--medium',
-    label: 'form'
+    label: 'form',
+    key: 4
   }
 ]
 

@@ -10,28 +10,32 @@ const COMPONENTS = [
     element: types.Title,
     type: 'title',
     class: 'b-title',
-    label: 'title'
+    label: 'title',
+    key: 1
   },
   {
     name: 'Description',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description'
+    label: 'description',
+    key: 2
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter'
+    label: 'delimiter',
+    key: 3
   },
   {
     name: 'Form',
     element: types.Form,
     type: 'form',
     class: 'b-form-element--big',
-    label: 'form'
+    label: 'form',
+    key: 4
   }
 ]
 
@@ -96,7 +100,7 @@ export default {
 
   mixins: [section],
 
-  cover: 'https://gn678.cdn.stg.gamenet.ru/0/7ji6A/o_JtBcA.png',
+  cover: 'https://gn982.cdn.stg.gamenet.ru/TY0Xv53wUG/7mH9m/o_1qPg3L.png',
 
   group: GROUP_NAME,
 

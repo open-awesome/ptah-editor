@@ -356,7 +356,9 @@ const data = new Map([
       resizable: false,
       removable: true,
       form: true,
-      isComplex: true
+      isComplex: true,
+      placeholder: 'Placeholder',
+      buttonText: 'Submit'
     })
   )],
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
