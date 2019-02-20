@@ -2,11 +2,12 @@
     "menu": {
         "siteSettings":                 "Site Settings",
         "sections":                     "Sections",
-        "visualSettings":               "Visual settings",
-        "seo":                          "SEO settings",
-        "cookie":                       "Cookies settings",
-        "addJs":                        "Add JS code",
-        "integrations":                 "Integrations"
+        "visualSettings":               "Visual",
+        "seo":                          "SEO",
+        "cookie":                       "Cookies",
+        "addJs":                        "Add JS ",
+        "integrations":                 "Integrations",
+        "openGraph":                    "Open Graph"
     },
     "nav": {
         "backToDashbord":               "Back to landings",
@@ -14,7 +15,9 @@
         "preview":                      "Preview",
         "export":                       "Export",
         "cancel":                       "Cancel",
-        "delete":                       "Delete"
+        "delete":                       "Delete",
+        "apply":                        "Apply",
+        "back":                         "Back"
     },
     "s": {
         "background":                   "Background",
@@ -45,6 +48,11 @@
         "placeholder":                  "Placeholder text",
         "add":                          "Add",
         "fullScreenView":               "View on full screen",
-        "minimize":                     "Minimize"
+        "minimize":                     "Minimize",
+        "openGraph":                    "Open Graph",
+        "integrations":                 "Integrations"
+    },
+    "c": {
+        "elementsLibrary":              "Elements library"
     }
 }
