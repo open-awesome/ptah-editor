@@ -3,10 +3,11 @@
         "siteSettings":                 "Настройки",
         "sections":                     "Секции",
         "visualSettings":               "Вид",
-        "seo":                          "Настройки SEO",
-        "cookie":                       "Настройки Cookie",
-        "addJs":                        "Добавить JS код",
-        "integrations":                 "Интеграции"
+        "seo":                          "SEO",
+        "cookie":                       "Cookie",
+        "addJs":                        "Добавить JS",
+        "integrations":                 "Интеграции",
+        "openGraph":                    "Open Graph"
     },
     "nav": {
         "backToDashbord":               "Назад к лендингам",
@@ -14,7 +15,9 @@
         "preview":                      "Просмотр",
         "export":                       "Экспорт",
         "cancel":                       "Отмена",
-        "delete":                       "Удалить"
+        "delete":                       "Удалить",
+        "apply":                        "Применить",
+        "back":                         "Назад"
     },
     "s": {
         "background":                   "Фон",
@@ -45,6 +48,11 @@
         "placeholder":                  "Подсказка",
         "add":                          "Добавить",
         "fullScreenView":               "На весь экран",
-        "minimize":                     "Свернуть"
+        "minimize":                     "Свернуть",
+        "openGraph":                    "Open Graph",
+        "integrations":                 "Интеграции"
+    },
+    "c": {
+        "elementsLibrary":              "Элементы"
     }
 }
