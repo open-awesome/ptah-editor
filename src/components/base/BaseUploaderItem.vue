@@ -44,6 +44,7 @@
       </span>
       <input
           :multiple="multiple"
+          @click="$event.target.value = ''"
           @change="uploadFiles($event.target.files)"
           type="file"
           hidden>
