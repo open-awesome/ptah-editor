@@ -310,6 +310,9 @@ export default {
       max-height: -moz-max-content
       max-height: -webkit-max-content
       max-height: fit-content
+      .is-mobile &,
+      .is-tablet &
+        align-items: center !important
       @media only screen and (max-width: 768px)
         &
           align-items: center !important
