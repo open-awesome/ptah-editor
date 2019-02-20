@@ -3,7 +3,7 @@
     <base-button @click="showSandboxSidebar($event)" class="sandbox-equalizer settings ptah-control" color="light-gray">
       <icon-base name="cog" fill="white" />
     </base-button>
-    <div class="divider">
+    <div class="divider ptah-control">
       <icon-base name="divider" width="2" height="37" fill="#1F5FAA"></icon-base>
     </div>
     <base-button @click="showSandboxSidebar($event, true)" class="sandbox-equalizer add-el ptah-control" color="light-gray">
