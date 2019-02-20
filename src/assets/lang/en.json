@@ -51,5 +51,8 @@
         "minimize":                     "Minimize",
         "openGraph":                    "Open Graph",
         "integrations":                 "Integrations"
+    },
+    "c": {
+        "elementsLibrary":              "Elements library"
     }
 }

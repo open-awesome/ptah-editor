@@ -51,5 +51,8 @@
         "minimize":                     "Свернуть",
         "openGraph":                    "Open Graph",
         "integrations":                 "Интеграции"
+    },
+    "c": {
+        "elementsLibrary":              "Элементы"
     }
 }
