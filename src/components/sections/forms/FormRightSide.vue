@@ -139,7 +139,7 @@ export default {
 
   mixins: [section],
 
-  cover: 'https://gn191.cdn.stg.gamenet.ru/0/7ji7m/o_sTl93.png',
+  cover: 'https://gn550.cdn.stg.gamenet.ru/TY0Xv53wUG/7mHAD/o_1HEQ3v.png',
 
   group: GROUP_NAME,
 

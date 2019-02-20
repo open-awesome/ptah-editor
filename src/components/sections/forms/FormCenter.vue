@@ -100,7 +100,7 @@ export default {
 
   mixins: [section],
 
-  cover: 'https://gn678.cdn.stg.gamenet.ru/0/7ji6A/o_JtBcA.png',
+  cover: 'https://gn982.cdn.stg.gamenet.ru/TY0Xv53wUG/7mH9m/o_1qPg3L.png',
 
   group: GROUP_NAME,
 
