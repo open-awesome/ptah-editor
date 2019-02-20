@@ -120,6 +120,7 @@ export default {
   &_middle
     width: 11rem
     font-size: 1.4rem
+    line-height: 2.4
   &_small
     font-size: 1.2rem
     line-height: 2
