@@ -19,7 +19,7 @@
         </span>
       </div>
 
-      <div style="width: 100%"
+      <div class="b-integrations__component"
         v-if="isIntegrationVisible"
         >
         <component
@@ -183,6 +183,8 @@ export default {
   &__textarea
     width: 100%
     height: 100%
+  &__component
+    width: 100%
   &__help
     margin-left: 1rem
     & svg
