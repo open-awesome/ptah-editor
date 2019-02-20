@@ -124,7 +124,7 @@ $h: 4.8rem
 
 .sandbox-equalizer
   position: absolute
-  top: -$h
+  top: 0
   z-index: 1
 
   width: 5.3rem
@@ -157,7 +157,7 @@ $h: 4.8rem
 
 .divider
   position: absolute
-  top: -$h
+  top: 0
   left: 5.3rem
   z-index: 2
 
