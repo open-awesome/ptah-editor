@@ -94,7 +94,7 @@ export default {
     max-height: 10rem
     border-top: none
     position: absolute
-    top: 130%
+    top: 150%
     z-index: 10
     margin: 0
     padding: 0
@@ -141,7 +141,7 @@ export default {
       z-index: -1
     & ul
       background-color: $white
-      padding: 0
+      padding: 0.5rem 0
       margin: 0
       position: relative
       z-index: 3
