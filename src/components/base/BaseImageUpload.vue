@@ -21,7 +21,7 @@
         v-else
         class="b-base-image-upload__button b-base-image-upload__button_add"
         @click="chooseFile">
-        <IconBase name="upload" width="16" height="16" color="#436FEE" />
+        <IconBase name="plus" width="16" height="16" color="#fff" />
       </span>
       <input
         style="display: none;"
@@ -99,6 +99,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-base-image-upload
   display: flex
   flex-direction: row
@@ -109,25 +112,29 @@ export default {
 
   &__side
     cursor: pointer
-    height: 4.8rem
-    width: 4.8rem
+    height: $size-step*2
+    width: $size-step*2
     margin-right: 1.4rem
+
     display: flex
     align-items: center
     justify-content: center
+
     position: relative
+    background: rgba($dark-grey, 0.6)
+    border-radius: 0.4rem
 
   &__button
-    border: 2px solid rgba(#888888, 0.2)
-    height: 4.8rem
-    width: 4.8rem
-    border-radius: 50%
+    height: $size-step*2
+    width: $size-step*2
     display: flex
     align-items: center
     justify-content: center
-
     &_preview
       overflow: hidden
+      height: $size-step*1.5
+      width: $size-step*1.5
+      margin: 0 auto
 
     &_remove
       z-index: 10
@@ -141,8 +148,13 @@ export default {
         opacity: 1
 
     &_add
+      height: $size-step
+      width: $size-step
+      margin: 0 auto
+      background: $dark-blue-krayola
+      border-radius: 100%
       &:hover
-        border-color: #436FEE
+        border-color: $dark-blue-krayola
 
       svg
         margin-bottom: 0.2rem

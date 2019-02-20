@@ -5,8 +5,8 @@
       <textarea class="b-add-js-scripts__textarea" placeholder="Add Js Scripts" v-model="script"/>
     </div>
     <div slot="controls">
-      <BaseButton color="gray" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
-      <BaseButton color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
+      <BaseButton color="gray" size="middle" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton color="blue" size="middle" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>
@@ -65,9 +65,13 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-add-js-scripts
-  height: 30rem
+  height: $size-step*5
   &__textarea
     width: 100%
     height: 100%
+    padding: $size-step/2
 </style>
