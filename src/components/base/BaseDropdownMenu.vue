@@ -153,7 +153,7 @@ export default {
       height: $size-step*1.5
       padding: 0 $size-step
 
-      white-spece: nowrap
+      white-space: nowrap
       list-style: none
       &:hover
         background-color: $blue-krayola
