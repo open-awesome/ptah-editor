@@ -1,10 +1,16 @@
 <template>
   <div class="b-elements is-editable">
-    <button class="b-elements__show-list ptah-control" @click="openList" :class="{'active': showList}">
+    <button class="b-elements__show-list ptah-control" @click="openList" :class="{'active': sandbox.addElExpanded}">
       <icon-base width="10" height="10" name="plus"></icon-base>
     </button>
-    <aside class="b-elements__list ptah-control" v-if="showList">
-      <div class="b-elements__title">Add Item</div>
+    <aside class="b-elements__list ptah-control" v-if="sandbox.addElExpanded">
+      <div class="b-elements__title">
+        {{ $t('c.elementsLibrary') }}
+
+        <div class="b-elements__close" @click="hideList">
+          <icon-base name="close" width="12" height="12" fill="#C4C4C4"></icon-base>
+        </div>
+      </div>
       <ul>
         <li><a href="#" @click.prevent="addButton" class="b-elements__button">Button</a></li>
         <li><a href="#" @click.prevent="addLink" class="b-elements__button">Link</a></li>
@@ -30,7 +36,7 @@
 import * as types from '@editor/types'
 import Seeder from '@editor/seeder'
 import * as _ from 'lodash-es'
-import { mapActions } from 'vuex'
+import { mapActions, mapState, mapMutations } from 'vuex'
 
 export default {
   name: 'ElementsList',
@@ -129,11 +135,17 @@ export default {
       }
     ]
   }),
+
+  computed: {
+    ...mapState('Sidebar', ['sandbox'])
+  },
+
   created () {
     this.elements = Seeder.seed(this.elements)
   },
   methods: {
     ...mapActions('Sidebar', ['clearSettingObjectLight']),
+    ...mapMutations('Sidebar', ['toggleElementsBar']),
 
     addButton () {
       const el = _.merge({}, Seeder.seed(this.elements[0]))
@@ -194,12 +206,12 @@ export default {
       this.$emit('addEl', _.merge({}, Seeder.seed(this.elements[14])))
     },
     openList () {
-      this.showList = true
+      this.toggleElementsBar(true)
       this.clearSettingObjectLight()
       document.addEventListener('click', this.hideList, true)
     },
     hideList () {
-      this.showList = false
+      this.toggleElementsBar(false)
       document.removeEventListener('click', this.hideList, true)
     }
   }
@@ -228,23 +240,12 @@ export default {
       width: 2rem
       height: 2rem
   &__list
-    width: 18rem
-    height: 100%
-    height: -moz-available
-    height: -webkit-fill-available
-    height: fill-available
-    max-height: intrinsic
-    max-height: -moz-max-content
-    max-height: -webkit-max-content
-    max-height: fit-content
     position: absolute
-    z-index: 20
-    top: .8rem
-    left: calc(100% - .8rem)
-    background: #fff
-    border: .1px solid lightgray
-    color: #474747
-    padding: 1.6rem
+    top: 0
+    right: 0
+    left: 0
+    bottom: 0
+    background: $dark-blue
     overflow: auto
     overflow-x: hidden
     ul
@@ -252,21 +253,20 @@ export default {
       padding: 0
       list-style: none
     li
-      padding-bottom: 0.5rem
+      padding: 0
   &__title
-    padding: 0 0 0 1.6rem
-    font-weight: bold
-    line-height: 4.3rem
-    font-size: 1.8rem
-    letter-spacing: 0.02em
+    padding: 2.5rem 0 3.2rem 2.5rem
+    color: $white
+    font-weight: normal
+    font-size: 2rem
+    letter-spacing: -0.02em
     text-align: left
     position: relative
   &__button
     display: block
     background: transparent
-    color: #474747
-    border-radius: 0.4rem
-    padding: 0.8rem 1.6rem
+    color: $pigeon-blue
+    padding: 1.4rem 2.6rem
     width: 100%
     text-decoration: none
     font-size: 1.4rem
@@ -274,5 +274,11 @@ export default {
     letter-spacing: -0.02em
     text-align: left
     &:hover
-      background: rgba(67, 111, 238, 0.15)
+      background: $dark-blue-krayola
+      color: $white
+  &__close
+    position: absolute
+    right: 2.5rem
+    top: 2.5rem
+    cursor: pointer
 </style>

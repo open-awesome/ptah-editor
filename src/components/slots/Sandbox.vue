@@ -1,7 +1,13 @@
 <template>
   <div class="b-slot">
-    <base-button @click="showSandboxSidebar" class="sandbox-equalizer ptah-control" color="light-gray">
-      <icon-base name="equalizer"/>
+    <base-button @click="showSandboxSidebar($event)" class="sandbox-equalizer settings ptah-control" color="light-gray">
+      <icon-base name="cog" fill="white" />
+    </base-button>
+    <div class="divider ptah-control">
+      <icon-base name="divider" width="2" height="37" fill="#1F5FAA"></icon-base>
+    </div>
+    <base-button @click="showSandboxSidebar($event, true)" class="sandbox-equalizer add-el ptah-control" color="light-gray">
+      <icon-base name="plus" fill="white" />
     </base-button>
     <slot/>
   </div>
@@ -12,7 +18,6 @@ import { mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Sandbox',
-
   inject: ['$section'],
 
   props: {
@@ -48,13 +53,14 @@ export default {
       'toggleSandboxSidebar',
       'setSandboxPaths',
       'setSection',
-      'isAddSectionExpanded'
+      'isAddSectionExpanded',
+      'toggleElementsBar'
     ]),
 
     ...mapActions('BuilderModalContent', ['setContent']),
     ...mapActions('Sidebar', ['toggleSidebar']),
 
-    showSandboxSidebar (e) {
+    showSandboxSidebar (e, openElBar) {
       this.setContent(null)
       this.isAddSectionExpanded(false)
 
@@ -77,12 +83,20 @@ export default {
       })
 
       this.toggleSidebar(true)
+
+      if (openElBar) {
+        this.toggleElementsBar(true)
+      } else {
+        this.toggleElementsBar(false)
+      }
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
+$h: 4.8rem
+
 .b-slot
   $this: &
   display: flex
@@ -93,7 +107,7 @@ export default {
   width: 100%
   min-height: 20rem
   .is-editable &
-    border: 1px dashed #18d88b
+    border: 1px dashed $dark-blue-krayola
   /deep/
     .b-draggable-slot
       display: flex
@@ -103,27 +117,56 @@ export default {
       color: inherit
       &_100
         width: 100%
+  &:hover
+    .sandbox-equalizer,
+    .divider
+      display: flex
 
 .sandbox-equalizer
   position: absolute
   top: 0
-  right: 0
   z-index: 1
 
-  width: auto
-  height: auto
-  padding: .8rem
+  width: 5.3rem
+  height: $h
+  padding: 0
+  margin: 0
+  border: none
+  border-radius: 0
 
-  display: flex
+  background: $dark-blue-krayola
+
+  display: none
   align-items: center
   justify-content: center
 
   line-height: 1.5em
-  opacity: .3
+  opacity: 1
+
+  &.settings
+    left: 0
+
+  &.add-el
+    left: 5.3rem
 
   > svg
     margin: 0
 
   &:hover
     opacity: 1
+
+.divider
+  position: absolute
+  top: 0
+  left: 5.3rem
+  z-index: 2
+
+  width: .2rem
+  height: $h
+
+  background: $dark-blue-krayola
+
+  display: none
+  align-items: center
+  justify-content: center
 </style>
