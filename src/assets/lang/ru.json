@@ -48,6 +48,12 @@
         "placeholder":                  "Подсказка",
         "add":                          "Добавить",
         "fullScreenView":               "На весь экран",
+        "minimize":                     "Свернуть"
+        "groupSections":                "Группировать секции",
+        "buttonText":                   "Текст на кнопке",
+        "placeholder":                  "Подсказка",
+        "add":                          "Добавить",
+        "fullScreenView":               "На весь экран",
         "minimize":                     "Свернуть",
         "openGraph":                    "Open Graph",
         "integrations":                 "Интеграции"
