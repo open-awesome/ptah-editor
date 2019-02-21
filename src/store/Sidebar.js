@@ -28,6 +28,14 @@ export default {
       {
         id: 'addJsScrips',
         name: 'menu.addJs'
+      },
+      {
+        id: 'integrations',
+        name: 'menu.integrations'
+      },
+      {
+        id: 'openGraph',
+        name: 'menu.openGraph'
       }
       // {
       //   id: 'versionHistory',
