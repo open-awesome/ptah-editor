@@ -19,7 +19,7 @@
           :key="ogField.id">
 
           <base-text-field
-            v-if="ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 && ogField.id.indexOf('locale') === -1"
+            v-if="(ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 || ogField.id.indexOf('type') !== -1) && ogField.id.indexOf('locale') === -1"
             v-model="ogField.value"
             :placeholder="ogField.placeholder"
             :label="ogField.label">
