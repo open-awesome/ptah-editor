@@ -399,6 +399,9 @@ export default {
       'clearSettingObject',
       'setSettingsExpanded'
     ]),
+    ...mapActions('Landing', [
+      'saveState'
+    ]),
 
     ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
 
@@ -474,6 +477,7 @@ export default {
       }
 
       this.builder.remove(this.settingObjectSection)
+      this.saveState(this.builder.export('JSON'))
       this.clearSettingObject()
     },
 
