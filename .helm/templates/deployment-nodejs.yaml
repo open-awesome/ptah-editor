@@ -60,7 +60,7 @@ spec:
           readOnly: true
         {{- end }}
         env:
-          {{- range .Values.frontend.env }}
+          {{- range .Values.backend.env }}
           - name: {{ . }}
             valueFrom:
               secretKeyRef:
