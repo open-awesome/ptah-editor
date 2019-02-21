@@ -124,26 +124,35 @@ export default {
           >
           {{ $t('menu.siteSettings') }}
         </BaseButton>
-        <BaseButton
-          :color="'gray'"
-          :transparent="true"
-          :size="'middle'"
-          @click="$emit('preview', $event)"
-          tooltip="click for preview"
-          tooltip-position="bottom"
+        <BaseDropdownMenu
+          positionDropdown="right"
           >
-          {{ $t('nav.preview') }}
-        </BaseButton>
-        <BaseButton
-          :color="'gray'"
-          :transparent="true"
-          :size="'middle'"
-          @click="$emit('export', $event)"
-          tooltip="click for export"
-          tooltip-position="bottom"
-          >
-          {{ $t('nav.export') }}
-        </BaseButton>
+          <BaseButton
+            :color="'gray-full'"
+            :transparent="true"
+            :size="'circle'"
+            >
+            <icon-base name="dotted"></icon-base>
+          </BaseButton>
+          <div slot="list">
+            <ul>
+              <li @click="$emit('preview', $event)">
+                <icon-base
+                  color="#B1B1B1"
+                  name="preview">
+                </icon-base>
+                {{ $t('nav.preview') }}
+              </li>
+              <li @click="$emit('export', $event)">
+                <icon-base
+                  color="#B1B1B1"
+                  name="upload">
+                </icon-base>
+                {{ $t('nav.export') }}
+              </li>
+            </ul>
+          </div>
+        </BaseDropdownMenu>
       </div>
     </div>
   </div>

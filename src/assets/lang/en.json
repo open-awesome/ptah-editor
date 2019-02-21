@@ -1,11 +1,13 @@
 {
     "menu": {
-        "siteSettings":                 "Site Settings",
+        "siteSettings":                 "Settings",
         "sections":                     "Sections",
-        "visualSettings":               "Visual settings",
-        "seo":                          "SEO settings",
-        "cookie":                       "Cookies settings",
-        "addJs":                        "Add JS code"
+        "visualSettings":               "Visual",
+        "seo":                          "SEO",
+        "cookie":                       "Cookies",
+        "addJs":                        "Add JS ",
+        "integrations":                 "Integrations",
+        "openGraph":                    "Open Graph"
     },
     "nav": {
         "backToDashbord":               "Back to landings",
@@ -13,7 +15,9 @@
         "preview":                      "Preview",
         "export":                       "Export",
         "cancel":                       "Cancel",
-        "delete":                       "Delete"
+        "delete":                       "Delete",
+        "apply":                        "Apply",
+        "back":                         "Back"
     },
     "s": {
         "background":                   "Background",
@@ -39,6 +43,16 @@
         "height":                       "Heigh",
         "fullScreen":                   "Full screen height",
         "useVideoBg":                   "Use video as background",
-        "groupSections":                "Group sections"
+        "groupSections":                "Group sections",
+        "buttonText":                   "Button text",
+        "placeholder":                  "Placeholder text",
+        "add":                          "Add",
+        "fullScreenView":               "View on full screen",
+        "minimize":                     "Minimize",
+        "openGraph":                    "Open Graph",
+        "integrations":                 "Integrations"
+    },
+    "c": {
+        "elementsLibrary":              "Elements library"
     }
 }
