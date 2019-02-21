@@ -29,7 +29,7 @@
             <slot></slot>
           </div>
         </base-scroll-container>
-        <BuilderModalContent />
+        <BuilderModalContent :builder="builder" />
       </main>
 
     </div>

@@ -43,8 +43,8 @@ const config = {
   auth1UserinfoUrl: getEnvVariable('AUTH1_USERINFO_URL', 'http://192.168.99.100:4444/userinfo'),
   auth1PostmessageHtmlTemplatePath: path.resolve('backend/templates/auth1.postmessage.html.template'),
 
-  mailchimpClientId: getEnvVariable('PTAH_MAILCHIMP_CLIENT_ID', '462853669980'),
-  mailchimpClientSecret: getEnvVariable('PTAH_MAILCHIMP_CLIENT_SECRET', '76db4d17f02fa0a036054278e08beaa0af50c328ba7e435b26'),
+  mailchimpClientId: getEnvVariable('MAILCHIMP_CLIENT_ID', '462853669980'),
+  mailchimpClientSecret: getEnvVariable('MAILCHIMP_CLIENT_SECRET', '76db4d17f02fa0a036054278e08beaa0af50c328ba7e435b26'),
   mailchimpAuthorizeUrl: getEnvVariable('MAILCHIMP_AUTHORIZE_URL', 'https://login.mailchimp.com/oauth2/authorize'),
   mailchimpTokenUrl: getEnvVariable('MAILCHIMP_TOKEN_URL', 'https://login.mailchimp.com/oauth2/token'),
   mailchimpPostmessageHtmlTemplatePath: path.resolve('backend/templates/mailchimp.postmessage.html.template')

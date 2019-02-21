@@ -145,6 +145,16 @@ export default {
 
     currentLanding (value) {
       this.initSettings()
+    },
+
+    /*
+     * AutoSave landing after editing settings
+     */
+    'currentLanding.settings': {
+      handler () {
+        this.saveState(this.$builder.export('JSON'))
+      },
+      deep: true
     }
   },
 
@@ -192,6 +202,9 @@ export default {
       'updateSectionGroups',
       'setSettingSection',
       'toggleSidebar'
+    ]),
+    ...mapActions('Landing', [
+      'saveState'
     ]),
     initSettings () {
       const settings = this.currentLanding.settings
