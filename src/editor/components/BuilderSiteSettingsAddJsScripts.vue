@@ -32,32 +32,18 @@ export default {
     ...mapState(['currentLanding'])
   },
 
-  watch: {
-    currentLanding () {
-      this.updateScript()
-    }
-  },
-
   mounted () {
-    this.updateScript()
+    this.script = this.currentLanding.settings.script
   },
 
   methods: {
-    ...mapActions([
-      'storeSettings'
-    ]),
-
-    updateScript () {
-      const sScript = this.currentLanding.settings.script
-      this.script = sScript
-    },
+    ...mapActions(['storeSettings']),
 
     applySettings () {
-      const data = {
+      this.storeSettings({
         script: this.script
-      }
+      })
 
-      this.storeSettings(data)
       this.$emit('requestClose')
     }
   }

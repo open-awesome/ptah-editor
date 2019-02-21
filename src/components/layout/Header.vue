@@ -56,7 +56,6 @@ export default {
     select: {
       handler: function (status, old) {
         this.$i18n.locale = status.selected.value
-        console.log(status)
       },
       deep: true
     }
