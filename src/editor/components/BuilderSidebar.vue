@@ -62,8 +62,20 @@
               :is-main="section.isMain"
               :has-draggable-icon="true"
               :section-id="section.id"
-              @click="toggleSettingsBar(section)">
-            {{`${ index + 1 } - `}} {{ section.name }}
+              >
+            <div @click="selectSection(section)">
+              {{`${ index + 1 } - `}} {{ section.name }}
+            </div>
+            <div>
+              <span
+                @click="toggleSettingsBar(section)">
+                <icon-base name="edit" color="#ffffff"></icon-base>
+              </span>
+              <span
+                @click="deleteSection(section)">
+                <icon-base name="remove" color="#ffffff"></icon-base>
+              </span>
+            </div>
           </menu-subitem>
 
         </div>
@@ -108,6 +120,7 @@
 </template>
 
 <script>
+import * as _ from 'lodash-es'
 import Sortable from 'sortablejs'
 import MenuItem from './MenuItem'
 import MenuSubitem from './MenuSubitem'
@@ -150,6 +163,7 @@ export default {
       'isAddSectionExpanded',
       'expandedMenuItem',
       'settingObjectType',
+      'sectionsGroups',
       'sandbox'
     ]),
 
@@ -207,7 +221,8 @@ export default {
       'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
-      'setMenuItem'
+      'setMenuItem',
+      'setSettingsExpanded'
     ]),
 
     ...mapActions('BuilderModalContent', {
@@ -237,6 +252,11 @@ export default {
       }
     },
 
+    selectSection (section) {
+      this.toggleSettingsBar(section)
+      this.setSettingsExpanded(false)
+    },
+
     closeSlotsBar () {
       this.clearSettingObject()
       this.toggleSandboxSidebar(false)
@@ -259,7 +279,7 @@ export default {
     },
 
     isActiveSection (id) {
-      return this.settingObjectOptions.sectionId === id
+      return this.settingObjectSection.id === id
     },
 
     showAddSectionBar () {
@@ -281,6 +301,22 @@ export default {
 
     toggleSidebarSection () {
       this.toggleSidebar()
+    },
+
+    isSlaveSection (sectionId) {
+      return !!_.find(this.sectionsGroups, o => o.children.indexOf(sectionId) > -1)
+    },
+
+    deleteSection (section) {
+      // update group
+      if (this.isSlaveSection(section.Id)) {
+        let master = _.find(this.sectionsGroups, o => o.children.indexOf(section.Id) > -1).main
+        let absorb = master.data.mainStyle.absorb
+        master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
+      }
+
+      this.builder.remove(section)
+      this.clearSettingObject()
     }
   }
 }

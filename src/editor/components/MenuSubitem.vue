@@ -139,6 +139,17 @@ $selected-bg-color: rgba(#202020, 0.35)
 
   &__title
     flex-grow: 1
+    display: flex
+    justify-content: space-between
+
+    line-height: 4.8rem
+    &
+      span
+        display: none
+        margin: 0 $size-step/4.5
+    &:hover
+      span
+        display: inline-block
 
   &__selected-icon
     visibility: hidden
