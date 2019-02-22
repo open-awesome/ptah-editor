@@ -21,6 +21,8 @@ const authorizeUrl = urlParse(config.auth1AuthorizeUrl)
 const tokenUrl = urlParse(config.auth1TokenUrl)
 const revokeUrl = urlParse(config.auth1RevokeTokenUrl)
 
+console.debug('auth1.oauth2.js tokenUrl', tokenUrl.origin, tokenUrl.pathname)
+
 const oauthConfig = {
   // Client ID and secret for OAuth provider
   clientId: config.auth1ClientId,
@@ -35,7 +37,7 @@ const oauthConfig = {
 
   scope: config.auth1Scope,
 
-  sessionNamespace: 'auth1',
+  sessionNamespace: config.auth1SessionNamespace,
 
   // These options are passed to simple-oauth2, see https://github.com/lelylan/simple-oauth2
   oauthOptions: {

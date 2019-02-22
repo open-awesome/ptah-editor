@@ -19,6 +19,9 @@ module.exports = ({
   publicHost
 }) => {
   // Initialize OAuth
+
+  console.debug('oauthOptions.auth', oauthOptions.auth)
+
   const oauth2 = simpleOauth2.create({
     ...oauthOptions,
     client: {
@@ -27,7 +30,6 @@ module.exports = ({
       ...oauthOptions.client
     },
     auth: {
-      tokenHost: url,
       ...oauthOptions.auth
     }
   })
