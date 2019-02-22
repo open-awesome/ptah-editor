@@ -26,8 +26,7 @@ const config = {
   indexHtmlPath: path.resolve('dist/index.html'),
   staticPath: path.resolve('dist'),
 
-  // ptahApiRootUrl: getEnvVariable('PTAH_API_HOST_URL', 'https://ptahapi.tst.protocol.one'),
-  ptahApiRootUrl: getEnvVariable('PTAH_API_HOST_URL', 'http://localhost:3000'),
+  ptahApiHostUrl: getEnvVariable('PTAH_API_HOST_URL', 'https://ptahapi.tst.protocol.one'),
 
   auth1ClientId: getEnvVariable('AUTH1_CLIENT_ID', '5c6fc4888db4bc0001beacec'),
   auth1ClientSecret: getEnvVariable('AUTH1_CLIENT_SECRET', 'RUOuk4bkWFNljuZzqwq5zrs0GdCLY9U3MJqubuDViUv7XQzgiU84y288Jh0klK1Z'),

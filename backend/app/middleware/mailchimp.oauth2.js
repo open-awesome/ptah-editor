@@ -79,7 +79,7 @@ const authorized = async (ctx) => {
     const auth1Oauth = ctx.session[config.auth1SessionNamespace]
     const auth1AccessToken = auth1Oauth.access_token
 
-    const updateUserEndpointUrl = urlJoin([config.ptahApiRootUrl, '/api/v1/user'])
+    const updateUserEndpointUrl = urlJoin([config.ptahApiHostUrl, '/api/v1/user'])
 
     let mailchimpIntegration = false
 
