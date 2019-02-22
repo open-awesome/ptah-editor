@@ -21,8 +21,6 @@ const authorizeUrl = urlParse(config.auth1AuthorizeUrl)
 const tokenUrl = urlParse(config.auth1TokenUrl)
 const revokeUrl = urlParse(config.auth1RevokeTokenUrl)
 
-console.debug('auth1.oauth2.js tokenUrl', tokenUrl.origin, tokenUrl.pathname)
-
 const oauthConfig = {
   // Client ID and secret for OAuth provider
   clientId: config.auth1ClientId,
