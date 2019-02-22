@@ -13,8 +13,6 @@ RUN yarn install
 COPY . /app/
 RUN yarn cjs && gulp locale_sync && gulp public-image && yarn build
 
-RUN chmod +x start.sh
-
 ENV NODE_ENV=production \
     AUTH1_AUTHORIZE_URL="" \
     AUTH1_CLIENT_ID="" \
