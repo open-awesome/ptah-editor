@@ -48,4 +48,6 @@ const config = {
 
 }
 
+console.debug('config', config)
+
 module.exports = config

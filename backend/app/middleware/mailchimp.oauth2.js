@@ -20,6 +20,8 @@ const callbackUrl = buildUrl(config.publicHost, {
 const authorizeUrl = urlParse(config.mailchimpAuthorizeUrl)
 const tokenUrl = urlParse(config.mailchimpTokenUrl)
 
+console.debug('mailchimp.oauth2.js tokenUrl', tokenUrl.origin, tokenUrl.pathname)
+
 const oauthConfig = {
   // Client ID and secret for OAuth provider
   clientId: config.mailchimpClientId,
