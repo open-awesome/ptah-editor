@@ -35,7 +35,7 @@ const oauthConfig = {
 
   scope: config.auth1Scope,
 
-  sessionNamespace: 'auth1',
+  sessionNamespace: config.auth1SessionNamespace,
 
   // These options are passed to simple-oauth2, see https://github.com/lelylan/simple-oauth2
   oauthOptions: {
