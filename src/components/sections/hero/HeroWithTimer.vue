@@ -163,7 +163,7 @@ export default {
 
 <template>
   <section
-    class="b-hero-skull"
+    class="b-hero-with-timer-skull"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
@@ -213,7 +213,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-hero-skull
+.b-hero-with-timer-skull
   position: relative
   width: 100%
   min-height: 56rem
@@ -236,6 +236,11 @@ export default {
       height: auto
       padding: 2rem 0 1rem
 .b-logo
+  .is-mobile &
+    max-width: 25rem !important
+  @media only screen and (max-width: 768px)
+    &
+      max-width: 25rem !important
 .b-title
   color: rgb(255, 255, 255)
   font-style: normal
@@ -265,7 +270,7 @@ export default {
       font-size: 1.4rem !important
 .b-button
   color: #fff
-  font-family: Heebo
+  font-family: 'PT Serif'
   font-style: normal
   font-size: 1.6rem
   text-align: center
@@ -289,6 +294,7 @@ export default {
   @media only screen and (max-width: 768px)
     &
       width: 80% !important
+
 .b-sandbox
   min-height: 36.5rem
   padding: 5rem 0
@@ -302,30 +308,6 @@ export default {
   @media only screen and (max-width: 768px)
     &
       padding: 1rem 0
-.b-footer
-  // overflow: hidden
-  position: absolute
-  bottom: 0
-  left: 0
-  right: 0
-  background-color: #0C173C
-  &__row
-    align-items: center
-  &__col
-    min-height: auto
-  &-logo,
-  &-game-logo
-  &-copyright
-  .is-mobile &,
-  .is-tablet &
-    position: relative
-    height: auto
-  @media only screen and (max-width: 768px)
-    &
-      position: relative
-      height: auto
-
-.b-footer-component
 
 /deep/
   .b-draggable-slot
