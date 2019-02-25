@@ -101,8 +101,6 @@ $h: 4.8rem
   $this: &
   display: flex
   flex-wrap: wrap
-  justify-content: center
-  align-items: center
   position: relative
   width: 100%
   min-height: 20rem

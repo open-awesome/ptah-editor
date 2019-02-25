@@ -17,7 +17,8 @@ const BG_SECTION = 'url(https://gn685.cdn.stg.gamenet.ru/0/7MZzz/o_bJr44.jpg)'
  * Video - 5
  * Slogan - 6
  * Link - 7
- * Timer - 8
+ * Delimiter- 8
+ * Timer - 9
  * */
 const COMPONENTS = [
   {

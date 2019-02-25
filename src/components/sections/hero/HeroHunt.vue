@@ -13,7 +13,8 @@ import section from '../../mixins/section.js'
  * Video - 5
  * Slogan - 6
  * Link - 7
- * Timer - 8
+ * Delimiter- 8
+ * Timer - 9
  * */
 const C_CUSTOM = [
   {

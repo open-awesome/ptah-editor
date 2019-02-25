@@ -4,11 +4,11 @@ import * as _ from 'lodash-es'
 import section from '../../mixins/section.js'
 
 const GROUP_NAME = 'Hero'
-const NAME = 'HeroWithTimer'
-const BG_SECTION = 'url(https://gn269.cdn.stg.gamenet.ru/0/7o9OH/o_l6SvX.jpg)'
+const NAME = 'HeroWithTimerColumns'
+const BG_SECTION = 'url(https://gn728.cdn.stg.gamenet.ru/0/7oAt2/o_1A6qDa.jpg)'
 
 /**
-* Base keys for elements in Hero sections
+ * Base keys for elements in Hero sections
  * Logo - 0
  * Title - 1
  * Description - 2
@@ -30,6 +30,17 @@ const COMPONENTS = [
     key: 0
   },
   {
+    name: 'Delimiter',
+    element: types.Delimiter,
+    type: 'delimiter',
+    class: 'b-delimiter',
+    label: 'delimiter',
+    key: 8
+  }
+]
+
+const COMPONENTS_2 = [
+  {
     name: 'Title',
     element: types.Title,
     type: 'text',
@@ -44,6 +55,14 @@ const COMPONENTS = [
     class: 'b-text',
     label: 'description',
     key: 2
+  },
+  {
+    name: 'Delimiter',
+    element: types.Delimiter,
+    type: 'delimiter',
+    class: 'b-delimiter',
+    label: 'delimiter',
+    key: 10
   },
   {
     name: 'Timer',
@@ -67,16 +86,27 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn860.cdn.stg.gamenet.ru/0/7o9P9/o_KucA7.png")',
+        'background-image': 'url(https://gn710.cdn.stg.gamenet.ru/0/7oAyH/o_2HZnCR.png)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '600px',
+        'width': '224px',
         'height': '124px'
       }
     },
     key: 0
   },
+  {
+    element: {
+      styles: {
+        'height': '500px'
+      }
+    },
+    key: 8
+  }
+]
+
+const C_CUSTOM_2 = [
   {
     element: {
       text: 'Excellent title',
@@ -100,13 +130,21 @@ const C_CUSTOM = [
     key: 2
   },
   {
+    element: {
+      styles: {
+        'height': '100px'
+      }
+    },
+    key: 10
+  },
+  {
     key: 9
   },
   {
     element: {
-      text: 'Call to Action',
+      text: 'Play Now',
       styles: {
-        'background-color': 'rgb(139, 1, 1)',
+        'background-color': 'rgba(159,104,5,1)',
         'color': '#ffffff',
         'font-family': 'PT Serif',
         'text-align': 'center',
@@ -132,7 +170,9 @@ const SCHEMA_CUSTOM = {
     classes: ['full-height']
   },
   components: _.merge([], C_CUSTOM),
+  components2: _.merge([], C_CUSTOM_2),
   container: {},
+  container2: {},
   edited: true
 }
 
@@ -143,12 +183,14 @@ export default {
 
   mixins: [section],
 
-  cover: '/img/covers/hero-with-timer.jpg',
+  cover: '/img/covers/hero-with-timer-columns.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    components: COMPONENTS
+    container2: types.StyleObject,
+    components: COMPONENTS,
+    components2: COMPONENTS_2
   },
 
   created () {
@@ -164,21 +206,20 @@ export default {
 
 <template>
   <section
-    class="b-hero-with-timer"
+    class="b-hero-with-timer-two-columns"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
-  >
+    >
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-12">
+        <div class="b-grid__col-6">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
               direction="column"
               class="b-sandbox">
-
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
@@ -208,6 +249,41 @@ export default {
             </draggable>
           </sandbox>
         </div>
+        <div class="b-grid__col-6">
+          <sandbox
+            container-path="$sectionData.container2"
+            components-path="$sectionData.components2"
+            direction="column"
+            class="b-sandbox">
+            <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
+              <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
+                <component
+                  v-if="$sectionData.components2[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
+                  :is="component.name"
+                  :href="$sectionData.components2[index].element.link.href"
+                  :target="$sectionData.components2[index].element.link.target"
+                  :style="$sectionData.components2[index].element.styles"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                  :path="`components2[${index}].element`"
+                  >
+                </component>
+                <component
+                  v-if="!$sectionData.components2[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
+                  v-html="$sectionData.components2[index].element.text"
+                  :is="component.name"
+                  :href="$sectionData.components2[index].element.link.href"
+                  :target="$sectionData.components2[index].element.link.target"
+                  :style="$sectionData.components2[index].element.styles"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                  :path="`components2[${index}].element`"
+                  >
+                </component>
+              </div>
+            </draggable>
+          </sandbox>
+        </div>
       </div>
     </div>
   </section>
@@ -217,11 +293,11 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-hero-with-timer
+.b-hero-with-timer-two-columns
   position: relative
 
   width: 100%
-  min-height: $size-step*1.75
+  min-height: $size-step*1.75*10
   margin: 0
   padding-bottom: $size-step/4
 
@@ -307,7 +383,8 @@ export default {
       width: 80% !important
 
 .b-sandbox
-  min-height: $size-step*10
+  align-items: flex-start
+  min-height: $size-step*5
   padding: $size-step/2 0
   width: 100%
   .is-mobile &,

@@ -19,4 +19,10 @@ export default {
   justify-content: center
   &.is-editable
     border: 1px dashed #18d88b
+  .is-mobile &,
+  .is-tablet &
+    display: none
+  @media only screen and (max-width: 768px)
+    &
+      display: none
 </style>

@@ -96,7 +96,8 @@ const [name, group, cover] = ['HeroArtRight', 'Hero', '/img/covers/hero-art-righ
  * Video - 5
  * Slogan - 6
  * Link - 7
- * Timer - 8
+ * Delimiter- 8
+ * Timer - 9
  * */
 const defaultColumnComponents = [
   {
