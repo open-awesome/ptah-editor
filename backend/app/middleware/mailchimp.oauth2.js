@@ -30,7 +30,7 @@ const oauthConfig = {
 
   sessionNamespace: config.mailchimpSessionNamespace,
 
-  publicHost: config.publicHost,
+  postMessageTargetOrigin: config.postMessageTargetOrigin,
 
   // These options are passed to simple-oauth2, see https://github.com/lelylan/simple-oauth2
   oauthOptions: {
