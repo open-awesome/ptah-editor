@@ -36,10 +36,12 @@ export default {
      * @returns {Promise.<T>|Promise<any>|Promise}
      */
     refreshToken ({ state, dispatch }) {
-      return axios.get(`${process.env.VUE_APP_DOMAIN}/auth1/refresh/`, {
-        headers: {
+      return axios.get(`${process.env.VUE_APP_DOMAIN}/auth1/refresh`, {
+        // this method requires only cookies for authrization
+        withCredentials: true
+        /* headers: {
           'Authorization': `Bearer ${localStorage.getItem('token')}`
-        }
+        } */
       })
         .then((response) => {
           dispatch('setToken', response.access_token)
@@ -53,6 +55,7 @@ export default {
     },
 
     logout ({ commit }) {
+      // todo: navigate to /auth1/logout to prevent inconsistent state!
       localStorage.removeItem('token')
       commit('setAuth', false)
       commit('setToken', '')

@@ -1,6 +1,7 @@
 'use strict'
 
 const fs = require('fs')
+const _ = require('lodash')
 const urlJoin = require('url-join')
 const urlParse = require('url-parse')
 const buildUrl = require('build-url')
@@ -54,6 +55,10 @@ const oauthConfig = {
 const oauthMiddleware = createMiddleware(Object.assign({}, oauthConfig))
 
 const login = async (ctx) => {
+  if (_.get(ctx, 'session.userId')) {
+    ctx.log.error(new Error('User already authenticated in session'))
+    return oauthMiddleware.sendHtmlResponse(ctx, { errorCode: 'user-already-logged' })
+  }
   try {
     await oauthMiddleware.login(ctx)
   } catch (err) {
