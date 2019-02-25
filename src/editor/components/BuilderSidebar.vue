@@ -45,8 +45,19 @@
               :is-selected="isActiveSection(headerSection.id)"
               :section-id="headerSection.id"
               @click="toggleSettingsBar(headerSection)"
-              class="b-menu-subitem--header">
+              class="b-menu-subitem--header"
+            >
             # - {{ headerSection.name }}
+            <div>
+              <span
+                @click.stop="toggleSettingsBar(headerSection)">
+                <icon-base name="edit" color="#ffffff"></icon-base>
+              </span>
+              <span
+                @click.stop="deleteSection(headerSection)">
+                <icon-base name="remove" color="#ffffff"></icon-base>
+              </span>
+            </div>
           </menu-subitem>
         </div>
 
@@ -63,10 +74,8 @@
               :has-draggable-icon="true"
               :section-id="section.id"
               @click="selectSection(section)"
-              >
-            <div>
-              {{`${ index + 1 } - `}} {{ section.name }}
-            </div>
+            >
+            {{`${ index + 1 } - `}} {{ section.name }}
             <div>
               <span
                 @click.stop="toggleSettingsBar(section)">

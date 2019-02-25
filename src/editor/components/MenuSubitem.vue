@@ -133,6 +133,8 @@ $selected-bg-color: rgba(#202020, 0.35)
 
     line-height: 4.8rem
     &
+      div
+        margin: 0 $size-step/4.5
       span
         display: none
         margin: 0 $size-step/4.5
