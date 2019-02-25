@@ -13,17 +13,6 @@
       <span class="b-menu-subitem__title">
         <slot></slot>
       </span>
-
-      <span class="b-menu-subitem__selected-icon">
-        <IconBase
-          name="arrowRight"
-          width="8"
-          height="14"
-          color="transparent"
-          strokeColor="rgba(255,255,255,0.24)"
-          />
-      </span>
-
     </div>
   </div>
 </template>
@@ -147,14 +136,12 @@ $selected-bg-color: rgba(#202020, 0.35)
       span
         display: none
         margin: 0 $size-step/4.5
-    &:hover
+  &__inner:hover
+    .b-menu-subitem__title
       span
         display: inline-block
+        opacity: 0.8
+        &:hover
+          opacity: 1
 
-  &__selected-icon
-    visibility: hidden
-    margin-right: 1.8rem
-
-    .b-menu-subitem_selected &
-      visibility: visible
 </style>

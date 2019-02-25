@@ -62,17 +62,18 @@
               :is-main="section.isMain"
               :has-draggable-icon="true"
               :section-id="section.id"
+              @click="selectSection(section)"
               >
-            <div @click="selectSection(section)">
+            <div>
               {{`${ index + 1 } - `}} {{ section.name }}
             </div>
             <div>
               <span
-                @click="toggleSettingsBar(section)">
+                @click.stop="toggleSettingsBar(section)">
                 <icon-base name="edit" color="#ffffff"></icon-base>
               </span>
               <span
-                @click="deleteSection(section)">
+                @click.stop="deleteSection(section)">
                 <icon-base name="remove" color="#ffffff"></icon-base>
               </span>
             </div>
@@ -244,12 +245,9 @@ export default {
 
     toggleSettingsBar (section) {
       this.closeSiteSettings()
-      this.clearSettingObject()
+      // this.clearSettingObject()
       this.toggleSandboxSidebar(false)
-
-      if (!this.isActiveSection(section.id)) {
-        this.setSettingSection(section)
-      }
+      this.setSettingSection(section)
     },
 
     selectSection (section) {
