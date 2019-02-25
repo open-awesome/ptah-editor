@@ -10,7 +10,7 @@
             expires_in: {expiresIn},
             success: {isSuccess},
         };
-        var targetOrigin = "{publicHost}:8080";
+        var targetOrigin = "{targetOrigin}";
         parent.postMessage(JSON.stringify(result), targetOrigin);
     </script>
 </head>

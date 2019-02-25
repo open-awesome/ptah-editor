@@ -20,8 +20,6 @@ const callbackUrl = buildUrl(config.publicHost, {
 const authorizeUrl = urlParse(config.mailchimpAuthorizeUrl)
 const tokenUrl = urlParse(config.mailchimpTokenUrl)
 
-console.debug('mailchimp.oauth2.js tokenUrl', tokenUrl.origin, tokenUrl.pathname)
-
 const oauthConfig = {
   // Client ID and secret for OAuth provider
   clientId: config.mailchimpClientId,
@@ -32,7 +30,7 @@ const oauthConfig = {
 
   sessionNamespace: config.mailchimpSessionNamespace,
 
-  publicHost: config.publicHost,
+  postMessageTargetOrigin: config.postMessageTargetOrigin,
 
   // These options are passed to simple-oauth2, see https://github.com/lelylan/simple-oauth2
   oauthOptions: {

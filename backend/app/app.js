@@ -2,6 +2,7 @@
 
 const os = require('os')
 const Koa = require('koa')
+const cors = require('koa2-cors')
 const serve = require('koa-static')
 const urlParse = require('url-parse')
 const Sentry = require('@sentry/node')
@@ -46,6 +47,31 @@ app.use(session({
 
 // serve statics (mainly for development; in production static must be served by nginx)
 app.use(serve(config.staticPath))
+
+// healthCheck page not requires authorization or cors origin header check
+const publicRoutes = {
+  path: `/_healthz`
+}
+// CORS setup
+app.use(cors({
+  origin: function (ctx) {
+    if (publicRoutes.path === ctx.url) {
+      return false
+    }
+    if (config.corsValidOrigins.includes('*')) {
+      return '*'
+    }
+    const requestOrigin = ctx.accept.headers.origin
+    if (!config.corsValidOrigins.includes(requestOrigin)) {
+      return ctx.throw(`${requestOrigin} is not a valid origin`)
+    }
+    return requestOrigin
+  },
+  allowMethods: router.allowedMethods(),
+  maxAge: 5,
+  credentials: false,
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept']
+}))
 
 app.use(async (ctx, next) => {
   try {

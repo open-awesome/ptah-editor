@@ -23,6 +23,8 @@ const config = {
 
   publicHost: getEnvVariable('PUBLIC_HOST', 'http://127.0.0.1'),
 
+  postMessageTargetOrigin: getEnvVariable('POST_MESSAGE_TARGET_ORIGIN', 'http://127.0.0.1:8080'),
+
   indexHtmlPath: path.resolve('dist/index.html'),
   staticPath: path.resolve('dist'),
 
@@ -43,10 +45,10 @@ const config = {
   mailchimpAuthorizeUrl: getEnvVariable('MAILCHIMP_AUTHORIZE_URL', 'https://login.mailchimp.com/oauth2/authorize'),
   mailchimpTokenUrl: getEnvVariable('MAILCHIMP_TOKEN_URL', 'https://login.mailchimp.com/oauth2/token'),
   mailchimpPostmessageHtmlTemplatePath: path.resolve('backend/templates/mailchimp.postmessage.html.template'),
-  mailchimpSessionNamespace: 'mailchimp'
+  mailchimpSessionNamespace: 'mailchimp',
+
+  corsValidOrigins: getEnvVariableArray('CORS_VALID_ORIGINS', '*')
 
 }
-
-console.debug('config', config)
 
 module.exports = config
