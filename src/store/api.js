@@ -15,10 +15,10 @@ export default {
           }
         },
         {
-          slug: 'HeroWithTimer',
+          slug: 'HeroWithTimerSlogan2',
           theme: {
-            name: 'HeroWithTimer',
-            sections: ['HeroWithTimer']
+            name: 'HeroWithTimerSlogan2',
+            sections: ['HeroWithTimerSlogan2']
           }
         },
         {

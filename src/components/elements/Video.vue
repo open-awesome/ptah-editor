@@ -10,7 +10,7 @@ export default {
 
 <style lang="sass" scoped>
 .b-video
-  max-width: calc(100% - 1.6rem)
+  width: calc(100% - 1.6rem)
   max-height: 100%
   margin: 1.6rem .8rem
 

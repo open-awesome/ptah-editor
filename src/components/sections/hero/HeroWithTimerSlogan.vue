@@ -4,8 +4,8 @@ import * as _ from 'lodash-es'
 import section from '../../mixins/section.js'
 
 const GROUP_NAME = 'Hero'
-const NAME = 'HeroWithTimerColumns'
-const BG_SECTION = 'url(https://gn728.cdn.stg.gamenet.ru/0/7oAt2/o_1A6qDa.jpg)'
+const NAME = 'HeroWithTimerSlogan'
+const BG_SECTION = 'url(https://gn866.cdn.stg.gamenet.ru/0/7oE1x/o_1ToUuI.jpg)'
 
 /**
  * Base keys for elements in Hero sections
@@ -30,39 +30,12 @@ const COMPONENTS = [
     key: 0
   },
   {
-    name: 'Delimiter',
-    element: types.Delimiter,
-    type: 'delimiter',
-    class: 'b-delimiter',
-    label: 'delimiter',
-    key: 8
-  }
-]
-
-const COMPONENTS_2 = [
-  {
-    name: 'Title',
-    element: types.Title,
-    type: 'text',
-    class: 'b-title',
-    label: 'title',
-    key: 1
-  },
-  {
-    name: 'Description',
-    element: types.Text,
-    type: 'text',
-    class: 'b-text',
-    label: 'description',
-    key: 2
-  },
-  {
-    name: 'Delimiter',
-    element: types.Delimiter,
-    type: 'delimiter',
-    class: 'b-delimiter',
-    label: 'delimiter',
-    key: 10
+    name: 'Slogan',
+    element: types.Slogan,
+    type: 'slogan',
+    class: 'b-slogan',
+    label: 'slogan',
+    key: 6
   },
   {
     name: 'Timer',
@@ -86,56 +59,18 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn710.cdn.stg.gamenet.ru/0/7oAyH/o_2HZnCR.png)',
+        'background-image': 'url(https://gn39.cdn.stg.gamenet.ru/0/7oE24/o_1iIFD9.png)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '224px',
+        'width': '440px',
         'height': '124px'
       }
     },
     key: 0
   },
   {
-    element: {
-      styles: {
-        'height': '500px'
-      }
-    },
-    key: 8
-  }
-]
-
-const C_CUSTOM_2 = [
-  {
-    element: {
-      text: `Excellent <div>title</div>`,
-      styles: {
-        'font-family': 'PT Serif',
-        'font-size': '5.6rem',
-        'color': '#ffffff'
-      }
-    },
-    key: 1
-  },
-  {
-    element: {
-      text: 'This is a short description',
-      styles: {
-        'font-family': 'PT Serif',
-        'font-size': '2rem',
-        'color': 'rgba(255, 255, 255, 0.3)'
-      }
-    },
-    key: 2
-  },
-  {
-    element: {
-      styles: {
-        'height': '172px'
-      }
-    },
-    key: 10
+    key: 6
   },
   {
     key: 9
@@ -144,14 +79,26 @@ const C_CUSTOM_2 = [
     element: {
       text: 'Play Now',
       styles: {
-        'background-color': 'rgba(159,104,5,1)',
-        'color': '#ffffff',
-        'font-family': 'PT Serif',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-image': 'url(https://gn757.cdn.stg.gamenet.ru/0/7oEGs/o_1KjCvL.png)',
+        'background-size': 'contain',
+        'color': '#000',
+        'font-family': 'Heebo',
         'text-align': 'center',
-        'font-size': '2rem',
-        'width': '352px',
-        'height': '64px',
-        'border-radius': '2px'
+        'font-size': '3.6rem',
+        'width': '384x',
+        'height': '116px',
+        'border-radius': '0',
+        'font-weight': 'bold'
+      },
+      classes: ['ptah-a-tada'],
+      pseudo: {
+        hover: {
+          'background-color': 'rgba(0,0,0,0) !important',
+          'background-image': 'url(https://gn12.cdn.stg.gamenet.ru/0/7oE4o/o_1pJc5k.png) !important',
+          'color': 'rgba(255,255,255,1) !important',
+          'background-size': 'contain !important'
+        }
       }
     },
     key: 3
@@ -170,9 +117,7 @@ const SCHEMA_CUSTOM = {
     classes: ['full-height']
   },
   components: _.merge([], C_CUSTOM),
-  components2: _.merge([], C_CUSTOM_2),
   container: {},
-  container2: {},
   edited: true
 }
 
@@ -183,14 +128,12 @@ export default {
 
   mixins: [section],
 
-  cover: '/img/covers/hero-with-timer-columns.jpg',
+  cover: '/img/covers/hero-with-timer-slogan.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    container2: types.StyleObject,
-    components: COMPONENTS,
-    components2: COMPONENTS_2
+    components: COMPONENTS
   },
 
   created () {
@@ -214,7 +157,7 @@ export default {
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-4">
+        <div class="b-grid__col-6">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
@@ -249,40 +192,8 @@ export default {
             </draggable>
           </sandbox>
         </div>
-        <div class="b-grid__col-8">
-          <sandbox
-            container-path="$sectionData.container2"
-            components-path="$sectionData.components2"
-            direction="column"
-            class="b-sandbox">
-            <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
-              <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
-                <component
-                  v-if="$sectionData.components2[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
-                  :is="component.name"
-                  :href="$sectionData.components2[index].element.link.href"
-                  :target="$sectionData.components2[index].element.link.target"
-                  :style="$sectionData.components2[index].element.styles"
-                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                  :path="`components2[${index}].element`"
-                  >
-                </component>
-                <component
-                  v-if="!$sectionData.components2[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
-                  v-html="$sectionData.components2[index].element.text"
-                  :is="component.name"
-                  :href="$sectionData.components2[index].element.link.href"
-                  :target="$sectionData.components2[index].element.link.target"
-                  :style="$sectionData.components2[index].element.styles"
-                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                  :path="`components2[${index}].element`"
-                  >
-                </component>
-              </div>
-            </draggable>
-          </sandbox>
+        <div class="b-grid__col-6">
+          <!-- empty col -->
         </div>
       </div>
     </div>
@@ -321,10 +232,12 @@ export default {
       padding: 2rem 0 1rem
 .b-logo
   .is-mobile &
-    max-width: $size-step*7.5 !important
+    max-width: 100% !important
+    margin: $size-step/2 0
   @media only screen and (max-width: 768px)
     &
-      max-width: $size-step*7.5 !important
+      max-width: 100% !important
+      margin: $size-step/2 0
 .b-title
   color: rgba($white, 1)
   font-style: normal
@@ -338,10 +251,12 @@ export default {
   .is-tablet &
     font-size: 2rem !important
     padding: 0 1rem
+    margin: $size-step/2 0
   @media only screen and (max-width: 768px)
     &
       font-size: 2rem !important
       padding: 0 1rem
+      margin: $size-step/2 0
 .b-text
   color: rgba($white, 0.3)
   font-size: 2rem
@@ -349,12 +264,14 @@ export default {
   .is-mobile &,
   .is-tablet &
     font-size: 1.4rem !important
+    margin: $size-step/2 0
   @media only screen and (max-width: 768px)
     &
       font-size: 1.4rem !important
+      margin: $size-step/2 0
 .b-button
   color: #fff
-  font-family: 'PT Serif'
+  font-family: 'Heebo'
   font-style: normal
   font-size: 1.6rem
   text-align: center
@@ -377,10 +294,14 @@ export default {
   border-radius: 2px
   .is-mobile &,
   .is-tablet &
-    width: 80% !important
+    width: 100% !important
+    font-size: 2rem !important
+    margin: $size-step/2 0
   @media only screen and (max-width: 768px)
     &
-      width: 80% !important
+      width: 100% !important
+      font-size: 2rem !important
+      margin: $size-step/2 0
 
 .b-sandbox
   align-items: flex-start
@@ -402,5 +323,11 @@ export default {
     justify-content: center
     align-items: flex-start
     flex-direction: column
+    .is-mobile & > div,
+    .is-tablet & > div
+      width: 100%
+    @media only screen and (max-width: 768px)
+      & > div
+        width: 100%
 
 </style>
