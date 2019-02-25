@@ -44,6 +44,7 @@ import HeroArtRight from '@components/sections/hero/HeroArtRight'
 import HeroArtLeft from '@components/sections/hero/HeroArtLeft'
 import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
 import HeroHunt from '@components/sections/hero/HeroHunt'
+import HeroWithTimer from '@components/sections/hero/HeroWithTimer'
 // --- gallery
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
@@ -100,6 +101,7 @@ const COMPONENTS = {
   HeroArtLeft,
   HeroBAS,
   HeroHunt,
+  HeroWithTimer,
 
   Gallery1,
   Gallery2,

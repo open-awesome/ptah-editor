@@ -87,6 +87,19 @@ import { merge } from 'lodash-es'
 import section from '../../mixins/section.js'
 
 const [name, group, cover] = ['HeroArtLeft', 'Hero', '/img/covers/hero-art-left.png']
+
+/**
+ * Base keys for elements in Hero sections
+ * Logo - 0
+ * Title - 1
+ * Description - 2
+ * Button - 3
+ * Available Platforms - 4
+ * Video - 5
+ * Slogan - 6
+ * Link - 7
+ * Timer - 8
+ * */
 const defaultColumnComponents = [
   {
     element: {
