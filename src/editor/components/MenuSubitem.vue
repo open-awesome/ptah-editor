@@ -88,8 +88,6 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 
-$selected-bg-color: rgba(#202020, 0.35)
-
 .b-menu-subitem
   cursor: pointer
   color: $white

@@ -13,18 +13,29 @@ export default {
     },
     label: {
       type: String
+    },
+    search: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
-    showOptions: false
+    showOptions: false,
+    valueSearch: ''
   }),
   computed: {
     colorFill: function () {
       return this.showOptions ? '#0B99FF' : '#888888'
+    },
+    filteredOptions () {
+      return this.valueSearch ?
+        this.options.filter((option) => ~option.name.toLowerCase().indexOf(this.valueSearch.toLowerCase())) :
+        this.options
     }
   },
   methods: {
     selectOption (option) {
+      this.showOptions = !this.showOptions
       this.$emit('input', option)
     },
     onClickOutside (e, el) {
@@ -35,12 +46,12 @@ export default {
 </script>
 
 <template>
-  <div class="l-pth-base-select"  @click="showOptions = !showOptions" v-click-outside="onClickOutside">
-    <base-label v-if="label">
+  <div class="l-pth-base-select" v-click-outside="onClickOutside">
+    <base-label v-if="label" @click="showOptions = !showOptions">
       {{ label }}
     </base-label>
     <div class="b-pth-base-select">
-      <div class="b-pth-base-select__container">
+      <div class="b-pth-base-select__container" @click="showOptions = !showOptions">
         <span class="b-pth-base-select__name">
           {{ value ? value.name : 'Select...' }}
         </span>
@@ -59,7 +70,10 @@ export default {
           :styling="{ width: '100%', height: '10rem' }" backgroundBar="#474747"
           >
           <ul class="b-pth-base-select__options">
-            <li class="b-pth-base-select__options-item" v-for="(option, index) in options" :key="index" @click="selectOption(option)">
+            <li v-if="search" class="b-pth-base-select__options-item">
+              <input v-model="valueSearch" />
+            </li>
+            <li class="b-pth-base-select__options-item" v-for="(option, index) in filteredOptions" :key="index" @click="selectOption(option)">
               {{ option.name }}
             </li>
           </ul>
@@ -93,6 +107,8 @@ export default {
     color: #272727
     padding: 0 0.6rem 0 0
     cursor: pointer
+    & input
+      border: transparent solid 1px
   &__arrow
     width: 0.8rem
     height: 0.4rem

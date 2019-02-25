@@ -29,10 +29,21 @@ export default {
       required: true
     }
   },
+
+  watch: {
+    '$sectionData': {
+      handler () {
+        this.storeData(this)
+      },
+      deep: true
+    }
+  },
+
   methods: {
     ...mapActions('Landing', [
       'updateGroupData',
-      'updateSectionData'
+      'updateSectionData',
+      'saveState'
     ]),
 
     // check there is data for the section in the state
@@ -192,6 +203,12 @@ export default {
         name: this.sectionName,
         data: _.cloneDeep($sectionData)
       })
+
+      /*
+       * AutoSave landing after editing section
+       */
+      let newState = this.$builder.export('JSON')
+      this.saveState(newState)
     },
 
     checkComponentInSectionStore ($sectionData, sectionDataStore, keyObj) {
@@ -303,10 +320,6 @@ export default {
       }
     }
 
-  },
-
-  updated () {
-    this.storeData(this)
   }
 
 }

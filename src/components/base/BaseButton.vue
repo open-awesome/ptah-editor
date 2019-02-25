@@ -10,6 +10,7 @@ export default {
           'black',
           'blue',
           'gray',
+          'gray-full',
           'light-gray',
           'orange',
           'transparent',
@@ -26,7 +27,8 @@ export default {
         const values = [
           'default',
           'middle',
-          'small'
+          'small',
+          'circle'
         ]
         return values.indexOf(value) !== -1
       }
@@ -105,11 +107,11 @@ export default {
     color: $white
   &[disabled]
     cursor: not-allowed
-    background-color: #b6b6b6
-    border-color: #b6b6b6
-    color: #b6b6b6
+    background-color: rgba($white, 0.1)
+    border-color: rgba($white, 0.1)
+    color: rgba($white, 0.1)
     > svg
-      fill: #8f8686
+      fill: rgba($white, 0.1)
   &:hover:not([disabled])
     cursor: pointer
     border-color: $dark-blue-krayola
@@ -118,32 +120,49 @@ export default {
   &_middle
     width: 11rem
     font-size: 1.4rem
+    line-height: 2.4
   &_small
     font-size: 1.2rem
     line-height: 2
     width: 8rem
     height: auto
+  &_circle
+    width: 4rem
+    height: 4rem
+    border-radius: 100%
   &_pressed
     +active
   &_black
     color: #eee
-    background-color: #202020
+    background-color: $dark-grey
   &_blue
    +active
   &_gray
     color: $dark-blue-krayola
-    border: 0.2rem rgba(0, 0, 0, 0.1) solid
+    border: 0.2rem rgba($black, 0.1) solid
+    border: 0.2rem rgba($black, 0.1) solid
+  &_gray-full
+    color: rgba($black, 0.1)
+    border: 0.2rem rgba($black, 0.1) solid
+    & svg
+      fill: rgba($black, 0.1) !important
+    &:hover,
+    &:active
+      color: $dark-blue-krayola
+      border: 0.2rem $dark-blue-krayola solid
+      & svg
+        fill: $dark-blue-krayola !important
   &_light-gray
     color: $white
     background-color: rgba($white, 0.1)
     border: 0.2rem rgba($white, 0.1) solid
   &_orange
     color: #fff
-    background-color: #DB4E2B
+    background-color: $orange
     border-radius: .4rem
     &:hover
-      background-color: #DB4E2B !important
-      border-color: #DB4E2B !important
+      background-color: $orange !important
+      border-color: $orange !important
       opacity: .8
   &_transparent
     background-color: transparent
