@@ -4,6 +4,7 @@ import _ from 'lodash'
 import api from '@store/api'
 import Sidebar from './Sidebar'
 import Landing from './Landing'
+import User from './User'
 import vOutsideEvents from 'vue-outside-events'
 import BuilderModalContent from './BuilderModalContent'
 import PageTweaks from './PageTweaks/PageTweaks'
@@ -148,7 +149,8 @@ const modules = {
   Sidebar,
   BuilderModalContent,
   PageTweaks,
-  Landing
+  Landing,
+  User
 }
 
 export default new Vuex.Store({

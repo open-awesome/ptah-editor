@@ -7,6 +7,8 @@ import Vuex from 'vuex'
 import VueI18n from 'vue-i18n'
 import VueScrollTo from 'vue-scrollto'
 
+import axios from 'axios'
+
 import '@components/_globals'
 
 import router from './router'
@@ -47,6 +49,38 @@ const i18n = new VueI18n({
   messages,
   fallbackLocale: 'en'
 })
+
+// request interceptor
+const createSetAuthInterceptor = options => config => {
+  if (store.state.User.access_token !== '') {
+    config.headers.Authorization = `Bearer ${store.state.User.access_token}`
+  }
+  return config
+}
+
+const setAuthCb = createSetAuthInterceptor(store.state.auth)
+axios.interceptors.request.use(setAuthCb)
+
+// response interceptor
+let refreshTokenPromise
+
+const createUpdateAuthInterceptor = (store, http) => async error => {
+  if (error.code !== 401) {
+    return Promise.reject(error)
+  }
+
+  if (!refreshTokenPromise) {
+    refreshTokenPromise = store.dispatch('User/refreshToken')
+  }
+
+  await refreshTokenPromise
+  refreshTokenPromise = null
+
+  return http(error.config)
+}
+
+const updateAuthCb = createUpdateAuthInterceptor(store, axios)
+axios.interceptors.response.use(null, updateAuthCb)
 
 new Vue(
   {

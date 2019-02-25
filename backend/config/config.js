@@ -9,7 +9,7 @@ const getEnvVariableArray = envUtils.getEnvVariableArray
 const config = {
   serverPort: +getEnvVariable('SERVER_PORT', 80),
 
-  redisHost: getEnvVariable('REDIS_HOST', '192.168.99.100'),
+  redisHost: getEnvVariable('REDIS_HOST', '127.0.0.1'),
   redisPort: +getEnvVariable('REDIS_PORT', '6379'),
 
   sessionCookieName: getEnvVariable('SESSION_COOKIE_NAME', 'ptahsid'),

@@ -1,9 +1,23 @@
-/**
- * Mock for API
- */
 import axios from 'axios'
 
 export default {
+  // send any api request
+  request ({ url, params, method, headers }) {
+    let requset = {
+      url: `${process.env.API}${url}`,
+      method: method || 'post'
+    }
+
+    method === 'get' ? requset.params = params : requset.data = params
+
+    if (headers !== undefined) requset.headers = headers
+
+    return axios(requset)
+      .then(response => {
+        return response.data
+      })
+  },
+
   getLandingsList () {
     return new Promise((resolve) => {
       resolve([
