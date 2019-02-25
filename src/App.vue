@@ -16,9 +16,7 @@ export default {
   },
 
   created () {
-    console.log(111, localStorage.getItem('token'))
     if (localStorage.getItem('token') !== null) {
-      console.log(11)
       this.refreshToken()
     }
   },

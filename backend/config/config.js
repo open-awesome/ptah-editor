@@ -21,7 +21,7 @@ const config = {
 
   sentryDsn: getEnvVariable('SENTRY_DSN', 'https://0c02631c9b4645699161cffa21721ef4@sentry.tst.protocol.one/9'),
 
-  publicHost: getEnvVariable('PUBLIC_HOST', 'http://127.0.0.1:8080'),
+  publicHost: getEnvVariable('PUBLIC_HOST', 'http://127.0.0.1'),
 
   indexHtmlPath: path.resolve('dist/index.html'),
   staticPath: path.resolve('dist'),

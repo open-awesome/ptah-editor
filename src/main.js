@@ -52,6 +52,7 @@ const i18n = new VueI18n({
 
 // request interceptor
 const createSetAuthInterceptor = options => config => {
+  console.log(store.state.User.access_token)
   if (store.state.User.access_token !== '') {
     config.headers.Authorization = `Bearer ${store.state.User.access_token}`
   }
