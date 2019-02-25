@@ -54,8 +54,6 @@ export default {
           data = JSON.parse(e.data)
         } catch (e) { }
 
-        console.log(data)
-
         if (data.access_token && data.success) {
           this.setToken(data.access_token)
           this.$router.push({ path: `/dashboard` })

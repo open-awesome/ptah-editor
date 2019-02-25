@@ -4,7 +4,7 @@ export default {
   // send any api request
   request ({ url, params, method, headers }) {
     let requset = {
-      url: `${process.env.API}${url}`,
+      url: `${process.env.VUE_APP_API}${url}`,
       method: method || 'post'
     }
 

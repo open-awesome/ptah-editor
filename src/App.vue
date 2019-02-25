@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 
 export default {
   name: 'app',
@@ -12,6 +13,18 @@ export default {
     return {
       section: 'Head'
     }
+  },
+
+  created () {
+    console.log(111, localStorage.getItem('token'))
+    if (localStorage.getItem('token') !== null) {
+      console.log(11)
+      this.refreshToken()
+    }
+  },
+
+  methods: {
+    ...mapActions('User', ['refreshToken'])
   }
 }
 </script>

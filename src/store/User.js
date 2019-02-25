@@ -36,11 +36,9 @@ export default {
      * @returns {Promise.<T>|Promise<any>|Promise}
      */
     refreshToken ({ state, dispatch }) {
-      return axios({
-        url: `${process.env.DOMAIN}/refresh/`,
-        method: 'GET',
+      return axios.get(`${process.env.VUE_APP_DOMAIN}/auth1/refresh/`, {
         headers: {
-          'Authorization': `Bearer ${state.access_token}`
+          'Authorization': `Bearer ${localStorage.getItem('token')}`
         }
       })
         .then((response) => {

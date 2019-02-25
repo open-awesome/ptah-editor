@@ -58,7 +58,7 @@ const createSetAuthInterceptor = options => config => {
   return config
 }
 
-const setAuthCb = createSetAuthInterceptor(store.state.auth)
+const setAuthCb = createSetAuthInterceptor(store.state.User.access_token)
 axios.interceptors.request.use(setAuthCb)
 
 // response interceptor

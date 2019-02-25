@@ -38,11 +38,19 @@ const actions = {
    * @returns {*}
    */
   fetchLandings ({ state, commit }) {
-    return api.getLandingsList()
+    return api.request({
+      url: 'landings',
+      method: 'get'
+    }).then((presets) => {
+      commit('updateLandings', presets)
+      return presets
+    })
+
+    /* return api.getLandingsList()
       .then((presets) => {
         commit('updateLandings', presets)
         return presets
-      })
+      }) */
   },
 
   /**
