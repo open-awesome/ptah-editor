@@ -29,7 +29,7 @@ const oauthConfig = {
   // Redirect URL for this application, i.e. where you mounted the authorized middleware
   callbackUrl: callbackUrl,
 
-  publicHost: config.publicHost,
+  postMessageTargetOrigin: config.postMessageTargetOrigin,
 
   userinfoUrl: config.auth1UserinfoUrl,
 
