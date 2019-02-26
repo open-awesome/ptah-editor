@@ -17,6 +17,4 @@ export default {
   display: flex
   align-items: center
   justify-content: center
-  &.is-editable
-    border: 1px dashed #18d88b
 </style>

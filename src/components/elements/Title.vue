@@ -22,8 +22,6 @@ export default {
   line-height: 1.4
   margin: 1.6rem
   display: block
-  &.is-editable
-    border: 1px dashed #18d88b
   &::selection, & ::selection
     color: #ff0
     background: #000

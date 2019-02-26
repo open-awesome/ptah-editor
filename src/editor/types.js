@@ -12,6 +12,7 @@ export class Label { }
 export class Cost { }
 export class ImageNoResize { }
 export class Delimiter { }
+export class VideoSection { }
 export class Video { }
 export class Timer { }
 export class ProductSection { }

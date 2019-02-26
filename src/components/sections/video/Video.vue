@@ -23,7 +23,7 @@ export default {
   mixins: [section],
 
   $schema: {
-    mainStyle: types.Video
+    mainStyle: types.StyleObject
   },
 
   data () {
@@ -40,14 +40,6 @@ export default {
       this.$nextTick(() => {
         this.updateVideoData(value)
       })
-    },
-
-    // To refresh DOM
-    '$sectionData.mainStyle.videoUrl' () {
-      this.videoType = ''
-    },
-    '$sectionData.mainStyle.loop' () {
-      this.videoType = ''
     }
   },
 
@@ -56,11 +48,8 @@ export default {
   },
 
   methods: {
-    /**
-     * Computed properties somehow doesn't work here (because of Vuse?)
-     * Have to do everything manually
-     */
     updateVideoData ({ videoUrl, loop }) {
+      this.videoType = ''
       this.videoUrl = videoUrl
 
       const youtubeVideoId = getYoutubeVideoIdFromUrl(this.videoUrl)
@@ -121,67 +110,34 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
 .b-video-section
-  max-width: 118.4rem
-  margin: 0 auto
-
-  &__inner
-    height: 0
-    padding-bottom: 56.25%
-    position: relative
-
-  iframe,
-  video
-    border: 0
-    position: absolute
-    z-index: 1
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-
-.b-content
-  position: absolute
-  z-index: 20
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  display: none
-
-  .is-editable &
-    display: block
-
-.b-header
-  position: absolute
-  z-index: 10
-  top: 50%
-  left: 0
-  right: 0
-  margin-top: -15rem
-  font-family: Helvetica Neue, Helvetica, Arial
-  font-style: normal
-  font-weight: 800
-  line-height: 5.3rem
-  font-size: 4.2rem
+  position: relative
+  width: 100%
+  min-height: 60rem
+  margin: 0
+  padding: 1rem
+  display: flex
   text-align: center
-  letter-spacing: 0.5rem
-  color: #fff
-  text-transform: uppercase
-  text-shadow: 1px 1px 5px black
+  justify-content: center
+  flex-direction: column
+  transition: background 200ms
+  &-component
+    margin: 1.2rem
 
-  .b-video-section_playing &
-    display: none
+.b-sandbox,
+.b-draggable-slot
+  max-width: 100%
+  height: 100%
 
-  .is-laptop &
-    font-size: 3.5rem
-    line-height: 4.6rem
-    margin-top: -14rem
-    letter-spacing: 0.4rem
+.b-sandbox
+  min-height: 20rem
+  justify-content: center
+  align-items: center
 
-  .is-mobile &
-    font-size: 1.2rem
-    line-height: 2rem
-    margin-top: -4.8rem
-    letter-spacing: 0.1rem
+.b-draggable-slot
+  padding: 1.6rem .8rem
+
 </style>

@@ -98,12 +98,10 @@
         </div>
 
         <!-- Video -->
-        <div v-if="settingObjectOptions.hasVideo" class="b-elem-settings__control">
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasVideo">
           <control-video
-              :src="settingObjectOptions.src"
-              :expand="expandedVideo"
-              @toggle="onExpand"
-              @change="changeVideoSrc"/>
+            :expand="expandedVideo"
+            @open="onExpand"/>
         </div>
 
       </div>
@@ -128,7 +126,7 @@ import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.v
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 import ControlIconWithText from './controls/TheControlIconWithText.vue'
-import ControlVideo from './controls/ControlVideo'
+import ControlVideo from './controls/TheControlVideo'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -347,7 +345,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks', 'IconWithText']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks', 'IconWithText', 'Video']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 
@@ -385,7 +383,7 @@ export default {
     min-width: 24rem
     padding-right: 2.5rem
     padding-bottom: 10rem
-    
+
   &__control
     margin-bottom: 1.6rem
 
