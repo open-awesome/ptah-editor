@@ -5,7 +5,7 @@
     <span>Video</span>
     <i :class="{ 'dropped': !controlOpen }">
     <icon-base
-        :class="{ closed: !opened }"
+        :class="{ closed: !controlOpen }"
         name="arrowDropDown"
         width="8"
         height="8"
@@ -13,7 +13,7 @@
     </i>
   </header>
 
-  <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen" class="b-video-control__dropdown">
+  <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <!-- VideoUrl -->
       <div class="b-video-control__control">
         <BaseUploadInput
@@ -65,7 +65,7 @@ export default {
     expand: {
       immediate: true,
       handler (value) {
-        this.opened = value
+        this.controlOpen = value
       }
     }
   },
@@ -100,6 +100,7 @@ export default {
     ]),
 
     onClickTitle () {
+      console.log(1)
       this.$emit('open', ['Video', !this.controlOpen])
     },
 
@@ -155,6 +156,10 @@ export default {
       transform: rotate(180deg)
       &.dropped
         transform: rotate(0deg)
+      & svg
+        display: inline-block
+        vertical-align: baseline
+        margin-bottom: 0.2rem
   &__description
     padding: $size-step/8 0
     font-size: 1.2rem

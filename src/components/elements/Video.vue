@@ -9,12 +9,21 @@
   </iframe>
 
   <video
-    v-if="videoType === 'custom'"
+    v-if="videoType === 'custom' && vLoop"
     ref="custom"
-    :src="videoUrl"
-    :loop="$sectionData.mainStyle.loop"
+    :src="vUrl"
+    loop="loop"
     type="video/mp4"
-    controls
+    controls="controls"
+    >
+  </video>
+
+  <video
+    v-if="videoType === 'custom' && !vLoop"
+    ref="custom"
+    :src="vUrl"
+    type="video/mp4"
+    controls="controls"
     >
   </video>
 
@@ -54,9 +63,11 @@ export default {
   },
 
   watch: {
-    vUrl (value) {
-      console.log(value)
+    videoUrl (value) {
       this.updateVideoData(value)
+    },
+    loop (value) {
+      this.vLoop = value
     }
   },
 
@@ -70,7 +81,7 @@ export default {
         // Looping one video on itself requires playlist param with its ID passed
         const loopValue = this.vLoop ? `&loop=1&playlist=${youtubeVideoId}` : '&loop=0'
         this.videoType = 'youtube'
-        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?disablekb=0&controls=1${loopValue}&autoplay=0&showinfo=0&modestbranding=1&enablejsapi=1`
+        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0&controls=1${loopValue}&autoplay=0&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1&rel=0`
       } else {
         this.videoType = 'custom'
         this.youtubeVideoUrl = ''
@@ -99,18 +110,17 @@ export default {
   margin: $size-step/2 $size-step/4
 
   position: relative
+  overflow: hidden
   display: flex
   justify-content: center
   align-items: center
   .is-mobile &
     margin: $size-step/4 auto
     width: 100%
-    height: auto
   @media only screen and (max-width: 540px)
     &
       margin: $size-step/4 auto
       width: 100%
-      height: auto
   & > iframe,
   & > video,
     position: absolute
@@ -120,8 +130,9 @@ export default {
     left: 0
     z-index: 0
 
-    width: 100%
-    height: 100%
+    width: 110%
+    height: 110%
+    margin: -5% 0 0 -5%
   &.is-editable:hover
     opacity: 0.6
     & > iframe,
