@@ -29,13 +29,13 @@ const oauthConfig = {
   // Redirect URL for this application, i.e. where you mounted the authorized middleware
   callbackUrl: callbackUrl,
 
-  publicHost: config.publicHost,
+  postMessageTargetOrigin: config.postMessageTargetOrigin,
 
   userinfoUrl: config.auth1UserinfoUrl,
 
   scope: config.auth1Scope,
 
-  sessionNamespace: 'auth1',
+  sessionNamespace: config.auth1SessionNamespace,
 
   // These options are passed to simple-oauth2, see https://github.com/lelylan/simple-oauth2
   oauthOptions: {

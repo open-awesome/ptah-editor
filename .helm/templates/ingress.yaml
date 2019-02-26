@@ -35,6 +35,6 @@ spec:
           {{- range .Values.ingress.pathBackend }}
           - path: {{ . }}
             backend:
-              serviceName: {{ $endpointFrontSvc }}
-              servicePort: {{ $endpointFront.service.port }}
+              serviceName: {{ $endpointBackSvc }}
+              servicePort: {{ $endpointBack.service.port }}
           {{- end }}

@@ -2,6 +2,7 @@
 
 const os = require('os')
 const Koa = require('koa')
+const cors = require('koa2-cors')
 const serve = require('koa-static')
 const urlParse = require('url-parse')
 const Sentry = require('@sentry/node')
@@ -13,7 +14,6 @@ const config = require('../config/config')
 
 const router = require('./middleware/router')
 
-const mongo = require('./middleware/mongo')
 const RedisStore = require('./middleware/redis-session-store')
 
 Sentry.init({
@@ -48,38 +48,39 @@ app.use(session({
 // serve statics (mainly for development; in production static must be served by nginx)
 app.use(serve(config.staticPath))
 
-// setup db connection
-const mongoOptions = {
-  host: config.dbHost,
-  port: config.dbPort,
-  db: config.dbName
+// healthCheck page not requires authorization or cors origin header check
+const publicRoutes = {
+  path: `/_healthz`
 }
-const mongoConnectionOptions = {}
-if (config.dbUser && config.dbPass && config.dbAuthMethod) {
-  mongoConnectionOptions.auth = {
-    user: config.dbUser,
-    password: config.dbPass
-  }
-  mongoConnectionOptions.authSource = config.dbName
-  mongoConnectionOptions.authMechanism = config.dbAuthMethod
-}
+// CORS setup
+app.use(cors({
+  origin: function (ctx) {
+    if (publicRoutes.path === ctx.url) {
+      return false
+    }
+    if (config.corsValidOrigins.includes('*')) {
+      return '*'
+    }
+    const requestOrigin = ctx.accept.headers.origin
+    if (!config.corsValidOrigins.includes(requestOrigin)) {
+      return ctx.throw(`${requestOrigin} is not a valid origin`)
+    }
+    return requestOrigin
+  },
+  allowMethods: router.allowedMethods(),
+  maxAge: 5,
+  credentials: false,
+  allowHeaders: ['Content-Type', 'Authorization', 'Accept']
+}))
 
-// handle mongoDb connection error with code 500 instead of 200 by default, and crash the app after send answer
 app.use(async (ctx, next) => {
   try {
     await next()
   } catch (err) {
-    if (~err.name.toLowerCase().indexOf('mongo')) {
-      ctx.res.once('finish', function () {
-        process.exit(1)
-      })
-    }
-    const error = new Error(err.message || 'Internal Server Error')
-    error.status = err.status || 500
-    throw error
+    err.status = err.status || 500
+    throw err
   }
 })
-app.use(mongo(mongoOptions, mongoConnectionOptions))
 
 app.use(router.routes())
 app.use(router.allowedMethods())

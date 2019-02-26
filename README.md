@@ -15,7 +15,6 @@ Each ready to use block (we named it `section`) could be tuned with custom eleme
 ## Dependencies: 
 * Node.js v10+
 * NPM v6+
-* MongoDB v4+
 * Redis v5+
 
 ## Install and run
@@ -25,11 +24,11 @@ Each ready to use block (we named it `section`) could be tuned with custom eleme
 * `gulp public-image`
 * `yarn build`
 * `node ./node_modules/migrate-mongo/bin/migrate-mongo.js up -f backend/migrations/migrate-mongo-config.js`
-* `NODE_ENV={string=production} AUTH1_AUTHORIZE_URL={string} AUTH1_CLIENT_ID={string} 
+* `NODE_ENV={string=production} AUTH1_AUTHORIZE_URL={string} AUTH1_CLIENT_ID={string}
 AUTH1_CLIENT_SCOPE={string="openid,offline"} AUTH1_CLIENT_SECRET={string} AUTH1_REVOKE_TOKEN_URL={string} AUTH1_TOKEN_URL={string} 
-AUTH1_USERINFO_URL={string} DB_AUTH_METHOD={string="SCRAM-SHA-256"} DB_HOST={string} DB_NAME={string="ptah"} 
-DB_PASS={string} DB_PORT={string=27017} DB_USER={string} MAILCHIMP_AUTHORIZE_URL={string} MAILCHIMP_CLIENT_ID={string} 
-MAILCHIMP_CLIENT_SECRET={string} MAILCHIMP_TOKEN_URL={string} PUBLIC_HOST={string} REDIS_HOST={string} 
+AUTH1_USERINFO_URL={string} CORS_VALID_ORIGINS={string} MAILCHIMP_AUTHORIZE_URL={string} MAILCHIMP_CLIENT_ID={string} 
+MAILCHIMP_CLIENT_SECRET={string} MAILCHIMP_TOKEN_URL={string} POST_MESSAGE_TARGET_ORIGIN={string} 
+PUBLIC_HOST={string} PTAH_API_HOST_URL={string} REDIS_HOST={string}
 REDIS_PORT={string="6379"} ROUTES_PREFIX={string=""} SENTRY_DSN={string} SESSION_COOKIE_NAME={string="ptahsid"} 
 SESSION_COOKIE_SIGN_KEY={string} SERVER_PORT={string=80} node ./index.js`
 
@@ -51,17 +50,8 @@ Where:
 
 {AUTH1_TOKEN_URL} - full url of Auth1 token endpoint
 
-{DB_AUTH_METHOD} - MongoDB authorization method, if user & password authorization is used
-
-{DB_HOST} - MongoDB host
-
-{DB_NAME} - MongoDB database name
-
-{DB_PASS} - MongoDB user password (must be an empty string if auth is not used)
-
-{DB_PORT} - MongoDB port
-
-{DB_USER} - MongoDB user name (must be an empty string if auth is not used)
+{CORS_VALID_ORIGINS} - list of valid origins for CORS protection, separated by comma. Notice! Value of * uses by 
+default (disable CORS protection)
 
 {MAILCHIMP_CLIENT_ID} - client id for OAuth2 authentication in Mailchimp service
 
@@ -71,7 +61,11 @@ Where:
 
 {MAILCHIMP_TOKEN_URL} - full url of Mailchimp token endpoint
 
+{POST_MESSAGE_TARGET_ORIGIN} - target origin for post messages with authentication results
+
 {PUBLIC_HOST} - Public host url, for example https://landings.protocol.one
+
+{PTAH_API_HOST_URL} - host with ptah-api, for example https://ptahapi.tst.protocol.one
 
 {REDIS_HOST} - Redis host
 

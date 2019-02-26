@@ -79,6 +79,7 @@
         :options="select.options"
         :value="select.value"
         v-model="select.selected"
+        :search="true"
         >
       </BaseSelect>
     </div>

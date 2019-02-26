@@ -16,7 +16,7 @@ module.exports = ({
   postmessageHtmlTemplate = '',
   userinfoUrl,
   sessionNamespace,
-  publicHost
+  postMessageTargetOrigin
 }) => {
   // Initialize OAuth
   const oauth2 = simpleOauth2.create({
@@ -27,7 +27,6 @@ module.exports = ({
       ...oauthOptions.client
     },
     auth: {
-      tokenHost: url,
       ...oauthOptions.auth
     }
   })
@@ -120,7 +119,7 @@ module.exports = ({
       errorCode: 'unknown',
       accessToken: '',
       expiresIn: 0,
-      publicHost: publicHost
+      targetOrigin: postMessageTargetOrigin
     })
     _params.isSuccess = _params.errorCode === ''
     ctx.type = 'html'

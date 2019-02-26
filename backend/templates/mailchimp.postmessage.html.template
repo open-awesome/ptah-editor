@@ -8,7 +8,7 @@
             error: "{errorCode}",
             success: {isSuccess},
         };
-        var targetOrigin = "{publicHost}";
+        var targetOrigin = "{targetOrigin}";
         parent.postMessage(JSON.stringify(result), targetOrigin);
     </script>
 </head>

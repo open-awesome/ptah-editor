@@ -13,8 +13,6 @@ RUN yarn install
 COPY . /app/
 RUN yarn cjs && gulp locale_sync && gulp public-image && yarn build
 
-RUN chmod +x start.sh
-
 ENV NODE_ENV=production \
     AUTH1_AUTHORIZE_URL="" \
     AUTH1_CLIENT_ID="" \
@@ -23,12 +21,9 @@ ENV NODE_ENV=production \
     AUTH1_REVOKE_TOKEN_URL="" \
     AUTH1_TOKEN_URL="" \
     AUTH1_USERINFO_URL="" \
-    DB_AUTH_METHOD="SCRAM-SHA-256" \
-    DB_HOST="" \
-    DB_NAME="ptah" \
-    DB_PASS="" \
-    DB_PORT=27017 \
-    DB_USER="" \
+    CORS_VALID_ORIGINS="" \
+    POST_MESSAGE_TARGET_ORIGIN="" \
+    PTAH_API_HOST_URL="" \
     MAILCHIMP_AUTHORIZE_URL="" \
     MAILCHIMP_CLIENT_ID="" \
     MAILCHIMP_CLIENT_SECRET="" \
@@ -44,4 +39,4 @@ ENV NODE_ENV=production \
 
 EXPOSE 80
 
-CMD ["./start.sh"]
+CMD ["node", "./index.js"]
