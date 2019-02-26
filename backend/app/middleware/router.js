@@ -29,12 +29,12 @@ router
   })
 
   .get(`${auth1RoutesNamespace}/login`, auth1Middleware.login)
-  .get(`${auth1RoutesNamespace}/callback`, auth1Middleware.authorized)
+  .get(`${auth1RoutesNamespace}/callback`, auth1Middleware.authorize)
   .get(`${auth1RoutesNamespace}/refresh`, auth1Middleware.refresh)
   .get(`${auth1RoutesNamespace}/logout`, auth1Middleware.logout)
 
   .get(`${mailchimpRoutesNamespace}/login`, mailchimpAuthMiddleware.login)
-  .get(`${mailchimpRoutesNamespace}/callback`, mailchimpAuthMiddleware.authorized)
+  .get(`${mailchimpRoutesNamespace}/callback`, mailchimpAuthMiddleware.authorize)
 
 module.exports.routes = function () {
   return router.routes()
