@@ -115,6 +115,12 @@ $h: 4.8rem
       color: inherit
       &_100
         width: 100%
+      .is-mobile & > div,
+      .is-tablet & > div
+        width: 100%
+      @media only screen and (max-width: 768px)
+        & > div
+          width: 100%
   &:hover
     .sandbox-equalizer,
     .divider

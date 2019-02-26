@@ -157,6 +157,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 $main-font-size: 6rem
 
 @mixin tabletFontSize ($property)
@@ -182,9 +185,17 @@ $main-font-size: 6rem
   color: #fff
   font-size: $main-font-size
   text-align: center
-  margin: 1.6rem
+  margin: 1.6rem 0
   &.is-editable
     border: .1rem dashed #18d88b
+  .is-mobile &,
+  .is-tablet &
+    width: 100%
+    margin: $size-step/2 auto
+  @media only screen and (max-width: 768px)
+    &
+      width: 100%
+      margin: $size-step/2 auto
 
   @include tabletFontSize($main-font-size)
   @include mobileFontSize($main-font-size)

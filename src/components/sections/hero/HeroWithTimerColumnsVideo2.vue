@@ -4,7 +4,7 @@ import * as _ from 'lodash-es'
 import section from '../../mixins/section.js'
 
 const GROUP_NAME = 'Hero'
-const NAME = 'HeroWithTimerColumns'
+const NAME = 'HeroWithTimerColumnsVideo2'
 const BG_SECTION = 'url(https://gn728.cdn.stg.gamenet.ru/0/7oAt2/o_1A6qDa.jpg)'
 
 /**
@@ -21,25 +21,6 @@ const BG_SECTION = 'url(https://gn728.cdn.stg.gamenet.ru/0/7oAt2/o_1A6qDa.jpg)'
  * Timer - 9
  * */
 const COMPONENTS = [
-  {
-    name: 'Logo',
-    element: types.Logo,
-    type: 'image',
-    class: 'b-logo',
-    label: 'logo',
-    key: 0
-  },
-  {
-    name: 'Delimiter',
-    element: types.Delimiter,
-    type: 'delimiter',
-    class: 'b-delimiter',
-    label: 'delimiter',
-    key: 8
-  }
-]
-
-const COMPONENTS_2 = [
   {
     name: 'Title',
     element: types.Title,
@@ -82,34 +63,37 @@ const COMPONENTS_2 = [
   }
 ]
 
-const C_CUSTOM = [
+const COMPONENTS_2 = [
   {
-    element: {
-      styles: {
-        'background-image': 'url(https://gn710.cdn.stg.gamenet.ru/0/7oAyH/o_2HZnCR.png)',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '224px',
-        'height': '124px'
-      }
-    },
+    name: 'Logo',
+    element: types.Logo,
+    type: 'image',
+    class: 'b-logo',
+    label: 'logo',
     key: 0
   },
   {
-    element: {
-      styles: {
-        'height': '500px'
-      }
-    },
+    name: 'Delimiter',
+    element: types.Delimiter,
+    type: 'delimiter',
+    class: 'b-delimiter',
+    label: 'delimiter',
     key: 8
+  },
+  {
+    name: 'Video',
+    element: types.Video,
+    type: 'video',
+    class: 'b-video',
+    label: 'video',
+    key: 5
   }
 ]
 
-const C_CUSTOM_2 = [
+const C_CUSTOM = [
   {
     element: {
-      text: `Excellent <div>title</div>`,
+      text: 'Excellent title',
       styles: {
         'font-family': 'PT Serif',
         'font-size': '5.6rem',
@@ -132,7 +116,7 @@ const C_CUSTOM_2 = [
   {
     element: {
       styles: {
-        'height': '172px'
+        'height': '132px'
       }
     },
     key: 10
@@ -155,6 +139,36 @@ const C_CUSTOM_2 = [
       }
     },
     key: 3
+  }
+]
+
+const C_CUSTOM_2 = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url(https://gn710.cdn.stg.gamenet.ru/0/7oAyH/o_2HZnCR.png)',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '224px',
+        'height': '124px'
+      }
+    },
+    key: 0
+  },
+  {
+    element: {
+      styles: {
+        'height': '276px'
+      }
+    },
+    key: 8
+  },
+  {
+    element: {
+      src: 'https://gn553.cdn.stg.gamenet.ru/0/7aJD3/o_1Od7Vf.mp4'
+    },
+    key: 5
   }
 ]
 
@@ -183,7 +197,7 @@ export default {
 
   mixins: [section],
 
-  cover: '/img/covers/hero-with-timer-columns.jpg',
+  cover: '/img/covers/hero-with-timer-columns-video2.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
@@ -214,7 +228,7 @@ export default {
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-4">
+        <div class="b-grid__col-6">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
@@ -249,7 +263,7 @@ export default {
             </draggable>
           </sandbox>
         </div>
-        <div class="b-grid__col-8">
+        <div class="b-grid__col-6">
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"

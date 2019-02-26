@@ -46,6 +46,10 @@ import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
 import HeroHunt from '@components/sections/hero/HeroHunt'
 import HeroWithTimer from '@components/sections/hero/HeroWithTimer'
 import HeroWithTimerColumns from '@components/sections/hero/HeroWithTimerColumns'
+import HeroWithTimerColumnsVideo from '@components/sections/hero/HeroWithTimerColumnsVideo'
+import HeroWithTimerColumnsVideo2 from '@components/sections/hero/HeroWithTimerColumnsVideo2'
+import HeroWithTimerSlogan from '@components/sections/hero/HeroWithTimerSlogan'
+import HeroWithTimerSlogan2 from '@components/sections/hero/HeroWithTimerSlogan2'
 // --- gallery
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
@@ -104,6 +108,10 @@ const COMPONENTS = {
   HeroHunt,
   HeroWithTimer,
   HeroWithTimerColumns,
+  HeroWithTimerColumnsVideo,
+  HeroWithTimerColumnsVideo2,
+  HeroWithTimerSlogan,
+  HeroWithTimerSlogan2,
 
   Gallery1,
   Gallery2,
