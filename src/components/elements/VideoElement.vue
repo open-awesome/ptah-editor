@@ -35,7 +35,7 @@
 import { getYoutubeVideoIdFromUrl } from '@editor/util'
 
 export default {
-  name: 'Video',
+  name: 'VideoElement',
   inject: ['$section'],
 
   props: {
@@ -116,28 +116,25 @@ export default {
   align-items: center
   .is-mobile &
     margin: $size-step/4 auto
-    width: 100%
+    width: 100% !important
+    height: $size-step*5 !important
   @media only screen and (max-width: 540px)
     &
       margin: $size-step/4 auto
-      width: 100%
+      width: 100% !important
+      height: $size-step*5 !important
   & > iframe,
   & > video,
-    position: absolute
-    top: 0
-    right: 0
-    bottom: 0
-    left: 0
-    z-index: 0
-
+    position: relative
     width: 110%
     height: 110%
     margin: -5% 0 0 -5%
   &.is-editable:hover
     opacity: 0.6
-    & > iframe,
-    & > video
+    & iframe,
       display: none
+    & video
+      visibility: hidden
   &__help
     display: none
   &.is-editable
@@ -151,7 +148,13 @@ export default {
       left: 0
       z-index: 1
     &:hover
-      #{$self}__help
-        display: block
+     & #{$self}__help
+       display: block
+       position: absolute
+       top: 45%
+       text-align: center
+       right: 0
+       left: 0
+       z-index: 1
 
 </style>

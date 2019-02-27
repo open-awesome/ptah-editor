@@ -340,7 +340,7 @@ const data = new Map([
       }
     })
   )],
-  [types.Video, () => (_.merge({}, DEFAULT_OPTIONS,
+  [types.VideoElement, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       background: false,
       hasVideo: true,

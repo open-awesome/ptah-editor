@@ -302,10 +302,10 @@ export default {
   text-align: center
   .is-mobile &,
   .is-tablet &
-    width: 80% !important
+    width: 90% !important
   @media only screen and (max-width: 768px)
     &
-      width: 80% !important
+      width: 90% !important
 .b-sandbox
   min-height: 36.5rem
   padding: 5rem 0

@@ -25,4 +25,12 @@ export default {
   &::selection, & ::selection
     color: #ff0
     background: #000
+  .is-mobile &,
+  .is-tablet &
+    font-size: 2rem !important
+    padding: 0 1rem
+  @media only screen and (max-width: 768px)
+    &
+      font-size: 2rem !important
+      padding: 0 1rem
 </style>
