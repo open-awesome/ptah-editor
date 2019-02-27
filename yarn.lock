@@ -1912,8 +1912,8 @@ atob@^2.1.1:
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
 
 "authone-middleware-node@github:ProtocolONE/authone-middleware-node#master":
-  version "1.0.0"
-  resolved "https://codeload.github.com/ProtocolONE/authone-middleware-node/tar.gz/7b0bd8d4a7665aecde69ecc395bf8442e87abf60"
+  version "1.0.1"
+  resolved "https://codeload.github.com/ProtocolONE/authone-middleware-node/tar.gz/249a0ef6cbe0e1152f7201e148cb50e68389378e"
   dependencies:
     axios "^0.18.0"
     ioredis "^4.6.2"
