@@ -294,14 +294,10 @@ export default {
   border-radius: 2px
   .is-mobile &,
   .is-tablet &
-    width: 100% !important
     font-size: 2rem !important
-    margin: $size-step/2 0
   @media only screen and (max-width: 768px)
     &
-      width: 100% !important
       font-size: 2rem !important
-      margin: $size-step/2 0
 
 .b-sandbox
   align-items: flex-start

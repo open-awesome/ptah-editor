@@ -190,11 +190,15 @@ $main-font-size: 6rem
     border: .1rem dashed #18d88b
   .is-mobile &,
   .is-tablet &
-    width: 100%
+    width: 90%
     margin: $size-step/2 auto
   @media only screen and (max-width: 768px)
     &
-      width: 100%
+      width: 90%
+      margin: $size-step/2 auto
+  @media only screen and (max-width: 768px) and (min-height: 700px)
+    &
+      width: 60%
       margin: $size-step/2 auto
 
   @include tabletFontSize($main-font-size)

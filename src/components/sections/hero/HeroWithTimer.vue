@@ -299,12 +299,6 @@ export default {
   background-color: rgb(255, 109, 100)
   box-shadow: none
   border-radius: 2px
-  .is-mobile &,
-  .is-tablet &
-    width: 80% !important
-  @media only screen and (max-width: 768px)
-    &
-      width: 80% !important
 
 .b-sandbox
   min-height: $size-step*10

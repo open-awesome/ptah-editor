@@ -303,12 +303,10 @@ $h: 100vh
   box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
   .is-mobile &,
   .is-tablet &
-    width: 80% !important
     height: 4rem !important
     font-size: 1.4rem !important
   @media only screen and (max-width: 768px)
     &
-      width: 80% !important
       height: 4rem !important
       font-size: 1.4rem !important
 </style>

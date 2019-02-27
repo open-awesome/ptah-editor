@@ -313,12 +313,7 @@ export default {
   text-transform: uppercase
   border-radius: 2px
   text-align: center
-  .is-mobile &,
-  .is-tablet &
-    width: 80% !important
-  @media only screen and (max-width: 768px)
-    &
-      width: 80% !important
+
 .b-sandbox
   min-height: 36.5rem
   padding: 5rem 0
