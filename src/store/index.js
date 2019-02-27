@@ -105,7 +105,10 @@ const actions = {
         landing: {
           title: name,
           settings: {},
-          sections
+          theme: {
+            name,
+            sections
+          }
         }
       }
     }).then((response) => {

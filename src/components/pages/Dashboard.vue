@@ -4,7 +4,23 @@ import { mapActions, mapState } from 'vuex'
 export default {
   data () {
     return {
-      createWindow: false
+      createWindow: false,
+      presets: [
+        {
+          type: 'Blank page',
+          sections: []
+        },
+        {
+          type: 'Simple landing',
+          sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns', 'Footer']
+        },
+        {
+          type: 'Skull',
+          sections: ['Skull']
+        }
+      ],
+      presetSelected: 0,
+      newPageTitle: ''
     }
   },
 
@@ -15,11 +31,19 @@ export default {
   },
   methods: {
     ...mapActions([
-      'fetchLandings'
+      'fetchLandings',
+      'createLanding'
     ]),
     openLanding (item) {
       // add log
       this.$router.push({ path: `/editor/${item._id}` })
+    },
+
+    newLanding () {
+      this.createLanding(this.newPageTitle, this.presets[this.presetSelected])
+        .then((response) => {
+          console.log(response)
+        })
     }
   },
   created () {
@@ -51,7 +75,24 @@ export default {
     <transition name="slide-fade">
       <div class="b-create" v-if="createWindow">
         <div class="b-create__inner">
+          <h1>Create new Landing page</h1>
 
+          <base-text-field
+            v-model="newPageTitle"
+            label="Landing name">
+          </base-text-field>
+
+          <div class="b-presets">
+            <div class="b-presets__item"
+                 v-for="(item, index) in presets"
+                 :key="index"
+                 :class="{ 'selected': presetSelected == index }"
+                 @click="presetSelected = index">
+              {{item.type}}
+            </div>
+          </div>
+
+          <base-button color="blue" size="middle" @click="newLanding">Create</base-button>
         </div>
       </div>
     </transition>
@@ -126,12 +167,32 @@ export default {
     width: $size-step*29
     height: $size-step*16
     z-index: 10
+    padding: 5rem
 
     background: $white
 
     display: flex
     flex-direction: column
     justify-content: stretch
+
+.b-presets
+  margin: 2rem 0 2rem -3rem
+  display: flex
+
+  &__item
+    width: 15rem
+    height: 20rem
+    background: $ligth-grey
+    border: 2px solid rgba($dark-blue, 0.2)
+    margin-left: 3rem
+    display: flex
+    align-items: center
+    justify-content: center
+    color: $dark-blue-krayola
+    cursor: pointer
+    transition: all .2s ease-out
+    &.selected
+      border: 2px solid $dark-blue-krayola
 
 // Animations
 .slide-fade
