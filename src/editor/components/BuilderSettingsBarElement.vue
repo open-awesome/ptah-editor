@@ -291,6 +291,7 @@ export default {
     ]),
 
     expandDropdown (type) {
+      this.expandedVideo = (type === 'video')
       this.expandedSize = (type === 'delimiter')
       this.expandedFont = ['text', 'title'].includes(type)
       this.expandedBg = ['image', 'galleryItem', 'product'].includes(type)
@@ -345,6 +346,7 @@ export default {
     },
 
     onExpand (value) {
+      console.log(value)
       const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks', 'IconWithText', 'Video']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
