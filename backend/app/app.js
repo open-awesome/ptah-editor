@@ -49,7 +49,7 @@ app.use(session({
 app.use(serve(config.staticPath))
 
 // CORS setup
-const corsRoutes = ['/auth1/refresh']
+const corsRoutes = ['/auth1/refresh', '/auth1/logout']
 app.use(cors({
   origin: function (ctx) {
     if (!corsRoutes.includes(ctx.url)) {

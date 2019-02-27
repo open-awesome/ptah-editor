@@ -29,14 +29,23 @@ export default {
       'landings'
     ])
   },
+
   methods: {
     ...mapActions([
       'fetchLandings',
       'createLanding'
     ]),
+
     openLanding (item) {
       // add log
       this.$router.push({ path: `/editor/${item._id}` })
+    },
+
+    openWindow () {
+      this.createWindow = true
+      this.$nextTick(() => {
+        document.querySelector('.b-base-text-field__input').focus()
+      })
     },
 
     newLanding () {
@@ -55,7 +64,7 @@ export default {
 <template>
   <div class="b-page__content">
     <div class="b-dashboard">
-      <figure class="b-dashboard__item create" @click="createWindow = true">
+      <figure class="b-dashboard__item create" @click="openWindow()">
         <div class="b-dashboard__item-cell b-dashboard__item--create">
           <icon-base name="plus" width="40" height="40" color="#2275D7"></icon-base>
           <figcaption>{{ $t('d.createNew') }}</figcaption>
@@ -73,8 +82,17 @@ export default {
     </div>
 
     <transition name="slide-fade">
-      <div class="b-create" v-if="createWindow">
+      <div class="b-create" v-if="createWindow" @click.self="createWindow = false">
         <div class="b-create__inner">
+          <div class="b-create__close"
+               @click="createWindow = false">
+            <icon-base
+              name="close"
+              color="#c4c4c4"
+              width="14"
+              height="14"
+            />
+          </div>
           <h1>Create new Landing page</h1>
 
           <base-text-field
@@ -174,6 +192,15 @@ export default {
     display: flex
     flex-direction: column
     justify-content: stretch
+
+  &__close
+    position: absolute
+    top: $size-step
+    right: $size-step
+    cursor: pointer
+    &:hover
+      & svg
+        fill: $dark-grey
 
 .b-presets
   margin: 2rem 0 2rem -3rem

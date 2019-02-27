@@ -42,7 +42,7 @@ export default {
       })
         .then((response) => {
           console.log(response)
-          dispatch('setToken', response.data.accessToken)
+          dispatch('setToken', response.data.access_token)
 
           return response
         })
