@@ -1,15 +1,13 @@
 'use strict'
 
 const fs = require('fs')
-const _ = require('lodash')
 const fetch = require('node-fetch')
 const urlJoin = require('url-join')
 const urlParse = require('url-parse')
 const buildUrl = require('build-url')
+const { auth1KoaMiddleware } = require('authone-middleware-node')
 
 const config = require('../../config/config')
-
-const createMiddleware = require('./oauth2')
 
 const mailchimpPostmessageHtmlTemplate = fs.readFileSync(config.mailchimpPostmessageHtmlTemplatePath).toString('utf8')
 
@@ -20,101 +18,82 @@ const callbackUrl = buildUrl(config.publicHost, {
 const authorizeUrl = urlParse(config.mailchimpAuthorizeUrl)
 const tokenUrl = urlParse(config.mailchimpTokenUrl)
 
-const oauthConfig = {
-  // Client ID and secret for OAuth provider
+const middlewareOptions = {
+  publicHost: authorizeUrl.origin,
+  authorizePath: authorizeUrl.pathname,
+  tokenPath: tokenUrl.pathname,
+  redirectUri: callbackUrl,
   clientId: config.mailchimpClientId,
   clientSecret: config.mailchimpClientSecret,
-
-  // Redirect URL for this application, i.e. where you mounted the authorized middleware
-  callbackUrl: callbackUrl,
-
-  sessionNamespace: config.mailchimpSessionNamespace,
-
+  namespace: config.mailchimpSessionNamespace,
+  postmessageHtmlTemplate: mailchimpPostmessageHtmlTemplate,
   postMessageTargetOrigin: config.postMessageTargetOrigin,
-
-  // These options are passed to simple-oauth2, see https://github.com/lelylan/simple-oauth2
-  oauthOptions: {
-    auth: {
-      tokenHost: tokenUrl.origin,
-      tokenPath: tokenUrl.pathname,
-      authorizeHost: authorizeUrl.origin,
-      authorizePath: authorizeUrl.pathname
-    }
-  },
-
   scope: [],
-
-  postmessageHtmlTemplate: mailchimpPostmessageHtmlTemplate
+  debug: false
 }
 
-const oauthMiddleware = createMiddleware(Object.assign({}, oauthConfig))
+const middleware = auth1KoaMiddleware(middlewareOptions)
 
-const login = async (ctx) => {
-  if (!_.get(ctx, 'session.userId')) {
-    ctx.log.error(new Error('No authenticated user in session'))
-    return oauthMiddleware.sendHtmlResponse(ctx, { errorCode: 'logged-user-required' })
-  }
-  try {
-    await oauthMiddleware.login(ctx)
-  } catch (err) {
-    ctx.log.error(err)
-    return oauthMiddleware.sendHtmlResponse(ctx, { errorCode: err.message || 'unknown' })
-  }
-}
+const login = middleware.login
 
-const authorized = async (ctx) => {
-  if (!_.get(ctx, 'session.userId')) {
+const authorize = async (ctx) => {
+  const auth1Tokens = ctx.session[config.auth1SessionNamespace]
+  if (!auth1Tokens) {
     ctx.log.error(new Error('No authenticated user in session'))
-    return oauthMiddleware.sendHtmlResponse(ctx, { errorCode: 'logged-user-required' })
+    return middleware.setHtmlResponse(ctx, { errorCode: 'logged-user-required' })
   }
 
   try {
-    await oauthMiddleware.authorized(ctx)
+    await middleware.authorize(ctx)
 
-    const oauthToken = oauthMiddleware.getTokenFromSession(ctx)
-    const mailchimpAccessToken = oauthToken.token.access_token
-
-    const auth1Oauth = ctx.session[config.auth1SessionNamespace]
-    const auth1AccessToken = auth1Oauth.access_token
-
-    const updateUserEndpointUrl = urlJoin([config.ptahApiHostUrl, '/api/v1/user'])
-
-    let mailchimpIntegration = false
-
-    try {
-      const response = await fetch(updateUserEndpointUrl, {
-        method: 'POST',
-        body: JSON.stringify({
-          mailchimpAccessToken: mailchimpAccessToken
-        }),
-        headers: {
-          'Content-Type': 'application/json',
-          'Authorization': `Bearer ${auth1AccessToken}`,
-          'X-Request-ID': ctx.id
-        }
-      })
-      if (response.ok) {
-        // Parse response
-        const result = await response.json()
-        mailchimpIntegration = result.mailchimpIntegration
-      } else {
-        throw new Error(response.error)
-      }
-    } catch (err) {
-      throw err
-    }
-
+    const mailchimpTokens = ctx.session[config.mailchimpSessionNamespace]
     // remove mailchimp oauth tokens from session, we don't need it there any more
     ctx.session[config.mailchimpSessionNamespace] = null
 
-    return oauthMiddleware.sendHtmlResponse(ctx, { errorCode: mailchimpIntegration ? '' : 'no-mailchimp-integration' })
+    if (mailchimpTokens) {
+      const mailchimpAccessToken = mailchimpTokens.access_token
+
+      const auth1AccessToken = auth1Tokens.access_token
+
+      const updateUserEndpointUrl = urlJoin([config.ptahApiHostUrl, '/api/v1/user'])
+
+      let mailchimpIntegration = false
+
+      try {
+        const response = await fetch(updateUserEndpointUrl, {
+          method: 'POST',
+          body: JSON.stringify({
+            mailchimpAccessToken: mailchimpAccessToken
+          }),
+          headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${auth1AccessToken}`,
+            'X-Request-ID': ctx.id
+          }
+        })
+        if (response.ok) {
+          // Parse response
+          const result = await response.json()
+          mailchimpIntegration = result.mailchimpIntegration
+        } else {
+          throw new Error(response.error)
+        }
+      } catch (err) {
+        throw err
+      }
+
+      if (mailchimpIntegration) {
+        return middleware.setHtmlResponse(ctx)
+      }
+    }
+    return middleware.setHtmlResponse(ctx, { errorCode: 'no-mailchimp-integration' })
   } catch (err) {
     ctx.log.error(err)
-    return oauthMiddleware.sendHtmlResponse(ctx, { errorCode: err.message || 'unknown' })
+    return middleware.setHtmlResponse(ctx, { errorCode: err.message || 'unknown' })
   }
 }
 
 module.exports = {
   login,
-  authorized
+  authorize
 }
