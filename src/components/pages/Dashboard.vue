@@ -33,7 +33,8 @@ export default {
   methods: {
     ...mapActions([
       'fetchLandings',
-      'createLanding'
+      'createLanding',
+      'deleteLanding'
     ]),
 
     openLanding (item) {
@@ -49,7 +50,7 @@ export default {
     },
 
     newLanding () {
-      this.createLanding(this.newPageTitle, this.presets[this.presetSelected])
+      this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
         .then((response) => {
           console.log(response)
         })
@@ -73,6 +74,11 @@ export default {
 
       <figure v-for="(item, index) in landings" :key="index" class="b-dashboard__item" @click="openLanding(item)">
         <div class="b-dashboard__item-cell">
+          <div class="b-dashboard__item-icons">
+            <div class="b-dashboard__icon" @click.stop="deleteLanding(item._id)">
+              <icon-base name="remove" color="#2275D7" width="18" hight="18"></icon-base>
+            </div>
+          </div>
           <div class="b-dashboard__item-cell-top"></div>
           <div class="b-dashboard__item-cell-bottom">
             {{ item.name }}
@@ -135,6 +141,7 @@ export default {
     width: 33%
     padding: 0
     margin: 0
+    position: relative
     &-cell
       max-width: 13*$size-step
       height: 8*$size-step
@@ -167,6 +174,24 @@ export default {
         font-size: 1.6rem
         color: $dark-blue-krayola
         letter-spacing: -0.02em
+    &-icons
+      position: absolute
+      top: 3.2rem
+      right: 3.2rem
+      display: none
+    &:hover .b-dashboard__item-icons
+      display: flex
+
+  &__icon
+    background: $white
+    box-shadow: 0px 4px 24px rgba(0, 0, 0, 0.25)
+    border-radius: 50%
+
+    width: 4rem
+    height: 4rem
+    display: flex
+    justify-content: center
+    align-items: center
 
 .b-create
   position: fixed

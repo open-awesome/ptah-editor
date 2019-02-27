@@ -56,9 +56,12 @@ const actions = {
   getLandingData ({ state, commit }, slug) {
     commit('slug', slug)
 
-    return api.getLanding(slug)
+    return api.request({
+      url: `landings/${slug}`,
+      method: 'get'
+    })
       .then((data) => {
-        const landing = data || {}
+        const landing = data.landing
         landing.settings = _.defaultsDeep(landing.settings, {
           ogTags: [],
           video: '',
@@ -87,6 +90,9 @@ const actions = {
         commit('updateCurrentLanding', landing)
         return landing
       })
+      .catch((error) => {
+        console.warn(error)
+      })
   },
 
   /**
@@ -104,15 +110,28 @@ const actions = {
         name,
         landing: {
           title: name,
-          settings: {},
-          theme: {
-            name,
-            sections
-          }
+          settings: {
+            title: name
+          },
+          sections
         }
       }
     }).then((response) => {
       return response.data
+    })
+  },
+
+  /**
+   * Delete landing by id
+   * @param state
+   * @param id
+   */
+  deleteLanding ({ state, commit }, id) {
+    return api.request({
+      url: `landings/${id}`,
+      method: 'delete'
+    }).then(() => {
+      commit('updateLandings', _.filter(state.landings, (o) => o._id !== id))
     })
   },
 
