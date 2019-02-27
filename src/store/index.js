@@ -37,20 +37,14 @@ const actions = {
    * @param commit
    * @returns {*}
    */
-  fetchLandings ({ state, commit }) {
+  fetchLandings ({ commit }) {
     return api.request({
       url: 'landings',
       method: 'get'
-    }).then((presets) => {
-      commit('updateLandings', presets)
-      return presets
+    }).then((response) => {
+      commit('updateLandings', response.landings)
+      return response.landings
     })
-
-    /* return api.getLandingsList()
-      .then((presets) => {
-        commit('updateLandings', presets)
-        return presets
-      }) */
   },
 
   /**
@@ -93,6 +87,30 @@ const actions = {
         commit('updateCurrentLanding', landing)
         return landing
       })
+  },
+
+  /**
+   * Create new landing
+   * @param state
+   * @param commit
+   * @param name
+   * @param sections
+   */
+  createLanding ({ state, commit }, { name, sections }) {
+    return api.request({
+      url: 'landings',
+      method: 'post',
+      params: {
+        name,
+        landing: {
+          title: name,
+          settings: {},
+          sections
+        }
+      }
+    }).then((response) => {
+      return response.data
+    })
   },
 
   /**

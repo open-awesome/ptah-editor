@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-        <router-view></router-view>
+        <router-view v-if="!loading"></router-view>
     </div>
 </template>
 
@@ -11,13 +11,18 @@ export default {
   name: 'app',
   data () {
     return {
-      section: 'Head'
+      section: 'Head',
+      loading: true
     }
   },
 
   created () {
     if (localStorage.getItem('token') !== null) {
-      this.refreshToken()
+      this.refreshToken().then(() => {
+        this.loading = false
+      })
+    } else {
+      this.loading = false
     }
   },
 
