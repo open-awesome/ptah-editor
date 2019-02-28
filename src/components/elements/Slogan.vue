@@ -26,8 +26,6 @@ export default {
   text-align: center
   justify-content: center
   flex-direction: column
-  &.is-editable
-    border: 1px dashed #18d88b
   .is-mobile &
     margin: 1rem auto
     height: auto
