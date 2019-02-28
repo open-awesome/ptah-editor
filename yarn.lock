@@ -1911,18 +1911,14 @@ atob@^2.1.1:
   version "2.1.2"
   resolved "https://registry.yarnpkg.com/atob/-/atob-2.1.2.tgz#6d9517eb9e030d2436666651e86bd9f6f13533c9"
 
-"authone-middleware-node@github:ProtocolONE/authone-middleware-node#master":
-  version "1.0.1"
-  resolved "https://codeload.github.com/ProtocolONE/authone-middleware-node/tar.gz/249a0ef6cbe0e1152f7201e148cb50e68389378e"
+"authone-jwt-verifier-node@github:ProtocolONE/authone-jwt-verifier-node#master":
+  version "1.1.0"
+  resolved "https://codeload.github.com/ProtocolONE/authone-jwt-verifier-node/tar.gz/9debb8951192d513cc05cf1ca204c6100a7166e0"
   dependencies:
     axios "^0.18.0"
-    ioredis "^4.6.2"
-    koa-unless "^1.0.7"
-    lodash "^4.17.11"
     lru-cache "^5.1.1"
     querystring "^0.2.0"
     string-template "^1.0.0"
-    url "^0.11.0"
 
 autoprefixer@^8.6.5:
   version "8.6.5"
@@ -6368,11 +6364,6 @@ koa-static@^5.0.0:
     debug "^3.1.0"
     koa-send "^5.0.0"
 
-koa-unless@^1.0.7:
-  version "1.0.7"
-  resolved "https://registry.yarnpkg.com/koa-unless/-/koa-unless-1.0.7.tgz#b9df375e2b4da3043918d48622520c2c0b79f032"
-  integrity sha1-ud83XitNowQ5GNSGIlIMLAt58DI=
-
 koa2-cors@^2.0.6:
   version "2.0.6"
   resolved "https://registry.yarnpkg.com/koa2-cors/-/koa2-cors-2.0.6.tgz#9ad23df3a0b9bb84530b46f5944f3fb576086554"
@@ -6863,6 +6854,14 @@ lsmod@1.0.0:
   version "1.0.0"
   resolved "https://registry.yarnpkg.com/lsmod/-/lsmod-1.0.0.tgz#9a00f76dca36eb23fa05350afe1b585d4299e64b"
   integrity sha1-mgD3bco26yP6BTUK/htYXUKZ5ks=
+
+mailchimp@^1.2.1:
+  version "1.2.1"
+  resolved "https://registry.yarnpkg.com/mailchimp/-/mailchimp-1.2.1.tgz#d1fc4ba4ca81d868228e2050be511c00b64b3cac"
+  integrity sha512-2qToqrSbsK8HXH+K5au4XsDO/m3XJD2Zf47va0Bnh7+QqzGXE7qQe7ajGvG1U8X5gc9u7hgU0unSBvFDS0RrGA==
+  dependencies:
+    qs "^6.2.0"
+    request "^2.72.0"
 
 make-dir@^1.0.0:
   version "1.3.0"
@@ -8501,7 +8500,7 @@ qs@6.5.1:
   version "6.5.1"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.1.tgz#349cdf6eef89ec45c12d7d5eb3fc0c870343a6d8"
 
-qs@^6.4.0:
+qs@^6.2.0, qs@^6.4.0:
   version "6.6.0"
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.6.0.tgz#a99c0f69a8d26bf7ef012f871cdabb0aee4424c2"
   integrity sha512-KIJqT9jQJDQx5h5uAVPimw6yVg2SekOKu959OCtktD3FjzbpvaPr8i4zzg07DOMz+igA4W/aNM7OV8H37pFYfA==
@@ -8880,9 +8879,10 @@ request@2.87.0:
     tunnel-agent "^0.6.0"
     uuid "^3.1.0"
 
-request@^2.87.0:
+request@^2.72.0, request@^2.87.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
+  integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
   dependencies:
     aws-sign2 "~0.7.0"
     aws4 "^1.8.0"
