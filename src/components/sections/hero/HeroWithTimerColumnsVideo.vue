@@ -39,7 +39,7 @@ const COMPONENTS = [
   },
   {
     name: 'Video',
-    element: types.Video,
+    element: types.VideoElement,
     type: 'video',
     class: 'b-video',
     label: 'video',
