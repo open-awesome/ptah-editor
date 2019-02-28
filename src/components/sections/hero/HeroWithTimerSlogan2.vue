@@ -90,15 +90,6 @@ const C_CUSTOM = [
         'height': '116px',
         'border-radius': '0',
         'font-weight': 'bold'
-      },
-      classes: ['ptah-a-tada'],
-      pseudo: {
-        hover: {
-          'background-color': 'rgba(0,0,0,0) !important',
-          'background-image': 'url(https://gn12.cdn.stg.gamenet.ru/0/7oE4o/o_1pJc5k.png) !important',
-          'color': 'rgba(255,255,255,1) !important',
-          'background-size': 'contain !important'
-        }
       }
     },
     key: 3
