@@ -28,12 +28,19 @@
           <control-size
             :height="elHeight"
             :width="elWidth"
-            :radius="elRadius"
             :expand="expandedSize"
             @open="onExpand"
             @change="styleChange"
             >
           </control-size>
+        </div>
+
+        <!-- Border radius -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.shape">
+          <control-border-radius
+            :radius="elRadius"
+            >
+          </control-border-radius>
         </div>
 
         <!-- Text -->
@@ -129,6 +136,7 @@ import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 import ControlIconWithText from './controls/TheControlIconWithText.vue'
 import ControlVideo from './controls/ControlVideo'
+import ControlBorderRadius from './controls/TheControlBorderRadius'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -151,7 +159,8 @@ export default {
     ControlAgeRestrictions,
     ControlSocialNetworks,
     ControlIconWithText,
-    ControlVideo
+    ControlVideo,
+    ControlBorderRadius
   },
 
   data () {
@@ -385,7 +394,7 @@ export default {
     min-width: 24rem
     padding-right: 2.5rem
     padding-bottom: 10rem
-    
+
   &__control
     margin-bottom: 1.6rem
 
