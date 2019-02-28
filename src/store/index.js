@@ -21,7 +21,9 @@ const state = {
     settings: {}
   },
   isSaved: false,
-  slug: ''
+  slug: '', // landing ID
+  name: '',
+  version: null // landing version
 }
 
 const getters = {
@@ -42,6 +44,7 @@ const actions = {
       url: 'landings',
       method: 'get'
     }).then((response) => {
+      this.$Progress.increase(50)
       commit('updateLandings', response.landings)
       return response.landings
     })
@@ -61,7 +64,12 @@ const actions = {
       method: 'get'
     })
       .then((data) => {
-        const landing = data.landing
+        let landing = data.landing
+
+        if (typeof landing === 'string') {
+          landing = JSON.parse(landing)
+        }
+
         landing.settings = _.defaultsDeep(landing.settings, {
           ogTags: [],
           video: '',
@@ -88,6 +96,8 @@ const actions = {
         })
         commit('isSaved', false)
         commit('updateCurrentLanding', landing)
+        commit('name', data.name)
+        commit('version', data.currentVersion)
         return landing
       })
       .catch((error) => {
@@ -141,7 +151,7 @@ const actions = {
    * @param commit
    * @param data - JSON representation of the builder
    */
-  saveLanding ({ state, commit }, data) {
+  saveLanding: _.throttle(({ state, commit }, data) => {
     // @todo save all data in the store properyly
     const parsedData = JSON.parse(data)
     const mergedData = {
@@ -150,11 +160,20 @@ const actions = {
     }
     const resultDataString = JSON.stringify(mergedData)
 
-    return api.saveLanding(state.slug, resultDataString)
-      .then(() => {
+    return api.request({
+      url: `landings/${state.slug}`,
+      method: 'patch',
+      params: {
+        name: state.name,
+        baseVersion: state.version,
+        landing: resultDataString
+      }
+    })
+      .then((data) => {
+        commit('version', data.currentVersion)
         return commit('isSaved', true)
       })
-  },
+  }, 800),
 
   /**
    * Stores settings data
@@ -190,6 +209,14 @@ const mutations = {
 
   slug (state, value) {
     state.slug = value
+  },
+
+  name (state, value) {
+    state.name = value
+  },
+
+  version (state, value) {
+    state.version = value
   }
 }
 

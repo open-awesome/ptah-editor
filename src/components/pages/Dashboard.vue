@@ -17,6 +17,14 @@ export default {
         {
           type: 'Skull',
           sections: ['Skull']
+        },
+        {
+          type: 'Products',
+          sections: ['ProductsColumns']
+        },
+        {
+          type: 'Game',
+          sections: ['System']
         }
       ],
       presetSelected: 0,
@@ -39,6 +47,7 @@ export default {
 
     openLanding (item) {
       // add log
+      this.$Progress.start()
       this.$router.push({ path: `/editor/${item._id}` })
     },
 
@@ -57,7 +66,10 @@ export default {
     }
   },
   created () {
-    this.fetchLandings()
+    this.$Progress.start()
+    this.fetchLandings().then(() => {
+      this.$Progress.finish()
+    })
   }
 }
 </script>

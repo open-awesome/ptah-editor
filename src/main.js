@@ -6,6 +6,7 @@ import Vue from 'vue'
 import Vuex from 'vuex'
 import VueI18n from 'vue-i18n'
 import VueScrollTo from 'vue-scrollto'
+import VueProgressBar from 'vue-progressbar'
 
 import axios from 'axios'
 
@@ -48,6 +49,12 @@ const i18n = new VueI18n({
   locale: 'en',
   messages,
   fallbackLocale: 'en'
+})
+
+Vue.use(VueProgressBar, {
+  color: 'rgb(34, 117, 215, .86)',
+  failedColor: 'red',
+  height: '3px'
 })
 
 // request interceptor

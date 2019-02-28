@@ -18,64 +18,6 @@ export default {
       })
   },
 
-  getLandingsList () {
-    return new Promise((resolve) => {
-      resolve([
-        {
-          slug: 'Landing',
-          theme: {
-            name: 'Landing',
-            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns', 'Footer']
-          }
-        },
-        {
-          slug: 'Skull',
-          theme: {
-            name: 'Skull',
-            sections: ['HeroSkull']
-          }
-        },
-        {
-          slug: 'Products',
-          theme: {
-            name: 'Products',
-            sections: ['ProductsColumns']
-          }
-        },
-        {
-          slug: 'Game',
-          theme: {
-            name: 'Game',
-            sections: ['System']
-          }
-        }
-      ])
-    })
-  },
-
-  saveLanding (slug, data) {
-    return new Promise((resolve) => {
-      localStorage.removeItem(slug)
-      localStorage.setItem(slug, data)
-      resolve(true)
-    })
-  },
-
-  getLanding (slug) {
-    return new Promise((resolve) => {
-      let landing = {}
-
-      if (localStorage.getItem(slug) !== null) {
-        landing = localStorage.getItem(slug)
-        resolve(JSON.parse(landing))
-      } else {
-        return this.getLandingsList().then((data) => {
-          resolve(data.filter(item => item.slug === slug)[0])
-        })
-      }
-    })
-  },
-
   /**
    * upload image to gamenet cdn
    * @param request FormData

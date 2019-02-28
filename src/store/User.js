@@ -1,4 +1,5 @@
 import axios from 'axios'
+import router from '@src/router'
 
 export default {
   state: {
@@ -59,7 +60,7 @@ export default {
       localStorage.removeItem('token')
       commit('setAuth', false)
       commit('setToken', '')
-      // TODO: go to login page
+      router.push({ path: `/login` })
     }
   },
 
