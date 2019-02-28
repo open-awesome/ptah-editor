@@ -27,7 +27,7 @@
     >
   </video>
 
-  <div class="b-video__help">You can drag</div>
+  <div class="b-video__help" contenteditable="false">You can drag</div>
 </div>
 </template>
 
@@ -123,12 +123,15 @@ export default {
       margin: $size-step/4 auto
       width: 100% !important
       height: $size-step*5 !important
-  & > iframe,
-  & > video,
+  & > iframe
     position: relative
     width: 110%
     height: 110%
     margin: -5% 0 0 -5%
+  & > video
+    width: 100%
+    height: 100%
+    position: relative
   &.is-editable:hover
     opacity: 0.6
     & iframe,
