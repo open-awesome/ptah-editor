@@ -10,16 +10,11 @@ const LIST_FONTS = [
 
 export default {
   props: {
-    expand: {
-      type: Boolean,
-      required: true
-    },
     isComplexText: Boolean
   },
 
   data () {
     return {
-      controlOpen: false,
       fontName: {},
       size: {},
       sizes: [
@@ -72,12 +67,6 @@ export default {
     this.controlOpen = this.expand
   },
 
-  watch: {
-    expand () {
-      this.controlOpen = this.expand
-    }
-  },
-
   computed: {
     ...mapState('Sidebar', [
       'settingObjectSection',
@@ -104,14 +93,14 @@ export default {
   methods: {
     changeFont () {
       this.styles['font-family'] = this.fontName.value
-          
+
       if (this.isComplexText) {
         this.changeStyleAll('font-family', this.fontName.value)
-      }    
+      }
     },
     changeSize () {
       this.styles['font-size'] = this.size.value
-          
+
       if (this.isComplexText) {
         this.changeStyleAll('font-size', `${this.size.value}rem`)
       }
@@ -119,7 +108,7 @@ export default {
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.styles['color'] = color
-          
+
       if (this.isComplexText) {
         this.changeStyleAll('color', color)
       }
@@ -137,12 +126,9 @@ export default {
             this.changeStyleAll(style.value.prop, style.value.base)
           } else {
             this.styles[style.value.prop] = style.value.base
-          }    
+          }
         }
       })
-    },
-    onClickTitle () {
-      this.$emit('open', ['Font', !this.controlOpen])
     },
     changeStyleAll (style, value) {
       let data = this.settingObjectSection.data
@@ -181,26 +167,18 @@ export default {
 
 <template>
   <div class="b-text-controls">
-    <div class="b-text-controls__header" @click="onClickTitle">
-      <span>Text</span>
-      <i :class="{ 'dropped': !controlOpen }">
-        <icon-base name="arrowDropDown" width="8"></icon-base>
-      </i>
+    <div class="b-text-controls__control">
+      <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont"></base-select>
     </div>
-    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
-      <div class="b-text-controls__control">
-        <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont"></base-select>
-      </div>
-      <div class="b-text-controls__control">
-        <base-select label="Font Size" :options="sizes" v-model="size" @input="changeSize"></base-select>
-      </div>
-      <div class="b-text-controls__control">
-        <base-color-picker label="Font color" v-model="color" @change="changeColor"></base-color-picker>
-      </div>
-      <div class="b-text-controls__control">
-        <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
-      </div>
-    </base-dropdown>
+    <div class="b-text-controls__control">
+      <base-select label="Font Size" :options="sizes" v-model="size" @input="changeSize"></base-select>
+    </div>
+    <div class="b-text-controls__control">
+      <base-color-picker label="Font color" v-model="color" @change="changeColor"></base-color-picker>
+    </div>
+    <div class="b-text-controls__control">
+      <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
+    </div>
   </div>
 </template>
 

@@ -25,7 +25,7 @@ export default {
   }),
   computed: {
     colorFill: function () {
-      return this.showOptions ? '#0B99FF' : '#888888'
+      return this.showOptions ? '#C6C6C6' : '#C6C6C6'
     },
     filteredOptions () {
       return this.valueSearch ?
@@ -87,11 +87,12 @@ export default {
 .b-pth-base-select
   height: 2.5rem
   background-color: transparent
-  border-bottom: 1px solid #888
+  border-bottom: 1px solid rgba($black, 0.15)
   display: flex
   max-width: 50rem
   cursor: pointer
   position: relative
+  letter-spacing: -0.02em
   width: 100%
   font-family: Lato, Helvetica, Arial, sans-serif
   & *
@@ -104,7 +105,7 @@ export default {
   &__name
     font-size: 1.6rem
     line-height: 2.4rem
-    color: #272727
+    color: $dark-grey
     padding: 0 0.6rem 0 0
     cursor: pointer
     & input

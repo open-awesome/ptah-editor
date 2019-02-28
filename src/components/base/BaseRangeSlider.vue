@@ -91,9 +91,6 @@ $knob-shadow: 0px 2px 8px rgba($cornflower-blue, 0.2)
     color: $dark-grey
 
     white-space: nowrap
-    &::last-letter
-      color: $grey-middle
-
   /deep/
     .range-slider
       box-sizing: border-box

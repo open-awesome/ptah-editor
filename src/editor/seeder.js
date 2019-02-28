@@ -21,6 +21,7 @@ const DEFAULT_OPTIONS = {
   background: false,
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
+  isHoverAnim: false, // hover anim for button/link
   isComplex: false,
   video: false,
 
@@ -152,6 +153,7 @@ const data = new Map([
         'color': ''
       }
     },
+    isHoverAnim: true,
     animation: {
       value: ''
     }
@@ -180,7 +182,7 @@ const data = new Map([
       canCopy: true,
       resizable: true,
       hasLink: true,
-      aligned: true,
+      aligned: false,
       typography: true,
       background: true,
       shape: true,
@@ -195,6 +197,7 @@ const data = new Map([
         }
       },
       text: 'Click Me!',
+      isHoverAnim: true,
       animation: {
         value: ''
       },

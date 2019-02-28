@@ -8,16 +8,11 @@ export default {
     height: {
       type: [Number, String],
       require: true
-    },
-    expand: {
-      type: Boolean,
-      required: true
     }
   },
 
   data () {
     return {
-      controlOpen: false,
       elHeight: 0,
       elWidth: 0
     }
@@ -26,13 +21,6 @@ export default {
   created () {
     this.elHeight = this.height ? parseInt(this.height) : 0
     this.elWidth = this.width ? parseInt(this.width) : 0
-    this.controlOpen = this.expand
-  },
-
-  watch: {
-    expand () {
-      this.controlOpen = this.expand
-    }
   },
 
   methods: {
@@ -46,10 +34,6 @@ export default {
       if (this.elWidth > 0) {
         this.$emit('change', ['width', `${this.elWidth}px`])
       }
-    },
-
-    onClickTitle () {
-      this.$emit('open', ['Size', !this.controlOpen])
     }
   }
 }
@@ -57,21 +41,16 @@ export default {
 
 <template>
   <div class="b-size-controls">
-    <div class="b-size-controls__header" @click="onClickTitle">
-      <span>Visual</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+    <div class="b-size-controls__control">
+      <base-range-slider v-model="elHeight" label="Height" step="8" min="20" max="320" @change="changeHeight">
+        {{elHeight}} px
+      </base-range-slider>
     </div>
-    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
-      <div class="b-size-controls__control">
-        <base-range-slider v-model="elHeight" label="Height" step="8" min="20" max="320" @change="changeHeight">
-          {{elHeight}} px
-        </base-range-slider>
-      </div>
-      <div class="b-size-controls__control">
-        <base-range-slider v-model="elWidth" label="Width" step="8" min="64" max="320" @change="changeWidth">
-          {{elWidth}} px
-        </base-range-slider>
-      </div>
-    </base-dropdown>
+    <div class="b-size-controls__control">
+      <base-range-slider v-model="elWidth" label="Width" step="8" min="64" max="320" @change="changeWidth">
+        {{elWidth}} px
+      </base-range-slider>
+    </div>
   </div>
 </template>
 

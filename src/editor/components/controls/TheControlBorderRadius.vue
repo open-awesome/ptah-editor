@@ -2,13 +2,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  props: {
-    radius: {
-      type: [Number, String],
-      require: true
-    }
-  },
-
   data () {
     return {
       elRadius: 0
@@ -53,7 +46,4 @@ export default {
   margin-top: 2.2rem
   &__px
     color: $grey-middle
-  /deep/
-    .b-base-label
-      color: $grey-middle
 </style>

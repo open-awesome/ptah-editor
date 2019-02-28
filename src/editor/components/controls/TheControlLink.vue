@@ -8,16 +8,11 @@ export default {
   name: 'TheControlLink',
 
   props: {
-    builder: Object,
-    expand: {
-      type: Boolean,
-      required: true
-    }
+    builder: Object
   },
 
   data () {
     return {
-      controlOpen: false,
       link: '',
       behavior: '',
       target: '',
@@ -56,12 +51,6 @@ export default {
         { name: 'Smooth', value: 'smooth' }
       ],
       scrollBehavior: { name: 'Auto', value: 'auto' }
-    }
-  },
-
-  watch: {
-    expand () {
-      this.controlOpen = this.expand
     }
   },
 
@@ -319,10 +308,6 @@ export default {
 
 <template>
   <div class="b-link-controls">
-    <div class="b-link-controls__header" @click="onClickTitle">
-      <span>Action</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
-    </div>
-    <base-dropdown :isOpened="controlOpen"  :hasOverflow="controlOpen">
       <!-- action -->
       <div class="b-link-controls__control">
         <base-select label="Action" :options="actionList" v-model="action" @input="changeAction"></base-select>
@@ -382,7 +367,6 @@ export default {
       <div class="b-link-controls__control">
         <base-select label="Animation" :options="animationList" v-model="animationClass" @input="changeAnimation"></base-select>
       </div>
-    </base-dropdown>
   </div>
 </template>
 

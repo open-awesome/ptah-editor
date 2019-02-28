@@ -23,32 +23,9 @@
           </control-align>
         </div>
 
-        <!-- Size -->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
-          <control-size
-            :height="elHeight"
-            :width="elWidth"
-            :expand="expandedSize"
-            @open="onExpand"
-            @change="styleChange"
-            >
-          </control-size>
-        </div>
-
-        <!-- Border radius -->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.shape">
-          <control-border-radius
-            :radius="elRadius"
-            >
-          </control-border-radius>
-        </div>
-
-        <!-- Text -->
+        <!-- Typography-->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-          <control-text
-            :expand="expandedFont"
-            @open="onExpand"
-            @change="styleChange"></control-text>
+          <control-text/>
         </div>
 
         <!-- background -->
@@ -63,10 +40,30 @@
             @change="styleChange"></control-background>
         </div>
 
-        <!-- Link -->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
-          <control-link :builder="builder" :expand="expandedLink" @open="onExpand"/>
+        <!-- Size -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
+          <control-size
+            :height="elHeight"
+            :width="elWidth"
+            @change="styleChange"
+            >
+          </control-size>
         </div>
+
+        <!-- Border radius -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.shape">
+          <control-border-radius/>
+        </div>
+
+        <!-- Hover animation -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.isHoverAnim">
+          <control-hover-animation/>
+        </div>
+
+        <!-- Link -->
+        <!--div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
+          <control-link :builder="builder" :expand="expandedLink" @open="onExpand"/>
+        </div-->
 
         <!-- Available Platforms Control-->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
@@ -137,6 +134,7 @@ import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 import ControlIconWithText from './controls/TheControlIconWithText.vue'
 import ControlVideo from './controls/ControlVideo'
 import ControlBorderRadius from './controls/TheControlBorderRadius'
+import ControlHoverAnimation from './controls/TheControlHoverAnimation'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -160,7 +158,8 @@ export default {
     ControlSocialNetworks,
     ControlIconWithText,
     ControlVideo,
-    ControlBorderRadius
+    ControlBorderRadius,
+    ControlHoverAnimation
   },
 
   data () {

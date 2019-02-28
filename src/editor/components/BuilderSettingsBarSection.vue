@@ -22,19 +22,6 @@
       >
       </control-section-products>
 
-     <!-- Font -->
-      <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-        <control-text
-          :fontSize="fontSize"
-          :fontFamily="fontFamily"
-          :fontColor="fontColor"
-          :fontStyles="styles"
-          :expand="expandedFont"
-          :isComplexText="isComplexText"
-          @open="onExpand"
-          @change="styleChange"></control-text>
-      </div>
-
       <div v-if="!isHeader" class="b-section-settings__control">
         <div class="b-section-settings__header">
           <span>Heights</span>
@@ -203,7 +190,6 @@ import { mapState, mapActions, mapMutations } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
-import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
 import BaseUploader from '../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './BuilderSettingsBarGroup'
@@ -223,7 +209,6 @@ export default {
     BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
-    ControlText,
     ControlSectionLayouts
   },
   name: 'BuilderSettingsBarSection',
