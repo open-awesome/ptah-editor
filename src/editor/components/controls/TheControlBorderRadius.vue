@@ -1,4 +1,6 @@
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
     radius: {
@@ -13,15 +15,23 @@ export default {
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ]),
+
+    styles () {
+      return this.settingObjectOptions.styles
+    }
+  },
+
   created () {
-    this.elRadius = this.radius ? parseInt(this.radius) : 0
+    this.elRadius = this.radius ? parseInt(this.styles['border-radius']) : 0
   },
 
   methods: {
     changeRadius () {
-      if (this.elRadius > 0) {
-        this.$emit('change', ['border-radius', `${this.elRadius}px`])
-      }
+      this.styles['border-radius'] = `${this.elRadius}px`
     }
   }
 }
@@ -30,7 +40,7 @@ export default {
 <template>
   <div class="b-border-radius-control">
     <base-range-slider v-model="elRadius" label="Corner radius" step="1" min="0" max="100" @change="changeRadius">
-      {{elRadius}} <span class="b-border-radius-control__px">px</span>
+      {{ elRadius }} <span class="b-border-radius-control__px">px</span>
     </base-range-slider>
   </div>
 </template>

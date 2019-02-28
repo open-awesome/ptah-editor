@@ -9,10 +9,6 @@ export default {
       type: [Number, String],
       require: true
     },
-    radius: {
-      type: [Number, String],
-      require: true
-    },
     expand: {
       type: Boolean,
       required: true
@@ -23,15 +19,13 @@ export default {
     return {
       controlOpen: false,
       elHeight: 0,
-      elWidth: 0,
-      elRadius: 0
+      elWidth: 0
     }
   },
 
   created () {
     this.elHeight = this.height ? parseInt(this.height) : 0
     this.elWidth = this.width ? parseInt(this.width) : 0
-    this.elRadius = this.radius ? parseInt(this.radius) : 0
     this.controlOpen = this.expand
   },
 
@@ -51,12 +45,6 @@ export default {
     changeWidth () {
       if (this.elWidth > 0) {
         this.$emit('change', ['width', `${this.elWidth}px`])
-      }
-    },
-
-    changeRadius () {
-      if (this.elRadius > 0) {
-        this.$emit('change', ['border-radius', `${this.elRadius}px`])
       }
     },
 
@@ -81,11 +69,6 @@ export default {
       <div class="b-size-controls__control">
         <base-range-slider v-model="elWidth" label="Width" step="8" min="64" max="320" @change="changeWidth">
           {{elWidth}} px
-        </base-range-slider>
-      </div>
-      <div class="b-size-controls__control">
-        <base-range-slider v-model="elRadius" label="Border radius" step="1" min="0" max="100" @change="changeRadius">
-          {{elRadius}} px
         </base-range-slider>
       </div>
     </base-dropdown>
