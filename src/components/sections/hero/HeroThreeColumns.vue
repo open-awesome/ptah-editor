@@ -87,6 +87,20 @@ import { merge } from 'lodash-es'
 import section from '../../mixins/section.js'
 
 const [name, group, cover] = ['HeroThreeColumns', 'Hero', '/img/covers/hero-three-columns.png']
+
+/**
+ * Base keys for elements in Hero sections
+ * Logo - 0
+ * Title - 1
+ * Description - 2
+ * Button - 3
+ * Available Platforms - 4
+ * Video - 5
+ * Slogan - 6
+ * Link - 7
+ * Delimiter- 8
+ * Timer - 9
+ * */
 const defaultColumnComponents1 = [
   {
     element: {
@@ -366,12 +380,10 @@ $h: 100vh
   box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
   .is-mobile &,
   .is-tablet &
-    width: 80% !important
     height: 4rem !important
     font-size: 1.4rem !important
   @media only screen and (max-width: 768px)
     &
-      width: 80% !important
       height: 4rem !important
       font-size: 1.4rem !important
 </style>

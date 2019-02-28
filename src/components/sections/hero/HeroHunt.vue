@@ -3,6 +3,19 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import section from '../../mixins/section.js'
 
+/**
+ * Base keys for elements in Hero sections
+ * Logo - 0
+ * Title - 1
+ * Description - 2
+ * Button - 3
+ * Available Platforms - 4
+ * Video - 5
+ * Slogan - 6
+ * Link - 7
+ * Delimiter- 8
+ * Timer - 9
+ * */
 const C_CUSTOM = [
   {
     element: {

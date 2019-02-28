@@ -4,8 +4,8 @@ import * as _ from 'lodash-es'
 import section from '../../mixins/section.js'
 
 const GROUP_NAME = 'Hero'
-const NAME = 'HeroSkull'
-const BG_SECTION = 'url(https://gn685.cdn.stg.gamenet.ru/0/7MZzz/o_bJr44.jpg)'
+const NAME = 'HeroWithTimerColumnsVideo'
+const BG_SECTION = 'url(https://gn728.cdn.stg.gamenet.ru/0/7oAt2/o_1A6qDa.jpg)'
 
 /**
  * Base keys for elements in Hero sections
@@ -30,6 +30,25 @@ const COMPONENTS = [
     key: 0
   },
   {
+    name: 'Delimiter',
+    element: types.Delimiter,
+    type: 'delimiter',
+    class: 'b-delimiter',
+    label: 'delimiter',
+    key: 8
+  },
+  {
+    name: 'Video',
+    element: types.VideoElement,
+    type: 'video',
+    class: 'b-video',
+    label: 'video',
+    key: 5
+  }
+]
+
+const COMPONENTS_2 = [
+  {
     name: 'Title',
     element: types.Title,
     type: 'text',
@@ -46,20 +65,28 @@ const COMPONENTS = [
     key: 2
   },
   {
+    name: 'Delimiter',
+    element: types.Delimiter,
+    type: 'delimiter',
+    class: 'b-delimiter',
+    label: 'delimiter',
+    key: 10
+  },
+  {
+    name: 'Timer',
+    element: types.Timer,
+    type: 'timer',
+    class: 'b-timer',
+    label: 'Timer',
+    key: 9
+  },
+  {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button',
     label: 'button',
     key: 3
-  },
-  {
-    name: 'AvailablePlatforms',
-    element: types.AvailablePlatforms,
-    type: 'available',
-    class: 'b-available-platforms',
-    label: 'Available Platforms',
-    key: 4
   }
 ]
 
@@ -67,21 +94,38 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn582.cdn.stg.gamenet.ru/0/7MYK7/o_Chxze.svg")',
+        'background-image': 'url(https://gn710.cdn.stg.gamenet.ru/0/7oAyH/o_2HZnCR.png)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '74px',
-        'height': '88px'
+        'width': '224px',
+        'height': '124px'
       }
     },
     key: 0
   },
   {
     element: {
-      text: 'This is a short header',
       styles: {
-        'font-family': 'Heebo',
+        'height': '276px'
+      }
+    },
+    key: 8
+  },
+  {
+    element: {
+      src: 'https://gn553.cdn.stg.gamenet.ru/0/7aJD3/o_1Od7Vf.mp4'
+    },
+    key: 5
+  }
+]
+
+const C_CUSTOM_2 = [
+  {
+    element: {
+      text: 'Excellent title',
+      styles: {
+        'font-family': 'PT Serif',
         'font-size': '5.6rem',
         'color': '#ffffff'
       }
@@ -101,11 +145,22 @@ const C_CUSTOM = [
   },
   {
     element: {
-      text: 'Call to Action',
       styles: {
-        'background-color': '#FF6D64',
+        'height': '132px'
+      }
+    },
+    key: 10
+  },
+  {
+    key: 9
+  },
+  {
+    element: {
+      text: 'Play Now',
+      styles: {
+        'background-color': 'rgba(159,104,5,1)',
         'color': '#ffffff',
-        'font-family': 'Heebo',
+        'font-family': 'PT Serif',
         'text-align': 'center',
         'font-size': '2rem',
         'width': '352px',
@@ -114,39 +169,6 @@ const C_CUSTOM = [
       }
     },
     key: 3
-  },
-  {
-    element: {
-      availablePlatforms: {
-        'windows': {
-          name: 'Windows',
-          visible: true
-        },
-        'apple': {
-          name: 'Apple',
-          visible: true
-        },
-        'linuxfull': {
-          name: 'Linux',
-          visible: false
-        },
-        'steam': {
-          name: 'Steam',
-          visible: false
-        },
-        'gog': {
-          name: 'GOG Galaxy',
-          visible: false
-        }
-      },
-      colorFill: {
-        color: '#fff'
-      },
-      sizeIcons: {
-        width: 15
-      }
-    },
-    key: 4
   }
 ]
 
@@ -158,10 +180,13 @@ const SCHEMA_CUSTOM = {
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll'
-    }
+    },
+    classes: ['full-height']
   },
   components: _.merge([], C_CUSTOM),
+  components2: _.merge([], C_CUSTOM_2),
   container: {},
+  container2: {},
   edited: true
 }
 
@@ -172,12 +197,14 @@ export default {
 
   mixins: [section],
 
-  cover: '/img/covers/hero-skull.jpg',
+  cover: '/img/covers/hero-with-timer-columns-video.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
-    components: COMPONENTS
+    container2: types.StyleObject,
+    components: COMPONENTS,
+    components2: COMPONENTS_2
   },
 
   created () {
@@ -193,21 +220,20 @@ export default {
 
 <template>
   <section
-    class="b-hero-skull"
+    class="b-hero-with-timer-two-columns"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
-  >
+    >
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-12">
+        <div class="b-grid__col-6">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
               direction="column"
               class="b-sandbox">
-
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
@@ -237,44 +263,91 @@ export default {
             </draggable>
           </sandbox>
         </div>
+        <div class="b-grid__col-6">
+          <sandbox
+            container-path="$sectionData.container2"
+            components-path="$sectionData.components2"
+            direction="column"
+            class="b-sandbox">
+            <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
+              <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
+                <component
+                  v-if="$sectionData.components2[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
+                  :is="component.name"
+                  :href="$sectionData.components2[index].element.link.href"
+                  :target="$sectionData.components2[index].element.link.target"
+                  :style="$sectionData.components2[index].element.styles"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                  :path="`components2[${index}].element`"
+                  >
+                </component>
+                <component
+                  v-if="!$sectionData.components2[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
+                  v-html="$sectionData.components2[index].element.text"
+                  :is="component.name"
+                  :href="$sectionData.components2[index].element.link.href"
+                  :target="$sectionData.components2[index].element.link.target"
+                  :style="$sectionData.components2[index].element.styles"
+                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
+                  :path="`components2[${index}].element`"
+                  >
+                </component>
+              </div>
+            </draggable>
+          </sandbox>
+        </div>
       </div>
     </div>
   </section>
 </template>
 
 <style lang="sass" scoped>
-.b-hero-skull
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
+.b-hero-with-timer-two-columns
   position: relative
+
   width: 100%
-  min-height: 56rem
+  min-height: $size-step*1.75*10
   margin: 0
-  padding-bottom: 8rem
-  display: flex
+  padding-bottom: $size-step/4
+
   text-align: center
+
+  display: flex
   justify-content: center
   align-items: center
   flex-direction: column
+
   transition: background 200ms
   .is-mobile &,
   .is-tablet &
     position: relative
     height: auto
-    padding: 2rem 0 1rem
+    padding: $size-step/2 0 $size-step/4
   @media only screen and (max-width: 768px)
     &
       position: relative
       height: auto
       padding: 2rem 0 1rem
 .b-logo
+  .is-mobile &
+    max-width: $size-step*7.5 !important
+  @media only screen and (max-width: 768px)
+    &
+      max-width: $size-step*7.5 !important
 .b-title
-  color: rgb(255, 255, 255)
+  color: rgba($white, 1)
   font-style: normal
   font-weight: 800
   font-size: 3.2rem
   text-align: center
   letter-spacing: 0.2em
   text-transform: uppercase
-  text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
+  text-shadow: 0 1.6rem 0.8rem rgba($black, 0.15)
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important
@@ -284,7 +357,7 @@ export default {
       font-size: 2rem !important
       padding: 0 1rem
 .b-text
-  color: rgba(255, 255, 255, 0.3)
+  color: rgba($white, 0.3)
   font-size: 2rem
   text-align: center
   .is-mobile &,
@@ -295,62 +368,39 @@ export default {
       font-size: 1.4rem !important
 .b-button
   color: #fff
-  font-family: Heebo
+  font-family: 'PT Serif'
   font-style: normal
   font-size: 1.6rem
   text-align: center
   letter-spacing: 0.2em
+  text-transform: uppercase
+
   width: auto
   height: auto
   background-color: rgb(255, 109, 100)
   box-shadow: none
-  margin: 1.6rem
+  margin: $size-step/2
   padding: 0
-  width: 35.2rem
-  height: 6.4rem
+  width: $size-step*10
+  height: $size-step
   min-width: auto
   min-height: auto
-  text-transform: uppercase
+
+  background-color: rgb(255, 109, 100)
+  box-shadow: none
   border-radius: 2px
-  text-align: center
 
 .b-sandbox
-  min-height: 36.5rem
-  padding: 5rem 0
-  justify-content: flex-start
-  align-items: center
-  max-width: 118.4rem
+  align-items: flex-start
+  min-height: $size-step*5
+  padding: $size-step/2 0
   width: 100%
   .is-mobile &,
   .is-tablet &
-    padding: 1rem 0
+    padding: $size-step/4 0
   @media only screen and (max-width: 768px)
     &
-      padding: 1rem 0
-.b-footer
-  // overflow: hidden
-  position: absolute
-  bottom: 0
-  left: 0
-  right: 0
-  background-color: #0C173C
-  &__row
-    align-items: center
-  &__col
-    min-height: auto
-  &-logo,
-  &-game-logo
-  &-copyright
-  .is-mobile &,
-  .is-tablet &
-    position: relative
-    height: auto
-  @media only screen and (max-width: 768px)
-    &
-      position: relative
-      height: auto
-
-.b-footer-component
+      padding: $size-step/4 0
 
 /deep/
   .b-draggable-slot
@@ -358,7 +408,7 @@ export default {
     display: flex
     text-align: center
     justify-content: center
-    align-items: center
+    align-items: flex-start
     flex-direction: column
 
 </style>

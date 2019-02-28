@@ -47,14 +47,19 @@
               @click="toggleSettingsBar(headerSection)"
               class="b-menu-subitem--header"
             >
-            # - {{ headerSection.name }}
-            <div>
-              <span
-                @click.stop="toggleSettingsBar(headerSection)">
+            # -
+            <span class="b-menu-subitem__title-text">
+              {{ headerSection.name }}
+            </span>
+            <div class="b-menu-subitem__icons">
+              <span class="b-menu-subitem__icon"
+                @click.stop="toggleSettingsBar(headerSection)"
+                >
                 <icon-base name="edit" color="#ffffff"></icon-base>
               </span>
-              <span
-                @click.stop="deleteSection(headerSection)">
+              <span class="b-menu-subitem__icon"
+                @click.stop="deleteSection(headerSection)"
+                >
                 <icon-base name="remove" color="#ffffff"></icon-base>
               </span>
             </div>
@@ -75,14 +80,19 @@
               :section-id="section.id"
               @click="selectSection(section)"
             >
-            {{`${ index + 1 } - `}} {{ section.name }}
-            <div>
-              <span
-                @click.stop="toggleSettingsBar(section)">
+            {{ `${ index + 1 } - `}}
+            <span class="b-menu-subitem__title-text">
+              {{ section.name }}
+            </span>
+            <div class="b-menu-subitem__icons">
+              <span class="b-menu-subitem__icon"
+                @click.stop="toggleSettingsBar(section)"
+                >
                 <icon-base name="edit" color="#ffffff"></icon-base>
               </span>
-              <span
-                @click.stop="deleteSection(section)">
+              <span class="b-menu-subitem__icon"
+                @click.stop="deleteSection(section)"
+                >
                 <icon-base name="remove" color="#ffffff"></icon-base>
               </span>
             </div>
