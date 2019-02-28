@@ -44,8 +44,8 @@ const actions = {
       url: 'landings',
       method: 'get'
     }).then((response) => {
-      this.$Progress.increase(50)
       commit('updateLandings', response.landings)
+      // this.$Progress.increase(50)
       return response.landings
     })
   },
