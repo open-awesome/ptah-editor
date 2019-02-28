@@ -38,7 +38,7 @@ const COMPONENTS = [
     key: 8
   },
   {
-    name: 'Video',
+    name: 'VideoElement',
     element: types.VideoElement,
     type: 'video',
     class: 'b-video',
