@@ -137,10 +137,7 @@ export default {
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle">
-    <div class="b-div">
-      &nbsp;
-    </div>
-
+    <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
         <div class="b-grid__col-12">
@@ -150,7 +147,7 @@ export default {
             direction="column"
             class="b-sandbox"
           >
-            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+            <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"
                   v-if="$sectionData.components[index].element.isComplex"
@@ -190,7 +187,7 @@ export default {
             direction="column"
             class="b-sandbox"
           >
-            <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
+            <draggable v-model="$sectionData.components2" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component class="b-hero-component"
                   v-if="$sectionData.components2[index].element.isComplex"
