@@ -100,7 +100,6 @@ export default {
     ]),
 
     onClickTitle () {
-      console.log(1)
       this.$emit('open', ['Video', !this.controlOpen])
     },
 
