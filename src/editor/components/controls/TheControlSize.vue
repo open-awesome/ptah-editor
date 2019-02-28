@@ -1,4 +1,6 @@
 <script>
+import { mapState } from 'vuex'
+
 export default {
   props: {
     width: {
@@ -24,7 +26,18 @@ export default {
       controlOpen: false,
       elHeight: 0,
       elWidth: 0,
-      elRadius: 0
+      elRadius: 0,
+      isShape: false
+    }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ]),
+
+    shape () {
+      return this.settingObjectOptions.shape
     }
   },
 
@@ -33,6 +46,8 @@ export default {
     this.elWidth = this.width ? parseInt(this.width) : 0
     this.elRadius = this.radius ? parseInt(this.radius) : 0
     this.controlOpen = this.expand
+
+    this.isShape = this.shape
   },
 
   watch: {
@@ -74,16 +89,16 @@ export default {
     </div>
     <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <div class="b-size-controls__control">
-        <base-range-slider v-model="elHeight" label="Height" step="8" min="20" max="620" @change="changeHeight">
+        <base-range-slider v-model="elHeight" label="Height" step="8" min="20" max="640" @change="changeHeight">
           {{elHeight}} px
         </base-range-slider>
       </div>
       <div class="b-size-controls__control">
-        <base-range-slider v-model="elWidth" label="Width" step="8" min="64" max="620" @change="changeWidth">
+        <base-range-slider v-model="elWidth" label="Width" step="8" min="64" max="640" @change="changeWidth">
           {{elWidth}} px
         </base-range-slider>
       </div>
-      <div class="b-size-controls__control">
+      <div class="b-size-controls__control" v-if="isShape">
         <base-range-slider v-model="elRadius" label="Border radius" step="1" min="0" max="100" @change="changeRadius">
           {{elRadius}} px
         </base-range-slider>

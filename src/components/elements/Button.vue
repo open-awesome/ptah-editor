@@ -33,8 +33,6 @@ export default {
   cursor: pointer
   transition: background-color 200ms
   text-decoration: none
-  &.is-editable
-    border: 1px dashed #18d88b
   &:hover
     filter: brightness(120%)
   &:active

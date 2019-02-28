@@ -48,14 +48,11 @@ app.use(session({
 // serve statics (mainly for development; in production static must be served by nginx)
 app.use(serve(config.staticPath))
 
-// healthCheck page not requires authorization or cors origin header check
-const publicRoutes = {
-  path: `/_healthz`
-}
 // CORS setup
+const corsRoutes = ['/auth1/refresh', '/auth1/logout']
 app.use(cors({
   origin: function (ctx) {
-    if (publicRoutes.path === ctx.url) {
+    if (!corsRoutes.includes(ctx.url)) {
       return false
     }
     if (config.corsValidOrigins.includes('*')) {
@@ -67,9 +64,9 @@ app.use(cors({
     }
     return requestOrigin
   },
-  allowMethods: router.allowedMethods(),
+  allowMethods: ['GET', 'OPTIONS'],
   maxAge: 5,
-  credentials: false,
+  credentials: true,
   allowHeaders: ['Content-Type', 'Authorization', 'Accept']
 }))
 

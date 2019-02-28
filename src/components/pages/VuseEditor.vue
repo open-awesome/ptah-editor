@@ -26,7 +26,7 @@ import SocialNetworks from '@components/elements/SocialNetworks'
 import Slogan from '@components/elements/Slogan'
 import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
-import VideoElement from '@components/elements/Video'
+import VideoElement from '@components/elements/VideoElement'
 import Timer from '@components/elements/Timer'
 
 // sections
@@ -88,7 +88,7 @@ const ELEMENTS = {
   Slogan,
   Cost,
   IconWithText,
-  'Video': VideoElement,
+  VideoElement,
   Timer
 }
 

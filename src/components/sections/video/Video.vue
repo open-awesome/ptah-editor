@@ -1,19 +1,69 @@
 <script>
 import * as types from '@editor/types'
-import { getYoutubeVideoIdFromUrl } from '@editor/util'
+import * as _ from 'lodash-es'
 import section from '../../mixins/section.js'
+
+const GROUP_NAME = 'Video'
+const NAME = 'Video'
+const BG_SECTION = 'url(https://gn123.cdn.stg.gamenet.ru/0/7opzP/o_NvNe4.jpg)'
+
+const COMPONENTS = [
+  {
+    name: 'Title',
+    element: types.Title,
+    type: 'text',
+    class: 'b-title',
+    label: 'title',
+    key: 0
+  },
+  {
+    name: 'VideoElement',
+    element: types.VideoElement,
+    type: 'video',
+    class: 'b-video',
+    label: 'video',
+    key: 1
+  }
+]
+
+const C_CUSTOM = [
+  {
+    element: {
+      text: 'This is a short header',
+      styles: {
+        'font-family': 'Heebo',
+        'font-size': '5.6rem',
+        'color': '#ffffff'
+      }
+    },
+    key: 0
+  },
+  {
+    element: {
+      videoUrl: 'https://gn616.cdn.stg.gamenet.ru/0/7opu4/o_n0x1o.mp4',
+      styles: {
+        width: '640px',
+        height: '400px'
+      }
+    },
+    key: 1
+  }
+]
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': '#303030'
+      'background-image': BG_SECTION,
+      'background-color': '#151C44',
+      'background-size': 'cover',
+      'background-repeat': 'no-repeat',
+      'background-attachment': 'scroll'
     }
   },
+  components: _.merge([], C_CUSTOM),
+  container: {},
   edited: true
 }
-
-const GROUP_NAME = 'Video'
-const NAME = 'Video'
 
 export default {
   name: NAME,
@@ -22,58 +72,12 @@ export default {
 
   mixins: [section],
 
+  cover: '/img/covers/video-thumbnail.png',
+
   $schema: {
-    mainStyle: types.Video
-  },
-
-  data () {
-    return {
-      player: null,
-      videoUrl: '',
-      youtubeVideoUrl: '',
-      videoType: ''
-    }
-  },
-
-  watch: {
-    '$sectionData.mainStyle' (value) {
-      this.$nextTick(() => {
-        this.updateVideoData(value)
-      })
-    },
-
-    // To refresh DOM
-    '$sectionData.mainStyle.videoUrl' () {
-      this.videoType = ''
-    },
-    '$sectionData.mainStyle.loop' () {
-      this.videoType = ''
-    }
-  },
-
-  mounted () {
-    this.updateVideoData(this.$sectionData.mainStyle)
-  },
-
-  methods: {
-    /**
-     * Computed properties somehow doesn't work here (because of Vuse?)
-     * Have to do everything manually
-     */
-    updateVideoData ({ videoUrl, loop }) {
-      this.videoUrl = videoUrl
-
-      const youtubeVideoId = getYoutubeVideoIdFromUrl(this.videoUrl)
-      if (youtubeVideoId) {
-        // Looping one video on itself requires playlist param with its ID passed
-        const loopValue = loop ? `&loop=1&playlist=${youtubeVideoId}` : '&loop=0'
-        this.videoType = 'youtube'
-        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?disablekb=0&controls=1${loopValue}&autoplay=0&showinfo=0&modestbranding=1&enablejsapi=1`
-      } else {
-        this.videoType = 'custom'
-        this.youtubeVideoUrl = ''
-      }
-    }
+    mainStyle: types.StyleObject,
+    container: types.StyleObject,
+    components: COMPONENTS
   },
 
   created () {
@@ -93,95 +97,80 @@ export default {
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
-    >
-    <div class="b-video-section__inner">
-      <div class="b-header">{{$sectionData.mainStyle.videoTitle}}</div>
-      <div class="b-content"></div>
+   >
+    <slot name="video"/>
+    <div class="b-grid">
+      <div class="b-grid__row">
+        <div class="b-grid__col-12">
+          <sandbox
+              container-path="$sectionData.container"
+              components-path="$sectionData.components"
+              direction="column"
+              class="b-sandbox">
 
-      <iframe
-        v-if="videoType === 'youtube'"
-        frameborder="0"
-        allowfullscreen="1"
-        allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-        width="1184"
-        height="666"
-        :src="youtubeVideoUrl"></iframe>
-
-      <video
-        v-if="videoType === 'custom'"
-        ref="custom"
-        :src="videoUrl"
-        :loop="$sectionData.mainStyle.loop"
-        type="video/mp4"
-        controls
-        ></video>
+            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+              <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+                <component
+                  v-if="$sectionData.components[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
+                  :is="component.name"
+                  :href="$sectionData.components[index].element.link.href"
+                  :target="$sectionData.components[index].element.link.target"
+                  :style="$sectionData.components[index].element.styles"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  :path="`components[${index}].element`"
+                  >
+                </component>
+                <component
+                  v-if="!$sectionData.components[index].element.isComplex"
+                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
+                  v-html="$sectionData.components[index].element.text"
+                  :is="component.name"
+                  :href="$sectionData.components[index].element.link.href"
+                  :target="$sectionData.components[index].element.link.target"
+                  :style="$sectionData.components[index].element.styles"
+                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  :path="`components[${index}].element`"
+                  >
+                </component>
+              </div>
+            </draggable>
+          </sandbox>
+        </div>
+      </div>
     </div>
   </section>
-
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
 .b-video-section
-  max-width: 118.4rem
-  margin: 0 auto
-
-  &__inner
-    height: 0
-    padding-bottom: 56.25%
-    position: relative
-
-  iframe,
-  video
-    border: 0
-    position: absolute
-    z-index: 1
-    top: 0
-    left: 0
-    width: 100%
-    height: 100%
-
-.b-content
-  position: absolute
-  z-index: 20
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-  display: none
-
-  .is-editable &
-    display: block
-
-.b-header
-  position: absolute
-  z-index: 10
-  top: 50%
-  left: 0
-  right: 0
-  margin-top: -15rem
-  font-family: Helvetica Neue, Helvetica, Arial
-  font-style: normal
-  font-weight: 800
-  line-height: 5.3rem
-  font-size: 4.2rem
+  position: relative
+  width: 100%
+  min-height: $size-step*10
+  margin: 0
+  padding: 1rem
+  display: flex
   text-align: center
-  letter-spacing: 0.5rem
-  color: #fff
-  text-transform: uppercase
-  text-shadow: 1px 1px 5px black
+  justify-content: center
+  flex-direction: column
+  transition: background 200ms
+  &-component
+    margin: 1.2rem
 
-  .b-video-section_playing &
-    display: none
+.b-sandbox,
+.b-draggable-slot
+  max-width: 100%
+  height: 100%
 
-  .is-laptop &
-    font-size: 3.5rem
-    line-height: 4.6rem
-    margin-top: -14rem
-    letter-spacing: 0.4rem
+.b-sandbox
+  min-height: 20rem
+  justify-content: center
+  align-items: center
 
-  .is-mobile &
-    font-size: 1.2rem
-    line-height: 2rem
-    margin-top: -4.8rem
-    letter-spacing: 0.1rem
+.b-draggable-slot
+  padding: 1.6rem .8rem
+
 </style>
