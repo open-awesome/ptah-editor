@@ -22,10 +22,13 @@ export default {
         this.bgImage = (result.match(/^("")|("")$/)) ? JSON.parse(result) : result
       }
     }
-    this.bgSize = this.styles['background-size'] || 'cover'
-    this.label = this.settingObjectType + ' image'
+    this.bgSize = this.styles['background-size'] || 'contain'
 
-    console.log(this.bgImage)
+    if (this.bgSize === 'cover') {
+      this.isStretchImage = true
+    }
+
+    this.label = this.settingObjectType + ' image'
   },
 
   computed: {
@@ -51,9 +54,9 @@ export default {
 
     setStretch () {
       if (this.isStretchImage) {
-        this.styles['background-size'] = 'contain'
-      } else {
         this.styles['background-size'] = 'cover'
+      } else {
+        this.styles['background-size'] = 'contain'
       }
     }
   }
@@ -68,7 +71,7 @@ export default {
           @change="changeImage"
           :label="label"/>
     </div>
-    <div class="b-bg-controls__control" v-if="bgImage !== '' || bgImage !== 'none' || bgImage !== null">
+    <div class="b-bg-controls__control" v-if="bgImage !== '' && bgImage !== 'none' && bgImage !== null">
       <BaseSwitcher v-model="isStretchImage" @change="setStretch" />
     </div>
   </div>
