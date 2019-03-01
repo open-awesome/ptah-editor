@@ -1913,7 +1913,7 @@ atob@^2.1.1:
 
 "authone-jwt-verifier-node@github:ProtocolONE/authone-jwt-verifier-node#master":
   version "1.1.0"
-  resolved "https://codeload.github.com/ProtocolONE/authone-jwt-verifier-node/tar.gz/9debb8951192d513cc05cf1ca204c6100a7166e0"
+  resolved "https://codeload.github.com/ProtocolONE/authone-jwt-verifier-node/tar.gz/baa16e2af6a591b2b3a8c6141a2372d07276bc5d"
   dependencies:
     axios "^0.18.0"
     lru-cache "^5.1.1"
