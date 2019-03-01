@@ -23,7 +23,6 @@ Each ready to use block (we named it `section`) could be tuned with custom eleme
 * `gulp locale_sync`
 * `gulp public-image`
 * `yarn build`
-* `node ./node_modules/migrate-mongo/bin/migrate-mongo.js up -f backend/migrations/migrate-mongo-config.js`
 * `NODE_ENV=production AUTH1_CLIENT_ID={string} AUTH1_CLIENT_SCOPE={string="openid,offline"} 
 AUTH1_CLIENT_SECRET={string} AUTH1_ISSUER_URL={string} CORS_VALID_ORIGINS={string} POST_MESSAGE_TARGET_ORIGIN={string} 
 PTAH_API_HOST_URL={string} MAILCHIMP_CLIENT_ID={string} MAILCHIMP_CLIENT_SECRET={string} PUBLIC_HOST={string} 
