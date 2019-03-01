@@ -36,14 +36,17 @@ app.use(logger.getMiddleware())
 // session
 const publicUrl = urlParse(config.publicHost)
 app.keys = [config.sessionCookieSignKey]
-app.use(session({
+const sessionParams = {
   key: config.sessionCookieName,
   store: new RedisStore(config.redisPort, config.redisHost),
   signed: true,
   httpOnly: true,
   domain: publicUrl.host
 }
-))
+if (config.redisPort && config.redisHost) {
+  sessionParams.store = new RedisStore(config.redisPort, config.redisHost, config.sessionMaxAge)
+}
+app.use(session(sessionParams))
 
 // serve statics (mainly for development; in production static must be served by nginx)
 app.use(serve(config.staticPath))
