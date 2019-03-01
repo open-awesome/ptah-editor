@@ -12,7 +12,7 @@ const config = {
   redisHost: getEnvVariable('REDIS_HOST', 'localhost'),
   redisPort: +getEnvVariable('REDIS_PORT', '6379'),
 
-  sessionMaxAge: +getEnvVariable('SESSION_MAX_AGE', '900'), // 15 minutes, in seconds
+  sessionMaxAge: +getEnvVariable('SESSION_MAX_AGE', '21600'), // 6 hours, in seconds
   sessionCookieName: getEnvVariable('SESSION_COOKIE_NAME', 'ptahsid'),
   sessionCookieSignKey: getEnvVariable('SESSION_COOKIE_SIGN_KEY', '3a610fe5-fd7f-41a3-89ba-e7c8c9bcd1d1'),
 

@@ -59,6 +59,7 @@ backend:
   - SENTRY_DSN
   - SESSION_COOKIE_NAME
   - SESSION_COOKIE_SIGN_KEY
+  - SESSION_MAX_AGE
   - SERVER_PORT
 
 resources: {}

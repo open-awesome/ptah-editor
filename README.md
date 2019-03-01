@@ -24,48 +24,37 @@ Each ready to use block (we named it `section`) could be tuned with custom eleme
 * `gulp public-image`
 * `yarn build`
 * `node ./node_modules/migrate-mongo/bin/migrate-mongo.js up -f backend/migrations/migrate-mongo-config.js`
-* `NODE_ENV={string=production} AUTH1_AUTHORIZE_URL={string} AUTH1_CLIENT_ID={string}
-AUTH1_CLIENT_SCOPE={string="openid,offline"} AUTH1_CLIENT_SECRET={string} AUTH1_REVOKE_TOKEN_URL={string} AUTH1_TOKEN_URL={string} 
-AUTH1_USERINFO_URL={string} CORS_VALID_ORIGINS={string} MAILCHIMP_AUTHORIZE_URL={string} MAILCHIMP_CLIENT_ID={string} 
-MAILCHIMP_CLIENT_SECRET={string} MAILCHIMP_TOKEN_URL={string} POST_MESSAGE_TARGET_ORIGIN={string} 
-PUBLIC_HOST={string} PTAH_API_HOST_URL={string} REDIS_HOST={string}
-REDIS_PORT={string="6379"} ROUTES_PREFIX={string=""} SENTRY_DSN={string} SESSION_COOKIE_NAME={string="ptahsid"} 
-SESSION_COOKIE_SIGN_KEY={string} SERVER_PORT={string=80} node ./index.js`
+* `NODE_ENV=production AUTH1_CLIENT_ID={string} AUTH1_CLIENT_SCOPE={string="openid,offline"} 
+AUTH1_CLIENT_SECRET={string} AUTH1_ISSUER_URL={string} CORS_VALID_ORIGINS={string} POST_MESSAGE_TARGET_ORIGIN={string} 
+PTAH_API_HOST_URL={string} MAILCHIMP_CLIENT_ID={string} MAILCHIMP_CLIENT_SECRET={string} PUBLIC_HOST={string} 
+REDIS_HOST={string} REDIS_PORT={string} ROUTES_PREFIX={string} SENTRY_DSN={string} SESSION_COOKIE_NAME={string} 
+SESSION_COOKIE_SIGN_KEY={string} SESSION_MAX_AGE={string=21600} SERVER_POR={string=80} node ./index.js`
 
 Where:
 
 *Obligatory params*
 
-{NODE_ENV} - Current environment
-
 {AUTH1_CLIENT_ID} - client id for OAuth2 authentication through Auth1 service
-
-{AUTH1_CLIENT_SECRET} - client secret for OAuth2 authentication through Auth1 service
 
 {AUTH1_CLIENT_SCOPE} - required client scope for OAuth2 authentication through Auth1 service
 
-{AUTH1_AUTHORIZE_URL} - full url of Auth1 authorize endpoint
+{AUTH1_CLIENT_SECRET} - client secret for OAuth2 authentication through Auth1 service
 
-{AUTH1_REVOKE_TOKEN_URL} - full url of Auth1 revoke token endpoint
+{AUTH1_ISSUER_URL} - url of Auth1 host 
 
-{AUTH1_TOKEN_URL} - full url of Auth1 token endpoint
-
-{CORS_VALID_ORIGINS} - list of valid origins for CORS protection, separated by comma. Notice! Value of * uses by 
-default (disable CORS protection)
+{CORS_VALID_ORIGINS} - list of valid origins for CORS protection, separated by comma. Notice! Value of * uses by default (disable CORS protection)
 
 {MAILCHIMP_CLIENT_ID} - client id for OAuth2 authentication in Mailchimp service
 
 {MAILCHIMP_CLIENT_SECRET} - client secret for OAuth2 authentication in Mailchimp service
 
-{MAILCHIMP_AUTHORIZE_URL} - full url of Mailchimp authorize endpoint 
+{NODE_ENV} - Current environment
 
-{MAILCHIMP_TOKEN_URL} - full url of Mailchimp token endpoint
-
-{POST_MESSAGE_TARGET_ORIGIN} - target origin for post messages with authentication results
-
-{PUBLIC_HOST} - Public host url, for example https://landings.protocol.one
+{POST_MESSAGE_TARGET_ORIGIN} - target origin for postMessages with results of authorization
 
 {PTAH_API_HOST_URL} - host with ptah-api, for example https://ptahapi.tst.protocol.one
+
+{PUBLIC_HOST} - Public host url, for example https://landings.protocol.one
 
 {REDIS_HOST} - Redis host
 
@@ -73,13 +62,19 @@ default (disable CORS protection)
 
 {ROUTES_PREFIX} - Common prefix for all routes, use empty string by default
 
+{SENTRY_DSN} - public DSN for Sentry
+
+{SERVER_PORT} - Port of koa http server
+
 {SESSION_COOKIE_NAME} - Name of cookie session
 
 {SESSION_COOKIE_SIGN_KEY} - Key for signing cookie session
 
-{SENTRY_DSN} - public DSN for Sentry
+{SESSION_MAX_AGE} - session lifetime in seconds
 
-{SERVER_PORT} - Port of koa http server
+
+
+
 
 
 ## User Authentication
