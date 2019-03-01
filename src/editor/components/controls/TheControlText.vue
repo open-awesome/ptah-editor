@@ -176,10 +176,12 @@ export default {
       </div>
     </div>
     <div class="b-text-controls__control">
-      <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
-    </div>
-    <div class="b-text-controls__control">
-      <base-color-picker label="Text color" v-model="color" @change="changeColor"></base-color-picker>
+      <div class="b-text-controls__control-col">
+        <base-color-picker label="Text color" v-model="color" @change="changeColor"></base-color-picker>
+      </div>
+      <div class="b-text-controls__control-col">
+        <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
+      </div>
     </div>
   </div>
 </template>

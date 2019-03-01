@@ -117,7 +117,7 @@ $border-color: rgba(#888888, 0.25)
   border: 1px solid $border-color
   border-left: 0
 
-  padding: $size-step/2
+  padding: $size-step/3
   font-size: 1.4rem
   white-space: nowrap
 
