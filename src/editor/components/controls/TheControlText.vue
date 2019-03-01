@@ -168,35 +168,41 @@ export default {
 <template>
   <div class="b-text-controls">
     <div class="b-text-controls__control">
-      <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont"></base-select>
-    </div>
-    <div class="b-text-controls__control">
-      <base-select label="Font Size" :options="sizes" v-model="size" @input="changeSize"></base-select>
-    </div>
-    <div class="b-text-controls__control">
-      <base-color-picker label="Font color" v-model="color" @change="changeColor"></base-color-picker>
+      <div class="b-text-controls__control-col b-text-controls__control-col-font-name">
+        <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont"></base-select>
+      </div>
+      <div class="b-text-controls__control-col">
+        <base-select label="Size" :options="sizes" v-model="size" @input="changeSize"></base-select>
+      </div>
     </div>
     <div class="b-text-controls__control">
       <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
+    </div>
+    <div class="b-text-controls__control">
+      <base-color-picker label="Text color" v-model="color" @change="changeColor"></base-color-picker>
     </div>
   </div>
 </template>
 
 <style lang="sass" scoped>
-  .b-text-controls
-    &__header
-      font-size: 1.6rem
-      height: 3.2rem
-      color: #272727
-      display: flex
-      align-items: center
-      cursor: pointer
-      i
-        margin-left: 5px
-        margin-bottom: -5px
-        transform: rotate(180deg)
-        &.dropped
-          transform: rotate(0deg)
-    &__control
-      margin-top: 2.2rem
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
+.b-text-controls
+  padding: 0 0 $size-step/2
+  border-bottom: 0.2rem dotted rgba($black, 0.15)
+  &__control
+    display: flex
+    justify-content: stretch
+    align-items: center
+
+    width: 100%
+    margin-top: $size-step/2
+    &-col
+      flex-basis: 50%
+      margin: 0 0 0 $size-step/2
+      &-font-name
+        flex-basis: 90%
+      &:first-child
+        margin: 0
 </style>

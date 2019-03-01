@@ -27,9 +27,11 @@ export default {
 
 .b-base-label
   font-size: 1.4rem
-  line-height: 1.7rem
+  line-height: 1.8rem
   color: $grey-middle
   letter-spacing: -0.01em
+
+  padding: 0 0 0.5rem 0
 
   display: flex
   align-items: center

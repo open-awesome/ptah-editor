@@ -48,7 +48,9 @@ export default {
       </div>
       <div class="b-pth-base-dropdown-menu__dropdown" :class="menuListClasses" v-if="showOptions">
         <div class="b-pth-base-dropdown-menu__list">
-          <slot name="list"></slot>
+          <div class="b-pth-base-dropdown-menu__list-padd">
+            <slot name="list"></slot>
+          </div>
         </div>
       </div>
     </div>
@@ -94,7 +96,7 @@ export default {
     max-height: 10rem
     border-top: none
     position: absolute
-    top: 150%
+    top: 100%
     z-index: 10
     margin: 0
     padding: 0
@@ -106,13 +108,13 @@ export default {
       #{$self}__list
         &:before,
         &:after
-          left: 5%
+          left: 14%
     &_right
       right: 0
       #{$self}__list
         &:before,
         &:after
-          left: 85%
+          left: 87%
   &__list
     text-align: left
     position: relative
@@ -139,12 +141,16 @@ export default {
       transform: rotate(-45deg)
       box-shadow: 0 0 2rem 0 rgba($black, 0.35)
       z-index: -1
-    & ul
+
+    &-padd
       background-color: $white
-      padding: 0.5rem 0
+      padding: 1rem
       margin: 0
       position: relative
       z-index: 3
+    & ul
+      padding: 0
+      margin: 0 -1rem
     & li
       display: flex
       align-items: center

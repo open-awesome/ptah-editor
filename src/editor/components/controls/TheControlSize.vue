@@ -55,20 +55,16 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-  .b-size-controls
-    &__header
-      font-size: 1.6rem
-      height: 3.2rem
-      color: #272727
-      display: flex
-      align-items: center
-      cursor: pointer
-      i
-        margin-left: 5px
-        margin-bottom: -5px
-        transform: rotate(180deg)
-        &.dropped
-          transform: rotate(0deg)
-    &__control
-      margin-top: 2.2rem
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
+.b-size-controls
+  &__control
+    display: flex
+    justify-content: stretch
+    align-iten: flex-start
+
+    width: 100%
+    margin-top: $size-step/2
+
 </style>

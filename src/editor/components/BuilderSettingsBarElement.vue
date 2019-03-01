@@ -391,8 +391,7 @@ export default {
 
   &__inner
     min-width: 24rem
-    padding-right: 2.5rem
-    padding-bottom: 10rem
+    padding: 0 2.4rem
 
   &__control
     margin-bottom: 1.6rem

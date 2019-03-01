@@ -1,6 +1,6 @@
 <script>
 import * as _ from 'lodash-es'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'TheControlHoverAnimation',
@@ -26,6 +26,15 @@ export default {
 
     animation () {
       return this.settingObjectOptions.animation
+    },
+
+    classes: {
+      get: function () {
+        return this.settingObjectOptions.classes
+      },
+      set: function (newValue) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: newValue }))
+      }
     }
   },
 
@@ -40,6 +49,10 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     changeAnimation () {
       this.selectAnimation(this.animationClass.value)
     },
