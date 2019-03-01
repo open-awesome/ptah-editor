@@ -42,7 +42,6 @@ export default {
         withCredentials: true
       })
         .then((response) => {
-          console.log(response)
           dispatch('setToken', response.data.access_token)
 
           return response

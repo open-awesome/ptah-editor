@@ -303,7 +303,7 @@ export default {
     },
 
     startScroll (x) {
-      console.log(x)
+
     },
 
     toggleSidebarSection () {

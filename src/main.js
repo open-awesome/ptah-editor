@@ -59,14 +59,13 @@ Vue.use(VueProgressBar, {
 
 // request interceptor
 const createSetAuthInterceptor = options => config => {
-  console.log(store.state.User.access_token)
-  if (store.state.User.access_token !== '') {
-    config.headers.Authorization = `Bearer ${store.state.User.access_token}`
+  if (localStorage.getItem('token') !== null) {
+    config.headers.Authorization = `Bearer ${localStorage.getItem('token')}`
   }
   return config
 }
 
-const setAuthCb = createSetAuthInterceptor(store.state.User.access_token)
+const setAuthCb = createSetAuthInterceptor(localStorage.getItem('token'))
 axios.interceptors.request.use(setAuthCb)
 
 // response interceptor
