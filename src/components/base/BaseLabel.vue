@@ -32,13 +32,13 @@ export default {
   letter-spacing: -0.01em
 
   padding: 0 0 0.5rem 0
-
-  display: flex
-  align-items: center
+  display: inline block
 
   transition: color 0.1s ease
   &_focus
     color: rgba(#747474, 0.5)
   &_error
     color: #FF3737
+  &::first-letter
+    text-transform: uppercase
 </style>

@@ -93,6 +93,8 @@ export default {
   &__label
     color: $dark-grey
     margin-left: $size-step/2
+    &:first-letter
+      text-transform: uppercase
   &__palette
     margin-top: .5rem
 

@@ -3,33 +3,30 @@
 
   <base-label v-if="label" v-text="label" class="b-uploader__label"/>
 
-    <div class="b-uploader__container">
-
-      <draggable v-if="multiple" v-model="items" class="b-uploader__draggable">
-        <base-uploader-item
-            v-for="(item, index) in items"
-            :key="`b-uploader-item-${ _uid }-${ index }`"
-            :item="item"
-            :type="type"
-            @replace="replaceFile($event, index)"
-            @remove="removeFile(index)"/>
-      </draggable>
-
+  <div class="b-uploader__container">
+    <draggable v-if="multiple" v-model="items" class="b-uploader__draggable">
       <base-uploader-item
-          v-else-if="src"
-          :src="src"
-          :type="type"
-          @replace="replaceSrc"
-          @remove="removeSrc"/>
-
-      <base-uploader-item
-          v-if="hasAddMore"
-          :multiple="multiple"
-          :type="type"
-          @add="addFile"/>
-
-    </div>
-
+        v-for="(item, index) in items"
+        :key="`b-uploader-item-${ _uid }-${ index }`"
+        :item="item"
+        :type="type"
+        @replace="replaceFile($event, index)"
+        @remove="removeFile(index)"/>
+    </draggable>
+    <base-uploader-item
+      v-else-if="src"
+      :src="src"
+      :type="type"
+      @replace="replaceSrc"
+      @remove="removeSrc"
+     />
+    <base-uploader-item
+      v-if="hasAddMore"
+      :multiple="multiple"
+      :type="type"
+      @add="addFile"
+    />
+  </div>
 </div>
 </template>
 

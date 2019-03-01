@@ -35,14 +35,10 @@
 
         <!-- background -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
-          <control-background
-            :color="bgColor"
-            :image="bgImage"
-            :repeat="bgRepeat"
-            :size="bgSize"
-            :expand="expandedBg"
-            @open="onExpand"
-            @change="styleChange"></control-background>
+          <control-background-color/>
+        </div>
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
+          <control-background-image/>
         </div>
 
         <!-- Size -->
@@ -131,13 +127,15 @@ import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
 import ControlTypegraphy from './controls/TheControlTypegraphy'
 import ControlBackground from './controls/TheControlBackground'
+import ControlBackgroundColor from './controls/TheControlBackgroundColor'
+import ControlBackgroundImage from './controls/TheControlBackgroundImage'
 import ControlSize from './controls/TheControlSize'
 import ControlLink from './controls/TheControlLink'
 // control for new elements
-import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.vue'
-import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
-import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
-import ControlIconWithText from './controls/TheControlIconWithText.vue'
+import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms'
+import ControlAgeRestrictions from './controls/TheControlAgeRestrictions'
+import ControlSocialNetworks from './controls/TheControlSocialNetworks'
+import ControlIconWithText from './controls/TheControlIconWithText'
 import ControlVideo from './controls/ControlVideo'
 import ControlBorderRadius from './controls/TheControlBorderRadius'
 import ControlHoverAnimation from './controls/TheControlHoverAnimation'
@@ -158,6 +156,8 @@ export default {
     ControlText,
     ControlTypegraphy,
     ControlBackground,
+    ControlBackgroundColor,
+    ControlBackgroundImage,
     ControlSize,
     ControlLink,
     ControlAvailablePlatforms,

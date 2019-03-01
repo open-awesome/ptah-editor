@@ -613,8 +613,7 @@ export default {
   &__control
     margin-top: 2.2rem
   &__inner
-    padding-right: 2.5rem
-    padding-bottom: 10rem
+    padding: 0 2.4rem
   &__buttons
     position: absolute
     bottom: 1rem
