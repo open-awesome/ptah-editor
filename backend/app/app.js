@@ -16,6 +16,8 @@ const router = require('./middleware/router')
 
 const RedisStore = require('./middleware/redis-session-store')
 
+const sessionMaxAge = config.sessionMaxAge || 6 * 60 * 60 // 6 hours in seconds
+
 Sentry.init({
   dsn: config.sentryDsn,
   serverName: `${os.hostname()}-${process.env.NODE_ENV}`
@@ -41,10 +43,11 @@ const sessionParams = {
   store: new RedisStore(config.redisPort, config.redisHost),
   signed: true,
   httpOnly: true,
-  domain: publicUrl.host
+  domain: publicUrl.host,
+  maxAge: sessionMaxAge * 1000
 }
 if (config.redisPort && config.redisHost) {
-  sessionParams.store = new RedisStore(config.redisPort, config.redisHost, config.sessionMaxAge)
+  sessionParams.store = new RedisStore(config.redisPort, config.redisHost, sessionMaxAge)
 }
 app.use(session(sessionParams))
 
