@@ -22,6 +22,7 @@ const DEFAULT_OPTIONS = {
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
   isHoverAnim: false, // hover anim for button/link
+  isTextEdit: false, // edit text in settings panel
   isComplex: false,
   video: false,
 
@@ -124,6 +125,7 @@ const data = new Map([
     hasLink: true,
     removable: true,
     typography: true,
+    isTextEdit: true,
     text: 'Click Me!',
     link: {
       href: '',
@@ -185,6 +187,7 @@ const data = new Map([
       aligned: false,
       typography: true,
       background: true,
+      isTextEdit: true,
       shape: true,
       pseudo: {
         hover: {

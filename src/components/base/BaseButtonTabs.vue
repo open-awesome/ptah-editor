@@ -115,26 +115,20 @@ $border-color: rgba(#888888, 0.25)
   background-color: $white
   color: #888888
   border: 1px solid $border-color
-  border-left: 0
+  border-radius: 0.2rem
 
-  padding: $size-step/3
+  padding: $size-step/2.5
+  margin: 0.2rem
   font-size: 1.4rem
   white-space: nowrap
 
-  &:first-child
-    border-radius: 0.2rem 0 0 0.2rem
-    border-left: 1px solid $border-color
-
-  &:last-child
-    border-radius: 0 0.2rem 0.2rem 0
-
-  &:hover
-    background-color: $blue-krayola
-
+  outline: none
+  &:hover,
   &_selected,
   &_selected:hover
-    background-color: $blue-krayola
-    color: $dark-grey
+    color: $dark-blue-krayola
+    fill: $dark-blue-krayola
+    border: 1px solid $dark-blue-krayola
 
   &__icon + &__text
     margin-left: 0.6rem

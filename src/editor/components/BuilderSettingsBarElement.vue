@@ -23,9 +23,14 @@
           </control-align>
         </div>
 
-        <!-- Typography-->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+        <!-- Text -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.isTextEdit">
           <control-text/>
+        </div>
+
+        <!-- Typography -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+          <control-typegraphy/>
         </div>
 
         <!-- background -->
@@ -124,6 +129,7 @@ import BuilderSettingsBarElementTimer from './BuilderSettingsBarElementTimer'
 
 import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
+import ControlTypegraphy from './controls/TheControlTypegraphy'
 import ControlBackground from './controls/TheControlBackground'
 import ControlSize from './controls/TheControlSize'
 import ControlLink from './controls/TheControlLink'
@@ -150,6 +156,7 @@ export default {
     BuilderSettingsBarElementTimer,
     ControlAlign,
     ControlText,
+    ControlTypegraphy,
     ControlBackground,
     ControlSize,
     ControlLink,
