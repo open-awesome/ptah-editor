@@ -611,7 +611,7 @@ export default {
       &.dropped
         transform: rotate(0deg)
   &__control
-    margin-top: 2.2rem
+    margin-top: $size-step/2
   &__inner
     padding: 0 2.4rem
   &__buttons
@@ -623,8 +623,6 @@ export default {
       margin: 0 auto
       max-width: 100%
       display: block
-  &__control
-    margin-bottom: 2rem
 
   &__description
     font-size: 1.4rem

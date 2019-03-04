@@ -3,44 +3,64 @@
 
   <progress v-show="progress !== 100" :value="progress" :max="100"></progress>
 
-  <figcaption v-show="progress === 100" class="b-uploader-item__caption">
+  <div v-show="progress !== 100" class="b-uploader-item__progress">
+    {{ progress + '%' }} Loading...
+  </div>
 
-    <template v-if="hasPreview">
-      <label>
-        <span
-          class="
-              b-pth-base-button
-              b-pth-base-button_orange
-              b-pth-base-button_middle
-              b-uploader-item__button
-              b-uploader-item__button--span
-              b-uploader-item__button--link
-            ">
-          Replace {{ type }}
-        </span>
-        <input
-          @change="uploadFile($event.target.files[0])"
-          type="file"
-          hidden>
-      </label>
-      <base-button
-          v-text="`Remove ${ type }`"
-          @click="$emit('remove')"
-          size="middle"
-          color="orange"
-          class="b-uploader-item__button b-uploader-item__button--link"/>
-    </template>
+  <div v-show="progress === 100" class="b-uploader-item__preview">
 
-    <label v-else>
+    <div v-if="hasPreview">
+      <BaseDropdownMenu
+        class="b-uploader-item__preview"
+        positionDropdown="left"
+        :onHover="true"
+        >
+        <div class="b-uploader-item__preview-img"></div>
+        <div slot="listHover">
+          <ul>
+            <li class="_right-icon _label">
+              <label class="b-uploader-item__preview-label">
+                Change
+                <input
+                  @change="uploadFile($event.target.files[0])"
+                  type="file"
+                  hidden>
+                <icon-base
+                  width="16"
+                  height="18"
+                  stroke="#B1B1B1"
+                  name="change">
+                </icon-base>
+              </label>
+            </li>
+            <li class="_right-icon"
+              @click="$emit('remove')"
+              >
+              Remove
+              <icon-base
+                width="12"
+                height="12"
+                color="#B1B1B1"
+                name="close">
+              </icon-base>
+            </li>
+          </ul>
+        </div>
+        <div slot="list">
+          <div class="b-uploader-item__show-img">
+            <div :style="style"/>
+          </div>
+        </div>
+      </BaseDropdownMenu>
+    </div>
+
+    <label class="b-uploader-item__label" v-else>
       <span
           class="
-            b-pth-base-button
-            b-pth-base-button_orange
-            b-pth-base-button_middle
             b-uploader-item__button
             b-uploader-item__button--span
           ">
-        Add {{ type }}
+        <IconBase name="plus" width="16" height="16" color="#2275D7" />
       </span>
       <input
           :multiple="multiple"
@@ -50,7 +70,7 @@
           hidden>
     </label>
 
-  </figcaption>
+  </div>
 
 </figure>
 </template>
@@ -161,44 +181,75 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-uploader-item
   display: inline-flex
   align-items: center
   justify-content: center
 
-  width: calc(100% - 1rem)
-  height: 10rem
-  margin: .5rem
+  width: $size-step*1.5
+  height: $size-step
+  margin: 0
 
-  border: .1rem solid #c1c1c1
-  border-radius: .4rem
-
-  background-color: #fff
+  border-radius: 0.2rem
+  border: 0.2rem solid $ligth-grey
+  background-color: $white
   background-size: contain !important
-  background-position: middle middle
 
-  &__caption
-    display: inline-flex
-    flex-direction: column
+  position: relative
+  &__progress
+    position: absolute
+    left: $size-step*1.8
+    top: 0rem
 
-  &__button
-    &--link
-      background-color: rgba(190, 190, 190, .85)
-      color: lighten(#000000, 15%)
-    &--span
-      display: inline-block
-      text-align: center
-      line-height: 2.4
-    &:not(:last-of-type)
-      margin-bottom: 0
-
-  .b-pth-base-button
-    font-size: 1.3rem
-
-  span.b-pth-base-button
     font-size: 1.4rem
+    line-height: 3rem
+    color: $dark-grey
+
+    width: 10rem
+    height: 3rem
+
+    background-color: $white
+  &__preview
+    display: inline-flex
+    align-items: center
+    justify-content: center
+
+    width: $size-step*1.5
+    height: $size-step
+    &-label
+     display: inline-flex
+     align-items: center
+     justify-content: center
+
+     cursor: pointer
+    &-img
+      width: $size-step*1.5
+      height: $size-step
+
+  &__label
+    cursor: pointer
+
+  &__show-img
+    padding: $size-step*0.43
+
+    display: inline-flex
+    align-items: center
+    justify-content: center
+    & > div
+      width: $size-step*7
+      height: $size-step*4
+
+  &:hover
+    border-color: $dark-blue-krayola
 
   &:not(:last-child)
     margin-right: 0
     margin-bottom: 0
+
+/deep/
+  .b-pth-base-dropdown-menu__dropdown_click
+    left: -1.5rem !important
 </style>

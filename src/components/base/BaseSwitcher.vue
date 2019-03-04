@@ -49,15 +49,14 @@ export default {
         @change="emitChange">
 
       <span class="b-base-switcher-core__body"></span>
-      <span class="b-base-switcher-core-texts">
-        <span class="b-base-switcher-core-texts__on">ON</span>
-        <span class="b-base-switcher-core-texts__off">OFF</span>
-      </span>
     </div>
   </label>
 </template>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-base-switcher
   width: 100%
   display: flex
@@ -66,16 +65,14 @@ export default {
   cursor: pointer
 
   &__label
-    color: #272727
+    color: $dark-grey
     font-size: 1.6rem
 
   &_checked
+    .b-base-switcher-core
+      background: $emerald-green
     .b-base-switcher-core__body:after
-      background-color: #99D848
-      transform: translateX(-3.9rem);
-
-    .b-base-switcher-core-texts__on
-      color: #fff
+      transform: translateX(2rem)
 
   &_disabled
     background: #fff
@@ -97,12 +94,11 @@ export default {
   position: relative
   display: inline-block
   margin: 0
-  height: 3.2rem
-  width: 8.8rem
-  background-color: #F5F8FF
-  border: 1px solid #e2e2e2
-  border-radius: 1.6rem
-  user-select: none
+  height: 2.4rem
+  width: 4.4rem
+  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.12)
+  border-radius: 100px
+  background: linear-gradient(180deg, $grey 0%, rgba($grey-middle, 0) 100%), #ECECEC
 
   &__checkbox
     opacity: 0
@@ -117,7 +113,7 @@ export default {
     padding-right: 0.4rem
     display: flex
     align-items: center
-    justify-content: flex-end
+    justify-content: flex-start
     position: relative
     cursor: pointer
     height: 100%
@@ -125,32 +121,13 @@ export default {
 
     &:after
       content: ''
-      height: 2.4rem
-      width: 4rem
+      height: 1.6rem
+      width: 1.6rem
       border-radius: 100px
       display: block
       cursor: pointer
-      box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.1)
-      background-color: #fff
+      background: linear-gradient(180deg, $white 0%, rgba(255, 255, 255, 0) 100%), #ECECEC
+      box-shadow: 0px 2px 4px rgba($black, 0.15)
       transition: transform 0.2s ease, background-color 0.2s ease-in
-
-  &-texts
-    position: absolute
-    display: flex
-    justify-content: space-around
-    align-items: center
-    z-index: 1
-    left: 0.4rem
-    right: 0.4rem
-    top: 0.2rem
-    bottom: 0
-    color: #CDCDCD
-    font-size: 1.2rem
-    font-weight: bold
-
-    &__on
-
-    &__off
-      color: #747474
-
+      margin: 0 0 0 $size-step/8
 </style>

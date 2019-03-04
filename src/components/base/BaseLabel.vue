@@ -32,7 +32,7 @@ export default {
   letter-spacing: -0.01em
 
   padding: 0 0 0.5rem 0
-  display: inline block
+  display: inline-block
 
   transition: color 0.1s ease
   &_focus

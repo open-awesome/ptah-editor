@@ -415,7 +415,7 @@ const data = new Map([
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': ''
-         },
+      },
       hasPlatforms: true,
       availablePlatforms: {
         'windows': {

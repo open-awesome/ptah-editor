@@ -90,6 +90,8 @@ export default {
     border-radius: 0.2rem
     background-color: $white
     border: 2px solid $ligth-grey
+    &:hover
+      border-color: $dark-blue-krayola
   &__label
     color: $dark-grey
     margin-left: $size-step/2
