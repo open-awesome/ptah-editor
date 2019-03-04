@@ -15,15 +15,17 @@ export default {
   created () {
     this.bgColor = this.styles['background-color']
 
-    if (this.settingObjectType === 'image') {
+    if (this.settingObjectType !== 'button') {
       this.label = 'Background ' + this.settingObjectType + ' color'
     } else {
       this.label = this.settingObjectType + ' color'
       this.labelHover = 'Hover color'
     }
 
-    const pBackgroundColor = this.pseudo['hover']['background-color'].split('!')[0]
-    this.bgColorHover = pBackgroundColor || this.styles['background-color']
+    if (this.settingObjectType === 'button') {
+      const pBackgroundColor = this.pseudo['hover']['background-color'].split('!')[0]
+      this.bgColorHover = pBackgroundColor || this.styles['background-color']
+    }
   },
 
   computed: {
@@ -80,7 +82,7 @@ export default {
     <div class="b-bg-controls__control">
       <base-color-picker :label="label" v-model="bgColor" @change="changeColor"></base-color-picker>
     </div>
-    <div class="b-bg-controls__control">
+    <div class="b-bg-controls__control" v-if="settingObjectType === 'button'">
       <base-color-picker :label="labelHover" v-model="bgColorHover" @change="changeHoverBgColor"></base-color-picker>
     </div>
   </div>
