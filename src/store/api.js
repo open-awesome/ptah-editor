@@ -15,10 +15,10 @@ export default {
           }
         },
         {
-          slug: 'Skull',
+          slug: 'HeroWithTimerSlogan2',
           theme: {
-            name: 'Skull',
-            sections: ['HeroSkull']
+            name: 'HeroWithTimerSlogan2',
+            sections: ['HeroWithTimerSlogan2']
           }
         },
         {

@@ -6,7 +6,7 @@
       </div>
     </base-scroll-container>
     <div class="b-builder-modal-content-layout__controls" v-if="$slots.controls">
-      <slot name="controls"></slot>
+      <slot class="b-builder-modal-content-layout__controls-slot" name="controls"></slot>
     </div>
   </div>
 </template>
@@ -18,30 +18,28 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-builder-modal-content-layout
   display: flex
   flex-direction: column
   flex-grow: 1
-  position: absolute
-  top: 0
-  bottom: 0
-  right: 0
-  left: 0
+  height: 40rem
 
   &__controls
-    display: flex
-    justify-content: space-between
-    flex-shrink: 0
-    border-top: 1px solid #E2E2E2
-    padding: 1.6rem
-    justify-content: space-evenly
-    box-shadow: 0 -0.6rem 1.5rem rgba(0,0,0,0.1)
+    & > div
+      border-top: 1px solid $ligth-grey
+      padding: $size-step/2
+
+      display: flex
+      justify-content: flex-end
+      flex-shrink: 0
 
 .b-scrolled-content
   margin: 0
   flex-grow: 1
-
   &__inner
-    padding: 4rem
+    padding: $size-step/2 $size-step
 
 </style>

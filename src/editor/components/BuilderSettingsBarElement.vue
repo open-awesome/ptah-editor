@@ -98,12 +98,10 @@
         </div>
 
         <!-- Video -->
-        <div v-if="settingObjectOptions.hasVideo" class="b-elem-settings__control">
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasVideo">
           <control-video
-              :src="settingObjectOptions.src"
-              :expand="expandedVideo"
-              @toggle="onExpand"
-              @change="changeVideoSrc"/>
+            :expand="expandedVideo"
+            @open="onExpand"/>
         </div>
 
         <!-- Form -->
@@ -133,7 +131,7 @@ import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.v
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 import ControlIconWithText from './controls/TheControlIconWithText.vue'
-import ControlVideo from './controls/ControlVideo'
+import ControlVideo from './controls/TheControlVideo'
 import ControlForm from './controls/TheControlForm'
 
 export default {
@@ -300,6 +298,7 @@ export default {
     ]),
 
     expandDropdown (type) {
+      this.expandedVideo = (type === 'video')
       this.expandedSize = (type === 'delimiter')
       this.expandedFont = ['text', 'title'].includes(type)
       this.expandedBg = ['image', 'galleryItem', 'product'].includes(type)
@@ -354,7 +353,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks', 'IconWithText']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks', 'IconWithText', 'Video']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 

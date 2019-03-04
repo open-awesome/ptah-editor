@@ -1,8 +1,11 @@
+const STACK_SIZE = 5
+
 export default {
   state: {
     groupData: {}, // group text
     sectionData: {}, // saved section data,
-    groups: [] // landings sections groups
+    groups: [], // landings sections groups
+    savedStates: [] // stack of saved states
   },
 
   mutations: {
@@ -20,6 +23,14 @@ export default {
 
     clear (state) {
       state.groupData = {}
+    },
+
+    saveState (state, landing) {
+      state.savedStates.push(landing)
+
+      if (state.savedStates.length > STACK_SIZE) {
+        state.savedStates.shift()
+      }
     }
   },
 
@@ -28,12 +39,17 @@ export default {
       commit('updateGroupData', { name, data })
     },
 
-    updateSectionData ({ commit }, { name, data }) {
+    updateSectionData ({ commit, dispatch }, { name, data }) {
       commit('updateSectionData', { name, data })
     },
 
     updateGroups ({ commit }, groups) {
       commit('updateGroups', groups)
+    },
+
+    saveState ({ commit, dispatch }, landing) {
+      commit('saveState', landing)
+      dispatch('saveLanding', landing, { root: true })
     }
   },
 

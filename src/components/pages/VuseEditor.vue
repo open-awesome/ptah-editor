@@ -26,7 +26,7 @@ import SocialNetworks from '@components/elements/SocialNetworks'
 import Slogan from '@components/elements/Slogan'
 import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
-import VideoElement from '@components/elements/Video'
+import VideoElement from '@components/elements/VideoElement'
 import Timer from '@components/elements/Timer'
 import Form from '@components/elements/Form'
 
@@ -45,6 +45,12 @@ import HeroArtRight from '@components/sections/hero/HeroArtRight'
 import HeroArtLeft from '@components/sections/hero/HeroArtLeft'
 import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
 import HeroHunt from '@components/sections/hero/HeroHunt'
+import HeroWithTimer from '@components/sections/hero/HeroWithTimer'
+import HeroWithTimerColumns from '@components/sections/hero/HeroWithTimerColumns'
+import HeroWithTimerColumnsVideo from '@components/sections/hero/HeroWithTimerColumnsVideo'
+import HeroWithTimerColumnsVideo2 from '@components/sections/hero/HeroWithTimerColumnsVideo2'
+import HeroWithTimerSlogan from '@components/sections/hero/HeroWithTimerSlogan'
+import HeroWithTimerSlogan2 from '@components/sections/hero/HeroWithTimerSlogan2'
 // --- gallery
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
@@ -87,7 +93,7 @@ const ELEMENTS = {
   Slogan,
   Cost,
   IconWithText,
-  'Video': VideoElement,
+  VideoElement,
   Timer,
   Form
 }
@@ -106,6 +112,12 @@ const COMPONENTS = {
   HeroArtLeft,
   HeroBAS,
   HeroHunt,
+  HeroWithTimer,
+  HeroWithTimerColumns,
+  HeroWithTimerColumnsVideo,
+  HeroWithTimerColumnsVideo2,
+  HeroWithTimerSlogan,
+  HeroWithTimerSlogan2,
 
   Gallery1,
   Gallery2,

@@ -7,6 +7,19 @@ const GROUP_NAME = 'Hero'
 const NAME = 'HeroSkull'
 const BG_SECTION = 'url(https://gn685.cdn.stg.gamenet.ru/0/7MZzz/o_bJr44.jpg)'
 
+/**
+ * Base keys for elements in Hero sections
+ * Logo - 0
+ * Title - 1
+ * Description - 2
+ * Button - 3
+ * Available Platforms - 4
+ * Video - 5
+ * Slogan - 6
+ * Link - 7
+ * Delimiter- 8
+ * Timer - 9
+ * */
 const COMPONENTS = [
   {
     name: 'Logo',
@@ -300,12 +313,7 @@ export default {
   text-transform: uppercase
   border-radius: 2px
   text-align: center
-  .is-mobile &,
-  .is-tablet &
-    width: 80% !important
-  @media only screen and (max-width: 768px)
-    &
-      width: 80% !important
+
 .b-sandbox
   min-height: 36.5rem
   padding: 5rem 0

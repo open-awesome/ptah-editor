@@ -13,17 +13,6 @@
       <span class="b-menu-subitem__title">
         <slot></slot>
       </span>
-
-      <span class="b-menu-subitem__selected-icon">
-        <IconBase
-          name="arrowRight"
-          width="8"
-          height="14"
-          color="transparent"
-          strokeColor="rgba(255,255,255,0.24)"
-          />
-      </span>
-
     </div>
   </div>
 </template>
@@ -99,8 +88,6 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 
-$selected-bg-color: rgba(#202020, 0.35)
-
 .b-menu-subitem
   cursor: pointer
   color: $white
@@ -139,11 +126,28 @@ $selected-bg-color: rgba(#202020, 0.35)
 
   &__title
     flex-grow: 1
+    display: flex
+    justify-content: space-between
 
-  &__selected-icon
-    visibility: hidden
-    margin-right: 1.8rem
+    line-height: 4.8rem
+    &-text
+      display: inline-block
+      width: 14rem
+      white-space: nowrap
+      text-overflow: ellipsis
+      overflow: hidden
+  &__icons
+    width: 8rem
+    margin: 0 $size-step/4.5
+  &__icon
+    display: none
+    margin: 0 $size-step/4.5
+  &__inner:hover
+    .b-menu-subitem__title
+      .b-menu-subitem__icon
+        display: inline-block
+        opacity: 0.8
+        &:hover
+          opacity: 1
 
-    .b-menu-subitem_selected &
-      visibility: visible
 </style>

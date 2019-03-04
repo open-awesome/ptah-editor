@@ -145,6 +145,16 @@ export default {
 
     currentLanding (value) {
       this.initSettings()
+    },
+
+    /*
+     * AutoSave landing after editing settings
+     */
+    'currentLanding.settings': {
+      handler () {
+        this.saveState(this.$builder.export('JSON'))
+      },
+      deep: true
     }
   },
 
@@ -192,6 +202,9 @@ export default {
       'updateSectionGroups',
       'setSettingSection',
       'toggleSidebar'
+    ]),
+    ...mapActions('Landing', [
+      'saveState'
     ]),
     initSettings () {
       const settings = this.currentLanding.settings
@@ -394,8 +407,9 @@ export default {
   position: relative
   &.is-editable .is-editable
     outline: none
-    &:hover, &.styler-active
-      box-shadow: inset 0 0 0.5rem 0.2rem #6BC1FF
+    border: .1rem dashed transparent
+    &:hover
+      border: .1rem dashed $dark-blue-krayola
   &.fp-scroll section
     height: 100vh !important
   &:before,

@@ -30,8 +30,12 @@ export default {
         name: 'menu.addJs'
       },
       {
-        id: 'integrationsSettings',
+        id: 'integrations',
         name: 'menu.integrations'
+      },
+      {
+        id: 'openGraph',
+        name: 'menu.openGraph'
       }
       // {
       //   id: 'versionHistory',
@@ -44,7 +48,8 @@ export default {
     sandbox: {
       expanded: false, // sandbox sidebar expand state
       components: [], // sandbox current section's components
-      styles: {} // sandbox current section's styles
+      styles: {}, // sandbox current section's styles
+      addElExpanded: false // expand add element panel
     }
   },
 
@@ -99,6 +104,9 @@ export default {
     },
     setElement (state, el) {
       state.settingObjectElement = el
+    },
+    toggleElementsBar ({ sandbox }, value = !sandbox.expanded) {
+      sandbox.addElExpanded = value
     }
   },
 
@@ -134,6 +142,7 @@ export default {
     clearSettingObject ({ commit }) {
       commit('isSettingsExpanded', false)
       commit('toggleSandboxSidebar', false)
+      commit('toggleElementsBar', false)
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
       commit('isGrouping', false)

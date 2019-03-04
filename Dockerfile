@@ -6,12 +6,33 @@ RUN apk update && apk add --no-cache --update make gcc g++ libc-dev libpng-dev a
 RUN npm install gulp -g
 
 WORKDIR /app
+
 COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js webpack.mix.js yarn.lock /app/
+# RUN npm install && npm prune --production
 RUN yarn install
 COPY . /app/
 RUN yarn cjs && gulp locale_sync && gulp public-image && yarn build
 
-FROM nginx:1.15.4
+ENV NODE_ENV=production \
+    AUTH1_CLIENT_ID="" \
+    AUTH1_CLIENT_SCOPE="openid,offline" \
+    AUTH1_CLIENT_SECRET="" \
+    AUTH1_ISSUER_URL="" \
+    CORS_VALID_ORIGINS="" \
+    MAILCHIMP_CLIENT_ID="" \
+    MAILCHIMP_CLIENT_SECRET="" \
+    POST_MESSAGE_TARGET_ORIGIN="" \
+    PTAH_API_HOST_URL="" \
+    PUBLIC_HOST="" \
+    REDIS_HOST="" \
+    REDIS_PORT="" \
+    ROUTES_PREFIX="" \
+    SENTRY_DSN="" \
+    SERVER_PORT=80 \
+    SESSION_COOKIE_NAME="" \
+    SESSION_COOKIE_SIGN_KEY="" \
+    SESSION_MAX_AGE=21600 
 
-WORKDIR /usr/share/nginx/html
-COPY --from=node /app/dist /usr/share/nginx/html
+EXPOSE 80
+
+CMD ["node", "./index.js"]

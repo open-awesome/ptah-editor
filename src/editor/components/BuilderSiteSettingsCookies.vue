@@ -24,14 +24,10 @@
 
     </form>
 
-    <div slot="controls">
-      <base-button
-        v-text="$t('nav.cancel')"
-        :transparent="true"
-        @click="$emit('requestClose')"
-        color="gray"/>
-      <base-button color="blue" v-text="$t('nav.save')" type="submit" form="cookies-form"/>
-    </div>
+  <div slot="controls">
+    <base-button size="middle" v-text="$t('nav.cancel')" :transparent="true" @click="$emit('requestClose')" color="gray"/>
+    <base-button size="middle" color="blue" v-text="$t('nav.save')" type="submit" form="cookies-form"/>
+  </div>
 
   </builder-modal-content-layout>
 </template>

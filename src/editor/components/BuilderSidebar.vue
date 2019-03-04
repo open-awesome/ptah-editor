@@ -45,8 +45,24 @@
               :is-selected="isActiveSection(headerSection.id)"
               :section-id="headerSection.id"
               @click="toggleSettingsBar(headerSection)"
-              class="b-menu-subitem--header">
-            # - {{ headerSection.name }}
+              class="b-menu-subitem--header"
+            >
+            # -
+            <span class="b-menu-subitem__title-text">
+              {{ headerSection.name }}
+            </span>
+            <div class="b-menu-subitem__icons">
+              <span class="b-menu-subitem__icon"
+                @click.stop="toggleSettingsBar(headerSection)"
+                >
+                <icon-base name="edit" color="#ffffff"></icon-base>
+              </span>
+              <span class="b-menu-subitem__icon"
+                @click.stop="deleteSection(headerSection)"
+                >
+                <icon-base name="remove" color="#ffffff"></icon-base>
+              </span>
+            </div>
           </menu-subitem>
         </div>
 
@@ -62,8 +78,24 @@
               :is-main="section.isMain"
               :has-draggable-icon="true"
               :section-id="section.id"
-              @click="toggleSettingsBar(section)">
-            {{`${ index + 1 } - `}} {{ section.name }}
+              @click="selectSection(section)"
+            >
+            {{ `${ index + 1 } - `}}
+            <span class="b-menu-subitem__title-text">
+              {{ section.name }}
+            </span>
+            <div class="b-menu-subitem__icons">
+              <span class="b-menu-subitem__icon"
+                @click.stop="toggleSettingsBar(section)"
+                >
+                <icon-base name="edit" color="#ffffff"></icon-base>
+              </span>
+              <span class="b-menu-subitem__icon"
+                @click.stop="deleteSection(section)"
+                >
+                <icon-base name="remove" color="#ffffff"></icon-base>
+              </span>
+            </div>
           </menu-subitem>
 
         </div>
@@ -108,6 +140,7 @@
 </template>
 
 <script>
+import * as _ from 'lodash-es'
 import Sortable from 'sortablejs'
 import MenuItem from './MenuItem'
 import MenuSubitem from './MenuSubitem'
@@ -150,6 +183,7 @@ export default {
       'isAddSectionExpanded',
       'expandedMenuItem',
       'settingObjectType',
+      'sectionsGroups',
       'sandbox'
     ]),
 
@@ -207,7 +241,8 @@ export default {
       'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
-      'setMenuItem'
+      'setMenuItem',
+      'setSettingsExpanded'
     ]),
 
     ...mapActions('BuilderModalContent', {
@@ -229,12 +264,14 @@ export default {
 
     toggleSettingsBar (section) {
       this.closeSiteSettings()
-      this.clearSettingObject()
+      // this.clearSettingObject()
       this.toggleSandboxSidebar(false)
+      this.setSettingSection(section)
+    },
 
-      if (!this.isActiveSection(section.id)) {
-        this.setSettingSection(section)
-      }
+    selectSection (section) {
+      this.toggleSettingsBar(section)
+      this.setSettingsExpanded(false)
     },
 
     closeSlotsBar () {
@@ -259,7 +296,7 @@ export default {
     },
 
     isActiveSection (id) {
-      return this.settingObjectOptions.sectionId === id
+      return this.settingObjectSection.id === id
     },
 
     showAddSectionBar () {
@@ -281,6 +318,22 @@ export default {
 
     toggleSidebarSection () {
       this.toggleSidebar()
+    },
+
+    isSlaveSection (sectionId) {
+      return !!_.find(this.sectionsGroups, o => o.children.indexOf(sectionId) > -1)
+    },
+
+    deleteSection (section) {
+      // update group
+      if (this.isSlaveSection(section.Id)) {
+        let master = _.find(this.sectionsGroups, o => o.children.indexOf(section.Id) > -1).main
+        let absorb = master.data.mainStyle.absorb
+        master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
+      }
+
+      this.builder.remove(section)
+      this.clearSettingObject()
     }
   }
 }
@@ -322,7 +375,7 @@ $top-panel-height: 7.2rem
     position: absolute
     right: -24.8rem
     top: 0.8rem
-    bottom: 0.8rem;
+    bottom: 0.8rem
     display: flex
     flex-direction: column
     flex-grow: 1

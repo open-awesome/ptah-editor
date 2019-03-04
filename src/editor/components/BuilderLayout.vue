@@ -1,6 +1,6 @@
 <template>
   <div class="b-builder-layout">
-    <div class="b-builder-layout__top-bar">
+    <div class="b-builder-layout__top-bar" :class="{'b-builder-layout__top-bar_down' : isContentVisible}">
       <BuilderTopBar
         @setDevice="setDevice"
         @backToLandings="backToLandings"
@@ -29,7 +29,7 @@
             <slot></slot>
           </div>
         </base-scroll-container>
-        <BuilderModalContent />
+        <BuilderModalContent :builder="builder" />
       </main>
 
     </div>
@@ -71,7 +71,13 @@ export default {
   },
 
   computed: {
-    ...mapState('Sidebar', ['isExpanded'])
+    ...mapState('Sidebar', [
+      'isExpanded',
+      'expandedMenuItem'
+    ]),
+    ...mapState('BuilderModalContent', [
+      'isContentVisible'
+    ])
   },
 
   methods: {
@@ -102,6 +108,8 @@ export default {
     right: 0
     left: 0
     z-index: 999
+    &_down
+      z-index: 0
 
 .b-builder-layout-content
   display: flex
