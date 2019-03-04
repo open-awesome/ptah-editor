@@ -70,6 +70,9 @@ import AutoplayCarousel from '@components/sections/carousel/AutoplayCarousel'
 import FormCenter from '@components/sections/forms/FormCenter'
 import FormRight from '@components/sections/forms/FormRightSide'
 import FormRight2 from '@components/sections/forms/FormRightSide2'
+import FormLeft from '@components/sections/forms/FormLeftSideVariant'
+import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
+
 // --- other
 import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
@@ -136,6 +139,8 @@ const COMPONENTS = {
   FormCenter,
   FormRight,
   FormRight2,
+  FormLeft,
+  FormLeft2,
 
   Footer,
   System,
