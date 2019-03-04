@@ -9,7 +9,7 @@ const getEnvVariableArray = envUtils.getEnvVariableArray
 const config = {
   serverPort: +getEnvVariable('SERVER_PORT', 80),
 
-  redisHost: getEnvVariable('REDIS_HOST', '127.0.0.1'),
+  redisHost: getEnvVariable('REDIS_HOST', 'localhost'),
   redisPort: +getEnvVariable('REDIS_PORT', '6379'),
 
   sessionMaxAge: +getEnvVariable('SESSION_MAX_AGE', '21600'), // 6 hours, in seconds
@@ -34,10 +34,7 @@ const config = {
   auth1ClientId: getEnvVariable('AUTH1_CLIENT_ID', '5c6fc4888db4bc0001beacec'),
   auth1ClientSecret: getEnvVariable('AUTH1_CLIENT_SECRET', 'RUOuk4bkWFNljuZzqwq5zrs0GdCLY9U3MJqubuDViUv7XQzgiU84y288Jh0klK1Z'),
   auth1Scope: getEnvVariableArray('AUTH1_CLIENT_SCOPE', 'openid,offline'),
-  auth1AuthorizeUrl: getEnvVariable('AUTH1_AUTHORIZE_URL', 'https://auth1.tst.protocol.one/oauth2/auth'),
-  auth1TokenUrl: getEnvVariable('AUTH1_TOKEN_URL', 'https://auth1.tst.protocol.one/oauth2/token'),
-  auth1RevokeTokenUrl: getEnvVariable('AUTH1_REVOKE_TOKEN_URL', 'https://auth1.tst.protocol.one/oauth2/revoke'),
-  auth1UserinfoUrl: getEnvVariable('AUTH1_USERINFO_URL', 'https://auth1.tst.protocol.one/userinfo'),
+  auth1Issuer: getEnvVariable('AUTH1_ISSUER_URL', 'https://auth1.tst.protocol.one'),
   auth1PostmessageHtmlTemplatePath: path.resolve('backend/templates/auth1.postmessage.html.template'),
   auth1SessionNamespace: 'auth1',
 
@@ -46,7 +43,7 @@ const config = {
   mailchimpPostmessageHtmlTemplatePath: path.resolve('backend/templates/mailchimp.postmessage.html.template'),
   mailchimpSessionNamespace: 'mailchimp',
 
-  corsValidOrigins: getEnvVariableArray('CORS_VALID_ORIGINS', 'http://127.0.0.1:8080')
+  corsValidOrigins: getEnvVariableArray('CORS_VALID_ORIGINS', '*')
 
 }
 
