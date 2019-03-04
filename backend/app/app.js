@@ -40,7 +40,6 @@ const publicUrl = urlParse(config.publicHost)
 app.keys = [config.sessionCookieSignKey]
 const sessionParams = {
   key: config.sessionCookieName,
-  store: new RedisStore(config.redisPort, config.redisHost),
   signed: true,
   httpOnly: true,
   domain: publicUrl.host,
