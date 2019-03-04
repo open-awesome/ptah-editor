@@ -3,10 +3,10 @@ import * as _ from 'lodash-es'
 export default {
   state: {
     isExpanded: true,
-    isSettingsExpanded: false, // 2nd level menu
+    isSettingsExpanded: false, // 2nd level menu // TODO: delete
     isAddSectionExpanded: false, // add section menu
     isGrouping: false, // section grouping interface
-    expandedMenuItem: 'sections', // submenu item
+    expandedMenuItem: 'sections', // submenu item TODO: delete
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectLabel: '', // Styler slot label
     settingObjectOptions: {},
@@ -45,6 +45,7 @@ export default {
     builderSections: [],
     builderGroups: [], // section layouts
     sectionsGroups: [],
+    // TODO: delete
     sandbox: {
       expanded: false, // sandbox sidebar expand state
       components: [], // sandbox current section's components
