@@ -138,8 +138,8 @@ const COMPONENTS = {
 
   FormCenter,
   FormRight,
-  FormRight2,
   FormLeft,
+  FormRight2,
   FormLeft2,
 
   Footer,
