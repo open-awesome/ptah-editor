@@ -28,6 +28,7 @@ import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
 import VideoElement from '@components/elements/VideoElement'
 import Timer from '@components/elements/Timer'
+import Form from '@components/elements/Form'
 
 // sections
 // --- header
@@ -65,6 +66,13 @@ import Video from '@components/sections/video/Video'
 import DefaultCarousel from '@components/sections/carousel/DefaultCarousel'
 import CoverflowCarousel from '@components/sections/carousel/CoverflowCarousel'
 import AutoplayCarousel from '@components/sections/carousel/AutoplayCarousel'
+// --- forms
+import FormCenter from '@components/sections/forms/FormCenter'
+import FormRight from '@components/sections/forms/FormRightSide'
+import FormRight2 from '@components/sections/forms/FormRightSide2'
+import FormLeft from '@components/sections/forms/FormLeftSideVariant'
+import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
+
 // --- other
 import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
@@ -89,7 +97,8 @@ const ELEMENTS = {
   Cost,
   IconWithText,
   VideoElement,
-  Timer
+  Timer,
+  Form
 }
 
 const COMPONENTS = {
@@ -126,6 +135,12 @@ const COMPONENTS = {
   DefaultCarousel,
   CoverflowCarousel,
   AutoplayCarousel,
+
+  FormCenter,
+  FormRight,
+  FormLeft,
+  FormRight2,
+  FormLeft2,
 
   Footer,
   System,
