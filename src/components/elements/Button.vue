@@ -1,12 +1,36 @@
 <template>
-    <a class="b-button is-editable">
+  <a class="b-button is-editable" :style="{ width: width + 'px', height: height + 'px' }">
+    <vue-draggable-resizable @resizing="onResize" :draggable="false" axis="x" :parent="true" :z="999">
       <slot></slot>
-    </a>
+    </vue-draggable-resizable>
+  </a>
 </template>
 
 <script>
+import VueDraggableResizable from 'vue-draggable-resizable'
+// optionally import default styles
+import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+
 export default {
-  name: 'Button'
+  name: 'Button',
+
+  components: {
+    VueDraggableResizable
+  },
+
+  data: function () {
+    return {
+      width: 0,
+      height: 0
+    }
+  },
+
+  methods: {
+    onResize: function (x, y, width, height) {
+      this.width = width
+      this.height = height
+    }
+  }
 }
 </script>
 
@@ -19,10 +43,8 @@ export default {
   font-size: 3rem
   font-family: 'Lato'
   line-height: 1.4
-  width: 20rem
-  min-width: 6.4rem
-  min-height: 2rem
-  margin: 1.6rem
+  width: 100%
+  height: 100%
   color: $black
   background-color: #a7a1a1
   display: flex

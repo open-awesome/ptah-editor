@@ -221,7 +221,8 @@ const data = new Map([
         'text-align': 'center',
         'width': '',
         'height': ''
-      }
+      },
+      isComplex: true
     })
   )],
   [types.Label, () => (_.merge({}, DEFAULT_OPTIONS,
