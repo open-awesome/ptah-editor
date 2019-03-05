@@ -7,7 +7,7 @@
         @preview="$emit('preview', $event)"
         @export="$emit('export', $event)"
         @save="$emit('save', $event)"
-        :landingName="builder.landing"
+        :landingName="$store.state.name"
         ></BuilderTopBar>
     </div>
     <div class="b-builder-layout-content">

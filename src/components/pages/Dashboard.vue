@@ -28,7 +28,8 @@ export default {
         }
       ],
       presetSelected: 0,
-      newPageTitle: ''
+      newPageTitle: '',
+      invalid: false
     }
   },
 
@@ -59,10 +60,16 @@ export default {
     },
 
     newLanding () {
-      this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
-        .then((response) => {
-          console.log(response)
-        })
+      if (this.newPageTitle.length > 0) {
+        this.$Progress.start()
+        this.invalid = false
+        this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
+          .then((response) => {
+            this.$router.push({ path: `/editor/${response._id}` })
+          })
+      } else {
+        this.invalid = true
+      }
     }
   },
   created () {
@@ -115,6 +122,8 @@ export default {
 
           <base-text-field
             v-model="newPageTitle"
+            :hasError="invalid"
+            errorText="Give a name to your landing page"
             label="Landing name">
           </base-text-field>
 

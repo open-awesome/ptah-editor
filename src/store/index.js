@@ -127,7 +127,7 @@ const actions = {
         }
       }
     }).then((response) => {
-      return response.data
+      return response
     })
   },
 

@@ -9,7 +9,7 @@ const getEnvVariableArray = envUtils.getEnvVariableArray
 const config = {
   serverPort: +getEnvVariable('SERVER_PORT', 80),
 
-  redisHost: getEnvVariable('REDIS_HOST', 'localhost'),
+  redisHost: getEnvVariable('REDIS_HOST', ''),
   redisPort: +getEnvVariable('REDIS_PORT', '6379'),
 
   sessionMaxAge: +getEnvVariable('SESSION_MAX_AGE', '21600'), // 6 hours, in seconds
@@ -43,7 +43,7 @@ const config = {
   mailchimpPostmessageHtmlTemplatePath: path.resolve('backend/templates/mailchimp.postmessage.html.template'),
   mailchimpSessionNamespace: 'mailchimp',
 
-  corsValidOrigins: getEnvVariableArray('CORS_VALID_ORIGINS', '*')
+  corsValidOrigins: getEnvVariableArray('CORS_VALID_ORIGINS', 'http://127.0.0.1:8080/')
 
 }
 
