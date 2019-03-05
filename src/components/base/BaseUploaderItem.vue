@@ -1,81 +1,95 @@
 <template>
-<figure :style="style" class="b-uploader-item">
+  <figure :style="style" class="b-uploader-item">
 
-  <progress v-show="progress !== 100" :value="progress" :max="100"></progress>
+    <!--progress v-show="progress !== 100" :value="progress" :max="100"></progress-->
 
-  <div v-show="progress !== 100" class="b-uploader-item__progress">
-    {{ progress + '%' }} Loading...
-  </div>
+    <radial-progress-bar
+      v-show="progress !== 100"
+      :diameter="16"
+      :completed-steps="progress"
+      :total-steps="totalSteps"
+      :strokeWidth="2"
+      :startColor="`#55D287`"
+      :stopColor="`#2275D7`"
+      :innerStrokeColor="`#E4E4E4`"
+      >
+    </radial-progress-bar>
 
-  <div v-show="progress === 100" class="b-uploader-item__preview">
-
-    <div v-if="hasPreview">
-      <BaseDropdownMenu
-        class="b-uploader-item__preview"
-        positionDropdown="left"
-        :onHover="true"
-        >
-        <div class="b-uploader-item__preview-img"></div>
-        <div slot="listHover">
-          <ul>
-            <li class="_right-icon _label">
-              <label class="b-uploader-item__preview-label">
-                Change
-                <input
-                  @change="uploadFile($event.target.files[0])"
-                  type="file"
-                  hidden>
-                <icon-base
-                  width="16"
-                  height="18"
-                  stroke="#B1B1B1"
-                  name="change">
-                </icon-base>
-              </label>
-            </li>
-            <li class="_right-icon"
-              @click="$emit('remove')"
-              >
-              Remove
-              <icon-base
-                width="12"
-                height="12"
-                color="#B1B1B1"
-                name="close">
-              </icon-base>
-            </li>
-          </ul>
-        </div>
-        <div slot="list">
-          <div class="b-uploader-item__show-img">
-            <div :style="style"/>
-          </div>
-        </div>
-      </BaseDropdownMenu>
+    <div v-show="progress !== 100" class="b-uploader-item__progress">
+      {{ progress + '%' }} Loading...
     </div>
 
-    <label class="b-uploader-item__label" v-else>
-      <span
-          class="
-            b-uploader-item__button
-            b-uploader-item__button--span
-          ">
-        <IconBase name="plus" width="16" height="16" color="#2275D7" />
-      </span>
-      <input
-          :multiple="multiple"
-          @click="$event.target.value = ''"
-          @change="uploadFiles($event.target.files)"
-          type="file"
-          hidden>
-    </label>
+    <div v-show="progress === 100" class="b-uploader-item__preview">
 
-  </div>
+      <div v-if="hasPreview">
+        <BaseDropdownMenu
+          class="b-uploader-item__preview"
+          positionDropdown="left"
+          :onHover="true"
+          >
+          <div class="b-uploader-item__preview-img"></div>
+          <div slot="listHover">
+            <ul>
+              <li class="_right-icon _label">
+                <label class="b-uploader-item__preview-label">
+                  Change
+                  <input
+                    @change="uploadFile($event.target.files[0])"
+                    type="file"
+                    hidden>
+                  <icon-base
+                    width="16"
+                    height="18"
+                    stroke="#B1B1B1"
+                    name="change">
+                  </icon-base>
+                </label>
+              </li>
+              <li class="_right-icon"
+                @click="$emit('remove')"
+                >
+                Remove
+                <icon-base
+                  width="12"
+                  height="12"
+                  color="#B1B1B1"
+                  name="close">
+                </icon-base>
+              </li>
+            </ul>
+          </div>
+          <div slot="list">
+            <div class="b-uploader-item__show-img">
+              <div :style="style"/>
+            </div>
+          </div>
+        </BaseDropdownMenu>
+      </div>
 
-</figure>
+      <label class="b-uploader-item__label" v-else>
+        <span
+            class="
+              b-uploader-item__button
+              b-uploader-item__button--span
+            ">
+          <IconBase name="plus" width="16" height="16" color="#2275D7" />
+        </span>
+        <input
+            :multiple="multiple"
+            @click="$event.target.value = ''"
+            @change="uploadFiles($event.target.files)"
+            type="file"
+            hidden>
+      </label>
+
+    </div>
+
+  </figure>
 </template>
 
 <script>
+import RadialProgressBar from 'vue-radial-progress'
+
 function getFormData (file) {
   let formData = new FormData()
   formData.append('file[]', file)
@@ -87,6 +101,10 @@ function getFormData (file) {
 export default {
   name: 'BaseUploaderItem',
 
+  components: {
+    RadialProgressBar
+  },
+
   props: {
     item: Object,
     multiple: Boolean,
@@ -96,7 +114,8 @@ export default {
 
   data () {
     return {
-      progress: 100
+      progress: 100,
+      totalSteps: 100
     }
   },
 

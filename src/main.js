@@ -13,14 +13,12 @@ import router from './router'
 import store from './store'
 import { sync } from 'vuex-router-sync'
 import AppView from './App.vue'
-import VueCircleSlider from 'vue-circle-slider'
 
 import en from '@assets/lang/en.json'
 import ru from '@assets/lang/ru.json'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
-Vue.use(VueCircleSlider)
 Vue.use(VueI18n)
 
 Vue.use(VueScrollTo, {
