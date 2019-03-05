@@ -1,9 +1,8 @@
 <template>
-  <a class="b-button is-editable" :style="{ width: width + 'px', height: height + 'px' }">
-    <vue-draggable-resizable @resizing="onResize" :draggable="false" axis="x" :parent="true" :z="999">
-      <slot></slot>
-    </vue-draggable-resizable>
-  </a>
+      <a class="b-button is-editable">
+        <span :style="{ width: width + 'px', height: height + 'px' }" v-html="t"></span>
+        <vue-draggable-resizable class="b-button__resize" :w="width" :h="height" @resizing="onResize" :draggable="false" :z="999"/>
+      </a>
 </template>
 
 <script>
@@ -14,22 +13,47 @@ import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 export default {
   name: 'Button',
 
+  inject: ['$section'],
+
   components: {
     VueDraggableResizable
   },
 
   data: function () {
     return {
+      t: '',
       width: 0,
       height: 0
     }
   },
 
+  props: {
+    path: {
+      type: String
+    }
+  },
+
+  computed: {
+    text () {
+      return this.$section.get(`$sectionData.${this.path}.text`)
+    },
+
+    styles () {
+      return this.$section.get(`$sectionData.${this.path}.styles`)
+    }
+  },
+
   methods: {
     onResize: function (x, y, width, height) {
-      this.width = width
-      this.height = height
+      this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
+      this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
     }
+  },
+
+  created () {
+    this.t = this.text
+    this.width = parseInt(this.styles.width.split('px')[0])
+    this.height = parseInt(this.styles.height.split('px')[0])
   }
 }
 </script>
@@ -55,6 +79,9 @@ export default {
   cursor: pointer
   transition: background-color 200ms
   text-decoration: none
+  & span
+    display: block
+  &__resize
   &:hover
     filter: brightness(120%)
   &:active

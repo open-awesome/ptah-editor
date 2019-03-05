@@ -269,9 +269,6 @@ export default {
       if (this.type === 'link') {
         this.el.contentEditable = 'true'
       }
-      if (this.type === 'button') {
-        this.el.contentEditable = 'true'
-      }
       if (this.type === 'slogan') {
         this.el.contentEditable = 'true'
       }
@@ -348,7 +345,7 @@ export default {
       document.removeEventListener('click', this.hideStyler, true)
       document.removeEventListener('blur', this.hideStyler, true)
 
-      this.section.set(`${this.name}.text`, this.el.innerHTML)
+      if (this.type !== 'button') this.section.set(`${this.name}.text`, this.el.innerHTML)
       this.setSettingsExpanded(false)
     },
 

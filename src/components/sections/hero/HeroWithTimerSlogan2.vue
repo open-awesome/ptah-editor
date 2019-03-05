@@ -86,7 +86,7 @@ const C_CUSTOM = [
         'font-family': 'Heebo',
         'text-align': 'center',
         'font-size': '3.6rem',
-        'width': '384x',
+        'width': '384px',
         'height': '116px',
         'border-radius': '0',
         'font-weight': 'bold'
