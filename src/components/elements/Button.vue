@@ -1,7 +1,18 @@
 <template>
       <a class="b-button is-editable">
-        <span :style="{ width: width + 'px', height: height + 'px' }" v-html="t"></span>
-        <vue-draggable-resizable class="b-button__resize" :w="width" :h="height" @resizing="onResize" :draggable="false" :z="999"/>
+        <span v-html="t"></span>
+        <vue-draggable-resizable
+          class="b-button__resize"
+          class-name-active="b-button__resize_active"
+          class-name-handle="b-handle"
+          :w="width"
+          :h="height"
+          @resizing="onResize"
+          :draggable="false"
+          :z="999"
+          :lock-aspect-ratio="true"
+          />
+        <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
       </a>
 </template>
 
@@ -79,9 +90,21 @@ export default {
   cursor: pointer
   transition: background-color 200ms
   text-decoration: none
+  &__resize
+    border: none !important
+    &_active
+      top: -0.4rem !important
+      right: -0.4rem !important
+      bottom: -0.4rem !important
+      left: -0.4rem !important
+
+      border-radius: 0.5rem
+      border: 0.2rem dotted $white !important
+
+      width: auto !important
+      height: auto !important
   & span
     display: block
-  &__resize
   &:hover
     filter: brightness(120%)
   &:active
@@ -98,4 +121,60 @@ export default {
       &
         width: 60% !important
         margin: $size-step/2 auto !important
+/deep/
+  .b-handle
+    position: absolute !important
+
+    background: $dark-blue-krayola !important
+    border: 0.2rem solid $white !important
+    box-sizing: border-box !important
+    box-shadow: 0px 2px 2px rgba($black, 0.15) !important
+    border-radius: 1px !important
+
+    height: $size-step/4 !important
+    width: $size-step/4 !important
+
+    transition: all 300ms linear !important
+    &-tl
+      top: -$size-step/4
+      left: -$size-step/4
+      cursor: nw-resize
+    &-tm
+      top: -$size-step/4
+      left: 50%
+      margin-left: -$size-step/8
+      cursor: n-resize
+    &-tr
+      top: -$size-step/4
+      right: -$size-step/4
+      cursor: ne-resize
+    &-ml
+      top: 50%
+      margin-top: -$size-step/8
+      left: -$size-step/4
+      cursor: w-resize
+    &-mr
+      top: 50%
+      margin-top: -$size-step/8
+      right: -$size-step/4
+      cursor: e-resize
+    &-bl
+      bottom: -$size-step/4
+      left: -$size-step/4
+      cursor: sw-resize
+    &-bm
+      bottom: -$size-step/4
+      left: 50%
+      margin-left: -$size-step/8
+      cursor: s-resize
+    &-br
+      bottom: -$size-step/4
+      right: -$size-step/4
+      cursor: se-resize
+    &-tl:hover,
+    &-tr:hover,
+    &-bl:hover,
+    &-br:hover
+      transform: scale(1.4)
+
 </style>
