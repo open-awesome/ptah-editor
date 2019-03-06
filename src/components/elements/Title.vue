@@ -22,9 +22,15 @@ export default {
   line-height: 1.4
   margin: 1.6rem
   display: block
-  &.is-editable
-    border: 1px dashed #18d88b
   &::selection, & ::selection
     color: #ff0
     background: #000
+  .is-mobile &,
+  .is-tablet &
+    font-size: 2rem !important
+    padding: 0 1rem
+  @media only screen and (max-width: 768px)
+    &
+      font-size: 2rem !important
+      padding: 0 1rem
 </style>

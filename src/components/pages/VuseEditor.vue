@@ -26,8 +26,9 @@ import SocialNetworks from '@components/elements/SocialNetworks'
 import Slogan from '@components/elements/Slogan'
 import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
-import VideoElement from '@components/elements/Video'
+import VideoElement from '@components/elements/VideoElement'
 import Timer from '@components/elements/Timer'
+import Form from '@components/elements/Form'
 
 // sections
 // --- header
@@ -44,6 +45,12 @@ import HeroArtRight from '@components/sections/hero/HeroArtRight'
 import HeroArtLeft from '@components/sections/hero/HeroArtLeft'
 import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
 import HeroHunt from '@components/sections/hero/HeroHunt'
+import HeroWithTimer from '@components/sections/hero/HeroWithTimer'
+import HeroWithTimerColumns from '@components/sections/hero/HeroWithTimerColumns'
+import HeroWithTimerColumnsVideo from '@components/sections/hero/HeroWithTimerColumnsVideo'
+import HeroWithTimerColumnsVideo2 from '@components/sections/hero/HeroWithTimerColumnsVideo2'
+import HeroWithTimerSlogan from '@components/sections/hero/HeroWithTimerSlogan'
+import HeroWithTimerSlogan2 from '@components/sections/hero/HeroWithTimerSlogan2'
 // --- gallery
 import Gallery1 from '@components/sections/galleries/Gallery1'
 import Gallery2 from '@components/sections/galleries/Gallery2'
@@ -59,6 +66,13 @@ import Video from '@components/sections/video/Video'
 import DefaultCarousel from '@components/sections/carousel/DefaultCarousel'
 import CoverflowCarousel from '@components/sections/carousel/CoverflowCarousel'
 import AutoplayCarousel from '@components/sections/carousel/AutoplayCarousel'
+// --- forms
+import FormCenter from '@components/sections/forms/FormCenter'
+import FormRight from '@components/sections/forms/FormRightSide'
+import FormRight2 from '@components/sections/forms/FormRightSide2'
+import FormLeft from '@components/sections/forms/FormLeftSideVariant'
+import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
+
 // --- other
 import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
@@ -82,8 +96,9 @@ const ELEMENTS = {
   Slogan,
   Cost,
   IconWithText,
-  'Video': VideoElement,
-  Timer
+  VideoElement,
+  Timer,
+  Form
 }
 
 const COMPONENTS = {
@@ -100,6 +115,12 @@ const COMPONENTS = {
   HeroArtLeft,
   HeroBAS,
   HeroHunt,
+  HeroWithTimer,
+  HeroWithTimerColumns,
+  HeroWithTimerColumnsVideo,
+  HeroWithTimerColumnsVideo2,
+  HeroWithTimerSlogan,
+  HeroWithTimerSlogan2,
 
   Gallery1,
   Gallery2,
@@ -114,6 +135,12 @@ const COMPONENTS = {
   DefaultCarousel,
   CoverflowCarousel,
   AutoplayCarousel,
+
+  FormCenter,
+  FormRight,
+  FormLeft,
+  FormRight2,
+  FormLeft2,
 
   Footer,
   System,

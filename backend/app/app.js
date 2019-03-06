@@ -16,6 +16,8 @@ const router = require('./middleware/router')
 
 const RedisStore = require('./middleware/redis-session-store')
 
+const sessionMaxAge = config.sessionMaxAge || 6 * 60 * 60 // 6 hours in seconds
+
 Sentry.init({
   dsn: config.sentryDsn,
   serverName: `${os.hostname()}-${process.env.NODE_ENV}`
@@ -36,14 +38,17 @@ app.use(logger.getMiddleware())
 // session
 const publicUrl = urlParse(config.publicHost)
 app.keys = [config.sessionCookieSignKey]
-app.use(session({
+const sessionParams = {
   key: config.sessionCookieName,
-  store: new RedisStore(config.redisPort, config.redisHost),
   signed: true,
   httpOnly: true,
-  domain: publicUrl.host
+  domain: publicUrl.host,
+  maxAge: sessionMaxAge * 1000
 }
-))
+if (config.redisPort && config.redisHost) {
+  sessionParams.store = new RedisStore(config.redisPort, config.redisHost, sessionMaxAge)
+}
+app.use(session(sessionParams))
 
 // serve statics (mainly for development; in production static must be served by nginx)
 app.use(serve(config.staticPath))

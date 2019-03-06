@@ -1,9 +1,7 @@
 <template>
-  <div class="l-button is-editable">
-    <a class="b-button">
+    <a class="b-button is-editable">
       <slot></slot>
     </a>
-  </div>
 </template>
 
 <script>
@@ -44,9 +42,16 @@ export default {
     filter: brightness(120%)
   &:active
     filter: brightness(50%)
-
-.l-button
-  &.styler-active
-   border: 2px dotted $white
-   border-radius: 0.5rem
+  .is-mobile &,
+  .is-tablet &
+    width: 90% !important
+    margin: $size-step/2 auto !important
+  @media only screen and (max-width: 768px)
+    &
+      width: 90% !important
+      margin: $size-step/2 auto !important
+  @media only screen and (max-width: 768px) and (min-height: 700px)
+    &
+      width: 60% !important
+      margin: $size-step/2 auto !important
 </style>

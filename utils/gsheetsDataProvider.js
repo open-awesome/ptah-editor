@@ -6,15 +6,15 @@
 
 'use strict'
 
-var fs = require('fs'),
-  request = require('request')
+let fs = require('fs'),
+    request = require('request')
 
 module.exports = (function () {
   // public API for data access.
   // Dedicated Google Application for serving this requests.
-  var localeUrl = 'https://script.google.com/macros/s/AKfycbxBeuIpJ2vzejPGeiX57rvipIqfDeu1rIei5jf5jt0cBtJCZXbI/exec'
+  const localeUrl = 'https://script.google.com/macros/s/AKfycbxBeuIpJ2vzejPGeiX57rvipIqfDeu1rIei5jf5jt0cBtJCZXbI/exec'
 
-  var makeRequest = function (callback) {
+  let makeRequest = function (callback) {
     request(localeUrl, function (error, response, body) {
       if (error || !body) {
         throw new Error('Google API request error: ', error)
@@ -24,7 +24,7 @@ module.exports = (function () {
     })
   }
 
-  var getLocales = function (callback) {
+  let getLocales = function (callback) {
     makeRequest(callback)
   }
 

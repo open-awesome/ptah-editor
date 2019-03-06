@@ -74,40 +74,6 @@
 
       </template>
 
-      <!-- Video Section Controls-->
-      <!-- Title -->
-      <template v-if="settingObjectOptions.hasVideo">
-        <div class="b-section-settings__control">
-          <BaseTextField
-            v-model="videoTitle"
-            label="Video title"
-            @input="updateSimpleValue('videoTitle', videoTitle)"
-          />
-        </div>
-
-        <!-- VideoUrl -->
-        <div class="b-section-settings__control">
-          <BaseUploadInput
-            v-model="videoUrl"
-            label="Video URL"
-            @upload="updateSimpleValue('videoUrl', videoUrl)"
-          />
-        </div>
-
-        <div class="b-section-settings__description">
-          YouTube video url or any mp4 file url is allowed.<br>
-          To play the video please use Preview button.
-        </div>
-
-        <div class="b-section-settings__control">
-          <BaseSwitcher
-            v-model="loop"
-            label="Loop"
-            @change="updateSimpleValue('loop', loop)"
-          />
-        </div>
-      </template>
-
       <!-- Header -->
       <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
         <BaseTextField
@@ -238,11 +204,6 @@ export default {
         { text: 'Fill', value: 'contain' }
       ],
 
-      videoTitle: '',
-      videoUrl: '',
-
-      loop: false,
-
       galleryImages: [],
       backgroundPickers: [],
 
@@ -312,11 +273,6 @@ export default {
     this.bgRepeat = styles['background-repeat'] || 'no-repeat'
     this.bgSize = styles['background-size'] || 'cover'
     this.bgAttachment = styles['background-attachment'] === 'fixed'
-
-    /* Video */
-    this.videoTitle = this.settingObjectOptions.videoTitle
-    this.videoUrl = this.settingObjectOptions.videoUrl
-    this.loop = this.settingObjectOptions.loop
 
     this.header = this.settingObjectOptions.header || ''
 

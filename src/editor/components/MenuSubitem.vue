@@ -130,15 +130,21 @@ export default {
     justify-content: space-between
 
     line-height: 4.8rem
-    &
-      div
-        margin: 0 $size-step/4.5
-      span
-        display: none
-        margin: 0 $size-step/4.5
+    &-text
+      display: inline-block
+      width: 14rem
+      white-space: nowrap
+      text-overflow: ellipsis
+      overflow: hidden
+  &__icons
+    width: 8rem
+    margin: 0 $size-step/4.5
+  &__icon
+    display: none
+    margin: 0 $size-step/4.5
   &__inner:hover
     .b-menu-subitem__title
-      span
+      .b-menu-subitem__icon
         display: inline-block
         opacity: 0.8
         &:hover

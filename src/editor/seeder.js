@@ -346,17 +346,34 @@ const data = new Map([
       }
     })
   )],
-  /* === Custom sections === */
-  [types.Video, () => (_.merge({}, DEFAULT_OPTIONS,
+  [types.VideoElement, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       background: false,
       hasVideo: true,
       removable: true,
+      resizable: true,
+      shape: false,
       videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
-      videoTitle: 'World of Warcraft: Battle for Azeroth',
-      loop: false
+      loop: false,
+      styles: {
+        'background-color': '#fff',
+        'width': '',
+        'height': ''
+      },
+      isComplex: true
     })
   )],
+  [types.Form, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      resizable: false,
+      removable: true,
+      form: true,
+      isComplex: true,
+      placeholder: 'Placeholder',
+      buttonText: 'Submit'
+    })
+  )],
+  /* === Custom sections === */
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       box: true,

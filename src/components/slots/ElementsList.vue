@@ -122,8 +122,8 @@ export default {
         label: 'icon with text'
       },
       {
-        name: 'Video',
-        element: types.Video,
+        name: 'VideoElement',
+        element: types.VideoElement,
         type: 'video',
         label: 'video'
       },

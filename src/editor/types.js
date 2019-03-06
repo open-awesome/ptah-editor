@@ -12,9 +12,10 @@ export class Label { }
 export class Cost { }
 export class ImageNoResize { }
 export class Delimiter { }
-export class Video { }
+export class VideoElement { }
 export class Timer { }
 export class ProductSection { }
+export class Form { }
 
 export class GallerySlider { }
 export class AvailablePlatforms { }

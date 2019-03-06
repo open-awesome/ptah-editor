@@ -35,6 +35,8 @@ router
 
   .get(`${mailchimpRoutesNamespace}/login`, mailchimpAuthMiddleware.login)
   .get(`${mailchimpRoutesNamespace}/callback`, mailchimpAuthMiddleware.authorize)
+  .get(`${mailchimpRoutesNamespace}/callback/success`, mailchimpAuthMiddleware.success)
+  .get(`${mailchimpRoutesNamespace}/callback/fail`, mailchimpAuthMiddleware.fail)
 
 module.exports.routes = function () {
   return router.routes()

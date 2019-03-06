@@ -5,7 +5,7 @@ class RedisStore extends Store {
   constructor (port, host, maxAge, keyPrefix) {
     super()
     this.keyPrefix = keyPrefix || 'SESSION'
-    this.maxAge = maxAge || 1000000
+    this.maxAge = maxAge || 900 // 15 minutes, in seconds
     this.redis = new Redis(port, host)
   }
 
@@ -17,7 +17,7 @@ class RedisStore extends Store {
   async set (session, { sid = this.getID(24), maxAge = this.maxAge } = {}, ctx) {
     try {
       // Use redis set EX to automatically drop expired sessions
-      await this.redis.set(`${this.keyPrefix}:${sid}`, JSON.stringify(session), 'EX', maxAge / 1000)
+      await this.redis.set(`${this.keyPrefix}:${sid}`, JSON.stringify(session), 'EX', maxAge)
     } catch (e) {
     }
     return sid

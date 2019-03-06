@@ -42,12 +42,12 @@ export default {
 <template>
   <div class="b-size-controls">
     <div class="b-size-controls__control">
-      <base-range-slider v-model="elHeight" label="Height" step="8" min="20" max="320" @change="changeHeight">
+      <base-range-slider v-model="elHeight" label="Height" step="8" min="64" max="640" @change="changeHeight">
         {{elHeight}} px
       </base-range-slider>
     </div>
     <div class="b-size-controls__control">
-      <base-range-slider v-model="elWidth" label="Width" step="8" min="64" max="320" @change="changeWidth">
+      <base-range-slider v-model="elWidth" label="Width" step="8" min="64" max="640" @change="changeWidth">
         {{elWidth}} px
       </base-range-slider>
     </div>
