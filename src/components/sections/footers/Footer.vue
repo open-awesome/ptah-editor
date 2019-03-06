@@ -233,12 +233,10 @@ export default {
   .is-mobile &,
   .is-tablet &
     position: relative
-    height: auto
     padding: 2rem 0 1rem
   @media only screen and (max-width: 768px)
     &
       position: relative
-      height: auto
       padding: 2rem 0 1rem
 .b-logo
 .b-title

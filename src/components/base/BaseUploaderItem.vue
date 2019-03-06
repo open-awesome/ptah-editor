@@ -218,6 +218,8 @@ export default {
   background-size: contain !important
 
   position: relative
+  &:not(:first-child)
+    margin: $size-step/8 0
   &__progress
     position: absolute
     left: $size-step*1.8
@@ -247,10 +249,15 @@ export default {
     &-img
       width: $size-step*1.5
       height: $size-step
-
   &__label
-    cursor: pointer
+    width: $size-step*1.5
+    height: $size-step
 
+    display: inline-flex
+    align-items: center
+    justify-content: center
+
+    cursor: pointer
   &__show-img
     padding: $size-step*0.43
 
@@ -260,10 +267,8 @@ export default {
     & > div
       width: $size-step*7
       height: $size-step*4
-
   &:hover
     border-color: $dark-blue-krayola
-
   &:not(:last-child)
     margin-right: 0
     margin-bottom: 0
