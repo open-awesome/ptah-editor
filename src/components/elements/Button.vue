@@ -74,36 +74,28 @@ export default {
 
 .b-button
   position: relative
+
   font-size: 3rem
   font-family: 'Lato'
   line-height: 1.4
-  width: 100%
-  height: 100%
+  text-decoration: none
   color: $black
+
+  width: $size-step*5
+  min-width: $size-step*2
+  min-height: $size-step/2
+  margin: $size-step/2
+
   background-color: #a7a1a1
+
   display: flex
   text-align: center
   justify-content: center
   flex-direction: column
+
   user-select: none
   cursor: pointer
   transition: background-color 200ms
-  text-decoration: none
-  &__resize
-    border: none !important
-    &_active
-      top: -0.4rem !important
-      right: -0.4rem !important
-      bottom: -0.4rem !important
-      left: -0.4rem !important
-
-      border-radius: 0.5rem
-      border: 0.2rem dotted $white !important
-
-      width: auto !important
-      height: auto !important
-  & span
-    display: block
   &:hover
     filter: brightness(120%)
   &:active

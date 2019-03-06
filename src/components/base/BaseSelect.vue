@@ -25,7 +25,7 @@ export default {
   }),
   computed: {
     colorFill: function () {
-      return this.showOptions ? '#0B99FF' : '#888888'
+      return this.showOptions ? '#C6C6C6' : '#C6C6C6'
     },
     filteredOptions () {
       return this.valueSearch ?
@@ -85,27 +85,33 @@ export default {
 
 <style lang="sass" scoped>
 .b-pth-base-select
-  height: 2.5rem
-  background-color: transparent
-  border-bottom: 1px solid #888
-  display: flex
-  max-width: 50rem
-  cursor: pointer
-  position: relative
-  width: 100%
   font-family: Lato, Helvetica, Arial, sans-serif
+  letter-spacing: -0.02em
+
+  width: 100%
+  height: 2.5rem
+  max-width: 50rem
+
+  position: relative
+  display: flex
+
+  background-color: transparent
+  border-bottom: 1px solid rgba($black, 0.15)
+  cursor: pointer
   & *
     user-select: none
   &__container
     display: flex
     justify-content: space-between
     align-items: center
+
     width: 100%
   &__name
     font-size: 1.6rem
-    line-height: 2.4rem
-    color: #272727
-    padding: 0 0.6rem 0 0
+    line-height: 1.8rem
+    color: $dark-grey
+
+    padding: 0 0.6rem 0.9rem 0
     cursor: pointer
     & input
       border: transparent solid 1px

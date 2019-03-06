@@ -3,16 +3,18 @@
     <base-label v-if="label">
       {{label}}
     </base-label>
-    <div class="b-range-slider__text">
-      <slot></slot>
+    <div class="b-range-slider__row">
+      <div class="b-range-slider__text">
+        <slot></slot>
+      </div>
+      <range-slider
+        class=""
+        :min="min"
+        :max="max"
+        :step="step"
+        v-model="sliderValue">
+      </range-slider>
     </div>
-    <range-slider
-      class=""
-      :min="min"
-      :max="max"
-      :step="step"
-      v-model="sliderValue">
-    </range-slider>
   </div>
 </template>
 
@@ -67,29 +69,34 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-$slider-height: 1.3rem
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 $rail-height: 1px
+$rail-color: rgba($black, 0.15)
+$rail-fill-color: $blue
 
-$rail-color: rgba(#888888, 0.25)
-$rail-fill-color: #436FEE
-$knob-color: #fff
-$knob-size: 0.9rem
-
-$knob-border: 2px solid #436FEE
-$knob-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
+$knob-color: $blue
+$knob-size: 1.2rem
+$knob-shadow: 0px 2px 8px rgba($cornflower-blue, 0.2)
 
 .b-range-slider
+  &__row
+    display: flex
   &__text
-    padding-top: 0.4rem
-    font-size: 1.6rem
-    line-height: 1.8rem
-    color: #272727
+    width: $size-step*2
 
+    font-size: 1.6rem
+    line-height: $size-step
+    color: $dark-grey
+
+    white-space: nowrap
   /deep/
     .range-slider
       box-sizing: border-box
       padding: 0 0.6rem
-      height: $slider-height
+      width: $size-step*5.5
+      height: $size-step
       display: block
 
     .range-slider.disabled
@@ -109,7 +116,6 @@ $knob-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
       left: 0
       height: $rail-height
       border-radius: $rail-height / 2
-      transform: translateY(-50%)
 
     .range-slider-rail
       width: 100%
@@ -135,11 +141,23 @@ $knob-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
         content: ''
         height: $knob-size
         width: $knob-size
-        border: $knob-border
         border-radius: 50%
+
         background-color: $knob-color
         box-shadow: $knob-shadow
 
+        position: relative
+        z-index: 0
+      &:after
+        content: ''
+        height: $knob-size/3
+        width: $knob-size/3
+        border-radius: 50%
+
+        background-color: $white
+
+        position: absolute
+        z-index: 0
     .range-slider-hidden
       display: none
 </style>

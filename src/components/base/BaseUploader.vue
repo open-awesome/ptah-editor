@@ -1,36 +1,35 @@
 <template>
-<div :id="`uploader-${ _uid }`" class="b-uploader">
-
-  <base-label v-if="label" v-text="label" class="b-uploader__label"/>
-
-    <div class="b-uploader__container">
-
-      <draggable v-if="multiple" v-model="items" class="b-uploader__draggable">
-        <base-uploader-item
+  <div class="b-uploader" :id="`uploader-${ _uid }`">
+    <div class="b-uploader__row">
+      <div class="b-uploader__preview">
+        <draggable v-if="multiple" v-model="items" class="b-uploader__draggable">
+          <base-uploader-item
             v-for="(item, index) in items"
             :key="`b-uploader-item-${ _uid }-${ index }`"
             :item="item"
             :type="type"
             @replace="replaceFile($event, index)"
             @remove="removeFile(index)"/>
-      </draggable>
-
-      <base-uploader-item
+        </draggable>
+        <base-uploader-item
           v-else-if="src"
           :src="src"
           :type="type"
           @replace="replaceSrc"
-          @remove="removeSrc"/>
-
-      <base-uploader-item
+          @remove="removeSrc"
+         />
+        <base-uploader-item
           v-if="hasAddMore"
           :multiple="multiple"
           :type="type"
-          @add="addFile"/>
-
+          @add="addFile"
+        />
+      </div>
+      <div class="b-uploader__label" v-if="label && label !== ''">
+        {{ label }}
+      </div>
     </div>
-
-</div>
+  </div>
 </template>
 
 <script>
@@ -123,19 +122,26 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-uploader
   width: 100%
-  max-width: 25rem
-  margin: .5rem 0
-
-  &__container
-    display: flex
-    flex-wrap: wrap
-
-    border: .1rem dashed #c1c1c1
-    border-radius: .4rem
-
   &__draggable
     width: 100%
     margin-bottom: -.5rem
+  &__row
+    display: flex
+    align-items: center
+
+    width: 100%
+    cursor: pointer
+  &__preview
+    width: $size-step*1.5
+    height: $size-step
+  &__label
+    color: $dark-grey
+    margin-left: $size-step/2
+    &:first-letter
+      text-transform: uppercase
 </style>
