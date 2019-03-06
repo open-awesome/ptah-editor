@@ -44,7 +44,7 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions, mapMutations } from 'vuex'
+import { mapState, mapGetters, mapActions } from 'vuex'
 import BuilderSiteSettingsSeo from './BuilderSiteSettingsSeo'
 import BuilderSiteSettingsVisual from './BuilderSiteSettingsVisual'
 import BuilderSiteSettingsCookies from './BuilderSiteSettingsCookies'
@@ -78,7 +78,7 @@ export default {
 
   computed: {
     ...mapState('BuilderModalContent', ['isContentVisible', 'contentID']),
-    ...mapState('Sidebar', ['isAddSectionExpanded', 'sandbox', 'isSettingsExpanded', 'siteSettingsMenu', 'expandedMenuItem']),
+    ...mapState('Sidebar', ['isAddSectionExpanded', 'siteSettingsMenu']),
 
     ...mapGetters('BuilderModalContent', ['contentComponent'])
   },
@@ -88,9 +88,6 @@ export default {
       this.setScrollbarVisible(!value)
       if (this.isAddSectionExpanded && value) {
         this.toggleAddSectionMenu(false)
-      }
-      if (this.sandbox.expanded) {
-        this.toggleSandboxSidebar(false)
       }
     }
   },
@@ -104,7 +101,6 @@ export default {
   },
 
   methods: {
-    ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
     ...mapActions('BuilderModalContent', {
       setModalContent: 'setContent'
     }),
@@ -115,9 +111,6 @@ export default {
       this.setModalContent('')
       if (this.isAddSectionExpanded) {
         this.toggleAddSectionMenu(false)
-      }
-      if (this.sandbox.expanded) {
-        this.toggleSandboxSidebar(false)
       }
     },
 

@@ -1,9 +1,6 @@
 <template>
   <div class="b-elements is-editable">
-    <button class="b-elements__show-list ptah-control" @click="openList" :class="{'active': sandbox.addElExpanded}">
-      <icon-base width="10" height="10" name="plus"></icon-base>
-    </button>
-    <aside class="b-elements__list ptah-control" v-if="sandbox.addElExpanded">
+    <aside class="b-elements__list ptah-control">
       <div class="b-elements__title">
         {{ $t('c.elementsLibrary') }}
 
@@ -36,7 +33,7 @@
 import * as types from '@editor/types'
 import Seeder from '@editor/seeder'
 import * as _ from 'lodash-es'
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 
 export default {
   name: 'ElementsList',
@@ -136,16 +133,11 @@ export default {
     ]
   }),
 
-  computed: {
-    ...mapState('Sidebar', ['sandbox'])
-  },
-
   created () {
     this.elements = Seeder.seed(this.elements)
   },
   methods: {
-    ...mapActions('Sidebar', ['clearSettingObjectLight']),
-    ...mapMutations('Sidebar', ['toggleElementsBar']),
+    ...mapActions('Sidebar', ['clearSettingObjectLight', 'setControlPanel']),
 
     addButton () {
       const el = _.merge({}, Seeder.seed(this.elements[0]))
@@ -205,13 +197,8 @@ export default {
     addTimer () {
       this.$emit('addEl', _.merge({}, Seeder.seed(this.elements[14])))
     },
-    openList () {
-      this.toggleElementsBar(true)
-      this.clearSettingObjectLight()
-      document.addEventListener('click', this.hideList, true)
-    },
     hideList () {
-      this.toggleElementsBar(false)
+      this.setControlPanel(false)
       document.removeEventListener('click', this.hideList, true)
     }
   }

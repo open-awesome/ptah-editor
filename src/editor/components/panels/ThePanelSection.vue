@@ -1,110 +1,110 @@
 <template>
-<div class="b-section-settings">
-  <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
-    <div class="b-section-settings__inner">
-      <div class="b-section-settings__control">
-        <control-section-layouts :builder="builder"></control-section-layouts>
-      </div>
-
-      <!-- System requirements -->
-      <control-system-requirements
-        :expand="expandedSystemRequirements"
-        @open="onExpand"
-        v-if="settingObjectOptions.hasSystemRequirements"
-      >
-      </control-system-requirements>
-
-      <!-- Products Section Controls -->
-      <control-section-products
-        :expand="expandedProducts"
-        @open="onExpand"
-        v-if="settingObjectOptions.hasProducts"
-      >
-      </control-section-products>
-
-     <!-- Font -->
-      <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-        <control-text
-          :fontSize="fontSize"
-          :fontFamily="fontFamily"
-          :fontColor="fontColor"
-          :fontStyles="styles"
-          :expand="expandedFont"
-          :isComplexText="isComplexText"
-          @open="onExpand"
-          @change="styleChange"></control-text>
-      </div>
-
-      <div v-if="!isHeader" class="b-section-settings__control">
-        <div class="b-section-settings__header">
-          <span>Heights</span>
-        </div>
-        <base-label>Full screen height</base-label>
-        <BaseSwitcher v-model="fullScreen" @change="setHeight" />
-      </div>
-
-      <template v-if="settingObjectOptions.background">
-
-        <div class="b-section-settings__header">
-          <span>Background</span>
-        </div>
-
+  <div class="b-section-settings">
+    <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
+      <div class="b-section-settings__inner">
         <div class="b-section-settings__control">
-          <base-label>Use video as background</base-label>
-          <base-switcher
-            :value="backgroundType === 'video'"
-            @change="toggleBackgroundType"/>
+          <control-section-layouts :builder="builder"></control-section-layouts>
         </div>
 
-        <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
-          <BaseUploadInput
-            :value="settingObjectOptions.backgroundVideo"
-            @upload="uploadVideo"
-            label="Background video"
-            placeholder="paste Video URL" />
+        <!-- System requirements -->
+        <control-system-requirements
+          :expand="expandedSystemRequirements"
+          @open="onExpand"
+          v-if="settingObjectOptions.hasSystemRequirements"
+        >
+        </control-system-requirements>
+
+        <!-- Products Section Controls -->
+        <control-section-products
+          :expand="expandedProducts"
+          @open="onExpand"
+          v-if="settingObjectOptions.hasProducts"
+        >
+        </control-section-products>
+
+        <!-- Font -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+          <control-text
+            :fontSize="fontSize"
+            :fontFamily="fontFamily"
+            :fontColor="fontColor"
+            :fontStyles="styles"
+            :expand="expandedFont"
+            :isComplexText="isComplexText"
+            @open="onExpand"
+            @change="styleChange"></control-text>
         </div>
 
-        <template v-else>
-          <div class="b-section-settings__control">
-            <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
+        <div v-if="!isHeader" class="b-section-settings__control">
+          <div class="b-section-settings__header">
+            <span>Heights</span>
           </div>
-          <div class="b-section-settings__control">
-            <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Background image"/>
+          <base-label>Full screen height</base-label>
+          <BaseSwitcher v-model="fullScreen" @change="setHeight" />
+        </div>
+
+        <template v-if="settingObjectOptions.background">
+
+          <div class="b-section-settings__header">
+            <span>Background</span>
           </div>
-          <template v-if="sectionBgUrl.length">
+
+          <div class="b-section-settings__control">
+            <base-label>Use video as background</base-label>
+            <base-switcher
+              :value="backgroundType === 'video'"
+              @change="toggleBackgroundType"/>
+          </div>
+
+          <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
+            <BaseUploadInput
+              :value="settingObjectOptions.backgroundVideo"
+              @upload="uploadVideo"
+              label="Background video"
+              placeholder="paste Video URL" />
+          </div>
+
+          <template v-else>
             <div class="b-section-settings__control">
-              <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+              <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
             </div>
             <div class="b-section-settings__control">
-              <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
+              <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Background image"/>
             </div>
-            <div v-if="!isHeader" class="b-section-settings__control">
-              <base-label>Fixed while scrolling</base-label>
-              <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
-            </div>
+            <template v-if="sectionBgUrl.length">
+              <div class="b-section-settings__control">
+                <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+              </div>
+              <div class="b-section-settings__control">
+                <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
+              </div>
+              <div v-if="!isHeader" class="b-section-settings__control">
+                <base-label>Fixed while scrolling</base-label>
+                <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
+              </div>
+            </template>
           </template>
+
         </template>
 
-      </template>
+        <!-- Header -->
+        <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
+          <BaseTextField
+            v-model="header"
+            label="Header"
+            @input="updateSimpleValue('header', header)"
+          />
+        </div>
 
-      <!-- Header -->
-      <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
-        <BaseTextField
-          v-model="header"
-          label="Header"
-          @input="updateSimpleValue('header', header)"
-        />
-      </div>
-
-      <!-- Images Multiple Upload -->
-      <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
-        <base-uploader
-          :value="galleryImages"
-          @change="updateGalleryImages"
-          label="Images upload"
-          multiple/>
-        <br>
-        <base-range-slider
+        <!-- Images Multiple Upload -->
+        <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
+          <base-uploader
+            :value="galleryImages"
+            @change="updateGalleryImages"
+            label="Images upload"
+            multiple/>
+          <br>
+          <base-range-slider
             v-if="settingObjectSection.name === 'AutoplayCarousel'"
             :value="settingObjectSection.data.mainStyle.swiper.delay"
             :label="`Autoplay slides delay (${settingObjectSection.data.mainStyle.swiper.delay})`"
@@ -112,67 +112,67 @@
             step="1000"
             min="1000"
             max="10000"/>
+        </div>
+
+        <!-- Group -->
+        <template v-if="!isLastSection()">
+          <div class="b-section-settings__control" v-if="!isSlaveSection()">
+            <BaseButton
+              :color="'gray'"
+              :transparent="true"
+              @click="toggleGrouping(true)"
+            >
+              Group sections
+            </BaseButton>
+          </div>
+
+          <div class="b-section-settings__control" v-if="isSlaveSection()">
+            <BaseButton
+              :color="'gray'"
+              :transparent="true"
+              @click="openSlaveGrouping()"
+            >
+              Group sections
+            </BaseButton>
+          </div>
+        </template>
+
       </div>
+    </base-scroll-container>
 
-      <!-- Group -->
-      <template v-if="!isLastSection()">
-        <div class="b-section-settings__control" v-if="!isSlaveSection()">
-          <BaseButton
-            :color="'gray'"
-            :transparent="true"
-            @click="toggleGrouping(true)"
-          >
-            Group sections
-          </BaseButton>
-        </div>
+    <div class="b-section-settings__inner" v-if="isGrouping">
+      <h3>Grouping</h3>
 
-        <div class="b-section-settings__control" v-if="isSlaveSection()">
-          <BaseButton
-            :color="'gray'"
-            :transparent="true"
-            @click="openSlaveGrouping()"
-          >
-            Group sections
-          </BaseButton>
-        </div>
-      </template>
+      <builder-settings-bar-group
+        :builder="builder"
+        :master="isMasterSection()"
+        :slave="isSlaveSection()"
+        v-if="isGrouping"></builder-settings-bar-group>
 
+      <BaseButton
+        :color="'gray'"
+        :transparent="true"
+        @click="toggleGrouping(false)"
+      >
+        Close
+      </BaseButton>
     </div>
-  </base-scroll-container>
 
-  <div class="b-section-settings__inner" v-if="isGrouping">
-    <h3>Grouping</h3>
-
-    <builder-settings-bar-group
-      :builder="builder"
-      :master="isMasterSection()"
-      :slave="isSlaveSection()"
-      v-if="isGrouping"></builder-settings-bar-group>
-
-    <BaseButton
-      :color="'gray'"
-      :transparent="true"
-      @click="toggleGrouping(false)"
-    >
-      Close
-    </BaseButton>
+    <div class="b-section-settings__buttons">
+      <base-button :color="'gray'" :transparent="true" @click="deleteSection">Delete</base-button>
+    </div>
   </div>
-
-  <div class="b-section-settings__buttons">
-    <base-button :color="'gray'" :transparent="true" @click="deleteSection">Delete</base-button>
-  </div>
-</div>
 </template>
 
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
-import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
-import ControlText from './controls/TheControlText'
-import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
-import BaseUploader from '../../components/base/BaseUploader'
-import BuilderSettingsBarGroup from './BuilderSettingsBarGroup'
+import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
+import ControlSystemRequirements from './../controls/TheControlSystemRequirements.vue'
+import ControlText from './../controls/TheControlText'
+import ControlSectionLayouts from './../controls/TheControlSectionLayouts.vue'
+import BaseUploader from '../../../components/base/BaseUploader'
+import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -557,8 +557,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../assets/sass/_colors.sass'
-@import '../../assets/sass/_variables.sass'
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
 
 .b-section-settings
   display: flex
