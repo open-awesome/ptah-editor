@@ -215,7 +215,8 @@ export default {
   border-radius: 0.2rem
   border: 0.2rem solid $ligth-grey
   background-color: $white
-  background-size: contain !important
+  background-size: 100% 100% !important
+  background-position: center center !important
 
   position: relative
   &:not(:first-child)
