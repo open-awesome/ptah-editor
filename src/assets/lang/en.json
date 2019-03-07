@@ -54,5 +54,8 @@
     },
     "c": {
         "elementsLibrary":              "Elements library"
+    },
+    "d": {
+        "createNew":                    "Create new landing"
     }
 }

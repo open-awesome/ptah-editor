@@ -18,6 +18,12 @@ const routes = [
     alias: ''
   },
   {
+    path: '/login/',
+    component: () => import('@components/pages/Login'),
+    name: 'Login',
+    alias: ''
+  },
+  {
     path: '/_sandbox/',
     component: () => import('@components/pages/Sandbox'),
     name: 'Sandbox',

@@ -178,6 +178,10 @@ export default {
     })
   },
 
+  mounted () {
+    this.$Progress.finish()
+  },
+
   methods: {
     ...mapActions([
       'saveLanding'
