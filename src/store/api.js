@@ -110,5 +110,4 @@ export default {
 
     return this.uploadFile(request)
   }
-
 }

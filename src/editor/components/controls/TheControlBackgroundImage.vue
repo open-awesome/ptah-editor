@@ -42,7 +42,12 @@ export default {
       this.bgHoverImage = (result.match(/^("")|("")$/)) ? JSON.parse(result) : result
     }
 
-    this.label = this.settingObjectType + ' image'
+    if (this.settingObjectType === 'image' || this.settingObjectType === 'logo') {
+      this.label = this.settingObjectType
+    } else {
+      this.label = this.settingObjectType + ' image'
+    }
+
     this.labelHover = 'Hover image'
   },
 

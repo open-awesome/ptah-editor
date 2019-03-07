@@ -36,7 +36,7 @@ export default {
 </script>
 
 <template>
-  <label class="b-base-switcher" :class="classObject">
+  <div class="b-base-switcher" :class="classObject">
     <div class="b-base-switcher__label" v-if="$slots.label || label">
       <slot name="label"></slot>
       {{label}}
@@ -50,7 +50,7 @@ export default {
 
       <span class="b-base-switcher-core__body"></span>
     </div>
-  </label>
+  </div>
 </template>
 
 <style lang="sass" scoped>
@@ -62,7 +62,6 @@ export default {
   display: flex
   justify-content: space-between
   align-items: center
-  cursor: pointer
 
   &__label
     color: $dark-grey

@@ -169,7 +169,7 @@ export default {
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-5 b-grid__col-m-12">
+        <div class="b-grid__col-6">
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
@@ -205,6 +205,9 @@ export default {
             </draggable>
           </sandbox>
         </div>
+        <div class="b-grid__col-6">
+          <!-- empty col -->
+        </div>
       </div>
     </div>
   </section>
@@ -214,11 +217,25 @@ export default {
 .b-hunt
   .b-grid,
   .b-grid__row
-    height: 90vh
+    height: 80vh
   .b-hunt-sandbox
-    height: 90vh
+    height: 80vh
     /deep/
       .b-draggable-slot
-        height: 90vh
         justify-content: flex-end
+
+/deep/
+  .b-draggable-slot
+    width: 100%
+    display: flex
+    text-align: center
+    justify-content: flex-start
+    align-items: flex-start
+    flex-direction: column
+    .is-mobile & > div,
+    .is-tablet & > div
+      width: 100%
+    @media only screen and (max-width: 768px)
+      & > div
+        width: 100%
 </style>

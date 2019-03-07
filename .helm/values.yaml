@@ -7,11 +7,11 @@ enableRedis: true
 
 ingress:
   hostname: storefront.tst.protocol.one
-  pathFrontend: 
+  pathFrontend:
    - /css
    - /img
    - /js
-  pathBackend: 
+  pathBackend:
    - /
 
 certIssuer:
@@ -24,39 +24,34 @@ frontend:
   imageTag: latest
   port: 80
   replicas: 1
-  service: 
+  service:
     type: ClusterIP
     port: 80
     protocol: TCP
-  configMap: 
+  configMap:
     mountPath: /etc/nginx/conf.d/
 
-backend:    
+backend:
   name: nodejs
   role: backend
   image: "p1hub/storefront.protocol.one-nodejs"
   imageTag: latest
   port: 8080
   replicas: 1
-  service: 
+  service:
     type: ClusterIP
     port: 8080
     protocol: TCP
   env:
-  - AUTH1_AUTHORIZE_URL
   - AUTH1_CLIENT_ID
   - AUTH1_CLIENT_SCOPE
   - AUTH1_CLIENT_SECRET
-  - AUTH1_TOKEN_URL
-  - AUTH1_REVOKE_TOKEN_URL
-  - AUTH1_USERINFO_URL
+  - AUTH1_ISSUER_URL
   - CORS_VALID_ORIGINS
   - POST_MESSAGE_TARGET_ORIGIN
   - PTAH_API_HOST_URL
-  - MAILCHIMP_AUTHORIZE_URL
   - MAILCHIMP_CLIENT_ID
   - MAILCHIMP_CLIENT_SECRET
-  - MAILCHIMP_TOKEN_URL
   - PUBLIC_HOST
   - REDIS_HOST
   - REDIS_PORT
@@ -64,8 +59,9 @@ backend:
   - SENTRY_DSN
   - SESSION_COOKIE_NAME
   - SESSION_COOKIE_SIGN_KEY
+  - SESSION_MAX_AGE
   - SERVER_PORT
-  
+
 resources: {}
   # We usually recommend not to specify default resources and to leave this as a conscious
   # choice for the user. This also increases chances charts run on environments with little

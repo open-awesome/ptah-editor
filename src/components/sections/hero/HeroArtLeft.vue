@@ -189,7 +189,7 @@ export default {
     container: StyleObject,
     components: [
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
-      { name: 'Video', element: VideoElement, type: 'video', class: 'b-video', label: 'video', key: 5 },
+      { name: 'VideoElement', element: VideoElement, type: 'video', class: 'b-video', label: 'video', key: 5 },
       { name: 'Slogan', element: Slogan, type: 'slogan', class: 'b-slogan', label: 'slogan', key: 6 },
       { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 },
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 7 }

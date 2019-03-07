@@ -62,9 +62,6 @@ body
   &__content
     flex-grow: 1
 
-section
-  z-index: 1
-
 #video_bg
   position: absolute
   top: 0
@@ -93,25 +90,6 @@ section
     @media only screen and (max-width: 768px)
       &
         width: auto
-
-section
-  &.full-height
-    height: 100vh !important
-  &.is-editable
-    border: 0.2rem rgba(255, 255, 255, 0.1) dashed
-
-    .is-tablet &,
-    .is-mobile &
-      height: auto !important
-      min-height: 100vh !important
-    @media only screen and (max-width: 768px)
-      &
-        height: auto !important
-        min-height: 100vh !important
-
-.is-editable
-  section.full-height
-    height: calc(100vh - 8rem) !important
 
 .b-video-popup
   display: flex

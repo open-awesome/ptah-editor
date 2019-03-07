@@ -363,6 +363,16 @@ const data = new Map([
       isComplex: true
     })
   )],
+  [types.Form, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      resizable: false,
+      removable: true,
+      form: true,
+      isComplex: true,
+      placeholder: 'Placeholder',
+      buttonText: 'Submit'
+    })
+  )],
   /* === Custom sections === */
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
     {

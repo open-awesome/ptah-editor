@@ -82,7 +82,6 @@ export default {
     align-items: center
 
     width: 100%
-    cursor: pointer
   &__preview
     width: $size-step*1.5
     height: $size-step

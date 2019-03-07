@@ -24,6 +24,12 @@ const routes = [
     alias: ''
   },
   {
+    path: '/oauth_complete/',
+    component: () => import('@components/pages/OauthComplete'),
+    name: 'OauthComplete',
+    alias: ''
+  },
+  {
     path: '/404',
     name: '404',
     component: lazyLoadView(import(/* webpackChunkName: "404" */ '@components/NotFound'))

@@ -103,12 +103,15 @@
         </div>
 
         <!-- Video -->
-        <div v-if="settingObjectOptions.hasVideo" class="b-elem-settings__control">
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasVideo">
           <control-video
-              :src="settingObjectOptions.src"
-              :expand="expandedVideo"
-              @toggle="onExpand"
-              @change="changeVideoSrc"/>
+            :expand="expandedVideo"
+            @open="onExpand"/>
+        </div>
+
+        <!-- Form -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.form">
+          <control-form></control-form>
         </div>
 
       </div>
@@ -131,7 +134,7 @@ import ControlBackgroundColor from './controls/TheControlBackgroundColor'
 import ControlBackgroundImage from './controls/TheControlBackgroundImage'
 import ControlSize from './controls/TheControlSize'
 import ControlLink from './controls/TheControlLink'
-// control for new elements
+import ControlForm from './controls/TheControlForm'
 import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms'
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks'
@@ -164,6 +167,7 @@ export default {
     ControlAgeRestrictions,
     ControlSocialNetworks,
     ControlIconWithText,
+    ControlForm,
     ControlVideo,
     ControlBorderRadius,
     ControlHoverAnimation
@@ -308,6 +312,7 @@ export default {
     ]),
 
     expandDropdown (type) {
+      this.expandedVideo = (type === 'video')
       this.expandedSize = (type === 'delimiter')
       this.expandedFont = ['text', 'title'].includes(type)
       this.expandedBg = ['image', 'galleryItem', 'product'].includes(type)

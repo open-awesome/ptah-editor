@@ -1,5 +1,9 @@
 <template>
-  <div class="styler is-editable" ref="styler" id="styler" v-if="$builder.isEditing" :class="{ 'is-visible': isVisible }"
+  <div class="styler is-editable"
+       ref="styler"
+       id="styler"
+       v-if="$builder.isEditing"
+       :class="{ 'is-visible': isVisible }"
        @click.stop="">
   </div>
 </template>

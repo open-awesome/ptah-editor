@@ -1,18 +1,20 @@
 <template>
   <div class="b-uploader" :id="`uploader-${ _uid }`">
-    <div class="b-uploader__row">
-      <div class="b-uploader__preview">
-        <draggable v-if="multiple" v-model="items" class="b-uploader__draggable">
-          <base-uploader-item
-            v-for="(item, index) in items"
-            :key="`b-uploader-item-${ _uid }-${ index }`"
-            :item="item"
-            :type="type"
-            @replace="replaceFile($event, index)"
-            @remove="removeFile(index)"/>
-        </draggable>
+    <div class="b-uploader__row b-uploader__row_multiple" v-if="multiple">
+      <draggable v-if="multiple" v-model="items" class="b-uploader__draggable">
         <base-uploader-item
-          v-else-if="src"
+          v-for="(item, index) in items"
+          :key="`b-uploader-item-${ _uid }-${ index }`"
+          :item="item"
+          :type="type"
+          @replace="replaceFile($event, index)"
+          @remove="removeFile(index)"/>
+      </draggable>
+    </div>
+    <div class="b-uploader__row b-uploader__row_add-multiple" v-if="multiple">
+      <div class="b-uploader__preview">
+        <base-uploader-item
+          v-if="src"
           :src="src"
           :type="type"
           @replace="replaceSrc"
@@ -24,6 +26,26 @@
           :type="type"
           @add="addFile"
         />
+      </div>
+      <div class="b-uploader__label" v-if="label && label !== ''">
+        {{ label }}
+      </div>
+    </div>
+    <div class="b-uploader__row" v-if="!multiple">
+      <div class="b-uploader__preview">
+        <base-uploader-item
+          v-if="src"
+          :src="src"
+          :type="type"
+          @replace="replaceSrc"
+          @remove="removeSrc"
+          />
+        <base-uploader-item
+          v-if="hasAddMore"
+          :multiple="multiple"
+          :type="type"
+          @add="addFile"
+          />
       </div>
       <div class="b-uploader__label" v-if="label && label !== ''">
         {{ label }}
@@ -135,7 +157,10 @@ export default {
     align-items: center
 
     width: 100%
-    cursor: pointer
+    &_multiple
+      flex-direction: column
+    &_add-multiple
+      margin-top: $size-step/4
   &__preview
     width: $size-step*1.5
     height: $size-step
