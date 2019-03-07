@@ -182,7 +182,6 @@ const data = new Map([
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       canCopy: true,
-      resizable: true,
       hasLink: true,
       aligned: false,
       typography: true,

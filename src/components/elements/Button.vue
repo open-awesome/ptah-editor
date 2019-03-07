@@ -7,6 +7,10 @@
           class-name-handle="b-handle"
           :w="width"
           :h="height"
+          :min-width="32"
+          :max-width="320"
+          :min-height="32"
+          :max-height="320"
           @resizing="onResize"
           :draggable="false"
           :z="999"
@@ -82,8 +86,13 @@ export default {
   color: $black
 
   width: $size-step*5
+
+  max-width: 100% !important
+  max-height: 100% !important
+
   min-width: $size-step*2
   min-height: $size-step/2
+
   margin: $size-step/2
 
   background-color: #a7a1a1
@@ -96,6 +105,19 @@ export default {
   user-select: none
   cursor: pointer
   transition: background-color 200ms
+  &__resize
+    border: none !important
+    &_active
+      top: -0.4rem !important
+      right: -0.4rem !important
+      bottom: -0.4rem !important
+      left: -0.4rem !important
+      border-radius: 0.5rem
+      border: 0.2rem dotted $white !important
+      width: auto !important
+      height: auto !important
+  & span
+    display: block
   &:hover
     filter: brightness(120%)
   &:active
@@ -109,9 +131,9 @@ export default {
       width: 90% !important
       margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px) and (min-height: 700px)
-      &
-        width: 60% !important
-        margin: $size-step/2 auto !important
+    &
+      width: 60% !important
+      margin: $size-step/2 auto !important
 /deep/
   .b-handle
     position: absolute !important

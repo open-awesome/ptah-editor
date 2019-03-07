@@ -136,7 +136,7 @@ import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms'
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks'
 import ControlIconWithText from './controls/TheControlIconWithText'
-import ControlVideo from './controls/ControlVideo'
+import ControlVideo from './controls/TheControlVideo'
 import ControlBorderRadius from './controls/TheControlBorderRadius'
 import ControlHoverAnimation from './controls/TheControlHoverAnimation'
 
