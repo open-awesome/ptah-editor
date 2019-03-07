@@ -21,6 +21,8 @@ const DEFAULT_OPTIONS = {
   background: false,
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
+  isHoverAnim: false, // hover anim for button/link
+  isTextEdit: false, // edit text in settings panel
   isComplex: false,
   video: false,
 
@@ -123,6 +125,7 @@ const data = new Map([
     hasLink: true,
     removable: true,
     typography: true,
+    isTextEdit: true,
     text: 'Click Me!',
     link: {
       href: '',
@@ -152,6 +155,7 @@ const data = new Map([
         'color': ''
       }
     },
+    isHoverAnim: true,
     animation: {
       value: ''
     }
@@ -180,9 +184,10 @@ const data = new Map([
       canCopy: true,
       resizable: true,
       hasLink: true,
-      aligned: true,
+      aligned: false,
       typography: true,
       background: true,
+      isTextEdit: true,
       shape: true,
       pseudo: {
         hover: {
@@ -195,6 +200,7 @@ const data = new Map([
         }
       },
       text: 'Click Me!',
+      isHoverAnim: true,
       animation: {
         value: ''
       },
@@ -426,7 +432,7 @@ const data = new Map([
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': ''
-         },
+      },
       hasPlatforms: true,
       availablePlatforms: {
         'windows': {

@@ -36,9 +36,12 @@ function installMixin ({ builder }) {
       }
     },
     updated () {
+      // --- TODO: I think it's too much
+      /*
       Array.from(this.$el.querySelectorAll('[contentEditable]')).forEach((el) => {
         el.contentEditable = this.$builder.isEditing
       })
+      */
     }
   }
 };

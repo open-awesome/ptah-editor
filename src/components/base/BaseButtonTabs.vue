@@ -8,7 +8,7 @@
       :title="item.tooltipText"
       @click="selectItem(item.value)">
 
-      <IconBase class="b-base-button-tabs-button__icon" v-if="item.iconName" :name="item.iconName" />
+      <IconBase width="12" height="12" class="b-base-button-tabs-button__icon" v-if="item.iconName" :name="item.iconName" />
       <span class="b-base-button-tabs-button__text" v-if="item.text" v-html="item.text"></span>
     </button>
   </div>
@@ -80,6 +80,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 $border-color: rgba(#888888, 0.25)
 
 @mixin button-style-reset()
@@ -109,31 +112,23 @@ $border-color: rgba(#888888, 0.25)
   justify-content: center
   align-items: center
 
-  background-color: #ffffff
+  background-color: $white
   color: #888888
   border: 1px solid $border-color
-  border-left: 0
+  border-radius: 0.2rem
 
-  height: 4rem
-  padding: 0 1.5rem
+  padding: $size-step/2.5
+  margin: 0.2rem
   font-size: 1.4rem
-  line-height: 34px
   white-space: nowrap
 
-  &:first-child
-    border-radius: 0.4rem 0 0 0.4rem
-    border-left: 1px solid $border-color
-
-  &:last-child
-    border-radius: 0 0.4rem 0.4rem 0
-
-  &:hover
-    background-color: #f5f5f5
-
+  outline: none
+  &:hover,
   &_selected,
   &_selected:hover
-    background-color: #F5F8FF
-    color: #202020
+    color: $dark-blue-krayola
+    fill: $dark-blue-krayola
+    border: 1px solid $dark-blue-krayola
 
   &__icon + &__text
     margin-left: 0.6rem

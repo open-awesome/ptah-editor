@@ -17,10 +17,15 @@ export default {
     arrow: {
       type: Boolean,
       default: false
+    },
+    onHover: {
+      type: Boolean,
+      default: false
     }
   },
   data: () => ({
-    showOptions: false
+    showOptions: false,
+    showOptionsHover: false
   }),
   computed: {
     menuListClasses () {
@@ -33,22 +38,44 @@ export default {
     selectOption (option) {
       this.$emit('input', option)
     },
-    onClickOutside (e, el) {
+    clickMenu () {
+      this.showOptions = !this.showOptions
+      this.showOptionsHover = false
+    },
+    menuMouseOut () {
+      this.showOptionsHover = false
+    },
+    menuMouseOver () {
+      if (this.onHover && !this.showOptions) {
+        this.showOptionsHover = true
+      }
+    },
+    closeMenu () {
       this.showOptions = false
+      this.showOptionsHover = false
     }
   }
 }
 </script>
 
 <template>
-  <div class="l-pth-base-dropdown-menu"  @click="showOptions = !showOptions" v-click-outside="onClickOutside">
+  <div class="l-pth-base-dropdown-menu"  @click="clickMenu" @mouseover="menuMouseOver" @mouseout="menuMouseOut" v-click-outside="closeMenu">
     <div class="b-pth-base-dropdown-menu">
       <div class="b-pth-base-dropdown-menu__container">
         <slot></slot>
       </div>
-      <div class="b-pth-base-dropdown-menu__dropdown" :class="menuListClasses" v-if="showOptions">
+      <div class="b-pth-base-dropdown-menu__dropdown b-pth-base-dropdown-menu__dropdown_click" :class="menuListClasses" v-if="showOptions">
         <div class="b-pth-base-dropdown-menu__list">
-          <slot name="list"></slot>
+          <div class="b-pth-base-dropdown-menu__list-padd">
+            <slot name="list"></slot>
+          </div>
+        </div>
+      </div>
+      <div class="b-pth-base-dropdown-menu__dropdown" :class="menuListClasses" v-if="showOptionsHover">
+        <div class="b-pth-base-dropdown-menu__list">
+          <div class="b-pth-base-dropdown-menu__list-padd">
+            <slot name="listHover"></slot>
+          </div>
         </div>
       </div>
     </div>
@@ -94,7 +121,7 @@ export default {
     max-height: 10rem
     border-top: none
     position: absolute
-    top: 150%
+    top: 100%
     z-index: 10
     margin: 0
     padding: 0
@@ -106,13 +133,13 @@ export default {
       #{$self}__list
         &:before,
         &:after
-          left: 5%
+          left: 14%
     &_right
       right: 0
       #{$self}__list
         &:before,
         &:after
-          left: 85%
+          left: 87%
   &__list
     text-align: left
     position: relative
@@ -139,29 +166,53 @@ export default {
       transform: rotate(-45deg)
       box-shadow: 0 0 2rem 0 rgba($black, 0.35)
       z-index: -1
-    & ul
+
+    &-padd
       background-color: $white
-      padding: 0.5rem 0
+      padding: 1rem
       margin: 0
       position: relative
       z-index: 3
+    & ul
+      padding: 0
+      margin: 0 -1rem
     & li
       display: flex
       align-items: center
+      position: relative
 
       width: 100%
       height: $size-step*1.5
       padding: 0 $size-step
 
+      color: $dark-grey
+
       white-space: nowrap
       list-style: none
+      &._label > label
+        display: flex
+        align-items: center
+
+        padding: 0 $size-step
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+
+        cursor: pointer
+        & > input
+          cursor: pointer
       &:hover
         background-color: $blue-krayola
         color: $dark-blue-krayola
         & svg
           fill: $dark-blue-krayola
       & svg
-          margin: 0 $size-step 0 0
+        margin: 0 $size-step 0 0
+      &._right-icon
+       & svg
+        margin: 0 0 0 $size-step
   &__options
     margin: 0
     padding: 0

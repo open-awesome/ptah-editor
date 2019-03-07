@@ -290,12 +290,6 @@ export default {
       if (this.type === 'title') {
         this.el.contentEditable = 'true'
       }
-      if (this.type === 'link') {
-        this.el.contentEditable = 'true'
-      }
-      if (this.type === 'button') {
-        this.el.contentEditable = 'true'
-      }
       if (this.type === 'slogan') {
         this.el.contentEditable = 'true'
       } */

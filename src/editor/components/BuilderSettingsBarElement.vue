@@ -12,6 +12,16 @@
 
       <div class="b-elem-settings__inner">
 
+        <!-- Text -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.isTextEdit">
+          <control-text/>
+        </div>
+
+        <!-- Typography -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
+          <control-typegraphy/>
+        </div>
+
         <!-- Text align -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.aligned">
           <control-align
@@ -23,43 +33,38 @@
           </control-align>
         </div>
 
+        <!-- background -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
+          <control-background-color/>
+        </div>
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
+          <control-background-image/>
+        </div>
+
         <!-- Size -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.resizable">
           <control-size
             :height="elHeight"
             :width="elWidth"
-            :radius="elRadius"
-            :expand="expandedSize"
-            @open="onExpand"
             @change="styleChange"
             >
           </control-size>
         </div>
 
-        <!-- Text -->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-          <control-text
-            :expand="expandedFont"
-            @open="onExpand"
-            @change="styleChange"></control-text>
+        <!-- Border radius -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.shape">
+          <control-border-radius/>
         </div>
 
-        <!-- background -->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.background">
-          <control-background
-            :color="bgColor"
-            :image="bgImage"
-            :repeat="bgRepeat"
-            :size="bgSize"
-            :expand="expandedBg"
-            @open="onExpand"
-            @change="styleChange"></control-background>
+        <!-- Hover animation -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.isHoverAnim">
+          <control-hover-animation/>
         </div>
 
         <!-- Link -->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
+        <!--div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
           <control-link :builder="builder" :expand="expandedLink" @open="onExpand"/>
-        </div>
+        </div-->
 
         <!-- Available Platforms Control-->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
@@ -123,16 +128,20 @@ import BuilderSettingsBarElementTimer from './BuilderSettingsBarElementTimer'
 
 import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
+import ControlTypegraphy from './controls/TheControlTypegraphy'
 import ControlBackground from './controls/TheControlBackground'
+import ControlBackgroundColor from './controls/TheControlBackgroundColor'
+import ControlBackgroundImage from './controls/TheControlBackgroundImage'
 import ControlSize from './controls/TheControlSize'
 import ControlLink from './controls/TheControlLink'
-// control for new elements
-import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms.vue'
-import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
-import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
-import ControlIconWithText from './controls/TheControlIconWithText.vue'
 import ControlVideo from './controls/TheControlVideo'
 import ControlForm from './controls/TheControlForm'
+import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms'
+import ControlAgeRestrictions from './controls/TheControlAgeRestrictions'
+import ControlSocialNetworks from './controls/TheControlSocialNetworks'
+import ControlIconWithText from './controls/TheControlIconWithText'
+import ControlBorderRadius from './controls/TheControlBorderRadius'
+import ControlHoverAnimation from './controls/TheControlHoverAnimation'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -148,15 +157,20 @@ export default {
     BuilderSettingsBarElementTimer,
     ControlAlign,
     ControlText,
+    ControlTypegraphy,
     ControlBackground,
+    ControlBackgroundColor,
+    ControlBackgroundImage,
     ControlSize,
     ControlLink,
     ControlAvailablePlatforms,
     ControlAgeRestrictions,
     ControlSocialNetworks,
     ControlIconWithText,
+    ControlForm,
     ControlVideo,
-    ControlForm
+    ControlBorderRadius,
+    ControlHoverAnimation
   },
 
   data () {
@@ -389,8 +403,7 @@ export default {
 
   &__inner
     min-width: 24rem
-    padding-right: 2.5rem
-    padding-bottom: 10rem
+    padding: 0 2.4rem
 
   &__control
     margin-bottom: 1.6rem

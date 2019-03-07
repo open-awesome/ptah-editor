@@ -22,19 +22,6 @@
       >
       </control-section-products>
 
-     <!-- Font -->
-      <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-        <control-text
-          :fontSize="fontSize"
-          :fontFamily="fontFamily"
-          :fontColor="fontColor"
-          :fontStyles="styles"
-          :expand="expandedFont"
-          :isComplexText="isComplexText"
-          @open="onExpand"
-          @change="styleChange"></control-text>
-      </div>
-
       <div v-if="!isHeader" class="b-section-settings__control">
         <div class="b-section-settings__header">
           <span>Heights</span>
@@ -169,7 +156,6 @@ import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
-import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
 import BaseUploader from '../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './BuilderSettingsBarGroup'
@@ -189,7 +175,6 @@ export default {
     BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
-    ControlText,
     ControlSectionLayouts
   },
   name: 'BuilderSettingsBarSection',
@@ -579,10 +564,9 @@ export default {
       &.dropped
         transform: rotate(0deg)
   &__control
-    margin-top: 2.2rem
+    margin-top: $size-step/2
   &__inner
-    padding-right: 2.5rem
-    padding-bottom: 10rem
+    padding: 0 2.4rem
   &__buttons
     position: absolute
     bottom: 1rem
@@ -592,8 +576,6 @@ export default {
       margin: 0 auto
       max-width: 100%
       display: block
-  &__control
-    margin-bottom: 2rem
 
   &__description
     font-size: 1.4rem

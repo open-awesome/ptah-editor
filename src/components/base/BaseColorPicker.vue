@@ -14,10 +14,6 @@ export default {
     value: {
       default: DEFAULT_COLOR
     },
-    showTextValue: {
-      type: Boolean,
-      default: true
-    },
     label: {
       type: String
     }
@@ -49,67 +45,94 @@ export default {
 </script>
 
 <template>
-  <div class="b-picker" :class="{ 'full': showTextValue }">
-    <base-label v-if="label">
-      {{label}}
-    </base-label>
-    <div class="b-picker__value-string" @click="expanded = !expanded">
-      <div class="b-picker__circle" :style="{ 'background-color': pickerValue.rgba || pickerValue }"></div>
-      <div class="b-picker__text">
-        {{ pickerValue.rgba || pickerValue || 'Choose color' }}
+  <div class="b-picker">
+    <div class="b-picker__row">
+      <BaseDropdownMenu
+        class="b-picker__palette"
+        positionDropdown="left"
+        >
+        <div class="b-picker__preview"
+          :style="{ 'background-color': pickerValue.rgba || pickerValue }"
+          :title="pickerValue.rgba || pickerValue || 'Choose color'"
+          >
+        </div>
+        <div slot="list">
+          <Sketch :value="pickerValue" @input="changeColor"></Sketch>
+        </div>
+      </BaseDropdownMenu>
+      <div
+        class="b-picker__label"
+        v-if="label !== ''"
+       >
+        {{ label }}
       </div>
-      <div class="b-picker__arrow" :class="{ 'b-picker__arrow--turn': expanded}">
-        <icon-base name="arrowDropDown" width="6" color="#888888" />
-      </div>
-    </div>
-
-    <div class="b-picker__palette" v-show="expanded">
-      <Sketch :value="pickerValue" @input="changeColor"></Sketch>
     </div>
   </div>
 </template>
 
 <style lang="sass" scoped="">
-  .b-picker
-    font-size: 1.6rem
-    padding: 0.5rem 0
-    position: relative
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
+.b-picker
+  position: relative
+  width: 100%
+  &__row
+    display: flex
+    align-items: center
+
     width: 100%
-    &__value-string
-      display: flex
-      align-items: center
-      width: 100%
-      justify-content: space-between
-      cursor: pointer
-    &__circle
-      width: 1.8rem
-      height: 1.8rem
-      border-radius: 50%
-      border: 2px solid #FFFFFF
-      box-sizing: border-box
-      box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.2)
-      flex-shrink: 0
-    &__text
-      display: none
-      color: #272727
-      margin-left: .8rem
-      flex-grow: 2
-    &.full
-      border-bottom: 1px solid rgba(136, 136, 136, .25)
-      .b-picker__text
-        display: block
-    &__palette
-      margin-top: .5rem
-      .vc-sketch
-        border: .1rem solid rgba(0, 0, 0, .15)
-        box-shadow: none
-        width: 18rem
-        margin: 0.5rem auto
-        padding: 0
-        background: transparent none
-        border: none
-    &__arrow
-      transition: .3s ease-out
-      &--turn
-        transform: rotate(180deg)
+  &__preview
+    width: $size-step*1.5
+    height: $size-step
+
+    border-radius: 0.2rem
+    background-color: $white
+    border: 2px solid $ligth-grey
+    &:hover
+      border-color: $dark-blue-krayola
+  &__label
+    color: $dark-grey
+    margin-left: $size-step/2
+    &:first-letter
+      text-transform: uppercase
+  &__palette
+    margin-top: .5rem
+
+/deep/
+  .b-pth-base-dropdown-menu__dropdown
+    width: $size-step*8.5 !important
+    max-height: none !important
+    box-shadow: 0px 0 8rem rgba($black, 0.15) !important
+    &_left
+      left: -1.5rem !important
+      padding: 0 0 1rem 0 !important
+
+  .vc-sketch
+    border: .1rem solid rgba(0, 0, 0, .15)
+    box-shadow: none
+
+    margin: 1.6rem
+
+    background: $white none
+    border: none
+
+    transform: scale(1.155)
+    border-radius: 0.2rem !important
+  .vc-sketch *
+    border-radius: 0.2rem !important
+  .vc-sketch-field
+    .vc-input__input
+      font-size: 1.4rem
+      box-shadow: none !important
+      border-bottom: 1px solid rgba($black, 0.15)
+      padding: $size-step/4 0
+    .vc-input__label
+      color: $grey-middle
+      text-align: left
+  .vc-sketch-presets
+    border-top: none
+  .vc-sketch-color-wrap
+    display: none
+
 </style>
