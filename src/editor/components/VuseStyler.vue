@@ -252,15 +252,13 @@ export default {
       event.preventDefault()
       event.stopPropagation()
 
-      // console.log(this.type, this.name, this.path,  this.options)
-
       let autoSizing = (data) => {
         data.styles.width = this.dimensions.width
         return data
       }
 
       // show inline styler
-      if (!this.popper) {
+      if (!this.popper && this.type !== 'section') {
         this.popper = new Popper(this.el, this.$refs.styler, {
           placement: 'top',
           modifiers: {
@@ -347,8 +345,14 @@ export default {
       // this.currentOption = ''
     },
     hideStyler (event) {
-      if (event && event.target === this.el) {
+      if (event && (event.target === this.el
+        || event.target.parentNode.className === 'b-styler__control'
+        || event.target.className === 'b-control-panel')) {
         this.isCurrentStyler = true
+        return
+      }
+
+      if (event && isParentTo(event.target, this.$el)) {
         return
       }
 
@@ -357,12 +361,9 @@ export default {
         this.popper = null
       }
 
+      this.setControlPanel(false)
+
       this.el.contentEditable = 'false'
-
-      if (event && isParentTo(event.target, this.$el)) {
-        return
-      }
-
       this.el.classList.remove('styler-active')
 
       this.isVisible = false

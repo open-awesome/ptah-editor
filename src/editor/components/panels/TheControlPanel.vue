@@ -62,13 +62,17 @@ export default {
   position: relative
   width: $size-step*9
   height: 100%
-  padding: 2.8rem 0.5rem 2.8rem 3.2rem
+  padding: 2.4rem 1.7rem 2.4rem
 
   display: flex
   flex-direction: column
 
   background: $white
   box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
+
+  color: $dark-grey
+  font-size: 1.4rem
+  letter-spacing: -0.01em
 
   &__close
     position: absolute
