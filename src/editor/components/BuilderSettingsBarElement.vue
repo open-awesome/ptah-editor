@@ -104,6 +104,11 @@
             @open="onExpand"/>
         </div>
 
+        <!-- Form -->
+        <div class="b-elem-settings__control" v-if="settingObjectOptions.form">
+          <control-form></control-form>
+        </div>
+
       </div>
     </base-scroll-container>
 
@@ -127,6 +132,7 @@ import ControlAgeRestrictions from './controls/TheControlAgeRestrictions.vue'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks.vue'
 import ControlIconWithText from './controls/TheControlIconWithText.vue'
 import ControlVideo from './controls/TheControlVideo'
+import ControlForm from './controls/TheControlForm'
 
 export default {
   name: 'BuilderSettingsBarElement',
@@ -149,7 +155,8 @@ export default {
     ControlAgeRestrictions,
     ControlSocialNetworks,
     ControlIconWithText,
-    ControlVideo
+    ControlVideo,
+    ControlForm
   },
 
   data () {

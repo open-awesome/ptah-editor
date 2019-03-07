@@ -8,7 +8,7 @@
     "build": "vue-cli-service build",
     "lint": "vue-cli-service lint",
     "cjs": "gulp cjs",
-    "start-app:local": "cross-env NODE_ENV=local nodemon --ignore './node_modules' -w ./ ./index.js"
+    "start-app:local": "cross-env NODE_ENV=local nodemon --watch './backend' -w ./*.js ./index.js"
   },
   "dependencies": {
     "@baianat/base.framework": "^2.0.0-beta.0",
