@@ -148,7 +148,7 @@ export default {
     resizer: null
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions']),
 
     // find path to element
     path () {
@@ -162,6 +162,14 @@ export default {
       get () {
         return this.section.get(this.sandbox.components) || []
       }
+    }
+  },
+  watch: {
+    'settingObjectOptions.styles.width': {
+      handler: function (val, oldVal) {
+        console.log(val)
+      },
+      deep: true
     }
   },
   created () {
@@ -350,9 +358,11 @@ export default {
       // this.currentOption = ''
     },
     hideStyler (event) {
+      let evPath = event.path || (event.composedPath && event.composedPath())
+
       if (event && (event.target === this.el
         || event.target.parentNode.className === 'b-styler__control'
-        || event.target.className === 'b-control-panel')) {
+        || Array.from(evPath).filter((el) => el.className === 'b-control-panel').length)) {
         this.isCurrentStyler = true
         return
       }

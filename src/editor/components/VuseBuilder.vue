@@ -407,9 +407,9 @@ export default {
   position: relative
   &.is-editable .is-editable
     outline: none
-    border: .1rem dashed transparent
+    border: .2rem dotted transparent
     &:hover
-      border: .1rem dashed $dark-blue-krayola
+      border-color: $dark-blue-krayola
   &.fp-scroll section
     height: 100vh !important
   &:before,

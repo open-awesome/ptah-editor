@@ -3,9 +3,10 @@
     <div class="b-social-networks__item"
       v-for="(value, key) in networks" :key="key"
       v-if="networks[key].visible"
+      :style="{ margin:  sizeIcons.width/4 + 'px ' + sizeIcons.width/2 + 'px' }"
       >
       <a class="b-social-networks__item-button flex flex_center"
-        :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px', margin:  sizeIcons.width/4 + 'px'  }"
+        :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px' }"
         :target="target"
         :href="networks[key].url"
         :title="networks[key].name"
@@ -21,7 +22,9 @@ import VuseIcon from '@editor/components/VuseIcon'
 
 export default {
   name: 'SocialNetworks',
+
   inject: ['$section'],
+
   components: {
     VuseIcon
   },
@@ -60,6 +63,9 @@ export default {
   display: flex
   justify-content: center
   align-items: center
+  &.styler-active
+    border: 0.2rem $white dotted
+    border-radius: 0.5rem
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     height: auto !important
