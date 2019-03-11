@@ -256,8 +256,8 @@ export default {
       event.stopPropagation()
 
       let autoSizing = (data) => {
-        data.offsets.popper.width = data.styles.width = Math.round(this.dimensions.width)
-        data.styles.width = data.offsets.reference.width
+        data.offsets.popper.left = data.offsets.reference.left
+        data.styles.width = this.dimensions.width
         return data
       }
 
