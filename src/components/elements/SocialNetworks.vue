@@ -5,7 +5,7 @@
       v-if="networks[key].visible"
       >
       <a class="b-social-networks__item-button flex flex_center"
-        :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px'  }"
+        :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px', margin:  sizeIcons.width/4 + 'px'  }"
         :target="target"
         :href="networks[key].url"
         :title="networks[key].name"

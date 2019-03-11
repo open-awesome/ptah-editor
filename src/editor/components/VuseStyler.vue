@@ -25,8 +25,6 @@
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
         <icon-base name="settings" width="16" height="16" />
       </a>
-    </div>
-    <div class="b-styler__controls" v-if="type === 'networks'">
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
         <icon-base name="style" width="12" height="15" />
       </a>
@@ -258,7 +256,8 @@ export default {
       event.stopPropagation()
 
       let autoSizing = (data) => {
-        data.styles.width = this.dimensions.width
+        data.offsets.popper.width = data.styles.width = Math.round(this.dimensions.width)
+        data.styles.width = data.offsets.reference.width
         return data
       }
 
@@ -269,7 +268,8 @@ export default {
           modifiers: {
             autoSizing: {
               enabled: true,
-              fn: autoSizing
+              fn: autoSizing,
+              order: 840
             }
           }
         })
@@ -418,6 +418,9 @@ export default {
   align-items: flex-start
   height: 4rem
   z-index: 20
+
+  &__controls
+    display: flex
 
   &__control
     width: 3.2rem
