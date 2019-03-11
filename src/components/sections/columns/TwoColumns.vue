@@ -48,7 +48,7 @@ const C_CUSTOM_1 = [
     element: {
       text: 'Secondary',
       styles: {
-        'background-color': 'transparent',
+        'background-color': 'rgba(255, 125, 125, 0.5)',
         'color': '#ffffff',
         'font-family': 'Lato',
         'font-size:': '1.4rem',
@@ -403,7 +403,6 @@ $h: 100vh
   text-transform: uppercase
   width: 22.4rem
   height: 5.6rem
-  border: 0.2rem solid rgba(255, 125, 125, 0.5)
   box-sizing: border-box
   border-radius: 0.2rem
   .is-tablet &,

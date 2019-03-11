@@ -22,7 +22,12 @@
 
     <!-- Social settings -->
     <div class="b-styler__controls" v-if="type === 'networks'">
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')">
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
+        <icon-base name="settings" width="16" height="16" />
+      </a>
+    </div>
+    <div class="b-styler__controls" v-if="type === 'networks'">
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
         <icon-base name="style" width="12" height="15" />
       </a>
     </div>

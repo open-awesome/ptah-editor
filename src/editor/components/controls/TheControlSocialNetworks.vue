@@ -9,18 +9,8 @@ export default {
     VuseIcon
   },
 
-  props: {
-    expand: {
-      type: Boolean,
-      required: true
-    }
-  },
-
   data () {
     return {
-      controlOpen: false,
-      color: '',
-      elWidth: 0,
       vTarget: '',
       networks: []
     }
@@ -35,25 +25,8 @@ export default {
       return this.settingObjectOptions.socialNetworks
     },
 
-    colorFill () {
-      return this.settingObjectOptions.colorFill
-    },
-
-    sizeIcons () {
-      return this.settingObjectOptions.sizeIcons
-    },
-
     settings () {
       return this.settingObjectOptions.settings
-    }
-  },
-
-  watch: {
-    expand: {
-      immediate: true,
-      handler (value) {
-        this.controlOpen = value
-      }
     }
   },
 
@@ -61,13 +34,6 @@ export default {
     visible (key) {
       this.closeModal()
       this.networks[key].visible = !this.networks[key].visible
-    },
-    changeColor () {
-      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
-      this.colorFill['color'] = color
-    },
-    onClickTitle () {
-      this.$emit('open', ['SocialNetworks', !this.controlOpen])
     },
     changeTarget () {
       this.settings.target = this.vTarget ? '_blank' : '_self'
@@ -89,38 +55,21 @@ export default {
   },
 
   mounted () {
-    this.color = this.colorFill.color
-    this.elWidth = this.sizeIcons.width
     this.vTarget = this.settings.target || '_blank'
     this.networks = this.socialNetworks
-    this.controlOpen = this.expand
   }
 }
 </script>
 
 <template>
-  <div class="b-text-controls">
-    <div class="b-text-controls__header" @click="onClickTitle">
-      <span>Icons settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
-    </div>
-    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
-      <div class="b-size-controls__control">
-        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="8" min="16" max="128">
-          {{ sizeIcons.width }} px
-        </base-range-slider>
-      </div>
-      <div class="b-text-controls__control">
-        <base-color-picker label="Color icons" v-model="color" @change="changeColor"></base-color-picker>
-      </div>
-      <div class="b-text-controls__control">
-        <div>Visible networks</div>
-        <div class="b-social-networks">
-          <div class="b-social-networks__item is-editable"
-            v-for="(value, key) in networks" :key="key"
-            :class="{ 'b-social-networks__item_opacity' : false === networks[key].visible, 'b-social-networks__item_select' : networks[key].expand }"
-            >
-
-            <div>
+  <div class="b-social-networks-controls">
+    <div class="b-social-networks-controls__control">
+      <div class="b-social-networks">
+        <div class="b-social-networks__item is-editable"
+          v-for="(value, key) in networks" :key="key"
+          :class="{ 'b-social-networks__item_opacity' : false === networks[key].visible, 'b-social-networks__item_select' : networks[key].expand }"
+          >
+          <div>
             <span class="b-socials-networks__item-eye"
               @click="visible(key)"
               title="Show / Hide"
@@ -143,48 +92,34 @@ export default {
               >
               <icon-base name="link" width="15" color="black"></icon-base>
             </a>
-            </div>
-
-            <div class="b-social-networks__item-set-link-modal" v-if="networks[key].expand">
-              <div class="b-link-controls__control">
-                <base-text-field v-model="networks[key].url" placeholder="Type link here"></base-text-field>
-                <BaseButton
-                  :color="'blue'"
-                  :transparent="false"
-                  size="small"
-                  @click="applyLink"
-                  >
-                  Apply
-                </BaseButton>
-              </div>
-            </div>
-
           </div>
-        </div><!--/.b-social-networks-->
-      </div>
-      <div class="b-link-controls__control">
-        <input type="checkbox" id="target" v-model="vTarget" @change="changeTarget">
-        <label for="target">open links in new window</label>
-      </div>
-    </base-dropdown>
+
+          <div class="b-social-networks__item-set-link-modal" v-if="networks[key].expand">
+            <div class="b-link-controls__control">
+              <base-text-field v-model="networks[key].url" placeholder="Type link here"></base-text-field>
+              <BaseButton
+                :color="'blue'"
+                :transparent="false"
+                size="small"
+                @click="applyLink"
+                >
+                Apply
+              </BaseButton>
+            </div>
+          </div>
+
+        </div>
+      </div><!--/.b-social-networks-->
+    </div>
+    <div class="b-link-controls__control">
+      <input type="checkbox" id="target" v-model="vTarget" @change="changeTarget">
+      <label for="target">open links in new window</label>
+    </div>
   </div>
 </template>
 
 <style lang="sass" scoped>
-.b-text-controls
-  &__header
-    font-size: 1.6rem
-    height: 3.2rem
-    color: #272727
-    display: flex
-    align-items: center
-    cursor: pointer
-    i
-      margin-left: 5px
-      margin-bottom: -5px
-      transform: rotate(180deg)
-      &.dropped
-        transform: rotate(0deg)
+.b-social-networks-controls
   &__control
     margin-top: 2.2rem
 
