@@ -181,7 +181,7 @@ export default {
                 components-path="$sectionData.components"
                 class="b-footer__col b-footer__col_1">
 
-              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+              <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_horizont" :style="$sectionData.container.styles">
                 <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                   <component
                     v-if="$sectionData.components[index].element.isComplex"
@@ -321,7 +321,7 @@ export default {
       height: auto
 
 .b-footer-component
-
+  margin: 0 0.8rem
 /deep/
   .b-draggable-slot
     width: 100%

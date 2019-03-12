@@ -45,7 +45,6 @@ export default {
 
 <style lang="sass" scoped="scoped">
 .b-age-restrictions
-  max-width: 100rem
   margin: 0 auto
   min-height: 5rem
   min-width: 5rem

@@ -366,29 +366,6 @@ export default {
   @media only screen and (max-width: 768px)
     &
       font-size: 1.4rem !important
-.b-button
-  color: #fff
-  font-family: 'PT Serif'
-  font-style: normal
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.2em
-  text-transform: uppercase
-
-  width: auto
-  height: auto
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  margin: $size-step/2
-  padding: 0
-  width: $size-step*10
-  height: $size-step
-  min-width: auto
-  min-height: auto
-
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  border-radius: 2px
 
 .b-sandbox
   align-items: flex-start

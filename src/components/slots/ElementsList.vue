@@ -47,7 +47,8 @@ export default {
         name: 'Button',
         element: types.Button,
         type: 'button',
-        label: 'button'
+        label: 'button',
+        maxWidth: 480
       },
       {
         name: 'Link',
@@ -220,7 +221,6 @@ export default {
 
 <style lang="sass">
 .b-elements
-
   &__show-list
     border: none
     background: #D8D8D8

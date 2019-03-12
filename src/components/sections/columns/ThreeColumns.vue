@@ -307,8 +307,6 @@ $h: 100vh
   justify-content: center
   flex-direction: column
   transition: background 200ms
-  &-component
-    margin: 1.2rem
 .b-header
   width: 100%
   color: rgb(255, 255, 255)
@@ -402,10 +400,10 @@ $h: 100vh
     & > a
       .is-mobile &,
       .is-tablet &
-        margin: 1.2rem 0 !important
+        margin: 1.2rem auto !important
       @media only screen and (max-width: 992px)
         &
-          margin: 1.2rem 0 !important
+          margin: 1.2rem auto !important
   &__image,
   &__logo,
   &__slogan,

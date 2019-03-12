@@ -8,7 +8,7 @@
           :w="width"
           :h="height"
           :min-width="32"
-          :max-width="320"
+          :max-width="maxWidth ? maxWidth : 320"
           :min-height="32"
           :max-height="320"
           @resizing="onResize"
@@ -44,6 +44,9 @@ export default {
   props: {
     path: {
       type: String
+    },
+    maxWidth: {
+      type: Number
     }
   },
 
@@ -66,8 +69,8 @@ export default {
 
   created () {
     this.t = this.text
-    this.width = parseInt(this.styles.width.split('px')[0])
-    this.height = parseInt(this.styles.height.split('px')[0])
+    this.width = parseInt(this.styles.width.split('px')[0]) || 320
+    this.height = parseInt(this.styles.height.split('px')[0]) || 60
   }
 }
 </script>
@@ -93,7 +96,7 @@ export default {
   min-width: $size-step*2
   min-height: $size-step/2
 
-  margin: $size-step/2
+  margin: $size-step/2 auto
 
   background-color: #a7a1a1
 
@@ -107,15 +110,23 @@ export default {
   transition: background-color 200ms
   &__resize
     border: none !important
+
+    top: -0.4rem !important
+    right: -0.4rem !important
+    bottom: -0.4rem !important
+    left: -0.4rem !important
+
+    border-radius: 0.5rem
+    width: auto !important
+    height: auto !important
     &_active
-      top: -0.4rem !important
-      right: -0.4rem !important
-      bottom: -0.4rem !important
-      left: -0.4rem !important
-      border-radius: 0.5rem
       border: 0.2rem dotted $white !important
-      width: auto !important
-      height: auto !important
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
   & span
     display: block
   &:hover
@@ -124,15 +135,15 @@ export default {
     filter: brightness(50%)
   .is-mobile &,
   .is-tablet &
-    width: 90% !important
+    max-width: 90% !important
     margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px)
     &
-      width: 90% !important
+      max-width: 90% !important
       margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px) and (min-height: 700px)
     &
-      width: 60% !important
+      max-width: 60% !important
       margin: $size-step/2 auto !important
 /deep/
   .b-handle
@@ -148,6 +159,12 @@ export default {
     width: $size-step/4 !important
 
     transition: all 300ms linear !important
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
     &-tl
       top: -$size-step/4
       left: -$size-step/4

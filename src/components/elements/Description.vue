@@ -19,7 +19,6 @@ export default {
   font-size: 1.4rem
   line-height: 1.4
   display: block
-  max-width: 100rem
   margin: 1.6rem
   &::selection, & ::selection
     color: #ff0
