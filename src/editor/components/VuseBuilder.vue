@@ -410,6 +410,9 @@ export default {
     border: .2rem dotted transparent
     &:hover
       border-color: $dark-blue-krayola
+    &.styler-active
+      &:hover
+       border-color: $white
   &.fp-scroll section
     height: 100vh !important
   &:before,
