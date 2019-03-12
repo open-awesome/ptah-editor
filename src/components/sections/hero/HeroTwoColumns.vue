@@ -256,7 +256,7 @@ $h: 100vh
       display: none
 
 .b-logo
-  margin: 0
+  margin: 0 auto
 
 .b-grid__col-8
   .is-mobile &,

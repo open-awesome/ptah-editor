@@ -224,11 +224,11 @@ export default {
 .b-logo
   .is-mobile &
     max-width: 100% !important
-    margin: $size-step/2 0
+    margin: $size-step/2 auto
   @media only screen and (max-width: 768px)
     &
       max-width: 100% !important
-      margin: $size-step/2 0
+      margin: $size-step/2 auto
 .b-title
   color: rgba($white, 1)
   font-style: normal

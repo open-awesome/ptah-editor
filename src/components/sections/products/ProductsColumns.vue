@@ -1049,7 +1049,7 @@ $h: 100vh
       &
         display: none
   .b-logo
-    margin: 1.6rem 0
+    margin: 1.6rem auto
   .b-title
     color: inherit
     font-style: normal

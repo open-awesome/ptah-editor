@@ -267,7 +267,7 @@ $h: 100vh
     &
       display: none
 .b-logo
-  margin: 0 0 5.5rem
+  margin: 0 auto 5.5rem
 .b-title
   color: rgb(255, 255, 255)
   font-style: normal
