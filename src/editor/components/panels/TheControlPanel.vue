@@ -92,7 +92,10 @@ export default {
     position: absolute
     right: 1rem
     top: 2.1rem
+    z-index: 10
+
     padding: 0.6rem 1rem
+
     border: 0
     background: transparent
     cursor: pointer

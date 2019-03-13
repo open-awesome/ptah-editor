@@ -107,7 +107,7 @@ const C_CUSTOM_2 = [
     element: {
       text: 'Secondary',
       styles: {
-        'background-color': 'transparent',
+        'background-color': 'rgba(255, 125, 125, 0.5)',
         'color': '#ffffff',
         'font-family': 'Lato',
         'font-size:': '1.4rem',
