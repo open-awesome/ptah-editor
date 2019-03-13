@@ -41,7 +41,7 @@ const C_CUSTOM_1 = [
         'font-family': 'Lato',
         'font-size:': '1.2rem',
         'text-align': 'center',
-        'width': '64px',
+        'width': '192px',
         'height': '52px',
         'border-radius': '2px'
       }
@@ -168,7 +168,7 @@ const C_CUSTOM_2 = [
         'font-family': 'Lato',
         'font-size:': '1.2rem',
         'text-align': 'center',
-        'width': '64px',
+        'width': '192px',
         'height': '52px',
         'border-radius': '2px'
       }
@@ -295,7 +295,7 @@ const C_CUSTOM_3 = [
         'font-family': 'Lato',
         'font-size:': '1.2rem',
         'text-align': 'center',
-        'width': '64px',
+        'width': '192px',
         'height': '52px',
         'border-radius': '2px'
       }
@@ -422,7 +422,7 @@ const C_CUSTOM_4 = [
         'font-family': 'Lato',
         'font-size:': '1.2rem',
         'text-align': 'center',
-        'width': '64px',
+        'width': '192px',
         'height': '52px',
         'border-radius': '2px'
       }
@@ -1028,13 +1028,14 @@ $h: 100vh
   min-height: 76rem
   margin: 0
   padding: 1rem
+
   display: flex
-  text-align: center
   justify-content: center
   flex-direction: column
+
   transition: background 200ms
   &-component
-    margin: 1.2rem
+    margin: 1.2rem auto
   &__row
     justify-content: center
   &__icon-with-text
@@ -1077,12 +1078,14 @@ $h: 100vh
         font-size: 1.4rem !important
   .b-button
     color: inherit
+
     font-family: Lato
     font-style: normal
     font-size: 1.4rem
     text-align: center
     letter-spacing: 0.28em
     text-transform: uppercase
+
     width: 22.4rem
     height: 5.6rem
     box-sizing: border-box

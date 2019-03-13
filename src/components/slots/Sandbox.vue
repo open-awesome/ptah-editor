@@ -113,23 +113,22 @@ $h: 4.8rem
       justify-content: center
       align-items: center
       color: inherit
-      width: 100%
-      > div
-        width: 100%
+
+      width: 96%
+      margin: 0 auto
       &_horizont
-        width: auto
         > div
           width: auto
-        .is-mobile &,
-        .is-tablet &
-          width: 100%
+      .is-mobile &,
+      .is-tablet &
+        width: 96%
+        > div
+          width: 96%
+      @media only screen and (max-width: 768px)
+        &
+          width: 96%
           > div
-            width: 100%
-        @media only screen and (max-width: 768px)
-          &
-            width: 100%
-            > div
-              width: 100%
+            width: 96%
   &:hover
     .sandbox-equalizer,
     .divider

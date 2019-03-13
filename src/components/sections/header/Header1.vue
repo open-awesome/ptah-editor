@@ -174,7 +174,6 @@ import section from '../../mixins/section.js'
 const [name, group, cover] = ['Header1', 'header', '/img/covers/header-1.png']
 const defaultComponents = [
   {
-    styles: { 'margin-right': 'auto' },
     element: {
       styles: {
         'background-image': 'url(https://gn120.cdn.stg.gamenet.ru/0/7aITH/o_1vTdxd.png)',
