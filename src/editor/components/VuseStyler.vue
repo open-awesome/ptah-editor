@@ -12,6 +12,11 @@
         <icon-base name="style" width="12" height="15" />
       </a>
     </div>
+    <div class="b-styler__controls" v-if="type === 'button'" ref="buttonModalProps">
+      <a href="#" class="b-styler__control" @click.stop="setModalProps()">
+        <icon-base name="link" width="18" height="18" />
+      </a>
+    </div>
 
     <!-- Text -->
     <div class="b-styler__controls" v-if="type === 'text'">
@@ -31,6 +36,35 @@
     <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
       <icon-base name="close" width="12" height="12"></icon-base>
     </a>
+
+    <div class="" ref="button" v-show="type === 'button' && modalsProps['button'] === true">
+      <div class="b-styler__modal">
+          <div class="b-styler__modal-chapter">
+            Select button target
+          </div>
+          <div>
+            <base-text-field label="URL" placeholder="Type link here"/>
+          </div>
+          <div class="b-styler__modal-buttons">
+            <BaseButton
+              class="b-styler__modal-button"
+              :color="'gray'"
+              :transparent="true"
+              size="middle"
+              >
+              Cancel
+            </BaseButton>
+            <BaseButton
+              class="b-styler__modal-button"
+              :color="'blue'"
+              :transparent="false"
+              size="middle"
+              >
+              Done
+            </BaseButton>
+          </div>
+        </div>
+    </div>
 
   </div>
 </template>
@@ -142,7 +176,11 @@ export default {
       { name: 'shake', className: 'ptah-a-shake' },
       { name: 'bounce', className: 'ptah-a-bounce' }
     ],
-    resizer: null
+    resizer: null,
+    popperModalProps: null,
+    modalsProps: {
+      button: false
+    }
   }),
   computed: {
     ...mapState('Sidebar', ['sandbox']),
@@ -361,6 +399,12 @@ export default {
         this.popper = null
       }
 
+      if (this.popperModalProps) {
+        this.popperModalProps.destroy()
+        this.popperModalProps = null
+        this.modalsProps[this.type] = false
+      }
+
       this.setControlPanel(false)
 
       this.el.contentEditable = 'false'
@@ -401,12 +445,23 @@ export default {
       let index = this.path[1]
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
+    },
+
+    setModalProps () {
+      this.popperModalProps = new Popper(this.$refs[this.type + 'ModalProps'], this.$refs[this.type], {
+        placement: 'top'
+      })
+
+      this.modalsProps[this.type] = !this.modalsProps[this.type]
     }
   }
 }
 </script>
 
 <style lang="sass">
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-styler
   display: flex
   justify-content: space-between
@@ -453,4 +508,25 @@ export default {
     svg
       fill: $white
       margin-bottom: 0
+
+  &__modal
+    width: 40rem
+    height: auto
+    padding: 2.3rem
+
+    background: $white
+    box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
+    &-buttons
+      display: flex
+      justify-content: flex-end
+      margin: $size-step 0 0
+    &-chapter
+      font-size: 1.6rem
+      letter-spacing: -0.02em
+      color: $dark-grey
+      margin: 0 0 $size-step/2 0
+    &_color *
+      fill: $dark-blue-krayola
+    &_color *
+      fill: #4D7DD8
 </style>
