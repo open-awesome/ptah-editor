@@ -264,7 +264,8 @@ export default {
           modifiers: {
             autoSizing: {
               enabled: true,
-              fn: autoSizing
+              fn: autoSizing,
+              order: 500
             }
           }
         })
