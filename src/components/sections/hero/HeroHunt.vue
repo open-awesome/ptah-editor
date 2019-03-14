@@ -122,8 +122,8 @@ export default {
         key: 0
       },
       {
-        name: 'Title',
-        element: types.TextElement,
+        name: 'TextElement',
+        element: types.Title,
         type: 'title',
         class: 'b-hunt-title',
         label: 'title',

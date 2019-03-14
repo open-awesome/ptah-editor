@@ -23,10 +23,14 @@
       </a>
 
       <!-- Social settings -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')" v-if="type === 'networks'">
-        <icon-base name="style" width="12" height="15" />
-      </a>
-    </div>
+      <template v-if="type === 'networks'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
     <!-- Delete element -->
     <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
@@ -100,7 +104,7 @@ export default {
     ]
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions']),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -124,6 +128,14 @@ export default {
       get () {
         return this.textEditorActive
       }
+    }
+  },
+  watch: {
+    'settingObjectOptions.styles.width': {
+      handler: function (val, oldVal) {
+        console.log(val)
+      },
+      deep: true
     }
   },
   created () {
@@ -187,6 +199,7 @@ export default {
       event.stopPropagation()
 
       let autoSizing = (data) => {
+        data.offsets.popper.left = data.offsets.reference.left
         data.styles.width = this.dimensions.width
         return data
       }
@@ -200,7 +213,7 @@ export default {
               autoSizing: {
                 enabled: true,
                 fn: autoSizing,
-                order: 500
+                order: 840
               }
             }
           })
@@ -270,7 +283,6 @@ export default {
       // this.currentOption = ''
     },
     hideStyler (event) {
-      console.log('hide', event)
       const evPath = event ? event.path || (event.composedPath && event.composedPath()) : []
       const stopNames = [
         'b-styler__control',
