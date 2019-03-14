@@ -372,7 +372,6 @@ export default {
       document.removeEventListener('blur', this.hideStyler, true)
 
       if (this.type !== 'button') this.section.set(`${this.name}.text`, this.el.innerHTML)
-      this.setSettingsExpanded(false)
     },
 
     /**
