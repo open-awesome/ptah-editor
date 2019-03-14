@@ -51,7 +51,6 @@
                 :class="{ 'b-logo-one': isOnlyOneLogo(component) }">
 
               <component
-                  v-if="component.element.isComplex"
                   v-styler:for="{
                     el: component.element,
                     type: component.type,
@@ -68,28 +67,9 @@
                   :allowfullscreen="component.element.allowfullscreen"
                   :class="[component.element.classes, component.class]"
                   :path="`components[${index}].element`"
-                  class="b-header-component"/>
-
-              <component
-                  v-else
-                  v-styler:for="{
-                    el: component.element,
-                    type: component.type,
-                    label: component.label,
-                    path: `$sectionData.components[${index}].element`
-                  }"
-                  v-html="component.element.text"
-                  :is="component.name"
-                  :href="component.element.link.href"
-                  :target="component.element.link.target"
-                  :style="component.element.styles"
-                  :src="component.element.src"
-                  :frameborder="component.element.frameborder"
-                  :allow="component.element.allow"
-                  :allowfullscreen="component.element.allowfullscreen"
-                  :class="[component.element.classes, component.class]"
-                  :path="`components[${index}].element`"
-                  class="b-header-component"/>
+                  class="b-header-component">
+                <div v-html="$sectionData.components[index].element.text"></div>
+              </component>
 
             </div>
 

@@ -74,7 +74,6 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 // --- other
 import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
-import MenuBas from '@components/sections/stickyMenus/MenuBAS'
 
 import store from '@store'
 
@@ -140,8 +139,7 @@ const COMPONENTS = {
 
   Footer,
   System,
-  Video,
-  MenuBas
+  Video
 }
 
 Vuse.mix({ components: ELEMENTS })

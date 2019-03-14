@@ -121,6 +121,20 @@ const C_CUSTOM_2 = [
   }
 ]
 
+const C_CUSTOM_3 = [
+  {
+    element: {
+      text: 'This is a short header',
+      styles: {
+        'font-family': 'Montserrat',
+        'font-size': '3.2rem',
+        'color': '#ffffff'
+      }
+    },
+    key: 10
+  }
+]
+
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
@@ -130,16 +144,14 @@ const SCHEMA_CUSTOM = {
       'background-size': 'cover'
     }
   },
-  header: {
-    text: 'This is a short header',
+  container3: {
     styles: {
-      'font-family': 'Montserrat',
-      'font-size': '3.2rem',
-      'color': '#ffffff'
+      'min-height': '0px'
     }
   },
   components: _.merge({}, C_CUSTOM_1),
   components2: _.merge({}, C_CUSTOM_2),
+  components3: _.merge({}, C_CUSTOM_3),
   edited: true
 }
 
@@ -186,6 +198,17 @@ const COMPONENTS = [
   }
 ]
 
+const HEADER = [
+  {
+    name: 'TextElement',
+    element: types.Title,
+    type: 'text',
+    class: 'b-title',
+    label: 'title',
+    key: 15
+  }
+]
+
 const GROUP_NAME = 'TwoColumns'
 const NAME = 'TwoColumns'
 
@@ -200,11 +223,12 @@ export default {
 
   $schema: {
     mainStyle: types.StyleObject,
-    header: types.Title,
     container: types.StyleObject,
     container2: types.StyleObject,
+    container3: types.StyleObject,
     components: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }, { key: 4 }]),
-    components2: _.merge([], COMPONENTS, [{ key: 5 }, { key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }])
+    components2: _.merge([], COMPONENTS, [{ key: 5 }, { key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
+    components3: _.merge([], HEADER, [{ key: 15 }])
   },
 
   created () {
@@ -228,12 +252,30 @@ export default {
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <h2 class="b-header"
-            v-html="$sectionData.header.text"
-            v-styler:for="{ el: $sectionData.header, path: `$sectionData.header`}"
-            :style="$sectionData.header.styles"
-            >
-        </h2>
+        <sandbox
+          class="b-sandbox"
+          container-path="$sectionData.container3"
+          components-path="$sectionData.components3"
+          direction="column"
+          :style="$sectionData.container3.styles"
+        >
+
+          <draggable v-model="$sectionData.components3" class="b-draggable-slot" :style="$sectionData.container3.styles">
+            <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components3" v-if="$sectionData.components3.length !== 0" :key="index">
+              <component class="b-columns2-component"
+                 v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type, label: $sectionData.components3[index].label }"
+                 :is="component.name"
+                 :href="$sectionData.components3[index].element.link.href"
+                 :target="$sectionData.components3[index].element.link.target"
+                 :path="`components3[${index}].element`"
+                 :style="$sectionData.components3[index].element.styles"
+                 :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
+              >
+                <div v-html="$sectionData.components3[index].element.text"></div>
+              </component>
+            </div>
+          </draggable>
+        </sandbox>
       </div>
       <div class="b-grid__row">
         <div class="b-grid__col-6 b-grid__col-m-12 ">
