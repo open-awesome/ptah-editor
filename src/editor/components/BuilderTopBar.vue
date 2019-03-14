@@ -21,9 +21,6 @@ export default {
 
   computed: {
     ...mapState(['currentLanding']),
-    ...mapState('Sidebar', [
-      'expandedMenuItem'
-    ]),
     ...mapState('BuilderModalContent', {
       modalContentID: 'contentID'
     })

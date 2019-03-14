@@ -70,6 +70,9 @@
       <icon-base name="groupRight"></icon-base>
       <icon-base name="groupRow"></icon-base>
       <icon-base name="groupColumn"></icon-base>
+      <icon-base name="style"></icon-base>
+      <icon-base name="link"></icon-base>
+      <icon-base name="timer"></icon-base>
     </div>
 
     <hr>

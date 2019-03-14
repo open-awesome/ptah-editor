@@ -26,9 +26,8 @@
     <div class="b-builder-sidebar__content" id="sections_contents">
       <!-- Sections -->
       <menu-item
-        :isSelected="expandedMenuItem === 'sections'"
+        :isSelected="true"
         :isExpandable="true"
-        @click="toggleMenuItem('sections')"
         >
           <span>
             {{ $t('menu.sections') }}
@@ -102,26 +101,10 @@
     </div>
 
     <transition name="slide-fade">
-      <div
-          v-if="isExpanded && (isSettingsExpanded || sandbox.expanded)"
-          :class="{ 'slots-settings': isSlotsSettings }"
-          class="b-builder-sidebar-settings">
-
-        <builder-settings-slots
-            v-if="sandbox.expanded"
-            :path="sandbox.path"
-            :section="settingObjectSection"
-            :options="settingObjectOptions"
-            @requestClose="closeSlotsBar"
-            class="slots-settings__list"/>
-
-        <builder-settings-bar
-            v-if="settingObjectOptions.sectionName"
-            :title="settingObjectOptions.sectionName"
-            :builder="builder"
-            @requestClose="closeSettingsBar"
-            class="slots-settings__preview"/>
-
+      <div v-if="controlPanel.expanded" class="b-builder-sidebar-settings">
+        <the-control-panel
+          :title="settingObjectOptions.sectionName"
+          :builder="builder" />
       </div>
     </transition>
 
@@ -147,12 +130,14 @@ import MenuSubitem from './MenuSubitem'
 import BuilderSettingsBar from './BuilderSettingsBar'
 import BuilderSettingsSlots from './BuilderSettingsSlots'
 import BuilderAddSectionBar from './BuilderAddSectionBar'
-import { mapMutations, mapActions, mapState } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+import TheControlPanel from './panels/TheControlPanel'
 
 export default {
   name: 'BuilderSidebar',
 
   components: {
+    TheControlPanel,
     MenuItem,
     MenuSubitem,
     BuilderSettingsBar,
@@ -176,15 +161,14 @@ export default {
     }),
 
     ...mapState('Sidebar', [
-      'isSettingsExpanded',
       'settingObjectOptions',
       'settingObjectSection',
       'siteSettingsMenu',
       'isAddSectionExpanded',
-      'expandedMenuItem',
       'settingObjectType',
       'sectionsGroups',
-      'sandbox'
+      'sandbox',
+      'controlPanel'
     ]),
 
     headerSection () {
@@ -227,13 +211,12 @@ export default {
   watch: {
     isAddSectionExpanded (value) {
       if (value) {
-        this.toggleSandboxSidebar(false)
+        // TODO: toggle others
       }
     }
   },
 
   methods: {
-    ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
 
     ...mapActions('Sidebar', [
       'setSettingSection',
@@ -254,29 +237,15 @@ export default {
       this.setModalContent('')
     },
 
-    toggleMenuItem (name) {
-      if (this.expandedMenuItem === name) {
-        this.setMenuItem('')
-      } else {
-        this.setMenuItem(name)
-      }
-    },
-
     toggleSettingsBar (section) {
       this.closeSiteSettings()
       // this.clearSettingObject()
-      this.toggleSandboxSidebar(false)
       this.setSettingSection(section)
     },
 
     selectSection (section) {
       this.toggleSettingsBar(section)
       this.setSettingsExpanded(false)
-    },
-
-    closeSlotsBar () {
-      this.clearSettingObject()
-      this.toggleSandboxSidebar(false)
     },
 
     closeSettingsBar () {

@@ -1,17 +1,45 @@
 <template>
-  <div class="styler is-editable"
+  <div class="b-styler is-editable"
        ref="styler"
        id="styler"
        v-if="$builder.isEditing"
        :class="{ 'is-visible': isVisible }"
        @click.stop="">
+
+    <!-- Button -->
+    <div class="b-styler__controls" v-if="type === 'button'">
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
+        <icon-base name="style" width="12" height="15" />
+      </a>
+    </div>
+
+    <!-- Text -->
+    <div class="b-styler__controls" v-if="type === 'text'">
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')">
+        <icon-base name="style" width="12" height="15" />
+      </a>
+    </div>
+
+    <!-- Social settings -->
+    <div class="b-styler__controls" v-if="type === 'networks'">
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')">
+        <icon-base name="style" width="12" height="15" />
+      </a>
+    </div>
+
+    <!-- Delete element -->
+    <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
+      <icon-base name="close" width="12" height="12"></icon-base>
+    </a>
+
   </div>
 </template>
 
 <script>
 import { isParentTo, randomPoneId, getPseudoTemplate, placeCaretAtEnd } from '../util'
 import * as _ from 'lodash-es'
-import { mapMutations, mapActions } from 'vuex'
+import { mapMutations, mapActions, mapState } from 'vuex'
+import Popper from 'popper.js'
 
 const DEFAULT_BACKGROUND_REPEAT = 'no-repeat'
 const DEFAULT_BACKGROUND_POSITION = 'center center'
@@ -117,26 +145,20 @@ export default {
     resizer: null
   }),
   computed: {
-    dmsToFixed () {
-      return {
-        width: parseInt(this.dimensions.width).toFixed(0),
-        height: parseInt(this.dimensions.height).toFixed(0)
-      }
-    },
+    ...mapState('Sidebar', ['sandbox']),
+
     // find path to element
     path () {
       let path = _.split(this.name, '.')[1]
       return _.toPath(path)
     },
-    isArrayEl () {
-      if (this.type === 'section' || this.type === 'header') return false
-      return this.name.indexOf('[') > 0
-    },
-    isFirstInArray () {
-      return parseInt(this.path[1]) === 0
-    },
-    isLastInArray () {
-      return (parseInt(this.path[1]) + 1) === this.section.data[this.path[0]].length
+    components: {
+      set (value) {
+        this.section.set(this.sandbox.components, value)
+      },
+      get () {
+        return this.section.get(this.sandbox.components) || []
+      }
     }
   },
   created () {
@@ -190,8 +212,8 @@ export default {
     document.removeEventListener('click', this.hideStyler, true)
   },
   methods: {
-    ...mapMutations('Sidebar', ['toggleSandboxSidebar', 'setSandboxPaths']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setSettingsExpanded']),
+    ...mapMutations('Sidebar', ['setSandboxPaths']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel']),
     ...mapActions('BuilderModalContent', ['setContent']),
 
     setInitialValue () {
@@ -225,31 +247,28 @@ export default {
         this.backgroundSelectedOptions.size = this.options.styles['background-size'] || DEFAULT_BACKGROUND_SIZE
       }
     },
-    /**
-     * create/clone element in componetns
-     */
-    addItem (event) {
-      let newObj = null
-      let path = _.split(this.name, '.')[1]
-      let devObj = this.section.data.defObj
-      let obj = null
 
-      if (path.indexOf('[') > 0) {
-        path = _.toPath(path)
-      }
-
-      if (event === 'clone') {
-        newObj = JSON.parse(JSON.stringify(this.section.data[path[0]][parseInt(path[1])]))
-      } else if (event === 'create' && devObj[path[0]] !== undefined) {
-        newObj = JSON.parse(JSON.stringify(this.section.data.defObj[path[0]]))
-      }
-
-      obj = Object.assign({}, newObj)
-      this.section.data[path[0]].push(obj)
-    },
     showStyler (event) {
       event.preventDefault()
       event.stopPropagation()
+
+      let autoSizing = (data) => {
+        data.styles.width = this.dimensions.width
+        return data
+      }
+
+      // show inline styler
+      if (!this.popper && this.type !== 'section') {
+        this.popper = new Popper(this.el, this.$refs.styler, {
+          placement: 'top',
+          modifiers: {
+            autoSizing: {
+              enabled: true,
+              fn: autoSizing
+            }
+          }
+        })
+      }
 
       if (this.isCurrentStyler) {
         this.isCurrentStyler = false
@@ -260,22 +279,18 @@ export default {
       document.querySelectorAll('.b-draggable-slot.active')
         .forEach(el => el.classList.remove('active'))
 
-      this.toggleSandboxSidebar(false)
       this.setContent(null)
       this.clearSettingObjectLight()
 
-      if (this.type === 'text') {
+      /* if (this.type === 'text') {
         this.el.contentEditable = 'true'
       }
       if (this.type === 'title') {
         this.el.contentEditable = 'true'
       }
-      if (this.type === 'link') {
-        this.el.contentEditable = 'true'
-      }
       if (this.type === 'slogan') {
         this.el.contentEditable = 'true'
-      }
+      } */
 
       placeCaretAtEnd(this.el)
 
@@ -307,7 +322,6 @@ export default {
               components: `$sectionData.components${index}`,
               container: `$sectionData.container${index}`
             })
-            this.toggleSandboxSidebar(true)
           }
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
@@ -331,17 +345,25 @@ export default {
       // this.currentOption = ''
     },
     hideStyler (event) {
-      if (event && event.target === this.el) {
+      if (event && (event.target === this.el
+        || event.target.parentNode.className === 'b-styler__control'
+        || event.target.className === 'b-control-panel')) {
         this.isCurrentStyler = true
         return
       }
-
-      this.el.contentEditable = 'false'
 
       if (event && isParentTo(event.target, this.$el)) {
         return
       }
 
+      if (this.popper) {
+        this.popper.destroy()
+        this.popper = null
+      }
+
+      this.setControlPanel(false)
+
+      this.el.contentEditable = 'false'
       this.el.classList.remove('styler-active')
 
       this.isVisible = false
@@ -370,7 +392,66 @@ export default {
       let styleTemplate = getPseudoTemplate(poneId, this.pseudoStyles)
 
       document.head.insertAdjacentHTML('beforeend', styleTemplate)
+    },
+
+    /**
+     * Remove
+     * @param index
+     */
+    removeElement () {
+      let index = this.path[1]
+      this.components.splice(index, 1)
+      this.clearSettingObjectLight()
     }
   }
 }
 </script>
+
+<style lang="sass">
+.b-styler
+  display: flex
+  justify-content: space-between
+  align-items: flex-start
+  height: 4rem
+  z-index: 20
+
+  &__control
+    width: 3.2rem
+    height: 3.2rem
+    display: flex
+    align-items: center
+    justify-content: center
+
+    border-radius: 50%
+    background: $white
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+    margin-right: .4rem
+
+    svg
+      fill: $dark-blue-krayola
+      margin-bottom: 0
+
+    &:hover, .active
+      background: $dark-blue-krayola
+
+      svg
+        fill: $white
+        margin-bottom: 0
+
+  &__delete
+    width: 3.2rem
+    height: 3.2rem
+    display: flex
+    align-items: center
+    justify-content: center
+
+    border-radius: 50%
+    background: rgba(82, 105, 166, 0.25)
+
+    &:hover, .active
+      background: $dark-blue-krayola
+
+    svg
+      fill: $white
+      margin-bottom: 0
+</style>

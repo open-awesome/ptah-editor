@@ -1,9 +1,6 @@
 <template>
   <div class="b-elements is-editable">
-    <button class="b-elements__show-list ptah-control" @click="openList" :class="{'active': sandbox.addElExpanded}">
-      <icon-base width="10" height="10" name="plus"></icon-base>
-    </button>
-    <aside class="b-elements__list ptah-control" v-if="sandbox.addElExpanded">
+    <aside class="b-elements__list ptah-control">
       <div class="b-elements__title">
         {{ $t('c.elementsLibrary') }}
 
@@ -36,7 +33,8 @@
 import * as types from '@editor/types'
 import Seeder from '@editor/seeder'
 import * as _ from 'lodash-es'
-import { mapActions, mapState, mapMutations } from 'vuex'
+import { mapActions, mapState } from 'vuex'
+import { randomPoneId } from '@editor/util'
 
 export default {
   name: 'ElementsList',
@@ -138,67 +136,81 @@ export default {
   }),
 
   computed: {
-    ...mapState('Sidebar', ['sandbox'])
+    ...mapState('Sidebar', ['settingObjectOptions', 'settingObjectSection', 'sandbox']),
+
+    components: {
+      set (value) {
+        this.settingObjectSection.set(this.sandbox.components, value)
+      },
+      get () {
+        return this.settingObjectSection.get(this.sandbox.components) || []
+      }
+    }
   },
 
   created () {
     this.elements = Seeder.seed(this.elements)
   },
   methods: {
-    ...mapActions('Sidebar', ['clearSettingObjectLight']),
-    ...mapMutations('Sidebar', ['toggleElementsBar']),
+    ...mapActions('Sidebar', ['clearSettingObjectLight', 'setControlPanel']),
+
+    addElement (element) {
+      element.element.removable = true
+      element.key = randomPoneId()
+      this.components = [...this.components, element]
+    },
 
     addButton () {
       const el = _.merge({}, Seeder.seed(this.elements[0]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addLink () {
       const el = _.merge({}, Seeder.seed(this.elements[1]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addTitle () {
       const el = _.merge({}, Seeder.seed(this.elements[2]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addText () {
       const el = _.merge({ text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }, Seeder.seed(this.elements[3]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addImage () {
       const el = _.merge({}, Seeder.seed(this.elements[4]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addLogo () {
       const el = _.merge({}, Seeder.seed(this.elements[5]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addDelimiter () {
       const el = _.merge({}, Seeder.seed(this.elements[6]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addAvailable () {
       const el = _.merge({}, Seeder.seed(this.elements[7]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addRestrictions () {
       const el = _.merge({}, Seeder.seed(this.elements[8]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addSocial () {
       const el = _.merge({}, Seeder.seed(this.elements[9]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addSlogan () {
       const el = _.merge({}, Seeder.seed(this.elements[10]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addCost () {
       const el = _.merge({}, Seeder.seed(this.elements[11]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addTextWithIcon () {
       const el = _.merge({}, Seeder.seed(this.elements[12]))
-      this.$emit('addEl', el)
+      this.addElement(el)
     },
     addVideo () {
       this.$emit('addEl', _.merge({}, Seeder.seed(this.elements[13])))
@@ -206,13 +218,8 @@ export default {
     addTimer () {
       this.$emit('addEl', _.merge({}, Seeder.seed(this.elements[14])))
     },
-    openList () {
-      this.toggleElementsBar(true)
-      this.clearSettingObjectLight()
-      document.addEventListener('click', this.hideList, true)
-    },
     hideList () {
-      this.toggleElementsBar(false)
+      this.setControlPanel(false)
       document.removeEventListener('click', this.hideList, true)
     }
   }

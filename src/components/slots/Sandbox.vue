@@ -50,15 +50,13 @@ export default {
 
   methods: {
     ...mapMutations('Sidebar', [
-      'toggleSandboxSidebar',
       'setSandboxPaths',
       'setSection',
-      'isAddSectionExpanded',
-      'toggleElementsBar'
+      'isAddSectionExpanded'
     ]),
 
     ...mapActions('BuilderModalContent', ['setContent']),
-    ...mapActions('Sidebar', ['toggleSidebar']),
+    ...mapActions('Sidebar', ['toggleSidebar', 'setControlPanel']),
 
     showSandboxSidebar (e, openElBar) {
       this.setContent(null)
@@ -79,15 +77,14 @@ export default {
         if (target) {
           target.classList.add('active')
         }
-        this.toggleSandboxSidebar(true)
       })
 
       this.toggleSidebar(true)
 
       if (openElBar) {
-        this.toggleElementsBar(true)
+        this.setControlPanel('Slot')
       } else {
-        this.toggleElementsBar(false)
+        this.setControlPanel(false)
       }
     }
   }
