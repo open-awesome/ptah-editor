@@ -31,6 +31,7 @@
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
+    </div>
 
     <!-- Delete element -->
     <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
