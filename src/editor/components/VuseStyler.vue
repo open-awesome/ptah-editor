@@ -40,7 +40,11 @@
     </a>
 
     <!-- modals -->
-    <div class="b-styler__modal" ref="button" v-show="type === 'button' && isModalsPropsShow === true">
+    <div class="b-styler__modal"
+       ref="button"
+       v-show="type === 'button' && isModalsPropsShow === true"
+       v-click-outside="setModalProps"
+      >
       <div class="b-styler__modal-close"
         @click="setModalProps">
         <icon-base
@@ -519,12 +523,11 @@ export default {
   &__modal
     width: 40rem
     height: auto
-    margin-left: -20rem
     padding: $size-step/1.45 0
 
     position: absolute
     bottom: 4rem
-    left: 50%
+    left: -2.5rem
 
     background: $white
     box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
