@@ -253,6 +253,7 @@ export default {
       event.stopPropagation()
 
       let autoSizing = (data) => {
+        data.offsets.popper.left = data.offsets.reference.left
         data.styles.width = this.dimensions.width
         return data
       }
@@ -265,7 +266,7 @@ export default {
             autoSizing: {
               enabled: true,
               fn: autoSizing,
-              order: 500
+              order: 840
             }
           }
         })
