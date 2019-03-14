@@ -7,15 +7,17 @@
        @click.stop="">
 
     <!-- Button -->
-    <div class="b-styler__controls" v-if="type === 'button'">
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
-        <icon-base name="style" width="12" height="15" />
-      </a>
-    </div>
-    <div class="b-styler__controls" v-if="type === 'button'" ref="buttonModalProps">
-      <a href="#" class="b-styler__control" @click.stop="setModalProps()">
-        <icon-base name="link" width="18" height="18" />
-      </a>
+    <div class="b-styler__col">
+      <div class="b-styler__controls" v-if="type === 'button'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </div>
+      <div class="b-styler__controls" v-if="type === 'button'" ref="buttonModalProps">
+        <a href="#" class="b-styler__control" @click.stop="setModalProps()">
+          <icon-base name="link" width="18" height="18" />
+        </a>
+      </div>
     </div>
 
     <!-- Text -->
@@ -37,33 +39,34 @@
       <icon-base name="close" width="12" height="12"></icon-base>
     </a>
 
-    <div class="" ref="button" v-show="type === 'button' && modalsProps['button'] === true">
-      <div class="b-styler__modal">
-          <div class="b-styler__modal-chapter">
-            Select button target
-          </div>
-          <div>
-            <base-text-field label="URL" placeholder="Type link here"/>
-          </div>
-          <div class="b-styler__modal-buttons">
-            <BaseButton
-              class="b-styler__modal-button"
-              :color="'gray'"
-              :transparent="true"
-              size="middle"
-              >
-              Cancel
-            </BaseButton>
-            <BaseButton
-              class="b-styler__modal-button"
-              :color="'blue'"
-              :transparent="false"
-              size="middle"
-              >
-              Done
-            </BaseButton>
-          </div>
-        </div>
+    <!-- modals -->
+    <div class="b-styler__modal" ref="button" v-show="type === 'button' && isModalsPropsShow === true">
+      <div class="b-styler__modal-close"
+        @click="setModalProps">
+        <icon-base
+          name="close"
+          color="#c4c4c4"
+          width="12"
+          height="12"
+        />
+      </div>
+      <div class="b-styler__modal-chapter">
+        Select button target
+      </div>
+      <div class="b-styler__modal-content">
+        <modal-button :builder="$builder"/>
+      </div>
+      <div class="b-styler__modal-buttons">
+        <BaseButton
+          class="b-styler__modal-button"
+          :color="'blue'"
+          :transparent="false"
+          size="middle"
+          @click.stop="setModalProps()"
+          >
+          Done
+        </BaseButton>
+      </div>
     </div>
 
   </div>
@@ -75,12 +78,19 @@ import * as _ from 'lodash-es'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import Popper from 'popper.js'
 
+import ModalButton from './modals/TheModalButton'
+
 const DEFAULT_BACKGROUND_REPEAT = 'no-repeat'
 const DEFAULT_BACKGROUND_POSITION = 'center center'
 const DEFAULT_BACKGROUND_SIZE = 'contain'
 
 export default {
   name: 'Styler',
+
+  components: {
+    ModalButton
+  },
+
   props: {
     el: {
       required: true,
@@ -177,10 +187,7 @@ export default {
       { name: 'bounce', className: 'ptah-a-bounce' }
     ],
     resizer: null,
-    popperModalProps: null,
-    modalsProps: {
-      button: false
-    }
+    isModalsPropsShow: false
   }),
   computed: {
     ...mapState('Sidebar', ['sandbox']),
@@ -313,6 +320,9 @@ export default {
         return
       }
 
+      // hide modal settings
+      this.isModalsPropsShow = false
+
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
         .forEach(el => el.classList.remove('active'))
@@ -399,11 +409,8 @@ export default {
         this.popper = null
       }
 
-      if (this.popperModalProps) {
-        this.popperModalProps.destroy()
-        this.popperModalProps = null
-        this.modalsProps[this.type] = false
-      }
+      // hide modal settings
+      this.isModalsPropsShow = false
 
       this.setControlPanel(false)
 
@@ -448,11 +455,7 @@ export default {
     },
 
     setModalProps () {
-      this.popperModalProps = new Popper(this.$refs[this.type + 'ModalProps'], this.$refs[this.type], {
-        placement: 'top'
-      })
-
-      this.modalsProps[this.type] = !this.modalsProps[this.type]
+      this.isModalsPropsShow = !this.isModalsPropsShow
     }
   }
 }
@@ -468,6 +471,10 @@ export default {
   align-items: flex-start
   height: 4rem
   z-index: 20
+
+  &__col
+    display: flex
+    flex-wrap: nowrap
 
   &__control
     width: 3.2rem
@@ -512,21 +519,57 @@ export default {
   &__modal
     width: 40rem
     height: auto
-    padding: 2.3rem
+    margin-left: -20rem
+    padding: $size-step/1.45 0
+
+    position: absolute
+    bottom: 4rem
+    left: 50%
 
     background: $white
     box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
     &-buttons
       display: flex
       justify-content: flex-end
-      margin: $size-step 0 0
+      margin: $size-step $size-step/2.5 0
     &-chapter
       font-size: 1.6rem
       letter-spacing: -0.02em
       color: $dark-grey
-      margin: 0 0 $size-step/2 0
+      margin: 0 $size-step/1.45
+    &-content
+      margin: $size-step/2 $size-step/1.45
     &_color *
       fill: $dark-blue-krayola
     &_color *
       fill: #4D7DD8
+    &-close
+      position: absolute
+      top: $size-step/1.45
+      right: $size-step/1.45
+
+      cursor: pointer
+    &:before
+      content: ""
+      position: absolute
+      width: 1.5rem
+      height: 1.5rem
+      bottom: -0.75rem
+      left: 19%
+      margin-left: -0.75rem
+      background: $white
+      transform: rotate(-45deg)
+      z-index: 2
+    &:after
+      content: ""
+      position: absolute
+      width: 1.5rem
+      height: 1.5rem
+      bottom: -0.75rem
+      left: 19%
+      margin-left: -0.75rem
+      background: $white
+      transform: rotate(-45deg)
+      box-shadow: 0 0 2rem 0 rgba($black, 0.35)
+      z-index: -1
 </style>

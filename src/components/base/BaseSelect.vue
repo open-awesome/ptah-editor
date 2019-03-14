@@ -89,7 +89,7 @@ export default {
   letter-spacing: -0.02em
 
   width: 100%
-  height: 2.5rem
+  height: 2.6rem
   max-width: 50rem
 
   position: relative
