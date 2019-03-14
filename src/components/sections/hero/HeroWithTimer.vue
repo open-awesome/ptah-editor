@@ -30,7 +30,7 @@ const COMPONENTS = [
     key: 0
   },
   {
-    name: 'Title',
+    name: 'TextElement',
     element: types.Title,
     type: 'text',
     class: 'b-title',
@@ -38,7 +38,7 @@ const COMPONENTS = [
     key: 1
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',

@@ -27,7 +27,6 @@
                 :key="`component-${ _uid }-${ index }`">
 
               <component class="b-hero-component"
-                  v-if="component.element.isComplex"
                   v-styler:for="{
                     el: component.element,
                     type: component.type,
@@ -43,27 +42,9 @@
                   :allow="component.element.allow"
                   :allowfullscreen="component.element.allowfullscreen"
                   :class="[component.element.classes, component.class]"
-                  :path="`components[${index}].element`"/>
-
-              <component
-                  v-else
-                  v-styler:for="{
-                    el: component.element,
-                    type: component.type,
-                    label: component.label,
-                    path: `$sectionData.components[${index}].element`
-                  }"
-                  v-html="component.element.text"
-                  :is="component.name"
-                  :href="component.element.link.href"
-                  :target="component.element.link.target"
-                  :style="component.element.styles"
-                  :src="component.element.src"
-                  :frameborder="component.element.frameborder"
-                  :allow="component.element.allow"
-                  :allowfullscreen="component.element.allowfullscreen"
-                  :class="[component.element.classes, component.class]"
-                  :path="`components[${index}].element`"/>
+                  :path="`components[${index}].element`">
+                <div v-html="$sectionData.components[index].element.text"></div>
+              </component>
 
             </div>
 
@@ -188,7 +169,7 @@ export default {
     components: [
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
       { name: 'VideoElement', element: VideoElement, type: 'video', class: 'b-video', label: 'video', key: 5 },
-      { name: 'Slogan', element: Slogan, type: 'slogan', class: 'b-slogan', label: 'slogan', key: 6 },
+      { name: 'TextElement', element: Slogan, type: 'slogan', class: 'b-slogan', label: 'slogan', key: 6 },
       { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 },
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 7 }
     ]

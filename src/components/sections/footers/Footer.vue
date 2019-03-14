@@ -13,7 +13,7 @@ const COMPONENTS = [
     key: 0
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-footer-copyright',

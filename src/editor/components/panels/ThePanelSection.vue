@@ -343,7 +343,6 @@ export default {
   },
 
   beforeDestroy () {
-    this.setSettingsExpanded(false)
   },
 
   methods: {
@@ -351,9 +350,7 @@ export default {
       'updateSettingOptions',
       'clearSettingObject',
       'toggleGrouping',
-      'setSettingSection',
-      'clearSettingObject',
-      'setSettingsExpanded'
+      'setSettingSection'
     ]),
     ...mapActions('Landing', [
       'saveState'
