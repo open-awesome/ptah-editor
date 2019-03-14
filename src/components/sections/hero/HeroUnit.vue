@@ -204,7 +204,7 @@ export default {
     <div class="b-grid">
       <div class="b-grid__row">
 
-        <div class="b-grid__col-2"/>
+        <div class="b-grid__col-2 hidden-m"/>
 
         <div class="b-grid__col-8">
           <sandbox
@@ -244,7 +244,7 @@ export default {
           </sandbox>
         </div>
 
-        <div class="b-grid__col-2"/>
+        <div class="b-grid__col-2 hidden-m"/>
 
       </div>
     </div>
