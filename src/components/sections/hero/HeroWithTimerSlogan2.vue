@@ -86,7 +86,7 @@ const C_CUSTOM = [
         'font-family': 'Heebo',
         'text-align': 'center',
         'font-size': '3.6rem',
-        'width': '384x',
+        'width': '384px',
         'height': '116px',
         'border-radius': '0',
         'font-weight': 'bold'
@@ -212,11 +212,11 @@ export default {
 .b-logo
   .is-mobile &
     max-width: 100% !important
-    margin: $size-step/2 0
+    margin: $size-step/2 auto
   @media only screen and (max-width: 768px)
     &
       max-width: 100% !important
-      margin: $size-step/2 0
+      margin: $size-step/2 auto
 .b-title
   color: rgba($white, 1)
   font-style: normal
@@ -249,28 +249,6 @@ export default {
       font-size: 1.4rem !important
       margin: $size-step/2 0
 .b-button
-  color: #fff
-  font-family: 'Heebo'
-  font-style: normal
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.2em
-  text-transform: uppercase
-
-  width: auto
-  height: auto
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  margin: $size-step/2
-  padding: 0
-  width: $size-step*10
-  height: $size-step
-  min-width: auto
-  min-height: auto
-
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  border-radius: 2px
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important

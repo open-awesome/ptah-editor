@@ -15,10 +15,10 @@ export default {
           }
         },
         {
-          slug: 'HeroUnit',
+          slug: 'HeroSkull',
           theme: {
-            name: 'HeroUnit',
-            sections: ['HeroUnit']
+            name: 'HeroSkull',
+            sections: ['HeroSkull']
           }
         },
         {

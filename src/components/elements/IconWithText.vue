@@ -47,7 +47,6 @@ export default {
   font-size: 1.4rem
   line-height: 1.4
   display: inline-block
-  max-width: 100rem
   margin: 0.8rem
   padding: 0 1.6rem 0 3.2rem
   color: inherit

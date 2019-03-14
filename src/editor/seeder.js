@@ -183,7 +183,6 @@ const data = new Map([
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       canCopy: true,
-      resizable: true,
       hasLink: true,
       aligned: false,
       typography: true,
@@ -228,7 +227,8 @@ const data = new Map([
         'text-align': 'center',
         'width': '',
         'height': ''
-      }
+      },
+      isComplex: true
     })
   )],
   [types.Label, () => (_.merge({}, DEFAULT_OPTIONS,

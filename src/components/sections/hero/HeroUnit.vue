@@ -114,6 +114,7 @@ const C_CUSTOM = [
         'border-radius': '2px'
       }
     },
+    maxWidth: 480,
     key: 3
   },
   {
@@ -202,14 +203,17 @@ export default {
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-12">
+
+        <div class="b-grid__col-2 hidden-m"/>
+
+        <div class="b-grid__col-8">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
               direction="column"
               class="b-sandbox">
 
-            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+            <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
@@ -219,6 +223,7 @@ export default {
                   :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  :maxWidth="$sectionData.components[index].maxWidth ? $sectionData.components[index].maxWidth : 320"
                   >
                   <div v-html="$sectionData.components[index].element.text"></div>
                 </component>
@@ -226,6 +231,9 @@ export default {
             </draggable>
           </sandbox>
         </div>
+
+        <div class="b-grid__col-2 hidden-m"/>
+
       </div>
     </div>
   </section>
@@ -244,8 +252,6 @@ $h: 100vh
   justify-content: center
   flex-direction: column
   transition: background 200ms
-  &-component
-    margin: 1.2rem
 .b-delimiter
   height: 2rem
   .is-mobile &,
@@ -255,7 +261,7 @@ $h: 100vh
     &
       display: none
 .b-logo
-  margin: 0 0 5.5rem
+  margin: 0 auto 5.5rem
 .b-title
   color: rgb(255, 255, 255)
   font-style: normal
@@ -291,25 +297,11 @@ $h: 100vh
       font-size: 1.4rem !important
       line-height: 2rem
 .b-button
-  color: #fff
-  font-family: Lato
-  font-style: normal
-  font-weight: bold
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.28em
-  text-transform: uppercase
-  width: 35.2rem
-  height: 6.4rem
-  background: #FF6D64
-  box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
   .is-mobile &,
   .is-tablet &
-    height: 4rem !important
     font-size: 1.4rem !important
   @media only screen and (max-width: 768px)
     &
-      height: 4rem !important
       font-size: 1.4rem !important
 .b-sandbox
   min-height: 20rem

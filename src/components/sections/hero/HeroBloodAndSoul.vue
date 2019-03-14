@@ -182,7 +182,7 @@ export default {
                   :is="component.name"
                   :href="$sectionData.components2[index].element.href"
                   :target="$sectionData.components2[index].element.target"
-                  :path="`components[${index}].element`"
+                  :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
                   :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                 >

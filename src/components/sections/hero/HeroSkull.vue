@@ -113,6 +113,7 @@ const C_CUSTOM = [
         'border-radius': '2px'
       }
     },
+    maxWidth: 480,
     key: 3
   },
   {
@@ -201,7 +202,10 @@ export default {
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-12">
+
+        <div class="b-grid__col-2 hidden-m "/>
+
+        <div class="b-grid__col-8">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
@@ -225,6 +229,9 @@ export default {
             </draggable>
           </sandbox>
         </div>
+
+        <div class="b-grid__col-2 hidden-m"/>
+
       </div>
     </div>
   </section>
@@ -281,26 +288,6 @@ export default {
   @media only screen and (max-width: 768px)
     &
       font-size: 1.4rem !important
-.b-button
-  color: #fff
-  font-family: Heebo
-  font-style: normal
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.2em
-  width: auto
-  height: auto
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  margin: 1.6rem
-  padding: 0
-  width: 35.2rem
-  height: 6.4rem
-  min-width: auto
-  min-height: auto
-  text-transform: uppercase
-  border-radius: 2px
-  text-align: center
 
 .b-sandbox
   min-height: 36.5rem

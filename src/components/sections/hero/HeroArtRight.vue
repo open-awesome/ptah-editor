@@ -54,6 +54,8 @@
 
       </div>
 
+      <div class="b-grid__col-6"></div>
+
     </div>
   </div>
 
@@ -213,8 +215,6 @@ $h: 100vh
   justify-content: center
   flex-direction: column
   transition: background 200ms
-  &-component
-    margin: 1.2rem
 
 .b-delimiter
   height: 2rem
@@ -226,7 +226,7 @@ $h: 100vh
       display: none
 
 .b-logo
-  margin: 0 0 5.5rem
+  margin: 0 auto 5.5rem
 
 .b-link:hover
   text-decoration: underline !important
@@ -268,18 +268,6 @@ $h: 100vh
       line-height: 2rem
 
 .b-button
-  color: #fff
-  font-family: Lato
-  font-style: normal
-  font-weight: bold
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.28em
-  text-transform: uppercase
-  width: 35.2rem
-  height: 6.4rem
-  background: #FF6D64
-  box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
   .is-mobile &,
   .is-tablet &
     height: 4rem !important
