@@ -1,19 +1,19 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Available platforms
+      Setting restrictions
     </h6>
     <div class="b-panel__control">
-      <control-available-platforms></control-available-platforms>
+      <control-age-restrictions></control-age-restrictions>
     </div>
   </div>
 </template>
 
 <script>
-import ControlAvailablePlatforms from '../controls/TheControlAvailablePlatforms'
+import ControlAgeRestrictions from '../controls/TheControlAgeRestrictions'
 export default {
-  name: 'ThePanelAvailablePlatforms',
-  components: { ControlAvailablePlatforms },
+  name: 'ThePanelRestrictions',
+  components: { ControlAgeRestrictions },
   props: {
     builder: {
       type: Object,

@@ -3,22 +3,14 @@ import { mapState } from 'vuex'
 import VuseIcon from '@editor/components/VuseIcon'
 
 export default {
-  name: 'ControlAgeRestrionctions',
+  name: 'ControlAgeRestrictions',
 
   components: {
     VuseIcon
   },
 
-  props: {
-    expand: {
-      type: Boolean,
-      required: true
-    }
-  },
-
   data () {
     return {
-      controlOpen: false,
       elWidth: 0
     }
   },
@@ -37,76 +29,59 @@ export default {
     }
   },
 
-  watch: {
-    expand: {
-      immediate: true,
-      handler (value) {
-        this.controlOpen = value
-      }
-    }
-  },
-
   methods: {
     visible (key) {
       this.restrictions[key].visible = !this.restrictions[key].visible
-    },
-    onClickTitle () {
-      this.$emit('open', ['AgeRestrictions', !this.controlOpen])
     }
   },
 
   mounted () {
     this.elWidth = this.sizeIcons.width
-    this.controlOpen = this.expand
   }
 }
 </script>
 
 <template>
   <div class="b-text-controls">
-    <div class="b-text-controls__header" @click="onClickTitle">
-      <span>Setting restrictions</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+    <div class="b-size-controls__control">
+      <base-range-slider v-model="sizeIcons.width" label="Width icons" step="8" min="16" max="128">
+        {{ sizeIcons.width }} px
+      </base-range-slider>
     </div>
-    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
-      <div class="b-size-controls__control">
-        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="8" min="16" max="128">
-          {{ sizeIcons.width }} px
-        </base-range-slider>
-      </div>
-      <div class="b-text-controls__control">
-        <div>Visible restrictions</div>
-        <div class="b-age-restrictions">
-          <div class="b-age-restrictions__item is-editable"
-            v-for="(value, key) in restrictions" :key="key"
-            :class="{ 'b-age-restrictions__item_opacity' : false === restrictions[key].visible }"
-            >
+
+    <div class="b-text-controls__control">
+      <div>Visible restrictions</div>
+      <div class="b-age-restrictions">
+        <div class="b-age-restrictions__item is-editable"
+             v-for="(value, key) in restrictions" :key="key"
+             :class="{ 'b-age-restrictions__item_opacity' : false === restrictions[key].visible }"
+        >
 
             <span class="b-age-restrictions__item-eye"
-              title="Show / Hide"
-              @click="visible(key)"
-              >
+                  title="Show / Hide"
+                  @click="visible(key)"
+            >
               <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
             </span>
 
-            <a class="b-age-restrictions__item-button"
-              :title="restrictions[key].name"
-              @click="visible(key)"
-              >
-              {{ restrictions[key].name }}
-            </a>
+          <a class="b-age-restrictions__item-button"
+             :title="restrictions[key].name"
+             @click="visible(key)"
+          >
+            {{ restrictions[key].name }}
+          </a>
 
-            <div class="b-age-restrictions__item-select" v-if="restrictions[key].visible">
-              <BaseSelect
-                :options="restrictions[key].options"
-                v-model="restrictions[key].selected"
-                :value="restrictions[key].selected"
-                >
-              </BaseSelect>
-            </div>
+          <div class="b-age-restrictions__item-select" v-if="restrictions[key].visible">
+            <BaseSelect
+              :options="restrictions[key].options"
+              v-model="restrictions[key].selected"
+              :value="restrictions[key].selected"
+            >
+            </BaseSelect>
           </div>
-        </div><!--/.b-age-restrictions-->
-      </div>
-    </base-dropdown>
+        </div>
+      </div><!--/.b-age-restrictions-->
+    </div>
   </div>
 </template>
 

@@ -39,6 +39,11 @@
         <icon-base name="settings" width="16" height="16" />
       </a>
 
+      <!-- Age restrictions -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Restrictions')" v-if="type === 'restrictions'">
+        <icon-base name="settings" width="16" height="16" />
+      </a>
+
     </div>
 
     <!-- Delete element -->
@@ -364,6 +369,7 @@ export default {
       let index = this.path[1]
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
+      this.hideStyler()
     }
   }
 }
