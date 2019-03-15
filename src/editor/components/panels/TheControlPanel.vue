@@ -18,6 +18,7 @@ import ThePanelSocialStyle from './ThePanelSocialStyle'
 import ThePanelText from './ThePanelText'
 import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
+import ThePanelAvailablePlatforms from './ThePanelAvailablePlatforms'
 
 export default {
   name: 'TheControlPanel',
@@ -52,7 +53,8 @@ export default {
     ThePanelText,
     ThePanelTimerSettings,
     ThePanelTimerStyle,
-    ThePanelSlot
+    ThePanelSlot,
+    ThePanelAvailablePlatforms
   }
 }
 </script>

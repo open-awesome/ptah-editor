@@ -31,6 +31,14 @@
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
+
+      <!-- Available platforms -->
+      <a href="#" class="b-styler__control"
+         @click.stop="setControlPanel('AvailablePlatforms')"
+         v-if="type === 'available'">
+        <icon-base name="settings" width="16" height="16" />
+      </a>
+
     </div>
 
     <!-- Delete element -->
@@ -196,6 +204,7 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
+      console.log(this.type)
       event.preventDefault()
       event.stopPropagation()
 
