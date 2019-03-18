@@ -1,5 +1,9 @@
 <template>
   <div class="b-panel">
+    <!-- image -->
+    <div class="b-panel__control">
+      <control-image/>
+    </div>
     <!-- Alt prop for image -->
     <div class="b-panel__control">
       <control-alt/>
@@ -9,6 +13,7 @@
 
 <script>
 import ControlAlt from './../controls/TheControlAlt'
+import ControlImage from './../controls/TheControlImage'
 
 export default {
   name: 'ThePanelImage',
@@ -21,7 +26,8 @@ export default {
   },
 
   components: {
-    ControlAlt
+    ControlAlt,
+    ControlImage
   }
 }
 </script>

@@ -1,5 +1,5 @@
 <template>
-  <div class="b-control-panel">
+  <div class="b-control-panel" @click.stop="">
     <button class="b-control-panel__close" @click="setControlPanel(false)">
       <icon-base width="10" height="10" name="close"/>
     </button>

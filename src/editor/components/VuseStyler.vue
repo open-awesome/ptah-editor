@@ -30,7 +30,7 @@
     <!-- Image / Logo -->
     <div class="b-styler__controls" v-if="type === 'image'">
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')">
-        <icon-base name="style" width="12" height="15" />
+        <icon-base name="preview" width="14" height="16" />
       </a>
     </div>
 
