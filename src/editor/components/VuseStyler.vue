@@ -3,8 +3,7 @@
        ref="styler"
        id="styler"
        v-if="$builder.isEditing"
-       :class="{ 'is-visible': isVisible }"
-       @click.stop="">
+       :class="{ 'is-visible': isVisible }">
 
     <!-- Button -->
     <div class="b-styler__col">
@@ -41,9 +40,11 @@
 
     <!-- modals -->
     <div class="b-styler__modal"
-       ref="button"
+       :class="modal.button.class"
+       ref="buttonModal"
        v-show="type === 'button' && isModalsPropsShow === true"
-       v-click-outside="setModalProps"
+       v-click-outside="closeModal"
+       :style="{ 'transform' : 'translate3d(' + transform.button.x +  'px' + ', ' + transform.button.y + 'px, 0)' }"
       >
       <div class="b-styler__modal-close"
         @click="setModalProps">
@@ -191,7 +192,20 @@ export default {
       { name: 'bounce', className: 'ptah-a-bounce' }
     ],
     resizer: null,
-    isModalsPropsShow: false
+    isModalsPropsShow: false,
+    modal: {
+      button: {
+        class: '_top',
+        width: '400',
+        height: '340'
+      }
+    },
+    transform: {
+      button: {
+        x: 0,
+        y: 0
+      }
+    }
   }),
   computed: {
     ...mapState('Sidebar', ['sandbox']),
@@ -314,6 +328,9 @@ export default {
             autoSizing: {
               enabled: true,
               fn: autoSizing
+            },
+            hide: {
+              enabled: true
             }
           }
         })
@@ -414,7 +431,7 @@ export default {
       }
 
       // hide modal settings
-      this.isModalsPropsShow = false
+      this.closeModal()
 
       this.setControlPanel(false)
 
@@ -460,6 +477,19 @@ export default {
 
     setModalProps () {
       this.isModalsPropsShow = !this.isModalsPropsShow
+      this.setPosition()
+    },
+
+    closeModal () {
+      this.isModalsPropsShow = false
+    },
+
+    setPosition () {
+      let pos = this.$refs.styler.getBoundingClientRect()
+
+      if (pos.top < this.modal[this.type].height || pos.right < this.modal[this.width]) {
+        this.modal[this.type].class = '_bottom'
+      }
     }
   }
 }
@@ -522,23 +552,35 @@ export default {
 
   &__modal
     width: 40rem
-    height: auto
-    padding: $size-step/1.45 0
+    height: 34rem
+    padding: 0 0 $size-step/1.45
 
     position: absolute
-    bottom: 4rem
-    left: -2.5rem
 
     background: $white
     box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
     &-buttons
+      position: absolute
+      right: 0
+      left: 0
+      bottom: 0
+      z-index: 3
+
+      background: $white
+
       display: flex
       justify-content: flex-end
+      padding-bottom: $size-step/1.45
       margin: $size-step $size-step/2.5 0
     &-chapter
       font-size: 1.6rem
+      font-weight: bold
       letter-spacing: -0.02em
       color: $dark-grey
+
+      background: $white
+
+      padding: $size-step/1.45 0 0
       margin: 0 $size-step/1.45
     &-content
       margin: $size-step/2 $size-step/1.45
@@ -552,14 +594,20 @@ export default {
       right: $size-step/1.45
 
       cursor: pointer
+
+    &._top
+      bottom: 4rem
+      left: -2.5rem
+    &._bottom
+      top: 4rem
+      right: -2.5rem
+
     &:before
       content: ""
       position: absolute
       width: 1.5rem
       height: 1.5rem
-      bottom: -0.75rem
-      left: 19%
-      margin-left: -0.75rem
+
       background: $white
       transform: rotate(-45deg)
       z-index: 2
@@ -568,11 +616,26 @@ export default {
       position: absolute
       width: 1.5rem
       height: 1.5rem
-      bottom: -0.75rem
-      left: 19%
-      margin-left: -0.75rem
+
       background: $white
       transform: rotate(-45deg)
       box-shadow: 0 0 2rem 0 rgba($black, 0.35)
       z-index: -1
+
+    &._top
+      &:before,
+      &:after
+        left: 19%
+        bottom: -0.75rem
+        margin-left: -0.75rem
+
+    &._bottom
+      &:before,
+      &:after
+        right: 19%
+        top: -0.75rem
+        margin-right: -0.75rem
+
+  &[x-out-of-boundaries]
+    display: none !important
 </style>
