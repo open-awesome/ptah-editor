@@ -112,6 +112,7 @@ export default {
 
   watch: {
     textEditorActive (value) {
+      // console.log(11111, value, this.settingObjectElement, this.$refs.text)
       let self = this
       if (value && this.settingObjectElement === this.$refs.text) {
         console.log(self.settingObjectOptions.text)

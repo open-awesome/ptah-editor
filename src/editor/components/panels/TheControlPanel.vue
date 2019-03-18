@@ -20,6 +20,7 @@ import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
 import ThePanelAvailablePlatforms from './ThePanelAvailablePlatforms'
 import ThePanelRestrictions from './ThePanelRestrictions'
+import ThePanelInlineText from './ThePanelInlineText'
 
 export default {
   name: 'TheControlPanel',
@@ -56,7 +57,8 @@ export default {
     ThePanelTimerStyle,
     ThePanelSlot,
     ThePanelAvailablePlatforms,
-    ThePanelRestrictions
+    ThePanelRestrictions,
+    ThePanelInlineText
   }
 }
 </script>

@@ -22,6 +22,11 @@
         <icon-base name="edit" width="12" height="15" />
       </a>
 
+      <!-- Inline text -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('InlineText')" v-if="type === 'inline'">
+        <icon-base name="cog" width="12" height="15" />
+      </a>
+
       <!-- Social settings -->
       <template v-if="type === 'networks'">
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
@@ -144,14 +149,7 @@ export default {
       }
     }
   },
-  watch: {
-    'settingObjectOptions.styles.width': {
-      handler: function (val, oldVal) {
-        console.log(val)
-      },
-      deep: true
-    }
-  },
+
   created () {
     this.dimensions.width = this.el.offsetWidth
     this.dimensions.height = this.el.offsetHeight
