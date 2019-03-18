@@ -32,7 +32,7 @@ export default {
       this.isStretchImage = true
     }
 
-    this.label = this.settingObjectType + 'Image'
+    this.label = 'Image'
   },
 
   computed: {
