@@ -21,6 +21,9 @@ export default {
 
   computed: {
     ...mapState(['currentLanding']),
+    ...mapState('Sidebar', [
+      'isExpanded'
+    ]),
     ...mapState('BuilderModalContent', {
       modalContentID: 'contentID'
     })
@@ -105,7 +108,9 @@ export default {
           </span>
         </div>
       </div>
-      <div class="b-top-bar-menu__middle">
+      <div class="b-top-bar-menu__middle"
+        :class="{'b-top-bar-menu__middle-margin' : isExpanded }"
+        >
         <MenuPlatforms
           @setDevice="setDevice"
           ></MenuPlatforms>
@@ -183,6 +188,8 @@ export default {
     &__middle
       order: 2
       width: 14rem
+      &-margin
+        margin: 0 0 0 $size-step*9
     &__right
       order: 3
       width: 45%

@@ -87,13 +87,13 @@ const data = new Map([
     },
     background: true,
     styles: {
-      'background-image': 'url(hhttps://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png)',
+      'background-image': 'url(https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png)',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
       'background-size': 'contain',
       'background-color': 'rgba(0, 0, 0, 0)',
-      'width': '',
-      'height': ''
+      'width': '256px',
+      'height': '160'
     }
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -113,8 +113,8 @@ const data = new Map([
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-color': 'rgba(0, 0, 0, 0)',
-      'width': '',
-      'height': ''
+      'width': '96px',
+      'height': '96px'
     }
   }))],
   [types.Link, () => (_.merge({}, DEFAULT_OPTIONS, {
