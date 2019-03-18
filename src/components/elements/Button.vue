@@ -1,6 +1,6 @@
 <template>
       <a class="b-button is-editable">
-        <span v-html="t"></span>
+        <slot></slot>
         <vue-draggable-resizable
           class="b-button__resize"
           class-name-active="b-button__resize_active"
@@ -35,7 +35,6 @@ export default {
 
   data: function () {
     return {
-      t: '',
       width: 0,
       height: 0
     }
@@ -51,10 +50,6 @@ export default {
   },
 
   computed: {
-    text () {
-      return this.$section.get(`$sectionData.${this.path}.text`)
-    },
-
     styles () {
       return this.$section.get(`$sectionData.${this.path}.styles`)
     }
@@ -68,7 +63,6 @@ export default {
   },
 
   created () {
-    this.t = this.text
     this.width = parseInt(this.styles.width.split('px')[0]) || 320
     this.height = parseInt(this.styles.height.split('px')[0]) || 60
   }
