@@ -27,6 +27,13 @@
       </a>
     </div>
 
+    <!-- Image / Logo -->
+    <div class="b-styler__controls" v-if="type === 'image'">
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')">
+        <icon-base name="style" width="12" height="15" />
+      </a>
+    </div>
+
     <!-- Delete element -->
     <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
       <icon-base name="close" width="12" height="12"></icon-base>
