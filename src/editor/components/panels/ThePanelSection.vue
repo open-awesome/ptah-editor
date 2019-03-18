@@ -322,22 +322,20 @@ export default {
     'settingObjectOptions.styles': {
       immediate: true,
       handler (value) {
-        let image = (typeof value['background-image'] === 'string') ? value['background-image'] : ''
-        let bggradient = image.match(/linear-gradient(\(.*\))/g)
-        if (bggradient) {
-          this.backgroundPickers = bggradient[0]
-            .replace(/^linear-gradient[(]/, '')
-            .replace(/[)]$/, '')
-            .split(', ')
-        } else {
-          this.backgroundPickers = [value['background-color']]
+        console.log(value)
+        if (value) {
+          let image = (!!value['background-image'] && typeof value['background-image'] === 'string')
+            ? value['background-image'] : ''
+          let bggradient = image.match(/linear-gradient(\(.*\))/g)
+          if (bggradient) {
+            this.backgroundPickers = bggradient[0]
+              .replace(/^linear-gradient[(]/, '')
+              .replace(/[)]$/, '')
+              .split(', ')
+          } else {
+            this.backgroundPickers = [value['background-color']]
+          }
         }
-        // TODO: this crashed storage with linear-gradient
-        // let bgimage = image.match(/url\((.*?)\)/)
-        // if (bgimage) {
-        //   bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-        // }
-        // this.sectionBgUrl = bgimage || ''
       }
     }
   },

@@ -49,6 +49,11 @@
         <icon-base name="settings" width="16" height="16" />
       </a>
 
+      <!-- Timer -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')" v-if="type === 'timer'">
+        <icon-base name="settings" width="16" height="16" />
+      </a>
+
     </div>
 
     <!-- Delete element -->
