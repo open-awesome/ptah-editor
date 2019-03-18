@@ -1,5 +1,9 @@
 <template>
   <div class="b-panel">
+    <h6 class="b-panel__title">
+      {{ settingObjectLabel }}
+    </h6>
+
     <!-- Text -->
     <div class="b-panel__control">
       <control-text/>
@@ -31,6 +35,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import ControlText from './../controls/TheControlText'
 import ControlTypegraphy from './../controls/TheControlTypegraphy'
 import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
@@ -55,11 +60,20 @@ export default {
     ControlBackgroundImage,
     ControlBorderRadius,
     ControlHoverAnimation
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectLabel'
+    ])
   }
 }
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
 .b-panel
   padding-bottom: 4.5rem
   display: flex
@@ -67,6 +81,17 @@ export default {
   height: auto
   width: 100%
   align-items: stretch
+
+  &__title
+    color: $black
+    font-size: 2rem
+    font-weight: bold
+
+    min-width: 28rem
+    margin: 0 0 2.8rem 0
+    padding: 0
+    &:first-letter
+      text-transform: uppercase
 
   &__control
     margin-bottom: 1.6rem

@@ -13,7 +13,7 @@ const COMPONENTS = [
     key: 0
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-footer-copyright',
@@ -181,7 +181,7 @@ export default {
                 components-path="$sectionData.components"
                 class="b-footer__col b-footer__col_1">
 
-              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+              <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_horizont" :style="$sectionData.container.styles">
                 <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                   <component
                     v-if="$sectionData.components[index].element.isComplex"
@@ -238,16 +238,10 @@ export default {
     &
       position: relative
       padding: 2rem 0 1rem
+.b-footer
+  width: 100%
 .b-logo
 .b-title
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-weight: 800
-  font-size: 3.2rem
-  text-align: center
-  letter-spacing: 0.2em
-  text-transform: uppercase
-  text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important
@@ -257,38 +251,13 @@ export default {
       font-size: 2rem !important
       padding: 0 1rem
 .b-text
-  color: rgba(255, 255, 255, 0.3)
-  font-size: 2rem
-  text-align: center
   .is-mobile &,
   .is-tablet &
     font-size: 1.4rem !important
   @media only screen and (max-width: 768px)
     &
       font-size: 1.4rem !important
-.b-button
-  color: #fff
-  font-family: 'Heebo', sans-serif
-  font-style: normal
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.2em
-  width: auto
-  height: auto
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  margin: 1.6rem
-  padding: 0
-  min-width: auto
-  min-height: auto
-  text-transform: uppercase
-  border-radius: 2px
-  .is-mobile &,
-  .is-tablet &
-    width: 80% !important
-  @media only screen and (max-width: 768px)
-    &
-      width: 80% !important
+
 .b-sandbox
   min-height: 36.5rem
   padding: 5rem 0
@@ -321,14 +290,12 @@ export default {
       height: auto
 
 .b-footer-component
-
-/deep/
-  .b-draggable-slot
-    width: 100%
-    display: flex
-    text-align: center
-    justify-content: center
-    align-items: center
-    flex-direction: column
+  margin: 0.8rem
+  .is-mobile &,
+  .is-tablet &
+    margin: 0.8rem auto
+  @media only screen and (max-width: 768px)
+    &
+      margin: 0.8rem auto
 
 </style>

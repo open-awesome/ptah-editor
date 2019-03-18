@@ -86,7 +86,7 @@ const C_CUSTOM = [
         'font-family': 'Heebo',
         'text-align': 'center',
         'font-size': '3.6rem',
-        'width': '384x',
+        'width': '384px',
         'height': '116px',
         'border-radius': '0',
         'font-weight': 'bold'
@@ -160,7 +160,6 @@ export default {
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
-                  v-if="$sectionData.components[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
@@ -169,18 +168,7 @@ export default {
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
                   >
-                </component>
-                <component
-                  v-if="!$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
-                  v-html="$sectionData.components[index].element.text"
-                  :is="component.name"
-                  :href="$sectionData.components[index].element.link.href"
-                  :target="$sectionData.components[index].element.link.target"
-                  :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                  :path="`components[${index}].element`"
-                  >
+                  <div v-html="$sectionData.components[index].element.text"></div>
                 </component>
               </div>
             </draggable>
@@ -224,11 +212,11 @@ export default {
 .b-logo
   .is-mobile &
     max-width: 100% !important
-    margin: $size-step/2 0
+    margin: $size-step/2 auto
   @media only screen and (max-width: 768px)
     &
       max-width: 100% !important
-      margin: $size-step/2 0
+      margin: $size-step/2 auto
 .b-title
   color: rgba($white, 1)
   font-style: normal
@@ -261,28 +249,6 @@ export default {
       font-size: 1.4rem !important
       margin: $size-step/2 0
 .b-button
-  color: #fff
-  font-family: 'Heebo'
-  font-style: normal
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.2em
-  text-transform: uppercase
-
-  width: auto
-  height: auto
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  margin: $size-step/2
-  padding: 0
-  width: $size-step*10
-  height: $size-step
-  min-width: auto
-  min-height: auto
-
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  border-radius: 2px
   .is-mobile &,
   .is-tablet &
     font-size: 2rem !important

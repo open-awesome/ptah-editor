@@ -3,28 +3,52 @@
        ref="styler"
        id="styler"
        v-if="$builder.isEditing"
-       :class="{ 'is-visible': isVisible }"
+       :class="{ 'is-visible': isVisible && !editText }"
        @click.stop="">
 
-    <!-- Button -->
-    <div class="b-styler__controls" v-if="type === 'button'">
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
+    <div class="b-styler__controls">
+      <!-- Button -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')"  v-if="type === 'button'">
         <icon-base name="style" width="12" height="15" />
       </a>
-    </div>
 
-    <!-- Text -->
-    <div class="b-styler__controls" v-if="type === 'text'">
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')">
+      <!-- Text -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')"  v-if="type === 'text'">
         <icon-base name="style" width="12" height="15" />
       </a>
-    </div>
 
-    <!-- Social settings -->
-    <div class="b-styler__controls" v-if="type === 'networks'">
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')">
-        <icon-base name="style" width="12" height="15" />
+      <!-- Text editor -->
+      <a href="#" class="b-styler__control" @click.stop="editText = true" v-if="type === 'text'">
+        <icon-base name="edit" width="12" height="15" />
       </a>
+
+      <!-- Inline text -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('InlineText')" v-if="type === 'inline'">
+        <icon-base name="cog" width="12" height="15" />
+      </a>
+
+      <!-- Social settings -->
+      <template v-if="type === 'networks'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
+
+      <!-- Available platforms -->
+      <a href="#" class="b-styler__control"
+         @click.stop="setControlPanel('AvailablePlatforms')"
+         v-if="type === 'available'">
+        <icon-base name="settings" width="16" height="16" />
+      </a>
+
+      <!-- Age restrictions -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Restrictions')" v-if="type === 'restrictions'">
+        <icon-base name="settings" width="16" height="16" />
+      </a>
+
     </div>
 
     <!-- Image / Logo -->
@@ -43,14 +67,10 @@
 </template>
 
 <script>
-import { isParentTo, randomPoneId, getPseudoTemplate, placeCaretAtEnd } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate } from '../util'
 import * as _ from 'lodash-es'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import Popper from 'popper.js'
-
-const DEFAULT_BACKGROUND_REPEAT = 'no-repeat'
-const DEFAULT_BACKGROUND_POSITION = 'center center'
-const DEFAULT_BACKGROUND_SIZE = 'contain'
 
 export default {
   name: 'Styler',
@@ -88,51 +108,10 @@ export default {
   },
   data: () => ({
     isCurrentStyler: false,
-    oldColorerColor: '',
-    colorerColor: '',
-    mouseTarget: '',
     currentOption: '',
-    url: '',
     title: '',
-    text: '',
-    preview: '',
-    image: '',
     gridValue: 0,
     isVisible: false,
-    imageBgSelected: false,
-    videoBgSelected: false,
-    videoBackgroundSources: [],
-    backgroundUrl: '',
-    backgroundColor: '#ffffff',
-    backgroundHoverColor: '#ffffff',
-    backgroundOptions: {
-      repeat: ['no-repeat', 'repeat', 'repeat-x', 'repeat-y'],
-      positions: [
-        'left top',
-        'left center',
-        'left bottom',
-        'right top',
-        'right center',
-        'right bottom',
-        'center top',
-        'center center',
-        'center bottom'
-      ],
-      sizes: ['auto', 'cover', 'contain']
-    },
-    backgroundSelectedOptions: {
-      repeat: DEFAULT_BACKGROUND_REPEAT,
-      position: DEFAULT_BACKGROUND_POSITION,
-      size: DEFAULT_BACKGROUND_SIZE
-    },
-    backgroundSettingsShow: { video: false, image: false, link: false, color: false },
-    isVideoBackgroundPoster: false,
-    videoBackgroundPosterSource: '',
-    isRequestProcess: false,
-    textSelectColor: '#000',
-    fontSize: null,
-    fontFamily: null,
-    borderRadius: 0,
     dimensions: {
       width: null,
       height: null
@@ -148,11 +127,11 @@ export default {
       { name: 'fade', className: 'ptah-a-fade' },
       { name: 'shake', className: 'ptah-a-shake' },
       { name: 'bounce', className: 'ptah-a-bounce' }
-    ],
-    resizer: null
+    ]
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions']),
+    ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
     path () {
@@ -166,8 +145,18 @@ export default {
       get () {
         return this.section.get(this.sandbox.components) || []
       }
+    },
+    editText: {
+      set (value) {
+        this.textEditor(value)
+      },
+
+      get () {
+        return this.textEditorActive
+      }
     }
   },
+
   created () {
     this.dimensions.width = this.el.offsetWidth
     this.dimensions.height = this.el.offsetHeight
@@ -181,11 +170,11 @@ export default {
       this.el.id = `section_${this.section.id}`
     }
 
-    this.setInitialValue()
+    // this.setInitialValue()
 
     // Restoring from a snapshot
     // to apply the pseudoclass to the element
-    if (Object.keys(this.options.pseudo).length) {
+    if (!!this.options.pseudo && Object.keys(this.options.pseudo).length) {
       _.forEach(this.options.pseudo, (styles, pseudo) => {
         this.changePseudoStyle(styles, pseudo)
       })
@@ -220,60 +209,34 @@ export default {
   },
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
+    ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel']),
     ...mapActions('BuilderModalContent', ['setContent']),
 
-    setInitialValue () {
-      if (this.type === 'button') {
-        // listen event change border-radius
-        let br = this.section.get(`${this.name}.styles['border-radius']`)
-        if (undefined !== br) {
-          this.borderRadius = parseFloat(br)
-        }
-      }
-      if (this.type === 'text' || this.type === 'button' || this.type === 'link') {
-        // listen event change font-size
-        let fs = this.section.get(`${this.name}.styles['font-size']`)
-        if (undefined !== fs) {
-          this.fontSize = parseFloat(fs)
-        }
-
-        // listen event change font-family
-        let ff = this.section.get(`${this.name}.styles['font-family']`)
-        if (undefined !== ff) {
-          this.fontFamily = ff
-        }
-      }
-      if (this.options.background === true) {
-        this.backgroundUrl = this.options.styles['background-image']
-        if (this.options.styles['background-image'] !== '') {
-          this.imageBgSelected = true
-        }
-        this.backgroundSelectedOptions.repeat = this.options.styles['background-repeat'] || DEFAULT_BACKGROUND_REPEAT
-        this.backgroundSelectedOptions.position = this.options.styles['background-position'] || DEFAULT_BACKGROUND_POSITION
-        this.backgroundSelectedOptions.size = this.options.styles['background-size'] || DEFAULT_BACKGROUND_SIZE
-      }
-    },
-
     showStyler (event) {
+      console.log(this.type)
       event.preventDefault()
       event.stopPropagation()
 
       let autoSizing = (data) => {
+        data.offsets.popper.left = data.offsets.reference.left
         data.styles.width = this.dimensions.width
         return data
       }
 
       // show inline styler
       if (!this.popper && this.type !== 'section') {
-        this.popper = new Popper(this.el, this.$refs.styler, {
-          placement: 'top',
-          modifiers: {
-            autoSizing: {
-              enabled: true,
-              fn: autoSizing
+        this.$nextTick(function () {
+          this.popper = new Popper(this.el, this.$refs.styler, {
+            placement: 'top',
+            modifiers: {
+              autoSizing: {
+                enabled: true,
+                fn: autoSizing,
+                order: 840
+              }
             }
-          }
+          })
         })
       }
 
@@ -288,18 +251,6 @@ export default {
 
       this.setContent(null)
       this.clearSettingObjectLight()
-
-      /* if (this.type === 'text') {
-        this.el.contentEditable = 'true'
-      }
-      if (this.type === 'title') {
-        this.el.contentEditable = 'true'
-      }
-      if (this.type === 'slogan') {
-        this.el.contentEditable = 'true'
-      } */
-
-      placeCaretAtEnd(this.el)
 
       if (this.isVisible) return
       this.isVisible = true
@@ -352,9 +303,17 @@ export default {
       // this.currentOption = ''
     },
     hideStyler (event) {
+      const evPath = event ? event.path || (event.composedPath && event.composedPath()) : []
+      const stopNames = [
+        'b-styler__control',
+        'b-control-panel',
+        'menubar__button',
+        'editor__content',
+        'menubar is-hidden'
+      ]
+
       if (event && (event.target === this.el
-        || event.target.parentNode.className === 'b-styler__control'
-        || event.target.className === 'b-control-panel')) {
+        || this.checkStylerNodes(evPath, stopNames))) {
         this.isCurrentStyler = true
         return
       }
@@ -374,11 +333,18 @@ export default {
       this.el.classList.remove('styler-active')
 
       this.isVisible = false
+      this.editText = false
 
       document.removeEventListener('click', this.hideStyler, true)
       document.removeEventListener('blur', this.hideStyler, true)
+    },
 
-      this.section.set(`${this.name}.text`, this.el.innerHTML)
+    checkStylerNodes (path, classes) {
+      let m = false
+      classes.forEach((className) => {
+        if (Array.from(path).filter((el) => el.className === className).length) m = true
+      })
+      return m
     },
 
     /**
@@ -408,6 +374,7 @@ export default {
       let index = this.path[1]
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
+      this.hideStyler()
     }
   }
 }
@@ -415,11 +382,17 @@ export default {
 
 <style lang="sass">
 .b-styler
-  display: flex
+  display: none
   justify-content: space-between
   align-items: flex-start
   height: 4rem
   z-index: 20
+
+  &.is-visible
+    display: flex
+
+  &__controls
+    display: flex
 
   &__control
     width: 3.2rem

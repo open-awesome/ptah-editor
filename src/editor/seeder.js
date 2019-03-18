@@ -23,7 +23,7 @@ const DEFAULT_OPTIONS = {
   pseudo: false, // can have a pseudo-class
   isHoverAnim: false, // hover anim for button/link
   isTextEdit: false, // edit text in settings panel
-  isComplex: false,
+  isComplex: false, // TODO: deprecated
   video: false,
 
   // --- Background type
@@ -72,7 +72,8 @@ const data = new Map([
       'text-align': 'center',
       'color': '#000',
       'justify-content': 'center'
-    }
+    },
+    isComplex: true
   }))],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
@@ -178,7 +179,6 @@ const data = new Map([
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       canCopy: true,
-      resizable: true,
       hasLink: true,
       aligned: false,
       typography: true,
@@ -223,7 +223,8 @@ const data = new Map([
         'text-align': 'center',
         'width': '',
         'height': ''
-      }
+      },
+      isComplex: true
     })
   )],
   [types.Label, () => (_.merge({}, DEFAULT_OPTIONS,

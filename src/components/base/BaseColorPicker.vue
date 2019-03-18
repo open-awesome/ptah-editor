@@ -53,6 +53,7 @@ export default {
         >
         <div class="b-picker__preview"
           :style="{ 'background-color': pickerValue.rgba || pickerValue }"
+          :class="{ 'b-picker__preview_transparent': pickerValue.rgba === 'rgba(0,0,0,0)' || pickerValue === 'rgba(0,0,0,0)' }"
           :title="pickerValue.rgba || pickerValue || 'Choose color'"
           >
         </div>
@@ -89,6 +90,8 @@ export default {
     border-radius: 0.2rem
     background-color: $white
     border: 2px solid $ligth-grey
+    &_transparent
+      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAL0lEQVQ4T2N89uzZfwY8QFJSEp80A+OoAcMiDP4DAb6Ifv78Of50MGoAA+PQDwMAuX5VedFT3cEAAAAASUVORK5CYII=")
     &:hover
       border-color: $dark-blue-krayola
   &__label

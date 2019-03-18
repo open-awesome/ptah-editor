@@ -17,6 +17,9 @@ export default {
   display: flex
   align-items: center
   justify-content: center
+  margin: 0 auto
+  &.is-editable
+    border: .1rem dashed $dark-blue-krayola
   .is-mobile &,
   .is-tablet &
     display: none
