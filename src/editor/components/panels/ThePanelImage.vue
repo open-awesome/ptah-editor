@@ -8,9 +8,11 @@
       <control-image/>
     </div>
     <!-- Alt prop for image -->
+    <!-- TODO: We're still not using <img>
     <div class="b-panel__control">
       <control-alt/>
     </div>
+    -->
   </div>
 </template>
 
