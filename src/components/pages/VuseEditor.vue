@@ -15,15 +15,13 @@ import Sandbox from '@components/slots/Sandbox'
 // elements
 import Button from '@components/elements/Button'
 import Link from '@components/elements/Link'
-import Title from '@components/elements/Title'
-import Description from '@components/elements/Description'
+import TextElement from '@components/elements/TextElement'
 import Pic from '@components/elements/Pic'
 import Logo from '@components/elements/Logo'
 import Delimiter from '@components/elements/Delimiter'
 import AvailablePlatforms from '@components/elements/AvailablePlatforms'
 import AgeRestrictions from '@components/elements/AgeRestrictions'
 import SocialNetworks from '@components/elements/SocialNetworks'
-import Slogan from '@components/elements/Slogan'
 import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
 import VideoElement from '@components/elements/VideoElement'
@@ -76,7 +74,6 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 // --- other
 import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
-import MenuBas from '@components/sections/stickyMenus/MenuBAS'
 
 import store from '@store'
 
@@ -85,15 +82,13 @@ const ELEMENTS = {
   Sandbox,
   Button,
   Link,
-  Title,
-  Description,
+  TextElement,
   Pic,
   Logo,
   Delimiter,
   AvailablePlatforms,
   AgeRestrictions,
   SocialNetworks,
-  Slogan,
   Cost,
   IconWithText,
   VideoElement,
@@ -144,8 +139,7 @@ const COMPONENTS = {
 
   Footer,
   System,
-  Video,
-  MenuBas
+  Video
 }
 
 Vuse.mix({ components: ELEMENTS })
@@ -176,6 +170,10 @@ export default {
       js: './../js/cjs.js',
       themes: themes
     })
+  },
+
+  mounted () {
+    this.$Progress.finish()
   },
 
   methods: {

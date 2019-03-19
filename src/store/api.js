@@ -1,65 +1,21 @@
-/**
- * Mock for API
- */
 import axios from 'axios'
 
 export default {
-  getLandingsList () {
-    return new Promise((resolve) => {
-      resolve([
-        {
-          slug: 'Landing',
-          theme: {
-            name: 'Landing',
-            sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns', 'Footer']
-          }
-        },
-        {
-          slug: 'HeroUnit',
-          theme: {
-            name: 'HeroUnit',
-            sections: ['HeroUnit']
-          }
-        },
-        {
-          slug: 'Products',
-          theme: {
-            name: 'Products',
-            sections: ['ProductsColumns']
-          }
-        },
-        {
-          slug: 'Game',
-          theme: {
-            name: 'Game',
-            sections: ['System']
-          }
-        }
-      ])
-    })
-  },
+  // send any api request
+  request ({ url, params, method, headers }) {
+    let requset = {
+      url: `${process.env.VUE_APP_API}${url}`,
+      method: method || 'post'
+    }
 
-  saveLanding (slug, data) {
-    return new Promise((resolve) => {
-      localStorage.removeItem(slug)
-      localStorage.setItem(slug, data)
-      resolve(true)
-    })
-  },
+    method === 'get' ? requset.params = params : requset.data = params
 
-  getLanding (slug) {
-    return new Promise((resolve) => {
-      let landing = {}
+    if (headers !== undefined) requset.headers = headers
 
-      if (localStorage.getItem(slug) !== null) {
-        landing = localStorage.getItem(slug)
-        resolve(JSON.parse(landing))
-      } else {
-        return this.getLandingsList().then((data) => {
-          resolve(data.filter(item => item.slug === slug)[0])
-        })
-      }
-    })
+    return axios(requset)
+      .then(response => {
+        return response.data
+      })
   },
 
   /**

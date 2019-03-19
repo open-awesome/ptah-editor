@@ -42,7 +42,7 @@ const sessionParams = {
   key: config.sessionCookieName,
   signed: true,
   httpOnly: true,
-  domain: publicUrl.host,
+  domain: publicUrl.hostname,
   maxAge: sessionMaxAge * 1000
 }
 if (config.redisPort && config.redisHost) {

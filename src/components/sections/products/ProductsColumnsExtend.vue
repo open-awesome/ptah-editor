@@ -41,7 +41,7 @@ const C_CUSTOM_1 = [
         'font-family': 'Lato',
         'font-size:': '1.2rem',
         'text-align': 'center',
-        'width': '64px',
+        'width': '192px',
         'height': '52px',
         'border-radius': '2px'
       }
@@ -168,7 +168,7 @@ const C_CUSTOM_2 = [
         'font-family': 'Lato',
         'font-size:': '1.2rem',
         'text-align': 'center',
-        'width': '64px',
+        'width': '192px',
         'height': '52px',
         'border-radius': '2px'
       }
@@ -295,7 +295,7 @@ const C_CUSTOM_3 = [
         'font-family': 'Lato',
         'font-size:': '1.2rem',
         'text-align': 'center',
-        'width': '64px',
+        'width': '192px',
         'height': '52px',
         'border-radius': '2px'
       }
@@ -422,7 +422,7 @@ const C_CUSTOM_4 = [
         'font-family': 'Lato',
         'font-size:': '1.2rem',
         'text-align': 'center',
-        'width': '64px',
+        'width': '192px',
         'height': '52px',
         'border-radius': '2px'
       }
@@ -709,6 +709,7 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
+    <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row b-products-columns-extend__row">
         <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__left hidden-m">
@@ -1229,13 +1230,14 @@ $h: 100vh
   min-height: 76rem
   margin: 0
   padding: 1rem
+
   display: flex
-  text-align: center
   justify-content: center
   flex-direction: column
+
   transition: background 200ms
   &-component
-    margin: 1.2rem
+    margin: 1.2rem auto
   &__row
     justify-content: center
     align-items: center
@@ -1303,7 +1305,7 @@ $h: 100vh
       &
         display: none
   .b-logo
-    margin: 1.6rem 0
+    margin: 1.6rem auto
   .b-title
     color: inherit
     font-style: normal

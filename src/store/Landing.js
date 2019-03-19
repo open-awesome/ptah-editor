@@ -5,7 +5,8 @@ export default {
     groupData: {}, // group text
     sectionData: {}, // saved section data,
     groups: [], // landings sections groups
-    savedStates: [] // stack of saved states
+    savedStates: [], // stack of saved states,
+    textEditorActive: false
   },
 
   mutations: {
@@ -31,6 +32,10 @@ export default {
       if (state.savedStates.length > STACK_SIZE) {
         state.savedStates.shift()
       }
+    },
+
+    textEditor (state, value) {
+      state.textEditorActive = value
     }
   },
 

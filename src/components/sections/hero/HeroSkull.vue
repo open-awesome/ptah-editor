@@ -30,7 +30,7 @@ const COMPONENTS = [
     key: 0
   },
   {
-    name: 'Title',
+    name: 'TextElement',
     element: types.Title,
     type: 'text',
     class: 'b-title',
@@ -38,7 +38,7 @@ const COMPONENTS = [
     key: 1
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
@@ -113,6 +113,7 @@ const C_CUSTOM = [
         'border-radius': '2px'
       }
     },
+    maxWidth: 480,
     key: 3
   },
   {
@@ -201,7 +202,10 @@ export default {
     <slot name="video"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-12">
+
+        <div class="b-grid__col-2 hidden-m "/>
+
+        <div class="b-grid__col-8">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
@@ -211,7 +215,6 @@ export default {
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
-                  v-if="$sectionData.components[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
@@ -220,23 +223,15 @@ export default {
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
                   >
-                </component>
-                <component
-                  v-if="!$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
-                  v-html="$sectionData.components[index].element.text"
-                  :is="component.name"
-                  :href="$sectionData.components[index].element.link.href"
-                  :target="$sectionData.components[index].element.link.target"
-                  :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                  :path="`components[${index}].element`"
-                  >
+                  <div v-html="$sectionData.components[index].element.text"></div>
                 </component>
               </div>
             </draggable>
           </sandbox>
         </div>
+
+        <div class="b-grid__col-2 hidden-m"/>
+
       </div>
     </div>
   </section>
@@ -293,26 +288,6 @@ export default {
   @media only screen and (max-width: 768px)
     &
       font-size: 1.4rem !important
-.b-button
-  color: #fff
-  font-family: Heebo
-  font-style: normal
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.2em
-  width: auto
-  height: auto
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  margin: 1.6rem
-  padding: 0
-  width: 35.2rem
-  height: 6.4rem
-  min-width: auto
-  min-height: auto
-  text-transform: uppercase
-  border-radius: 2px
-  text-align: center
 
 .b-sandbox
   min-height: 36.5rem

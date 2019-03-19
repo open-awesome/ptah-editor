@@ -107,7 +107,7 @@ export default {
   height: $size-step*5.785
   max-width: calc(100% - #{$size-step}/2)
   max-height: 100%
-  margin: $size-step/2 $size-step/4
+  margin: $size-step/2 auto
 
   position: relative
   overflow: hidden

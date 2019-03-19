@@ -37,7 +37,6 @@
                 :key="`component1-${ _uid }-${ index }`">
 
               <component class="b-hero-component"
-                  v-if="component.element.isComplex"
                   v-styler:for="{
                     el: component.element,
                     type: component.type,
@@ -49,23 +48,9 @@
                   :target="component.element.link.target"
                   :style="component.element.styles"
                   :class="[component.element.classes, component.class]"
-                  :path="`components${ prefix }[${index}].element`"/>
-
-              <component
-                  v-else
-                  v-styler:for="{
-                    el: component.element,
-                    type: component.type,
-                    label: component.label,
-                    path: `$sectionData.components${ prefix }[${index}].element`
-                  }"
-                  v-html="component.element.text"
-                  :is="component.name"
-                  :href="component.element.link.href"
-                  :target="component.element.link.target"
-                  :style="component.element.styles"
-                  :class="[component.element.classes, component.class]"
-                  :path="`components${ prefix }[${index}].element`"/>
+                  :path="`components${ prefix }[${index}].element`">
+                <div v-html="$sectionData[`components${ prefix }`][index].element.text"></div>
+              </component>
 
             </div>
 
@@ -209,8 +194,8 @@ export default {
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
     ],
     components2: [
-      { name: 'Title', element: Title, type: 'title', class: 'b-title', label: 'title', key: 1 },
-      { name: 'Description', element: Text, type: 'text', class: 'b-text', label: 'description', key: 2 },
+      { name: 'TextElement', element: Title, type: 'title', class: 'b-title', label: 'title', key: 1 },
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-text', label: 'description', key: 2 },
       { name: 'Delimiter', element: Delimiter, type: 'delimiter', class: 'b-delimiter', label: 'delimiter', key: 8 },
       { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 }
     ],
@@ -266,8 +251,6 @@ $h: 100vh
   justify-content: center
   flex-direction: column
   transition: background 200ms
-  &-component
-    margin: 1.2rem
 
 .b-delimiter
   height: 2rem
@@ -366,18 +349,6 @@ $h: 100vh
       line-height: 2rem
 
 .b-button
-  color: #fff
-  font-family: Lato
-  font-style: normal
-  font-weight: bold
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.28em
-  text-transform: uppercase
-  width: 35.2rem
-  height: 6.4rem
-  background: #FF6D64
-  box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
   .is-mobile &,
   .is-tablet &
     height: 4rem !important

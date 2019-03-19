@@ -10,7 +10,11 @@ const LIST_FONTS = [
 
 export default {
   props: {
-    isComplexText: Boolean
+    isComplexText: Boolean,
+    showTextStyles: {
+      type: Boolean,
+      default: true
+    }
   },
 
   data () {
@@ -176,7 +180,7 @@ export default {
       <div class="b-typography-controls__control-col">
         <base-color-picker label="Text color" v-model="color" @change="changeColor"></base-color-picker>
       </div>
-      <div class="b-typography-controls__control-col">
+      <div class="b-typography-controls__control-col" v-if="showTextStyles">
         <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
       </div>
     </div>

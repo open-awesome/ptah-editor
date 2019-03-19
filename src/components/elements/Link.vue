@@ -16,7 +16,7 @@ export default {
   font-size: 1.6rem
   font-family: 'Lato'
   line-height: 1.4
-  margin: 1.6rem
+  margin: 1.6rem auto
   color: #fff
   user-select: none
   cursor: pointer

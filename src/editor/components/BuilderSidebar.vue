@@ -224,8 +224,7 @@ export default {
       'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
-      'setMenuItem',
-      'setSettingsExpanded'
+      'setMenuItem'
     ]),
 
     ...mapActions('BuilderModalContent', {
@@ -245,7 +244,6 @@ export default {
 
     selectSection (section) {
       this.toggleSettingsBar(section)
-      this.setSettingsExpanded(false)
     },
 
     closeSettingsBar () {
@@ -282,7 +280,7 @@ export default {
     },
 
     startScroll (x) {
-      console.log(x)
+
     },
 
     toggleSidebarSection () {

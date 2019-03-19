@@ -6,15 +6,15 @@ import section from '../../mixins/section.js'
 
 const COMPONENTS = [
   {
-    name: 'Title',
+    name: 'TextElement',
     element: types.Title,
-    type: 'title',
+    type: 'text',
     class: 'b-title',
     label: 'title',
     key: 1
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
@@ -141,7 +141,6 @@ export default {
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"
-                           v-if="$sectionData.components[index].element.isComplex"
                            v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                            :is="component.name"
                            :href="$sectionData.components[index].element.link.href"
@@ -150,18 +149,7 @@ export default {
                            :style="$sectionData.components[index].element.styles"
                            :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                 >
-                </component>
-                <component class="b-hero-component"
-                           v-if="!$sectionData.components[index].element.isComplex"
-                           v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
-                           v-html="$sectionData.components[index].element.text"
-                           :is="component.name"
-                           :href="$sectionData.components[index].element.link.href"
-                           :target="$sectionData.components[index].element.link.target"
-                           :path="`components[${index}].element`"
-                           :style="$sectionData.components[index].element.styles"
-                           :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                >
+                  <div v-html="$sectionData.components[index].element.text"></div>
                 </component>
               </div>
             </draggable>

@@ -128,12 +128,12 @@ import ControlBackground from './controls/TheControlBackground'
 import ControlBackgroundColor from './controls/TheControlBackgroundColor'
 import ControlBackgroundImage from './controls/TheControlBackgroundImage'
 import ControlSize from './controls/TheControlSize'
-import ControlVideo from './controls/TheControlVideo'
 import ControlForm from './controls/TheControlForm'
 import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms'
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks'
 import ControlIconWithText from './controls/TheControlIconWithText'
+import ControlVideo from './controls/TheControlVideo'
 import ControlBorderRadius from './controls/TheControlBorderRadius'
 import ControlHoverAnimation from './controls/TheControlHoverAnimation'
 
@@ -360,7 +360,7 @@ export default {
     },
 
     onExpand (value) {
-      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks', 'IconWithText', 'Video']
+      const accordeon = ['Size', 'Font', 'Bg', 'Link', 'AvailablePlatforms', 'AgeRestrictioins', 'SocialNetworks', 'IconWithText']
       const prop = `expanded${value[0]}`
       this[prop] = value[1]
 

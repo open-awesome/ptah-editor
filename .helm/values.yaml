@@ -8,11 +8,10 @@ enableRedis: true
 ingress:
   hostname: storefront.tst.protocol.one
   pathFrontend:
-   - /css
-   - /img
-   - /js
-  pathBackend:
    - /
+  pathBackend:
+   - /auth1
+   - /mailchimp
 
 certIssuer:
   email: admin@protocol.one

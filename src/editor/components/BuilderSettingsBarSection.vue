@@ -261,7 +261,8 @@ export default {
 
   created () {
     let styles = this.settingObjectOptions.styles
-    let image = (typeof styles['background-image'] === 'string') ? styles['background-image'] : ''
+    let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
+      styles['background-image'] : ''
     let bgimage = image.match(/url\((.*?)\)/)
 
     if (bgimage) {
@@ -307,7 +308,7 @@ export default {
     'settingObjectOptions.styles': {
       immediate: true,
       handler (value) {
-        let image = (typeof value['background-image'] === 'string') ? value['background-image'] : ''
+        let image = (!!value['background-image'] && typeof value['background-image'] === 'string') ? value['background-image'] : ''
         let bggradient = image.match(/linear-gradient(\(.*\))/g)
         if (bggradient) {
           this.backgroundPickers = bggradient[0]
@@ -328,7 +329,6 @@ export default {
   },
 
   beforeDestroy () {
-    this.setSettingsExpanded(false)
   },
 
   methods: {
@@ -337,8 +337,7 @@ export default {
       'clearSettingObject',
       'toggleGrouping',
       'setSettingSection',
-      'clearSettingObject',
-      'setSettingsExpanded'
+      'clearSettingObject'
     ]),
     ...mapActions('Landing', [
       'saveState'
