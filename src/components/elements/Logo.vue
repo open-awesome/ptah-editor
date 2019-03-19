@@ -97,7 +97,7 @@ export default {
   margin: $size-step/2 auto
 
   user-select: none
-  cursor: pointer
+  // cursor: pointer
   transition: background-color 200ms
 
   &__resize
