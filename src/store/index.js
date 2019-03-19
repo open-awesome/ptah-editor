@@ -4,6 +4,7 @@ import _ from 'lodash'
 import api from '@store/api'
 import Sidebar from './Sidebar'
 import Landing from './Landing'
+import User from './User'
 import vOutsideEvents from 'vue-outside-events'
 import BuilderModalContent from './BuilderModalContent'
 import PageTweaks from './PageTweaks/PageTweaks'
@@ -20,7 +21,9 @@ const state = {
     settings: {}
   },
   isSaved: false,
-  slug: ''
+  slug: '', // landing ID
+  name: '',
+  version: null // landing version
 }
 
 const getters = {
@@ -36,12 +39,15 @@ const actions = {
    * @param commit
    * @returns {*}
    */
-  fetchLandings ({ state, commit }) {
-    return api.getLandingsList()
-      .then((presets) => {
-        commit('updateLandings', presets)
-        return presets
-      })
+  fetchLandings ({ commit }) {
+    return api.request({
+      url: 'landings',
+      method: 'get'
+    }).then((response) => {
+      commit('updateLandings', response.landings)
+      // this.$Progress.increase(50)
+      return response.landings
+    })
   },
 
   /**
@@ -53,9 +59,17 @@ const actions = {
   getLandingData ({ state, commit }, slug) {
     commit('slug', slug)
 
-    return api.getLanding(slug)
+    return api.request({
+      url: `landings/${slug}`,
+      method: 'get'
+    })
       .then((data) => {
-        const landing = data || {}
+        let landing = data.landing
+
+        if (typeof landing === 'string') {
+          landing = JSON.parse(landing)
+        }
+
         landing.settings = _.defaultsDeep(landing.settings, {
           ogTags: [],
           video: '',
@@ -82,8 +96,53 @@ const actions = {
         })
         commit('isSaved', false)
         commit('updateCurrentLanding', landing)
+        commit('name', data.name)
+        commit('version', data.currentVersion)
         return landing
       })
+      .catch((error) => {
+        console.warn(error)
+      })
+  },
+
+  /**
+   * Create new landing
+   * @param state
+   * @param commit
+   * @param name
+   * @param sections
+   */
+  createLanding ({ state, commit }, { name, sections }) {
+    return api.request({
+      url: 'landings',
+      method: 'post',
+      params: {
+        name,
+        landing: {
+          title: name,
+          settings: {
+            title: name
+          },
+          sections
+        }
+      }
+    }).then((response) => {
+      return response
+    })
+  },
+
+  /**
+   * Delete landing by id
+   * @param state
+   * @param id
+   */
+  deleteLanding ({ state, commit }, id) {
+    return api.request({
+      url: `landings/${id}`,
+      method: 'delete'
+    }).then(() => {
+      commit('updateLandings', _.filter(state.landings, (o) => o._id !== id))
+    })
   },
 
   /**
@@ -92,7 +151,7 @@ const actions = {
    * @param commit
    * @param data - JSON representation of the builder
    */
-  saveLanding ({ state, commit }, data) {
+  saveLanding: _.throttle(({ state, commit }, data) => {
     // @todo save all data in the store properyly
     const parsedData = JSON.parse(data)
     const mergedData = {
@@ -101,11 +160,20 @@ const actions = {
     }
     const resultDataString = JSON.stringify(mergedData)
 
-    return api.saveLanding(state.slug, resultDataString)
-      .then(() => {
+    return api.request({
+      url: `landings/${state.slug}`,
+      method: 'patch',
+      params: {
+        name: state.name,
+        baseVersion: state.version,
+        landing: resultDataString
+      }
+    })
+      .then((data) => {
+        commit('version', data.currentVersion)
         return commit('isSaved', true)
       })
-  },
+  }, 800),
 
   /**
    * Stores settings data
@@ -141,6 +209,14 @@ const mutations = {
 
   slug (state, value) {
     state.slug = value
+  },
+
+  name (state, value) {
+    state.name = value
+  },
+
+  version (state, value) {
+    state.version = value
   }
 }
 
@@ -148,7 +224,8 @@ const modules = {
   Sidebar,
   BuilderModalContent,
   PageTweaks,
-  Landing
+  Landing,
+  User
 }
 
 export default new Vuex.Store({
