@@ -14,7 +14,7 @@ export default {
     return {
       link: '',
       behavior: '',
-      target: '',
+      target: false,
       videoId: '',
       actionList: [
         { name: 'Open URL', value: '' },
@@ -35,7 +35,6 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectElement',
       'settingObjectSection'
     ]),
 
@@ -89,26 +88,22 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'updateSettingOptions',
-      'updateText'
+      'updateSettingOptions'
     ]),
 
     setUrl (value = this.link) {
       this.elLink['href'] = value
-      this.setOption(['href', value])
     },
 
     changeTarget () {
       this.elLink['target'] = this.target === true ? '_blank' : '_self'
-      this.setOption(['target', this.target])
     },
 
     setVideoUrl () {
       let ytId = getYoutubeVideoIdFromUrl(this.videoId)
 
       if (ytId) {
-        // this.$emit('setAction', ['video', ytId])
-        this.setElAction(['video', ytId])
+        this.elLink['video'] = ytId
       }
     },
 
@@ -117,55 +112,28 @@ export default {
         this.link = (this.link.includes('#section_')) ? '' : this.link
         this.setUrl(this.link)
       }
+
+      if (this.action.value !== 'ptah-d-video') {
+        this.classes.forEach((name, index) => {
+          if (name.indexOf('ptah-d-video') > -1) {
+            this.classes.splice(index, 1)
+          }
+        })
+      } else {
+        this.classes.push('ptah-d-video')
+      }
     },
 
     changeScrollIntoSection ({ value }) {
       this.updateSettingOptions(
         _.merge({}, this.settingObjectOptions, {
-          href: value,
           link: { href: value, target: '_self' }
         })
       )
     },
 
     changeScrollBehavior ({ value = 'auto' }) {
-      this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, {
-          behavior: value,
-          link: { behavior: value }
-        })
-      )
-    },
-
-    setElAction (value) {
-      let action = value[0]
-      let classes = this.settingObjectOptions.classes
-
-      classes.forEach((name, index) => {
-        if (name.indexOf('ptah-d') > -1) {
-          classes.splice(index, 1)
-        }
-      })
-
-      if (action === 'href') {
-        this.videoId = ''
-        this.settingObjectElement.classList.remove('ptah-d-video')
-        this.setOption(value)
-        this.setOption(['video', false])
-      } else {
-        classes.push('ptah-d-video')
-        this.settingObjectElement.dataset.video = value[1]
-        this.setOption(value.slice())
-      }
-    },
-
-    setOption (option) {
-      this.updateText()
-      let obj = {}
-      obj[option[0]] = option[1]
-      let merge = _.merge({}, this.settingObjectOptions, obj)
-      delete merge.element
-      this.updateSettingOptions(merge)
+      this.elLink['behavior'] = this.scrollBehavior
     }
   }
 }
@@ -176,11 +144,11 @@ export default {
 
     <!-- action -->
     <div class="b-link-controls__control">
-      <base-select label="Action" :options="actionList" v-model="action" @input="changeAction"></base-select>
+      <base-select label="Action" :options="actionList" v-model="action" @input="changeAction(action)"></base-select>
     </div>
 
     <!-- scroll into section -->
-    <div v-if="action.value === 'scroll-into-section'" class="b-link-controls__control">
+    <div v-if="action.value === 'scroll-into-section' && sections.length > 0" class="b-link-controls__control">
       <base-select
         v-model="section"
         :options="sections"
@@ -192,6 +160,10 @@ export default {
         :options="scrollBehaviors"
         @input="changeScrollBehavior"
         label="Scroll behavior"/>
+    </div>
+
+    <div class="b-link-controls__no-sections" v-if="action.value === 'scroll-into-section' && sections.length === 0">
+      No more sections
     </div>
 
     <!-- open link -->
@@ -217,4 +189,8 @@ export default {
 .b-link-controls
   &__control
     margin-top: $size-step/1.45
+  &__no-sections
+    padding: $size-step
+    text-align: center
+    color: $grey
 </style>

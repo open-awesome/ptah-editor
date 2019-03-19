@@ -1,10 +1,10 @@
 <template>
   <div class="b-styler is-editable"
-       ref="styler"
-       id="styler"
-       v-if="$builder.isEditing"
-       :class="{ 'is-visible': isVisible && !editText }"
-       @click.stop="">
+    ref="styler"
+    id="styler"
+    v-if="$builder.isEditing"
+    :class="{ 'is-visible': isVisible && !editText }"
+  >
 
     <!-- Button -->
     <div class="b-styler__col">
@@ -75,7 +75,7 @@
     <div class="b-styler__modal"
        :class="modal.button.class"
        ref="buttonModal"
-       v-show="type === 'button' && isModalsPropsShow === true"
+       v-if="type === 'button' && isModalsPropsShow === true"
        v-click-outside="closeModal"
        :style="{ 'transform' : 'translate3d(' + transform.button.x +  'px' + ', ' + transform.button.y + 'px, 0)' }"
       >
