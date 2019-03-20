@@ -54,12 +54,18 @@
         <icon-base name="settings" width="16" height="16" />
       </a>
 
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
+        <icon-base name="preview" width="14" height="16" />
+      </a>
+
     </div>
 
     <!-- Delete element -->
-    <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
-      <icon-base name="close" width="12" height="12"></icon-base>
-    </a>
+    <div class="b-styler__controls">
+      <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
+        <icon-base name="close" width="10" height="10"></icon-base>
+      </a>
+    </div>
 
   </div>
 </template>

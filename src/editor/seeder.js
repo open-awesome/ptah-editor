@@ -79,55 +79,51 @@ const data = new Map([
     resizable: true,
     removable: true,
     alt: 'Default image',
-    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
+    src: 'https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png',
+    hasLink: true,
+    link: {
+      href: '',
+      target: '_blank'
+    },
     background: true,
     styles: {
-      'background-image': 'url(https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png)',
+      'background-image': 'url(https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png)',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
       'background-size': 'contain',
-      'background-color': '#fff',
-      'width': '',
-      'height': ''
-    }
-  }))],
-  [types.ImageNoResize, () => (_.merge({}, DEFAULT_OPTIONS, {
-    resizable: false,
-    removable: true,
-    alt: 'Default image',
-    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
-    background: true,
-    styles: {
-      'background-image': 'url(https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png)',
-      'background-position': 'center center',
-      'background-repeat': 'no-repeat',
-      'background-size': 'contain',
-      'background-color': '#fff'
+      'background-color': 'rgba(0, 0, 0, 0)',
+      'width': '256px',
+      'height': '160'
     }
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
     removable: true,
     alt: 'Default logo',
-    url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
+    src: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
+    hasLink: true,
+    link: {
+      href: '',
+      target: '_blank'
+    },
     background: true,
     styles: {
       'background-image': 'url(https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png)',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
-      'background-size': 'contain',
-      'background-color': '#fff',
-      'width': '',
-      'height': ''
+      'background-size': 'cover',
+      'background-color': 'rgba(0, 0, 0, 0)',
+      'width': '96px',
+      'height': '96px'
     }
   }))],
   [types.Link, () => (_.merge({}, DEFAULT_OPTIONS, {
     canCopy: true,
-    hasLink: true,
     removable: true,
     typography: true,
     isTextEdit: true,
     text: 'Click Me!',
+    hasLink: true,
     link: {
       href: '',
       target: '_blank'

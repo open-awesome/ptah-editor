@@ -1,5 +1,8 @@
 <template>
   <div class="b-section-settings">
+    <h6 class="b-section-settings__title">
+      {{ settingObjectSection.name }}
+    </h6>
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-section-settings__inner">
         <div class="b-section-settings__control">
@@ -35,23 +38,11 @@
             @change="styleChange"></control-text>
         </div>
 
-        <div v-if="!isHeader" class="b-section-settings__control">
-          <div class="b-section-settings__header">
-            <span>Heights</span>
-          </div>
-          <base-label>Full screen height</base-label>
-          <BaseSwitcher v-model="fullScreen" @change="setHeight" />
-        </div>
-
-        <template v-if="settingObjectOptions.background">
-
-          <div class="b-section-settings__header">
-            <span>Background</span>
-          </div>
+        <div class="b-section-settings__group" v-if="settingObjectOptions.background">
 
           <div class="b-section-settings__control">
-            <base-label>Use video as background</base-label>
             <base-switcher
+              label="Use video as background"
               :value="backgroundType === 'video'"
               @change="toggleBackgroundType"/>
           </div>
@@ -79,13 +70,16 @@
                 <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
               </div>
               <div v-if="!isHeader" class="b-section-settings__control">
-                <base-label>Fixed while scrolling</base-label>
-                <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
+                <BaseSwitcher label="Fixed while scrolling" v-model="bgAttachment" @change="changeAttachment" />
               </div>
             </template>
           </template>
 
-        </template>
+        </div>
+
+        <div v-if="!isHeader" class="b-section-settings__control">
+          <BaseSwitcher label="Full screen height" v-model="fullScreen" @change="setHeight" />
+        </div>
 
         <!-- Header -->
         <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
@@ -560,20 +554,25 @@ export default {
   align-items: stretch
   padding-bottom: 4.5rem
   width: 100%
-  &-header
-    font-size: 1.6rem
+  &__title
+    min-width: 28rem
+    margin: 0 0 2.8rem 0
+    padding: 0
     color: #272727
-    display: flex
-    align-items: center
-    cursor: pointer
-    i
-      margin-left: 5px
-      margin-bottom: -5px
-      transform: rotate(180deg)
-      &.dropped
-        transform: rotate(0deg)
+    font-size: 1.8rem
+    font-weight: bold
+    &:first-letter
+      text-transform: uppercase
+    &.subtitle
+      color: rgba(39, 39, 39, 0.5)
+      font-size: 1.4rem
+      font-weight: normal
+      margin: 0 0 1rem
   &__control
     margin-top: 2.2rem
+  &__group
+    border-bottom: 0.2rem dotted rgba($black, 0.15)
+    padding-bottom: 2.4rem
   &__inner
     padding-right: 2.5rem
     padding-bottom: 10rem
