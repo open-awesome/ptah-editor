@@ -29,8 +29,8 @@ function installStyler ({ builder, Vue }) {
         type = binding.value.type
       }
 
-      if (binding.value.el && binding.value.el.behavior) {
-        el.dataset.behavior = binding.value.el.behavior || 'auto'
+      if (binding.value.el && binding.value.el.link && binding.value.el.link.behavior) {
+        el.dataset.behavior = binding.value.el.link.behavior || 'auto'
       }
 
       section.stylers.push(new StylerInstance({

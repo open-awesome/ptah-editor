@@ -98,7 +98,7 @@
         Select button target
       </div>
       <div class="b-styler__modal-content">
-        <modal-button :builder="$builder"/>
+        <modal-button :builder="$builder" @changeProps="changeButtonProps"/>
       </div>
       <div class="b-styler__modal-buttons">
         <BaseButton
@@ -267,6 +267,10 @@ export default {
     if (this.options.video) {
       this.el.classList.add('ptah-d-video')
       this.el.dataset.video = this.options.video
+    }
+
+    if (this.options.link && this.options.link.behavior) {
+      this.el.dataset.behavior = this.options.link.behavior
     }
 
     this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
@@ -472,6 +476,12 @@ export default {
 
       if (pos.top < this.modal[this.type].height || pos.right < this.modal[this.width]) {
         this.modal[this.type].class = '_bottom'
+      }
+    },
+
+    changeButtonProps (props) {
+      if (props && props.behavior) {
+        this.el.dataset.behavior = props.behavior
       }
     }
   }

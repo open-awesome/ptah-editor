@@ -132,8 +132,9 @@ export default {
       )
     },
 
-    changeScrollBehavior ({ value = 'auto' }) {
-      this.elLink['behavior'] = this.scrollBehavior
+    changeScrollBehavior () {
+      this.elLink['behavior'] = this.scrollBehavior.value
+      this.$emit('changeProps', { behavior: this.scrollBehavior.value })
     }
   }
 }

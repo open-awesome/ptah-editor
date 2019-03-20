@@ -575,11 +575,11 @@ const COMPONENTS = [
     label: 'logo'
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description'
+    label: 'text'
   },
   {
     name: 'Cost',
@@ -606,11 +606,11 @@ const COMPONENTS_M = [
     label: 'logo'
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description'
+    label: 'text'
   }
 ]
 
