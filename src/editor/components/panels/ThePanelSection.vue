@@ -322,7 +322,6 @@ export default {
     'settingObjectOptions.styles': {
       immediate: true,
       handler (value) {
-        console.log(value)
         if (value) {
           let image = (!!value['background-image'] && typeof value['background-image'] === 'string')
             ? value['background-image'] : ''

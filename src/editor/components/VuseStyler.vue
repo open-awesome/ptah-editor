@@ -279,6 +279,7 @@ export default {
               container: `$sectionData.container${index}`
             })
           }
+          console.log('opt', _.get(this.section.data, this.path).element, this.options)
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
             label: this.$props.label,

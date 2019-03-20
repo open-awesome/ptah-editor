@@ -259,7 +259,7 @@ export default {
               :style="$sectionData.platforms[key].text.styles"
               @click="selectPlatform(key)"
               >
-              Enter your text
+              {{$sectionData.platforms[key].text.text}}
             </span>
           </div>
         </div>

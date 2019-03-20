@@ -43,7 +43,7 @@ const config = {
   mailchimpPostmessageHtmlTemplatePath: path.resolve('backend/templates/mailchimp.postmessage.html.template'),
   mailchimpSessionNamespace: 'mailchimp',
 
-  corsValidOrigins: getEnvVariableArray('CORS_VALID_ORIGINS', 'http://127.0.0.1:8080/')
+  corsValidOrigins: getEnvVariableArray('CORS_VALID_ORIGINS', 'http://127.0.0.1:8080')
 
 }
 

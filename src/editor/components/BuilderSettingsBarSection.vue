@@ -318,12 +318,6 @@ export default {
         } else {
           this.backgroundPickers = [value['background-color']]
         }
-        // TODO: this crashed storage with linear-gradient
-        // let bgimage = image.match(/url\((.*?)\)/)
-        // if (bgimage) {
-        //   bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-        // }
-        // this.sectionBgUrl = bgimage || ''
       }
     }
   },
