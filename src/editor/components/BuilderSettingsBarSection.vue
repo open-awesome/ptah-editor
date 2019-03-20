@@ -261,7 +261,8 @@ export default {
 
   created () {
     let styles = this.settingObjectOptions.styles
-    let image = (typeof styles['background-image'] === 'string') ? styles['background-image'] : ''
+    let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
+      styles['background-image'] : ''
     let bgimage = image.match(/url\((.*?)\)/)
 
     if (bgimage) {
@@ -317,12 +318,6 @@ export default {
         } else {
           this.backgroundPickers = [value['background-color']]
         }
-        // TODO: this crashed storage with linear-gradient
-        // let bgimage = image.match(/url\((.*?)\)/)
-        // if (bgimage) {
-        //   bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-        // }
-        // this.sectionBgUrl = bgimage || ''
       }
     }
   },

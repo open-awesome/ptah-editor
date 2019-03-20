@@ -49,6 +49,11 @@
         <icon-base name="settings" width="16" height="16" />
       </a>
 
+      <!-- Timer -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')" v-if="type === 'timer'">
+        <icon-base name="settings" width="16" height="16" />
+      </a>
+
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
         <icon-base name="preview" width="14" height="16" />
       </a>
@@ -280,6 +285,7 @@ export default {
               container: `$sectionData.container${index}`
             })
           }
+          console.log('opt', _.get(this.section.data, this.path).element, this.options)
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
             label: this.$props.label,
