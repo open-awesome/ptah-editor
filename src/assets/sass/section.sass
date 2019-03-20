@@ -14,14 +14,16 @@ section
   z-index: 1
   &.is-editable
     border: 0.2rem rgba(255, 255, 255, 0.1) dashed
-
+  .is-tablet &
+    padding: $size-step/4 !important
+  .is-mobile
+    padding: $size-step/8 !important
   .is-tablet &,
   .is-mobile &
-    padding: $size-step/4 !important
     height: auto !important
   @media only screen and (max-width: 768px)
     &
-      padding: $size-step/4 !important
+      padding: $size-step/8 !important
       height: auto !important
 
 section.full-height

@@ -196,4 +196,9 @@ export default {
 
 .mobile-header
   padding: 0
+  display: none
+  .is-mobile &
+    display: block
+  @media (max-width: 800px)
+    display: block
 </style>
