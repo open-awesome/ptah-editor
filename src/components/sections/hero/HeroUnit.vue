@@ -81,7 +81,7 @@ const C_CUSTOM = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Montserrat',
+        'font-family': 'Lato',
         'font-size': '4.8rem',
         'color': '#ffffff'
       }
@@ -240,75 +240,6 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-$h: 100vh
 .b-hero
-  position: relative
-  width: 100%
-  min-height: 70rem
-  margin: 0
-  padding: 1rem
-  display: flex
-  text-align: center
-  justify-content: center
-  flex-direction: column
-  transition: background 200ms
-.b-delimiter
-  height: 2rem
-  .is-mobile &,
-  .is-tablet &
-    display: none
-  @media only screen and (max-width: 768px)
-    &
-      display: none
-.b-logo
-  margin: 0 auto 5.5rem
-.b-title
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-weight: 800
-  line-height: 6.7rem
-  font-size: 4.8rem
-  text-align: center
-  letter-spacing: 0.15em
-  text-transform: uppercase
-  margin: 0 0 2rem
-  text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-    line-height: 4rem
-    padding: 0 1rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-      line-height: 4rem
-      padding: 0 1rem
-.b-text
-  color: rgba(255, 255, 255, 0.3)
-  font-size: 2rem
-  line-height: 4rem
-  text-align: center
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-    line-height: 2rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
-      line-height: 2rem
-.b-button
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
-.b-sandbox
-  min-height: 20rem
-  justify-content: center
-  align-items: center
 
-/deep/
-  .b-draggable-slot
-    align-items: center
 </style>

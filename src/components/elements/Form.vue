@@ -45,20 +45,20 @@ export default {
     width: 70rem
     .is-mobile &,
     .is-tablet &
-      width: 30rem
+      width: 100%
     @media only screen and (max-width: 768px)
       &
-        width: 30rem
+        width: 100%
     input
       width: 45rem
       height: 64px
       font-size: 2rem
       .is-mobile &,
       .is-tablet &
-        width: 30rem
+        width: 100%
       @media only screen and (max-width: 768px)
         &
-          width: 30rem
+          width: 100%
     button
       min-width: 22.4rem
       height: 64px

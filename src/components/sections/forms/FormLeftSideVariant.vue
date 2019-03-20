@@ -71,7 +71,7 @@ const C_CUSTOM_2 = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Montserrat',
+        'font-family': 'Lato',
         'font-size': '2.8rem',
         'color': '#ffffff'
       }
@@ -227,72 +227,14 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-  .b-form
-    position: relative
-    width: 100%
-    min-height: 70rem
-    margin: 0
-    padding: 1rem
-    display: flex
-    text-align: center
-    justify-content: center
-    flex-direction: column
-    transition: background 200ms
-
-    &__left-col
-      align-items: stretch
-
-    .b-title
-      color: rgb(255, 255, 255)
-      font-style: normal
-      font-weight: 800
-      line-height: 6.7rem
-      font-size: 2.8rem
-      text-align: center
-      letter-spacing: 0.15em
-      text-transform: uppercase
-      margin: 0 0 2rem
-      text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
-      .is-mobile &,
-      .is-tablet &
-        font-size: 2rem !important
-        line-height: 4rem
-        padding: 0 1rem
-      @media only screen and (max-width: 768px)
-        &
-          font-size: 2rem !important
-          line-height: 4rem
-          padding: 0 1rem
-
-    .b-text
-      color: rgba(255, 255, 255, 0.3)
-      font-size: 1.8rem
-      line-height: 4rem
-      text-align: center
-      margin: 0
-      .is-mobile &,
-      .is-tablet &
-        font-size: 1.4rem !important
-        line-height: 2rem
-      @media only screen and (max-width: 768px)
-        &
-          font-size: 1.4rem !important
-          line-height: 2rem
-
-    .b-draggable-slot
-      width: 100%
-      height: 100%
-      height: -moz-available
-      height: -webkit-fill-available
-      height: fill-available
-      max-height: intrinsic
-      max-height: -moz-max-content
-      max-height: -webkit-max-content
-      max-height: fit-content
-      .is-mobile &,
-      .is-tablet &
+.b-form
+  &__left-col
+    align-items: stretch
+  .b-draggable-slot
+    .is-mobile &,
+    .is-tablet &
+      align-items: center !important
+    @media only screen and (max-width: 768px)
+      &
         align-items: center !important
-      @media only screen and (max-width: 768px)
-        &
-          align-items: center !important
 </style>

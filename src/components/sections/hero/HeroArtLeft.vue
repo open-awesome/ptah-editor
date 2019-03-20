@@ -191,19 +191,6 @@ export default {
 <style lang="sass" scoped>
 $h: 100vh
 
-.b-sandbox,
-.b-draggable-slot
-  max-width: 100%
-  height: 100%
-
-.b-sandbox
-  min-height: 20rem
-  justify-content: center
-  align-items: center
-
-.b-draggable-slot
-  padding: 1.6rem .8rem
-
 .b-hero
   position: relative
   width: 100%
@@ -216,64 +203,7 @@ $h: 100vh
   flex-direction: column
   transition: background 200ms
 
-.b-delimiter
-  height: 2rem
-  .is-mobile &,
-  .is-tablet &
-    display: none
-  @media only screen and (max-width: 768px)
-    &
-      display: none
-
-.b-logo
-  margin: 0 auto 5.5rem
-
 .b-link:hover
   text-decoration: underline !important
 
-.b-title
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-weight: 800
-  line-height: 6.7rem
-  font-size: 4.8rem
-  text-align: center
-  letter-spacing: 0.15em
-  text-transform: uppercase
-  margin: 0 0 2rem
-  text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-    line-height: 4rem
-    padding: 0 1rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-      line-height: 4rem
-      padding: 0 1rem
-
-.b-text
-  color: rgba(255, 255, 255, 0.3)
-  font-size: 2rem
-  line-height: 4rem
-  text-align: center
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-    line-height: 2rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
-      line-height: 2rem
-
-.b-button
-  .is-mobile &,
-  .is-tablet &
-    height: 4rem !important
-    font-size: 1.4rem !important
-  @media only screen and (max-width: 768px)
-    &
-      height: 4rem !important
-      font-size: 1.4rem !important
 </style>

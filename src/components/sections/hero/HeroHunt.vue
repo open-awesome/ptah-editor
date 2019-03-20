@@ -211,19 +211,4 @@ export default {
     /deep/
       .b-draggable-slot
         justify-content: flex-end
-
-/deep/
-  .b-draggable-slot
-    width: 100%
-    display: flex
-    text-align: center
-    justify-content: flex-start
-    align-items: flex-start
-    flex-direction: column
-    .is-mobile & > div,
-    .is-tablet & > div
-      width: 100%
-    @media only screen and (max-width: 768px)
-      & > div
-        width: 100%
 </style>
