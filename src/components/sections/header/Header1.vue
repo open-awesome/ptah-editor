@@ -193,6 +193,7 @@ const defaultComponents2 = [
       text: 'Button',
       styles: {
         'background-color': '#FF6D64',
+        'background-image': 'none',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',

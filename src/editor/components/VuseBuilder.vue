@@ -411,8 +411,9 @@ export default {
     &:hover
       border-color: $dark-blue-krayola
     &.styler-active
+      border-color: $white
       &:hover
-       border-color: $white
+        border-color: $white
   &.fp-scroll section
     height: 100vh !important
   &:before,

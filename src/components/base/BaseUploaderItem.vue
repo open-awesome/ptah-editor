@@ -268,6 +268,8 @@ export default {
     & > div
       width: $size-step*7
       height: $size-step*4
+
+      background-size: contain
   &:hover
     border-color: $dark-blue-krayola
   &:not(:last-child)

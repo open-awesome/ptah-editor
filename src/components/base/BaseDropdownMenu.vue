@@ -118,7 +118,7 @@ export default {
       transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
   &__dropdown
     transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-    max-height: 10rem
+    max-height: 18rem
     border-top: none
     position: absolute
     top: 100%

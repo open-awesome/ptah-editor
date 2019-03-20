@@ -1,5 +1,5 @@
 <template>
-  <div class="b-control-panel">
+  <div class="b-control-panel" @click.stop="">
     <button class="b-control-panel__close" @click="setControlPanel(false)">
       <icon-base color="#c4c4c4" width="10" height="10" name="close"/>
     </button>
@@ -18,6 +18,7 @@ import ThePanelSocialStyle from './ThePanelSocialStyle'
 import ThePanelText from './ThePanelText'
 import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
+import ThePanelImage from './ThePanelImage'
 import ThePanelAvailablePlatforms from './ThePanelAvailablePlatforms'
 import ThePanelRestrictions from './ThePanelRestrictions'
 import ThePanelInlineText from './ThePanelInlineText'
@@ -58,7 +59,8 @@ export default {
     ThePanelSlot,
     ThePanelAvailablePlatforms,
     ThePanelRestrictions,
-    ThePanelInlineText
+    ThePanelInlineText,
+    ThePanelImage
   }
 }
 </script>
