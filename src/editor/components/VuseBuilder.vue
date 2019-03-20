@@ -21,8 +21,7 @@
         :is="headerSection.name"
         :id="headerSection.id"
         :class="{ 'video-background': headerSection.data.mainStyle.backgroundType === 'video' }"
-        @click.native="selectSidebarSection(headerSection)"
-        @dblclick.native="showSettingsBar($event, headerSection)">
+        @click.native="selectSidebarSection(headerSection)">
 
       <video
           v-if="headerSection.data.mainStyle.backgroundType === 'video' && headerSection.data.mainStyle.backgroundVideo"
@@ -42,8 +41,7 @@
         :is="section.name"
         :id="section.id"
         :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
-        @click.native="selectSidebarSection(section)"
-        @dblclick.native="showSettingsBar($event, section)">
+        @click.native="selectSidebarSection(section)">
 
         <video
             v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
