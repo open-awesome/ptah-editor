@@ -255,6 +255,7 @@ export default {
     background: $dark-blue
     overflow: auto
     overflow-x: hidden
+    z-index: 20
     ul
       margin: 0
       padding: 0
