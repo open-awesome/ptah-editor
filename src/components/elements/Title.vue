@@ -10,18 +10,23 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .b-title
   color: #000
+
   font-family: 'Lato'
-  position: relative
-  text-align: center
-  display: flex
-  align-items: center
-  font-size: 2.5rem
+  font-size: 2.4rem
   line-height: 1.4
-  margin: 1.6rem
+  text-align: center
+  text-transform: uppercase
+
+  position: relative
   display: block
+
+  margin: 1.6rem auto
+  &::selection, & ::selection
+    color: #ff0
+    background: #000
   &::selection, & ::selection
     color: #ff0
     background: #000

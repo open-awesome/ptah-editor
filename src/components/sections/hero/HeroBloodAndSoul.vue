@@ -209,10 +209,4 @@ export default {
   align-items: center
   .b-div
     height: 4rem
-.b-logo
-  .is-mobile &
-    max-width: 25rem !important
-  @media only screen and (max-width: 768px)
-    &
-      max-width: 25rem !important
 </style>

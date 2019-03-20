@@ -147,30 +147,4 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-video-section
-  position: relative
-  width: 100%
-  min-height: $size-step*10
-  margin: 0
-  padding: 1rem
-  display: flex
-  text-align: center
-  justify-content: center
-  flex-direction: column
-  transition: background 200ms
-  &-component
-    margin: 1.2rem
-
-.b-sandbox,
-.b-draggable-slot
-  max-width: 100%
-  height: 100%
-
-.b-sandbox
-  min-height: 20rem
-  justify-content: center
-  align-items: center
-
-.b-draggable-slot
-  padding: 1.6rem .8rem
-
 </style>

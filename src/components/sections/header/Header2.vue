@@ -241,7 +241,7 @@ export default {
   padding: .8rem 1.6rem
 
 .b-grid__col-8 .b-draggable-slot
-  justify-content: flex-start
+  justify-content: center
   padding-left: 4rem
 
   .is-tablet &,

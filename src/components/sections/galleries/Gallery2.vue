@@ -202,20 +202,7 @@ export default {
 @import '../../../assets/sass/_flex.sass'
 
 .b-gallery-two
-  display: flex
-  align-items: center
-  flex-wrap: wrap
-  padding: 1rem
-  &.is-editable
-    // resize: vertical
-    // overflow: hidden
-  @media only screen and (max-width: 768px)
-    &
-      height: auto !important
-  &__wrap
-    max-width: 160rem
-    width: 80%
-    margin: 0 auto
+
 .b-gallery-two__item-wrap
   width: 28rem
   min-width: 10rem

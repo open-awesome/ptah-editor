@@ -68,8 +68,8 @@ export default {
       border: none
       position: relative
       .vuse-icon
-         width: 100%
-         height: auto
-         fill: inherit
+        width: inherit
+        height: auto
+        fill: inherit
 
 </style>

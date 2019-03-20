@@ -21,7 +21,7 @@ const C_CUSTOM_1 = [
     element: {
       text: 'This is a header',
       styles: {
-        'font-family': 'Montserrat',
+        'font-family': 'Lato',
         'font-size': '2.4rem',
         'color': '#ffffff'
       }
@@ -80,7 +80,7 @@ const C_CUSTOM_2 = [
     element: {
       text: 'This is a header',
       styles: {
-        'font-family': 'Montserrat',
+        'font-family': 'Lato',
         'font-size': '2.4rem',
         'color': '#ffffff'
       }
@@ -126,7 +126,7 @@ const C_CUSTOM_3 = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Montserrat',
+        'font-family': 'Lato',
         'font-size': '3.2rem',
         'color': '#ffffff'
       }
@@ -336,129 +336,6 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-$h: 100vh
 .b-columns2
-  position: relative
-  width: 100%
-  min-height: 88rem
-  margin: 0
-  padding: 1rem
-  display: flex
-  text-align: center
-  justify-content: center
-  flex-direction: column
-  transition: background 200ms
-  &.is-editable
-    min-height: calc(#{$h} - 7.2rem)
-.b-header
-  width: 100%
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-weight: 800
-  font-size: 4.8rem
-  text-align: center
-  letter-spacing: 0.15em
-  text-transform: uppercase
-  margin: 0 0 2rem
-  text-shadow: 0 .4rem 1.9rem rgba(0, 0, 0, 0.9)
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-.b-delimiter
-  height: 2rem
-  .is-mobile &,
-  .is-tablet &
-    display: none
-  @media only screen and (max-width: 768px)
-    &
-      display: none
-.b-logo
-  .is-mobile &,
-  .is-tablet &
-    width: 100% !important
-  @media only screen and (max-width: 992px)
-    &
-      width: 100% !important
-.b-title
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-size: 2.4rem
-  font-weight: 400
-  text-align: center
-  letter-spacing: 0.15em
-  text-transform: uppercase
-  margin: 0 0 2rem
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-.b-text
-  color: rgba(255, 255, 255, 0.3)
-  font-size: 1.6rem
-  text-align: center
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-    line-height: 2rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
-      line-height: 2rem
-.b-button
-  color: #fff
-  font-family: Lato
-  font-style: normal
-  font-size: 1.4rem
-  text-align: center
-  letter-spacing: 0.28em
-  text-transform: uppercase
-  width: 22.4rem
-  height: 5.6rem
-  box-sizing: border-box
-  border-radius: 0.2rem
-  .is-tablet &,
-  .is-mobile &
-    width: 100% !important
-  @media only screen and (max-width: 992px)
-    &
-      width: 100% !important
-.b-sandbox
-  min-height: 20rem
-  display: flex
-  justify-content: center
-  align-items: center
-.b-draggable-slot,
-.b-draggable-slot
-  & > div
-    max-width: 100%
-    max-height: 100%
-    & > div,
-    & > a
-      .is-mobile &,
-      .is-tablet &
-        margin: 1.2rem auto !important
-      @media only screen and (max-width: 768px)
-        &
-          margin: 1.2rem auto !important
-    .is-mobile &,
-    .is-tablet &
-      margin: 1.2rem auto !important
-    @media only screen and (max-width: 768px)
-      &
-        margin: 1.2rem auto !important
-  &__image,
-  &__logo,
-  &__slogan,
-  &__button
-    .is-mobile &,
-    .is-tablet &
-      width: 100% !important
-    @media only screen and (max-width: 992px)
-      &
-        width: 100% !important
+
 </style>

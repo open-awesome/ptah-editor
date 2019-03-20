@@ -194,15 +194,6 @@ export default {
 @import '../../../assets/sass/_flex.sass'
 
 .b-gallery-three
-  display: flex
-  align-items: center
-  padding: 1rem
-  &.is-editable
-   // resize: vertical
-   // overflow: hidden
-  @media only screen and (max-width: 768px)
-    &
-      height: auto !important
   &__wrap
     margin: 0 auto
     max-width: 160rem
