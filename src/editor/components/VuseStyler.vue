@@ -218,9 +218,11 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
-      console.log(this.type)
       event.preventDefault()
       event.stopPropagation()
+
+      this.setControlPanel(false)
+      this.clearSettingObjectLight()
 
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
@@ -254,7 +256,6 @@ export default {
         .forEach(el => el.classList.remove('active'))
 
       this.setContent(null)
-      this.clearSettingObjectLight()
 
       if (this.isVisible) return
       this.isVisible = true
@@ -285,7 +286,6 @@ export default {
               container: `$sectionData.container${index}`
             })
           }
-          console.log('opt', _.get(this.section.data, this.path).element, this.options)
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
             label: this.$props.label,
@@ -303,9 +303,6 @@ export default {
       }, 0)
 
       document.addEventListener('click', this.hideStyler, true)
-      // TODO: this work incorrectly
-      // document.addEventListener('blur', this.hideStyler);
-      // this.currentOption = ''
     },
     hideStyler (event) {
       const evPath = event ? event.path || (event.composedPath && event.composedPath()) : []
