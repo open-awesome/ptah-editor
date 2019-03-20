@@ -218,10 +218,11 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
+      console.log('show', this.type)
       event.preventDefault()
       event.stopPropagation()
 
-      this.setControlPanel(false)
+      if (this.type !== 'section') this.setControlPanel(false)
       this.clearSettingObjectLight()
 
       let autoSizing = (data) => {
