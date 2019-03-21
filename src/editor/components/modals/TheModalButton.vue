@@ -58,8 +58,13 @@ export default {
       }
     },
 
-    videoLink () {
-      return this.settingObjectOptions.video
+    videoLink: {
+      get: function () {
+        return this.settingObjectOptions.video
+      },
+      set: function (newValue) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { video: newValue }))
+      }
     }
   },
 
@@ -110,7 +115,8 @@ export default {
       let ytId = getYoutubeVideoIdFromUrl(this.videoId)
 
       if (ytId) {
-        this.elLink['video'] = ytId
+        this.videoLink = ytId
+        this.$emit('changeProps', { video: ytId })
       }
     },
 

@@ -481,6 +481,9 @@ export default {
       if (props && props.behavior) {
         this.el.dataset.behavior = props.behavior
       }
+      if (props && props.video) {
+        this.el.dataset.video = props.video
+      }
     }
   }
 }
