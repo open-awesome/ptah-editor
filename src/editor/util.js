@@ -14,6 +14,26 @@ export function isParentTo(target, parent) {
   return false
 }
 
+export function composedPath (el) {
+
+  var path = [];
+
+  while (el) {
+
+    path.push(el);
+
+    if (el.tagName === 'HTML') {
+
+      path.push(document);
+      path.push(window);
+
+      return path;
+    }
+
+    el = el.parentElement;
+  }
+}
+
 /**
  *
  * @param {String} target
@@ -29,11 +49,11 @@ export function getTypeFromSchema(target, schema) {
   if (value === types.Link) return 'link'
   if (value === types.ClassList) return 'section'
   if (value === types.StyleObject) return 'section'
-  if (value === types.Label) return 'text'
-  if (value === types.Cost) return 'text'
+  if (value === types.Label) return 'inline'
+  if (value === types.Cost) return 'inline'
   if (value === types.Delimiter) return 'delimiter'
   if (value === types.SystemRequirements) return 'section'
-  if (value === types.TextInherit) return 'text'
+  if (value === types.TextInherit) return 'inline'
 
   return null
 }

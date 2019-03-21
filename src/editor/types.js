@@ -10,7 +10,6 @@ export class StyleObject { }
 export class Icon { }
 export class Label { }
 export class Cost { }
-export class ImageNoResize { }
 export class Delimiter { }
 export class VideoElement { }
 export class Timer { }

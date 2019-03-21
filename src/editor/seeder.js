@@ -9,8 +9,10 @@ const DEFAULT_OPTIONS = {
   resizable: false,
   hasLink: false,
   link: {
-    href: '',
-    target: '_blank'
+    href: '#',
+    target: '_blank',
+    behavior: 'auto',
+    action: ''
   },
   removable: false,
   aligned: false,
@@ -21,7 +23,9 @@ const DEFAULT_OPTIONS = {
   background: false,
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
-  isComplex: false,
+  isHoverAnim: false, // hover anim for button/link
+  isTextEdit: false, // edit text in settings panel
+  isComplex: false, // TODO: deprecated
   video: false,
 
   // --- Background type
@@ -48,7 +52,7 @@ const data = new Map([
     styles: {
       'font-family': 'Lato',
       'font-size': '3.2rem',
-      'font-weight': 'bold',
+      'font-weight': 'normal',
       'font-style': 'normal',
       'text-decoration': 'none',
       'text-align': 'center',
@@ -70,60 +74,58 @@ const data = new Map([
       'text-align': 'center',
       'color': '#000',
       'justify-content': 'center'
-    }
+    },
+    isComplex: true
   }))],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
     removable: true,
     alt: 'Default image',
-    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
+    src: 'https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png',
+    hasLink: true,
+    link: {
+      href: '',
+      target: '_blank'
+    },
     background: true,
     styles: {
-      'background-image': 'url(https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png)',
+      'background-image': 'url(https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png)',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
       'background-size': 'contain',
-      'background-color': '#fff',
-      'width': '',
-      'height': ''
-    }
-  }))],
-  [types.ImageNoResize, () => (_.merge({}, DEFAULT_OPTIONS, {
-    resizable: false,
-    removable: true,
-    alt: 'Default image',
-    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
-    background: true,
-    styles: {
-      'background-image': 'url(https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png)',
-      'background-position': 'center center',
-      'background-repeat': 'no-repeat',
-      'background-size': 'contain',
-      'background-color': '#fff'
+      'background-color': 'rgba(0, 0, 0, 0)',
+      'width': '256px',
+      'height': '160'
     }
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
     removable: true,
     alt: 'Default logo',
-    url: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
+    src: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
+    hasLink: true,
+    link: {
+      href: '',
+      target: '_blank'
+    },
     background: true,
     styles: {
       'background-image': 'url(https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png)',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
-      'background-size': 'contain',
-      'background-color': '#fff',
-      'width': '',
-      'height': ''
+      'background-size': 'cover',
+      'background-color': 'rgba(0, 0, 0, 0)',
+      'width': '96px',
+      'height': '96px'
     }
   }))],
   [types.Link, () => (_.merge({}, DEFAULT_OPTIONS, {
     canCopy: true,
-    hasLink: true,
     removable: true,
     typography: true,
+    isTextEdit: true,
     text: 'Click Me!',
+    hasLink: true,
     link: {
       href: '',
       target: '_blank'
@@ -152,6 +154,7 @@ const data = new Map([
         'color': ''
       }
     },
+    isHoverAnim: true,
     animation: {
       value: ''
     }
@@ -178,11 +181,11 @@ const data = new Map([
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       canCopy: true,
-      resizable: true,
       hasLink: true,
-      aligned: true,
+      aligned: false,
       typography: true,
       background: true,
+      isTextEdit: true,
       shape: true,
       pseudo: {
         hover: {
@@ -195,6 +198,7 @@ const data = new Map([
         }
       },
       text: 'Click Me!',
+      isHoverAnim: true,
       animation: {
         value: ''
       },
@@ -221,7 +225,8 @@ const data = new Map([
         'text-align': 'center',
         'width': '',
         'height': ''
-      }
+      },
+      isComplex: true
     })
   )],
   [types.Label, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -426,7 +431,7 @@ const data = new Map([
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': ''
-         },
+      },
       hasPlatforms: true,
       availablePlatforms: {
         'windows': {

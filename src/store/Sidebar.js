@@ -3,10 +3,12 @@ import * as _ from 'lodash-es'
 export default {
   state: {
     isExpanded: true,
-    isSettingsExpanded: false, // 2nd level menu
+    controlPanel: { // control panels for sections & elements
+      expanded: false,
+      name: ''
+    },
     isAddSectionExpanded: false, // add section menu
     isGrouping: false, // section grouping interface
-    expandedMenuItem: 'sections', // submenu item
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectLabel: '', // Styler slot label
     settingObjectOptions: {},
@@ -46,10 +48,8 @@ export default {
     builderGroups: [], // section layouts
     sectionsGroups: [],
     sandbox: {
-      expanded: false, // sandbox sidebar expand state
       components: [], // sandbox current section's components
-      styles: {}, // sandbox current section's styles
-      addElExpanded: false // expand add element panel
+      styles: {} // sandbox current section's styles
     }
   },
 
@@ -57,17 +57,8 @@ export default {
     isExpanded (state, value) {
       state.isExpanded = value
     },
-    isSettingsExpanded (state, value) {
-      state.isSettingsExpanded = value
-      if (value) {
-        state.isAddSectionExpanded = false
-      }
-    },
     isAddSectionExpanded (state, value) {
       state.isAddSectionExpanded = value
-      if (value) {
-        state.isSettingsExpanded = false
-      }
     },
     setSettingObjectType (state, value) {
       state.settingObjectType = value
@@ -81,9 +72,6 @@ export default {
     setSection (state, section) {
       state.settingObjectSection = section
     },
-    setExpandedMenuItem (state, item) {
-      state.expandedMenuItem = item
-    },
     setBuilderSections (state, array) {
       state.builderSections = array
     },
@@ -96,17 +84,14 @@ export default {
     isGrouping (state, value) {
       state.isGrouping = value
     },
-    toggleSandboxSidebar ({ sandbox }, value = !sandbox.expanded) {
-      sandbox.expanded = value
-    },
     setSandboxPaths (state, paths) {
       state.sandbox = { ...state.sandbox, ...paths }
     },
     setElement (state, el) {
       state.settingObjectElement = el
     },
-    toggleElementsBar ({ sandbox }, value = !sandbox.expanded) {
-      sandbox.addElExpanded = value
+    controlPanel (state, data) {
+      state.controlPanel = data
     }
   },
 
@@ -119,17 +104,12 @@ export default {
       commit('isAddSectionExpanded', (typeof value !== 'undefined') ? value : !state.isAddSectionExpanded)
     },
 
-    setMenuItem ({ commit }, value) {
-      commit('setExpandedMenuItem', value)
-    },
-
     /**
      * Set current element options (from seeder)
      * @param commit
      * @param data
      */
     setSettingObject ({ commit }, data) {
-      commit('isSettingsExpanded', true)
       commit('setSettingObjectLabel', data.label)
       commit('setSettingObjectType', data.type)
       commit('setSettingObjectOptions', data.options)
@@ -140,9 +120,6 @@ export default {
      * @param commit
      */
     clearSettingObject ({ commit }) {
-      commit('isSettingsExpanded', false)
-      commit('toggleSandboxSidebar', false)
-      commit('toggleElementsBar', false)
       commit('setSettingObjectType', '')
       commit('setSettingObjectOptions', {})
       commit('isGrouping', false)
@@ -194,6 +171,8 @@ export default {
         type: 'section',
         options
       })
+
+      dispatch('setControlPanel', 'Section')
     },
 
     setSettingElement ({ dispatch, commit }, { type, name, label, options, section, element }) {
@@ -205,7 +184,6 @@ export default {
       }
 
       commit('setSection', section)
-      commit('setExpandedMenuItem', 'sections')
       commit('setElement', element)
 
       dispatch('setSettingObject', {
@@ -242,8 +220,18 @@ export default {
       commit('isGrouping', (typeof value !== 'undefined') ? value : !state.isGrouping)
     },
 
-    setSettingsExpanded ({ commit, state }, value) {
-      commit('isSettingsExpanded', (typeof value !== 'undefined') ? value : false)
+    setControlPanel ({ commit }, panel) {
+      if (typeof panel === 'string') {
+        commit('controlPanel', {
+          expanded: true,
+          name: panel
+        })
+      } else {
+        commit('controlPanel', {
+          expanded: false,
+          name: ''
+        })
+      }
     }
   },
 

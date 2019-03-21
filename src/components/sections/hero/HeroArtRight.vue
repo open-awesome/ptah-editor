@@ -27,7 +27,6 @@
                 :key="`component-${ _uid }-${ index }`">
 
               <component class="b-hero-component"
-                  v-if="component.element.isComplex"
                   v-styler:for="{
                     el: component.element,
                     type: component.type,
@@ -43,27 +42,9 @@
                   :allow="component.element.allow"
                   :allowfullscreen="component.element.allowfullscreen"
                   :class="[component.element.classes, component.class]"
-                  :path="`components[${index}].element`"/>
-
-              <component
-                  v-else
-                  v-styler:for="{
-                    el: component.element,
-                    type: component.type,
-                    label: component.label,
-                    path: `$sectionData.components[${index}].element`
-                  }"
-                  v-html="component.element.text"
-                  :is="component.name"
-                  :href="component.element.link.href"
-                  :target="component.element.link.target"
-                  :style="component.element.styles"
-                  :src="component.element.src"
-                  :frameborder="component.element.frameborder"
-                  :allow="component.element.allow"
-                  :allowfullscreen="component.element.allowfullscreen"
-                  :class="[component.element.classes, component.class]"
-                  :path="`components[${index}].element`"/>
+                  :path="`components[${index}].element`">
+                <div v-html="$sectionData.components[index].element.text"></div>
+              </component>
 
             </div>
 
@@ -72,6 +53,8 @@
         </sandbox>
 
       </div>
+
+      <div class="b-grid__col-6"></div>
 
     </div>
   </div>
@@ -188,7 +171,7 @@ export default {
     components: [
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
       { name: 'VideoElement', element: VideoElement, type: 'video', class: 'b-video', label: 'video', key: 5 },
-      { name: 'Slogan', element: Slogan, type: 'slogan', class: 'b-slogan', label: 'slogan', key: 6 },
+      { name: 'TextElement', element: Slogan, type: 'slogan', class: 'b-slogan', label: 'slogan', key: 6 },
       { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 },
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 7 }
     ]
@@ -206,21 +189,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-$h: 100vh
-
-.b-sandbox,
-.b-draggable-slot
-  max-width: 100%
-  height: 100%
-
-.b-sandbox
-  min-height: 20rem
-  justify-content: center
-  align-items: center
-
-.b-draggable-slot
-  padding: 1.6rem .8rem
-
 .b-hero
   position: relative
   width: 100%
@@ -232,79 +200,4 @@ $h: 100vh
   justify-content: center
   flex-direction: column
   transition: background 200ms
-  &-component
-    margin: 1.2rem
-
-.b-delimiter
-  height: 2rem
-  .is-mobile &,
-  .is-tablet &
-    display: none
-  @media only screen and (max-width: 768px)
-    &
-      display: none
-
-.b-logo
-  margin: 0 0 5.5rem
-
-.b-link:hover
-  text-decoration: underline !important
-
-.b-title
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-weight: 800
-  line-height: 6.7rem
-  font-size: 4.8rem
-  text-align: center
-  letter-spacing: 0.15em
-  text-transform: uppercase
-  margin: 0 0 2rem
-  text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-    line-height: 4rem
-    padding: 0 1rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-      line-height: 4rem
-      padding: 0 1rem
-
-.b-text
-  color: rgba(255, 255, 255, 0.3)
-  font-size: 2rem
-  line-height: 4rem
-  text-align: center
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-    line-height: 2rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
-      line-height: 2rem
-
-.b-button
-  color: #fff
-  font-family: Lato
-  font-style: normal
-  font-weight: bold
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.28em
-  text-transform: uppercase
-  width: 35.2rem
-  height: 6.4rem
-  background: #FF6D64
-  box-shadow: 0 2.4rem 4.4rem rgba(0, 0, 0, 0.15)
-  .is-mobile &,
-  .is-tablet &
-    height: 4rem !important
-    font-size: 1.4rem !important
-  @media only screen and (max-width: 768px)
-    &
-      height: 4rem !important
-      font-size: 1.4rem !important
 </style>

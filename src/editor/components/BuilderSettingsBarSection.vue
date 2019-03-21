@@ -22,19 +22,6 @@
       >
       </control-section-products>
 
-     <!-- Font -->
-      <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-        <control-text
-          :fontSize="fontSize"
-          :fontFamily="fontFamily"
-          :fontColor="fontColor"
-          :fontStyles="styles"
-          :expand="expandedFont"
-          :isComplexText="isComplexText"
-          @open="onExpand"
-          @change="styleChange"></control-text>
-      </div>
-
       <div v-if="!isHeader" class="b-section-settings__control">
         <div class="b-section-settings__header">
           <span>Heights</span>
@@ -165,11 +152,10 @@
 </template>
 
 <script>
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
-import ControlText from './controls/TheControlText'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
 import BaseUploader from '../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './BuilderSettingsBarGroup'
@@ -189,7 +175,6 @@ export default {
     BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
-    ControlText,
     ControlSectionLayouts
   },
   name: 'BuilderSettingsBarSection',
@@ -276,7 +261,8 @@ export default {
 
   created () {
     let styles = this.settingObjectOptions.styles
-    let image = (typeof styles['background-image'] === 'string') ? styles['background-image'] : ''
+    let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
+      styles['background-image'] : ''
     let bgimage = image.match(/url\((.*?)\)/)
 
     if (bgimage) {
@@ -322,7 +308,7 @@ export default {
     'settingObjectOptions.styles': {
       immediate: true,
       handler (value) {
-        let image = (typeof value['background-image'] === 'string') ? value['background-image'] : ''
+        let image = (!!value['background-image'] && typeof value['background-image'] === 'string') ? value['background-image'] : ''
         let bggradient = image.match(/linear-gradient(\(.*\))/g)
         if (bggradient) {
           this.backgroundPickers = bggradient[0]
@@ -332,18 +318,11 @@ export default {
         } else {
           this.backgroundPickers = [value['background-color']]
         }
-        // TODO: this crashed storage with linear-gradient
-        // let bgimage = image.match(/url\((.*?)\)/)
-        // if (bgimage) {
-        //   bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-        // }
-        // this.sectionBgUrl = bgimage || ''
       }
     }
   },
 
   beforeDestroy () {
-    this.setSettingsExpanded(false)
   },
 
   methods: {
@@ -352,14 +331,11 @@ export default {
       'clearSettingObject',
       'toggleGrouping',
       'setSettingSection',
-      'clearSettingObject',
-      'setSettingsExpanded'
+      'clearSettingObject'
     ]),
     ...mapActions('Landing', [
       'saveState'
     ]),
-
-    ...mapMutations('Sidebar', ['toggleSandboxSidebar']),
 
     updateBgColor (value) {
       let settings = this.settingObjectOptions
@@ -550,7 +526,6 @@ export default {
       let masterId = _.find(this.sectionsGroups, o => o.children.indexOf(this.sectionId) > -1).main.id
       let masterSection = _.find(this.builder.sections, o => o.id === masterId)
 
-      this.toggleSandboxSidebar(false)
       this.clearSettingObject()
       this.setSettingSection(masterSection)
       this.toggleGrouping(true)
@@ -582,10 +557,9 @@ export default {
       &.dropped
         transform: rotate(0deg)
   &__control
-    margin-top: 2.2rem
+    margin-top: $size-step/2
   &__inner
-    padding-right: 2.5rem
-    padding-bottom: 10rem
+    padding: 0 2.4rem
   &__buttons
     position: absolute
     bottom: 1rem
@@ -595,8 +569,6 @@ export default {
       margin: 0 auto
       max-width: 100%
       display: block
-  &__control
-    margin-bottom: 2rem
 
   &__description
     font-size: 1.4rem

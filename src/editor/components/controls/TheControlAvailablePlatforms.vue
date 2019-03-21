@@ -9,16 +9,8 @@ export default {
     VuseIcon
   },
 
-  props: {
-    expand: {
-      type: Boolean,
-      required: true
-    }
-  },
-
   data () {
     return {
-      controlOpen: false,
       color: '',
       elWidth: 0
     }
@@ -42,15 +34,6 @@ export default {
     }
   },
 
-  watch: {
-    expand: {
-      immediate: true,
-      handler (value) {
-        this.controlOpen = value
-      }
-    }
-  },
-
   methods: {
     visible (key) {
       this.platforms[key].visible = !this.platforms[key].visible
@@ -58,59 +41,50 @@ export default {
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.colorFill['color'] = color
-    },
-    onClickTitle () {
-      this.$emit('open', ['AvailablePlatforms', !this.controlOpen])
     }
   },
 
   mounted () {
     this.color = this.colorFill.color
     this.elWidth = this.sizeIcons.width
-    this.controlOpen = this.expand
   }
 }
 </script>
 
 <template>
   <div class="b-text-controls">
-    <div class="b-text-controls__header" @click="onClickTitle">
-      <span>Icons settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+    <div class="b-size-controls__control">
+      <base-range-slider v-model="sizeIcons.width" label="Icons width" step="8" min="16" max="128">
+        {{ sizeIcons.width }} px
+      </base-range-slider>
     </div>
-    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
-      <div class="b-size-controls__control">
-        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="8" min="16" max="128">
-          {{ sizeIcons.width }} px
-        </base-range-slider>
-      </div>
-      <div class="b-text-controls__control">
-        <base-color-picker label="Color icons" v-model="color" @change="changeColor"></base-color-picker>
-      </div>
-      <div class="b-text-controls__control">
-        <div>Visible platforms</div>
-        <div class="b-available-platforms">
-          <div class="b-available-platforms__item is-editable"
-            v-for="(value, key) in platforms" :key="key"
-            :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"
-            @click="visible(key)"
-            >
+    <div class="b-text-controls__control">
+      <base-color-picker label="Icons color" v-model="color" @change="changeColor"></base-color-picker>
+    </div>
+    <div class="b-text-controls__control">
+      <div>Visible platforms</div>
+      <div class="b-available-platforms">
+        <div class="b-available-platforms__item is-editable"
+             v-for="(value, key) in platforms" :key="key"
+             :class="{ 'b-available-platforms__item_opacity' : false === platforms[key].visible }"
+             @click="visible(key)"
+        >
 
             <span class="b-socials__item-eye"
-              title="Show / Hide"
-              >
+                  title="Show / Hide"
+            >
               <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
             </span>
 
-            <a class="b-available-platforms__item-button"
-              :title="platforms[key].name"
-              >
-              {{ platforms[key].name }}
-            </a>
+          <a class="b-available-platforms__item-button"
+             :title="platforms[key].name"
+          >
+            {{ platforms[key].name }}
+          </a>
 
-          </div>
-        </div><!--/.b-available-platforms-->
-      </div>
-    </base-dropdown>
+        </div>
+      </div><!--/.b-available-platforms-->
+    </div>
   </div>
 </template>
 
@@ -130,7 +104,7 @@ export default {
       &.dropped
         transform: rotate(0deg)
   &__control
-    margin-top: 2.2rem
+    margin-top: 3.2rem
 
 .b-available-platforms
   width: 100%

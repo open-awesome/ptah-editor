@@ -30,7 +30,7 @@ const COMPONENTS = [
     key: 0
   },
   {
-    name: 'Title',
+    name: 'TextElement',
     element: types.Title,
     type: 'text',
     class: 'b-title',
@@ -38,7 +38,7 @@ const COMPONENTS = [
     key: 1
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
@@ -218,106 +218,5 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-hero-with-timer
-  position: relative
-
-  width: 100%
-  min-height: $size-step*1.75
-  margin: 0
-  padding-bottom: $size-step/4
-
-  text-align: center
-
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
-
-  transition: background 200ms
-  .is-mobile &,
-  .is-tablet &
-    position: relative
-    height: auto
-    padding: $size-step/2 0 $size-step/4
-  @media only screen and (max-width: 768px)
-    &
-      position: relative
-      height: auto
-      padding: 2rem 0 1rem
-.b-logo
-  .is-mobile &
-    max-width: $size-step*7.5 !important
-  @media only screen and (max-width: 768px)
-    &
-      max-width: $size-step*7.5 !important
-.b-title
-  color: rgba($white, 1)
-  font-style: normal
-  font-weight: 800
-  font-size: 3.2rem
-  text-align: center
-  letter-spacing: 0.2em
-  text-transform: uppercase
-  text-shadow: 0 1.6rem 0.8rem rgba($black, 0.15)
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-    padding: 0 1rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-      padding: 0 1rem
-.b-text
-  color: rgba($white, 0.3)
-  font-size: 2rem
-  text-align: center
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
-.b-button
-  color: #fff
-  font-family: 'PT Serif'
-  font-style: normal
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.2em
-  text-transform: uppercase
-
-  width: auto
-  height: auto
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  margin: $size-step/2
-  padding: 0
-  width: $size-step*10
-  height: $size-step
-  min-width: auto
-  min-height: auto
-
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  border-radius: 2px
-
-.b-sandbox
-  min-height: $size-step*10
-  padding: $size-step/2 0
-  width: 100%
-  .is-mobile &,
-  .is-tablet &
-    padding: $size-step/4 0
-  @media only screen and (max-width: 768px)
-    &
-      padding: $size-step/4 0
-
-/deep/
-  .b-draggable-slot
-    width: 100%
-    display: flex
-    text-align: center
-    justify-content: center
-    align-items: flex-start
-    flex-direction: column
 
 </style>

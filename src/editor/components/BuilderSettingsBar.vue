@@ -67,7 +67,7 @@ export default {
   position: relative
   width: $size-step*9
   height: 100%
-  padding: 2.8rem 0.5rem 2.8rem 3.2rem
+  padding: 2.8rem 0
 
   display: flex
   flex-direction: column
@@ -77,6 +77,7 @@ export default {
   &__title
     min-width: 28rem
     margin: 0 0 2.8rem 0
+    padding: 0 2.4rem
     color: #272727
     font-size: 1.8rem
     font-weight: bold

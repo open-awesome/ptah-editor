@@ -22,7 +22,7 @@ const BG_SECTION = 'url(https://gn728.cdn.stg.gamenet.ru/0/7oAt2/o_1A6qDa.jpg)'
  * */
 const COMPONENTS = [
   {
-    name: 'Title',
+    name: 'TextElement',
     element: types.Title,
     type: 'text',
     class: 'b-title',
@@ -30,7 +30,7 @@ const COMPONENTS = [
     key: 1
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
@@ -237,7 +237,6 @@ export default {
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
-                  v-if="$sectionData.components[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
@@ -246,18 +245,7 @@ export default {
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
                   >
-                </component>
-                <component
-                  v-if="!$sectionData.components[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
-                  v-html="$sectionData.components[index].element.text"
-                  :is="component.name"
-                  :href="$sectionData.components[index].element.link.href"
-                  :target="$sectionData.components[index].element.link.target"
-                  :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                  :path="`components[${index}].element`"
-                  >
+                  <div v-html="$sectionData.components[index].element.text"></div>
                 </component>
               </div>
             </draggable>
@@ -272,7 +260,6 @@ export default {
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component
-                  v-if="$sectionData.components2[index].element.isComplex"
                   v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
                   :is="component.name"
                   :href="$sectionData.components2[index].element.link.href"
@@ -281,18 +268,7 @@ export default {
                   :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
                   :path="`components2[${index}].element`"
                   >
-                </component>
-                <component
-                  v-if="!$sectionData.components2[index].element.isComplex"
-                  v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
-                  v-html="$sectionData.components2[index].element.text"
-                  :is="component.name"
-                  :href="$sectionData.components2[index].element.link.href"
-                  :target="$sectionData.components2[index].element.link.target"
-                  :style="$sectionData.components2[index].element.styles"
-                  :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                  :path="`components2[${index}].element`"
-                  >
+                  <div v-html="$sectionData.components2[index].element.text"></div>
                 </component>
               </div>
             </draggable>
@@ -308,107 +284,5 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-hero-with-timer-two-columns
-  position: relative
-
-  width: 100%
-  min-height: $size-step*1.75*10
-  margin: 0
-  padding-bottom: $size-step/4
-
-  text-align: center
-
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
-
-  transition: background 200ms
-  .is-mobile &,
-  .is-tablet &
-    position: relative
-    height: auto
-    padding: $size-step/2 0 $size-step/4
-  @media only screen and (max-width: 768px)
-    &
-      position: relative
-      height: auto
-      padding: 2rem 0 1rem
-.b-logo
-  .is-mobile &
-    max-width: $size-step*7.5 !important
-  @media only screen and (max-width: 768px)
-    &
-      max-width: $size-step*7.5 !important
-.b-title
-  color: rgba($white, 1)
-  font-style: normal
-  font-weight: 800
-  font-size: 3.2rem
-  text-align: center
-  letter-spacing: 0.2em
-  text-transform: uppercase
-  text-shadow: 0 1.6rem 0.8rem rgba($black, 0.15)
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-    padding: 0 1rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-      padding: 0 1rem
-.b-text
-  color: rgba($white, 0.3)
-  font-size: 2rem
-  text-align: center
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
-.b-button
-  color: #fff
-  font-family: 'PT Serif'
-  font-style: normal
-  font-size: 1.6rem
-  text-align: center
-  letter-spacing: 0.2em
-  text-transform: uppercase
-
-  width: auto
-  height: auto
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  margin: $size-step/2
-  padding: 0
-  width: $size-step*10
-  height: $size-step
-  min-width: auto
-  min-height: auto
-
-  background-color: rgb(255, 109, 100)
-  box-shadow: none
-  border-radius: 2px
-
-.b-sandbox
-  align-items: flex-start
-  min-height: $size-step*5
-  padding: $size-step/2 0
-  width: 100%
-  .is-mobile &,
-  .is-tablet &
-    padding: $size-step/4 0
-  @media only screen and (max-width: 768px)
-    &
-      padding: $size-step/4 0
-
-/deep/
-  .b-draggable-slot
-    width: 100%
-    display: flex
-    text-align: center
-    justify-content: center
-    align-items: flex-start
-    flex-direction: column
 
 </style>

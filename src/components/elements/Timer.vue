@@ -185,9 +185,7 @@ $main-font-size: 6rem
   color: #fff
   font-size: $main-font-size
   text-align: center
-  margin: 1.6rem 0
-  &.is-editable
-    border: .1rem dashed #18d88b
+  margin: 1.6rem auto
   .is-mobile &,
   .is-tablet &
     width: 90%

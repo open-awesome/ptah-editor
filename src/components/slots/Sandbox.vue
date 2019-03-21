@@ -50,15 +50,13 @@ export default {
 
   methods: {
     ...mapMutations('Sidebar', [
-      'toggleSandboxSidebar',
       'setSandboxPaths',
       'setSection',
-      'isAddSectionExpanded',
-      'toggleElementsBar'
+      'isAddSectionExpanded'
     ]),
 
     ...mapActions('BuilderModalContent', ['setContent']),
-    ...mapActions('Sidebar', ['toggleSidebar']),
+    ...mapActions('Sidebar', ['toggleSidebar', 'setControlPanel']),
 
     showSandboxSidebar (e, openElBar) {
       this.setContent(null)
@@ -79,15 +77,14 @@ export default {
         if (target) {
           target.classList.add('active')
         }
-        this.toggleSandboxSidebar(true)
       })
 
       this.toggleSidebar(true)
 
       if (openElBar) {
-        this.toggleElementsBar(true)
+        this.setControlPanel('Slot')
       } else {
-        this.toggleElementsBar(false)
+        this.setControlPanel(false)
       }
     }
   }
@@ -103,7 +100,6 @@ $h: 4.8rem
   flex-wrap: wrap
   position: relative
   width: 100%
-  min-height: 20rem
   .is-editable &
     border: 1px dashed $dark-blue-krayola
   /deep/
@@ -113,14 +109,22 @@ $h: 4.8rem
       justify-content: center
       align-items: center
       color: inherit
-      &_100
-        width: 100%
-      .is-mobile & > div,
-      .is-tablet & > div
-        width: 100%
+
+      width: 96%
+      margin: 0 auto
+      &_horizont
+        > div
+          width: auto
+      .is-mobile &,
+      .is-tablet &
+        width: 96%
+        > div
+          width: 96%
       @media only screen and (max-width: 768px)
-        & > div
-          width: 100%
+        &
+          width: 96%
+          > div
+            width: 96%
   &:hover
     .sandbox-equalizer,
     .divider

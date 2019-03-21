@@ -70,6 +70,11 @@
       <icon-base name="groupRight"></icon-base>
       <icon-base name="groupRow"></icon-base>
       <icon-base name="groupColumn"></icon-base>
+      <icon-base name="style"></icon-base>
+      <icon-base name="link"></icon-base>
+      <icon-base name="timer"></icon-base>
+      <icon-base name="bulletList"></icon-base>
+      <icon-base name="orderedList"></icon-base>
     </div>
 
     <hr>

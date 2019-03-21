@@ -72,8 +72,7 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'isExpanded',
-      'expandedMenuItem'
+      'isExpanded'
     ]),
     ...mapState('BuilderModalContent', [
       'isContentVisible'

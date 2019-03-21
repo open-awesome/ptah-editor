@@ -136,28 +136,10 @@ export default {
 }
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
 @import '../../../assets/sass/_flex.sass'
 
 .b-gallery-one
-  font-family: Helvetica Neue, Helvetica, Arial
-  display: flex
-  align-items: center
-  position: relative
-  width: 100%
-  background-position: center
-  background-size: cover
-  color: #000
-  padding: 1rem
-  min-height: 63rem
-  @media only screen and (max-width: 768px)
-    &
-      height: auto !important
-
-h2
-  font-size: 2.3rem
-  line-height: 2rem
-  font-weight: 700
 
 .b-preview
   cursor: pointer

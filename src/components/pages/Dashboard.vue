@@ -118,7 +118,7 @@ export default {
               height="14"
             />
           </div>
-          <h1>Create new Landing page</h1>
+          <h3>Create new Landing page</h3>
 
           <base-text-field
             v-model="newPageTitle"

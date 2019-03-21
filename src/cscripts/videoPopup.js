@@ -1,12 +1,13 @@
 ;
 export function videoPopup () {
   Array.from(document.querySelectorAll('.ptah-d-video')).forEach(function(element) {
-    element.addEventListener('click', createVideoPopup);
+    element.onclick = function (e) {
+      createVideoPopup(element);
+    };
   });
 
-  function createVideoPopup(e) {
-    e.preventDefault()
-    let videoId = e.target.dataset.video
+  function createVideoPopup(element) {
+    let videoId = element.dataset.video
     let container = document.createElement('div')
     container.classList.add('b-video-popup')
     container.innerHTML = popupTemplate(videoId)

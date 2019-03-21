@@ -31,10 +31,10 @@ const config = {
 
   ptahApiHostUrl: getEnvVariable('PTAH_API_HOST_URL', 'https://ptahapi.tst.protocol.one'),
 
-  auth1ClientId: getEnvVariable('AUTH1_CLIENT_ID', '5c6fc4888db4bc0001beacec'),
-  auth1ClientSecret: getEnvVariable('AUTH1_CLIENT_SECRET', 'RUOuk4bkWFNljuZzqwq5zrs0GdCLY9U3MJqubuDViUv7XQzgiU84y288Jh0klK1Z'),
+  auth1ClientId: getEnvVariable('AUTH1_CLIENT_ID', '5c87d096ebe80e0001ed2e28'),
+  auth1ClientSecret: getEnvVariable('AUTH1_CLIENT_SECRET', 'JAD0Xsh2nSjVaFkFzxHBebL3Mkbtrof81afO2TJub7Ba3pyqMtxdcm3ICQkH2vXH'),
   auth1Scope: getEnvVariableArray('AUTH1_CLIENT_SCOPE', 'openid,offline'),
-  auth1Issuer: getEnvVariable('AUTH1_ISSUER_URL', 'https://auth1.tst.protocol.one'),
+  auth1Issuer: getEnvVariable('AUTH1_ISSUER_URL', 'https://dev-auth1.tst.protocol.one'),
   auth1PostmessageHtmlTemplatePath: path.resolve('backend/templates/auth1.postmessage.html.template'),
   auth1SessionNamespace: 'auth1',
 
@@ -43,7 +43,7 @@ const config = {
   mailchimpPostmessageHtmlTemplatePath: path.resolve('backend/templates/mailchimp.postmessage.html.template'),
   mailchimpSessionNamespace: 'mailchimp',
 
-  corsValidOrigins: getEnvVariableArray('CORS_VALID_ORIGINS', 'http://127.0.0.1:8080/')
+  corsValidOrigins: getEnvVariableArray('CORS_VALID_ORIGINS', 'http://127.0.0.1:8080')
 
 }
 

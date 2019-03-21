@@ -48,7 +48,6 @@ export default {
 
 .b-available-platforms
   width: auto
-  max-width: 100rem
   margin: 1.6rem
   min-height: 5rem
   min-width: 5rem
@@ -69,8 +68,8 @@ export default {
       border: none
       position: relative
       .vuse-icon
-         width: 100%
-         height: auto
-         fill: inherit
+        width: inherit
+        height: auto
+        fill: inherit
 
 </style>

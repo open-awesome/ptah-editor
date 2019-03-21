@@ -6,15 +6,15 @@ import section from '../../mixins/section.js'
 
 const COMPONENTS = [
   {
-    name: 'Title',
+    name: 'TextElement',
     element: types.Title,
-    type: 'title',
+    type: 'text',
     class: 'b-title',
     label: 'title',
     key: 1
   },
   {
-    name: 'Description',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
@@ -44,7 +44,7 @@ const C_CUSTOM = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Montserrat',
+        'font-family': 'Lato',
         'font-size': '4.2rem',
         'color': '#ffffff'
       }
@@ -141,7 +141,6 @@ export default {
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"
-                           v-if="$sectionData.components[index].element.isComplex"
                            v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                            :is="component.name"
                            :href="$sectionData.components[index].element.link.href"
@@ -150,18 +149,7 @@ export default {
                            :style="$sectionData.components[index].element.styles"
                            :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                 >
-                </component>
-                <component class="b-hero-component"
-                           v-if="!$sectionData.components[index].element.isComplex"
-                           v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
-                           v-html="$sectionData.components[index].element.text"
-                           :is="component.name"
-                           :href="$sectionData.components[index].element.link.href"
-                           :target="$sectionData.components[index].element.link.target"
-                           :path="`components[${index}].element`"
-                           :style="$sectionData.components[index].element.styles"
-                           :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                >
+                  <div v-html="$sectionData.components[index].element.text"></div>
                 </component>
               </div>
             </draggable>
@@ -174,51 +162,5 @@ export default {
 
 <style lang="sass" scoped>
 .b-form
-  position: relative
-  width: 100%
-  min-height: 70rem
-  margin: 0
-  padding: 1rem
-  display: flex
-  text-align: center
-  justify-content: center
-  flex-direction: column
-  transition: background 200ms
-
-.b-title
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-weight: 800
-  line-height: 6.7rem
-  font-size: 4.8rem
-  text-align: center
-  letter-spacing: 0.15em
-  text-transform: uppercase
-  margin: 0 0 2rem
-  text-shadow: 0 1.6rem 0.8rem rgba(0, 0, 0, 0.15)
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-    line-height: 4rem
-    padding: 0 1rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-      line-height: 4rem
-      padding: 0 1rem
-
-.b-text
-  color: rgba(255, 255, 255, 0.3)
-  font-size: 2rem
-  line-height: 4rem
-  text-align: center
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-    line-height: 2rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
-      line-height: 2rem
 
 </style>

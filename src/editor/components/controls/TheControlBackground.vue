@@ -2,13 +2,6 @@
 import { mapState } from 'vuex'
 
 export default {
-  props: {
-    expand: {
-      type: Boolean,
-      required: true
-    }
-  },
-
   data () {
     return {
       controlOpen: false,
@@ -39,13 +32,6 @@ export default {
     this.bgColor = this.styles['background-color']
     this.bgRepeat = this.styles['background-repeat'] || 'no-repeat'
     this.bgSize = this.styles['background-size'] || 'cover'
-    this.controlOpen = this.expand
-  },
-
-  watch: {
-    expand () {
-      this.controlOpen = this.expand
-    }
   },
 
   computed: {
@@ -79,10 +65,6 @@ export default {
 
     changeSize () {
       this.styles['background-size'] = this.bgSize
-    },
-
-    onClickTitle () {
-      this.$emit('open', ['Bg', !this.controlOpen])
     }
   }
 }
@@ -90,26 +72,21 @@ export default {
 
 <template>
   <div class="b-bg-controls">
-    <div class="b-bg-controls__header" @click="onClickTitle">
-      <span>Background</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+    <div class="b-bg-controls__control">
+      <base-color-picker label="Background color" v-model="bgColor" @change="changeColor"></base-color-picker>
     </div>
-    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
-      <div class="b-bg-controls__control">
-        <base-color-picker label="Background color" v-model="bgColor" @change="changeColor"></base-color-picker>
-      </div>
-      <div class="b-bg-controls__control">
-        <base-uploader
-            v-model="bgImage"
-            @change="changeImage"
-            label="Background image"/>
-      </div>
-      <div class="b-bg-controls__control">
-        <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
-      </div>
-      <div class="b-bg-controls__control">
-        <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
-      </div>
-    </base-dropdown>
+    <div class="b-bg-controls__control">
+      <base-uploader
+          v-model="bgImage"
+          @change="changeImage"
+          label="Background image"/>
+    </div>
+    <div class="b-bg-controls__control">
+      <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
+    </div>
+    <div class="b-bg-controls__control">
+      <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
+    </div>
   </div>
 </template>
 

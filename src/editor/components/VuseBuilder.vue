@@ -21,8 +21,7 @@
         :is="headerSection.name"
         :id="headerSection.id"
         :class="{ 'video-background': headerSection.data.mainStyle.backgroundType === 'video' }"
-        @click.native="selectSidebarSection(headerSection)"
-        @dblclick.native="showSettingsBar($event, headerSection)">
+        @click.native="selectSidebarSection(headerSection)">
 
       <video
           v-if="headerSection.data.mainStyle.backgroundType === 'video' && headerSection.data.mainStyle.backgroundVideo"
@@ -42,8 +41,7 @@
         :is="section.name"
         :id="section.id"
         :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
-        @click.native="selectSidebarSection(section)"
-        @dblclick.native="showSettingsBar($event, section)">
+        @click.native="selectSidebarSection(section)">
 
         <video
             v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
@@ -407,9 +405,13 @@ export default {
   position: relative
   &.is-editable .is-editable
     outline: none
-    border: .1rem dashed transparent
+    border: .2rem dotted transparent
     &:hover
-      border: .1rem dashed $dark-blue-krayola
+      border-color: $dark-blue-krayola
+    &.styler-active
+      border-color: $white
+      &:hover
+        border-color: $white
   &.fp-scroll section
     height: 100vh !important
   &:before,
