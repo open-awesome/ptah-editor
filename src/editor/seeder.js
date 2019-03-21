@@ -11,7 +11,8 @@ const DEFAULT_OPTIONS = {
   link: {
     href: '#',
     target: '_blank',
-    behavior: 'auto'
+    behavior: 'auto',
+    action: ''
   },
   removable: false,
   aligned: false,

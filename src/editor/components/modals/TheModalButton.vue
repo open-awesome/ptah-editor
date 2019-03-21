@@ -68,13 +68,20 @@ export default {
       this.link = this.elLink.href
       this.behavior = this.elLink.behavior
       this.target = this.elLink.target === '_blank'
+      this.action = this.elLink.action
     }
 
     this.videoId = this.videoLink || ''
 
-    if (this.videoId.length) {
+    if (this.action === '') {
+      this.action = { name: 'Open URL', value: '' }
+    }
+
+    if (this.action === 'ptah-d-video') {
       this.action = { name: 'Open video popup', value: 'ptah-d-video' }
-    } else if (this.link && this.link.includes('#section')) {
+    }
+
+    if (this.action === 'scroll-into-section') {
       let matches = this.link.match(/\d+(?!\d+)/)
       if (matches) {
         let id = Number(matches[0])
@@ -122,6 +129,8 @@ export default {
       } else {
         this.classes.push('ptah-d-video')
       }
+
+      this.elLink['action'] = this.action.value
     },
 
     changeScrollIntoSection ({ value }) {
