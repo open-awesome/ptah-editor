@@ -1,19 +1,29 @@
 <template>
   <div class="b-styler is-editable"
-       ref="styler"
-       id="styler"
-       v-if="$builder.isEditing"
-       :class="{ 'is-visible': isVisible && !editText }"
-       @click.stop="">
+    ref="styler"
+    id="styler"
+    v-if="$builder.isEditing"
+    :class="{ 'is-visible': isVisible && !editText }"
+  >
+
+    <!-- Button -->
+    <div class="b-styler__col">
+      <div class="b-styler__controls" v-if="type === 'button'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </div>
+      <div class="b-styler__controls" v-if="type === 'button'" ref="buttonModalProps">
+        <a href="#" class="b-styler__control" @click.stop="setModalProps()">
+          <icon-base name="link" width="18" height="18" />
+        </a>
+      </div>
+    </div>
 
     <div class="b-styler__controls">
-      <!-- Button -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')"  v-if="type === 'button'">
-        <icon-base name="style" width="12" height="15" />
-      </a>
 
       <!-- Text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')"  v-if="type === 'text'">
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')" v-if="type === 'text'">
         <icon-base name="style" width="12" height="15" />
       </a>
 
@@ -67,6 +77,42 @@
       </a>
     </div>
 
+    <!-- modals -->
+    <div class="b-styler__modal"
+       :class="modal.button.class"
+       ref="buttonModal"
+       v-if="type === 'button' && isModalsPropsShow === true"
+       v-click-outside="closeModal"
+       :style="{ 'transform' : 'translate3d(' + transform.button.x +  'px' + ', ' + transform.button.y + 'px, 0)' }"
+      >
+      <div class="b-styler__modal-close"
+        @click="setModalProps">
+        <icon-base
+          name="close"
+          color="#c4c4c4"
+          width="12"
+          height="12"
+        />
+      </div>
+      <div class="b-styler__modal-chapter">
+        Select button target
+      </div>
+      <div class="b-styler__modal-content">
+        <modal-button :builder="$builder" @changeProps="changeButtonProps"/>
+      </div>
+      <div class="b-styler__modal-buttons">
+        <BaseButton
+          class="b-styler__modal-button"
+          :color="'blue'"
+          :transparent="false"
+          size="middle"
+          @click.stop="setModalProps()"
+          >
+          Done
+        </BaseButton>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -76,8 +122,15 @@ import * as _ from 'lodash-es'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import Popper from 'popper.js'
 
+import ModalButton from './modals/TheModalButton'
+
 export default {
   name: 'Styler',
+
+  components: {
+    ModalButton
+  },
+
   props: {
     el: {
       required: true,
@@ -131,7 +184,21 @@ export default {
       { name: 'fade', className: 'ptah-a-fade' },
       { name: 'shake', className: 'ptah-a-shake' },
       { name: 'bounce', className: 'ptah-a-bounce' }
-    ]
+    ],
+    isModalsPropsShow: false,
+    modal: {
+      button: {
+        class: '_top',
+        width: '400',
+        height: '340'
+      }
+    },
+    transform: {
+      button: {
+        x: 0,
+        y: 0
+      }
+    }
   }),
   computed: {
     ...mapState('Sidebar', ['sandbox', 'settingObjectOptions']),
@@ -202,6 +269,10 @@ export default {
       this.el.dataset.video = this.options.video
     }
 
+    if (this.options.link && this.options.link.behavior) {
+      this.el.dataset.behavior = this.options.link.behavior
+    }
+
     this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
   },
   beforeDestroy () {
@@ -218,7 +289,6 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
-      console.log('show', this.type)
       event.preventDefault()
       event.stopPropagation()
 
@@ -238,6 +308,9 @@ export default {
                 enabled: true,
                 fn: autoSizing,
                 order: 840
+              },
+              hide: {
+                enabled: true
               }
             }
           })
@@ -248,6 +321,9 @@ export default {
         this.isCurrentStyler = false
         return
       }
+
+      // hide modal settings
+      this.isModalsPropsShow = false
 
       if (this.type !== 'section') this.setControlPanel(false)
       this.clearSettingObjectLight()
@@ -329,6 +405,9 @@ export default {
         this.popper = null
       }
 
+      // hide modal settings
+      this.closeModal()
+
       this.setControlPanel(false)
 
       this.el.contentEditable = 'false'
@@ -379,12 +458,41 @@ export default {
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
       this.hideStyler()
+    },
+
+    setModalProps () {
+      this.isModalsPropsShow = !this.isModalsPropsShow
+      this.setPosition()
+    },
+
+    closeModal () {
+      this.isModalsPropsShow = false
+    },
+
+    setPosition () {
+      let pos = this.$refs.styler.getBoundingClientRect()
+
+      if (pos.top < this.modal[this.type].height || pos.right < this.modal[this.width]) {
+        this.modal[this.type].class = '_bottom'
+      }
+    },
+
+    changeButtonProps (props) {
+      if (props && props.behavior) {
+        this.el.dataset.behavior = props.behavior
+      }
+      if (props && props.video) {
+        this.el.dataset.video = props.video
+      }
     }
   }
 }
 </script>
 
 <style lang="sass">
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
 .b-styler
   display: none
   justify-content: space-between
@@ -397,6 +505,10 @@ export default {
 
   &__controls
     display: flex
+
+  &__col
+    display: flex
+    flex-wrap: nowrap
 
   &__control
     width: 3.2rem
@@ -437,4 +549,93 @@ export default {
     svg
       fill: $white
       margin-bottom: 0
+
+  &__modal
+    width: 40rem
+    height: 34rem
+    padding: 0 0 $size-step/1.45
+
+    position: absolute
+
+    background: $white
+    box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
+    &-buttons
+      position: absolute
+      right: 0
+      left: 0
+      bottom: 0
+      z-index: 3
+
+      background: $white
+
+      display: flex
+      justify-content: flex-end
+      padding-bottom: $size-step/1.45
+      margin: $size-step $size-step/2.5 0
+    &-chapter
+      font-size: 1.6rem
+      font-weight: bold
+      letter-spacing: -0.02em
+      color: $dark-grey
+
+      background: $white
+
+      padding: $size-step/1.45 0 0
+      margin: 0 $size-step/1.45
+    &-content
+      margin: $size-step/2 $size-step/1.45
+    &_color *
+      fill: $dark-blue-krayola
+    &_color *
+      fill: #4D7DD8
+    &-close
+      position: absolute
+      top: $size-step/1.45
+      right: $size-step/1.45
+
+      cursor: pointer
+
+    &._top
+      bottom: 4rem
+      left: -2.5rem
+    &._bottom
+      top: 4rem
+      right: -2.5rem
+
+    &:before
+      content: ""
+      position: absolute
+      width: 1.5rem
+      height: 1.5rem
+
+      background: $white
+      transform: rotate(-45deg)
+      z-index: 2
+    &:after
+      content: ""
+      position: absolute
+      width: 1.5rem
+      height: 1.5rem
+
+      background: $white
+      transform: rotate(-45deg)
+      box-shadow: 0 0 2rem 0 rgba($black, 0.35)
+      z-index: -1
+
+    &._top
+      &:before,
+      &:after
+        left: 19%
+        bottom: -0.75rem
+        margin-left: -0.75rem
+
+    &._bottom
+      &:before,
+      &:after
+        right: 19%
+        top: -0.75rem
+        margin-right: -0.75rem
+
+  &[x-out-of-boundaries]
+    display: none !important
 </style>

@@ -103,6 +103,7 @@ export default {
   cursor: pointer
   transition: background-color 200ms
   &__resize
+    display: none
     border: none !important
 
     top: -0.4rem !important
@@ -121,6 +122,9 @@ export default {
     @media only screen and (max-width: 768px)
       &
         display: none
+  &.is-editable
+    .b-button__resize
+      display: block
   & span
     display: block
   &:hover

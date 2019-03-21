@@ -61,11 +61,6 @@
           <control-hover-animation/>
         </div>
 
-        <!-- Link -->
-        <!--div class="b-elem-settings__control" v-if="settingObjectOptions.hasLink">
-          <control-link :builder="builder" :expand="expandedLink" @open="onExpand"/>
-        </div-->
-
         <!-- Available Platforms Control-->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.hasPlatforms">
           <control-available-platforms
@@ -133,7 +128,6 @@ import ControlBackground from './controls/TheControlBackground'
 import ControlBackgroundColor from './controls/TheControlBackgroundColor'
 import ControlBackgroundImage from './controls/TheControlBackgroundImage'
 import ControlSize from './controls/TheControlSize'
-import ControlLink from './controls/TheControlLink'
 import ControlForm from './controls/TheControlForm'
 import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms'
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions'
@@ -162,7 +156,6 @@ export default {
     ControlBackgroundColor,
     ControlBackgroundImage,
     ControlSize,
-    ControlLink,
     ControlAvailablePlatforms,
     ControlAgeRestrictions,
     ControlSocialNetworks,

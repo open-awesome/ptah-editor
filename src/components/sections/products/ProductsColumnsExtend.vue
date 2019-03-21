@@ -579,7 +579,7 @@ const COMPONENTS = [
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description'
+    label: 'text'
   },
   {
     name: 'Cost',
@@ -610,7 +610,7 @@ const COMPONENTS_M = [
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description'
+    label: 'text'
   }
 ]
 

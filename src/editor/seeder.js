@@ -9,8 +9,10 @@ const DEFAULT_OPTIONS = {
   resizable: false,
   hasLink: false,
   link: {
-    href: '',
-    target: '_blank'
+    href: '#',
+    target: '_blank',
+    behavior: 'auto',
+    action: ''
   },
   removable: false,
   aligned: false,

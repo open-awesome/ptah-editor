@@ -89,7 +89,7 @@ export default {
   letter-spacing: -0.02em
 
   width: 100%
-  height: 2.5rem
+  height: 2.6rem
   max-width: 50rem
 
   position: relative
@@ -129,11 +129,15 @@ export default {
     max-height: 10rem
     border-top: none
     overflow: hidden
+
+    background: #fff
+
     position: absolute
     top: 100%
     left: -1.2rem
     right: -0.4rem
-    z-index: 10
+    z-index: 999
+
     margin: 0
     padding: 0
     box-shadow: 0 0.6rem 2.4rem 0 rgba(0, 0, 0, 0.15)
@@ -141,7 +145,6 @@ export default {
     margin: 0
     padding: 0
     min-height: 6rem
-    background: #fff
     &-item
       padding: 0 1.2rem
       height: 3.2rem

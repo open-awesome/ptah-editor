@@ -239,7 +239,7 @@ export default {
     components2: [
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 1 },
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 2 },
-      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 5 }
+      { name: 'Button', element: Button, type: 'button', class: 'b-button', label: 'button', key: 5 }
     ]
   },
 
