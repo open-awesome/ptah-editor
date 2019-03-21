@@ -318,28 +318,9 @@ export default {
 <style lang="sass" scoped="scoped">
 @import '../../../assets/sass/_flex.sass'
 
-.l-system
-  position: relative
-  width: 100%
-  background-position: center
-  background-size: cover
-  color: #000
-  padding: 3.2rem
-  line-height: 1.4
-  display: flex
-  justify-content: center
-  align-items: center
-  .is-tablet &,
-  .is-mobile &
-    flex-wrap: wrap
-    padding: 1.6rem 0
-  @media only screen and (max-width: 768px)
-    &
-      flex-wrap: wrap
-      height: auto !important
 .b-system
   max-width: 100rem
-  margin: 0 auto
+  margin: 0 auto 3.2rem
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap

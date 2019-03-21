@@ -115,7 +115,6 @@ export default {
       let self = this
       self.text = self.settingObjectOptions.text
       if (value && this.settingObjectElement === this.$refs.text) {
-        console.log(self.settingObjectOptions.text)
         this.editor = new Editor({
           extensions: [
             new Bold(),
@@ -168,17 +167,19 @@ export default {
 }
 </script>
 
-<style lang="sass" scoped>
+<style lang="sass">
 .b-text
   color: #000
+
   font-family: 'Lato'
-  position: relative
-  text-align: center
   font-size: 1.4rem
   line-height: 1.4
+  text-align: center
+
+  position: relative
   display: block
-  max-width: 100rem
-  margin: 1.6rem
+
+  margin: 1.6rem auto
   &::selection, & ::selection
     color: #ff0
     background: #000
@@ -193,6 +194,7 @@ export default {
   width: 43rem
   top: -66px
   left: calc(50% - 21.5rem)
+  z-index: 9999
 
   background: $white
   border-radius: 4px

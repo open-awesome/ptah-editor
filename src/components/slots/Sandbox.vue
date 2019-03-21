@@ -100,7 +100,6 @@ $h: 4.8rem
   flex-wrap: wrap
   position: relative
   width: 100%
-  min-height: 20rem
   .is-editable &
     border: 1px dashed $dark-blue-krayola
   /deep/

@@ -55,13 +55,13 @@ export default {
         label: 'link'
       },
       {
-        name: 'Title',
+        name: 'TextElement',
         element: types.Title,
         type: 'text',
         label: 'title'
       },
       {
-        name: 'Description',
+        name: 'TextElement',
         element: types.Text,
         type: 'text',
         label: 'description'

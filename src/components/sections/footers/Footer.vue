@@ -238,41 +238,9 @@ export default {
     &
       position: relative
       padding: 2rem 0 1rem
-.b-footer
-  width: 100%
-.b-logo
-.b-title
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-    padding: 0 1rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-      padding: 0 1rem
-.b-text
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
 
-.b-sandbox
-  min-height: 36.5rem
-  padding: 5rem 0
-  justify-content: flex-start
-  align-items: center
-  background-color: rgba(0, 0, 0, 0.1)
-  max-width: 118.4rem
-  width: 100%
-  .is-mobile &,
-  .is-tablet &
-    padding: 1rem 0
-  @media only screen and (max-width: 768px)
-    &
-      padding: 1rem 0
 .b-footer
+  width: 100%
   &__row
     align-items: center
   &__col
@@ -289,13 +257,13 @@ export default {
       position: relative
       height: auto
 
-.b-footer-component
-  margin: 0.8rem
-  .is-mobile &,
-  .is-tablet &
-    margin: 0.8rem auto
-  @media only screen and (max-width: 768px)
-    &
+  &-component
+    margin: 0.8rem
+    .is-mobile &,
+    .is-tablet &
       margin: 0.8rem auto
+    @media only screen and (max-width: 768px)
+      &
+        margin: 0.8rem auto
 
 </style>

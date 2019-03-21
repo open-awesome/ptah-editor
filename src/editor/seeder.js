@@ -51,7 +51,7 @@ const data = new Map([
     styles: {
       'font-family': 'Lato',
       'font-size': '3.2rem',
-      'font-weight': 'bold',
+      'font-weight': 'normal',
       'font-style': 'normal',
       'text-decoration': 'none',
       'text-align': 'center',

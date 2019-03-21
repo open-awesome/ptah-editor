@@ -1223,21 +1223,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-$h: 100vh
 .b-products-columns-extend
-  position: relative
-  width: 100%
-  min-height: 76rem
-  margin: 0
-  padding: 1rem
-
-  display: flex
-  justify-content: center
-  flex-direction: column
-
-  transition: background 200ms
-  &-component
-    margin: 1.2rem auto
   &__row
     justify-content: center
     align-items: center
@@ -1296,63 +1282,5 @@ $h: 100vh
           position: relative
           visibility: visible
           margin: 1.6rem 0
-  .b-delimiter
-    height: 2rem
-    .is-mobile &,
-    .is-tablet &
-      display: none
-    @media only screen and (max-width: 768px)
-      &
-        display: none
-  .b-logo
-    margin: 1.6rem auto
-  .b-title
-    color: inherit
-    font-style: normal
-    font-size: 2.4rem
-    font-weight: 400
-    text-align: center
-    letter-spacing: 0.15em
-    text-transform: uppercase
-    margin: 1.6rem 0
-    .is-mobile &,
-    .is-tablet &
-      font-size: 2rem !important
-    @media only screen and (max-width: 768px)
-      &
-        font-size: 2rem !important
-  .b-text
-    color: inherit
-    font-size: 1.6rem
-    text-align: left
-    .is-mobile &,
-    .is-tablet &
-      font-size: 1.4rem !important
-    @media only screen and (max-width: 768px)
-      &
-        font-size: 1.4rem !important
-  .b-button
-    color: inherit
-    font-family: Lato
-    font-style: normal
-    font-size: 1.4rem
-    text-align: center
-    letter-spacing: 0.28em
-    text-transform: uppercase
-    width: 22.4rem
-    height: 5.6rem
-    box-sizing: border-box
-    border-radius: 0.2rem
-    .is-mobile &,
-    .is-tablet &
-      width: 80%
-    @media only screen and (max-width: 768px)
-      &
-        width: 80%
-  .b-cost
-.b-sandbox
-  min-height: 20rem
-  display: flex
-  justify-content: center
-  align-items: center
+
 </style>

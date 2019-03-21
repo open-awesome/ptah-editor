@@ -14,6 +14,26 @@ export function isParentTo(target, parent) {
   return false
 }
 
+export function composedPath (el) {
+
+  var path = [];
+
+  while (el) {
+
+    path.push(el);
+
+    if (el.tagName === 'HTML') {
+
+      path.push(document);
+      path.push(window);
+
+      return path;
+    }
+
+    el = el.parentElement;
+  }
+}
+
 /**
  *
  * @param {String} target

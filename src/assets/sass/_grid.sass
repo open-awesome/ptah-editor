@@ -78,9 +78,20 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
     max-width: 100%
   &__row
     display: flex
-    flex-wrap: wrap
+    flex-wrap: nowrap
+    justify-content: center
+    align-items: center
+
     width: 100%
     box-sizing: border-box
     padding: 0 $basis / 2 * 1px
+    .is-tablet &,
+    .is-mobile &
+      flex-wrap: wrap
+      padding: 0 $basis / 4 * 1px
+    @media only screen and (max-width: 768px)
+      &
+        flex-wrap: wrap
+        padding: 0 $basis / 4 * 1px
   @each $modifier , $breakpoint in $map-grid-props
     @include create-col-classes($modifier, $grid__cols, $breakpoint)

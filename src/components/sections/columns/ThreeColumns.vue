@@ -21,7 +21,7 @@ const C_CUSTOM = [
     element: {
       text: 'This is a header',
       styles: {
-        'font-family': 'Montserrat',
+        'font-family': 'Lato',
         'font-size': '2.4rem',
         'color': '#ffffff'
       }
@@ -66,7 +66,7 @@ const C_CUSTOM_2 = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Montserrat',
+        'font-family': 'Lato',
         'font-size': '3.2rem',
         'color': '#ffffff'
       }
@@ -165,6 +165,7 @@ export default {
     container: types.StyleObject,
     container2: types.StyleObject,
     container3: types.StyleObject,
+    container4: types.StyleObject,
     components: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }, { key: 4 }]),
     components2: _.merge([], COMPONENTS, [{ key: 5 }, { key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
     components3: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }, { key: 14 }]),
@@ -193,7 +194,7 @@ export default {
     <div class="b-grid">
       <div class="b-grid__row">
         <sandbox
-          class="b-sandbox"
+          class="b-sandbox b-sandbox_header"
           container-path="$sectionData.container4"
           components-path="$sectionData.components4"
           direction="column"
@@ -299,122 +300,6 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-$h: 100vh
 .b-columns3
-  position: relative
-  width: 100%
-  min-height: 76rem
-  margin: 0
-  padding: 1rem
-  display: flex
-  text-align: center
-  justify-content: center
-  flex-direction: column
-  transition: background 200ms
-.b-header
-  width: 100%
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-weight: 800
-  font-size: 4.8rem
-  text-align: center
-  letter-spacing: 0.15em
-  text-transform: uppercase
-  margin: 0 0 2rem
-  text-shadow: 0 .4rem 1.9rem rgba(0, 0, 0, 0.9)
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-    line-height: 4rem
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-      line-height: 4rem
-.b-delimiter
-  height: 2rem
-  .is-mobile &,
-  .is-tablet &
-    display: none
-  @media only screen and (max-width: 768px)
-    &
-      display: none
-.b-logo
-  .is-mobile &,
-  .is-tablet &
-    width: 100% !important
-  @media only screen and (max-width: 992px)
-    &
-      width: 100% !important
-.b-title
-  color: rgb(255, 255, 255)
-  font-style: normal
-  font-size: 2.4rem
-  font-weight: 400
-  text-align: center
-  letter-spacing: 0.15em
-  text-transform: uppercase
-  margin: 0 0 2rem
-  .is-mobile &,
-  .is-tablet &
-    font-size: 2rem !important
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 2rem !important
-.b-text
-  color: rgba(255, 255, 255, 0.3)
-  font-size: 1.6rem
-  text-align: center
-  .is-mobile &,
-  .is-tablet &
-    font-size: 1.4rem !important
-  @media only screen and (max-width: 768px)
-    &
-      font-size: 1.4rem !important
-.b-button
-  color: #fff
-  font-family: Lato
-  font-style: normal
-  font-size: 1.4rem
-  text-align: center
-  letter-spacing: 0.28em
-  text-transform: uppercase
-  width: 22.4rem
-  height: 5.6rem
-  box-sizing: border-box
-  border-radius: 0.2rem
-  .is-tablet &,
-  .is-mobile &
-    width: 100% !important
-  @media only screen and (max-width: 992px)
-    &
-      width: 100% !important
-.b-sandbox
-  min-height: 20rem
-  display: flex
-  justify-content: center
-  align-items: center
 
-.b-draggable-slot,
-.b-draggable-slot
-  & > div
-    max-width: 100%
-    max-height: 100%
-    & > div,
-    & > a
-      .is-mobile &,
-      .is-tablet &
-        margin: 1.2rem auto !important
-      @media only screen and (max-width: 992px)
-        &
-          margin: 1.2rem auto !important
-  &__image,
-  &__logo,
-  &__slogan,
-  &__button
-    .is-mobile &,
-    .is-tablet &
-      width: 100% !important
-    @media only screen and (max-width: 992px)
-      &
-        width: 100% !important
 </style>

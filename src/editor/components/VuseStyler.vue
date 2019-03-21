@@ -117,7 +117,7 @@
 </template>
 
 <script>
-import { isParentTo, randomPoneId, getPseudoTemplate } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate, composedPath } from '../util'
 import * as _ from 'lodash-es'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import Popper from 'popper.js'
@@ -289,7 +289,6 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
-      console.log(this.type)
       event.preventDefault()
       event.stopPropagation()
 
@@ -326,12 +325,14 @@ export default {
       // hide modal settings
       this.isModalsPropsShow = false
 
+      if (this.type !== 'section') this.setControlPanel(false)
+      this.clearSettingObjectLight()
+
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
         .forEach(el => el.classList.remove('active'))
 
       this.setContent(null)
-      this.clearSettingObjectLight()
 
       if (this.isVisible) return
       this.isVisible = true
@@ -362,7 +363,6 @@ export default {
               container: `$sectionData.container${index}`
             })
           }
-          console.log('opt', _.get(this.section.data, this.path).element, this.options)
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
             label: this.$props.label,
@@ -380,12 +380,8 @@ export default {
       }, 0)
 
       document.addEventListener('click', this.hideStyler, true)
-      // TODO: this work incorrectly
-      // document.addEventListener('blur', this.hideStyler);
-      // this.currentOption = ''
     },
     hideStyler (event) {
-      const evPath = event ? event.path || (event.composedPath && event.composedPath()) : []
       const stopNames = [
         'b-styler__control',
         'b-control-panel',
@@ -395,7 +391,7 @@ export default {
       ]
 
       if (event && (event.target === this.el
-        || this.checkStylerNodes(evPath, stopNames))) {
+        || this.checkStylerNodes(event, stopNames))) {
         this.isCurrentStyler = true
         return
       }
@@ -424,8 +420,10 @@ export default {
       document.removeEventListener('blur', this.hideStyler, true)
     },
 
-    checkStylerNodes (path, classes) {
+    checkStylerNodes (event, classes) {
       let m = false
+      let path = event.path ? event.path : composedPath(event.target)
+
       classes.forEach((className) => {
         if (Array.from(path).filter((el) => el.className === className).length) m = true
       })
