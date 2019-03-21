@@ -115,7 +115,6 @@ export default {
       let self = this
       self.text = self.settingObjectOptions.text
       if (value && this.settingObjectElement === this.$refs.text) {
-        console.log(self.settingObjectOptions.text)
         this.editor = new Editor({
           extensions: [
             new Bold(),

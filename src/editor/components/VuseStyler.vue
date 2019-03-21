@@ -71,7 +71,7 @@
 </template>
 
 <script>
-import { isParentTo, randomPoneId, getPseudoTemplate } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate, composedPath } from '../util'
 import * as _ from 'lodash-es'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import Popper from 'popper.js'
@@ -222,9 +222,6 @@ export default {
       event.preventDefault()
       event.stopPropagation()
 
-      if (this.type !== 'section') this.setControlPanel(false)
-      this.clearSettingObjectLight()
-
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
         data.styles.width = this.dimensions.width
@@ -251,6 +248,9 @@ export default {
         this.isCurrentStyler = false
         return
       }
+
+      if (this.type !== 'section') this.setControlPanel(false)
+      this.clearSettingObjectLight()
 
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
@@ -306,7 +306,6 @@ export default {
       document.addEventListener('click', this.hideStyler, true)
     },
     hideStyler (event) {
-      const evPath = event ? event.path || (event.composedPath && event.composedPath()) : []
       const stopNames = [
         'b-styler__control',
         'b-control-panel',
@@ -316,7 +315,7 @@ export default {
       ]
 
       if (event && (event.target === this.el
-        || this.checkStylerNodes(evPath, stopNames))) {
+        || this.checkStylerNodes(event, stopNames))) {
         this.isCurrentStyler = true
         return
       }
@@ -342,8 +341,10 @@ export default {
       document.removeEventListener('blur', this.hideStyler, true)
     },
 
-    checkStylerNodes (path, classes) {
+    checkStylerNodes (event, classes) {
       let m = false
+      let path = event.path ? event.path : composedPath(event.target)
+
       classes.forEach((className) => {
         if (Array.from(path).filter((el) => el.className === className).length) m = true
       })
