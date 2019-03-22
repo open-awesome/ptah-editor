@@ -38,45 +38,6 @@
             @change="styleChange"></control-text>
         </div>
 
-        <div class="b-section-settings__group" v-if="settingObjectOptions.background">
-
-          <div class="b-section-settings__control">
-            <base-switcher
-              label="Use video as background"
-              :value="backgroundType === 'video'"
-              @change="toggleBackgroundType"/>
-          </div>
-
-          <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
-            <BaseUploadInput
-              :value="settingObjectOptions.backgroundVideo"
-              @upload="uploadVideo"
-              label="Background video"
-              placeholder="paste Video URL" />
-          </div>
-
-          <template v-else>
-            <div class="b-section-settings__control">
-              <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
-            </div>
-            <div class="b-section-settings__control">
-              <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Background image"/>
-            </div>
-            <template v-if="sectionBgUrl.length">
-              <div class="b-section-settings__control">
-                <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
-              </div>
-              <div class="b-section-settings__control">
-                <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
-              </div>
-              <div v-if="!isHeader" class="b-section-settings__control">
-                <BaseSwitcher label="Fixed while scrolling" v-model="bgAttachment" @change="changeAttachment" />
-              </div>
-            </template>
-          </template>
-
-        </div>
-
         <div v-if="!isHeader" class="b-section-settings__control">
           <BaseSwitcher label="Full screen height" v-model="fullScreen" @change="setHeight" />
         </div>

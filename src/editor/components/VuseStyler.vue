@@ -6,6 +6,12 @@
     :class="{ 'is-visible': isVisible && !editText }"
   >
 
+    <div class="b-styler__controls" v-if="type === 'section'">
+      <a href="#" class="b-styler__control" @click.stop="showBackgroundPanel">
+        <icon-base name="image" width="18" height="18" />
+      </a>
+    </div>
+
     <!-- Button -->
     <div class="b-styler__col">
       <div class="b-styler__controls" v-if="type === 'button'">
@@ -285,7 +291,7 @@ export default {
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
@@ -299,7 +305,7 @@ export default {
       }
 
       // show inline styler
-      if (!this.popper && this.type !== 'section') {
+      if (!this.popper) {
         this.$nextTick(function () {
           this.popper = new Popper(this.el, this.$refs.styler, {
             placement: 'top',
@@ -484,6 +490,11 @@ export default {
       if (props && props.video) {
         this.el.dataset.video = props.video
       }
+    },
+
+    showBackgroundPanel () {
+      this.setControlPanel('SectionBackground')
+      this.setSection(this.section)
     }
   }
 }

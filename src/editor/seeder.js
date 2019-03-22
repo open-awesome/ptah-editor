@@ -175,6 +175,10 @@ const data = new Map([
         'background-attachment': 'scroll',
         'width': '',
         'height': ''
+      },
+      overlay: {
+        color: '#000',
+        opacity: '0.3'
       }
     })
   )],

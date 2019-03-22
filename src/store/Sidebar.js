@@ -175,6 +175,32 @@ export default {
       dispatch('setControlPanel', 'Section')
     },
 
+    /**
+     * Open and set section settings
+     * @param dispatch
+     * @param commit
+     * @param section {Object} section from builder
+     */
+    setSection ({ dispatch, commit }, section) {
+      let options = {
+        ...section.data.mainStyle,
+        sectionId: section.id,
+        sectionName: section.name
+      }
+
+      // restore styles
+      if (section.data) {
+        options.styles = section.data.mainStyle.styles
+      }
+
+      commit('setSection', section)
+
+      dispatch('setSettingObject', {
+        type: 'section',
+        options
+      })
+    },
+
     setSettingElement ({ dispatch, commit }, { type, name, label, options, section, element }) {
       let elementOptions = {
         ...options,

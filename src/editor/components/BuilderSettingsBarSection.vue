@@ -9,7 +9,6 @@
       <!-- System requirements -->
       <control-system-requirements
         :expand="expandedSystemRequirements"
-        @open="onExpand"
         v-if="settingObjectOptions.hasSystemRequirements"
       >
       </control-system-requirements>
@@ -17,7 +16,6 @@
       <!-- Products Section Controls -->
       <control-section-products
         :expand="expandedProducts"
-        @open="onExpand"
         v-if="settingObjectOptions.hasProducts"
       >
       </control-section-products>
@@ -29,50 +27,6 @@
         <base-label>Full screen height</base-label>
         <BaseSwitcher v-model="fullScreen" @change="setHeight" />
       </div>
-
-      <template v-if="settingObjectOptions.background">
-
-        <div class="b-section-settings__header">
-          <span>Background</span>
-        </div>
-
-        <div class="b-section-settings__control">
-          <base-label>Use video as background</base-label>
-          <base-switcher
-            :value="backgroundType === 'video'"
-            @change="toggleBackgroundType"/>
-        </div>
-
-        <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
-          <BaseUploadInput
-            :value="settingObjectOptions.backgroundVideo"
-            @upload="uploadVideo"
-            label="Background video"
-            placeholder="paste Video URL" />
-        </div>
-
-        <template v-else>
-          <div class="b-section-settings__control">
-            <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
-          </div>
-          <div class="b-section-settings__control">
-            <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Background image"/>
-          </div>
-          <template v-if="sectionBgUrl.length">
-            <div class="b-section-settings__control">
-              <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
-            </div>
-            <div class="b-section-settings__control">
-              <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
-            </div>
-            <div v-if="!isHeader" class="b-section-settings__control">
-              <base-label>Fixed while scrolling</base-label>
-              <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" />
-            </div>
-          </template>
-        </template>
-
-      </template>
 
       <!-- Header -->
       <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
@@ -157,22 +111,11 @@ import * as _ from 'lodash-es'
 import ControlSectionProducts from './controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './controls/TheControlSystemRequirements.vue'
 import ControlSectionLayouts from './controls/TheControlSectionLayouts.vue'
-import BaseUploader from '../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './BuilderSettingsBarGroup'
-
-const DEFAULT_COLOR = 'rgba(0,0,0,1)'
-
-function getPickerColor (color) {
-  if (typeof color === 'object' && color.hasOwnProperty('rgba')) {
-    return `rgba(${Object.values(color.rgba).toString()})`
-  }
-  return color
-}
 
 export default {
   components: {
     BuilderSettingsBarGroup,
-    BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
     ControlSectionLayouts
@@ -190,20 +133,6 @@ export default {
     return {
       fullScreen: false,
 
-      sectionBgColor: '',
-      sectionBgUrl: '',
-      bgRepeat: '',
-      bgSize: '',
-      bgAttachment: '',
-      list: [
-        { text: 'No-repeat', value: 'no-repeat' },
-        { text: 'Repeat', value: 'repeat' }
-      ],
-      sizeList: [
-        { text: 'Tile', value: 'cover' },
-        { text: 'Fill', value: 'contain' }
-      ],
-
       galleryImages: [],
       backgroundPickers: [],
 
@@ -217,12 +146,12 @@ export default {
       fontSize: null,
       fontFamily: '',
       fontColor: '',
-      expandedFont: false,
+      expandedFont: true,
 
       styles: [],
       products: {},
       selectProduct: {},
-      expandedProducts: false,
+      expandedProducts: true,
 
       isComplexText: false
     }
@@ -237,19 +166,6 @@ export default {
       'settingObjectElement'
     ]),
 
-    bgAttachmentCheckbox: {
-      set (value) {
-        this.bgAttachment = value ? 'fixed' : 'scroll'
-      },
-      get () {
-        return this.bgAttachment === 'fixed'
-      }
-    },
-
-    backgroundType () {
-      return this.settingObjectOptions.backgroundType
-    },
-
     sectionId () {
       return this.settingObjectSection.id
     },
@@ -261,20 +177,8 @@ export default {
 
   created () {
     let styles = this.settingObjectOptions.styles
-    let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
-      styles['background-image'] : ''
-    let bgimage = image.match(/url\((.*?)\)/)
 
-    if (bgimage) {
-      bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-    }
-
-    this.sectionBgColor = styles['background-color']
-    this.sectionBgUrl = bgimage || ''
-    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
-    this.bgSize = styles['background-size'] || 'cover'
-    this.bgAttachment = styles['background-attachment'] === 'fixed'
-
+    /* Section is Header */
     this.header = this.settingObjectOptions.header || ''
 
     /* Gallery */
@@ -304,25 +208,8 @@ export default {
     this.isComplexText = this.settingObjectOptions.hasProducts || false
   },
 
-  watch: {
-    'settingObjectOptions.styles': {
-      immediate: true,
-      handler (value) {
-        let image = (!!value['background-image'] && typeof value['background-image'] === 'string') ? value['background-image'] : ''
-        let bggradient = image.match(/linear-gradient(\(.*\))/g)
-        if (bggradient) {
-          this.backgroundPickers = bggradient[0]
-            .replace(/^linear-gradient[(]/, '')
-            .replace(/[)]$/, '')
-            .split(', ')
-        } else {
-          this.backgroundPickers = [value['background-color']]
-        }
-      }
-    }
-  },
-
   beforeDestroy () {
+    //
   },
 
   methods: {
@@ -336,69 +223,6 @@ export default {
     ...mapActions('Landing', [
       'saveState'
     ]),
-
-    updateBgColor (value) {
-      let settings = this.settingObjectOptions
-      let pickers = this.backgroundPickers
-      let image = (typeof settings.styles['background-image'] === 'string') ? settings.styles['background-image'] : ''
-      let bgimage = image.match(/url\((.*?)\)/)
-      let styles = { 'background-color': '' }
-
-      switch (pickers.length) {
-        case 0:
-          break
-        case 1:
-          styles['background-color'] = getPickerColor(value)
-          styles['background-image'] = (bgimage) ? bgimage[0] : ''
-          break
-        default:
-          let colors = pickers.filter(Boolean).map(getPickerColor)
-          if (colors.length) {
-            let mappedColor = [...colors.splice(0, 1), ...(colors || []).map(c => ` ${c}`)]
-            let gradient = `linear-gradient(${mappedColor})`
-            if (bgimage) {
-              bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-            }
-            styles['background-image'] = (bgimage) ? (bgimage + `, ${gradient}`) : gradient
-          }
-          break
-      }
-
-      this.updateSettingOptions(_.merge({}, settings, { styles }))
-    },
-
-    updateBgUrl (value) {
-      this.sectionBgUrl = value || ''
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-image': `url(${this.sectionBgUrl})`
-        }
-      }))
-    },
-
-    changeRepeat () {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-repeat': this.bgRepeat
-        }
-      }))
-    },
-
-    changeSize () {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-size': this.bgSize
-        }
-      }))
-    },
-
-    changeAttachment () {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-attachment': this.bgAttachment ? 'fixed' : 'scroll'
-        }
-      }))
-    },
 
     deleteSection () {
       // update group
@@ -443,42 +267,6 @@ export default {
       )
     },
 
-    addBackgroundPicker () {
-      this.backgroundPickers.push(DEFAULT_COLOR)
-      this.updateBgColor()
-    },
-
-    removeBackgroundPicker (index) {
-      this.backgroundPickers.splice(index, 1)
-      this.updateBgColor()
-    },
-
-    styleChange (value) {
-      this.updateStyle(_.kebabCase(value[0]), value[1])
-      this[value[0]] = value[1]
-    },
-
-    updateStyle (prop, value) {
-      this.updateText()
-      let styles = {}
-      styles[prop] = value
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
-    },
-
-    onExpand (value) {
-      const accordeon = ['Font', 'SystemRequirements', 'Products']
-      const prop = `expanded${value[0]}`
-      this[prop] = value[1]
-
-      if (value[1]) {
-        accordeon.forEach((item) => {
-          if (item !== value[0]) {
-            this[`expanded${item}`] = false
-          }
-        })
-      }
-    },
-
     updateText () {
       // TODO: Lost 'settingObjectOptions' from the store at the time of execution 'beforeDestroy'.
       // Text also saved at VuseStyler -> hideStyler
@@ -486,25 +274,6 @@ export default {
         const el = this.settingObjectElement
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
       }
-    },
-
-    toggleBackgroundType (value) {
-      let backgroundType = (value) ? 'video' : 'default'
-      this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, { backgroundType })
-      )
-    },
-
-    uploadVideo (url) {
-      this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, { backgroundVideo: url || null })
-      )
-      // --- update video player
-      document.querySelectorAll('video[id^="bg-video"]').forEach(video => {
-        video.pause()
-        video.load()
-        video.play()
-      })
     },
 
     isMasterSection () {
