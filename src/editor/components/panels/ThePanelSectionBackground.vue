@@ -67,7 +67,7 @@ import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import BaseUploader from '../../../components/base/BaseUploader'
 
-const DEFAULT_COLOR = 'rgba(0,0,0,1)'
+const DEFAULT_COLOR = 'rgba(0,0,0,0)'
 
 function getPickerColor (color) {
   if (typeof color === 'object' && color.hasOwnProperty('rgba')) {
@@ -94,7 +94,6 @@ export default {
     return {
       fullScreen: false,
 
-      sectionBgColor: '',
       sectionOverlayColor: '',
       sectionBgUrl: '',
       bgRepeat: '',
@@ -172,15 +171,23 @@ export default {
 
     if (bgimage) {
       bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+      this.sectionBgUrl = bgimage || ''
     }
 
-    this.sectionBgColor = styles['background-color']
-    this.sectionBgUrl = bgimage || ''
+    let bggradient = image.match(/linear-gradient(\(.*\))/g)
+    if (bggradient) {
+      this.backgroundPickers = bggradient[0]
+        .replace(/^linear-gradient[(]/, '')
+        .replace(/[)]$/, '')
+        .split(', ')
+    } else {
+      this.backgroundPickers = [styles['background-color']]
+    }
+    this.updateBgColor(DEFAULT_COLOR)
+
     this.bgRepeat = styles['background-repeat'] || 'no-repeat'
     this.bgSize = styles['background-size'] || 'cover'
     this.bgAttachment = styles['background-attachment'] === 'fixed'
-
-    this.backgroundPickers = [styles['background-color']]
 
     this.header = this.settingObjectOptions.header || ''
 
@@ -211,24 +218,6 @@ export default {
     this.isComplexText = this.settingObjectOptions.hasProducts || false
   },
 
-  watch: {
-    'settingObjectOptions.styles': {
-      immediate: true,
-      handler (value) {
-        let image = (!!value['background-image'] && typeof value['background-image'] === 'string') ? value['background-image'] : ''
-        let bggradient = image.match(/linear-gradient(\(.*\))/g)
-        if (bggradient) {
-          this.backgroundPickers = bggradient[0]
-            .replace(/^linear-gradient[(]/, '')
-            .replace(/[)]$/, '')
-            .split(', ')
-        } else {
-          this.backgroundPickers = [value['background-color']]
-        }
-      }
-    }
-  },
-
   beforeDestroy () {
   },
 
@@ -247,26 +236,20 @@ export default {
     updateBgColor (value) {
       let settings = this.settingObjectOptions
       let pickers = this.backgroundPickers
-      let image = (typeof settings.styles['background-image'] === 'string') ? settings.styles['background-image'] : ''
-      let bgimage = image.match(/url\((.*?)\)/)
+      let bgimage = this.sectionBgUrl
       let styles = { 'background-color': '' }
 
       switch (pickers.length) {
-        case 0:
-          break
         case 1:
-          styles['background-color'] = getPickerColor(value)
-          styles['background-image'] = (bgimage) ? bgimage[0] : ''
+          styles['background-color'] = getPickerColor(this.backgroundPickers[0])
+          styles['background-image'] = (bgimage) ? `url(${bgimage})` : ''
           break
         default:
           let colors = pickers.filter(Boolean).map(getPickerColor)
           if (colors.length) {
             let mappedColor = [...colors.splice(0, 1), ...(colors || []).map(c => ` ${c}`)]
             let gradient = `linear-gradient(${mappedColor})`
-            if (bgimage) {
-              bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-            }
-            styles['background-image'] = (bgimage) ? (bgimage + `, ${gradient}`) : gradient
+            styles['background-image'] = (bgimage) ? (`url(${bgimage})` + `, ${gradient}`) : gradient
           }
           break
       }
@@ -274,13 +257,8 @@ export default {
       this.updateSettingOptions(_.merge({}, settings, { styles }))
     },
 
-    updateBgUrl (value) {
-      this.sectionBgUrl = value || ''
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-image': `url(${this.sectionBgUrl})`
-        }
-      }))
+    updateBgUrl () {
+      this.updateBgColor()
     },
 
     changeRepeat () {
@@ -315,18 +293,6 @@ export default {
     removeBackgroundPicker (index) {
       this.backgroundPickers.splice(index, 1)
       this.updateBgColor()
-    },
-
-    styleChange (value) {
-      this.updateStyle(_.kebabCase(value[0]), value[1])
-      this[value[0]] = value[1]
-    },
-
-    updateStyle (prop, value) {
-      this.updateText()
-      let styles = {}
-      styles[prop] = value
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
     },
 
     toggleBackgroundType (value) {
