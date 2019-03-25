@@ -68,6 +68,11 @@
         <icon-base name="preview" width="14" height="16" />
       </a>
 
+      <!-- Icon with text -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')" v-if="type === 'icon'">
+        <icon-base name="style" width="12" height="15" />
+      </a>
+
     </div>
 
     <!-- Delete element -->

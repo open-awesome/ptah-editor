@@ -582,11 +582,11 @@ const COMPONENTS = [
     label: 'text'
   },
   {
-    name: 'Cost',
+    name: 'TextElement',
     element: types.Cost,
     type: 'text',
     class: 'b-cost',
-    label: 'cost'
+    label: 'text'
   },
   {
     name: 'Button',
