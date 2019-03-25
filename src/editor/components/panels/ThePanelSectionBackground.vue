@@ -33,7 +33,7 @@
         </div>
       </div>
 
-      <div class="b-section-settings__control">
+      <div class="b-section-settings__control b-section-settings__control_select-type">
         <base-switcher
           :value="backgroundType === 'video'"
           label="Use video as background"
@@ -44,15 +44,9 @@
         <div class="b-section-settings__control">
           <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Image"/>
         </div>
-        <template v-if="sectionBgUrl.length">
-          <!--div class="b-section-settings__control">
-            <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
-          </div>
+        <template v-if="sectionBgUrl != ''">
           <div class="b-section-settings__control">
-            <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
-          </div-->
-          <div v-if="!isHeader" class="b-section-settings__control">
-            <BaseSwitcher v-model="bgAttachment" @change="changeAttachment" label="Parallax on background" />
+            <control-background-position/>
           </div>
         </template>
       </template>
@@ -75,6 +69,7 @@
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import BaseUploader from '../../../components/base/BaseUploader'
+import ControlBackgroundPosition from './../controls/TheControlBackgroundPosition'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,0)'
 
@@ -89,7 +84,8 @@ export default {
   name: 'ThePanelSectionBackground',
 
   components: {
-    BaseUploader
+    BaseUploader,
+    ControlBackgroundPosition
   },
 
   props: {
@@ -346,6 +342,8 @@ export default {
   width: 100%
   &__control
     margin-top: $size-step/2
+    &_select-type
+      margin: $size-step 0 $size-step/2
   &__overlay
    display: flex
    &-col
