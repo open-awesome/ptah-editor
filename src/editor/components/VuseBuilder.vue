@@ -53,6 +53,15 @@
           <source :src="section.data.mainStyle.backgroundVideo">
         </video>
 
+        <div
+          class="b-overlay"
+          v-if="section.data.mainStyle.overlay"
+          :id="`bg-overlay-${ section.id }`"
+          slot="overlay"
+          :style="{ 'background-color' : section.data.mainStyle.overlay.color, 'opacity' : section.data.mainStyle.overlay.opacity }"
+          >
+        </div>
+
     </component>
 
     <div class="builder-last"></div>
@@ -534,6 +543,15 @@ export default {
     min-height: 100%
     + .b-footer
       background: none !important
+
+/* overlay background */
+
+.b-overlay
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
 
 // --- dirty hack. normalize artboard size
 .builder-last

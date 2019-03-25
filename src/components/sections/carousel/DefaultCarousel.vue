@@ -55,6 +55,7 @@ export default {
     v-styler:section="$sectionData.mainStyle"
     >
       <slot name="video"/>
+      <slot name="overlay"/>
       <h3 class="b-header">{{ $sectionData.mainStyle.header }}</h3>
       <div class="b-gallery-carousel-body">
         <template v-if="$sectionData.mainStyle.galleryImages.length > 1">

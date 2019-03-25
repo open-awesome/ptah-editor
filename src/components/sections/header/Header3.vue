@@ -6,6 +6,7 @@
     class="b-section-header">
 
   <slot name="video"/>
+  <slot name="overlay"/>
 
   <div class="b-grid b-header">
 

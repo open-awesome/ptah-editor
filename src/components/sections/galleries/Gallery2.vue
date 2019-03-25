@@ -6,6 +6,7 @@
     :style="$sectionData.mainStyle.styles"
     >
       <slot name="video"/>
+      <slot name="overlay"/>
       <div class="b-gallery-two__wrap">
         <div class="b-gallery-two flex flex_center">
           <div class="b-gallery-two__item-wrap"

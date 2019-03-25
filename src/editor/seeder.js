@@ -177,8 +177,8 @@ const data = new Map([
         'height': ''
       },
       overlay: {
-        color: '#000',
-        opacity: '0.3'
+        color: 'rgba(0,0,0,1)',
+        opacity: '0'
       }
     })
   )],

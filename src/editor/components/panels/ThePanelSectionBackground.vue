@@ -21,7 +21,16 @@
       </div>
 
       <div class="b-section-settings__control">
-        <base-color-picker v-model="sectionOverlayColor" @change="updateOverlayColor" label="Overlay"></base-color-picker>
+        <div class="b-section-settings__overlay">
+          <div class="b-section-settings__overlay-col">
+            <base-color-picker v-model="sectionOverlayColor" @change="updateOverlayColor" label="Overlay"></base-color-picker>
+          </div>
+          <div class="b-section-settings__overlay-col">
+            <base-range-slider v-model="sectionOverlayOpacity" label="" step="1" min="0" max="100" @change="changeOverlayOpacity">
+              {{ sectionOverlayOpacity }} <span class="b-border-radius-control__px">%</span>
+            </base-range-slider>
+          </div>
+        </div>
       </div>
 
       <div class="b-section-settings__control">
@@ -95,6 +104,7 @@ export default {
       fullScreen: false,
 
       sectionOverlayColor: '',
+      sectionOverlayOpacity: '',
       sectionBgUrl: '',
       bgRepeat: '',
       bgSize: '',
@@ -160,6 +170,10 @@ export default {
 
     isHeader () {
       return this.settingObjectSection.isHeader
+    },
+
+    overlay () {
+      return this.settingObjectOptions.overlay
     }
   },
 
@@ -185,42 +199,13 @@ export default {
     }
     this.updateBgColor(DEFAULT_COLOR)
 
+    this.sectionOverlayColor = this.overlay.color
+    this.sectionOverlayOpacity = this.overlay.opacity * 100
+
     this.bgRepeat = styles['background-repeat'] || 'no-repeat'
     this.bgSize = styles['background-size'] || 'cover'
     this.bgAttachment = styles['background-attachment'] === 'fixed'
-
-    this.header = this.settingObjectOptions.header || ''
-
-    /* Gallery */
-    this.galleryImages = this.settingObjectOptions.galleryImages || []
-
-    if (this.settingObjectOptions.classes !== undefined && this.settingObjectOptions.classes.indexOf('full-height') !== -1) {
-      this.fullScreen = true
-    }
-
-    /* System Requirements */
-    this.systemRequirements = this.settingObjectOptions.systemRequirements || {}
-    this.rowsRequirements = this.settingObjectOptions.rowsRequirements || {}
-    this.selectPlatform = this.settingObjectOptions.selectPlatform || {}
-
-    /* Get font settings */
-    this.fontFamily = styles['font-family'] || ''
-    this.fontSize = styles['font-size'] || 1.6
-    this.fontColor = styles['color'] || '#000000'
-
-    if (styles['font-style']) {
-      this.styles.push({ prop: 'font-style', value: styles['font-style'] })
-    }
-
-    /* Products */
-    this.products = this.settingObjectOptions.products || {}
-    this.selectProduct = this.settingObjectOptions.selectProduct || {}
-    this.isComplexText = this.settingObjectOptions.hasProducts || false
   },
-
-  beforeDestroy () {
-  },
-
   methods: {
     ...mapActions('Sidebar', [
       'updateSettingOptions',
@@ -315,7 +300,13 @@ export default {
     },
 
     updateOverlayColor () {
-      //
+      const color = this.sectionOverlayColor.rgba ? `rgba(${Object.values(this.sectionOverlayColor.rgba).toString()})` : this.sectionOverlayColor
+
+      this.overlay['color'] = color
+    },
+
+    changeOverlayOpacity () {
+      this.overlay['opacity'] = this.sectionOverlayOpacity / 100
     }
   }
 }
@@ -355,6 +346,18 @@ export default {
   width: 100%
   &__control
     margin-top: $size-step/2
+  &__overlay
+   display: flex
+   &-col
+     /deep/
+       .b-range-slider__row
+         flex-direction: row-reverse
+       .b-range-slider__text
+         padding-left: 0.5rem
+       .b-range-slider
+         padding-left: 1rem
+         .range-slider
+           width: $size-step * 2.8
   &__inner
     padding: 0 2.4rem
   &__buttons

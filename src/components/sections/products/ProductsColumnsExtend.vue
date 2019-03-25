@@ -710,6 +710,7 @@ export default {
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="video"/>
+    <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row b-products-columns-extend__row">
         <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__left hidden-m">
