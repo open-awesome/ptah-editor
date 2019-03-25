@@ -289,6 +289,7 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
+      console.log(this.type)
       event.preventDefault()
       event.stopPropagation()
 
@@ -454,6 +455,7 @@ export default {
      * @param index
      */
     removeElement () {
+      console.log(this.path, this.components)
       let index = this.path[1]
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
