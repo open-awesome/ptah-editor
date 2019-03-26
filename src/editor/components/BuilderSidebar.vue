@@ -245,8 +245,7 @@ export default {
       'toggleSidebar',
       'toggleAddSectionMenu',
       'setMenuItem',
-      'setControlPanel',
-      'setSection'
+      'setControlPanel'
     ]),
 
     ...mapActions('BuilderModalContent', {
@@ -338,7 +337,7 @@ export default {
 
     showBackgroundPanel (section) {
       this.setControlPanel('SectionBackground')
-      this.setSection(section)
+      this.setSettingSection(section)
     }
   }
 }
