@@ -10,7 +10,7 @@ jobs:
     install: true
     script:
     - echo "tests here"
-    after_success:
+    #after_success:
     #- bash <(curl -s https://codecov.io/bash)
   - stage: deploy
     services: docker
