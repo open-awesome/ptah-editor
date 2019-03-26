@@ -674,7 +674,7 @@ const data = new Map([
       sizeIcons: {
         width: 24
       },
-      typography: true,
+      typography: false,
       styles: {
         'background-image': '',
         'background-position': 'center center',
