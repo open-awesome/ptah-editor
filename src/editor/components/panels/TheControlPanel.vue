@@ -22,6 +22,7 @@ import ThePanelImage from './ThePanelImage'
 import ThePanelAvailablePlatforms from './ThePanelAvailablePlatforms'
 import ThePanelRestrictions from './ThePanelRestrictions'
 import ThePanelInlineText from './ThePanelInlineText'
+import ThePanelIcon from './ThePanelIcon'
 
 export default {
   name: 'TheControlPanel',
@@ -60,7 +61,8 @@ export default {
     ThePanelAvailablePlatforms,
     ThePanelRestrictions,
     ThePanelInlineText,
-    ThePanelImage
+    ThePanelImage,
+    ThePanelIcon
   }
 }
 </script>
