@@ -12,14 +12,14 @@
       </a>
     </div>
 
-    <!-- Button -->
-    <div class="b-styler__col">
-      <div class="b-styler__controls" v-if="type === 'button'">
+    <div class="b-styler__col" v-if="type === 'button'">
+      <!-- Button -->
+      <div class="b-styler__controls">
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </div>
-      <div class="b-styler__controls" v-if="type === 'button'" ref="buttonModalProps">
+      <div class="b-styler__controls" ref="buttonModalProps">
         <a href="#" class="b-styler__control" @click.stop="setModalProps()">
           <icon-base name="link" width="18" height="18" />
         </a>
@@ -72,6 +72,11 @@
 
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
         <icon-base name="preview" width="14" height="16" />
+      </a>
+
+      <!-- Icon with text -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')" v-if="type === 'icon'">
+        <icon-base name="style" width="12" height="15" />
       </a>
 
     </div>
@@ -305,7 +310,7 @@ export default {
       }
 
       // show inline styler
-      if (!this.popper) {
+      if (!this.popper && this.type !== 'section') {
         this.$nextTick(function () {
           this.popper = new Popper(this.el, this.$refs.styler, {
             placement: 'top',

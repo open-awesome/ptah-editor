@@ -172,7 +172,7 @@ export default {
         options
       })
 
-      dispatch('setControlPanel', 'Section')
+      // dispatch('setControlPanel', 'Section')
     },
 
     /**

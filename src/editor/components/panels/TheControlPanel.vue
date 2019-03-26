@@ -11,6 +11,7 @@
 import { mapState, mapActions } from 'vuex'
 
 import ThePanelSection from './ThePanelSection'
+import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
 import ThePanelButton from './ThePanelButton'
 import ThePanelSocialSettings from './ThePanelSocialSettings'
@@ -22,6 +23,7 @@ import ThePanelImage from './ThePanelImage'
 import ThePanelAvailablePlatforms from './ThePanelAvailablePlatforms'
 import ThePanelRestrictions from './ThePanelRestrictions'
 import ThePanelInlineText from './ThePanelInlineText'
+import ThePanelIcon from './ThePanelIcon'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 
 export default {
@@ -51,6 +53,7 @@ export default {
 
   components: {
     ThePanelSection,
+    ThePanelSectionLayout,
     ThePanelButton,
     ThePanelSocialSettings,
     ThePanelSocialStyle,
@@ -62,6 +65,7 @@ export default {
     ThePanelRestrictions,
     ThePanelInlineText,
     ThePanelImage,
+    ThePanelIcon,
     ThePanelSectionBackground
   }
 }

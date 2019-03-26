@@ -5,10 +5,6 @@
     </h6>
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-section-settings__inner">
-        <div class="b-section-settings__control">
-          <control-section-layouts :builder="builder"></control-section-layouts>
-        </div>
-
         <!-- System requirements -->
         <control-system-requirements
           :expand="expandedSystemRequirements"
@@ -125,7 +121,6 @@ import * as _ from 'lodash-es'
 import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './../controls/TheControlSystemRequirements.vue'
 import ControlText from './../controls/TheControlText'
-import ControlSectionLayouts from './../controls/TheControlSectionLayouts.vue'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 
@@ -144,8 +139,7 @@ export default {
     BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
-    ControlText,
-    ControlSectionLayouts
+    ControlText
   },
   name: 'BuilderSettingsBarSection',
 

@@ -102,7 +102,7 @@ export default {
       {
         name: 'TextElement',
         element: types.Title,
-        type: 'title',
+        type: 'text',
         class: 'b-title',
         label: 'title',
         key: 1
