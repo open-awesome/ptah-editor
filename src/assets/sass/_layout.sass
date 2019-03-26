@@ -26,10 +26,14 @@ body
   color: $dark-grey
 
   margin: 0
-  -webkit-font-smoothing: subpixel-antialiased
-  -moz-osx-font-smoothing: auto
+  // -webkit-font-smoothing: subpixel-antialiased
+  // -moz-osx-font-smoothing: auto
 
-  // overflow: hidden //TODO: wtf?
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004)
+  text-rendering: optimizeLegibility !important
+  -webkit-font-smoothing: antialiased !important
+  -moz-osx-font-smoothing: antialiased !important
+  font-smooth: always
 .b-body
   &_preview,
   &_export

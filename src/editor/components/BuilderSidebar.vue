@@ -90,6 +90,11 @@
                 <icon-base name="edit" color="#ffffff"></icon-base>
               </span>
               <span class="b-menu-subitem__icon"
+                    @click.stop="toggleSectionLayouts(section)"
+              >
+                <icon-base name="layouts" color="#ffffff"></icon-base>
+              </span>
+              <span class="b-menu-subitem__icon"
                 @click.stop="deleteSection(section)"
                 >
                 <icon-base name="remove" color="#ffffff"></icon-base>
@@ -224,7 +229,8 @@ export default {
       'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
-      'setMenuItem'
+      'setMenuItem',
+      'setControlPanel'
     ]),
 
     ...mapActions('BuilderModalContent', {
@@ -238,8 +244,14 @@ export default {
 
     toggleSettingsBar (section) {
       this.closeSiteSettings()
-      // this.clearSettingObject()
       this.setSettingSection(section)
+      this.setControlPanel('Section')
+    },
+
+    toggleSectionLayouts (section) {
+      this.closeSiteSettings()
+      this.setSettingSection(section)
+      this.setControlPanel('SectionLayout')
     },
 
     selectSection (section) {
