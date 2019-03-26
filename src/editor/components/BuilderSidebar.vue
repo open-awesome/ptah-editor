@@ -52,9 +52,19 @@
             </span>
             <div class="b-menu-subitem__icons">
               <span class="b-menu-subitem__icon"
-                @click.stop="toggleSettingsBar(headerSection)"
+                @click.stop="showSettingsBar(headerSection)"
                 >
                 <icon-base name="edit" color="#ffffff"></icon-base>
+              </span>
+              <span class="b-menu-subitem__icon"
+                @click.stop="toggleSectionLayouts(headerSection)"
+                >
+                <icon-base name="layouts" color="#fff"></icon-base>
+              </span>
+              <span class="b-menu-subitem__icon"
+                @click.stop="showBackgroundPanel(section)"
+                >
+                <icon-base name="image" color="#fff"></icon-base>
               </span>
               <span class="b-menu-subitem__icon"
                 @click.stop="deleteSection(headerSection)"
@@ -77,7 +87,7 @@
               :is-main="section.isMain"
               :has-draggable-icon="true"
               :section-id="section.id"
-              @click="selectSection(section)"
+              @click="toggleSettingsBar(section)"
             >
             {{ `${ index + 1 } - `}}
             <span class="b-menu-subitem__title-text">
@@ -85,14 +95,19 @@
             </span>
             <div class="b-menu-subitem__icons">
               <span class="b-menu-subitem__icon"
-                @click.stop="toggleSettingsBar(section)"
+                @click.stop="showSettingsBar(section)"
                 >
                 <icon-base name="edit" color="#ffffff"></icon-base>
               </span>
               <span class="b-menu-subitem__icon"
-                    @click.stop="toggleSectionLayouts(section)"
-              >
-                <icon-base name="layouts" color="#ffffff"></icon-base>
+                @click.stop="toggleSectionLayouts(section)"
+                >
+                <icon-base name="layouts" color="#fff"></icon-base>
+              </span>
+              <span class="b-menu-subitem__icon"
+                @click.stop="showBackgroundPanel(section)"
+                >
+                <icon-base name="image" color="#fff"></icon-base>
               </span>
               <span class="b-menu-subitem__icon"
                 @click.stop="deleteSection(section)"
@@ -230,7 +245,8 @@ export default {
       'toggleSidebar',
       'toggleAddSectionMenu',
       'setMenuItem',
-      'setControlPanel'
+      'setControlPanel',
+      'setSection'
     ]),
 
     ...mapActions('BuilderModalContent', {
@@ -243,6 +259,11 @@ export default {
     },
 
     toggleSettingsBar (section) {
+      this.closeSiteSettings()
+      this.setSettingSection(section)
+    },
+
+    showSettingsBar (section) {
       this.closeSiteSettings()
       this.setSettingSection(section)
       this.setControlPanel('Section')
@@ -313,6 +334,11 @@ export default {
 
       this.builder.remove(section)
       this.clearSettingObject()
+    },
+
+    showBackgroundPanel (section) {
+      this.setControlPanel('SectionBackground')
+      this.setSection(section)
     }
   }
 }

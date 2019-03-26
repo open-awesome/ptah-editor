@@ -6,12 +6,6 @@
     :class="{ 'is-visible': isVisible && !editText }"
   >
 
-    <div class="b-styler__controls" v-if="type === 'section'">
-      <a href="#" class="b-styler__control" @click.stop="showBackgroundPanel">
-        <icon-base name="image" width="18" height="18" />
-      </a>
-    </div>
-
     <div class="b-styler__col" v-if="type === 'button'">
       <!-- Button -->
       <div class="b-styler__controls">
@@ -495,11 +489,6 @@ export default {
       if (props && props.video) {
         this.el.dataset.video = props.video
       }
-    },
-
-    showBackgroundPanel () {
-      this.setControlPanel('SectionBackground')
-      this.setSection(this.section)
     }
   }
 }

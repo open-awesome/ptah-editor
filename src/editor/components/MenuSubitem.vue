@@ -132,19 +132,24 @@ export default {
     line-height: 4.8rem
     &-text
       display: inline-block
-      width: 14rem
+      width: 12rem
       white-space: nowrap
       text-overflow: ellipsis
       overflow: hidden
   &__icons
-    width: 8rem
+    width: 9rem
     margin: 0 $size-step/4.5
+    display: flex
+    flex-wrap: nowrap
+    align-items: center
+    justify-content: space-between
+    height: 5rem
   &__icon
     display: none
-    margin: 0 .5rem
-    svg
-      max-width: 1.5rem
-      max-height: 1.7rem
+    & svg
+      width: 1.6rem
+      height: 1.6rem
+  &_selected,
   &__inner:hover
     .b-menu-subitem__title
       .b-menu-subitem__icon
