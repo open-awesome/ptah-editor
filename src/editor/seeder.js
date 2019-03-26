@@ -692,17 +692,7 @@ const data = new Map([
     })
   )],
   [types.TextInherit, () => (_.merge({}, DEFAULT_OPTIONS, {
-    text: 'Enter your text',
-    aligned: true,
-    styles: {
-        'font-family': 'inherit',
-        'font-size': 'inherit',
-        'font-weight': 'inherit',
-        'font-style': 'inherit',
-        'text-decoration': 'inherit',
-        'text-align': 'inherit',
-        'color': 'inherit'
-    }
+    text: 'Enter your text'
   }))],
   [types.Timer, () => (_.merge({}, DEFAULT_OPTIONS, {
     isComplex: true,

@@ -255,11 +255,11 @@ export default {
             </span>
             <span
               v-html="$sectionData.platforms[key].text.text"
-              v-styler:for="{ el: $sectionData.platforms[key].text, path: `$sectionData.platforms[${key}].text`}"
+              v-styler:for="{ el: $sectionData.platforms[key].text, path: `$sectionData.platforms[${key}].text`, type: 'inline'}"
               :style="$sectionData.platforms[key].text.styles"
               @click="selectPlatform(key)"
               >
-              {{$sectionData.platforms[key].text.text}}
+              {{ $sectionData.platforms[key].text.text }}
             </span>
           </div>
         </div>
