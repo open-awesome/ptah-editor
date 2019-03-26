@@ -141,7 +141,7 @@ export default {
       cursor: pointer
       & svg
         fill: $dark-blue-krayola
-  &:hover
+  .is-editable &:hover
     #{$this}__settings
       opacity: 1
   /deep/
