@@ -5,22 +5,18 @@
     v-if="$builder.isEditing"
     :class="{ 'is-visible': isVisible && !editText }"
   >
-
-    <!-- Button -->
-    <div class="b-styler__col">
-      <div class="b-styler__controls" v-if="type === 'button'">
+    <div class="b-styler__controls">
+      <!-- Button -->
+      <div v-if="type === 'button'">
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </div>
-      <div class="b-styler__controls" v-if="type === 'button'" ref="buttonModalProps">
+      <div v-if="type === 'button'" ref="buttonModalProps">
         <a href="#" class="b-styler__control" @click.stop="setModalProps()">
           <icon-base name="link" width="18" height="18" />
         </a>
       </div>
-    </div>
-
-    <div class="b-styler__controls">
 
       <!-- Text -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')" v-if="type === 'text'">
@@ -512,10 +508,6 @@ export default {
 
   &__controls
     display: flex
-
-  &__col
-    display: flex
-    flex-wrap: nowrap
 
   &__control
     width: 3.2rem

@@ -141,12 +141,15 @@ export default {
     margin: 0 $size-step/4.5
   &__icon
     display: none
-    margin: 0 $size-step/4.5
+    margin: 0 .5rem
+    svg
+      max-width: 1.5rem
+      max-height: 1.7rem
   &__inner:hover
     .b-menu-subitem__title
       .b-menu-subitem__icon
         display: inline-block
-        opacity: 0.8
+        opacity: 0.7
         &:hover
           opacity: 1
 

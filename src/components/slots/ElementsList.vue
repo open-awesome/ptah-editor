@@ -11,16 +11,13 @@
       <ul>
         <li><a href="#" @click.prevent="addButton" class="b-elements__button">Button</a></li>
         <li><a href="#" @click.prevent="addLink" class="b-elements__button">Link</a></li>
-        <li><a href="#" @click.prevent="addTitle" class="b-elements__button">Title</a></li>
-        <li><a href="#" @click.prevent="addText" class="b-elements__button">Description</a></li>
-        <li><a href="#" @click.prevent="addImage" class="b-elements__button">Pic</a></li>
+        <li><a href="#" @click.prevent="addText" class="b-elements__button">Text</a></li>
+        <li><a href="#" @click.prevent="addImage" class="b-elements__button">Image</a></li>
         <li><a href="#" @click.prevent="addDelimiter" class="b-elements__button">Delimiter</a></li>
         <li><a href="#" @click.prevent="addLogo" class="b-elements__button">Logo</a></li>
         <li><a href="#" @click.prevent="addAvailable" class="b-elements__button">Available platforms</a></li>
         <li><a href="#" @click.prevent="addRestrictions" class="b-elements__button">Age restrictions</a></li>
         <li><a href="#" @click.prevent="addSocial" class="b-elements__button">Social networks</a></li>
-        <li><a href="#" @click.prevent="addSlogan" class="b-elements__button">Slogan</a></li>
-        <li><a href="#" @click.prevent="addCost" class="b-elements__button">Cost</a></li>
         <li><a href="#" @click.prevent="addTextWithIcon" class="b-elements__button">Icon with text</a></li>
         <li><a href="#" @click.prevent="addVideo" class="b-elements__button">Video</a></li>
         <li><a href="#" @click.prevent="addTimer" class="b-elements__button">Timer</a></li>
@@ -56,9 +53,9 @@ export default {
       },
       {
         name: 'TextElement',
-        element: types.Title,
+        element: types.Text,
         type: 'text',
-        label: 'title'
+        label: 'text'
       },
       {
         name: 'TextElement',

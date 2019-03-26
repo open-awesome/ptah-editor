@@ -75,6 +75,8 @@
       <icon-base name="timer"></icon-base>
       <icon-base name="bulletList"></icon-base>
       <icon-base name="orderedList"></icon-base>
+      <icon-base name="background"></icon-base>
+      <icon-base name="layouts"></icon-base>
     </div>
 
     <hr>
