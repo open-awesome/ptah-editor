@@ -405,6 +405,7 @@ export default {
   position: relative
   &.is-editable .is-editable
     outline: none
+    transition: border 0.25s
     border: .2rem dotted transparent
     &:hover
       border-color: $dark-blue-krayola
