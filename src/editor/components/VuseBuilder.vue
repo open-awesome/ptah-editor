@@ -33,6 +33,15 @@
         <source :src="headerSection.data.mainStyle.backgroundVideo">
       </video>
 
+      <div
+        class="b-overlay"
+        v-if="headerSection.data.mainStyle.overlay"
+        :id="`bg-overlay-${ headerSection.id }`"
+        slot="overlay"
+        :style="{ 'background-color' : headerSection.data.mainStyle.overlay.color, 'opacity' : headerSection.data.mainStyle.overlay.opacity }"
+        >
+      </div>
+
     </component>
 
     <component

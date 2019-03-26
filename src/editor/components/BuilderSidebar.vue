@@ -62,7 +62,7 @@
                 <icon-base name="layouts" color="#fff"></icon-base>
               </span>
               <span class="b-menu-subitem__icon"
-                @click.stop="showBackgroundPanel(section)"
+                @click.stop="showBackgroundPanel(headerSection)"
                 >
                 <icon-base name="image" color="#fff"></icon-base>
               </span>
