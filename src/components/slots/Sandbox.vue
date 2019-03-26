@@ -1,9 +1,10 @@
 <template>
   <div class="b-slot">
     <div class="b-slot__settings">
-      <span @click="showSandboxSidebar($event)" class="b-slot__settings-item b-slot__settings-item-settings">
+      <!-- TODO: need added controls aligned in slot -->
+      <!--span @click="showSandboxSidebar($event)" class="b-slot__settings-item b-slot__settings-item-settings">
         <icon-base name="cog" fill="white" />
-      </span>
+      </span-->
       <span @click="showSandboxSidebar($event, true)" class="b-slot__settings-item b-slot__settings-item-add-el">
         <icon-base name="plus" fill="white" />
       </span>
@@ -108,7 +109,8 @@ export default {
   &__settings
     position: absolute
     top: -1px
-    left: -$size-step
+    bottom: -1px
+    left: -$size-step*1.1
     z-index: 1
 
     width: $size-step
@@ -119,7 +121,7 @@ export default {
 
     display: flex
     align-items: center
-    justify-content: center
+    justify-content: flex-start
     flex-direction: column
 
     opacity: 0
@@ -132,10 +134,13 @@ export default {
       width: $size-step
       height: $size-step
 
-      margin-bottom: 0.2rem
-      background: rgba($dark-blue-krayola, 0.6)
+      border-radius: 50%;
+      background: $white;
+      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39);
 
       cursor: pointer
+      & svg
+        fill: $dark-blue-krayola
   &:hover
     #{$this}__settings
       opacity: 1
