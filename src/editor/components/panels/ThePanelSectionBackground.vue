@@ -13,9 +13,10 @@
             <span class="del" v-show="backgroundPickers.length > 1 && index > 0" @click="removeBackgroundPicker(index)">
               <icon-base name="close" color="#B1B1B1" width="10" height="10"></icon-base>
             </span>
-            <span class="plus" v-show="index === 0" @click="addBackgroundPicker">
+            <!-- TODO: if the gradient is selected - do not save the image for the background when switching layouts -->
+            <!--span class="plus" v-show="index === 0 && backgroundPickers.length < 4" @click="addBackgroundPicker">
               <icon-base name="plus" color="#B1B1B1" width="14" height="14"></icon-base>
-            </span>
+            </span-->
           </div>
         </div>
       </div>
@@ -71,7 +72,7 @@ import * as _ from 'lodash-es'
 import BaseUploader from '../../../components/base/BaseUploader'
 import ControlBackgroundPosition from './../controls/TheControlBackgroundPosition'
 
-const DEFAULT_COLOR = 'rgba(0,0,0,0)'
+const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
 function getPickerColor (color) {
   if (typeof color === 'object' && color.hasOwnProperty('rgba')) {

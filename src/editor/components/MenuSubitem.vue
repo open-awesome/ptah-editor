@@ -149,6 +149,11 @@ export default {
     & svg
       width: 1.6rem
       height: 1.6rem
+    &_background
+      & svg
+        position: relative
+        top: 0
+        width: 1.4rem
   &_selected,
   &__inner:hover
     .b-menu-subitem__title

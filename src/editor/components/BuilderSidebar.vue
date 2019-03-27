@@ -64,7 +64,7 @@
               <span class="b-menu-subitem__icon"
                 @click.stop="showBackgroundPanel(headerSection)"
                 >
-                <icon-base name="image" color="#fff"></icon-base>
+                <icon-base name="background" color="#fff"></icon-base>
               </span>
               <span class="b-menu-subitem__icon"
                 @click.stop="deleteSection(headerSection)"
@@ -104,10 +104,10 @@
                 >
                 <icon-base name="layouts" color="#fff"></icon-base>
               </span>
-              <span class="b-menu-subitem__icon"
+              <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
                 @click.stop="showBackgroundPanel(section)"
                 >
-                <icon-base name="image" color="#fff"></icon-base>
+                <icon-base name="background" color="#fff"></icon-base>
               </span>
               <span class="b-menu-subitem__icon"
                 @click.stop="deleteSection(section)"
