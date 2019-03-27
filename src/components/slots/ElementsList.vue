@@ -10,7 +10,6 @@
       </div>
       <ul>
         <li><a href="#" @click.prevent="addButton" class="b-elements__button">Button</a></li>
-        <li><a href="#" @click.prevent="addLink" class="b-elements__button">Link</a></li>
         <li><a href="#" @click.prevent="addText" class="b-elements__button">Text</a></li>
         <li><a href="#" @click.prevent="addImage" class="b-elements__button">Image</a></li>
         <li><a href="#" @click.prevent="addDelimiter" class="b-elements__button">Delimiter</a></li>
@@ -161,14 +160,6 @@ export default {
       const el = _.merge({}, Seeder.seed(this.elements[0]))
       this.addElement(el)
     },
-    addLink () {
-      const el = _.merge({}, Seeder.seed(this.elements[1]))
-      this.addElement(el)
-    },
-    addTitle () {
-      const el = _.merge({}, Seeder.seed(this.elements[2]))
-      this.addElement(el)
-    },
     addText () {
       const el = _.merge({ text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }, Seeder.seed(this.elements[3]))
       this.addElement(el)
@@ -195,14 +186,6 @@ export default {
     },
     addSocial () {
       const el = _.merge({}, Seeder.seed(this.elements[9]))
-      this.addElement(el)
-    },
-    addSlogan () {
-      const el = _.merge({}, Seeder.seed(this.elements[10]))
-      this.addElement(el)
-    },
-    addCost () {
-      const el = _.merge({}, Seeder.seed(this.elements[11]))
       this.addElement(el)
     },
     addTextWithIcon () {

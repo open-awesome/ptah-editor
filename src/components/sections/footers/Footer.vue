@@ -21,27 +21,27 @@ const COMPONENTS = [
     key: 1
   },
   {
-    name: 'Link',
-    element: types.Link,
-    type: 'button',
+    name: 'TextElement',
+    element: types.Text,
+    type: 'text',
     class: 'b-footer-link',
-    label: 'link',
+    label: 'text',
     key: 2
   },
   {
-    name: 'Link',
-    element: types.Link,
-    type: 'button',
+    name: 'TextElement',
+    element: types.Text,
+    type: 'text',
     class: 'b-footer-link',
-    label: 'link',
+    label: 'text',
     key: 3
   },
   {
-    name: 'Link',
-    element: types.Link,
-    type: 'button',
+    name: 'TextElement',
+    element: types.Text,
+    type: 'text',
     class: 'b-footer-link',
-    label: 'link',
+    label: 'text',
     key: 4
   },
   {
@@ -81,7 +81,7 @@ const C_CUSTOM = [
   },
   {
     element: {
-      text: 'Information',
+      text: '<a href="#">Information</a>',
       styles: {
         'background-color': 'rgba(0, 0, 0, 0)',
         'color': '#FF6D64',
@@ -94,7 +94,7 @@ const C_CUSTOM = [
   },
   {
     element: {
-      text: 'Legal',
+      text: '<a href="#">Legal</a>',
       styles: {
         'background-color': 'rgba(0, 0, 0, 0)',
         'color': '#FF6D64',
@@ -107,7 +107,7 @@ const C_CUSTOM = [
   },
   {
     element: {
-      text: 'Something',
+      text: '<a href="#">Something</a>',
       styles: {
         'background-color': 'rgba(0, 0, 0, 0)',
         'color': '#FF6D64',
@@ -184,7 +184,6 @@ export default {
               <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_horizont" :style="$sectionData.container.styles">
                 <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                   <component
-                    v-if="$sectionData.components[index].element.isComplex"
                     v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                     :is="component.name"
                     :href="$sectionData.components[index].element.link.href"
@@ -194,19 +193,7 @@ export default {
                     :path="`components[${index}].element`"
                     class="b-footer-component"
                     >
-                  </component>
-                  <component
-                    v-if="!$sectionData.components[index].element.isComplex"
-                    v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
-                    v-html="$sectionData.components[index].element.text"
-                    :is="component.name"
-                    :href="$sectionData.components[index].element.link.href"
-                    :target="$sectionData.components[index].element.link.target"
-                    :style="$sectionData.components[index].element.styles"
-                    :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                    :path="`components[${index}].element`"
-                    class="b-footer-component"
-                    >
+                    <div v-html="$sectionData.components[index].element.text"></div>
                   </component>
                 </div>
               </draggable>
