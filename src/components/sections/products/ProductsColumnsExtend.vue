@@ -583,7 +583,7 @@ const COMPONENTS = [
   },
   {
     name: 'TextElement',
-    element: types.Cost,
+    element: types.Text,
     type: 'text',
     class: 'b-cost',
     label: 'text'
