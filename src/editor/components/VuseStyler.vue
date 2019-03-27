@@ -304,7 +304,7 @@ export default {
 
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
-        data.styles.width = this.dimensions.width
+        data.styles.width = data.offsets.reference.width
         return data
       }
 

@@ -15,8 +15,8 @@
 </template>
 
 <script>
-import TheControlTypography from '../controls/TheControlTypegraphy'
 import TheControlTextLink from '../controls/TheControlTextLink'
+import TheControlTypography from '../controls/TheControlTypography'
 
 export default {
   name: 'ThePanelText',

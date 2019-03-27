@@ -51,7 +51,6 @@ export function getTypeFromSchema(target, schema) {
   if (value === types.ClassList) return 'section'
   if (value === types.StyleObject) return 'section'
   if (value === types.Label) return 'inline'
-  if (value === types.Cost) return 'inline'
   if (value === types.Delimiter) return 'delimiter'
   if (value === types.SystemRequirements) return 'section'
   if (value === types.TextInherit) return 'inline'

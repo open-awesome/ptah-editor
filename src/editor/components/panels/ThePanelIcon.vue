@@ -13,7 +13,7 @@
 
 <script>
 import ControlText from './../controls/TheControlText'
-import ControlTypegraphy from './../controls/TheControlTypegraphy'
+import ControlTypography from './../controls/TheControlTypography'
 import ControlTextWithIcon from '../controls/TheControlIconWithText'
 
 export default {
@@ -22,7 +22,7 @@ export default {
   components: {
     ControlTextWithIcon,
     ControlText,
-    ControlTypegraphy
+    ControlTypography
   },
 
   props: {

@@ -282,22 +282,6 @@ const data = new Map([
       }
     })
   )],
-  [types.Cost, () => (_.merge({}, DEFAULT_OPTIONS,
-    {
-      typography: true,
-      removable: true,
-      aligned: true,
-      text: '$90',
-      styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
-      }
-    })
-  )],
   [types.Icon, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       text: '',
@@ -695,7 +679,7 @@ const data = new Map([
       sizeIcons: {
         width: 24
       },
-      typography: true,
+      typography: false,
       styles: {
         'background-image': '',
         'background-position': 'center center',

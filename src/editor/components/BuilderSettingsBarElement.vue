@@ -19,7 +19,7 @@
 
         <!-- Typography -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-          <control-typegraphy/>
+          <control-typography/>
         </div>
 
         <!-- Text align -->
@@ -123,7 +123,7 @@ import BuilderSettingsBarElementTimer from './BuilderSettingsBarElementTimer'
 
 import ControlAlign from './controls/TheControlAlign'
 import ControlText from './controls/TheControlText'
-import ControlTypegraphy from './controls/TheControlTypegraphy'
+import ControlTypography from './controls/TheControlTypography'
 import ControlBackground from './controls/TheControlBackground'
 import ControlBackgroundColor from './controls/TheControlBackgroundColor'
 import ControlBackgroundImage from './controls/TheControlBackgroundImage'
@@ -151,7 +151,7 @@ export default {
     BuilderSettingsBarElementTimer,
     ControlAlign,
     ControlText,
-    ControlTypegraphy,
+    ControlTypography,
     ControlBackground,
     ControlBackgroundColor,
     ControlBackgroundImage,
