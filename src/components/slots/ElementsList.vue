@@ -9,18 +9,19 @@
         </div>
       </div>
       <ul>
-        <li><a href="#" @click.prevent="addButton" class="b-elements__button">Button</a></li>
-        <li><a href="#" @click.prevent="addLink" class="b-elements__button">Link</a></li>
-        <li><a href="#" @click.prevent="addText" class="b-elements__button">Text</a></li>
-        <li><a href="#" @click.prevent="addImage" class="b-elements__button">Image</a></li>
-        <li><a href="#" @click.prevent="addDelimiter" class="b-elements__button">Delimiter</a></li>
-        <li><a href="#" @click.prevent="addLogo" class="b-elements__button">Logo</a></li>
-        <li><a href="#" @click.prevent="addAvailable" class="b-elements__button">Available platforms</a></li>
-        <li><a href="#" @click.prevent="addRestrictions" class="b-elements__button">Age restrictions</a></li>
-        <li><a href="#" @click.prevent="addSocial" class="b-elements__button">Social networks</a></li>
-        <li><a href="#" @click.prevent="addTextWithIcon" class="b-elements__button">Icon with text</a></li>
-        <li><a href="#" @click.prevent="addVideo" class="b-elements__button">Video</a></li>
-        <li><a href="#" @click.prevent="addTimer" class="b-elements__button">Timer</a></li>
+        <li><a href="#" @click.prevent="addEl(0)" class="b-elements__button">Button</a></li>
+        <li><a href="#" @click.prevent="addEl(1)" class="b-elements__button">Link</a></li>
+        <li><a href="#" @click.prevent="addEl(2)" class="b-elements__button">Text</a></li>
+        <li><a href="#" @click.prevent="addEl(3)" class="b-elements__button">Image</a></li>
+        <li><a href="#" @click.prevent="addEl(5)" class="b-elements__button">Delimiter</a></li>
+        <li><a href="#" @click.prevent="addEl(4)" class="b-elements__button">Logo</a></li>
+        <li><a href="#" @click.prevent="addEl(6)" class="b-elements__button">Available platforms</a></li>
+        <li><a href="#" @click.prevent="addEl(7)" class="b-elements__button">Age restrictions</a></li>
+        <li><a href="#" @click.prevent="addEl(8)" class="b-elements__button">Social networks</a></li>
+        <!--li><a href="#" @click.prevent="addEl(9)" class="b-elements__button">Slogan</a></li-->
+        <li><a href="#" @click.prevent="addEl(10)" class="b-elements__button">Icon with text</a></li>
+        <li><a href="#" @click.prevent="addEl(11)" class="b-elements__button">Video</a></li>
+        <li><a href="#" @click.prevent="addEl(12)" class="b-elements__button">Timer</a></li>
       </ul>
     </aside>
   </div>
@@ -56,12 +57,6 @@ export default {
         element: types.Text,
         type: 'text',
         label: 'text'
-      },
-      {
-        name: 'TextElement',
-        element: types.Text,
-        type: 'text',
-        label: 'description'
       },
       {
         name: 'Pic',
@@ -104,12 +99,6 @@ export default {
         element: types.Slogan,
         type: 'slogan',
         label: 'slogan'
-      },
-      {
-        name: 'Cost',
-        element: types.Cost,
-        type: 'text',
-        label: 'cost'
       },
       {
         name: 'IconWithText',
@@ -157,63 +146,9 @@ export default {
       this.components = [...this.components, element]
     },
 
-    addButton () {
-      const el = _.merge({}, Seeder.seed(this.elements[0]))
+    addEl (index) {
+      const el = _.merge({}, Seeder.seed(this.elements[index]))
       this.addElement(el)
-    },
-    addLink () {
-      const el = _.merge({}, Seeder.seed(this.elements[1]))
-      this.addElement(el)
-    },
-    addTitle () {
-      const el = _.merge({}, Seeder.seed(this.elements[2]))
-      this.addElement(el)
-    },
-    addText () {
-      const el = _.merge({ text: 'Reloaded is a multiplayer game, free-to-play first-person shooter' }, Seeder.seed(this.elements[3]))
-      this.addElement(el)
-    },
-    addImage () {
-      const el = _.merge({}, Seeder.seed(this.elements[4]))
-      this.addElement(el)
-    },
-    addLogo () {
-      const el = _.merge({}, Seeder.seed(this.elements[5]))
-      this.addElement(el)
-    },
-    addDelimiter () {
-      const el = _.merge({}, Seeder.seed(this.elements[6]))
-      this.addElement(el)
-    },
-    addAvailable () {
-      const el = _.merge({}, Seeder.seed(this.elements[7]))
-      this.addElement(el)
-    },
-    addRestrictions () {
-      const el = _.merge({}, Seeder.seed(this.elements[8]))
-      this.addElement(el)
-    },
-    addSocial () {
-      const el = _.merge({}, Seeder.seed(this.elements[9]))
-      this.addElement(el)
-    },
-    addSlogan () {
-      const el = _.merge({}, Seeder.seed(this.elements[10]))
-      this.addElement(el)
-    },
-    addCost () {
-      const el = _.merge({}, Seeder.seed(this.elements[11]))
-      this.addElement(el)
-    },
-    addTextWithIcon () {
-      const el = _.merge({}, Seeder.seed(this.elements[12]))
-      this.addElement(el)
-    },
-    addVideo () {
-      this.$emit('addEl', _.merge({}, Seeder.seed(this.elements[13])))
-    },
-    addTimer () {
-      this.$emit('addEl', _.merge({}, Seeder.seed(this.elements[14])))
     },
     hideList () {
       this.setControlPanel(false)
