@@ -18,11 +18,10 @@
         <li><a href="#" @click.prevent="addEl(6)" class="b-elements__button">Available platforms</a></li>
         <li><a href="#" @click.prevent="addEl(7)" class="b-elements__button">Age restrictions</a></li>
         <li><a href="#" @click.prevent="addEl(8)" class="b-elements__button">Social networks</a></li>
-        <!--li><a href="#" @click.prevent="addEl(9)" class="b-elements__button">Slogan</a></li>
-        <li><a href="#" @click.prevent="addEl(10)" class="b-elements__button">Cost</a></li-->
-        <li><a href="#" @click.prevent="addEl(11)" class="b-elements__button">Icon with text</a></li>
-        <li><a href="#" @click.prevent="addEl(12)" class="b-elements__button">Video</a></li>
-        <li><a href="#" @click.prevent="addEl(13)" class="b-elements__button">Timer</a></li>
+        <!--li><a href="#" @click.prevent="addEl(9)" class="b-elements__button">Slogan</a></li-->
+        <li><a href="#" @click.prevent="addEl(10)" class="b-elements__button">Icon with text</a></li>
+        <li><a href="#" @click.prevent="addEl(11)" class="b-elements__button">Video</a></li>
+        <li><a href="#" @click.prevent="addEl(12)" class="b-elements__button">Timer</a></li>
       </ul>
     </aside>
   </div>
@@ -100,12 +99,6 @@ export default {
         element: types.Slogan,
         type: 'slogan',
         label: 'slogan'
-      },
-      {
-        name: 'Cost',
-        element: types.Cost,
-        type: 'text',
-        label: 'cost'
       },
       {
         name: 'IconWithText',
