@@ -5,13 +5,13 @@ import VuseIcon from '@editor/components/VuseIcon'
 import section from '../../mixins/section.js'
 
 const REQUIREMENTS = {
-  'OS': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
-  'Processor': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
-  'Memory': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
-  'Graphics': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
-  'Direct X': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
-  'Storage': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit },
-  'Sound Card': { text: types.TextInherit, min: types.TextInherit, max: types.TextInherit }
+  'OS': { text: {}, min: types.TextInherit, max: types.TextInherit },
+  'Processor': { text: {}, min: types.TextInherit, max: types.TextInherit },
+  'Memory': { text: {}, min: types.TextInherit, max: types.TextInherit },
+  'Graphics': { text: {}, min: types.TextInherit, max: types.TextInherit },
+  'Direct X': { text: {}, min: types.TextInherit, max: types.TextInherit },
+  'Storage': { text: {}, min: types.TextInherit, max: types.TextInherit },
+  'Sound Card': { text: {}, min: types.TextInherit, max: types.TextInherit }
 }
 
 const REQUIREMENTS_WINDOWS = {
@@ -240,73 +240,73 @@ export default {
     >
     <slot name="video"/>
     <div class="b-system">
-      <div class="b-system-platforms flex flex_center">
-        <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
-             v-show="$sectionData.mainStyle.systemRequirements[key].visible"
-             :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.mainStyle.selectPlatform.name }">
-          <div
-            class="b-system-platforms__item__tab"
-            @click="selectPlatform(key)"
-            >
-            <span class="b-system-platforms__item__tab-icon"
-              :style="{ width: $sectionData.mainStyle.sizeIcons.width + 'px', fill: $sectionData.mainStyle.colorFill.color }"
-              >
-              <VuseIcon :name="key"></VuseIcon>
-            </span>
-            <span
-              v-html="$sectionData.platforms[key].text.text"
-              v-styler:for="{ el: $sectionData.platforms[key].text, path: `$sectionData.platforms[${key}].text`, type: 'inline'}"
-              :style="$sectionData.platforms[key].text.styles"
+      <div class="b-system__padd-border">
+        <div class="b-system-platforms flex flex_center">
+          <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
+               v-show="$sectionData.mainStyle.systemRequirements[key].visible"
+               :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.mainStyle.selectPlatform.name }">
+            <div
+              class="b-system-platforms__item__tab"
               @click="selectPlatform(key)"
               >
-              {{ $sectionData.platforms[key].text.text }}
-            </span>
+              <span class="b-system-platforms__item__tab-icon"
+                :style="{ width: $sectionData.mainStyle.sizeIcons.width + 'px', fill: $sectionData.mainStyle.colorFill.color }"
+                >
+                <VuseIcon :name="key"></VuseIcon>
+              </span>
+              <span
+                v-html="$sectionData.platforms[key].text.text"
+                v-styler:for="{ el: $sectionData.platforms[key].text, path: `$sectionData.platforms[${key}].text`, type: 'inline'}"
+                :style="$sectionData.platforms[key].text.styles"
+                @click="selectPlatform(key)"
+                >
+                {{ $sectionData.platforms[key].text.text }}
+              </span>
+            </div>
           </div>
         </div>
-      </div>
-      <div class="b-system-requirements">
-        <div class="b-system-requirements__table">
-          <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
-              v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
-            <div>
-              <div class="b-system-requirements__table-row  flex flex_center">
-                <div class="b-system-requirements__table-col">
+        <div class="b-system-requirements">
+          <div class="b-system-requirements__table">
+            <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
+                v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
+              <div>
+                <div class="b-system-requirements__table-row  flex flex_center">
+                  <div class="b-system-requirements__table-col">
 
-                </div>
-                <div class="b-system-requirements__table-col">
-                <span class="b-system-requirements__table-chapter">
-                  Minimum
-                </span>
                   </div>
                   <div class="b-system-requirements__table-col">
-                <span class="b-system-requirements__table-chapter">
-                  Recommended
-                </span>
-                </div>
-              </div><!--/.b-system-requirements__table-row-->
-              <div class="b-system-requirements__table-row flex flex_center"
-                v-for="(v, index) in value.requirements" :key="index"
-                v-if="$sectionData.mainStyle.rowsRequirements[index].visible"
-                >
-                <div class="b-system-requirements__table-col"
-                  v-styler:for="{ el: $sectionData.platforms[key].requirements[index].text, path: `$sectionData.platforms[${key}].requirements[${index}].text`}"
-                  :style="$sectionData.platforms[key].requirements[index].text.styles"
-                  v-html="$sectionData.platforms[key].requirements[index].text.text"
+                  <span class="b-system-requirements__table-chapter">
+                    Minimum
+                  </span>
+                    </div>
+                    <div class="b-system-requirements__table-col">
+                  <span class="b-system-requirements__table-chapter">
+                    Recommended
+                  </span>
+                  </div>
+                </div><!--/.b-system-requirements__table-row-->
+                <div class="b-system-requirements__table-row flex flex_center"
+                  v-for="(v, index) in value.requirements" :key="index"
+                  v-if="$sectionData.mainStyle.rowsRequirements[index].visible"
                   >
-                </div>
-                <div class="b-system-requirements__table-col"
-                  v-styler:for="{ el: $sectionData.platforms[key].requirements[index].min, path: `$sectionData.platforms[${key}].requirements[${index}].min`}"
-                  :style="$sectionData.platforms[key].requirements[index].min.styles"
-                  v-html="$sectionData.platforms[key].requirements[index].min.text"
-                  >
-                </div>
-                <div class="b-system-requirements__table-col"
-                     v-styler:for="{ el: $sectionData.platforms[key].requirements[index].max, path: `$sectionData.platforms[${key}].requirements[${index}].max`}"
-                     :style="$sectionData.platforms[key].requirements[index].max.styles"
-                     v-html="$sectionData.platforms[key].requirements[index].max.text"
-                  >
-                </div>
-              </div><!--/.b-system-requirements__table-row-->
+                  <div class="b-system-requirements__table-col"
+                    v-html="$sectionData.platforms[key].requirements[index].text.text"
+                    >
+                  </div>
+                  <div class="b-system-requirements__table-col"
+                    v-styler:for="{ el: $sectionData.platforms[key].requirements[index].min, path: `$sectionData.platforms[${key}].requirements[${index}].min`}"
+                    :style="$sectionData.platforms[key].requirements[index].min.styles"
+                    v-html="$sectionData.platforms[key].requirements[index].min.text"
+                    >
+                  </div>
+                  <div class="b-system-requirements__table-col"
+                       v-styler:for="{ el: $sectionData.platforms[key].requirements[index].max, path: `$sectionData.platforms[${key}].requirements[${index}].max`}"
+                       :style="$sectionData.platforms[key].requirements[index].max.styles"
+                       v-html="$sectionData.platforms[key].requirements[index].max.text"
+                    >
+                  </div>
+                </div><!--/.b-system-requirements__table-row-->
+              </div>
             </div>
           </div>
         </div>
@@ -316,20 +316,34 @@ export default {
 </template>
 
 <style lang="sass" scoped="scoped">
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
 
 .b-system
+  $this: &
   max-width: 100rem
   margin: 0 auto 3.2rem
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
       height: auto !important
+  &__padd-border
+    padding: $size-step
+    margin: $size-step*2
+
+    transition: border 0.25s
+    border: 0.2rem dotted transparent
+    #{$this}:hover &
+      border: 0.2rem dotted #fff
   &-platforms
    justify-content: space-around
    padding: 2rem 0
    border-bottom: 0.2rem solid inherit
    border-color: inherit
+
+   position: relative
+   z-index: 0
    &__item
      font-weight: bold
      transition: all 200ms
