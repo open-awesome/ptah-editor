@@ -80,32 +80,34 @@ export default {
 
 <template>
   <div class="b-bg-controls" v-if="this.layouts.length">
-    <div class="b-bg-controls__header" @click="controlOpen = !controlOpen">
-      <span>Layout</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
-    </div>
-    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
+    <base-scroll-container
+      backgroundBar="#5D7899">
       <div v-for="(section, index) in layouts"  class="b-add"
            :class="{ 'b-add-selected': section.name === selectedSection }"
            :key="index"
            @click="selectLayout(section)">
         <img class="b-add-image" v-if="section.cover" :src="section.cover"/>
-        <icon-base
-          v-if="section.name === selectedSection"
-          name="checkMark"
-          :width="17"
-          :height="12"
-          color="#fff">
-        </icon-base>
-        <span class="b-add-title" v-if="!section.cover">
+
+        <div class="b-add-title">
+          <div class="mark">
+            <icon-base
+              v-if="section.name === selectedSection"
+              name="checkMark"
+              :width="17"
+              :height="12"
+              color="#fff">
+            </icon-base>
+          </div>
           {{ section.name }}
-        </span>
+        </div>
       </div>
-    </base-dropdown>
+    </base-scroll-container>
   </div>
 </template>
 
 <style lang="sass" scoped>
 .b-bg-controls
+  height: calc(100vh - 10rem)
   &__header
     font-size: 1.6rem
     height: 3.2rem
@@ -123,31 +125,40 @@ export default {
     margin-top: 2.2rem
 .b-add
   overflow: hidden
-  width: 17.6rem
-  height: 11.2rem
+  width: 23rem
   box-sizing: border-box
-  margin: 0 auto 1.2rem
+  margin: 0 auto 2rem
   cursor: pointer
-  display: flex
   align-items: center
   justify-content: center
   border: 0.2rem solid transparent
   transition: all 0.1s ease-in-out
   position: relative
+  &-title
+    font-size: 1.6rem
+    line-height: 4rem
+    height: 4rem
+    display: flex
+
   &-image
     max-width: 100%
     max-height: 100%
-  &-selected:after
-    content: ''
-    display: block
-    position: absolute
-    width: 100%
-    height: 100%
-    background: rgba(67, 11, 238, .3)
-    z-index: 100
+    border-radius: 2px
+    overflow: hidden
+
+  &-selected .mark
+    display: flex
+    justify-content: center
+    align-items: center
   svg
-    position: absolute
-    top: calc(50% - 6px)
-    left: calc(50% - 8.5px)
-    z-index: 110
+    fill: white
+
+.mark
+  display: none
+  width: 2.4rem
+  height: 2.4rem
+  background: $dark-blue-krayola
+  border-radius: 50%
+  margin: .9rem .5rem 0 0
+
 </style>

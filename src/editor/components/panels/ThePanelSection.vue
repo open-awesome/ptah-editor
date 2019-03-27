@@ -5,10 +5,6 @@
     </h6>
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-section-settings__inner">
-        <div class="b-section-settings__control">
-          <control-section-layouts :builder="builder"></control-section-layouts>
-        </div>
-
         <!-- System requirements -->
         <control-system-requirements
           :expand="expandedSystemRequirements"
@@ -27,7 +23,7 @@
 
         <!-- Font -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-          <control-text
+          <control-typography
             :fontSize="fontSize"
             :fontFamily="fontFamily"
             :fontColor="fontColor"
@@ -35,7 +31,7 @@
             :expand="expandedFont"
             :isComplexText="isComplexText"
             @open="onExpand"
-            @change="styleChange"></control-text>
+            @change="styleChange"></control-typography>
         </div>
 
         <div class="b-section-settings__group" v-if="settingObjectOptions.background">
@@ -164,7 +160,7 @@ import * as _ from 'lodash-es'
 import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './../controls/TheControlSystemRequirements.vue'
 import ControlText from './../controls/TheControlText'
-import ControlSectionLayouts from './../controls/TheControlSectionLayouts.vue'
+import ControlTypography from './../controls/TheControlTypography'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 
@@ -184,7 +180,7 @@ export default {
     ControlSectionProducts,
     ControlSystemRequirements,
     ControlText,
-    ControlSectionLayouts
+    ControlTypography
   },
   name: 'BuilderSettingsBarSection',
 

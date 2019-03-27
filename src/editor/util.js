@@ -44,13 +44,13 @@ export function getTypeFromSchema(target, schema) {
   tempTarget.shift()
   const value = _.get(schema, tempTarget.join('.'))
   if (value === types.Text) return 'text'
+  if (value === types.Slogan) return 'text'
   if (value === types.Title) return 'title'
   if (value === types.Button) return 'button'
   if (value === types.Link) return 'link'
   if (value === types.ClassList) return 'section'
   if (value === types.StyleObject) return 'section'
   if (value === types.Label) return 'inline'
-  if (value === types.Cost) return 'inline'
   if (value === types.Delimiter) return 'delimiter'
   if (value === types.SystemRequirements) return 'section'
   if (value === types.TextInherit) return 'inline'

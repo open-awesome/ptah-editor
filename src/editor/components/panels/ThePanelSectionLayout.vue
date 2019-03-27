@@ -1,25 +1,34 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Text
+      {{ settingObjectSection.name }} layout
     </h6>
 
     <div class="b-panel__control">
-      <the-control-typography :show-text-styles="false"></the-control-typography>
+      <control-section-layouts :builder="builder"></control-section-layouts>
     </div>
   </div>
 </template>
 
 <script>
-import TheControlTypography from '../controls/TheControlTypography'
+import { mapState } from 'vuex'
+
+import ControlSectionLayouts from './../controls/TheControlSectionLayouts.vue'
+
 export default {
-  name: 'ThePanelText',
-  components: { TheControlTypography },
+  name: 'ThePanelSectionLayout',
+
+  components: { ControlSectionLayouts },
+
   props: {
     builder: {
       type: Object,
       required: true
     }
+  },
+
+  computed: {
+    ...mapState('Sidebar', ['settingObjectSection'])
   }
 }
 </script>
@@ -44,6 +53,7 @@ export default {
       min-width: 28rem
       margin: 0 0 2.8rem 0
       padding: 0
+
       &:first-letter
         text-transform: uppercase
 

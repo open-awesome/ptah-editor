@@ -5,22 +5,18 @@
     v-if="$builder.isEditing"
     :class="{ 'is-visible': isVisible && !editText }"
   >
-
-    <!-- Button -->
-    <div class="b-styler__col">
-      <div class="b-styler__controls" v-if="type === 'button'">
+    <div class="b-styler__controls">
+      <!-- Button -->
+      <div v-if="type === 'button'">
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </div>
-      <div class="b-styler__controls" v-if="type === 'button'" ref="buttonModalProps">
+      <div v-if="type === 'button'" ref="buttonModalProps">
         <a href="#" class="b-styler__control" @click.stop="setModalProps()">
           <icon-base name="link" width="18" height="18" />
         </a>
       </div>
-    </div>
-
-    <div class="b-styler__controls">
 
       <!-- Text -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')" v-if="type === 'text'">
@@ -66,6 +62,11 @@
 
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
         <icon-base name="preview" width="14" height="16" />
+      </a>
+
+      <!-- Icon with text -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')" v-if="type === 'icon'">
+        <icon-base name="style" width="12" height="15" />
       </a>
 
     </div>
@@ -289,12 +290,13 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
+      console.log(this.type)
       event.preventDefault()
       event.stopPropagation()
 
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
-        data.styles.width = this.dimensions.width
+        data.styles.width = data.offsets.reference.width
         return data
       }
 
@@ -454,6 +456,7 @@ export default {
      * @param index
      */
     removeElement () {
+      console.log(this.path, this.components)
       let index = this.path[1]
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
@@ -505,10 +508,6 @@ export default {
 
   &__controls
     display: flex
-
-  &__col
-    display: flex
-    flex-wrap: nowrap
 
   &__control
     width: 3.2rem

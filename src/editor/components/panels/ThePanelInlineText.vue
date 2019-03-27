@@ -11,21 +11,21 @@
 
     <!-- Typography -->
     <div class="b-panel__control">
-      <control-typegraphy/>
+      <control-typography/>
     </div>
   </div>
 </template>
 
 <script>
 import ControlText from './../controls/TheControlText'
-import ControlTypegraphy from './../controls/TheControlTypegraphy'
+import ControlTypography from './../controls/TheControlTypography'
 
 export default {
   name: 'ThePanelInlineText',
 
   components: {
     ControlText,
-    ControlTypegraphy
+    ControlTypography
   },
 
   props: {
