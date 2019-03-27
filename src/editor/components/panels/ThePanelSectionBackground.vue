@@ -72,7 +72,7 @@ import * as _ from 'lodash-es'
 import BaseUploader from '../../../components/base/BaseUploader'
 import ControlBackgroundPosition from './../controls/TheControlBackgroundPosition'
 
-const DEFAULT_COLOR = 'rgba(0,0,0,1)'
+const DEFAULT_COLOR = 'rgba(255,255,255,1)'
 
 function getPickerColor (color) {
   if (typeof color === 'object' && color.hasOwnProperty('rgba')) {
