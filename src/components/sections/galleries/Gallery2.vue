@@ -58,7 +58,7 @@ const NAME = 'Gallery2'
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': 'rgba(21,28,68,0.07)'
+      'background-color': 'rgba(21,28,68,1)'
     },
     classes: [
       'full-height'

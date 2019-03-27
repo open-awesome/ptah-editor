@@ -568,7 +568,7 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-image': 'url(https://gn664.cdn.stg.gamenet.ru/0/7RIc1/o_4g83t.jpg)',
-      'background-color': 'rgba(21,28,68,0.73)'
+      'background-color': 'rgba(21,28,68,1)'
     }
   },
   container1: _.merge({}, C_CUSTOM_CONTAINER),
