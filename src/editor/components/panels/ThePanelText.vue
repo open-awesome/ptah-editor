@@ -7,14 +7,20 @@
     <div class="b-panel__control">
       <the-control-typography :show-text-styles="false"></the-control-typography>
     </div>
+
+    <div class="b-panel__control">
+      <the-control-text-link></the-control-text-link>
+    </div>
   </div>
 </template>
 
 <script>
 import TheControlTypography from '../controls/TheControlTypegraphy'
+import TheControlTextLink from '../controls/TheControlTextLink'
+
 export default {
   name: 'ThePanelText',
-  components: { TheControlTypography },
+  components: { TheControlTypography, TheControlTextLink },
   props: {
     builder: {
       type: Object,
