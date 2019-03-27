@@ -171,7 +171,7 @@ export default {
     &-ml
       top: 50%
       margin-top: -$size-step/8
-      left: -$size-step/4
+      left: -$size-step/8
       cursor: w-resize
     &-mr
       top: 50%
