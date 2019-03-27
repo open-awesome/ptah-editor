@@ -28,7 +28,15 @@ const C_CUSTOM_1 = [
   },
   {
     element: {
-      text: '39$'
+      text: '39$',
+      styles: {
+        'color': '#e4a11e',
+        'font-size': '3.2rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'font-family': 'Lato',
+        'text-decoration': ''
+      }
     },
     key: 2
   },
@@ -155,7 +163,15 @@ const C_CUSTOM_2 = [
   },
   {
     element: {
-      text: '49$'
+      text: '49$',
+      styles: {
+        'color': '#e4a11e',
+        'font-size': '3.2rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'font-family': 'Lato',
+        'text-decoration': ''
+      }
     },
     key: 12
   },
@@ -282,7 +298,15 @@ const C_CUSTOM_3 = [
   },
   {
     element: {
-      text: '59$'
+      text: '59$',
+      styles: {
+        'color': '#e4a11e',
+        'font-size': '3.2rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'font-family': 'Lato',
+        'text-decoration': ''
+      }
     },
     key: 22
   },
@@ -409,7 +433,15 @@ const C_CUSTOM_4 = [
   },
   {
     element: {
-      text: '79$'
+      text: '79$',
+      styles: {
+        'color': '#e4a11e',
+        'font-size': '3.2rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'font-family': 'Lato',
+        'text-decoration': ''
+      }
     },
     key: 32
   },
@@ -583,7 +615,7 @@ const COMPONENTS = [
   },
   {
     name: 'TextElement',
-    element: types.Cost,
+    element: types.Text,
     type: 'text',
     class: 'b-cost',
     label: 'text'

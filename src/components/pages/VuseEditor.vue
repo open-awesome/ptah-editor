@@ -22,7 +22,6 @@ import Delimiter from '@components/elements/Delimiter'
 import AvailablePlatforms from '@components/elements/AvailablePlatforms'
 import AgeRestrictions from '@components/elements/AgeRestrictions'
 import SocialNetworks from '@components/elements/SocialNetworks'
-import Cost from '@components/elements/Cost'
 import IconWithText from '@components/elements/IconWithText'
 import VideoElement from '@components/elements/VideoElement'
 import Timer from '@components/elements/Timer'
@@ -89,7 +88,6 @@ const ELEMENTS = {
   AvailablePlatforms,
   AgeRestrictions,
   SocialNetworks,
-  Cost,
   IconWithText,
   VideoElement,
   Timer,

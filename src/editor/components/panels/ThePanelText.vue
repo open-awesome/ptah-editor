@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import TheControlTypography from '../controls/TheControlTypegraphy'
+import TheControlTypography from '../controls/TheControlTypography'
 export default {
   name: 'ThePanelText',
   components: { TheControlTypography },

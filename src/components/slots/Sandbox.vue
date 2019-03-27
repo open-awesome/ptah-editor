@@ -1,14 +1,14 @@
 <template>
   <div class="b-slot">
-    <base-button @click="showSandboxSidebar($event)" class="sandbox-equalizer settings ptah-control" color="light-gray">
-      <icon-base name="cog" fill="white" />
-    </base-button>
-    <div class="divider ptah-control">
-      <icon-base name="divider" width="2" height="37" fill="#1F5FAA"></icon-base>
+    <div class="b-slot__settings">
+      <!-- TODO: need added controls aligned in slot -->
+      <!--span @click="showSandboxSidebar($event)" class="b-slot__settings-item b-slot__settings-item-settings">
+        <icon-base name="cog" fill="white" />
+      </span-->
+      <span @click="showSandboxSidebar($event, true)" class="b-slot__settings-item b-slot__settings-item-add-el">
+        <icon-base name="plus" fill="white" />
+      </span>
     </div>
-    <base-button @click="showSandboxSidebar($event, true)" class="sandbox-equalizer add-el ptah-control" color="light-gray">
-      <icon-base name="plus" fill="white" />
-    </base-button>
     <slot/>
   </div>
 </template>
@@ -73,7 +73,7 @@ export default {
       })
 
       setImmediate(() => {
-        let target = e.target.closest('.sandbox-equalizer').nextElementSibling
+        let target = e.target.closest('.b-slot__settings-item').nextElementSibling
         if (target) {
           target.classList.add('active')
         }
@@ -92,7 +92,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-$h: 4.8rem
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
 
 .b-slot
   $this: &
@@ -100,8 +101,49 @@ $h: 4.8rem
   flex-wrap: wrap
   position: relative
   width: 100%
-  .is-editable &
+  border: 1px dashed transparent
+
+  transition: border 0.25s
+  .is-editable &:hover
     border: 1px dashed $dark-blue-krayola
+  &__settings
+    position: absolute
+    top: -1px
+    bottom: -1px
+    left: -$size-step*1.1
+    z-index: 1
+
+    width: $size-step
+    padding: 0
+    margin: 0
+    border: none
+    border-radius: 0
+
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    flex-direction: column
+
+    opacity: 0
+    transition: opacity 0.25s
+    &-item
+      display: flex
+      align-items: center
+      justify-content: center
+
+      width: $size-step
+      height: $size-step
+
+      border-radius: 50%;
+      background: $white;
+      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39);
+
+      cursor: pointer
+      & svg
+        fill: $dark-blue-krayola
+  .is-editable &:hover
+    #{$this}__settings
+      opacity: 1
   /deep/
     .b-draggable-slot
       display: flex
@@ -125,56 +167,5 @@ $h: 4.8rem
           width: 96%
           > div
             width: 96%
-  &:hover
-    .sandbox-equalizer,
-    .divider
-      display: flex
 
-.sandbox-equalizer
-  position: absolute
-  top: 0
-  z-index: 1
-
-  width: 5.3rem
-  height: $h
-  padding: 0
-  margin: 0
-  border: none
-  border-radius: 0
-
-  background: $dark-blue-krayola
-
-  display: none
-  align-items: center
-  justify-content: center
-
-  line-height: 1.5em
-  opacity: 1
-
-  &.settings
-    left: 0
-
-  &.add-el
-    left: 5.3rem
-
-  > svg
-    margin: 0
-
-  &:hover
-    opacity: 1
-
-.divider
-  position: absolute
-  top: 0
-  left: 5.3rem
-  z-index: 2
-
-  width: .2rem
-  height: $h
-
-  background: $dark-blue-krayola
-
-  display: none
-  align-items: center
-  justify-content: center
 </style>

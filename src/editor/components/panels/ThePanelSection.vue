@@ -23,7 +23,7 @@
 
         <!-- Font -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-          <control-text
+          <control-typography
             :fontSize="fontSize"
             :fontFamily="fontFamily"
             :fontColor="fontColor"
@@ -31,7 +31,7 @@
             :expand="expandedFont"
             :isComplexText="isComplexText"
             @open="onExpand"
-            @change="styleChange"></control-text>
+            @change="styleChange"></control-typography>
         </div>
 
         <div v-if="!isHeader" class="b-section-settings__control">
@@ -121,6 +121,7 @@ import * as _ from 'lodash-es'
 import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './../controls/TheControlSystemRequirements.vue'
 import ControlText from './../controls/TheControlText'
+import ControlTypography from './../controls/TheControlTypography'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 
@@ -139,7 +140,8 @@ export default {
     BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
-    ControlText
+    ControlText,
+    ControlTypography
   },
   name: 'BuilderSettingsBarSection',
 

@@ -11,7 +11,7 @@
 
     <!-- Typography -->
     <div class="b-panel__control">
-      <control-typegraphy/>
+      <control-typography/>
     </div>
 
     <!-- background -->
@@ -37,7 +37,7 @@
 <script>
 import { mapState } from 'vuex'
 import ControlText from './../controls/TheControlText'
-import ControlTypegraphy from './../controls/TheControlTypegraphy'
+import ControlTypography from './../controls/TheControlTypography'
 import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
 import ControlBackgroundImage from './../controls/TheControlBackgroundImage'
 import ControlBorderRadius from './../controls/TheControlBorderRadius'
@@ -55,7 +55,7 @@ export default {
 
   components: {
     ControlText,
-    ControlTypegraphy,
+    ControlTypography,
     ControlBackgroundColor,
     ControlBackgroundImage,
     ControlBorderRadius,
