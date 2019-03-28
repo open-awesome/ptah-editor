@@ -283,21 +283,6 @@ export default {
                 >
                 <VuseIcon :name="key"></VuseIcon>
               </span>
-              <span class="b-system-platforms__item__tab-text"
-                v-html="$sectionData.platforms[key].text.text"
-                v-styler:for="{ el: $sectionData.platforms[key].text, path: `$sectionData.platforms[${key}].text`, type: 'inline'}"
-                :style="{
-                  'color' : $sectionData.mainStyle.table.head['color'],
-                  'font-family' : $sectionData.mainStyle.table.head['font-family'],
-                  'font-size' : $sectionData.mainStyle.table.head['font-size'],
-                  'font-weight' : $sectionData.mainStyle.table.head['font-weight'],
-                  'font-style' : $sectionData.mainStyle.table.head['font-style'],
-                  'text-decoration' : $sectionData.mainStyle.table.head['text-decoration']
-                }"
-                @click="selectPlatform(key)"
-                >
-                {{ $sectionData.platforms[key].text.text }}
-              </span>
             </div>
           </div>
         </div>
@@ -393,6 +378,12 @@ export default {
     border: 0.2rem dotted transparent
 
     position: relative
+    .is-mobile &
+      padding: 0
+      margin: $size-step*4 0
+    @media only screen and (max-width: 540px)
+      &
+        padding: 0
     #{$this}:hover &
       border: 0.2rem dotted #fff
   &-platforms
@@ -455,7 +446,7 @@ export default {
 
             width: $size-step/2
             height: $size-step/2
-            margin: $size-step/4 0 0 -$size-step/4
+            margin: $size-step/4 -$size-step/2 0 -$size-step/4
             background-color: #fff
 
             transform: rotate(45deg)
@@ -515,5 +506,10 @@ export default {
         white-space: nowrap
       &_name
         opacity: 0.6
+      .is-mobile &
+        padding: $size-step/4
+      @media only screen and (max-width: 540px)
+        &
+          padding: $size-step/4
 
 </style>
