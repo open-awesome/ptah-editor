@@ -662,6 +662,26 @@ const data = new Map([
       sizeIcons: {
         width: 24
       },
+      table: {
+        head: {
+          'font-name': 'Lato',
+          'font-size': '14px',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'text-decoration': 'none',
+          'color': 'rgba(0, 0, 0, 0.26)',
+          'background-color': '#C4EDCD'
+        },
+        body: {
+          'font-family': 'Lato',
+          'font-size': '14px',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'text-decoration': 'none',
+          'color': 'rgba(0, 0, 0, 0.5)',
+          'background-color': '#fff'
+        }
+      },
       typography: false,
       styles: {
         'background-image': '',

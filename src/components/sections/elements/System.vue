@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import VuseIcon from '@editor/components/VuseIcon'
 import section from '../../mixins/section.js'
+import { mapActions } from 'vuex'
 
 const REQUIREMENTS = {
   'OS': { text: {}, min: types.TextInherit, max: types.TextInherit },
@@ -208,12 +209,24 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
+
     selectPlatform (key) {
       if (!this.$sectionData.mainStyle.systemRequirements[key].visible) {
         return
       }
 
       this.$sectionData.mainStyle.selectPlatform.name = key
+    },
+
+    async showSettings (panel) {
+      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
+
+      this.setSettingSection(this.$builder.sections[index])
+
+      await this.$nextTick()
+
+      this.setControlPanel(panel)
     }
   },
 
@@ -242,23 +255,45 @@ export default {
     <slot name="overlay"/>
     <div class="b-system">
       <div class="b-system__padd-border">
+        <!-- Setting controls -->
+        <div class="b-system__controls">
+          <div>
+            <a href="#" class="b-system__control" @click.stop="showSettings('SectionSystemSettings')">
+              <icon-base name="cog" width="12" height="15" />
+            </a>
+          </div>
+          <div>
+            <a href="#" class="b-system__control" @click.stop="showSettings('SectionSystemStyle')">
+              <icon-base name="style" width="12" height="15" />
+            </a>
+          </div>
+        </div>
+
         <div class="b-system-platforms flex flex_center">
           <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
                v-show="$sectionData.mainStyle.systemRequirements[key].visible"
-               :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.mainStyle.selectPlatform.name }">
+               :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible }">
             <div
               class="b-system-platforms__item__tab"
               @click="selectPlatform(key)"
+              :class="{ 'b-system-platforms__item__tab_active': key === $sectionData.mainStyle.selectPlatform.name }"
               >
               <span class="b-system-platforms__item__tab-icon"
                 :style="{ width: $sectionData.mainStyle.sizeIcons.width + 'px', fill: $sectionData.mainStyle.colorFill.color }"
                 >
                 <VuseIcon :name="key"></VuseIcon>
               </span>
-              <span
+              <span class="b-system-platforms__item__tab-text"
                 v-html="$sectionData.platforms[key].text.text"
                 v-styler:for="{ el: $sectionData.platforms[key].text, path: `$sectionData.platforms[${key}].text`, type: 'inline'}"
-                :style="$sectionData.platforms[key].text.styles"
+                :style="{
+                  'color' : $sectionData.mainStyle.table.head['color'],
+                  'font-family' : $sectionData.mainStyle.table.head['font-family'],
+                  'font-size' : $sectionData.mainStyle.table.head['font-size'],
+                  'font-weight' : $sectionData.mainStyle.table.head['font-weight'],
+                  'font-style' : $sectionData.mainStyle.table.head['font-style'],
+                  'text-decoration' : $sectionData.mainStyle.table.head['text-decoration']
+                }"
                 @click="selectPlatform(key)"
                 >
                 {{ $sectionData.platforms[key].text.text }}
@@ -271,26 +306,47 @@ export default {
             <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
                 v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
               <div>
-                <div class="b-system-requirements__table-row  flex flex_center">
+                <div class="b-system-requirements__table-row  flex flex_center"
+                  :style="{
+                    'color' : $sectionData.mainStyle.table.head['color'],
+                    'font-family' : $sectionData.mainStyle.table.head['font-family'],
+                    'font-size' : $sectionData.mainStyle.table.head['font-size'],
+                    'font-weight' : $sectionData.mainStyle.table.head['font-weight'],
+                    'font-style' : $sectionData.mainStyle.table.head['font-style'],
+                    'text-decoration' : $sectionData.mainStyle.table.head['text-decoration'],
+                    'background-color' : $sectionData.mainStyle.table.head['background-color']
+                  }"
+                  >
                   <div class="b-system-requirements__table-col">
-
+                    <span class="b-system-requirements__table-chapter">
+                      Component
+                    </span>
                   </div>
                   <div class="b-system-requirements__table-col">
-                  <span class="b-system-requirements__table-chapter">
-                    Minimum
-                  </span>
-                    </div>
-                    <div class="b-system-requirements__table-col">
-                  <span class="b-system-requirements__table-chapter">
-                    Recommended
-                  </span>
+                    <span class="b-system-requirements__table-chapter">
+                      Minimum
+                    </span>
+                  </div>
+                  <div class="b-system-requirements__table-col">
+                    <span class="b-system-requirements__table-chapter">
+                      Recommended
+                    </span>
                   </div>
                 </div><!--/.b-system-requirements__table-row-->
                 <div class="b-system-requirements__table-row flex flex_center"
                   v-for="(v, index) in value.requirements" :key="index"
                   v-if="$sectionData.mainStyle.rowsRequirements[index].visible"
+                  :style="{
+                    'color' : $sectionData.mainStyle.table.body['color'],
+                    'font-family' : $sectionData.mainStyle.table.body['font-family'],
+                    'font-size' : $sectionData.mainStyle.table.body['font-size'],
+                    'font-weight' : $sectionData.mainStyle.table.body['font-weight'],
+                    'font-style' : $sectionData.mainStyle.table.body['font-style'],
+                    'text-decoration' : $sectionData.mainStyle.table.body['text-decoration'],
+                    'background-color' : $sectionData.mainStyle.table.body['background-color']
+                  }"
                   >
-                  <div class="b-system-requirements__table-col"
+                  <div class="b-system-requirements__table-col b-system-requirements__table-col_name"
                     v-html="$sectionData.platforms[key].requirements[index].text.text"
                     >
                   </div>
@@ -316,7 +372,7 @@ export default {
   </section>
 </template>
 
-<style lang="sass" scoped="scoped">
+<style lang="sass" scoped>
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
@@ -335,61 +391,111 @@ export default {
 
     transition: border 0.25s
     border: 0.2rem dotted transparent
+
+    position: relative
     #{$this}:hover &
       border: 0.2rem dotted #fff
   &-platforms
-   justify-content: space-around
-   padding: 2rem 0
-   border-bottom: 0.2rem solid inherit
-   border-color: inherit
+    justify-content: flex-start
 
-   position: relative
-   z-index: 0
-   &__item
-     font-weight: bold
-     transition: all 200ms
-     position: relative
-     cursor: pointer
-     opacity: 1
-     border: dotted transparent 0.1rem
-     &_opacity
-       display: none
-       .is-editable &
-         opacity: 0.2
-         display: block
-     &__tab
-       border: dotted transparent 0.1rem
-       padding: 0.5rem 1rem
-       z-index: 0
-       position: relative
-       max-width: 20rem
-       text-overflow: ellipsis
-       white-space: nowrap
-       overflow: hidden
-       .is-mobile &
-         max-width: 16rem
-       @media only screen and (max-width: 540px)
-         &
-           max-width: 16rem
-       &-icon
-         display: inline-block
-         margin: 0.8rem
-         & .vuse-icon
-           width: 100%
-           height: auto
-           fill: inherit
-     &:hover,
-     &_active
-       border: dotted inherit 0.2rem
-       border-color: inherit
-       filter: invert(10%)
+    position: relative
+    z-index: 0
+    &__item
+      transition: all 200ms
+      position: relative
+      cursor: pointer
+      opacity: 1
+      border: dotted transparent 0.1rem
+      cursor: pointer
+      &_opacity
+        display: none
+        .is-editable &
+          opacity: 0.2
+          display: block
+      &__tab
+        position: relative
+        z-index: 0
+
+        padding: $size-step/4
+        transition: all 200ms
+
+        display: flex
+        align-items: center
+        &-text
+          display: inline-block
+          position: relative
+          max-width: 20rem
+          text-overflow: ellipsis
+          white-space: nowrap
+          padding: $size-step/8
+          overflow: hidden
+          .is-mobile &
+            max-width: 16rem
+          @media only screen and (max-width: 540px)
+            &
+              max-width: 16rem
+        &-icon
+          display: inline-block
+          margin: 0.8rem
+          & .vuse-icon
+            width: 100%
+            height: auto
+            fill: inherit
+        &:hover,
+        &_active
+          cursor: pointer
+          background-color: #fff
+          border-radius: 4px
+        &_active
+          &:before
+            content: ""
+            position: absolute
+            left: 50%
+            bottom: 0
+
+            width: $size-step/2
+            height: $size-step/2
+            margin: $size-step/4 0 0 -$size-step/4
+            background-color: #fff
+
+            transform: rotate(45deg)
+            transition: all 200ms
+  &__controls
+    position: absolute
+    top: -4rem
+    left: 0
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    display: none
+    #{$this}:hover &
+      display: flex
+  &__control
+    width: 3.2rem
+    height: 3.2rem
+    display: flex
+    align-items: center
+    justify-content: center
+
+    border-radius: 50%
+    background: $white
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+    margin-right: .4rem
+    svg
+      fill: $dark-blue-krayola
+      margin-bottom: 0
+    &:hover, .active
+      background: $dark-blue-krayola
+      svg
+        fill: $white
+        margin-bottom: 0
 
 .b-system-requirements
   &__table
-    margin: 3rem 0 0
+    margin: $size-step 0 0
     &-chapter
-      font-size: 1.6rem
-      font-weight: bold
     &-row
       border-bottom: 0.1rem dotted #333
       border-color: inherit
@@ -399,7 +505,7 @@ export default {
           opacity: 0.2
           display: flex
     &-col
-      padding: 1rem
+      padding: $size-step/2
       width: 38%
       text-align: center
       word-break: break-all
@@ -407,5 +513,7 @@ export default {
         text-align: left
         width: 24%
         white-space: nowrap
+      &_name
+        opacity: 0.6
 
 </style>

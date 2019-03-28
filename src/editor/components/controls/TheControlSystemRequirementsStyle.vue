@@ -1,12 +1,14 @@
 <script>
 import { mapState } from 'vuex'
-import VuseIcon from '@editor/components/VuseIcon'
+import ControlTable from './../controls/TheControlTable.vue'
+import ControlTableBody from './../controls/TheControlTableBody.vue'
 
 export default {
-  name: 'ControlSystemRequirements',
+  name: 'ControlSystemRequirementsStyle',
 
   components: {
-    VuseIcon
+    ControlTable,
+    ControlTableBody
   },
 
   data () {
@@ -76,63 +78,22 @@ export default {
   <div class="b-text-controls">
     <div>
       <div class="b-text-controls__control">
-        <div class="b-text-controls__control-chapter">
-          Supported systems
-        </div>
-        <div class="b-system-requirements">
-          <div class="b-system-requirements__item is-editable"
-            v-for="(value, key) in requirements" :key="key"
-            :class="{ 'b-system-requirements__item_opacity' : false === requirements[key].visible, 'b-system-requirements__item_select' : requirements[key].expand }"
-            >
-            <span class="b-system-requirements__item-check"
-              @click="visible(key)"
-              title="Show / Hide"
-              :class="{ 'b-system-requirements__item-check_color' : true === requirements[key].visible }"
-              >
-               <icon-base width="10" height="7" name="checkMark"
-                 v-show="requirements[key].visible"
-                 />
-            </span>
-
-            <a class="b-system-requirements__item-button"
-              @click="visible(key)"
-              :title="key"
-              >
-              {{ key }}
-            </a>
-
-          </div>
-        </div><!--/.b-system-requirements-->
+        <base-range-slider v-model="sizeIcons.width" label="Icons size" step="8" min="16" max="128">
+          {{ sizeIcons.width }} px
+        </base-range-slider>
       </div>
       <div class="b-text-controls__control">
-        <div class="b-text-controls__control-chapter">
-          System components
-        </div>
-        <div class="b-system-requirements">
-          <div class="b-system-requirements__item is-editable"
-            v-for="(value, key) in rowsRequirements" :key="key"
-            :class="{ 'b-system-requirements__item_opacity' : false === rowsRequirements[key].visible, 'b-system-requirements__item_select' : rowsRequirements[key].expand }"
-            >
-
-            <span class="b-system-requirements__item-check"
-              @click="visibleRows(key)"
-              title="Show / Hide"
-              :class="{ 'b-system-requirements__item-check_color' : true === rowsRequirements[key].visible }"
-              >
-              <icon-base width="10" height="7" name="checkMark"
-               v-show="rowsRequirements[key].visible"
-                />
-            </span>
-
-            <a class="b-system-requirements__item-button"
-              @click="visibleRows(key)"
-              :title="key"
-              >
-              {{ key }}
-            </a>
-
-          </div>
-        </div><!--/.b-system-requirements-->
+        <base-color-picker label="Icons color" v-model="color" @change="changeColor"></base-color-picker>
+      </div>
+    </div>
+    <div>
+      <div class="b-text-controls__control">
+        <control-table/>
+      </div>
+    </div>
+    <div>
+      <div class="b-text-controls__control">
+        <control-table-body/>
       </div>
     </div>
   </div>
@@ -151,11 +112,14 @@ export default {
     align-items: center
     cursor: pointer
     margin: 1.6rem 0
+    i
+      margin-left: 5px
+      margin-bottom: -5px
+      transform: rotate(180deg)
+      &.dropped
+        transform: rotate(0deg)
   &__control
     margin-top: 2.2rem
-    &-chapter
-      font-size: 1.6rem
-      font-weight: bold
 
 .b-system-requirements
   width: 100%
@@ -200,8 +164,6 @@ export default {
         filter: brightness(120%)
       &:active
         filter: brightness(50%)
-      .vuse-icon
-         width: 100%
     &-check
       width: 2rem
       height: 2rem

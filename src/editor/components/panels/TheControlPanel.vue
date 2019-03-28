@@ -25,6 +25,8 @@ import ThePanelRestrictions from './ThePanelRestrictions'
 import ThePanelInlineText from './ThePanelInlineText'
 import ThePanelIcon from './ThePanelIcon'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
+import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
+import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 
 export default {
   name: 'TheControlPanel',
@@ -66,7 +68,9 @@ export default {
     ThePanelInlineText,
     ThePanelImage,
     ThePanelIcon,
-    ThePanelSectionBackground
+    ThePanelSectionBackground,
+    ThePanelSectionSystemSettings,
+    ThePanelSectionSystemStyle
   }
 }
 </script>
