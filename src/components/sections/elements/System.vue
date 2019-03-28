@@ -277,6 +277,9 @@ export default {
               class="b-system-platforms__item__tab"
               @click="selectPlatform(key)"
               :class="{ 'b-system-platforms__item__tab_active': key === $sectionData.mainStyle.selectPlatform.name }"
+              :style="{
+                'border-color' : $sectionData.mainStyle.table.head['background-color']
+              }"
               >
               <span class="b-system-platforms__item__tab-icon"
                 :style="{ width: $sectionData.mainStyle.sizeIcons.width + 'px', fill: $sectionData.mainStyle.colorFill.color }"
@@ -408,10 +411,15 @@ export default {
         z-index: 0
 
         padding: $size-step/4
+        margin: 0 $size-step/4
         transition: all 200ms
 
         display: flex
         align-items: center
+
+        box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.25)
+        border: 0.2rem solid transparent
+        border-radius: 0.4rem
         &-text
           display: inline-block
           position: relative
