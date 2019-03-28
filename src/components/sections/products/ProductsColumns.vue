@@ -568,7 +568,7 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-image': 'url(https://gn664.cdn.stg.gamenet.ru/0/7RIc1/o_4g83t.jpg)',
-      'background-color': 'rgba(21,28,68,0.73)'
+      'background-color': 'rgba(21,28,68,1)'
     }
   },
   container1: _.merge({}, C_CUSTOM_CONTAINER),
@@ -736,6 +736,7 @@ export default {
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="video"/>
+    <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row b-products-colums__row">
         <div class="b-grid__col-3 b-grid__col-m-12 "

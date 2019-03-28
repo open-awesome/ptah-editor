@@ -5,6 +5,7 @@
     :style="$sectionData.mainStyle.styles"
     >
       <slot name="video"/>
+      <slot name="overlay"/>
       <div class="b-gallery-three__wrap">
         <div class="b-gallery-three-block flex flex_center">
           <div class="b-gallery-three-block__item flex flex_center flex_columns"
@@ -75,7 +76,7 @@ const NAME = 'Gallery3'
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': 'rgba(21,28,68,0.07)'
+      'background-color': 'rgba(21,28,68,1)'
     },
     classes: [
       'full-height'

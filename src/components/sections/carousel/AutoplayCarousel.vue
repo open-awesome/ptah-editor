@@ -6,6 +6,7 @@
     class="b-gallery-carousel">
 
   <slot name="video"/>
+  <slot name="overlay"/>
 
   <h3 class="b-header">{{ $sectionData.mainStyle.header }}</h3>
 

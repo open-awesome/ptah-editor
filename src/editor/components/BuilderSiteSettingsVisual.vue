@@ -59,21 +59,21 @@ export default {
 
     backgroundFillValue: {
       set (value) {
-        if (value === 'fill') {
+        if (value === false) {
           this.bgSize = 'cover'
           this.bgRepeat = 'no-repeat'
         }
 
-        if (value === 'tile') {
+        if (value === true) {
           this.bgSize = ''
           this.bgRepeat = 'repeat'
         }
       },
       get () {
         if (this.bgSize === 'cover') {
-          return 'fill'
+          return false
         }
-        return 'tile'
+        return true
       }
     },
 
@@ -147,64 +147,50 @@ export default {
 <template>
   <builder-modal-content-layout>
     <div class="b-builder-site-settings-visual">
-      <base-heading level="2">{{ $t('s.backgroundColor') }}</base-heading>
-
-      <base-fieldset>
-        <base-fieldset-row width="short">
-          <BaseColorPicker :label="$t('')" v-model="pageBackgroundColor" />
-        </base-fieldset-row>
-
-        <base-fieldset-row>
-          <BaseSwitcher v-model="fullPageScrollCheckbox" :label="$t('s.fpScroll')" />
-        </base-fieldset-row>
-      </base-fieldset>
-
-      <base-fieldset>
-        <base-heading level="3">{{ $t('s.backgroundImage') }}</base-heading>
-
-        <base-fieldset-row>
+      <div class="b-builder-site-settings-visual__row">
+        <div class="b-builder-site-settings-visual__col">
+          <BaseColorPicker :label="$t('s.backgroundColor')" v-model="pageBackgroundColor" />
+        </div>
+        <div class="b-builder-site-settings-visual__col">
           <base-uploader v-model="pageBackgroundUrl" :label="$t('s.backgroundImage')"/>
-        </base-fieldset-row>
-
-        <base-fieldset-row>
-          <base-fieldset-item>
-            <BaseTextField
-              :label="$t('s.posX')"
-              v-model="pageBackgroundPositionX"
-              placeholder="0px"
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+          <BaseTextField
+            :label="$t('s.posX')"
+            v-model="pageBackgroundPositionX"
+            placeholder="0px"
             />
-          </base-fieldset-item>
-          <base-fieldset-item>
-            <BaseTextField
-              :label="$t('s.poxY')"
-              v-model="pageBackgroundPositionY"
-              placeholder="0px"
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+          <BaseTextField
+            :label="$t('s.poxY')"
+            v-model="pageBackgroundPositionY"
+            placeholder="0px"
             />
-          </base-fieldset-item>
-        </base-fieldset-row>
-
-        <base-fieldset-row>
-          <BaseButtonTabs :list="backgroundFillTypes" v-model="backgroundFillValue" />
-        </base-fieldset-row>
-        <base-fieldset-row>
+        </div>
+      </div>
+      <div class="b-builder-site-settings-visual__row">
+        <div class="b-builder-site-settings-visual__col">
+          <BaseSwitcher v-model="fullPageScrollCheckbox" :label="$t('s.fpScroll')" />
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+          <BaseSwitcher v-model="backgroundFillValue" label="Background fill" />
+        </div>
+        <div class="b-builder-site-settings-visual__col">
           <BaseSwitcher v-model="bgAttachmentCheckbox" :label="$t('s.fixedScrolling')" />
-        </base-fieldset-row>
-      </base-fieldset>
-
-      <base-fieldset>
-        <base-heading level="3">{{ $t('s.backgroundVideo') }}</base-heading>
-
-        <base-fieldset-row>
-          <base-uploader
-              v-model="bgVideo"
-              :label="$t('s.backgroundVideo')"
-              type="video"/>
-        </base-fieldset-row>
-
-        <base-fieldset-row>
-          <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
-        </base-fieldset-row>
-      </base-fieldset>
+        </div>
+      </div>
+      <div class="b-builder-site-settings-visual__row">
+        <div class="b-builder-site-settings-visual__col">
+            <base-uploader
+                v-model="bgVideo"
+                :label="$t('s.backgroundVideo')"
+                type="video"/>
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+            <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
+        </div>
+      </div>
     </div>
 
     <div slot="controls">
@@ -213,3 +199,23 @@ export default {
     </div>
   </builder-modal-content-layout>
 </template>
+
+<style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+
+.b-builder-site-settings-visual
+  &__row
+    display: flex
+    align-items: center
+
+    margin: $size-step/4 0
+    padding: $size-step/4
+    &:nth-child(2)
+      background-color: rgba($ligth-grey, 0.3)
+  &__col
+    margin: $size-step/2 $size-step*2 $size-step/2 0
+  /deep/
+    .b-base-switcher__label
+      margin-right: $size-step/2
+</style>

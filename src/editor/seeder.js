@@ -171,10 +171,14 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': 'rgba(0,0,0,0)',
+        'background-color': 'rgba(255,255,255,1)',
         'background-attachment': 'scroll',
         'width': '',
         'height': ''
+      },
+      overlay: {
+        color: 'rgba(0,0,0,1)',
+        opacity: '0'
       }
     })
   )],
