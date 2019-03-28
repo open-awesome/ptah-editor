@@ -13,7 +13,7 @@
               :key="index"
             >
             <div class="b-preview__image"
-              v-styler:galleryItem="{ el: $sectionData.images[index].preview, path:`$sectionData.images[${index}].preview`, type: 'galleryItem' }"
+              v-styler:for="{ el: $sectionData.images[index].preview, path:`$sectionData.images[${index}].preview`, type: 'image' }"
               :style="$sectionData.images[index].preview.styles"
               :data-index="index"
               :gallery-one-preview="'loader__content_show'"
@@ -60,7 +60,7 @@ import { galleryPreviewClick } from '@cscripts/gallery1'
 import section from '../../mixins/section.js'
 
 const GALLERY_ITEM = {
-  preview: types.GalleryItem,
+  preview: types.Image,
   label: types.Text,
   title: types.Text,
   img: types.Image,
