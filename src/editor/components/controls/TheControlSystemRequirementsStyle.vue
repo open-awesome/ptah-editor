@@ -78,7 +78,7 @@ export default {
   <div class="b-text-controls">
     <div>
       <div class="b-text-controls__control">
-        <base-range-slider v-model="sizeIcons.width" label="Icons size" step="8" min="16" max="128">
+        <base-range-slider v-model="sizeIcons.width" label="Icons size" step="8" min="16" max="72">
           {{ sizeIcons.width }} px
         </base-range-slider>
       </div>
