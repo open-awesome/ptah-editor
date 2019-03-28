@@ -19,7 +19,7 @@
               >
             </div>
             <div class="b-preview__name"
-              v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'text' }"
+              v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'inline' }"
               v-html="$sectionData.images[index].label.text"
               :style="$sectionData.images[index].label.styles"
               >
@@ -31,7 +31,7 @@
             <h2 class="b-gallery-one-stage__name"
                v-html="$sectionData.images[index].title.text"
                :style="$sectionData.images[index].title.styles"
-               v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`, type: 'text' }">
+               v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`, type: 'inline' }">
             </h2>
             <!-- image -->
             <div class="b-gallery-one-stage__img"
@@ -41,7 +41,7 @@
             </div>
             <!--/image -->
             <p class="b-gallery-one-stage__bio"
-             v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`, type: 'text' }"
+             v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`, type: 'inline' }"
              :style="$sectionData.images[index].text.styles"
              v-html="$sectionData.images[index].text.text">
             </p>
@@ -60,10 +60,10 @@ import section from '../../mixins/section.js'
 
 const GALLERY_ITEM = {
   preview: types.GalleryItem,
-  label: types.Text,
-  title: types.Text,
+  label: types.TextInherit,
+  title: types.TextInherit,
   img: types.Image,
-  text: types.Text
+  text: types.TextInherit
 }
 
 const GROUP_NAME = 'Galleries'
