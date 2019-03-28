@@ -5,18 +5,22 @@
     v-if="$builder.isEditing"
     :class="{ 'is-visible': isVisible && !editText }"
   >
-    <div class="b-styler__controls">
+
+    <div class="b-styler__col" v-if="type === 'button'">
       <!-- Button -->
-      <div v-if="type === 'button'">
+      <div class="b-styler__controls">
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </div>
-      <div v-if="type === 'button'" ref="buttonModalProps">
+      <div class="b-styler__controls" ref="buttonModalProps">
         <a href="#" class="b-styler__control" @click.stop="setModalProps()">
           <icon-base name="link" width="18" height="18" />
         </a>
       </div>
+    </div>
+
+    <div class="b-styler__controls">
 
       <!-- Text -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')" v-if="type === 'text'">
@@ -286,13 +290,12 @@ export default {
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
       let elOps = null
 
-      console.log(this.type)
       event.preventDefault()
       event.stopPropagation()
 
@@ -461,7 +464,6 @@ export default {
      * @param index
      */
     removeElement () {
-      console.log(this.path, this.components)
       let index = this.path[1]
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
@@ -513,6 +515,10 @@ export default {
 
   &__controls
     display: flex
+
+  &__col
+    display: flex
+    flex-wrap: nowrap
 
   &__control
     width: 3.2rem

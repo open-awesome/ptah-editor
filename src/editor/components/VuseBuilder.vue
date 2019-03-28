@@ -33,6 +33,15 @@
         <source :src="headerSection.data.mainStyle.backgroundVideo">
       </video>
 
+      <div
+        class="b-overlay"
+        v-if="headerSection.data.mainStyle.overlay"
+        :id="`bg-overlay-${ headerSection.id }`"
+        slot="overlay"
+        :style="{ 'background-color' : headerSection.data.mainStyle.overlay.color, 'opacity' : headerSection.data.mainStyle.overlay.opacity }"
+        >
+      </div>
+
     </component>
 
     <component
@@ -52,6 +61,15 @@
             loop>
           <source :src="section.data.mainStyle.backgroundVideo">
         </video>
+
+        <div
+          class="b-overlay"
+          v-if="section.data.mainStyle.overlay"
+          :id="`bg-overlay-${ section.id }`"
+          slot="overlay"
+          :style="{ 'background-color' : section.data.mainStyle.overlay.color, 'opacity' : section.data.mainStyle.overlay.opacity }"
+          >
+        </div>
 
     </component>
 
@@ -199,7 +217,8 @@ export default {
       'updateBuilderGroups',
       'updateSectionGroups',
       'setSettingSection',
-      'toggleSidebar'
+      'toggleSidebar',
+      'setControlPanel'
     ]),
     ...mapActions('Landing', [
       'saveState'
@@ -338,6 +357,7 @@ export default {
       // --- add selected class and scroll to el
       menuItem.classList.add('b-menu-subitem_selected')
       menuItem.scrollIntoView()
+      // this.setControlPanel(false)
     },
 
     showSettingsBar (event, section) {
@@ -535,6 +555,15 @@ export default {
     min-height: 100%
     + .b-footer
       background: none !important
+
+/* overlay background */
+
+.b-overlay
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
 
 // --- dirty hack. normalize artboard size
 .builder-last

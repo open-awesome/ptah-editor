@@ -1,6 +1,6 @@
 <template>
   <div class="b-range-slider">
-    <base-label v-if="label">
+    <base-label v-if="label != ''">
       {{label}}
     </base-label>
     <div class="b-range-slider__row">

@@ -167,6 +167,7 @@ export default {
   &__label
     color: $dark-grey
     margin-left: $size-step/2
+    white-space: nowrap
     &:first-letter
       text-transform: uppercase
 </style>

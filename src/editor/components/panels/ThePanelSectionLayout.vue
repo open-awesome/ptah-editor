@@ -1,7 +1,8 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      {{ settingObjectSection.name }} layout
+      Layout
+      <div>{{ settingObjectSection.name }}</div>
     </h6>
 
     <div class="b-panel__control">
@@ -53,6 +54,13 @@ export default {
       min-width: 28rem
       margin: 0 0 2.8rem 0
       padding: 0
+
+      & div
+        width: 24rem
+        display: block
+        white-space: nowrap
+        text-overflow: ellipsis
+        overflow: hidden
 
       &:first-letter
         text-transform: uppercase
