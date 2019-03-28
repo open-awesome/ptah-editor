@@ -14,6 +14,7 @@ const DEFAULT_OPTIONS = {
     behavior: 'auto',
     action: ''
   },
+  textLinkStyles: false, // styling links in text
   removable: false,
   aligned: false,
   typography: false,
@@ -58,6 +59,16 @@ const data = new Map([
       'text-align': 'center',
       'color': '#000',
       'justify-content': 'center'
+    },
+    textLinkStyles: {
+      a: {
+        'color': 'rgb(255, 109, 100)',
+        'text-decoration': 'underline'
+      },
+      hover: {
+        'color': 'rgb(255, 109, 100)',
+        'text-decoration': 'none'
+      }
     }
   }))],
   [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -75,7 +86,17 @@ const data = new Map([
       'color': '#000',
       'justify-content': 'center'
     },
-    isComplex: true
+    isComplex: true,
+    textLinkStyles: {
+      a: {
+        'color': 'rgb(255, 109, 100)',
+        'text-decoration': 'underline'
+      },
+      hover: {
+        'color': 'rgb(255, 109, 100)',
+        'text-decoration': 'none'
+      }
+    }
   }))],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,

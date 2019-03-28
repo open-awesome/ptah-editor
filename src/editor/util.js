@@ -151,7 +151,7 @@ export function randomPoneId() {
  *  }
  * @returns {string}
  */
-export function getPseudoTemplate(poneId, data) {
+export function getPseudoTemplate (poneId, data) {
   let content = ''
   _.forEach(data, (styles, pseudo) => {
     let acc = ''
@@ -164,6 +164,35 @@ export function getPseudoTemplate(poneId, data) {
   })
 
   return `<style type="text/css" id="${poneId}">${content}</style>`
+}
+
+/**
+ * Return template of text links
+ * @param poneId
+ * @param data
+ * @returns {string}
+ */
+export function getLinkStyles (poneId, data) {
+  let content = ''
+  let a = ''
+  let hover = ''
+  _.forEach(data.a, (value, style) => {
+    a += `${style}: ${value};`
+  })
+
+  content += `[data-pone="${poneId}"] a {
+      ${a}
+  }`
+
+  _.forEach(data.hover, (value, style) => {
+    hover += `${style}: ${value};`
+  })
+
+  content += `[data-pone="${poneId}"] a:hover {
+      ${hover}
+  }`
+
+  return `<style type="text/css" id="${poneId}-link">${content}</style>`
 }
 
 /**

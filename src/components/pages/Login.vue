@@ -102,4 +102,8 @@ export default {
 
     img
       max-width: 100%
+
+iframe
+  border: none
+  outline: none
 </style>
