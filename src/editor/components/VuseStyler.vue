@@ -47,25 +47,39 @@
         </a>
       </template>
 
-      <!-- Available platforms -->
-      <a href="#" class="b-styler__control"
-         @click.stop="setControlPanel('AvailablePlatforms')"
-         v-if="type === 'available'">
-        <icon-base name="settings" width="16" height="16" />
-      </a>
+      <!-- Social settings -->
+      <template v-if="type === 'available'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Age restrictions -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Restrictions')" v-if="type === 'restrictions'">
-        <icon-base name="settings" width="16" height="16" />
-      </a>
+      <template v-if="type === 'restrictions'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Timer -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')" v-if="type === 'timer'">
         <icon-base name="settings" width="16" height="16" />
       </a>
 
+      <!-- Image -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
         <icon-base name="preview" width="14" height="16" />
+      </a>
+
+      <!-- Video -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Video')" v-if="type === 'video'">
+        <icon-base name="settings" width="14" height="16" />
       </a>
 
       <!-- Icon with text -->

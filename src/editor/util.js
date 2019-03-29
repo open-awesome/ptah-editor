@@ -55,6 +55,7 @@ export function getTypeFromSchema(target, schema) {
   if (value === types.Delimiter) return 'delimiter'
   if (value === types.SystemRequirements) return 'section'
   if (value === types.TextInherit) return 'inline'
+  if (value === types.VideoElement) return 'video'
 
   return null
 }

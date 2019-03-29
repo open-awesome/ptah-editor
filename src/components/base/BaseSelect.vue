@@ -146,10 +146,9 @@ export default {
     padding: 0
     min-height: 6rem
     &-item
-      padding: 0 1.2rem
-      height: 3.2rem
-      line-height: 2.8rem
-      font-size: 1.6rem
+      padding: 0.8rem 1.6rem
+      line-height: 1.8rem
+      font-size: 1.4rem
       list-style: none
       color: #272727
       transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)

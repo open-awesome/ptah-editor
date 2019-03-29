@@ -1,10 +1,10 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Available platforms
+      Available settings
     </h6>
     <div class="b-panel__control">
-      <control-available-platforms></control-available-platforms>
+      <control-available-platforms/>
     </div>
   </div>
 </template>
@@ -12,8 +12,12 @@
 <script>
 import ControlAvailablePlatforms from '../controls/TheControlAvailablePlatforms'
 export default {
-  name: 'ThePanelAvailablePlatforms',
-  components: { ControlAvailablePlatforms },
+  name: 'ThePanelAvailableSettings',
+
+  components: {
+    ControlAvailablePlatforms
+  },
+
   props: {
     builder: {
       type: Object,
