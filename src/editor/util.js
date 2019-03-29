@@ -43,6 +43,7 @@ export function getTypeFromSchema(target, schema) {
   const tempTarget = target.split('.')
   tempTarget.shift()
   const value = _.get(schema, tempTarget.join('.'))
+
   if (value === types.Text) return 'text'
   if (value === types.Slogan) return 'text'
   if (value === types.Title) return 'title'
@@ -79,23 +80,23 @@ export function getTypeFromTagName(tagName) {
   tagName = tagName.toUpperCase()
   switch (tagName) {
     case 'H1':
-      return 'title'
+      return 'inline'
     case 'H2':
-      return 'title'
+      return 'inline'
     case 'H3':
-      return 'title'
+      return 'inline'
     case 'H4':
-      return 'title'
+      return 'inline'
     case 'H5':
-      return 'title'
+      return 'inline'
     case 'H6':
-      return 'title'
+      return 'inline'
     case 'P':
-      return 'text'
+      return 'inline'
     case 'B':
-      return 'text'
+      return 'inline'
     case 'SPAN':
-      return 'title'
+      return 'inline'
     case 'BUTTON':
       return 'button'
     case 'A':
