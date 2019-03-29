@@ -357,7 +357,8 @@ export default {
       // --- add selected class and scroll to el
       menuItem.classList.add('b-menu-subitem_selected')
       menuItem.scrollIntoView()
-      // this.setControlPanel(false)
+
+      this.setControlPanel(false)
     },
 
     showSettingsBar (event, section) {

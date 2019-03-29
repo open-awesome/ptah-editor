@@ -26,8 +26,13 @@
           class="b-uploader-item__preview"
           positionDropdown="left"
           :onHover="true"
+          :onClick="onClick"
           >
-          <div class="b-uploader-item__preview-img"></div>
+          <div class="b-uploader-item__preview-img">
+            <div v-if="type === 'video'">
+              <icon-base name="video" width="18" height="18" />
+            </div>
+          </div>
           <div slot="listHover">
             <ul>
               <li class="_right-icon _label">
@@ -136,6 +141,14 @@ export default {
       return {
         background: `url(${src || item.path}) no-repeat center`
       }
+    },
+
+    onClick () {
+      if (this.type === 'video') {
+        return false
+      } else {
+        return true
+      }
     }
   },
 
@@ -178,7 +191,7 @@ export default {
     },
 
     loadingProgress ({ loaded, total }) {
-      this.progress = (loaded === total) ? 99 : (loaded / total * 100)
+      this.progress = (loaded === total) ? 99 : parseInt((loaded / total * 100))
     },
 
     async uploadFiles (fileList) {
@@ -251,6 +264,10 @@ export default {
     &-img
       width: $size-step*1.5
       height: $size-step
+
+      display: flex
+      justify-content: center
+      align-items: center
   &__label
     width: $size-step*1.5
     height: $size-step

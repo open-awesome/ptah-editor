@@ -21,6 +21,10 @@ export default {
     onHover: {
       type: Boolean,
       default: false
+    },
+    onClick: {
+      type: Boolean,
+      default: true
     }
   },
   data: () => ({
@@ -64,7 +68,7 @@ export default {
       <div class="b-pth-base-dropdown-menu__container">
         <slot></slot>
       </div>
-      <div class="b-pth-base-dropdown-menu__dropdown b-pth-base-dropdown-menu__dropdown_click" :class="menuListClasses" v-if="showOptions">
+      <div class="b-pth-base-dropdown-menu__dropdown b-pth-base-dropdown-menu__dropdown_click" :class="menuListClasses" v-if="showOptions && onClick">
         <div class="b-pth-base-dropdown-menu__list">
           <div class="b-pth-base-dropdown-menu__list-padd">
             <slot name="list"></slot>

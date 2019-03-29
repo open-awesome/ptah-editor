@@ -4,65 +4,68 @@
       Section Background
     </h6>
 
-    <template v-if="settingObjectOptions.background">
+    <base-scroll-container backgroundBar="#999">
+      <div class="b-panel__inner">
+        <template v-if="settingObjectOptions.background">
 
-      <div class="b-section-settings__control">
-        <div class="b-section-settings__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
-          <base-color-picker v-model="backgroundPickers[index]" :label="`Color ${ index > 0 ? index : '' }`" @change="updateBgColor"/>
-          <div class="b-section-settings__picker-buttons">
-            <span class="del" v-show="backgroundPickers.length > 1 && index > 0" @click="removeBackgroundPicker(index)">
-              <icon-base name="close" color="#B1B1B1" width="10" height="10"></icon-base>
-            </span>
-            <!-- TODO: if the gradient is selected - do not save the image for the background when switching layouts -->
-            <!--span class="plus" v-show="index === 0 && backgroundPickers.length < 4" @click="addBackgroundPicker">
-              <icon-base name="plus" color="#B1B1B1" width="14" height="14"></icon-base>
-            </span-->
-          </div>
-        </div>
-      </div>
-
-      <div class="b-section-settings__control">
-        <div class="b-section-settings__overlay">
-          <div class="b-section-settings__overlay-col">
-            <base-color-picker v-model="sectionOverlayColor" @change="updateOverlayColor" label="Overlay"></base-color-picker>
-          </div>
-          <div class="b-section-settings__overlay-col">
-            <base-range-slider v-model="sectionOverlayOpacity" label="" step="1" min="0" max="100" @change="changeOverlayOpacity">
-              {{ sectionOverlayOpacity }} <span class="b-border-radius-control__px">%</span>
-            </base-range-slider>
-          </div>
-        </div>
-      </div>
-
-      <div class="b-section-settings__control b-section-settings__control_select-type">
-        <base-switcher
-          :value="backgroundType === 'video'"
-          label="Use video as background"
-          @change="toggleBackgroundType"/>
-      </div>
-
-      <template v-if="backgroundType !== 'video'">
-        <div class="b-section-settings__control">
-          <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Image"/>
-        </div>
-        <template v-if="sectionBgUrl != ''">
           <div class="b-section-settings__control">
-            <control-background-position/>
+            <div class="b-section-settings__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
+              <base-color-picker v-model="backgroundPickers[index]" :label="`Color ${ index > 0 ? index : '' }`" @change="updateBgColor"/>
+              <div class="b-section-settings__picker-buttons">
+                <span class="del" v-show="backgroundPickers.length > 1 && index > 0" @click="removeBackgroundPicker(index)">
+                  <icon-base name="close" color="#B1B1B1" width="10" height="10"></icon-base>
+                </span>
+                <!-- TODO: if the gradient is selected - do not save the image for the background when switching layouts -->
+                <!--span class="plus" v-show="index === 0 && backgroundPickers.length < 4" @click="addBackgroundPicker">
+                  <icon-base name="plus" color="#B1B1B1" width="14" height="14"></icon-base>
+                </span-->
+              </div>
+            </div>
           </div>
+
+          <div class="b-section-settings__control">
+            <div class="b-section-settings__overlay">
+              <div class="b-section-settings__overlay-col">
+                <base-color-picker v-model="sectionOverlayColor" @change="updateOverlayColor" label="Overlay"></base-color-picker>
+              </div>
+              <div class="b-section-settings__overlay-col">
+                <base-range-slider v-model="sectionOverlayOpacity" label="" step="1" min="0" max="100" @change="changeOverlayOpacity">
+                  {{ sectionOverlayOpacity }} <span class="b-border-radius-control__px">%</span>
+                </base-range-slider>
+              </div>
+            </div>
+          </div>
+
+          <div class="b-section-settings__control b-section-settings__control_select-type">
+            <base-switcher
+              :value="backgroundType === 'video'"
+              label="Use video as background"
+              @change="toggleBackgroundType"/>
+          </div>
+
+          <template v-if="backgroundType !== 'video'">
+            <div class="b-section-settings__control">
+              <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Image"/>
+            </div>
+            <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
+              <div class="b-section-settings__control">
+                <control-background-position/>
+              </div>
+            </template>
+          </template>
+
+          <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
+            <base-uploader
+              v-model="settingObjectOptions.backgroundVideo"
+              @upload="uploadVideo"
+              label="Video"
+              type="video"
+            />
+          </div>
+
         </template>
-      </template>
-
-      <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
-        <base-uploader
-          v-model="settingObjectOptions.backgroundVideo"
-          @upload="uploadVideo"
-          label="Video"
-          type="video"
-        />
       </div>
-
-    </template>
-
+    </base-scroll-container>
   </div>
 </template>
 
@@ -314,19 +317,21 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-panel
+  height: 100%
+  width: 100%
+
   padding-bottom: 4.5rem
+
   display: flex
   flex-direction: column
-  height: auto
-  width: 100%
   align-items: stretch
-
+  justify-content: flex-start
   &__title
     color: $black
     font-size: 2rem
     font-weight: bold
 
-    min-width: 28rem
+    min-width: 24rem
     margin: 0 0 2.8rem 0
     padding: 0
     &:first-letter
@@ -334,6 +339,11 @@ export default {
 
   &__control
     margin-bottom: 1.6rem
+
+  &__inner
+    max-width: 24rem
+    height: 100%
+    padding: 0 0 2.4rem 0
 
 .b-section-settings
   display: flex
@@ -356,7 +366,7 @@ export default {
        .b-range-slider
          padding-left: 1rem
          .range-slider
-           width: $size-step * 2.8
+           width: $size-step * 2
   &__inner
     padding: 0 2.4rem
   &__buttons
@@ -380,7 +390,6 @@ export default {
   &__picker
     display: flex
     align-items: center
-    cursor: pointer
     margin: $size-step/2 0
     &-buttons
       width: $size-step

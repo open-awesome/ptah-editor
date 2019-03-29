@@ -391,6 +391,10 @@ const data = new Map([
         'text-decoration': false,
         'text-align': false,
         'color': '#fff'
+      },
+      overlay: {
+        color: 'rgba(0,0,0,1)',
+        opacity: '0'
       }
     })
   )],
