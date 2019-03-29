@@ -6,7 +6,7 @@
         <div
           class="menubar is-hidden"
           :class="{ 'is-focused': focused }"
-          slot-scope="{ commands, isActive, focused }"
+          slot-scope="{ commands, isActive, focused, getMarkAttrs }"
         >
           <button
             class="menubar__button"
@@ -72,9 +72,26 @@
             <icon-base name="orderedList"></icon-base>
           </button>
 
+          <button
+            class="menubar__button"
+            @click="showLinkMenu(getMarkAttrs('link'))"
+            :class="{ 'is-active': isActive.link() }"
+          >
+            <icon-base name="link"></icon-base>
+          </button>
+
           <base-button color="blue" size="small" @click="save">Done</base-button>
+
+          <!-- Link form -->
+          <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
+            <input class="menubar__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="hideLinkMenu"/>
+            <button class="menubar__button" @click="setLinkUrl(commands.link, null)" type="button">
+              <icon-base name="remove"></icon-base>
+            </button>
+          </form>
         </div>
       </editor-menu-bar>
+
       <editor-content class="editor__content" :editor="editor" v-if="isActive" />
     </div>
 </template>
@@ -106,7 +123,9 @@ export default {
     return {
       editor: null,
       text: null,
-      isActive: false
+      isActive: false,
+      linkUrl: null,
+      linkMenuIsActive: false
     }
   },
 
@@ -135,6 +154,7 @@ export default {
         this.isActive = true
       } else {
         if (this.editor !== null) this.editor.destroy()
+        this.hideLinkMenu()
         this.isActive = false
       }
     }
@@ -152,6 +172,7 @@ export default {
   beforeDestroy () {
     try {
       this.editor.destroy()
+      this.hideLinkMenu()
     } catch (e) { }
   },
 
@@ -162,6 +183,25 @@ export default {
     save () {
       this.updateSettingOptions(merge({}, this.settingObjectOptions, { text: this.text }))
       this.textEditor(false)
+    },
+
+    showLinkMenu (attrs) {
+      this.linkUrl = attrs.href
+      this.linkMenuIsActive = true
+      this.$nextTick(() => {
+        this.$refs.linkInput.focus()
+      })
+    },
+
+    hideLinkMenu () {
+      this.linkUrl = null
+      this.linkMenuIsActive = false
+    },
+
+    setLinkUrl (command, url) {
+      command({ href: url })
+      this.hideLinkMenu()
+      this.editor.focus()
     }
   }
 }
@@ -225,4 +265,25 @@ export default {
 
       svg
         fill: #000000
+
+  &__form
+    width: 100%
+    height: 100%
+    padding: 0 .8rem
+    position: absolute
+    top: 0
+    left: 0
+    display: flex
+    align-items: center
+
+    background: $white
+    border-radius: 4px
+
+  &__input
+    width: 28em
+    padding: 1rem
+    margin-right: 1rem
+
+    border: 1px solid $grey-middle
+    border-radius: 4px
 </style>

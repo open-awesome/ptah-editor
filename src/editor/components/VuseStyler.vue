@@ -5,18 +5,22 @@
     v-if="$builder.isEditing"
     :class="{ 'is-visible': isVisible && !editText }"
   >
-    <div class="b-styler__controls">
+
+    <div class="b-styler__col" v-if="type === 'button'">
       <!-- Button -->
-      <div v-if="type === 'button'">
+      <div class="b-styler__controls">
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </div>
-      <div v-if="type === 'button'" ref="buttonModalProps">
+      <div class="b-styler__controls" ref="buttonModalProps">
         <a href="#" class="b-styler__control" @click.stop="setModalProps()">
           <icon-base name="link" width="18" height="18" />
         </a>
       </div>
+    </div>
+
+    <div class="b-styler__controls">
 
       <!-- Text -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')" v-if="type === 'text'">
@@ -62,6 +66,11 @@
 
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
         <icon-base name="preview" width="14" height="16" />
+      </a>
+
+      <!-- Icon with text -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')" v-if="type === 'icon'">
+        <icon-base name="style" width="12" height="15" />
       </a>
 
     </div>
@@ -113,7 +122,7 @@
 </template>
 
 <script>
-import { isParentTo, randomPoneId, getPseudoTemplate, composedPath } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate, getLinkStyles, composedPath } from '../util'
 import * as _ from 'lodash-es'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import Popper from 'popper.js'
@@ -221,6 +230,10 @@ export default {
       get () {
         return this.textEditorActive
       }
+    },
+
+    poneId () {
+      return randomPoneId()
     }
   },
 
@@ -245,6 +258,10 @@ export default {
       _.forEach(this.options.pseudo, (styles, pseudo) => {
         this.changePseudoStyle(styles, pseudo)
       })
+    }
+
+    if (!!this.options.textLinkStyles && Object.keys(this.options.textLinkStyles).length) {
+      this.changeTextLinkStyle(this.options.textLinkStyles)
     }
 
     // Apply animation to element
@@ -281,7 +298,7 @@ export default {
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
@@ -290,7 +307,7 @@ export default {
 
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
-        data.styles.width = this.dimensions.width
+        data.styles.width = data.offsets.reference.width
         return data
       }
 
@@ -432,16 +449,20 @@ export default {
      * @param pseudoClass {string}
      */
     changePseudoStyle (style, pseudoClass = 'hover') {
-      let poneId = ''
       let pseudoClassValue = {}
       pseudoClassValue[pseudoClass] = style
-      poneId = randomPoneId()
-      this.el.dataset.pone = poneId
+      this.el.dataset.pone = this.poneId
       _.merge(this.pseudoStyles, pseudoClassValue)
       this.options.pseudo = this.pseudoStyles
 
-      let styleTemplate = getPseudoTemplate(poneId, this.pseudoStyles)
+      let styleTemplate = getPseudoTemplate(this.poneId, this.pseudoStyles)
 
+      document.head.insertAdjacentHTML('beforeend', styleTemplate)
+    },
+
+    changeTextLinkStyle (style) {
+      this.el.dataset.pone = this.poneId
+      let styleTemplate = getLinkStyles(this.poneId, style)
       document.head.insertAdjacentHTML('beforeend', styleTemplate)
     },
 
@@ -501,6 +522,10 @@ export default {
 
   &__controls
     display: flex
+
+  &__col
+    display: flex
+    flex-wrap: nowrap
 
   &__control
     width: 3.2rem

@@ -23,7 +23,7 @@
 
         <!-- Font -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-          <control-text
+          <control-typography
             :fontSize="fontSize"
             :fontFamily="fontFamily"
             :fontColor="fontColor"
@@ -31,46 +31,7 @@
             :expand="expandedFont"
             :isComplexText="isComplexText"
             @open="onExpand"
-            @change="styleChange"></control-text>
-        </div>
-
-        <div class="b-section-settings__group" v-if="settingObjectOptions.background">
-
-          <div class="b-section-settings__control">
-            <base-switcher
-              label="Use video as background"
-              :value="backgroundType === 'video'"
-              @change="toggleBackgroundType"/>
-          </div>
-
-          <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
-            <BaseUploadInput
-              :value="settingObjectOptions.backgroundVideo"
-              @upload="uploadVideo"
-              label="Background video"
-              placeholder="paste Video URL" />
-          </div>
-
-          <template v-else>
-            <div class="b-section-settings__control">
-              <base-color-picker v-model="sectionBgColor" @change="updateBgColor" label="Background color"></base-color-picker>
-            </div>
-            <div class="b-section-settings__control">
-              <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Background image"/>
-            </div>
-            <template v-if="sectionBgUrl.length">
-              <div class="b-section-settings__control">
-                <BaseButtonTabs :list="list" v-model="bgRepeat" @change="changeRepeat"/>
-              </div>
-              <div class="b-section-settings__control">
-                <BaseButtonTabs :list="sizeList" v-model="bgSize" @change="changeSize"/>
-              </div>
-              <div v-if="!isHeader" class="b-section-settings__control">
-                <BaseSwitcher label="Fixed while scrolling" v-model="bgAttachment" @change="changeAttachment" />
-              </div>
-            </template>
-          </template>
-
+            @change="styleChange"></control-typography>
         </div>
 
         <div v-if="!isHeader" class="b-section-settings__control">
@@ -160,6 +121,7 @@ import * as _ from 'lodash-es'
 import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
 import ControlSystemRequirements from './../controls/TheControlSystemRequirements.vue'
 import ControlText from './../controls/TheControlText'
+import ControlTypography from './../controls/TheControlTypography'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 
@@ -178,7 +140,8 @@ export default {
     BaseUploader,
     ControlSectionProducts,
     ControlSystemRequirements,
-    ControlText
+    ControlText,
+    ControlTypography
   },
   name: 'BuilderSettingsBarSection',
 

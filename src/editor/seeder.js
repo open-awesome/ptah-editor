@@ -14,6 +14,7 @@ const DEFAULT_OPTIONS = {
     behavior: 'auto',
     action: ''
   },
+  textLinkStyles: false, // styling links in text
   removable: false,
   aligned: false,
   typography: false,
@@ -58,6 +59,16 @@ const data = new Map([
       'text-align': 'center',
       'color': '#000',
       'justify-content': 'center'
+    },
+    textLinkStyles: {
+      a: {
+        'color': 'rgb(255, 109, 100)',
+        'text-decoration': 'underline'
+      },
+      hover: {
+        'color': 'rgb(255, 109, 100)',
+        'text-decoration': 'none'
+      }
     }
   }))],
   [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -75,7 +86,17 @@ const data = new Map([
       'color': '#000',
       'justify-content': 'center'
     },
-    isComplex: true
+    isComplex: true,
+    textLinkStyles: {
+      a: {
+        'color': 'rgb(255, 109, 100)',
+        'text-decoration': 'underline'
+      },
+      hover: {
+        'color': 'rgb(255, 109, 100)',
+        'text-decoration': 'none'
+      }
+    }
   }))],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
     resizable: true,
@@ -171,10 +192,14 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': 'rgba(0,0,0,0)',
+        'background-color': 'rgba(255,255,255,0)',
         'background-attachment': 'scroll',
         'width': '',
         'height': ''
+      },
+      overlay: {
+        color: 'rgba(0,0,0,1)',
+        opacity: '0'
       }
     })
   )],
@@ -258,22 +283,6 @@ const data = new Map([
         'justify-content': 'center',
         'width': '',
         'height': ''
-      }
-    })
-  )],
-  [types.Cost, () => (_.merge({}, DEFAULT_OPTIONS,
-    {
-      typography: true,
-      removable: true,
-      aligned: true,
-      text: '$90',
-      styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
       }
     })
   )],
@@ -674,7 +683,7 @@ const data = new Map([
       sizeIcons: {
         width: 24
       },
-      typography: true,
+      typography: false,
       styles: {
         'background-image': '',
         'background-position': 'center center',

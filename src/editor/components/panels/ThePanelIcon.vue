@@ -1,26 +1,30 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Text
+      Icon
     </h6>
 
+    <!-- Control icon -->
     <div class="b-panel__control">
-      <the-control-typography :show-text-styles="false"></the-control-typography>
-    </div>
-
-    <div class="b-panel__control">
-      <the-control-text-link></the-control-text-link>
+      <control-text-with-icon></control-text-with-icon>
     </div>
   </div>
 </template>
 
 <script>
-import TheControlTextLink from '../controls/TheControlTextLink'
-import TheControlTypography from '../controls/TheControlTypography'
+import ControlText from './../controls/TheControlText'
+import ControlTypography from './../controls/TheControlTypography'
+import ControlTextWithIcon from '../controls/TheControlIconWithText'
 
 export default {
-  name: 'ThePanelText',
-  components: { TheControlTypography, TheControlTextLink },
+  name: 'ThePanelInlineText',
+
+  components: {
+    ControlTextWithIcon,
+    ControlText,
+    ControlTypography
+  },
+
   props: {
     builder: {
       type: Object,

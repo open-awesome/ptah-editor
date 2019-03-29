@@ -15,13 +15,6 @@ export default {
     VuseIcon
   },
 
-  props: {
-    expand: {
-      type: Boolean,
-      required: true
-    }
-  },
-
   data () {
     return {
       controlOpen: false,
@@ -58,12 +51,6 @@ export default {
     }
   },
 
-  watch: {
-    expand () {
-      this.controlOpen = this.expand
-    }
-  },
-
   methods: {
     visibleIcon () {
       this.icon.visible = !this.icon.visible
@@ -75,9 +62,6 @@ export default {
     changeIcon () {
       this.icon.name = this.iconName.value
       this.icon.value = this.iconName.value
-    },
-    onClickTitle () {
-      this.$emit('open', ['IconWithText', !this.controlOpen])
     }
   },
 
@@ -85,53 +69,47 @@ export default {
     this.color = this.colorFill.color
     this.elWidth = this.sizeIcons.width
     this.iconName = this.icon
-    this.controlOpen = this.expand
   }
 }
 </script>
 
 <template>
   <div class="b-text-controls">
-    <div class="b-text-controls__header" @click="onClickTitle">
-      <span>Icon settings</span> <i :class="{ 'dropped': !controlOpen }"><icon-base name="arrowDropDown" width="8"></icon-base></i>
+    <div class="b-text-controls__control">
+      <base-select label="Icon" :options="icons.options" :value="iconName" v-model="iconName" @input="changeIcon"></base-select>
     </div>
-    <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
-      <div class="b-text-controls__control">
-        <base-select label="Icon" :options="icons.options" :value="iconName" v-model="iconName" @input="changeIcon"></base-select>
-      </div>
-      <div class="b-text-controls__control">
-        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="2" min="14" max="34">
-          {{ sizeIcons.width }} px
-        </base-range-slider>
-      </div>
-      <div class="b-text-controls__control">
-        <base-color-picker label="Color icon" v-model="color" @change="changeColor"></base-color-picker>
-      </div>
-      <div class="b-text-controls__control">
-        <div>Visible icon</div>
-        <div class="b-icon-with-text">
-          <div class="b-icon-with-text__item"
-            :class="{ 'b-icon-with-text__item_opacity' : false === icon.visible }"
-            @click="visibleIcon"
-            >
+    <div class="b-text-controls__control">
+      <base-range-slider v-model="sizeIcons.width" label="Width icons" step="2" min="14" max="34">
+        {{ sizeIcons.width }} px
+      </base-range-slider>
+    </div>
+    <div class="b-text-controls__control">
+      <base-color-picker label="Color icon" v-model="color" @change="changeColor"></base-color-picker>
+    </div>
+    <div class="b-text-controls__control">
+      <div>Visible icon</div>
+      <div class="b-icon-with-text">
+        <div class="b-icon-with-text__item"
+             :class="{ 'b-icon-with-text__item_opacity' : false === icon.visible }"
+             @click="visibleIcon"
+        >
 
             <span class="b-icon-with-text__item-eye"
-              title="Show / Hide"
-              >
+                  title="Show / Hide"
+            >
               <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
             </span>
 
-            <span>
+          <span>
               Visible
             </span>
 
-          </div>
         </div>
       </div>
-      <div class="b-text-controls__control">
-        <base-text-field v-model="icon.text" label="Text here" placeholder="Enter text here"></base-text-field>
-      </div>
-    </base-dropdown>
+    </div>
+    <div class="b-text-controls__control">
+      <base-text-field v-model="icon.text" label="Text here" placeholder="Enter text here"></base-text-field>
+    </div>
   </div>
 </template>
 

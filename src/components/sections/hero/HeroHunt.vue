@@ -124,7 +124,7 @@ export default {
       {
         name: 'TextElement',
         element: types.Title,
-        type: 'title',
+        type: 'text',
         class: 'b-hunt-title',
         label: 'title',
         key: 1
@@ -167,6 +167,7 @@ export default {
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="video"/>
+    <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row">
         <div class="b-grid__col-6">

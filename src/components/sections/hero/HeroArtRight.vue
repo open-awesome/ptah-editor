@@ -6,6 +6,7 @@
     class="b-hero">
 
   <slot name="video"/>
+  <slot name="overlay"/>
 
   <div class="b-grid">
     <div class="b-grid__row">
@@ -171,7 +172,7 @@ export default {
     components: [
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
       { name: 'VideoElement', element: VideoElement, type: 'video', class: 'b-video', label: 'video', key: 5 },
-      { name: 'TextElement', element: Slogan, type: 'slogan', class: 'b-slogan', label: 'slogan', key: 6 },
+      { name: 'TextElement', element: Slogan, type: 'text', class: 'b-slogan', label: 'slogan', key: 6 },
       { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 },
       { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 7 }
     ]
