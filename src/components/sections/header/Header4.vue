@@ -85,7 +85,7 @@
 </template>
 
 <script>
-import { StyleObject, Link, Logo } from '@editor/types'
+import { StyleObject, Logo, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import section from '../../mixins/section.js'
 
@@ -207,11 +207,11 @@ export default {
     mainStyle: StyleObject,
     container: StyleObject,
     components: [
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 1 },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 2 },
+      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
+      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 },
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 3 },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 4 }
+      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 3 },
+      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 4 }
     ]
   },
 
