@@ -66,7 +66,7 @@
         </div>
 
         <!-- Group -->
-        <template v-if="!isLastSection()">
+        <template v-if="!isLastSection() && !isHeader">
           <div class="b-section-settings__control" v-if="!isSlaveSection()">
             <BaseButton
               :color="'gray'"
