@@ -67,6 +67,11 @@
                 <icon-base name="background" color="#fff"></icon-base>
               </span>
               <span class="b-menu-subitem__icon"
+                    @click.stop="toggleSectionLayouts(headerSection)"
+              >
+                <icon-base name="layouts" color="#ffffff"></icon-base>
+              </span>
+              <span class="b-menu-subitem__icon"
                 @click.stop="deleteSection(headerSection)"
                 >
                 <icon-base name="remove" color="#ffffff"></icon-base>
@@ -217,9 +222,11 @@ export default {
         animation: 150,
         sort: true,
         disabled: false,
+        filter: 'no-sortable',
         preventOnFilter: false,
         onUpdate: (event) => {
-          this.builder.sort(event.oldIndex, event.newIndex)
+          let headerMod = this.headerSection ? 1 : 0
+          this.builder.sort(event.oldIndex + headerMod, event.newIndex + headerMod)
         }
       })
     }
