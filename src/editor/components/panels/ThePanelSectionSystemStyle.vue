@@ -42,13 +42,14 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-section-system-style
+  height: 100%
+  width: 100%
+
   display: flex
   flex-direction: column
-  align-items: stretch
-  padding-bottom: 4.5rem
-  width: 100%
+  justify-content: flex-start
   &__title
-    min-width: 28rem
+    min-width: 24rem
     margin: 0 0 2.8rem 0
     padding: 0
     color: #272727
@@ -61,4 +62,7 @@ export default {
       font-size: 1.4rem
       font-weight: normal
       margin: 0 0 1rem
+  &__inner
+    max-width: 24rem
+    padding: 0 0 2.4rem 0
 </style>

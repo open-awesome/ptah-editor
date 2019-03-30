@@ -17,19 +17,19 @@ const REQUIREMENTS = {
 
 const REQUIREMENTS_WINDOWS = {
   'OS': {
-    text: { text: 'OS' },
+    text: { text: 'OS version' },
     min: { text: 'Windows 7, 8, 10' },
     max: { text: 'Windows 7, 8, 10' }
   },
   'Processor': {
-    text: { text: 'Processor' },
+    text: { text: 'CPU' },
     min: { text: 'Intel Core 2 Duo 2.5 GHz' },
     max: { text: 'Intel Core i5 3.0 GHz' }
   },
   'Memory': {
-    text: { text: 'Memory' },
-    min: { text: '1 GB RAM' },
-    max: { text: '2 GB RAM' }
+    text: { text: 'RAM' },
+    min: { text: '1 GB' },
+    max: { text: '2 GB' }
   },
   'Graphics': {
     text: { text: 'Graphics' },
@@ -37,17 +37,17 @@ const REQUIREMENTS_WINDOWS = {
     max: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' }
   },
   'Direct X': {
-    text: { text: 'Direct X' },
+    text: { text: 'DX version' },
     min: { text: 'Version 9.0c' },
     max: { text: 'Version 9.0c' }
   },
   'Storage': {
-    text: { text: 'Storage' },
+    text: { text: 'Storage space' },
     min: { text: '5 GB' },
     max: { text: '5 GB' }
   },
   'Sound Card': {
-    text: { text: 'Sound Card' },
+    text: { text: 'Sound card' },
     min: { text: 'DirectX9 Compatible' },
     max: { text: 'DirectX9 Compatible' }
   }
@@ -55,19 +55,19 @@ const REQUIREMENTS_WINDOWS = {
 
 const REQUIREMENTS_OS = {
   'OS': {
-    text: { text: 'OS' },
+    text: { text: 'OS version' },
     min: { text: 'Mac OSX 10.7.5' },
     max: { text: 'Mac OSX 10.7.5' }
   },
   'Processor': {
-    text: { text: 'Processor' },
+    text: { text: 'CPU' },
     min: { text: 'Intel Core 2 Duo 2.5 GHz' },
     max: { text: 'Intel Core i5 3.0 GHz' }
   },
   'Memory': {
-    text: { text: 'Memory' },
-    min: { text: '1 GB RAM' },
-    max: { text: '2 GB RAM' }
+    text: { text: 'RAM' },
+    min: { text: '1 GB' },
+    max: { text: '2 GB' }
   },
   'Graphics': {
     text: { text: 'Graphics' },
@@ -75,17 +75,17 @@ const REQUIREMENTS_OS = {
     max: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' }
   },
   'Direct X': {
-    text: { text: 'Direct X' },
+    text: { text: 'DX version' },
     min: { text: 'Version 9.0c' },
     max: { text: 'Version 9.0c' }
   },
   'Storage': {
-    text: { text: 'Storage' },
+    text: { text: 'Storage space' },
     min: { text: '5 GB' },
     max: { text: '5 GB' }
   },
   'Sound Card': {
-    text: { text: 'Sound Card' },
+    text: { text: 'Sound card' },
     min: { text: 'DirectX9 Compatible' },
     max: { text: 'DirectX9 Compatible' }
   }
@@ -93,19 +93,19 @@ const REQUIREMENTS_OS = {
 
 const REQUIREMENTS_LINUX = {
   'OS': {
-    text: { text: 'OS' },
+    text: { text: 'OS version' },
     min: { text: 'Ubuntu/SteamOS' },
     max: { text: 'Ubuntu/SteamOS' }
   },
   'Processor': {
-    text: { text: 'Processor' },
+    text: { text: 'CPU' },
     min: { text: 'Intel Core 2 Duo 2.5 GHz' },
     max: { text: 'Intel Core i5 3.0 GHz' }
   },
   'Memory': {
-    text: { text: 'Memory' },
-    min: { text: '1 GB RAM' },
-    max: { text: '2 GB RAM' }
+    text: { text: 'RAM' },
+    min: { text: '1 GB' },
+    max: { text: '2 GB' }
   },
   'Graphics': {
     text: { text: 'Graphics' },
@@ -113,17 +113,17 @@ const REQUIREMENTS_LINUX = {
     max: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' }
   },
   'Direct X': {
-    text: { text: 'Direct X' },
+    text: { text: 'DX version' },
     min: { text: 'Version 9.0c' },
     max: { text: 'Version 9.0c' }
   },
   'Storage': {
-    text: { text: 'Storage' },
+    text: { text: 'Storage space' },
     min: { text: '5 GB' },
     max: { text: '5 GB' }
   },
   'Sound Card': {
-    text: { text: 'Sound Card' },
+    text: { text: 'Sound card' },
     min: { text: '—' },
     max: { text: '—' }
   }
@@ -144,11 +144,24 @@ const PLATFORMS_CUSTOM = {
   }
 }
 
+const C_CUSTOM = [
+  {
+    element: {
+      text: 'System requirements',
+      styles: {
+        'font-family': 'Montserrat',
+        'font-size': '4rem',
+        'color': '#000'
+      }
+    },
+    key: 10
+  }
+]
+
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn819.cdn.stg.gamenet.ru/0/7L5P8/o_Dyakc.png)',
-      'background-color': '#151C44',
+      'background-color': '#8CD2B5',
       'background-position': 'center center',
       'background-size': 'cover',
       'font-family': 'Lato',
@@ -158,11 +171,29 @@ const SCHEMA_CUSTOM = {
       'text-decoration': false,
       'text-align': 'center',
       'color': '#fff'
+    },
+    sizeIcons: {
+      width: 32
+    },
+    colorFill: {
+      color: '#393192'
     }
   },
   platforms: _.merge({}, PLATFORMS_CUSTOM),
+  components: _.merge({}, C_CUSTOM),
   edited: true
 }
+
+const HEADER = [
+  {
+    name: 'TextElement',
+    element: types.Title,
+    type: 'text',
+    class: 'b-title',
+    label: 'title',
+    key: 0
+  }
+]
 
 const GROUP_NAME = 'System'
 const NAME = 'System'
@@ -182,6 +213,8 @@ export default {
 
   $schema: {
     mainStyle: types.SystemRequirements,
+    container: types.StyleObject,
+    components: _.merge([], HEADER),
     platforms: {
       'windows': {
         element: types.TextInherit,
@@ -253,109 +286,150 @@ export default {
     >
     <slot name="video"/>
     <slot name="overlay"/>
-    <div class="b-system">
-      <div class="b-system__padd-border">
-        <!-- Setting controls -->
-        <div class="b-system__controls">
-          <div>
-            <a href="#" class="b-system__control" @click.stop="showSettings('SectionSystemSettings')">
-              <icon-base name="cog" width="12" height="15" />
-            </a>
-          </div>
-          <div>
-            <a href="#" class="b-system__control" @click.stop="showSettings('SectionSystemStyle')">
-              <icon-base name="style" width="12" height="15" />
-            </a>
-          </div>
+    <div class="b-grid">
+      <div class="b-grid__row">
+          <div class="b-grid__col-12">
+            <sandbox
+              class="b-sandbox"
+              container-path="$sectionData.container"
+              components-path="$sectionData.components"
+              direction="column"
+              :style="$sectionData.container.styles"
+            >
+              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+                <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+                  <component
+                     v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
+                     :is="component.name"
+                     :href="$sectionData.components[index].element.link.href"
+                     :target="$sectionData.components[index].element.link.target"
+                     :path="`components[${index}].element`"
+                     :style="$sectionData.components[index].element.styles"
+                     :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  >
+                    <div v-html="$sectionData.components[index].element.text"></div>
+                  </component>
+                </div>
+              </draggable>
+            </sandbox>
         </div>
+      </div>
+      <div class="b-grid__row">
+        <div class="b-grid__col-12">
+          <div class="b-system">
+            <div class="b-system__padd">
+              <!-- Setting controls -->
+              <div class="b-system__controls">
+                <div>
+                  <a href="#" class="b-system__control" @click.stop="showSettings('SectionSystemSettings')">
+                    <icon-base name="cog" width="12" height="15" />
+                  </a>
+                </div>
+                <div>
+                  <a href="#" class="b-system__control" @click.stop="showSettings('SectionSystemStyle')">
+                    <icon-base name="style" width="12" height="15" />
+                  </a>
+                </div>
+              </div>
 
-        <div class="b-system-platforms flex flex_center">
-          <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
-               v-show="$sectionData.mainStyle.systemRequirements[key].visible"
-               :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible }">
-            <div
-              class="b-system-platforms__item__tab"
-              @click="selectPlatform(key)"
-              :class="{ 'b-system-platforms__item__tab_active': key === $sectionData.mainStyle.selectPlatform.name }"
-              :style="{
-                'border-color' : $sectionData.mainStyle.table.head['background-color']
-              }"
-              >
-              <span class="b-system-platforms__item__tab-icon"
-                :style="{ width: $sectionData.mainStyle.sizeIcons.width + 'px', fill: $sectionData.mainStyle.colorFill.color }"
-                >
-                <VuseIcon :name="key"></VuseIcon>
-              </span>
-            </div>
-          </div>
-        </div>
-        <div class="b-system-requirements">
-          <div class="b-system-requirements__table">
-            <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
-                v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
-              <div>
-                <div class="b-system-requirements__table-row  flex flex_center"
-                  :style="{
-                    'color' : $sectionData.mainStyle.table.head['color'],
-                    'font-family' : $sectionData.mainStyle.table.head['font-family'],
-                    'font-size' : $sectionData.mainStyle.table.head['font-size'],
-                    'font-weight' : $sectionData.mainStyle.table.head['font-weight'],
-                    'font-style' : $sectionData.mainStyle.table.head['font-style'],
-                    'text-decoration' : $sectionData.mainStyle.table.head['text-decoration'],
-                    'background-color' : $sectionData.mainStyle.table.head['background-color']
-                  }"
-                  >
-                  <div class="b-system-requirements__table-col">
-                    <span class="b-system-requirements__table-chapter">
-                      Component
-                    </span>
+              <div class="b-system__padd-border">
+                <div class="b-system-platforms flex flex_center">
+                  <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
+                       v-show="$sectionData.mainStyle.systemRequirements[key].visible"
+                       :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.mainStyle.selectPlatform.name }">
+                    <div
+                      class="b-system-platforms__item__tab"
+                      @click.stop="selectPlatform(key)"
+                      :class="{ 'b-system-platforms__item__tab_active': key === $sectionData.mainStyle.selectPlatform.name }"
+                      :style="{
+                        'background-color' : $sectionData.mainStyle.table.body['background-color'],
+                        'border-color' : $sectionData.mainStyle.table.head['background-color']
+                      }"
+                      >
+                      <span class="b-system-platforms__item__tab-corner"
+                        :style="{
+                          'background-color' : $sectionData.mainStyle.table.body['background-color']
+                        }"
+                      />
+                      <span class="b-system-platforms__item__tab-icon"
+                        :style="{ width: $sectionData.mainStyle.sizeIcons.width + 'px', fill: $sectionData.mainStyle.colorFill.color }"
+                        >
+                        <VuseIcon :name="key"></VuseIcon>
+                      </span>
+                    </div>
                   </div>
-                  <div class="b-system-requirements__table-col">
-                    <span class="b-system-requirements__table-chapter">
-                      Minimum
-                    </span>
+                </div>
+                <div class="b-system-requirements">
+                  <div class="b-system-requirements__table">
+                    <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
+                        v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
+                      <div>
+                        <div class="b-system-requirements__table-row  flex flex_center"
+                          :style="{
+                            'color' : $sectionData.mainStyle.table.head['color'],
+                            'font-family' : $sectionData.mainStyle.table.head['font-family'],
+                            'font-size' : $sectionData.mainStyle.table.head['font-size'],
+                            'font-weight' : $sectionData.mainStyle.table.head['font-weight'],
+                            'font-style' : $sectionData.mainStyle.table.head['font-style'],
+                            'text-decoration' : $sectionData.mainStyle.table.head['text-decoration'],
+                            'background-color' : $sectionData.mainStyle.table.head['background-color']
+                          }"
+                          >
+                          <div class="b-system-requirements__table-col">
+                            <span class="b-system-requirements__table-chapter">
+                              Component
+                            </span>
+                          </div>
+                          <div class="b-system-requirements__table-col">
+                            <span class="b-system-requirements__table-chapter">
+                              Minimal requirement
+                            </span>
+                          </div>
+                          <div class="b-system-requirements__table-col">
+                            <span class="b-system-requirements__table-chapter">
+                              Recommended
+                            </span>
+                          </div>
+                        </div><!--/.b-system-requirements__table-row-->
+                        <div class="b-system-requirements__table-row flex flex_center"
+                          v-for="(v, index) in value.requirements" :key="index"
+                          v-if="$sectionData.mainStyle.rowsRequirements[index].visible"
+                          :style="{
+                            'color' : $sectionData.mainStyle.table.body['color'],
+                            'font-family' : $sectionData.mainStyle.table.body['font-family'],
+                            'font-size' : $sectionData.mainStyle.table.body['font-size'],
+                            'font-weight' : $sectionData.mainStyle.table.body['font-weight'],
+                            'font-style' : $sectionData.mainStyle.table.body['font-style'],
+                            'text-decoration' : $sectionData.mainStyle.table.body['text-decoration'],
+                            'background-color' : $sectionData.mainStyle.table.body['background-color']
+                          }"
+                          >
+                          <div class="b-system-requirements__table-col b-system-requirements__table-col_name"
+                            v-html="$sectionData.platforms[key].requirements[index].text.text"
+                            >
+                          </div>
+                          <div class="b-system-requirements__table-col"
+                            v-styler:for="{ el: $sectionData.platforms[key].requirements[index].min, path: `$sectionData.platforms[${key}].requirements[${index}].min`}"
+                            :style="$sectionData.platforms[key].requirements[index].min.styles"
+                            v-html="$sectionData.platforms[key].requirements[index].min.text"
+                            >
+                          </div>
+                          <div class="b-system-requirements__table-col"
+                               v-styler:for="{ el: $sectionData.platforms[key].requirements[index].max, path: `$sectionData.platforms[${key}].requirements[${index}].max`}"
+                               :style="$sectionData.platforms[key].requirements[index].max.styles"
+                               v-html="$sectionData.platforms[key].requirements[index].max.text"
+                            >
+                          </div>
+                        </div><!--/.b-system-requirements__table-row-->
+                      </div>
+                    </div>
                   </div>
-                  <div class="b-system-requirements__table-col">
-                    <span class="b-system-requirements__table-chapter">
-                      Recommended
-                    </span>
-                  </div>
-                </div><!--/.b-system-requirements__table-row-->
-                <div class="b-system-requirements__table-row flex flex_center"
-                  v-for="(v, index) in value.requirements" :key="index"
-                  v-if="$sectionData.mainStyle.rowsRequirements[index].visible"
-                  :style="{
-                    'color' : $sectionData.mainStyle.table.body['color'],
-                    'font-family' : $sectionData.mainStyle.table.body['font-family'],
-                    'font-size' : $sectionData.mainStyle.table.body['font-size'],
-                    'font-weight' : $sectionData.mainStyle.table.body['font-weight'],
-                    'font-style' : $sectionData.mainStyle.table.body['font-style'],
-                    'text-decoration' : $sectionData.mainStyle.table.body['text-decoration'],
-                    'background-color' : $sectionData.mainStyle.table.body['background-color']
-                  }"
-                  >
-                  <div class="b-system-requirements__table-col b-system-requirements__table-col_name"
-                    v-html="$sectionData.platforms[key].requirements[index].text.text"
-                    >
-                  </div>
-                  <div class="b-system-requirements__table-col"
-                    v-styler:for="{ el: $sectionData.platforms[key].requirements[index].min, path: `$sectionData.platforms[${key}].requirements[${index}].min`}"
-                    :style="$sectionData.platforms[key].requirements[index].min.styles"
-                    v-html="$sectionData.platforms[key].requirements[index].min.text"
-                    >
-                  </div>
-                  <div class="b-system-requirements__table-col"
-                       v-styler:for="{ el: $sectionData.platforms[key].requirements[index].max, path: `$sectionData.platforms[${key}].requirements[${index}].max`}"
-                       :style="$sectionData.platforms[key].requirements[index].max.styles"
-                       v-html="$sectionData.platforms[key].requirements[index].max.text"
-                    >
-                  </div>
-                </div><!--/.b-system-requirements__table-row-->
+                </div>
               </div>
             </div>
           </div>
-        </div>
-      </div>
+        </div><!--/.b-grid__col-->
+      </div><!--/.b-grid__row-->
     </div>
   </section>
 </template>
@@ -367,15 +441,14 @@ export default {
 
 .b-system
   $this: &
-  max-width: 100rem
-  margin: 0 auto 3.2rem
+  padding: 0
   @media only screen and (max-width: 768px)
     &
       flex-wrap: wrap
       height: auto !important
-  &__padd-border
-    padding: $size-step
-    margin: $size-step*2
+      padding: 0
+  &__padd
+    padding: $size-step/4
 
     transition: border 0.25s
     border: 0.2rem dotted transparent
@@ -383,18 +456,27 @@ export default {
     position: relative
     .is-mobile &
       padding: 0
-      margin: $size-step*4 0
     @media only screen and (max-width: 540px)
       &
         padding: 0
-    #{$this}:hover &
-      border: 0.2rem dotted #fff
+    &-border
+      padding: $size-step/4
+      transition: border 0.25s
+      border: 0.2rem dotted transparent
+      .is-editable #{$this}__padd:hover &
+        border: 0.2rem dotted #fff
   &-platforms
     justify-content: flex-start
 
     position: relative
     z-index: 0
+    .is-mobile &
+      justify-content: center
+    @media only screen and (max-width: 540px)
+      &
+        justify-content: center
     &__item
+      $item: &
       transition: all 200ms
       position: relative
       cursor: pointer
@@ -407,18 +489,18 @@ export default {
           opacity: 0.2
           display: block
       &__tab
+        $tab: &
         position: relative
         z-index: 0
 
         padding: $size-step/4
-        margin: 0 $size-step/4
+        margin: 0 $size-step/4 0 0
         transition: all 200ms
 
         display: flex
         align-items: center
 
-        box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.25)
-        border: 0.2rem solid transparent
+        border: 0.2rem solid rgba($black, 0.1)
         border-radius: 0.4rem
         &-text
           display: inline-block
@@ -430,9 +512,11 @@ export default {
           overflow: hidden
           .is-mobile &
             max-width: 16rem
+            font-size: 1.4rem !important
           @media only screen and (max-width: 540px)
             &
               max-width: 16rem
+              font-size: 1.4rem !important
         &-icon
           display: inline-block
           margin: 0.8rem
@@ -444,9 +528,11 @@ export default {
         &_active
           cursor: pointer
           background-color: #fff
+          border: 0.2rem solid  #fff
           border-radius: 4px
-        &_active
-          &:before
+          box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.25)
+        #{$item}_active &
+          #{$tab}-corner
             content: ""
             position: absolute
             left: 50%
@@ -461,16 +547,16 @@ export default {
             transition: all 200ms
   &__controls
     position: absolute
-    top: -4rem
-    left: 0
+    top: -$size-step
+    left: $size-step/3
 
     display: flex
     align-items: center
     justify-content: center
 
     display: none
-    #{$this}:hover &
-      display: flex
+    .is-editable #{$this}__padd:hover &
+      display: flex !important
   &__control
     width: 3.2rem
     height: 3.2rem
@@ -512,12 +598,18 @@ export default {
         text-align: left
         width: 24%
         white-space: nowrap
+        .is-mobile &
+          width: 35%
+        @media only screen and (max-width: 540px)
+          &
+            width: 35%
       &_name
         opacity: 0.6
       .is-mobile &
         padding: $size-step/4
+        font-size: 1.4rem !important
       @media only screen and (max-width: 540px)
         &
           padding: $size-step/4
-
+          font-size: 1.4rem !important
 </style>

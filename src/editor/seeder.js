@@ -660,7 +660,7 @@ const data = new Map([
         color:  '#fff'
       },
       sizeIcons: {
-        width: 24
+        width: 32
       },
       table: {
         head: {
@@ -696,6 +696,10 @@ const data = new Map([
         'text-decoration': 'none',
         'text-align': 'center',
         'color': '#fff'
+      },
+      overlay: {
+        color: 'rgba(0,0,0,1)',
+        opacity: '0'
       }
     })
   )],

@@ -295,13 +295,16 @@ export default {
 
     showStyler (event) {
       let elOps = null
+      let self = this
 
       event.preventDefault()
       event.stopPropagation()
 
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
-        data.styles.width = data.offsets.reference.width
+        if (self.options.removable) {
+          data.styles.width = data.offsets.reference.width
+        }
         return data
       }
 
