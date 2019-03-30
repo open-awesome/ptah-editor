@@ -63,7 +63,7 @@ export default {
 </script>
 
 <template>
-  <div class="l-pth-base-dropdown-menu"  @click="clickMenu" @mouseover="menuMouseOver" @mouseout="menuMouseOut" v-click-outside="closeMenu">
+  <div class="l-pth-base-dropdown-menu"  @click="clickMenu" @mouseover="menuMouseOver" @mouseleave="menuMouseOut" v-click-outside="closeMenu">
     <div class="b-pth-base-dropdown-menu">
       <div class="b-pth-base-dropdown-menu__container">
         <slot></slot>
@@ -93,6 +93,7 @@ export default {
 .l-pth-base-dropdown-menu
   display: inline-block
   vertical-align: middle
+
 .b-pth-base-dropdown-menu
   $self: &
   display: flex

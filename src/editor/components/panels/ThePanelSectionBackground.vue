@@ -200,7 +200,7 @@ export default {
     this.updateBgColor(DEFAULT_COLOR)
 
     this.sectionOverlayColor = this.overlay.color
-    this.sectionOverlayOpacity = this.overlay.opacity * 100
+    this.sectionOverlayOpacity = parseInt(this.overlay.opacity * 100)
 
     this.bgRepeat = styles['background-repeat'] || 'no-repeat'
     this.bgSize = styles['background-size'] || 'cover'
@@ -306,7 +306,7 @@ export default {
     },
 
     changeOverlayOpacity () {
-      this.overlay['opacity'] = this.sectionOverlayOpacity / 100
+      this.overlay['opacity'] = parseInt(this.sectionOverlayOpacity / 100)
     }
   }
 }
