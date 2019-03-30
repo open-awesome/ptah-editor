@@ -1,8 +1,6 @@
 <template>
   <figure :style="style" class="b-uploader-item">
 
-    <!--progress v-show="progress !== 100" :value="progress" :max="100"></progress-->
-
     <radial-progress-bar
       v-show="progress !== 100"
       :diameter="16"

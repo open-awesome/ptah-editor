@@ -43,18 +43,23 @@
               @change="toggleBackgroundType"/>
           </div>
 
-          <template v-if="backgroundType !== 'video'">
+          <div v-show="backgroundType !== 'video'">
             <div class="b-section-settings__control">
-              <base-uploader v-model="sectionBgUrl" @change="updateBgUrl" label="Image"/>
+              <base-uploader
+                v-model="sectionBgUrl"
+                @change="updateBgUrl"
+                label="Image"
+                type="image"
+              />
             </div>
             <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
               <div class="b-section-settings__control">
                 <control-background-position/>
               </div>
             </template>
-          </template>
+          </div>
 
-          <div v-if="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
+          <div v-show="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
             <base-uploader
               v-model="settingObjectOptions.backgroundVideo"
               @upload="uploadVideo"
