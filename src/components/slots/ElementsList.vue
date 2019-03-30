@@ -9,19 +9,18 @@
         </div>
       </div>
       <ul>
-        <li><a href="#" @click.prevent="addEl(0)" class="b-elements__button">Button</a></li>
-        <li><a href="#" @click.prevent="addEl(1)" class="b-elements__button">Link</a></li>
-        <li><a href="#" @click.prevent="addEl(2)" class="b-elements__button">Text</a></li>
-        <li><a href="#" @click.prevent="addEl(3)" class="b-elements__button">Image</a></li>
-        <li><a href="#" @click.prevent="addEl(5)" class="b-elements__button">Delimiter</a></li>
-        <li><a href="#" @click.prevent="addEl(4)" class="b-elements__button">Logo</a></li>
-        <li><a href="#" @click.prevent="addEl(6)" class="b-elements__button">Available platforms</a></li>
-        <li><a href="#" @click.prevent="addEl(7)" class="b-elements__button">Age restrictions</a></li>
-        <li><a href="#" @click.prevent="addEl(8)" class="b-elements__button">Social networks</a></li>
+        <li><a href="#" @click.prevent="addEl('button')" class="b-elements__button">Button</a></li>
+        <li><a href="#" @click.prevent="addEl('text')" class="b-elements__button">Text</a></li>
+        <li><a href="#" @click.prevent="addEl('pic')" class="b-elements__button">Image</a></li>
+        <li><a href="#" @click.prevent="addEl('delimiter')" class="b-elements__button">Delimiter</a></li>
+        <li><a href="#" @click.prevent="addEl('logo')" class="b-elements__button">Logo</a></li>
+        <li><a href="#" @click.prevent="addEl('platforms')" class="b-elements__button">Available platforms</a></li>
+        <li><a href="#" @click.prevent="addEl('restrictions')" class="b-elements__button">Age restrictions</a></li>
+        <li><a href="#" @click.prevent="addEl('social')" class="b-elements__button">Social networks</a></li>
         <!--li><a href="#" @click.prevent="addEl(9)" class="b-elements__button">Slogan</a></li-->
-        <li><a href="#" @click.prevent="addEl(10)" class="b-elements__button">Icon with text</a></li>
-        <li><a href="#" @click.prevent="addEl(11)" class="b-elements__button">Video</a></li>
-        <li><a href="#" @click.prevent="addEl(12)" class="b-elements__button">Timer</a></li>
+        <li><a href="#" @click.prevent="addEl('icontext')" class="b-elements__button">Icon with text</a></li>
+        <li><a href="#" @click.prevent="addEl('video')" class="b-elements__button">Video</a></li>
+        <li><a href="#" @click.prevent="addEl('timer')" class="b-elements__button">Timer</a></li>
       </ul>
     </aside>
   </div>
@@ -38,87 +37,81 @@ export default {
   name: 'ElementsList',
   data: () => ({
     showList: false,
-    elements: [
-      {
+    elements: {
+      button: {
         name: 'Button',
         element: types.Button,
         type: 'button',
         label: 'button',
         maxWidth: 480
       },
-      {
-        name: 'Link',
-        element: types.Link,
-        type: 'button',
-        label: 'link'
-      },
-      {
+      text: {
         name: 'TextElement',
         element: types.Text,
         type: 'text',
         label: 'text'
       },
-      {
+      pic: {
         name: 'Pic',
         element: types.Image,
         type: 'image',
         label: 'pic'
       },
-      {
+      logo: {
         name: 'Logo',
         element: types.Logo,
         type: 'image',
         label: 'logo'
       },
-      {
+      delimiter: {
         name: 'Delimiter',
         element: types.Delimiter,
         type: 'delimiter',
         label: 'delimiter'
       },
-      {
+      platforms: {
         name: 'AvailablePlatforms',
         element: types.AvailablePlatforms,
         type: 'available',
         label: 'available platforms'
       },
-      {
+      restrictions: {
         name: 'AgeRestrictions',
         element: types.AgeRestrictions,
         type: 'restrictions',
         label: 'age restrictions'
       },
-      {
+      social: {
         name: 'SocialNetworks',
         element: types.SocialNetworks,
         type: 'networks',
         label: 'social networks'
       },
-      {
+      slogan: {
         name: 'Slogan',
         element: types.Slogan,
         type: 'slogan',
         label: 'slogan'
       },
-      {
+      icontext: {
         name: 'IconWithText',
         element: types.IconWithText,
         type: 'icon',
         label: 'icon with text'
       },
-      {
+      video: {
         name: 'VideoElement',
         element: types.VideoElement,
         type: 'video',
         label: 'video'
       },
-      {
+      timer: {
         name: 'Timer',
         element: types.Timer,
         type: 'timer',
         label: 'timer'
       }
-    ]
+    }
   }),
 
   computed: {
@@ -146,8 +139,8 @@ export default {
       this.components = [...this.components, element]
     },
 
-    addEl (index) {
-      const el = _.merge({}, Seeder.seed(this.elements[index]))
+    addEl (name) {
+      const el = _.merge({}, Seeder.seed(this.elements[name]))
       this.addElement(el)
     },
     hideList () {

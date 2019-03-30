@@ -24,7 +24,7 @@
             </div>
             <div>
               <span class="b-gallery-three-block__item-title"
-                v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'text' }"
+                v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'inline' }"
                 v-html="$sectionData.images[index].label.text"
                 :style="$sectionData.images[index].label.styles"
                 >
@@ -66,7 +66,7 @@ import section from '../../mixins/section.js'
 
 const GALLERY_ITEM = {
   preview: types.Image,
-  label: types.Text,
+  label: types.TextInherit,
   button: types.Button
 }
 
@@ -195,6 +195,7 @@ export default {
 @import '../../../assets/sass/_flex.sass'
 
 .b-gallery-three
+  color: rgba(255, 255, 255, .9)
   &__wrap
     margin: 0 auto
     max-width: 160rem

@@ -48,7 +48,7 @@ import section from '../../mixins/section.js'
 
 const GALLERY_ITEM = {
   preview: types.Image,
-  label: types.Text,
+  label: types.TextInherit,
   button: types.Button
 }
 
