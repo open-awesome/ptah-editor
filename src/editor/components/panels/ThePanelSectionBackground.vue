@@ -306,7 +306,7 @@ export default {
     },
 
     changeOverlayOpacity () {
-      this.overlay['opacity'] = parseInt(this.sectionOverlayOpacity / 100)
+      this.overlay['opacity'] = this.sectionOverlayOpacity / 100
     }
   }
 }
