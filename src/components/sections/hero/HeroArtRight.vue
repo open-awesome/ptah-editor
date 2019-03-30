@@ -63,7 +63,7 @@
 </template>
 
 <script>
-import { StyleObject, Logo, VideoElement, Slogan, Button, Link } from '@editor/types'
+import { StyleObject, Logo, VideoElement, Slogan, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import section from '../../mixins/section.js'
 
@@ -139,7 +139,8 @@ const defaultColumnComponents = [
         'height': '6.4rem',
         'max-width': '100%',
         'border-radius': '2px',
-        'font-size': '1.8rem'
+        'font-size': '1.8rem',
+        'background-color': 'transparent'
       }
     },
     key: 7
@@ -173,7 +174,7 @@ export default {
       { name: 'VideoElement', element: VideoElement, type: 'video', class: 'b-video', label: 'video', key: 5 },
       { name: 'TextElement', element: Slogan, type: 'text', class: 'b-slogan', label: 'slogan', key: 6 },
       { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 7 }
+      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 7 }
     ]
   },
 
