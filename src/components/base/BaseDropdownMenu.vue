@@ -75,7 +75,7 @@ export default {
           </div>
         </div>
       </div>
-      <div class="b-pth-base-dropdown-menu__dropdown" :class="menuListClasses" v-if="showOptionsHover">
+      <div class="b-pth-base-dropdown-menu__dropdown" :class="menuListClasses" v-if="showOptionsHover" @click.stop="">
         <div class="b-pth-base-dropdown-menu__list">
           <div class="b-pth-base-dropdown-menu__list-padd">
             <slot name="listHover"></slot>

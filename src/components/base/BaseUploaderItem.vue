@@ -285,7 +285,7 @@ export default {
       width: $size-step*7
       height: $size-step*4
 
-      background-size: contain
+      background-size: contain !important
   &:hover
     border-color: $dark-blue-krayola
   &:not(:last-child)
