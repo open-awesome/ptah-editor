@@ -220,9 +220,11 @@ export default {
         animation: 150,
         sort: true,
         disabled: false,
+        filter: 'no-sortable',
         preventOnFilter: false,
         onUpdate: (event) => {
-          this.builder.sort(event.oldIndex, event.newIndex)
+          let headerMod = this.headerSection ? 1 : 0
+          this.builder.sort(event.oldIndex + headerMod, event.newIndex + headerMod)
         }
       })
     }

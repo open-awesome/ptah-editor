@@ -248,8 +248,8 @@ const data = new Map([
         'text-decoration': 'none',
         'justify-content': 'center',
         'text-align': 'center',
-        'width': '',
-        'height': ''
+        'width': '256px',
+        'height': '64px'
       },
       isComplex: true
     })

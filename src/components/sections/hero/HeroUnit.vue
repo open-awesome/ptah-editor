@@ -41,7 +41,7 @@ const COMPONENTS = [
     name: 'TextElement',
     element: types.Text,
     type: 'text',
-    class: 'b-text',
+    class: ' ',
     label: 'text',
     key: 2
   },
