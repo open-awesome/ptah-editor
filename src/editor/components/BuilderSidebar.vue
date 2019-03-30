@@ -33,91 +33,94 @@
             {{ $t('menu.sections') }}
           </span>
       </menu-item>
-
-      <!-- Sections CONTENTS -->
-        <!-- header -->
-        <div class="no-sortable" ref="header">
-          <menu-subitem
-              v-if="headerSection"
-              v-scroll-to="`#section_${ headerSection.id }`"
-              :id="`menu-item-${ headerSection.id }`"
-              :is-selected="isActiveSection(headerSection.id)"
-              :section-id="headerSection.id"
-              @click="toggleSettingsBar(headerSection)"
-              class="b-menu-subitem--header"
-            >
-            # -
-            <span class="b-menu-subitem__title-text">
-              {{ headerSection.name }}
-            </span>
-            <div class="b-menu-subitem__icons">
-              <span class="b-menu-subitem__icon"
-                @click.stop="showSettingsBar(headerSection)"
+      <base-scroll-container backgroundBar="#999">
+        <div class="b-builder-sidebar__content-inner">
+        <!-- Sections CONTENTS -->
+          <!-- header -->
+            <div class="no-sortable" ref="header">
+              <menu-subitem
+                  v-if="headerSection"
+                  v-scroll-to="`#section_${ headerSection.id }`"
+                  :id="`menu-item-${ headerSection.id }`"
+                  :is-selected="isActiveSection(headerSection.id)"
+                  :section-id="headerSection.id"
+                  @click="toggleSettingsBar(headerSection)"
+                  class="b-menu-subitem--header"
                 >
-                <icon-base name="edit" color="#ffffff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="toggleSectionLayouts(headerSection)"
-                >
-                <icon-base name="layouts" color="#fff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="showBackgroundPanel(headerSection)"
-                >
-                <icon-base name="background" color="#fff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="deleteSection(headerSection)"
-                >
-                <icon-base name="remove" color="#ffffff"></icon-base>
-              </span>
+                # -
+                <span class="b-menu-subitem__title-text">
+                  {{ headerSection.name }}
+                </span>
+                <div class="b-menu-subitem__icons">
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="showSettingsBar(headerSection)"
+                    >
+                    <icon-base name="edit" color="#ffffff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="toggleSectionLayouts(headerSection)"
+                    >
+                    <icon-base name="layouts" color="#fff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="showBackgroundPanel(headerSection)"
+                    >
+                    <icon-base name="background" color="#fff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="deleteSection(headerSection)"
+                    >
+                    <icon-base name="remove" color="#ffffff"></icon-base>
+                  </span>
+                </div>
+              </menu-subitem>
             </div>
-          </menu-subitem>
-        </div>
 
-        <div class="sortable" ref="sections">
+            <div class="sortable" ref="sections">
 
-          <!-- sections -->
-          <menu-subitem
-              v-for="(section, index) in builderSections"
-              v-scroll-to="`#section_${section.id}`"
-              :key="section.id"
-              :id="`menu-item-${section.id}`"
-              :is-selected="isActiveSection(section.id)"
-              :is-main="section.isMain"
-              :has-draggable-icon="true"
-              :section-id="section.id"
-              @click="toggleSettingsBar(section)"
-            >
-            {{ `${ index + 1 } - `}}
-            <span class="b-menu-subitem__title-text">
-              {{ section.name }}
-            </span>
-            <div class="b-menu-subitem__icons">
-              <span class="b-menu-subitem__icon"
-                @click.stop="showSettingsBar(section)"
+            <!-- sections -->
+              <menu-subitem
+                  v-for="(section, index) in builderSections"
+                  v-scroll-to="`#section_${section.id}`"
+                  :key="section.id"
+                  :id="`menu-item-${section.id}`"
+                  :is-selected="isActiveSection(section.id)"
+                  :is-main="section.isMain"
+                  :has-draggable-icon="true"
+                  :section-id="section.id"
+                  @click="toggleSettingsBar(section)"
                 >
-                <icon-base name="edit" color="#ffffff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="toggleSectionLayouts(section)"
-                >
-                <icon-base name="layouts" color="#fff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
-                @click.stop="showBackgroundPanel(section)"
-                >
-                <icon-base name="background" color="#fff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="deleteSection(section)"
-                >
-                <icon-base name="remove" color="#ffffff"></icon-base>
-              </span>
+                {{ `${ index + 1 } - `}}
+                <span class="b-menu-subitem__title-text">
+                  {{ section.name }}
+                </span>
+                <div class="b-menu-subitem__icons">
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="showSettingsBar(section)"
+                    >
+                    <icon-base name="edit" color="#ffffff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="toggleSectionLayouts(section)"
+                    >
+                    <icon-base name="layouts" color="#fff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
+                    @click.stop="showBackgroundPanel(section)"
+                    >
+                    <icon-base name="background" color="#fff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="deleteSection(section)"
+                    >
+                    <icon-base name="remove" color="#ffffff"></icon-base>
+                  </span>
+                </div>
+              </menu-subitem>
+
             </div>
-          </menu-subitem>
-
         </div>
+      </base-scroll-container>
     </div>
 
     <transition name="slide-fade">
@@ -374,6 +377,8 @@ $top-panel-height: 7.2rem
     flex-direction: column
     min-height: 0
     overflow: auto
+    &-inner
+      padding: 0 0.6rem 0 0
 
   &-settings
     position: absolute
