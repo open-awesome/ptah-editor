@@ -347,7 +347,6 @@ export default {
 
   &__inner
     max-width: 24rem
-    height: 100%
     padding: 0 0 2.4rem 0
 
 .b-section-settings
