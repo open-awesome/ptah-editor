@@ -13,7 +13,7 @@
               :key="index"
             >
             <div class="b-preview__image"
-              v-styler:galleryItem="{ el: $sectionData.images[index].preview, path:`$sectionData.images[${index}].preview`, type: 'galleryItem' }"
+              v-styler:for="{ el: $sectionData.images[index].preview, path:`$sectionData.images[${index}].preview`, type: 'image' }"
               :style="$sectionData.images[index].preview.styles"
               :data-index="index"
               :gallery-one-preview="'loader__content_show'"
@@ -60,7 +60,7 @@ import { galleryPreviewClick } from '@cscripts/gallery1'
 import section from '../../mixins/section.js'
 
 const GALLERY_ITEM = {
-  preview: types.GalleryItem,
+  preview: types.Image,
   label: types.TextInherit,
   title: types.TextInherit,
   img: types.Image,
@@ -141,6 +141,7 @@ export default {
 @import '../../../assets/sass/_flex.sass'
 
 .b-gallery-one
+  color: rgba(255, 255, 255, .9)
 
 .b-preview
   cursor: pointer
@@ -153,10 +154,11 @@ export default {
   position: relative
 
 .b-preview__image
-  width: 12rem
+  width: 12rem !important
   height: 18rem
   position: relative
   z-index: 0
+  background-color: white !important
 
 .b-preview__name
   border-radius: 0rem
@@ -171,7 +173,7 @@ export default {
 
 .b-preview_active
   transform: scale(1.1)
-  box-shadow: 0 0 2rem 0 rgba(50, 50, 50, 1)
+  box-shadow: 0 0 2rem 0 #2f98ba
   border: 0.2rem solid #18d88b
 
 .b-gallery-one-list
@@ -285,6 +287,7 @@ export default {
   width: 40rem
   height: 40rem
   margin: 0 auto
+  background-color: white !important
   .is-tablet &,
   .is-mobile &
     width: 30rem

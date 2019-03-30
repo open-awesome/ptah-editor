@@ -414,7 +414,8 @@ export default {
         'b-control-panel',
         'menubar__button',
         'editor__content',
-        'menubar is-hidden'
+        'menubar is-hidden',
+        'b-slot__settings'
       ]
 
       if (event && (event.target === this.el
