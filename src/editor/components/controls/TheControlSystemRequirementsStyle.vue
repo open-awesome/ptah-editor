@@ -64,6 +64,9 @@ export default {
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.colorFill['color'] = color
+    },
+    changeSize () {
+      this.sizeIcons['width'] = this.elWidth
     }
   },
 
@@ -78,7 +81,7 @@ export default {
   <div class="b-text-controls">
     <div>
       <div class="b-text-controls__control">
-        <base-range-slider v-model="elWidth" label="Icons size" step="8" min="16" max="72">
+        <base-range-slider v-model="elWidth" @change="changeSize" label="Icons size" step="8" min="16" max="72">
           {{ elWidth }} px
         </base-range-slider>
       </div>
