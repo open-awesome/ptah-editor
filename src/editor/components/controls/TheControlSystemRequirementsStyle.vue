@@ -14,7 +14,7 @@ export default {
   data () {
     return {
       color: '',
-      elWidth: ''
+      elWidth: 0
     }
   },
 
@@ -68,8 +68,8 @@ export default {
   },
 
   mounted () {
-    this.color = this.colorFill.color
-    this.elWidth = this.sizeIcons.width
+    this.colorFill !== undefined ? this.color = this.colorFill.color : this.color = 'rgba(0, 0, 0, 1)'
+    this.sizeIcons !== undefined ? this.elWidth = this.sizeIcons.width : this.elWidth = 32
   }
 }
 </script>
@@ -78,8 +78,8 @@ export default {
   <div class="b-text-controls">
     <div>
       <div class="b-text-controls__control">
-        <base-range-slider v-model="sizeIcons.width" label="Icons size" step="8" min="16" max="72">
-          {{ sizeIcons.width }} px
+        <base-range-slider v-model="elWidth" label="Icons size" step="8" min="16" max="72">
+          {{ elWidth }} px
         </base-range-slider>
       </div>
       <div class="b-text-controls__control">
@@ -182,37 +182,4 @@ export default {
         top: -0.5rem
       &_color
         border: 0.2rem solid rgba($cornflower-blue, 0.5)
-    &-set-link
-      &-modal
-        width: 40rem
-        background: $white
-        position: absolute
-        right: -39rem
-        top: -2rem
-        z-index: 1
-        box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
-        padding: 0 2.3rem 2.3rem
-        &:before
-          content: ""
-          position: absolute
-          width: $size-step/2
-          height: $size-step/2
-          top: 2.4rem
-          left: -.7rem
-          background: $white
-          transform: rotate(-45deg)
-          z-index: 2
-        &-buttons
-          display: flex
-          justify-content: flex-end
-          margin: $size-step 0 0
-        &-chapter
-          font-size: 1.6rem
-          letter-spacing: -0.02em
-          color: $dark-grey
-          margin: 0 0 $size-step/2 0
-      &_color *
-        fill: $dark-blue-krayola
-      &_color *
-        fill: #4D7DD8
 </style>
