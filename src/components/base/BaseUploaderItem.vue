@@ -142,11 +142,7 @@ export default {
     },
 
     onClick () {
-      if (this.type === 'video') {
-        return false
-      } else {
-        return true
-      }
+      return this.type !== 'video'
     }
   },
 
