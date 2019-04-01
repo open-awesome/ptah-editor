@@ -128,7 +128,7 @@
 </template>
 
 <script>
-import { StyleObject, Logo, Button, Link } from '@editor/types'
+import { StyleObject, Logo, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import section from '../../mixins/section.js'
 
@@ -238,8 +238,8 @@ export default {
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
     ],
     components2: [
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 1 },
-      { name: 'Link', element: Link, type: 'link', class: 'b-link', label: 'link', key: 2 },
+      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
+      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 },
       { name: 'Button', element: Button, type: 'button', class: 'b-button', label: 'button', key: 5 }
     ]
   },
