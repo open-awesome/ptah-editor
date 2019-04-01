@@ -5,142 +5,475 @@ import VuseIcon from '@editor/components/VuseIcon'
 import section from '../../mixins/section.js'
 import { mapActions } from 'vuex'
 
-const REQUIREMENTS = {
-  'OS': { text: {}, min: types.TextInherit, max: types.TextInherit },
-  'Processor': { text: {}, min: types.TextInherit, max: types.TextInherit },
-  'Memory': { text: {}, min: types.TextInherit, max: types.TextInherit },
-  'Graphics': { text: {}, min: types.TextInherit, max: types.TextInherit },
-  'Direct X': { text: {}, min: types.TextInherit, max: types.TextInherit },
-  'Storage': { text: {}, min: types.TextInherit, max: types.TextInherit },
-  'Sound Card': { text: {}, min: types.TextInherit, max: types.TextInherit }
-}
-
-const REQUIREMENTS_WINDOWS = {
-  'OS': {
-    text: { text: 'OS version' },
-    min: { text: 'Windows 7, 8, 10' },
-    max: { text: 'Windows 7, 8, 10' }
+const REQUIREMENTS = [
+  {
+    name: 'OS-text',
+    prop: 'OS',
+    text: {}
   },
-  'Processor': {
-    text: { text: 'CPU' },
-    min: { text: 'Intel Core 2 Duo 2.5 GHz' },
-    max: { text: 'Intel Core i5 3.0 GHz' }
+  {
+    name: 'OS-min',
+    prop: 'OS',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
   },
-  'Memory': {
-    text: { text: 'RAM' },
-    min: { text: '1 GB' },
-    max: { text: '2 GB' }
+  {
+    name: 'OS-max',
+    prop: 'OS',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
   },
-  'Graphics': {
-    text: { text: 'Graphics' },
-    min: { text: 'NVIDIA 9xxx / ATI 2xxx' },
-    max: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' }
+  {
+    name: 'Processor-text',
+    prop: 'Processor',
+    text: {}
   },
-  'Direct X': {
-    text: { text: 'DX version' },
-    min: { text: 'Version 9.0c' },
-    max: { text: 'Version 9.0c' }
+  {
+    name: 'Processor-min',
+    prop: 'Processor',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
   },
-  'Storage': {
-    text: { text: 'Storage space' },
-    min: { text: '5 GB' },
-    max: { text: '5 GB' }
+  {
+    name: 'Processor-max',
+    prop: 'Processor',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
   },
-  'Sound Card': {
-    text: { text: 'Sound card' },
-    min: { text: 'DirectX9 Compatible' },
-    max: { text: 'DirectX9 Compatible' }
+  {
+    name: 'Memory-text',
+    prop: 'Memory',
+    text: {}
+  },
+  {
+    name: 'Memory-min',
+    prop: 'Memory',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
+  },
+  {
+    name: 'Memory-max',
+    prop: 'Memory',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
+  },
+  {
+    name: 'Graphics-text',
+    prop: 'Graphics',
+    text: {}
+  },
+  {
+    name: 'Graphics-min',
+    prop: 'Graphics',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
+  },
+  {
+    name: 'Graphics-max',
+    prop: 'Graphics',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
+  },
+  {
+    name: 'Direct X-text',
+    prop: 'Direct X',
+    text: {}
+  },
+  {
+    name: 'Direct X-min',
+    prop: 'Direct X',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
+  },
+  {
+    name: 'Direct X-max',
+    prop: 'Direct X',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
+  },
+  {
+    name: 'Storage-text',
+    prop: 'Storage',
+    text: {}
+  },
+  {
+    name: 'Storage-min',
+    prop: 'Storage',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
+  },
+  {
+    name: 'Storage-max',
+    prop: 'Storage',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
+  },
+  {
+    name: 'Sound Card-text',
+    prop: 'Sound Card',
+    text: {}
+  },
+  {
+    name: 'Sound Card-min',
+    prop: 'Sound Card',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
+  },
+  {
+    name: 'Sound Card-max',
+    prop: 'Sound Card',
+    element: types.TextInherit,
+    type: 'inline',
+    label: 'Text'
   }
-}
+]
 
-const REQUIREMENTS_OS = {
-  'OS': {
-    text: { text: 'OS version' },
-    min: { text: 'Mac OSX 10.7.5' },
-    max: { text: 'Mac OSX 10.7.5' }
+const REQUIREMENTS_WINDOWS = [
+  {
+    name: 'OS-text',
+    element: { text: 'OS version' },
+    key: 11
   },
-  'Processor': {
-    text: { text: 'CPU' },
-    min: { text: 'Intel Core 2 Duo 2.5 GHz' },
-    max: { text: 'Intel Core i5 3.0 GHz' }
+  {
+    name: 'OS-min',
+    element: { text: 'Windows 7, 8, 10' },
+    key: 12
   },
-  'Memory': {
-    text: { text: 'RAM' },
-    min: { text: '1 GB' },
-    max: { text: '2 GB' }
+  {
+    name: 'OS-max',
+    element: { text: 'Windows 7, 8, 10' },
+    key: 13
   },
-  'Graphics': {
-    text: { text: 'Graphics' },
-    min: { text: 'NVIDIA 9xxx / ATI 2xxx' },
-    max: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' }
+  {
+    name: 'Processor-text',
+    element: { text: 'CPU' },
+    key: 21
   },
-  'Direct X': {
-    text: { text: 'DX version' },
-    min: { text: 'Version 9.0c' },
-    max: { text: 'Version 9.0c' }
+  {
+    name: 'Processor-min',
+    element: { text: 'Intel Core 2 Duo 2.5 GHz' },
+    key: 22
   },
-  'Storage': {
-    text: { text: 'Storage space' },
-    min: { text: '5 GB' },
-    max: { text: '5 GB' }
+  {
+    name: 'Processor-max',
+    element: { text: 'Intel Core i5 3.0 GHz' },
+    key: 23
   },
-  'Sound Card': {
-    text: { text: 'Sound card' },
-    min: { text: 'DirectX9 Compatible' },
-    max: { text: 'DirectX9 Compatible' }
+  {
+    name: 'Memory-text',
+    element: { text: 'RAM' },
+    key: 31
+  },
+  {
+    name: 'Memory-min',
+    element: { text: '1 GB' },
+    key: 32
+  },
+  {
+    name: 'Memory-max',
+    element: { text: '2 GB' },
+    key: 33
+  },
+  {
+    name: 'Graphics-text',
+    element: { text: 'Graphics' },
+    key: 41
+  },
+  {
+    name: 'Graphics-min',
+    element: { text: 'NVIDIA 9xxx / ATI 2xxx' },
+    key: 42
+  },
+  {
+    name: 'Graphics-max',
+    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' },
+    key: 43
+  },
+  {
+    name: 'Direct X-text',
+    element: { text: 'DX version' },
+    key: 41
+  },
+  {
+    name: 'Direct X-min',
+    element: { text: 'Version 9.0c' },
+    key: 42
+  },
+  {
+    name: 'Direct X-max',
+    element: { text: 'Version 9.0c' },
+    key: 43
+  },
+  {
+    name: 'Storage-text',
+    element: { text: 'Storage' },
+    key: 51
+  },
+  {
+    name: 'Storage-min',
+    element: { text: '5 GB' },
+    key: 52
+  },
+  {
+    name: 'Storage-max',
+    element: { text: '5 GB' },
+    key: 53
+  },
+  {
+    name: 'Sound Card-text',
+    element: { text: 'Sound Card' },
+    key: 61
+  },
+  {
+    name: 'Sound Card-min',
+    element: { text: '—' },
+    key: 62
+  },
+  {
+    name: 'Sound Card-max',
+    element: { text: '—' },
+    key: 63
   }
-}
+]
 
-const REQUIREMENTS_LINUX = {
-  'OS': {
-    text: { text: 'OS version' },
-    min: { text: 'Ubuntu/SteamOS' },
-    max: { text: 'Ubuntu/SteamOS' }
+const REQUIREMENTS_OS = [
+  {
+    name: 'OS-text',
+    element: { text: 'OS version' },
+    key: 111
   },
-  'Processor': {
-    text: { text: 'CPU' },
-    min: { text: 'Intel Core 2 Duo 2.5 GHz' },
-    max: { text: 'Intel Core i5 3.0 GHz' }
+  {
+    name: 'OS-min',
+    element: { text: 'Mac OSX 10.7.5' },
+    key: 112
   },
-  'Memory': {
-    text: { text: 'RAM' },
-    min: { text: '1 GB' },
-    max: { text: '2 GB' }
+  {
+    name: 'OS-max',
+    element: { text: 'Mac OSX 10.7.5' },
+    key: 113
   },
-  'Graphics': {
-    text: { text: 'Graphics' },
-    min: { text: 'NVIDIA 9xxx / ATI 2xxx' },
-    max: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' }
+  {
+    name: 'Processor-text',
+    element: { text: 'CPU' },
+    key: 121
   },
-  'Direct X': {
-    text: { text: 'DX version' },
-    min: { text: 'Version 9.0c' },
-    max: { text: 'Version 9.0c' }
+  {
+    name: 'Processor-min',
+    element: { text: 'Intel Core 2 Duo 2.5 GHz' },
+    key: 122
   },
-  'Storage': {
-    text: { text: 'Storage space' },
-    min: { text: '5 GB' },
-    max: { text: '5 GB' }
+  {
+    name: 'Processor-max',
+    element: { text: 'Intel Core i5 3.0 GHz' },
+    key: 123
   },
-  'Sound Card': {
-    text: { text: 'Sound card' },
-    min: { text: '—' },
-    max: { text: '—' }
+  {
+    name: 'Memory-text',
+    element: { text: 'RAM' },
+    key: 131
+  },
+  {
+    name: 'Memory-min',
+    element: { text: '1 GB' },
+    key: 132
+  },
+  {
+    name: 'Memory-max',
+    element: { text: '2 GB' },
+    key: 133
+  },
+  {
+    name: 'Graphics-text',
+    element: { text: 'Graphics' },
+    key: 141
+  },
+  {
+    name: 'Graphics-min',
+    element: { text: 'NVIDIA 9xxx / ATI 2xxx' },
+    key: 142
+  },
+  {
+    name: 'Graphics-max',
+    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' },
+    key: 143
+  },
+  {
+    name: 'Direct X-text',
+    element: { text: 'DX version' },
+    key: 141
+  },
+  {
+    name: 'Direct X-min',
+    element: { text: 'Version 9.0c' },
+    key: 142
+  },
+  {
+    name: 'Direct X-max',
+    element: { text: 'Version 9.0c' },
+    key: 143
+  },
+  {
+    name: 'Storage-text',
+    element: { text: 'Storage' },
+    key: 151
+  },
+  {
+    name: 'Storage-min',
+    element: { text: '5 GB' },
+    key: 152
+  },
+  {
+    name: 'Storage-max',
+    element: { text: '5 GB' },
+    key: 153
+  },
+  {
+    name: 'Sound Card-text',
+    element: { text: 'Sound Card' },
+    key: 161
+  },
+  {
+    name: 'Sound Card-min',
+    element: { text: '—' },
+    key: 162
+  },
+  {
+    name: 'Sound Card-max',
+    element: { text: '—' },
+    key: 163
   }
-}
+]
+
+const REQUIREMENTS_LINUX = [
+  {
+    name: 'OS-text',
+    element: { text: 'OS version' },
+    key: 211
+  },
+  {
+    name: 'OS-min',
+    element: { text: 'Ubuntu/SteamOS' },
+    key: 212
+  },
+  {
+    name: 'OS-max',
+    element: { text: 'Ubuntu/SteamOS' },
+    key: 213
+  },
+  {
+    name: 'Processor-text',
+    element: { text: 'CPU' },
+    key: 221
+  },
+  {
+    name: 'Processor-min',
+    element: { text: 'Intel Core 2 Duo 2.5 GHz' },
+    key: 222
+  },
+  {
+    name: 'Processor-max',
+    element: { text: 'Intel Core i5 3.0 GHz' },
+    key: 223
+  },
+  {
+    name: 'Memory-text',
+    element: { text: 'RAM' },
+    key: 231
+  },
+  {
+    name: 'Memory-min',
+    element: { text: '1 GB' },
+    key: 232
+  },
+  {
+    name: 'Memory-max',
+    element: { text: '2 GB' },
+    key: 233
+  },
+  {
+    name: 'Graphics-text',
+    element: { text: 'Graphics' },
+    key: 241
+  },
+  {
+    name: 'Graphics-min',
+    element: { text: 'NVIDIA 9xxx / ATI 2xxx' },
+    key: 242
+  },
+  {
+    name: 'Graphics-max',
+    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' },
+    key: 243
+  },
+  {
+    name: 'Direct X-text',
+    element: { text: 'DX version' },
+    key: 241
+  },
+  {
+    name: 'Direct X-min',
+    element: { text: 'Version 9.0c' },
+    key: 242
+  },
+  {
+    name: 'Direct X-max',
+    element: { text: 'Version 9.0c' },
+    key: 243
+  },
+  {
+    name: 'Storage-text',
+    element: { text: 'Storage' },
+    key: 251
+  },
+  {
+    name: 'Storage-min',
+    element: { text: '5 GB' },
+    key: 252
+  },
+  {
+    name: 'Storage-max',
+    element: { text: '5 GB' },
+    key: 253
+  },
+  {
+    name: 'Sound Card-text',
+    element: { text: 'Sound Card' },
+    key: 261
+  },
+  {
+    name: 'Sound Card-min',
+    element: { text: '—' },
+    key: 262
+  },
+  {
+    name: 'Sound Card-max',
+    element: { text: '—' },
+    key: 263
+  }
+]
 
 const PLATFORMS_CUSTOM = {
   'windows': {
-    text: { text: 'Windows' },
-    requirements: _.merge({}, REQUIREMENTS_WINDOWS)
+    text: { text: 'Windows' }
   },
   'apple': {
-    text: { text: 'Apple' },
-    requirements: _.merge({}, REQUIREMENTS_OS)
+    text: { text: 'Apple' }
   },
   'linux': {
-    text: { text: 'Linux' },
-    requirements: _.merge({}, REQUIREMENTS_LINUX)
+    text: { text: 'Linux' }
   }
 }
 
@@ -154,7 +487,7 @@ const C_CUSTOM = [
         'color': '#000'
       }
     },
-    key: 10
+    key: 1000
   }
 ]
 
@@ -180,6 +513,9 @@ const SCHEMA_CUSTOM = {
     }
   },
   platforms: _.merge({}, PLATFORMS_CUSTOM),
+  componentsRequirementswindows: _.merge([], REQUIREMENTS_WINDOWS),
+  componentsRequirementsapple: _.merge([], REQUIREMENTS_OS),
+  componentsRequirementslinux: _.merge([], REQUIREMENTS_LINUX),
   components: _.merge({}, C_CUSTOM),
   edited: true
 }
@@ -218,27 +554,30 @@ export default {
     platforms: {
       'windows': {
         element: types.TextInherit,
-        requirements: _.merge({}, REQUIREMENTS),
         text: types.TextInherit,
-        min: types.TextInherit,
-        rec: types.TextInherit
+        min: { element: types.TextInherit, type: 'inline', label: 'Text' },
+        rec: types.TextInherit,
+        key: 10000
       },
       'apple': {
         element: types.TextInherit,
-        requirements: _.merge({}, REQUIREMENTS),
         text: types.TextInherit,
-        min: types.TextInherit,
-        rec: types.TextInherit
+        min: { element: types.TextInherit, type: 'inline', label: 'Text' },
+        rec: types.TextInherit,
+        key: 20000
       },
       'linux': {
         element: types.TextInherit,
-        requirements: _.merge({}, REQUIREMENTS),
         button: types.Button,
         text: types.TextInherit,
-        min: types.TextInherit,
-        rec: types.TextInherit
+        min: { element: types.TextInherit, type: 'inline', label: 'Text' },
+        rec: types.TextInherit,
+        key: 30000
       }
-    }
+    },
+    componentsRequirementswindows: _.merge([], REQUIREMENTS),
+    componentsRequirementsapple: _.merge([], REQUIREMENTS),
+    componentsRequirementslinux: _.merge([], REQUIREMENTS)
   },
 
   methods: {
@@ -362,9 +701,9 @@ export default {
                 <div class="b-system-requirements">
                   <div class="b-system-requirements__table">
                     <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
-                        v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
+                        v-if="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
                       <div>
-                        <div class="b-system-requirements__table-row  flex flex_center"
+                        <div class="b-system-requirements__table-row  flex"
                           :style="{
                             'color' : $sectionData.mainStyle.table.head['color'],
                             'font-family' : $sectionData.mainStyle.table.head['font-family'],
@@ -391,9 +730,9 @@ export default {
                             </span>
                           </div>
                         </div><!--/.b-system-requirements__table-row-->
-                        <div class="b-system-requirements__table-row flex flex_center"
-                          v-for="(v, index) in value.requirements" :key="index"
-                          v-if="$sectionData.mainStyle.rowsRequirements[index].visible"
+                        <div class="b-system-requirements__table-row flex"
+                             v-for="(row, i) in $sectionData.mainStyle.rowsRequirements" :key="i"
+                             v-if="$sectionData.mainStyle.rowsRequirements[i].visible"
                           :style="{
                             'color' : $sectionData.mainStyle.table.body['color'],
                             'font-family' : $sectionData.mainStyle.table.body['font-family'],
@@ -404,21 +743,30 @@ export default {
                             'background-color' : $sectionData.mainStyle.table.body['background-color']
                           }"
                           >
-                          <div class="b-system-requirements__table-col b-system-requirements__table-col_name"
-                            v-html="$sectionData.platforms[key].requirements[index].text.text"
+                          <div class="b-system-requirements__table-col flex"
+                             v-for="(col, index) in $sectionData[`componentsRequirements${key}`]"
+                             :key="index"
+                             v-if="col.prop === i"
                             >
-                          </div>
-                          <div class="b-system-requirements__table-col"
-                            v-styler:for="{ el: $sectionData.platforms[key].requirements[index].min, path: `$sectionData.platforms[${key}].requirements[${index}].min`}"
-                            :style="$sectionData.platforms[key].requirements[index].min.styles"
-                            v-html="$sectionData.platforms[key].requirements[index].min.text"
-                            >
-                          </div>
-                          <div class="b-system-requirements__table-col"
-                               v-styler:for="{ el: $sectionData.platforms[key].requirements[index].max, path: `$sectionData.platforms[${key}].requirements[${index}].max`}"
-                               :style="$sectionData.platforms[key].requirements[index].max.styles"
-                               v-html="$sectionData.platforms[key].requirements[index].max.text"
-                            >
+                            <div class="b-system-requirements__table-col_name"
+                              v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
+                              v-if="$sectionData[`componentsRequirements${key}`][index].name.indexOf('-text') !== -1"
+                              >
+                            </div>
+                            <div class=""
+                              v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData[componentsRequirements${key}][${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type }"
+                              :style="$sectionData[`componentsRequirements${key}`][index].element.styles"
+                              v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
+                              v-if="$sectionData[`componentsRequirements${key}`][index].name.indexOf('-min') !== -1"
+                              >
+                            </div>
+                            <div class=""
+                                 v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData[componentsRequirements${key}][${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type }"
+                                 :style="$sectionData[`componentsRequirements${key}`][index].element.styles"
+                                 v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
+                                 v-if="$sectionData[`componentsRequirements${key}`][index].name.indexOf('-max') !== -1"
+                              >
+                            </div>
                           </div>
                         </div><!--/.b-system-requirements__table-row-->
                       </div>
@@ -589,13 +937,13 @@ export default {
         .is-editable &
           opacity: 0.2
           display: flex
+      &-padd
     &-col
       padding: $size-step/2
       width: 38%
-      text-align: center
       word-break: break-all
+      text-align: left
       &:nth-child(1)
-        text-align: left
         width: 24%
         white-space: nowrap
         .is-mobile &
