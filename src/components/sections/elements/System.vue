@@ -9,7 +9,7 @@ const REQUIREMENTS = [
   {
     name: 'OS-text',
     prop: 'OS',
-    text: {}
+    element: types.TextInherit
   },
   {
     name: 'OS-min',
@@ -28,7 +28,7 @@ const REQUIREMENTS = [
   {
     name: 'Processor-text',
     prop: 'Processor',
-    text: {}
+    element: types.TextInherit
   },
   {
     name: 'Processor-min',
@@ -47,7 +47,7 @@ const REQUIREMENTS = [
   {
     name: 'Memory-text',
     prop: 'Memory',
-    text: {}
+    element: types.TextInherit
   },
   {
     name: 'Memory-min',
@@ -66,7 +66,7 @@ const REQUIREMENTS = [
   {
     name: 'Graphics-text',
     prop: 'Graphics',
-    text: {}
+    element: types.TextInherit
   },
   {
     name: 'Graphics-min',
@@ -85,7 +85,7 @@ const REQUIREMENTS = [
   {
     name: 'Direct X-text',
     prop: 'Direct X',
-    text: {}
+    element: types.TextInherit
   },
   {
     name: 'Direct X-min',
@@ -104,7 +104,7 @@ const REQUIREMENTS = [
   {
     name: 'Storage-text',
     prop: 'Storage',
-    text: {}
+    element: types.TextInherit
   },
   {
     name: 'Storage-min',
@@ -123,7 +123,7 @@ const REQUIREMENTS = [
   {
     name: 'Sound Card-text',
     prop: 'Sound Card',
-    text: {}
+    element: types.TextInherit
   },
   {
     name: 'Sound Card-min',
@@ -248,6 +248,71 @@ const REQUIREMENTS_WINDOWS = [
     key: 63
   }
 ]
+const COMPONENTS_WINDOWS_KEYS = [
+  {
+    key: 11
+  },
+  {
+    key: 12
+  },
+  {
+    key: 13
+  },
+  {
+    key: 21
+  },
+  {
+    key: 22
+  },
+  {
+    key: 23
+  },
+  {
+    key: 31
+  },
+  {
+    key: 32
+  },
+  {
+    key: 33
+  },
+  {
+    key: 41
+  },
+  {
+    key: 42
+  },
+  {
+    key: 43
+  },
+  {
+    key: 41
+  },
+  {
+    key: 42
+  },
+  {
+    key: 43
+  },
+  {
+    key: 51
+  },
+  {
+    key: 52
+  },
+  {
+    key: 53
+  },
+  {
+    key: 61
+  },
+  {
+    key: 62
+  },
+  {
+    key: 63
+  }
+]
 
 const REQUIREMENTS_OS = [
   {
@@ -353,6 +418,71 @@ const REQUIREMENTS_OS = [
   {
     name: 'Sound Card-max',
     element: { text: '—' },
+    key: 163
+  }
+]
+const COMPONENTS_OS_KEYS = [
+  {
+    key: 111
+  },
+  {
+    key: 112
+  },
+  {
+    key: 113
+  },
+  {
+    key: 121
+  },
+  {
+    key: 122
+  },
+  {
+    key: 123
+  },
+  {
+    key: 131
+  },
+  {
+    key: 132
+  },
+  {
+    key: 133
+  },
+  {
+    key: 141
+  },
+  {
+    key: 142
+  },
+  {
+    key: 143
+  },
+  {
+    key: 141
+  },
+  {
+    key: 142
+  },
+  {
+    key: 143
+  },
+  {
+    key: 151
+  },
+  {
+    key: 152
+  },
+  {
+    key: 153
+  },
+  {
+    key: 161
+  },
+  {
+    key: 162
+  },
+  {
     key: 163
   }
 ]
@@ -464,18 +594,71 @@ const REQUIREMENTS_LINUX = [
     key: 263
   }
 ]
-
-const PLATFORMS_CUSTOM = {
-  'windows': {
-    text: { text: 'Windows' }
+const COMPONENTS_LINUX_KEYS = [
+  {
+    key: 211
   },
-  'apple': {
-    text: { text: 'Apple' }
+  {
+    key: 212
   },
-  'linux': {
-    text: { text: 'Linux' }
+  {
+    key: 213
+  },
+  {
+    key: 221
+  },
+  {
+    key: 222
+  },
+  {
+    key: 223
+  },
+  {
+    key: 231
+  },
+  {
+    key: 232
+  },
+  {
+    key: 233
+  },
+  {
+    key: 241
+  },
+  {
+    key: 242
+  },
+  {
+    key: 243
+  },
+  {
+    key: 241
+  },
+  {
+    key: 242
+  },
+  {
+    key: 243
+  },
+  {
+    key: 251
+  },
+  {
+    key: 252
+  },
+  {
+    key: 253
+  },
+  {
+    key: 261
+  },
+  {
+    key: 262
+  },
+  {
+    key: 263
   }
-}
+]
 
 const C_CUSTOM = [
   {
@@ -487,7 +670,7 @@ const C_CUSTOM = [
         'color': '#000'
       }
     },
-    key: 1000
+    key: 0
   }
 ]
 
@@ -512,10 +695,9 @@ const SCHEMA_CUSTOM = {
       color: '#393192'
     }
   },
-  platforms: _.merge({}, PLATFORMS_CUSTOM),
-  componentsRequirementswindows: _.merge([], REQUIREMENTS_WINDOWS),
-  componentsRequirementsapple: _.merge([], REQUIREMENTS_OS),
-  componentsRequirementslinux: _.merge([], REQUIREMENTS_LINUX),
+  componentsRequirementswindows: _.merge({}, REQUIREMENTS_WINDOWS),
+  componentsRequirementsapple: _.merge({}, REQUIREMENTS_OS),
+  componentsRequirementslinux: _.merge({}, REQUIREMENTS_LINUX),
   components: _.merge({}, C_CUSTOM),
   edited: true
 }
@@ -526,8 +708,7 @@ const HEADER = [
     element: types.Title,
     type: 'text',
     class: 'b-title',
-    label: 'title',
-    key: 0
+    label: 'title'
   }
 ]
 
@@ -550,34 +731,10 @@ export default {
   $schema: {
     mainStyle: types.SystemRequirements,
     container: types.StyleObject,
-    components: _.merge([], HEADER),
-    platforms: {
-      'windows': {
-        element: types.TextInherit,
-        text: types.TextInherit,
-        min: { element: types.TextInherit, type: 'inline', label: 'Text' },
-        rec: types.TextInherit,
-        key: 10000
-      },
-      'apple': {
-        element: types.TextInherit,
-        text: types.TextInherit,
-        min: { element: types.TextInherit, type: 'inline', label: 'Text' },
-        rec: types.TextInherit,
-        key: 20000
-      },
-      'linux': {
-        element: types.TextInherit,
-        button: types.Button,
-        text: types.TextInherit,
-        min: { element: types.TextInherit, type: 'inline', label: 'Text' },
-        rec: types.TextInherit,
-        key: 30000
-      }
-    },
-    componentsRequirementswindows: _.merge([], REQUIREMENTS),
-    componentsRequirementsapple: _.merge([], REQUIREMENTS),
-    componentsRequirementslinux: _.merge([], REQUIREMENTS)
+    components: _.merge([], HEADER, { key: 0 }),
+    componentsRequirementswindows: _.merge([], REQUIREMENTS, COMPONENTS_WINDOWS_KEYS),
+    componentsRequirementsapple: _.merge([], REQUIREMENTS, COMPONENTS_OS_KEYS),
+    componentsRequirementslinux: _.merge([], REQUIREMENTS, COMPONENTS_LINUX_KEYS)
   },
 
   methods: {
@@ -673,9 +830,9 @@ export default {
 
               <div class="b-system__padd-border">
                 <div class="b-system-platforms flex flex_center">
-                  <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.platforms" :key="key"
+                  <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.mainStyle.systemRequirements" :key="key"
                        v-show="$sectionData.mainStyle.systemRequirements[key].visible"
-                       :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.platforms[key].visible, 'b-system-platforms__item_active': key === $sectionData.mainStyle.selectPlatform.name }">
+                       :class="{ 'b-system-platforms__item_opacity' : false === $sectionData.mainStyle.systemRequirements[key].visible, 'b-system-platforms__item_active': key === $sectionData.mainStyle.selectPlatform.name }">
                     <div
                       class="b-system-platforms__item__tab"
                       @click.stop="selectPlatform(key)"
@@ -700,7 +857,7 @@ export default {
                 </div>
                 <div class="b-system-requirements">
                   <div class="b-system-requirements__table">
-                    <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
+                    <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.mainStyle.systemRequirements" :key="key"
                         v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
                       <div>
                         <div class="b-system-requirements__table-row  flex"
@@ -931,14 +1088,14 @@ export default {
     &-chapter
      .is-mobile &
        white-space: nowrap
-       width: 7rem
+       width: 6.5rem
        overflow: hidden
        text-overflow: ellipsis
        display: inline-block
      @media only screen and (max-width: 540px)
        &
          white-space: nowrap
-         width: 7em
+         width: 6.5rem
          overflow: hidden
          text-overflow: ellipsis
          display: inline-block
