@@ -20,13 +20,16 @@ import ThePanelText from './ThePanelText'
 import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
 import ThePanelImage from './ThePanelImage'
-import ThePanelAvailablePlatforms from './ThePanelAvailablePlatforms'
-import ThePanelRestrictions from './ThePanelRestrictions'
+import ThePanelAvailableSettings from './ThePanelAvailableSettings'
+import ThePanelAvailableStyle from './ThePanelAvailableStyle'
+import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
+import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineText from './ThePanelInlineText'
 import ThePanelIcon from './ThePanelIcon'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
+import ThePanelVideo from './ThePanelVideo'
 
 export default {
   name: 'TheControlPanel',
@@ -63,14 +66,17 @@ export default {
     ThePanelTimerSettings,
     ThePanelTimerStyle,
     ThePanelSlot,
-    ThePanelAvailablePlatforms,
-    ThePanelRestrictions,
+    ThePanelAvailableSettings,
+    ThePanelAvailableStyle,
+    ThePanelRestrictionsSettings,
+    ThePanelRestrictionsStyle,
     ThePanelInlineText,
     ThePanelImage,
     ThePanelIcon,
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
-    ThePanelSectionSystemStyle
+    ThePanelSectionSystemStyle,
+    ThePanelVideo
   }
 }
 </script>

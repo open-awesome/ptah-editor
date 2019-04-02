@@ -1,26 +1,19 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Text
+      Setting restrictions
     </h6>
-
     <div class="b-panel__control">
-      <the-control-typography :show-text-styles="false"></the-control-typography>
-    </div>
-
-    <div class="b-panel__control">
-      <the-control-text-link></the-control-text-link>
+      <control-age-restrictions/>
     </div>
   </div>
 </template>
 
 <script>
-import TheControlTextLink from '../controls/TheControlTextLink'
-import TheControlTypography from '../controls/TheControlTypography'
-
+import ControlAgeRestrictions from '../controls/TheControlAgeRestrictions'
 export default {
-  name: 'ThePanelText',
-  components: { TheControlTypography, TheControlTextLink },
+  name: 'ThePanelRestrictions',
+  components: { ControlAgeRestrictions },
   props: {
     builder: {
       type: Object,

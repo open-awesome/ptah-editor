@@ -71,8 +71,8 @@ export default {
 
   created () {
     this.a = this.alt
-    this.width = parseInt(this.styles.width.split('px')[0]) || 320
-    this.height = parseInt(this.styles.height.split('px')[0]) || 60
+    this.width = parseInt(this.styles.width.split('px')[0]) || 96
+    this.height = parseInt(this.styles.height.split('px')[0]) || 96
   }
 }
 </script>
@@ -158,40 +158,40 @@ export default {
       &
         display: none
     &-tl
-      top: -$size-step/4
-      left: -$size-step/4
+      top: -$size-step/8
+      left: -$size-step/8
       cursor: nw-resize
     &-tm
-      top: -$size-step/4
+      top: -$size-step/8
       left: 50%
-      margin-left: -$size-step/8
+      margin-left: -$size-step/16
       cursor: n-resize
     &-tr
-      top: -$size-step/4
-      right: -$size-step/4
+      top: -$size-step/8
+      right: -$size-step/8
       cursor: ne-resize
     &-ml
       top: 50%
-      margin-top: -$size-step/8
-      left: -$size-step/4
+      margin-top: -$size-step/16
+      left: -$size-step/8
       cursor: w-resize
     &-mr
       top: 50%
-      margin-top: -$size-step/8
-      right: -$size-step/4
+      margin-top: -$size-step/16
+      right: -$size-step/8
       cursor: e-resize
     &-bl
-      bottom: -$size-step/4
-      left: -$size-step/4
+      bottom: -$size-step/8
+      left: -$size-step/8
       cursor: sw-resize
     &-bm
-      bottom: -$size-step/4
+      bottom: -$size-step/8
       left: 50%
-      margin-left: -$size-step/8
+      margin-left: -$size-step/16
       cursor: s-resize
     &-br
-      bottom: -$size-step/4
-      right: -$size-step/4
+      bottom: -$size-step/8
+      right: -$size-step/8
       cursor: se-resize
     &-tl:hover,
     &-tr:hover,

@@ -13,14 +13,14 @@
               :key="index"
             >
             <div class="b-preview__image"
-              v-styler:galleryItem="{ el: $sectionData.images[index].preview, path:`$sectionData.images[${index}].preview`, type: 'galleryItem' }"
+              v-styler:for="{ el: $sectionData.images[index].preview, path:`$sectionData.images[${index}].preview`, type: 'image' }"
               :style="$sectionData.images[index].preview.styles"
               :data-index="index"
               :gallery-one-preview="'loader__content_show'"
               >
             </div>
             <div class="b-preview__name"
-              v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'text' }"
+              v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'inline' }"
               v-html="$sectionData.images[index].label.text"
               :style="$sectionData.images[index].label.styles"
               >
@@ -32,7 +32,7 @@
             <h2 class="b-gallery-one-stage__name"
                v-html="$sectionData.images[index].title.text"
                :style="$sectionData.images[index].title.styles"
-               v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`, type: 'text' }">
+               v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`, type: 'inline' }">
             </h2>
             <!-- image -->
             <div class="b-gallery-one-stage__img"
@@ -42,7 +42,7 @@
             </div>
             <!--/image -->
             <p class="b-gallery-one-stage__bio"
-             v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`, type: 'text' }"
+             v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`, type: 'inline' }"
              :style="$sectionData.images[index].text.styles"
              v-html="$sectionData.images[index].text.text">
             </p>
@@ -60,11 +60,11 @@ import { galleryPreviewClick } from '@cscripts/gallery1'
 import section from '../../mixins/section.js'
 
 const GALLERY_ITEM = {
-  preview: types.GalleryItem,
-  label: types.Text,
-  title: types.Text,
+  preview: types.Image,
+  label: types.TextInherit,
+  title: types.TextInherit,
   img: types.Image,
-  text: types.Text
+  text: types.TextInherit
 }
 
 const GROUP_NAME = 'Galleries'
@@ -141,6 +141,7 @@ export default {
 @import '../../../assets/sass/_flex.sass'
 
 .b-gallery-one
+  color: rgba(255, 255, 255, .9)
 
 .b-preview
   cursor: pointer
@@ -153,10 +154,11 @@ export default {
   position: relative
 
 .b-preview__image
-  width: 12rem
+  width: 12rem !important
   height: 18rem
   position: relative
   z-index: 0
+  background-color: white !important
 
 .b-preview__name
   border-radius: 0rem
@@ -171,7 +173,7 @@ export default {
 
 .b-preview_active
   transform: scale(1.1)
-  box-shadow: 0 0 2rem 0 rgba(50, 50, 50, 1)
+  box-shadow: 0 0 2rem 0 #2f98ba
   border: 0.2rem solid #18d88b
 
 .b-gallery-one-list
@@ -285,6 +287,7 @@ export default {
   width: 40rem
   height: 40rem
   margin: 0 auto
+  background-color: white !important
   .is-tablet &,
   .is-mobile &
     width: 30rem

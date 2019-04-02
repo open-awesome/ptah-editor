@@ -47,25 +47,39 @@
         </a>
       </template>
 
-      <!-- Available platforms -->
-      <a href="#" class="b-styler__control"
-         @click.stop="setControlPanel('AvailablePlatforms')"
-         v-if="type === 'available'">
-        <icon-base name="settings" width="16" height="16" />
-      </a>
+      <!-- Social settings -->
+      <template v-if="type === 'available'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Age restrictions -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Restrictions')" v-if="type === 'restrictions'">
-        <icon-base name="settings" width="16" height="16" />
-      </a>
+      <template v-if="type === 'restrictions'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Timer -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')" v-if="type === 'timer'">
         <icon-base name="settings" width="16" height="16" />
       </a>
 
+      <!-- Image -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
         <icon-base name="preview" width="14" height="16" />
+      </a>
+
+      <!-- Video -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Video')" v-if="type === 'video'">
+        <icon-base name="settings" width="14" height="16" />
       </a>
 
       <!-- Icon with text -->
@@ -122,7 +136,7 @@
 </template>
 
 <script>
-import { isParentTo, randomPoneId, getPseudoTemplate, composedPath } from '../util'
+import { isParentTo, randomPoneId, getPseudoTemplate, getLinkStyles, composedPath } from '../util'
 import * as _ from 'lodash-es'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import Popper from 'popper.js'
@@ -230,6 +244,10 @@ export default {
       get () {
         return this.textEditorActive
       }
+    },
+
+    poneId () {
+      return randomPoneId()
     }
   },
 
@@ -254,6 +272,10 @@ export default {
       _.forEach(this.options.pseudo, (styles, pseudo) => {
         this.changePseudoStyle(styles, pseudo)
       })
+    }
+
+    if (!!this.options.textLinkStyles && Object.keys(this.options.textLinkStyles).length) {
+      this.changeTextLinkStyle(this.options.textLinkStyles)
     }
 
     // Apply animation to element
@@ -400,7 +422,8 @@ export default {
         'b-control-panel',
         'menubar__button',
         'editor__content',
-        'menubar is-hidden'
+        'menubar is-hidden',
+        'b-slot__settings'
       ]
 
       if (event && (event.target === this.el
@@ -449,16 +472,20 @@ export default {
      * @param pseudoClass {string}
      */
     changePseudoStyle (style, pseudoClass = 'hover') {
-      let poneId = ''
       let pseudoClassValue = {}
       pseudoClassValue[pseudoClass] = style
-      poneId = randomPoneId()
-      this.el.dataset.pone = poneId
+      this.el.dataset.pone = this.poneId
       _.merge(this.pseudoStyles, pseudoClassValue)
       this.options.pseudo = this.pseudoStyles
 
-      let styleTemplate = getPseudoTemplate(poneId, this.pseudoStyles)
+      let styleTemplate = getPseudoTemplate(this.poneId, this.pseudoStyles)
 
+      document.head.insertAdjacentHTML('beforeend', styleTemplate)
+    },
+
+    changeTextLinkStyle (style) {
+      this.el.dataset.pone = this.poneId
+      let styleTemplate = getLinkStyles(this.poneId, style)
       document.head.insertAdjacentHTML('beforeend', styleTemplate)
     },
 
