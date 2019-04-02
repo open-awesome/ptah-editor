@@ -1,7 +1,7 @@
 <template>
   <div class="b-range-slider">
     <base-label v-if="label != ''">
-      {{label}}
+      {{ label }}
     </base-label>
     <div class="b-range-slider__row">
       <div class="b-range-slider__text">
@@ -62,7 +62,7 @@ export default {
 
   watch: {
     sliderValue (value) {
-      this.$emit('change', value)
+      this.$emit('change', parseInt(value))
     }
   }
 }
