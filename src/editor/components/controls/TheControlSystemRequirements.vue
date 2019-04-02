@@ -220,37 +220,4 @@ export default {
         top: -0.5rem
       &_color
         border: 0.2rem solid rgba($cornflower-blue, 0.5)
-    &-set-link
-      &-modal
-        width: 40rem
-        background: $white
-        position: absolute
-        right: -39rem
-        top: -2rem
-        z-index: 1
-        box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
-        padding: 0 2.3rem 2.3rem
-        &:before
-          content: ""
-          position: absolute
-          width: $size-step/2
-          height: $size-step/2
-          top: 2.4rem
-          left: -.7rem
-          background: $white
-          transform: rotate(-45deg)
-          z-index: 2
-        &-buttons
-          display: flex
-          justify-content: flex-end
-          margin: $size-step 0 0
-        &-chapter
-          font-size: 1.6rem
-          letter-spacing: -0.02em
-          color: $dark-grey
-          margin: 0 0 $size-step/2 0
-      &_color *
-        fill: $dark-blue-krayola
-      &_color *
-        fill: #4D7DD8
 </style>

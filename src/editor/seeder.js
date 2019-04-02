@@ -664,7 +664,7 @@ const data = new Map([
       },
       table: {
         head: {
-          'font-name': 'Lato',
+          'font-family': 'Lato',
           'font-size': '1.4rem',
           'font-weight': 'normal',
           'font-style': 'normal',

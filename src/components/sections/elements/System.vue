@@ -701,7 +701,7 @@ export default {
                 <div class="b-system-requirements">
                   <div class="b-system-requirements__table">
                     <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.platforms" :key="key"
-                        v-if="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
+                        v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
                       <div>
                         <div class="b-system-requirements__table-row  flex"
                           :style="{
@@ -731,8 +731,8 @@ export default {
                           </div>
                         </div><!--/.b-system-requirements__table-row-->
                         <div class="b-system-requirements__table-row flex"
-                             v-for="(row, i) in $sectionData.mainStyle.rowsRequirements" :key="i"
-                             v-if="$sectionData.mainStyle.rowsRequirements[i].visible"
+                          v-for="(row, i) in $sectionData.mainStyle.rowsRequirements" :key="i"
+                          v-show="$sectionData.mainStyle.rowsRequirements[i].visible"
                           :style="{
                             'color' : $sectionData.mainStyle.table.body['color'],
                             'font-family' : $sectionData.mainStyle.table.body['font-family'],
@@ -929,6 +929,19 @@ export default {
   &__table
     margin: $size-step 0 0
     &-chapter
+     .is-mobile &
+       white-space: nowrap
+       width: 7rem
+       overflow: hidden
+       text-overflow: ellipsis
+       display: inline-block
+     @media only screen and (max-width: 540px)
+       &
+         white-space: nowrap
+         width: 7em
+         overflow: hidden
+         text-overflow: ellipsis
+         display: inline-block
     &-row
       border-bottom: 0.1rem dotted #333
       border-color: inherit
