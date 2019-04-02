@@ -5,7 +5,7 @@
       <!--span @click="showSandboxSidebar($event)" class="b-slot__settings-item b-slot__settings-item-settings">
         <icon-base name="cog" fill="white" />
       </span-->
-      <span @click="showSandboxSidebar($event, true)" class="b-slot__settings-item b-slot__settings-item-add-el">
+      <span @click.stop="showSandboxSidebar($event, true)" class="b-slot__settings-item b-slot__settings-item-add-el">
         <icon-base name="plus" fill="white" />
       </span>
     </div>

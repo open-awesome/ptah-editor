@@ -681,7 +681,27 @@ const data = new Map([
         color:  '#fff'
       },
       sizeIcons: {
-        width: 24
+        width: 32
+      },
+      table: {
+        head: {
+          'font-family': 'Lato',
+          'font-size': '1.4rem',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'text-decoration': 'none',
+          'color': 'rgba(0, 0, 0, 0.26)',
+          'background-color': '#C4EDCD'
+        },
+        body: {
+          'font-family': 'Lato',
+          'font-size': '1.4rem',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'text-decoration': 'none',
+          'color': 'rgba(0, 0, 0, 0.5)',
+          'background-color': '#fff'
+        }
       },
       typography: false,
       styles: {
@@ -697,21 +717,15 @@ const data = new Map([
         'text-decoration': 'none',
         'text-align': 'center',
         'color': '#fff'
+      },
+      overlay: {
+        color: 'rgba(0,0,0,1)',
+        opacity: '0'
       }
     })
   )],
   [types.TextInherit, () => (_.merge({}, DEFAULT_OPTIONS, {
-    text: 'Enter your text',
-    aligned: true,
-    styles: {
-        'font-family': 'inherit',
-        'font-size': 'inherit',
-        'font-weight': 'inherit',
-        'font-style': 'inherit',
-        'text-decoration': 'inherit',
-        'text-align': 'inherit',
-        'color': 'inherit'
-    }
+    text: 'Enter your text'
   }))],
   [types.Timer, () => (_.merge({}, DEFAULT_OPTIONS, {
     isComplex: true,
