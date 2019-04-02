@@ -1,31 +1,22 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Text
+      Available style
     </h6>
-
     <div class="b-panel__control">
-      <the-control-typography :show-text-styles="false"></the-control-typography>
-    </div>
-
-    <div class="b-panel__control">
-      <the-control-text-link></the-control-text-link>
+      <control-available-platforms-style/>
     </div>
   </div>
 </template>
 
 <script>
-import TheControlTextLink from '../controls/TheControlTextLink'
-import TheControlTypography from '../controls/TheControlTypography'
+import ControlAvailablePlatformsStyle from '../controls/TheControlAvailablePlatformsStyle'
 
 export default {
-  name: 'ThePanelText',
-  components: { TheControlTypography, TheControlTextLink },
-  props: {
-    builder: {
-      type: Object,
-      required: true
-    }
+  name: 'ThePanelAvailableStyle',
+
+  components: {
+    ControlAvailablePlatformsStyle
   }
 }
 </script>

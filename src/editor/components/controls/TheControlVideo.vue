@@ -1,19 +1,6 @@
 <template>
 <div class="b-video-control">
 
-  <header @click="onClickTitle" class="b-video-control__header">
-    <span>Video</span>
-    <i :class="{ 'dropped': !controlOpen }">
-    <icon-base
-        :class="{ closed: !controlOpen }"
-        name="arrowDropDown"
-        width="8"
-        height="8"
-        class="b-video-control__icon"/>
-    </i>
-  </header>
-
-  <base-dropdown :isOpened="controlOpen" :hasOverflow="controlOpen">
       <!-- VideoUrl -->
       <div class="b-video-control__control">
         <BaseUploadInput
@@ -34,8 +21,6 @@
           @change="updateSimpleValue('loop', vLoop)"
         />
       </div>
-  </base-dropdown>
-
 </div>
 </template>
 
@@ -46,27 +31,10 @@ import { mapState, mapActions } from 'vuex'
 export default {
   name: 'TheControlVideo',
 
-  props: {
-    expand: {
-      type: Boolean,
-      required: true
-    }
-  },
-
   data () {
     return {
-      controlOpen: false,
       vUrl: '',
       vLoop: ''
-    }
-  },
-
-  watch: {
-    expand: {
-      immediate: true,
-      handler (value) {
-        this.controlOpen = value
-      }
     }
   },
 
@@ -99,10 +67,6 @@ export default {
       'updateSettingOptions'
     ]),
 
-    onClickTitle () {
-      this.$emit('open', ['Video', !this.controlOpen])
-    },
-
     updateSimpleValue (propName, value) {
       this[propName] = value
     }
@@ -111,7 +75,6 @@ export default {
   mounted () {
     this.vUrl = this.videoUrl
     this.vLoop = this.loop
-    this.controlOpen = this.expand
   }
 }
 </script>

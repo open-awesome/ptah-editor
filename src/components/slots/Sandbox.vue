@@ -152,7 +152,7 @@ export default {
       align-items: center
       color: inherit
 
-      width: 96%
+      width: 100%
       margin: 0 auto
       &_horizont
         > div

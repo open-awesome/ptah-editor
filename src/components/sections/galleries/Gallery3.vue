@@ -10,7 +10,7 @@
         <div class="b-gallery-three-block flex flex_center">
           <div class="b-gallery-three-block__item flex flex_center flex_columns"
                v-for="(item, index) in $sectionData.images" :key="index"
-               v-styler:galleryItem="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`, type: 'galleryItem'}"
+               v-styler:for="{el: $sectionData.images[index].preview, path: `$sectionData.images[${index}].preview`, type: 'image'}"
                :data-index="index"
                :style="$sectionData.images[index].preview.styles"
             >
@@ -24,7 +24,7 @@
             </div>
             <div>
               <span class="b-gallery-three-block__item-title"
-                v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'text' }"
+                v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'inline' }"
                 v-html="$sectionData.images[index].label.text"
                 :style="$sectionData.images[index].label.styles"
                 >
@@ -66,7 +66,7 @@ import section from '../../mixins/section.js'
 
 const GALLERY_ITEM = {
   preview: types.Image,
-  label: types.Text,
+  label: types.TextInherit,
   button: types.Button
 }
 
@@ -195,6 +195,7 @@ export default {
 @import '../../../assets/sass/_flex.sass'
 
 .b-gallery-three
+  color: rgba(255, 255, 255, .9)
   &__wrap
     margin: 0 auto
     max-width: 160rem

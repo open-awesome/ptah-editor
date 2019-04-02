@@ -1,19 +1,25 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Setting restrictions
+      Video
     </h6>
+
     <div class="b-panel__control">
-      <control-age-restrictions></control-age-restrictions>
+      <control-video :show-text-styles="false"></control-video>
     </div>
   </div>
 </template>
 
 <script>
-import ControlAgeRestrictions from '../controls/TheControlAgeRestrictions'
+import ControlVideo from '../controls/TheControlVideo'
+
 export default {
-  name: 'ThePanelRestrictions',
-  components: { ControlAgeRestrictions },
+  name: 'ThePanelVideo',
+
+  components: {
+    ControlVideo
+  },
+
   props: {
     builder: {
       type: Object,

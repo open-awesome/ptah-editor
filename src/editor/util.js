@@ -43,6 +43,7 @@ export function getTypeFromSchema(target, schema) {
   const tempTarget = target.split('.')
   tempTarget.shift()
   const value = _.get(schema, tempTarget.join('.'))
+
   if (value === types.Text) return 'text'
   if (value === types.Slogan) return 'text'
   if (value === types.Title) return 'title'
@@ -54,6 +55,7 @@ export function getTypeFromSchema(target, schema) {
   if (value === types.Delimiter) return 'delimiter'
   if (value === types.SystemRequirements) return 'section'
   if (value === types.TextInherit) return 'inline'
+  if (value === types.VideoElement) return 'video'
 
   return null
 }
@@ -79,23 +81,23 @@ export function getTypeFromTagName(tagName) {
   tagName = tagName.toUpperCase()
   switch (tagName) {
     case 'H1':
-      return 'title'
+      return 'inline'
     case 'H2':
-      return 'title'
+      return 'inline'
     case 'H3':
-      return 'title'
+      return 'inline'
     case 'H4':
-      return 'title'
+      return 'inline'
     case 'H5':
-      return 'title'
+      return 'inline'
     case 'H6':
-      return 'title'
+      return 'inline'
     case 'P':
-      return 'text'
+      return 'inline'
     case 'B':
-      return 'text'
+      return 'inline'
     case 'SPAN':
-      return 'title'
+      return 'inline'
     case 'BUTTON':
       return 'button'
     case 'A':
@@ -151,7 +153,7 @@ export function randomPoneId() {
  *  }
  * @returns {string}
  */
-export function getPseudoTemplate(poneId, data) {
+export function getPseudoTemplate (poneId, data) {
   let content = ''
   _.forEach(data, (styles, pseudo) => {
     let acc = ''
@@ -164,6 +166,35 @@ export function getPseudoTemplate(poneId, data) {
   })
 
   return `<style type="text/css" id="${poneId}">${content}</style>`
+}
+
+/**
+ * Return template of text links
+ * @param poneId
+ * @param data
+ * @returns {string}
+ */
+export function getLinkStyles (poneId, data) {
+  let content = ''
+  let a = ''
+  let hover = ''
+  _.forEach(data.a, (value, style) => {
+    a += `${style}: ${value};`
+  })
+
+  content += `[data-pone="${poneId}"] a {
+      ${a}
+  }`
+
+  _.forEach(data.hover, (value, style) => {
+    hover += `${style}: ${value};`
+  })
+
+  content += `[data-pone="${poneId}"] a:hover {
+      ${hover}
+  }`
+
+  return `<style type="text/css" id="${poneId}-link">${content}</style>`
 }
 
 /**
