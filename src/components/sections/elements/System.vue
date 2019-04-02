@@ -219,7 +219,7 @@ const REQUIREMENTS_WINDOWS = [
   },
   {
     name: 'Storage-text',
-    element: { text: 'Storage' },
+    element: { text: 'Storage space' },
     key: 51
   },
   {
@@ -392,7 +392,7 @@ const REQUIREMENTS_OS = [
   },
   {
     name: 'Storage-text',
-    element: { text: 'Storage' },
+    element: { text: 'Storage space' },
     key: 151
   },
   {
@@ -565,7 +565,7 @@ const REQUIREMENTS_LINUX = [
   },
   {
     name: 'Storage-text',
-    element: { text: 'Storage' },
+    element: { text: 'Storage space' },
     key: 251
   },
   {
