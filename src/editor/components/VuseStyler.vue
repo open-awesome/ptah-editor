@@ -68,9 +68,14 @@
       </template>
 
       <!-- Timer -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')" v-if="type === 'timer'">
-        <icon-base name="settings" width="16" height="16" />
-      </a>
+      <template v-if="type === 'timer'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Image -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">

@@ -1,7 +1,7 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Timer
+      Timer settings
     </h6>
 
     <div class="b-panel__control">
@@ -24,30 +24,10 @@
 
     <div class="b-panel__control">
       <base-select
-        :options="languageOptions"
-        :value="language"
-        @input="language = $event.value"
-        label="Labels language"/>
-    </div>
-
-    <div class="b-panel__control">
-      <base-select
-        :options="positionOptions"
-        :value="position"
-        @input="position = $event.value"
-        label="Labels position"/>
-    </div>
-
-    <div class="b-panel__control">
-      <base-select
         :options="UTCOptions"
         :value="UTC"
         @input="UTC = $event.value"
         label="Time zone"/>
-    </div>
-
-    <div class="b-panel__control">
-      <base-switcher v-model="labels.show" label="Show labels"/>
     </div>
   </div>
 </template>
@@ -64,15 +44,6 @@ export default {
   data () {
     return {
       maxDays: 999,
-      languageOptions: [
-        { name: 'Russian', value: 'ru' },
-        { name: 'English', value: 'en' },
-        { name: 'German', value: 'de' }
-      ],
-      positionOptions: [
-        { name: 'Top', value: 'top' },
-        { name: 'Bottom', value: 'bottom' }
-      ],
       UTCOptions: [
         { name: 'UTC -11:00', value: -11 },
         { name: 'UTC -10:00', value: -10 },
@@ -118,28 +89,6 @@ export default {
       return new Date(maxms)
     },
 
-    labels () {
-      return this.timer.labels
-    },
-
-    position: {
-      get () {
-        return this.getLabelsOption('position')
-      },
-      set (value) {
-        this.labels.position = value
-      }
-    },
-
-    language: {
-      get () {
-        return this.getLabelsOption('language')
-      },
-      set (value) {
-        this.labels.language = value
-      }
-    },
-
     UTC: {
       get () {
         let value = this.timer.UTC
@@ -155,12 +104,6 @@ export default {
   methods: {
     getDisabledDays (date) {
       return new Date() >= date
-    },
-
-    getLabelsOption (name) {
-      let value = this.labels[name]
-      let option = this[`${ name }Options`].find(option => option.value === value)
-      return { name: option.name, value }
     }
   }
 }
@@ -191,4 +134,38 @@ export default {
 
   &__control
     margin-bottom: 1.6rem
+
+/deep/
+  .mx-input
+    border: 0.2ren solid $dark-blue-krayola
+    border-radius: 0.2rem
+    padding: $size-step/2 $size-step $size-step/2 size-step/2
+    font-size: 1.4rem
+    font-weight: bold
+    color: $dark-grey
+  .mx-calendar-icon
+    color: $dark-blue-krayola
+  .mx-calendar
+    color: $dark-grey
+  .mx-calendar-content .cell.cur-month.actived
+    color: $white
+    background-color: $dark-blue-krayola
+    border-radius: 100%
+  .mx-icon-next-month,
+  .mx-icon-next-year,
+  .mx-icon-last-month,
+  .mx-icon-last-year
+    color: $dark-blue-krayola
+  .mx-calendar-content .cell.cur-month:first-child,
+  .mx-calendar-content .cell.cur-month:last-child
+    color: $orange
+  .mx-datepicker-btn-confirm
+    color: $white
+    background-color: $dark-blue-krayola
+    border-radius: 100px
+    width: $size-step*3
+    margin: 0
+  .mx-datepicker-footer
+    padding: $size-step/2
+
 </style>
