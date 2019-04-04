@@ -745,8 +745,20 @@ const data = new Map([
         // --- labels translation
         language: 'en',
         // --- labels position
-        position: 'top'
-      }
+        position: 'bottom'
+      },
+      colorTile: '#4B35D4'
+    },
+    typography: true,
+    styles: {
+      'background-color':'rgba(255, 255, 255, 0.5)',
+      'font-family': 'Lato',
+      'font-size':  '3.2rem',
+      'font-weight': 'normal',
+      'font-style': 'normal',
+      'text-decoration': 'none',
+      'text-align': 'center',
+      'color': '#fff'
     }
   }))]
 ])
