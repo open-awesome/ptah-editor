@@ -11,7 +11,7 @@ export default {
 
   created () {
     this.bgColor = this.styles['background-color']
-    this.bgTile = this.timer['color']
+    this.bgTile = this.timer['colorTile']
   },
 
   computed: {

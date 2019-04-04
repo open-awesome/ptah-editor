@@ -187,18 +187,22 @@ $main-font-size: 6rem
   text-align: center
   margin: 1.6rem auto
   padding: 0.8rem
+
   .is-mobile &,
   .is-tablet &
     width: 90%
     margin: $size-step/2 auto
+    font-size: 2.2rem !important
   @media only screen and (max-width: 768px)
     &
       width: 90%
       margin: $size-step/2 auto
+      font-size: 2.2rem !important
   @media only screen and (max-width: 768px) and (min-height: 700px)
     &
       width: 60%
       margin: $size-step/2 auto
+      font-size: 2.2rem !important
 
   @include tabletFontSize($main-font-size)
   @include mobileFontSize($main-font-size)
@@ -218,6 +222,16 @@ $main-font-size: 6rem
   font-size: 1em
   text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25)
   letter-spacing: 0.4em
+  .is-mobile &,
+  .is-tablet &
+    min-width: none
+    padding: 0.6em 0.4em
+    letter-spacing: 0
+  @media only screen and (max-width: 768px)
+    &
+      min-width:none
+      padding: 0.6em 0.4em
+      letter-spacing: 0
 
   position: relative
   &:after
