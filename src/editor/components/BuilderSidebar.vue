@@ -33,96 +33,98 @@
             {{ $t('menu.sections') }}
           </span>
       </menu-item>
-
-      <!-- Sections CONTENTS -->
-        <!-- header -->
-        <div class="no-sortable" ref="header">
-          <menu-subitem
-              v-if="headerSection"
-              v-scroll-to="`#section_${ headerSection.id }`"
-              :id="`menu-item-${ headerSection.id }`"
-              :is-selected="isActiveSection(headerSection.id)"
-              :section-id="headerSection.id"
-              @click="toggleSettingsBar(headerSection)"
-              class="b-menu-subitem--header"
-            >
-            # -
-            <span class="b-menu-subitem__title-text">
-              {{ headerSection.name }}
-            </span>
-            <div class="b-menu-subitem__icons">
-              <span class="b-menu-subitem__icon"
-                @click.stop="showSettingsBar(headerSection)"
+      <div class="b-builder-sidebar__content-outer">
+      <base-scroll-container backgroundBar="#999">
+        <div class="b-builder-sidebar__content-inner">
+        <!-- Sections CONTENTS -->
+          <!-- header -->
+            <div class="no-sortable" ref="header">
+              <menu-subitem
+                  v-if="headerSection"
+                  v-scroll-to="`#section_${ headerSection.id }`"
+                  :id="`menu-item-${ headerSection.id }`"
+                  :is-selected="isActiveSection(headerSection.id)"
+                  :section-id="headerSection.id"
+                  @click="toggleSettingsBar(headerSection)"
+                  class="b-menu-subitem--header"
                 >
-                <icon-base name="edit" color="#ffffff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="toggleSectionLayouts(headerSection)"
-                >
-                <icon-base name="layouts" color="#fff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="showBackgroundPanel(headerSection)"
-                >
-                <icon-base name="background" color="#fff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
+                # -
+                <span class="b-menu-subitem__title-text">
+                  {{ headerSection.name }}
+                </span>
+                <div class="b-menu-subitem__icons">
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="showSettingsBar(headerSection)"
+                    >
+                    <icon-base name="edit" color="#ffffff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
                     @click.stop="toggleSectionLayouts(headerSection)"
-              >
-                <icon-base name="layouts" color="#ffffff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="deleteSection(headerSection)"
-                >
-                <icon-base name="remove" color="#ffffff"></icon-base>
-              </span>
+                    >
+                    <icon-base name="layouts" color="#fff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="showBackgroundPanel(headerSection)"
+                    >
+                    <icon-base name="background" color="#fff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="deleteSection(headerSection)"
+                    >
+                    <icon-base name="remove" color="#ffffff"></icon-base>
+                  </span>
+                </div>
+              </menu-subitem>
             </div>
-          </menu-subitem>
-        </div>
 
-        <div class="sortable" ref="sections">
+            <div class="sortable" ref="sections">
 
-          <!-- sections -->
-          <menu-subitem
-              v-for="(section, index) in builderSections"
-              v-scroll-to="`#section_${section.id}`"
-              :key="section.id"
-              :id="`menu-item-${section.id}`"
-              :is-selected="isActiveSection(section.id)"
-              :is-main="section.isMain"
-              :has-draggable-icon="true"
-              :section-id="section.id"
-              @click="toggleSettingsBar(section)"
-            >
-            {{ `${ index + 1 } - `}}
-            <span class="b-menu-subitem__title-text">
-              {{ section.name }}
-            </span>
-            <div class="b-menu-subitem__icons">
-              <span class="b-menu-subitem__icon"
-                @click.stop="showSettingsBar(section)"
+            <!-- sections -->
+              <menu-subitem
+                  v-for="(section, index) in builderSections"
+                  v-scroll-to="`#section_${section.id}`"
+                  :key="section.id"
+                  :id="`menu-item-${section.id}`"
+                  :is-selected="isActiveSection(section.id)"
+                  :is-main="section.isMain"
+                  :has-draggable-icon="true"
+                  :section-id="section.id"
+                  @click="toggleSettingsBar(section)"
                 >
-                <icon-base name="edit" color="#ffffff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="toggleSectionLayouts(section)"
-                >
-                <icon-base name="layouts" color="#fff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
-                @click.stop="showBackgroundPanel(section)"
-                >
-                <icon-base name="background" color="#fff"></icon-base>
-              </span>
-              <span class="b-menu-subitem__icon"
-                @click.stop="deleteSection(section)"
-                >
-                <icon-base name="remove" color="#ffffff"></icon-base>
-              </span>
+                <span class="b-menu-subitem__title-num">
+                  {{ `${ index + 1 } - `}}
+                </span>
+                <span class="b-menu-subitem__title-text">
+                  {{ section.name }}
+                </span>
+                <div class="b-menu-subitem__icons">
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="showSettingsBar(section)"
+                    >
+                    <icon-base name="edit" color="#ffffff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="toggleSectionLayouts(section)"
+                    >
+                    <icon-base name="layouts" color="#fff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
+                    @click.stop="showBackgroundPanel(section)"
+                    >
+                    <icon-base name="background" color="#fff"></icon-base>
+                  </span>
+                  <span class="b-menu-subitem__icon"
+                    @click.stop="deleteSection(section)"
+                    >
+                    <icon-base name="remove" color="#ffffff"></icon-base>
+                  </span>
+                </div>
+              </menu-subitem>
+
             </div>
-          </menu-subitem>
-
         </div>
+      </base-scroll-container>
+      </div>
     </div>
 
     <transition name="slide-fade">
@@ -381,6 +383,19 @@ $top-panel-height: 7.2rem
     flex-direction: column
     min-height: 0
     overflow: auto
+    &-inner
+      padding: 0
+    /deep/
+      .vb.vb-invisible .vb-content
+        padding-right: 0 !important
+        overflow: hidden !important
+        width: 100% !important
+      .vb.vb-visible .vb-content
+        padding-right: 0 !important
+        width: calc(100% + 17px) !important
+    &-outer
+      height: 80vh
+      padding: 0 0 0 0
 
   &-settings
     position: absolute
@@ -422,7 +437,7 @@ $top-panel-height: 7.2rem
    justify-content: space-between
    align-items: center
 
-   padding: $size-step/2 $size-step
+   padding: $size-step/2
    &__ham
      &:hover
        cursor: pointer
@@ -439,4 +454,5 @@ $top-panel-height: 7.2rem
   &-leave-to
     transform: translateX(-0.8rem)
     opacity: 0
+
 </style>

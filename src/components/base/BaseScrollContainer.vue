@@ -94,4 +94,5 @@ export default {
 .vb.vb-dragging-phantom > .vb-dragger > .vb-dragger-styler
   background-color: var(--bg-color)
   opacity: 0.5
+
 </style>

@@ -5,14 +5,6 @@
     </h6>
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-section-settings__inner">
-        <!-- System requirements -->
-        <control-system-requirements
-          :expand="expandedSystemRequirements"
-          @open="onExpand"
-          v-if="settingObjectOptions.hasSystemRequirements"
-        >
-        </control-system-requirements>
-
         <!-- Products Section Controls -->
         <control-section-products
           :expand="expandedProducts"
@@ -66,7 +58,7 @@
         </div>
 
         <!-- Group -->
-        <template v-if="!isLastSection()">
+        <template v-if="!isLastSection() && !isHeader">
           <div class="b-section-settings__control" v-if="!isSlaveSection()">
             <BaseButton
               :color="'gray'"
@@ -119,7 +111,6 @@
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
-import ControlSystemRequirements from './../controls/TheControlSystemRequirements.vue'
 import ControlText from './../controls/TheControlText'
 import ControlTypography from './../controls/TheControlTypography'
 import BaseUploader from '../../../components/base/BaseUploader'
@@ -139,7 +130,6 @@ export default {
     BuilderSettingsBarGroup,
     BaseUploader,
     ControlSectionProducts,
-    ControlSystemRequirements,
     ControlText,
     ControlTypography
   },
@@ -172,12 +162,6 @@ export default {
 
       galleryImages: [],
       backgroundPickers: [],
-
-      /* vars for control system requirements */
-      systemRequirements: {},
-      rowsRequirements: {},
-      selectPlatform: {},
-      expandedSystemRequirements: true,
 
       /* text styles */
       fontSize: null,

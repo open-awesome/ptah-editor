@@ -64,6 +64,122 @@ const C_CUSTOM = [
 const C_CUSTOM_2 = [
   {
     element: {
+      styles: {
+        'background-image': 'url("https://gn560.cdn.stg.gamenet.ru/0/7KUKv/o_6j0hJ.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '256px',
+        'height': '221px'
+      }
+    },
+    key: 5
+  },
+  {
+    element: {
+      text: 'This is a header',
+      styles: {
+        'font-family': 'Lato',
+        'font-size': '2.4rem',
+        'color': '#ffffff'
+      }
+    },
+    key: 6
+  },
+  {
+    element: {
+      text: 'An sincerity so extremity he additions.' +
+      '<div>Her yet there truth merit.</div>' +
+      '<div>Mrs all projecting favourable now unpleasing.</div>',
+      styles: {
+        'font-family': 'Lato',
+        'font-size': '1.6rem',
+        'color': 'rgba(255, 255, 255, 0.3)'
+      }
+    },
+    key: 7
+  },
+  {
+    key: 8
+  },
+  {
+    element: {
+      text: 'Secondary',
+      styles: {
+        'background-color': 'rgba(255, 125, 125, 0.5)',
+        'color': '#ffffff',
+        'font-family': 'Lato',
+        'font-size:': '1.4rem',
+        'text-align': 'center',
+        'width': '224px',
+        'height': '56px',
+        'border-radius': '2px'
+      }
+    },
+    key: 9
+  }
+]
+const C_CUSTOM_3 = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn560.cdn.stg.gamenet.ru/0/7KUKv/o_6j0hJ.png")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '256px',
+        'height': '221px'
+      }
+    },
+    key: 10
+  },
+  {
+    element: {
+      text: 'This is a header',
+      styles: {
+        'font-family': 'Lato',
+        'font-size': '2.4rem',
+        'color': '#ffffff'
+      }
+    },
+    key: 11
+  },
+  {
+    element: {
+      text: 'An sincerity so extremity he additions.' +
+      '<div>Her yet there truth merit.</div>' +
+      '<div>Mrs all projecting favourable now unpleasing.</div>',
+      styles: {
+        'font-family': 'Lato',
+        'font-size': '1.6rem',
+        'color': 'rgba(255, 255, 255, 0.3)'
+      }
+    },
+    key: 12
+  },
+  {
+    key: 13
+  },
+  {
+    element: {
+      text: 'Secondary',
+      styles: {
+        'background-color': 'rgba(255, 125, 125, 0.5)',
+        'color': '#ffffff',
+        'font-family': 'Lato',
+        'font-size:': '1.4rem',
+        'text-align': 'center',
+        'width': '224px',
+        'height': '56px',
+        'border-radius': '2px'
+      }
+    },
+    key: 14
+  }
+]
+const C_CUSTOM_4 = [
+  {
+    element: {
       text: 'This is a short header',
       styles: {
         'font-family': 'Lato',
@@ -71,7 +187,7 @@ const C_CUSTOM_2 = [
         'color': '#ffffff'
       }
     },
-    key: 10
+    key: 15
   }
 ]
 
@@ -88,9 +204,9 @@ const SCHEMA_CUSTOM = {
     }
   },
   components: _.merge({}, C_CUSTOM),
-  components2: _.merge({}, C_CUSTOM),
-  components3: _.merge({}, C_CUSTOM),
-  components4: _.merge({}, C_CUSTOM_2),
+  components2: _.merge({}, C_CUSTOM_2),
+  components3: _.merge({}, C_CUSTOM_3),
+  components4: _.merge({}, C_CUSTOM_4),
   edited: true
 }
 
@@ -100,40 +216,35 @@ const COMPONENTS = [
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo',
-    key: 0
+    label: 'logo'
   },
   {
     name: 'TextElement',
     element: types.Title,
     type: 'text',
     class: 'b-title',
-    label: 'text',
-    key: 1
+    label: 'text'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'text',
-    key: 2
+    label: 'text'
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter',
-    key: 3
+    label: 'delimiter'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button-test',
-    label: 'button',
-    key: 4
+    label: 'button'
   }
 ]
 
@@ -144,7 +255,7 @@ const HEADER = [
     type: 'text',
     class: 'b-title',
     label: 'title',
-    key: 10
+    key: 15
   }
 ]
 

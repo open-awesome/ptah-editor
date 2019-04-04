@@ -362,6 +362,8 @@ export default {
       // --- add selected class and scroll to el
       menuItem.classList.add('b-menu-subitem_selected')
       menuItem.scrollIntoView()
+
+      this.setControlPanel(false)
     },
 
     showSettingsBar (event, section) {
@@ -427,7 +429,7 @@ export default {
   margin: 0 auto
   transition: 0.2s
   position: relative
-  &.is-editable .is-editable
+  &.is-editable div.is-editable
     outline: none
     transition: border 0.25s
     border: .2rem dotted transparent

@@ -41,13 +41,13 @@
 
   <tbody>
     <tr>
-      <td class="number js-timer-days">{{ parse(days) | check }}</td>
+      <td class="number js-timer-days" :style="{ 'background-color' : timer.colorTile }">{{ parse(days) | check }}</td>
       <td class="number-divider"></td>
-      <td class="number js-timer-hours">{{ parse(hours, 24) | check }}</td>
+      <td class="number js-timer-hours" :style="{ 'background-color' : timer.colorTile }">{{ parse(hours, 24) | check }}</td>
       <td class="number-divider"></td>
-      <td class="number js-timer-minutes">{{ parse(minutes, 60) | check }}</td>
+      <td class="number js-timer-minutes" :style="{ 'background-color' : timer.colorTile }">{{ parse(minutes, 60) | check }}</td>
       <td class="number-divider"></td>
-      <td class="number js-timer-seconds">{{ parse(seconds, 60) | check }}</td>
+      <td class="number js-timer-seconds" :style="{ 'background-color' : timer.colorTile }">{{ parse(seconds, 60) | check }}</td>
     </tr>
   </tbody>
 
@@ -186,18 +186,23 @@ $main-font-size: 6rem
   font-size: $main-font-size
   text-align: center
   margin: 1.6rem auto
+  padding: 0.8rem
+
   .is-mobile &,
   .is-tablet &
     width: 90%
     margin: $size-step/2 auto
+    font-size: 2.2rem !important
   @media only screen and (max-width: 768px)
     &
       width: 90%
       margin: $size-step/2 auto
+      font-size: 2.2rem !important
   @media only screen and (max-width: 768px) and (min-height: 700px)
     &
       width: 60%
       margin: $size-step/2 auto
+      font-size: 2.2rem !important
 
   @include tabletFontSize($main-font-size)
   @include mobileFontSize($main-font-size)
@@ -206,21 +211,45 @@ $main-font-size: 6rem
   @include columnsFontSize(3, $main-font-size - 2)
 
 .label
-  font-size: .4em
+  font-size: .5em
 
 .number
-  min-width: 1.5em
-  padding: .5rem
-  border-radius: .4rem
+  min-width: 2.2em
+  text-align: center
+  padding: 0.6em 0 0.6em 0.4em
+  border-radius: .2rem
   background: rgba(51, 51, 51, .5)
   font-size: 1em
+  text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25)
+  letter-spacing: 0.4em
+  .is-mobile &,
+  .is-tablet &
+    min-width: none
+    padding: 0.6em 0.4em
+    letter-spacing: 0
+  @media only screen and (max-width: 768px)
+    &
+      min-width:none
+      padding: 0.6em 0.4em
+      letter-spacing: 0
+
+  position: relative
+  &:after
+    content: ""
+    position: absolute
+    top: 50%
+    bottom: 0
+    left: 0
+    right: 0
+    background: linear-gradient(180deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 100%)
+    border-radius: 2px
 
   &-divider
     width: .3em
-    font-size: 1em
-
+    font-size: .4em
     &::before
       content: ':'
       position: relative
       top: -.1em
+
 </style>

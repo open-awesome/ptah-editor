@@ -3,29 +3,21 @@
     <h6 class="b-panel__title">
       Text
     </h6>
-
     <!-- Text -->
     <div class="b-panel__control">
       <control-text/>
-    </div>
-
-    <!-- Typography -->
-    <div class="b-panel__control">
-      <control-typography/>
     </div>
   </div>
 </template>
 
 <script>
 import ControlText from './../controls/TheControlText'
-import ControlTypography from './../controls/TheControlTypography'
 
 export default {
   name: 'ThePanelInlineText',
 
   components: {
-    ControlText,
-    ControlTypography
+    ControlText
   },
 
   props: {

@@ -68,9 +68,14 @@
       </template>
 
       <!-- Timer -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')" v-if="type === 'timer'">
-        <icon-base name="settings" width="16" height="16" />
-      </a>
+      <template v-if="type === 'timer'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Image -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
@@ -316,12 +321,17 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
+      let elOps = null
+      let self = this
+
       event.preventDefault()
       event.stopPropagation()
 
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
-        data.styles.width = data.offsets.reference.width
+        if (self.options.removable) {
+          data.styles.width = data.offsets.reference.width
+        }
         return data
       }
 
@@ -390,11 +400,14 @@ export default {
               container: `$sectionData.container${index}`
             })
           }
+
+          elOps = this.type === 'inline' ? this.options : _.get(this.section.data, this.path).element
+
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
             label: this.$props.label,
             name: this.name,
-            options: _.get(this.section.data, this.path).element || this.options,
+            options: elOps,
             section: this.section,
             element: this.el
           })

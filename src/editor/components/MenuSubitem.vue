@@ -118,7 +118,7 @@ export default {
 
   &__drag-icon
     visibility: hidden
-    width: 3.2rem
+    width: $size-step/2
     padding-left: 0.1rem
 
     .b-menu-subitem:hover &
@@ -127,9 +127,11 @@ export default {
   &__title
     flex-grow: 1
     display: flex
-    justify-content: space-between
 
     line-height: 4.8rem
+    &-num
+      width: $size-step
+      text-align: center
     &-text
       display: inline-block
       width: 12rem
@@ -138,7 +140,7 @@ export default {
       overflow: hidden
   &__icons
     width: 9rem
-    margin: 0 $size-step/4.5
+    margin: 0 $size-step/4 0 $size-step/4.5
     display: flex
     flex-wrap: nowrap
     align-items: center
