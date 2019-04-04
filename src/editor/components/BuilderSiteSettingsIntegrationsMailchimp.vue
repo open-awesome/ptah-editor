@@ -91,7 +91,13 @@ export default {
     setList (list) {
       console.log(list)
       this.selectedList = list
-      this.storeSettings({ mailchimpUrl: list.subscribe_url_long })
+      let sUrl = list.subscribe_url_long
+
+      let url = ''
+      let pos = sUrl.indexOf('?u=')
+      url = sUrl.substring(0, pos) + '/post' + sUrl.substring(pos)
+
+      this.storeSettings({ mailchimpUrl: url })
       this.storeSettings({ mailchimpList: list.name })
     }
   }

@@ -7,16 +7,21 @@ export function formsSender () {
   })
 
   function submitForm (form) {
-    let data = new FormData(form)
-    let req = new XMLHttpRequest()
+    let url = form.dataset.action
+    let email = form.querySelector('.ptah-input').value
+    let control = [form.querySelector('.ptah-valid').value, form.querySelector('.ptah-valid').getAttribute('name')]
+    let body = `EMAIL=${encodeURIComponent(email)}&${control[1]}=${control[0]}`
 
-    req.send(data)
+    let req = new XMLHttpRequest()
+    req.open('POST', url, true)
+    req.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded')
+
     req.onreadystatechange = function () {
-      if (this.status === 200) {
-        let button = form.getElementsByClassName('ptah-submit')[0]
-        button.classList.add('submited')
-      }
+      let button = form.getElementsByClassName('ptah-submit')[0]
+      button.classList.add('submited')
     }
+
+    req.send(body)
   }
 }
 
