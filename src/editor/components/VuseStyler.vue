@@ -90,7 +90,7 @@
     </div>
 
     <!-- Delete element -->
-    <div class="b-styler__controls">
+    <div class="b-styler__controls" v-if="options.removable">
       <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
         <icon-base name="close" width="10" height="10"></icon-base>
       </a>
@@ -316,12 +316,17 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
+      let elOps = null
+      let self = this
+
       event.preventDefault()
       event.stopPropagation()
 
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
-        data.styles.width = data.offsets.reference.width
+        if (self.options.removable) {
+          data.styles.width = data.offsets.reference.width
+        }
         return data
       }
 
@@ -390,11 +395,14 @@ export default {
               container: `$sectionData.container${index}`
             })
           }
+
+          elOps = this.type === 'inline' ? this.options : _.get(this.section.data, this.path).element
+
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
             label: this.$props.label,
             name: this.name,
-            options: _.get(this.section.data, this.path).element || this.options,
+            options: elOps,
             section: this.section,
             element: this.el
           })

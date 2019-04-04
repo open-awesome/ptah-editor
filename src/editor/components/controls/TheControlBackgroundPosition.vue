@@ -222,6 +222,7 @@ export default {
 
       width: 1rem
       height: 1rem
+      margin: -0.5rem 0 0 -0.5rem
 
       border: 0.2rem solid #fff
       border-radius: 100%

@@ -1,8 +1,6 @@
 <template>
   <figure :style="style" class="b-uploader-item">
 
-    <!--progress v-show="progress !== 100" :value="progress" :max="100"></progress-->
-
     <radial-progress-bar
       v-show="progress !== 100"
       :diameter="16"
@@ -26,8 +24,13 @@
           class="b-uploader-item__preview"
           positionDropdown="left"
           :onHover="true"
+          :onClick="onClick"
           >
-          <div class="b-uploader-item__preview-img"></div>
+          <div class="b-uploader-item__preview-img">
+            <div v-if="type === 'video'">
+              <icon-base name="video" width="18" height="18" />
+            </div>
+          </div>
           <div slot="listHover">
             <ul>
               <li class="_right-icon _label">
@@ -136,6 +139,10 @@ export default {
       return {
         background: `url(${src || item.path}) no-repeat center`
       }
+    },
+
+    onClick () {
+      return this.type !== 'video'
     }
   },
 
@@ -178,7 +185,7 @@ export default {
     },
 
     loadingProgress ({ loaded, total }) {
-      this.progress = (loaded === total) ? 99 : (loaded / total * 100)
+      this.progress = (loaded === total) ? 99 : parseInt((loaded / total * 100))
     },
 
     async uploadFiles (fileList) {
@@ -251,6 +258,10 @@ export default {
     &-img
       width: $size-step*1.5
       height: $size-step
+
+      display: flex
+      justify-content: center
+      align-items: center
   &__label
     width: $size-step*1.5
     height: $size-step
@@ -270,7 +281,7 @@ export default {
       width: $size-step*7
       height: $size-step*4
 
-      background-size: contain
+      background-size: contain !important
   &:hover
     border-color: $dark-blue-krayola
   &:not(:last-child)

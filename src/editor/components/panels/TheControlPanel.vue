@@ -27,6 +27,8 @@ import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineText from './ThePanelInlineText'
 import ThePanelIcon from './ThePanelIcon'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
+import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
+import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelVideo from './ThePanelVideo'
 
 export default {
@@ -72,6 +74,8 @@ export default {
     ThePanelImage,
     ThePanelIcon,
     ThePanelSectionBackground,
+    ThePanelSectionSystemSettings,
+    ThePanelSectionSystemStyle,
     ThePanelVideo
   }
 }
@@ -85,7 +89,7 @@ export default {
   position: relative
   width: $size-step*9
   height: 100%
-  padding: 2.4rem 1.7rem 2.4rem
+  padding: 2.4rem 1rem 2.4rem 1.6rem
 
   display: flex
   flex-direction: column
@@ -110,7 +114,7 @@ export default {
 
   &__close
     position: absolute
-    right: 1rem
+    right: 0.5rem
     top: 2.1rem
     z-index: 10
 
