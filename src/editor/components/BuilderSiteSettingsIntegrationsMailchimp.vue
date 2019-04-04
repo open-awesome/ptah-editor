@@ -89,7 +89,6 @@ export default {
     },
 
     setList (list) {
-      console.log(list)
       this.selectedList = list
       let sUrl = list.subscribe_url_long
 
