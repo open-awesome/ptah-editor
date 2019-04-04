@@ -16,6 +16,7 @@ export default {
       .then(response => {
         return response.data
       })
+      .catch(err => console.warn(err))
   },
 
   /**

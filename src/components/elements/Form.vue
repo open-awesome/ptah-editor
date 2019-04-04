@@ -1,7 +1,11 @@
 <template>
-  <form class="b-form-element ptah-form">
-    <input type="email" name="email" :placeholder="placeholder" class="b-form-element-input">
-    <button type="submit" class="b-form-element-button">{{ buttonText }}</button>
+  <form class="b-form-element ptah-form" :data-action="$builder.settings.mailchimpUrl">
+    <input type="email" name="EMAIL" :placeholder="placeholder" class="b-form-element-input">
+    <!-- real people should not fill this in and expect good things - do not remove this or risk form bot signups-->
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+      <input type="text" name="b_24eb68ed5e4875cb24309c0dd_994b03af6b" tabindex="-1" value="">
+    </div>
+    <button type="submit" class="b-form-element-button ptah-submit">{{ buttonText }}</button>
   </form>
 </template>
 
@@ -9,7 +13,7 @@
 export default {
   name: 'Form',
 
-  inject: ['$section'],
+  inject: ['$section', '$builder'],
 
   props: {
     path: {

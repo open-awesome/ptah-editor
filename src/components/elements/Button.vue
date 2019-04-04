@@ -1,22 +1,22 @@
 <template>
-      <a class="b-button is-editable">
-        <slot></slot>
-        <vue-draggable-resizable
-          class="b-button__resize"
-          class-name-active="b-button__resize_active"
-          class-name-handle="b-handle"
-          :w="width"
-          :h="height"
-          :min-width="32"
-          :max-width="maxWidth ? maxWidth : 320"
-          :min-height="32"
-          :max-height="320"
-          @resizing="onResize"
-          :draggable="false"
-          :z="999"
-          />
-        <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
-      </a>
+  <a class="b-button is-editable">
+    <slot></slot>
+    <vue-draggable-resizable
+      class="b-button__resize"
+      class-name-active="b-button__resize_active"
+      class-name-handle="b-handle"
+      :w="width"
+      :h="height"
+      :min-width="32"
+      :max-width="maxWidth ? maxWidth : 320"
+      :min-height="32"
+      :max-height="320"
+      @resizing="onResize"
+      :draggable="false"
+      :z="999"
+      />
+    <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
+  </a>
 </template>
 
 <script>

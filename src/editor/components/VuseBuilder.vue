@@ -188,6 +188,8 @@ export default {
     this.groups = this.generateGroups()
     this.updateBuilderSections(this.sections)
     this.updateBuilderGroups(this.groups)
+
+    this.getUser()
   },
   mounted () {
     this.$builder.rootEl = this.$refs.artboard
@@ -222,6 +224,9 @@ export default {
     ]),
     ...mapActions('Landing', [
       'saveState'
+    ]),
+    ...mapActions('User', [
+      'getUser'
     ]),
     initSettings () {
       const settings = this.currentLanding.settings

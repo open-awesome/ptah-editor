@@ -1,10 +1,13 @@
 import axios from 'axios'
 import router from '@src/router'
+import api from './api'
 
 export default {
   state: {
     access_token: '',
-    isAuth: false
+    isAuth: false,
+    mcLists: [], // user mailchimp lists,
+    user: null
   },
 
   mutations: {
@@ -14,6 +17,14 @@ export default {
 
     setAuth (state, value) {
       state.isAuth = value
+    },
+
+    setLists (state, value) {
+      state.mcLists = value
+    },
+
+    setUser (state, value) {
+      state.user = value
     }
   },
 
@@ -60,6 +71,37 @@ export default {
       commit('setAuth', false)
       commit('setToken', '')
       router.push({ path: `/login` })
+    },
+
+    /**
+     * Get user info
+     * @param commit
+     * @returns {userId, mailchimpIntegration}
+     */
+    getUser ({ commit }) {
+      return api.request({
+        url: `user`,
+        method: 'get'
+      })
+        .then(data => {
+          commit('setUser', data)
+        })
+    },
+
+    /**
+     * Get user mailchimp lists
+     * @param commit
+     */
+    mailchimpLists ({ commit }) {
+      return api.request({
+        url: `mailchimp/maillists`,
+        method: 'get'
+      })
+        .then((lists) => {
+          console.log('lists', lists)
+          commit('setLists', lists)
+          return lists
+        })
     }
   },
 

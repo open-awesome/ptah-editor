@@ -90,7 +90,7 @@
     </div>
 
     <!-- Delete element -->
-    <div class="b-styler__controls">
+    <div class="b-styler__controls" v-if="options.removable">
       <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
         <icon-base name="close" width="10" height="10"></icon-base>
       </a>
