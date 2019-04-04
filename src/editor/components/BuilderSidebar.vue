@@ -33,6 +33,7 @@
             {{ $t('menu.sections') }}
           </span>
       </menu-item>
+      <div class="b-builder-sidebar__content-outer">
       <base-scroll-container backgroundBar="#999">
         <div class="b-builder-sidebar__content-inner">
         <!-- Sections CONTENTS -->
@@ -90,7 +91,9 @@
                   :section-id="section.id"
                   @click="toggleSettingsBar(section)"
                 >
-                {{ `${ index + 1 } - `}}
+                <span class="b-menu-subitem__title-num">
+                  {{ `${ index + 1 } - `}}
+                </span>
                 <span class="b-menu-subitem__title-text">
                   {{ section.name }}
                 </span>
@@ -121,6 +124,7 @@
             </div>
         </div>
       </base-scroll-container>
+      </div>
     </div>
 
     <transition name="slide-fade">
@@ -380,7 +384,18 @@ $top-panel-height: 7.2rem
     min-height: 0
     overflow: auto
     &-inner
-      padding: 0 0.6rem 0 0
+      padding: 0
+    /deep/
+      .vb.vb-invisible .vb-content
+        padding-right: 0 !important
+        overflow: hidden !important
+        width: 100% !important
+      .vb.vb-visible .vb-content
+        padding-right: 0 !important
+        width: calc(100% + 17px) !important
+    &-outer
+      height: 80vh
+      padding: 0 0 0 0
 
   &-settings
     position: absolute
@@ -422,7 +437,7 @@ $top-panel-height: 7.2rem
    justify-content: space-between
    align-items: center
 
-   padding: $size-step/2 $size-step
+   padding: $size-step/2
    &__ham
      &:hover
        cursor: pointer
@@ -439,4 +454,5 @@ $top-panel-height: 7.2rem
   &-leave-to
     transform: translateX(-0.8rem)
     opacity: 0
+
 </style>

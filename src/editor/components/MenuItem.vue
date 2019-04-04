@@ -51,7 +51,7 @@ export default {
   justify-content: space-between
   cursor: pointer
   color: $white
-  padding: 0 1.3rem 0 3.2rem
+  padding: 0 $size-step/2
 
   &__title
     margin-top: 0.2rem

@@ -74,7 +74,7 @@ const C_CUSTOM_2 = [
         'height': '236px'
       }
     },
-    key: 0
+    key: 5
   },
   {
     element: {
@@ -85,7 +85,7 @@ const C_CUSTOM_2 = [
         'color': '#ffffff'
       }
     },
-    key: 1
+    key: 6
   },
   {
     element: {
@@ -98,10 +98,10 @@ const C_CUSTOM_2 = [
         'color': 'rgba(255, 255, 255, 0.3)'
       }
     },
-    key: 2
+    key: 7
   },
   {
-    key: 3
+    key: 8
   },
   {
     element: {
@@ -117,7 +117,7 @@ const C_CUSTOM_2 = [
         'border-radius': '2px'
       }
     },
-    key: 4
+    key: 9
   }
 ]
 
@@ -161,40 +161,35 @@ const COMPONENTS = [
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo',
-    key: 0
+    label: 'logo'
   },
   {
     name: 'TextElement',
     element: types.Title,
     type: 'text',
     class: 'b-title',
-    label: 'title',
-    key: 1
+    label: 'title'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description',
-    key: 2
+    label: 'description'
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter',
-    key: 3
+    label: 'delimiter'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button-test',
-    label: 'button',
-    key: 4
+    label: 'button'
   }
 ]
 
@@ -205,7 +200,7 @@ const HEADER = [
     type: 'text',
     class: 'b-title',
     label: 'title',
-    key: 15
+    key: 10
   }
 ]
 
@@ -228,7 +223,7 @@ export default {
     container3: types.StyleObject,
     components: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }, { key: 4 }]),
     components2: _.merge([], COMPONENTS, [{ key: 5 }, { key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
-    components3: _.merge([], HEADER, [{ key: 15 }])
+    components3: _.merge([], HEADER, [{ key: 10 }])
   },
 
   created () {
