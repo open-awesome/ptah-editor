@@ -91,7 +91,9 @@
                   :section-id="section.id"
                   @click="toggleSettingsBar(section)"
                 >
-                {{ `${ index + 1 } - `}}
+                <span class="b-menu-subitem__title-num">
+                  {{ `${ index + 1 } - `}}
+                </span>
                 <span class="b-menu-subitem__title-text">
                   {{ section.name }}
                 </span>
@@ -387,6 +389,10 @@ $top-panel-height: 7.2rem
       .vb.vb-invisible .vb-content
         padding-right: 0 !important
         overflow: hidden !important
+        width: 100% !important
+      .vb.vb-visible .vb-content
+        padding-right: 0 !important
+        width: calc(100% + 17px) !important
     &-outer
       height: 80vh
       padding: 0 0 0 0
@@ -431,7 +437,7 @@ $top-panel-height: 7.2rem
    justify-content: space-between
    align-items: center
 
-   padding: $size-step/2 $size-step
+   padding: $size-step/2
    &__ham
      &:hover
        cursor: pointer
