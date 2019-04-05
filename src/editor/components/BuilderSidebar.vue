@@ -253,7 +253,6 @@ export default {
       'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
-      'setMenuItem',
       'setControlPanel'
     ]),
 

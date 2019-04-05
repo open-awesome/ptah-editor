@@ -57,6 +57,28 @@
             max="10000"/>
         </div>
 
+        <!-- Form -->
+        <div class="b-section-settings__control mailchimp" v-if="settingObjectSection.group === 'Forms'">
+          <div v-if="user.mailchimpIntegration">
+            <div class="mailchimp_complete">
+              <img src="https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png" alt="">
+              <icon-base name="checkMark" width="40" height="40"></icon-base>
+            </div>
+            <p>Now emails from this form will be sent to the list:
+              <b>{{currentLanding.settings.mailchimpList}}</b>
+            </p>
+            <p>Change this in <b>Settings > Integrations > Mailchimp</b></p>
+          </div>
+
+          <div v-if="!user.mailchimpIntegration">
+            <div class="mailchimp_none">
+              <img src="https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png" alt="">
+              <icon-base name="close" width="40" height="40"></icon-base>
+            </div>
+            <p>Change this in <b>Settings > Integrations > Mailchimp</b></p>
+          </div>
+        </div>
+
         <!-- Group -->
         <template v-if="!isLastSection() && !isHeader">
           <div class="b-section-settings__control" v-if="!isSlaveSection()">
@@ -115,6 +137,7 @@ import ControlText from './../controls/TheControlText'
 import ControlTypography from './../controls/TheControlTypography'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
+import IconBase from '../../../components/base/icons/IconBase'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -127,6 +150,7 @@ function getPickerColor (color) {
 
 export default {
   components: {
+    IconBase,
     BuilderSettingsBarGroup,
     BaseUploader,
     ControlSectionProducts,
@@ -186,6 +210,9 @@ export default {
       'isGrouping',
       'settingObjectElement'
     ]),
+
+    ...mapState('User', ['user']),
+    ...mapState(['currentLanding']),
 
     bgAttachmentCheckbox: {
       set (value) {
@@ -591,4 +618,22 @@ export default {
         margin-left: 1rem
       ~ .picker__item
         margin-top: .4rem
+
+.mailchimp
+  p
+    padding: 1rem 0
+  &_complete
+    display: flex
+    align-items: center
+    img
+      margin-right: 2rem
+    svg
+      fill: $emerald-green
+  &_none
+    display: flex
+    align-items: center
+    img
+      margin-right: 2rem
+    svg
+      fill: red
 </style>

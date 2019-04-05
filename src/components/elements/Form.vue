@@ -1,11 +1,11 @@
 <template>
   <div>
   <form class="b-form-element ptah-form" :data-action="$builder.settings.mailchimpUrl" method="post" target="_blank">
-    <input type="email" name="EMAIL" :placeholder="placeholder" class="b-form-element-input ptah-input">
+    <input type="email" name="EMAIL" :style="inputBorder" :placeholder="placeholder" class="b-form-element-input ptah-input">
     <div style="position: absolute; left: -5000px;" aria-hidden="true">
       <input type="text" :name="roboCheck" tabindex="-1" value="" class="ptah-valid">
     </div>
-    <button type="submit" class="b-form-element-button ptah-submit">
+    <button type="submit" class="b-form-element-button ptah-submit" :style="buttonStyles">
       <span><icon-base name="checkMark" color="white"></icon-base></span>
       {{ buttonText }}
     </button>
@@ -34,6 +34,16 @@ export default {
 
     buttonText () {
       return this.$section.get(`$sectionData.${this.path}.buttonText`)
+    },
+
+    buttonStyles () {
+      return this.$section.get(`$sectionData.${this.path}.formStyles`)
+    },
+
+    inputBorder () {
+      let color = this.buttonStyles['background-color']
+
+      return `border-color: ${color}`
     },
 
     roboCheck () {
