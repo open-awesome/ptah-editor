@@ -10,9 +10,10 @@
           :value="selectedList"
           @input="setList($event)"
           label="Select a list to collect leads"/>
+
+        <br>
+        <p>E-mail addresses from the "Form" section will now be sent to this list</p>
       </template>
-      <br>
-      <p>E-mail addresses from the "Form" section will now be sent to this list</p>
 
       <template v-if="!integrationComplete">
         <iframe :src="frameSrc" frameborder="none" width="100%" height="100%"></iframe>
