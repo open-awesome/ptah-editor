@@ -30,7 +30,7 @@ const COMPONENTS = [
     key: 0
   },
   {
-    name: 'Text',
+    name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-slogan',
