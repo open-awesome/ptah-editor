@@ -59,7 +59,7 @@
 
         <!-- Form -->
         <div class="b-section-settings__control mailchimp" v-if="settingObjectSection.group === 'Forms'">
-          <div v-if="user.mailchimpIntegration">
+          <div v-if="user.mailchimpIntegration && currentLanding.settings.mailchimpList">
             <div class="mailchimp_complete">
               <img src="https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png" alt="">
               <icon-base name="checkMark" width="40" height="40"></icon-base>
@@ -70,7 +70,7 @@
             <p>Change this in <b>Settings > Integrations > Mailchimp</b></p>
           </div>
 
-          <div v-if="!user.mailchimpIntegration">
+          <div v-if="!user.mailchimpIntegration || !currentLanding.settings.mailchimpList">
             <div class="mailchimp_none">
               <img src="https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png" alt="">
               <icon-base name="close" width="40" height="40"></icon-base>

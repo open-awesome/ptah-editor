@@ -1,7 +1,13 @@
 <template>
   <div>
   <form class="b-form-element ptah-form" :data-action="$builder.settings.mailchimpUrl" method="post" target="_blank">
-    <input type="email" name="EMAIL" :style="inputBorder" :placeholder="placeholder" class="b-form-element-input ptah-input">
+    <input
+      type="email"
+      name="EMAIL"
+      required
+      :style="inputBorder"
+      :placeholder="placeholder"
+      class="b-form-element-input ptah-input">
     <div style="position: absolute; left: -5000px;" aria-hidden="true">
       <input type="text" :name="roboCheck" tabindex="-1" value="" class="ptah-valid">
     </div>
