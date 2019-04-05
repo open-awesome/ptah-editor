@@ -24,6 +24,7 @@
 <script>
 import { mapActions, mapState } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
+import * as _ from 'lodash-es'
 
 export default {
   name: 'BuilderSiteSettingsIntegrationsMailchimp',
@@ -40,6 +41,7 @@ export default {
   },
 
   computed: {
+    ...mapState(['currentLanding']),
     ...mapState('User', ['user', 'mcLists']),
 
     integrationComplete () {
@@ -48,6 +50,10 @@ export default {
 
     frameSrc () {
       return `${window.location.protocol}//${window.location.hostname}/mailchimp/login`
+    },
+
+    savedList () {
+      return this.currentLanding.settings.mailchimpList
     }
   },
 
@@ -83,8 +89,16 @@ export default {
     getLists () {
       return this.mailchimpLists()
         .then(() => {
+          let list = {}
           this.lists = this.mcLists.lists.slice()
-          this.setList(this.lists[0])
+
+          if (this.savedList) {
+            list = _.find(this.lists, (o) => o.name === this.savedList)
+          } else {
+            list = this.lists[0]
+          }
+
+          this.setList(list)
         })
     },
 
