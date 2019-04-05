@@ -30,9 +30,9 @@ const COMPONENTS = [
     key: 0
   },
   {
-    name: 'Slogan',
-    element: types.Slogan,
-    type: 'slogan',
+    name: 'TextElement',
+    element: types.Text,
+    type: 'text',
     class: 'b-slogan',
     label: 'slogan',
     key: 6
@@ -70,6 +70,15 @@ const C_CUSTOM = [
     key: 0
   },
   {
+    element: {
+      styles: {
+        'color': '#fff',
+        'font-family': 'Lato',
+        'text-align': 'center',
+        'font-size': '4.8rem',
+        'font-weight': 'bold'
+      }
+    },
     key: 6
   },
   {
