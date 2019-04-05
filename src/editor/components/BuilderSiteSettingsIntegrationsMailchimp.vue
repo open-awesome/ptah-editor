@@ -74,7 +74,7 @@ export default {
         if (data.success) {
           this.getLists()
             .then(() => {
-              this.integrationComplete = true
+              return this.getUser()
             })
         }
       })
@@ -106,7 +106,7 @@ export default {
 <style lang="sass" scoped>
 .b-integrations-mailchimp
   height: 100%
-  min-height: 40rem
+  min-height: 60rem
   &__controls
     justify-content: flex-start !important
     border-top: none !important
