@@ -330,6 +330,7 @@ const data = new Map([
   )],
   [types.Gallery, () => (_.merge({}, DEFAULT_OPTIONS, {
     hasGallery: true,
+    background: true,
     count: 3,
     styles: {
       'background-image': '',
