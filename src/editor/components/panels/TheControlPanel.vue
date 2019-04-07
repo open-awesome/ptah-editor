@@ -29,6 +29,8 @@ import ThePanelIcon from './ThePanelIcon'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
+import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
+import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
 
 export default {
@@ -76,6 +78,8 @@ export default {
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
+    ThePanelSectionGallerySettings,
+    ThePanelSectionGalleryStyle,
     ThePanelVideo
   }
 }
