@@ -337,18 +337,29 @@ const data = new Map([
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
-      'background-color':'',
-      'font-family': 'Lato',
-      'font-size':  '1.6rem',
-      'font-weight': 'normal',
-      'font-style': 'normal',
-      'text-decoration': 'none',
-      'text-align': 'center',
-      'color': '#fff'
+      'background-color':''
     },
     overlay: {
       color: 'rgba(0,0,0,1)',
       opacity: '0'
+    },
+    textStyles: {
+      chapter: {
+        'font-family': 'Lato',
+        'font-size': '3.2rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'text-decoration': 'none',
+        'color': 'rgba(0, 0, 0, 1)'
+      },
+      text: {
+        'font-family': 'Lato',
+        'font-size': '1.4rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'text-decoration': 'none',
+        'color': 'rgba(0, 0, 0, 1)'
+      }
     }
   }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,

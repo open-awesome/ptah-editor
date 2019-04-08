@@ -76,7 +76,14 @@
                             v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
                             :path="`${key}[1].element`"
                             v-html="$sectionData[key][1].element.text"
-                            :style="$sectionData[key][1].element.styles"
+                            :style="{
+                              'color' : $sectionData.mainStyle.textStyles.text['color'],
+                              'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                              'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                              'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                              'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                              'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                            }"
                             >
                           </div>
                       </div>
@@ -90,8 +97,16 @@
                         >
                         <div class="b-gallery-one-stage__name"
                            v-html="$sectionData[key][2].element.text"
-                           :style="$sectionData[key][2].element.styles"
-                           v-styler:for="{ el: $sectionData[key][2].element, path:`$sectionData.${key}[2].element`, type: $sectionData[key][2].type, label: $sectionData[key][2].label }">
+                           v-styler:for="{ el: $sectionData[key][2].element, path:`$sectionData.${key}[2].element`, type: $sectionData[key][2].type, label: $sectionData[key][2].label }"
+                           :style="{
+                             'color' : $sectionData.mainStyle.textStyles.chapter['color'],
+                             'font-family' : $sectionData.mainStyle.textStyles.chapter['font-family'],
+                             'font-size' : $sectionData.mainStyle.textStyles.chapter['font-size'],
+                             'font-weight' : $sectionData.mainStyle.textStyles.chapter['font-weight'],
+                             'font-style' : $sectionData.mainStyle.textStyles.chapter['font-style'],
+                             'text-decoration' : $sectionData.mainStyle.textStyles.chapter['text-decoration'],
+                         }"
+                          >
                         </div>
                         <div class="b-gallery-one-stage__img"
                           :style="$sectionData[key][3].element.styles"
@@ -103,8 +118,16 @@
                         </div>
                         <div class="b-gallery-one-stage__bio"
                          v-styler:for="{ el: $sectionData[key][4].element, path: `$sectionData.${key}[4].element`, type: $sectionData[key][4].type, label: $sectionData[key][4].label }"
-                         :style="$sectionData[key][4].element.styles"
-                         v-html="$sectionData[key][4].element.text">
+                         v-html="$sectionData[key][4].element.text"
+                         :style="{
+                           'color' : $sectionData.mainStyle.textStyles.text['color'],
+                           'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                           'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                           'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                           'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                           'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                         }"
+                         >
                         </div>
                       </div>
                     </div>
@@ -171,7 +194,7 @@ const GALLERY_ITEM_CUSTOM = [
       styles: {
         'background-image': 'url(https://gn854.cdn.stg.gamenet.ru/0/836nk/o_e19nv.png)',
         'background-size': 'cover',
-        'width': '128x',
+        'width': '128px',
         'height': '160px'
       }
     }
@@ -183,7 +206,14 @@ const GALLERY_ITEM_CUSTOM = [
   },
   {
     element: {
-      removable: false
+      removable: false,
+      text: 'Chapter for image',
+      styles: {
+        'font-family': 'Montserrat',
+        'font-size': '3.2rem',
+        'color': '#000',
+        'font-weight': 'bold'
+      }
     }
   },
   {
@@ -199,7 +229,14 @@ const GALLERY_ITEM_CUSTOM = [
   },
   {
     element: {
-      removable: false
+      removable: false,
+      text: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+      styles: {
+        'font-family': 'Montserrat',
+        'font-size': '1.6rem',
+        'color': '#000',
+        'font-weight': 'bold'
+      }
     }
   }
 ]
@@ -384,9 +421,9 @@ export default {
   vertical-align: top
 
   width: $size-step*4
-  height: $size-step*5
+  min-height: $size-step*5
 
-  margin: $size-step $size-step/2
+  margin: $size-step/3
   padding: 0
   border: 0.2rem dotted transparent
 

@@ -1,38 +1,25 @@
 <template>
-  <div class="b-section-system-style">
-    <h6 class="b-section-system-style__title">
+  <div class="b-section-gallery-style">
+    <h6 class="b-section-gallery-style__title">
       Gallery style
     </h6>
     <base-scroll-container backgroundBar="#999">
-      <div class="b-section-system-style__inner">
-        <!-- System requirements -->
-        <!--control-system-requirements-style/-->
+      <div class="b-section-gallery-style__inner">
+        <!-- Gallery style -->
+        <control-section-gallery-style/>
       </div>
     </base-scroll-container>
   </div>
 </template>
 
 <script>
-// import ControlGalleryStyle from './../controls/TheControlSystemRequirementsStyle.vue'
+import ControlSectionGalleryStyle from './../controls/TheControlSectionGalleryStyle.vue'
 
 export default {
   name: 'ThePanelSectionGalleryStyle',
 
   components: {
-    // ControlSystemRequirementsStyle
-  },
-
-  props: {
-    builder: {
-      type: Object,
-      required: true
-    }
-  },
-
-  data () {
-    return {
-      /* vars for control system requirements */
-    }
+    ControlSectionGalleryStyle
   }
 }
 </script>
@@ -41,7 +28,7 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-section-system-style
+.b-section-gallery-style
   height: 100%
   width: 100%
 
