@@ -177,7 +177,9 @@ export default {
   created () {
     // sets the initial data.
     this.$builder.set(this.data)
-    this.$builder.settings = {}
+    this.$builder.settings = {
+      mailchimpUrl: false
+    }
     this.title = this.$builder.title
     this.themes = this.$builder.themes
 

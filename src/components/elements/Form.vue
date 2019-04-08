@@ -21,6 +21,7 @@
 
 <script>
 import { getParameterByName } from '@editor/util'
+import { mapState } from 'vuex'
 
 export default {
   name: 'Form',
@@ -34,6 +35,8 @@ export default {
   },
 
   computed: {
+    ...mapState(['currentLanding']),
+
     placeholder () {
       return this.$section.get(`$sectionData.${this.path}.placeholder`)
     },
@@ -53,8 +56,8 @@ export default {
     },
 
     roboCheck () {
-      let hash = getParameterByName('u', this.$builder.settings.mailchimpUrl)
-      let list = getParameterByName('id', this.$builder.settings.mailchimpUrl)
+      let hash = getParameterByName('u', this.currentLanding.settings.mailchimpUrl)
+      let list = getParameterByName('id', this.currentLanding.settings.mailchimpUrl)
 
       return `b_${hash}_${list}`
     }
