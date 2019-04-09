@@ -249,15 +249,12 @@ export default {
     filter: brightness(50%)
   .is-mobile &,
   .is-tablet &
-    max-width: 90% !important
     margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px)
     &
-      max-width: 90% !important
       margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px) and (min-height: 700px)
     &
-      max-width: 60% !important
       margin: $size-step/2 auto !important
 /deep/
   .b-handle
