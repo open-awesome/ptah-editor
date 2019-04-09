@@ -54,7 +54,7 @@ export default {
         this.showOptionsHover = true
       }
     },
-    closeMenu () {
+    closeMenu (event, el) {
       this.showOptions = false
       this.showOptionsHover = false
     }
@@ -63,9 +63,9 @@ export default {
 </script>
 
 <template>
-  <div class="l-pth-base-dropdown-menu"  @click="clickMenu" @mouseover="menuMouseOver" @mouseleave="menuMouseOut" v-click-outside="closeMenu">
+  <div class="l-pth-base-dropdown-menu" v-click-outside="closeMenu">
     <div class="b-pth-base-dropdown-menu">
-      <div class="b-pth-base-dropdown-menu__container">
+      <div class="b-pth-base-dropdown-menu__container" @click="clickMenu" @mouseover="menuMouseOver" @mouseleave="menuMouseOut">
         <slot></slot>
       </div>
       <div class="b-pth-base-dropdown-menu__dropdown b-pth-base-dropdown-menu__dropdown_click" :class="menuListClasses" v-if="showOptions && onClick">
