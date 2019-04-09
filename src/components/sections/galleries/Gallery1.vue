@@ -13,22 +13,22 @@
             <sandbox
               class="b-sandbox"
               container-path="$sectionData.container"
-              components-path="$sectionData.components0"
+              components-path="$sectionData.components"
               direction="column"
               :style="$sectionData.container.styles"
             >
-              <draggable v-model="$sectionData.components0" class="b-draggable-slot" :style="$sectionData.container.styles">
-                <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components0" v-if="$sectionData.components0.length !== 0" :key="index">
+              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+                <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                   <component
-                     v-styler:for="{ el: $sectionData.components0[index].element, path: `$sectionData.components0[${index}].element`, type: $sectionData.components0[index].type, label: $sectionData.components0[index].label }"
+                     v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                      :is="component.name"
-                     :href="$sectionData.components0[index].element.link.href"
-                     :target="$sectionData.components0[index].element.link.target"
+                     :href="$sectionData.components[index].element.link.href"
+                     :target="$sectionData.components[index].element.link.target"
                      :path="`components0[${index}].element`"
-                     :style="$sectionData.components0[index].element.styles"
-                     :class="[$sectionData.components0[index].element.classes, $sectionData.components0[index].class]"
+                     :style="$sectionData.components[index].element.styles"
+                     :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   >
-                    <div v-html="$sectionData.components0[index].element.text"></div>
+                    <div v-html="$sectionData.components[index].element.text"></div>
                   </component>
                 </div>
               </draggable>
@@ -59,17 +59,17 @@
                       <div class="b-preview"
                           v-for="(components, key) in $sectionData"
                           :key="key"
-                          v-if="key.indexOf('components') !== -1 && key.split('components')[1] !== '0' && key.split('components')[1] <= $sectionData.mainStyle.count"
+                          v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
                         >
                           <div class="b-preview__image"
                             v-styler:for="{ el: $sectionData[key][0].element, path: `$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
                             :style="$sectionData[key][0].element.styles"
                             :path="`${key}[0].element`"
-                            :data-index="key.split('components')[1] - 1"
+                            :data-index="key.split('components')[1]"
                             :gallery-one-preview="'loader__content_show'"
                             >
                             <span class="b-preview__count">
-                              {{ key.split('components')[1] }}
+                              {{ parseFloat(key.split('components')[1]) + 1 }}
                             </span>
                           </div>
                           <div class="b-preview__name"
@@ -92,8 +92,8 @@
                       <div class="loader__content loader__content_mobile"
                          v-for="(components, key) in $sectionData"
                          :key="key"
-                         v-if="key.indexOf('components') !== -1 && key.split('components')[1] !== '0' && key.split('components')[1] <= $sectionData.mainStyle.count"
-                         :gallery-one-stage="key.split('components')[1] - 1"
+                         v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
+                         :gallery-one-stage="key.split('components')[1]"
                         >
                         <div class="b-gallery-one-stage__name"
                            v-html="$sectionData[key][2].element.text"
@@ -113,7 +113,7 @@
                           v-styler:for="{ el: $sectionData[key][3].element, path:`$sectionData.${key}[3].element`, type: $sectionData[key][3].type, label: $sectionData[key][3].label }"
                           >
                           <span class="b-gallery-one-stage__count">
-                            {{ key.split('components')[1] }}
+                            {{ parseFloat(key.split('components')[1]) + 1 }}
                           </span>
                         </div>
                         <div class="b-gallery-one-stage__bio"
@@ -274,7 +274,8 @@ const SCHEMA_CUSTOM = {
       'background-color': '#8CD2B5'
     }
   },
-  components0: _.merge([], C_CUSTOM),
+  components: _.merge([], C_CUSTOM),
+  components0: _.merge([], GALLERY_ITEM_CUSTOM),
   components1: _.merge([], GALLERY_ITEM_CUSTOM),
   components2: _.merge([], GALLERY_ITEM_CUSTOM),
   components3: _.merge([], GALLERY_ITEM_CUSTOM),
@@ -283,7 +284,6 @@ const SCHEMA_CUSTOM = {
   components6: _.merge([], GALLERY_ITEM_CUSTOM),
   components7: _.merge([], GALLERY_ITEM_CUSTOM),
   components8: _.merge([], GALLERY_ITEM_CUSTOM),
-  components9: _.merge([], GALLERY_ITEM_CUSTOM),
   edited: true
 }
 
@@ -299,22 +299,23 @@ export default {
   $schema: {
     mainStyle: types.Gallery,
     container: types.StyleObject,
-    components0: _.merge([], HEADER, [{ key: 0 }]),
-    components1: _.merge([], GALLERY_ITEM, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }, { key: 14 }]),
-    components2: _.merge([], GALLERY_ITEM, [{ key: 20 }, { key: 21 }, { key: 22 }, { key: 23 }, { key: 24 }]),
-    components3: _.merge([], GALLERY_ITEM, [{ key: 30 }, { key: 31 }, { key: 32 }, { key: 33 }, { key: 34 }]),
-    components4: _.merge([], GALLERY_ITEM, [{ key: 40 }, { key: 41 }, { key: 42 }, { key: 43 }, { key: 44 }]),
-    components5: _.merge([], GALLERY_ITEM, [{ key: 50 }, { key: 51 }, { key: 52 }, { key: 53 }, { key: 54 }]),
-    components6: _.merge([], GALLERY_ITEM, [{ key: 60 }, { key: 61 }, { key: 62 }, { key: 63 }, { key: 64 }]),
-    components7: _.merge([], GALLERY_ITEM, [{ key: 70 }, { key: 71 }, { key: 72 }, { key: 73 }, { key: 74 }]),
-    components8: _.merge([], GALLERY_ITEM, [{ key: 80 }, { key: 81 }, { key: 82 }, { key: 83 }, { key: 84 }]),
-    components9: _.merge([], GALLERY_ITEM, [{ key: 90 }, { key: 91 }, { key: 92 }, { key: 93 }, { key: 94 }])
+    components: _.merge([], HEADER, [{ key: 0 }]),
+    components0: _.merge([], GALLERY_ITEM, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }, { key: 14 }]),
+    components1: _.merge([], GALLERY_ITEM, [{ key: 20 }, { key: 21 }, { key: 22 }, { key: 23 }, { key: 24 }]),
+    components2: _.merge([], GALLERY_ITEM, [{ key: 30 }, { key: 31 }, { key: 32 }, { key: 33 }, { key: 34 }]),
+    components3: _.merge([], GALLERY_ITEM, [{ key: 40 }, { key: 41 }, { key: 42 }, { key: 43 }, { key: 44 }]),
+    components4: _.merge([], GALLERY_ITEM, [{ key: 50 }, { key: 51 }, { key: 52 }, { key: 53 }, { key: 54 }]),
+    components5: _.merge([], GALLERY_ITEM, [{ key: 60 }, { key: 61 }, { key: 62 }, { key: 63 }, { key: 64 }]),
+    components6: _.merge([], GALLERY_ITEM, [{ key: 70 }, { key: 71 }, { key: 72 }, { key: 73 }, { key: 74 }]),
+    components7: _.merge([], GALLERY_ITEM, [{ key: 80 }, { key: 81 }, { key: 82 }, { key: 83 }, { key: 84 }]),
+    components8: _.merge([], GALLERY_ITEM, [{ key: 90 }, { key: 91 }, { key: 92 }, { key: 93 }, { key: 94 }]),
+    index: 0
   },
 
   watch: {
-    $sectionData: {
-      handler: function () {
-        setTimeout(this.bindingClickPreview(), 2000)
+    '$sectionData.mainStyle.count': {
+      handler: function (val, old) {
+        setTimeout(val > old ? this.bindingClickPreview(old) : this.bindingClickPreview(val - 1), 250)
       },
       deep: true
     }
@@ -352,7 +353,7 @@ export default {
   },
 
   updated: function () {
-    this.bindingClickPreview(this.index)
+    this.bindingClickPreview(this.$sectionData.index)
   }
 }
 </script>
@@ -538,7 +539,6 @@ export default {
   top: 0
   left: 0
   width: 100%
-  height: 100%
   padding: 0
   opacity: 0
   visibility: hidden
