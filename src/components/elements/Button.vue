@@ -74,6 +74,7 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-button
+  $self: &
   position: relative
 
   font-size: 3rem
@@ -123,8 +124,11 @@ export default {
       &
         display: none
   &.is-editable
-    .b-button__resize
+    #{$self}__resize
       display: block
+      .is-mobile &,
+      .is-tablet &
+        display: none
   & span
     display: block
   &:hover

@@ -364,7 +364,6 @@ const data = new Map([
       videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
       loop: false,
       styles: {
-        'background-color': '#fff',
         'width': '',
         'height': ''
       },
