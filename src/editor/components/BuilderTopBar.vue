@@ -32,7 +32,6 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'clearSettingObject',
-      'setMenuItem',
       'clearSettingObjectLight',
       'toggleSidebar'
     ]),
@@ -51,7 +50,6 @@ export default {
     },
 
     toggleMenuItem (name) {
-      this.setMenuItem(name)
       this.toggleSiteSettings('visualSettings')
     },
 

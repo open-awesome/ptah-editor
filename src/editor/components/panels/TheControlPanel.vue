@@ -31,6 +31,7 @@ import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelVideo from './ThePanelVideo'
+import ThePanelForm from './ThePanelForm'
 
 export default {
   name: 'TheControlPanel',
@@ -77,7 +78,8 @@ export default {
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
-    ThePanelVideo
+    ThePanelVideo,
+    ThePanelForm
   }
 }
 </script>

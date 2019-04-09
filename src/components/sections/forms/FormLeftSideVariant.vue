@@ -95,7 +95,17 @@ const C_CUSTOM_2 = [
   {
     element: {
       placeholder: 'email',
-      buttonText: 'Submit'
+      buttonText: 'Submit',
+      formStyles: {
+        'background-color': 'rgba(255, 109, 100, 1)',
+        'color': '#FFFFFF',
+        'border-radius': '2px',
+        'font-family': 'Lato',
+        'font-weight': 'normal',
+        'font-style': 'none',
+        'font-size': '1.6rem',
+        'text-decoration': 'none'
+      }
     },
     key: 4
   }

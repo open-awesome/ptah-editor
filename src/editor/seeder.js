@@ -374,7 +374,7 @@ const data = new Map([
   [types.Form, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       resizable: false,
-      removable: true,
+      removable: false,
       form: true,
       isComplex: true,
       placeholder: 'Placeholder',

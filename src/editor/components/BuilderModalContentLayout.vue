@@ -25,7 +25,7 @@ export default {
   display: flex
   flex-direction: column
   flex-grow: 1
-  height: 40rem
+  height: 100%
 
   &__controls
     & > div

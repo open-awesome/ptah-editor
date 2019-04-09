@@ -52,6 +52,7 @@ export default {
   z-index: auto
 
   margin-bottom: 4.5rem
+  text-align: left
 
   &__header
     cursor: pointer
