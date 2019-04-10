@@ -321,7 +321,6 @@ export default {
     ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
-      let elOps = null
       let self = this
 
       event.preventDefault()
@@ -401,13 +400,11 @@ export default {
             })
           }
 
-          elOps = this.type === 'inline' ? this.options : _.get(this.section.data, this.path).element
-
           this.setSettingElement({
             type: this.$props.type, // TODO: $props.type !== type ?
             label: this.$props.label,
             name: this.name,
-            options: elOps,
+            options: _.get(this.section.data, this.path).element,
             section: this.section,
             element: this.el
           })
