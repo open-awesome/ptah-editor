@@ -50,8 +50,7 @@ export default {
       this.$emit('backToLandings', $event)
     },
 
-    toggleMenuItem (name) {
-      this.setMenuItem(name)
+    toggleMenuItem () {
       this.toggleSiteSettings('visualSettings')
     },
 
@@ -71,7 +70,8 @@ export default {
       if (this.modalContentID === contentID) {
         this.closeSiteSettings()
       } else {
-        this.setModalContent(contentID)
+        this.$router.push(`${this.$route.path}/settings`)
+        // this.setModalContent(contentID)
       }
     },
 

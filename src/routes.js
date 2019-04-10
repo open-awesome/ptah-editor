@@ -1,3 +1,11 @@
+import BuilderModalContent from '@editor/components/BuilderModalContent'
+import BuilderSiteSettingsSeo from '@editor/components/BuilderSiteSettingsSeo'
+import BuilderSiteSettingsCookies from '@editor/components/BuilderSiteSettingsCookies'
+import BuilderSiteSettingsVisual from '@editor/components/BuilderSiteSettingsVisual'
+import BuilderSiteSettingsAddJsScripts from '@editor/components/BuilderSiteSettingsAddJsScripts'
+import BuilderSiteSettingsIntegrations from '@editor/components/BuilderSiteSettingsIntegrations'
+import BuilderSiteSettingsOpenGraph from '@editor/components/BuilderSiteSettingsOpenGraph'
+
 const routes = [
   {
     path: '/',
@@ -15,7 +23,39 @@ const routes = [
     path: '/editor/:slug',
     component: () => import(/* webpackChunkName: "VuseEditor" */ '@components/pages/VuseEditor'),
     name: 'VuseEditor',
-    alias: ''
+    alias: '',
+    children: [
+      {
+        path: 'settings',
+        component: BuilderModalContent,
+        children: [
+          {
+            path: 'visualSettings',
+            component: BuilderSiteSettingsVisual
+          },
+          {
+            path: 'seoSettings',
+            component: BuilderSiteSettingsSeo
+          },
+          {
+            path: 'cookiesSettings',
+            component: BuilderSiteSettingsCookies
+          },
+          {
+            path: 'addJsScrips',
+            component: BuilderSiteSettingsAddJsScripts
+          },
+          {
+            path: 'integrations',
+            component: BuilderSiteSettingsIntegrations
+          },
+          {
+            path: 'openGraph',
+            component: BuilderSiteSettingsOpenGraph
+          }
+        ]
+      }
+    ]
   },
   {
     path: '/login/',

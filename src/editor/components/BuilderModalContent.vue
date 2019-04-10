@@ -1,7 +1,6 @@
 <template>
   <transition name="slide-fade">
     <div class="b-builder-modal"
-      v-if="isContentVisible"
       @click.self="closeContent"
       >
       <div
@@ -97,6 +96,7 @@ export default {
   },
 
   mounted () {
+    this.setModalContent('visualSettings')
     this.setScrollbarVisible(!this.isContentVisible)
   },
 

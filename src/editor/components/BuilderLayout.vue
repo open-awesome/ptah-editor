@@ -29,7 +29,8 @@
             <slot></slot>
           </div>
         </base-scroll-container>
-        <BuilderModalContent :builder="builder" />
+        <!--<BuilderModalContent :builder="builder" />-->
+        <router-view :builder="builder"></router-view>
       </main>
 
     </div>
