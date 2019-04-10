@@ -7,6 +7,7 @@ import Vuex from 'vuex'
 import VueI18n from 'vue-i18n'
 import VueScrollTo from 'vue-scrollto'
 import VueProgressBar from 'vue-progressbar'
+import vClickOutside from 'v-click-outside'
 
 import axios from 'axios'
 
@@ -23,6 +24,7 @@ import ru from '@assets/lang/ru.json'
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(VueI18n)
+Vue.use(vClickOutside)
 
 Vue.use(VueScrollTo, {
   container: '.b-builder-layout-content__main .vb-content',

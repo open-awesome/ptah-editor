@@ -177,7 +177,9 @@ export default {
   created () {
     // sets the initial data.
     this.$builder.set(this.data)
-    this.$builder.settings = {}
+    this.$builder.settings = {
+      mailchimpUrl: false
+    }
     this.title = this.$builder.title
     this.themes = this.$builder.themes
 
@@ -188,6 +190,8 @@ export default {
     this.groups = this.generateGroups()
     this.updateBuilderSections(this.sections)
     this.updateBuilderGroups(this.groups)
+
+    this.getUser()
   },
   mounted () {
     this.$builder.rootEl = this.$refs.artboard
@@ -222,6 +226,9 @@ export default {
     ]),
     ...mapActions('Landing', [
       'saveState'
+    ]),
+    ...mapActions('User', [
+      'getUser'
     ]),
     initSettings () {
       const settings = this.currentLanding.settings

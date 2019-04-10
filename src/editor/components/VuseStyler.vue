@@ -92,6 +92,11 @@
         <icon-base name="style" width="12" height="15" />
       </a>
 
+      <!-- Form -->
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Form')" v-if="type === 'form'">
+        <icon-base name="style" width="12" height="15" />
+      </a>
+
     </div>
 
     <!-- Delete element -->

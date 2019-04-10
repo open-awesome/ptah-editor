@@ -1,15 +1,32 @@
 <template>
-  <form class="b-form-element ptah-form">
-    <input type="email" name="email" :placeholder="placeholder" class="b-form-element-input">
-    <button type="submit" class="b-form-element-button">{{ buttonText }}</button>
+  <div>
+  <form class="b-form-element ptah-form" :data-action="$builder.settings.mailchimpUrl" method="post" target="_blank">
+    <input
+      type="email"
+      name="EMAIL"
+      required
+      :style="inputBorder"
+      :placeholder="placeholder"
+      class="b-form-element-input ptah-input">
+    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+      <input type="text" :name="roboCheck" tabindex="-1" value="" class="ptah-valid">
+    </div>
+    <button type="submit" class="b-form-element-button ptah-submit" :style="buttonStyles">
+      <span><icon-base name="checkMark" color="white"></icon-base></span>
+      {{ buttonText }}
+    </button>
   </form>
+  </div>
 </template>
 
 <script>
+import { getParameterByName } from '@editor/util'
+import { mapState } from 'vuex'
+
 export default {
   name: 'Form',
 
-  inject: ['$section'],
+  inject: ['$section', '$builder'],
 
   props: {
     path: {
@@ -18,12 +35,31 @@ export default {
   },
 
   computed: {
+    ...mapState(['currentLanding']),
+
     placeholder () {
       return this.$section.get(`$sectionData.${this.path}.placeholder`)
     },
 
     buttonText () {
       return this.$section.get(`$sectionData.${this.path}.buttonText`)
+    },
+
+    buttonStyles () {
+      return this.$section.get(`$sectionData.${this.path}.formStyles`)
+    },
+
+    inputBorder () {
+      let color = this.buttonStyles['background-color']
+
+      return `border-color: ${color}`
+    },
+
+    roboCheck () {
+      let hash = getParameterByName('u', this.currentLanding.settings.mailchimpUrl)
+      let list = getParameterByName('id', this.currentLanding.settings.mailchimpUrl)
+
+      return `b_${hash}_${list}`
     }
   }
 }
@@ -85,6 +121,12 @@ export default {
   font-family: 'Lato', sans-serif
   letter-spacing: .28em
   margin-left: 2rem
+  transition: all ease-out .4s
+  position: relative
+  span
+    display: none
+  &.submited
+    background-color: $emerald-green
   .is-mobile &,
   .is-tablet &
     min-width: auto
