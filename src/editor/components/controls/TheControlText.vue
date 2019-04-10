@@ -9,14 +9,12 @@ export default {
       vText: {}
     }
   },
-
-  created () {
-    this.vText = this.text
-  },
-
   watch: {
-    vText: function (value) {
-      this.text = value
+    vText: {
+      handler (value) {
+        _.throttle(this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: value })), 1000)
+      },
+      deep: true
     }
   },
 
@@ -25,21 +23,19 @@ export default {
       'settingObjectOptions'
     ]),
 
-    text: {
-      get: function () {
-        return this.settingObjectOptions.text
-      },
-      set: function (newValue) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: newValue }))
-      }
+    text () {
+      return this.settingObjectOptions.text
     }
   },
 
   methods: {
     ...mapActions('Sidebar', [
-      'updateSettingOptions',
-      'updateText'
+      'updateSettingOptions'
     ])
+  },
+
+  mounted () {
+    this.vText = this.text
   }
 }
 </script>
@@ -47,7 +43,7 @@ export default {
 <template>
   <div class="b-text-controls">
     <div class="b-text-controls__control">
-      <base-text-field v-model="vText" :value="vText" label="Text"></base-text-field>
+      <base-text-field v-model="vText" label="Text"></base-text-field>
     </div>
   </div>
 </template>
