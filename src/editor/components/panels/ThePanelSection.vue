@@ -5,26 +5,6 @@
     </h6>
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-section-settings__inner">
-        <!-- Products Section Controls -->
-        <control-section-products
-          :expand="expandedProducts"
-          @open="onExpand"
-          v-if="settingObjectOptions.hasProducts"
-        >
-        </control-section-products>
-
-        <!-- Font -->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
-          <control-typography
-            :fontSize="fontSize"
-            :fontFamily="fontFamily"
-            :fontColor="fontColor"
-            :fontStyles="styles"
-            :expand="expandedFont"
-            :isComplexText="isComplexText"
-            @open="onExpand"
-            @change="styleChange"></control-typography>
-        </div>
 
         <div v-if="!isHeader" class="b-section-settings__control">
           <BaseSwitcher label="Full screen height" v-model="fullScreen" @change="setHeight" />
@@ -132,28 +112,17 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
 import ControlText from './../controls/TheControlText'
 import ControlTypography from './../controls/TheControlTypography'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
 
-const DEFAULT_COLOR = 'rgba(0,0,0,1)'
-
-function getPickerColor (color) {
-  if (typeof color === 'object' && color.hasOwnProperty('rgba')) {
-    return `rgba(${Object.values(color.rgba).toString()})`
-  }
-  return color
-}
-
 export default {
   components: {
     IconBase,
     BuilderSettingsBarGroup,
     BaseUploader,
-    ControlSectionProducts,
     ControlText,
     ControlTypography
   },
@@ -170,35 +139,7 @@ export default {
     return {
       fullScreen: false,
 
-      sectionBgColor: '',
-      sectionBgUrl: '',
-      bgRepeat: '',
-      bgSize: '',
-      bgAttachment: '',
-      list: [
-        { text: 'No-repeat', value: 'no-repeat' },
-        { text: 'Repeat', value: 'repeat' }
-      ],
-      sizeList: [
-        { text: 'Tile', value: 'cover' },
-        { text: 'Fill', value: 'contain' }
-      ],
-
-      galleryImages: [],
-      backgroundPickers: [],
-
-      /* text styles */
-      fontSize: null,
-      fontFamily: '',
-      fontColor: '',
-      expandedFont: false,
-
-      styles: [],
-      products: {},
-      selectProduct: {},
-      expandedProducts: false,
-
-      isComplexText: false
+      galleryImages: []
     }
   },
 
@@ -237,20 +178,6 @@ export default {
   },
 
   created () {
-    let styles = this.settingObjectOptions.styles
-    let image = (typeof styles['background-image'] === 'string') ? styles['background-image'] : ''
-    let bgimage = image.match(/url\((.*?)\)/)
-
-    if (bgimage) {
-      bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-    }
-
-    this.sectionBgColor = styles['background-color']
-    this.sectionBgUrl = bgimage || ''
-    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
-    this.bgSize = styles['background-size'] || 'cover'
-    this.bgAttachment = styles['background-attachment'] === 'fixed'
-
     this.header = this.settingObjectOptions.header || ''
 
     /* Gallery */
@@ -259,25 +186,6 @@ export default {
     if (this.settingObjectOptions.classes !== undefined && this.settingObjectOptions.classes.indexOf('full-height') !== -1) {
       this.fullScreen = true
     }
-
-    /* System Requirements */
-    this.systemRequirements = this.settingObjectOptions.systemRequirements || {}
-    this.rowsRequirements = this.settingObjectOptions.rowsRequirements || {}
-    this.selectPlatform = this.settingObjectOptions.selectPlatform || {}
-
-    /* Get font settings */
-    this.fontFamily = styles['font-family'] || ''
-    this.fontSize = styles['font-size'] || 1.6
-    this.fontColor = styles['color'] || '#000000'
-
-    if (styles['font-style']) {
-      this.styles.push({ prop: 'font-style', value: styles['font-style'] })
-    }
-
-    /* Products */
-    this.products = this.settingObjectOptions.products || {}
-    this.selectProduct = this.settingObjectOptions.selectProduct || {}
-    this.isComplexText = this.settingObjectOptions.hasProducts || false
   },
 
   watch: {
@@ -314,69 +222,6 @@ export default {
     ...mapActions('Landing', [
       'saveState'
     ]),
-
-    updateBgColor (value) {
-      let settings = this.settingObjectOptions
-      let pickers = this.backgroundPickers
-      let image = (typeof settings.styles['background-image'] === 'string') ? settings.styles['background-image'] : ''
-      let bgimage = image.match(/url\((.*?)\)/)
-      let styles = { 'background-color': '' }
-
-      switch (pickers.length) {
-        case 0:
-          break
-        case 1:
-          styles['background-color'] = getPickerColor(value)
-          styles['background-image'] = (bgimage) ? bgimage[0] : ''
-          break
-        default:
-          let colors = pickers.filter(Boolean).map(getPickerColor)
-          if (colors.length) {
-            let mappedColor = [...colors.splice(0, 1), ...(colors || []).map(c => ` ${c}`)]
-            let gradient = `linear-gradient(${mappedColor})`
-            if (bgimage) {
-              bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-            }
-            styles['background-image'] = (bgimage) ? (bgimage + `, ${gradient}`) : gradient
-          }
-          break
-      }
-
-      this.updateSettingOptions(_.merge({}, settings, { styles }))
-    },
-
-    updateBgUrl (value) {
-      this.sectionBgUrl = value || ''
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-image': `url(${this.sectionBgUrl})`
-        }
-      }))
-    },
-
-    changeRepeat () {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-repeat': this.bgRepeat
-        }
-      }))
-    },
-
-    changeSize () {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-size': this.bgSize
-        }
-      }))
-    },
-
-    changeAttachment () {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-attachment': this.bgAttachment ? 'fixed' : 'scroll'
-        }
-      }))
-    },
 
     deleteSection () {
       // update group
@@ -420,71 +265,6 @@ export default {
         })
       )
     },
-
-    addBackgroundPicker () {
-      this.backgroundPickers.push(DEFAULT_COLOR)
-      this.updateBgColor()
-    },
-
-    removeBackgroundPicker (index) {
-      this.backgroundPickers.splice(index, 1)
-      this.updateBgColor()
-    },
-
-    styleChange (value) {
-      this.updateStyle(_.kebabCase(value[0]), value[1])
-      this[value[0]] = value[1]
-    },
-
-    updateStyle (prop, value) {
-      this.updateText()
-      let styles = {}
-      styles[prop] = value
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
-    },
-
-    onExpand (value) {
-      const accordeon = ['Font', 'SystemRequirements', 'Products']
-      const prop = `expanded${value[0]}`
-      this[prop] = value[1]
-
-      if (value[1]) {
-        accordeon.forEach((item) => {
-          if (item !== value[0]) {
-            this[`expanded${item}`] = false
-          }
-        })
-      }
-    },
-
-    updateText () {
-      // TODO: Lost 'settingObjectOptions' from the store at the time of execution 'beforeDestroy'.
-      // Text also saved at VuseStyler -> hideStyler
-      if (this.settingObjectElement) {
-        const el = this.settingObjectElement
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: el.innerHTML }))
-      }
-    },
-
-    toggleBackgroundType (value) {
-      let backgroundType = (value) ? 'video' : 'default'
-      this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, { backgroundType })
-      )
-    },
-
-    uploadVideo (url) {
-      this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, { backgroundVideo: url || null })
-      )
-      // --- update video player
-      document.querySelectorAll('video[id^="bg-video"]').forEach(video => {
-        video.pause()
-        video.load()
-        video.play()
-      })
-    },
-
     isMasterSection () {
       return !!_.find(this.sectionsGroups, o => o.main.id === this.sectionId)
     },

@@ -9,6 +9,13 @@ export default {
     VuseIcon
   },
 
+  data () {
+    return {
+      color: '',
+      count: 0
+    }
+  },
+
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions'

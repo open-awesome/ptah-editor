@@ -33,6 +33,8 @@ import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelVideo from './ThePanelVideo'
 import ThePanelForm from './ThePanelForm'
+import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
+import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
 
 export default {
   name: 'TheControlPanel',
@@ -81,7 +83,9 @@ export default {
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
     ThePanelVideo,
-    ThePanelForm
+    ThePanelForm,
+    ThePanelSectionProductsColumnsSettings,
+    ThePanelSectionProductsColumnsStyle
   }
 }
 </script>
