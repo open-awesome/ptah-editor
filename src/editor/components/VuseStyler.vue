@@ -88,9 +88,14 @@
       </a>
 
       <!-- Icon with text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')" v-if="type === 'icon'">
-        <icon-base name="style" width="12" height="15" />
-      </a>
+      <template v-if="type === 'icon'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
+          <icon-base name="settings" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Form -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Form')" v-if="type === 'form'">

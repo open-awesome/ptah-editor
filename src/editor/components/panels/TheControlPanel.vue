@@ -27,6 +27,7 @@ import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
 import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineText from './ThePanelInlineText'
 import ThePanelIcon from './ThePanelIcon'
+import ThePanelIconStyle from './ThePanelIconStyle'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
@@ -75,6 +76,7 @@ export default {
     ThePanelInlineText,
     ThePanelImage,
     ThePanelIcon,
+    ThePanelIconStyle,
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
