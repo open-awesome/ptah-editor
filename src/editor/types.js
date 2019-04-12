@@ -5,7 +5,7 @@ export class Image { }
 export class Link { }
 export class ClassList { }
 export class Button { }
-export class GalleryItem { }
+export class Gallery { }
 export class StyleObject { }
 export class Icon { }
 export class Label { }

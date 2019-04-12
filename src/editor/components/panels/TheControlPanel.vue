@@ -30,6 +30,8 @@ import ThePanelIcon from './ThePanelIcon'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
+import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
+import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
 import ThePanelForm from './ThePanelForm'
 
@@ -78,8 +80,10 @@ export default {
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
-    ThePanelVideo,
-    ThePanelForm
+    ThePanelForm,
+    ThePanelSectionGallerySettings,
+    ThePanelSectionGalleryStyle,
+    ThePanelVideo
   }
 }
 </script>

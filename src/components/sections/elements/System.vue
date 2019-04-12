@@ -911,14 +911,14 @@ export default {
                               >
                             </div>
                             <div class=""
-                              v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData[componentsRequirements${key}][${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type }"
+                              v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type }"
                               :style="$sectionData[`componentsRequirements${key}`][index].element.styles"
                               v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
                               v-if="$sectionData[`componentsRequirements${key}`][index].name.indexOf('-min') !== -1"
                               >
                             </div>
                             <div class=""
-                                 v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData[componentsRequirements${key}][${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type }"
+                                 v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type }"
                                  :style="$sectionData[`componentsRequirements${key}`][index].element.styles"
                                  v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
                                  v-if="$sectionData[`componentsRequirements${key}`][index].name.indexOf('-max') !== -1"
