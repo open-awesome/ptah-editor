@@ -5,6 +5,9 @@ import BuilderSiteSettingsVisual from '@editor/components/BuilderSiteSettingsVis
 import BuilderSiteSettingsAddJsScripts from '@editor/components/BuilderSiteSettingsAddJsScripts'
 import BuilderSiteSettingsIntegrations from '@editor/components/BuilderSiteSettingsIntegrations'
 import BuilderSiteSettingsOpenGraph from '@editor/components/BuilderSiteSettingsOpenGraph'
+import BuilderSiteSettingsIntegrationsGoogleTag from '@editor/components/BuilderSiteSettingsIntegrationsGoogleTag'
+import BuilderSiteSettingsIntegrationsGoogleAnalitycs from '@editor/components/BuilderSiteSettingsIntegrationsGoogleAnalitycs'
+import BuilderSiteSettingsIntegrationsMailchimp from '@editor/components/BuilderSiteSettingsIntegrationsMailchimp'
 
 const routes = [
   {
@@ -47,7 +50,21 @@ const routes = [
           },
           {
             path: 'integrations',
-            component: BuilderSiteSettingsIntegrations
+            component: BuilderSiteSettingsIntegrations,
+            children: [
+              {
+                path: 'googleTag',
+                component: BuilderSiteSettingsIntegrationsGoogleTag
+              },
+              {
+                path: 'googleAnalitycs',
+                component: BuilderSiteSettingsIntegrationsGoogleAnalitycs
+              },
+              {
+                path: 'mailchimp',
+                component: BuilderSiteSettingsIntegrationsMailchimp
+              }
+            ]
           },
           {
             path: 'openGraph',

@@ -54,12 +54,9 @@ export default {
       'setSection',
       'isAddSectionExpanded'
     ]),
-
-    ...mapActions('BuilderModalContent', ['setContent']),
     ...mapActions('Sidebar', ['toggleSidebar', 'setControlPanel']),
 
     showSandboxSidebar (e, openElBar) {
-      this.setContent(null)
       this.isAddSectionExpanded(false)
 
       // --- clear active classes

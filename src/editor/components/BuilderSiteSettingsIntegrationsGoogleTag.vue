@@ -21,7 +21,7 @@
     </div>
 
     <div slot="controls" class="b-integrations-google-analitycs__controls">
-      <BaseButton size="middle" color="gray" :transparent="true" @click="$emit('back')">{{ $t('nav.back') }}</BaseButton>
+      <BaseButton size="middle" color="gray" :transparent="true" @click="back()">{{ $t('nav.back') }}</BaseButton>
       <BaseButton size="middle" color="gray" @click="applySettings">{{ $t('nav.apply') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
@@ -37,13 +37,13 @@ export default {
   components: {
     BuilderModalContentLayout
   },
-          
+
   data () {
     return {
       gtmId: ''
     }
   },
-  
+
   computed: {
     ...mapState(['currentLanding'])
   },
@@ -75,7 +75,11 @@ export default {
       }
 
       this.storeSettings(data)
-      this.$emit('back')
+      this.back()
+    },
+
+    back () {
+      this.$router.push(`/editor/${this.$route.params.slug}/settings/integrations`)
     }
   }
 }

@@ -75,9 +75,10 @@ export default {
     ...mapState('Sidebar', [
       'isExpanded'
     ]),
-    ...mapState('BuilderModalContent', [
-      'isContentVisible'
-    ])
+
+    isContentVisible () {
+      return this.$route.path.split('/').indexOf('settings') > 0
+    }
   },
 
   methods: {

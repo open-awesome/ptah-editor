@@ -5,7 +5,7 @@
       <textarea class="b-add-js-scripts__textarea" placeholder="Add Js Scripts" v-model="script"/>
     </div>
     <div slot="controls">
-      <BaseButton color="gray" size="middle" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton color="gray" size="middle" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
       <BaseButton color="blue" size="middle" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
@@ -44,8 +44,12 @@ export default {
         script: this.script
       })
 
-      this.$emit('requestClose')
+      this.close()
     }
+  },
+
+  close () {
+    this.$router.push(`/editor/${this.$route.params.slug}`)
   }
 }
 </script>

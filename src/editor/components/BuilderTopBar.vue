@@ -24,9 +24,10 @@ export default {
     ...mapState('Sidebar', [
       'isExpanded'
     ]),
-    ...mapState('BuilderModalContent', {
-      modalContentID: 'contentID'
-    })
+
+    modalContentID () {
+      return this.$route.path.split('/')[4] || ''
+    }
   },
 
   methods: {
@@ -36,10 +37,6 @@ export default {
       'clearSettingObjectLight',
       'toggleSidebar'
     ]),
-
-    ...mapActions('BuilderModalContent', {
-      setModalContent: 'setContent'
-    }),
 
     setDevice (type) {
       this.$emit('setDevice', type)
@@ -59,7 +56,7 @@ export default {
     },
 
     closeSiteSettings () {
-      this.setModalContent('')
+      this.$router.push(`/editor/${this.$route.params.slug}`)
     },
 
     toggleSiteSettings (contentID) {
@@ -70,8 +67,7 @@ export default {
       if (this.modalContentID === contentID) {
         this.closeSiteSettings()
       } else {
-        this.$router.push(`${this.$route.path}/settings`)
-        // this.setModalContent(contentID)
+        this.$router.push(`/editor/${this.$route.params.slug}/settings`)
       }
     },
 

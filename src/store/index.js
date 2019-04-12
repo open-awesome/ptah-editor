@@ -6,7 +6,6 @@ import Sidebar from './Sidebar'
 import Landing from './Landing'
 import User from './User'
 import vOutsideEvents from 'vue-outside-events'
-import BuilderModalContent from './BuilderModalContent'
 import PageTweaks from './PageTweaks/PageTweaks'
 import Vuebar from 'vuebar'
 
@@ -222,7 +221,6 @@ const mutations = {
 
 const modules = {
   Sidebar,
-  BuilderModalContent,
   PageTweaks,
   Landing,
   User

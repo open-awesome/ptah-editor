@@ -318,7 +318,6 @@ export default {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
-    ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
       let elOps = null
@@ -368,8 +367,6 @@ export default {
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
         .forEach(el => el.classList.remove('active'))
-
-      this.setContent(null)
 
       if (this.isVisible) return
       this.isVisible = true
