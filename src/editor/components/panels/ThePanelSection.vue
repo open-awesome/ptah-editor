@@ -67,7 +67,7 @@
             <p>Now emails from this form will be sent to the list:
               <b>{{currentLanding.settings.mailchimpList}}</b>
             </p>
-            <p>Change this in <b>Settings > Integrations > Mailchimp</b></p>
+            <p>Change this in <b><router-link :to="mailchimpLink">Integrations Settings</router-link></b></p>
           </div>
 
           <div v-if="!user.mailchimpIntegration || !currentLanding.settings.mailchimpList">
@@ -75,7 +75,7 @@
               <img src="https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png" alt="">
               <icon-base name="close" width="40" height="40"></icon-base>
             </div>
-            <p>Change this in <b>Settings > Integrations > Mailchimp</b></p>
+            <p>Change this in <b><router-link :to="mailchimpLink">Integrations Settings</router-link></b></p>
           </div>
         </div>
 
@@ -233,6 +233,10 @@ export default {
 
     isHeader () {
       return this.settingObjectSection.isHeader
+    },
+
+    mailchimpLink () {
+      return `/editor/${this.$route.params.slug}/settings/integrations/mailchimp`
     }
   },
 
