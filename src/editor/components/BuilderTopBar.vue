@@ -33,7 +33,6 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'clearSettingObject',
-      'setMenuItem',
       'clearSettingObjectLight',
       'toggleSidebar'
     ]),

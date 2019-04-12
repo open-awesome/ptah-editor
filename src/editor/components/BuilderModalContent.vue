@@ -121,9 +121,9 @@ export default {
     left: 50%
     top: 50%
     margin-left: -$size-step*29/2
-    margin-top: -$size-step*16/2
+    margin-top: -45vh
     width: $size-step*29
-    height: $size-step*16
+    height: 90vh
     z-index: 10
 
     background: $white

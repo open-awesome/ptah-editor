@@ -1,46 +1,76 @@
 <template>
 <div class="b-video">
-  <iframe
-    v-if="videoType === 'youtube'"
-    frameborder="0"
-    allowfullscreen="1"
-    allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
-    :src="youtubeVideoUrl">
-  </iframe>
+  <div class="b-video__padd">
+    <iframe
+      v-if="videoType === 'youtube'"
+      frameborder="0"
+      allowfullscreen="allowfullscreen"
+      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      :src="youtubeVideoUrl">
+    </iframe>
 
-  <video
-    v-if="videoType === 'custom' && vLoop"
-    ref="custom"
-    :src="vUrl"
-    loop="loop"
-    type="video/mp4"
-    controls="controls"
-    >
-  </video>
+    <video
+      v-if="videoType === 'custom' && vLoop"
+      ref="custom"
+      :src="vUrl"
+      loop="loop"
+      type="video/mp4"
+      controls="controls"
+      >
+    </video>
 
-  <video
-    v-if="videoType === 'custom' && !vLoop"
-    ref="custom"
-    :src="vUrl"
-    type="video/mp4"
-    controls="controls"
-    >
-  </video>
+    <video
+      v-if="videoType === 'custom' && !vLoop"
+      ref="custom"
+      :src="vUrl"
+      type="video/mp4"
+      controls="controls"
+      >
+    </video>
 
-  <div class="b-video__help" contenteditable="false">You can drag</div>
+    <div class="b-video__help" contenteditable="false">You can Drag and Resize</div>
+  </div>
+
+  <vue-draggable-resizable
+      class="b-video__resize"
+      class-name-active="b-video__resize_active"
+      class-name-handle="b-handle"
+      :w="width"
+      :h="height"
+      :min-width="32"
+      :max-width="maxWidth ? maxWidth : 640"
+      :min-height="32"
+      :max-height="640"
+      @resizing="onResize"
+      :draggable="false"
+      :z="999"
+      :lock-aspect-ratio="true"
+     />
+     <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
 </div>
 </template>
 
 <script>
 import { getYoutubeVideoIdFromUrl } from '@editor/util'
+import VueDraggableResizable from 'vue-draggable-resizable'
+// optionally import default styles
+import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
 export default {
   name: 'VideoElement',
+
   inject: ['$section'],
+
+  components: {
+    VueDraggableResizable
+  },
 
   props: {
     path: {
       type: String
+    },
+    maxWidth: {
+      type: Number
     }
   },
 
@@ -49,7 +79,9 @@ export default {
       vUrl: '',
       youtubeVideoUrl: '',
       videoType: '',
-      vLoop: false
+      vLoop: false,
+      width: 0,
+      height: 0
     }
   },
 
@@ -59,6 +91,9 @@ export default {
     },
     loop () {
       return this.$section.get(`$sectionData.${this.path}.loop`)
+    },
+    styles () {
+      return this.$section.get(`$sectionData.${this.path}.styles`)
     }
   },
 
@@ -81,11 +116,15 @@ export default {
         // Looping one video on itself requires playlist param with its ID passed
         const loopValue = this.vLoop ? `&loop=1&playlist=${youtubeVideoId}` : '&loop=0'
         this.videoType = 'youtube'
-        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0&controls=1${loopValue}&autoplay=0&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1&rel=0`
+        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0&controls=0${loopValue}&autoplay=0&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1&rel=0`
       } else {
         this.videoType = 'custom'
         this.youtubeVideoUrl = ''
       }
+    },
+    onResize: function (x, y, width, height) {
+      this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
+      this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
     }
   },
 
@@ -93,6 +132,9 @@ export default {
     this.vUrl = this.videoUrl
     this.vLoop = this.loop
     this.updateVideoData(this.vUrl)
+
+    this.width = parseInt(this.styles.width.split('px')[0]) || 320
+    this.height = parseInt(this.styles.height.split('px')[0]) || 180
   }
 }
 </script>
@@ -104,13 +146,12 @@ export default {
 .b-video
   $self: &
   width: $size-step*10
-  height: $size-step*5.785
-  max-width: calc(100% - #{$size-step}/2)
-  max-height: 100%
+  height: $size-step*5.625
+  max-width: 100% !important
+  max-height: 100% !important
   margin: $size-step/2 auto
 
   position: relative
-  overflow: hidden
   display: flex
   justify-content: center
   align-items: center
@@ -123,20 +164,28 @@ export default {
       margin: $size-step/4 auto
       width: 100% !important
       height: $size-step*5 !important
-  & > iframe
-    position: relative
-    width: 110%
-    height: 110%
-    margin: -5% 0 0 -5%
-  & > video
+  &__padd
+    margin: $size-step/8
     width: 100%
     height: 100%
+
     position: relative
+    overflow: hidden
+    & > iframe
+      width: 100%
+      height: 100%
+
+      position: relative
+    & > video
+      width: 100%
+      height: 100%
+
+      position: relative
   &.is-editable:hover
     opacity: 0.6
-    & iframe,
+    #{$self}__padd > iframe,
       display: none
-    & video
+    #{$self}__padd > video
       visibility: hidden
   &__help
     display: none
@@ -154,10 +203,118 @@ export default {
      & #{$self}__help
        display: block
        position: absolute
-       top: 45%
-       text-align: center
+       top: 0
        right: 0
+       bottom: 0
        left: 0
-       z-index: 1
 
+       display: flex
+       justify-content: center
+       align-items: center
+
+       z-index: 1
+       background-color: rgba(255, 255, 255, 0.8)
+  &__resize
+    border: none !important
+
+    top: -0.4rem !important
+    right: -0.4rem !important
+    bottom: -0.4rem !important
+    left: -0.4rem !important
+
+    border-radius: 0.5rem
+    width: auto !important
+    height: auto !important
+
+    display: none
+    &_active
+      border: 0.2rem dotted $white !important
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
+  &.is-editable
+    #{$self}__resize
+      display: block
+      .is-mobile &,
+      .is-tablet &
+        display: none
+  & span
+    display: block
+  &:hover
+    filter: brightness(120%)
+  &:active
+    filter: brightness(50%)
+  .is-mobile &,
+  .is-tablet &
+    margin: $size-step/2 auto !important
+  @media only screen and (max-width: 768px)
+    &
+      margin: $size-step/2 auto !important
+  @media only screen and (max-width: 768px) and (min-height: 700px)
+    &
+      margin: $size-step/2 auto !important
+/deep/
+  .b-handle
+    position: absolute !important
+
+    background: $dark-blue-krayola !important
+    border: 0.2rem solid $white !important
+    box-sizing: border-box !important
+    box-shadow: 0px 2px 2px rgba($black, 0.15) !important
+    border-radius: 1px !important
+
+    height: $size-step/4 !important
+    width: $size-step/4 !important
+
+    transition: all 300ms linear !important
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
+    &-tl
+      top: -$size-step/8
+      left: -$size-step/8
+      cursor: nw-resize
+    &-tm
+      top: -$size-step/8
+      left: 50%
+      margin-left: -$size-step/16
+      cursor: n-resize
+    &-tr
+      top: -$size-step/8
+      right: -$size-step/8
+      cursor: ne-resize
+    &-ml
+      top: 50%
+      margin-top: -$size-step/16
+      left: -$size-step/8
+      cursor: w-resize
+    &-mr
+      top: 50%
+      margin-top: -$size-step/16
+      right: -$size-step/8
+      cursor: e-resize
+    &-bl
+      bottom: -$size-step/8
+      left: -$size-step/8
+      cursor: sw-resize
+    &-bm
+      bottom: -$size-step/8
+      left: 50%
+      margin-left: -$size-step/16
+      cursor: s-resize
+    &-br
+      bottom: -$size-step/8
+      right: -$size-step/8
+      cursor: se-resize
+    &-tl:hover,
+    &-tr:hover,
+    &-bl:hover,
+    &-br:hover
+      transform: scale(1.4)
 </style>

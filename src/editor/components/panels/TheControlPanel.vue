@@ -1,5 +1,6 @@
 <template>
-  <div class="b-control-panel" @click.stop="">
+  <!-- @click.stop was here. this breaks down the color picker -->
+  <div class="b-control-panel">
     <button class="b-control-panel__close" @click="setControlPanel(false)">
       <icon-base color="#c4c4c4" width="10" height="10" name="close"/>
     </button>
@@ -30,6 +31,7 @@ import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelVideo from './ThePanelVideo'
+import ThePanelForm from './ThePanelForm'
 
 export default {
   name: 'TheControlPanel',
@@ -76,7 +78,8 @@ export default {
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
-    ThePanelVideo
+    ThePanelVideo,
+    ThePanelForm
   }
 }
 </script>

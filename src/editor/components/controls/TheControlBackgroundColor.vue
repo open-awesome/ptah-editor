@@ -36,6 +36,7 @@ export default {
     ]),
 
     styles () {
+      if (this.settingObjectType === 'form') return this.settingObjectOptions.formStyles
       return this.settingObjectOptions.styles
     },
 

@@ -364,7 +364,6 @@ const data = new Map([
       videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
       loop: false,
       styles: {
-        'background-color': '#fff',
         'width': '',
         'height': ''
       },
@@ -374,7 +373,7 @@ const data = new Map([
   [types.Form, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       resizable: false,
-      removable: true,
+      removable: false,
       form: true,
       isComplex: true,
       placeholder: 'Placeholder',
