@@ -1,7 +1,7 @@
 <template>
   <!-- @click.stop was here. this breaks down the color picker -->
   <div class="b-control-panel">
-    <button class="b-control-panel__close" @click="setControlPanel(false)">
+    <button class="b-control-panel__close" @click="close()">
       <icon-base color="#c4c4c4" width="10" height="10" name="close"/>
     </button>
     <component :is="panelName" :builder="builder"/>
@@ -55,7 +55,12 @@ export default {
   },
 
   methods: {
-    ...mapActions('Sidebar', ['setControlPanel'])
+    ...mapActions('Sidebar', ['setControlPanel', 'toggleGrouping']),
+
+    close () {
+      this.setControlPanel(false)
+      this.toggleGrouping(false)
+    }
   },
 
   components: {
