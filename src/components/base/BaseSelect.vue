@@ -17,6 +17,10 @@ export default {
     search: {
       type: Boolean,
       default: false
+    },
+    height: {
+      type: String,
+      default: '10'
     }
   },
   data: () => ({
@@ -67,13 +71,17 @@ export default {
       </div>
       <div class="b-pth-base-select__dropdown" v-if="showOptions">
         <BaseScrollContainer classes="b-pth-base-select__scrollbar"
-          :styling="{ width: '100%', height: '10rem' }" backgroundBar="#474747"
+          :styling="{ width: '100%', height: `${height}rem` }" backgroundBar="#474747"
           >
           <ul class="b-pth-base-select__options">
             <li v-if="search" class="b-pth-base-select__options-item">
               <input v-model="valueSearch" />
             </li>
-            <li class="b-pth-base-select__options-item" v-for="(option, index) in filteredOptions" :key="index" @click="selectOption(option)">
+            <li class="b-pth-base-select__options-item"
+                :class="{ 'selected': value.name === option.name }"
+                v-for="(option, index) in filteredOptions"
+                :key="index"
+                @click="selectOption(option)">
               {{ option.name }}
             </li>
           </ul>
@@ -126,7 +134,6 @@ export default {
       transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
   &__dropdown
     transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
-    max-height: 10rem
     border-top: none
     overflow: hidden
 
@@ -154,7 +161,7 @@ export default {
       transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
       &:last-child
         border-bottom: none
-      &:hover
+      &:hover, &.selected
         background-color: rgba(11, 153, 255, 0.25)
 
 .vue-scrollbar__scrollbar-vertical
