@@ -45,11 +45,11 @@ export default {
       })
 
       this.close()
-    }
-  },
+    },
 
-  close () {
-    this.$router.push(`/editor/${this.$route.params.slug}`)
+    close () {
+      this.$router.push(`/editor/${this.$route.params.slug}`)
+    }
   }
 }
 </script>
