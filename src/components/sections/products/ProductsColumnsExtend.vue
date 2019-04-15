@@ -2,6 +2,7 @@
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import section from '../../mixins/section.js'
+import { mapActions } from 'vuex'
 
 const C_CUSTOM_1 = [
   {
@@ -545,7 +546,7 @@ const C_CUSTOM_4D = [
 
 const C_CUSTOM_CONTAINER = {
   styles: {
-    'flex-direction': 'row',
+    'flex-direction': 'column',
     'align-items': 'center'
   }
 }
@@ -564,6 +565,20 @@ const C_CUSTOM_CONTAINER_D = {
   }
 }
 
+const C_CUSTOM = [
+  {
+    element: {
+      text: 'Chapter for products',
+      styles: {
+        'font-family': 'Lato',
+        'font-size': '4rem',
+        'color': '#fff'
+      }
+    },
+    key: 0
+  }
+]
+
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
@@ -571,54 +586,55 @@ const SCHEMA_CUSTOM = {
       'background-color': 'rgba(21,28,68,1)'
     }
   },
-  container1: _.merge({}, C_CUSTOM_CONTAINER),
-  container2: _.merge({}, C_CUSTOM_CONTAINER_M),
-  container3: _.merge({}, C_CUSTOM_CONTAINER_D),
-  container4: _.merge({}, C_CUSTOM_CONTAINER),
-  container5: _.merge({}, C_CUSTOM_CONTAINER_M),
-  container6: _.merge({}, C_CUSTOM_CONTAINER_D),
-  container7: _.merge({}, C_CUSTOM_CONTAINER),
-  container8: _.merge({}, C_CUSTOM_CONTAINER_M),
-  container9: _.merge({}, C_CUSTOM_CONTAINER_D),
-  container10: _.merge({}, C_CUSTOM_CONTAINER),
-  container11: _.merge({}, C_CUSTOM_CONTAINER_M),
-  container12: _.merge({}, C_CUSTOM_CONTAINER_D),
-  components1: _.merge({}, C_CUSTOM_1),
-  components2: _.merge({}, C_CUSTOM_1_M),
-  components3: _.merge({}, C_CUSTOM_1D),
-  components4: _.merge({}, C_CUSTOM_2),
-  components5: _.merge({}, C_CUSTOM_2_M),
-  components6: _.merge({}, C_CUSTOM_2D),
-  components7: _.merge({}, C_CUSTOM_3),
-  components8: _.merge({}, C_CUSTOM_3_M),
-  components9: _.merge({}, C_CUSTOM_3D),
-  components10: _.merge({}, C_CUSTOM_4),
-  components11: _.merge({}, C_CUSTOM_4_M),
-  components12: _.merge({}, C_CUSTOM_4D),
+  components: _.merge({}, C_CUSTOM),
+  containerStandart: _.merge({}, C_CUSTOM_CONTAINER),
+  containerStandartM: _.merge({}, C_CUSTOM_CONTAINER_M),
+  containerStandartD: _.merge({}, C_CUSTOM_CONTAINER_D),
+  containerFull: _.merge({}, C_CUSTOM_CONTAINER),
+  containerFullM: _.merge({}, C_CUSTOM_CONTAINER_M),
+  containerFullD: _.merge({}, C_CUSTOM_CONTAINER_D),
+  containerDeluxe: _.merge({}, C_CUSTOM_CONTAINER),
+  containerDeluxeM: _.merge({}, C_CUSTOM_CONTAINER_M),
+  containerDeluxeD: _.merge({}, C_CUSTOM_CONTAINER_D),
+  containerUltimate: _.merge({}, C_CUSTOM_CONTAINER),
+  containerUltimateM: _.merge({}, C_CUSTOM_CONTAINER_M),
+  containerUltimateD: _.merge({}, C_CUSTOM_CONTAINER_D),
+  componentsStandart: _.merge({}, C_CUSTOM_1),
+  componentsStandartM: _.merge({}, C_CUSTOM_1_M),
+  componentsStandartD: _.merge({}, C_CUSTOM_1D),
+  componentsFull: _.merge({}, C_CUSTOM_2),
+  componentsFullM: _.merge({}, C_CUSTOM_2_M),
+  componentsFullD: _.merge({}, C_CUSTOM_2D),
+  componentsDeluxe: _.merge({}, C_CUSTOM_3),
+  componentsDeluxeM: _.merge({}, C_CUSTOM_3_M),
+  componentsDeluxeD: _.merge({}, C_CUSTOM_3D),
+  componentsUltimate: _.merge({}, C_CUSTOM_4),
+  componentsUltimateM: _.merge({}, C_CUSTOM_4_M),
+  componentsUltimateD: _.merge({}, C_CUSTOM_4D),
   edited: true
 }
 
 const COMPONENTS = [
   {
-    name: 'Logo',
-    element: types.Logo,
+    name: 'Pic',
+    element: types.Image,
     type: 'image',
-    class: 'b-logo',
-    label: 'logo'
+    class: 'b-image',
+    label: 'Pic'
   },
   {
     name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    element: types.TextInherit,
+    type: 'inline',
     class: 'b-text',
     label: 'text'
   },
   {
     name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    element: types.TextInherit,
+    type: 'inline',
     class: 'b-cost',
-    label: 'text'
+    label: 'cost'
   },
   {
     name: 'Button',
@@ -631,16 +647,16 @@ const COMPONENTS = [
 
 const COMPONENTS_M = [
   {
-    name: 'Logo',
-    element: types.Logo,
+    name: 'Pic',
+    element: types.Image,
     type: 'image',
-    class: 'b-logo',
-    label: 'logo'
+    class: 'b-image',
+    label: 'Pic'
   },
   {
     name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    element: types.TextInherit,
+    type: 'inline',
     class: 'b-text',
     label: 'text'
   }
@@ -652,28 +668,38 @@ const COMPONENTS_D = [
     element: types.IconWithText,
     type: 'icon',
     class: 'b-text-icon',
-    label: 'icon with text'
+    label: 'icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
     class: 'b-text-icon',
-    label: 'icon with text'
+    label: 'icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
     class: 'b-text-icon',
-    label: 'icon with text'
+    label: 'icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
     class: 'b-text-icon',
-    label: 'icon with text'
+    label: 'icon'
+  }
+]
+
+const HEADER = [
+  {
+    name: 'TextElement',
+    element: types.Title,
+    type: 'text',
+    class: 'b-title',
+    label: 'title'
   }
 ]
 
@@ -691,33 +717,47 @@ export default {
 
   $schema: {
     mainStyle: types.ProductSection,
-    container1: types.StyleObject,
-    container2: types.StyleObject,
-    container3: types.StyleObject,
-    container4: types.StyleObject,
-    container5: types.StyleObject,
-    container6: types.StyleObject,
-    container7: types.StyleObject,
-    container8: types.StyleObject,
-    container9: types.StyleObject,
-    container10: types.StyleObject,
-    container11: types.StyleObject,
-    container12: types.StyleObject,
-    components1: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }]),
-    components2: _.merge([], COMPONENTS_M, [{ key: 4 }, { key: 5 }]),
-    components3: _.merge([], COMPONENTS_D, [{ key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
-    components4: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }]),
-    components5: _.merge([], COMPONENTS_M, [{ key: 14 }, { key: 15 }]),
-    components6: _.merge([], COMPONENTS_D, [{ key: 16 }, { key: 17 }, { key: 18 }, { key: 19 }]),
-    components7: _.merge([], COMPONENTS, [{ key: 20 }, { key: 21 }, { key: 22 }, { key: 23 }]),
-    components8: _.merge([], COMPONENTS_M, [{ key: 24 }, { key: 25 }]),
-    components9: _.merge([], COMPONENTS_D, [{ key: 26 }, { key: 27 }, { key: 28 }, { key: 29 }]),
-    components10: _.merge([], COMPONENTS, [{ key: 30 }, { key: 31 }, { key: 32 }, { key: 33 }]),
-    components11: _.merge([], COMPONENTS_M, [{ key: 34 }, { key: 35 }]),
-    components12: _.merge([], COMPONENTS_D, [{ key: 36 }, { key: 37 }, { key: 38 }, { key: 39 }])
+    container: types.StyleObject,
+    components: _.merge([], HEADER, { key: 0 }),
+    containerStandart: types.StyleObject,
+    containerStandartM: types.StyleObject,
+    containerStandartD: types.StyleObject,
+    containerFull: types.StyleObject,
+    containerFullM: types.StyleObject,
+    containerFullD: types.StyleObject,
+    containerDeluxe: types.StyleObject,
+    containerDeluxeM: types.StyleObject,
+    containerDeluxeD: types.StyleObject,
+    containerUltimate: types.StyleObject,
+    containerUltimateM: types.StyleObject,
+    containerUltimateD: types.StyleObject,
+    componentsStandart: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }]),
+    componentsStandartM: _.merge([], COMPONENTS_M, [{ key: 4 }, { key: 5 }]),
+    componentsStandartD: _.merge([], COMPONENTS_D, [{ key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
+    componentsFull: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }]),
+    componentsFullM: _.merge([], COMPONENTS_M, [{ key: 14 }, { key: 15 }]),
+    componentsFullD: _.merge([], COMPONENTS_D, [{ key: 16 }, { key: 17 }, { key: 18 }, { key: 19 }]),
+    componentsDeluxe: _.merge([], COMPONENTS, [{ key: 20 }, { key: 21 }, { key: 22 }, { key: 23 }]),
+    componentsDeluxeM: _.merge([], COMPONENTS_M, [{ key: 24 }, { key: 25 }]),
+    componentsDeluxeD: _.merge([], COMPONENTS_D, [{ key: 26 }, { key: 27 }, { key: 28 }, { key: 29 }]),
+    componentsUltimate: _.merge([], COMPONENTS, [{ key: 30 }, { key: 31 }, { key: 32 }, { key: 33 }]),
+    componentsUltimateM: _.merge([], COMPONENTS_M, [{ key: 34 }, { key: 35 }]),
+    componentsUltimateD: _.merge([], COMPONENTS_D, [{ key: 36 }, { key: 37 }, { key: 38 }, { key: 39 }])
   },
 
   methods: {
+    ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
+
+    async showSettings (panel) {
+      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
+
+      this.setSettingSection(this.$builder.sections[index])
+
+      await this.$nextTick()
+
+      this.setControlPanel(panel)
+    },
+
     selectProduct (key) {
       this.$sectionData.mainStyle.selectProduct.name = key
     }
@@ -744,367 +784,202 @@ export default {
     <slot name="video"/>
     <slot name="overlay"/>
     <div class="b-grid">
-      <div class="b-grid__row b-products-columns-extend__row">
-        <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__left hidden-m">
-          <!-- b-products-columns-extend__left -->
-          <div class="b-grid__row b-products-columns-extend__row">
-            <div class="b-grid__col-6 b-products-columns-extend__left-item"
-              v-if="$sectionData.mainStyle.products['Standart'].visible"
-              :data-index="0"
-              :product-extend-preview="'b-products-columns-extend__right-item_active'"
-              @click="selectProduct('Standart')"
-              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' }"
-              >
-              <sandbox
-                class="b-sandbox"
-                container-path="$sectionData.container2"
-                components-path="$sectionData.components2"
-                direction="column"
-                :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                >
-                <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
-                  <div
-                    v-for="(component, index) in $sectionData.components2"
-                    v-if="$sectionData.components2.length !== 0" :key="index">
-                    <component class="b-products-columns-component"
-                      v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: $sectionData.components2[index].label }"
-                      :is="component.name"
-                      :href="$sectionData.components2[index].element.link.href"
-                      :target="$sectionData.components2[index].element.link.target"
-                      :path="`components2[${index}].element`"
-                      :style="$sectionData.components2[index].element.styles"
-                      :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
-                      >
-                      <div v-html="$sectionData.components2[index].element.text"></div>
-                    </component>
-                  </div>
-                </draggable>
-              </sandbox>
-            </div>
-            <div class="b-grid__col-6 b-products-columns-extend__left-item"
-              v-if="$sectionData.mainStyle.products['Full'].visible"
-              :data-index="1"
-              :product-extend-preview="'b-products-columns-extend__right-item_active'"
-              @click="selectProduct('Full')"
-              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Full' }"
-              >
-              <sandbox
-                class="b-sandbox"
-                container-path="$sectionData.container5"
-                components-path="$sectionData.components5"
-                direction="column"
-                :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                >
-
-                <draggable v-model="$sectionData.components5" class="b-draggable-slot" :style="$sectionData.container5.styles">
-                  <div
-                       v-for="(component, index) in $sectionData.components5" v-if="$sectionData.components5.length !== 0" :key="index">
-                    <component class="b-products-columns-component"
-                      v-styler:for="{ el: $sectionData.components5[index].element, path: `$sectionData.components5[${index}].element`, type: $sectionData.components5[index].type, label: $sectionData.components5[index].label }"
-                      :is="component.name"
-                      :href="$sectionData.components5[index].element.link.href"
-                      :target="$sectionData.components5[index].element.link.target"
-                      :path="`components5[${index}].element`"
-                      :style="$sectionData.components5[index].element.styles"
-                      :class="[$sectionData.components5[index].element.classes, $sectionData.components5[index].class]"
-                      >
-                      <div v-html="$sectionData.components5[index].element.text"></div>
-                    </component>
-                  </div>
-                </draggable>
-              </sandbox>
-            </div>
-            <div class="b-grid__col-6 b-products-columns-extend__left-item"
-              v-if="$sectionData.mainStyle.products['Deluxe'].visible"
-              :data-index="2"
-              :product-extend-preview="'b-products-columns-extend__right-item_active'"
-              @click="selectProduct('Deluxe')"
-              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' }"
-              >
-              <sandbox
-                class="b-sandbox"
-                container-path="$sectionData.container8"
-                components-path="$sectionData.components8"
-                direction="column"
-                :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                >
-                <draggable v-model="$sectionData.components8" class="b-draggable-slot" :style="$sectionData.container8.styles">
-                  <div
-                       v-for="(component, index) in $sectionData.components8" v-if="$sectionData.components8.length !== 0" :key="index">
-                    <component class="b-products-columns-component"
-                      v-styler:for="{ el: $sectionData.components8[index].element, path: `$sectionData.components8[${index}].element`, type: $sectionData.components8[index].type, label: $sectionData.components8[index].label }"
-                      :is="component.name"
-                      :href="$sectionData.components8[index].element.link.href"
-                      :target="$sectionData.components8[index].element.link.target"
-                      :path="`components8[${index}].element`"
-                      :style="$sectionData.components8[index].element.styles"
-                      :class="[$sectionData.components8[index].element.classes, $sectionData.components8[index].class]"
-                      >
-                      <div v-html="$sectionData.components8[index].element.text"></div>
-                    </component>
-                  </div>
-                </draggable>
-              </sandbox>
-            </div>
-            <div class="b-grid__col-6 b-products-columns-extend__left-item"
-              v-if="$sectionData.mainStyle.products['Ultimate'].visible"
-              :data-index="3"
-              :product-extend-preview="'b-products-columns-extend__right-item_active'"
-              @click="selectProduct('Ultimate')"
-              :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate' }"
-              >
-              <sandbox
-                class="b-sandbox"
-                container-path="$sectionData.container11"
-                components-path="$sectionData.components11"
-                direction="column"
-                :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                >
-
-                <draggable v-model="$sectionData.components11" class="b-draggable-slot" :style="$sectionData.container11.styles">
-                  <div
-                       v-for="(component, index) in $sectionData.components11" v-if="$sectionData.components11.length !== 0" :key="index">
-                    <component class="b-products-columns-component"
-                      v-styler:for="{ el: $sectionData.components11[index].element, path: `$sectionData.components11[${index}].element`, type: $sectionData.components11[index].type, label: $sectionData.components11[index].label }"
-                      :is="component.name"
-                      :href="$sectionData.components11[index].element.link.href"
-                      :target="$sectionData.components11[index].element.link.target"
-                      :path="`components11[${index}].element`"
-                      :style="$sectionData.components11[index].element.styles"
-                      :class="[$sectionData.components11[index].element.classes, $sectionData.components11[index].class]"
-                      >
-                      <div v-html="$sectionData.components11[index].element.text"></div>
-                    </component>
-                  </div>
-                </draggable>
-              </sandbox>
-            </div>
-          </div><!--/.b-products-columns-extend__left-->
+      <div class="b-grid__row">
+        <div class="b-grid__col-12">
+          <sandbox
+            class="b-sandbox"
+            container-path="$sectionData.container"
+            components-path="$sectionData.components"
+            direction="column"
+            :style="$sectionData.container.styles"
+            >
+              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+                <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+                  <component
+                    v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
+                    :is="component.name"
+                    :href="$sectionData.components[index].element.link.href"
+                    :target="$sectionData.components[index].element.link.target"
+                    :path="`components[${index}].element`"
+                    :style="$sectionData.components[index].element.styles"
+                    :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                    >
+                    <div v-html="$sectionData.components[index].element.text"></div>
+                  </component>
+                </div>
+              </draggable>
+          </sandbox>
         </div>
-        <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__right">
-               <!-- b-products-columns-extend__right -->
-                <div class="b-grid__row">
-                  <div class="b-grid__col-12 b-products-columns-extend__right-item"
-                    v-show="$sectionData.mainStyle.selectProduct.name === 'Standart' && $sectionData.mainStyle.products['Standart'].visible"
-                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Standart' }"
-                    :product-extend-stage="0"
-                    >
-                    <sandbox
-                      class="b-sandbox"
-                      container-path="$sectionData.container1"
-                      components-path="$sectionData.components1"
-                      direction="column"
-                      :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                      >
-                      <draggable v-model="$sectionData.components1" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container1.styles">
-                        <div
-                          v-for="(component, index) in $sectionData.components1"
-                          v-if="$sectionData.components1.length !== 0" :key="index">
-                          <component class="b-products-columns-component"
-                            v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type, label: $sectionData.components1[index].label }"
-                            :is="component.name"
-                            :href="$sectionData.components1[index].element.link.href"
-                            :target="$sectionData.components1[index].element.link.target"
-                            :path="`components1[${index}].element`"
-                            :style="$sectionData.components1[index].element.styles"
-                            :class="[$sectionData.components1[index].element.classes, $sectionData.components1[index].class]"
-                            >
-                            <div v-html="$sectionData.components1[index].element.text"></div>
-                          </component>
-                        </div>
-                      </draggable>
-                    </sandbox>
-                    <sandbox
-                      class="b-sandbox"
-                      container-path="$sectionData.container3"
-                      components-path="$sectionData.components3"
-                      direction="column"
-                      align="flex-start"
-                      :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                      >
-                      <draggable v-model="$sectionData.components3" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3.styles">
-                        <div
-                          v-for="(component, index) in $sectionData.components3"
-                          v-if="$sectionData.components3.length !== 0" :key="index">
-                          <component class="b-products-columns-component"
-                            v-styler:for="{ el: $sectionData.components3[index].element, path: `$sectionData.components3[${index}].element`, type: $sectionData.components3[index].type, label: $sectionData.components3[index].label }"
-                            :is="component.name"
-                            :href="$sectionData.components3[index].element.link.href"
-                            :target="$sectionData.components3[index].element.link.target"
-                            :path="`components3[${index}].element`"
-                            :style="$sectionData.components3[index].element.styles"
-                            :class="[$sectionData.components3[index].element.classes, $sectionData.components3[index].class]"
-                            >
-                            <div v-html="$sectionData.components3[index].element.text"></div>
-                          </component>
-                        </div>
-                      </draggable>
-                    </sandbox>
-                  </div>
-                  <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-show="$sectionData.mainStyle.selectProduct.name === 'Full' && $sectionData.mainStyle.products['Full'].visible"
-                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Full' }"
-                    :product-extend-stage="1"
-                    >
-                    <sandbox
-                      class="b-sandbox"
-                      container-path="$sectionData.container4"
-                      components-path="$sectionData.components4"
-                      direction="column"
-                      :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                      >
-                      <draggable v-model="$sectionData.components4" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container4.styles">
-                        <div
-                             v-for="(component, index) in $sectionData.components4" v-if="$sectionData.components4.length !== 0" :key="index">
-                          <component class="b-products-columns-component"
-                            v-styler:for="{ el: $sectionData.components4[index].element, path: `$sectionData.components4[${index}].element`, type: $sectionData.components4[index].type, label: $sectionData.components4[index].label }"
-                            :is="component.name"
-                            :href="$sectionData.components4[index].element.link.href"
-                            :target="$sectionData.components4[index].element.link.target"
-                            :path="`components4[${index}].element`"
-                            :style="$sectionData.components4[index].element.styles"
-                            :class="[$sectionData.components4[index].element.classes, $sectionData.components4[index].class]"
-                            >
-                            <div v-html="$sectionData.components4[index].element.text"></div>
-                          </component>
-                        </div>
-                      </draggable>
-                    </sandbox>
-                    <sandbox
-                      class="b-sandbox"
-                      container-path="$sectionData.container6"
-                      components-path="$sectionData.components6"
-                      direction="column"
-                      :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                      >
+      </div>
+      <div class="b-products-columns-extend__padd">
 
-                      <draggable v-model="$sectionData.components6" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container6.styles">
-                        <div
-                             v-for="(component, index) in $sectionData.components6" v-if="$sectionData.components6.length !== 0" :key="index">
-                          <component class="b-products-columns-component"
-                            v-styler:for="{ el: $sectionData.components6[index].element, path: `$sectionData.components6[${index}].element`, type: $sectionData.components6[index].type, label: $sectionData.components6[index].label }"
-                            :is="component.name"
-                            :href="$sectionData.components6[index].element.link.href"
-                            :target="$sectionData.components6[index].element.link.target"
-                            :path="`components6[${index}].element`"
-                            :style="$sectionData.components6[index].element.styles"
-                            :class="[$sectionData.components6[index].element.classes, $sectionData.components6[index].class]"
-                            >
-                            <div v-html="$sectionData.components6[index].element.text"></div>
-                          </component>
-                        </div>
-                      </draggable>
-                    </sandbox>
-                  </div>
-                  <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-show="$sectionData.mainStyle.selectProduct.name === 'Deluxe' && $sectionData.mainStyle.products['Deluxe'].visible"
-                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Deluxe' }"
-                    :product-extend-stage="2"
+        <div class="b-products-columns-extend__padd-border">
+          <!-- Setting controls -->
+          <div class="b-products-columns-extend__controls">
+            <div>
+              <a href="#" class="b-products-columns-extend__control" @click.stop="showSettings('SectionProductsColumnsSettings')">
+                <icon-base name="cog" width="12" height="15" />
+              </a>
+            </div>
+            <div>
+            <a href="#" class="b-products-columns-extend__control" @click.stop="showSettings('SectionProductsColumnsStyle')">
+              <icon-base name="style" width="12" height="15" />
+              </a>
+            </div>
+          </div>
+
+          <div class="b-grid__row b-products-columns-extend__row">
+            <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__left hidden-m">
+              <!-- b-products-columns-extend__left -->
+              <div class="b-grid__row b-products-columns-extend__row">
+                <div class="b-grid__col-6 b-products-columns-extend__left-item"
+                  v-for="(product, key) in $sectionData.mainStyle.products"
+                  :key="key"
+                  v-if="$sectionData.mainStyle.products[key].visible"
+                  :data-index="key"
+                  product-extend-preview="b-products-columns-extend__right-item_active"
+                  @click="selectProduct(key)"
+                  :class="{ 'b-products-columns-extend__left-item_active': $sectionData.mainStyle.selectProduct.name === key }"
+                  >
+                  <sandbox
+                    class="b-sandbox"
+                    :container-path="`$sectionData.container${key}M`"
+                    :components-path="`$sectionData.components${key}M`"
+                    direction="column"
+                    :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                     >
-                    <sandbox
-                      class="b-sandbox"
-                      container-path="$sectionData.container7"
-                      components-path="$sectionData.components7"
-                      direction="column"
-                      :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                      >
-                      <draggable v-model="$sectionData.components7" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container7.styles">
-                        <div
-                             v-for="(component, index) in $sectionData.components7" v-if="$sectionData.components7.length !== 0" :key="index">
-                          <component class="b-products-columns-component"
-                            v-styler:for="{ el: $sectionData.components7[index].element, path: `$sectionData.components7[${index}].element`, type: $sectionData.components7[index].type, label: $sectionData.components7[index].label }"
-                            :is="component.name"
-                            :href="$sectionData.components7[index].element.link.href"
-                            :target="$sectionData.components7[index].element.link.target"
-                            :path="`components7[${index}].element`"
-                            :style="$sectionData.components7[index].element.styles"
-                            :class="[$sectionData.components7[index].element.classes, $sectionData.components7[index].class]"
+
+                    <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}M`].styles">
+                          <div
+                            v-for="(component, index) in $sectionData[`components${key}M`]"
+                            v-if="$sectionData[`components${key}M`].length !== 0"
+                            :key="index"
                             >
-                            <div v-html="$sectionData.components7[index].element.text"></div>
-                          </component>
-                        </div>
+                            <component class="b-products-colums-component"
+                              v-if="component.type === 'inline' || component.type === 'icon'"
+                              v-styler:for="{ el: $sectionData[`components${key}M`][index].element, path: `$sectionData.components${key}M[${index}].element`, type: $sectionData[`components${key}M`][index].type, label: $sectionData[`components${key}M`][index].label }"
+                              :is="component.name"
+                              :href="$sectionData[`components${key}M`][index].element.link.href"
+                              :target="$sectionData[`components${key}M`][index].element.link.target"
+                              :path="`components${key}M[${index}].element`"
+                              :style="$sectionData.mainStyle.textStyles[component.label]"
+                              :class="[$sectionData[`components${key}M`][index].element.classes, $sectionData[`components${key}M`][index].class]"
+                              >
+                              <div v-html="$sectionData[`components${key}M`][index].element.text"></div>
+                            </component>
+                            <component class="b-products-colums-component"
+                              v-else
+                              v-styler:for="{ el: $sectionData[`components${key}M`][index].element, path: `$sectionData.components${key}M[${index}].element`, type: $sectionData[`components${key}M`][index].type, label: $sectionData[`components${key}M`][index].label }"
+                              :is="component.name"
+                              :href="$sectionData[`components${key}M`][index].element.link.href"
+                              :target="$sectionData[`components${key}M`][index].element.link.target"
+                              :path="`components${key}M[${index}].element`"
+                              :style="$sectionData[`components${key}M`][index].element.styles"
+                              :class="[$sectionData[`components${key}M`][index].element.classes, $sectionData[`components${key}M`][index].class]"
+                              >
+                              <div v-html="$sectionData[`components${key}M`][index].element.text"></div>
+                            </component>
+                          </div>
                       </draggable>
-                    </sandbox>
-                    <sandbox
-                      class="b-sandbox"
-                      container-path="$sectionData.container9"
-                      components-path="$sectionData.components9"
-                      direction="column"
-                      :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                      >
-                      <draggable v-model="$sectionData.components9" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container9.styles">
-                        <div
-                             v-for="(component, index) in $sectionData.components9" v-if="$sectionData.components9.length !== 0" :key="index">
-                          <component class="b-products-columns-component"
-                            v-styler:for="{ el: $sectionData.components9[index].element, path: `$sectionData.components9[${index}].element`, type: $sectionData.components9[index].type, label: $sectionData.components9[index].label }"
-                            :is="component.name"
-                            :href="$sectionData.components9[index].element.link.href"
-                            :target="$sectionData.components9[index].element.link.target"
-                            :path="`components9[${index}].element`"
-                            :style="$sectionData.components9[index].element.styles"
-                            :class="[$sectionData.components9[index].element.classes, $sectionData.components9[index].class]"
+                  </sandbox>
+                </div>
+              </div><!--/.b-products-columns-extend__left-->
+            </div>
+            <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__right">
+                   <!-- b-products-columns-extend__right -->
+                    <div class="b-grid__row">
+                      <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
+                        v-for="(product, key) in $sectionData.mainStyle.products"
+                        :key="key"
+                        v-show="$sectionData.mainStyle.selectProduct.name === key && $sectionData.mainStyle.products[key].visible"
+                        :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === key }"
+                        :product-extend-stage="key"
+                        :data-index="key"
+                        >
+                        <sandbox
+                          class="b-sandbox"
+                          :container-path="`$sectionData.container${key}`"
+                          :components-path="`$sectionData.components${key}`"
+                          direction="column"
+                          :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
+                          >
+                          <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot b-draggable-slot_row" :style="$sectionData[`container${key}`].styles">
+                          <div
+                            v-for="(component, index) in $sectionData[`components${key}`]"
+                            v-if="$sectionData[`components${key}`].length !== 0"
+                            :key="index"
                             >
-                            <div v-html="$sectionData.components9[index].element.text"></div>
-                          </component>
-                        </div>
-                      </draggable>
-                    </sandbox>
-                  </div>
-                  <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                    v-show="$sectionData.mainStyle.selectProduct.name === 'Ultimate' && $sectionData.mainStyle.products['Ultimate'].visible"
-                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === 'Ultimate' }"
-                    :product-extend-stage="3"
-                    >
-                    <sandbox
-                      class="b-sandbox"
-                      container-path="$sectionData.container10"
-                      components-path="$sectionData.components10"
-                      direction="column"
-                      :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                      >
-                      <draggable v-model="$sectionData.components10" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container10.styles">
-                        <div
-                             v-for="(component, index) in $sectionData.components10" v-if="$sectionData.components10.length !== 0" :key="index">
-                          <component class="b-products-columns-component"
-                            v-styler:for="{ el: $sectionData.components10[index].element, path: `$sectionData.components10[${index}].element`, type: $sectionData.components10[index].type, label: $sectionData.components10[index].label }"
-                            :is="component.name"
-                            :href="$sectionData.components10[index].element.link.href"
-                            :target="$sectionData.components10[index].element.link.target"
-                            :path="`components10[${index}].element`"
-                            :style="$sectionData.components10[index].element.styles"
-                            :class="[$sectionData.components10[index].element.classes, $sectionData.components10[index].class]"
-                            >
-                            <div v-html="$sectionData.components10[index].element.text"></div>
-                          </component>
-                        </div>
-                      </draggable>
-                    </sandbox>
-                    <sandbox
-                      class="b-sandbox"
-                      container-path="$sectionData.container12"
-                      components-path="$sectionData.components12"
-                      direction="column"
-                      :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                      >
-                      <draggable v-model="$sectionData.components12" class=" b-draggable-slot b-draggable-slot_100" :style="$sectionData.container12.styles">
-                        <div
-                             v-for="(component, index) in $sectionData.components12" v-if="$sectionData.components12.length !== 0" :key="index">
-                          <component class="b-products-columns-component"
-                            v-styler:for="{ el: $sectionData.components12[index].element, path: `$sectionData.components12[${index}].element`, type: $sectionData.components12[index].type, label: $sectionData.components12[index].label }"
-                            :is="component.name"
-                            :href="$sectionData.components12[index].element.link.href"
-                            :target="$sectionData.components12[index].element.link.target"
-                            :path="`components12[${index}].element`"
-                            :style="$sectionData.components12[index].element.styles"
-                            :class="[$sectionData.components12[index].element.classes, $sectionData.components12[index].class]"
-                            >
-                            <div v-html="$sectionData.components12[index].element.text"></div>
-                          </component>
-                        </div>
-                      </draggable>
-                    </sandbox>
-                  </div>
-              </div><!--/.b-products-columns-extend__right-->
+                            <component class="b-products-colums-component"
+                              v-if="component.type === 'inline' || component.type === 'icon'"
+                              v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
+                              :is="component.name"
+                              :href="$sectionData[`components${key}`][index].element.link.href"
+                              :target="$sectionData[`components${key}`][index].element.link.target"
+                              :path="`components${key}[${index}].element`"
+                              :style="$sectionData.mainStyle.textStyles[component.label]"
+                              :class="[$sectionData[`components${key}`][index].element.classes, $sectionData[`components${key}`][index].class]"
+                              >
+                              <div v-html="$sectionData[`components${key}`][index].element.text"></div>
+                            </component>
+                            <component class="b-products-colums-component"
+                              v-else
+                              v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
+                              :is="component.name"
+                              :href="$sectionData[`components${key}`][index].element.link.href"
+                              :target="$sectionData[`components${key}`][index].element.link.target"
+                              :path="`components${key}[${index}].element`"
+                              :style="$sectionData[`components${key}`][index].element.styles"
+                              :class="[$sectionData[`components${key}`][index].element.classes, $sectionData[`components${key}`][index].class]"
+                              >
+                              <div v-html="$sectionData[`components${key}`][index].element.text"></div>
+                            </component>
+                          </div>
+                        </draggable>
+                      </sandbox>
+                      <sandbox
+                          class="b-sandbox"
+                          :container-path="`$sectionData.container${key}D`"
+                          :components-path="`$sectionData.components${key}D`"
+                          direction="column"
+                          :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
+                          >
+                          <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles">
+                            <div
+                              v-for="(component, index) in $sectionData[`components${key}D`]"
+                              v-if="$sectionData[`components${key}D`].length !== 0"
+                              :key="index"
+                              >
+                              <component class="b-products-colums-component"
+                                v-if="component.type === 'inline' || component.type === 'icon'"
+                                v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
+                                :is="component.name"
+                                :href="$sectionData[`components${key}D`][index].element.link.href"
+                                :target="$sectionData[`components${key}D`][index].element.link.target"
+                                :path="`components${key}D[${index}].element`"
+                                :style="$sectionData.mainStyle.textStyles[component.label]"
+                                :class="[$sectionData[`components${key}D`][index].element.classes, $sectionData[`components${key}D`][index].class]"
+                                >
+                                <div v-html="$sectionData[`components${key}D`][index].element.text"></div>
+                              </component>
+                              <component class="b-products-colums-component"
+                                v-else
+                                v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
+                                :is="component.name"
+                                :href="$sectionData[`components${key}D`][index].element.link.href"
+                                :target="$sectionData[`components${key}D`][index].element.link.target"
+                                :path="`components${key}D[${index}].element`"
+                                :style="$sectionData[`components${key}D`][index].element.styles"
+                                :class="[$sectionData[`components${key}D`][index].element.classes, $sectionData[`components${key}D`][index].class]"
+                                >
+                                <div v-html="$sectionData[`components${key}D`][index].element.text"></div>
+                              </component>
+                            </div>
+                          </draggable>
+                        </sandbox>
+                      </div>
+                  </div><!--/.b-products-columns-extend__right-->
+            </div>
+          </div>
         </div>
       </div>
     </div>
@@ -1112,14 +987,70 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/_variables.sass'
+@import '../../../assets/sass/_flex.sass'
+
 .b-products-columns-extend
+  $this: &
   &__row
     justify-content: center
     align-items: center
+    flex-wrap: wrap
   &__icon-with-text
     color: inherit
     font-family: inherit
+  &__padd
+    padding: $size-step/4
+
+    transition: border 0.25s
+    border: 0.2rem dotted transparent
+
+    position: relative
+    .is-mobile &
+      padding: 0
+    @media only screen and (max-width: 540px)
+      &
+        padding: 0
+    &-border
+      padding: $size-step/4
+      transition: border 0.25s
+      border: 0.2rem dotted transparent
+      .is-editable #{$this}__padd:hover &
+        border: 0.2rem dotted #fff
+
+  &__controls
+    position: absolute
+    top: -$size-step
+    left: $size-step/3
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    display: none
+    .is-editable #{$this}__padd:hover &
+      display: flex !important
+  &__control
+    width: 3.2rem
+    height: 3.2rem
+    display: flex
+    align-items: center
+    justify-content: center
+
+    border-radius: 50%
+    background: $white
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+    margin-right: .4rem
+    svg
+      fill: $dark-blue-krayola
+      margin-bottom: 0
+    &:hover, .active
+      background: $dark-blue-krayola
+      svg
+        fill: $white
+        margin-bottom: 0
   &__left
+    flex-wrap: wrap
     &-item
       &:hover,
       &_active
@@ -1128,7 +1059,8 @@ export default {
           cursor: pointer
   &__right
     position: relative
-    min-height: 60rem
+    min-height: $size-step*15
+
     display: flex
     text-align: center
     justify-content: center
@@ -1146,11 +1078,16 @@ export default {
     &-item
       position: absolute
       top: 0
+      right: 0
+      bottom: 0
       left: 0
+
       width: 100%
       height: 100%
       padding: 0
+
       visibility: hidden
+
       display: flex
       justify-content: center
       align-items: flex-start
@@ -1164,6 +1101,7 @@ export default {
         position: relative
         visibility: visible
         margin: 1.6rem 0
+        display: flex !important
       @media only screen and (max-width: 768px)
         &
           width: 100%
@@ -1171,5 +1109,11 @@ export default {
           position: relative
           visibility: visible
           margin: 1.6rem 0
+          display: flex !important
+
+.b-draggable-slot_row
+  flex-direction: row !important
+  & > div
+    margin: $size-step/8
 
 </style>

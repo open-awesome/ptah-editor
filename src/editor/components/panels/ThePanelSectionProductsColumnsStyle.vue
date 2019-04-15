@@ -29,11 +29,12 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-section-settings
+  height: 100%
+  width: 100%
+
   display: flex
   flex-direction: column
-  align-items: stretch
-  padding-bottom: 4.5rem
-  width: 100%
+  justify-content: flex-start
   &__title
     min-width: 28rem
     margin: 0 0 2.8rem 0

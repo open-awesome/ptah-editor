@@ -697,7 +697,7 @@ const HEADER = [
   {
     name: 'TextElement',
     element: types.Title,
-    type: 'inline',
+    type: 'text',
     class: 'b-title',
     label: 'title'
   }
