@@ -170,7 +170,7 @@ export default {
   <div class="b-typography-controls">
     <div class="b-typography-controls__control">
       <div class="b-typography-controls__control-col b-typography-controls__control-col-font-name">
-        <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont"></base-select>
+        <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont" height="14"></base-select>
       </div>
       <div class="b-typography-controls__control-col">
         <base-select label="Size" :options="sizes" v-model="size" @input="changeSize" height="23"></base-select>
