@@ -63,9 +63,9 @@ export default {
 </script>
 
 <template>
-  <div class="l-pth-base-dropdown-menu" v-click-outside="closeMenu">
+  <div class="l-pth-base-dropdown-menu" v-click-outside="closeMenu" @mouseover="menuMouseOver" @mouseleave="menuMouseOut">
     <div class="b-pth-base-dropdown-menu">
-      <div class="b-pth-base-dropdown-menu__container" @click="clickMenu" @mouseover="menuMouseOver" @mouseleave="menuMouseOut">
+      <div class="b-pth-base-dropdown-menu__container" @click="clickMenu">
         <slot></slot>
       </div>
       <div class="b-pth-base-dropdown-menu__dropdown b-pth-base-dropdown-menu__dropdown_click" :class="menuListClasses" v-if="showOptions && onClick">
