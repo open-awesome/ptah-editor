@@ -103,7 +103,7 @@ export default {
     </div>
     <ul class="b-seciton-list">
       <template v-for="(section, index) in builder.sections">
-        <li class="b-seciton-list__item" :key="section.id" v-if="index > sIndex">
+        <li class="b-seciton-list__item" :key="section.id" v-if="index > sIndex && section.group !== 'header'">
           <span class="b-seciton-list__name">{{section.name}}</span>
           <label class="b-seciton-list__control">
             <input type="checkbox" :value="section.id" v-model="absorbed">

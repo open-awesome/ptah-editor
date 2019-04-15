@@ -105,7 +105,8 @@ const defaultComponents = [
         'height': '50px',
         'border-radius': '2px',
         'font-size': '18px',
-        'margin': '8px 16px'
+        'margin': '8px 16px',
+        'width': 'auto'
       }
     },
     key: 1
@@ -124,7 +125,8 @@ const defaultComponents = [
         'height': '50px',
         'border-radius': '2px',
         'font-size': '18px',
-        'margin': '8px 16px'
+        'margin': '8px 16px',
+        'width': 'auto'
       }
     },
     key: 2
@@ -143,7 +145,8 @@ const defaultComponents = [
         'height': '50px',
         'border-radius': '2px',
         'font-size': '18px',
-        'margin': '8px 16px'
+        'margin': '8px 16px',
+        'width': 'auto'
       }
     },
     key: 3

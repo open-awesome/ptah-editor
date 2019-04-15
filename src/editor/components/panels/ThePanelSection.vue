@@ -19,7 +19,7 @@
           />
         </div>
 
-        <!-- Images Multiple Upload -->
+        <!-- Carousel Images Multiple Upload -->
         <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
           <base-uploader
             :value="galleryImages"
@@ -112,8 +112,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import ControlText from './../controls/TheControlText'
-import ControlTypography from './../controls/TheControlTypography'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
@@ -122,9 +120,7 @@ export default {
   components: {
     IconBase,
     BuilderSettingsBarGroup,
-    BaseUploader,
-    ControlText,
-    ControlTypography
+    BaseUploader
   },
   name: 'BuilderSettingsBarSection',
 
@@ -155,19 +151,6 @@ export default {
     ...mapState('User', ['user']),
     ...mapState(['currentLanding']),
 
-    bgAttachmentCheckbox: {
-      set (value) {
-        this.bgAttachment = value ? 'fixed' : 'scroll'
-      },
-      get () {
-        return this.bgAttachment === 'fixed'
-      }
-    },
-
-    backgroundType () {
-      return this.settingObjectOptions.backgroundType
-    },
-
     sectionId () {
       return this.settingObjectSection.id
     },
@@ -186,30 +169,6 @@ export default {
     if (this.settingObjectOptions.classes !== undefined && this.settingObjectOptions.classes.indexOf('full-height') !== -1) {
       this.fullScreen = true
     }
-  },
-
-  watch: {
-    'settingObjectOptions.styles': {
-      immediate: true,
-      handler (value) {
-        if (value) {
-          let image = (!!value['background-image'] && typeof value['background-image'] === 'string')
-            ? value['background-image'] : ''
-          let bggradient = image.match(/linear-gradient(\(.*\))/g)
-          if (bggradient) {
-            this.backgroundPickers = bggradient[0]
-              .replace(/^linear-gradient[(]/, '')
-              .replace(/[)]$/, '')
-              .split(', ')
-          } else {
-            this.backgroundPickers = [value['background-color']]
-          }
-        }
-      }
-    }
-  },
-
-  beforeDestroy () {
   },
 
   methods: {
@@ -265,6 +224,7 @@ export default {
         })
       )
     },
+
     isMasterSection () {
       return !!_.find(this.sectionsGroups, o => o.main.id === this.sectionId)
     },

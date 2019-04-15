@@ -328,20 +328,38 @@ const data = new Map([
       isComplex: true
     })
   )],
-  [types.GalleryItem, () => (_.merge({}, DEFAULT_OPTIONS, {
-    removable: true,
-    resizable: false,
-    alt: 'Default image',
-    url: 'https://gn548.cdn.gamenet.ru/TY0Xv2riHu/772oj/o_OnTml.png',
+  [types.Gallery, () => (_.merge({}, DEFAULT_OPTIONS, {
+    hasGallery: true,
     background: true,
+    count: 3,
     styles: {
-      'background-image': 'url(https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png)',
+      'background-image': '',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
-      'background-size': 'contain',
-      'background-color': '#fff',
-      'width': '',
-      'height': ''
+      'background-size': 'cover',
+      'background-color':''
+    },
+    overlay: {
+      color: 'rgba(0,0,0,1)',
+      opacity: '0'
+    },
+    textStyles: {
+      chapter: {
+        'font-family': 'Lato',
+        'font-size': '3.2rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'text-decoration': 'none',
+        'color': 'rgba(0, 0, 0, 1)'
+      },
+      text: {
+        'font-family': 'Lato',
+        'font-size': '1.4rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'text-decoration': 'none',
+        'color': 'rgba(0, 0, 0, 1)'
+      }
     }
   }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,

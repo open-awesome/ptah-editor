@@ -6,49 +6,138 @@
     >
       <slot name="video"/>
       <slot name="overlay"/>
-      <div class="b-gallery-one-list flex__item flex flex_center">
-        <div class="b-gallery-one-list__tiles b-gallery-one-list__tiles_mobile">
-          <div class="b-preview"
-              v-for="(item, index) in $sectionData.images"
-              :key="index"
+
+      <div class="b-grid">
+      <div class="b-grid__row">
+          <div class="b-grid__col-12">
+            <sandbox
+              class="b-sandbox"
+              container-path="$sectionData.container"
+              components-path="$sectionData.components"
+              direction="column"
+              :style="$sectionData.container.styles"
             >
-            <div class="b-preview__image"
-              v-styler:for="{ el: $sectionData.images[index].preview, path:`$sectionData.images[${index}].preview`, type: 'image' }"
-              :style="$sectionData.images[index].preview.styles"
-              :data-index="index"
-              :gallery-one-preview="'loader__content_show'"
-              >
-            </div>
-            <div class="b-preview__name"
-              v-styler:for="{ el: $sectionData.images[index].label, path:`$sectionData.images[${index}].label`, type: 'inline' }"
-              v-html="$sectionData.images[index].label.text"
-              :style="$sectionData.images[index].label.styles"
-              >
+              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+                <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+                  <component
+                     v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
+                     :is="component.name"
+                     :href="$sectionData.components[index].element.link.href"
+                     :target="$sectionData.components[index].element.link.target"
+                     :path="`components0[${index}].element`"
+                     :style="$sectionData.components[index].element.styles"
+                     :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  >
+                    <div v-html="$sectionData.components[index].element.text"></div>
+                  </component>
+                </div>
+              </draggable>
+            </sandbox>
+        </div>
+      </div>
+      <div class="b-grid__row">
+        <div class="b-grid__col-12">
+          <div class="b-gallery-one">
+            <div class="b-gallery-one__padd">
+              <div class="b-gallery-one__padd-border">
+                <!-- Setting controls -->
+                  <div class="b-gallery-one__controls">
+                    <div>
+                      <a href="#" class="b-gallery-one__control" @click.stop="showSettings('SectionGallerySettings')">
+                        <icon-base name="cog" width="12" height="15" />
+                      </a>
+                    </div>
+                    <div>
+                      <a href="#" class="b-gallery-one__control" @click.stop="showSettings('SectionGalleryStyle')">
+                        <icon-base name="style" width="12" height="15" />
+                      </a>
+                    </div>
+                  </div>
+                <!-- b-gallery-one-list -->
+                  <div class="b-gallery-one-list flex__item flex flex_center">
+                    <div class="b-gallery-one-list__tiles b-gallery-one-list__tiles_mobile">
+                      <div class="b-preview"
+                          v-for="(components, key) in $sectionData"
+                          :key="key"
+                          v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
+                        >
+                          <div class="b-preview__image"
+                            v-styler:for="{ el: $sectionData[key][0].element, path: `$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
+                            :style="$sectionData[key][0].element.styles"
+                            :path="`${key}[0].element`"
+                            :data-index="key.split('components')[1]"
+                            :gallery-one-preview="'loader__content_show'"
+                            >
+                            <span class="b-preview__count">
+                              {{ parseFloat(key.split('components')[1]) + 1 }}
+                            </span>
+                          </div>
+                          <div class="b-preview__name"
+                            v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
+                            :path="`${key}[1].element`"
+                            v-html="$sectionData[key][1].element.text"
+                            :style="{
+                              'color' : $sectionData.mainStyle.textStyles.text['color'],
+                              'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                              'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                              'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                              'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                              'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                            }"
+                            >
+                          </div>
+                      </div>
+                    </div>
+                    <div class="b-gallery-one-list__detail flex__item b-gallery-one-stage loader">
+                      <div class="loader__content loader__content_mobile"
+                         v-for="(components, key) in $sectionData"
+                         :key="key"
+                         v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
+                         :gallery-one-stage="key.split('components')[1]"
+                        >
+                        <div class="b-gallery-one-stage__name"
+                           v-html="$sectionData[key][2].element.text"
+                           v-styler:for="{ el: $sectionData[key][2].element, path:`$sectionData.${key}[2].element`, type: $sectionData[key][2].type, label: $sectionData[key][2].label }"
+                           :style="{
+                             'color' : $sectionData.mainStyle.textStyles.chapter['color'],
+                             'font-family' : $sectionData.mainStyle.textStyles.chapter['font-family'],
+                             'font-size' : $sectionData.mainStyle.textStyles.chapter['font-size'],
+                             'font-weight' : $sectionData.mainStyle.textStyles.chapter['font-weight'],
+                             'font-style' : $sectionData.mainStyle.textStyles.chapter['font-style'],
+                             'text-decoration' : $sectionData.mainStyle.textStyles.chapter['text-decoration'],
+                         }"
+                          >
+                        </div>
+                        <div class="b-gallery-one-stage__img"
+                          :style="$sectionData[key][3].element.styles"
+                          v-styler:for="{ el: $sectionData[key][3].element, path:`$sectionData.${key}[3].element`, type: $sectionData[key][3].type, label: $sectionData[key][3].label }"
+                          >
+                          <span class="b-gallery-one-stage__count">
+                            {{ parseFloat(key.split('components')[1]) + 1 }}
+                          </span>
+                        </div>
+                        <div class="b-gallery-one-stage__bio"
+                         v-styler:for="{ el: $sectionData[key][4].element, path: `$sectionData.${key}[4].element`, type: $sectionData[key][4].type, label: $sectionData[key][4].label }"
+                         v-html="$sectionData[key][4].element.text"
+                         :style="{
+                           'color' : $sectionData.mainStyle.textStyles.text['color'],
+                           'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                           'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                           'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                           'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                           'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                         }"
+                         >
+                        </div>
+                      </div>
+                    </div>
+                </div><!--/.b-gallery-one-list -->
+              </div>
             </div>
           </div>
-        </div>
-        <div class="b-gallery-one-list__detail flex__item b-gallery-one-stage loader">
-          <div class="loader__content loader__content_mobile" :gallery-one-stage="index" v-for="(item, index) in $sectionData.images" :key="index">
-            <h2 class="b-gallery-one-stage__name"
-               v-html="$sectionData.images[index].title.text"
-               :style="$sectionData.images[index].title.styles"
-               v-styler:for="{ el: $sectionData.images[index].title, path:`$sectionData.images[${index}].title`, type: 'inline' }">
-            </h2>
-            <!-- image -->
-            <div class="b-gallery-one-stage__img"
-              :style="$sectionData.images[index].img.styles"
-              v-styler:for="{ el: $sectionData.images[index].img, path:`$sectionData.images[${index}].img`, type: 'image' }"
-              >
-            </div>
-            <!--/image -->
-            <p class="b-gallery-one-stage__bio"
-             v-styler:for="{el: $sectionData.images[index].text, path: `$sectionData.images[${index}].text`, type: 'inline' }"
-             :style="$sectionData.images[index].text.styles"
-             v-html="$sectionData.images[index].text.text">
-            </p>
-          </div>
-        </div>
-    </div>
+        </div><!--/.b-grid__col-->
+      </div><!--/.b-grid__row-->
+    </div><!--/.b-grid-->
   </section>
 
 </template>
@@ -58,14 +147,123 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import { galleryPreviewClick } from '@cscripts/gallery1'
 import section from '../../mixins/section.js'
+import { mapActions } from 'vuex'
 
-const GALLERY_ITEM = {
-  preview: types.Image,
-  label: types.TextInherit,
-  title: types.TextInherit,
-  img: types.Image,
-  text: types.TextInherit
-}
+const GALLERY_ITEM = [
+  {
+    name: 'Pic',
+    element: types.Image,
+    type: 'image',
+    class: 'b-preview',
+    label: 'preview'
+  },
+  {
+    name: 'Label',
+    element: types.TextInherit,
+    type: 'inline',
+    class: 'b-label',
+    label: 'label'
+  },
+  {
+    name: 'Chapter',
+    element: types.TextInherit,
+    type: 'inline',
+    class: 'b-chapter',
+    label: 'chapter'
+  },
+  {
+    name: 'Pic',
+    element: types.Image,
+    type: 'image',
+    class: 'b-image',
+    label: 'image'
+  },
+  {
+    name: 'Text',
+    element: types.TextInherit,
+    type: 'inline',
+    class: 'b-text',
+    label: 'description'
+  }
+]
+
+const GALLERY_ITEM_CUSTOM = [
+  {
+    element: {
+      removable: false,
+      styles: {
+        'background-image': 'url(https://gn854.cdn.stg.gamenet.ru/0/836nk/o_e19nv.png)',
+        'background-size': 'cover',
+        'width': '128px',
+        'height': '160px'
+      }
+    }
+  },
+  {
+    element: {
+      removable: false
+    }
+  },
+  {
+    element: {
+      removable: false,
+      text: 'Chapter for image',
+      styles: {
+        'font-family': 'Montserrat',
+        'font-size': '3.2rem',
+        'color': '#000',
+        'font-weight': 'bold'
+      }
+    }
+  },
+  {
+    element: {
+      removable: false,
+      styles: {
+        'background-image': 'url(https://gn854.cdn.stg.gamenet.ru/0/836nk/o_e19nv.png)',
+        'background-size': 'cover',
+        'width': '256px',
+        'height': '320px'
+      }
+    }
+  },
+  {
+    element: {
+      removable: false,
+      text: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
+      styles: {
+        'font-family': 'Montserrat',
+        'font-size': '1.6rem',
+        'color': '#000',
+        'font-weight': 'bold'
+      }
+    }
+  }
+]
+
+const HEADER = [
+  {
+    name: 'TextElement',
+    element: types.Title,
+    type: 'text',
+    class: 'b-title',
+    label: 'title'
+  }
+]
+
+const C_CUSTOM = [
+  {
+    element: {
+      text: 'Your beautiful header should be here!',
+      styles: {
+        'font-family': 'Montserrat',
+        'font-size': '4rem',
+        'color': '#000'
+      }
+    },
+    key: 0
+  }
+]
 
 const GROUP_NAME = 'Galleries'
 const NAME = 'Gallery1'
@@ -73,12 +271,19 @@ const NAME = 'Gallery1'
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': 'rgba(21,28,68,1)'
-    },
-    classes: [
-      'full-height'
-    ]
+      'background-color': '#8CD2B5'
+    }
   },
+  components: _.merge([], C_CUSTOM),
+  components0: _.merge([], GALLERY_ITEM_CUSTOM),
+  components1: _.merge([], GALLERY_ITEM_CUSTOM),
+  components2: _.merge([], GALLERY_ITEM_CUSTOM),
+  components3: _.merge([], GALLERY_ITEM_CUSTOM),
+  components4: _.merge([], GALLERY_ITEM_CUSTOM),
+  components5: _.merge([], GALLERY_ITEM_CUSTOM),
+  components6: _.merge([], GALLERY_ITEM_CUSTOM),
+  components7: _.merge([], GALLERY_ITEM_CUSTOM),
+  components8: _.merge([], GALLERY_ITEM_CUSTOM),
   edited: true
 }
 
@@ -92,29 +297,45 @@ export default {
   cover: '/img/covers/gallery1.png',
 
   $schema: {
-    mainStyle: types.StyleObject,
-    images: [
-      _.merge({}, GALLERY_ITEM),
-      _.merge({}, GALLERY_ITEM),
-      _.merge({}, GALLERY_ITEM)
-    ],
-    defObj: {
-      images: _.merge({}, GALLERY_ITEM)
-    }
+    mainStyle: types.Gallery,
+    container: types.StyleObject,
+    components: _.merge([], HEADER, [{ key: 0 }]),
+    components0: _.merge([], GALLERY_ITEM, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }, { key: 14 }]),
+    components1: _.merge([], GALLERY_ITEM, [{ key: 20 }, { key: 21 }, { key: 22 }, { key: 23 }, { key: 24 }]),
+    components2: _.merge([], GALLERY_ITEM, [{ key: 30 }, { key: 31 }, { key: 32 }, { key: 33 }, { key: 34 }]),
+    components3: _.merge([], GALLERY_ITEM, [{ key: 40 }, { key: 41 }, { key: 42 }, { key: 43 }, { key: 44 }]),
+    components4: _.merge([], GALLERY_ITEM, [{ key: 50 }, { key: 51 }, { key: 52 }, { key: 53 }, { key: 54 }]),
+    components5: _.merge([], GALLERY_ITEM, [{ key: 60 }, { key: 61 }, { key: 62 }, { key: 63 }, { key: 64 }]),
+    components6: _.merge([], GALLERY_ITEM, [{ key: 70 }, { key: 71 }, { key: 72 }, { key: 73 }, { key: 74 }]),
+    components7: _.merge([], GALLERY_ITEM, [{ key: 80 }, { key: 81 }, { key: 82 }, { key: 83 }, { key: 84 }]),
+    components8: _.merge([], GALLERY_ITEM, [{ key: 90 }, { key: 91 }, { key: 92 }, { key: 93 }, { key: 94 }]),
+    index: 0
   },
 
   watch: {
-    $sectionData: {
-      handler: function () {
-        setTimeout(this.bindingClickPreview(), 2000)
+    '$sectionData.mainStyle.count': {
+      handler: function (val, old) {
+        setTimeout(val > old ? this.bindingClickPreview(old) : this.bindingClickPreview(val - 1), 250)
       },
       deep: true
     }
   },
 
   methods: {
+    ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
+
     bindingClickPreview (index) {
       galleryPreviewClick(index)
+    },
+
+    async showSettings (panel) {
+      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
+
+      this.setSettingSection(this.$builder.sections[index])
+
+      await this.$nextTick()
+
+      this.setControlPanel(panel)
     }
   },
 
@@ -132,58 +353,134 @@ export default {
   },
 
   updated: function () {
-    this.bindingClickPreview(this.index)
+    this.bindingClickPreview(this.$sectionData.index)
   }
 }
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
 
 .b-gallery-one
-  color: rgba(255, 255, 255, .9)
+  $this: &
+  &__padd
+    padding: $size-step/4
+
+    transition: border 0.25s
+    border: 0.2rem dotted transparent
+
+    position: relative
+    .is-mobile &
+      padding: 0
+    @media only screen and (max-width: 540px)
+      &
+        padding: 0
+    &-border
+      padding: $size-step/4 $size-step/4 $size-step/2
+      transition: border 0.25s
+      border: 0.2rem dotted transparent
+      .is-editable #{$this}__padd:hover &
+        border: 0.2rem dotted #fff
+
+  &__controls
+    position: absolute
+    top: -$size-step
+    left: $size-step/3
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    display: none
+    .is-editable #{$this}__padd:hover &
+      display: flex !important
+  &__control
+    width: 3.2rem
+    height: 3.2rem
+    display: flex
+    align-items: center
+    justify-content: center
+
+    border-radius: 50%
+    background: $white
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+    margin-right: .4rem
+    svg
+      fill: $dark-blue-krayola
+      margin-bottom: 0
+    &:hover, .active
+      background: $dark-blue-krayola
+      svg
+        fill: $white
+        margin-bottom: 0
 
 .b-preview
-  cursor: pointer
   text-align: center
   display: inline-block
   vertical-align: top
-  width: 12rem
-  margin: 0 1rem
-  border: 0.2rem solid transparent
-  position: relative
 
-.b-preview__image
-  width: 12rem !important
-  height: 18rem
-  position: relative
-  z-index: 0
-  background-color: white !important
+  width: $size-step*4
+  min-height: $size-step*5
 
-.b-preview__name
-  border-radius: 0rem
-  padding: 1rem 0.5rem
-  transition: all 200ms
-  width: 100%
-  height: auto
-  min-height: 2rem
-  position: relative
-  z-index: 10
-  overflow: hidden
+  margin: $size-step/3
+  padding: 0
+  border: 0.2rem dotted transparent
 
-.b-preview_active
-  transform: scale(1.1)
-  box-shadow: 0 0 2rem 0 #2f98ba
-  border: 0.2rem solid #18d88b
+  position: relative
+  cursor: pointer
+  &__count
+    position: absolute
+    top: $size-step/3
+    left: $size-step/3
+
+    width: $size-step/2
+    height: $size-step/2
+
+    background-color: rgba($white, 1)
+    border-radius: 100%
+    color: $dark-grey
+    font-size: 1.2rem
+
+    display: none
+  .is-editable &__count
+    display: flex
+    justify-content: center
+    align-items: center
+
+  &__image
+    width: 100%
+    height: 100%
+
+    position: relative
+    z-index: 0
+    opacity: 0.6
+
+  &__name
+    border-radius: 0rem
+    padding: 1rem 0.5rem
+    transition: all 200ms
+    width: 100%
+    height: auto
+    min-height: 2rem
+    position: relative
+    z-index: 10
+    overflow: hidden
+
+  &_active
+    transform: scale(1.1)
+    box-shadow: 0 0 2rem 0 rgba($black, 0.6)
+    opacity: 1
 
 .b-gallery-one-list
- width: 95%
+ width: 100%
  max-width: 98rem
  margin: 0 auto
+
 .b-gallery-one-list__tiles
-  margin: 1rem
   text-align: center
-  width: 50%
+  width: 60%
   opacity: 1
   height: auto
   &_mobile
@@ -199,12 +496,11 @@ export default {
         height: 0
 
 .b-gallery-one-list__tiles
-  margin: 1rem
   text-align: center
 
 .b-gallery-one-list__detail
   text-align: center
-  width: 50%
+  width: 40%
   height: 50rem
   .is-tablet &,
   .is-mobile &
@@ -238,34 +534,55 @@ export default {
       flex: 0 0 auto
 
 .loader__content
-  -webkit-transition: all 200ms
-  transition: all 200ms
+  transition: opacity 200ms
   position: absolute
   top: 0
   left: 0
   width: 100%
-  height: 100%
   padding: 0
   opacity: 0
   visibility: hidden
+
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-direction: column
   &_show
    opacity: 1
    visibility: visible
   &_mobile
-      .is-tablet &,
-      .is-mobile &
+    .is-tablet &,
+    .is-mobile &
+      opacity: 1
+      visibility: visible
+      margin: $size-step 0
+      position: relative
+    @media only screen and (max-width: 768px)
+      &
         opacity: 1
         visibility: visible
-        margin: 10rem 0
+        margin: $size-step 0
         position: relative
-      @media only screen and (max-width: 768px)
-        &
-          opacity: 1
-          visibility: visible
-          margin: 10rem 0
-          position: relative
 .b-gallery-one-stage
   position: relative
+  &__count
+    position: absolute
+    top: $size-step/3
+    left: $size-step/3
+
+    width: $size-step/2
+    height: $size-step/2
+
+    background-color: rgba($white, 1)
+    border-radius: 100%
+    color: $dark-grey
+    font-size: 1.2rem
+
+    display: none
+  .is-editable &__count
+    display: flex
+    justify-content: center
+    align-items: center
   .is-tablet &,
   .is-mobile &
     .b-gallery-one-stage
@@ -274,20 +591,17 @@ export default {
     &
       margin-bottom: 1rem
 
-.b-gallery-one-stage__name
-  font-weight: 400
-
+.b-gallery-one-stage__name,
 .b-gallery-one-stage__bio
-  font-size: 1.4rem
-  line-height: 1.1
   max-width: 50rem
-  margin: 1rem auto
+  margin: $size-step/2 auto
 
 .b-gallery-one-stage__img
+  position: relative
+
   width: 40rem
   height: 40rem
   margin: 0 auto
-  background-color: white !important
   .is-tablet &,
   .is-mobile &
     width: 30rem
@@ -297,75 +611,4 @@ export default {
       width: 30rem
       height: 30rem
 
-// button layout2 styles
-.l-layout2-btn
-  width: 100%
-  min-height: 10rem
-  position: relative
-.b-layout2-btn
-  background-color: #fff
-  color: #333
-  font-size: 3rem
-  text-align: center
-  cursor: pointer
-  z-index: 100
-  transition: all 100ms
-  margin: 0 auto
-  line-height: 3rem
-  padding: 2rem
-  width: 20rem
-  min-width: 5rem
-  min-height: 2rem
-  display: flex
-  align-items: center
-  justify-content: center
-  &:hover
-    filter: brightness(120%)
-  &:active
-    filter: brightness(80%)
-  &.is-editable
-    // resize: both
-    // overflow: hidden
-@media only screen and (max-width: 768px)
-  .b-layout2-btn
-    font-size: 2rem
-
-.is-tablet,
-.is-mobile
-  .b-layout2-btn
-    font-size: 2rem
-
-.gallery1-btn-container
-  text-align: center
-  position: relative
-  z-index: 100
-  padding-bottom: 5vh
-  &__button
-    position: relative
-    font-size: 3rem
-    line-height: 3rem
-    padding: 2rem 4rem
-    background-color: #fff
-    color: #000
-    width: 25rem
-    min-width: 5rem
-    min-height: 2rem
-    margin: 0 auto
-    transition: 100ms
-    cursor: pointer
-    text-align: center
-    display: flex
-    align-items: center
-    justify-content: center
-    .is-tablet &,
-    .is-mobile &
-      font-size: 2rem
-    @media only screen and (max-width: 768px)
-      &
-        font-size: 2rem
-    &:hover
-      filter: brightness(120%)
-    &:active
-      filter: brightness(80%)
-// end button layout2 styles
 </style>
