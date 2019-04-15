@@ -220,12 +220,16 @@ export default {
       commit('isGrouping', (typeof value !== 'undefined') ? value : !state.isGrouping)
     },
 
-    setControlPanel ({ commit, dispatch }, panel) {
+    setControlPanel ({ commit, state, dispatch }, panel) {
       if (typeof panel === 'string') {
         commit('controlPanel', {
           expanded: true,
           name: panel
         })
+
+        if (!state.isExpanded) {
+          commit('isExpanded', true)
+        }
       } else {
         commit('controlPanel', {
           expanded: false,
