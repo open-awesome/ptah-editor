@@ -3,42 +3,24 @@ import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 
 export default {
-
-  data () {
-    return {
-      vText: {}
-    }
-  },
-
-  created () {
-    this.vText = this.text
-  },
-
-  watch: {
-    vText: function (value) {
-      this.text = value
-    }
-  },
-
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions'
     ]),
 
     text: {
-      get: function () {
+      get () {
         return this.settingObjectOptions.text
       },
-      set: function (newValue) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: newValue }))
+      set (value) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { text: value }))
       }
     }
   },
 
   methods: {
     ...mapActions('Sidebar', [
-      'updateSettingOptions',
-      'updateText'
+      'updateSettingOptions'
     ])
   }
 }
@@ -47,7 +29,7 @@ export default {
 <template>
   <div class="b-text-controls">
     <div class="b-text-controls__control">
-      <base-text-field v-model="vText" :value="vText" label="Text"></base-text-field>
+      <base-text-field v-model="text" label="Text"></base-text-field>
     </div>
   </div>
 </template>

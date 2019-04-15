@@ -1,7 +1,7 @@
 <template>
   <!-- @click.stop was here. this breaks down the color picker -->
   <div class="b-control-panel">
-    <button class="b-control-panel__close" @click="setControlPanel(false)">
+    <button class="b-control-panel__close" @click="close()">
       <icon-base color="#c4c4c4" width="10" height="10" name="close"/>
     </button>
     <component :is="panelName" :builder="builder"/>
@@ -30,6 +30,8 @@ import ThePanelIcon from './ThePanelIcon'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
+import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
+import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
 import ThePanelForm from './ThePanelForm'
 
@@ -55,7 +57,11 @@ export default {
   },
 
   methods: {
-    ...mapActions('Sidebar', ['setControlPanel'])
+    ...mapActions('Sidebar', ['setControlPanel']),
+
+    close () {
+      this.setControlPanel(false)
+    }
   },
 
   components: {
@@ -78,8 +84,10 @@ export default {
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
-    ThePanelVideo,
-    ThePanelForm
+    ThePanelForm,
+    ThePanelSectionGallerySettings,
+    ThePanelSectionGalleryStyle,
+    ThePanelVideo
   }
 }
 </script>

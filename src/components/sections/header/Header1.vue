@@ -164,7 +164,8 @@ const defaultComponents2 = [
         'height': '50px',
         'border-radius': '2px',
         'font-size': '18px',
-        'margin': '8px 16px'
+        'margin': '8px 16px',
+        'width': 'auto'
       }
     },
     key: 1
@@ -183,7 +184,8 @@ const defaultComponents2 = [
         'height': '50px',
         'border-radius': '2px',
         'font-size': '18px',
-        'margin': '8px 16px'
+        'margin': '8px 16px',
+        'width': 'auto'
       }
     },
     key: 2
@@ -271,6 +273,7 @@ export default {
   padding: .8rem 1.6rem
 
 .b-button-one
+  margin-left: auto
   .is-mobile &
     margin-top: auto !important
     order: 1
