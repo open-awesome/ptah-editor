@@ -22,35 +22,26 @@
       <div class="b-integrations__component"
         v-if="isIntegrationVisible"
         >
-        <component
-          :is="integrationComponent"
-          @back="back"
-          >
-        </component>
+        <router-view></router-view>
       </div>
     </div>
     <div slot="controls">
-      <BaseButton color="gray" size="middle" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton color="gray" size="middle" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
       <BaseButton color="blue" size="middle" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
-import BuilderSiteSettingsIntegrationsGoogleTag from './BuilderSiteSettingsIntegrationsGoogleTag'
-import BuilderSiteSettingsIntegrationsGoogleAnalitycs from './BuilderSiteSettingsIntegrationsGoogleAnalitycs'
-import BuilderSiteSettingsIntegrationsMailchimp from './BuilderSiteSettingsIntegrationsMailchimp'
+import { last } from 'lodash-es'
 
 export default {
   name: 'BuilderSiteSettingsIntegrations',
 
   components: {
-    BuilderModalContentLayout,
-    BuilderSiteSettingsIntegrationsGoogleTag,
-    BuilderSiteSettingsIntegrationsGoogleAnalitycs,
-    BuilderSiteSettingsIntegrationsMailchimp
+    BuilderModalContentLayout
   },
 
   data () {
@@ -80,8 +71,9 @@ export default {
   computed: {
     ...mapState(['currentLanding']),
 
-    ...mapState('BuilderModalContent', ['isIntegrationVisible', 'integrationID']),
-    ...mapGetters('BuilderModalContent', ['integrationComponent'])
+    isIntegrationVisible () {
+      return last(this.$route.path.split('/')) !== 'integrations'
+    }
   },
 
   watch: {
@@ -98,9 +90,6 @@ export default {
     ...mapActions([
       'storeSettings'
     ]),
-    ...mapActions('BuilderModalContent', {
-      setIntegrationContent: 'setIntegration'
-    }),
 
     updateIntegrations () {
       const settings = this.currentLanding.settings
@@ -116,16 +105,15 @@ export default {
       }
 
       this.storeSettings(data)
-      this.$emit('requestClose')
+      this.close()
     },
 
     selectIntegration (integrationID) {
-      this.setIntegrationContent(integrationID)
+      this.$router.push(`/editor/${this.$route.params.slug}/settings/integrations/${integrationID}`)
     },
 
-    back () {
-      console.log('setIntegrationContent')
-      this.setIntegrationContent('')
+    close () {
+      this.$router.push(`/editor/${this.$route.params.slug}`)
     }
   }
 }

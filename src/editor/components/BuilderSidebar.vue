@@ -183,10 +183,6 @@ export default {
   },
 
   computed: {
-    ...mapState('BuilderModalContent', {
-      modalContentID: 'contentID'
-    }),
-
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection',
@@ -256,13 +252,8 @@ export default {
       'setControlPanel'
     ]),
 
-    ...mapActions('BuilderModalContent', {
-      setModalContent: 'setContent'
-    }),
-
     toggleSidebarAndHideContent () {
       this.toggleSidebar()
-      this.setModalContent('')
     },
 
     toggleSettingsBar (section) {
@@ -291,7 +282,7 @@ export default {
     },
 
     closeSiteSettings () {
-      this.setModalContent('')
+      // this.setModalContent('')
     },
 
     closeAddSectionBar () {

@@ -29,7 +29,8 @@
             <slot></slot>
           </div>
         </base-scroll-container>
-        <BuilderModalContent :builder="builder" />
+        <!--<BuilderModalContent :builder="builder" />-->
+        <router-view :builder="builder"></router-view>
       </main>
 
     </div>
@@ -74,9 +75,10 @@ export default {
     ...mapState('Sidebar', [
       'isExpanded'
     ]),
-    ...mapState('BuilderModalContent', [
-      'isContentVisible'
-    ])
+
+    isContentVisible () {
+      return this.$route.path.split('/').indexOf('settings') > 0
+    }
   },
 
   methods: {

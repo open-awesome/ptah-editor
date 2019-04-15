@@ -25,7 +25,7 @@
     </form>
 
   <div slot="controls">
-    <base-button size="middle" v-text="$t('nav.cancel')" :transparent="true" @click="$emit('requestClose')" color="gray"/>
+    <base-button size="middle" v-text="$t('nav.cancel')" :transparent="true" @click="close()" color="gray"/>
     <base-button size="middle" color="blue" v-text="$t('nav.save')" type="submit" form="cookies-form"/>
   </div>
 
@@ -79,7 +79,11 @@ export default {
           pdf: this.pdfFile
         }
       })
-      this.$emit('requestClose')
+      this.close()
+    },
+
+    close () {
+      this.$router.push(`/editor/${this.$route.params.slug}`)
     }
   }
 }

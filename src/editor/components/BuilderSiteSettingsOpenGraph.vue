@@ -85,7 +85,7 @@
       </base-fieldset>
     </div>
     <div slot="controls">
-      <BaseButton color="gray" size="middle" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton color="gray" size="middle" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
       <BaseButton color="blue" size="middle" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
@@ -267,7 +267,7 @@ export default {
       }
 
       this.storeSettings(data)
-      this.$emit('requestClose')
+      this.close()
     },
     validUrl (str) {
       let pattern = new RegExp(/(^https?:\/\/)?[a-z0-9~_\-.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/i)
@@ -277,6 +277,10 @@ export default {
       } else {
         this.error.url = false
       }
+    },
+
+    close () {
+      this.$router.push(`/editor/${this.$route.params.slug}`)
     }
   }
 }
