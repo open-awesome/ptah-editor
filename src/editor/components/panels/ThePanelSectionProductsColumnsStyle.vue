@@ -13,13 +13,13 @@
 </template>
 
 <script>
-import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
+import ControlSectionProductsStyle from './../controls/TheControlSectionProductsStyle.vue'
 
 export default {
   name: 'ThePanelSectionProductsColumnsStyle',
 
   components: {
-    ControlSectionProducts
+    ControlSectionProductsStyle
   }
 }
 </script>

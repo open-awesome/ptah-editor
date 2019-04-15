@@ -101,6 +101,7 @@ export default {
   flex-wrap: wrap
   position: relative
   width: 100%
+  min-height: $size-step
   border: 1px dashed transparent
 
   transition: border 0.25s
@@ -134,9 +135,9 @@ export default {
       width: $size-step
       height: $size-step
 
-      border-radius: 50%;
-      background: $white;
-      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39);
+      border-radius: 50%
+      background: $white
+      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
 
       cursor: pointer
       & svg
@@ -154,6 +155,7 @@ export default {
 
       width: 100%
       margin: 0 auto
+      padding: .8rem
       &_horizont
         > div
           width: auto

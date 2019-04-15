@@ -402,8 +402,8 @@ export default {
             // --- TODO: bad idea
             // --- fix in future
             // --- coz data storage is unstable
-            let match = this.path[0].match(/\d+(?!\d+)/)
-            let index = (match) ? match[0] : ''
+            let name = this.path[0]
+            let index = name.split('components')[1]
             this.setSandboxPaths({
               components: `$sectionData.components${index}`,
               container: `$sectionData.container${index}`

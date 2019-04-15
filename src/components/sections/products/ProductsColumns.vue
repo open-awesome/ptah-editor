@@ -616,25 +616,25 @@ const SCHEMA_CUSTOM = {
 
 const COMPONENTS = [
   {
-    name: 'Logo',
-    element: types.Logo,
+    name: 'Pic',
+    element: types.Image,
     type: 'image',
-    class: 'b-logo',
-    label: 'logo'
+    class: 'b-image',
+    label: 'Pic'
   },
   {
     name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    element: types.TextInherit,
+    type: 'inline',
     class: 'b-text',
     label: 'text'
   },
   {
     name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    element: types.TextInherit,
+    type: 'inline',
     class: 'b-cost',
-    label: 'text'
+    label: 'cost'
   },
   {
     name: 'Button',
@@ -647,16 +647,16 @@ const COMPONENTS = [
 
 const COMPONENTS_M = [
   {
-    name: 'Logo',
-    element: types.Logo,
+    name: 'Pic',
+    element: types.Image,
     type: 'image',
-    class: 'b-logo',
-    label: 'logo'
+    class: 'b-image',
+    label: 'Pic'
   },
   {
     name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    element: types.TextInherit,
+    type: 'inline',
     class: 'b-text',
     label: 'text'
   }
@@ -668,28 +668,28 @@ const COMPONENTS_D = [
     element: types.IconWithText,
     type: 'icon',
     class: 'b-text-icon',
-    label: 'icon with text'
+    label: 'icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
     class: 'b-text-icon',
-    label: 'icon with text'
+    label: 'icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
     class: 'b-text-icon',
-    label: 'icon with text'
+    label: 'icon'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
     type: 'icon',
     class: 'b-text-icon',
-    label: 'icon with text'
+    label: 'icon'
   }
 ]
 
@@ -697,7 +697,7 @@ const HEADER = [
   {
     name: 'TextElement',
     element: types.Title,
-    type: 'text',
+    type: 'inline',
     class: 'b-title',
     label: 'title'
   }
@@ -843,6 +843,19 @@ export default {
                         :key="index"
                         >
                         <component class="b-products-colums-component"
+                          v-if="component.type === 'inline' || component.type === 'icon'"
+                          v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
+                          :is="component.name"
+                          :href="$sectionData[`components${key}`][index].element.link.href"
+                          :target="$sectionData[`components${key}`][index].element.link.target"
+                          :path="`components${key}[${index}].element`"
+                          :style="$sectionData.mainStyle.textStyles[component.label]"
+                          :class="[$sectionData[`components${key}`][index].element.classes, $sectionData[`components${key}`][index].class]"
+                          >
+                          <div v-html="$sectionData[`components${key}`][index].element.text"></div>
+                        </component>
+                        <component class="b-products-colums-component"
+                          v-else
                           v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
                           :is="component.name"
                           :href="$sectionData[`components${key}`][index].element.link.href"
@@ -870,6 +883,19 @@ export default {
                         :key="index"
                         >
                         <component class="b-products-colums-component"
+                          v-if="component.type === 'inline' || component.type === 'icon'"
+                          v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
+                          :is="component.name"
+                          :href="$sectionData[`components${key}D`][index].element.link.href"
+                          :target="$sectionData[`components${key}D`][index].element.link.target"
+                          :path="`components${key}D[${index}].element`"
+                          :style="$sectionData.mainStyle.textStyles[component.label]"
+                          :class="[$sectionData[`components${key}D`][index].element.classes, $sectionData[`components${key}D`][index].class]"
+                          >
+                          <div v-html="$sectionData[`components${key}D`][index].element.text"></div>
+                        </component>
+                        <component class="b-products-colums-component"
+                          v-else
                           v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
                           :is="component.name"
                           :href="$sectionData[`components${key}D`][index].element.link.href"
