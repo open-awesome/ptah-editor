@@ -55,11 +55,10 @@ export default {
   },
 
   methods: {
-    ...mapActions('Sidebar', ['setControlPanel', 'toggleGrouping']),
+    ...mapActions('Sidebar', ['setControlPanel']),
 
     close () {
       this.setControlPanel(false)
-      this.toggleGrouping(false)
     }
   },
 
