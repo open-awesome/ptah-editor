@@ -220,7 +220,7 @@ export default {
       commit('isGrouping', (typeof value !== 'undefined') ? value : !state.isGrouping)
     },
 
-    setControlPanel ({ commit }, panel) {
+    setControlPanel ({ commit, dispatch }, panel) {
       if (typeof panel === 'string') {
         commit('controlPanel', {
           expanded: true,
@@ -231,6 +231,8 @@ export default {
           expanded: false,
           name: ''
         })
+
+        dispatch('toggleGrouping', false)
       }
     }
   },
