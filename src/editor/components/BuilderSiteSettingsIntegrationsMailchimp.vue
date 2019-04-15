@@ -26,6 +26,7 @@
 import { mapActions, mapState } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 import * as _ from 'lodash-es'
+import store from '@store'
 
 export default {
   name: 'BuilderSiteSettingsIntegrationsMailchimp',
@@ -56,6 +57,11 @@ export default {
     savedList () {
       return this.currentLanding.settings.mailchimpList
     }
+  },
+
+  async beforeRouteEnter (to, from, next) {
+    await store.dispatch('User/getUser')
+    next()
   },
 
   created () {
