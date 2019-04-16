@@ -185,7 +185,7 @@ $main-font-size: 6rem
   color: #fff
   font-size: $main-font-size
   text-align: center
-  margin: 1.6rem auto
+  margin: 1.6rem
   padding: 0.8rem
 
   .is-mobile &,

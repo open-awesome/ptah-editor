@@ -83,7 +83,7 @@ export default {
   height: 4rem
 
   padding: 0
-  margin: 0 auto
+  margin: 1.6rem
 
   position: relative
 

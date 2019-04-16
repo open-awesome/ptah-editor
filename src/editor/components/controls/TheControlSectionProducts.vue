@@ -48,7 +48,6 @@ export default {
 
         <span class="b-products__item-check"
           title="Show / Hide"
-          @click="visible(key)"
           :class="{ 'b-products__item-check_color' : true === products[key].visible }"
           >
             <icon-base width="10" height="7" name="checkMark"
