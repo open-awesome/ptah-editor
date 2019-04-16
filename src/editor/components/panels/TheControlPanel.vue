@@ -33,7 +33,8 @@ import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
 import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
-import ThePanelForm from './ThePanelForm'
+import ThePanelFormSettings from './ThePanelFormSettings'
+import ThePanelFormStyles from './ThePanelFormStyles'
 
 export default {
   name: 'TheControlPanel',
@@ -84,7 +85,8 @@ export default {
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
-    ThePanelForm,
+    ThePanelFormSettings,
+    ThePanelFormStyles,
     ThePanelSectionGallerySettings,
     ThePanelSectionGalleryStyle,
     ThePanelVideo

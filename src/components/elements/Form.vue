@@ -1,17 +1,44 @@
 <template>
   <div>
-  <form class="b-form-element ptah-form" :data-action="$builder.settings.mailchimpUrl" method="post" target="_blank">
+  <form class="b-form-element ptah-form"
+    :data-action="$builder.settings.mailchimpUrl"
+    method="post"
+    target="_blank"
+    :style="{
+      'background-color' : styles['background-color'],
+    }"
+    >
     <input
       type="email"
       name="EMAIL"
       required
-      :style="inputBorder"
+      :style="{
+        'color' : styles['color'],
+        'background-color': formStyles['input-color'],
+        'font-family' : styles['font-family'],
+        'font-size' : styles['font-size'],
+        'font-weight' : styles['font-weight'],
+        'font-style' : styles['font-style'],
+        'text-decoration' : styles['text-decoration']
+      }"
       :placeholder="placeholder"
-      class="b-form-element-input ptah-input">
-    <div style="position: absolute; left: -5000px;" aria-hidden="true">
+      class="b-form-element-input ptah-input"
+      >
+    <div class="b-form-element__hidden-input" aria-hidden="true">
       <input type="text" :name="roboCheck" tabindex="-1" value="" class="ptah-valid">
     </div>
-    <button type="submit" class="b-form-element-button ptah-submit" :style="buttonStyles">
+    <button type="submit" class="b-form-element-button ptah-submit"
+     :style="{
+      'color': styles['color'],
+      'background-color': formStyles['button-color'],
+      'color' : styles['color'],
+      'font-family' : styles['font-family'],
+      'font-size' : styles['font-size'],
+      'font-weight' : styles['font-weight'],
+      'font-style' : styles['font-style'],
+      'text-decoration' : styles['text-decoration']
+     }"
+      >
       <span><icon-base name="checkMark" color="white"></icon-base></span>
       {{ buttonText }}
     </button>
@@ -45,14 +72,12 @@ export default {
       return this.$section.get(`$sectionData.${this.path}.buttonText`)
     },
 
-    buttonStyles () {
-      return this.$section.get(`$sectionData.${this.path}.formStyles`)
+    styles () {
+      return this.$section.get(`$sectionData.${this.path}.styles`)
     },
 
-    inputBorder () {
-      let color = this.buttonStyles['background-color']
-
-      return `border-color: ${color}`
+    formStyles () {
+      return this.$section.get(`$sectionData.${this.path}.formStyles`)
     },
 
     roboCheck () {
@@ -70,6 +95,10 @@ export default {
   display: flex
   align-items: center
   justify-content: center
+
+  width: 100%
+  padding: 0.4rem 0.8rem
+  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.08)
   .is-mobile &,
   .is-tablet &
     flex-direction: column
@@ -77,50 +106,50 @@ export default {
     &
       flex-direction: column
 
-  &--big
-    width: 70rem
+  &__hidden-input
+    position: absolute
+    left: -5000px
+
+  input
+    width: 65%
+    min-width: 50%
+    height: 6.4rem
+    margin: 0.2rem
+
+    font-size: 2rem
+
+    overflow: hidden
     .is-mobile &,
     .is-tablet &
       width: 100%
     @media only screen and (max-width: 768px)
       &
         width: 100%
-    input
-      width: 45rem
-      height: 64px
-      font-size: 2rem
-      .is-mobile &,
-      .is-tablet &
-        width: 100%
-      @media only screen and (max-width: 768px)
-        &
-          width: 100%
-    button
-      min-width: 22.4rem
-      height: 64px
-      font-size: 1.6rem
+  button
+    max-width: 50%
+    height: 6.4rem
+    margin: 0.2rem
 
-  &--medium
-    width: auto
-    input
-      width: 25rem
-      height: 40px
-      font-size: 1.6rem
-    button
-      min-width: 11rem
-      height: 40px
-      font-size: 1.4rem
+    font-size: 1.6rem
+    word-break: keep-all
+    overflow: hidden
+    .is-mobile &,
+    .is-tablet &
+      width: 100%
+    @media only screen and (max-width: 768px)
+      &
+        width: 100%
 
 .b-form-element-button
-  padding: 0 20px
-  background-color: rgba(255, 109, 100, 1)
-  color: #FFFFFF
-  border-radius: 2px
+  padding: 0 2rem
+  border-radius: 0.2rem
   border: none
+
   text-transform: uppercase
   font-family: 'Lato', sans-serif
   letter-spacing: .28em
   margin-left: 2rem
+
   transition: all ease-out .4s
   position: relative
   span
@@ -137,18 +166,19 @@ export default {
       min-width: auto
       max-width: 100%
       margin-left: 0
+
 .b-form-element-input
-  border: 0.2rem solid rgba(255, 125, 125, 0.5)
+  border: none
   background: #fff
   color: #2a2a2a
-  border-radius: 2px
-  padding: 10px
+  border-radius: 0.2rem
+  padding: 1rem
   .is-mobile &,
   .is-tablet &
     max-width: 100%
-    margin-bottom: 10px
+    margin-bottom: 1rem
   @media only screen and (max-width: 768px)
     &
       max-width: 100%
-      margin-bottom: 10px
+      margin-bottom: 1rem
 </style>
