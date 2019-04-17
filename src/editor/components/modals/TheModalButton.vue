@@ -22,7 +22,7 @@ export default {
         { name: 'Scroll into section', value: 'scroll-into-section' }
       ],
       action: { name: 'Open URL', value: '' },
-      section: null,
+      section: { name: 'Select section', value: '' },
       scrollBehaviors: [
         { name: 'Auto', value: 'auto' },
         { name: 'Instant', value: 'instant' },
@@ -42,7 +42,7 @@ export default {
       let currentSectionId = this.settingObjectSection.id
       return this.builder.sections
         .filter(({ id }) => id !== currentSectionId)
-        .map(({ id, name }) => ({ name, value: `#section_${id}` }))
+        .map(({ id, name }) => ({ name: name, value: `#section_${id}` }))
     },
 
     elLink () {
@@ -91,7 +91,7 @@ export default {
       if (matches) {
         let id = Number(matches[0])
         let section = this.builder.sections.find(section => section.id === id)
-        this.section = (section) ? { name: section.name, value: this.link } : null
+        this.section = (section) ? { name: section.name, value: this.link } : { name: 'Select section', value: '' }
       }
       this.action = { name: 'Scroll into section', value: 'scroll-into-section' }
       this.scrollBehavior = this.scrollBehaviors.find(({ value }) => value === this.behavior) || this.scrollBehaviors[0]
