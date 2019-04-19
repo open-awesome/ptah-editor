@@ -10,7 +10,8 @@
       :class="{
         'is-sorting': $builder.isSorting,
         'is-editable': $builder.isEditing,
-        'fp-scroll': currentLanding.settings.fullPageScroll === 'yes'
+        'fp-scroll': currentLanding.settings.fullPageScroll === 'yes',
+        'is-expanded': isExpanded
       }"
       id="artboard"
       class="artboard"
@@ -135,6 +136,9 @@ export default {
 
   computed: {
     ...mapState(['currentLanding']),
+    ...mapState('Sidebar', [
+      'isExpanded'
+    ]),
 
     builder () {
       return this.$builder

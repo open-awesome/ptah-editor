@@ -203,41 +203,6 @@ const GALLERY_ITEM_CUSTOM = [
     element: {
       removable: false
     }
-  },
-  {
-    element: {
-      removable: false,
-      text: 'Chapter for image',
-      styles: {
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem',
-        'color': '#000',
-        'font-weight': 'bold'
-      }
-    }
-  },
-  {
-    element: {
-      removable: false,
-      styles: {
-        'background-image': 'url(https://gn854.cdn.stg.gamenet.ru/0/836nk/o_e19nv.png)',
-        'background-size': 'cover',
-        'width': '256px',
-        'height': '320px'
-      }
-    }
-  },
-  {
-    element: {
-      removable: false,
-      text: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-      styles: {
-        'font-family': 'Montserrat',
-        'font-size': '1.6rem',
-        'color': '#000',
-        'font-weight': 'bold'
-      }
-    }
   }
 ]
 
@@ -257,7 +222,7 @@ const C_CUSTOM = [
       text: 'Your beautiful header should be here!',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '4rem',
+        'font-size': '3.2rem',
         'color': '#000'
       }
     },
@@ -266,7 +231,7 @@ const C_CUSTOM = [
 ]
 
 const GROUP_NAME = 'Galleries'
-const NAME = 'Gallery1'
+const NAME = 'GallerySwitch'
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
