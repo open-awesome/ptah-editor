@@ -103,10 +103,11 @@ const data = new Map([
     removable: true,
     alt: 'Default image',
     src: 'https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png',
-    hasLink: true,
+    hasLink: false,
     link: {
       href: '',
-      target: '_blank'
+      target: '_blank',
+      type: 'default'
     },
     background: true,
     styles: {
@@ -124,7 +125,7 @@ const data = new Map([
     removable: true,
     alt: 'Default logo',
     src: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
-    hasLink: true,
+    hasLink: false,
     link: {
       href: '',
       target: '_blank'

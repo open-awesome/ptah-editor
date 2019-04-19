@@ -79,9 +79,14 @@
       </template>
 
       <!-- Image -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
-        <icon-base name="preview" width="14" height="16" />
-      </a>
+      <template v-if="type === 'image'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')">
+          <icon-base name="preview" width="14" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
+          <icon-base name="link" width="14" height="16" />
+        </a>
+      </template>
 
       <!-- Video -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Video')" v-if="type === 'video'">

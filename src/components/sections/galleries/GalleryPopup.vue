@@ -28,7 +28,8 @@ const GALLERY_ITEM_CUSTOM = [
       styles: {
         'background-image': 'url(https://gn854.cdn.stg.gamenet.ru/0/836nk/o_e19nv.png)',
         'background-size': 'cover'
-      }
+      },
+      hasLink: true
     }
   },
   {
@@ -97,15 +98,15 @@ export default {
     mainStyle: types.Gallery,
     container: types.StyleObject,
     components: _.merge([], HEADER, [{ key: 0 }]),
-    components0: _.merge([], GALLERY_ITEM, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }, { key: 14 }]),
-    components1: _.merge([], GALLERY_ITEM, [{ key: 20 }, { key: 21 }, { key: 22 }, { key: 23 }, { key: 24 }]),
-    components2: _.merge([], GALLERY_ITEM, [{ key: 30 }, { key: 31 }, { key: 32 }, { key: 33 }, { key: 34 }]),
-    components3: _.merge([], GALLERY_ITEM, [{ key: 40 }, { key: 41 }, { key: 42 }, { key: 43 }, { key: 44 }]),
-    components4: _.merge([], GALLERY_ITEM, [{ key: 50 }, { key: 51 }, { key: 52 }, { key: 53 }, { key: 54 }]),
-    components5: _.merge([], GALLERY_ITEM, [{ key: 60 }, { key: 61 }, { key: 62 }, { key: 63 }, { key: 64 }]),
-    components6: _.merge([], GALLERY_ITEM, [{ key: 70 }, { key: 71 }, { key: 72 }, { key: 73 }, { key: 74 }]),
-    components7: _.merge([], GALLERY_ITEM, [{ key: 80 }, { key: 81 }, { key: 82 }, { key: 83 }, { key: 84 }]),
-    components8: _.merge([], GALLERY_ITEM, [{ key: 90 }, { key: 91 }, { key: 92 }, { key: 93 }, { key: 94 }]),
+    components0: _.merge([], GALLERY_ITEM, [{ key: 10 }, { key: 11 }]),
+    components1: _.merge([], GALLERY_ITEM, [{ key: 20 }, { key: 21 }]),
+    components2: _.merge([], GALLERY_ITEM, [{ key: 30 }, { key: 31 }]),
+    components3: _.merge([], GALLERY_ITEM, [{ key: 40 }, { key: 41 }]),
+    components4: _.merge([], GALLERY_ITEM, [{ key: 50 }, { key: 51 }]),
+    components5: _.merge([], GALLERY_ITEM, [{ key: 60 }, { key: 61 }]),
+    components6: _.merge([], GALLERY_ITEM, [{ key: 70 }, { key: 71 }]),
+    components7: _.merge([], GALLERY_ITEM, [{ key: 80 }, { key: 81 }]),
+    components8: _.merge([], GALLERY_ITEM, [{ key: 90 }, { key: 91 }]),
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
@@ -207,9 +208,8 @@ export default {
     },
 
     clickArr (type) {
-      console.log(this.index)
-      let index = this.index
-      let num = 1
+      let index = this.$sectionData.index
+      let num = 0
       let el = null
 
       if (type === 'prev') {
@@ -307,6 +307,9 @@ export default {
                           :style="$sectionData[key][0].element.styles"
                           @dblclick="onClick($sectionData[key][0].element, parseFloat(key.split('components')[1]))"
                           >
+                          <span class="b-gallery-popup__preview-count"
+                            v-text="parseFloat(key.split('components')[1]) + 1"
+                          />
                         </div>
                       </div>
                     </div>
@@ -337,6 +340,9 @@ export default {
             <icon-base name="arrowRight" color="#fff" width="8" height="14" />
           </div>
           <div gallery-popup-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
+          <span class="l-popup__count"
+            v-text="$sectionData.index + 1"
+          />
         </div>
       </div><!--/.l-popup-->
 
@@ -424,11 +430,30 @@ export default {
   width: 100%
   height: 100%
   transition: all 200ms
+  position: relative
   &:hover
     // transform: scale(1.1)
   .is-editable &:hover
     border: 0.2rem dotted #fff
-    box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.6);
+    box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.6)
+  &-count
+    position: absolute
+    top: $size-step/3
+    left: $size-step/3
+
+    width: $size-step/2
+    height: $size-step/2
+
+    background-color: rgba($white, 1)
+    border-radius: 100%
+    color: $dark-grey
+    font-size: 1.2rem
+
+    display: none
+  .is-editable &-count
+    display: flex
+    justify-content: center
+    align-items: center
 
 .b-gallery-popup__text
   position: absolute
@@ -539,4 +564,22 @@ export default {
         transform: rotate(-180deg)
     &_next
       right: 0.5rem
+  &__count
+    position: absolute
+    top: $size-step/3
+    left: $size-step/3
+
+    width: $size-step/2
+    height: $size-step/2
+
+    background-color: rgba($white, 1)
+    border-radius: 100%
+    color: $dark-grey
+    font-size: 1.2rem
+
+    display: none
+  .is-editable &__count
+    display: flex
+    justify-content: center
+    align-items: center
 </style>
