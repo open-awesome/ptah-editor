@@ -15,15 +15,12 @@ export default {
   },
 
   created () {
-    let url = this.link['href']
-
     this.isTypeContent = this.link['type']
+    this.imageUrl = this.link.imageUrl
+    this.videoUrl = this.link.videoUrl
 
-    if (this.isTypeContent === 'image') {
-      this.imageUrl = url
-    } else {
-      this.videoUrl = url
-      this.type = true
+    if (this.isTypeContent !== 'default') {
+      this.typeC = true
     }
 
     this.label = 'Image'
@@ -46,9 +43,15 @@ export default {
       'updateSettingOptions'
     ]),
 
-    changeUrl (url) {
+    changeImageUrl (url) {
       this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, { 'link': { 'href': url } })
+        _.merge({}, this.settingObjectOptions, { 'link': { 'imageUrl': url } })
+      )
+    },
+
+    changeVideoUrl (url) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, { 'link': { 'videoUrl': url } })
       )
     },
 
@@ -73,18 +76,21 @@ export default {
     <div class="b-bg-controls__control" v-if="!typeC">
       <base-uploader
         v-model="imageUrl"
-        @change="changeUrl(imageUrl)"
+        @change="changeImageUrl(imageUrl)"
         :label="label"
       />
     </div>
     <!-- VideoUrl -->
-      <div class="b-video-control__control" v-if="typeC">
-        <BaseUploadInput
-          v-model="videoUrl"
-          label="Video URL"
-          @upload="changeUrl(videoUrl)"
-        />
+    <div class="b-video-control__control" v-if="typeC">
+      <BaseUploadInput
+        v-model="videoUrl"
+        label="Video URL"
+        @upload="changeVideoUrl(videoUrl)"
+      />
+      <div class="b-video-control__description">
+        YouTube video url or any mp4 file url is allowed.
       </div>
+    </div>
   </div>
 </template>
 
@@ -100,4 +106,12 @@ export default {
     margin-bottom: $size-step/2
     &:lastt-child
       margin-bottom: 0
+
+.b-video-control
+  &__description
+    padding: $size-step/8 0
+    font-size: 1.2rem
+    color: $dark-grey
+  &__control
+    margin-top: 2.2rem
 </style>

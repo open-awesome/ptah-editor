@@ -107,7 +107,9 @@ const data = new Map([
     link: {
       href: '',
       target: '_blank',
-      type: 'default'
+      type: 'default',
+      videoUrl: '',
+      imageUrl: ''
     },
     background: true,
     styles: {

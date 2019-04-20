@@ -115,12 +115,7 @@ export default {
   },
 
   mounted () {
-    // TODO: crached for preview/export
-    // try {
-    //   document.body.appendChild(this.$refs['gallery-container'])
-    // } catch (error) {
-    //   console.error(error)
-    // }
+    this.$sectionData.isShowPopup = false
   },
 
   methods: {
@@ -138,18 +133,35 @@ export default {
 
     onClick (el, index) {
       console.log(index)
-      let m = false
-      let href = el.link.href
-      let url = href !== '' ? href : this.$sectionData.url
-      let c = ''
-      this.$sectionData.content = c
-      m = this.matchYoutubeUrl(url)
-      if (m) {
-        c = '<iframe id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + m + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+      let youtubeVideoUrl = false
+      let imageUrl = el.link.imageUrl
+      let videoUrl = el.link.videoUrl
+      let typeContent = el.link.type
+      let url = ''
+      let contentPopup = ''
+
+      if (imageUrl !== '') {
+        url = imageUrl
+      } else if (videoUrl !== '') {
+        url = videoUrl
       } else {
-        c = '<img id="content" width="100%"  height="100%" src="' + url + '"></img>'
+        url = this.$sectionData.url
       }
-      this.$sectionData.content = c
+
+      this.$sectionData.content = contentPopup
+      youtubeVideoUrl = this.matchYoutubeUrl(videoUrl)
+
+      if (typeContent === 'default') {
+        contentPopup = '<img id="content" height="100%" src="' + url + '"></img>'
+      } else {
+        if (youtubeVideoUrl) {
+          contentPopup = '<iframe id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+        } else {
+          contentPopup = '<video id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
+        }
+      }
+
+      this.$sectionData.content = contentPopup
       this.openPopup(this.$sectionData.content)
       this.setIndex(index)
 
@@ -184,6 +196,7 @@ export default {
       calcHeight = actualWidth * 0.5625
       calcMargin = (document.body.clientWidth - actualWidth) / 2
       el.style.height = calcHeight + 'px'
+      el.style.width = actualWidth + 'px'
 
       this.$sectionData.popupStyles['width'] = actualWidth + 'px'
       this.$sectionData.popupStyles['margin'] = '0 ' + calcMargin + 'px'
@@ -241,7 +254,7 @@ export default {
     @resize="closePopup"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }]"
     >
       <slot name="video"/>
       <slot name="overlay"/>
@@ -310,6 +323,9 @@ export default {
                           <span class="b-gallery-popup__preview-count"
                             v-text="parseFloat(key.split('components')[1]) + 1"
                           />
+                          <span class="b-gallery-popup__preview-video" v-if="$sectionData[key][0].element.link.type === 'video'">
+                            <icon-base name="video" color="#fff" width="64" height="64" />
+                          </span>
                         </div>
                       </div>
                     </div>
@@ -327,7 +343,7 @@ export default {
          class="l-popup l-popup_flex"
          gallery-popup-popup=""
         >
-        <div gallery-popup-popup-padd="" class="l-popup__padd" :style="$sectionData.popupStyles">
+        <div gallery-popup-popup-padd="" class="l-popup__padd" :style="$sectionData.popupStyles" @click.self="closePopup">
           <div gallery-popup-popup-close="" class="l-popup__close"
             @click="closePopup"
             >
@@ -339,7 +355,7 @@ export default {
           <div gallery-popup-popup-next="" class="l-popup__arr l-popup__arr_next" @click="clickArr('next')" v-show="$sectionData.index < $sectionData.mainStyle.count - 1">
             <icon-base name="arrowRight" color="#fff" width="8" height="14" />
           </div>
-          <div gallery-popup-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
+          <div id="content" gallery-popup-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
           <span class="l-popup__count"
             v-text="$sectionData.index + 1"
           />
@@ -426,13 +442,22 @@ export default {
   justify-content: center
 
 .b-gallery-popup__preview
-  display: block
+  $this: &
+
+  display: flex
+  justify-content: center
+  align-items: center
+
   width: 100%
   height: 100%
+
   transition: all 200ms
   position: relative
   &:hover
     // transform: scale(1.1)
+    #{$this}-video
+      transition: all 200ms
+      transform: rotate(360deg)
   .is-editable &:hover
     border: 0.2rem dotted #fff
     box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.6)
@@ -496,8 +521,9 @@ export default {
     padding: 0 0 2rem 0
 
 .l-popup
-  display: none
   position: fixed
+
+  display: none
   justify-content: center
   align-items: center
 
@@ -530,7 +556,8 @@ export default {
     overflow: hidden
     cursor: auto
     transition: all 200ms
-  &__content iframe
+  &__content iframe,
+  &__content video
     display: block
 
     width: 100%
