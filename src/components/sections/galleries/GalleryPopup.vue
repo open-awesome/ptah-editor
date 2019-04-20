@@ -63,6 +63,60 @@ const C_CUSTOM = [
   }
 ]
 
+const TOP_POPUP = [
+  {
+    name: 'Logo',
+    element: types.Logo,
+    type: 'image',
+    class: 'b-logo',
+    label: 'logo'
+  }
+]
+
+const C_CUSTOM_TOP_POPUP = [
+  {
+    element: {
+      styles: {
+        'background-image': 'url("https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg")',
+        'background-color': 'rgba(0, 0, 0, 0)',
+        'background-repeat': 'no-repeat',
+        'background-size': 'contain',
+        'width': '110px',
+        'height': '64px'
+      }
+    },
+    key: 1
+  }
+]
+
+const BOTTOM_POPUP = [
+  {
+    name: 'Button',
+    element: types.Button,
+    type: 'button',
+    class: 'b-button',
+    label: 'button'
+  }
+]
+
+const C_CUSTOM_BOTTOM_POPUP = [
+  {
+    element: {
+      text: 'Call to Action',
+      styles: {
+        'background-color': '#FF6D64',
+        'color': '#ffffff',
+        'font-family': 'Lato',
+        'text-align': 'center',
+        'width': '352px',
+        'height': '64px',
+        'border-radius': '2px'
+      }
+    },
+    key: 2
+  }
+]
+
 const GROUP_NAME = 'Galleries'
 const NAME = 'GalleryPopup'
 
@@ -70,7 +124,13 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-color': '#8CD2B5'
-    }
+    },
+    isTextStyle: true,
+    isLabel: true,
+    isLabelPreview: true,
+    isBottom: true,
+    isBottomPopup: true,
+    isTop: true
   },
   components: _.merge([], C_CUSTOM),
   components0: _.merge([], GALLERY_ITEM_CUSTOM),
@@ -82,6 +142,8 @@ const SCHEMA_CUSTOM = {
   components6: _.merge([], GALLERY_ITEM_CUSTOM),
   components7: _.merge([], GALLERY_ITEM_CUSTOM),
   components8: _.merge([], GALLERY_ITEM_CUSTOM),
+  componentsTopPopup: _.merge([], C_CUSTOM_TOP_POPUP),
+  componentsBottomPopup: _.merge([], C_CUSTOM_BOTTOM_POPUP),
   edited: true
 }
 
@@ -107,6 +169,10 @@ export default {
     components6: _.merge([], GALLERY_ITEM, [{ key: 70 }, { key: 71 }]),
     components7: _.merge([], GALLERY_ITEM, [{ key: 80 }, { key: 81 }]),
     components8: _.merge([], GALLERY_ITEM, [{ key: 90 }, { key: 91 }]),
+    containerTopPopup: types.StyleObject,
+    componentsTopPopup: _.merge([], TOP_POPUP, [{ key: 1 }]),
+    containerBottomPopup: types.StyleObject,
+    componentsBottomPopup: _.merge([], BOTTOM_POPUP, [{ key: 2 }]),
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
@@ -120,7 +186,6 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
-
     async showSettings (panel) {
       let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
 
@@ -163,10 +228,6 @@ export default {
       this.$sectionData.content = contentPopup
       this.openPopup(this.$sectionData.content)
       this.setIndex(index)
-
-      // up z-index for 'b-builder-layout'
-      let bl = document.getElementById('builderLayout')
-      bl.style.zIndex = 21
     },
 
     setIndex (index) {
@@ -196,15 +257,14 @@ export default {
 
       this.$sectionData.popupStyles['width'] = actualWidth + 'px'
       this.$sectionData.popupStyles['margin'] = '0 ' + calcMargin + 'px'
+
+      // hide all styler after shop popup
+      el.click()
     },
 
     closePopup () {
       this.$sectionData.isShowPopup = false
       this.$sectionData.content = ''
-
-      // down z-index for 'b-builder-layout'
-      let bl = document.getElementById('builderLayout')
-      bl.style.zIndex = 19
     },
 
     matchYoutubeUrl (url) {
@@ -229,6 +289,14 @@ export default {
 
       el = this.$sectionData[`components${num}`][0].element
       this.onClick(el, num)
+    },
+
+    clickEl () {
+      console.log(123)
+      if (this.isShowPopup) {
+        let bl = document.getElementById('builderLayout')
+        bl.style.zIndex = 19
+      }
     }
   },
 
@@ -270,7 +338,7 @@ export default {
                        :is="component.name"
                        :href="$sectionData.components[index].element.link.href"
                        :target="$sectionData.components[index].element.link.target"
-                       :path="`components0[${index}].element`"
+                       :path="`components[${index}].element`"
                        :style="$sectionData.components[index].element.styles"
                        :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                     >
@@ -323,6 +391,22 @@ export default {
                             <icon-base name="video" color="#fff" width="64" height="64" />
                           </span>
                         </div>
+                        <div v-if="$sectionData.mainStyle.isLabelPreview">
+                          <span class="b-gallery-popup__preview-title"
+                            v-styler:for="{ el: $sectionData[key][1].element, path:`$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][1].label }"
+                            v-html="$sectionData[key][1].element.text"
+                            :path="`${key}[1].element`"
+                            :style="{
+                              'color' : $sectionData.mainStyle.textStyles.text['color'],
+                              'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                              'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                              'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                              'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                              'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                            }"
+                            >
+                          </span>
+                        </div>
                       </div>
                     </div>
                   </div><!--/.b-gallery-popup__wrap-->
@@ -351,7 +435,73 @@ export default {
           <div gallery-two-popup-next="" class="l-popup__arr l-popup__arr_next" @click="clickArr('next')" v-show="$sectionData.index < $sectionData.mainStyle.count - 1">
             <icon-base name="arrowRight" color="#fff" width="8" height="14" />
           </div>
-          <div id="content" gallery-two-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
+          <div class="b-grid"
+             v-if="$sectionData.mainStyle.isTopPopup"
+            >
+            <div class="b-grid__row">
+                <div class="b-grid__col-12">
+                  <sandbox
+                    class="b-sandbox"
+                    container-path="$sectionData.containerTopPopup"
+                    components-path="$sectionData.componentsTopPopup"
+                    direction="column"
+                    :style="$sectionData.containerTopPopup.styles"
+                  >
+                    <draggable v-model="$sectionData.componentsTopPopup" class="b-draggable-slot" :style="$sectionData.containerTopPopup.styles">
+                      <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.componentsTopPopup" v-if="$sectionData.componentsTopPopup.length !== 0" :key="index">
+                        <component
+                           v-styler:for="{ el: $sectionData.componentsTopPopup[index].element, path: `$sectionData.componentsTopPopup[${index}].element`, type: $sectionData.componentsTopPopup[index].type, label: $sectionData.componentsTopPopup[index].label }"
+                           :is="component.name"
+                           :href="$sectionData.componentsTopPopup[index].element.link.href"
+                           :target="$sectionData.componentsTopPopup[index].element.link.target"
+                           :path="`componentsTopPopup[${index}].element`"
+                           :style="$sectionData.componentsTopPopup[index].element.styles"
+                           :class="[$sectionData.componentsTopPopup[index].element.classes, $sectionData.componentsTopPopup[index].class]"
+                        >
+                          <div v-html="$sectionData.componentsTopPopup[index].element.text"></div>
+                        </component>
+                      </div>
+                    </draggable>
+                  </sandbox>
+              </div>
+            </div>
+          </div><!--/.b-grid-->
+          <div id="content"
+            gallery-two-popup-content=""
+            class="l-popup__content flex flex_center"
+            v-html="$sectionData.content">
+          </div>
+          <div class="b-grid"
+            v-if="$sectionData.mainStyle.isBottomPopup"
+            >
+            <div class="b-grid__row">
+                <div class="b-grid__col-12">
+                  <sandbox
+                    class="b-sandbox"
+                    container-path="$sectionData.containerBottomPopup"
+                    components-path="$sectionData.componentsBottomPopup"
+                    direction="column"
+                    :style="$sectionData.containerBottomPopup.styles"
+                  >
+                    <draggable v-model="$sectionData.componentsBottomPopup" class="b-draggable-slot" :style="$sectionData.containerBottomPopup.styles">
+                      <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.componentsBottomPopup" v-if="$sectionData.componentsBottomPopup.length !== 0" :key="index">
+                        <component
+                           v-styler:for="{ el: $sectionData.componentsBottomPopup[index].element, path: `$sectionData.componentsBottomPopup[${index}].element`, type: $sectionData.componentsBottomPopup[index].type, label: $sectionData.componentsBottomPopup[index].label }"
+                           :is="component.name"
+                           :href="$sectionData.componentsBottomPopup[index].element.link.href"
+                           :target="$sectionData.componentsBottomPopup[index].element.link.target"
+                           :path="`componentsBottomPopup[${index}].element`"
+                           :style="$sectionData.componentsBottomPopup[index].element.styles"
+                           :class="[$sectionData.componentsBottomPopup[index].element.classes, $sectionData.componentsBottomPopup[index].class]"
+                        >
+                          <div v-html="$sectionData.componentsBottomPopup[index].element.text"></div>
+                        </component>
+                      </div>
+                    </draggable>
+                  </sandbox>
+              </div>
+            </div>
+          </div><!--/.b-grid-->
           <span class="l-popup__count"
             v-text="$sectionData.index + 1"
           />
@@ -436,6 +586,7 @@ export default {
   display: flex
   align-items: center
   justify-content: center
+  flex-direction: column
 
 .b-gallery-popup__preview
   $this: &
@@ -539,9 +690,11 @@ export default {
   &__padd
     position: relative
     height: 100%
+
     display: flex
     justify-content: center
     align-items: center
+    flex-direction: column
   &__content
     border: 0.2rem solid #fff
     background-color: #000

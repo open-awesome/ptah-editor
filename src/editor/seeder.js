@@ -363,7 +363,17 @@ const data = new Map([
         'text-decoration': 'none',
         'color': 'rgba(0, 0, 0, 1)'
       }
-    }
+    },
+    isChapter: false,
+    isChapterStyle: false,
+    isTextStyle: false,
+    isLabel: false,
+    isLabelPreview: false,
+    isLabel: false,
+    isTop:  false,
+    isTopPopup:  false,
+    isBottom:  false,
+    isBottomPopup:  false
   }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
     {

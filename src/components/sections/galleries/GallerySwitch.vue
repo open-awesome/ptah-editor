@@ -73,6 +73,7 @@
                             </span>
                           </div>
                           <div class="b-preview__name"
+                            v-if="$sectionData.mainStyle.isLabelPreview"
                             v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
                             :path="`${key}[1].element`"
                             v-html="$sectionData[key][1].element.text"
@@ -237,7 +238,12 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-color': '#8CD2B5'
-    }
+    },
+    isChapter: true,
+    isChapterStyle: true,
+    isTextStyle: true,
+    isLabel: true,
+    isLabelPreview: true
   },
   components: _.merge([], C_CUSTOM),
   components0: _.merge([], GALLERY_ITEM_CUSTOM),

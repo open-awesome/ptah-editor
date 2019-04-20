@@ -1,5 +1,5 @@
 <template>
-  <div id="builderLayout" class="b-builder-layout">
+  <div class="b-builder-layout">
     <div class="b-builder-layout__top-bar" :class="{'b-builder-layout__top-bar_down' : isContentVisible}">
       <BuilderTopBar
         @setDevice="setDevice"

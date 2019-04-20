@@ -51,7 +51,6 @@ import HeroWithTimerSlogan2 from '@components/sections/hero/HeroWithTimerSlogan2
 // --- gallery
 import GallerySwitch from '@components/sections/galleries/GallerySwitch'
 import GalleryPopup from '@components/sections/galleries/GalleryPopup'
-import Gallery3 from '@components/sections/galleries/Gallery3'
 // --- products
 import ProductsColumns from '@components/sections/products/ProductsColumns'
 import ProductsColumnsExtend from '@components/sections/products/ProductsColumnsExtend'
@@ -117,7 +116,6 @@ const COMPONENTS = {
 
   GallerySwitch,
   GalleryPopup,
-  Gallery3,
 
   ProductsColumns,
   ProductsColumnsExtend,
