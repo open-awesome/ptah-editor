@@ -132,7 +132,6 @@ export default {
     },
 
     onClick (el, index) {
-      console.log(index)
       let youtubeVideoUrl = false
       let imageUrl = el.link.imageUrl
       let videoUrl = el.link.videoUrl
@@ -189,9 +188,6 @@ export default {
       let calcHeight = null
       let calcMargin = null
 
-      console.log(ab.clientWidth)
-      console.log(document.body.clientWidth)
-
       actualWidth = undefined !== ab ? ab.clientWidth : el.clientWidth
       calcHeight = actualWidth * 0.5625
       calcMargin = (document.body.clientWidth - actualWidth) / 2
@@ -230,8 +226,6 @@ export default {
       } else {
         num = index + 1
       }
-
-      console.log(num)
 
       el = this.$sectionData[`components${num}`][0].element
       this.onClick(el, num)
@@ -314,8 +308,10 @@ export default {
                         :data-index="parseFloat(key.split('components')[1])"
                       >
                         <div class="b-gallery-popup__preview"
-                          gallery-popup-link=""
-                          :gallery-popup-url="$sectionData[key][0].element.link.href"
+                          gallery-two-popup-link=""
+                          :gallery-two-popup-image-url="$sectionData[key][0].element.link.imageUrl"
+                          :gallery-two-popup-video-url="$sectionData[key][0].element.link.videoUrl"
+                          :gallery-two-popup-type-content="$sectionData[key][0].element.link.type"
                           v-styler:for="{ el: $sectionData[key][0].element, path:`$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
                           :style="$sectionData[key][0].element.styles"
                           @dblclick="onClick($sectionData[key][0].element, parseFloat(key.split('components')[1]))"
@@ -341,21 +337,21 @@ export default {
          @click.self="closePopup"
          ref="gallery-container"
          class="l-popup l-popup_flex"
-         gallery-popup-popup=""
+         gallery-two-popup=""
         >
-        <div gallery-popup-popup-padd="" class="l-popup__padd" :style="$sectionData.popupStyles" @click.self="closePopup">
-          <div gallery-popup-popup-close="" class="l-popup__close"
+        <div gallery-two-popup-padd="" class="l-popup__padd" :style="$sectionData.popupStyles" @click.self="closePopup">
+          <div gallery-two-popup-close="" class="l-popup__close"
             @click="closePopup"
             >
             <icon-base name="close" color="#fff" width="14" height="14" />
           </div>
-          <div gallery-popup-popup-prev="" class="l-popup__arr l-popup__arr_prev" @click="clickArr('prev')" v-show="$sectionData.index > 0">
+          <div gallery-two-popup-prev="" class="l-popup__arr l-popup__arr_prev" @click="clickArr('prev')" v-show="$sectionData.index > 0">
             <icon-base name="arrowRight" color="#fff" width="8" height="14" />
           </div>
-          <div gallery-popup-popup-next="" class="l-popup__arr l-popup__arr_next" @click="clickArr('next')" v-show="$sectionData.index < $sectionData.mainStyle.count - 1">
+          <div gallery-two-popup-next="" class="l-popup__arr l-popup__arr_next" @click="clickArr('next')" v-show="$sectionData.index < $sectionData.mainStyle.count - 1">
             <icon-base name="arrowRight" color="#fff" width="8" height="14" />
           </div>
-          <div id="content" gallery-popup-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
+          <div id="content" gallery-two-popup-content="" class="l-popup__content flex flex_center" v-html="$sectionData.content"></div>
           <span class="l-popup__count"
             v-text="$sectionData.index + 1"
           />
