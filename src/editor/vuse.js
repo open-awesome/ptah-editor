@@ -282,7 +282,6 @@ class Vuse {
     let { video, title } = this.settings
     let styles = this.getCss(frag)
     let customCss = this.getCustomCss()
-    console.log(customCss)
     let script = this.getJsScript()
     let bodyStyles = this.getBodyStyles()
     let scrollSetup = this.getScrollSetup()
