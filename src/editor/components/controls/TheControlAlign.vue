@@ -1,22 +1,13 @@
 <script>
+import { mapState, mapActions } from 'vuex'
+import * as _ from 'lodash-es'
+
 export default {
-  props: {
-    isBox: {
-      type: Boolean,
-      required: true
-    },
-    alignText: {
-      type: String
-    },
-    alignFlex: {
-      type: String
-    }
-  },
   data: () => ({
     flex: {
-      left: ['justify-content', 'flex-start'],
-      center: ['justify-content', 'center'],
-      right: ['justify-content', 'flex-end']
+      left: ['align-items', 'flex-start'],
+      center: ['align-items', 'center'],
+      right: ['align-items', 'flex-end']
     },
     text: {
       left: ['text-align', 'left'],
@@ -44,21 +35,45 @@ export default {
       value: ''
     }
   }),
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ]),
+
+    box () {
+      return this.settingObjectOptions.box
+    },
+    styles () {
+      return this.settingObjectOptions.styles
+    }
+  },
+
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     aligned () {
-      if (this.isBox) {
-        this.$emit('boxAligned', this.flex[this.align.value])
+      if (this.box) {
+        this.updateStyle('align-items', this.flex[this.align.value][1])
       } else {
-        this.$emit('textAligned', this.text[this.align.value])
+        this.updateStyle('text-align', this.text[this.align.value][1])
       }
+    },
+
+    updateStyle (prop, value) {
+      let styles = {}
+      styles[prop] = value
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
     }
   },
 
   mounted () {
-    if (this.isBox) {
-      this.align.value = this.alignFlex
+    if (this.box) {
+      this.align.value = this.styles['align-items']
     } else {
-      this.align.value = this.alignText
+      this.align.value = this.styles['text-align']
     }
   }
 }

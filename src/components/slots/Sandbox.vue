@@ -151,6 +151,9 @@ export default {
 
       width: 100%
       margin: 0 auto
+      &
+        > div
+          width: 100%
       &_horizont
         > div
           width: auto
