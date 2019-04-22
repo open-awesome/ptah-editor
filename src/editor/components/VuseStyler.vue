@@ -4,6 +4,7 @@
     id="styler"
     v-if="$builder.isEditing"
     :class="{ 'is-visible': isVisible && !editText }"
+    @click.stop=""
   >
 
     <div class="b-styler__col" v-if="type === 'button'">
@@ -112,6 +113,7 @@
        ref="buttonModal"
        v-if="type === 'button' && isModalsPropsShow === true"
        v-click-outside="closeModal"
+       @clic.stop=""
        :style="{ 'transform' : 'translate3d(' + transform.button.x +  'px' + ', ' + transform.button.y + 'px, 0)' }"
       >
       <div class="b-styler__modal-close"
