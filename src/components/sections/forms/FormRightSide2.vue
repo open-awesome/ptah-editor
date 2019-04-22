@@ -57,9 +57,7 @@ const C_CUSTOM_1 = [
       styles: {
         'font-family': 'Lato',
         'font-size': '4.8rem',
-        'color': '#ffffff',
-        'text-align': 'left',
-        'padding-right': '4rem'
+        'color': '#ffffff'
       }
     },
     key: 1

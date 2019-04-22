@@ -407,7 +407,7 @@ const data = new Map([
         'text-decoration': 'none'
       },
       formStyles: {
-        'button-color': '#FE8A49',
+        'button-color': '#f76a67',
         'input-color': '#ffffff'
       }
     })

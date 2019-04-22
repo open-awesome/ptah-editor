@@ -113,7 +113,7 @@ export default {
   input
     width: 65%
     min-width: 50%
-    height: 6.4rem
+    height: 4.8rem
     margin: 0.2rem
 
     font-size: 2rem
@@ -127,7 +127,7 @@ export default {
         width: 100%
   button
     max-width: 50%
-    height: 6.4rem
+    height: 4.8rem
     margin: 0.2rem
 
     font-size: 1.6rem
