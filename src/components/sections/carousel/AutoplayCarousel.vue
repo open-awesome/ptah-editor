@@ -46,7 +46,8 @@
 <script>
 import * as types from '@editor/types'
 import { merge } from 'lodash-es'
-import section from '../../mixins/section.js'
+import Seeder from '@editor/seeder'
+import defaults from '../../mixins/defaults'
 
 import 'swiper/dist/css/swiper.min.css'
 import swiperOptions from '@editor/swiper'
@@ -71,7 +72,7 @@ export default {
 
   group: GROUP_NAME,
 
-  mixins: [section],
+  mixins: [defaults],
 
   cover: '/img/covers/autoplay-carousel.png',
 
@@ -96,12 +97,7 @@ export default {
   },
 
   created () {
-    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
-    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
-    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
-    let $sectionData = this.$sectionData
-
-    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
+    Seeder.seed(merge(this.$sectionData, SCHEMA_CUSTOM))
   }
 }
 </script>
