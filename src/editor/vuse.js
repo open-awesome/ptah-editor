@@ -281,6 +281,8 @@ class Vuse {
 
     let { video, title } = this.settings
     let styles = this.getCss(frag)
+    let customCss = this.getCustomCss()
+    console.log(customCss)
     let script = this.getJsScript()
     let bodyStyles = this.getBodyStyles()
     let scrollSetup = this.getScrollSetup()
@@ -297,6 +299,7 @@ class Vuse {
             ${scrollSetup.style}
             <style>
               ${styles}
+              ${customCss}
             </style>
           </head>
           <body class="b-body_preview" style="${bodyStyles}">
@@ -340,6 +343,14 @@ class Vuse {
     }
 
     return styles
+  }
+
+  getCustomCss () {
+    if (!!this.settings.css) {
+      return this.settings.css
+    } else {
+      return ''
+    }
   }
 
   getJsScript () {
