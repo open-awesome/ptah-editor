@@ -125,6 +125,7 @@ export default {
 
       width: $size-step
       height: $size-step
+      margin-bottom: 4px
 
       border-radius: 50%;
       background: $white;
