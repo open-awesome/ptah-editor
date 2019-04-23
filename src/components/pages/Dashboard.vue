@@ -16,7 +16,7 @@ export default {
         },
         {
           type: 'Skull',
-          sections: ['Skull']
+          sections: ['HeroSkull']
         },
         {
           type: 'Products',

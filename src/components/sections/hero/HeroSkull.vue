@@ -113,7 +113,6 @@ const C_CUSTOM = [
         'border-radius': '2px'
       }
     },
-    maxWidth: 480,
     key: 3
   },
   {
@@ -206,7 +205,7 @@ export default {
 
         <div class="b-grid__col-2 hidden-m "/>
 
-        <div class="b-grid__col-8">
+        <div class="b-grid__col-m-12 b-grid__col-8">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"

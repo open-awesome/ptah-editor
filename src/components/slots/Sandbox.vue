@@ -96,6 +96,7 @@ export default {
   $this: &
   display: flex
   flex-wrap: wrap
+
   position: relative
   width: 100%
   border: 1px dashed transparent
@@ -131,8 +132,8 @@ export default {
       width: $size-step
       height: $size-step
 
-      border-radius: 50%;
-      background: $white;
+      border-radius: 50%
+      background: $white
       box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39);
 
       cursor: pointer
@@ -150,7 +151,12 @@ export default {
       color: inherit
 
       width: 100%
+      max-width: 100%
       margin: 0 auto
+      padding: 0.8rem
+      &
+        > div
+          max-width: 100%
       &_horizont
         > div
           width: auto

@@ -215,7 +215,7 @@ export default {
     <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-4">
+        <div class="b-grid__col-m-12 b-grid__col-4">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
@@ -238,7 +238,7 @@ export default {
             </draggable>
           </sandbox>
         </div>
-        <div class="b-grid__col-8">
+        <div class="b-grid__col-m-12 b-grid__col-8">
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
