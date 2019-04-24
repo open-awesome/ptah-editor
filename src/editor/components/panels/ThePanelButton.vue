@@ -15,7 +15,7 @@
     </div>
 
     <!-- Align -->
-    <div class="b-panel__control">
+    <div class="b-panel__control" v-if="settingObjectOptions.aligned">
       <control-align/>
     </div>
 
@@ -71,6 +71,7 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
+      'settingObjectOptions',
       'settingObjectLabel'
     ])
   }

@@ -5,9 +5,11 @@ import * as _ from 'lodash-es'
 export default {
   data: () => ({
     flex: {
-      left: ['align-items', 'flex-start'],
-      center: ['align-items', 'center'],
-      right: ['align-items', 'flex-end']
+      'left': ['align-items', 'flex-start'],
+      'center': ['align-items', 'center'],
+      'right': ['align-items', 'flex-end'],
+      'flex-start': ['align-items', 'left'],
+      'flex-end': ['align-items', 'right']
     },
     text: {
       left: ['text-align', 'left'],
@@ -71,7 +73,7 @@ export default {
 
   mounted () {
     if (this.box) {
-      this.align.value = this.styles['align-items']
+      this.align.value = this.flex[this.styles['align-items']][1]
     } else {
       this.align.value = this.styles['text-align']
     }

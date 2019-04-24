@@ -208,7 +208,7 @@ const data = new Map([
       box: true,
       canCopy: true,
       hasLink: true,
-      aligned: true,
+      aligned: false,
       typography: true,
       background: true,
       isTextEdit: true,
