@@ -10,21 +10,11 @@
     </iframe>
 
     <video
-      v-if="videoType === 'custom' && vLoop"
+      v-if="videoType === 'custom'"
       ref="custom"
       :src="vUrl"
-      loop="loop"
+      v-bind="options"
       type="video/mp4"
-      controls="controls"
-      >
-    </video>
-
-    <video
-      v-if="videoType === 'custom' && !vLoop"
-      ref="custom"
-      :src="vUrl"
-      type="video/mp4"
-      controls="controls"
       >
     </video>
 
@@ -80,43 +70,53 @@ export default {
       youtubeVideoUrl: '',
       videoType: '',
       vLoop: false,
+      vAutoplay: false,
+      vControls: false,
+      vRel: false,
       width: 0,
       height: 0
     }
   },
 
   computed: {
-    videoUrl () {
-      return this.$section.get(`$sectionData.${this.path}.videoUrl`)
-    },
-    loop () {
-      return this.$section.get(`$sectionData.${this.path}.loop`)
+    settings () {
+      return this.$section.get(`$sectionData.${this.path}.settings`)
     },
     styles () {
       return this.$section.get(`$sectionData.${this.path}.styles`)
+    },
+    options () {
+      let objAttrs = {}
+      this.vLoop ? objAttrs['loop'] = '' : delete objAttrs['loop']
+      this.vAutoplay ? objAttrs['autoplay'] = '' : delete objAttrs['autoplay']
+      return objAttrs
     }
   },
 
   watch: {
-    videoUrl (value) {
-      this.updateVideoData(value)
-    },
-    loop (value) {
-      this.vLoop = value
+    settings (value) {
+      this.vUrl = value.url
+      this.vLoop = value.loop
+      this.vAutoplay = value.autoplay
+      this.vControls = value.controls
+      this.vRel = value.rel
+      this.updateVideoData()
     }
   },
 
   methods: {
     updateVideoData (videoUrl) {
-      this.vUrl = videoUrl
       this.videoType = ''
 
       const youtubeVideoId = getYoutubeVideoIdFromUrl(this.vUrl)
       if (youtubeVideoId) {
         // Looping one video on itself requires playlist param with its ID passed
         const loopValue = this.vLoop ? `&loop=1&playlist=${youtubeVideoId}` : '&loop=0'
+        const autoplayValue = this.vAutoplay ? '&autoplay=1' : '&autoplay=0'
+        const controlsValue = this.vControls ? '&controls=1' : '&controls=0'
+        const relValue = this.vControls ? '&rel=1' : '&rel=0'
         this.videoType = 'youtube'
-        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0&controls=0${loopValue}&autoplay=0&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1&rel=0`
+        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0${controlsValue}${loopValue}${autoplayValue}&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1${relValue}`
       } else {
         this.videoType = 'custom'
         this.youtubeVideoUrl = ''
@@ -129,8 +129,11 @@ export default {
   },
 
   created () {
-    this.vUrl = this.videoUrl
-    this.vLoop = this.loop
+    this.vUrl = this.settings.url
+    this.vLoop = this.settings.loop
+    this.vAutoplay = this.settings.autoplay
+    this.vControls = this.settings.controls
+    this.vRel = this.settings.rel
     this.updateVideoData(this.vUrl)
 
     this.width = parseInt(this.styles.width.split('px')[0]) || 320
