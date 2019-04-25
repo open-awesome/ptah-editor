@@ -15,10 +15,9 @@
                 <span class="del" v-show="backgroundPickers.length > 1 && index > 0" @click="removeBackgroundPicker(index)">
                   <icon-base name="close" color="#B1B1B1" width="10" height="10"></icon-base>
                 </span>
-                <!-- TODO: if the gradient is selected - do not save the image for the background when switching layouts -->
-                <!--span class="plus" v-show="index === 0 && backgroundPickers.length < 4" @click="addBackgroundPicker">
+                <span class="plus" v-show="index === 0 && backgroundPickers.length < 4" @click="addBackgroundPicker">
                   <icon-base name="plus" color="#B1B1B1" width="14" height="14"></icon-base>
-                </span-->
+                </span>
               </div>
             </div>
           </div>
