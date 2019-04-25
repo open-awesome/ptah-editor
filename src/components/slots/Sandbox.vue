@@ -1,12 +1,11 @@
 <template>
   <div class="b-slot">
     <div class="b-slot__settings">
-      <!-- TODO: need added controls aligned in slot -->
-      <!--span @click="showSandboxSidebar($event)" class="b-slot__settings-item b-slot__settings-item-settings">
-        <icon-base name="cog" fill="white" />
-      </span-->
-      <span @click.stop="showSandboxSidebar($event, true)" class="b-slot__settings-item b-slot__settings-item-add-el">
+      <span @click.stop="showSandboxSidebar($event, 'Slot')" class="b-slot__settings-item b-slot__settings-item-add-el">
         <icon-base name="plus" fill="white" />
+      </span>
+      <span @click.stop="showSandboxSidebar($event, 'SlotBackground')" class="b-slot__settings-item b-slot__settings-item-add-el">
+        <icon-base name="background" fill="white" />
       </span>
     </div>
     <slot/>
@@ -18,34 +17,12 @@ import { mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Sandbox',
+
   inject: ['$section'],
 
   props: {
     containerPath: String,
-    componentsPath: String,
-    direction: {
-      type: String,
-      default: 'row'
-    },
-    align: {
-      type: String,
-      default: 'center'
-    }
-  },
-
-  computed: {
-    styles () {
-      return this.$section.get(this.containerPath).styles
-    },
-
-    components () {
-      return this.$section.get(this.componentsPath)
-    }
-  },
-
-  created () {
-    this.styles['flex-direction'] = this.styles['flex-direction'] || this.direction
-    this.styles['align-items'] = this.styles['align-items'] || this.align
+    componentsPath: String
   },
 
   methods: {
@@ -54,7 +31,13 @@ export default {
       'setSection',
       'isAddSectionExpanded'
     ]),
-    ...mapActions('Sidebar', ['toggleSidebar', 'setControlPanel']),
+
+    ...mapActions('Sidebar', [
+      'toggleSidebar',
+      'setControlPanel',
+      'setSlot',
+      'updateSlotOptions'
+    ]),
 
     showSandboxSidebar (e, openElBar) {
       this.isAddSectionExpanded(false)
@@ -77,12 +60,7 @@ export default {
       })
 
       this.toggleSidebar(true)
-
-      if (openElBar) {
-        this.setControlPanel('Slot')
-      } else {
-        this.setControlPanel(false)
-      }
+      this.setControlPanel(openElBar)
     }
   }
 }
