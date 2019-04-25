@@ -4,6 +4,7 @@
     id="styler"
     v-if="$builder.isEditing"
     :class="{ 'is-visible': isVisible && !editText }"
+    @click.stop=""
   >
 
     <div class="b-styler__col" v-if="type === 'button'">
@@ -117,6 +118,7 @@
        ref="buttonModal"
        v-if="type === 'button' && isModalsPropsShow === true"
        v-click-outside="closeModal"
+       @clic.stop=""
        :style="{ 'transform' : 'translate3d(' + transform.button.x +  'px' + ', ' + transform.button.y + 'px, 0)' }"
       >
       <div class="b-styler__modal-close"
@@ -328,7 +330,6 @@ export default {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
-    ...mapActions('BuilderModalContent', ['setContent']),
 
     showStyler (event) {
       let self = this
@@ -377,8 +378,6 @@ export default {
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
         .forEach(el => el.classList.remove('active'))
-
-      this.setContent(null)
 
       if (this.isVisible) return
       this.isVisible = true

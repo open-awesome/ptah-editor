@@ -58,11 +58,11 @@
                     >
                     <icon-base name="edit" color="#ffffff"></icon-base>
                   </span>
-                  <span class="b-menu-subitem__icon"
+                  <!--<span class="b-menu-subitem__icon"
                     @click.stop="toggleSectionLayouts(headerSection)"
                     >
                     <icon-base name="layouts" color="#fff"></icon-base>
-                  </span>
+                  </span>-->
                   <span class="b-menu-subitem__icon"
                     @click.stop="showBackgroundPanel(headerSection)"
                     >
@@ -103,11 +103,11 @@
                     >
                     <icon-base name="edit" color="#ffffff"></icon-base>
                   </span>
-                  <span class="b-menu-subitem__icon"
+                  <!--<span class="b-menu-subitem__icon"
                     @click.stop="toggleSectionLayouts(section)"
                     >
                     <icon-base name="layouts" color="#fff"></icon-base>
-                  </span>
+                  </span>-->
                   <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
                     @click.stop="showBackgroundPanel(section)"
                     >
@@ -183,10 +183,6 @@ export default {
   },
 
   computed: {
-    ...mapState('BuilderModalContent', {
-      modalContentID: 'contentID'
-    }),
-
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection',
@@ -256,13 +252,8 @@ export default {
       'setControlPanel'
     ]),
 
-    ...mapActions('BuilderModalContent', {
-      setModalContent: 'setContent'
-    }),
-
     toggleSidebarAndHideContent () {
       this.toggleSidebar()
-      this.setModalContent('')
     },
 
     toggleSettingsBar (section) {
@@ -291,7 +282,7 @@ export default {
     },
 
     closeSiteSettings () {
-      this.setModalContent('')
+      // this.setModalContent('')
     },
 
     closeAddSectionBar () {

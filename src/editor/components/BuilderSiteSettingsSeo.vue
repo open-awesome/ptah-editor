@@ -24,7 +24,7 @@
     </div>
 
     <div slot="controls">
-      <BaseButton size="middle" color="gray" :transparent="true" @click="$emit('requestClose')">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton size="middle" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
       <BaseButton size="middle" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
@@ -79,7 +79,10 @@ export default {
       }
 
       this.storeSettings(data)
-      this.$emit('requestClose')
+      this.close()
+    },
+    close () {
+      this.$router.push(`/editor/${this.$route.params.slug}`)
     }
   }
 }

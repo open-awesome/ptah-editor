@@ -1,7 +1,6 @@
 <template>
   <transition name="slide-fade">
     <div class="b-builder-modal"
-      v-if="isContentVisible"
       @click.self="closeContent"
       >
       <div
@@ -32,10 +31,7 @@
           </div>
 
           <div class="b-builder-modal-content__layout">
-            <component
-              :is="contentComponent"
-              @requestClose="closeContent">
-            </component>
+            <router-view></router-view>
           </div>
         </div>
       </div>
@@ -44,14 +40,8 @@
 </template>
 
 <script>
-import { mapState, mapGetters, mapActions } from 'vuex'
-import BuilderSiteSettingsSeo from './BuilderSiteSettingsSeo'
-import BuilderSiteSettingsVisual from './BuilderSiteSettingsVisual'
-import BuilderSiteSettingsCookies from './BuilderSiteSettingsCookies'
-import BuilderSiteSettingsVersionHistory from './BuilderSiteSettingsVersionHistory'
-import BuilderSiteSettingsAddJsScripts from './BuilderSiteSettingsAddJsScripts'
-import BuilderSiteSettingsIntegrations from './BuilderSiteSettingsIntegrations'
-import BuilderSiteSettingsOpenGraph from './BuilderSiteSettingsOpenGraph'
+import { mapState, mapActions } from 'vuex'
+import * as _ from 'lodash-es'
 import MenuSubitem from './MenuSubitem'
 import TabItem from './TabItem'
 
@@ -59,13 +49,6 @@ export default {
   name: 'BuilderModalContent',
 
   components: {
-    BuilderSiteSettingsSeo,
-    BuilderSiteSettingsCookies,
-    BuilderSiteSettingsVisual,
-    BuilderSiteSettingsVersionHistory,
-    BuilderSiteSettingsAddJsScripts,
-    BuilderSiteSettingsIntegrations,
-    BuilderSiteSettingsOpenGraph,
     MenuSubitem,
     TabItem
   },
@@ -77,45 +60,30 @@ export default {
   },
 
   computed: {
-    ...mapState('BuilderModalContent', ['isContentVisible', 'contentID']),
     ...mapState('Sidebar', ['isAddSectionExpanded', 'siteSettingsMenu']),
 
-    ...mapGetters('BuilderModalContent', ['contentComponent'])
-  },
-
-  watch: {
-    isContentVisible (value) {
-      this.setScrollbarVisible(!value)
-      if (this.isAddSectionExpanded && value) {
-        this.toggleAddSectionMenu(false)
-      }
+    contentID () {
+      return this.$route.path.split('/')[4] || ''
     }
   },
 
-  created () {
-    this.closeContent()
-  },
-
   mounted () {
-    this.setScrollbarVisible(!this.isContentVisible)
+    if (_.last(this.$route.path.split('/')) === 'settings') {
+      this.toggleSiteSettings('visualSettings')
+    }
+    this.toggleSidebar(false)
+    this.setScrollbarVisible(false)
   },
 
   methods: {
-    ...mapActions('BuilderModalContent', {
-      setModalContent: 'setContent'
-    }),
     ...mapActions('PageTweaks', ['setScrollbarVisible']),
-    ...mapActions('Sidebar', ['toggleAddSectionMenu', 'clearSettingObjectLight', 'toggleAddSectionMenu']),
+    ...mapActions('Sidebar', ['toggleAddSectionMenu', 'clearSettingObjectLight', 'toggleSidebar']),
 
     closeContent () {
-      this.setModalContent('')
+      this.$router.push(`/editor/${this.$route.params.slug}`)
       if (this.isAddSectionExpanded) {
         this.toggleAddSectionMenu(false)
       }
-    },
-
-    closeSiteSettings () {
-      this.setModalContent('')
     },
 
     closeSettingsBar () {
@@ -127,10 +95,8 @@ export default {
       if (this.isAddSectionExpanded) {
         this.toggleAddSectionMenu()
       }
-      if (this.contentID === contentID) {
-        this.closeSiteSettings()
-      } else {
-        this.setModalContent(contentID)
+      if (this.contentID !== contentID) {
+        this.$router.push(`/editor/${this.$route.params.slug}/settings/${contentID}`)
       }
     }
   }
