@@ -16,6 +16,10 @@
           <BaseSwitcher label="Full screen height" v-model="fullScreen" @change="setHeight" />
         </div>
 
+        <div class="b-section-settings__control">
+          <control-box></control-box>
+        </div>
+
         <!-- Header -->
         <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
           <BaseTextField
@@ -120,6 +124,7 @@ import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
 import ControlSectionGallery from './../controls/TheControlSectionGallery.vue'
+import ControlBox from './../controls/TheControlBox'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
@@ -130,7 +135,8 @@ export default {
     BuilderSettingsBarGroup,
     BaseUploader,
     ControlSectionProducts,
-    ControlSectionGallery
+    ControlSectionGallery,
+    ControlBox
   },
   name: 'BuilderSettingsBarSection',
 
