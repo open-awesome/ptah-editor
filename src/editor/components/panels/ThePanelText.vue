@@ -11,16 +11,21 @@
     <div class="b-panel__control">
       <the-control-text-link></the-control-text-link>
     </div>
+
+    <div class="b-panel__control">
+      <control-box></control-box>
+    </div>
   </div>
 </template>
 
 <script>
 import TheControlTextLink from '../controls/TheControlTextLink'
 import TheControlTypography from '../controls/TheControlTypography'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelText',
-  components: { TheControlTypography, TheControlTextLink },
+  components: { ControlBox, TheControlTypography, TheControlTextLink },
   props: {
     builder: {
       type: Object,

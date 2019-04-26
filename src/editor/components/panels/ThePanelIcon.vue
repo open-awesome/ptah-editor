@@ -8,6 +8,10 @@
     <div class="b-panel__control">
       <control-text-with-icon></control-text-with-icon>
     </div>
+
+    <div class="b-panel__control">
+      <control-box></control-box>
+    </div>
   </div>
 </template>
 
@@ -15,11 +19,13 @@
 import ControlText from './../controls/TheControlText'
 import ControlTypography from './../controls/TheControlTypography'
 import ControlTextWithIcon from '../controls/TheControlIconWithText'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelInlineText',
 
   components: {
+    ControlBox,
     ControlTextWithIcon,
     ControlText,
     ControlTypography
@@ -58,5 +64,5 @@ export default {
         text-transform: uppercase
 
     &__control
-      margin-bottom: 1.6rem
+      margin-bottom: 4rem
 </style>
