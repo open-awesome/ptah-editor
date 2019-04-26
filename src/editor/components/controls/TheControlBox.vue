@@ -20,8 +20,7 @@ export default {
         marginRight: 'margin-right',
         marginBottom: 'margin-bottom',
         marginLeft: 'margin-left'
-      },
-      reg: /-?[0-9]*\\.[0-9]*/g
+      }
     }
   },
 
@@ -118,17 +117,10 @@ export default {
 
     getStyleNumberValue (prop) {
       let s = this.settingObjectOptions.styles[prop] || 0
-      if (s === '-') {
-        return -0
-      }
       return parseInt(s)
     },
 
     setter (group, prop, value) {
-      if (value.substring(0, 1) === '-') {
-        value = '-' + value
-      }
-
       if ((group === 'padding' && this.lockPaddings) || (group === 'margin' && this.lockMargins)) {
         Object.keys(this[group]).forEach((key) => this.update(group, key, value))
       } else {
