@@ -16,8 +16,8 @@ export function sectionsGroups () {
 
     SECTIONS.forEach((section, index) => {
       section.style.top = '0px'
-      section.style.marginBottom = '0px'
-      section.style.paddingBottom = '0px'
+      section.style.marginBottom = 'auto'
+      section.style.paddingBottom = 'auto'
 
       if (section.classList.contains('ptah-g-main')) {
         let group = {}

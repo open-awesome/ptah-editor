@@ -118,11 +118,17 @@ export default {
 
     getStyleNumberValue (prop) {
       let s = this.settingObjectOptions.styles[prop] || 0
-      // `console.log(this.reg.text(s))
+      if (s === '-') {
+        return -0
+      }
       return parseInt(s)
     },
 
     setter (group, prop, value) {
+      if (value.substring(0, 1) === '-') {
+        value = '-' + value
+      }
+
       if ((group === 'padding' && this.lockPaddings) || (group === 'margin' && this.lockMargins)) {
         Object.keys(this[group]).forEach((key) => this.update(group, key, value))
       } else {
@@ -145,22 +151,21 @@ export default {
     <!-- preview -->
     <div class="control-box__element-edge">
       <div class="control-box__content-edge">
-
       </div>
     </div>
     <div class="control-box__title-m">Margin</div>
     <div class="control-box__title-p">Padding</div>
     <!-- CONTROLS -->
     <!-- margin -->
-    <base-text-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern=""></base-text-field>
-    <base-text-field v-model="marginRight" class="ctrl ctrl__m-right"></base-text-field>
-    <base-text-field v-model="marginTop" class="ctrl ctrl__m-top"></base-text-field>
-    <base-text-field v-model="marginBottom" class="ctrl ctrl__m-bottom"></base-text-field>
+    <base-number-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern=""></base-number-field>
+    <base-number-field v-model="marginRight" class="ctrl ctrl__m-right"></base-number-field>
+    <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"></base-number-field>
+    <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom"></base-number-field>
     <!-- padding -->
-    <base-text-field v-model="paddingLeft" class="ctrl ctrl__p-left"></base-text-field>
-    <base-text-field v-model="paddingRight" class="ctrl ctrl__p-right"></base-text-field>
-    <base-text-field v-model="paddingTop" class="ctrl ctrl__p-top"></base-text-field>
-    <base-text-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"></base-text-field>
+    <base-number-field v-model="paddingLeft" class="ctrl ctrl__p-left"></base-number-field>
+    <base-number-field v-model="paddingRight" class="ctrl ctrl__p-right"></base-number-field>
+    <base-number-field v-model="paddingTop" class="ctrl ctrl__p-top"></base-number-field>
+    <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"></base-number-field>
     <!-- locks -->
     <a href="#"
        class="control-box__lock control-box__lock--margin"
