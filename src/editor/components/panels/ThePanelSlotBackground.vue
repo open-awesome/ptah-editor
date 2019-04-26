@@ -46,7 +46,7 @@ import * as _ from 'lodash-es'
 import BaseUploader from '../../../components/base/BaseUploader'
 import ControlSlotBackgroundPosition from './../controls/TheControlSlotBackgroundPosition'
 
-const DEFAULT_COLOR = 'rgba(255,255,255,1)'
+const DEFAULT_COLOR = 'rgba(0,0,0,0)'
 
 function getPickerColor (color) {
   if (typeof color === 'object' && color.hasOwnProperty('rgba')) {
@@ -83,8 +83,7 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'sandbox',
-      'settingObjectSection',
-      'settingObjectOptions'
+      'settingObjectSection'
     ]),
 
     bgAttachmentCheckbox: {
@@ -111,7 +110,7 @@ export default {
     },
 
     options () {
-      return this.settingObjectOptions
+      return this.settingObjectSection.get(this.sandbox.container) || {}
     },
 
     styles () {
@@ -119,35 +118,48 @@ export default {
     }
   },
 
-  created () {
-    let styles = this.styles
-    let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
-      styles['background-image'] : ''
-    let bgimage = image.match(/url\((.*?)\)/)
+  watch: {
+    sandbox (value) {
+      let opts = this.settingObjectSection.get(this.sandbox.container) || {}
+      this.settingObjectSection.set(this.sandbox.container, opts)
 
-    if (bgimage) {
-      bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-      this.sectionBgUrl = bgimage || ''
+      this.updateProps()
     }
-
-    let bggradient = image.match(/linear-gradient(\(.*\))/g)
-    if (bggradient) {
-      this.backgroundPickers = bggradient[0]
-        .replace(/^linear-gradient[(]/, '')
-        .replace(/[)]$/, '')
-        .split(', ')
-    } else {
-      this.backgroundPickers = [styles['background-color']]
-    }
-    this.updateBgColor(DEFAULT_COLOR)
-
-    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
-    this.bgSize = styles['background-size'] || 'cover'
-    this.bgAttachment = styles['background-attachment'] === 'fixed'
   },
+
+  created () {
+    this.updateProps()
+  },
+
   methods: {
+    updateProps () {
+      let styles = this.styles
+      let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
+        styles['background-image'] : ''
+      let bgimage = image.match(/url\((.*?)\)/)
+
+      if (bgimage) {
+        bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+        this.sectionBgUrl = bgimage || ''
+      }
+
+      let bggradient = image.match(/linear-gradient(\(.*\))/g)
+      if (bggradient) {
+        this.backgroundPickers = bggradient[0]
+          .replace(/^linear-gradient[(]/, '')
+          .replace(/[)]$/, '')
+          .split(', ')
+      } else {
+        this.backgroundPickers = [styles['background-color']]
+      }
+      this.updateBgColor(DEFAULT_COLOR)
+
+      this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+      this.bgSize = styles['background-size'] || 'cover'
+      this.bgAttachment = styles['background-attachment'] === 'fixed'
+    },
+
     updateBgColor (value) {
-      let settings = this.options
       let pickers = this.backgroundPickers
       let bgimage = this.sectionBgUrl
       let styles = { 'background-color': '' }
@@ -167,7 +179,7 @@ export default {
           break
       }
 
-      this.settingObjectSection.set(this.sandbox.container, _.merge({}, settings, { styles }))
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, { styles: styles }))
     },
 
     updateBgUrl () {
@@ -175,7 +187,7 @@ export default {
     },
 
     changeRepeat () {
-      this.settingObjectSection.set(this.sandbox.container, _.merge(this.options, {
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, {
         styles: {
           'background-repeat': this.bgRepeat
         }
@@ -183,7 +195,7 @@ export default {
     },
 
     changeSize () {
-      this.settingObjectSection.set(this.sandbox.container, _.merge(this.options, {
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, {
         styles: {
           'background-size': this.bgSize
         }
@@ -191,7 +203,7 @@ export default {
     },
 
     changeAttachment () {
-      this.settingObjectSection.set(this.sandbox.container, _.merge(this.options, {
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, {
         styles: {
           'background-attachment': this.bgAttachment ? 'fixed' : 'scroll'
         }

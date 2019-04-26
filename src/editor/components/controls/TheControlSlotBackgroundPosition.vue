@@ -47,7 +47,7 @@ export default {
     ]),
 
     options () {
-      return this.settingObjectOptions
+      return this.settingObjectSection.get(this.sandbox.container)
     },
 
     isHeader () {
@@ -141,7 +141,7 @@ export default {
       let s = {}
 
       s[prop] = value
-      this.settingObjectSection.set(this.sandbox.container, _.merge(this.options, { styles: this.styles }, { styles: s }))
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, { styles: this.styles }, { styles: s }))
     }
   }
 }

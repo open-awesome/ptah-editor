@@ -4,7 +4,7 @@
       <span @click.stop="showSandboxSidebar($event, 'Slot')" class="b-slot__settings-item b-slot__settings-item-add-el">
         <icon-base name="plus" fill="white" />
       </span>
-      <span @click.stop="showSandboxSidebar($event, 'SlotBackground')" class="b-slot__settings-item b-slot__settings-item-add-el">
+      <span @click.stop="showSandboxSidebar($event, 'SlotBackground')" class="b-slot__settings-item b-slot__settings-item-slot-bg">
         <icon-base name="background" fill="white" />
       </span>
     </div>
@@ -13,7 +13,7 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Sandbox',
@@ -25,6 +25,13 @@ export default {
     componentsPath: String
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'sandbox',
+      'settingObjectSection'
+    ])
+  },
+
   methods: {
     ...mapMutations('Sidebar', [
       'setSandboxPaths',
@@ -34,9 +41,7 @@ export default {
 
     ...mapActions('Sidebar', [
       'toggleSidebar',
-      'setControlPanel',
-      'setSlot',
-      'updateSlotOptions'
+      'setControlPanel'
     ]),
 
     showSandboxSidebar (e, openElBar) {
@@ -108,6 +113,7 @@ export default {
 
       width: $size-step
       height: $size-step
+      margin: 0 0 $size-step/8
 
       border-radius: 50%;
       background: $white;
@@ -116,6 +122,7 @@ export default {
       cursor: pointer
       & svg
         fill: $dark-blue-krayola
+
   .is-editable &:hover
     #{$this}__settings
       opacity: 1
@@ -123,6 +130,7 @@ export default {
     .b-draggable-slot
       display: flex
       flex-wrap: wrap
+      flex-direction: column
       justify-content: center
       align-items: center
       color: inherit
