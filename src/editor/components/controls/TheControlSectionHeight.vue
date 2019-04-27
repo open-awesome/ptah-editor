@@ -61,9 +61,15 @@ export default {
 
     pxValue: {
       get () {
-        let h = parseInt(this.optHeight) || this.sectionHeight
-        if (this.settingObjectOptions.height && this.optHeight.indexOf('rem') > 0) {
-          h = h * 10
+        let h
+        if (this.optHeight) {
+          h = parseInt(this.optHeight) || 0
+
+          if (this.optHeight.indexOf('rem') > 0) {
+            h = h * 10
+          }
+        } else {
+          h = this.sectionHeight
         }
         return h
       },
