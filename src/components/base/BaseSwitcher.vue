@@ -66,6 +66,8 @@ export default {
   &__label
     color: $dark-grey
     font-size: 1.6rem
+    &:first-letter
+      text-transform: uppercase
 
   &_checked
     .b-base-switcher-core

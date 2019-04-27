@@ -397,7 +397,21 @@ const data = new Map([
       form: true,
       isComplex: true,
       placeholder: 'Placeholder',
-      buttonText: 'Submit'
+      buttonText: 'Submit',
+      styles: {
+        'background-color': 'rgba(0, 0, 0, 0.4)',
+        'color': '#000',
+        'border-radius': '2px',
+        'font-family': 'Lato',
+        'font-weight': 'normal',
+        'font-style': 'none',
+        'font-size': '1.6rem',
+        'text-decoration': 'none'
+      },
+      formStyles: {
+        'button-color': '#f76a67',
+        'input-color': '#ffffff'
+      }
     })
   )],
   /* === Custom sections === */
