@@ -1,11 +1,10 @@
 <template>
   <div class="b-slot">
     <div class="b-slot__settings">
-      <!-- TODO: need added controls aligned in slot -->
-      <!--span @click="showSandboxSidebar($event)" class="b-slot__settings-item b-slot__settings-item-settings">
+      <span @click.stop="showSandboxSidebar($event, 'SlotSettings')" class="b-slot__settings-item b-slot__settings-item-settings">
         <icon-base name="cog" fill="white" />
-      </span-->
-      <span @click.stop="showSandboxSidebar($event, true)" class="b-slot__settings-item b-slot__settings-item-add-el">
+      </span>
+      <span @click.stop="showSandboxSidebar($event, 'Slot')" class="b-slot__settings-item b-slot__settings-item-add-el">
         <icon-base name="plus" fill="white" />
       </span>
     </div>
@@ -78,11 +77,7 @@ export default {
 
       this.toggleSidebar(true)
 
-      if (openElBar) {
-        this.setControlPanel('Slot')
-      } else {
-        this.setControlPanel(false)
-      }
+      this.setControlPanel(openElBar)
     }
   }
 }
@@ -130,6 +125,7 @@ export default {
 
       width: $size-step
       height: $size-step
+      margin-bottom: 4px
 
       border-radius: 50%;
       background: $white;

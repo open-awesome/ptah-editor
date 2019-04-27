@@ -7,7 +7,8 @@
         "cookie":                       "Cookies",
         "addJs":                        "Add JS ",
         "integrations":                 "Integrations",
-        "openGraph":                    "Open Graph"
+        "openGraph":                    "Open Graph",
+        "addCss":                       "Add custom CSS"
     },
     "nav": {
         "backToDashbord":               "Back to landings",

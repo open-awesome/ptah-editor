@@ -14,6 +14,7 @@ import { mapState, mapActions } from 'vuex'
 import ThePanelSection from './ThePanelSection'
 import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
+import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
 import ThePanelSocialSettings from './ThePanelSocialSettings'
 import ThePanelSocialStyle from './ThePanelSocialStyle'
@@ -74,6 +75,7 @@ export default {
     ThePanelTimerSettings,
     ThePanelTimerStyle,
     ThePanelSlot,
+    ThePanelSlotSettings,
     ThePanelAvailableSettings,
     ThePanelAvailableStyle,
     ThePanelRestrictionsSettings,
