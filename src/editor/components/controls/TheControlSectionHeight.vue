@@ -25,13 +25,32 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'settingObjectSection'
     ]),
+
+    sectionHeight () {
+      let node = document.getElementById(`section_${this.settingObjectSection.id}`)
+      return node.offsetHeight
+    },
+
+    screenHeight () {
+      return document.querySelector('.b-builder-layout-content__main').offsetHeight
+    },
+
+    optHeight () {
+      return this.settingObjectOptions.styles.height
+    },
 
     vhValue: {
       get () {
-        let h = parseInt(this.settingObjectOptions.height) || 100
-        return h > 100 ? h : 100
+        let h = 0
+        if (this.optHeight && this.optHeight.indexOf('vh') > 0) {
+          h = parseInt(this.optHeight)
+        } else {
+          h = Math.ceil((this.sectionHeight * 100) / this.screenHeight)
+        }
+        return h < 100 ? h : 100
       },
 
       set (value) {
@@ -42,8 +61,8 @@ export default {
 
     pxValue: {
       get () {
-        let h = parseInt(this.settingObjectOptions.height) || 500
-        if (this.settingObjectOptions.height.indexOf('rem') > 0) {
+        let h = parseInt(this.optHeight) || this.sectionHeight
+        if (this.settingObjectOptions.height && this.optHeight.indexOf('rem') > 0) {
           h = h * 10
         }
         return h
@@ -57,9 +76,9 @@ export default {
   },
 
   created () {
-    if (this.settingObjectOptions.height && this.settingObjectOptions.height.indexOf('px') > 0) {
+    if (this.optHeight && this.optHeight.indexOf('px') > 0) {
       this.heigthValueType = 'px'
-    } else if (this.settingObjectOptions.height && this.settingObjectOptions.height.indexOf('vh') > 0) {
+    } else if (this.optHeight && this.optHeight.indexOf('vh') > 0) {
       this.heigthValueType = 'vh'
     } else {
       this.heigthValueType = 'auto'
