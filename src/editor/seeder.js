@@ -205,6 +205,7 @@ const data = new Map([
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
+      box: true,
       canCopy: true,
       hasLink: true,
       aligned: false,
@@ -247,6 +248,7 @@ const data = new Map([
         'font-family': 'Lato',
         'text-decoration': 'none',
         'justify-content': 'center',
+        'align-items': 'center',
         'text-align': 'center',
         'width': '256px',
         'height': '64px'
