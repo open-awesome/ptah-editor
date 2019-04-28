@@ -62,8 +62,8 @@ export default {
     pxValue: {
       get () {
         let h
-        if (this.optHeight) {
-          h = parseInt(this.optHeight) || 0
+        if (this.optHeight && !_.isNaN(parseInt(this.optHeight))) {
+          h = parseInt(this.optHeight)
 
           if (this.optHeight.indexOf('rem') > 0) {
             h = h * 10
