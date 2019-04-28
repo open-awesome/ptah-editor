@@ -4,6 +4,8 @@
       Slot
     </h6>
 
+    {{styles}}
+
     <div class="direction">
       <div class="b-panel__control">
         <h6 class="">Section direction</h6>
