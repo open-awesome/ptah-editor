@@ -81,11 +81,8 @@ export default {
   flex-wrap: wrap
   position: relative
   width: 100%
-  border: 1px dashed transparent
 
   transition: border 0.25s
-  .is-editable &:hover
-    border: 1px dashed $dark-blue-krayola
   &__settings
     position: absolute
     top: -1px
@@ -137,6 +134,10 @@ export default {
 
       width: 100%
       margin: 0 auto
+
+      border: 1px dashed transparent
+      .is-editable &:hover
+        border: 1px dashed $dark-blue-krayola
       &_horizont
         > div
           width: auto
