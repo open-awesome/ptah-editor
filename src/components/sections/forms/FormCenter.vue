@@ -74,7 +74,7 @@ const C_CUSTOM = [
         'border-radius': '2px',
         'font-family': 'Lato',
         'font-weight': 'normal',
-        'font-style': 'none',
+        'font-style': 'normal',
         'font-size': '1.6rem',
         'text-decoration': 'none'
       }
