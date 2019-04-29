@@ -121,10 +121,6 @@ export default {
         display: none
   & span
     display: block
-  &:hover
-    filter: brightness(120%)
-  &:active
-    filter: brightness(50%)
   .is-mobile &,
   .is-tablet &
     max-width: 90% !important

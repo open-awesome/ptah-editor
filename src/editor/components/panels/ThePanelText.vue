@@ -4,23 +4,37 @@
       Text
     </h6>
 
+    <!-- Typography -->
     <div class="b-panel__control">
-      <the-control-typography :show-text-styles="false"></the-control-typography>
+      <control-typography :show-text-styles="false"></control-typography>
     </div>
 
+    <!-- Align -->
     <div class="b-panel__control">
-      <the-control-text-link></the-control-text-link>
+      <control-align/>
+    </div>
+
+    <!-- Text Link -->
+    <div class="b-panel__control">
+      <control-text-link></control-text-link>
     </div>
   </div>
 </template>
 
 <script>
-import TheControlTextLink from '../controls/TheControlTextLink'
-import TheControlTypography from '../controls/TheControlTypography'
+import ControlTypography from '../controls/TheControlTypography'
+import ControlAlign from '../controls/TheControlAlign'
+import ControlTextLink from '../controls/TheControlTextLink'
 
 export default {
   name: 'ThePanelText',
-  components: { TheControlTypography, TheControlTextLink },
+
+  components: {
+    ControlTypography,
+    ControlAlign,
+    ControlTextLink
+  },
+
   props: {
     builder: {
       type: Object,

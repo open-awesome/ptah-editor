@@ -44,7 +44,7 @@ const COMPONENTS_2 = [
     name: 'Form',
     element: types.Form,
     type: 'form',
-    class: 'b-form-element--medium',
+    class: 'b-form',
     label: 'form',
     key: 4
   }
@@ -58,8 +58,7 @@ const C_CUSTOM_1 = [
         'font-family': 'Lato',
         'font-size': '4.8rem',
         'color': '#ffffff',
-        'text-align': 'center',
-        'padding-right': '4rem'
+        'text-align': 'center'
       }
     },
     key: 1
@@ -97,11 +96,10 @@ const C_CUSTOM_2 = [
   },
   {
     element: {
-      placeholder: 'email',
+      placeholder: 'Email',
       buttonText: 'Submit',
-      formStyles: {
-        'background-color': 'rgba(255, 109, 100, 1)',
-        'color': '#FFFFFF',
+      styles: {
+        'color': '#000000',
         'border-radius': '2px',
         'font-family': 'Lato',
         'font-weight': 'normal',

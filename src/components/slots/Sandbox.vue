@@ -1,11 +1,14 @@
 <template>
   <div class="b-slot">
     <div class="b-slot__settings">
-      <span @click.stop="showSandboxSidebar($event, 'Slot')" class="b-slot__settings-item b-slot__settings-item-add-el">
-        <icon-base name="plus" fill="white" />
+      <span @click.stop="showSandboxSidebar($event, 'SlotSettings')" class="b-slot__settings-item b-slot__settings-item-settings">
+        <icon-base name="cog" fill="white" />
       </span>
       <span @click.stop="showSandboxSidebar($event, 'SlotBackground')" class="b-slot__settings-item b-slot__settings-item-slot-bg">
         <icon-base name="background" fill="white" />
+      </span>
+      <span @click.stop="showSandboxSidebar($event, 'Slot')" class="b-slot__settings-item b-slot__settings-item-add-el">
+        <icon-base name="plus" fill="white" />
       </span>
     </div>
     <slot/>
@@ -22,14 +25,31 @@ export default {
 
   props: {
     containerPath: String,
-    componentsPath: String
+    componentsPath: String,
+    direction: {
+      type: String,
+      default: 'row'
+    },
+    align: {
+      type: String,
+      default: 'center'
+    }
   },
 
   computed: {
     ...mapState('Sidebar', [
       'sandbox',
       'settingObjectSection'
-    ])
+    ]),
+
+    styles () {
+      return this.$section.get(this.containerPath).styles
+    }
+  },
+
+  created () {
+    this.styles['flex-direction'] = this.styles['flex-direction'] || this.direction
+    this.styles['align-items'] = this.styles['align-items'] || this.align
   },
 
   methods: {
@@ -38,7 +58,6 @@ export default {
       'setSection',
       'isAddSectionExpanded'
     ]),
-
     ...mapActions('Sidebar', [
       'toggleSidebar',
       'setControlPanel'
@@ -65,6 +84,7 @@ export default {
       })
 
       this.toggleSidebar(true)
+
       this.setControlPanel(openElBar)
     }
   }
@@ -111,6 +131,7 @@ export default {
       width: $size-step
       height: $size-step
       margin: 0 0 $size-step/8
+      margin-bottom: 4px
 
       border-radius: 50%;
       background: $white;

@@ -1,27 +1,30 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      {{ settingObjectLabel }}
+      {{ settingObjectLabel }} styles
     </h6>
 
+    <!-- Background Color -->
     <div class="b-panel__control">
-      <the-control-form></the-control-form>
+      <control-typography/>
     </div>
 
-    <!-- background -->
+    <!-- Background Color -->
     <div class="b-panel__control">
-      <control-background-color/>
+      <control-form-styles/>
     </div>
+
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import TheControlForm from '../controls/TheControlForm'
-import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
+import ControlForm from '../controls/TheControlForm'
+import ControlFormStyles from './../controls/TheControlFormStyles'
+import ControlTypography from './../controls/TheControlTypography'
 
 export default {
-  name: 'ThePanelForm',
+  name: 'ThePanelFormStyles',
 
   props: {
     builder: {
@@ -31,8 +34,9 @@ export default {
   },
 
   components: {
-    TheControlForm,
-    ControlBackgroundColor
+    ControlForm,
+    ControlFormStyles,
+    ControlTypography
   },
 
   computed: {

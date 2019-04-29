@@ -13,7 +13,7 @@
         </control-section-products>
 
         <div v-if="!isHeader" class="b-section-settings__control">
-          <BaseSwitcher label="Full screen height" v-model="fullScreen" @change="setHeight" />
+          <control-section-height></control-section-height>
         </div>
 
         <!-- Header -->
@@ -118,6 +118,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
+import ControlSectionHeight from './../controls/TheControlSectionHeight'
 import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
 import ControlSectionGallery from './../controls/TheControlSectionGallery.vue'
 import BaseUploader from '../../../components/base/BaseUploader'
@@ -130,7 +131,8 @@ export default {
     BuilderSettingsBarGroup,
     BaseUploader,
     ControlSectionProducts,
-    ControlSectionGallery
+    ControlSectionGallery,
+    ControlSectionHeight
   },
   name: 'BuilderSettingsBarSection',
 
@@ -143,8 +145,6 @@ export default {
 
   data () {
     return {
-      fullScreen: false,
-
       galleryImages: []
     }
   },
@@ -207,15 +207,6 @@ export default {
       this.builder.remove(this.settingObjectSection)
       this.saveState(this.builder.export('JSON'))
       this.clearSettingObject()
-    },
-
-    setHeight () {
-      if (this.fullScreen) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: ['full-height'] }))
-      } else {
-        let classesObj = this.settingObjectOptions.classes
-        classesObj.splice(classesObj.indexOf('full-height'), 1)
-      }
     },
 
     updateSimpleValue (propName, value) {
