@@ -33,7 +33,7 @@
       </div>
 
       <!-- Show/hide controls video -->
-      <div class="b-video-control__control" v-if="videoType === 'youtube'">
+      <div class="b-video-control__control">
         <BaseSwitcher
           v-model="vControls"
           label="Show/hide controls"

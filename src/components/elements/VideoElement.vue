@@ -10,7 +10,17 @@
     </iframe>
 
     <video
-      v-if="videoType === 'custom'"
+      v-if="videoType === 'custom' && vAutoplay"
+      ref="custom"
+      :src="vUrl"
+      v-bind="options"
+      muted="muted"
+      type="video/mp4"
+      >
+    </video>
+
+    <video
+      v-if="videoType === 'custom' && !vAutoplay"
       ref="custom"
       :src="vUrl"
       v-bind="options"
@@ -87,8 +97,22 @@ export default {
     },
     options () {
       let objAttrs = {}
+      let video = null
+
+      if (this.videoType === 'custom') {
+        video = this.$refs.custom
+      }
+
       this.vLoop ? objAttrs['loop'] = '' : delete objAttrs['loop']
-      this.vAutoplay ? objAttrs['autoplay'] = '' : delete objAttrs['autoplay']
+
+      this.vControls ? objAttrs['controls'] = '' : delete objAttrs['controls']
+
+      if (this.vAutoplay) {
+        objAttrs['autoplay'] = ''
+      } else {
+        delete objAttrs['autoplay']
+        if (video) video.pause()
+      }
       return objAttrs
     }
   },
@@ -114,7 +138,7 @@ export default {
         const loopValue = this.vLoop ? `&loop=1&playlist=${youtubeVideoId}` : '&loop=0'
         const autoplayValue = this.vAutoplay ? '&autoplay=1' : '&autoplay=0'
         const controlsValue = this.vControls ? '&controls=1' : '&controls=0'
-        const relValue = this.vControls ? '&rel=1' : '&rel=0'
+        const relValue = this.vRel ? '&rel=1' : '&rel=0'
         this.videoType = 'youtube'
         this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0${controlsValue}${loopValue}${autoplayValue}&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1${relValue}`
       } else {
