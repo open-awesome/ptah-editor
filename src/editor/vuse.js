@@ -301,7 +301,7 @@ class Vuse {
           </head>
           <body class="b-body_preview" style="${bodyStyles}">
             ${(video) ? this.getVideoBg(video) : ''}
-            <div class="main">
+            <div id="main" class="main">
               ${artboard.innerHTML}
             </div>
             ${this.getCookiesPreview()}

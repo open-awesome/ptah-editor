@@ -36,3 +36,9 @@ section.full-height
   @media only screen and (max-width: 768px)
     &
       min-height: 100vh !important
+
+.main
+  &_showPopup
+    & > section:not(.b-gallery-popup)
+      z-index: 0 !important
+

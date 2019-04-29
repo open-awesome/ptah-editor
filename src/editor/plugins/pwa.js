@@ -132,7 +132,7 @@ function download (assets) {
           </head>
           <body class="b-body_export" style="${bodyStyles}">
             ${gtm.body}
-            <div class="main">
+            <div id="main" class="main">
               ${artboard.innerHTML}
             </div>
             ${video}

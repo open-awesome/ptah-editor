@@ -221,7 +221,7 @@ export default {
         if (youtubeVideoUrl) {
           contentPopup = '<iframe id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
         } else {
-          contentPopup = '<video id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
+          contentPopup = '<video style="width: 100%;" id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
         }
       }
 
@@ -292,7 +292,6 @@ export default {
     },
 
     clickEl () {
-      console.log(123)
       if (this.isShowPopup) {
         let bl = document.getElementById('builderLayout')
         bl.style.zIndex = 19
@@ -468,7 +467,7 @@ export default {
           </div><!--/.b-grid-->
           <div id="content"
             gallery-two-popup-content=""
-            class="l-popup__content flex flex_center"
+            class="l-popup__content"
             v-html="$sectionData.content">
           </div>
           <div class="b-grid"
@@ -687,6 +686,8 @@ export default {
     left: $size-step * 9
   &_flex
     display: flex
+    jusitify-content: center
+    align-items: center
   &__padd
     position: relative
     height: 100%
@@ -705,6 +706,10 @@ export default {
     overflow: hidden
     cursor: auto
     transition: all 200ms
+
+    display: flex
+    justify-content: center
+    align-items: center
   &__content iframe,
   &__content video
     display: block
@@ -721,6 +726,15 @@ export default {
     transition: all 200ms
     &:hover
       transform: rotate(90deg)
+    .is-tablet &,
+    .is-mobile &
+      & svg
+        width: 2.8rem
+        height: 2.8rem
+    @media only screen and (max-width: 460px)
+      & svg
+        width: 2.8rem
+        height: 2.8rem
   &__arr
     position: absolute
     top: 50%
@@ -731,9 +745,15 @@ export default {
     .is-tablet &,
     .is-mobile &
        top: 90%
+       & svg
+         width: 2.8rem
+         height: 2.8rem
     @media only screen and (max-width: 460px)
       &
         top: 95%
+        & svg
+         width: 2.8rem
+         height: 2.8rem
     &_prev
       left: 0.5rem
       & svg
