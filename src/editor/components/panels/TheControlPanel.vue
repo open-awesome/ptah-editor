@@ -14,6 +14,7 @@ import { mapState, mapActions } from 'vuex'
 import ThePanelSection from './ThePanelSection'
 import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
+import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
 import ThePanelSocialSettings from './ThePanelSocialSettings'
 import ThePanelSocialStyle from './ThePanelSocialStyle'
@@ -34,7 +35,8 @@ import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
 import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
-import ThePanelForm from './ThePanelForm'
+import ThePanelFormSettings from './ThePanelFormSettings'
+import ThePanelFormStyles from './ThePanelFormStyles'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
 import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
 
@@ -77,6 +79,7 @@ export default {
     ThePanelTimerSettings,
     ThePanelTimerStyle,
     ThePanelSlot,
+    ThePanelSlotSettings,
     ThePanelAvailableSettings,
     ThePanelAvailableStyle,
     ThePanelRestrictionsSettings,
@@ -88,8 +91,9 @@ export default {
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
+    ThePanelFormSettings,
+    ThePanelFormStyles,
     ThePanelVideo,
-    ThePanelForm,
     ThePanelSectionProductsColumnsSettings,
     ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,

@@ -92,6 +92,7 @@ export default {
   min-height: $size-step/2
 
   margin: $size-step/2
+  padding: 0 $size-step/2
 
   background-color: #a7a1a1
 

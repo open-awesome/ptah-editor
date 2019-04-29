@@ -109,6 +109,7 @@ function download (assets) {
       let og = this.settings.ogTags ? this.getOgMetaTags(this.settings.ogTags) : ''
       let icon = this.settings.favicon
       let scrollSetup = this.getScrollSetup()
+      let customCss = this.getCustomCss()
       let gtm = this.gtmSetup(this.settings.gtmId)
       let gtag = gtagSetup(this.settings.gtag)
       let script = this.settings.script ? this.settings.script : ''
@@ -128,6 +129,7 @@ function download (assets) {
             ${og}
             <style>
               ${styles}
+              ${customCss}
             </style>
           </head>
           <body class="b-body_export" style="${bodyStyles}">
