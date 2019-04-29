@@ -406,14 +406,23 @@ export default {
 
       border-radius: 100%
       border: 0.2rem solid $ligth-grey
+
+      transition: all .3s cubic-bezier(.2,.85,.4,1.275)
       &:hover
+        cursor: pointer
         background-color: $white
-      &.delete svg
+      &.del svg
         fill: $ligth-grey
-      &.delete:hover svg
-        fill: $orange
+      &.del:hover
+        border: 0.2rem solid $orange
+        & svg
+          fill: $orange
       &.plus svg
         fill: $dark-blue-krayola
+      &.plus:hover
+        border: 0.2rem solid $dark-blue-krayola
+        & svg
+          fill: $dark-blue-krayola
     &__description
       font-size: 1.4rem
       line-height: 1.7rem

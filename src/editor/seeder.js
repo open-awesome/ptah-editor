@@ -445,6 +445,10 @@ const data = new Map([
       hasHeader: true,
       galleryImages: [],
       header: 'This is a short header',
+      overlay: {
+        color: 'rgba(0,0,0,1)',
+        opacity: '0'
+      },
       // --- swiper options
       swiper: {
         delay: 2000
