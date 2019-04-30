@@ -459,7 +459,7 @@ const data = new Map([
           'font-weight': 'normal',
           'font-style': 'normal',
           'font-family': 'Lato',
-          'text-decoration': ''
+          'text-decoration': 'none'
         }
       }
     })
