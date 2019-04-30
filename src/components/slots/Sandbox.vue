@@ -91,6 +91,7 @@ export default {
   $this: &
   display: flex
   flex-wrap: wrap
+
   position: relative
   width: 100%
   min-height: $size-step
@@ -147,6 +148,7 @@ export default {
       color: inherit
 
       width: 100%
+      max-width: 100%
       margin: 0 auto
       padding: .8rem
       &_horizont

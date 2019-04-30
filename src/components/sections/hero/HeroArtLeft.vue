@@ -11,7 +11,7 @@
   <div class="b-grid">
     <div class="b-grid__row">
 
-      <div class="b-grid__col-6"></div>
+      <div class="b-grid__col-6 hidden-m"></div>
 
       <div class="b-grid__col-6 b-grid__col-m-12">
 

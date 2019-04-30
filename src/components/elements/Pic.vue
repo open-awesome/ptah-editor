@@ -10,7 +10,6 @@
       :w="width"
       :h="height"
       :min-width="32"
-      :max-width="maxWidth ? maxWidth : 640"
       :min-height="32"
       :max-height="640"
       @resizing="onResize"
@@ -46,9 +45,6 @@ export default {
   props: {
     path: {
       type: String
-    },
-    maxWidth: {
-      type: Number
     }
   },
 

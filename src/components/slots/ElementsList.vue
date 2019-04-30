@@ -42,8 +42,7 @@ export default {
         name: 'Button',
         element: types.Button,
         type: 'button',
-        label: 'button',
-        maxWidth: 480
+        label: 'button'
       },
       text: {
         name: 'TextElement',
