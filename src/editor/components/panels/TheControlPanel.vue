@@ -28,6 +28,7 @@ import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
 import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineText from './ThePanelInlineText'
 import ThePanelIcon from './ThePanelIcon'
+import ThePanelIconStyle from './ThePanelIconStyle'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
@@ -36,6 +37,8 @@ import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
 import ThePanelFormSettings from './ThePanelFormSettings'
 import ThePanelFormStyles from './ThePanelFormStyles'
+import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
+import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
 
 export default {
   name: 'TheControlPanel',
@@ -84,14 +87,17 @@ export default {
     ThePanelInlineText,
     ThePanelImage,
     ThePanelIcon,
+    ThePanelIconStyle,
     ThePanelSectionBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
     ThePanelFormSettings,
     ThePanelFormStyles,
+    ThePanelVideo,
+    ThePanelSectionProductsColumnsSettings,
+    ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,
-    ThePanelSectionGalleryStyle,
-    ThePanelVideo
+    ThePanelSectionGalleryStyle
   }
 }
 </script>

@@ -94,7 +94,7 @@ export default {
   min-width: $size-step*2
   min-height: $size-step/2
 
-  margin: $size-step/2 auto
+  margin: $size-step/2
 
   user-select: none
   // cursor: pointer
