@@ -205,6 +205,7 @@ const data = new Map([
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
+      box: true,
       canCopy: true,
       hasLink: true,
       aligned: false,
@@ -247,6 +248,7 @@ const data = new Map([
         'font-family': 'Lato',
         'text-decoration': 'none',
         'justify-content': 'center',
+        'align-items': 'center',
         'text-align': 'center',
         'width': '256px',
         'height': '64px'
@@ -395,7 +397,21 @@ const data = new Map([
       form: true,
       isComplex: true,
       placeholder: 'Placeholder',
-      buttonText: 'Submit'
+      buttonText: 'Submit',
+      styles: {
+        'background-color': 'rgba(0, 0, 0, 0.4)',
+        'color': '#000',
+        'border-radius': '2px',
+        'font-family': 'Lato',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'font-size': '1.6rem',
+        'text-decoration': 'none'
+      },
+      formStyles: {
+        'button-color': '#f76a67',
+        'input-color': '#ffffff'
+      }
     })
   )],
   /* === Custom sections === */

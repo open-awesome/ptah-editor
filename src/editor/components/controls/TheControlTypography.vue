@@ -10,7 +10,6 @@ const LIST_FONTS = [
 
 export default {
   props: {
-    isComplexText: Boolean,
     showTextStyles: {
       type: Boolean,
       default: true
@@ -68,7 +67,6 @@ export default {
     this.fontName = { name: this.styles['font-family'], value: this.styles['font-family'] }
     this.size = find(this.sizes, { value: this.styles['font-size'] })
     this.color = this.styles['color']
-    this.controlOpen = this.expand
   },
 
   computed: {
@@ -94,59 +92,22 @@ export default {
   methods: {
     changeFont () {
       this.styles['font-family'] = this.fontName.value
-
-      if (this.isComplexText) {
-        this.changeStyleAll('font-family', this.fontName.value)
-      }
     },
     changeSize () {
       this.styles['font-size'] = this.size.value
-
-      if (this.isComplexText) {
-        this.changeStyleAll('font-size', `${this.size.value}rem`)
-      }
     },
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.styles['color'] = color
-
-      if (this.isComplexText) {
-        this.changeStyleAll('color', color)
-      }
     },
     changeStyle () {
       this.style.list.forEach((style) => {
         if (find(this.style.valueMultiple, style.value)) {
-          if (this.isComplexText) {
-            this.changeStyleAll(style.value.prop, style.value.value)
-          } else {
-            this.styles[style.value.prop] = style.value.value
-          }
+          this.styles[style.value.prop] = style.value.value
         } else {
-          if (this.isComplexText) {
-            this.changeStyleAll(style.value.prop, style.value.base)
-          } else {
-            this.styles[style.value.prop] = style.value.base
-          }
+          this.styles[style.value.prop] = style.value.base
         }
       })
-    },
-    changeStyleAll (style, value) {
-      let data = this.settingObjectSection.data
-
-      for (var key in data) {
-        if (key.indexOf('components') !== -1) {
-          let components = data[key]
-
-          components.forEach((component, index) => {
-            for (var keyEl in component.element.styles) {
-              if (keyEl.indexOf(style) !== -1 && keyEl.indexOf('back') === -1) {
-                this.settingObjectSection.data[key][index].element.styles[keyEl] = value
-              }
-            }
-          })
-        }
-      }
     }
   },
 
@@ -154,9 +115,11 @@ export default {
     this.style.list[0].value = this.td
     this.style.list[1].value = this.fs
     this.style.list[2].value = this.fw
+
     this.temp['text-decoration'] = this.td
     this.temp['font-style'] = this.fs
     this.temp['font-weight'] = this.fw
+
     for (let key in this.temp) {
       if (this.styles[key] !== this.temp[key].base) {
         this.style.valueMultiple.push(this.temp[key])

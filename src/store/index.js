@@ -88,6 +88,7 @@ const actions = {
             backgroundSize: 'cover'
           },
           script: '',
+          css: '',
           cookiesPolicy: {
             enabled: false,
             pdf: 'https://gn338.cdn.stg.gamenet.ru/0/7XSEU/o_1ohKcv.pdf'

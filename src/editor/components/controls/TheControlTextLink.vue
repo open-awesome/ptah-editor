@@ -56,7 +56,6 @@ export default {
     underline: {
       get: function () {
         let underline = _.get(this.settingObjectOptions, 'textLinkStyles.a.text-decoration') || ''
-        console.log(!(underline === 'none' || underline === ''))
         return !(underline === 'none' || underline === '')
       },
       set: function (newValue) {

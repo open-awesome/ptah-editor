@@ -1,8 +1,8 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import Draggable from 'vuedraggable'
-import section from '../../mixins/section.js'
+import Seeder from '@editor/seeder'
+import defaults from '../../mixins/defaults'
 
 const COMPONENTS_1 = [
   {
@@ -44,7 +44,7 @@ const COMPONENTS_2 = [
     name: 'Form',
     element: types.Form,
     type: 'form',
-    class: 'b-form-element--medium',
+    class: 'b-form',
     label: 'form',
     key: 4
   }
@@ -94,15 +94,14 @@ const C_CUSTOM_2 = [
   },
   {
     element: {
-      placeholder: 'email',
+      placeholder: 'Email',
       buttonText: 'Submit',
-      formStyles: {
-        'background-color': 'rgba(255, 109, 100, 1)',
-        'color': '#FFFFFF',
+      styles: {
+        'color': '#000000',
         'border-radius': '2px',
         'font-family': 'Lato',
         'font-weight': 'normal',
-        'font-style': 'none',
+        'font-style': 'normal',
         'font-size': '1.6rem',
         'text-decoration': 'none'
       }
@@ -143,11 +142,7 @@ const NAME = 'FormRight'
 export default {
   name: NAME,
 
-  components: {
-    Draggable
-  },
-
-  mixins: [section],
+  mixins: [defaults],
 
   cover: 'https://gn550.cdn.stg.gamenet.ru/TY0Xv53wUG/7mHAD/o_1HEQ3v.png',
 
@@ -162,12 +157,7 @@ export default {
   },
 
   created () {
-    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
-    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
-    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
-    let $sectionData = this.$sectionData
-
-    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
+    Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
   }
 }
 </script>
