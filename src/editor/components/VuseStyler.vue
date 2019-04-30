@@ -550,6 +550,7 @@ export default {
   align-items: flex-start
   height: 2.6rem
   z-index: 20
+  margin: 0 0 0 -0.2rem
 
   &.is-visible
     display: flex
@@ -586,7 +587,7 @@ export default {
         margin-bottom: 0
 
     &_del
-      margin-right: 0
+      margin-right: -0.2rem
       background: $black
       svg
         fill: $white
