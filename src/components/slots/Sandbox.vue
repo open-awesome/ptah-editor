@@ -149,7 +149,8 @@ export default {
       margin: 0 auto
       &
         > div
-          width: 100%
+          /* this breaks the location of the elements in the slot */
+          // width: 100%
       &_horizont
         > div
           width: auto
