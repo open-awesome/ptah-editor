@@ -114,7 +114,11 @@ export default {
   }),
 
   computed: {
-    ...mapState('Sidebar', ['settingObjectOptions', 'settingObjectSection', 'sandbox']),
+    ...mapState('Sidebar', [
+      'settingObjectOptions',
+      'settingObjectSection',
+      'sandbox']
+    ),
 
     components: {
       set (value) {
@@ -133,6 +137,10 @@ export default {
     ...mapActions('Sidebar', ['clearSettingObjectLight', 'setControlPanel']),
 
     addElement (element) {
+      if (this.settingObjectSection.data.mainStyle.isTextEdit && element.type === 'text') {
+        element.type = 'inline'
+      }
+
       element.element.removable = true
       element.key = randomPoneId()
       this.components = [...this.components, element]

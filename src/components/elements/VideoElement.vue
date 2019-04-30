@@ -145,7 +145,7 @@ export default {
   height: $size-step*5.625
   max-width: 100% !important
   max-height: 100% !important
-  margin: $size-step/2 auto
+  margin: $size-step/2
 
   position: relative
   display: flex

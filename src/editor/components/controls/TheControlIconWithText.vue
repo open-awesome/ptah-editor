@@ -17,10 +17,7 @@ export default {
 
   data () {
     return {
-      controlOpen: false,
-      color: '',
-      iconName: {},
-      elWidth: 0
+      iconName: {}
     }
   },
 
@@ -31,14 +28,6 @@ export default {
 
     icon () {
       return this.settingObjectOptions.icon
-    },
-
-    colorFill () {
-      return this.settingObjectOptions.colorFill
-    },
-
-    sizeIcons () {
-      return this.settingObjectOptions.sizeIcons
     },
 
     icons () {
@@ -55,10 +44,6 @@ export default {
     visibleIcon () {
       this.icon.visible = !this.icon.visible
     },
-    changeColor () {
-      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
-      this.colorFill['color'] = color
-    },
     changeIcon () {
       this.icon.name = this.iconName.value
       this.icon.value = this.iconName.value
@@ -66,8 +51,6 @@ export default {
   },
 
   mounted () {
-    this.color = this.colorFill.color
-    this.elWidth = this.sizeIcons.width
     this.iconName = this.icon
   }
 }
@@ -77,14 +60,6 @@ export default {
   <div class="b-text-controls">
     <div class="b-text-controls__control">
       <base-select label="Icon" :options="icons.options" :value="iconName" v-model="iconName" @input="changeIcon"></base-select>
-    </div>
-    <div class="b-text-controls__control">
-      <base-range-slider v-model="sizeIcons.width" label="Width icons" step="2" min="14" max="34">
-        {{ sizeIcons.width }} px
-      </base-range-slider>
-    </div>
-    <div class="b-text-controls__control">
-      <base-color-picker label="Color icon" v-model="color" @change="changeColor"></base-color-picker>
     </div>
     <div class="b-text-controls__control">
       <div>Visible icon</div>
