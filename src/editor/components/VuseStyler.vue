@@ -107,7 +107,7 @@
 
     <!-- Delete element -->
     <div class="b-styler__controls" v-if="options.removable">
-      <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
+      <a href="#" class="b-styler__control b-styler__control_del" title="delete" @click.stop="removeElement">
         <icon-base name="close" width="10" height="10"></icon-base>
       </a>
     </div>
@@ -548,7 +548,7 @@ export default {
   display: none
   justify-content: space-between
   align-items: flex-start
-  height: 4rem
+  height: 2.6rem
   z-index: 20
 
   &.is-visible
@@ -562,14 +562,15 @@ export default {
     flex-wrap: nowrap
 
   &__control
-    width: 3.2rem
-    height: 3.2rem
+    width: $size-step/1.5
+    height: $size-step/1.5
+
     display: flex
     align-items: center
     justify-content: center
 
-    border-radius: 50%
     background: $white
+    border-radius: 0.2rem
     box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
     margin-right: .4rem
 
@@ -584,22 +585,16 @@ export default {
         fill: $white
         margin-bottom: 0
 
-  &__delete
-    width: 3.2rem
-    height: 3.2rem
-    display: flex
-    align-items: center
-    justify-content: center
-
-    border-radius: 50%
-    background: rgba(82, 105, 166, 0.25)
-
-    &:hover, .active
-      background: $dark-blue-krayola
-
-    svg
-      fill: $white
-      margin-bottom: 0
+    &_del
+      margin-right: 0
+      background: $black
+      svg
+        fill: $white
+        margin-bottom: 0
+      &:hover, .active
+        background: $black
+        svg
+          fill: $orange
 
   &__modal
     width: 40rem

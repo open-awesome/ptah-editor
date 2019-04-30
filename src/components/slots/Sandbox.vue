@@ -99,18 +99,19 @@ export default {
   $this: &
   display: flex
   flex-wrap: wrap
+
   position: relative
   width: 100%
+  padding: 0 $size-step/1.5
 
   transition: border 0.25s
   &__settings
     position: absolute
-    top: -1px
-    bottom: -1px
-    left: -$size-step*1.1
+    top: 0
+    left: 0
     z-index: 1
 
-    width: $size-step
+    width: $size-step/1.5
     padding: 0
     margin: 0
     border: none
@@ -128,22 +129,28 @@ export default {
       align-items: center
       justify-content: center
 
-      width: $size-step
-      height: $size-step
-      margin: 0 0 $size-step/8
-      margin-bottom: 4px
+      width: $size-step/1.5
+      height: $size-step/1.5
 
-      border-radius: 50%;
-      background: $white;
-      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39);
+      background: $dark-blue-krayola
+      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
 
       cursor: pointer
       & svg
-        fill: $dark-blue-krayola
+        fill:  $white
+        width: 12px
+        height: 12px
+
+      &:hover, .active
+        background: $white
+        svg
+          fill: $dark-blue-krayola
 
   .is-editable &:hover
     #{$this}__settings
       opacity: 1
+    .b-draggable-slot
+      border: 1px dashed $dark-blue-krayola
   /deep/
     .b-draggable-slot
       display: flex
@@ -157,8 +164,6 @@ export default {
       margin: 0 auto
 
       border: 1px dashed transparent
-      .is-editable &:hover
-        border: 1px dashed $dark-blue-krayola
       &_horizont
         > div
           width: auto
