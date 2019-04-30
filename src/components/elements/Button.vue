@@ -79,6 +79,7 @@ export default {
   text-decoration: none
   color: $black
 
+  box-sizing: border-box
   width: $size-step*5
 
   max-width: 100% !important
@@ -87,7 +88,6 @@ export default {
   min-width: $size-step*2
   min-height: $size-step/2
 
-  margin: $size-step/2
   padding: 0 $size-step/2
 
   background-color: #a7a1a1

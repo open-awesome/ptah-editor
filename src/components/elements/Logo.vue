@@ -90,10 +90,7 @@ export default {
   min-width: $size-step*2
   min-height: $size-step/2
 
-  margin: $size-step/2
-
   user-select: none
-  // cursor: pointer
   transition: background-color 200ms
 
   &__resize

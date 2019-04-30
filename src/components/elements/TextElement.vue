@@ -219,7 +219,6 @@ export default {
   position: relative
   display: block
 
-  margin: 1.6rem
   &::selection, & ::selection
     color: #ff0
     background: #000

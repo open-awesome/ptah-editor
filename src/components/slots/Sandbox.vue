@@ -148,12 +148,12 @@ export default {
       color: inherit
 
       width: 100%
-      max-width: 100%
       margin: 0 auto
       padding: .8rem
       &
         > div
           max-width: 100%
+          padding: .8rem
       &_horizont
         > div
           width: auto
