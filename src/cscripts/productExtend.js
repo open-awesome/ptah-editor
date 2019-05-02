@@ -17,7 +17,7 @@ export function productExtendPreviewClick(num) {
     previewReset(previews, index);
 
     [].forEach.call(stages, function (el, i) {
-      if (i == index) {
+      if (el.getAttribute('data-index') == index) {
         el.classList.add(target);
         el.style.display = "flex";
       } else if (el.classList.contains(target)) {
@@ -35,7 +35,7 @@ export function productExtendPreviewClick(num) {
       /** Manually calling click may cause errors in styler behavior */
       if (el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
         clickPreview(el);
-      } else if (i == num) {
+      } else if (el.getAttribute('data-index') == num) {
         clickPreview(el);
       }
     });
@@ -43,11 +43,11 @@ export function productExtendPreviewClick(num) {
 
   function previewReset(items, index) {
     [].forEach.call(items, function (el, i) {
-      if (i == index && el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
+      if (el.getAttribute('data-index') == index && el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
         return;
       }
 
-      if (i == index) {
+      if (el.getAttribute('data-index') == index) {
         el.classList.add(PREVIEW_ACTIVE_CLASS);
       } else if (el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
         el.classList.remove(PREVIEW_ACTIVE_CLASS);
@@ -59,4 +59,4 @@ export function productExtendPreviewClick(num) {
 
 }
 
-productExtendPreviewClick(0);
+productExtendPreviewClick('Standart');
