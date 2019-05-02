@@ -5,7 +5,7 @@
       v-if="videoType === 'youtube'"
       frameborder="0"
       allowfullscreen="allowfullscreen"
-      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      :allow="allow"
       :src="youtubeVideoUrl">
     </iframe>
 
@@ -55,6 +55,8 @@ import { getYoutubeVideoIdFromUrl } from '@editor/util'
 import VueDraggableResizable from 'vue-draggable-resizable'
 // optionally import default styles
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+
+const ALLOW_IFRAME = 'accelerometer; encrypted-media; gyroscope; picture-in-picture;'
 
 export default {
   name: 'VideoElement',
@@ -114,6 +116,9 @@ export default {
         if (video) video.pause()
       }
       return objAttrs
+    },
+    allow () {
+      return this.vAutoplay ? ALLOW_IFRAME + ' autoplay;' : ALLOW_IFRAME
     }
   },
 
