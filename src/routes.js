@@ -100,7 +100,11 @@ const routes = [
   {
     path: '/404',
     name: '404',
-    component: lazyLoadView(import(/* webpackChunkName: "404" */ '@components/NotFound'))
+    component: () => import('@components/NotFound')
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ]
 
