@@ -44,7 +44,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('User', ['setToken']),
+    ...mapActions('User', ['setToken', 'logout']),
 
     listenFrame () {
       window.addEventListener('message', (e) => {
@@ -57,6 +57,16 @@ export default {
         if (data.access_token && data.success) {
           this.setToken(data.access_token)
           this.$router.push({ path: `/dashboard` })
+        }
+
+        // the client has lost the token
+        // logout & reload
+        if (data.error === 'user-already-logged') {
+          this.logout()
+
+          setTimeout(() => {
+            window.location.reload()
+          }, 500)
         }
       })
     }
