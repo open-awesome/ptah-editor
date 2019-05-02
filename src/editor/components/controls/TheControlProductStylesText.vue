@@ -1,6 +1,7 @@
 <script>
 import { mapState } from 'vuex'
 import find from 'lodash-es/find'
+
 const LIST_FONTS = [
   'Lato',
   'Montserrat',
@@ -9,12 +10,6 @@ const LIST_FONTS = [
 ]
 
 export default {
-  props: {
-    showTextStyles: {
-      type: Boolean,
-      default: true
-    }
-  },
 
   data () {
     return {
@@ -64,9 +59,9 @@ export default {
   },
 
   created () {
-    this.fontName = { name: this.styles['font-family'], value: this.styles['font-family'] }
-    this.size = find(this.sizes, { value: this.styles['font-size'] })
-    this.color = this.styles['color']
+    this.fontName = { name: this.textStyles.text['font-family'], value: this.textStyles.text['font-family'] }
+    this.size = find(this.sizes, { value: this.textStyles.text['font-size'] })
+    this.color = this.textStyles.text['color']
   },
 
   computed: {
@@ -75,8 +70,8 @@ export default {
       'settingObjectOptions'
     ]),
 
-    styles () {
-      return this.settingObjectOptions.styles
+    textStyles () {
+      return this.settingObjectOptions.textStyles
     },
 
     fonts () {
@@ -91,21 +86,27 @@ export default {
 
   methods: {
     changeFont () {
-      this.styles['font-family'] = this.fontName.value
+      this.textStyles.text['font-family'] = this.fontName.value
+      this.textStyles.icon['font-family'] = this.fontName.value
     },
     changeSize () {
-      this.styles['font-size'] = this.size.value
+      this.textStyles.text['font-size'] = this.size.value
+      this.textStyles.icon['font-size'] = this.size.value
     },
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
-      this.styles['color'] = color
+
+      this.textStyles.text['color'] = color
+      this.textStyles.icon['color'] = color
     },
     changeStyle () {
       this.style.list.forEach((style) => {
         if (find(this.style.valueMultiple, style.value)) {
-          this.styles[style.value.prop] = style.value.value
+          this.textStyles.text[style.value.prop] = style.value.value
+          this.textStyles.icon[style.value.prop] = style.value.value
         } else {
-          this.styles[style.value.prop] = style.value.base
+          this.textStyles.text[style.value.prop] = style.value.base
+          this.textStyles.icon[style.value.prop] = style.value.base
         }
       })
     }
@@ -115,13 +116,11 @@ export default {
     this.style.list[0].value = this.td
     this.style.list[1].value = this.fs
     this.style.list[2].value = this.fw
-
     this.temp['text-decoration'] = this.td
     this.temp['font-style'] = this.fs
     this.temp['font-weight'] = this.fw
-
     for (let key in this.temp) {
-      if (this.styles[key] !== this.temp[key].base) {
+      if (this.textStyles.text[key] !== this.temp[key].base) {
         this.style.valueMultiple.push(this.temp[key])
       }
     }
@@ -130,20 +129,23 @@ export default {
 </script>
 
 <template>
-  <div class="b-typography-controls">
-    <div class="b-typography-controls__control">
-      <div class="b-typography-controls__control-col b-typography-controls__control-col-font-name">
-        <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont" height="14"></base-select>
+  <div class="b-table-controls">
+    <div class="b-table-controls__chapter">
+      Text style
+    </div>
+    <div class="b-table-controls__control">
+      <div class="b-table-controls__control-col b-table-controls__control-col-font-name">
+        <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont"></base-select>
       </div>
-      <div class="b-typography-controls__control-col">
-        <base-select label="Size" :options="sizes" v-model="size" @input="changeSize" height="23"></base-select>
+      <div class="b-table-controls__control-col">
+        <base-select label="Size" :options="sizes" v-model="size" @input="changeSize"></base-select>
       </div>
     </div>
-    <div class="b-typography-controls__control">
-      <div class="b-typography-controls__control-col">
+    <div class="b-table-controls__control">
+      <div class="b-table-controls__control-col">
         <base-color-picker label="Text color" v-model="color" @change="changeColor"></base-color-picker>
       </div>
-      <div class="b-typography-controls__control-col" v-if="showTextStyles">
+      <div class="b-table-controls__control-col">
         <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
       </div>
     </div>
@@ -154,7 +156,7 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-typography-controls
+.b-table-controls
   padding: 0 0 $size-step/2
   border-bottom: 0.2rem dotted rgba($black, 0.15)
   &__control
@@ -171,4 +173,8 @@ export default {
         flex-basis: 90%
       &:first-child
         margin: 0
+  &__chapter
+    font-size: 1.4rem
+    font-weight: bold
+    margin-top: $size-step
 </style>

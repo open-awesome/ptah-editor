@@ -8,7 +8,9 @@
           :item="item"
           :type="type"
           @replace="replaceFile($event, index)"
-          @remove="removeFile(index)"/>
+          @remove="removeFile(index)"
+          @labelProgress="labelChange"
+          />
       </draggable>
     </div>
     <div class="b-uploader__row b-uploader__row_add-multiple" v-if="multiple">
@@ -19,16 +21,18 @@
           :type="type"
           @replace="replaceSrc"
           @remove="removeSrc"
+          @labelProgress="labelChange"
          />
         <base-uploader-item
           v-if="hasAddMore"
           :multiple="multiple"
           :type="type"
           @add="addFile"
+          @labelProgress="labelChange"
         />
       </div>
       <div class="b-uploader__label" v-if="label && label !== ''">
-        {{ label }}
+        {{ labelUploader }}
       </div>
     </div>
     <div class="b-uploader__row" v-if="!multiple">
@@ -39,16 +43,18 @@
           :type="type"
           @replace="replaceSrc"
           @remove="removeSrc"
+          @labelProgress="labelChange"
           />
         <base-uploader-item
           v-if="hasAddMore"
           :multiple="multiple"
           :type="type"
           @add="addFile"
+          @labelProgress="labelChange"
           />
       </div>
       <div class="b-uploader__label" v-if="label && label !== ''">
-        {{ label }}
+        {{ labelUploader }}
       </div>
     </div>
   </div>
@@ -80,7 +86,8 @@ export default {
   data () {
     return {
       src: null,
-      items: []
+      items: [],
+      labelUploader: ''
     }
   },
 
@@ -113,6 +120,7 @@ export default {
     } else {
       this.src = value
     }
+    this.labelUploader = this.label
   },
 
   methods: {
@@ -138,6 +146,11 @@ export default {
 
     removeSrc () {
       this.src = null
+    },
+
+    labelChange (newLabel) {
+      console.log(newLabel)
+      newLabel !== '' ? this.labelUploader = newLabel : this.labelUploader = this.label
     }
   }
 }

@@ -101,7 +101,7 @@ const C_CUSTOM_2 = [
         'border-radius': '2px',
         'font-family': 'Lato',
         'font-weight': 'normal',
-        'font-style': 'none',
+        'font-style': 'normal',
         'font-size': '1.6rem',
         'text-decoration': 'none'
       }
@@ -173,7 +173,7 @@ export default {
     <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-6">
+        <div class="b-grid__col-m-12 b-grid__col-6">
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"

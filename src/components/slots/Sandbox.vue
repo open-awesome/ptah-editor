@@ -103,6 +103,7 @@ export default {
   position: relative
   width: 100%
   padding: 0 $size-step/1.5
+  min-height: $size-step
 
   transition: border 0.25s
   &__settings
@@ -164,6 +165,11 @@ export default {
       margin: 0 auto
 
       border: 1px dashed transparent
+      padding: .8rem
+      &
+        > div
+          max-width: 100%
+          padding: .8rem
       &_horizont
         > div
           width: auto
