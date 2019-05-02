@@ -1,11 +1,10 @@
 <template>
   <div class="b-slot">
     <div class="b-slot__settings">
-      <!-- TODO: need added controls aligned in slot -->
-      <!--span @click="showSandboxSidebar($event)" class="b-slot__settings-item b-slot__settings-item-settings">
+      <span @click.stop="showSandboxSidebar($event, 'SlotSettings')" class="b-slot__settings-item b-slot__settings-item-settings">
         <icon-base name="cog" fill="white" />
-      </span-->
-      <span @click.stop="showSandboxSidebar($event, true)" class="b-slot__settings-item b-slot__settings-item-add-el">
+      </span>
+      <span @click.stop="showSandboxSidebar($event, 'Slot')" class="b-slot__settings-item b-slot__settings-item-add-el">
         <icon-base name="plus" fill="white" />
       </span>
     </div>
@@ -78,11 +77,7 @@ export default {
 
       this.toggleSidebar(true)
 
-      if (openElBar) {
-        this.setControlPanel('Slot')
-      } else {
-        this.setControlPanel(false)
-      }
+      this.setControlPanel(openElBar)
     }
   }
 }
@@ -96,8 +91,10 @@ export default {
   $this: &
   display: flex
   flex-wrap: wrap
+
   position: relative
   width: 100%
+  min-height: $size-step
   border: 1px dashed transparent
 
   transition: border 0.25s
@@ -130,10 +127,11 @@ export default {
 
       width: $size-step
       height: $size-step
+      margin-bottom: 4px
 
-      border-radius: 50%;
-      background: $white;
-      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39);
+      border-radius: 50%
+      background: $white
+      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
 
       cursor: pointer
       & svg
@@ -151,6 +149,11 @@ export default {
 
       width: 100%
       margin: 0 auto
+      padding: .8rem
+      &
+        > div
+          max-width: 100%
+          padding: .8rem
       &_horizont
         > div
           width: auto

@@ -14,6 +14,11 @@
       <control-typography/>
     </div>
 
+    <!-- Align -->
+    <div class="b-panel__control" v-if="settingObjectOptions.aligned">
+      <control-align/>
+    </div>
+
     <!-- background -->
     <div class="b-panel__control">
       <control-background-color/>
@@ -42,6 +47,7 @@ import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
 import ControlBackgroundImage from './../controls/TheControlBackgroundImage'
 import ControlBorderRadius from './../controls/TheControlBorderRadius'
 import ControlHoverAnimation from './../controls/TheControlHoverAnimation'
+import ControlAlign from './../controls/TheControlAlign'
 
 export default {
   name: 'ThePanelButton',
@@ -56,6 +62,7 @@ export default {
   components: {
     ControlText,
     ControlTypography,
+    ControlAlign,
     ControlBackgroundColor,
     ControlBackgroundImage,
     ControlBorderRadius,
@@ -64,6 +71,7 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
+      'settingObjectOptions',
       'settingObjectLabel'
     ])
   }

@@ -3,6 +3,7 @@ import BuilderSiteSettingsSeo from '@editor/components/BuilderSiteSettingsSeo'
 import BuilderSiteSettingsCookies from '@editor/components/BuilderSiteSettingsCookies'
 import BuilderSiteSettingsVisual from '@editor/components/BuilderSiteSettingsVisual'
 import BuilderSiteSettingsAddJsScripts from '@editor/components/BuilderSiteSettingsAddJsScripts'
+import BuilderSiteSettingsAddCss from '@editor/components/BuilderSiteSettingsAddCss'
 import BuilderSiteSettingsIntegrations from '@editor/components/BuilderSiteSettingsIntegrations'
 import BuilderSiteSettingsOpenGraph from '@editor/components/BuilderSiteSettingsOpenGraph'
 import BuilderSiteSettingsIntegrationsGoogleTag from '@editor/components/BuilderSiteSettingsIntegrationsGoogleTag'
@@ -47,6 +48,10 @@ const routes = [
           {
             path: 'addJsScrips',
             component: BuilderSiteSettingsAddJsScripts
+          },
+          {
+            path: 'addCss',
+            component: BuilderSiteSettingsAddCss
           },
           {
             path: 'integrations',
@@ -95,7 +100,11 @@ const routes = [
   {
     path: '/404',
     name: '404',
-    component: lazyLoadView(import(/* webpackChunkName: "404" */ '@components/NotFound'))
+    component: () => import('@components/NotFound')
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ]
 

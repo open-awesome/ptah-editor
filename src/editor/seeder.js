@@ -205,6 +205,7 @@ const data = new Map([
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
     {
+      box: true,
       canCopy: true,
       hasLink: true,
       aligned: false,
@@ -247,6 +248,7 @@ const data = new Map([
         'font-family': 'Lato',
         'text-decoration': 'none',
         'justify-content': 'center',
+        'align-items': 'center',
         'text-align': 'center',
         'width': '256px',
         'height': '64px'
@@ -395,7 +397,21 @@ const data = new Map([
       form: true,
       isComplex: true,
       placeholder: 'Placeholder',
-      buttonText: 'Submit'
+      buttonText: 'Submit',
+      styles: {
+        'background-color': 'rgba(0, 0, 0, 0.4)',
+        'color': '#000',
+        'border-radius': '2px',
+        'font-family': 'Lato',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'font-size': '1.6rem',
+        'text-decoration': 'none'
+      },
+      formStyles: {
+        'button-color': '#f76a67',
+        'input-color': '#ffffff'
+      }
     })
   )],
   /* === Custom sections === */
@@ -406,6 +422,7 @@ const data = new Map([
       removable: true,
       background: true,
       hasProducts: true,
+      isTextEdit: true,
       products: {
         'Standart': { visible: true },
         'Full': { visible: true },
@@ -415,24 +432,35 @@ const data = new Map([
       selectProduct: {
         name: 'Standart'
       },
-      typography: true,
-      styles: {
-        'background-image': '',
-        'background-position': 'center center',
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'background-color': '',
-        'font-family': 'Lato',
-        'font-size':  1.6,
-        'font-weight': false,
-        'font-style': false,
-        'text-decoration': false,
-        'text-align': false,
-        'color': '#fff'
-      },
       overlay: {
         color: 'rgba(0,0,0,1)',
         opacity: '0'
+      },
+      textStyles: {
+        text: {
+          'font-family': 'Lato',
+          'font-size': '1.4rem',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'text-decoration': 'none',
+          'color': 'rgba(255, 255, 255, 1)'
+        },
+        icon: {
+          'font-family': 'Lato',
+          'font-size': '1.4rem',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'text-decoration': 'none',
+          'color': 'rgba(255, 255, 255, 1)'
+        },
+        cost: {
+          'color': '#e4a11e',
+          'font-size': '3.2rem',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'font-family': 'Lato',
+          'text-decoration': 'none'
+        }
       }
     })
   )],

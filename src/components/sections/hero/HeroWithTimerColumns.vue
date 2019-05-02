@@ -1,7 +1,8 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import section from '../../mixins/section.js'
+import Seeder from '@editor/seeder'
+import defaults from '../../mixins/defaults'
 
 const GROUP_NAME = 'Hero'
 const NAME = 'HeroWithTimerColumns'
@@ -181,7 +182,7 @@ export default {
 
   group: GROUP_NAME,
 
-  mixins: [section],
+  mixins: [defaults],
 
   cover: '/img/covers/hero-with-timer-columns.jpg',
 
@@ -194,12 +195,7 @@ export default {
   },
 
   created () {
-    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
-    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
-    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
-    let $sectionData = this.$sectionData
-
-    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
+    Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
   }
 }
 </script>
@@ -215,7 +211,7 @@ export default {
     <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-4">
+        <div class="b-grid__col-m-12 b-grid__col-4">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
@@ -238,7 +234,7 @@ export default {
             </draggable>
           </sandbox>
         </div>
-        <div class="b-grid__col-8">
+        <div class="b-grid__col-m-12 b-grid__col-8">
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"

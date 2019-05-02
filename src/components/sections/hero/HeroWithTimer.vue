@@ -1,7 +1,8 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import section from '../../mixins/section.js'
+import Seeder from '@editor/seeder'
+import defaults from '../../mixins/defaults'
 
 const GROUP_NAME = 'Hero'
 const NAME = 'HeroWithTimer'
@@ -141,7 +142,7 @@ export default {
 
   group: GROUP_NAME,
 
-  mixins: [section],
+  mixins: [defaults],
 
   cover: '/img/covers/hero-with-timer.jpg',
 
@@ -152,12 +153,7 @@ export default {
   },
 
   created () {
-    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
-    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
-    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
-    let $sectionData = this.$sectionData
-
-    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
+    Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
   }
 }
 </script>

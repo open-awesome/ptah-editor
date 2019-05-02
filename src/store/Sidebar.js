@@ -32,6 +32,10 @@ export default {
         name: 'menu.addJs'
       },
       {
+        id: 'addCss',
+        name: 'menu.addCss'
+      },
+      {
         id: 'integrations',
         name: 'menu.integrations'
       },

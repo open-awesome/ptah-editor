@@ -89,14 +89,24 @@
       </a>
 
       <!-- Icon with text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')" v-if="type === 'icon'">
-        <icon-base name="style" width="12" height="15" />
-      </a>
+      <template v-if="type === 'icon'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
+          <icon-base name="settings" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Form -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Form')" v-if="type === 'form'">
-        <icon-base name="style" width="12" height="15" />
-      </a>
+      <template v-if="type === 'form'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormStyles')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
     </div>
 
@@ -396,8 +406,8 @@ export default {
             // --- TODO: bad idea
             // --- fix in future
             // --- coz data storage is unstable
-            let match = this.path[0].match(/\d+(?!\d+)/)
-            let index = (match) ? match[0] : ''
+            let name = this.path[0]
+            let index = name.split('components')[1]
             this.setSandboxPaths({
               components: `$sectionData.components${index}`,
               container: `$sectionData.container${index}`

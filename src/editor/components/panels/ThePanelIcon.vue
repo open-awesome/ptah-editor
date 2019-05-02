@@ -1,7 +1,7 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Icon
+      Icon settings
     </h6>
 
     <!-- Control icon -->
@@ -12,24 +12,13 @@
 </template>
 
 <script>
-import ControlText from './../controls/TheControlText'
-import ControlTypography from './../controls/TheControlTypography'
 import ControlTextWithIcon from '../controls/TheControlIconWithText'
 
 export default {
-  name: 'ThePanelInlineText',
+  name: 'ThePanelIcon',
 
   components: {
-    ControlTextWithIcon,
-    ControlText,
-    ControlTypography
-  },
-
-  props: {
-    builder: {
-      type: Object,
-      required: true
-    }
+    ControlTextWithIcon
   }
 }
 </script>
