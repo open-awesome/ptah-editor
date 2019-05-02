@@ -55,7 +55,7 @@
 
       </div>
 
-      <div class="b-grid__col-6"></div>
+      <div class="b-grid__col-6 hidden-m"></div>
 
     </div>
   </div>

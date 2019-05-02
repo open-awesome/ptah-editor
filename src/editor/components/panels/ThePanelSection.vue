@@ -6,12 +6,6 @@
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-section-settings__inner">
 
-        <!-- Products Section Controls -->
-        <control-section-products
-          v-if="settingObjectOptions.hasProducts"
-        >
-        </control-section-products>
-
         <div v-if="!isHeader" class="b-section-settings__control">
           <control-section-height></control-section-height>
         </div>
@@ -123,20 +117,16 @@
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlSectionHeight from './../controls/TheControlSectionHeight'
-import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
-import ControlSectionGallery from './../controls/TheControlSectionGallery.vue'
-import ControlBox from './../controls/TheControlBox'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
+import ControlBox from './../controls/TheControlBox'
 
 export default {
   components: {
     IconBase,
     BuilderSettingsBarGroup,
     BaseUploader,
-    ControlSectionProducts,
-    ControlSectionGallery,
     ControlBox,
     ControlSectionHeight
   },

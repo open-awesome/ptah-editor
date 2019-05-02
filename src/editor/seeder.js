@@ -192,10 +192,8 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': 'rgba(255,255,255,0)',
-        'background-attachment': 'scroll',
-        'width': '',
-        'height': ''
+        'background-color': 'rgba(0,0,0,0)',
+        'background-attachment': 'scroll'
       },
       overlay: {
         color: 'rgba(0,0,0,1)',
@@ -404,7 +402,7 @@ const data = new Map([
         'border-radius': '2px',
         'font-family': 'Lato',
         'font-weight': 'normal',
-        'font-style': 'none',
+        'font-style': 'normal',
         'font-size': '1.6rem',
         'text-decoration': 'none'
       },
@@ -422,6 +420,7 @@ const data = new Map([
       removable: true,
       background: true,
       hasProducts: true,
+      isTextEdit: true,
       products: {
         'Standart': { visible: true },
         'Full': { visible: true },
@@ -431,24 +430,35 @@ const data = new Map([
       selectProduct: {
         name: 'Standart'
       },
-      typography: true,
-      styles: {
-        'background-image': '',
-        'background-position': 'center center',
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'background-color': '',
-        'font-family': 'Lato',
-        'font-size':  1.6,
-        'font-weight': false,
-        'font-style': false,
-        'text-decoration': false,
-        'text-align': false,
-        'color': '#fff'
-      },
       overlay: {
         color: 'rgba(0,0,0,1)',
         opacity: '0'
+      },
+      textStyles: {
+        text: {
+          'font-family': 'Lato',
+          'font-size': '1.4rem',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'text-decoration': 'none',
+          'color': 'rgba(255, 255, 255, 1)'
+        },
+        icon: {
+          'font-family': 'Lato',
+          'font-size': '1.4rem',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'text-decoration': 'none',
+          'color': 'rgba(255, 255, 255, 1)'
+        },
+        cost: {
+          'color': '#e4a11e',
+          'font-size': '3.2rem',
+          'font-weight': 'normal',
+          'font-style': 'normal',
+          'font-family': 'Lato',
+          'text-decoration': 'none'
+        }
       }
     })
   )],
@@ -461,6 +471,10 @@ const data = new Map([
       hasHeader: true,
       galleryImages: [],
       header: 'This is a short header',
+      overlay: {
+        color: 'rgba(0,0,0,1)',
+        opacity: '0'
+      },
       // --- swiper options
       swiper: {
         delay: 2000

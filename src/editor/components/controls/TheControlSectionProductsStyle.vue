@@ -1,13 +1,13 @@
 <script>
-import ControlTextStylesChapter from './../controls/TheControlTextStylesChapter.vue'
-import ControlTextStylesText from './../controls/TheControlTextStylesText.vue'
+import ControlProductStylesText from './../controls/TheControlProductStylesText.vue'
+import ControlProductStylesCost from './../controls/TheControlProductStylesCost.vue'
 
 export default {
-  name: 'ControlSectionGalleryStyle',
+  name: 'ControlSectionProductStyles',
 
   components: {
-    ControlTextStylesChapter,
-    ControlTextStylesText
+    ControlProductStylesText,
+    ControlProductStylesCost
   }
 }
 </script>
@@ -16,12 +16,10 @@ export default {
   <div class="b-text-controls">
     <div>
       <div class="b-text-controls__control">
-        <control-text-styles-chapter/>
+        <control-product-styles-text/>
       </div>
-    </div>
-    <div>
       <div class="b-text-controls__control">
-        <control-text-styles-text/>
+        <control-product-styles-cost/>
       </div>
     </div>
   </div>

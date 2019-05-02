@@ -1,30 +1,24 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Icon settings
+      Icon style
     </h6>
 
     <!-- Control icon -->
     <div class="b-panel__control">
-      <control-text-with-icon></control-text-with-icon>
-    </div>
-
-    <div class="b-panel__control">
-      <control-box></control-box>
+      <control-text-with-icon-style></control-text-with-icon-style>
     </div>
   </div>
 </template>
 
 <script>
-import ControlTextWithIcon from '../controls/TheControlIconWithText'
-import ControlBox from '../controls/TheControlBox'
+import ControlTextWithIconStyle from '../controls/TheControlIconWithTextStyle'
 
 export default {
-  name: 'ThePanelIcon',
+  name: 'ThePanelIconStyle',
 
   components: {
-    ControlBox,
-    ControlTextWithIcon
+    ControlTextWithIconStyle
   }
 }
 </script>
@@ -53,5 +47,5 @@ export default {
         text-transform: uppercase
 
     &__control
-      margin-bottom: 4rem
+      margin-bottom: 1.6rem
 </style>

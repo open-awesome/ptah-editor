@@ -1,18 +1,17 @@
 <template>
     <header class="b-page__header" v-if="this.isStorefrontPreview == false">
-        <!--div style="margin: 1rem auto">
-            <router-link to="/">Dashboard</router-link>
-            <router-link to="editor/new">Editor</router-link>
-        </div-->
-      <div class="b-page__header-menu">
-        <icon-base name="hamburger" :color="colorHamburger"></icon-base>
-      </div>
 
       <div class="b-page__header-crumbs">
-        <span class="b-page__header-crumbs-home">
+        <span class="b-page__header-crumbs-home"
+          :class="{'b-page__header-crumbs-home_active': pageIs('/dashboard') === false}"
+          @click="returnToBoard"
+          >
           <icon-base name="home" :color="colorHome"></icon-base>
         </span>
-        <span>
+        <span class="b-page__header-crumbs-home"
+          :class="{'b-page__header-crumbs-home_active': pageIs('/dashboard') === false}"
+          @click="returnToBoard"
+          >
           All sites
         </span>
       </div>
@@ -65,6 +64,14 @@ export default {
   },
   mounted () {
     this.select.selected = { name: this.$i18n.locale, value: this.$i18n.locale }
+  },
+  methods: {
+    returnToBoard () {
+      this.$router.push('/dashboard/')
+    },
+    pageIs (page) {
+      return this.$route.path.indexOf(page) === 0
+    }
   }
 }
 </script>
@@ -93,6 +100,12 @@ export default {
     align-items: center
     &-home
       padding: 0  $size-step/4
+      &_active
+        cursor: pointer
+        color: $grey
+        opacity: 0.5
+        &:hover
+          opacity: 1
 .b-locale-changer
   .b-pth-base-select__dropdown
     max-height: 6rem !important

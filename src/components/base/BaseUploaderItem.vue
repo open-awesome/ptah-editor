@@ -13,10 +13,6 @@
       >
     </radial-progress-bar>
 
-    <div v-show="progress !== 100" class="b-uploader-item__progress">
-      {{ progress + '%' }} Loading...
-    </div>
-
     <div v-show="progress === 100" class="b-uploader-item__preview">
 
       <div v-if="hasPreview">
@@ -186,6 +182,12 @@ export default {
 
     loadingProgress ({ loaded, total }) {
       this.progress = (loaded === total) ? 99 : parseInt((loaded / total * 100))
+
+      if (this.progress === 99) {
+        this.$emit('labelProgress', '')
+      } else {
+        this.$emit('labelProgress', `${this.progress}% Loading...`)
+      }
     },
 
     async uploadFiles (fileList) {
@@ -229,19 +231,6 @@ export default {
   position: relative
   &:not(:first-child)
     margin: $size-step/8 0
-  &__progress
-    position: absolute
-    left: $size-step*1.8
-    top: 0rem
-
-    font-size: 1.4rem
-    line-height: 3rem
-    color: $dark-grey
-
-    width: 10rem
-    height: 3rem
-
-    background-color: $white
   &__preview
     display: inline-flex
     align-items: center
