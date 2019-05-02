@@ -8,16 +8,22 @@
     <div class="b-panel__control">
       <control-text-with-icon></control-text-with-icon>
     </div>
+
+    <div class="b-panel__control">
+      <control-box></control-box>
+    </div>
   </div>
 </template>
 
 <script>
 import ControlTextWithIcon from '../controls/TheControlIconWithText'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelIcon',
 
   components: {
+    ControlBox,
     ControlTextWithIcon
   }
 }
@@ -47,5 +53,5 @@ export default {
         text-transform: uppercase
 
     &__control
-      margin-bottom: 1.6rem
+      margin-bottom: 4rem
 </style>

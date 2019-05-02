@@ -10,6 +10,10 @@
           <control-section-height></control-section-height>
         </div>
 
+        <div class="b-section-settings__control">
+          <control-box></control-box>
+        </div>
+
         <!-- Header -->
         <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
           <BaseTextField
@@ -116,12 +120,14 @@ import ControlSectionHeight from './../controls/TheControlSectionHeight'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
+import ControlBox from './../controls/TheControlBox'
 
 export default {
   components: {
     IconBase,
     BuilderSettingsBarGroup,
     BaseUploader,
+    ControlBox,
     ControlSectionHeight
   },
   name: 'BuilderSettingsBarSection',
@@ -197,6 +203,19 @@ export default {
       this.builder.remove(this.settingObjectSection)
       this.saveState(this.builder.export('JSON'))
       this.clearSettingObject()
+
+      if (this.isMasterSection()) {
+        setTimeout(() => {
+          let frame = document.getElementById('artboard')
+          let sections = Array.from(frame.children)
+
+          sections.forEach((section) => {
+            section.style.top = '0px'
+            section.style.marginBottom = '0px'
+            section.style.paddingBottom = '0px'
+          })
+        }, 200)
+      }
     },
 
     updateSimpleValue (propName, value) {

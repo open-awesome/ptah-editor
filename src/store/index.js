@@ -175,7 +175,7 @@ const actions = {
         commit('version', data.currentVersion)
         return commit('isSaved', true)
       })
-  }, 800),
+  }, 2800),
 
   /**
    * Stores settings data
