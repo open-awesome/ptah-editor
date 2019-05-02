@@ -30,6 +30,7 @@ import ThePanelInlineText from './ThePanelInlineText'
 import ThePanelIcon from './ThePanelIcon'
 import ThePanelIconStyle from './ThePanelIconStyle'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
+import ThePanelSlotBackground from './ThePanelSlotBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
@@ -89,6 +90,7 @@ export default {
     ThePanelIcon,
     ThePanelIconStyle,
     ThePanelSectionBackground,
+    ThePanelSlotBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
     ThePanelFormSettings,

@@ -192,10 +192,8 @@ const data = new Map([
         'background-position': 'center center',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
-        'background-color': 'rgba(255,255,255,0)',
-        'background-attachment': 'scroll',
-        'width': '',
-        'height': ''
+        'background-color': 'rgba(0,0,0,0)',
+        'background-attachment': 'scroll'
       },
       overlay: {
         color: 'rgba(0,0,0,1)',
