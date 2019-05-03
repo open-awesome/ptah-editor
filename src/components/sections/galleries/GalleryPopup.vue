@@ -219,9 +219,9 @@ export default {
         contentPopup = '<img id="content" height="100%" src="' + url + '"></img>'
       } else {
         if (youtubeVideoUrl) {
-          contentPopup = '<iframe id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+          contentPopup = '<iframe allow="autoplay" id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
         } else {
-          contentPopup = '<video style="width: 100%;" id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
+          contentPopup = '<video autoplay="autoplay" style="width: 100%;" id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
         }
       }
 
@@ -466,9 +466,9 @@ export default {
             </div>
           </div><!--/.b-grid-->
           <div id="content"
-            gallery-two-popup-content=""
-            class="l-popup__content"
-            v-html="$sectionData.content">
+               gallery-two-popup-content=""
+               class="l-popup__content"
+               v-html="$sectionData.content">
           </div>
           <div class="b-grid"
             v-if="$sectionData.mainStyle.isBottomPopup"
@@ -679,6 +679,7 @@ export default {
   bottom: 0
 
   background-color: rgba(0, 0, 0, 0.8)
+  padding: $size-step
   z-index: 99999
   cursor: pointer
   .is-expanded &

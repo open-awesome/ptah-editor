@@ -73,9 +73,9 @@ export function galleryTwo() {
       contentPopup = '<img id="content" height="100%" src="' + url + '"></img>'
     } else {
       if (youtubeVideoUrl) {
-        contentPopup = '<iframe id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+        contentPopup = '<iframe allow="autoplay" id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
       } else {
-        contentPopup = '<video style="width: 100%; height: 100%;" id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
+        contentPopup = '<video autoplay="autoplay" style="width: 100%; height: 100%;" id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
       }
     }
 
@@ -105,19 +105,24 @@ export function galleryTwo() {
       next.style.display = "block";
     }
 
-    mainClassToggle();
+    mainClassToggle(true);
   }
 
-  function mainClassToggle() {
+  function mainClassToggle(value) {
     let bl = document.getElementById('main')
-    bl.classList.toggle("main_showPopup");
+
+    if (value) {
+      bl.classList.add("main_showPopup");
+    } else if (bl.classList.contains("main_showPopup")) {
+      bl.classList.remove("main_showPopup");
+    }
   }
 
   function closePopup() {
     popupC.innerHTML = "";
     popup.style.display = "none";
 
-    mainClassToggle();
+    mainClassToggle(false);
   }
 
   function matchYoutubeUrl(url) {
