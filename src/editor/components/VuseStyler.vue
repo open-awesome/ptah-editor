@@ -377,7 +377,7 @@ export default {
       // hide modal settings
       this.isModalsPropsShow = false
 
-      if (this.type !== 'section') this.setControlPanel(false)
+      this.setControlPanel(false)
       this.clearSettingObjectLight()
 
       // --- clear active classes
