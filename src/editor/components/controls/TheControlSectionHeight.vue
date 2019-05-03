@@ -62,11 +62,13 @@ export default {
     pxValue: {
       get () {
         let h
-        if (this.optHeight) {
-          h = parseInt(this.optHeight) || 0
-
-          if (this.optHeight.indexOf('rem') > 0) {
+        if (this.optHeight && !_.isNaN(parseInt(this.optHeight))) {
+          if (this.optHeight.indexOf('px') > 0) {
+            h = parseInt(this.optHeight)
+          } else if (this.optHeight.indexOf('rem') > 0) {
             h = h * 10
+          } else {
+            h = this.sectionHeight
           }
         } else {
           h = this.sectionHeight
@@ -97,8 +99,16 @@ export default {
     ]),
 
     onTypeChange () {
+      let styles
+
       if (this.heigthValueType === 'auto') {
-        let styles = { height: 'auto' }
+        styles = { height: 'auto' }
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+      } else if (this.heigthValueType === 'px') {
+        let styles = { height: this.pxValue + 'px' }
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+      } else {
+        let styles = { height: this.vhValue + 'vh' }
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
       }
     }
