@@ -144,8 +144,9 @@ export default {
         const autoplayValue = this.vAutoplay ? '&autoplay=1' : '&autoplay=0'
         const controlsValue = this.vControls ? '&controls=1' : '&controls=0'
         const relValue = this.vRel ? '&rel=1' : '&rel=0'
+        const muteValue = this.vAutoplay ? '&mute=1' : '&mute=0'
         this.videoType = 'youtube'
-        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0${controlsValue}${loopValue}${autoplayValue}&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1${relValue}`
+        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0${controlsValue}${loopValue}${autoplayValue}${muteValue}&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1${relValue}`
       } else {
         this.videoType = 'custom'
         this.youtubeVideoUrl = ''
