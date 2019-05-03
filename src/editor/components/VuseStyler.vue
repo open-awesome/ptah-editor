@@ -94,20 +94,30 @@
       </a>
 
       <!-- Icon with text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')" v-if="type === 'icon'">
-        <icon-base name="style" width="12" height="15" />
-      </a>
+      <template v-if="type === 'icon'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
+          <icon-base name="settings" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Form -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Form')" v-if="type === 'form'">
-        <icon-base name="style" width="12" height="15" />
-      </a>
+      <template v-if="type === 'form'">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormSettings')">
+          <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormStyles')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
 
     </div>
 
     <!-- Delete element -->
     <div class="b-styler__controls" v-if="options.removable">
-      <a href="#" class="b-styler__delete" title="delete" @click.stop="removeElement">
+      <a href="#" class="b-styler__control b-styler__control_del" title="delete" @click.stop="removeElement">
         <icon-base name="close" width="10" height="10"></icon-base>
       </a>
     </div>
@@ -401,8 +411,8 @@ export default {
             // --- TODO: bad idea
             // --- fix in future
             // --- coz data storage is unstable
-            let match = this.path[0].match(/\d+(?!\d+)/)
-            let index = (match) ? match[0] : ''
+            let name = this.path[0]
+            let index = name.split('components')[1]
             this.setSandboxPaths({
               components: `$sectionData.components${index}`,
               container: `$sectionData.container${index}`
@@ -548,8 +558,9 @@ export default {
   display: none
   justify-content: space-between
   align-items: flex-start
-  height: 4rem
+  height: 2.6rem
   z-index: 20
+  margin: 0 0 0 -0.2rem
 
   &.is-visible
     display: flex
@@ -562,14 +573,15 @@ export default {
     flex-wrap: nowrap
 
   &__control
-    width: 3.2rem
-    height: 3.2rem
+    width: $size-step/1.5
+    height: $size-step/1.5
+
     display: flex
     align-items: center
     justify-content: center
 
-    border-radius: 50%
     background: $white
+    border-radius: 0.2rem
     box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
     margin-right: .4rem
 
@@ -584,22 +596,16 @@ export default {
         fill: $white
         margin-bottom: 0
 
-  &__delete
-    width: 3.2rem
-    height: 3.2rem
-    display: flex
-    align-items: center
-    justify-content: center
-
-    border-radius: 50%
-    background: rgba(82, 105, 166, 0.25)
-
-    &:hover, .active
-      background: $dark-blue-krayola
-
-    svg
-      fill: $white
-      margin-bottom: 0
+    &_del
+      margin-right: -0.2rem
+      background: $black
+      svg
+        fill: $white
+        margin-bottom: 0
+      &:hover, .active
+        background: $black
+        svg
+          fill: $orange
 
   &__modal
     width: 40rem

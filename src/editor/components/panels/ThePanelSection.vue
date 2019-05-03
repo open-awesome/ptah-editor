@@ -6,14 +6,12 @@
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-section-settings__inner">
 
-        <!-- Products Section Controls -->
-        <control-section-products
-          v-if="settingObjectOptions.hasProducts"
-        >
-        </control-section-products>
-
         <div v-if="!isHeader" class="b-section-settings__control">
-          <BaseSwitcher label="Full screen height" v-model="fullScreen" @change="setHeight" />
+          <control-section-height></control-section-height>
+        </div>
+
+        <div class="b-section-settings__control">
+          <control-box></control-box>
         </div>
 
         <!-- Header -->
@@ -118,19 +116,19 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import ControlSectionProducts from './../controls/TheControlSectionProducts.vue'
-import ControlSectionGallery from './../controls/TheControlSectionGallery.vue'
+import ControlSectionHeight from './../controls/TheControlSectionHeight'
 import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
+import ControlBox from './../controls/TheControlBox'
 
 export default {
   components: {
     IconBase,
     BuilderSettingsBarGroup,
     BaseUploader,
-    ControlSectionProducts,
-    ControlSectionGallery
+    ControlBox,
+    ControlSectionHeight
   },
   name: 'BuilderSettingsBarSection',
 
@@ -143,8 +141,6 @@ export default {
 
   data () {
     return {
-      fullScreen: false,
-
       galleryImages: []
     }
   },
@@ -207,14 +203,18 @@ export default {
       this.builder.remove(this.settingObjectSection)
       this.saveState(this.builder.export('JSON'))
       this.clearSettingObject()
-    },
 
-    setHeight () {
-      if (this.fullScreen) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: ['full-height'] }))
-      } else {
-        let classesObj = this.settingObjectOptions.classes
-        classesObj.splice(classesObj.indexOf('full-height'), 1)
+      if (this.isMasterSection()) {
+        setTimeout(() => {
+          let frame = document.getElementById('artboard')
+          let sections = Array.from(frame.children)
+
+          sections.forEach((section) => {
+            section.style.top = '0px'
+            section.style.marginBottom = '0px'
+            section.style.paddingBottom = '0px'
+          })
+        }, 200)
       }
     },
 

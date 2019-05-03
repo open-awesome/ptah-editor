@@ -1,11 +1,13 @@
 <template>
   <div class="b-slot">
     <div class="b-slot__settings">
-      <!-- TODO: need added controls aligned in slot -->
-      <!--span @click="showSandboxSidebar($event)" class="b-slot__settings-item b-slot__settings-item-settings">
+      <span @click.stop="showSandboxSidebar($event, 'SlotSettings')" class="b-slot__settings-item b-slot__settings-item-settings">
         <icon-base name="cog" fill="white" />
-      </span-->
-      <span @click.stop="showSandboxSidebar($event, true)" class="b-slot__settings-item b-slot__settings-item-add-el">
+      </span>
+      <span @click.stop="showSandboxSidebar($event, 'SlotBackground')" class="b-slot__settings-item b-slot__settings-item-slot-bg">
+        <icon-base name="background" fill="white" />
+      </span>
+      <span @click.stop="showSandboxSidebar($event, 'Slot')" class="b-slot__settings-item b-slot__settings-item-add-el">
         <icon-base name="plus" fill="white" />
       </span>
     </div>
@@ -14,10 +16,11 @@
 </template>
 
 <script>
-import { mapMutations, mapActions } from 'vuex'
+import { mapState, mapMutations, mapActions } from 'vuex'
 
 export default {
   name: 'Sandbox',
+
   inject: ['$section'],
 
   props: {
@@ -34,12 +37,13 @@ export default {
   },
 
   computed: {
+    ...mapState('Sidebar', [
+      'sandbox',
+      'settingObjectSection'
+    ]),
+
     styles () {
       return this.$section.get(this.containerPath).styles
-    },
-
-    components () {
-      return this.$section.get(this.componentsPath)
     }
   },
 
@@ -54,7 +58,10 @@ export default {
       'setSection',
       'isAddSectionExpanded'
     ]),
-    ...mapActions('Sidebar', ['toggleSidebar', 'setControlPanel']),
+    ...mapActions('Sidebar', [
+      'toggleSidebar',
+      'setControlPanel'
+    ]),
 
     showSandboxSidebar (e, openElBar) {
       this.isAddSectionExpanded(false)
@@ -78,11 +85,7 @@ export default {
 
       this.toggleSidebar(true)
 
-      if (openElBar) {
-        this.setControlPanel('Slot')
-      } else {
-        this.setControlPanel(false)
-      }
+      this.setControlPanel(openElBar)
     }
   }
 }
@@ -96,21 +99,20 @@ export default {
   $this: &
   display: flex
   flex-wrap: wrap
+
   position: relative
   width: 100%
-  border: 1px dashed transparent
+  padding: 0 $size-step/1.5
+  min-height: $size-step
 
   transition: border 0.25s
-  .is-editable &:hover
-    border: 1px dashed $dark-blue-krayola
   &__settings
     position: absolute
-    top: -1px
-    bottom: -1px
-    left: -$size-step*1.1
+    top: 0
+    left: 0
     z-index: 1
 
-    width: $size-step
+    width: $size-step/1.5
     padding: 0
     margin: 0
     border: none
@@ -128,29 +130,46 @@ export default {
       align-items: center
       justify-content: center
 
-      width: $size-step
-      height: $size-step
+      width: $size-step/1.5
+      height: $size-step/1.5
 
-      border-radius: 50%;
-      background: $white;
-      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39);
+      background: $dark-blue-krayola
+      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
 
       cursor: pointer
       & svg
-        fill: $dark-blue-krayola
+        fill:  $white
+        width: 12px
+        height: 12px
+
+      &:hover, .active
+        background: $white
+        svg
+          fill: $dark-blue-krayola
+
   .is-editable &:hover
     #{$this}__settings
       opacity: 1
+    .b-draggable-slot
+      border: 1px dashed $dark-blue-krayola
   /deep/
     .b-draggable-slot
       display: flex
       flex-wrap: wrap
+      flex-direction: column
       justify-content: center
       align-items: center
       color: inherit
 
       width: 100%
       margin: 0 auto
+
+      border: 1px dashed transparent
+      padding: .8rem
+      &
+        > div
+          max-width: 100%
+          padding: .8rem
       &_horizont
         > div
           width: auto

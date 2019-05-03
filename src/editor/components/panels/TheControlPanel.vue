@@ -14,6 +14,7 @@ import { mapState, mapActions } from 'vuex'
 import ThePanelSection from './ThePanelSection'
 import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
+import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
 import ThePanelSocialSettings from './ThePanelSocialSettings'
 import ThePanelSocialStyle from './ThePanelSocialStyle'
@@ -28,13 +29,18 @@ import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
 import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineText from './ThePanelInlineText'
 import ThePanelIcon from './ThePanelIcon'
+import ThePanelIconStyle from './ThePanelIconStyle'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
+import ThePanelSlotBackground from './ThePanelSlotBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
 import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
-import ThePanelForm from './ThePanelForm'
+import ThePanelFormSettings from './ThePanelFormSettings'
+import ThePanelFormStyles from './ThePanelFormStyles'
+import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
+import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
 
 export default {
   name: 'TheControlPanel',
@@ -75,6 +81,7 @@ export default {
     ThePanelTimerSettings,
     ThePanelTimerStyle,
     ThePanelSlot,
+    ThePanelSlotSettings,
     ThePanelAvailableSettings,
     ThePanelAvailableStyle,
     ThePanelRestrictionsSettings,
@@ -83,13 +90,18 @@ export default {
     ThePanelImage,
     ThePanelImageLink,
     ThePanelIcon,
+    ThePanelIconStyle,
     ThePanelSectionBackground,
+    ThePanelSlotBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
-    ThePanelForm,
+    ThePanelFormSettings,
+    ThePanelFormStyles,
+    ThePanelVideo,
+    ThePanelSectionProductsColumnsSettings,
+    ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,
-    ThePanelSectionGalleryStyle,
-    ThePanelVideo
+    ThePanelSectionGalleryStyle
   }
 }
 </script>

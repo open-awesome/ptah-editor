@@ -70,7 +70,8 @@
 <script>
 import { StyleObject, Logo, Title, Text, Delimiter, Button } from '@editor/types'
 import { merge } from 'lodash-es'
-import section from '../../mixins/section.js'
+import Seeder from '@editor/seeder'
+import defaults from '../../mixins/defaults'
 
 const [name, group, cover] = ['HeroThreeColumns', 'Hero', '/img/covers/hero-three-columns.png']
 
@@ -184,7 +185,7 @@ export default {
   group,
   cover,
 
-  mixins: [section],
+  mixins: [defaults],
 
   $schema: {
     mainStyle: StyleObject,
@@ -212,12 +213,7 @@ export default {
   },
 
   created () {
-    let groupDataStore = this.$store.state.Landing.groupData[group]
-    let sectionDataStore = this.$store.state.Landing.sectionData[name]
-    let sectionData = this.canRestore(group, name) ? sectionDataStore : defaultSchema
-    let $sectionData = this.$sectionData
-
-    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, group, name, defaultSchema)
+    Seeder.seed(merge(this.$sectionData, defaultSchema))
   }
 }
 </script>

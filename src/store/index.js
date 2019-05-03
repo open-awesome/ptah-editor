@@ -88,6 +88,7 @@ const actions = {
             backgroundSize: 'cover'
           },
           script: '',
+          css: '',
           cookiesPolicy: {
             enabled: false,
             pdf: 'https://gn338.cdn.stg.gamenet.ru/0/7XSEU/o_1ohKcv.pdf'
@@ -174,7 +175,7 @@ const actions = {
         commit('version', data.currentVersion)
         return commit('isSaved', true)
       })
-  }, 800),
+  }, 2800),
 
   /**
    * Stores settings data

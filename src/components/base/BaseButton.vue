@@ -114,7 +114,7 @@ export default {
       fill: rgba($white, 0.1)
   &:hover:not([disabled])
     cursor: pointer
-    border-color: $dark-blue-krayola
+    border-color: $blue
   &_default
     width: 20.8rem
   &_middle

@@ -11,6 +11,9 @@
     <div class="b-panel__control">
       <control-background-color/>
     </div>
+    <div class="b-panel__control">
+      <control-box></control-box>
+    </div>
   </div>
 </template>
 
@@ -18,13 +21,15 @@
 import { mapState } from 'vuex'
 import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
 import ControlSocialNetworksStyle from './../controls/TheControlSocialNetworksStyle'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelSocialStyle',
 
   components: {
     ControlBackgroundColor,
-    ControlSocialNetworksStyle
+    ControlSocialNetworksStyle,
+    ControlBox
   },
 
   props: {

@@ -10,7 +10,6 @@
       :w="width"
       :h="height"
       :min-width="32"
-      :max-width="maxWidth ? maxWidth : 640"
       :min-height="32"
       :max-height="640"
       @resizing="onResize"
@@ -46,9 +45,6 @@ export default {
   props: {
     path: {
       type: String
-    },
-    maxWidth: {
-      type: Number
     }
   },
 
@@ -94,10 +90,7 @@ export default {
   min-width: $size-step*2
   min-height: $size-step/2
 
-  margin: $size-step/2 auto
-
   user-select: none
-  // cursor: pointer
   transition: background-color 200ms
 
   &__resize
@@ -121,10 +114,6 @@ export default {
         display: none
   & span
     display: block
-  &:hover
-    filter: brightness(120%)
-  &:active
-    filter: brightness(50%)
   .is-mobile &,
   .is-tablet &
     max-width: 90% !important

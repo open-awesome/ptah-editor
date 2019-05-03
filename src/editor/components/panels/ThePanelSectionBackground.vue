@@ -15,10 +15,9 @@
                 <span class="del" v-show="backgroundPickers.length > 1 && index > 0" @click="removeBackgroundPicker(index)">
                   <icon-base name="close" color="#B1B1B1" width="10" height="10"></icon-base>
                 </span>
-                <!-- TODO: if the gradient is selected - do not save the image for the background when switching layouts -->
-                <!--span class="plus" v-show="index === 0 && backgroundPickers.length < 4" @click="addBackgroundPicker">
+                <span class="plus" v-show="index === 0 && backgroundPickers.length < 4" @click="addBackgroundPicker">
                   <icon-base name="plus" color="#B1B1B1" width="14" height="14"></icon-base>
-                </span-->
+                </span>
               </div>
             </div>
           </div>
@@ -407,14 +406,23 @@ export default {
 
       border-radius: 100%
       border: 0.2rem solid $ligth-grey
+
+      transition: all .3s cubic-bezier(.2,.85,.4,1.275)
       &:hover
+        cursor: pointer
         background-color: $white
-      &.delete svg
+      &.del svg
         fill: $ligth-grey
-      &.delete:hover svg
-        fill: $orange
+      &.del:hover
+        border: 0.2rem solid $orange
+        & svg
+          fill: $orange
       &.plus svg
         fill: $dark-blue-krayola
+      &.plus:hover
+        border: 0.2rem solid $dark-blue-krayola
+        & svg
+          fill: $dark-blue-krayola
     &__description
       font-size: 1.4rem
       line-height: 1.7rem
