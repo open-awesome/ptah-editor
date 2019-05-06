@@ -252,9 +252,9 @@ export default {
       'setControlPanel'
     ]),
 
-    toggleSidebarAndHideContent () {
-      this.toggleSidebar()
-    },
+    ...mapActions('Landing', [
+      'saveState'
+    ]),
 
     toggleSettingsBar (section) {
       this.closeSiteSettings()
@@ -332,6 +332,8 @@ export default {
 
       this.builder.remove(section)
       this.clearSettingObject()
+
+      this.saveState(this.builder.export('JSON'))
     },
 
     showBackgroundPanel (section) {
