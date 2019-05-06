@@ -721,46 +721,48 @@ export default {
     width: 70%
   &__close
     position: absolute
-    top: 1rem
+    top: 0.5rem
     right: 1rem
+    z-index: 10
 
     transition: all 200ms
     &:hover
       transform: rotate(90deg)
-    .is-tablet &,
-    .is-mobile &
-      & svg
-        width: 2.8rem
-        height: 2.8rem
-    @media only screen and (max-width: 460px)
-      & svg
-        width: 2.8rem
-        height: 2.8rem
+    & svg
+      width: 2.8rem
+      height: 2.8rem
   &__arr
     position: absolute
-    top: 50%
-    width: 2rem
-    height: 2rem
-    margin: -1rem 0 0
+    top: 0
+    bottom: 0
+    z-index: 0
+
+    display: flex
+    justify-content: center
+    align-items: center
+
     transition: all 200ms
+    & svg
+      width: 2.8rem
+      height: 2.8rem
+
+      transition: all 200ms
+    &:hover svg
+      fill: $grey
     .is-tablet &,
     .is-mobile &
        top: 90%
-       & svg
-         width: 2.8rem
-         height: 2.8rem
     @media only screen and (max-width: 460px)
       &
         top: 95%
-        & svg
-         width: 2.8rem
-         height: 2.8rem
     &_prev
-      left: 0.5rem
+      left: 0rem
+      right: 95%
       & svg
         transform: rotate(-180deg)
     &_next
-      right: 0.5rem
+      right: 0
+      left: 95%
   &__count
     position: absolute
     top: $size-step/3
