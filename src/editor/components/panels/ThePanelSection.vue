@@ -121,6 +121,7 @@ import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
 import ControlBox from './../controls/TheControlBox'
+import { resetIndents } from '@editor/util'
 
 export default {
   components: {
@@ -203,16 +204,7 @@ export default {
       this.clearSettingObject()
 
       if (this.isMasterSection()) {
-        setTimeout(() => {
-          let frame = document.getElementById('artboard')
-          let sections = Array.from(frame.children)
-
-          sections.forEach((section) => {
-            section.style.top = '0px'
-            section.style.marginBottom = '0px'
-            section.style.paddingBottom = '0px'
-          })
-        }, 200)
+        resetIndents()
       }
       this.saveState(this.builder.export('JSON'))
     },
