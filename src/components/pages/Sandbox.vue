@@ -77,6 +77,7 @@
       <icon-base name="orderedList"></icon-base>
       <icon-base name="background"></icon-base>
       <icon-base name="layouts"></icon-base>
+      <icon-base name="lock"></icon-base>
     </div>
 
     <hr>

@@ -46,15 +46,20 @@
         </ul>
       </div> <!-- /_b-panel__control-->
     </div><!-- /_direction-->
+
+    <div class="b-panel__control">
+      <control-box></control-box>
+    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelSlotSettings',
-
+  components: { ControlBox },
   props: {
     builder: {
       type: Object,

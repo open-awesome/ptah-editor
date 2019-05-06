@@ -18,6 +18,10 @@
     <div class="b-panel__control">
       <control-text-link></control-text-link>
     </div>
+
+    <div class="b-panel__control">
+      <control-box></control-box>
+    </div>
   </div>
 </template>
 
@@ -25,11 +29,13 @@
 import ControlTypography from '../controls/TheControlTypography'
 import ControlAlign from '../controls/TheControlAlign'
 import ControlTextLink from '../controls/TheControlTextLink'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelText',
 
   components: {
+    ControlBox,
     ControlTypography,
     ControlAlign,
     ControlTextLink

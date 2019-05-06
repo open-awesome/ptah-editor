@@ -64,6 +64,10 @@ export default {
       this.moveSections()
       // apply changes
       this.updateSettingOptions(merge({}, this.settingObjectOptions, { absorb: this.absorbed.length }))
+
+      setTimeout(() => {
+        this.resetInednts()
+      }, 200)
     },
 
     moveSections () {
@@ -91,6 +95,17 @@ export default {
       }
 
       return holes
+    },
+
+    resetInednts () {
+      let frame = document.getElementById('artboard')
+      let sections = Array.from(frame.children)
+
+      sections.forEach((section) => {
+        section.style.top = '0px'
+        section.style.marginBottom = '0px'
+        section.style.paddingBottom = '0px'
+      })
     }
   }
 }
