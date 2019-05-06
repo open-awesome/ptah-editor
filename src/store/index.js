@@ -103,7 +103,7 @@ const actions = {
         return landing
       })
       .catch((error) => {
-        console.warn(error)
+        return Promise.reject(error)
       })
   },
 
