@@ -119,7 +119,7 @@
 
     <!-- modals -->
     <div class="b-styler__modal"
-       :class="modal.button.class"
+       :class="[ modal.button.classV, modal.button.classH ]"
        ref="buttonModal"
        v-if="type === 'button' && isModalsPropsShow === true"
        v-click-outside="closeModal"
@@ -229,9 +229,10 @@ export default {
     isModalsPropsShow: false,
     modal: {
       button: {
-        class: '_top',
-        width: '400',
-        height: '340'
+        classV: '_top',
+        classH: '_right',
+        width: 400,
+        height: 340
       }
     },
     transform: {
@@ -438,7 +439,9 @@ export default {
         'b-control-panel',
         'menubar__button',
         'editor__content',
-        'menubar is-hidden'
+        'menubar is-hidden',
+        'b-handle',
+        'resizable'
       ]
 
       if (event && (event.target === this.el
@@ -525,10 +528,24 @@ export default {
     },
 
     setPosition () {
-      let pos = this.$refs.styler.getBoundingClientRect()
+      let pos = this.el.getBoundingClientRect()
+      let widthBoard = document.getElementById('artboard').clientWidth
+      let widthSidebar = document.getElementById('sidebar').clientWidth
+      let heightTopbar = document.getElementById('topbar').clientHeight
+      let right = widthBoard - (pos.right - widthSidebar)
 
-      if (pos.top < this.modal[this.type].height || pos.right < this.modal[this.width]) {
-        this.modal[this.type].class = '_bottom'
+      if (pos.top < (this.modal[this.type].height + heightTopbar)) {
+        this.modal[this.type].classV = '_bottom'
+      } else {
+        this.modal[this.type].classV = '_top'
+      }
+
+      if (right < this.modal[this.type].width) {
+        this.transform[this.type].x = -(this.modal[this.type].width - 55)
+        this.modal[this.type].classH = '_left'
+      } else {
+        this.transform[this.type].x = 0
+        this.modal[this.type].classH = '_right'
       }
     },
 
@@ -648,11 +665,12 @@ export default {
 
     &._top
       bottom: 4rem
-      left: -2.5rem
     &._bottom
       top: 4rem
-      right: -2.5rem
-
+    &.right
+      right: calc(100% - 40px)
+    &._left
+      left: 40px
     &:before
       content: ""
       position: absolute
@@ -676,15 +694,23 @@ export default {
     &._top
       &:before,
       &:after
-        left: 19%
         bottom: -0.75rem
-        margin-left: -0.75rem
 
     &._bottom
       &:before,
       &:after
-        right: 19%
         top: -0.75rem
+
+    &._right
+      &:before,
+      &:after
+        left: 9%
+        margin-left: -0.75rem
+
+    &._left
+      &:before,
+      &:after
+        right: 15%
         margin-right: -0.75rem
 
   &[x-out-of-boundaries]
