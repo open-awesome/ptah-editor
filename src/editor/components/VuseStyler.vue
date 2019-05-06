@@ -29,7 +29,7 @@
       </a>
 
       <!-- Text editor -->
-      <a href="#" class="b-styler__control" @click.stop="editText = true" v-if="type === 'text'">
+      <a href="#" class="b-styler__control b-styler__control_text" @click.stop="editText = true" v-if="type === 'text'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
@@ -434,12 +434,11 @@ export default {
     },
     hideStyler (event) {
       const stopNames = [
-        'b-styler__control',
+        'b-styler__control_text',
         'b-control-panel',
         'menubar__button',
         'editor__content',
-        'menubar is-hidden',
-        'b-slot__settings'
+        'menubar is-hidden'
       ]
 
       if (event && (event.target === this.el
