@@ -157,8 +157,12 @@ export default {
   },
 
   async beforeRouteEnter (to, from, next) {
-    await store.dispatch('getLandingData', to.params.slug)
-    next()
+    try {
+      await store.dispatch('getLandingData', to.params.slug)
+      next()
+    } catch (e) {
+      next({ path: '/404' })
+    }
   },
 
   created () {
