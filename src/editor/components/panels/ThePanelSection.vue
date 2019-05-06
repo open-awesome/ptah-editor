@@ -108,7 +108,7 @@
     </div>
 
     <div class="b-section-settings__buttons">
-      <base-button :color="'gray'" :transparent="true" @click="deleteSection">Delete</base-button>
+      <base-button :color="'gray'" :transparent="true" @click="deleteSection()">Delete</base-button>
     </div>
   </div>
 </template>
@@ -199,9 +199,7 @@ export default {
         let absorb = master.data.mainStyle.absorb
         master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
       }
-
       this.builder.remove(this.settingObjectSection)
-      this.saveState(this.builder.export('JSON'))
       this.clearSettingObject()
 
       if (this.isMasterSection()) {
@@ -216,6 +214,7 @@ export default {
           })
         }, 200)
       }
+      this.saveState(this.builder.export('JSON'))
     },
 
     updateSimpleValue (propName, value) {
