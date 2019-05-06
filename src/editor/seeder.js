@@ -379,8 +379,13 @@ const data = new Map([
       removable: true,
       resizable: true,
       shape: false,
-      videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
-      loop: false,
+      settings: {
+        loop: false,
+        autoplay: false,
+        rel: false,
+        controls: true,
+        url: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8'
+      },
       styles: {
         'width': '',
         'height': ''
