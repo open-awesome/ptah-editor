@@ -380,6 +380,10 @@ export default {
       let groups = []
       let sectionsNodes = Array.from(this.$refs.artboard.children)
 
+      sectionsNodes = sectionsNodes.filter((node) => {
+        return Array.from(node.classList).indexOf('b-section-header') < 0
+      })
+
       this.removeGroupClasses(sectionsNodes)
 
       this.$builder.sections.forEach((section, index) => {
