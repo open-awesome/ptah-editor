@@ -3,7 +3,7 @@
     ref="styler"
     id="styler"
     v-if="$builder.isEditing"
-    :class="{ 'is-visible': isVisible && !editText }"
+    :class="{ 'is-visible': isVisible && !editText && isShowStyler }"
     @click.stop=""
   >
 
@@ -243,7 +243,7 @@ export default {
     }
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -271,6 +271,21 @@ export default {
 
     poneId () {
       return randomPoneId()
+    }
+  },
+
+  watch: {
+    isResizeStop: {
+      handler: function (val, oldVal) {
+        if (val === true) this.el.addEventListener('click', this.showStyler)
+      }
+    },
+    isDragStop: {
+      handler: function (val, oldVal) {
+        if (val) {
+          this.showStylerAfterDragEl()
+        }
+      }
     }
   },
 
@@ -335,7 +350,7 @@ export default {
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
 
     showStyler (event) {
       let self = this
@@ -400,8 +415,13 @@ export default {
             keys.some(key => Boolean(~key.indexOf('container')))
           )
           if (hasSlotsData) {
-            let target = event.target.closest('.b-draggable-slot')
-            if (target) {
+            let target = null
+
+            if (event.target !== null) {
+              target = event.target.closest('.b-draggable-slot')
+            }
+
+            if (target !== null) {
               target.classList.add('active')
             }
             // --- TODO: bad idea
@@ -439,18 +459,19 @@ export default {
         'b-control-panel',
         'menubar__button',
         'editor__content',
-        'menubar is-hidden',
-        'b-handle',
-        'resizable'
+        'menubar is-hidden'
       ]
 
-      if (event && (event.target === this.el
-        || this.checkStylerNodes(event, stopNames))) {
+      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames))) || this.isResizeStop) {
         this.isCurrentStyler = true
+
+        if (this.isResizeStop) this.isCurrentStyler = false
+        this.toggleResizeStop(false)
+
         return
       }
 
-      if (event && isParentTo(event.target, this.$el)) {
+      if (event && MouseEvent && isParentTo(event.target, this.$el)) {
         return
       }
 
@@ -462,6 +483,7 @@ export default {
       // hide modal settings
       this.closeModal()
 
+      // hide panel
       this.setControlPanel(false)
 
       this.el.contentEditable = 'false'
@@ -555,6 +577,19 @@ export default {
       }
       if (props && props.video) {
         this.el.dataset.video = props.video
+      }
+    },
+
+    showStylerAfterDragEl () {
+      if (undefined !== this.options['isDragged'] && this.options['isDragged']) {
+        delete this.options['isDragged']
+
+        this.isVisible = false
+        this.isCurrentStyler = false
+        this.toggleDragStop(false)
+
+        this.el.addEventListener('click', this.showStyler)
+        this.el.click()
       }
     }
   }
