@@ -144,12 +144,23 @@
         {{rangeSliderValue}} %
       </base-range-slider>
     </div>
+    <hr>
+    <Sketch v-model="someColor"></Sketch>
+    <base-color-picker :value="someColor"></base-color-picker>
+
+    <div style="height: 400px">&nbsp;</div>
   </div>
 </template>
 
 <script>
+import { Sketch } from 'vue-color'
+
 export default {
   name: 'Sandbox',
+
+  components: {
+    Sketch
+  },
 
   data () {
     return {
