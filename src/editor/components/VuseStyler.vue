@@ -606,6 +606,9 @@ export default {
         this.isVisible = false
         this.isCurrentStyler = false
         this.toggleDragStop(false)
+
+        this.el.addEventListener('click', this.showStyler)
+        this.el.click()
       }
     }
   }
