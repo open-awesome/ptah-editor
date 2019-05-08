@@ -205,6 +205,7 @@ export default {
     label: String
   },
   data: () => ({
+    popper: null,
     isCurrentStyler: false,
     currentOption: '',
     title: '',
@@ -275,6 +276,14 @@ export default {
   },
 
   watch: {
+    settingObjectOptions: {
+      handler: function (val, oldVal) {
+        if (this.popper) {
+          this.popper.update()
+        }
+      },
+      deep: true
+    },
     isResizeStop: {
       handler: function (val, oldVal) {
         if (val === true) this.el.addEventListener('click', this.showStyler)
@@ -366,6 +375,10 @@ export default {
         return data
       }
 
+      let applyReactStyle = (data) => {
+        data.styles.width = data.offsets.reference.width
+      }
+
       // show inline styler
       if (!this.popper && this.type !== 'section') {
         this.$nextTick(function () {
@@ -379,6 +392,12 @@ export default {
               },
               hide: {
                 enabled: true
+              },
+              applyStyle: { enabled: true },
+              applyReactStyle: {
+                enabled: true,
+                fn: applyReactStyle,
+                order: 900
               }
             }
           })
@@ -587,9 +606,6 @@ export default {
         this.isVisible = false
         this.isCurrentStyler = false
         this.toggleDragStop(false)
-
-        this.el.addEventListener('click', this.showStyler)
-        this.el.click()
       }
     }
   }
