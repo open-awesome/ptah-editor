@@ -26,9 +26,6 @@ const state = {
 }
 
 const getters = {
-  getMyState: (state) => {
-    return state
-  },
   storefrontPreview: (state) => {
     return state.storefrontPreview
   }
