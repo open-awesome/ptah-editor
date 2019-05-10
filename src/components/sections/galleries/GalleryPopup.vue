@@ -216,12 +216,12 @@ export default {
       youtubeVideoUrl = this.matchYoutubeUrl(videoUrl)
 
       if (typeContent === 'default') {
-        contentPopup = '<img id="content" height="100%" src="' + url + '"></img>'
+        contentPopup = '<img id="content" width="100%" height="100%" src="' + url + '"></img>'
       } else {
         if (youtubeVideoUrl) {
           contentPopup = '<iframe allow="autoplay" id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
         } else {
-          contentPopup = '<video autoplay="autoplay" style="width: 100%;" id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
+          contentPopup = '<video autoplay="autoplay" style="width: 100%; height: 100%;" id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
         }
       }
 
@@ -237,34 +237,38 @@ export default {
     openPopup () {
       setTimeout(() => {
         this.setHeight()
-      }, 100)
+      }, 250)
     },
 
     setHeight () {
       this.$sectionData.isShowPopup = true
 
-      let el = document.getElementById('content')
+      let el = document.getElementById('layoutContent')
       let ab = document.getElementById('artboard')
       let actualWidth = null
-      let calcHeight = null
+      // let calcHeight = null
       let calcMargin = null
 
       actualWidth = undefined !== ab ? ab.clientWidth : el.clientWidth
-      calcHeight = actualWidth * 0.5625
+      // calcHeight = actualWidth * 0.5625
       calcMargin = (document.body.clientWidth - actualWidth) / 2
-      el.style.height = calcHeight + 'px'
-      el.style.width = actualWidth + 'px'
+      // el.style.height = calcHeight + 'px'
+      // el.style.width = actualWidth + 'px'
 
       this.$sectionData.popupStyles['width'] = actualWidth + 'px'
       this.$sectionData.popupStyles['margin'] = '0 ' + calcMargin + 'px'
-
       // hide all styler after shop popup
       el.click()
+
+      this.$sectionData.isShowPopup = true
     },
 
     closePopup () {
+      let el = document.getElementById('layoutContent')
       this.$sectionData.isShowPopup = false
       this.$sectionData.content = ''
+      el.style.height = ''
+      el.style.width = ''
     },
 
     matchYoutubeUrl (url) {
@@ -296,6 +300,10 @@ export default {
         let bl = document.getElementById('builderLayout')
         bl.style.zIndex = 19
       }
+    },
+
+    onClickOutside () {
+      this.closePopup()
     }
   },
 
@@ -428,12 +436,6 @@ export default {
             >
             <icon-base name="close" color="#fff" width="14" height="14" />
           </div>
-          <div gallery-two-popup-prev="" class="l-popup__arr l-popup__arr_prev" @click="clickArr('prev')" v-show="$sectionData.index > 0">
-            <icon-base name="arrowRight" color="#fff" width="8" height="14" />
-          </div>
-          <div gallery-two-popup-next="" class="l-popup__arr l-popup__arr_next" @click="clickArr('next')" v-show="$sectionData.index < $sectionData.mainStyle.count - 1">
-            <icon-base name="arrowRight" color="#fff" width="8" height="14" />
-          </div>
           <div class="b-grid"
              v-if="$sectionData.mainStyle.isTopPopup"
             >
@@ -465,10 +467,19 @@ export default {
               </div>
             </div>
           </div><!--/.b-grid-->
-          <div id="content"
-               gallery-two-popup-content=""
-               class="l-popup__content"
-               v-html="$sectionData.content">
+          <div id="layoutContent" class="l-popup__content" v-click-outside="onClickOutside">
+            <div id="content"
+              class="l-popup__content-block"
+              gallery-two-popup-content=""
+              v-html="$sectionData.content"
+              >
+            </div>
+            <div gallery-two-popup-prev="" class="l-popup__arr l-popup__arr_prev" @click="clickArr('prev')" v-show="$sectionData.index > 0">
+              <icon-base name="arrowRight" color="#fff" width="8" height="14" />
+            </div>
+            <div gallery-two-popup-next="" class="l-popup__arr l-popup__arr_next" @click="clickArr('next')" v-show="$sectionData.index < $sectionData.mainStyle.count - 1">
+              <icon-base name="arrowRight" color="#fff" width="8" height="14" />
+            </div>
           </div>
           <div class="b-grid"
             v-if="$sectionData.mainStyle.isBottomPopup"
@@ -678,10 +689,9 @@ export default {
   left: 0
   bottom: 0
 
-  background-color: rgba(0, 0, 0, 0.8)
+  background-color: rgba(0, 0, 0, 0.9)
   padding: $size-step
   z-index: 99999
-  cursor: pointer
   .is-expanded &
     top: 8rem
     left: $size-step * 9
@@ -691,32 +701,37 @@ export default {
     align-items: center
   &__padd
     position: relative
+    width: 100%
     height: 100%
 
     display: flex
-    justify-content: center
     align-items: center
+    justify-content: center
     flex-direction: column
   &__content
-    border: 0.2rem solid #fff
-    background-color: #000
 
-    max-width: 90%
-    max-height: 90%
+    width: 80%
+    max-height: 80%
 
-    overflow: hidden
     cursor: auto
     transition: all 200ms
 
+    position: relative
+    height: auto
+
     display: flex
     justify-content: center
-    align-items: center
-  &__content iframe,
-  &__content video
-    display: block
+    &-block
+      overflow: hidden
+      height: 100%
 
-    width: 100%
-    height: 100%
+      transition: all 200ms
+      & iframe,
+      & video,
+      & img
+        display: block
+        width: 100%
+        height: 100%
   &__content_video
     width: 70%
   &__close
@@ -728,6 +743,7 @@ export default {
     transition: all 200ms
     &:hover
       transform: rotate(90deg)
+      cursor: pointer
     & svg
       width: 2.8rem
       height: 2.8rem
@@ -742,6 +758,7 @@ export default {
     align-items: center
 
     transition: all 200ms
+    cursor: pointer
     & svg
       width: 2.8rem
       height: 2.8rem
@@ -749,20 +766,14 @@ export default {
       transition: all 200ms
     &:hover svg
       fill: $grey
-    .is-tablet &,
-    .is-mobile &
-       top: 90%
-    @media only screen and (max-width: 460px)
-      &
-        top: 95%
     &_prev
-      left: 0rem
-      right: 95%
+      left: -15%
+      right: 100%
       & svg
         transform: rotate(-180deg)
     &_next
-      right: 0
-      left: 95%
+      right: -15%
+      left: 100%
   &__count
     position: absolute
     top: $size-step/3

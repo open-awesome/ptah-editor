@@ -19,7 +19,7 @@ export function galleryTwo() {
   var prev = document.querySelectorAll('[' + TARGET_POPUP_PREV + ']')[0];
   var next = document.querySelectorAll('[' + TARGET_POPUP_NEXT + ']')[0];
   var typeContent = document.querySelectorAll('[' + TARGET_POPUP_TYPE_CONTENT + ']')[0];
-  var defUrl = 'https://gn792.cdn.gamenet.ru/TY0Xv2riHu/6qfh3/o_1Pvytf.png';
+  var defUrl = 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png';
   var index = null;
 
   if (links.length === 0) {
@@ -70,7 +70,7 @@ export function galleryTwo() {
 
     youtubeVideoUrl = matchYoutubeUrl(url);
     if (typeContent === 'default') {
-      contentPopup = '<img id="content" height="100%" src="' + url + '"></img>'
+      contentPopup = '<img id="content" width="100%" height="100%" src="' + url + '"></img>'
     } else {
       if (youtubeVideoUrl) {
         contentPopup = '<iframe allow="autoplay" id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
@@ -83,26 +83,23 @@ export function galleryTwo() {
     popupP.style.width = "100%";
     popupP.style.height = "100%";
     popupP.style.margin = "0 auto";
-    setTimeout(opepPopup(contentPopup), 500);
+    popupC.innerHTML = contentPopup;
+
+    setTimeout(opepPopup(), 500);
   }
 
-  function opepPopup(c) {
-    popupC.innerHTML = c;
+  function opepPopup() {
     popup.style.display = "flex";
-    var c = document.getElementById('content');
-    var actualWidth = c.clientWidth;
-    var calcHeight = actualWidth * 0.5625;
-    c.style.height = calcHeight + 'px';
 
     if (index === 0) {
       prev.style.display = "none";
-      next.style.display = "block";
+      next.style.display = "flex";
     } else if (index === links.length - 1) {
-      prev.style.display = "block";
+      prev.style.display = "flex";
       next.style.display = "none";
     } else {
-      prev.style.display = "block";
-      next.style.display = "block";
+      prev.style.display = "flex";
+      next.style.display = "flex";
     }
 
     mainClassToggle(true);
@@ -119,7 +116,11 @@ export function galleryTwo() {
   }
 
   function closePopup() {
+    var c = document.getElementById('layoutContent');
+
     popupC.innerHTML = "";
+    c.style.width = '';
+    c.style.height = '';
     popup.style.display = "none";
 
     mainClassToggle(false);
