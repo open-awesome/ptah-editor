@@ -363,6 +363,10 @@ export default {
 
     showStyler (event) {
       let self = this
+      const stopNames = [
+        'b-draggable-slot',
+        'b-draggable-slot active'
+      ]
 
       event.preventDefault()
       event.stopPropagation()
@@ -404,7 +408,7 @@ export default {
         })
       }
 
-      if (this.isCurrentStyler) {
+      if (this.isCurrentStyler && !this.checkStylerNodes(event, stopNames)) {
         this.isCurrentStyler = false
         return
       }
