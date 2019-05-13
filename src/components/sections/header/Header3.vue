@@ -185,7 +185,9 @@ export default {
   },
 
   created () {
-    Seeder.seed(merge(this.$sectionData, defaultSchema))
+    if (this.$sectionData.edited === undefined) {
+      Seeder.seed(merge(this.$sectionData, defaultSchema))
+    }
   }
 }
 </script>
