@@ -27,8 +27,8 @@
           v-if="headerSection.data.mainStyle.backgroundType === 'video' && headerSection.data.mainStyle.backgroundVideo"
           :id="`bg-video-${ headerSection.id }`"
           slot="video"
-          autoplay
-          muted
+          autoplay="true"
+          muted="muted"
           loop>
         <source :src="headerSection.data.mainStyle.backgroundVideo">
       </video>
@@ -56,8 +56,8 @@
             v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
             :id="`bg-video-${ section.id }`"
             slot="video"
-            autoplay
-            muted
+            autoplay="true"
+            muted="muted"
             loop>
           <source :src="section.data.mainStyle.backgroundVideo">
         </video>
@@ -309,14 +309,15 @@ export default {
 
       const node = document.createElement('video')
       node.id = 'video_bg'
-      node.setAttribute('autoplay', 'autoplay')
-      node.setAttribute('loop', 'loop')
-      node.setAttribute('muted', true)
+      node.setAttribute('autoplay', '')
+      node.setAttribute('loop', '')
+      node.setAttribute('muted', '')
       if (settings.videoPosition) {
         node.classList.add(settings.videoPosition)
       }
       node.innerHTML = `<source src="${settings.video}" type="video/mp4"></source>`
       this.$refs.artboard.appendChild(node)
+      node.muted = true
     },
     getSections () {
       let sections = []

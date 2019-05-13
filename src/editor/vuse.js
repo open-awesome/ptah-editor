@@ -383,7 +383,7 @@ class Vuse {
   }
 
   getVideoBg (video) {
-    return `<video id="video_bg" class="${this.settings.videoPosition}" autoplay="autoplay" loop="loop" muted="muted">
+    return `<video id="video_bg" class="${this.settings.videoPosition}" autoplay="true" loop="loop" muted="muted">
               <source src="${video}" type="video/mp4"></source>
             </video>`
   }
