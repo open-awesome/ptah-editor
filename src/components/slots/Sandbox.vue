@@ -60,11 +60,15 @@ export default {
     ]),
     ...mapActions('Sidebar', [
       'toggleSidebar',
-      'setControlPanel'
+      'setControlPanel',
+      'setElement'
     ]),
 
     showSandboxSidebar (e, openElBar) {
       this.isAddSectionExpanded(false)
+
+      // set slot element
+      this.setElement(this.$slots.default[0].elm)
 
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
