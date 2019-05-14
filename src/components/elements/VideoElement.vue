@@ -14,7 +14,7 @@
       ref="custom"
       :src="vUrl"
       v-bind="options"
-      muted="muted"
+      muted="true"
       type="video/mp4"
       >
     </video>
