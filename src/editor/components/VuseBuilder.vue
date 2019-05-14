@@ -28,7 +28,7 @@
           :id="`bg-video-${ headerSection.id }`"
           slot="video"
           autoplay="true"
-          muted="muted"
+          muted="true"
           loop>
         <source :src="headerSection.data.mainStyle.backgroundVideo">
       </video>
@@ -57,7 +57,7 @@
             :id="`bg-video-${ section.id }`"
             slot="video"
             autoplay="true"
-            muted="muted"
+            muted="true"
             loop>
           <source :src="section.data.mainStyle.backgroundVideo">
         </video>
