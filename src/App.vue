@@ -18,13 +18,7 @@ export default {
   },
 
   created () {
-    if (localStorage.getItem('token') !== null) {
-      this.refreshToken().then(() => {
-        this.loading = false
-      })
-    } else {
-      this.loading = false
-    }
+    this.loading = false
   },
 
   methods: {
