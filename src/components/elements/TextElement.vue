@@ -59,7 +59,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bullet_list() }"
-            @click="commands.bullet_list"
+            @click="toggleList('bullet', 'ordered')"
           >
             <icon-base name="bulletList"></icon-base>
           </button>
@@ -67,7 +67,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.ordered_list() }"
-            @click="commands.ordered_list"
+            @click="toggleList('ordered', 'bullet')"
           >
             <icon-base name="orderedList"></icon-base>
           </button>
@@ -202,6 +202,18 @@ export default {
       command({ href: url })
       this.hideLinkMenu()
       this.editor.focus()
+    },
+
+    toggleList (oldList, newList) {
+      if (this.editor.isActive[`${newList}_list`]()) {
+        this.editor.commands[`${newList}_list`]()
+
+        this.$nextTick(function () {
+          this.editor.commands[`${oldList}_list`]()
+        })
+      } else {
+        this.editor.commands[`${oldList}_list`]()
+      }
     }
   }
 }
