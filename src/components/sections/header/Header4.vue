@@ -106,7 +106,7 @@ const defaultComponents = [
         'min-width': '100px',
         'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px',
+        'font-size': '1.8rem',
         'margin': '8px 16px',
         'width': 'auto'
       }
@@ -126,7 +126,7 @@ const defaultComponents = [
         'min-width': '100px',
         'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px',
+        'font-size': '1.8rem',
         'margin': '8px 16px',
         'width': 'auto'
       }
@@ -160,7 +160,7 @@ const defaultComponents = [
         'min-width': '100px',
         'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px',
+        'font-size': '1.8rem',
         'margin': '8px 16px',
         'width': 'auto'
       }
@@ -180,7 +180,7 @@ const defaultComponents = [
         'min-width': '100px',
         'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px',
+        'font-size': '1.8rem',
         'margin': '8px 16px',
         'width': 'auto'
       }
