@@ -59,14 +59,14 @@ export default {
       'toggleResizeStop'
     ]),
 
-    onResize: function (x, y, width, height) {
+    onResize (x, y, width, height) {
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
 
       this.toggleShowStyler(false)
     },
 
-    onResizeStop: function (x, y, width, height) {
+    onResizeStop (x, y, width, height) {
       this.toggleShowStyler(true)
       this.toggleResizeStop(true)
     }
