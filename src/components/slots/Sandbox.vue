@@ -61,7 +61,8 @@ export default {
     ...mapActions('Sidebar', [
       'toggleSidebar',
       'setControlPanel',
-      'setElement'
+      'setElement',
+      'setSettingObject'
     ]),
 
     showSandboxSidebar (e, openElBar) {
@@ -73,6 +74,15 @@ export default {
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
         .forEach(el => el.classList.remove('active'))
+
+      let options = this.$section.get(this.containerPath)
+      options.name = this.containerPath
+
+      this.setSettingObject({
+        options,
+        type: 'slot',
+        label: 'slot'
+      })
 
       this.setSection(this.$section)
       this.setSandboxPaths({
