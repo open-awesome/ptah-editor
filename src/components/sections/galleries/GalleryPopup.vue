@@ -216,7 +216,7 @@ export default {
       youtubeVideoUrl = this.matchYoutubeUrl(videoUrl)
 
       if (typeContent === 'default') {
-        contentPopup = '<img id="content" width="100%" height="100%" src="' + url + '"></img>'
+        contentPopup = '<img style="max-width: 100%; max-height: 100%;" id="content" src="' + url + '"></img>'
       } else {
         if (youtubeVideoUrl) {
           contentPopup = '<iframe allow="autoplay" id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
@@ -247,16 +247,16 @@ export default {
       let ab = document.getElementById('artboard')
       let actualWidth = null
       // let calcHeight = null
-      let calcMargin = null
+      // let calcMargin = null
 
       actualWidth = undefined !== ab ? ab.clientWidth : el.clientWidth
       // calcHeight = actualWidth * 0.5625
-      calcMargin = (document.body.clientWidth - actualWidth) / 2
+      // calcMargin = (document.body.clientWidth - actualWidth) / 2
       // el.style.height = calcHeight + 'px'
       // el.style.width = actualWidth + 'px'
 
       this.$sectionData.popupStyles['width'] = actualWidth + 'px'
-      this.$sectionData.popupStyles['margin'] = '0 ' + calcMargin + 'px'
+      this.$sectionData.popupStyles['margin'] = '0 auto'
       // hide all styler after shop popup
       el.click()
 
@@ -711,7 +711,9 @@ export default {
   &__content
 
     width: 80%
+    min-width: 50%
     max-height: 80%
+    min-height: 40%
 
     cursor: auto
     transition: all 200ms
@@ -721,17 +723,17 @@ export default {
 
     display: flex
     justify-content: center
+    align-items: center
+    flex-grow: 1
     &-block
-      overflow: hidden
+      display: flex
+      align-items: center
+      justify-content: center
+
       height: 100%
+      width: 80%
 
       transition: all 200ms
-      & iframe,
-      & video,
-      & img
-        display: block
-        width: 100%
-        height: 100%
   &__content_video
     width: 70%
   &__close

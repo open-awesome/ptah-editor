@@ -70,7 +70,7 @@ export function galleryTwo() {
 
     youtubeVideoUrl = matchYoutubeUrl(url);
     if (typeContent === 'default') {
-      contentPopup = '<img id="content" width="100%" height="100%" src="' + url + '"></img>'
+      contentPopup = '<img style="max-width: 100%; max-height: 100%;" id="content" src="' + url + '"></img>'
     } else {
       if (youtubeVideoUrl) {
         contentPopup = '<iframe allow="autoplay" id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
