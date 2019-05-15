@@ -200,7 +200,6 @@ export default {
 .b-hero
   position: relative
   width: 100%
-  min-height: 70rem
   margin: 0
   display: flex
   flex-direction: column

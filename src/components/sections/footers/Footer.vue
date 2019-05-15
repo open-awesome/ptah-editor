@@ -208,7 +208,6 @@ export default {
 .b-section-footer
   position: relative
   width: 100%
-  min-height: 14rem
   margin: 0
   display: flex
   text-align: center
