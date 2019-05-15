@@ -118,7 +118,9 @@ export default {
 
 <template>
   <div class="control-height">
-    <h6>Section height</h6>
+   <base-label>
+     Section height
+   </base-label>
     <BaseRadioCheck :list="heightValueTypesList" v-model="heigthValueType" @change="onTypeChange"/>
 
     <div class="control-height__input" v-if="heigthValueType === 'vh'">

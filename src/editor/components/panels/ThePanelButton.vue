@@ -87,7 +87,4 @@ export default {
     padding: 0
     &:first-letter
       text-transform: uppercase
-
-  &__control
-    margin-bottom: 1.6rem
 </style>
