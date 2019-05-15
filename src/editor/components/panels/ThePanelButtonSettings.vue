@@ -3,40 +3,16 @@
     <h6 class="b-panel__title">
       {{ settingObjectLabel }}
     </h6>
-
-    <!-- Typography -->
+    <!-- Hover animation -->
     <div class="b-panel__control">
-      <control-typography/>
+      <control-hover-animation/>
     </div>
-
-    <!-- Align -->
-    <div class="b-panel__control" v-if="settingObjectOptions.aligned">
-      <control-align/>
-    </div>
-
-    <!-- background -->
-    <div class="b-panel__control">
-      <control-background-color/>
-    </div>
-    <div class="b-panel__control">
-      <control-background-image/>
-    </div>
-
-    <!-- Border radius -->
-    <div class="b-panel__control">
-      <control-border-radius/>
-    </div>
-
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import ControlTypography from './../controls/TheControlTypography'
-import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
-import ControlBackgroundImage from './../controls/TheControlBackgroundImage'
-import ControlBorderRadius from './../controls/TheControlBorderRadius'
-import ControlAlign from './../controls/TheControlAlign'
+import ControlHoverAnimation from './../controls/TheControlHoverAnimation'
 
 export default {
   name: 'ThePanelButton',
@@ -49,11 +25,7 @@ export default {
   },
 
   components: {
-    ControlTypography,
-    ControlAlign,
-    ControlBackgroundColor,
-    ControlBackgroundImage,
-    ControlBorderRadius
+    ControlHoverAnimation
   },
 
   computed: {

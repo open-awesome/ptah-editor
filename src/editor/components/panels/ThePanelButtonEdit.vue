@@ -4,39 +4,16 @@
       {{ settingObjectLabel }}
     </h6>
 
-    <!-- Typography -->
+    <!-- Text -->
     <div class="b-panel__control">
-      <control-typography/>
+      <control-text/>
     </div>
-
-    <!-- Align -->
-    <div class="b-panel__control" v-if="settingObjectOptions.aligned">
-      <control-align/>
-    </div>
-
-    <!-- background -->
-    <div class="b-panel__control">
-      <control-background-color/>
-    </div>
-    <div class="b-panel__control">
-      <control-background-image/>
-    </div>
-
-    <!-- Border radius -->
-    <div class="b-panel__control">
-      <control-border-radius/>
-    </div>
-
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import ControlTypography from './../controls/TheControlTypography'
-import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
-import ControlBackgroundImage from './../controls/TheControlBackgroundImage'
-import ControlBorderRadius from './../controls/TheControlBorderRadius'
-import ControlAlign from './../controls/TheControlAlign'
+import ControlText from './../controls/TheControlText'
 
 export default {
   name: 'ThePanelButton',
@@ -49,11 +26,7 @@ export default {
   },
 
   components: {
-    ControlTypography,
-    ControlAlign,
-    ControlBackgroundColor,
-    ControlBackgroundImage,
-    ControlBorderRadius
+    ControlText
   },
 
   computed: {

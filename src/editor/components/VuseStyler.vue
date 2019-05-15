@@ -14,6 +14,16 @@
           <icon-base name="style" width="12" height="15" />
         </a>
       </div>
+      <div class="b-styler__controls">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonEdit')">
+          <icon-base name="edit" width="12" height="15" />
+        </a>
+      </div>
+      <div class="b-styler__controls">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonSettings')">
+          <icon-base name="cog" width="12" height="15" />
+        </a>
+      </div>
       <div class="b-styler__controls" ref="buttonModalProps">
         <a href="#" class="b-styler__control" @click.stop="setModalProps()">
           <icon-base name="link" width="18" height="18" />
@@ -35,7 +45,7 @@
 
       <!-- Inline text -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('InlineText')" v-if="type === 'inline'">
-        <icon-base name="cog" width="12" height="15" />
+        <icon-base name="edit" width="12" height="15" />
       </a>
 
       <!-- Social settings -->
@@ -90,11 +100,14 @@
 
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
-          <icon-base name="settings" width="12" height="15" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
           <icon-base name="style" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconEdit')">
+          <icon-base name="edit" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
+          <icon-base name="settings" width="12" height="15" />
         </a>
       </template>
 
@@ -568,17 +581,16 @@ export default {
     flex-wrap: nowrap
 
   &__control
-    width: $size-step/1.5
-    height: $size-step/1.5
+    width: $size-step/1.8
+    height: $size-step/1.8
 
     display: flex
     align-items: center
     justify-content: center
 
     background: $white
-    border-radius: 0.2rem
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    margin-right: .4rem
+    // box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+    // margin-right: .4rem
 
     svg
       fill: $dark-blue-krayola
