@@ -234,6 +234,10 @@ export default {
   &::selection, & ::selection
     color: #ff0
     background: #000
+  ul,
+  ol
+    margin: 0 1rem
+    padding: 0 1rem
 
 .menubar
   height: 6.4rem
