@@ -124,6 +124,14 @@ export default {
       if (this.action.value === '') {
         this.link = (this.link.includes('#section_')) ? '' : this.link
         this.setUrl(this.link)
+
+        this.classes.push('js-element-link')
+      } else {
+        this.classes.forEach((name, index) => {
+          if (name.indexOf('js-element-link') > -1) {
+            this.classes.splice(index, 1)
+          }
+        })
       }
 
       if (this.action.value !== 'ptah-d-video') {

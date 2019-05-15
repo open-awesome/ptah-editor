@@ -246,20 +246,12 @@ export default {
       let el = document.getElementById('layoutContent')
       let ab = document.getElementById('artboard')
       let actualWidth = null
-      // let calcHeight = null
-      // let calcMargin = null
 
       actualWidth = undefined !== ab ? ab.clientWidth : el.clientWidth
-      // calcHeight = actualWidth * 0.5625
-      // calcMargin = (document.body.clientWidth - actualWidth) / 2
-      // el.style.height = calcHeight + 'px'
-      // el.style.width = actualWidth + 'px'
-
       this.$sectionData.popupStyles['width'] = actualWidth + 'px'
       this.$sectionData.popupStyles['margin'] = '0 auto'
-      // hide all styler after shop popup
-      el.click()
 
+      el.click()
       this.$sectionData.isShowPopup = true
     },
 

@@ -305,6 +305,15 @@ export default {
       this.changeTextLinkStyle(this.options.textLinkStyles)
     }
 
+    if (this.options.video && this.options.link.type === 'video') {
+      this.el.classList.add('ptah-d-video')
+      this.el.dataset.video = this.options.video
+    }
+
+    if (this.options.link && this.options.link.action === '') {
+      this.el.classList.add('js-element-link')
+    }
+
     // Apply animation to element
     if (this.options.classes !== undefined && this.options.classes.length) {
       this.options.classes.forEach((name, index) => {
@@ -316,11 +325,6 @@ export default {
           this.el.dataset.video = this.options.video
         }
       })
-    }
-
-    if (this.options.video) {
-      this.el.classList.add('ptah-d-video')
-      this.el.dataset.video = this.options.video
     }
 
     if (this.options.link && this.options.link.behavior) {

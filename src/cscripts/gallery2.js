@@ -60,7 +60,7 @@ export function galleryTwo() {
     let url = ''
 
 
-    if (imageUrl !== '') {
+    if (imageUrl !== '' && imageUrl !== null && typeContent === 'default') {
       url = imageUrl
     } else if (videoUrl !== '') {
       url = videoUrl
