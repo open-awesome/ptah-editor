@@ -24,6 +24,17 @@ export default {
     }
   },
 
+  props: {
+    hideMargin: {
+      type: Boolean,
+      default: false
+    },
+    hidePadding: {
+      type: Boolean,
+      default: false
+    }
+  },
+
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions'
@@ -145,30 +156,38 @@ export default {
       <div class="control-box__content-edge">
       </div>
     </div>
-    <div class="control-box__title-m">Margin</div>
-    <div class="control-box__title-p">Padding</div>
+    <div class="control-box__title-m" v-if="!hideMargin">Margin</div>
+    <div class="control-box__title-p" v-if="!hidePadding">Padding</div>
     <!-- CONTROLS -->
     <!-- margin -->
-    <base-number-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern=""></base-number-field>
-    <base-number-field v-model="marginRight" class="ctrl ctrl__m-right"></base-number-field>
-    <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"></base-number-field>
-    <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom"></base-number-field>
+    <template v-if="!hideMargin">
+      <base-number-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern=""></base-number-field>
+      <base-number-field v-model="marginRight" class="ctrl ctrl__m-right"></base-number-field>
+      <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"></base-number-field>
+      <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom"></base-number-field>
+    </template>
     <!-- padding -->
-    <base-number-field v-model="paddingLeft" class="ctrl ctrl__p-left"></base-number-field>
-    <base-number-field v-model="paddingRight" class="ctrl ctrl__p-right"></base-number-field>
-    <base-number-field v-model="paddingTop" class="ctrl ctrl__p-top"></base-number-field>
-    <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"></base-number-field>
+    <template v-if="!hidePadding">
+      <base-number-field v-model="paddingLeft" class="ctrl ctrl__p-left"></base-number-field>
+      <base-number-field v-model="paddingRight" class="ctrl ctrl__p-right"></base-number-field>
+      <base-number-field v-model="paddingTop" class="ctrl ctrl__p-top"></base-number-field>
+      <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"></base-number-field>
+    </template>
     <!-- locks -->
     <a href="#"
        class="control-box__lock control-box__lock--margin"
        :class="{ 'active': lockMargins }"
-       @click.prevent="lockMargins = !lockMargins">
+       @click.prevent="lockMargins = !lockMargins"
+       v-if="!hideMargin"
+      >
       <icon-base name="lock"></icon-base>
     </a>
     <a href="#"
        class="control-box__lock control-box__lock--padding"
        :class="{ 'active': lockPaddings }"
-       @click.prevent="lockPaddings = !lockPaddings">
+       @click.prevent="lockPaddings = !lockPaddings"
+       v-if="!hidePadding"
+      >
       <icon-base name="lock"></icon-base>
     </a>
   </div>
