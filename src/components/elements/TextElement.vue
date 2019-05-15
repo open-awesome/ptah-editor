@@ -236,8 +236,8 @@ export default {
     background: #000
   ul,
   ol
-    margin: 0 1rem
-    padding: 0 1rem
+    margin: 0
+    padding: 0 1em
 
 .menubar
   height: 6.4rem
