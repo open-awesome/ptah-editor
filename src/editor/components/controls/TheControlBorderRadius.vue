@@ -1,13 +1,8 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { merge } from 'lodash-es'
 
 export default {
-  data () {
-    return {
-      elRadius: 0
-    }
-  },
-
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions'
@@ -15,17 +10,24 @@ export default {
 
     styles () {
       return this.settingObjectOptions.styles
-    }
-  },
+    },
 
-  created () {
-    this.elRadius = this.radius ? parseInt(this.styles['border-radius']) : 0
+    elRadius: {
+      get () {
+        return parseInt(this.styles['border-radius']) || 0
+      },
+
+      set (radius) {
+        let styles = {
+          'border-radius': `${radius}px`
+        }
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, { styles }))
+      }
+    }
   },
 
   methods: {
-    changeRadius () {
-      this.styles['border-radius'] = `${this.elRadius}px`
-    }
+    ...mapActions('Sidebar', ['updateSettingOptions'])
   }
 }
 </script>
