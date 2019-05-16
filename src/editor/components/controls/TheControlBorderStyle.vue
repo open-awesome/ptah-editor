@@ -25,7 +25,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'settingObjectElement'
     ]),
 
     styles () {
@@ -33,20 +34,20 @@ export default {
     },
 
     pseudo () {
-      return this.settingObjectOptions.pseudo
+      return this.settingObjectOptions.pseudo.hover
     }
   },
 
   created () {
     let self = this
 
-    this.borderWidth = this.styles['border-width'] ? this.styles['border-width'].split('px')[0] : 0
+    this.borderWidth = this.styles['border-width'] ? parseFloat(this.styles['border-width'].split('px')[0]) : 0
     this.borderColor = this.styles['border-color'] ? this.styles['border-color'] : 'rgba(0, 0, 0, 0)'
     this.borderStyle = this.styles['border-style'] ? this.styles['border-style'] : 'solid'
 
-    this.borderWidthHover = this.pseudo['border-width'] ? this.pseudo['border-width'] : 0
-    this.borderColorHover = this.pseudo['border-color'] ? this.pseudo['border-color'] : 'rgba(0, 0, 0, 0)'
-    this.borderStyleHover = this.pseudo['border-style'] ? this.pseudo['border-style'] : 'solid'
+    this.borderWidthHover = this.pseudo['border-width'] ? parseFloat(this.pseudo['border-width'].split('px')[0]) : 0
+    this.borderColorHover = this.pseudo['border-color'] ? this.pseudo['border-color'].split('!')[0] : 'rgba(0, 0, 0, 0)'
+    this.borderStyleHover = this.pseudo['border-style'] ? this.pseudo['border-style'].split('!')[0] : 'solid'
 
     this.borderStyleList.forEach(function (item, i, arr) {
       if (self.borderStyle === self.borderStyleList[i].value) {
@@ -69,8 +70,18 @@ export default {
       this.update('border-color', color)
     },
 
+    changeColorHover () {
+      const color = this.borderColorHover.rgba ? `rgba(${Object.values(this.borderColorHover.rgba).toString()})` : this.borderColorHover
+
+      this.changePseudo('border-color', color)
+    },
+
     changeWidth () {
       this.update('border-width', `${this.borderWidth}px`)
+    },
+
+    changeWidthHover () {
+      this.changePseudo('border-width', `${this.borderWidthHover}px`)
     },
 
     update (prop, value) {
@@ -83,26 +94,26 @@ export default {
       this.update('border-style', this.borderStyleValue.value)
     },
 
-    changeHoverColor () {
-      const color = this.borderColorHover.rgba ? `rgba(${Object.values(this.borderColorHover.rgba).toString()})` : this.borderColorHover
-      this.changePseudo('border-color', color)
+    changeStyleHover () {
+      this.changePseudo('border-style', this.borderStyleHoverValue.value)
     },
 
     changePseudo (attr, style, pseudoClass = 'hover') {
-      if (style !== '') {
-        this.changePseudoStyle(attr, style + '!important')
-        this.pseudo[pseudoClass][attr] = style + '!important'
-      }
-    },
-
-    changePseudoStyle (attr, style, pseudoClass = 'hover') {
       const poneId = randomPoneId()
-      this.pseudo[pseudoClass][attr] = style
+
+      this.updatePseudo(attr, style + '!important', pseudoClass)
       this.settingObjectElement.dataset.pone = poneId
 
       let styleTemplate = getPseudoTemplate(poneId, this.settingObjectOptions.pseudo)
 
       document.head.insertAdjacentHTML('beforeend', styleTemplate)
+    },
+
+    updatePseudo (attr, style, pseudoClass = 'hover') {
+      let pseudo = {}
+      pseudo[pseudoClass] = {}
+      pseudo[pseudoClass][attr] = style
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { pseudo }))
     }
   }
 }
@@ -126,6 +137,22 @@ export default {
       </div>
     </div>
   </div>
+  <div class="b-border-style__control b-border-style__control_h">
+    <base-label>Border hover</base-label>
+    <div class="b-border-style__color-style">
+      <div class="b-border-style__color-style-col">
+        <base-color-picker v-model="borderColorHover" @change="changeColorHover" label=""/>
+      </div>
+      <div class="b-border-style__color-style-col">
+        <base-range-slider v-model="borderWidthHover" label="" step="1" min="0" max="16" @change="changeWidthHover">
+          {{ borderWidthHover }} <span class="b-border-radius-control__px">px</span>
+        </base-range-slider>
+      </div>
+      <div class="b-border-style__color-style-col">
+        <base-select typeItems="class" label="" :options="borderStyleList" v-model="borderStyleHoverValue" @input="changeStyleHover"/>
+      </div>
+    </div>
+  </div>
 </div>
 </template>
 
@@ -136,6 +163,8 @@ export default {
 .b-border-style
   margin-top: 2.2rem
   &__control
+    &_h
+      margin-top: 1rem
   &__px
     color: $grey-middle
   &__color-style
