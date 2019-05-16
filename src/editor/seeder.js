@@ -218,7 +218,10 @@ const data = new Map([
           'background-position': 'center center',
           'background-repeat': 'no-repeat',
           'background-size': 'cover',
-          'color': ''
+          'color': '',
+          'border-color': '',
+          'border-width': '',
+          'border-style': ''
         }
       },
       text: 'Click Me!',
@@ -241,6 +244,9 @@ const data = new Map([
         'border-color': '',
         'font-size': '1.6rem',
         'border-radius': 0,
+        'border-color': '',
+        'border-width': '',
+        'border-style': '',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-family': 'Lato',

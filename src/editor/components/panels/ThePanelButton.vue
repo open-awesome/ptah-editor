@@ -22,6 +22,11 @@
       <control-background-image/>
     </div>
 
+    <!-- Border style -->
+    <div class="b-panel__control">
+      <control-border-style/>
+    </div>
+
     <!-- Border radius -->
     <div class="b-panel__control">
       <control-border-radius/>
@@ -36,6 +41,7 @@ import ControlTypography from './../controls/TheControlTypography'
 import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
 import ControlBackgroundImage from './../controls/TheControlBackgroundImage'
 import ControlBorderRadius from './../controls/TheControlBorderRadius'
+import ControlBorderStyle from './../controls/TheControlBorderStyle'
 import ControlAlign from './../controls/TheControlAlign'
 
 export default {
@@ -53,7 +59,8 @@ export default {
     ControlAlign,
     ControlBackgroundColor,
     ControlBackgroundImage,
-    ControlBorderRadius
+    ControlBorderRadius,
+    ControlBorderStyle
   },
 
   computed: {
