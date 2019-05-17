@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import { mapActions } from 'vuex'
 
 const C_CUSTOM_COLUMN = [
   {
@@ -89,10 +90,10 @@ const SCHEMA_CUSTOM = {
   },
   container: _.merge({}, C_CUSTOM_CONTAINER),
   components: _.merge({}, C_CUSTOM),
-  components0: _.merge({}, C_CUSTOM_COLUMN),
   components1: _.merge({}, C_CUSTOM_COLUMN),
   components2: _.merge({}, C_CUSTOM_COLUMN),
   components3: _.merge({}, C_CUSTOM_COLUMN),
+  components4: _.merge({}, C_CUSTOM_COLUMN),
   edited: true
 }
 
@@ -159,15 +160,29 @@ export default {
   $schema: {
     mainStyle: types.Columns,
     container: types.StyleObject,
-    container0: types.StyleObject,
     container1: types.StyleObject,
     container2: types.StyleObject,
     container3: types.StyleObject,
+    container4: types.StyleObject,
     components: _.merge([], HEADER, [{ key: 20 }]),
-    components0: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }, { key: 4 }]),
-    components1: _.merge([], COMPONENTS, [{ key: 5 }, { key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
-    components2: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }, { key: 14 }]),
-    components3: _.merge([], COMPONENTS, [{ key: 15 }, { key: 16 }, { key: 17 }, { key: 18 }, { key: 19 }])
+    components1: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }, { key: 4 }]),
+    components2: _.merge([], COMPONENTS, [{ key: 5 }, { key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
+    components3: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }, { key: 14 }]),
+    components4: _.merge([], COMPONENTS, [{ key: 15 }, { key: 16 }, { key: 17 }, { key: 18 }, { key: 19 }])
+  },
+
+  methods: {
+    ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
+
+    async showSettings (panel) {
+      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
+
+      this.setSettingSection(this.$builder.sections[index])
+
+      await this.$nextTick()
+
+      this.setControlPanel(panel)
+    }
   },
 
   created () {
@@ -180,7 +195,7 @@ export default {
 
 <template>
   <section
-    class="b-columns2"
+    class="b-columns"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
@@ -199,7 +214,7 @@ export default {
 
           <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
             <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
-              <component class="b-columns2-component"
+              <component class="b-columns-component"
                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
                  :is="component.name"
                  :href="$sectionData.components[index].element.link.href"
@@ -214,39 +229,53 @@ export default {
           </draggable>
         </sandbox>
       </div>
-      <div class="b-grid__row">
-        <div class="b-grid__col-3 b-grid__col-m-12 "
-          v-for="(column, key) in $sectionData"
-          v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
-          :key="key"
-          >
-          <sandbox
-            class="b-sandbox"
-            :container-path="`$sectionData.container${key.split('components')[1]}`"
-            :components-path="`$sectionData.components${key.split('components')[1]}`"
-            direction="column"
-            :style="`$sectionData.container${key.split('components')[1]}.styles`"
-            >
-            <draggable v-model="$sectionData[key]" class="b-draggable-slot" :style="$sectionData[`container${key.split('components')[1]}`].styles">
-              <div :class="`b-draggable-slot__${component.type}`"
-                 v-for="(component, index) in $sectionData[key]"
-                 v-if="$sectionData[key].length !== 0"
-                 :key="index"
+      <div class="b-columns__padd">
+        <div class="b-columns__padd-border">
+          <!-- Setting controls -->
+          <div class="b-columns__controls">
+            <div>
+              <a href="#" class="b-columns__control" @click.stop="showSettings('SectionColumnsSettings')">
+                <icon-base name="cog" width="12" height="15" />
+              </a>
+            </div>
+          </div>
+
+          <div class="b-grid__row">
+            <div class="b-grid__col-m-12"
+              :class="`b-grid__col-${12/$sectionData.mainStyle.count}`"
+              v-for="(column, key) in $sectionData"
+              v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) <= $sectionData.mainStyle.count"
+              :key="key"
+              >
+              <sandbox
+                class="b-sandbox"
+                :container-path="`$sectionData.container${key.split('components')[1]}`"
+                :components-path="`$sectionData.components${key.split('components')[1]}`"
+                direction="column"
+                :style="`$sectionData.container${key.split('components')[1]}.styles`"
                 >
-                <component class="b-columns2-component"
-                  v-styler:for="{ el: $sectionData[key][index].element, path: `$sectionData.components[${key}][${index}].element`, type: $sectionData[key][index].type, label: $sectionData[key][index].label }"
-                  :is="component.name"
-                  :href="$sectionData[key][index].element.link.href"
-                  :target="$sectionData[key][index].element.link.target"
-                  :path="`components[${key}][${index}].element`"
-                  :style="$sectionData[key][index].element.styles"
-                  :class="[$sectionData[key][index].element.classes, $sectionData[key][index].class]"
-                  >
-                  <div v-html="$sectionData[key][index].element.text"></div>
-                </component>
-              </div>
-            </draggable>
-          </sandbox>
+                <draggable v-model="$sectionData[key]" class="b-draggable-slot" :style="$sectionData[`container${key.split('components')[1]}`].styles">
+                  <div :class="`b-draggable-slot__${component.type}`"
+                     v-for="(component, index) in $sectionData[key]"
+                     v-if="$sectionData[key].length !== 0"
+                     :key="index"
+                    >
+                    <component class="b-columns-component"
+                      v-styler:for="{ el: $sectionData[`${key}`][index].element, path: `$sectionData.${key}[${index}].element`, type: $sectionData[key][index].type, label: $sectionData[`${key}`][index].label }"
+                      :is="component.name"
+                      :href="$sectionData[key][index].element.link.href"
+                      :target="$sectionData[key][index].element.link.target"
+                      :path="`${key}[${index}].element`"
+                      :style="$sectionData[key][index].element.styles"
+                      :class="[$sectionData[key][index].element.classes, $sectionData[key][index].class]"
+                      >
+                      <div v-html="$sectionData[key][index].element.text"></div>
+                    </component>
+                  </div>
+                </draggable>
+              </sandbox>
+            </div><!--/.b-grid__col-3 b-grid__col-m-12-->
+          </div><!--/.b-grid__row-->
         </div>
       </div>
     </div>
@@ -254,6 +283,60 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-columns2
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
 
+.b-columns
+  $this: &
+  &__padd
+    padding: $size-step/4
+
+    transition: border 0.25s
+    border: 0.2rem dotted transparent
+
+    position: relative
+    .is-mobile &
+      padding: 0
+    @media only screen and (max-width: 540px)
+      &
+        padding: 0
+    &-border
+      padding: $size-step/4
+      transition: border 0.25s
+      border: 0.2rem dotted transparent
+      .is-editable #{$this}__padd:hover &
+        border: 0.2rem dotted #fff
+
+  &__controls
+    position: absolute
+    top: -$size-step/1.5
+    left: $size-step/3.4
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    display: none
+    .is-editable #{$this}__padd:hover &
+      display: flex !important
+  &__control
+    width: $size-step/1.5
+    height: $size-step/1.5
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    background: $white
+    border-radius: 0.2rem
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+    margin-right: .4rem
+    svg
+      fill: $dark-blue-krayola
+      margin-bottom: 0
+    &:hover, .active
+      background: $dark-blue-krayola
+      svg
+        fill: $white
+        margin-bottom: 0
 </style>
