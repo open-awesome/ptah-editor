@@ -145,8 +145,8 @@ const HEADER = [
   }
 ]
 
-const GROUP_NAME = 'ThreeColumns'
-const NAME = 'ThreeColumns'
+const GROUP_NAME = 'Columns'
+const NAME = 'Columns'
 
 export default {
   name: NAME,
