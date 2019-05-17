@@ -1,5 +1,6 @@
 <script>
-import { mapState } from 'vuex'
+import * as _ from 'lodash-es'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'ControlTextWithIcon',
@@ -9,9 +10,20 @@ export default {
       'settingObjectOptions'
     ]),
 
-    icon () {
-      return this.settingObjectOptions.icon
+    icon: {
+      get: function () {
+        return this.settingObjectOptions.icon
+      },
+      set: function (newValue) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { icon: newValue }))
+      }
     }
+  },
+
+  methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ])
   }
 }
 </script>
