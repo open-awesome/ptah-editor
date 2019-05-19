@@ -15,7 +15,7 @@ export default {
 
   data: () => ({
     device: null,
-    colorHamburger: '#333',
+    colorHamburger: '#C4C4C4',
     colorHome: '#333'
   }),
 
@@ -83,17 +83,14 @@ export default {
   <div class="b-top-bar__padd">
     <div class="b-top-bar-menu">
       <div class="b-top-bar-menu__left">
-        <div class="b-top-bar-menu__ham" @click="toggleSidebarSection">
-          <icon-base name="hamburger" :color="colorHamburger"></icon-base>
+        <div class="b-top-bar-menu__ham" @click="toggleSidebarSection" v-if="!isExpanded">
+          <icon-base name="hamburgerDot" :color="colorHamburger"></icon-base>
         </div>
         <div class="b-top-bar-menu__crumbs">
           <span class="b-top-bar-menu__crumbs-home b-top-bar-menu__crumbs-link"
                 @click="backToLandings"
             >
-            <icon-base name="home" :color="colorHome"></icon-base>
-          </span>
-          <span class="b-top-bar-menu__crumbs-link" @click="backToLandings">
-            All sites
+            <icon-base name="home" width="20" height="17" :color="colorHome"></icon-base>
           </span>
           <span class="b-top-bar-menu__crumbs-arrow">
             →
@@ -184,7 +181,7 @@ export default {
       order: 2
       width: 14rem
       &-margin
-        margin: 0 0 0 $size-step*9
+        // margin: 0 0 0 $size-step*9
     &__right
       order: 3
       width: 45%
@@ -192,9 +189,9 @@ export default {
 
     &__ham
       cursor: pointer
+      color: $grey
     &__crumbs
       color: $dark-grey
-      opacity: 0.5
       padding: 0 $size-step
       white-space: nowrap
       &-home

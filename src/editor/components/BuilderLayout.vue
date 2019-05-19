@@ -1,6 +1,9 @@
 <template>
   <div class="b-builder-layout">
-    <div class="b-builder-layout__top-bar" :class="{'b-builder-layout__top-bar_down' : isContentVisible}">
+    <div class="b-builder-layout__top-bar" :class="{
+      'b-builder-layout__top-bar_down' : isContentVisible,
+      'b-builder-layout__top-bar_sidebar-expanded' : isExpanded
+      }">
       <BuilderTopBar
         @setDevice="setDevice"
         @backToLandings="backToLandings"
@@ -99,9 +102,11 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 
+$topBarHeight: 6rem
+
 .b-builder-layout
   &__top-bar
-    height: 8rem
+    height: $topBarHeight
     max-width: 100vw
     background-color: $white
     position: fixed
@@ -109,8 +114,11 @@ export default {
     right: 0
     left: 0
     z-index: 999
+    transition: all .2s ease-out
     &_down
       z-index: 0
+    &_sidebar-expanded
+      padding-left: $size-step*9
 
 .b-builder-layout-content
   display: flex
@@ -136,7 +144,7 @@ export default {
     order: 2
     flex-grow: 1
     min-height: 5rem
-    margin: 8rem 0 0
+    margin: $topBarHeight 0 0
     position: relative
     z-index: 10
     transition: width 0.3s ease-in-out
