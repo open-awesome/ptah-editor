@@ -159,6 +159,19 @@ export default {
           <span class="b-background-position__btn b-background-position__btn_rb"
                 :class="{ 'selected' : bgPosition === 'right bottom' }"
                 @click="setPosition('right', 'bottom')"/>
+
+          <span class="b-background-position__btn b-background-position__btn_tc"
+                :class="{ 'selected' : bgPosition === 'top center' }"
+                @click="setPosition('top', 'center')"></span>
+          <span class="b-background-position__btn b-background-position__btn_rc"
+                :class="{ 'selected' : bgPosition === 'right center' }"
+                @click="setPosition('right', 'center')"></span>
+          <span class="b-background-position__btn b-background-position__btn_bc"
+                :class="{ 'selected' : bgPosition === 'bottom center' }"
+                @click="setPosition('bottom', 'center')"></span>
+          <span class="b-background-position__btn b-background-position__btn_lc"
+                :class="{ 'selected' : bgPosition === 'left center' }"
+                @click="setPosition('left', 'center')"></span>
         </div>
       </div>
     </div>
@@ -200,6 +213,7 @@ export default {
 
     position: relative
   &__btn
+    position: absolute
     width: 1rem
     height: 1rem
     border: 0.2rem solid #fff
@@ -216,7 +230,6 @@ export default {
       &:before
         background-color: $dark-blue-krayola
     &_center
-      position: absolute
       left: 50%
       top: 50%
 
@@ -238,32 +251,55 @@ export default {
         background-color: #fff
         border-radius: 100%
     &_lt
-      position: absolute
       left: 0.2rem
       top: 0.2rem
 
       border-right: none
       border-bottom: none
     &_lb
-      position: absolute
       left: 0.2rem
       bottom: 0.2rem
 
       border-right: none
       border-top: none
     &_rt
-      position: absolute
       right: 0.2rem
       top: 0.2rem
 
       border-left: none
       border-bottom: none
     &_rb
-      position: absolute
       right: 0.2rem
       bottom: 0.2rem
 
       border-left: none
       border-top: none
+    &_tc
+      top: .2rem
+      left: calc(50% - .5rem)
 
+      border-left: none
+      border-right: none
+      border-bottom: none
+    &_rc
+      top: calc(50% - .5rem)
+      right: .2rem
+
+      border-left: none
+      border-top: none
+      border-bottom: none
+    &_bc
+      bottom: .2rem
+      left: calc(50% - .5rem)
+
+      border-left: none
+      border-right: none
+      border-top: none
+    &_lc
+      left: .2rem
+      top: calc(50% - .5rem)
+
+      border-top: none
+      border-right: none
+      border-bottom: none
 </style>

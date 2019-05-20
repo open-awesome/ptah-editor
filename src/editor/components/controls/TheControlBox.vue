@@ -26,7 +26,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'settingObjectElement'
     ]),
 
     marginLeft: {
@@ -116,7 +117,12 @@ export default {
     ]),
 
     getStyleNumberValue (prop) {
-      let s = this.settingObjectOptions.styles[prop] || 0
+      let s = _.get(this.settingObjectOptions, `styles[${prop}]`)
+      if (s === undefined) {
+        // get values from node
+        let style = window.getComputedStyle(this.settingObjectElement)
+        s = style[_.camelCase(prop)]
+      }
       return parseInt(s)
     },
 

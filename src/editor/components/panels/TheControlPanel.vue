@@ -40,6 +40,7 @@ import ThePanelFormSettings from './ThePanelFormSettings'
 import ThePanelFormStyles from './ThePanelFormStyles'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
 import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
+import ThePanelSectionColumnsSettings from './ThePanelSectionColumnsSettings'
 
 export default {
   name: 'TheControlPanel',
@@ -99,7 +100,8 @@ export default {
     ThePanelSectionProductsColumnsSettings,
     ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,
-    ThePanelSectionGalleryStyle
+    ThePanelSectionGalleryStyle,
+    ThePanelSectionColumnsSettings
   }
 }
 </script>

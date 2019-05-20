@@ -104,7 +104,7 @@ export default {
 
 /deep/
   .b-pth-base-dropdown-menu__dropdown
-    width: $size-step*8.5 !important
+    width: $size-step*7.5 !important
     max-height: none !important
     box-shadow: 0px 0 8rem rgba($black, 0.15) !important
     &_left
@@ -112,15 +112,14 @@ export default {
       padding: 0 0 1rem 0 !important
 
   .vc-sketch
-    border: .1rem solid rgba(0, 0, 0, .15)
     box-shadow: none
 
-    margin: 1.6rem
+    //margin: 1.6rem
 
     background: $white none
     border: none
 
-    transform: scale(1.155)
+    //transform: scale(1.155)
     border-radius: 0.2rem !important
   .vc-sketch *
     border-radius: 0.2rem !important
