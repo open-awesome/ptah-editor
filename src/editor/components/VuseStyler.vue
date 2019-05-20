@@ -3,7 +3,7 @@
     ref="styler"
     id="styler"
     v-if="$builder.isEditing"
-    :class="{ 'is-visible': isVisible && !editText }"
+    :class="{ 'is-visible': isVisible && !editText && isShowStyler }"
     @click.stop=""
   >
 
@@ -29,7 +29,7 @@
       </a>
 
       <!-- Text editor -->
-      <a href="#" class="b-styler__control" @click.stop="editText = true" v-if="type === 'text'">
+      <a href="#" class="b-styler__control b-styler__control_text" @click.stop="editText = true" v-if="type === 'text'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
@@ -119,7 +119,7 @@
 
     <!-- modals -->
     <div class="b-styler__modal"
-       :class="modal.button.class"
+       :class="[ modal.button.classV, modal.button.classH ]"
        ref="buttonModal"
        v-if="type === 'button' && isModalsPropsShow === true"
        v-click-outside="closeModal"
@@ -205,6 +205,7 @@ export default {
     label: String
   },
   data: () => ({
+    popper: null,
     isCurrentStyler: false,
     currentOption: '',
     title: '',
@@ -229,9 +230,10 @@ export default {
     isModalsPropsShow: false,
     modal: {
       button: {
-        class: '_top',
-        width: '400',
-        height: '340'
+        classV: '_top',
+        classH: '_right',
+        width: 400,
+        height: 340
       }
     },
     transform: {
@@ -242,7 +244,7 @@ export default {
     }
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -270,6 +272,29 @@ export default {
 
     poneId () {
       return randomPoneId()
+    }
+  },
+
+  watch: {
+    settingObjectOptions: {
+      handler: function (val, oldVal) {
+        if (this.popper) {
+          this.popper.update()
+        }
+      },
+      deep: true
+    },
+    isResizeStop: {
+      handler: function (val, oldVal) {
+        if (val === true) this.el.addEventListener('click', this.showStyler)
+      }
+    },
+    isDragStop: {
+      handler: function (val, oldVal) {
+        if (val) {
+          this.showStylerAfterDragEl()
+        }
+      }
     }
   },
 
@@ -334,10 +359,14 @@ export default {
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
 
     showStyler (event) {
       let self = this
+      const stopNames = [
+        'b-draggable-slot',
+        'b-draggable-slot active'
+      ]
 
       event.preventDefault()
       event.stopPropagation()
@@ -348,6 +377,10 @@ export default {
           data.styles.width = data.offsets.reference.width
         }
         return data
+      }
+
+      let applyReactStyle = (data) => {
+        data.styles.width = data.offsets.reference.width
       }
 
       // show inline styler
@@ -363,13 +396,19 @@ export default {
               },
               hide: {
                 enabled: true
+              },
+              applyStyle: { enabled: true },
+              applyReactStyle: {
+                enabled: true,
+                fn: applyReactStyle,
+                order: 900
               }
             }
           })
         })
       }
 
-      if (this.isCurrentStyler) {
+      if (this.isCurrentStyler && !this.checkStylerNodes(event, stopNames)) {
         this.isCurrentStyler = false
         return
       }
@@ -399,8 +438,13 @@ export default {
             keys.some(key => Boolean(~key.indexOf('container')))
           )
           if (hasSlotsData) {
-            let target = event.target.closest('.b-draggable-slot')
-            if (target) {
+            let target = null
+
+            if (event.target !== null) {
+              target = event.target.closest('.b-draggable-slot')
+            }
+
+            if (target !== null) {
               target.classList.add('active')
             }
             // --- TODO: bad idea
@@ -434,21 +478,23 @@ export default {
     },
     hideStyler (event) {
       const stopNames = [
-        'b-styler__control',
+        'b-styler__control_text',
         'b-control-panel',
         'menubar__button',
         'editor__content',
-        'menubar is-hidden',
-        'b-slot__settings'
+        'menubar is-hidden'
       ]
 
-      if (event && (event.target === this.el
-        || this.checkStylerNodes(event, stopNames))) {
+      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames))) || this.isResizeStop) {
         this.isCurrentStyler = true
+
+        if (this.isResizeStop) this.isCurrentStyler = false
+        this.toggleResizeStop(false)
+
         return
       }
 
-      if (event && isParentTo(event.target, this.$el)) {
+      if (event && MouseEvent && isParentTo(event.target, this.$el)) {
         return
       }
 
@@ -460,6 +506,7 @@ export default {
       // hide modal settings
       this.closeModal()
 
+      // hide panel
       this.setControlPanel(false)
 
       this.el.contentEditable = 'false'
@@ -526,10 +573,24 @@ export default {
     },
 
     setPosition () {
-      let pos = this.$refs.styler.getBoundingClientRect()
+      let pos = this.el.getBoundingClientRect()
+      let widthBoard = document.getElementById('artboard').clientWidth
+      let widthSidebar = document.getElementById('sidebar').clientWidth
+      let heightTopbar = document.getElementById('topbar').clientHeight
+      let right = widthBoard - (pos.right - widthSidebar)
 
-      if (pos.top < this.modal[this.type].height || pos.right < this.modal[this.width]) {
-        this.modal[this.type].class = '_bottom'
+      if (pos.top < (this.modal[this.type].height + heightTopbar)) {
+        this.modal[this.type].classV = '_bottom'
+      } else {
+        this.modal[this.type].classV = '_top'
+      }
+
+      if (right < this.modal[this.type].width) {
+        this.transform[this.type].x = -(this.modal[this.type].width - 55)
+        this.modal[this.type].classH = '_left'
+      } else {
+        this.transform[this.type].x = 0
+        this.modal[this.type].classH = '_right'
       }
     },
 
@@ -539,6 +600,19 @@ export default {
       }
       if (props && props.video) {
         this.el.dataset.video = props.video
+      }
+    },
+
+    showStylerAfterDragEl () {
+      if (undefined !== this.options['isDragged'] && this.options['isDragged']) {
+        delete this.options['isDragged']
+
+        this.isVisible = false
+        this.isCurrentStyler = false
+        this.toggleDragStop(false)
+
+        this.el.addEventListener('click', this.showStyler)
+        this.el.click()
       }
     }
   }
@@ -649,11 +723,12 @@ export default {
 
     &._top
       bottom: 4rem
-      left: -2.5rem
     &._bottom
       top: 4rem
-      right: -2.5rem
-
+    &.right
+      right: calc(100% - 40px)
+    &._left
+      left: 40px
     &:before
       content: ""
       position: absolute
@@ -677,15 +752,23 @@ export default {
     &._top
       &:before,
       &:after
-        left: 19%
         bottom: -0.75rem
-        margin-left: -0.75rem
 
     &._bottom
       &:before,
       &:after
-        right: 19%
         top: -0.75rem
+
+    &._right
+      &:before,
+      &:after
+        left: 9%
+        margin-left: -0.75rem
+
+    &._left
+      &:before,
+      &:after
+        right: 15%
         margin-right: -0.75rem
 
   &[x-out-of-boundaries]
