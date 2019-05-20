@@ -350,6 +350,7 @@ export default {
     },
 
     showBackgroundPanel (section) {
+      console.log(section)
       this.setControlPanel('SectionBackground')
       this.setSettingSection(section)
     }

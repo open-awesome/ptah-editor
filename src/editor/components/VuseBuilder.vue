@@ -23,6 +23,8 @@
         :class="{ 'video-background': headerSection.data.mainStyle.backgroundType === 'video' }"
         @click.native="selectSidebarSection(headerSection)">
 
+      <menu-settings slot="menu" :section="headerSection"/>
+
       <video
           v-if="headerSection.data.mainStyle.backgroundType === 'video' && headerSection.data.mainStyle.backgroundVideo"
           :id="`bg-video-${ headerSection.id }`"
@@ -51,6 +53,8 @@
         :id="section.id"
         :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
         @click.native="selectSidebarSection(section)">
+
+        <menu-settings slot="menu" :section="section"/>
 
         <video
             v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
@@ -99,6 +103,7 @@ import VuseIcon from './VuseIcon'
 import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
+import MenuSettings from '@components/slots/MenuSettings'
 
 import { sectionsGroups } from '@cscripts/sectionsGroups'
 
@@ -107,7 +112,8 @@ export default {
 
   components: {
     VuseIcon,
-    BuilderLayout
+    BuilderLayout,
+    MenuSettings
   },
 
   props: {
