@@ -16,6 +16,8 @@ import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
 import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
+import ThePanelButtonEdit from './ThePanelButtonEdit'
+import ThePanelButtonSettings from './ThePanelButtonSettings'
 import ThePanelSocialSettings from './ThePanelSocialSettings'
 import ThePanelSocialStyle from './ThePanelSocialStyle'
 import ThePanelText from './ThePanelText'
@@ -29,6 +31,7 @@ import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineText from './ThePanelInlineText'
 import ThePanelIcon from './ThePanelIcon'
 import ThePanelIconStyle from './ThePanelIconStyle'
+import ThePanelIconEdit from './ThePanelIconEdit'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSlotBackground from './ThePanelSlotBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
@@ -75,6 +78,8 @@ export default {
     ThePanelSection,
     ThePanelSectionLayout,
     ThePanelButton,
+    ThePanelButtonEdit,
+    ThePanelButtonSettings,
     ThePanelSocialSettings,
     ThePanelSocialStyle,
     ThePanelText,
@@ -90,6 +95,7 @@ export default {
     ThePanelImage,
     ThePanelIcon,
     ThePanelIconStyle,
+    ThePanelIconEdit,
     ThePanelSectionBackground,
     ThePanelSlotBackground,
     ThePanelSectionSystemSettings,

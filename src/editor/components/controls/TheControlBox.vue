@@ -145,7 +145,12 @@ export default {
 </script>
 
 <template>
+<div>
+  <base-label>
+    Edit indents
+  </base-label>
   <div class="control-box">
+
     <!-- preview -->
     <div class="control-box__element-edge">
       <div class="control-box__content-edge">
@@ -178,6 +183,7 @@ export default {
       <icon-base name="lock"></icon-base>
     </a>
   </div>
+</div>
 </template>
 
 <style lang="sass" scoped>

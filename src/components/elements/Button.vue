@@ -113,7 +113,7 @@ export default {
 
   user-select: none
   cursor: pointer
-  transition: background-color 200ms
+  transition: background-color, border 200ms
   &__resize
     display: none
     border: none !important
