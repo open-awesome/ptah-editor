@@ -9,6 +9,8 @@
 
         <span class="b-builder-sidebar__icon-add"
           slot="icon"
+          tooltip="Add section"
+          tooltip-position="bottom"
           @click.stop="showAddSectionBar">
            <IconBase
              name="plus"
@@ -45,6 +47,8 @@
                 </span>
                 <div class="b-menu-subitem__icons">
                   <span class="b-menu-subitem__icon"
+                      tooltip="Section settings"
+                      tooltip-position="bottom"
                     @click.stop="showSettingsBar(headerSection)"
                     >
                     <icon-base name="cog"></icon-base>
@@ -55,11 +59,15 @@
                     <icon-base name="layouts" color="#fff"></icon-base>
                   </span>-->
                   <span class="b-menu-subitem__icon"
+                    tooltip="Section background"
+                    tooltip-position="bottom"
                     @click.stop="showBackgroundPanel(headerSection)"
                     >
                     <icon-base name="background"></icon-base>
                   </span>
                   <span class="b-menu-subitem__icon"
+                    tooltip="Delete section"
+                    tooltip-position="bottom"
                     @click.stop="deleteSection(headerSection)"
                     >
                     <icon-base name="remove"></icon-base>
@@ -90,6 +98,8 @@
                 </span>
                 <div class="b-menu-subitem__icons">
                   <span class="b-menu-subitem__icon"
+                    tooltip="Section settings"
+                    tooltip-position="bottom"
                     @click.stop="showSettingsBar(section)"
                     >
                     <icon-base name="cog"></icon-base>
@@ -100,11 +110,15 @@
                     <icon-base name="layouts" color="#fff"></icon-base>
                   </span>-->
                   <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
+                    tooltip="Section background"
+                    tooltip-position="bottom"
                     @click.stop="showBackgroundPanel(section)"
                     >
                     <icon-base name="background"></icon-base>
                   </span>
                   <span class="b-menu-subitem__icon"
+                    tooltip="Delete section"
+                    tooltip-position="bottom"
                     @click.stop="deleteSection(section)"
                     >
                     <icon-base name="remove"></icon-base>
