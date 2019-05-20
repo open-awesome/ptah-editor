@@ -778,7 +778,8 @@ export default {
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     >
-    <slot name="menu"/> <slot name="video"/>
+    <slot name="menu"/>
+    <slot name="video"/>
     <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row">

@@ -5,7 +5,8 @@
     :style="$sectionData.mainStyle.styles"
     class="b-section-header">
 
-  <slot name="menu"/> <slot name="video"/>
+  <slot name="menu"/>
+  <slot name="video"/>
   <slot name="overlay"/>
 
   <div class="b-grid b-header">

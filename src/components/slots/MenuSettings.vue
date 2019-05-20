@@ -2,13 +2,15 @@
   <div class="b-section-menu">
     <div class="b-section-menu__settings">
       <span
-        @click="showSettingsBar"
+        v-if="!section.isHeader"
+
+        @click.stop="showSettingsBar"
         class="b-section-menu__settings-item b-section-menu__settings-item-settings"
         >
         <icon-base name="cog" fill="white" />
       </span>
       <span
-        @click="showBackgroundPanel"
+        @click.stop="showBackgroundPanel"
         class="b-section-menu__settings-item b-section-menu__settings-item-slot-bg"
         >
         <icon-base name="background" fill="white" />
@@ -51,7 +53,6 @@ export default {
     },
 
     showBackgroundPanel () {
-      console.log(this.section)
       this.setSettingSection(this.section)
       this.selectSidebarSection(this.section)
       this.setControlPanel('SectionBackground')
@@ -88,8 +89,9 @@ export default {
   top: 0
   right: $size-step/1.5
   z-index: 1
+
+  opacity: 0
   &__settings
-    width: $size-step/1.5
     padding: 0
     margin: 0
     border: none
@@ -123,7 +125,7 @@ export default {
         svg
           fill: $dark-blue-krayola
 
-  .is-editable &:hover
-    #{$this}__settings
-      opacity: 1
+section:hover
+  .b-section-menu
+    opacity: 1
 </style>
