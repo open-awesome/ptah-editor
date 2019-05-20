@@ -73,9 +73,9 @@ export function galleryTwo() {
       contentPopup = '<img style="max-width: 100%; max-height: 100%;" id="content" src="' + url + '"></img>'
     } else {
       if (youtubeVideoUrl) {
-        contentPopup = '<iframe allow="autoplay" id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
+        contentPopup = '<iframe allow="autoplay" id="popupIframeVideo" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
       } else {
-        contentPopup = '<video autoplay="autoplay" style="width: 100%; height: 100%;" id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
+        contentPopup = '<video autoplay="autoplay" style="width: 100%; height: 100%;" id="popupVideo" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
       }
     }
 

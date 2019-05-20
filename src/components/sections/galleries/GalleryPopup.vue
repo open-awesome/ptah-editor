@@ -177,7 +177,8 @@ export default {
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
     url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
-    content: ''
+    content: '',
+    typeContent: 'default'
   },
 
   mounted () {
@@ -226,6 +227,7 @@ export default {
       }
 
       this.$sectionData.content = contentPopup
+      this.$sectionData.typeContent = typeContent
       this.openPopup(this.$sectionData.content)
       this.setIndex(index)
     },
@@ -257,8 +259,11 @@ export default {
 
     closePopup () {
       let el = document.getElementById('layoutContent')
+
       this.$sectionData.isShowPopup = false
+      this.stopVideo()
       this.$sectionData.content = ''
+
       el.style.height = ''
       el.style.width = ''
     },
@@ -296,6 +301,29 @@ export default {
 
     onClickOutside () {
       this.closePopup()
+    },
+
+    stopVideo () {
+      if (this.$sectionData.typeContent === 'video') {
+        const TARGET_POPUP = 'gallery-two-popup'
+        const TARGET_POPUP_IFRAME = 'iframe'
+        const TARGET_POPUP_VIDEO = 'video'
+
+        var popup = document.querySelectorAll('[' + TARGET_POPUP + ']')[0]
+        var popupI = popup.getElementsByTagName(TARGET_POPUP_IFRAME)[0]
+        var popupV = popup.getElementsByTagName(TARGET_POPUP_VIDEO)[0]
+
+        if (popupI) {
+          popupI.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*')
+          popupI.removeAttribute('src')
+        }
+
+        if (popupV) {
+          popupV.pause()
+          popupV.removeAttribute('src') // empty source
+          popupV.load()
+        }
+      }
     }
   },
 

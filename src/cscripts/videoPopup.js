@@ -9,11 +9,31 @@ export function videoPopup () {
   function createVideoPopup(element) {
     let videoId = element.dataset.video
     let container = document.createElement('div')
+    let bl = document.getElementById('main')
+
     container.classList.add('b-video-popup')
     container.innerHTML = popupTemplate(videoId)
     document.body.appendChild(container)
 
     document.querySelector('.b-video-popup__close').addEventListener('click', destroy)
+
+    if (bl.classList.contains("main_showPopup")) {
+      const TARGET_POPUP = 'gallery-two-popup'
+      const TARGET_POPUP_IFRAME = 'iframe'
+      const TARGET_POPUP_VIDEO = 'video'
+
+      var popup = document.querySelectorAll('[' + TARGET_POPUP + ']')[0]
+      var popupI = popup.getElementsByTagName(TARGET_POPUP_IFRAME)[0]
+      var popupV = popup.getElementsByTagName(TARGET_POPUP_VIDEO)[0]
+
+      if (popupI) {
+        popupI.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*');
+      }
+
+      if (popupV) {
+        popupV.pause()
+      }
+    }
   }
 
   function popupTemplate(videoId) {
