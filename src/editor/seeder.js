@@ -362,6 +362,21 @@ const data = new Map([
       }
     }
   }))],
+  [types.Columns, () => (_.merge({}, DEFAULT_OPTIONS, {
+    background: true,
+    count: 2,
+    styles: {
+      'background-image': '',
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      'background-color':''
+    },
+    overlay: {
+      color: 'rgba(0,0,0,1)',
+      opacity: '0'
+    }
+  }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       resizable: true,

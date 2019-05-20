@@ -259,7 +259,8 @@ export default {
       'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
-      'setControlPanel'
+      'setControlPanel',
+      'setElement'
     ]),
 
     ...mapActions('Landing', [
@@ -273,6 +274,7 @@ export default {
 
     showSettingsBar (section) {
       this.closeSiteSettings()
+      this.setElement(document.getElementById(`section_${section.id}`))
       this.setSettingSection(section)
       this.setControlPanel('Section')
     },
