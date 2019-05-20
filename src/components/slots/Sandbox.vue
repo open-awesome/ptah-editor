@@ -183,7 +183,7 @@ export default {
       &
         > div
           max-width: 100%
-          padding: .8rem
+          // padding: .8rem
       &_horizont
         > div
           width: auto
