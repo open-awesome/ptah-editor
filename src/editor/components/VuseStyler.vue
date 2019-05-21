@@ -446,13 +446,15 @@ export default {
         .forEach(el => el.classList.remove('active'))
 
       if (this.isVisible) return
+      if (this.$props.type !== 'section') {
+        this.isVisible = true
+      }
 
       setTimeout(() => {
         if (this.$props.type === 'section') {
           // Do not show section settings on click
           // this.setSettingSection(this.section)
         } else {
-          this.isVisible = true
           // --- if section has components or slots
           let keys = Object.keys(this.section.data)
           let hasSlotsData = (
