@@ -414,7 +414,7 @@ $top-panel-height: 7.2rem
         padding-right: 0 !important
         width: calc(100% + 17px) !important
     &-outer
-      height: 80vh
+      height: 90vh
       padding: 0 0 0 0
 
   &-settings

@@ -21,6 +21,8 @@ import AppView from './App.vue'
 import en from '@assets/lang/en.json'
 import ru from '@assets/lang/ru.json'
 
+import { truncate } from '@src/filters/truncate'
+
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(VueI18n)
@@ -88,6 +90,8 @@ const createUpdateAuthInterceptor = (store, http) => async error => {
 
 const updateAuthCb = createUpdateAuthInterceptor(store, axios)
 axios.interceptors.response.use(null, updateAuthCb)
+
+Vue.filter('truncate', truncate)
 
 new Vue(
   {
