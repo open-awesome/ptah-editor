@@ -3,30 +3,20 @@
     <h6 class="b-panel__title">
       {{ settingObjectLabel }}
     </h6>
-    <!-- image -->
+
+    <!-- Text -->
     <div class="b-panel__control">
-      <control-image/>
+      <control-text/>
     </div>
-    <div class="b-panel__control">
-      <control-box></control-box>
-    </div>
-    <!-- Alt prop for image -->
-    <!-- TODO: We're still not using <img>
-    <div class="b-panel__control">
-      <control-alt/>
-    </div>
-    -->
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import ControlAlt from './../controls/TheControlAlt'
-import ControlImage from './../controls/TheControlImage'
-import ControlBox from '../controls/TheControlBox'
+import ControlText from './../controls/TheControlText'
 
 export default {
-  name: 'ThePanelImage',
+  name: 'ThePanelButton',
 
   props: {
     builder: {
@@ -36,13 +26,12 @@ export default {
   },
 
   components: {
-    ControlAlt,
-    ControlImage,
-    ControlBox
+    ControlText
   },
 
   computed: {
     ...mapState('Sidebar', [
+      'settingObjectOptions',
       'settingObjectLabel'
     ])
   }
@@ -50,6 +39,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
 .b-panel
   padding-bottom: 4.5rem
   display: flex

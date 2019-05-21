@@ -221,7 +221,10 @@ const data = new Map([
           'background-position': 'center center',
           'background-repeat': 'no-repeat',
           'background-size': 'cover',
-          'color': ''
+          'color': '',
+          'border-color': '#fff',
+          'border-width': '0px',
+          'border-style': 'solid'
         }
       },
       text: 'Click Me!',
@@ -244,6 +247,9 @@ const data = new Map([
         'border-color': '',
         'font-size': '1.6rem',
         'border-radius': 0,
+        'border-color': '#fff',
+        'border-width': '0px',
+        'border-style': 'solid',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-family': 'Lato',
@@ -375,6 +381,21 @@ const data = new Map([
     isBottom:  false,
     isBottomPopup:  false
   }))],
+  [types.Columns, () => (_.merge({}, DEFAULT_OPTIONS, {
+    background: true,
+    count: 2,
+    styles: {
+      'background-image': '',
+      'background-position': 'center center',
+      'background-repeat': 'no-repeat',
+      'background-size': 'cover',
+      'background-color':''
+    },
+    overlay: {
+      color: 'rgba(0,0,0,1)',
+      opacity: '0'
+    }
+  }))],
   [types.Delimiter, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       resizable: true,
@@ -392,8 +413,13 @@ const data = new Map([
       removable: true,
       resizable: true,
       shape: false,
-      videoUrl: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8',
-      loop: false,
+      settings: {
+        loop: false,
+        autoplay: false,
+        rel: false,
+        controls: true,
+        url: 'https://www.youtube.com/watch?v=Xv1JzYDKoc8'
+      },
       styles: {
         'width': '',
         'height': ''

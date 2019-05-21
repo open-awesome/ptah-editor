@@ -1,6 +1,6 @@
 <template>
   <div class="b-builder-layout">
-    <div class="b-builder-layout__top-bar" :class="{'b-builder-layout__top-bar_down' : isContentVisible}">
+    <div id="topbar" class="b-builder-layout__top-bar" :class="{'b-builder-layout__top-bar_down' : isContentVisible}">
       <BuilderTopBar
         @setDevice="setDevice"
         @backToLandings="backToLandings"
@@ -13,6 +13,7 @@
     <div class="b-builder-layout-content">
 
       <aside
+        id="sidebar"
         class="b-builder-layout-content__sidebar"
         :class="{'b-builder-layout-content__sidebar_expanded': isExpanded}">
 

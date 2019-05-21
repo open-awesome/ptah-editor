@@ -320,3 +320,16 @@ export function getParameterByName (name, url) {
   if (!results[2]) return ''
   return decodeURIComponent(results[2].replace(/\+/g, ' '))
 }
+
+export function resetIndents () {
+  setTimeout(() => {
+    let frame = document.getElementById('artboard')
+    let sections = Array.from(frame.children)
+
+    sections.forEach((section) => {
+      section.style.top = '0px'
+      section.style.marginBottom = '0px'
+      section.style.paddingBottom = '0px'
+    })
+  }, 200)
+}

@@ -112,6 +112,11 @@ export default {
       padding-left: 1.4em
       border-radius: 0 0.2rem 0.2rem 0
 
+      .b-menu-subitem__icons
+        justify-content: flex-start
+      .b-menu-subitem__icon
+        margin-right: 13px
+
     .b-menu-subitem_selected &
       background: $dark-blue-krayola
       color: #ffffff

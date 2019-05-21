@@ -82,7 +82,9 @@ export default {
   },
 
   created () {
-    Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    if (this.$sectionData.edited === undefined) {
+      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    }
   }
 }
 </script>
@@ -105,7 +107,7 @@ export default {
               direction="column"
               class="b-sandbox">
 
-            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
                   v-if="$sectionData.components[index].element.isComplex"

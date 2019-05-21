@@ -22,7 +22,7 @@
             align="center"
             class="b-sandbox">
 
-          <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot">
+          <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot" @change="dragStop">
 
             <div
                 v-for="(component, index) in $sectionData.components"
@@ -181,7 +181,9 @@ export default {
   },
 
   created () {
-    Seeder.seed(merge(this.$sectionData, defaultSchema))
+    if (this.$sectionData.edited === undefined) {
+      Seeder.seed(merge(this.$sectionData, defaultSchema))
+    }
   }
 }
 </script>

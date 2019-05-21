@@ -5,26 +5,26 @@
       v-if="videoType === 'youtube'"
       frameborder="0"
       allowfullscreen="allowfullscreen"
-      allow="accelerometer; encrypted-media; gyroscope; picture-in-picture"
+      :allow="allow"
       :src="youtubeVideoUrl">
     </iframe>
 
     <video
-      v-if="videoType === 'custom' && vLoop"
+      v-if="videoType === 'custom' && vAutoplay"
       ref="custom"
       :src="vUrl"
-      loop="loop"
+      v-bind="options"
+      muted="true"
       type="video/mp4"
-      controls="controls"
       >
     </video>
 
     <video
-      v-if="videoType === 'custom' && !vLoop"
+      v-if="videoType === 'custom' && !vAutoplay"
       ref="custom"
       :src="vUrl"
+      v-bind="options"
       type="video/mp4"
-      controls="controls"
       >
     </video>
 
@@ -41,6 +41,7 @@
       :min-height="32"
       :max-height="640"
       @resizing="onResize"
+      @resizestop="onResizeStop"
       :draggable="false"
       :z="999"
       :lock-aspect-ratio="true"
@@ -50,10 +51,13 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { getYoutubeVideoIdFromUrl } from '@editor/util'
 import VueDraggableResizable from 'vue-draggable-resizable'
 // optionally import default styles
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+
+const ALLOW_IFRAME = 'accelerometer; encrypted-media; gyroscope; picture-in-picture;'
 
 export default {
   name: 'VideoElement',
@@ -76,57 +80,100 @@ export default {
       youtubeVideoUrl: '',
       videoType: '',
       vLoop: false,
+      vAutoplay: false,
+      vControls: false,
+      vRel: false,
       width: 0,
       height: 0
     }
   },
 
   computed: {
-    videoUrl () {
-      return this.$section.get(`$sectionData.${this.path}.videoUrl`)
-    },
-    loop () {
-      return this.$section.get(`$sectionData.${this.path}.loop`)
+    settings () {
+      return this.$section.get(`$sectionData.${this.path}.settings`)
     },
     styles () {
       return this.$section.get(`$sectionData.${this.path}.styles`)
+    },
+    options () {
+      let objAttrs = {}
+      let video = null
+
+      if (this.videoType === 'custom') {
+        video = this.$refs.custom
+      }
+
+      this.vLoop ? objAttrs['loop'] = '' : delete objAttrs['loop']
+
+      this.vControls ? objAttrs['controls'] = '' : delete objAttrs['controls']
+
+      if (this.vAutoplay) {
+        objAttrs['autoplay'] = ''
+      } else {
+        delete objAttrs['autoplay']
+        if (video) video.pause()
+      }
+      return objAttrs
+    },
+    allow () {
+      return this.vAutoplay ? ALLOW_IFRAME + ' autoplay;' : ALLOW_IFRAME
     }
   },
 
   watch: {
-    videoUrl (value) {
-      this.updateVideoData(value)
-    },
-    loop (value) {
-      this.vLoop = value
+    settings (value) {
+      this.vUrl = value.url
+      this.vLoop = value.loop
+      this.vAutoplay = value.autoplay
+      this.vControls = value.controls
+      this.vRel = value.rel
+      this.updateVideoData()
     }
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'toggleShowStyler',
+      'toggleResizeStop'
+    ]),
+
     updateVideoData (videoUrl) {
-      this.vUrl = videoUrl
       this.videoType = ''
 
       const youtubeVideoId = getYoutubeVideoIdFromUrl(this.vUrl)
       if (youtubeVideoId) {
         // Looping one video on itself requires playlist param with its ID passed
         const loopValue = this.vLoop ? `&loop=1&playlist=${youtubeVideoId}` : '&loop=0'
+        const autoplayValue = this.vAutoplay ? '&autoplay=1' : '&autoplay=0'
+        const controlsValue = this.vControls ? '&controls=1' : '&controls=0'
+        const relValue = this.vRel ? '&rel=1' : '&rel=0'
+        const muteValue = this.vAutoplay ? '&mute=1' : '&mute=0'
         this.videoType = 'youtube'
-        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0&controls=0${loopValue}&autoplay=0&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1&rel=0`
+        this.youtubeVideoUrl = `https://www.youtube.com/embed/${youtubeVideoId}?version=3&disablekb=0${controlsValue}${loopValue}${autoplayValue}${muteValue}&showinfo=0&modestbranding=1&enablejsapi=1&showinfo=0&autohide=1${relValue}`
       } else {
         this.videoType = 'custom'
         this.youtubeVideoUrl = ''
       }
     },
-    onResize: function (x, y, width, height) {
+    onResize (x, y, width, height) {
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
+
+      this.toggleShowStyler(false)
+    },
+
+    onResizeStop (x, y, width, height) {
+      this.toggleShowStyler(true)
+      this.toggleResizeStop(true)
     }
   },
 
   created () {
-    this.vUrl = this.videoUrl
-    this.vLoop = this.loop
+    this.vUrl = this.settings.url
+    this.vLoop = this.settings.loop
+    this.vAutoplay = this.settings.autoplay
+    this.vControls = this.settings.controls
+    this.vRel = this.settings.rel
     this.updateVideoData(this.vUrl)
 
     this.width = parseInt(this.styles.width.split('px')[0]) || 320

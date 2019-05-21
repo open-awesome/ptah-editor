@@ -4,11 +4,6 @@
       {{ settingObjectLabel }}
     </h6>
 
-    <!-- Text -->
-    <div class="b-panel__control">
-      <control-text/>
-    </div>
-
     <!-- Typography -->
     <div class="b-panel__control">
       <control-typography/>
@@ -27,26 +22,26 @@
       <control-background-image/>
     </div>
 
+    <!-- Border style -->
+    <div class="b-panel__control">
+      <control-border-style/>
+    </div>
+
     <!-- Border radius -->
     <div class="b-panel__control">
       <control-border-radius/>
     </div>
 
-    <!-- Hover animation -->
-    <div class="b-panel__control">
-      <control-hover-animation/>
-    </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import ControlText from './../controls/TheControlText'
 import ControlTypography from './../controls/TheControlTypography'
 import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
 import ControlBackgroundImage from './../controls/TheControlBackgroundImage'
 import ControlBorderRadius from './../controls/TheControlBorderRadius'
-import ControlHoverAnimation from './../controls/TheControlHoverAnimation'
+import ControlBorderStyle from './../controls/TheControlBorderStyle'
 import ControlAlign from './../controls/TheControlAlign'
 
 export default {
@@ -60,13 +55,12 @@ export default {
   },
 
   components: {
-    ControlText,
     ControlTypography,
     ControlAlign,
     ControlBackgroundColor,
     ControlBackgroundImage,
     ControlBorderRadius,
-    ControlHoverAnimation
+    ControlBorderStyle
   },
 
   computed: {
@@ -100,7 +94,4 @@ export default {
     padding: 0
     &:first-letter
       text-transform: uppercase
-
-  &__control
-    margin-bottom: 1.6rem
 </style>

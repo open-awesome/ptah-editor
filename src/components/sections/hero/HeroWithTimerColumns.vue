@@ -195,7 +195,9 @@ export default {
   },
 
   created () {
-    Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    if (this.$sectionData.edited === undefined) {
+      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    }
   }
 }
 </script>
@@ -217,7 +219,7 @@ export default {
               components-path="$sectionData.components"
               direction="column"
               class="b-sandbox">
-            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
@@ -240,7 +242,7 @@ export default {
             components-path="$sectionData.components2"
             direction="column"
             class="b-sandbox">
-            <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles">
+            <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component
                   v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"

@@ -6,7 +6,7 @@
         <BaseUploadInput
           v-model="vUrl"
           label="Video URL"
-          @upload="updateSimpleValue('videoUrl', vUrl)"
+          @upload="updateSettings('url', vUrl)"
         />
       </div>
 
@@ -14,11 +14,39 @@
         YouTube video url or any mp4 file url is allowed.
       </div>
 
+      <!-- Loop video -->
       <div class="b-video-control__control">
         <BaseSwitcher
           v-model="vLoop"
           label="Loop"
-          @change="updateSimpleValue('loop', vLoop)"
+          @change="updateSettings('loop', vLoop)"
+        />
+      </div>
+
+      <!-- Autoplay video -->
+      <div class="b-video-control__control">
+        <BaseSwitcher
+          v-model="vAutoplay"
+          label="Autoplay"
+          @change="updateSettings('autoplay', vAutoplay)"
+        />
+      </div>
+
+      <!-- Show/hide controls video -->
+      <div class="b-video-control__control">
+        <BaseSwitcher
+          v-model="vControls"
+          label="Show/hide controls"
+          @change="updateSettings('controls', vControls)"
+        />
+      </div>
+
+      <!-- Show/hide related videos  -->
+      <div class="b-video-control__control" v-if="videoType === 'youtube'">
+        <BaseSwitcher
+          v-model="vRel"
+          label="Show/hide related videos"
+          @change="updateSettings('rel', vRel)"
         />
       </div>
 </div>
@@ -27,14 +55,19 @@
 <script>
 import * as _ from 'lodash-es'
 import { mapState, mapActions } from 'vuex'
+import { getYoutubeVideoIdFromUrl } from '@editor/util'
 
 export default {
   name: 'TheControlVideo',
 
   data () {
     return {
+      videoType: '',
       vUrl: '',
-      vLoop: ''
+      vLoop: '',
+      vAutoplay: '',
+      vControls: '',
+      vRel: ''
     }
   },
 
@@ -43,22 +76,8 @@ export default {
       'settingObjectOptions'
     ]),
 
-    videoUrl: {
-      get: function () {
-        return this.settingObjectOptions.videoUrl
-      },
-      set: function (newValue) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { 'videoUrl': newValue }))
-      }
-    },
-
-    loop: {
-      get: function () {
-        return this.settingObjectOptions.loop
-      },
-      set: function (newValue) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { 'loop': newValue }))
-      }
+    settings () {
+      return this.settingObjectOptions.settings
     }
   },
 
@@ -67,14 +86,21 @@ export default {
       'updateSettingOptions'
     ]),
 
-    updateSimpleValue (propName, value) {
-      this[propName] = value
+    updateSettings (prop, value) {
+      let settings = {}
+      let youtubeVideoId = getYoutubeVideoIdFromUrl(this.vUrl)
+      settings[prop] = value
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { settings }))
+      youtubeVideoId ? this.videoType = 'youtube' : this.videoType = 'custom'
     }
   },
 
   mounted () {
-    this.vUrl = this.videoUrl
-    this.vLoop = this.loop
+    this.vUrl = this.settings.url
+    this.vLoop = this.settings.loop
+    this.vAutoplay = this.settings.autoplay
+    this.vControls = this.settings.controls
+    this.vRel = this.settings.rel
   }
 }
 </script>

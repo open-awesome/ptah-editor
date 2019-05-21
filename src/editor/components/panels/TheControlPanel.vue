@@ -16,6 +16,8 @@ import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
 import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
+import ThePanelButtonEdit from './ThePanelButtonEdit'
+import ThePanelButtonSettings from './ThePanelButtonSettings'
 import ThePanelSocialSettings from './ThePanelSocialSettings'
 import ThePanelSocialStyle from './ThePanelSocialStyle'
 import ThePanelText from './ThePanelText'
@@ -23,6 +25,7 @@ import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
 import ThePanelImage from './ThePanelImage'
 import ThePanelImageLink from './ThePanelImageLink'
+import ThePanelImageStyle from './ThePanelImageStyle'
 import ThePanelAvailableSettings from './ThePanelAvailableSettings'
 import ThePanelAvailableStyle from './ThePanelAvailableStyle'
 import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
@@ -30,6 +33,7 @@ import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineText from './ThePanelInlineText'
 import ThePanelIcon from './ThePanelIcon'
 import ThePanelIconStyle from './ThePanelIconStyle'
+import ThePanelIconEdit from './ThePanelIconEdit'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSlotBackground from './ThePanelSlotBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
@@ -41,6 +45,7 @@ import ThePanelFormSettings from './ThePanelFormSettings'
 import ThePanelFormStyles from './ThePanelFormStyles'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
 import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
+import ThePanelSectionColumnsSettings from './ThePanelSectionColumnsSettings'
 
 export default {
   name: 'TheControlPanel',
@@ -75,6 +80,8 @@ export default {
     ThePanelSection,
     ThePanelSectionLayout,
     ThePanelButton,
+    ThePanelButtonEdit,
+    ThePanelButtonSettings,
     ThePanelSocialSettings,
     ThePanelSocialStyle,
     ThePanelText,
@@ -89,8 +96,10 @@ export default {
     ThePanelInlineText,
     ThePanelImage,
     ThePanelImageLink,
+    ThePanelImageStyle,
     ThePanelIcon,
     ThePanelIconStyle,
+    ThePanelIconEdit,
     ThePanelSectionBackground,
     ThePanelSlotBackground,
     ThePanelSectionSystemSettings,
@@ -101,7 +110,8 @@ export default {
     ThePanelSectionProductsColumnsSettings,
     ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,
-    ThePanelSectionGalleryStyle
+    ThePanelSectionGalleryStyle,
+    ThePanelSectionColumnsSettings
   }
 }
 </script>

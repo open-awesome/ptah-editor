@@ -108,7 +108,7 @@
     </div>
 
     <div class="b-section-settings__buttons">
-      <base-button :color="'gray'" :transparent="true" @click="deleteSection">Delete</base-button>
+      <base-button :color="'gray'" :transparent="true" @click="deleteSection()">Delete</base-button>
     </div>
   </div>
 </template>
@@ -121,6 +121,7 @@ import BaseUploader from '../../../components/base/BaseUploader'
 import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
 import ControlBox from './../controls/TheControlBox'
+import { resetIndents } from '@editor/util'
 
 export default {
   components: {
@@ -199,23 +200,13 @@ export default {
         let absorb = master.data.mainStyle.absorb
         master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
       }
-
       this.builder.remove(this.settingObjectSection)
-      this.saveState(this.builder.export('JSON'))
       this.clearSettingObject()
 
       if (this.isMasterSection()) {
-        setTimeout(() => {
-          let frame = document.getElementById('artboard')
-          let sections = Array.from(frame.children)
-
-          sections.forEach((section) => {
-            section.style.top = '0px'
-            section.style.marginBottom = '0px'
-            section.style.paddingBottom = '0px'
-          })
-        }, 200)
+        resetIndents()
       }
+      this.saveState(this.builder.export('JSON'))
     },
 
     updateSimpleValue (propName, value) {

@@ -55,8 +55,8 @@ import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 import ProductsColumns from '@components/sections/products/ProductsColumns'
 import ProductsColumnsExtend from '@components/sections/products/ProductsColumnsExtend'
 // --- columns
-import ThreeColumns from '@components/sections/columns/ThreeColumns'
-import TwoColumns from '@components/sections/columns/TwoColumns'
+import Columns from '@components/sections/columns/Columns'
+// video
 import Video from '@components/sections/video/Video'
 // --- carousel
 import DefaultCarousel from '@components/sections/carousel/DefaultCarousel'
@@ -120,8 +120,7 @@ const COMPONENTS = {
   ProductsColumns,
   ProductsColumnsExtend,
 
-  TwoColumns,
-  ThreeColumns,
+  Columns,
 
   DefaultCarousel,
   CoverflowCarousel,
@@ -155,8 +154,12 @@ export default {
   },
 
   async beforeRouteEnter (to, from, next) {
-    await store.dispatch('getLandingData', to.params.slug)
-    next()
+    try {
+      await store.dispatch('getLandingData', to.params.slug)
+      next()
+    } catch (e) {
+      next({ path: '/404' })
+    }
   },
 
   created () {

@@ -3,27 +3,15 @@
     <h6 class="b-panel__title">
       {{ settingObjectLabel }}
     </h6>
-    <!-- image -->
     <div class="b-panel__control">
-      <control-image/>
+      <control-box :hidePadding="true"/>
     </div>
-    <div class="b-panel__control">
-      <control-box></control-box>
-    </div>
-    <!-- Alt prop for image -->
-    <!-- TODO: We're still not using <img>
-    <div class="b-panel__control">
-      <control-alt/>
-    </div>
-    -->
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import ControlAlt from './../controls/TheControlAlt'
-import ControlImage from './../controls/TheControlImage'
-import ControlBox from '../controls/TheControlBox'
+import ControlBox from './../controls/TheControlBox'
 
 export default {
   name: 'ThePanelImage',
@@ -36,8 +24,6 @@ export default {
   },
 
   components: {
-    ControlAlt,
-    ControlImage,
     ControlBox
   },
 

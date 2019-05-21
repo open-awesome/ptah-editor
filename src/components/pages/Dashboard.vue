@@ -12,7 +12,7 @@ export default {
         },
         {
           type: 'Simple landing',
-          sections: ['HeroUnit', 'ThreeColumns', 'TwoColumns', 'Footer']
+          sections: ['HeroUnit', 'Columns', 'Footer']
         },
         {
           type: 'Skull',

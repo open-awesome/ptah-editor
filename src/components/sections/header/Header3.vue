@@ -42,7 +42,9 @@
               v-if="$sectionData.components.length"
               v-model="$sectionData.components"
               :style="$sectionData.container.styles"
-              class="b-draggable-slot  b-draggable-slot_horizont">
+              class="b-draggable-slot  b-draggable-slot_horizont"
+              @change="dragStop"
+            >
 
             <div
                 v-for="(component, index) in $sectionData.components"
@@ -105,7 +107,7 @@ const defaultComponents = [
         'min-width': '100px',
         'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px',
+        'font-size': '1.8rem',
         'margin': '8px 16px',
         'width': 'auto'
       }
@@ -125,7 +127,7 @@ const defaultComponents = [
         'min-width': '100px',
         'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px',
+        'font-size': '1.8rem',
         'margin': '8px 16px',
         'width': 'auto'
       }
@@ -145,7 +147,7 @@ const defaultComponents = [
         'min-width': '100px',
         'height': '50px',
         'border-radius': '2px',
-        'font-size': '18px',
+        'font-size': '1.8rem',
         'margin': '8px 16px',
         'width': 'auto'
       }
@@ -185,7 +187,9 @@ export default {
   },
 
   created () {
-    Seeder.seed(merge(this.$sectionData, defaultSchema))
+    if (this.$sectionData.edited === undefined) {
+      Seeder.seed(merge(this.$sectionData, defaultSchema))
+    }
   }
 }
 </script>

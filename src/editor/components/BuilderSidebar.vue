@@ -159,6 +159,7 @@ import BuilderSettingsSlots from './BuilderSettingsSlots'
 import BuilderAddSectionBar from './BuilderAddSectionBar'
 import { mapActions, mapState } from 'vuex'
 import TheControlPanel from './panels/TheControlPanel'
+import { resetIndents } from '@editor/util'
 
 export default {
   name: 'BuilderSidebar',
@@ -193,6 +194,10 @@ export default {
       'sandbox',
       'controlPanel'
     ]),
+
+    sectionId () {
+      return this.settingObjectSection.id
+    },
 
     headerSection () {
       return this.builder.sections.find(section => section.isHeader)
@@ -249,12 +254,13 @@ export default {
       'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
-      'setControlPanel'
+      'setControlPanel',
+      'setElement'
     ]),
 
-    toggleSidebarAndHideContent () {
-      this.toggleSidebar()
-    },
+    ...mapActions('Landing', [
+      'saveState'
+    ]),
 
     toggleSettingsBar (section) {
       this.closeSiteSettings()
@@ -263,6 +269,7 @@ export default {
 
     showSettingsBar (section) {
       this.closeSiteSettings()
+      this.setElement(document.getElementById(`section_${section.id}`))
       this.setSettingSection(section)
       this.setControlPanel('Section')
     },
@@ -318,6 +325,10 @@ export default {
       this.toggleSidebar()
     },
 
+    isMasterSection () {
+      return !!_.find(this.sectionsGroups, o => o.main.id === this.sectionId)
+    },
+
     isSlaveSection (sectionId) {
       return !!_.find(this.sectionsGroups, o => o.children.indexOf(sectionId) > -1)
     },
@@ -332,6 +343,12 @@ export default {
 
       this.builder.remove(section)
       this.clearSettingObject()
+
+      if (this.isMasterSection()) {
+        resetIndents()
+      }
+
+      this.saveState(this.builder.export('JSON'))
     },
 
     showBackgroundPanel (section) {

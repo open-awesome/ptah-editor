@@ -1,5 +1,5 @@
 <template>
-  <builder-modal-content-layout
+  <div
     class="b-integrations-mailchimp"
     >
     <div>
@@ -19,7 +19,7 @@
         <iframe :src="frameSrc" frameborder="none" width="100%" height="100%"></iframe>
       </template>
     </div>
-  </builder-modal-content-layout>
+  </div>
 </template>
 
 <script>
