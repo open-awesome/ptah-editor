@@ -123,7 +123,7 @@ export default {
         svg
           fill: $dark-blue-krayola
 
-section:hover
+section.is-editable:hover
   .b-section-menu
     opacity: 1
 </style>
