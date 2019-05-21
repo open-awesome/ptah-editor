@@ -3,30 +3,20 @@
     ref="styler"
     id="styler"
     v-if="$builder.isEditing"
-    :class="{ 'is-visible': isVisible && !editText && isShowStyler }"
+    :class="{ 'is-visible': isVisible && !editText }"
     @click.stop=""
   >
 
     <div class="b-styler__col" v-if="type === 'button'">
       <!-- Button -->
+      <div class="b-styler__controls" ref="buttonModalProps">
+        <a href="#" class="b-styler__control b-styler__control_link" @click.stop="setModalProps()">
+          <icon-base name="link" width="18" height="18" />
+        </a>
+      </div>
       <div class="b-styler__controls">
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
-        </a>
-      </div>
-      <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonEdit')">
-          <icon-base name="edit" width="12" height="15" />
-        </a>
-      </div>
-      <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonSettings')">
-          <icon-base name="cog" width="12" height="15" />
-        </a>
-      </div>
-      <div class="b-styler__controls" ref="buttonModalProps">
-        <a href="#" class="b-styler__control" @click.stop="setModalProps()">
-          <icon-base name="link" width="18" height="18" />
         </a>
       </div>
     </div>
@@ -39,64 +29,59 @@
       </a>
 
       <!-- Text editor -->
-      <a href="#" class="b-styler__control b-styler__control_text" @click.stop="editText = true" v-if="type === 'text'">
+      <a href="#" class="b-styler__control" @click.stop="editText = true" v-if="type === 'text'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
       <!-- Inline text -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('InlineText')" v-if="type === 'inline'">
-        <icon-base name="edit" width="12" height="15" />
+        <icon-base name="cog" width="12" height="15" />
       </a>
 
       <!-- Social settings -->
       <template v-if="type === 'networks'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
           <icon-base name="style" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
+          <icon-base name="settings" width="16" height="16" />
         </a>
       </template>
 
       <!-- Social settings -->
       <template v-if="type === 'available'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableStyle')">
           <icon-base name="style" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableSettings')">
+          <icon-base name="settings" width="16" height="16" />
         </a>
       </template>
 
       <!-- Age restrictions -->
       <template v-if="type === 'restrictions'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsStyle')">
           <icon-base name="style" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsSettings')">
+          <icon-base name="settings" width="16" height="16" />
         </a>
       </template>
 
       <!-- Timer -->
       <template v-if="type === 'timer'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerStyle')">
           <icon-base name="style" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')">
+          <icon-base name="settings" width="16" height="16" />
         </a>
       </template>
 
       <!-- Image -->
-      <template v-if="type === 'image'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" >
-          <icon-base name="preview" width="14" height="16" />
-        </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
-      </template>
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
+        <icon-base name="preview" width="14" height="16" />
+      </a>
 
       <!-- Video -->
       <a href="#" class="b-styler__control" @click.stop="setControlPanel('Video')" v-if="type === 'video'">
@@ -108,9 +93,6 @@
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconEdit')">
-          <icon-base name="edit" width="12" height="15" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
           <icon-base name="settings" width="12" height="15" />
         </a>
@@ -118,11 +100,11 @@
 
       <!-- Form -->
       <template v-if="type === 'form'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormStyles')">
           <icon-base name="style" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormSettings')">
+          <icon-base name="settings" width="16" height="16" />
         </a>
       </template>
 
@@ -137,7 +119,7 @@
 
     <!-- modals -->
     <div class="b-styler__modal"
-       :class="[ modal.button.classV, modal.button.classH ]"
+       :class="modal.button.class"
        ref="buttonModal"
        v-if="type === 'button' && isModalsPropsShow === true"
        v-click-outside="closeModal"
@@ -223,7 +205,6 @@ export default {
     label: String
   },
   data: () => ({
-    popper: null,
     isCurrentStyler: false,
     currentOption: '',
     title: '',
@@ -248,10 +229,9 @@ export default {
     isModalsPropsShow: false,
     modal: {
       button: {
-        classV: '_top',
-        classH: '_right',
-        width: 400,
-        height: 340
+        class: '_top',
+        width: '400',
+        height: '340'
       }
     },
     transform: {
@@ -262,7 +242,7 @@ export default {
     }
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions']),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -293,29 +273,6 @@ export default {
     }
   },
 
-  watch: {
-    settingObjectOptions: {
-      handler: function (val, oldVal) {
-        if (this.popper) {
-          this.popper.update()
-        }
-      },
-      deep: true
-    },
-    isResizeStop: {
-      handler: function (val, oldVal) {
-        if (val === true) this.el.addEventListener('click', this.showStyler)
-      }
-    },
-    isDragStop: {
-      handler: function (val, oldVal) {
-        if (val) {
-          this.showStylerAfterDragEl()
-        }
-      }
-    }
-  },
-
   created () {
     this.dimensions.width = this.el.offsetWidth
     this.dimensions.height = this.el.offsetHeight
@@ -324,6 +281,7 @@ export default {
     if (this.$builder && !this.$builder.isEditing) return
 
     this.el.addEventListener('click', this.showStyler)
+    this.el.addEventListener('dblclick', this.dblclick)
 
     if (this.type === 'section') {
       this.el.id = `section_${this.section.id}`
@@ -373,18 +331,15 @@ export default {
     this.el.classList.remove('is-editable')
     this.el.removeEventListener('click', this.showStyler)
     document.removeEventListener('click', this.hideStyler, true)
+    // document.removeEventListener('dblclick', this.dblclick)
   },
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
 
     showStyler (event) {
       let self = this
-      const stopNames = [
-        'b-draggable-slot',
-        'b-draggable-slot active'
-      ]
 
       event.preventDefault()
       event.stopPropagation()
@@ -395,10 +350,6 @@ export default {
           data.styles.width = data.offsets.reference.width
         }
         return data
-      }
-
-      let applyReactStyle = (data) => {
-        data.styles.width = data.offsets.reference.width
       }
 
       // show inline styler
@@ -414,19 +365,13 @@ export default {
               },
               hide: {
                 enabled: true
-              },
-              applyStyle: { enabled: true },
-              applyReactStyle: {
-                enabled: true,
-                fn: applyReactStyle,
-                order: 900
               }
             }
           })
         })
       }
 
-      if (this.isCurrentStyler && !this.checkStylerNodes(event, stopNames)) {
+      if (this.isCurrentStyler) {
         this.isCurrentStyler = false
         return
       }
@@ -456,13 +401,8 @@ export default {
             keys.some(key => Boolean(~key.indexOf('container')))
           )
           if (hasSlotsData) {
-            let target = null
-
-            if (event.target !== null) {
-              target = event.target.closest('.b-draggable-slot')
-            }
-
-            if (target !== null) {
+            let target = event.target.closest('.b-draggable-slot')
+            if (target) {
               target.classList.add('active')
             }
             // --- TODO: bad idea
@@ -496,23 +436,23 @@ export default {
     },
     hideStyler (event) {
       const stopNames = [
-        'b-styler__control_text',
+        'b-styler__control',
         'b-control-panel',
         'menubar__button',
         'editor__content',
-        'menubar is-hidden'
+        'menubar is-hidden',
+        'b-slot__settings'
       ]
 
-      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames))) || this.isResizeStop) {
+      console.log('hide styler')
+
+      if (event && (event.target === this.el
+        || this.checkStylerNodes(event, stopNames))) {
         this.isCurrentStyler = true
-
-        if (this.isResizeStop) this.isCurrentStyler = false
-        this.toggleResizeStop(false)
-
         return
       }
 
-      if (event && MouseEvent && isParentTo(event.target, this.$el)) {
+      if (event && isParentTo(event.target, this.$el)) {
         return
       }
 
@@ -524,7 +464,6 @@ export default {
       // hide modal settings
       this.closeModal()
 
-      // hide panel
       this.setControlPanel(false)
 
       this.el.contentEditable = 'false'
@@ -534,6 +473,7 @@ export default {
       this.editText = false
 
       document.removeEventListener('click', this.hideStyler, true)
+      document.removeEventListener('dblclick', this.dblclick)
       document.removeEventListener('blur', this.hideStyler, true)
     },
 
@@ -591,24 +531,10 @@ export default {
     },
 
     setPosition () {
-      let pos = this.el.getBoundingClientRect()
-      let widthBoard = document.getElementById('artboard').clientWidth
-      let widthSidebar = document.getElementById('sidebar').clientWidth
-      let heightTopbar = document.getElementById('topbar').clientHeight
-      let right = widthBoard - (pos.right - widthSidebar)
+      let pos = this.$refs.styler.getBoundingClientRect()
 
-      if (pos.top < (this.modal[this.type].height + heightTopbar)) {
-        this.modal[this.type].classV = '_bottom'
-      } else {
-        this.modal[this.type].classV = '_top'
-      }
-
-      if (right < this.modal[this.type].width) {
-        this.transform[this.type].x = -(this.modal[this.type].width - 55)
-        this.modal[this.type].classH = '_left'
-      } else {
-        this.transform[this.type].x = 0
-        this.modal[this.type].classH = '_right'
+      if (pos.top < this.modal[this.type].height || pos.right < this.modal[this.width]) {
+        this.modal[this.type].class = '_bottom'
       }
     },
 
@@ -621,16 +547,9 @@ export default {
       }
     },
 
-    showStylerAfterDragEl () {
-      if (undefined !== this.options['isDragged'] && this.options['isDragged']) {
-        delete this.options['isDragged']
-
-        this.isVisible = false
-        this.isCurrentStyler = false
-        this.toggleDragStop(false)
-
-        this.el.addEventListener('click', this.showStyler)
-        this.el.click()
+    dblclick () {
+      if (this.type === 'text') {
+        this.editText = true
       }
     }
   }
@@ -660,27 +579,26 @@ export default {
     flex-wrap: nowrap
 
   &__control
-    width: $size-step/1.8
-    height: $size-step/1.8
-
     display: flex
     align-items: center
     justify-content: center
 
-    background: $white
-    // box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    // margin-right: .4rem
+    width: $size-step/1.5
+    height: $size-step/1.5
 
-    svg
-      fill: $dark-blue-krayola
-      margin-bottom: 0
+    background: $dark-blue-krayola
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+
+    cursor: pointer
+    & svg
+      fill:  $white
+      width: 14px
+      height: 14px
 
     &:hover, .active
-      background: $dark-blue-krayola
-
+      background: $white
       svg
-        fill: $white
-        margin-bottom: 0
+        fill: $dark-blue-krayola
 
     &_del
       margin-right: -0.2rem
@@ -692,6 +610,11 @@ export default {
         background: $black
         svg
           fill: $orange
+
+    &_link
+      svg
+        width: 18px
+        height: 18px
 
   &__modal
     width: 40rem
@@ -740,12 +663,11 @@ export default {
 
     &._top
       bottom: 4rem
+      left: -2.5rem
     &._bottom
       top: 4rem
-    &.right
-      right: calc(100% - 40px)
-    &._left
-      left: 40px
+      right: -2.5rem
+
     &:before
       content: ""
       position: absolute
@@ -769,23 +691,15 @@ export default {
     &._top
       &:before,
       &:after
+        left: 19%
         bottom: -0.75rem
+        margin-left: -0.75rem
 
     &._bottom
       &:before,
       &:after
+        right: 19%
         top: -0.75rem
-
-    &._right
-      &:before,
-      &:after
-        left: 9%
-        margin-left: -0.75rem
-
-    &._left
-      &:before,
-      &:after
-        right: 15%
         margin-right: -0.75rem
 
   &[x-out-of-boundaries]
