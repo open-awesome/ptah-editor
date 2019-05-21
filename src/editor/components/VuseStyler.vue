@@ -239,7 +239,9 @@ export default {
         x: 0,
         y: 0
       }
-    }
+    },
+    timer: 0,
+    prevent: false
   }),
   computed: {
     ...mapState('Sidebar', ['sandbox', 'settingObjectOptions']),
@@ -331,18 +333,14 @@ export default {
     this.el.classList.remove('is-editable')
     this.el.removeEventListener('click', this.showStyler)
     document.removeEventListener('click', this.hideStyler, true)
-    // document.removeEventListener('dblclick', this.dblclick)
   },
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
 
-    showStyler (event) {
+    stylerInit (event) {
       let self = this
-
-      event.preventDefault()
-      event.stopPropagation()
 
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
@@ -352,10 +350,10 @@ export default {
         return data
       }
 
-      // show inline styler
-      if (!this.popper && this.type !== 'section') {
-        this.$nextTick(function () {
-          this.popper = new Popper(this.el, this.$refs.styler, {
+      // create popper and show styler
+      if (!self.popper && self.type !== 'section') {
+        self.$nextTick(function () {
+          this.popper = new Popper(self.el, self.$refs.styler, {
             placement: 'top',
             modifiers: {
               autoSizing: {
@@ -371,31 +369,31 @@ export default {
         })
       }
 
-      if (this.isCurrentStyler) {
-        this.isCurrentStyler = false
+      if (self.isCurrentStyler) {
+        self.isCurrentStyler = false
         return
       }
 
       // hide modal settings
-      this.isModalsPropsShow = false
+      self.isModalsPropsShow = false
 
-      this.setControlPanel(false)
-      this.clearSettingObjectLight()
+      self.setControlPanel(false)
+      self.clearSettingObjectLight()
 
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
         .forEach(el => el.classList.remove('active'))
 
-      if (this.isVisible) return
-      this.isVisible = true
+      if (self.isVisible) return
+      self.isVisible = true
 
       setTimeout(() => {
-        if (this.$props.type === 'section') {
+        if (self.$props.type === 'section') {
           // Do not show section settings on click
-          // this.setSettingSection(this.section)
+          // self.setSettingSection(self.section)
         } else {
           // --- if section has components or slots
-          let keys = Object.keys(this.section.data)
+          let keys = Object.keys(self.section.data)
           let hasSlotsData = (
             keys.some(key => Boolean(~key.indexOf('components'))) ||
             keys.some(key => Boolean(~key.indexOf('container')))
@@ -408,32 +406,46 @@ export default {
             // --- TODO: bad idea
             // --- fix in future
             // --- coz data storage is unstable
-            let name = this.path[0]
+            let name = self.path[0]
             let index = name.split('components')[1]
-            this.setSandboxPaths({
+            self.setSandboxPaths({
               components: `$sectionData.components${index}`,
               container: `$sectionData.container${index}`
             })
           }
 
-          this.setSettingElement({
-            type: this.$props.type, // TODO: $props.type !== type ?
-            label: this.$props.label,
-            name: this.name,
-            options: _.get(this.section.data, this.path).element,
-            section: this.section,
-            element: this.el
+          self.setSettingElement({
+            type: self.$props.type, // TODO: $props.type !== type ?
+            label: self.$props.label,
+            name: self.name,
+            options: _.get(self.section.data, self.path).element,
+            section: self.section,
+            element: self.el
           })
-          this.el.classList.add('styler-active')
+          self.el.classList.add('styler-active')
           // --- rm class/es from menu items
           document
             .querySelectorAll('.b-menu-subitem_selected')
             .forEach(el => el.classList.remove('b-menu-subitem_selected'))
         }
       }, 0)
-
-      document.addEventListener('click', this.hideStyler, true)
     },
+
+    showStyler (event) {
+      let self = this
+
+      event.preventDefault()
+      event.stopPropagation()
+
+      this.timer = setTimeout(function () {
+        this.stylerInit(event)
+        if (!self.prevent) {
+          document.addEventListener('click', self.hideStyler, true)
+        }
+        self.prevent = false
+      }, 150)
+    },
+
     hideStyler (event) {
       const stopNames = [
         'b-styler__control',
@@ -443,8 +455,6 @@ export default {
         'menubar is-hidden',
         'b-slot__settings'
       ]
-
-      console.log('hide styler')
 
       if (event && (event.target === this.el
         || this.checkStylerNodes(event, stopNames))) {
@@ -473,7 +483,6 @@ export default {
       this.editText = false
 
       document.removeEventListener('click', this.hideStyler, true)
-      document.removeEventListener('dblclick', this.dblclick)
       document.removeEventListener('blur', this.hideStyler, true)
     },
 
@@ -548,9 +557,13 @@ export default {
     },
 
     dblclick () {
+      clearTimeout(this.timer)
+
+      this.prevent = true
       if (this.type === 'text') {
         this.editText = true
       }
+      document.addEventListener('click', this.hideStyler, true)
     }
   }
 }
