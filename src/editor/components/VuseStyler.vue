@@ -568,28 +568,26 @@ export default {
     flex-wrap: nowrap
 
   &__control
-    width: $size-step/1.5
-    height: $size-step/1.5
-
     display: flex
     align-items: center
     justify-content: center
 
-    background: $white
-    border-radius: 0.2rem
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    margin-right: .4rem
+    width: $size-step/1.5
+    height: $size-step/1.5
 
-    svg
-      fill: $dark-blue-krayola
-      margin-bottom: 0
+    background: $dark-blue-krayola
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+
+    cursor: pointer
+    & svg
+      fill:  $white
+      width: 14px
+      height: 14px
 
     &:hover, .active
-      background: $dark-blue-krayola
-
+      background: $white
       svg
-        fill: $white
-        margin-bottom: 0
+        fill: $dark-blue-krayola
 
     &_del
       margin-right: -0.2rem

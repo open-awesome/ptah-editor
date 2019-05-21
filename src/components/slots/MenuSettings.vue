@@ -2,8 +2,6 @@
   <div class="b-section-menu">
     <div class="b-section-menu__settings">
       <span
-        v-if="!section.isHeader"
-
         @click.stop="showSettingsBar"
         class="b-section-menu__settings-item b-section-menu__settings-item-settings"
         >
@@ -87,7 +85,7 @@ export default {
 
   position: absolute
   top: 0
-  right: $size-step/1.5
+  right: $size-step/2
   z-index: 1
 
   opacity: 0
@@ -117,8 +115,8 @@ export default {
       cursor: pointer
       & svg
         fill:  $white
-        width: 12px
-        height: 12px
+        width: 14px
+        height: 14px
 
       &:hover, .active
         background: $white

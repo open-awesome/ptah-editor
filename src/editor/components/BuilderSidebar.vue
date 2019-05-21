@@ -56,18 +56,18 @@
                   <span class="b-menu-subitem__icon"
                     @click.stop="showSettingsBar(headerSection)"
                     >
-                    <icon-base name="edit" color="#ffffff"></icon-base>
+                    <icon-base name="cog" color="#ffffff"></icon-base>
                   </span>
                   <!--<span class="b-menu-subitem__icon"
                     @click.stop="toggleSectionLayouts(headerSection)"
                     >
                     <icon-base name="layouts" color="#fff"></icon-base>
                   </span>-->
-                  <span class="b-menu-subitem__icon"
+                  <!--span class="b-menu-subitem__icon"
                     @click.stop="showBackgroundPanel(headerSection)"
                     >
                     <icon-base name="background" color="#fff"></icon-base>
-                  </span>
+                  </span-->
                   <span class="b-menu-subitem__icon"
                     @click.stop="deleteSection(headerSection)"
                     >
@@ -101,18 +101,18 @@
                   <span class="b-menu-subitem__icon"
                     @click.stop="showSettingsBar(section)"
                     >
-                    <icon-base name="edit" color="#ffffff"></icon-base>
+                    <icon-base name="cog" color="#ffffff"></icon-base>
                   </span>
                   <!--<span class="b-menu-subitem__icon"
                     @click.stop="toggleSectionLayouts(section)"
                     >
                     <icon-base name="layouts" color="#fff"></icon-base>
                   </span>-->
-                  <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
+                  <!--span class="b-menu-subitem__icon b-menu-subitem__icon_background"
                     @click.stop="showBackgroundPanel(section)"
                     >
                     <icon-base name="background" color="#fff"></icon-base>
-                  </span>
+                  </span-->
                   <span class="b-menu-subitem__icon"
                     @click.stop="deleteSection(section)"
                     >
@@ -350,7 +350,6 @@ export default {
     },
 
     showBackgroundPanel (section) {
-      console.log(section)
       this.setControlPanel('SectionBackground')
       this.setSettingSection(section)
     }
