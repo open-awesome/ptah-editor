@@ -41,6 +41,7 @@
       :min-height="32"
       :max-height="640"
       @resizing="onResize"
+      @resizestop="onResizeStop"
       :draggable="false"
       :z="999"
       :lock-aspect-ratio="true"
@@ -50,6 +51,7 @@
 </template>
 
 <script>
+import { mapActions } from 'vuex'
 import { getYoutubeVideoIdFromUrl } from '@editor/util'
 import VueDraggableResizable from 'vue-draggable-resizable'
 // optionally import default styles
@@ -130,6 +132,11 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'toggleShowStyler',
+      'toggleResizeStop'
+    ]),
+
     updateVideoData (videoUrl) {
       this.videoType = ''
 
@@ -148,9 +155,16 @@ export default {
         this.youtubeVideoUrl = ''
       }
     },
-    onResize: function (x, y, width, height) {
+    onResize (x, y, width, height) {
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
+
+      this.toggleShowStyler(false)
+    },
+
+    onResizeStop (x, y, width, height) {
+      this.toggleShowStyler(true)
+      this.toggleResizeStop(true)
     }
   },
 

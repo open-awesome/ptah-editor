@@ -8,6 +8,9 @@ export default {
       name: ''
     },
     isAddSectionExpanded: false, // add section menu
+    isShowStyler: true,
+    isResizeStop: true,
+    isDragStop: false,
     isGrouping: false, // section grouping interface
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectLabel: '', // Styler slot label
@@ -96,6 +99,15 @@ export default {
     },
     controlPanel (state, data) {
       state.controlPanel = data
+    },
+    setVisibleStyler (state, value) {
+      state.isShowStyler = value
+    },
+    setResizeStop (state, value) {
+      state.isResizeStop = value
+    },
+    setDragStop (state, value) {
+      state.isDragStop = value
     }
   },
 
@@ -242,6 +254,18 @@ export default {
 
         dispatch('toggleGrouping', false)
       }
+    },
+
+    toggleShowStyler ({ commit, state }, value) {
+      commit('setVisibleStyler', (typeof value !== 'undefined') ? value : !state.isShowStyler)
+    },
+
+    toggleResizeStop ({ commit, state }, value) {
+      commit('setResizeStop', (typeof value !== 'undefined') ? value : false)
+    },
+
+    toggleDragStop ({ commit, state }, value) {
+      commit('setDragStop', (typeof value !== 'undefined') ? value : false)
     }
   },
 

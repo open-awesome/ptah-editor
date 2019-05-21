@@ -16,6 +16,7 @@
     <div class="b-builder-layout-content">
 
       <aside
+        id="sidebar"
         class="b-builder-layout-content__sidebar"
         :class="{'b-builder-layout-content__sidebar_expanded': isExpanded}">
 
