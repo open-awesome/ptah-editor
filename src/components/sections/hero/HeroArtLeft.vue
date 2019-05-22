@@ -194,7 +194,6 @@ $h: 100vh
 .b-hero
   position: relative
   width: 100%
-  min-height: 60rem
   margin: 0
   padding: 1rem
   display: flex

@@ -239,7 +239,6 @@ export default {
 .b-hero-skull
   position: relative
   width: 100%
-  min-height: 56rem
   margin: 0
   padding-bottom: 8rem
   display: flex
