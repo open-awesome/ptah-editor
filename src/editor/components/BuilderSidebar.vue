@@ -66,7 +66,7 @@
                     <icon-base name="background"></icon-base>
                   </span>
                   <span class="b-menu-subitem__icon"
-                    tooltip="Delete section"
+                    tooltip="Delete"
                     tooltip-position="bottom"
                     @click.stop="deleteSection(headerSection)"
                     >
@@ -117,7 +117,7 @@
                     <icon-base name="background"></icon-base>
                   </span>
                   <span class="b-menu-subitem__icon"
-                    tooltip="Delete section"
+                    tooltip="Delete"
                     tooltip-position="bottom"
                     @click.stop="deleteSection(section)"
                     >

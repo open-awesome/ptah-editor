@@ -815,13 +815,19 @@ export default {
           <!-- Setting controls -->
           <div class="b-products-columns-extend__controls">
             <div>
-              <a href="#" class="b-products-columns-extend__control" @click.stop="showSettings('SectionProductsColumnsSettings')">
+              <a href="#" class="b-products-columns-extend__control"
+                 tooltip="Products"
+                 tooltip-position="bottom"
+                 @click.stop="showSettings('SectionProductsColumnsSettings')">
                 <icon-base name="cog" width="12" height="15" />
               </a>
             </div>
             <div>
-            <a href="#" class="b-products-columns-extend__control" @click.stop="showSettings('SectionProductsColumnsStyle')">
-              <icon-base name="style" width="12" height="15" />
+              <a href="#" class="b-products-columns-extend__control"
+                 tooltip="Products style"
+                 tooltip-position="bottom"
+                 @click.stop="showSettings('SectionProductsColumnsStyle')">
+                <icon-base name="style" width="12" height="15" />
               </a>
             </div>
           </div>
