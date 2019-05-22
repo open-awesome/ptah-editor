@@ -333,3 +333,80 @@ export function resetIndents () {
     })
   }, 200)
 }
+
+export function elemtentList () {
+  return {
+    button: {
+      name: 'Button',
+      element: types.Button,
+      type: 'button',
+      label: 'button'
+    },
+    text: {
+      name: 'TextElement',
+      element: types.Text,
+      type: 'text',
+      label: 'text'
+    },
+    pic: {
+      name: 'Pic',
+      element: types.Image,
+      type: 'image',
+      label: 'pic'
+    },
+    logo: {
+      name: 'Logo',
+      element: types.Logo,
+      type: 'image',
+      label: 'logo'
+    },
+    delimiter: {
+      name: 'Delimiter',
+      element: types.Delimiter,
+      type: 'delimiter',
+      label: 'delimiter'
+    },
+    platforms: {
+      name: 'AvailablePlatforms',
+      element: types.AvailablePlatforms,
+      type: 'available',
+      label: 'available platforms'
+    },
+    restrictions: {
+      name: 'AgeRestrictions',
+      element: types.AgeRestrictions,
+      type: 'restrictions',
+      label: 'age restrictions'
+    },
+    social: {
+      name: 'SocialNetworks',
+      element: types.SocialNetworks,
+      type: 'networks',
+      label: 'social networks'
+    },
+    slogan: {
+      name: 'Slogan',
+      element: types.Slogan,
+      type: 'slogan',
+      label: 'slogan'
+    },
+    icontext: {
+      name: 'IconWithText',
+      element: types.IconWithText,
+      type: 'icon',
+      label: 'icon with text'
+    },
+    video: {
+      name: 'VideoElement',
+      element: types.VideoElement,
+      type: 'video',
+      label: 'video'
+    },
+    timer: {
+      name: 'Timer',
+      element: types.Timer,
+      type: 'timer',
+      label: 'timer'
+    }
+  }
+}

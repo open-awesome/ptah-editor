@@ -130,6 +130,10 @@
 
     <!-- Delete element -->
     <div class="b-styler__controls" v-if="options.removable">
+      <a href="#" class="b-styler__control" @click.stop="duplicateElement">
+        <icon-base name="arrowRight"  width="15" height="10"></icon-base>
+      </a>
+
       <a href="#" class="b-styler__control b-styler__control_del" title="delete" @click.stop="removeElement">
         <icon-base name="close" width="10" height="10"></icon-base>
       </a>
@@ -579,6 +583,12 @@ export default {
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
       this.hideStyler()
+    },
+
+    duplicateElement () {
+      let el = _.cloneDeep(_.get(this.section.data, this.path))
+      el.key = randomPoneId()
+      this.components = [...this.components, el]
     },
 
     setModalProps () {
