@@ -262,7 +262,9 @@ export default {
         x: 0,
         y: 0
       }
-    }
+    },
+    timer: 0,
+    prevent: false
   }),
   computed: {
     ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
@@ -327,6 +329,7 @@ export default {
     if (this.$builder && !this.$builder.isEditing) return
 
     this.el.addEventListener('click', this.showStyler)
+    this.el.addEventListener('dblclick', this.dblclick)
 
     if (this.type === 'section') {
       this.el.id = `section_${this.section.id}`
@@ -379,6 +382,7 @@ export default {
     this.$refs.styler.remove()
     this.el.classList.remove('is-editable')
     this.el.removeEventListener('click', this.showStyler)
+    this.el.removeEventListener('dblclick', this.dblclick)
     document.removeEventListener('click', this.hideStyler, true)
   },
   methods: {
@@ -386,15 +390,13 @@ export default {
     ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
 
-    showStyler (event) {
+    stylerInit (event) {
       let self = this
+
       const stopNames = [
         'b-draggable-slot',
         'b-draggable-slot active'
       ]
-
-      event.preventDefault()
-      event.stopPropagation()
 
       let autoSizing = (data) => {
         data.offsets.popper.left = data.offsets.reference.left
@@ -498,9 +500,24 @@ export default {
             .forEach(el => el.classList.remove('b-menu-subitem_selected'))
         }
       }, 0)
-
-      document.addEventListener('click', this.hideStyler, true)
     },
+
+    showStyler (event) {
+      let self = this
+
+      event.preventDefault()
+      event.stopPropagation()
+
+      this.timer = setTimeout(function () {
+        self.stylerInit(event)
+
+        if (!self.prevent) {
+          document.addEventListener('click', self.hideStyler, true)
+        }
+        self.prevent = false
+      }, 50)
+    },
+
     hideStyler (event) {
       const stopNames = [
         'b-styler__control_text',
@@ -639,6 +656,17 @@ export default {
         this.el.addEventListener('click', this.showStyler)
         this.el.click()
       }
+    },
+
+    dblclick () {
+      clearTimeout(this.timer)
+
+      this.prevent = true
+      if (this.type === 'text') {
+        this.editText = true
+      }
+
+      document.addEventListener('click', this.hideStyler, true)
     }
   }
 }
