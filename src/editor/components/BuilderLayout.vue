@@ -101,6 +101,8 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-builder-layout
+  position: relative
+
   &__top-bar
     height: 8rem
     max-width: 100vw
