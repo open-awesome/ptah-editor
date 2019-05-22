@@ -26,7 +26,7 @@ import ControlImage from './../controls/TheControlImage'
 import ControlBox from '../controls/TheControlBox'
 
 export default {
-  name: 'ThePanelImage',
+  name: 'ThePanelImageSettings',
 
   props: {
     builder: {

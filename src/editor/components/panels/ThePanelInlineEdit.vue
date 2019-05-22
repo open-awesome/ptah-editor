@@ -14,7 +14,7 @@
 import ControlText from './../controls/TheControlText'
 
 export default {
-  name: 'ThePanelInlineText',
+  name: 'ThePanelInlineEdit',
 
   components: {
     ControlText

@@ -44,7 +44,7 @@
       </a>
 
       <!-- Inline text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('InlineText')" v-if="type === 'inline'">
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('InlineEdit')" v-if="type === 'inline'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
@@ -93,7 +93,7 @@
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageSettings')">
           <icon-base name="preview" width="14" height="16" />
         </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
@@ -102,7 +102,7 @@
       </template>
 
       <!-- Video -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Video')" v-if="type === 'video'">
+      <a href="#" class="b-styler__control" @click.stop="setControlPanel('VideoSettings')" v-if="type === 'video'">
         <icon-base name="settings" width="14" height="16" />
       </a>
 
@@ -485,21 +485,27 @@ export default {
             })
           }
 
-          this.setSettingElement({
-            type: this.$props.type, // TODO: $props.type !== type ?
-            label: this.$props.label,
-            name: this.name,
-            options: _.get(this.section.data, this.path).element,
-            section: this.section,
-            element: this.el
-          })
-          this.el.classList.add('styler-active')
-          // --- rm class/es from menu items
-          document
-            .querySelectorAll('.b-menu-subitem_selected')
-            .forEach(el => el.classList.remove('b-menu-subitem_selected'))
+          this.setElement()
         }
       }, 0)
+    },
+
+    setElement () {
+      this.setSettingElement({
+        type: this.$props.type, // TODO: $props.type !== type ?
+        label: this.$props.label,
+        name: this.name,
+        options: _.get(this.section.data, this.path).element,
+        section: this.section,
+        element: this.el
+      })
+      this.el.classList.add('styler-active')
+      // --- rm class/es from menu items
+      document
+        .querySelectorAll('.b-menu-subitem_selected')
+        .forEach(el => el.classList.remove('b-menu-subitem_selected'))
+
+      this.el.addEventListener('click', this.hideStyler, true)
     },
 
     showStyler (event) {
@@ -515,7 +521,7 @@ export default {
           document.addEventListener('click', self.hideStyler, true)
         }
         self.prevent = false
-      }, 50)
+      }, 150)
     },
 
     hideStyler (event) {
@@ -645,28 +651,33 @@ export default {
       }
     },
 
-    showStylerAfterDragEl () {
-      if (undefined !== this.options['isDragged'] && this.options['isDragged']) {
-        delete this.options['isDragged']
+    async dblclick (event) {
+      let name = _.startCase(this.type)
 
-        this.isVisible = false
-        this.isCurrentStyler = false
-        this.toggleDragStop(false)
-
-        this.el.addEventListener('click', this.showStyler)
-        this.el.click()
-      }
-    },
-
-    dblclick () {
+      // clear timer after dbl click
       clearTimeout(this.timer)
 
       this.prevent = true
-      if (this.type === 'text') {
-        this.editText = true
+
+      if (this.type === 'section') {
+        return
       }
 
-      document.addEventListener('click', this.hideStyler, true)
+      if (this.type === 'text') {
+        this.editText = true
+        this.el.addEventListener('click', this.hideStyler, true)
+      } else {
+        // set props element
+        this.setElement()
+
+        await this.$nextTick()
+
+        if (this.type === 'button' || this.type === 'inline' || this.type === 'icon') {
+          this.setControlPanel(name + 'Edit')
+        } else {
+          this.setControlPanel(name + 'Settings')
+        }
+      }
     }
   }
 }
