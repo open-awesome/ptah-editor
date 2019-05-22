@@ -117,7 +117,7 @@ export default {
       </div>
       <div>
         <button class="b-add-section__header-close-bt" @click="closeAddSectionBar">
-          <icon-base width="14" height="14" color="#fff" name="close"/>
+          <icon-base width="14" height="14" name="close"/>
         </button>
       </div>
     </div>
@@ -197,7 +197,7 @@ export default {
   position: relative
   z-index: 1
 
-  background: $dark-blue
+  background: $white
   box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
 
   &__toggle-bar
@@ -219,6 +219,7 @@ export default {
       background: transparent
       cursor: pointer
       border: none
+      color: $gray300
   &__padd
     padding: 2.8rem 0 8rem
     height: calc(100% - 8rem)
@@ -227,7 +228,7 @@ export default {
     flex-direction: column
 
   &__title
-    color: $white
+    color: $black
     font-size: 1.8rem
     font-weight: bold
     letter-spacing: 0.02rem
@@ -251,11 +252,12 @@ export default {
       height: 4.8rem
       line-height: 4.6rem
       font-size: 1.4rem
-      color: $white
+      color: $gray300
       cursor: pointer
       &_selected,
       &:hover
-        background-color: $dark-blue-krayola
+        color: $black
+        background-color: rgba(116, 169, 230, 0.25)
     &-title
       display: inline-block
       text-transform: capitalize
