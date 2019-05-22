@@ -72,6 +72,12 @@ export default {
 
     toggleSidebarSection () {
       this.toggleSidebar()
+    },
+
+    async itemClick (item, event) {
+      await this.$nextTick()
+
+      this.$emit(item, event)
     }
   }
 }

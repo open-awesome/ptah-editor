@@ -106,6 +106,8 @@ export default {
 $topBarHeight: 6rem
 
 .b-builder-layout
+  position: relative
+
   &__top-bar
     height: $topBarHeight
     max-width: 100vw
