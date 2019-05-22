@@ -72,6 +72,12 @@ export default {
 
     toggleSidebarSection () {
       this.toggleSidebar()
+    },
+
+    async itemClick (item, event) {
+      await this.$nextTick()
+
+      this.$emit(item, event)
     }
   }
 }
@@ -133,14 +139,14 @@ export default {
           </BaseButton>
           <div slot="list">
             <ul>
-              <li @click="$emit('preview', $event)">
+              <li @click="itemClick('preview', $event)">
                 <icon-base
                   color="#B1B1B1"
                   name="preview">
                 </icon-base>
                 {{ $t('nav.preview') }}
               </li>
-              <li @click="$emit('export', $event)">
+              <li @click="itemClick('export', $event)">
                 <icon-base
                   color="#B1B1B1"
                   name="upload">

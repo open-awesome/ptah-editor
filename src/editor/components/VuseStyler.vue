@@ -90,11 +90,14 @@
 
       <!-- Image -->
       <template v-if="type === 'image'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" >
-          <icon-base name="preview" width="14" height="16" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageStyle')">
           <icon-base name="style" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')">
+          <icon-base name="preview" width="14" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
+          <icon-base name="link" width="14" height="16" />
         </a>
       </template>
 
@@ -343,6 +346,15 @@ export default {
       this.changeTextLinkStyle(this.options.textLinkStyles)
     }
 
+    if (this.options.video && this.options.link.type === 'video') {
+      this.el.classList.add('ptah-d-video')
+      this.el.dataset.video = this.options.video
+    }
+
+    if (this.options.link && this.options.link.action === '') {
+      this.el.classList.add('js-element-link')
+    }
+
     // Apply animation to element
     if (this.options.classes !== undefined && this.options.classes.length) {
       this.options.classes.forEach((name, index) => {
@@ -354,11 +366,6 @@ export default {
           this.el.dataset.video = this.options.video
         }
       })
-    }
-
-    if (this.options.video) {
-      this.el.classList.add('ptah-d-video')
-      this.el.dataset.video = this.options.video
     }
 
     if (this.options.link && this.options.link.behavior) {

@@ -1,7 +1,7 @@
 <template>
   <div class="b-section-settings">
     <h6 class="b-section-settings__title">
-      System settings
+      Gallery settings
     </h6>
     <base-scroll-container backgroundBar="#999">
       <div class="b-section-settings__inner">
