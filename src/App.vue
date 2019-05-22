@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 
 export default {
   name: 'app',
@@ -14,6 +14,26 @@ export default {
     return {
       section: 'Head',
       loading: true
+    }
+  },
+
+  computed: {
+    ...mapState(['isSaved'])
+  },
+
+  watch: {
+    isSaved (value) {
+      if (value === 'error') {
+        this.$message.error('Save failed', {
+          duration: 2500,
+          dismissible: false
+        })
+      } else {
+        this.$message.info('Saved', {
+          duration: 500,
+          dismissible: false
+        })
+      }
     }
   },
 
