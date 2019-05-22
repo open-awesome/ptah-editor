@@ -1,4 +1,5 @@
 <script>
+import { mapState } from 'vuex'
 import ControlTextStylesChapter from './../controls/TheControlTextStylesChapter.vue'
 import ControlTextStylesText from './../controls/TheControlTextStylesText.vue'
 
@@ -8,6 +9,12 @@ export default {
   components: {
     ControlTextStylesChapter,
     ControlTextStylesText
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ])
   }
 }
 </script>
@@ -15,7 +22,7 @@ export default {
 <template>
   <div class="b-text-controls">
     <div>
-      <div class="b-text-controls__control">
+      <div class="b-text-controls__control" v-if="settingObjectOptions.isChapter">
         <control-text-styles-chapter/>
       </div>
     </div>

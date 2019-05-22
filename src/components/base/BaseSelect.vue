@@ -21,6 +21,17 @@ export default {
     height: {
       type: String,
       default: '10'
+    },
+    typeItems: {
+      default: 'text',
+      type: String,
+      validator (value) {
+        const values = [
+          'text',
+          'class'
+        ]
+        return values.indexOf(value) !== -1
+      }
     }
   },
   data: () => ({
@@ -56,8 +67,11 @@ export default {
     </base-label>
     <div class="b-pth-base-select">
       <div class="b-pth-base-select__container" @click="showOptions = !showOptions">
-        <span class="b-pth-base-select__name">
+        <span class="b-pth-base-select__name" v-if="typeItems === 'text'">
           {{ value ? value.name : 'Select...' }}
+        </span>
+        <span class="b-pth-base-select__name" v-if="typeItems === 'class'">
+          <i :class="`b-pth-base-select__name-icon b-pth-base-select__name-icon-${value.name}`" />
         </span>
         <span class="b-pth-base-select__arrow">
           <icon-base class="b-pth-base-select__icon"

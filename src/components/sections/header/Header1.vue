@@ -37,7 +37,9 @@
               v-if="$sectionData.components.length"
               v-model="$sectionData.components"
               :style="$sectionData.container.styles"
-              class="b-draggable-slot b-draggable-slot_horizont">
+              class="b-draggable-slot b-draggable-slot_horizont"
+              @change="dragStop"
+            >
 
             <div
                 v-for="(component, index) in $sectionData.components"
@@ -85,7 +87,9 @@
               v-if="$sectionData.components2.length"
               v-model="$sectionData.components2"
               :style="$sectionData.container2.styles"
-              class="b-draggable-slot b-draggable-slot_horizont">
+              class="b-draggable-slot b-draggable-slot_horizont"
+              @change="dragStop"
+            >
 
             <div
                 v-for="(component, index) in $sectionData.components2"

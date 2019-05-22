@@ -72,7 +72,7 @@ axios.interceptors.request.use(setAuthCb)
 let refreshTokenPromise
 
 const createUpdateAuthInterceptor = (store, http) => async error => {
-  if (error.code !== 401) {
+  if (error.response.data.error.code !== 401) {
     return Promise.reject(error)
   }
 

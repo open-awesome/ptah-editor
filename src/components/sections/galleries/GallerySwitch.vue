@@ -17,7 +17,7 @@
               direction="column"
               :style="$sectionData.container.styles"
             >
-              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @change="dragStop">
                 <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                   <component
                      v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
@@ -73,6 +73,7 @@
                             </span>
                           </div>
                           <div class="b-preview__name"
+                            v-if="$sectionData.mainStyle.isLabelPreview"
                             v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
                             :path="`${key}[1].element`"
                             v-html="$sectionData[key][1].element.text"
@@ -204,41 +205,6 @@ const GALLERY_ITEM_CUSTOM = [
     element: {
       removable: false
     }
-  },
-  {
-    element: {
-      removable: false,
-      text: 'Chapter for image',
-      styles: {
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem',
-        'color': '#000',
-        'font-weight': 'bold'
-      }
-    }
-  },
-  {
-    element: {
-      removable: false,
-      styles: {
-        'background-image': 'url(https://gn854.cdn.stg.gamenet.ru/0/836nk/o_e19nv.png)',
-        'background-size': 'cover',
-        'width': '256px',
-        'height': '320px'
-      }
-    }
-  },
-  {
-    element: {
-      removable: false,
-      text: `Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book.`,
-      styles: {
-        'font-family': 'Montserrat',
-        'font-size': '1.6rem',
-        'color': '#000',
-        'font-weight': 'bold'
-      }
-    }
   }
 ]
 
@@ -258,7 +224,7 @@ const C_CUSTOM = [
       text: 'Your beautiful header should be here!',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '4rem',
+        'font-size': '3.2rem',
         'color': '#000'
       }
     },
@@ -267,13 +233,18 @@ const C_CUSTOM = [
 ]
 
 const GROUP_NAME = 'Galleries'
-const NAME = 'Gallery1'
+const NAME = 'GallerySwitch'
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-color': '#8CD2B5'
-    }
+    },
+    isChapter: true,
+    isChapterStyle: true,
+    isTextStyle: true,
+    isLabel: true,
+    isLabelPreview: true
   },
   components: _.merge([], C_CUSTOM),
   components0: _.merge([], GALLERY_ITEM_CUSTOM),
@@ -384,8 +355,8 @@ export default {
 
   &__controls
     position: absolute
-    top: -$size-step
-    left: $size-step/3
+    top: -$size-step/1.5
+    left: $size-step/3.4
 
     display: flex
     align-items: center
@@ -395,14 +366,15 @@ export default {
     .is-editable #{$this}__padd:hover &
       display: flex !important
   &__control
-    width: 3.2rem
-    height: 3.2rem
+    width: $size-step/1.5
+    height: $size-step/1.5
+
     display: flex
     align-items: center
     justify-content: center
 
-    border-radius: 50%
     background: $white
+    border-radius: 0.2rem
     box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
     margin-right: .4rem
     svg

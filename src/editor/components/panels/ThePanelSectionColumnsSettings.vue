@@ -1,38 +1,25 @@
 <template>
   <div class="b-section-settings">
     <h6 class="b-section-settings__title">
-      Gallery settings
+      Columns settings
     </h6>
     <base-scroll-container backgroundBar="#999">
       <div class="b-section-settings__inner">
-        <!-- System requirements -->
-        <control-section-gallery/>
+        <!-- Columns settings -->
+        <control-section-columns/>
       </div>
     </base-scroll-container>
   </div>
 </template>
 
 <script>
-import ControlSectionGallery from './../controls/TheControlSectionGallery.vue'
+import ControlSectionColumns from './../controls/TheControlSectionColumns.vue'
 
 export default {
-  name: 'ThePanelSectionGalleryettings',
+  name: 'ThePanelSectionColumnsSettings',
 
   components: {
-    ControlSectionGallery
-  },
-
-  props: {
-    builder: {
-      type: Object,
-      required: true
-    }
-  },
-
-  data () {
-    return {
-      /* vars for control system requirements */
-    }
+    ControlSectionColumns
   }
 }
 </script>

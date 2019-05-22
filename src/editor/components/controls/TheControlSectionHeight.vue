@@ -29,11 +29,6 @@ export default {
       'settingObjectSection'
     ]),
 
-    sectionHeight () {
-      let node = document.getElementById(`section_${this.settingObjectSection.id}`)
-      return node.offsetHeight
-    },
-
     screenHeight () {
       return document.querySelector('.b-builder-layout-content__main').offsetHeight
     },
@@ -48,7 +43,7 @@ export default {
         if (this.optHeight && this.optHeight.indexOf('vh') > 0) {
           h = parseInt(this.optHeight)
         } else {
-          h = Math.ceil((this.sectionHeight * 100) / this.screenHeight)
+          h = Math.ceil((this.sectionHeight() * 100) / this.screenHeight)
         }
         return h < 100 ? h : 100
       },
@@ -68,10 +63,10 @@ export default {
           } else if (this.optHeight.indexOf('rem') > 0) {
             h = h * 10
           } else {
-            h = this.sectionHeight
+            h = this.sectionHeight()
           }
         } else {
-          h = this.sectionHeight
+          h = this.sectionHeight()
         }
         return h
       },
@@ -111,6 +106,11 @@ export default {
         let styles = { height: this.vhValue + 'vh' }
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
       }
+    },
+
+    sectionHeight () {
+      let node = document.getElementById(`section_${this.settingObjectSection.id}`)
+      return node.offsetHeight
     }
   }
 }
@@ -118,7 +118,9 @@ export default {
 
 <template>
   <div class="control-height">
-    <h6>Section height</h6>
+   <base-label>
+     Section height
+   </base-label>
     <BaseRadioCheck :list="heightValueTypesList" v-model="heigthValueType" @change="onTypeChange"/>
 
     <div class="control-height__input" v-if="heigthValueType === 'vh'">

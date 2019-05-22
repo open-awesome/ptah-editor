@@ -24,6 +24,12 @@ export default {
   },
 
   methods: {
-    ...mapActions('Landing', ['saveState'])
+    ...mapActions('Landing', ['saveState']),
+    ...mapActions('Sidebar', ['toggleDragStop']),
+
+    dragStop (event) {
+      this.toggleDragStop(true)
+      event.moved.element.element['isDragged'] = true
+    }
   }
 }
