@@ -18,12 +18,18 @@
         </a>
       </div>
       <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonEdit')">
+        <a href="#" class="b-styler__control"
+           tooltip="Edit button text"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ButtonEdit')">
           <icon-base name="edit" width="12" height="15" />
         </a>
       </div>
       <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Button setttings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ButtonSettings')">
           <icon-base name="cog" width="12" height="15" />
         </a>
       </div>
