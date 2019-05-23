@@ -140,12 +140,12 @@ export default {
       text-align: center
     &-text
       display: inline-block
-      width: 16rem
+      width: 12rem
       white-space: nowrap
       text-overflow: ellipsis
       overflow: hidden
   &__icons
-    width: 5rem
+    width: 9rem
     margin: 0 $size-step/4 0 $size-step/4.5
     display: flex
     flex-wrap: nowrap

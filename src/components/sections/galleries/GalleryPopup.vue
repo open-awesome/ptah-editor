@@ -345,6 +345,7 @@ export default {
     :class="$sectionData.mainStyle.classes"
     :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }]"
     >
+      <slot name="menu"/>
       <slot name="video"/>
       <slot name="overlay"/>
 
@@ -573,35 +574,37 @@ export default {
 
   &__controls
     position: absolute
-    top: -$size-step
-    left: $size-step/3
+    top: -14px
+    left: $size-step/3.4
 
     display: flex
-    align-items: center
-    justify-content: center
+    align-items: flex-end
+    justify-content: flex-start
 
     display: none
     .is-editable #{$this}__padd:hover &
       display: flex !important
   &__control
-    width: 3.2rem
-    height: 3.2rem
     display: flex
     align-items: center
     justify-content: center
 
-    border-radius: 50%
-    background: $white
+    width: $size-step/1.5
+    height: $size-step/1.5
+
+    background: $dark-blue-krayola
     box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    margin-right: .4rem
-    svg
-      fill: $dark-blue-krayola
-      margin-bottom: 0
+
+    cursor: pointer
+    & svg
+      fill:  $white
+      width: 14px
+      height: 14px
+
     &:hover, .active
-      background: $dark-blue-krayola
+      background: $white
       svg
-        fill: $white
-        margin-bottom: 0
+        fill: $dark-blue-krayola
 
 .b-gallery-popup__item
   width: 25%
