@@ -1,13 +1,16 @@
 <template>
-    <div class="uploader">
-        <img v-bind:src="src" />
+    <div class="b-uploader"
+      @dragover.prevent
+      @drop="onDrop"
+      >
         <form>
-            <input
-                class="uploader-input"
-                type="file"
-                ref="uploader"
-                @change="uploadImg"
-                v-if="$builder.isEditing && mode === 'input'" />
+          <input
+            class="b-uploader__input"
+            type="file"
+            ref="uploader"
+            @change="uploadImg"
+            v-if="$builder.isEditing && mode === 'input'"
+            />
         </form>
     </div>
 </template>
@@ -29,22 +32,33 @@ export default {
       type: String
     }
   },
+
   data: () => ({
-    src: '',
-    section: {}
+    src: ''
   }),
-  created () {
-    this.section = this.$section.get(this.path)
-    this.src = this.section.url
+
+  computed: {
+    section () {
+      return this.$section.get(`$sectionData.${this.path}`)
+    }
   },
+
+  mounted () {
+    this.src = this.section.src
+  },
+
   methods: {
     uploadImg: function (event) {
+      console.log(event)
+
       let file = event.target.files || event.dataTransfer.files
       let self = this
 
       if (!file) {
         return
       }
+
+      console.log(123)
 
       let request = new FormData()
       let $form = $(event.target).parent()
@@ -65,44 +79,44 @@ export default {
 
           const data = response['data']['response']['data'][0]
 
-          self.src = self.section.url = data.src
+          self.src = self.section.src = data.src
 
           self.$section.set(self.path, self.section)
         }).catch(function (e) {
           console.warn(e)
         })
+    },
+
+    onDrop: function (e) {
+      e.stopPropagation()
+      e.preventDefault()
+
+      this.uploadImg(e)
     }
   }
 }
 </script>
 
 <style lang="sass">
-.uploader
-  position: relative
-  cursor: pointer
-  outline: none
-  &-input
+.b-uploader
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 1000
+
+  background: #000
+
+  &__input
     position: absolute
     top: 0
-    right: 1rem
-    bottom: 1rem
+    right: 0
+    bottom: 0
     left: 0
+    z-index: 1000
+
     width: 100%
     opacity: 0
-    z-index: 100
     cursor: pointer
-
-  > img
-    width: 100%
-    display: inline-block
-    height: 100%
-    min-width: 1rem
-    min-height: 1rem
-    .is-mobile &
-       height: auto
-    @media only screen and (max-width: 540px)
-      &
-        height: auto
-  &:hover
-    box-shadow: 0 0 0 2px #18d88b
 </style>

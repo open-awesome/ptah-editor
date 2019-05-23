@@ -3,6 +3,9 @@
     :alt="a"
     :title="a"
     >
+
+    <uploader :path="path" class="b-logo__uploader"/>
+
     <vue-draggable-resizable
       class="b-logo__resize"
       class-name-active="b-logo__resize_active"
@@ -24,6 +27,7 @@
 <script>
 import { mapActions } from 'vuex'
 import VueDraggableResizable from 'vue-draggable-resizable'
+import Uploader from '@editor/plugins/Uploader.vue'
 // optionally import default styles
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
@@ -33,7 +37,8 @@ export default {
   inject: ['$section'],
 
   components: {
-    VueDraggableResizable
+    VueDraggableResizable,
+    Uploader
   },
 
   data: function () {
@@ -92,6 +97,8 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-logo
+  $this: &
+
   position: relative
   display: inline-block
 
@@ -106,6 +113,13 @@ export default {
 
   user-select: none
   transition: background-color 200ms
+
+  &__uploader
+    // display: none
+    opacity: 0.1
+  &:hover &__uploader
+    opacity: 0.2
+    display: block
 
   &__resize
     border: none !important
