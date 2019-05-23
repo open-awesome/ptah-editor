@@ -791,7 +791,7 @@ export default {
               direction="column"
               :style="$sectionData.container.styles"
             >
-              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @change="dragStop">
                 <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                   <component
                      v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
@@ -816,12 +816,18 @@ export default {
               <!-- Setting controls -->
               <div class="b-system__controls">
                 <div>
-                  <a href="#" class="b-system__control" @click.stop="showSettings('SectionSystemSettings')">
+                  <a href="#" class="b-system__control"
+                     tooltip="Settings"
+                     tooltip-position="bottom"
+                     @click.stop="showSettings('SectionSystemSettings')">
                     <icon-base name="cog" width="12" height="15" />
                   </a>
                 </div>
                 <div>
-                  <a href="#" class="b-system__control" @click.stop="showSettings('SectionSystemStyle')">
+                  <a href="#" class="b-system__control"
+                     tooltip="Table style"
+                     tooltip-position="bottom"
+                     @click.stop="showSettings('SectionSystemStyle')">
                     <icon-base name="style" width="12" height="15" />
                   </a>
                 </div>

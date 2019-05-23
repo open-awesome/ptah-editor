@@ -789,7 +789,7 @@ export default {
                 direction="column"
                 :style="$sectionData.container.styles"
               >
-                <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+                <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @change="dragStop">
                   <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                     <component
                        v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
@@ -812,12 +812,18 @@ export default {
               <!-- Setting controls -->
                 <div class="b-products-colums__controls">
                   <div>
-                    <a href="#" class="b-products-colums__control" @click.stop="showSettings('SectionProductsColumnsSettings')">
+                    <a href="#" class="b-products-colums__control"
+                       tooltip="Products"
+                       tooltip-position="bottom"
+                       @click.stop="showSettings('SectionProductsColumnsSettings')">
                       <icon-base name="cog" width="12" height="15" />
                     </a>
                   </div>
                   <div>
-                    <a href="#" class="b-products-colums__control" @click.stop="showSettings('SectionProductsColumnsStyle')">
+                    <a href="#" class="b-products-colums__control"
+                       tooltip="Products style"
+                       tooltip-position="bottom"
+                       @click.stop="showSettings('SectionProductsColumnsStyle')">
                       <icon-base name="style" width="12" height="15" />
                     </a>
                   </div>
@@ -836,7 +842,7 @@ export default {
                     direction="column"
                     :style="{ backgroundColor : $sectionData.mainStyle.styles['background-color'] }"
                     >
-                    <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles">
+                    <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @change="dragStop">
                       <div
                         v-for="(component, index) in $sectionData[`components${key}`]"
                         v-if="$sectionData[`components${key}`].length !== 0"
@@ -876,7 +882,7 @@ export default {
                     direction="column"
                     :style="{ backgroundColor : $sectionData.mainStyle.styles['background-color'] }"
                     >
-                    <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles">
+                    <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @change="dragStop">
                       <div
                         v-for="(component, index) in $sectionData[`components${key}D`]"
                         v-if="$sectionData[`components${key}D`].length !== 0"

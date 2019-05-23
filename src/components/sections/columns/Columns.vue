@@ -235,7 +235,10 @@ export default {
           <!-- Setting controls -->
           <div class="b-columns__controls">
             <div>
-              <a href="#" class="b-columns__control" @click.stop="showSettings('SectionColumnsSettings')">
+              <a href="#" class="b-columns__control"
+                 tooltip="Number of columns"
+                 tooltip-position="right"
+                 @click.stop="showSettings('SectionColumnsSettings')">
                 <icon-base name="cog" width="12" height="15" />
               </a>
             </div>

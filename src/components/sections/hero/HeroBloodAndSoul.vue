@@ -149,7 +149,7 @@ export default {
             direction="column"
             class="b-sandbox"
           >
-            <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles">
+            <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
@@ -177,7 +177,7 @@ export default {
             direction="column"
             class="b-sandbox"
           >
-            <draggable v-model="$sectionData.components2" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles">
+            <draggable v-model="$sectionData.components2" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
                 <component class="b-hero-component"
                   v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
@@ -203,7 +203,6 @@ export default {
 .b-hero
   position: relative
   width: 100%
-  min-height: 70rem
   margin: 0
   display: flex
   flex-direction: column

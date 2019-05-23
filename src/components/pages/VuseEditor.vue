@@ -49,9 +49,8 @@ import HeroWithTimerColumnsVideo2 from '@components/sections/hero/HeroWithTimerC
 import HeroWithTimerSlogan from '@components/sections/hero/HeroWithTimerSlogan'
 import HeroWithTimerSlogan2 from '@components/sections/hero/HeroWithTimerSlogan2'
 // --- gallery
-import Gallery1 from '@components/sections/galleries/Gallery1'
-import Gallery2 from '@components/sections/galleries/Gallery2'
-import Gallery3 from '@components/sections/galleries/Gallery3'
+import GallerySwitch from '@components/sections/galleries/GallerySwitch'
+import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 // --- products
 import ProductsColumns from '@components/sections/products/ProductsColumns'
 import ProductsColumnsExtend from '@components/sections/products/ProductsColumnsExtend'
@@ -115,9 +114,8 @@ const COMPONENTS = {
   HeroWithTimerSlogan,
   HeroWithTimerSlogan2,
 
-  Gallery1,
-  Gallery2,
-  Gallery3,
+  GallerySwitch,
+  GalleryPopup,
 
   ProductsColumns,
   ProductsColumnsExtend,

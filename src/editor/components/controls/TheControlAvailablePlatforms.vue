@@ -1,22 +1,40 @@
 <script>
-import { mapState } from 'vuex'
+import * as _ from 'lodash-es'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'ControlAvailablePlatforms',
 
-  computed: {
-    ...mapState('Sidebar', [
-      'settingObjectOptions'
-    ]),
-
-    platforms () {
-      return this.settingObjectOptions.availablePlatforms
+  data () {
+    return {
+      platforms: []
     }
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ])
+  },
+
+  created () {
+    this.platforms = this.settingObjectOptions.availablePlatforms
+  },
+
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     visible (key) {
       this.platforms[key].visible = !this.platforms[key].visible
+      this.updateSettings('availablePlatforms', this.platforms)
+    },
+
+    updateSettings (prop, value) {
+      let settings = {}
+      settings[prop] = value
+      this.updateSettingOptions(_.merge(this.settingObjectOptions, { settings }))
     }
   }
 }

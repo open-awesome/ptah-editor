@@ -54,6 +54,9 @@ export default {
   display: flex
   justify-content: center
   align-items: center
+  &.styler-active
+    border: 0.2rem $white dotted
+    border-radius: 0.5rem
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     height: auto !important

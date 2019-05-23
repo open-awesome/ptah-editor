@@ -3,20 +3,23 @@
     ref="styler"
     id="styler"
     v-if="$builder.isEditing"
-    :class="{ 'is-visible': isVisible && !editText }"
+    :class="{ 'is-visible': isVisible && !editText && isShowStyler }"
     @click.stop=""
   >
 
     <div class="b-styler__col" v-if="type === 'button'">
       <!-- Button -->
-      <div class="b-styler__controls" ref="buttonModalProps">
-        <a href="#" class="b-styler__control b-styler__control_link" @click.stop="setModalProps()">
-          <icon-base name="link" width="18" height="18" />
+      <div class="b-styler__controls">
+        <a href="#" class="b-styler__control"
+           tooltip="Button style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('Button')">
+          <icon-base name="style" width="12" height="15" />
         </a>
       </div>
-      <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
-          <icon-base name="style" width="12" height="15" />
+      <div class="b-styler__controls" ref="buttonModalProps">
+        <a href="#" class="b-styler__control" @click.stop="setModalProps()">
+          <icon-base name="link" width="18" height="18" />
         </a>
       </div>
     </div>
@@ -24,87 +27,120 @@
     <div class="b-styler__controls">
 
       <!-- Text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')" v-if="type === 'text'">
+      <a href="#" class="b-styler__control"
+         tooltip="Text style"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Text')"
+         v-if="type === 'text'">
         <icon-base name="style" width="12" height="15" />
       </a>
 
       <!-- Text editor -->
-      <a href="#" class="b-styler__control" @click.stop="editText = true" v-if="type === 'text'">
+      <a href="#" class="b-styler__control b-styler__control_text"
+         tooltip="Edit"
+         tooltip-position="bottom"
+         @click.stop="editText = true"
+         v-if="type === 'text'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
       <!-- Inline text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('InlineText')" v-if="type === 'inline'">
-        <icon-base name="cog" width="12" height="15" />
+      <a href="#" class="b-styler__control"
+         tooltip="Edit"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('InlineText')"
+         v-if="type === 'inline'">
+        <icon-base name="edit" width="12" height="15" />
       </a>
 
       <!-- Social settings -->
       <template v-if="type === 'networks'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-      </template>
-
-      <!-- Social settings -->
-      <template v-if="type === 'available'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableStyle')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
+      </template>
+
+      <!-- available settings -->
+      <template v-if="type === 'available'">
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableSettings')">
           <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableStyle')">
+          <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Age restrictions -->
       <template v-if="type === 'restrictions'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsSettings')">
           <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsStyle')">
+          <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Timer -->
       <template v-if="type === 'timer'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')">
           <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerStyle')">
+          <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Image -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" v-if="type === 'image'">
-        <icon-base name="preview" width="14" height="16" />
-      </a>
+      <template v-if="type === 'image'">
+        <a href="#" class="b-styler__control"
+           tooltip="Image style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ImageStyle')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control"
+         tooltip="Set/change image"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Image')">
+          <icon-base name="preview" width="14" height="16" />
+        </a>
+        <a href="#" class="b-styler__control"
+           tooltip="Image link"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
+          <icon-base name="link" width="14" height="16" />
+        </a>
+      </template>
 
       <!-- Video -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Video')" v-if="type === 'video'">
+      <a href="#" class="b-styler__control"
+         tooltip="Video settings"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Video')"
+         v-if="type === 'video'">
         <icon-base name="settings" width="14" height="16" />
       </a>
 
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
           <icon-base name="settings" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
+          <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Form -->
       <template v-if="type === 'form'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormStyles')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormSettings')">
           <icon-base name="settings" width="16" height="16" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormStyles')">
+          <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
@@ -119,7 +155,7 @@
 
     <!-- modals -->
     <div class="b-styler__modal"
-       :class="modal.button.class"
+       :class="[ modal.button.classV, modal.button.classH ]"
        ref="buttonModal"
        v-if="type === 'button' && isModalsPropsShow === true"
        v-click-outside="closeModal"
@@ -205,6 +241,7 @@ export default {
     label: String
   },
   data: () => ({
+    popper: null,
     isCurrentStyler: false,
     currentOption: '',
     title: '',
@@ -229,9 +266,10 @@ export default {
     isModalsPropsShow: false,
     modal: {
       button: {
-        class: '_top',
-        width: '400',
-        height: '340'
+        classV: '_top',
+        classH: '_right',
+        width: 400,
+        height: 340
       }
     },
     transform: {
@@ -242,7 +280,7 @@ export default {
     }
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -273,6 +311,29 @@ export default {
     }
   },
 
+  watch: {
+    settingObjectOptions: {
+      handler: function (val, oldVal) {
+        if (this.popper) {
+          this.popper.update()
+        }
+      },
+      deep: true
+    },
+    isResizeStop: {
+      handler: function (val, oldVal) {
+        if (val === true) this.el.addEventListener('click', this.showStyler)
+      }
+    },
+    isDragStop: {
+      handler: function (val, oldVal) {
+        if (val) {
+          this.showStylerAfterDragEl()
+        }
+      }
+    }
+  },
+
   created () {
     this.dimensions.width = this.el.offsetWidth
     this.dimensions.height = this.el.offsetHeight
@@ -300,6 +361,15 @@ export default {
       this.changeTextLinkStyle(this.options.textLinkStyles)
     }
 
+    if (this.options.video && this.options.link.type === 'video') {
+      this.el.classList.add('ptah-d-video')
+      this.el.dataset.video = this.options.video
+    }
+
+    if (this.options.link && this.options.link.action === '') {
+      this.el.classList.add('js-element-link')
+    }
+
     // Apply animation to element
     if (this.options.classes !== undefined && this.options.classes.length) {
       this.options.classes.forEach((name, index) => {
@@ -311,11 +381,6 @@ export default {
           this.el.dataset.video = this.options.video
         }
       })
-    }
-
-    if (this.options.video) {
-      this.el.classList.add('ptah-d-video')
-      this.el.dataset.video = this.options.video
     }
 
     if (this.options.link && this.options.link.behavior) {
@@ -334,10 +399,14 @@ export default {
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection']),
+    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
 
     showStyler (event) {
       let self = this
+      const stopNames = [
+        'b-draggable-slot',
+        'b-draggable-slot active'
+      ]
 
       event.preventDefault()
       event.stopPropagation()
@@ -348,6 +417,10 @@ export default {
           data.styles.width = data.offsets.reference.width
         }
         return data
+      }
+
+      let applyReactStyle = (data) => {
+        data.styles.width = data.offsets.reference.width
       }
 
       // show inline styler
@@ -363,13 +436,19 @@ export default {
               },
               hide: {
                 enabled: true
+              },
+              applyStyle: { enabled: true },
+              applyReactStyle: {
+                enabled: true,
+                fn: applyReactStyle,
+                order: 900
               }
             }
           })
         })
       }
 
-      if (this.isCurrentStyler) {
+      if (this.isCurrentStyler && !this.checkStylerNodes(event, stopNames)) {
         this.isCurrentStyler = false
         return
       }
@@ -385,7 +464,9 @@ export default {
         .forEach(el => el.classList.remove('active'))
 
       if (this.isVisible) return
-      this.isVisible = true
+      if (this.$props.type !== 'section') {
+        this.isVisible = true
+      }
 
       setTimeout(() => {
         if (this.$props.type === 'section') {
@@ -399,8 +480,13 @@ export default {
             keys.some(key => Boolean(~key.indexOf('container')))
           )
           if (hasSlotsData) {
-            let target = event.target.closest('.b-draggable-slot')
-            if (target) {
+            let target = null
+
+            if (event.target !== null) {
+              target = event.target.closest('.b-draggable-slot')
+            }
+
+            if (target !== null) {
               target.classList.add('active')
             }
             // --- TODO: bad idea
@@ -434,21 +520,23 @@ export default {
     },
     hideStyler (event) {
       const stopNames = [
-        'b-styler__control',
+        'b-styler__control_text',
         'b-control-panel',
         'menubar__button',
         'editor__content',
-        'menubar is-hidden',
-        'b-slot__settings'
+        'menubar is-hidden'
       ]
 
-      if (event && (event.target === this.el
-        || this.checkStylerNodes(event, stopNames))) {
+      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames))) || this.isResizeStop) {
         this.isCurrentStyler = true
+
+        if (this.isResizeStop) this.isCurrentStyler = false
+        this.toggleResizeStop(false)
+
         return
       }
 
-      if (event && isParentTo(event.target, this.$el)) {
+      if (event && MouseEvent && isParentTo(event.target, this.$el)) {
         return
       }
 
@@ -460,6 +548,7 @@ export default {
       // hide modal settings
       this.closeModal()
 
+      // hide panel
       this.setControlPanel(false)
 
       this.el.contentEditable = 'false'
@@ -526,10 +615,24 @@ export default {
     },
 
     setPosition () {
-      let pos = this.$refs.styler.getBoundingClientRect()
+      let pos = this.el.getBoundingClientRect()
+      let widthBoard = document.getElementById('artboard').clientWidth
+      let widthSidebar = document.getElementById('sidebar').clientWidth
+      let heightTopbar = document.getElementById('topbar').clientHeight
+      let right = widthBoard - (pos.right - widthSidebar)
 
-      if (pos.top < this.modal[this.type].height || pos.right < this.modal[this.width]) {
-        this.modal[this.type].class = '_bottom'
+      if (pos.top < (this.modal[this.type].height + heightTopbar)) {
+        this.modal[this.type].classV = '_bottom'
+      } else {
+        this.modal[this.type].classV = '_top'
+      }
+
+      if (right < this.modal[this.type].width) {
+        this.transform[this.type].x = -(this.modal[this.type].width - 55)
+        this.modal[this.type].classH = '_left'
+      } else {
+        this.transform[this.type].x = 0
+        this.modal[this.type].classH = '_right'
       }
     },
 
@@ -539,6 +642,19 @@ export default {
       }
       if (props && props.video) {
         this.el.dataset.video = props.video
+      }
+    },
+
+    showStylerAfterDragEl () {
+      if (undefined !== this.options['isDragged'] && this.options['isDragged']) {
+        delete this.options['isDragged']
+
+        this.isVisible = false
+        this.isCurrentStyler = false
+        this.toggleDragStop(false)
+
+        this.el.addEventListener('click', this.showStyler)
+        this.el.click()
       }
     }
   }
@@ -568,6 +684,9 @@ export default {
     flex-wrap: nowrap
 
   &__control
+    width: $size-step/1.8
+    height: $size-step/1.8
+
     display: flex
     align-items: center
     justify-content: center
@@ -577,6 +696,9 @@ export default {
 
     background: $dark-blue-krayola
     box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+    background: $white
+    // box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+    // margin-right: .4rem
 
     cursor: pointer
     & svg
@@ -652,11 +774,12 @@ export default {
 
     &._top
       bottom: 4rem
-      left: -2.5rem
     &._bottom
       top: 4rem
-      right: -2.5rem
-
+    &.right
+      right: calc(100% - 40px)
+    &._left
+      left: 40px
     &:before
       content: ""
       position: absolute
@@ -680,15 +803,23 @@ export default {
     &._top
       &:before,
       &:after
-        left: 19%
         bottom: -0.75rem
-        margin-left: -0.75rem
 
     &._bottom
       &:before,
       &:after
-        right: 19%
         top: -0.75rem
+
+    &._right
+      &:before,
+      &:after
+        left: 9%
+        margin-left: -0.75rem
+
+    &._left
+      &:before,
+      &:after
+        right: 15%
         margin-right: -0.75rem
 
   &[x-out-of-boundaries]
