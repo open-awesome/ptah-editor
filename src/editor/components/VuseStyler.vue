@@ -391,49 +391,12 @@ export default {
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
 
     stylerInit (event) {
-      let self = this
-
       const stopNames = [
         'b-draggable-slot',
         'b-draggable-slot active'
       ]
 
-      let autoSizing = (data) => {
-        data.offsets.popper.left = data.offsets.reference.left
-        if (self.options.removable) {
-          data.styles.width = data.offsets.reference.width
-        }
-        return data
-      }
-
-      let applyReactStyle = (data) => {
-        data.styles.width = data.offsets.reference.width
-      }
-
-      // show inline styler
-      if (!this.popper && this.type !== 'section') {
-        this.$nextTick(function () {
-          this.popper = new Popper(this.el, this.$refs.styler, {
-            placement: 'top',
-            modifiers: {
-              autoSizing: {
-                enabled: true,
-                fn: autoSizing,
-                order: 840
-              },
-              hide: {
-                enabled: true
-              },
-              applyStyle: { enabled: true },
-              applyReactStyle: {
-                enabled: true,
-                fn: applyReactStyle,
-                order: 900
-              }
-            }
-          })
-        })
-      }
+      this.initPopper()
 
       if (this.isCurrentStyler && !this.checkStylerNodes(event, stopNames)) {
         this.isCurrentStyler = false
@@ -490,6 +453,47 @@ export default {
       }, 0)
     },
 
+    initPopper () {
+      let self = this
+
+      let autoSizing = (data) => {
+        data.offsets.popper.left = data.offsets.reference.left
+        if (self.options.removable) {
+          data.styles.width = data.offsets.reference.width
+        }
+        return data
+      }
+
+      let applyReactStyle = (data) => {
+        data.styles.width = data.offsets.reference.width
+      }
+
+      // show inline styler
+      if (!this.popper && this.type !== 'section') {
+        this.$nextTick(function () {
+          this.popper = new Popper(this.el, this.$refs.styler, {
+            placement: 'top',
+            modifiers: {
+              autoSizing: {
+                enabled: true,
+                fn: autoSizing,
+                order: 840
+              },
+              hide: {
+                enabled: true
+              },
+              applyStyle: { enabled: true },
+              applyReactStyle: {
+                enabled: true,
+                fn: applyReactStyle,
+                order: 900
+              }
+            }
+          })
+        })
+      }
+    },
+
     setElement () {
       this.setSettingElement({
         type: this.$props.type, // TODO: $props.type !== type ?
@@ -505,7 +509,7 @@ export default {
         .querySelectorAll('.b-menu-subitem_selected')
         .forEach(el => el.classList.remove('b-menu-subitem_selected'))
 
-      this.el.addEventListener('click', this.hideStyler, true)
+      document.addEventListener('click', this.hideStyler, true)
     },
 
     showStyler (event) {
@@ -665,7 +669,7 @@ export default {
 
       if (this.type === 'text') {
         this.editText = true
-        this.el.addEventListener('click', this.hideStyler, true)
+        document.addEventListener('click', this.hideStyler, true)
       } else {
         // set props element
         this.setElement()
@@ -677,6 +681,8 @@ export default {
         } else {
           this.setControlPanel(name + 'Settings')
         }
+
+        this.initPopper()
       }
     }
   }
