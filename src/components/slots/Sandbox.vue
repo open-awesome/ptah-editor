@@ -162,8 +162,8 @@ export default {
       cursor: pointer
       & svg
         fill:  $white
-        width: 12px
-        height: 12px
+        width: 14px
+        height: 14px
 
       &:hover, .active
         background: $white

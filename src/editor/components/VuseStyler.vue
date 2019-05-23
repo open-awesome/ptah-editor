@@ -17,27 +17,8 @@
           <icon-base name="style" width="12" height="15" />
         </a>
       </div>
-      <div class="b-styler__controls">
-        <a href="#" class="b-styler__control"
-           tooltip="Edit button text"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('ButtonEdit')">
-          <icon-base name="edit" width="12" height="15" />
-        </a>
-      </div>
-      <div class="b-styler__controls">
-        <a href="#" class="b-styler__control"
-           tooltip="Button setttings"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('ButtonSettings')">
-          <icon-base name="cog" width="12" height="15" />
-        </a>
-      </div>
       <div class="b-styler__controls" ref="buttonModalProps">
-        <a href="#" class="b-styler__control"
-           tooltip="Action"
-           tooltip-position="bottom"
-           @click.stop="setModalProps()">
+        <a href="#" class="b-styler__control" @click.stop="setModalProps()">
           <icon-base name="link" width="18" height="18" />
         </a>
       </div>
@@ -74,64 +55,40 @@
 
       <!-- Social settings -->
       <template v-if="type === 'networks'">
-        <a href="#" class="b-styler__control"
-           tooltip="Add/remove networks"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('SocialSettings')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Social icons style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('SocialStyle')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- available settings -->
       <template v-if="type === 'available'">
-        <a href="#" class="b-styler__control"
-           tooltip="Add/remove platform"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('AvailableSettings')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Icons style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('AvailableStyle')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Age restrictions -->
       <template v-if="type === 'restrictions'">
-        <a href="#" class="b-styler__control"
-           tooltip="Restrictions settings"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('RestrictionsSettings')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Icon size & block style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('RestrictionsStyle')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Timer -->
       <template v-if="type === 'timer'">
-        <a href="#" class="b-styler__control"
-           tooltip="Timer settings"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('TimerSettings')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Timer style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('TimerStyle')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
@@ -169,38 +126,20 @@
 
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
-        <a href="#" class="b-styler__control"
-           tooltip="Icon style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('IconStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Edit text"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('IconEdit')">
-          <icon-base name="edit" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Element settings"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('Icon')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
           <icon-base name="settings" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
+          <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Form -->
       <template v-if="type === 'form'">
-        <a href="#" class="b-styler__control"
-           tooltip="Form settings"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('FormSettings')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Form styles"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('FormStyles')">
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormStyles')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
@@ -752,20 +691,22 @@ export default {
     align-items: center
     justify-content: center
 
-    background: $white
-    // box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    // margin-right: .4rem
+    width: $size-step/1.5
+    height: $size-step/1.5
 
-    svg
-      fill: $dark-blue-krayola
-      margin-bottom: 0
+    background: $dark-blue-krayola
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+
+    cursor: pointer
+    & svg
+      fill:  $white
+      width: 14px
+      height: 14px
 
     &:hover, .active
-      background: $dark-blue-krayola
-
+      background: $white
       svg
-        fill: $white
-        margin-bottom: 0
+        fill: $dark-blue-krayola
 
     &_del
       margin-right: -0.2rem
@@ -777,6 +718,11 @@ export default {
         background: $black
         svg
           fill: $orange
+
+    &_link
+      svg
+        width: 18px
+        height: 18px
 
   &__modal
     width: 40rem
