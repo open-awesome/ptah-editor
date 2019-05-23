@@ -149,7 +149,6 @@ export default {
     },
 
     labelChange (newLabel) {
-      console.log(newLabel)
       newLabel !== '' ? this.labelUploader = newLabel : this.labelUploader = this.label
     }
   }
