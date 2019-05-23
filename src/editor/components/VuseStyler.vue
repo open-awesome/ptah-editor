@@ -67,7 +67,7 @@
       <a href="#" class="b-styler__control"
          tooltip="Edit"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('Inline')"
+         @click.stop="setControlPanel('InlineEdit')"
          v-if="type === 'inline'">
         <icon-base name="edit" width="12" height="15" />
       </a>
@@ -147,7 +147,7 @@
         <a href="#" class="b-styler__control"
          tooltip="Set/change image"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('Image')">
+         @click.stop="setControlPanel('ImageSettings')">
           <icon-base name="preview" width="14" height="16" />
         </a>
         <a href="#" class="b-styler__control"
@@ -162,7 +162,7 @@
       <a href="#" class="b-styler__control"
          tooltip="Video settings"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('Video')"
+         @click.stop="setControlPanel('VideoSettings')"
          v-if="type === 'video'">
         <icon-base name="settings" width="14" height="16" />
       </a>
