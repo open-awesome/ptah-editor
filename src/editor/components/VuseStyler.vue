@@ -696,9 +696,6 @@ export default {
 
     background: $dark-blue-krayola
     box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    background: $white
-    // box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    // margin-right: .4rem
 
     cursor: pointer
     & svg
