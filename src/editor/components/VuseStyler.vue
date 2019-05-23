@@ -10,22 +10,34 @@
     <div class="b-styler__col" v-if="type === 'button'">
       <!-- Button -->
       <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
+        <a href="#" class="b-styler__control"
+           tooltip="Button style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </div>
       <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonEdit')">
+        <a href="#" class="b-styler__control"
+           tooltip="Edit button text"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ButtonEdit')">
           <icon-base name="edit" width="12" height="15" />
         </a>
       </div>
       <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Button setttings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ButtonSettings')">
           <icon-base name="cog" width="12" height="15" />
         </a>
       </div>
       <div class="b-styler__controls" ref="buttonModalProps">
-        <a href="#" class="b-styler__control" @click.stop="setModalProps()">
+        <a href="#" class="b-styler__control"
+           tooltip="Action"
+           tooltip-position="bottom"
+           @click.stop="setModalProps()">
           <icon-base name="link" width="18" height="18" />
         </a>
       </div>
@@ -34,97 +46,161 @@
     <div class="b-styler__controls">
 
       <!-- Text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')" v-if="type === 'text'">
+      <a href="#" class="b-styler__control"
+         tooltip="Text style"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Text')"
+         v-if="type === 'text'">
         <icon-base name="style" width="12" height="15" />
       </a>
 
       <!-- Text editor -->
-      <a href="#" class="b-styler__control b-styler__control_text" @click.stop="editText = true" v-if="type === 'text'">
+      <a href="#" class="b-styler__control b-styler__control_text"
+         tooltip="Edit"
+         tooltip-position="bottom"
+         @click.stop="editText = true"
+         v-if="type === 'text'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
       <!-- Inline text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('InlineEdit')" v-if="type === 'inline'">
+      <a href="#" class="b-styler__control"
+         tooltip="Edit"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Inline')"
+         v-if="type === 'inline'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
       <!-- Social settings -->
       <template v-if="type === 'networks'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Add/remove networks"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('SocialSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Social icons style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('SocialStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
-      <!-- Social settings -->
+      <!-- available settings -->
       <template v-if="type === 'available'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Add/remove platform"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('AvailableSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Icons style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('AvailableStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Age restrictions -->
       <template v-if="type === 'restrictions'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Restrictions settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('RestrictionsSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Icon size & block style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('RestrictionsStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Timer -->
       <template v-if="type === 'timer'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Timer settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('TimerSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Timer style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('TimerStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Image -->
       <template v-if="type === 'image'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Image style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ImageStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageSettings')">
+        <a href="#" class="b-styler__control"
+         tooltip="Set/change image"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Image')">
           <icon-base name="preview" width="14" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
+        <a href="#" class="b-styler__control"
+           tooltip="Image link"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
           <icon-base name="link" width="14" height="16" />
         </a>
       </template>
 
       <!-- Video -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('VideoSettings')" v-if="type === 'video'">
+      <a href="#" class="b-styler__control"
+         tooltip="Video settings"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Video')"
+         v-if="type === 'video'">
         <icon-base name="settings" width="14" height="16" />
       </a>
 
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Icon style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('IconStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconEdit')">
+        <a href="#" class="b-styler__control"
+           tooltip="Edit text"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('IconEdit')">
           <icon-base name="edit" width="12" height="15" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
+        <a href="#" class="b-styler__control"
+           tooltip="Element settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('Icon')">
           <icon-base name="settings" width="12" height="15" />
         </a>
       </template>
 
       <!-- Form -->
       <template v-if="type === 'form'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Form settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('FormSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormStyles')">
+        <a href="#" class="b-styler__control"
+           tooltip="Form styles"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('FormStyles')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
@@ -414,7 +490,9 @@ export default {
         .forEach(el => el.classList.remove('active'))
 
       if (this.isVisible) return
-      this.isVisible = true
+      if (this.$props.type !== 'section') {
+        this.isVisible = true
+      }
 
       setTimeout(() => {
         if (this.$props.type === 'section') {
@@ -652,6 +730,19 @@ export default {
       }
       if (props && props.video) {
         this.el.dataset.video = props.video
+      }
+    },
+
+    showStylerAfterDragEl () {
+      if (undefined !== this.options['isDragged'] && this.options['isDragged']) {
+        delete this.options['isDragged']
+
+        this.isVisible = false
+        this.isCurrentStyler = false
+        this.toggleDragStop(false)
+
+        this.el.addEventListener('click', this.showStyler)
+        this.el.click()
       }
     },
 

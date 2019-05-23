@@ -43,12 +43,18 @@
                 <!-- Setting controls -->
                   <div class="b-gallery-one__controls">
                     <div>
-                      <a href="#" class="b-gallery-one__control" @click.stop="showSettings('SectionGallerySettings')">
+                      <a href="#" class="b-gallery-one__control"
+                         tooltip="Items count"
+                         tooltip-position="bottom"
+                         @click.stop="showSettings('SectionGallerySettings')">
                         <icon-base name="cog" width="12" height="15" />
                       </a>
                     </div>
                     <div>
-                      <a href="#" class="b-gallery-one__control" @click.stop="showSettings('SectionGalleryStyle')">
+                      <a href="#" class="b-gallery-one__control"
+                         tooltip="Gallery style"
+                         tooltip-position="bottom"
+                         @click.stop="showSettings('SectionGalleryStyle')">
                         <icon-base name="style" width="12" height="15" />
                       </a>
                     </div>

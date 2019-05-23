@@ -25,22 +25,7 @@ section
       padding: $size-step/8
       height: auto !important
 
-section.full-height
-  height: 100vh !important
-  box-sizing: content-box
-  &.is-editable
-    min-height: calc(100vh - 8rem) !important
-  .is-tablet &,
-  .is-mobile &
-    min-height: calc(100vh - 8rem) !important
-    height: auto !important
-  @media only screen and (max-width: 768px)
-    &
-      min-height: 100vh !important
-      height: auto !important
-
 .main
   &_showPopup
     & > section:not(.b-gallery-popup)
       z-index: 0 !important
-
