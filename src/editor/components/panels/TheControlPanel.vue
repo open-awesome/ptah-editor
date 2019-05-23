@@ -23,9 +23,8 @@ import ThePanelSocialStyle from './ThePanelSocialStyle'
 import ThePanelText from './ThePanelText'
 import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
-import ThePanelImage from './ThePanelImage'
+import ThePanelImageSettings from './ThePanelImageSettings'
 import ThePanelImageLink from './ThePanelImageLink'
-import ThePanelImageStyle from './ThePanelImageStyle'
 import ThePanelAvailableSettings from './ThePanelAvailableSettings'
 import ThePanelAvailableStyle from './ThePanelAvailableStyle'
 import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
@@ -94,9 +93,8 @@ export default {
     ThePanelRestrictionsSettings,
     ThePanelRestrictionsStyle,
     ThePanelInlineText,
-    ThePanelImage,
+    ThePanelImageSettings,
     ThePanelImageLink,
-    ThePanelImageStyle,
     ThePanelIcon,
     ThePanelIconStyle,
     ThePanelIconEdit,

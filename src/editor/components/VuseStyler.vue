@@ -139,22 +139,16 @@
       <!-- Image -->
       <template v-if="type === 'image'">
         <a href="#" class="b-styler__control"
-           tooltip="Image style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('ImageStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-         tooltip="Set/change image"
-         tooltip-position="bottom"
-         @click.stop="setControlPanel('Image')">
-          <icon-base name="preview" width="14" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
            tooltip="Image link"
            tooltip-position="bottom"
            @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
           <icon-base name="link" width="14" height="16" />
+        </a>
+        <a href="#" class="b-styler__control"
+         tooltip="Set/change image"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('ImageSettings')">
+          <icon-base name="style" width="14" height="16" />
         </a>
       </template>
 
