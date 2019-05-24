@@ -41,12 +41,13 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'setSettingSection',
-      'setControlPanel'
+      'setControlPanel',
+      'setElement'
     ]),
 
     showSettingsBar () {
+      this.setElement(document.getElementById(`section_${this.section.id}`))
       this.setSettingSection(this.section)
-      this.selectSidebarSection(this.section)
       this.setControlPanel('Section')
     },
 
