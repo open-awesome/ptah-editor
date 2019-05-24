@@ -2,11 +2,13 @@
   <a class="b-logo is-editable"
     :alt="a"
     :title="a"
+    @dragover.prevent
+    @drop="onDrop"
     >
 
     <uploader
       :path="path"
-      class="b-logo__uploader"
+      :file="file"
       @change="changeSrc"
     />
 
@@ -30,8 +32,8 @@
 
 <script>
 import { mapActions } from 'vuex'
-import VueDraggableResizable from 'vue-draggable-resizable'
 import Uploader from '@editor/plugins/Uploader.vue'
+import VueDraggableResizable from 'vue-draggable-resizable'
 // optionally import default styles
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
@@ -49,7 +51,8 @@ export default {
     return {
       a: '',
       width: 0,
-      height: 0
+      height: 0,
+      file: ''
     }
   },
 
@@ -89,11 +92,29 @@ export default {
 
     changeSrc (path) {
       this.$section.set(`$sectionData.${this.path}.styles['background-image']`, `url(${path})`)
+    },
+
+    onDrop (e) {
+      let files = e.dataTransfer.files
+
+      e.stopPropagation()
+      e.preventDefault()
+
+      if (!files || !files[0]) {
+        return
+      }
+
+      if (!/^image\//.test(files[0].type)) {
+        return
+      }
+
+      this.file = files[0]
     }
   },
 
   created () {
     this.a = this.alt
+    this.file = this.styles['background-image']
     this.width = parseInt(this.styles.width.split('px')[0]) || 320
     this.height = parseInt(this.styles.height.split('px')[0]) || 60
   }
@@ -122,10 +143,10 @@ export default {
   user-select: none
   transition: background-color 200ms
 
-  &__uploader
-    opacity: 0.1
+  & .b-uploader
+    opacity: 0
     z-index: 1
-  &:hover &__uploader
+  &:hover .b-uploader
     opacity: 0.2
     display: block
 

@@ -41,10 +41,17 @@ export default {
       default: 'input',
       type: String
     },
+    file: String,
     type: {
       type: String,
       default: VALID_TYPES[0],
       validator: value => VALID_TYPES.includes(value)
+    }
+  },
+
+  watch: {
+    file (value) {
+      this.uploadFile(value)
     }
   },
 
@@ -120,10 +127,10 @@ export default {
 <style lang="sass">
 .b-uploader
   position: absolute
-  top: 0.5rem
-  right: 0.5rem
-  bottom: 0.5rem
-  left: 0.5rem
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
   z-index: 1000
 
   background: #000
