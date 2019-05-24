@@ -205,7 +205,7 @@ export default {
       this.$emit('replace', await this.getFileData(file))
     },
 
-    onDrop: function (e) {
+    onDrop (e) {
       let files = e.dataTransfer.files
 
       e.stopPropagation()

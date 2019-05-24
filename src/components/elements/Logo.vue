@@ -4,7 +4,11 @@
     :title="a"
     >
 
-    <uploader :path="path" class="b-logo__uploader"/>
+    <uploader
+      :path="path"
+      class="b-logo__uploader"
+      @change="changeSrc"
+    />
 
     <vue-draggable-resizable
       class="b-logo__resize"
@@ -81,6 +85,10 @@ export default {
     onResizeStop (x, y, width, height) {
       this.toggleShowStyler(true)
       this.toggleResizeStop(true)
+    },
+
+    changeSrc (path) {
+      this.$section.set(`$sectionData.${this.path}.styles['background-image']`, `url(${path})`)
     }
   },
 
@@ -115,8 +123,8 @@ export default {
   transition: background-color 200ms
 
   &__uploader
-    // display: none
     opacity: 0.1
+    z-index: 1
   &:hover &__uploader
     opacity: 0.2
     display: block
@@ -132,6 +140,8 @@ export default {
     border-radius: 0.5rem
     width: auto !important
     height: auto !important
+
+    z-index: 2
     &_active
       border: 0.2rem dotted $white !important
     .is-mobile &,

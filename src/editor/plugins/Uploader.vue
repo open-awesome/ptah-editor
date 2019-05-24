@@ -8,7 +8,7 @@
             class="b-uploader__input"
             type="file"
             ref="uploader"
-            @change="uploadImg"
+            @change="getFileData"
             v-if="$builder.isEditing && mode === 'input'"
             />
         </form>
@@ -16,12 +16,22 @@
 </template>
 
 <script>
-import $ from 'jquery'
-import axios from 'axios'
+const VALID_TYPES = ['image', 'video']
+
+function getFormData (file) {
+  let formData = new FormData()
+  formData.append('file[]', file)
+  formData.append('method', 'storefront.upload')
+  formData.append('format', 'json')
+  return formData
+}
 
 export default {
+
   name: 'Uploader',
+
   inject: ['$builder', '$section'],
+
   props: {
     path: {
       type: String,
@@ -30,68 +40,78 @@ export default {
     mode: {
       default: 'input',
       type: String
+    },
+    type: {
+      type: String,
+      default: VALID_TYPES[0],
+      validator: value => VALID_TYPES.includes(value)
     }
   },
-
-  data: () => ({
-    src: ''
-  }),
 
   computed: {
-    section () {
+    props () {
       return this.$section.get(`$sectionData.${this.path}`)
-    }
-  },
+    },
 
-  mounted () {
-    this.src = this.section.src
+    pattern () {
+      return new RegExp(`^${this.type}`)
+    }
   },
 
   methods: {
-    uploadImg: function (event) {
-      console.log(event)
+    getFileData (file) {
+      return new Promise((resolve, reject) => {
+        let xhr = new XMLHttpRequest()
 
-      let file = event.target.files || event.dataTransfer.files
-      let self = this
+        // xhr.upload.onprogress = this.loadingProgress // --- uploading progress
+        xhr.open('POST', '//images.stg.gamenet.ru/restapi')
+        xhr.send(getFormData(file))
 
-      if (!file) {
-        return
-      }
-
-      console.log(123)
-
-      let request = new FormData()
-      let $form = $(event.target).parent()
-
-      request.append('file[]', file[0])
-      request.append('method', 'storefront.upload')
-      request.append('format', 'json')
-
-      $form[0].reset()
-
-      axios.post('//images.stg.gamenet.ru/restapi', request)
-        .then(function (response) {
-          if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response') ||
-                    !response['data']['response'].hasOwnProperty('data') ||
-                    !Array.isArray(response['data']['response']['data'])) {
-            return
+        xhr.onload = xhr.onerror = () => {
+          if (xhr.status === 200) {
+            try {
+              let { response } = JSON.parse(xhr.response)
+              let { name, src: path } = response.data[0]
+              // this.clearProgress(path)
+              resolve({ name, path })
+            } catch (error) {
+              reject(error)
+            }
+          } else {
+            let error = { status: xhr.status, statusText: xhr.statusText }
+            reject(error)
           }
-
-          const data = response['data']['response']['data'][0]
-
-          self.src = self.section.src = data.src
-
-          self.$section.set(self.path, self.section)
-        }).catch(function (e) {
-          console.warn(e)
-        })
+        }
+      })
     },
 
-    onDrop: function (e) {
+    async uploadFile (file) {
+      let data = {}
+      if (!(file && file.type.match(this.pattern))) {
+        return
+      }
+      data = await this.getFileData(file)
+
+      if (data.path) {
+        this.$emit('change', data.path)
+      }
+    },
+
+    onDrop (e) {
+      let files = e.dataTransfer.files
+
       e.stopPropagation()
       e.preventDefault()
 
-      this.uploadImg(e)
+      if (!files || !files[0]) {
+        return
+      }
+
+      if (!/^image\//.test(files[0].type)) {
+        return
+      }
+
+      this.uploadFile(files[0])
     }
   }
 }
@@ -100,10 +120,10 @@ export default {
 <style lang="sass">
 .b-uploader
   position: absolute
-  top: 0
-  right: 0
-  bottom: 0
-  left: 0
+  top: 0.5rem
+  right: 0.5rem
+  bottom: 0.5rem
+  left: 0.5rem
   z-index: 1000
 
   background: #000
