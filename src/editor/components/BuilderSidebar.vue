@@ -59,13 +59,6 @@
                     <icon-base name="layouts" color="#fff"></icon-base>
                   </span>-->
                   <span class="b-menu-subitem__icon"
-                    tooltip="Section background"
-                    tooltip-position="bottom"
-                    @click.stop="showBackgroundPanel(headerSection)"
-                    >
-                    <icon-base name="background"></icon-base>
-                  </span>
-                  <span class="b-menu-subitem__icon"
                     tooltip="Delete"
                     tooltip-position="bottom"
                     @click.stop="deleteSection(headerSection)"
@@ -109,13 +102,6 @@
                     >
                     <icon-base name="layouts" color="#fff"></icon-base>
                   </span>-->
-                  <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
-                    tooltip="Section background"
-                    tooltip-position="bottom"
-                    @click.stop="showBackgroundPanel(section)"
-                    >
-                    <icon-base name="background"></icon-base>
-                  </span>
                   <span class="b-menu-subitem__icon"
                     tooltip="Delete"
                     tooltip-position="bottom"
@@ -354,11 +340,6 @@ export default {
       }
 
       this.saveState(this.builder.export('JSON'))
-    },
-
-    showBackgroundPanel (section) {
-      this.setControlPanel('SectionBackground')
-      this.setSettingSection(section)
     }
   }
 }

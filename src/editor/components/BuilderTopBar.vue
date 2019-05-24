@@ -186,6 +186,8 @@ export default {
       cursor: pointer
       color: $grey
     &__crumbs
+      display: flex
+
       color: $dark-grey
       padding: 0 $size-step
       white-space: nowrap
