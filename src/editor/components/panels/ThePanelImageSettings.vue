@@ -8,7 +8,7 @@
       <control-image/>
     </div>
     <div class="b-panel__control">
-      <control-box></control-box>
+      <control-box :hidePadding="true"></control-box>
     </div>
     <!-- Alt prop for image -->
     <!-- TODO: We're still not using <img>

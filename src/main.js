@@ -8,6 +8,7 @@ import VueI18n from 'vue-i18n'
 import VueScrollTo from 'vue-scrollto'
 import VueProgressBar from 'vue-progressbar'
 import vClickOutside from 'v-click-outside'
+import messageService from 'vue-update-message'
 
 import axios from 'axios'
 
@@ -27,6 +28,10 @@ Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(VueI18n)
 Vue.use(vClickOutside)
+Vue.use(messageService, {
+  placement: 'bottom-right',
+  mode: 'single'
+})
 
 Vue.use(VueScrollTo, {
   container: '.b-builder-layout-content__main .vb-content',

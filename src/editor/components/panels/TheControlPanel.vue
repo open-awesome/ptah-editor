@@ -25,7 +25,6 @@ import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
 import ThePanelImageSettings from './ThePanelImageSettings'
 import ThePanelImageLink from './ThePanelImageLink'
-import ThePanelImageStyle from './ThePanelImageStyle'
 import ThePanelAvailableSettings from './ThePanelAvailableSettings'
 import ThePanelAvailableStyle from './ThePanelAvailableStyle'
 import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
@@ -96,7 +95,6 @@ export default {
     ThePanelInlineEdit,
     ThePanelImageSettings,
     ThePanelImageLink,
-    ThePanelImageStyle,
     ThePanelIcon,
     ThePanelIconStyle,
     ThePanelIconEdit,

@@ -5,6 +5,7 @@
     :style="$sectionData.mainStyle.styles"
     class="b-gallery-carousel">
 
+  <slot name="menu"/>
   <slot name="video"/>
   <slot name="overlay"/>
 
