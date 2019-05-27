@@ -28,7 +28,7 @@
       </div>
       <div class="b-builder-sidebar__content-outer">
       <base-scroll-container backgroundBar="#999">
-        <menu-tree :sections="this.builder.sections"></menu-tree>
+        <menu-tree :sections="this.builder.sections" :builder="builder"></menu-tree>
         <div class="b-builder-sidebar__content-inner">
         <!-- Sections CONTENTS -->
           <!-- header -->
