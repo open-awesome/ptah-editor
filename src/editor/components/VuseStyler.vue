@@ -116,27 +116,42 @@
 
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
+        <a href="#" class="b-styler__control"
+           tooltip="Icon settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('Icon')">
           <icon-base name="settings" width="12" height="15" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Icon styles"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('IconStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Form -->
       <template v-if="type === 'form'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Form settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('FormSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormStyles')">
+        <a href="#" class="b-styler__control"
+           tooltip="Form styles"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('FormStyles')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- duplicate element -->
       <template v-if="options.removable">
-        <a href="#" class="b-styler__control" @click.stop="duplicateElement">
+        <a href="#" class="b-styler__control"
+           tooltip="Clone element"
+           tooltip-position="bottom"
+           @click.stop="duplicateElement">
           <icon-base name="clone"  width="14" height="16"></icon-base>
         </a>
       </template>
