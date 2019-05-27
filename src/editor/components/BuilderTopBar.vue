@@ -84,7 +84,7 @@ export default {
 </script>
 
 <template>
-<div class="b-top-bar">
+<div class="b-top-bar" id="topbar">
 
   <div class="b-top-bar__padd">
     <div class="b-top-bar-menu">

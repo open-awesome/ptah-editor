@@ -34,7 +34,7 @@ export default {
 
 <template>
   <div class="b-border-radius-control">
-    <base-range-slider v-model="elRadius" label="Corner radius" step="1" min="0" max="100" @change="changeRadius">
+    <base-range-slider v-model="elRadius" label="Corner radius" step="1" min="0" max="100">
       {{ elRadius }} <span class="b-border-radius-control__px">px</span>
     </base-range-slider>
   </div>
