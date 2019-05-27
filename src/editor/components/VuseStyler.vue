@@ -394,6 +394,13 @@ export default {
           this.showStylerAfterDragEl()
         }
       }
+    },
+    textEditorActive: {
+      handler: function (val) {
+        if (!val) {
+          this.setControlPanel(false)
+        }
+      }
     }
   },
 
@@ -453,6 +460,7 @@ export default {
 
     this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
   },
+
   beforeDestroy () {
     this.hideStyler()
     this.$refs.styler.remove()
@@ -461,6 +469,7 @@ export default {
     this.el.removeEventListener('dblclick', this.dblclick)
     document.removeEventListener('click', this.hideStyler, true)
   },
+
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
@@ -596,9 +605,9 @@ export default {
       event.preventDefault()
       event.stopPropagation()
 
-      this.timer = setTimeout(function () {
-        self.stylerInit(event)
+      self.stylerInit(event)
 
+      this.timer = setTimeout(function () {
         if (!self.prevent) {
           document.addEventListener('click', self.hideStyler, true)
         }
@@ -758,13 +767,14 @@ export default {
         return
       }
 
+      this.setElement()
+
       if (this.type === 'text') {
+        await this.$nextTick()
         this.editText = true
-        document.addEventListener('click', this.hideStyler, true)
+        this.setControlPanel(name)
       } else {
         // set props element
-        this.setElement()
-
         await this.$nextTick()
 
         if (this.type === 'button' || this.type === 'inline' || this.type === 'icon') {
