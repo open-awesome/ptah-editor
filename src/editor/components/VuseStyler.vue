@@ -7,24 +7,20 @@
     @click.stop=""
   >
 
-    <div class="b-styler__col" v-if="type === 'button'">
+    <div class="b-styler__controls">
       <!-- Button -->
-      <div class="b-styler__controls">
+      <template v-if="type === 'button'">
         <a href="#" class="b-styler__control"
            tooltip="Button style"
            tooltip-position="bottom"
            @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
         </a>
-      </div>
-      <div class="b-styler__controls" ref="buttonModalProps">
-        <a href="#" class="b-styler__control" @click.stop="setModalProps()">
+
+        <a href="#" class="b-styler__control" @click.stop="setModalProps()" ref="buttonModalProps">
           <icon-base name="link" width="18" height="18" />
         </a>
-      </div>
-    </div>
-
-    <div class="b-styler__controls">
+      </template>
 
       <!-- Text -->
       <a href="#" class="b-styler__control"
@@ -120,21 +116,43 @@
 
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
+        <a href="#" class="b-styler__control"
+           tooltip="Icon settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('Icon')">
           <icon-base name="settings" width="12" height="15" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Icon styles"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('IconStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Form -->
       <template v-if="type === 'form'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Form settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('FormSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('FormStyles')">
+        <a href="#" class="b-styler__control"
+           tooltip="Form styles"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('FormStyles')">
           <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
+
+      <!-- duplicate element -->
+      <template v-if="options.removable">
+        <a href="#" class="b-styler__control"
+           tooltip="Clone element"
+           tooltip-position="bottom"
+           @click.stop="duplicateElement">
+          <icon-base name="clone"  width="14" height="16"></icon-base>
         </a>
       </template>
 
@@ -597,6 +615,12 @@ export default {
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
       this.hideStyler()
+    },
+
+    duplicateElement () {
+      let el = _.cloneDeep(_.get(this.section.data, this.path))
+      el.key = randomPoneId()
+      this.components = [...this.components, el]
     },
 
     setModalProps () {
