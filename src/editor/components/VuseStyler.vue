@@ -25,6 +25,13 @@
         </a>
 
         <a href="#" class="b-styler__control"
+           tooltip="Button settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ButtonSettings')">
+          <icon-base name="cog" width="12" height="15" />
+        </a>
+
+        <a href="#" class="b-styler__control"
            tooltip="Button link"
            tooltip-position="bottom"
            @click.stop="setModalProps()" ref="buttonModalProps">
