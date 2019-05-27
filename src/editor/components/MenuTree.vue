@@ -114,15 +114,22 @@ export default {
       } else { // move 1 section
         console.log(e)
         let nodeId = e.item.dataset.id
+        let currentSection = this.getSectionById(nodeId)
 
         if (e.to !== e.from) {
           // move to group
           if (e.to.classList.contains('tree-branch')) {
+            let mainSection = this.getSectionById(e.to.querySelector('.tree-node').dataset.id)
             if (e.newIndex !== 0) {
-              let mainSection = this.getSectionById(e.to.querySelector('.tree-node').dataset.id)
               mainSection.data.mainStyle.absorb = mainSection.data.mainStyle.absorb + 1
             } else {
-              // TODO: make new main
+              // make new main
+              let absorb = mainSection.data.mainStyle.absorb + 1
+              mainSection.isMain = false
+              mainSection.data.mainStyle.absorb = 0
+
+              currentSection.isMain = false
+              currentSection.data.mainStyle.absorb = absorb
             }
           } else { // move from group
             if (e.oldIndex !== 0) {
@@ -132,10 +139,20 @@ export default {
                 mainSection.isMain = false
               }
             } else {
-              // TODO: make new main
+              // make new main
+              let absorb = currentSection.data.mainStyle.absorb - 1
+              let newMainSection = this.getSectionById(Array.from(e.from.querySelectorAll('.tree-node'))[1].dataset.id)
+
+              currentSection.isMain = false
+              currentSection.data.mainStyle.absorb = 0
+
+              newMainSection.isMain = true
+              newMainSection.data.mainStyle.absorb = absorb
             }
           }
         }
+
+        // TODO: main section lost lead
 
         this.sort(this.lastIndexes.indexOf(nodeId), newIndexes.indexOf(nodeId))
       }
