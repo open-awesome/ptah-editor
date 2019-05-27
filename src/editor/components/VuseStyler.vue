@@ -7,24 +7,20 @@
     @click.stop=""
   >
 
-    <div class="b-styler__col" v-if="type === 'button'">
+    <div class="b-styler__controls">
       <!-- Button -->
-      <div class="b-styler__controls">
+      <template v-if="type === 'button'">
         <a href="#" class="b-styler__control"
            tooltip="Button style"
            tooltip-position="bottom"
            @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
         </a>
-      </div>
-      <div class="b-styler__controls" ref="buttonModalProps">
-        <a href="#" class="b-styler__control" @click.stop="setModalProps()">
+
+        <a href="#" class="b-styler__control" @click.stop="setModalProps()" ref="buttonModalProps">
           <icon-base name="link" width="18" height="18" />
         </a>
-      </div>
-    </div>
-
-    <div class="b-styler__controls">
+      </template>
 
       <!-- Text -->
       <a href="#" class="b-styler__control"
@@ -138,14 +134,17 @@
         </a>
       </template>
 
+      <!-- duplicate element -->
+      <template v-if="options.removable">
+        <a href="#" class="b-styler__control" @click.stop="duplicateElement">
+          <icon-base name="clone"  width="14" height="16"></icon-base>
+        </a>
+      </template>
+
     </div>
 
     <!-- Delete element -->
     <div class="b-styler__controls" v-if="options.removable">
-      <a href="#" class="b-styler__control" @click.stop="duplicateElement">
-        <icon-base name="arrowRight"  width="15" height="10"></icon-base>
-      </a>
-
       <a href="#" class="b-styler__control b-styler__control_del" title="delete" @click.stop="removeElement">
         <icon-base name="close" width="10" height="10"></icon-base>
       </a>
