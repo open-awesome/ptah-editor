@@ -17,7 +17,17 @@
           <icon-base name="style" width="12" height="15" />
         </a>
 
-        <a href="#" class="b-styler__control" @click.stop="setModalProps()" ref="buttonModalProps">
+        <a href="#" class="b-styler__control"
+           tooltip="Edit text"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('InlineText')">
+          <icon-base name="edit" width="12" height="15" />
+        </a>
+
+        <a href="#" class="b-styler__control"
+           tooltip="Button link"
+           tooltip-position="bottom"
+           @click.stop="setModalProps()" ref="buttonModalProps">
           <icon-base name="link" width="18" height="18" />
         </a>
       </template>
