@@ -22,6 +22,10 @@ export default {
     ...mapActions('Sidebar', [
       'updateSettingOptions'
     ])
+  },
+
+  mounted () {
+    this.$refs.editText.$refs.inputText.focus()
   }
 }
 </script>
@@ -29,7 +33,7 @@ export default {
 <template>
   <div class="b-text-controls">
     <div class="b-text-controls__control">
-      <base-text-field v-model="text" label="Text"></base-text-field>
+      <base-text-field ref="editText" v-model="text" label="Text"></base-text-field>
     </div>
   </div>
 </template>
