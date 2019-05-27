@@ -20,7 +20,7 @@
         <a href="#" class="b-styler__control"
            tooltip="Edit text"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('InlineText')">
+           @click.stop="setControlPanel('InlineEdit')">
           <icon-base name="edit" width="12" height="15" />
         </a>
 
@@ -139,9 +139,9 @@
           <icon-base name="link" width="14" height="16" />
         </a>
         <a href="#" class="b-styler__control"
-         tooltip="Set/change image"
-         tooltip-position="bottom"
-         @click.stop="setControlPanel('ImageSettings')">
+          tooltip="Set/change image"
+          tooltip-position="bottom"
+          @click.stop="setControlPanel('ImageSettings')">
           <icon-base name="style" width="14" height="16" />
         </a>
       </template>
@@ -157,12 +157,6 @@
 
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
-        <a href="#" class="b-styler__control"
-           tooltip="Icon settings"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('IconЫенду')">
-          <icon-base name="settings" width="12" height="15" />
-        </a>
         <a href="#" class="b-styler__control"
            tooltip="Icon styles"
            tooltip-position="bottom"
@@ -395,7 +389,7 @@ export default {
     },
     textEditorActive: {
       handler: function (val) {
-        if (!val) {
+        if (val === false && this.isCurrentStyler) {
           this.setControlPanel(false)
         }
       }
@@ -415,8 +409,6 @@ export default {
     if (this.type === 'section') {
       this.el.id = `section_${this.section.id}`
     }
-
-    // this.setInitialValue()
 
     // Restoring from a snapshot
     // to apply the pseudoclass to the element
@@ -771,16 +763,15 @@ export default {
         return
       }
 
+      // set props element
       this.setElement()
 
+      await this.$nextTick()
+
       if (this.type === 'text') {
-        await this.$nextTick()
         this.editText = true
         this.setControlPanel(name)
       } else {
-        // set props element
-        await this.$nextTick()
-
         if (this.type === 'button' || this.type === 'inline' || this.type === 'icon') {
           this.setControlPanel(name + 'Edit')
         } else {
