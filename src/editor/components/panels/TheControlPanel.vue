@@ -18,8 +18,8 @@ import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
 import ThePanelButtonEdit from './ThePanelButtonEdit'
 import ThePanelButtonSettings from './ThePanelButtonSettings'
-import ThePanelSocialSettings from './ThePanelSocialSettings'
-import ThePanelSocialStyle from './ThePanelSocialStyle'
+import ThePanelNetworksSettings from './ThePanelNetworksSettings'
+import ThePanelNetworksStyle from './ThePanelNetworksStyle'
 import ThePanelText from './ThePanelText'
 import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
@@ -82,8 +82,8 @@ export default {
     ThePanelButton,
     ThePanelButtonEdit,
     ThePanelButtonSettings,
-    ThePanelSocialSettings,
-    ThePanelSocialStyle,
+    ThePanelNetworksSettings,
+    ThePanelNetworksStyle,
     ThePanelText,
     ThePanelTimerSettings,
     ThePanelTimerStyle,

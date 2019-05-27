@@ -3,9 +3,16 @@
     <h6 class="b-panel__title">
       {{ settingObjectLabel }}
     </h6>
-    <!-- social settings -->
+    <!-- social settings style -->
     <div class="b-panel__control">
-      <control-social-networks/>
+      <control-social-networks-style/>
+    </div>
+    <!-- background color -->
+    <div class="b-panel__control">
+      <control-background-color/>
+    </div>
+    <div class="b-panel__control">
+      <control-box></control-box>
     </div>
   </div>
 </template>
@@ -13,14 +20,16 @@
 <script>
 import { mapState } from 'vuex'
 import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
-import ControlSocialNetworks from './../controls/TheControlSocialNetworks'
+import ControlSocialNetworksStyle from './../controls/TheControlSocialNetworksStyle'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
-  name: 'ThePanelSocialSettings',
+  name: 'ThePanelNetworksStyle',
 
   components: {
     ControlBackgroundColor,
-    ControlSocialNetworks
+    ControlSocialNetworksStyle,
+    ControlBox
   },
 
   props: {
