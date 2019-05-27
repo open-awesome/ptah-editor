@@ -158,7 +158,7 @@ $topBarHeight: 6rem
       margin: 0 auto
       position: relative
       z-index: 5
-      height: calc(100vh - 7.2rem)
+      height: calc(100vh - 6rem)
 
       &.is-desktop
         width: 100%

@@ -28,6 +28,7 @@
       </div>
       <div class="b-builder-sidebar__content-outer">
       <base-scroll-container backgroundBar="#999">
+        <menu-tree :sections="this.builder.sections"></menu-tree>
         <div class="b-builder-sidebar__content-inner">
         <!-- Sections CONTENTS -->
           <!-- header -->
@@ -165,11 +166,13 @@ import BuilderAddSectionBar from './BuilderAddSectionBar'
 import { mapActions, mapState } from 'vuex'
 import TheControlPanel from './panels/TheControlPanel'
 import { resetIndents } from '@editor/util'
+import MenuTree from './MenuTree'
 
 export default {
   name: 'BuilderSidebar',
 
   components: {
+    MenuTree,
     TheControlPanel,
     MenuItem,
     MenuSubitem,
