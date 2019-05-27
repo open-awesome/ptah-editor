@@ -196,8 +196,10 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
+    <slot name="menu"/>
     <slot name="video"/>
     <slot name="overlay"/>
+
     <div class="b-grid">
       <div class="b-grid__row">
 
@@ -239,7 +241,6 @@ export default {
 .b-hero-skull
   position: relative
   width: 100%
-  min-height: 56rem
   margin: 0
   padding-bottom: 8rem
   display: flex

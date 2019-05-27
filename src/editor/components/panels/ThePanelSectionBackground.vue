@@ -12,10 +12,18 @@
             <div class="b-section-settings__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
               <base-color-picker v-model="backgroundPickers[index]" :label="`Color ${ index > 0 ? index : '' }`" @change="updateBgColor"/>
               <div class="b-section-settings__picker-buttons">
-                <span class="del" v-show="backgroundPickers.length > 1 && index > 0" @click="removeBackgroundPicker(index)">
+                <span class="del"
+                      tooltip="Remove color"
+                      tooltip-position="left"
+                      v-show="backgroundPickers.length > 1 && index > 0"
+                      @click="removeBackgroundPicker(index)">
                   <icon-base name="close" color="#B1B1B1" width="10" height="10"></icon-base>
                 </span>
-                <span class="plus" v-show="index === 0 && backgroundPickers.length < 4" @click="addBackgroundPicker">
+                <span class="plus"
+                      tooltip="Add gradient"
+                      tooltip-position="left"
+                      v-show="index === 0 && backgroundPickers.length < 4"
+                      @click="addBackgroundPicker">
                   <icon-base name="plus" color="#B1B1B1" width="14" height="14"></icon-base>
                 </span>
               </div>

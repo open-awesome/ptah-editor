@@ -8,6 +8,7 @@ import VueI18n from 'vue-i18n'
 import VueScrollTo from 'vue-scrollto'
 import VueProgressBar from 'vue-progressbar'
 import vClickOutside from 'v-click-outside'
+import messageService from 'vue-update-message'
 
 import axios from 'axios'
 
@@ -21,10 +22,16 @@ import AppView from './App.vue'
 import en from '@assets/lang/en.json'
 import ru from '@assets/lang/ru.json'
 
+import { truncate } from '@src/filters/truncate'
+
 Vue.use(VueRouter)
 Vue.use(Vuex)
 Vue.use(VueI18n)
 Vue.use(vClickOutside)
+Vue.use(messageService, {
+  placement: 'bottom-right',
+  mode: 'single'
+})
 
 Vue.use(VueScrollTo, {
   container: '.b-builder-layout-content__main .vb-content',
@@ -88,6 +95,8 @@ const createUpdateAuthInterceptor = (store, http) => async error => {
 
 const updateAuthCb = createUpdateAuthInterceptor(store, axios)
 axios.interceptors.response.use(null, updateAuthCb)
+
+Vue.filter('truncate', truncate)
 
 new Vue(
   {

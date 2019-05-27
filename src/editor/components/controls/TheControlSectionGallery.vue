@@ -23,6 +23,30 @@ export default {
       set: function (newValue) {
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { count: newValue }))
       }
+    },
+    isLabelPreview: {
+      get: function () {
+        return this.settingObjectOptions.isLabelPreview
+      },
+      set: function (newValue) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { isLabelPreview: newValue }))
+      }
+    },
+    isTopPopup: {
+      get: function () {
+        return this.settingObjectOptions.isTopPopup
+      },
+      set: function (newValue) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { isTopPopup: newValue }))
+      }
+    },
+    isBottomPopup: {
+      get: function () {
+        return this.settingObjectOptions.isBottomPopup
+      },
+      set: function (newValue) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { isBottomPopup: newValue }))
+      }
     }
   },
 
@@ -49,6 +73,15 @@ export default {
             {{ vCount }}
         </base-range-slider>
       </div>
+    <div class="b-text-controls__control" v-if="this.settingObjectOptions.isLabel">
+      <BaseSwitcher v-model="isLabelPreview" label="Show label for image" />
+    </div>
+    <div class="b-text-controls__control" v-if="this.settingObjectOptions.isTop">
+      <BaseSwitcher v-model="isTopPopup" label="Show header for popup" />
+    </div>
+    <div class="b-text-controls__control" v-if="this.settingObjectOptions.isBottom">
+      <BaseSwitcher v-model="isBottomPopup" label="Show bottom for popup" />
+    </div>
   </div>
 </template>
 

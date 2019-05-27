@@ -22,7 +22,27 @@ export function scrollIntoSection (e) {
 
   if (section) {
     let behavior = target.dataset.behavior
+    closePopup()
     section.scrollIntoView({ block: 'start', behavior })
+  }
+
+
+  function mainClassToggle() {
+    let bl = document.getElementById('main')
+    bl.classList.toggle("main_showPopup")
+  }
+
+  function closePopup() {
+    const TARGET_POPUP = 'gallery-two-popup'
+    const TARGET_POPUP_CONTENT = 'gallery-two-popup-content'
+
+    var popup = document.querySelectorAll('[' + TARGET_POPUP + ']')[0]
+    var popupC = document.querySelectorAll('[' + TARGET_POPUP_CONTENT + ']')[0]
+
+    popupC.innerHTML = ""
+    popup.style.display = "none"
+
+    mainClassToggle()
   }
 }
 

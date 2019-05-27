@@ -5,6 +5,7 @@
     :style="$sectionData.mainStyle.styles"
     class="b-hero">
 
+  <slot name="menu"/>
   <slot name="video"/>
   <slot name="overlay"/>
 
@@ -194,7 +195,6 @@ $h: 100vh
 .b-hero
   position: relative
   width: 100%
-  min-height: 60rem
   margin: 0
   padding: 1rem
   display: flex

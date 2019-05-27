@@ -10,18 +10,11 @@
     <div class="b-styler__col" v-if="type === 'button'">
       <!-- Button -->
       <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Button')">
+        <a href="#" class="b-styler__control"
+           tooltip="Button style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
-        </a>
-      </div>
-      <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonEdit')">
-          <icon-base name="edit" width="12" height="15" />
-        </a>
-      </div>
-      <div class="b-styler__controls">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ButtonSettings')">
-          <icon-base name="cog" width="12" height="15" />
         </a>
       </div>
       <div class="b-styler__controls" ref="buttonModalProps">
@@ -34,17 +27,29 @@
     <div class="b-styler__controls">
 
       <!-- Text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Text')" v-if="type === 'text'">
+      <a href="#" class="b-styler__control"
+         tooltip="Text style"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Text')"
+         v-if="type === 'text'">
         <icon-base name="style" width="12" height="15" />
       </a>
 
       <!-- Text editor -->
-      <a href="#" class="b-styler__control b-styler__control_text" @click.stop="editText = true" v-if="type === 'text'">
+      <a href="#" class="b-styler__control b-styler__control_text"
+         tooltip="Edit"
+         tooltip-position="bottom"
+         @click.stop="editText = true"
+         v-if="type === 'text'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
       <!-- Inline text -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('InlineText')" v-if="type === 'inline'">
+      <a href="#" class="b-styler__control"
+         tooltip="Edit"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('InlineText')"
+         v-if="type === 'inline'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
@@ -58,7 +63,7 @@
         </a>
       </template>
 
-      <!-- Social settings -->
+      <!-- available settings -->
       <template v-if="type === 'available'">
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableSettings')">
           <icon-base name="settings" width="16" height="16" />
@@ -90,29 +95,36 @@
 
       <!-- Image -->
       <template v-if="type === 'image'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('Image')" >
-          <icon-base name="preview" width="14" height="16" />
+        <a href="#" class="b-styler__control"
+           tooltip="Image link"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
+          <icon-base name="link" width="14" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('ImageStyle')">
-          <icon-base name="style" width="12" height="15" />
+        <a href="#" class="b-styler__control"
+         tooltip="Set/change image"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('ImageSettings')">
+          <icon-base name="style" width="14" height="16" />
         </a>
       </template>
 
       <!-- Video -->
-      <a href="#" class="b-styler__control" @click.stop="setControlPanel('Video')" v-if="type === 'video'">
+      <a href="#" class="b-styler__control"
+         tooltip="Video settings"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Video')"
+         v-if="type === 'video'">
         <icon-base name="settings" width="14" height="16" />
       </a>
 
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconEdit')">
-          <icon-base name="edit" width="12" height="15" />
-        </a>
         <a href="#" class="b-styler__control" @click.stop="setControlPanel('Icon')">
           <icon-base name="settings" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control" @click.stop="setControlPanel('IconStyle')">
+          <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
@@ -347,6 +359,15 @@ export default {
       this.changeTextLinkStyle(this.options.textLinkStyles)
     }
 
+    if (this.options.video && this.options.link.type === 'video') {
+      this.el.classList.add('ptah-d-video')
+      this.el.dataset.video = this.options.video
+    }
+
+    if (this.options.link && this.options.link.action === '') {
+      this.el.classList.add('js-element-link')
+    }
+
     // Apply animation to element
     if (this.options.classes !== undefined && this.options.classes.length) {
       this.options.classes.forEach((name, index) => {
@@ -358,11 +379,6 @@ export default {
           this.el.dataset.video = this.options.video
         }
       })
-    }
-
-    if (this.options.video) {
-      this.el.classList.add('ptah-d-video')
-      this.el.dataset.video = this.options.video
     }
 
     if (this.options.link && this.options.link.behavior) {
@@ -446,7 +462,9 @@ export default {
         .forEach(el => el.classList.remove('active'))
 
       if (this.isVisible) return
-      this.isVisible = true
+      if (this.$props.type !== 'section') {
+        this.isVisible = true
+      }
 
       setTimeout(() => {
         if (this.$props.type === 'section') {
@@ -677,20 +695,22 @@ export default {
     align-items: center
     justify-content: center
 
-    background: $white
-    // box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    // margin-right: .4rem
+    width: $size-step/1.5
+    height: $size-step/1.5
 
-    svg
-      fill: $dark-blue-krayola
-      margin-bottom: 0
+    background: $dark-blue-krayola
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+
+    cursor: pointer
+    & svg
+      fill:  $white
+      width: 14px
+      height: 14px
 
     &:hover, .active
-      background: $dark-blue-krayola
-
+      background: $white
       svg
-        fill: $white
-        margin-bottom: 0
+        fill: $dark-blue-krayola
 
     &_del
       margin-right: -0.2rem
@@ -702,6 +722,11 @@ export default {
         background: $black
         svg
           fill: $orange
+
+    &_link
+      svg
+        width: 18px
+        height: 18px
 
   &__modal
     width: 40rem

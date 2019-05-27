@@ -171,6 +171,7 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
+    <slot name="menu"/>
     <slot name="video"/>
     <slot name="overlay"/>
     <div class="b-grid">

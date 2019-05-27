@@ -775,8 +775,10 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
+    <slot name="menu"/>
     <slot name="video"/>
     <slot name="overlay"/>
+
         <div class="b-grid">
           <div class="b-grid__row">
             <div class="b-grid__col-12">
@@ -810,12 +812,18 @@ export default {
               <!-- Setting controls -->
                 <div class="b-products-colums__controls">
                   <div>
-                    <a href="#" class="b-products-colums__control" @click.stop="showSettings('SectionProductsColumnsSettings')">
+                    <a href="#" class="b-products-colums__control"
+                       tooltip="Products"
+                       tooltip-position="bottom"
+                       @click.stop="showSettings('SectionProductsColumnsSettings')">
                       <icon-base name="cog" width="12" height="15" />
                     </a>
                   </div>
                   <div>
-                    <a href="#" class="b-products-colums__control" @click.stop="showSettings('SectionProductsColumnsStyle')">
+                    <a href="#" class="b-products-colums__control"
+                       tooltip="Products style"
+                       tooltip-position="bottom"
+                       @click.stop="showSettings('SectionProductsColumnsStyle')">
                       <icon-base name="style" width="12" height="15" />
                     </a>
                   </div>
@@ -944,41 +952,42 @@ export default {
     &-border
       padding: $size-step/4
       transition: border 0.25s
-      border: 0.2rem dotted transparent
+      border: 1px dotted transparent
       .is-editable #{$this}__padd:hover &
-        border: 0.2rem dotted #fff
+        border: 1px dashed $dark-blue-krayola
 
   &__controls
     position: absolute
-    top: -$size-step/1.5
+    top: -14px
     left: $size-step/3.4
 
     display: flex
-    align-items: center
-    justify-content: center
+    align-items: flex-end
+    justify-content: flex-start
 
     display: none
     .is-editable #{$this}__padd:hover &
       display: flex !important
   &__control
-    width: $size-step/1.5
-    height: $size-step/1.5
-
     display: flex
     align-items: center
     justify-content: center
 
-    background: $white
-    border-radius: 0.2rem
+    width: $size-step/1.5
+    height: $size-step/1.5
+
+    background: $dark-blue-krayola
     box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    margin-right: .4rem
-    svg
-      fill: $dark-blue-krayola
-      margin-bottom: 0
+
+    cursor: pointer
+    & svg
+      fill:  $white
+      width: 14px
+      height: 14px
+
     &:hover, .active
-      background: $dark-blue-krayola
+      background: $white
       svg
-        fill: $white
-        margin-bottom: 0
+        fill: $dark-blue-krayola
 
 </style>

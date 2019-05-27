@@ -50,7 +50,7 @@ export default {
   align-items: center
   justify-content: space-between
   cursor: pointer
-  color: $white
+  color: $black
   padding: 0 $size-step/2
 
   &__title

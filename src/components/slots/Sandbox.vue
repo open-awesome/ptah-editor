@@ -1,13 +1,22 @@
 <template>
   <div class="b-slot">
     <div class="b-slot__settings">
-      <span @click.stop="showSandboxSidebar($event, 'SlotSettings')" class="b-slot__settings-item b-slot__settings-item-settings">
+      <span @click.stop="showSandboxSidebar($event, 'SlotSettings')"
+            tooltip="Slot settings"
+            tooltip-position="right"
+            class="b-slot__settings-item b-slot__settings-item-settings">
         <icon-base name="cog" fill="white" />
       </span>
-      <span @click.stop="showSandboxSidebar($event, 'SlotBackground')" class="b-slot__settings-item b-slot__settings-item-slot-bg">
+      <span @click.stop="showSandboxSidebar($event, 'SlotBackground')"
+            tooltip="Slot background"
+            tooltip-position="right"
+            class="b-slot__settings-item b-slot__settings-item-slot-bg">
         <icon-base name="background" fill="white" />
       </span>
-      <span @click.stop="showSandboxSidebar($event, 'Slot')" class="b-slot__settings-item b-slot__settings-item-add-el">
+      <span @click.stop="showSandboxSidebar($event, 'Slot')"
+            tooltip="Add element"
+            tooltip-position="right"
+            class="b-slot__settings-item b-slot__settings-item-add-el">
         <icon-base name="plus" fill="white" />
       </span>
     </div>
@@ -153,8 +162,8 @@ export default {
       cursor: pointer
       & svg
         fill:  $white
-        width: 12px
-        height: 12px
+        width: 14px
+        height: 14px
 
       &:hover, .active
         background: $white

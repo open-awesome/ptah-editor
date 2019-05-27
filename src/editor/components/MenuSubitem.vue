@@ -90,13 +90,14 @@ export default {
 
 .b-menu-subitem
   cursor: pointer
-  color: $white
+  color: $gray300
   font-size: 1.4rem
   width: 100%
   padding: 0
 
   &:hover:not(.b-menu-subitem_selected)
-    background: $dark-blue-krayola
+    background: rgba(116, 169, 230, 0.25)
+    color: $black
 
   &__inner
     display: flex
@@ -118,8 +119,8 @@ export default {
         margin-right: 13px
 
     .b-menu-subitem_selected &
-      background: $dark-blue-krayola
-      color: #ffffff
+      background: rgba(116, 169, 230, 0.25)
+      color: $black
 
   &__drag-icon
     visibility: hidden
@@ -139,12 +140,12 @@ export default {
       text-align: center
     &-text
       display: inline-block
-      width: 12rem
+      width: 16rem
       white-space: nowrap
       text-overflow: ellipsis
       overflow: hidden
   &__icons
-    width: 9rem
+    width: 5rem
     margin: 0 $size-step/4 0 $size-step/4.5
     display: flex
     flex-wrap: nowrap
@@ -166,8 +167,8 @@ export default {
     .b-menu-subitem__title
       .b-menu-subitem__icon
         display: inline-block
-        opacity: 0.7
+        color: rgba(0, 0, 0, 0.2)
         &:hover
-          opacity: 1
+          color: $dark-blue-krayola
 
 </style>

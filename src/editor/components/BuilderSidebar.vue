@@ -1,38 +1,31 @@
 <template>
   <div class="b-builder-sidebar" :class="{'b-builder-sidebar_expanded': isExpanded}">
-    <div class="b-builder-sidebar-header">
-      <div class="b-builder-sidebar-header__ham">
-        <span @click="toggleSidebarSection">
-          <icon-base
-            name="close"
-            color="#fff"
-            width="14"
-            height="14"
-            />
-        </span>
-      </div>
-      <div class="b-builder-sidebar-header__add">
-        <span class="b-builder-sidebar__icon-add"
-          slot="icon"
-          @click.stop="showAddSectionBar">
-           <IconBase
-            name="plus"
-            color="#fff"
-            strokeColor="transparent"
-           />
-        </span>
-      </div>
-    </div>
     <div class="b-builder-sidebar__content" id="sections_contents">
       <!-- Sections -->
-      <menu-item
-        :isSelected="true"
-        :isExpandable="true"
-        >
-          <span>
-            {{ $t('menu.sections') }}
-          </span>
-      </menu-item>
+      <div class="b-builder-sidebar__header">
+        <span>
+          {{ $t('menu.sections') }}
+        </span>
+
+        <span class="b-builder-sidebar__icon-add"
+          slot="icon"
+          tooltip="Add section"
+          tooltip-position="bottom"
+          @click.stop="showAddSectionBar">
+           <IconBase
+             name="plus"
+             strokeColor="transparent"
+           />
+        </span>
+
+        <span class="b-builder-sidebar__icon-close" @click="toggleSidebarSection">
+          <icon-base
+            name="close"
+            width="14"
+            height="14"
+          />
+        </span>
+      </div>
       <div class="b-builder-sidebar__content-outer">
       <base-scroll-container backgroundBar="#999">
         <div class="b-builder-sidebar__content-inner">
@@ -54,9 +47,11 @@
                 </span>
                 <div class="b-menu-subitem__icons">
                   <span class="b-menu-subitem__icon"
+                      tooltip="Section settings"
+                      tooltip-position="bottom"
                     @click.stop="showSettingsBar(headerSection)"
                     >
-                    <icon-base name="edit" color="#ffffff"></icon-base>
+                    <icon-base name="cog"></icon-base>
                   </span>
                   <!--<span class="b-menu-subitem__icon"
                     @click.stop="toggleSectionLayouts(headerSection)"
@@ -64,14 +59,11 @@
                     <icon-base name="layouts" color="#fff"></icon-base>
                   </span>-->
                   <span class="b-menu-subitem__icon"
-                    @click.stop="showBackgroundPanel(headerSection)"
-                    >
-                    <icon-base name="background" color="#fff"></icon-base>
-                  </span>
-                  <span class="b-menu-subitem__icon"
+                    tooltip="Delete"
+                    tooltip-position="bottom"
                     @click.stop="deleteSection(headerSection)"
                     >
-                    <icon-base name="remove" color="#ffffff"></icon-base>
+                    <icon-base name="remove"></icon-base>
                   </span>
                 </div>
               </menu-subitem>
@@ -99,24 +91,23 @@
                 </span>
                 <div class="b-menu-subitem__icons">
                   <span class="b-menu-subitem__icon"
+                    tooltip="Section settings"
+                    tooltip-position="bottom"
                     @click.stop="showSettingsBar(section)"
                     >
-                    <icon-base name="edit" color="#ffffff"></icon-base>
+                    <icon-base name="cog"></icon-base>
                   </span>
                   <!--<span class="b-menu-subitem__icon"
                     @click.stop="toggleSectionLayouts(section)"
                     >
                     <icon-base name="layouts" color="#fff"></icon-base>
                   </span>-->
-                  <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
-                    @click.stop="showBackgroundPanel(section)"
-                    >
-                    <icon-base name="background" color="#fff"></icon-base>
-                  </span>
                   <span class="b-menu-subitem__icon"
+                    tooltip="Delete"
+                    tooltip-position="bottom"
                     @click.stop="deleteSection(section)"
                     >
-                    <icon-base name="remove" color="#ffffff"></icon-base>
+                    <icon-base name="remove"></icon-base>
                   </span>
                 </div>
               </menu-subitem>
@@ -349,11 +340,6 @@ export default {
       }
 
       this.saveState(this.builder.export('JSON'))
-    },
-
-    showBackgroundPanel (section) {
-      this.setControlPanel('SectionBackground')
-      this.setSettingSection(section)
     }
   }
 }
@@ -367,14 +353,13 @@ $top-panel-height: 7.2rem
 
 .b-builder-sidebar
   width: $size-step*9
-  border-right: 1px solid rgba($black, 0.08)
-  background: $dark-blue
+  background: $white
   position: fixed
   top: 0
   left: 0
   opacity: 0
-  box-shadow: inset 0 1px 0 rgba($white, 0.05)
-  color: $white
+  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25)
+  color: $black
   transition: left 0.3s ease-in-out
   height: 100vh
   display: flex
@@ -383,9 +368,18 @@ $top-panel-height: 7.2rem
   &_expanded
     opacity: 1
 
+  &__header
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    width: 100%
+    padding: 1.7rem 3.1rem
+    font-size: 2rem
+    letter-spacing: -0.02em
+
   &__content
     height: 100%
-    box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
     display: flex
     flex-direction: column
     min-height: 0
@@ -401,7 +395,7 @@ $top-panel-height: 7.2rem
         padding-right: 0 !important
         width: calc(100% + 17px) !important
     &-outer
-      height: 80vh
+      height: 90vh
       padding: 0 0 0 0
 
   &-settings
@@ -421,12 +415,22 @@ $top-panel-height: 7.2rem
   &__icon-add
     width: 3.2rem
     height: 3.2rem
-    color: $white
+    color: $dark-blue-krayola
     display: flex
     align-items: center
     justify-content: center
     border-radius: 100%
     cursor: pointer
+    margin-left: 11px
+
+  &__icon-close
+    color: $grey
+    position: absolute
+    top: 21px
+    right: 26px
+    cursor: pointer
+    &:hover
+      color: $dark-blue-krayola
 
   &-settings,
   &-add-section
@@ -436,18 +440,6 @@ $top-panel-height: 7.2rem
     top: 0
     bottom: 0
     display: flex
-
-  &-header
-   height: 8rem
-
-   display: flex
-   justify-content: space-between
-   align-items: center
-
-   padding: $size-step/2
-   &__ham
-     &:hover
-       cursor: pointer
 
 // Animations down here
 .slide-fade

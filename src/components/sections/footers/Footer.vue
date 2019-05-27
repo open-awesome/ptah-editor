@@ -168,6 +168,7 @@ export default {
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
   >
+    <slot name="menu"/>
     <slot name="video"/>
     <slot name="overlay"/>
     <div class="b-footer">
@@ -208,7 +209,6 @@ export default {
 .b-section-footer
   position: relative
   width: 100%
-  min-height: 14rem
   margin: 0
   display: flex
   text-align: center

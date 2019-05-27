@@ -15,7 +15,7 @@ export default {
 
   data: () => ({
     device: null,
-    colorHamburger: '#333',
+    colorHamburger: '#C4C4C4',
     colorHome: '#333'
   }),
 
@@ -72,6 +72,12 @@ export default {
 
     toggleSidebarSection () {
       this.toggleSidebar()
+    },
+
+    async itemClick (item, event) {
+      await this.$nextTick()
+
+      this.$emit(item, event)
     }
   }
 }
@@ -83,23 +89,25 @@ export default {
   <div class="b-top-bar__padd">
     <div class="b-top-bar-menu">
       <div class="b-top-bar-menu__left">
-        <div class="b-top-bar-menu__ham" @click="toggleSidebarSection">
-          <icon-base name="hamburger" :color="colorHamburger"></icon-base>
+        <div class="b-top-bar-menu__ham"
+             :tooltip="$t('menu.sections')"
+             tooltip-position="bottom"
+             @click="toggleSidebarSection" v-if="!isExpanded">
+          <icon-base name="hamburgerDot" :color="colorHamburger"></icon-base>
         </div>
         <div class="b-top-bar-menu__crumbs">
           <span class="b-top-bar-menu__crumbs-home b-top-bar-menu__crumbs-link"
+                :tooltip="$t('nav.backToDashbord')"
+                tooltip-position="bottom"
                 @click="backToLandings"
             >
-            <icon-base name="home" :color="colorHome"></icon-base>
-          </span>
-          <span class="b-top-bar-menu__crumbs-link" @click="backToLandings">
-            All sites
+            <icon-base name="home" width="20" height="17" :color="colorHome"></icon-base>
           </span>
           <span class="b-top-bar-menu__crumbs-arrow">
             →
           </span>
-          <span>
-            {{ landingName }}
+          <span :title="landingName">
+            {{ landingName | truncate(35, '...') }}
           </span>
         </div>
       </div>
@@ -111,45 +119,22 @@ export default {
           ></MenuPlatforms>
       </div>
       <div class="b-top-bar-menu__right">
-        <BaseButton
-          :color="'gray'"
-          :transparent="true"
-          :size="'middle'"
-          @click="toggleMenuItem('siteSettings')"
-          tooltip="show site settings"
-          tooltip-position="bottom"
-          >
-          {{ $t('menu.siteSettings') }}
-        </BaseButton>
-        <BaseDropdownMenu
-          positionDropdown="right"
-          >
-          <BaseButton
-            :color="'gray-full'"
-            :transparent="true"
-            :size="'circle'"
-            >
-            <icon-base name="dotted"></icon-base>
-          </BaseButton>
-          <div slot="list">
-            <ul>
-              <li @click="$emit('preview', $event)">
-                <icon-base
-                  color="#B1B1B1"
-                  name="preview">
-                </icon-base>
-                {{ $t('nav.preview') }}
-              </li>
-              <li @click="$emit('export', $event)">
-                <icon-base
-                  color="#B1B1B1"
-                  name="upload">
-                </icon-base>
-                {{ $t('nav.export') }}
-              </li>
-            </ul>
-          </div>
-        </BaseDropdownMenu>
+        <span :tooltip="$t('menu.siteSettings')" tooltip-position="bottom"
+              @click="toggleMenuItem('siteSettings')">
+          <icon-base name="cog"></icon-base>
+        </span>
+
+        <span :tooltip="$t('nav.preview')" tooltip-position="bottom"
+              @click="$emit('preview', $event)">
+          <icon-base name="preview">
+          </icon-base>
+        </span>
+
+        <span :tooltip="$t('nav.export')" tooltip-position="bottom"
+              @click="$emit('export', $event)">
+          <icon-base name="export">
+          </icon-base>
+        </span>
       </div>
     </div>
   </div>
@@ -184,17 +169,26 @@ export default {
       order: 2
       width: 14rem
       &-margin
-        margin: 0 0 0 $size-step*9
+        // margin: 0 0 0 $size-step*9
     &__right
       order: 3
       width: 45%
       text-align: right
+      span
+        margin-left: 1.6rem
+      svg
+        color: $grey
+        cursor: pointer
+        &:hover
+          color: $dark-blue-krayola
 
     &__ham
       cursor: pointer
+      color: $grey
     &__crumbs
+      display: flex
+
       color: $dark-grey
-      opacity: 0.5
       padding: 0 $size-step
       white-space: nowrap
       &-home
