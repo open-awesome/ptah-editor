@@ -20,7 +20,7 @@
         <a href="#" class="b-styler__control"
            tooltip="Edit text"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('InlineText')">
+           @click.stop="setControlPanel('InlineEdit')">
           <icon-base name="edit" width="12" height="15" />
         </a>
 
@@ -61,47 +61,71 @@
       <a href="#" class="b-styler__control"
          tooltip="Edit"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('InlineText')"
+         @click.stop="setControlPanel('InlineEdit')"
          v-if="type === 'inline'">
         <icon-base name="edit" width="12" height="15" />
       </a>
 
       <!-- Social settings -->
       <template v-if="type === 'networks'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Add/remove networks"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('SocialSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('SocialStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Social icons style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('SocialStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- available settings -->
       <template v-if="type === 'available'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Add/remove platform"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('AvailableSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('AvailableStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Icons style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('AvailableStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Age restrictions -->
       <template v-if="type === 'restrictions'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Restrictions settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('RestrictionsSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('RestrictionsStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Icon size & block style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('RestrictionsStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
       <!-- Timer -->
       <template v-if="type === 'timer'">
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerSettings')">
+        <a href="#" class="b-styler__control"
+           tooltip="Timer settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('TimerSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
-        <a href="#" class="b-styler__control" @click.stop="setControlPanel('TimerStyle')">
+        <a href="#" class="b-styler__control"
+           tooltip="Timer style"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('TimerStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
@@ -115,9 +139,9 @@
           <icon-base name="link" width="14" height="16" />
         </a>
         <a href="#" class="b-styler__control"
-         tooltip="Set/change image"
-         tooltip-position="bottom"
-         @click.stop="setControlPanel('ImageSettings')">
+          tooltip="Set/change image"
+          tooltip-position="bottom"
+          @click.stop="setControlPanel('ImageSettings')">
           <icon-base name="style" width="14" height="16" />
         </a>
       </template>
@@ -126,7 +150,7 @@
       <a href="#" class="b-styler__control"
          tooltip="Video settings"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('Video')"
+         @click.stop="setControlPanel('VideoSettings')"
          v-if="type === 'video'">
         <icon-base name="settings" width="14" height="16" />
       </a>
@@ -134,16 +158,16 @@
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
         <a href="#" class="b-styler__control"
-           tooltip="Icon settings"
+           tooltip="Icon styles"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('IconEdit')">
+          <icon-base name="edit" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control"
+           tooltip="Element settings"
            tooltip-position="bottom"
            @click.stop="setControlPanel('Icon')">
           <icon-base name="settings" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Icon styles"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('IconStyle')">
-          <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
@@ -306,7 +330,9 @@ export default {
         x: 0,
         y: 0
       }
-    }
+    },
+    timer: 0,
+    prevent: false
   }),
   computed: {
     ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
@@ -360,6 +386,13 @@ export default {
           this.showStylerAfterDragEl()
         }
       }
+    },
+    textEditorActive: {
+      handler: function (val) {
+        if (val === false && this.isCurrentStyler) {
+          this.setControlPanel(false)
+        }
+      }
     }
   },
 
@@ -371,12 +404,11 @@ export default {
     if (this.$builder && !this.$builder.isEditing) return
 
     this.el.addEventListener('click', this.showStyler)
+    this.el.addEventListener('dblclick', this.dblclick)
 
     if (this.type === 'section') {
       this.el.id = `section_${this.section.id}`
     }
-
-    // this.setInitialValue()
 
     // Restoring from a snapshot
     // to apply the pseudoclass to the element
@@ -418,64 +450,28 @@ export default {
 
     this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
   },
+
   beforeDestroy () {
     this.hideStyler()
     this.$refs.styler.remove()
     this.el.classList.remove('is-editable')
     this.el.removeEventListener('click', this.showStyler)
+    this.el.removeEventListener('dblclick', this.dblclick)
     document.removeEventListener('click', this.hideStyler, true)
   },
+
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
 
-    showStyler (event) {
-      let self = this
+    stylerInit (event) {
       const stopNames = [
         'b-draggable-slot',
         'b-draggable-slot active'
       ]
 
-      event.preventDefault()
-      event.stopPropagation()
-
-      let autoSizing = (data) => {
-        data.offsets.popper.left = data.offsets.reference.left
-        if (self.options.removable) {
-          data.styles.width = data.offsets.reference.width
-        }
-        return data
-      }
-
-      let applyReactStyle = (data) => {
-        data.styles.width = data.offsets.reference.width
-      }
-
-      // show inline styler
-      if (!this.popper && this.type !== 'section') {
-        this.$nextTick(function () {
-          this.popper = new Popper(this.el, this.$refs.styler, {
-            placement: 'top',
-            modifiers: {
-              autoSizing: {
-                enabled: true,
-                fn: autoSizing,
-                order: 840
-              },
-              hide: {
-                enabled: true
-              },
-              applyStyle: { enabled: true },
-              applyReactStyle: {
-                enabled: true,
-                fn: applyReactStyle,
-                order: 900
-              }
-            }
-          })
-        })
-      }
+      this.initPopper()
 
       if (this.isCurrentStyler && !this.checkStylerNodes(event, stopNames)) {
         this.isCurrentStyler = false
@@ -529,24 +525,86 @@ export default {
             })
           }
 
-          this.setSettingElement({
-            type: this.$props.type, // TODO: $props.type !== type ?
-            label: this.$props.label,
-            name: this.name,
-            options: _.get(this.section.data, this.path).element,
-            section: this.section,
-            element: this.el
-          })
-          this.el.classList.add('styler-active')
-          // --- rm class/es from menu items
-          document
-            .querySelectorAll('.b-menu-subitem_selected')
-            .forEach(el => el.classList.remove('b-menu-subitem_selected'))
+          this.setElement()
         }
       }, 0)
+    },
+
+    initPopper () {
+      let self = this
+
+      let autoSizing = (data) => {
+        data.offsets.popper.left = data.offsets.reference.left
+        if (self.options.removable) {
+          data.styles.width = data.offsets.reference.width
+        }
+        return data
+      }
+
+      let applyReactStyle = (data) => {
+        data.styles.width = data.offsets.reference.width
+      }
+
+      // show inline styler
+      if (!this.popper && this.type !== 'section') {
+        this.$nextTick(function () {
+          this.popper = new Popper(this.el, this.$refs.styler, {
+            placement: 'top',
+            modifiers: {
+              autoSizing: {
+                enabled: true,
+                fn: autoSizing,
+                order: 840
+              },
+              hide: {
+                enabled: true
+              },
+              applyStyle: { enabled: true },
+              applyReactStyle: {
+                enabled: true,
+                fn: applyReactStyle,
+                order: 900
+              }
+            }
+          })
+        })
+      }
+    },
+
+    setElement () {
+      this.setSettingElement({
+        type: this.$props.type, // TODO: $props.type !== type ?
+        label: this.$props.label,
+        name: this.name,
+        options: _.get(this.section.data, this.path).element,
+        section: this.section,
+        element: this.el
+      })
+      this.el.classList.add('styler-active')
+      // --- rm class/es from menu items
+      document
+        .querySelectorAll('.b-menu-subitem_selected')
+        .forEach(el => el.classList.remove('b-menu-subitem_selected'))
 
       document.addEventListener('click', this.hideStyler, true)
     },
+
+    showStyler (event) {
+      let self = this
+
+      event.preventDefault()
+      event.stopPropagation()
+
+      self.stylerInit(event)
+
+      this.timer = setTimeout(function () {
+        if (!self.prevent) {
+          document.addEventListener('click', self.hideStyler, true)
+        }
+        self.prevent = false
+      }, 150)
+    },
+
     hideStyler (event) {
       const stopNames = [
         'b-styler__control_text',
@@ -690,6 +748,37 @@ export default {
 
         this.el.addEventListener('click', this.showStyler)
         this.el.click()
+      }
+    },
+
+    async dblclick (event) {
+      let name = _.startCase(this.type)
+
+      // clear timer after dbl click
+      clearTimeout(this.timer)
+
+      this.prevent = true
+
+      if (this.type === 'section' || this.type === 'delimiter') {
+        return
+      }
+
+      // set props element
+      this.setElement()
+
+      await this.$nextTick()
+
+      if (this.type === 'text') {
+        this.editText = true
+        this.setControlPanel(name)
+      } else {
+        if (this.type === 'button' || this.type === 'inline' || this.type === 'icon') {
+          this.setControlPanel(name + 'Edit')
+        } else {
+          this.setControlPanel(name + 'Settings')
+        }
+
+        this.initPopper()
       }
     }
   }

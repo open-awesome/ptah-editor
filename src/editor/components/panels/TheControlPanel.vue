@@ -18,8 +18,8 @@ import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
 import ThePanelButtonEdit from './ThePanelButtonEdit'
 import ThePanelButtonSettings from './ThePanelButtonSettings'
-import ThePanelSocialSettings from './ThePanelSocialSettings'
-import ThePanelSocialStyle from './ThePanelSocialStyle'
+import ThePanelNetworksSettings from './ThePanelNetworksSettings'
+import ThePanelNetworksStyle from './ThePanelNetworksStyle'
 import ThePanelText from './ThePanelText'
 import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
@@ -29,7 +29,7 @@ import ThePanelAvailableSettings from './ThePanelAvailableSettings'
 import ThePanelAvailableStyle from './ThePanelAvailableStyle'
 import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
 import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
-import ThePanelInlineText from './ThePanelInlineText'
+import ThePanelInlineEdit from './ThePanelInlineEdit'
 import ThePanelIcon from './ThePanelIcon'
 import ThePanelIconStyle from './ThePanelIconStyle'
 import ThePanelIconEdit from './ThePanelIconEdit'
@@ -39,7 +39,7 @@ import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
 import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
-import ThePanelVideo from './ThePanelVideo'
+import ThePanelVideoSettings from './ThePanelVideoSettings'
 import ThePanelFormSettings from './ThePanelFormSettings'
 import ThePanelFormStyles from './ThePanelFormStyles'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
@@ -81,8 +81,8 @@ export default {
     ThePanelButton,
     ThePanelButtonEdit,
     ThePanelButtonSettings,
-    ThePanelSocialSettings,
-    ThePanelSocialStyle,
+    ThePanelNetworksSettings,
+    ThePanelNetworksStyle,
     ThePanelText,
     ThePanelTimerSettings,
     ThePanelTimerStyle,
@@ -92,7 +92,7 @@ export default {
     ThePanelAvailableStyle,
     ThePanelRestrictionsSettings,
     ThePanelRestrictionsStyle,
-    ThePanelInlineText,
+    ThePanelInlineEdit,
     ThePanelImageSettings,
     ThePanelImageLink,
     ThePanelIcon,
@@ -104,7 +104,7 @@ export default {
     ThePanelSectionSystemStyle,
     ThePanelFormSettings,
     ThePanelFormStyles,
-    ThePanelVideo,
+    ThePanelVideoSettings,
     ThePanelSectionProductsColumnsSettings,
     ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,

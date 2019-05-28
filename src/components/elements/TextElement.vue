@@ -1,5 +1,5 @@
 <template>
-    <div class="b-text is-editable" ref="text">
+    <div class="b-text is-editable" ref="text" @click.stop.stop>
       <slot v-if="!isActive"></slot>
 
       <editor-menu-bar :editor="editor" v-if="isActive">
@@ -11,7 +11,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bold() }"
-            @click="commands.bold"
+            @click.stop="commands.bold"
           >
             <icon-base name="fontBold" width="14" height="14"></icon-base>
           </button>
@@ -19,7 +19,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.italic() }"
-            @click="commands.italic"
+            @click.stop="commands.italic"
           >
             <icon-base name="fontItalic" width="14" height="14"></icon-base>
           </button>
@@ -27,7 +27,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.paragraph() }"
-            @click="commands.paragraph"
+            @click.stop="commands.paragraph"
           >
             <icon-base name="paragraph" width="14" height="14"></icon-base>
           </button>
@@ -35,7 +35,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-            @click="commands.heading({ level: 1 })"
+            @click.stop="commands.heading({ level: 1 })"
           >
             H1
           </button>
@@ -43,7 +43,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-            @click="commands.heading({ level: 2 })"
+            @click.stop="commands.heading({ level: 2 })"
           >
             H2
           </button>
@@ -51,7 +51,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-            @click="commands.heading({ level: 3 })"
+            @click.stop="commands.heading({ level: 3 })"
           >
             H3
           </button>
@@ -59,7 +59,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bullet_list() }"
-            @click="toggleList('bullet', 'ordered')"
+            @click.stop="toggleList('bullet', 'ordered')"
           >
             <icon-base name="bulletList"></icon-base>
           </button>
@@ -67,25 +67,25 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.ordered_list() }"
-            @click="toggleList('ordered', 'bullet')"
+            @click.stop="toggleList('ordered', 'bullet')"
           >
             <icon-base name="orderedList"></icon-base>
           </button>
 
           <button
             class="menubar__button"
-            @click="showLinkMenu(getMarkAttrs('link'))"
+            @click.stop="showLinkMenu(getMarkAttrs('link'))"
             :class="{ 'is-active': isActive.link() }"
           >
             <icon-base name="link"></icon-base>
           </button>
 
-          <base-button color="blue" size="small" @click="save">Done</base-button>
+          <base-button color="blue" size="small" @click.stop="save">Done</base-button>
 
           <!-- Link form -->
           <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
             <input class="menubar__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="hideLinkMenu"/>
-            <button class="menubar__button" @click="setLinkUrl(commands.link, null)" type="button">
+            <button class="menubar__button" @click.stop="setLinkUrl(commands.link, null)" type="button">
               <icon-base name="remove"></icon-base>
             </button>
           </form>

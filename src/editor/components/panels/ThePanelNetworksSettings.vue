@@ -1,23 +1,26 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Text
+      {{ settingObjectLabel }}
     </h6>
-    <!-- Text -->
+    <!-- social settings -->
     <div class="b-panel__control">
-      <control-text/>
+      <control-social-networks/>
     </div>
   </div>
 </template>
 
 <script>
-import ControlText from './../controls/TheControlText'
+import { mapState } from 'vuex'
+import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
+import ControlSocialNetworks from './../controls/TheControlSocialNetworks'
 
 export default {
-  name: 'ThePanelInlineText',
+  name: 'ThePanelNetworksSettings',
 
   components: {
-    ControlText
+    ControlBackgroundColor,
+    ControlSocialNetworks
   },
 
   props: {
@@ -25,6 +28,12 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectLabel'
+    ])
   }
 }
 </script>

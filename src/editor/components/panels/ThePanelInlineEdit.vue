@@ -1,35 +1,23 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      {{ settingObjectLabel }}
+      Text
     </h6>
-    <!-- social settings style -->
+    <!-- Text -->
     <div class="b-panel__control">
-      <control-social-networks-style/>
-    </div>
-    <!-- background color -->
-    <div class="b-panel__control">
-      <control-background-color/>
-    </div>
-    <div class="b-panel__control">
-      <control-box></control-box>
+      <control-text/>
     </div>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
-import ControlSocialNetworksStyle from './../controls/TheControlSocialNetworksStyle'
-import ControlBox from '../controls/TheControlBox'
+import ControlText from './../controls/TheControlText'
 
 export default {
-  name: 'ThePanelSocialStyle',
+  name: 'ThePanelInlineEdit',
 
   components: {
-    ControlBackgroundColor,
-    ControlSocialNetworksStyle,
-    ControlBox
+    ControlText
   },
 
   props: {
@@ -37,12 +25,6 @@ export default {
       type: Object,
       required: true
     }
-  },
-
-  computed: {
-    ...mapState('Sidebar', [
-      'settingObjectLabel'
-    ])
   }
 }
 </script>
