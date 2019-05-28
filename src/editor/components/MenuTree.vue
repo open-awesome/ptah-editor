@@ -51,7 +51,7 @@
 
 <script>
 import * as _ from 'lodash-es'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 import MenuTreeItem from './MenuTreeItem'
 import Sortable from 'sortablejs'
 import { resetIndents } from '@editor/util'
@@ -80,7 +80,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'sectionsGroups'
+      'sectionsGroups',
+      'treeState'
     ])
   },
 
@@ -119,12 +120,13 @@ export default {
       'setElement'
     ]),
 
-    buildTree (renew) {
-      if (!this.init && !renew) {
+    ...mapMutations('Sidebar', ['setTree']),
+
+    buildTree (renew = false) {
+      if (!this.init || !renew) {
         this.menuTree = []
 
         this.builderSections().forEach((section) => {
-          console.log(section.isMain)
           if (this.isSimpleSection(section)) {
             this.menuTree.push(section)
           } else {
@@ -160,7 +162,6 @@ export default {
           })
         }
       } else { // --- move 1 section
-        console.log(e)
         let nodeId = e.item.dataset.id
         let currentSection = this.getSectionById(nodeId)
 
@@ -204,6 +205,8 @@ export default {
         // TODO: main section lost lead
 
         this.builder.sort(this.lastIndexes.indexOf(nodeId), newIndexes.indexOf(nodeId))
+
+        this.setTree(this.treeState + 1)
       }
 
       this.lastIndexes = this.getIndexes() // renew indexes
@@ -263,6 +266,7 @@ export default {
       section.isMain = false
       section.data.mainStyle.absorb = 0
 
+      this.setTree(this.treeState + 1)
       this.buildTree(true)
     },
 
@@ -271,7 +275,7 @@ export default {
       this.absorbed = _.tail(this.selectedSections)
 
       this.applyGroup(newMain)
-
+      this.setTree(this.treeState + 1)
       this.buildTree(true)
     },
 
@@ -328,9 +332,9 @@ export default {
   margin: 0
 
   &__group
-    background: rgba($grey-middle, .2)
+    background: rgba($grey-middle, .1)
 
-    .group-node
+    .tree-node
       padding-left: 3.2rem
 
   &__group-name
@@ -342,7 +346,7 @@ export default {
 
     display: flex
     justify-content: space-between
-    padding: 1.6rem 1.6rem 1.6rem 4.6rem
+    padding: 1.6rem 1.6rem 1.6rem 3.1rem
 
   &__group-controls
     opacity: .7

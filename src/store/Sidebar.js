@@ -57,7 +57,8 @@ export default {
     sandbox: {
       components: [], // sandbox current section's components
       styles: {} // sandbox current section's styles
-    }
+    },
+    treeState: 0
   },
 
   mutations: {
@@ -108,6 +109,10 @@ export default {
     },
     setDragStop (state, value) {
       state.isDragStop = value
+    },
+
+    setTree (state, value) {
+      state.treeState = value
     }
   },
 

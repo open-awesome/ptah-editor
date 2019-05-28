@@ -54,6 +54,7 @@ export default {
       svg
         width: .3rem
         height: 1.4rem
+        margin-bottom: -1px !important
 
     &:hover
       background: rgba(116, 169, 230, 0.25)
