@@ -759,7 +759,7 @@ export default {
 
       this.prevent = true
 
-      if (this.type === 'section') {
+      if (this.type === 'section' || this.type === 'delimiter') {
         return
       }
 
