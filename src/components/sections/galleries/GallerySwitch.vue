@@ -77,6 +77,11 @@
                             <span class="b-preview__count">
                               {{ parseFloat(key.split('components')[1]) + 1 }}
                             </span>
+                            <uploader
+                              :path="`${key}[0].element`"
+                              :file="$sectionData[key][0].file"
+                              @change="changeSrc"
+                            />
                           </div>
                           <div class="b-preview__name"
                             v-if="$sectionData.mainStyle.isLabelPreview"
@@ -119,6 +124,11 @@
                           :style="$sectionData[key][3].element.styles"
                           v-styler:for="{ el: $sectionData[key][3].element, path:`$sectionData.${key}[3].element`, type: $sectionData[key][3].type, label: $sectionData[key][3].label }"
                           >
+                          <uploader
+                              :path="`${key}[3].element`"
+                              :file="$sectionData[key][3].file"
+                              @change="changeSrc"
+                            />
                           <span class="b-gallery-one-stage__count">
                             {{ parseFloat(key.split('components')[1]) + 1 }}
                           </span>
@@ -156,6 +166,7 @@ import { galleryPreviewClick } from '@cscripts/gallery1'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 import { mapActions } from 'vuex'
+import Uploader from '@editor/plugins/Uploader.vue'
 
 const GALLERY_ITEM = [
   {
@@ -163,7 +174,8 @@ const GALLERY_ITEM = [
     element: types.Image,
     type: 'image',
     class: 'b-preview',
-    label: 'preview'
+    label: 'preview',
+    file: null
   },
   {
     name: 'Label',
@@ -184,7 +196,8 @@ const GALLERY_ITEM = [
     element: types.Image,
     type: 'image',
     class: 'b-image',
-    label: 'image'
+    label: 'image',
+    file: null
   },
   {
     name: 'Text',
@@ -270,6 +283,10 @@ export default {
 
   group: GROUP_NAME,
 
+  components: {
+    Uploader
+  },
+
   mixins: [defaults],
 
   cover: '/img/covers/gallery1.png',
@@ -314,6 +331,10 @@ export default {
       await this.$nextTick()
 
       this.setControlPanel(panel)
+    },
+
+    changeSrc (data) {
+      this.$section.set(`$sectionData.${data.path}.styles['background-image']`, `url(${data.url})`)
     }
   },
 
@@ -325,10 +346,6 @@ export default {
 
   mounted: function () {
     this.bindingClickPreview(0)
-  },
-
-  updated: function () {
-    this.bindingClickPreview(this.$sectionData.index)
   }
 }
 </script>
@@ -406,6 +423,12 @@ export default {
 
   position: relative
   cursor: pointer
+  & .b-uploader
+    opacity: 0
+    z-index: 1
+  &:hover .b-uploader
+    opacity: 0.2
+    display: block
   &__count
     position: absolute
     top: $size-step/3
@@ -578,6 +601,14 @@ export default {
   width: 40rem
   height: 40rem
   margin: 0 auto
+
+  & .b-uploader
+    opacity: 0
+    z-index: 1
+  &:hover .b-uploader
+    opacity: 0.2
+    display: block
+
   .is-tablet &,
   .is-mobile &
     width: 30rem

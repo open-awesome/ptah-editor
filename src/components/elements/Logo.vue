@@ -90,8 +90,8 @@ export default {
       this.toggleResizeStop(true)
     },
 
-    changeSrc (path) {
-      this.$section.set(`$sectionData.${this.path}.styles['background-image']`, `url(${path})`)
+    changeSrc (data) {
+      this.$section.set(`$sectionData.${data.path}.styles['background-image']`, `url(${data.url})`)
     },
 
     onDrop (e) {

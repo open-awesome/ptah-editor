@@ -94,13 +94,14 @@ export default {
 
     async uploadFile (file) {
       let data = {}
-      if (!(file && file.type.match(this.pattern))) {
+      if (!(typeof file !== 'string' && file && file.type.match(this.pattern))) {
+        if (file !== '') this.$emit('change', { url: file, path: this.path })
         return
       }
       data = await this.getFileData(file)
 
       if (data.path) {
-        this.$emit('change', data.path)
+        this.$emit('change', { url: data.path, path: this.path })
       }
     },
 
