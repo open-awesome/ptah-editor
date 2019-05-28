@@ -41,7 +41,7 @@ export default {
       default: 'input',
       type: String
     },
-    file: String,
+    file: [String, File],
     type: {
       type: String,
       default: VALID_TYPES[0],
