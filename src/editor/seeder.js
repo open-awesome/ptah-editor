@@ -316,10 +316,10 @@ const data = new Map([
       removable: true,
       styles: {
         'text-align': 'left',
-        'font-family': 'inherit',
-        'font-size': 'inherit',
-        'font-weight': 'inherit',
-        'font-style': 'inherit'
+        'font-size': '1.2rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'font-family': 'Lato'
       },
       isIconWithText: true,
       colorFill: {
@@ -333,6 +333,33 @@ const data = new Map([
         name: 'checkMark',
         text: 'Default icon text',
         visible: true
+      },
+      isComplex: true
+    })
+  )],
+  [types.ToggleElement, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      aligned: true,
+      typography: true,
+      removable: true,
+      styles: {
+        'font-size': '1.2rem',
+        'font-weight': 'normal',
+        'font-style': 'normal',
+        'font-family': 'Lato',
+        'text-align': 'left'
+      },
+      element: {
+        color:  '#fff',
+        size: 14,
+        icon: {
+          value: 'checkMark',
+          name: 'checkMark'
+        },
+        isIconVisible: true,
+        isTextVisible: false,
+        description: 'When will open game testing begin?',
+        text: 'The start date of the open test will be announced later. Follow the news in the official communities to stay up to date!',
       },
       isComplex: true
     })

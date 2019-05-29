@@ -1,30 +1,24 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Icon settings
+      Toggle texts edit
     </h6>
 
-    <!-- Control icon -->
+    <!-- Control texts edit-->
     <div class="b-panel__control">
-      <control-text-with-icon></control-text-with-icon>
-    </div>
-
-    <div class="b-panel__control">
-      <control-box></control-box>
+      <control-toggle-element-texts-edit/>
     </div>
   </div>
 </template>
 
 <script>
-import ControlTextWithIcon from '../controls/TheControlIconWithText'
-import ControlBox from '../controls/TheControlBox'
+import ControlToggleElementTextsEdit from '../controls/TheControlToggleElementTextsEdit'
 
 export default {
-  name: 'ThePanelIcon',
+  name: 'ThePanelToggleElementEdit',
 
   components: {
-    ControlBox,
-    ControlTextWithIcon
+    ControlToggleElementTextsEdit
   }
 }
 </script>
@@ -53,5 +47,5 @@ export default {
         text-transform: uppercase
 
     &__control
-      margin-bottom: 4rem
+      margin-bottom: 1.6rem
 </style>

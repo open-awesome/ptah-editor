@@ -6,19 +6,19 @@
 
     <!-- Control icon -->
     <div class="b-panel__control">
-      <control-text-with-icon-style></control-text-with-icon-style>
+      <control-icon-width-style/>
     </div>
   </div>
 </template>
 
 <script>
-import ControlTextWithIconStyle from '../controls/TheControlIconWithTextStyle'
+import ControlIconWithTextStyle from '../controls/TheControlIconWithTextStyle'
 
 export default {
   name: 'ThePanelIconStyle',
 
   components: {
-    ControlTextWithIconStyle
+    ControlIconWithTextStyle
   }
 }
 </script>
