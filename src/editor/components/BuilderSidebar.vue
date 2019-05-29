@@ -167,13 +167,7 @@ export default {
       'saveState'
     ]),
 
-    toggleSettingsBar (section) {
-      this.closeSiteSettings()
-      this.setSettingSection(section)
-    },
-
     showAddSectionBar () {
-      this.closeSiteSettings()
       this.toggleAddSectionMenu()
     },
 
@@ -187,6 +181,10 @@ export default {
 
     toggleSidebarSection () {
       this.toggleSidebar()
+    },
+
+    closeAddSectionBar () {
+      this.toggleAddSectionMenu(false)
     }
   }
 }

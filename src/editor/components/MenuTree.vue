@@ -5,6 +5,7 @@
       <menu-tree-item
         v-if="headerSection()"
         :section="headerSection()"
+        :builder="builder"
         :data-id="headerSection().id"
         :class="{ 'selected' : itemSelected(headerSection())}"
         class="isHeader"
@@ -17,6 +18,7 @@
           v-if="!isGroup(item)"
           :key="index"
           :section="item"
+          :builder="builder"
           :data-id="item.id"
           :class="{ 'selected' : itemSelected(item) }"
           @click="setActive(item, $event)"
@@ -45,6 +47,7 @@
             v-for="(section, i) in item"
             :key="i"
             :section="section"
+            :builder="builder"
             :data-id="section.id"
             :class="{ 'selected' : itemSelected(section) }"
             is-group-item="true"

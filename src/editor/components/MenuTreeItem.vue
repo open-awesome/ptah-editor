@@ -46,9 +46,11 @@ export default {
     section: {
       required: true
     },
-
     isGroupItem: {
       required: false
+    },
+    builder: {
+      required: true
     }
   },
 
