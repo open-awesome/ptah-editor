@@ -9,6 +9,7 @@
       </base-label>
 
       <input class="b-base-text-field__input" type="text"
+        ref="inputText"
         v-bind="$attrs"
         v-model="innerValue"
         :placeholder="placeholder"

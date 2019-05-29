@@ -3,40 +3,42 @@
     <h6 class="b-panel__title">
       {{ settingObjectLabel }}
     </h6>
-    <!-- social settings style -->
+    <!-- image -->
     <div class="b-panel__control">
-      <control-social-networks-style/>
-    </div>
-    <!-- background color -->
-    <div class="b-panel__control">
-      <control-background-color/>
+      <control-image/>
     </div>
     <div class="b-panel__control">
-      <control-box></control-box>
+      <control-box :hidePadding="true"></control-box>
     </div>
+    <!-- Alt prop for image -->
+    <!-- TODO: We're still not using <img>
+    <div class="b-panel__control">
+      <control-alt/>
+    </div>
+    -->
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
-import ControlSocialNetworksStyle from './../controls/TheControlSocialNetworksStyle'
+import ControlAlt from './../controls/TheControlAlt'
+import ControlImage from './../controls/TheControlImage'
 import ControlBox from '../controls/TheControlBox'
 
 export default {
-  name: 'ThePanelSocialStyle',
-
-  components: {
-    ControlBackgroundColor,
-    ControlSocialNetworksStyle,
-    ControlBox
-  },
+  name: 'ThePanelImageSettings',
 
   props: {
     builder: {
       type: Object,
       required: true
     }
+  },
+
+  components: {
+    ControlAlt,
+    ControlImage,
+    ControlBox
   },
 
   computed: {
@@ -48,9 +50,6 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
 .b-panel
   padding-bottom: 4.5rem
   display: flex

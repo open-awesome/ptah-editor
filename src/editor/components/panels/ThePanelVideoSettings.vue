@@ -14,7 +14,7 @@
 import ControlVideo from '../controls/TheControlVideo'
 
 export default {
-  name: 'ThePanelVideo',
+  name: 'ThePanelVideoSettings',
 
   components: {
     ControlVideo

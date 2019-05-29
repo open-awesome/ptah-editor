@@ -3,28 +3,40 @@
     <h6 class="b-panel__title">
       {{ settingObjectLabel }}
     </h6>
+    <!-- social settings style -->
     <div class="b-panel__control">
-      <control-box :hidePadding="true"/>
+      <control-social-networks-style/>
+    </div>
+    <!-- background color -->
+    <div class="b-panel__control">
+      <control-background-color/>
+    </div>
+    <div class="b-panel__control">
+      <control-box></control-box>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import ControlBox from './../controls/TheControlBox'
+import ControlBackgroundColor from './../controls/TheControlBackgroundColor'
+import ControlSocialNetworksStyle from './../controls/TheControlSocialNetworksStyle'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
-  name: 'ThePanelImage',
+  name: 'ThePanelNetworksStyle',
+
+  components: {
+    ControlBackgroundColor,
+    ControlSocialNetworksStyle,
+    ControlBox
+  },
 
   props: {
     builder: {
       type: Object,
       required: true
     }
-  },
-
-  components: {
-    ControlBox
   },
 
   computed: {
@@ -36,6 +48,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
 .b-panel
   padding-bottom: 4.5rem
   display: flex

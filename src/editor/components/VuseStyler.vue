@@ -7,43 +7,37 @@
     @click.stop=""
   >
 
-    <div class="b-styler__col" v-if="type === 'button'">
+    <div class="b-styler__controls">
       <!-- Button -->
-      <div class="b-styler__controls">
+      <template v-if="type === 'button'">
         <a href="#" class="b-styler__control"
            tooltip="Button style"
            tooltip-position="bottom"
            @click.stop="setControlPanel('Button')">
           <icon-base name="style" width="12" height="15" />
         </a>
-      </div>
-      <div class="b-styler__controls">
+
         <a href="#" class="b-styler__control"
-           tooltip="Edit button text"
+           tooltip="Edit text"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('ButtonEdit')">
+           @click.stop="setControlPanel('InlineEdit')">
           <icon-base name="edit" width="12" height="15" />
         </a>
-      </div>
-      <div class="b-styler__controls">
+
         <a href="#" class="b-styler__control"
-           tooltip="Button setttings"
+           tooltip="Button settings"
            tooltip-position="bottom"
            @click.stop="setControlPanel('ButtonSettings')">
           <icon-base name="cog" width="12" height="15" />
         </a>
-      </div>
-      <div class="b-styler__controls" ref="buttonModalProps">
+
         <a href="#" class="b-styler__control"
-           tooltip="Action"
+           tooltip="Button link"
            tooltip-position="bottom"
-           @click.stop="setModalProps()">
+           @click.stop="setModalProps()" ref="buttonModalProps">
           <icon-base name="link" width="18" height="18" />
         </a>
-      </div>
-    </div>
-
-    <div class="b-styler__controls">
+      </template>
 
       <!-- Text -->
       <a href="#" class="b-styler__control"
@@ -67,7 +61,7 @@
       <a href="#" class="b-styler__control"
          tooltip="Edit"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('InlineText')"
+         @click.stop="setControlPanel('InlineEdit')"
          v-if="type === 'inline'">
         <icon-base name="edit" width="12" height="15" />
       </a>
@@ -139,22 +133,16 @@
       <!-- Image -->
       <template v-if="type === 'image'">
         <a href="#" class="b-styler__control"
-           tooltip="Image style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('ImageStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-         tooltip="Set/change image"
-         tooltip-position="bottom"
-         @click.stop="setControlPanel('Image')">
-          <icon-base name="preview" width="14" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
            tooltip="Image link"
            tooltip-position="bottom"
            @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
           <icon-base name="link" width="14" height="16" />
+        </a>
+        <a href="#" class="b-styler__control"
+          tooltip="Set/change image"
+          tooltip-position="bottom"
+          @click.stop="setControlPanel('ImageSettings')">
+          <icon-base name="style" width="14" height="16" />
         </a>
       </template>
 
@@ -162,7 +150,7 @@
       <a href="#" class="b-styler__control"
          tooltip="Video settings"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('Video')"
+         @click.stop="setControlPanel('VideoSettings')"
          v-if="type === 'video'">
         <icon-base name="settings" width="14" height="16" />
       </a>
@@ -170,13 +158,7 @@
       <!-- Icon with text -->
       <template v-if="type === 'icon'">
         <a href="#" class="b-styler__control"
-           tooltip="Icon style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('IconStyle')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Edit text"
+           tooltip="Icon styles"
            tooltip-position="bottom"
            @click.stop="setControlPanel('IconEdit')">
           <icon-base name="edit" width="12" height="15" />
@@ -202,6 +184,16 @@
            tooltip-position="bottom"
            @click.stop="setControlPanel('FormStyles')">
           <icon-base name="style" width="12" height="15" />
+        </a>
+      </template>
+
+      <!-- duplicate element -->
+      <template v-if="options.removable">
+        <a href="#" class="b-styler__control"
+           tooltip="Clone element"
+           tooltip-position="bottom"
+           @click.stop="duplicateElement">
+          <icon-base name="clone"  width="14" height="16"></icon-base>
         </a>
       </template>
 
@@ -338,7 +330,9 @@ export default {
         x: 0,
         y: 0
       }
-    }
+    },
+    timer: 0,
+    prevent: false
   }),
   computed: {
     ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
@@ -392,6 +386,13 @@ export default {
           this.showStylerAfterDragEl()
         }
       }
+    },
+    textEditorActive: {
+      handler: function (val) {
+        if (val === false && this.isCurrentStyler) {
+          this.setControlPanel(false)
+        }
+      }
     }
   },
 
@@ -403,12 +404,11 @@ export default {
     if (this.$builder && !this.$builder.isEditing) return
 
     this.el.addEventListener('click', this.showStyler)
+    this.el.addEventListener('dblclick', this.dblclick)
 
     if (this.type === 'section') {
       this.el.id = `section_${this.section.id}`
     }
-
-    // this.setInitialValue()
 
     // Restoring from a snapshot
     // to apply the pseudoclass to the element
@@ -450,64 +450,28 @@ export default {
 
     this.proportions = Math.min(this.el.offsetWidth / this.el.offsetHeight)
   },
+
   beforeDestroy () {
     this.hideStyler()
     this.$refs.styler.remove()
     this.el.classList.remove('is-editable')
     this.el.removeEventListener('click', this.showStyler)
+    this.el.removeEventListener('dblclick', this.dblclick)
     document.removeEventListener('click', this.hideStyler, true)
   },
+
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
 
-    showStyler (event) {
-      let self = this
+    stylerInit (event) {
       const stopNames = [
         'b-draggable-slot',
         'b-draggable-slot active'
       ]
 
-      event.preventDefault()
-      event.stopPropagation()
-
-      let autoSizing = (data) => {
-        data.offsets.popper.left = data.offsets.reference.left
-        if (self.options.removable) {
-          data.styles.width = data.offsets.reference.width
-        }
-        return data
-      }
-
-      let applyReactStyle = (data) => {
-        data.styles.width = data.offsets.reference.width
-      }
-
-      // show inline styler
-      if (!this.popper && this.type !== 'section') {
-        this.$nextTick(function () {
-          this.popper = new Popper(this.el, this.$refs.styler, {
-            placement: 'top',
-            modifiers: {
-              autoSizing: {
-                enabled: true,
-                fn: autoSizing,
-                order: 840
-              },
-              hide: {
-                enabled: true
-              },
-              applyStyle: { enabled: true },
-              applyReactStyle: {
-                enabled: true,
-                fn: applyReactStyle,
-                order: 900
-              }
-            }
-          })
-        })
-      }
+      this.initPopper()
 
       if (this.isCurrentStyler && !this.checkStylerNodes(event, stopNames)) {
         this.isCurrentStyler = false
@@ -561,24 +525,86 @@ export default {
             })
           }
 
-          this.setSettingElement({
-            type: this.$props.type, // TODO: $props.type !== type ?
-            label: this.$props.label,
-            name: this.name,
-            options: _.get(this.section.data, this.path).element,
-            section: this.section,
-            element: this.el
-          })
-          this.el.classList.add('styler-active')
-          // --- rm class/es from menu items
-          document
-            .querySelectorAll('.b-menu-subitem_selected')
-            .forEach(el => el.classList.remove('b-menu-subitem_selected'))
+          this.setElement()
         }
       }, 0)
+    },
+
+    initPopper () {
+      let self = this
+
+      let autoSizing = (data) => {
+        data.offsets.popper.left = data.offsets.reference.left
+        if (self.options.removable) {
+          data.styles.width = data.offsets.reference.width
+        }
+        return data
+      }
+
+      let applyReactStyle = (data) => {
+        data.styles.width = data.offsets.reference.width
+      }
+
+      // show inline styler
+      if (!this.popper && this.type !== 'section') {
+        this.$nextTick(function () {
+          this.popper = new Popper(this.el, this.$refs.styler, {
+            placement: 'top',
+            modifiers: {
+              autoSizing: {
+                enabled: true,
+                fn: autoSizing,
+                order: 840
+              },
+              hide: {
+                enabled: true
+              },
+              applyStyle: { enabled: true },
+              applyReactStyle: {
+                enabled: true,
+                fn: applyReactStyle,
+                order: 900
+              }
+            }
+          })
+        })
+      }
+    },
+
+    setElement () {
+      this.setSettingElement({
+        type: this.$props.type, // TODO: $props.type !== type ?
+        label: this.$props.label,
+        name: this.name,
+        options: _.get(this.section.data, this.path).element,
+        section: this.section,
+        element: this.el
+      })
+      this.el.classList.add('styler-active')
+      // --- rm class/es from menu items
+      document
+        .querySelectorAll('.b-menu-subitem_selected')
+        .forEach(el => el.classList.remove('b-menu-subitem_selected'))
 
       document.addEventListener('click', this.hideStyler, true)
     },
+
+    showStyler (event) {
+      let self = this
+
+      event.preventDefault()
+      event.stopPropagation()
+
+      self.stylerInit(event)
+
+      this.timer = setTimeout(function () {
+        if (!self.prevent) {
+          document.addEventListener('click', self.hideStyler, true)
+        }
+        self.prevent = false
+      }, 150)
+    },
+
     hideStyler (event) {
       const stopNames = [
         'b-styler__control_text',
@@ -666,6 +692,12 @@ export default {
       this.hideStyler()
     },
 
+    duplicateElement () {
+      let el = _.cloneDeep(_.get(this.section.data, this.path))
+      el.key = randomPoneId()
+      this.components = [...this.components, el]
+    },
+
     setModalProps () {
       this.isModalsPropsShow = !this.isModalsPropsShow
       this.setPosition()
@@ -717,6 +749,37 @@ export default {
         this.el.addEventListener('click', this.showStyler)
         this.el.click()
       }
+    },
+
+    async dblclick (event) {
+      let name = _.startCase(this.type)
+
+      // clear timer after dbl click
+      clearTimeout(this.timer)
+
+      this.prevent = true
+
+      if (this.type === 'section' || this.type === 'delimiter') {
+        return
+      }
+
+      // set props element
+      this.setElement()
+
+      await this.$nextTick()
+
+      if (this.type === 'text') {
+        this.editText = true
+        this.setControlPanel(name)
+      } else {
+        if (this.type === 'button' || this.type === 'inline' || this.type === 'icon') {
+          this.setControlPanel(name + 'Edit')
+        } else {
+          this.setControlPanel(name + 'Settings')
+        }
+
+        this.initPopper()
+      }
     }
   }
 }
@@ -752,20 +815,22 @@ export default {
     align-items: center
     justify-content: center
 
-    background: $white
-    // box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-    // margin-right: .4rem
+    width: $size-step/1.5
+    height: $size-step/1.5
 
-    svg
-      fill: $dark-blue-krayola
-      margin-bottom: 0
+    background: $dark-blue-krayola
+    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+
+    cursor: pointer
+    & svg
+      fill:  $white
+      width: 14px
+      height: 14px
 
     &:hover, .active
-      background: $dark-blue-krayola
-
+      background: $white
       svg
-        fill: $white
-        margin-bottom: 0
+        fill: $dark-blue-krayola
 
     &_del
       margin-right: -0.2rem
@@ -777,6 +842,11 @@ export default {
         background: $black
         svg
           fill: $orange
+
+    &_link
+      svg
+        width: 18px
+        height: 18px
 
   &__modal
     width: 40rem

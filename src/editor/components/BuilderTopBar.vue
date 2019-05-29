@@ -84,7 +84,7 @@ export default {
 </script>
 
 <template>
-<div class="b-top-bar">
+<div class="b-top-bar" id="topbar">
 
   <div class="b-top-bar__padd">
     <div class="b-top-bar-menu">
@@ -186,6 +186,8 @@ export default {
       cursor: pointer
       color: $grey
     &__crumbs
+      display: flex
+
       color: $dark-grey
       padding: 0 $size-step
       white-space: nowrap

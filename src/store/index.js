@@ -44,7 +44,6 @@ const actions = {
       method: 'get'
     }).then((response) => {
       commit('updateLandings', response.landings)
-      // this.$Progress.increase(50)
       return response.landings
     })
   },
@@ -173,7 +172,10 @@ const actions = {
     })
       .then((data) => {
         commit('version', data.currentVersion)
-        return commit('isSaved', true)
+        return commit('isSaved', data.currentVersion)
+      })
+      .catch(() => {
+        commit('isSaved', 'error')
       })
   }, 2800),
 

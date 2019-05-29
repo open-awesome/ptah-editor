@@ -1,0 +1,62 @@
+.custom-message-container
+  position: fixed
+  width: 10vw
+  box-sizing: border-box
+  z-index: 9999
+  opacity: .7
+
+  &> *
+    box-sizing: border-box
+
+  &.bottom-right
+    bottom: 1rem
+    right: 1rem
+
+  .close:not(:disabled):not(.disabled)
+    cursor: pointer
+
+  .close
+    float: right
+    font-size: 1.5rem
+    font-weight: 700
+    line-height: 1
+    color: #000
+    text-shadow: 0 1px 0 #fff
+
+  button.close
+    padding: 0
+    background-color: transparent
+    border: 0
+    -webkit-appearance: none
+
+.update-message::after, .update-message::before
+  box-sizing: border-box
+
+.update-message
+  position: relative !important
+  top: auto !important
+  bottom: auto !important
+  left: auto !important
+  right: auto !important
+  width: 100% !important
+  transform: none !important
+
+.update-message-dismissible .close
+  position: absolute
+  top: 0
+  right: 0
+  padding: .75rem 1.25rem
+  color: inherit
+
+.update-info
+  color: black !important
+  background-color: $white !important
+  border: none !important
+  border-radius: 10px !important
+
+.update-error
+  color: black !important
+  background-color: #FF3232 !important
+  border: none !important
+  border-radius: 10px !important
+
