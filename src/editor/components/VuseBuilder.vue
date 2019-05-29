@@ -137,8 +137,7 @@ export default {
   computed: {
     ...mapState(['currentLanding']),
     ...mapState('Sidebar', [
-      'isExpanded',
-      'treeState'
+      'isExpanded'
     ]),
 
     builder () {
@@ -176,10 +175,6 @@ export default {
         this.saveState(this.$builder.export('JSON'))
       },
       deep: true
-    },
-
-    treeState () {
-      this.observeGroups()
     }
   },
 

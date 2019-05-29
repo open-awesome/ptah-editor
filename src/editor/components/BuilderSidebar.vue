@@ -29,106 +29,6 @@
       <div class="b-builder-sidebar__content-outer">
       <base-scroll-container backgroundBar="#999">
         <menu-tree :sections="this.builder.sections" :builder="builder"></menu-tree>
-        <div class="b-builder-sidebar__content-inner">
-        <!-- Sections CONTENTS -->
-          <!-- header -->
-            <div class="no-sortable" ref="header">
-              <menu-subitem
-                  v-if="headerSection"
-                  v-scroll-to="`#section_${ headerSection.id }`"
-                  :id="`menu-item-${ headerSection.id }`"
-                  :is-selected="isActiveSection(headerSection.id)"
-                  :section-id="headerSection.id"
-                  @click="toggleSettingsBar(headerSection)"
-                  class="b-menu-subitem--header"
-                >
-                # -
-                <span class="b-menu-subitem__title-text">
-                  {{ headerSection.name }}
-                </span>
-                <div class="b-menu-subitem__icons">
-                  <span class="b-menu-subitem__icon"
-                      tooltip="Section settings"
-                      tooltip-position="bottom"
-                    @click.stop="showSettingsBar(headerSection)"
-                    >
-                    <icon-base name="cog"></icon-base>
-                  </span>
-                  <!--<span class="b-menu-subitem__icon"
-                    @click.stop="toggleSectionLayouts(headerSection)"
-                    >
-                    <icon-base name="layouts" color="#fff"></icon-base>
-                  </span>-->
-                  <span class="b-menu-subitem__icon"
-                    tooltip="Section background"
-                    tooltip-position="bottom"
-                    @click.stop="showBackgroundPanel(headerSection)"
-                    >
-                    <icon-base name="background"></icon-base>
-                  </span>
-                  <span class="b-menu-subitem__icon"
-                    tooltip="Delete"
-                    tooltip-position="bottom"
-                    @click.stop="deleteSection(headerSection)"
-                    >
-                    <icon-base name="remove"></icon-base>
-                  </span>
-                </div>
-              </menu-subitem>
-            </div>
-
-            <div class="sortable" ref="sections">
-
-            <!-- sections -->
-              <menu-subitem
-                  v-for="(section, index) in builderSections"
-                  v-scroll-to="`#section_${section.id}`"
-                  :key="section.id"
-                  :id="`menu-item-${section.id}`"
-                  :is-selected="isActiveSection(section.id)"
-                  :is-main="section.isMain"
-                  :has-draggable-icon="true"
-                  :section-id="section.id"
-                  @click="toggleSettingsBar(section)"
-                >
-                <span class="b-menu-subitem__title-num">
-                  {{ `${ index + 1 } - `}}
-                </span>
-                <span class="b-menu-subitem__title-text">
-                  {{ section.name }}
-                </span>
-                <div class="b-menu-subitem__icons">
-                  <span class="b-menu-subitem__icon"
-                    tooltip="Section settings"
-                    tooltip-position="bottom"
-                    @click.stop="showSettingsBar(section)"
-                    >
-                    <icon-base name="cog"></icon-base>
-                  </span>
-                  <!--<span class="b-menu-subitem__icon"
-                    @click.stop="toggleSectionLayouts(section)"
-                    >
-                    <icon-base name="layouts" color="#fff"></icon-base>
-                  </span>-->
-                  <span class="b-menu-subitem__icon b-menu-subitem__icon_background"
-                    tooltip="Section background"
-                    tooltip-position="bottom"
-                    @click.stop="showBackgroundPanel(section)"
-                    >
-                    <icon-base name="background"></icon-base>
-                  </span>
-                  <span class="b-menu-subitem__icon"
-                    tooltip="Delete"
-                    tooltip-position="bottom"
-                    @click.stop="deleteSection(section)"
-                    >
-                    <icon-base name="remove"></icon-base>
-                  </span>
-                </div>
-              </menu-subitem>
-
-            </div>
-        </div>
       </base-scroll-container>
       </div>
     </div>
@@ -156,7 +56,6 @@
 </template>
 
 <script>
-import * as _ from 'lodash-es'
 import Sortable from 'sortablejs'
 import MenuItem from './MenuItem'
 import MenuSubitem from './MenuSubitem'
@@ -165,7 +64,6 @@ import BuilderSettingsSlots from './BuilderSettingsSlots'
 import BuilderAddSectionBar from './BuilderAddSectionBar'
 import { mapActions, mapState } from 'vuex'
 import TheControlPanel from './panels/TheControlPanel'
-import { resetIndents } from '@editor/util'
 import MenuTree from './MenuTree'
 
 export default {
@@ -275,43 +173,6 @@ export default {
       this.setSettingSection(section)
     },
 
-    showSettingsBar (section) {
-      this.closeSiteSettings()
-      this.setElement(document.getElementById(`section_${section.id}`))
-      this.setSettingSection(section)
-      this.setControlPanel('Section')
-    },
-
-    toggleSectionLayouts (section) {
-      this.closeSiteSettings()
-      this.setSettingSection(section)
-      this.setControlPanel('SectionLayout')
-    },
-
-    selectSection (section) {
-      this.toggleSettingsBar(section)
-    },
-
-    closeSettingsBar () {
-      this.clearSettingObjectLight()
-    },
-
-    closeSiteSettings () {
-      // this.setModalContent('')
-    },
-
-    closeAddSectionBar () {
-      this.toggleAddSectionMenu(false)
-    },
-
-    updateSectionsOrder (event) {
-      this.builder.sort(event.oldIndex, event.newIndex)
-    },
-
-    isActiveSection (id) {
-      return this.settingObjectSection.id === id
-    },
-
     showAddSectionBar () {
       this.closeSiteSettings()
       this.toggleAddSectionMenu()
@@ -325,43 +186,8 @@ export default {
       target.click()
     },
 
-    startScroll (x) {
-
-    },
-
     toggleSidebarSection () {
       this.toggleSidebar()
-    },
-
-    isMasterSection () {
-      return !!_.find(this.sectionsGroups, o => o.main.id === this.sectionId)
-    },
-
-    isSlaveSection (sectionId) {
-      return !!_.find(this.sectionsGroups, o => o.children.indexOf(sectionId) > -1)
-    },
-
-    deleteSection (section) {
-      // update group
-      if (this.isSlaveSection(section.Id)) {
-        let master = _.find(this.sectionsGroups, o => o.children.indexOf(section.Id) > -1).main
-        let absorb = master.data.mainStyle.absorb
-        master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
-      }
-
-      this.builder.remove(section)
-      this.clearSettingObject()
-
-      if (this.isMasterSection()) {
-        resetIndents()
-      }
-
-      this.saveState(this.builder.export('JSON'))
-    },
-
-    showBackgroundPanel (section) {
-      this.setControlPanel('SectionBackground')
-      this.setSettingSection(section)
     }
   }
 }

@@ -8,6 +8,17 @@
       color="blue"
       class="b-menu-tree__group-together">Group selected</base-button>
 
+    <!-- header section -->
+    <menu-tree-item
+      v-if="headerSection()"
+      :section="headerSection()"
+      :data-id="headerSection().id"
+      :class="{ 'selected' : itemSelected(headerSection())}"
+      class="isHeader"
+      @click="setActive(headerSection(), $event)"
+      v-scroll-to="`#section_${headerSection().id}`" />
+
+    <!-- tree menu -->
     <template v-for="(item, index) in menuTree">
       <menu-tree-item
         v-if="!isGroup(item)"
@@ -15,9 +26,11 @@
         :section="item"
         :data-id="item.id"
         :class="{ 'selected' : itemSelected(item) }"
+        @click="setActive(item, $event)"
         v-on:select="onSelect"
-        class="tree-node" />
-      <div class="b-menu-tree__group node-sortable tree-branch" :key="index" v-if="isGroup(item)">
+        v-scroll-to="`#section_${item.id}`"
+        class="tree-node draggable" />
+      <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
         <div class="b-menu-tree__group-name">
           <span>Group</span>
           <div class="b-menu-tree__group-controls">
@@ -43,7 +56,9 @@
           :class="{ 'selected' : itemSelected(section) }"
           is-group-item="true"
           v-on:select="onSelect"
-          class="tree-node group-node" />
+          v-scroll-to="`#section_${section.id}`"
+          @click="setActive(section, $event)"
+          class="tree-node group-node draggable" />
       </div>
     </template>
   </div>
@@ -51,7 +66,7 @@
 
 <script>
 import * as _ from 'lodash-es'
-import { mapState, mapActions, mapMutations } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import MenuTreeItem from './MenuTreeItem'
 import Sortable from 'sortablejs'
 import { resetIndents } from '@editor/util'
@@ -81,7 +96,7 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'sectionsGroups',
-      'treeState'
+      'settingObjectSection'
     ])
   },
 
@@ -100,6 +115,7 @@ export default {
         animation: 150,
         fallbackOnBody: true,
         swapThreshold: 0.65,
+        draggable: '.draggable',
         onEnd: (event) => {
           this.treeUpdate(event)
         }
@@ -114,13 +130,13 @@ export default {
       'setSettingSection',
       'clearSettingObject',
       'clearSettingObjectLight',
-      'toggleSidebar',
-      'toggleAddSectionMenu',
       'setControlPanel',
       'setElement'
     ]),
 
-    ...mapMutations('Sidebar', ['setTree']),
+    ...mapActions('Landing', [
+      'saveState'
+    ]),
 
     buildTree (renew = false) {
       if (!this.init || !renew) {
@@ -147,6 +163,11 @@ export default {
     treeUpdate (e) {
       let newIndexes = this.getIndexes()
       let needReloadTree = false
+      let nodeId = e.item.dataset.id
+      let currentSection = this.getSectionById(nodeId)
+      let group = Array.from(e.from.querySelectorAll('.tree-node')).map((node) => node.dataset.id)
+
+      console.log(e)
 
       if (e.item.classList.contains('tree-branch')) { // --- move group
         // section ids in the group
@@ -162,51 +183,58 @@ export default {
           })
         }
       } else { // --- move 1 section
-        let nodeId = e.item.dataset.id
-        let currentSection = this.getSectionById(nodeId)
-
         if (e.to !== e.from) {
           needReloadTree = true
           // move to group
           if (e.to.classList.contains('tree-branch')) {
             let mainSection = this.getSectionById(e.to.querySelector('.tree-node').dataset.id)
             if (e.newIndex !== 0) {
-              mainSection.data.mainStyle.absorb = mainSection.data.mainStyle.absorb + 1
+              this.setSectionData(mainSection, 'absorb', mainSection.data.mainStyle.absorb + 1)
             } else {
               // make new main
               let absorb = mainSection.data.mainStyle.absorb + 1
-              mainSection.isMain = false
-              mainSection.data.mainStyle.absorb = 0
-
-              currentSection.isMain = false
-              currentSection.data.mainStyle.absorb = absorb
+              this.setSectionData(mainSection, 'absorb', 0)
+              this.setSectionData(currentSection, 'absorb', absorb)
             }
           } else { // move from group
             if (e.oldIndex !== 0) {
               let mainSection = this.getSectionById(e.from.querySelector('.tree-node').dataset.id)
-              mainSection.data.mainStyle.absorb = mainSection.data.mainStyle.absorb - 1
-              if (mainSection.data.mainStyle.absorb === 0) {
-                mainSection.isMain = false
-              }
+              this.setSectionData(mainSection, 'absorb', mainSection.data.mainStyle.absorb - 1)
             } else {
               // make new main
               let absorb = currentSection.data.mainStyle.absorb - 1
               let newMainSection = this.getSectionById(Array.from(e.from.querySelectorAll('.tree-node'))[1].dataset.id)
 
-              currentSection.isMain = false
-              currentSection.data.mainStyle.absorb = 0
-
-              newMainSection.isMain = true
-              newMainSection.data.mainStyle.absorb = absorb
+              this.setSectionData(currentSection, 'absorb', 0)
+              this.setSectionData(newMainSection, 'absorb', absorb)
             }
           }
         }
 
-        // TODO: main section lost lead
+        // --- moving within a group
+        if (e.from.classList.contains('tree-branch') && e.to.classList.contains('tree-branch')) {
+          // The section becomes the new master
+          if (e.newIndex === 0) {
+            let oldMaster = _.filter(this.builder.sections, (section) => {
+              return group.indexOf(section.id) > -1 && section.isMain
+            })
+            let absorb = oldMaster.data.mainStyle.absorb
+
+            this.setSectionData(oldMaster, 'absorb', 0)
+            this.setSectionData(currentSection, 'absorb', absorb)
+          }
+
+          // The old master lost its lead
+          if (e.oldIndex === 0) {
+            let absorb = currentSection.data.mainStyle.absorb
+            let newMaster = this.getSectionById(group[0])
+
+            this.setSectionData(currentSection, 'absorb', 0)
+            this.setSectionData(newMaster, 'absorb', absorb)
+          }
+        }
 
         this.builder.sort(this.lastIndexes.indexOf(nodeId), newIndexes.indexOf(nodeId))
-
-        this.setTree(this.treeState + 1)
       }
 
       this.lastIndexes = this.getIndexes() // renew indexes
@@ -215,7 +243,7 @@ export default {
         needReloadTree = false
       }
 
-      //  TODO: save state
+      this.saveState(this.builder.export('JSON'))
     },
 
     getIndexes () {
@@ -229,11 +257,6 @@ export default {
 
     isGroup (item) {
       return _.isArray(item)
-    },
-
-    async sort (oldIndex, newIndex) {
-      await this.$nextTick()
-      this.builder.sort(oldIndex, newIndex)
     },
 
     getSectionById (id) {
@@ -254,7 +277,7 @@ export default {
     },
 
     itemSelected (section) {
-      return this.selectedSections.indexOf(section.id) > -1
+      return this.selectedSections.indexOf(section.id) > -1 || this.isActiveSection(section.id)
     },
 
     showBackgroundPanel (section) {
@@ -263,10 +286,7 @@ export default {
     },
 
     ungroup (section) {
-      section.isMain = false
-      section.data.mainStyle.absorb = 0
-
-      this.setTree(this.treeState + 1)
+      this.setSectionData(section, 'absorb', 0)
       this.buildTree(true)
     },
 
@@ -275,7 +295,6 @@ export default {
       this.absorbed = _.tail(this.selectedSections)
 
       this.applyGroup(newMain)
-      this.setTree(this.treeState + 1)
       this.buildTree(true)
     },
 
@@ -283,8 +302,7 @@ export default {
       // sort sections in builder
       this.moveSections()
       // apply changes
-      newMain.isMain = true
-      newMain.data.mainStyle.absorb = this.absorbed.length
+      this.setSectionData(newMain, 'absorb', this.absorbed.length)
 
       resetIndents()
 
@@ -321,6 +339,27 @@ export default {
 
     builderSections () {
       return this.sections.filter(section => !section.isHeader)
+    },
+
+    setSectionData (section, param, value) {
+      let obj = {}
+      obj[param] = value
+      section.set('$sectionData.mainStyle', _.merge({}, section.data.mainStyle, obj))
+    },
+
+    headerSection () {
+      return this.builder.sections.find(section => section.isHeader)
+    },
+
+    setActive (section, event) {
+      this.setSettingSection(section)
+      if (!event.ctrlKey) {
+        this.selectedSections = []
+      }
+    },
+
+    isActiveSection (id) {
+      return this.settingObjectSection.id === id
     }
   }
 }
