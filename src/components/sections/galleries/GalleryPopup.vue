@@ -10,7 +10,8 @@ const GALLERY_ITEM = [
     element: types.Image,
     type: 'image',
     class: 'b-preview',
-    label: 'preview'
+    label: 'preview',
+    file: null
   },
   {
     name: 'Label',
@@ -324,6 +325,10 @@ export default {
           popupV.load()
         }
       }
+    },
+
+    changeSrc (data) {
+      this.$section.set(`$sectionData.${data.path}.styles['background-image']`, `url(${data.url})`)
     }
   },
 
@@ -412,6 +417,11 @@ export default {
                           :style="$sectionData[key][0].element.styles"
                           @dblclick="onClick($sectionData[key][0].element, parseFloat(key.split('components')[1]))"
                           >
+                          <uploader
+                            :path="`${key}[0].element`"
+                            :file="$sectionData[key][0].file"
+                            @change="changeSrc"
+                          />
                           <span class="b-gallery-popup__preview-count"
                             v-text="parseFloat(key.split('components')[1]) + 1"
                           />
@@ -638,6 +648,12 @@ export default {
     #{$this}-video
       transition: all 200ms
       transform: rotate(360deg)
+  & .b-uploader
+    opacity: 0
+    z-index: 1
+  &:hover .b-uploader
+    opacity: 0.2
+    display: block
   .is-editable &:hover
     border: 0.2rem dotted #fff
     box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.6)

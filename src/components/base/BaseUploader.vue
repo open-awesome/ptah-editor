@@ -1,10 +1,10 @@
 <template>
-  <div class="b-uploader" :id="`uploader-${ _uid }`">
-    <div class="b-uploader__row b-uploader__row_multiple" v-if="multiple">
-      <draggable v-if="multiple" v-model="items" class="b-uploader__draggable">
+  <div class="b-base-uploader" :id="`uploader-${ _uid }`">
+    <div class="b-base-uploader__row b-base-uploader__row_multiple" v-if="multiple">
+      <draggable v-if="multiple" v-model="items" class="b-base-uploader__draggable">
         <base-uploader-item
           v-for="(item, index) in items"
-          :key="`b-uploader-item-${ _uid }-${ index }`"
+          :key="`b-base-uploader-item-${ _uid }-${ index }`"
           :item="item"
           :type="type"
           @replace="replaceFile($event, index)"
@@ -13,8 +13,8 @@
           />
       </draggable>
     </div>
-    <div class="b-uploader__row b-uploader__row_add-multiple" v-if="multiple">
-      <div class="b-uploader__preview">
+    <div class="b-base-uploader__row b-base-uploader__row_add-multiple" v-if="multiple">
+      <div class="b-base-uploader__preview">
         <base-uploader-item
           v-if="src"
           :src="src"
@@ -31,12 +31,12 @@
           @labelProgress="labelChange"
         />
       </div>
-      <div class="b-uploader__label" v-if="label && label !== ''">
+      <div class="b-base-uploader__label" v-if="label && label !== ''">
         {{ labelUploader }}
       </div>
     </div>
-    <div class="b-uploader__row" v-if="!multiple">
-      <div class="b-uploader__preview">
+    <div class="b-base-uploader__row" v-if="!multiple">
+      <div class="b-base-uploader__preview">
         <base-uploader-item
           v-if="src"
           :src="src"
@@ -53,7 +53,7 @@
           @labelProgress="labelChange"
           />
       </div>
-      <div class="b-uploader__label" v-if="label && label !== ''">
+      <div class="b-base-uploader__label" v-if="label && label !== ''">
         {{ labelUploader }}
       </div>
     </div>
@@ -159,7 +159,7 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 
-.b-uploader
+.b-base-uploader
   width: 100%
   &__draggable
     width: 100%
