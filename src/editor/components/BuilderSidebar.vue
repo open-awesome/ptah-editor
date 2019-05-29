@@ -55,7 +55,6 @@
 </template>
 
 <script>
-import Sortable from 'sortablejs'
 import MenuItem from './MenuItem'
 import MenuSubitem from './MenuSubitem'
 import BuilderSettingsBar from './BuilderSettingsBar'
@@ -124,21 +123,6 @@ export default {
   },
 
   updated () {
-    if (this.$refs.sections && this.builderSections.length) {
-      Sortable.create(this.$refs.sections, {
-        group: { name: 'sections' },
-        animation: 150,
-        sort: true,
-        disabled: false,
-        filter: 'no-sortable',
-        preventOnFilter: false,
-        onUpdate: (event) => {
-          let headerMod = this.headerSection ? 1 : 0
-          this.builder.sort(event.oldIndex + headerMod, event.newIndex + headerMod)
-        }
-      })
-    }
-
     // hack for update dropdown component
     window.dispatchEvent(new Event('resize'))
   },
@@ -173,9 +157,14 @@ export default {
 
     async onAddSection (section) {
       await this.$nextTick()
-      let target = (section.isHeader)
-        ? this.$refs.header.lastElementChild
-        : this.$refs.sections.lastElementChild
+      let target
+
+      document.querySelectorAll('.tree-node').forEach((node) => {
+        if (parseInt(node.dataset.id) === section.id) {
+          target = node
+        }
+      })
+
       target.click()
     },
 
