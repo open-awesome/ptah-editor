@@ -1,39 +1,32 @@
 <template>
   <div class="b-menu-tree node-sortable tree-root" v-click-outside="onClickOutside">
-
-    <base-button
-      v-show="selectedSections.length > 1"
-      @click="groupSections"
-      size="small"
-      color="blue"
-      class="b-menu-tree__group-together">Group selected</base-button>
-
-    <!-- header section -->
-    <menu-tree-item
-      v-if="headerSection()"
-      :section="headerSection()"
-      :data-id="headerSection().id"
-      :class="{ 'selected' : itemSelected(headerSection())}"
-      class="isHeader"
-      @click="setActive(headerSection(), $event)"
-      v-scroll-to="`#section_${headerSection().id}`" />
-
-    <!-- tree menu -->
-    <template v-for="(item, index) in menuTree">
+    <base-scroll-container backgroundBar="#999">
+      <!-- header section -->
       <menu-tree-item
-        v-if="!isGroup(item)"
-        :key="index"
-        :section="item"
-        :data-id="item.id"
-        :class="{ 'selected' : itemSelected(item) }"
-        @click="setActive(item, $event)"
-        v-on:select="onSelect"
-        v-scroll-to="`#section_${item.id}`"
-        class="tree-node draggable" />
-      <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
-        <div class="b-menu-tree__group-name">
-          <span>Group</span>
-          <div class="b-menu-tree__group-controls">
+        v-if="headerSection()"
+        :section="headerSection()"
+        :data-id="headerSection().id"
+        :class="{ 'selected' : itemSelected(headerSection())}"
+        class="isHeader"
+        @click="setActive(headerSection(), $event)"
+        v-scroll-to="`#section_${headerSection().id}`" />
+
+      <!-- tree menu -->
+      <template v-for="(item, index) in menuTree">
+        <menu-tree-item
+          v-if="!isGroup(item)"
+          :key="index"
+          :section="item"
+          :data-id="item.id"
+          :class="{ 'selected' : itemSelected(item) }"
+          @click="setActive(item, $event)"
+          v-on:select="onSelect"
+          v-scroll-to="`#section_${item.id}`"
+          class="tree-node draggable" />
+        <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
+          <div class="b-menu-tree__group-name">
+            <span>Group</span>
+            <div class="b-menu-tree__group-controls">
             <span
               @click="showBackgroundPanel(item[0])"
               tooltip="Group background"
@@ -46,21 +39,37 @@
                 tooltip-position="bottom">
               <icon-base name="remove"></icon-base>
             </span>
+            </div>
           </div>
+          <menu-tree-item
+            v-for="(section, i) in item"
+            :key="i"
+            :section="section"
+            :data-id="section.id"
+            :class="{ 'selected' : itemSelected(section) }"
+            is-group-item="true"
+            v-on:select="onSelect"
+            v-scroll-to="`#section_${section.id}`"
+            @click="setActive(section, $event)"
+            class="tree-node group-node draggable" />
         </div>
-        <menu-tree-item
-          v-for="(section, i) in item"
-          :key="i"
-          :section="section"
-          :data-id="section.id"
-          :class="{ 'selected' : itemSelected(section) }"
-          is-group-item="true"
-          v-on:select="onSelect"
-          v-scroll-to="`#section_${section.id}`"
-          @click="setActive(section, $event)"
-          class="tree-node group-node draggable" />
+      </template>
+    </base-scroll-container>
+
+    <div class="b-menu-tree__group-control">
+      <div class="b-menu-tree__group-control--description" v-show="selectedSections.length <= 1">
+        <icon-base name="pling"></icon-base>
+        <div>
+          To group sections select them both holding “Ctrl” key
+        </div>
       </div>
-    </template>
+      <base-button
+        v-show="selectedSections.length > 1"
+        @click="groupSections"
+        size="middle"
+        color="gray"
+        class="b-menu-tree__group-together">Group selected</base-button>
+    </div>
   </div>
 </template>
 
@@ -367,8 +376,9 @@ export default {
 
 <style lang="sass" scoped>
 .b-menu-tree
-  padding: 0 0 3rem
+  padding: 0 0 5rem
   margin: 0
+  height: 100%
 
   &__group
     background: rgba($grey-middle, .1)
@@ -395,7 +405,26 @@ export default {
       margin-left: 1.5rem
       cursor: pointer
 
+  &__group-control
+    position: absolute
+    bottom: 0
+    width: 100%
+    padding: 0 4.4rem 1.8rem 2.1rem
+
+    &--description
+      color: $grey-middle
+      font-size: 1.4rem
+      line-height: 1.7rem
+      display: flex
+      justify-content: flex-start
+      align-items: center
+
+      svg
+        width: 2.4rem
+        height: 2.4rem
+        margin-right: 1.1rem
+
   &__group-together
-    width: 12rem !important
-    margin-left: 2.8rem
+    width: 100% !important
+    background: transparent !important
 </style>

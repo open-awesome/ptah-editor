@@ -27,9 +27,8 @@
         </span>
       </div>
       <div class="b-builder-sidebar__content-outer">
-      <base-scroll-container backgroundBar="#999">
-        <menu-tree :sections="this.builder.sections" :builder="builder"></menu-tree>
-      </base-scroll-container>
+      <menu-tree :sections="this.builder.sections" :builder="builder"></menu-tree>
+
       </div>
     </div>
 
