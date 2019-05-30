@@ -368,7 +368,7 @@ export default {
     setActive (section, event) {
       this.setSettingSection(section)
       if (!event.ctrlKey) {
-        this.selectedSections = []
+        this.selectedSections = [section.id]
       }
     },
 

@@ -159,7 +159,7 @@ export default {
       await this.$nextTick()
       let target
 
-      document.querySelectorAll('.tree-node').forEach((node) => {
+      document.querySelectorAll('.menu-tree-item').forEach((node) => {
         if (parseInt(node.dataset.id) === section.id) {
           target = node
         }
