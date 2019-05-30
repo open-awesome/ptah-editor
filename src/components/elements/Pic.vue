@@ -1,8 +1,5 @@
 <template>
-  <a class="b-image is-editable"
-    :alt="a"
-    :title="a"
-    >
+  <div class="b-image is-editable">
     <vue-draggable-resizable
       class="b-image__resize"
       class-name-active="b-image__resize_active"
@@ -18,7 +15,7 @@
       :z="999"
      />
      <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
-  </a>
+  </div>
 </template>
 
 <script>
