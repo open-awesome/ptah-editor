@@ -13,12 +13,13 @@ export function initElementToggle() {
 
   document.body.addEventListener('click', function(e) {
     let el = e.target.closest('.b-toggle-element')
-    let text = el.querySelectorAll('[data-toggle-element-text]')[0]
+    let text = null
 
     if (!el) {
       return
     }
 
+    text = el.querySelectorAll('[data-toggle-element-text]')[0]
     text.style.display = text.style.display === 'none' ? 'flex' : 'none';
 
   }, false)
