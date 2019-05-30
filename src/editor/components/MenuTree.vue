@@ -1,5 +1,5 @@
 <template>
-  <div class="b-menu-tree node-sortable tree-root" v-click-outside="onClickOutside">
+  <div class="b-menu-tree">
     <base-scroll-container backgroundBar="#999">
       <!-- header section -->
       <menu-tree-item
@@ -13,50 +13,52 @@
         v-scroll-to="`#section_${headerSection().id}`" />
 
       <!-- tree menu -->
-      <template v-for="(item, index) in menuTree">
-        <menu-tree-item
-          v-if="!isGroup(item)"
-          :key="index"
-          :section="item"
-          :builder="builder"
-          :data-id="item.id"
-          :class="{ 'selected' : itemSelected(item) }"
-          @click="setActive(item, $event)"
-          v-on:select="onSelect"
-          v-scroll-to="`#section_${item.id}`"
-          class="tree-node draggable" />
-        <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
-          <div class="b-menu-tree__group-name">
-            <span>Group</span>
-            <div class="b-menu-tree__group-controls">
-            <span
-              @click="showBackgroundPanel(item[0])"
-              tooltip="Group background"
-              tooltip-position="bottom">
-              <icon-base name="background"></icon-base>
-            </span>
-              <span
-                @click="ungroup(item[0])"
-                tooltip="Ungroup"
-                tooltip-position="bottom">
-              <icon-base name="remove"></icon-base>
-            </span>
-            </div>
-          </div>
+      <div class="node-sortable tree-root" v-click-outside="onClickOutside">
+        <template v-for="(item, index) in menuTree">
           <menu-tree-item
-            v-for="(section, i) in item"
-            :key="i"
-            :section="section"
+            v-if="!isGroup(item)"
+            :key="index"
+            :section="item"
             :builder="builder"
-            :data-id="section.id"
-            :class="{ 'selected' : itemSelected(section) }"
-            is-group-item="true"
+            :data-id="item.id"
+            :class="{ 'selected' : itemSelected(item) }"
+            @click="setActive(item, $event)"
             v-on:select="onSelect"
-            v-scroll-to="`#section_${section.id}`"
-            @click="setActive(section, $event)"
-            class="tree-node group-node draggable" />
-        </div>
-      </template>
+            v-scroll-to="`#section_${item.id}`"
+            class="tree-node draggable" />
+          <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
+            <div class="b-menu-tree__group-name">
+              <span>Group</span>
+              <div class="b-menu-tree__group-controls">
+              <span
+                @click="showBackgroundPanel(item[0])"
+                tooltip="Group background"
+                tooltip-position="bottom">
+                <icon-base name="background"></icon-base>
+              </span>
+                <span
+                  @click="ungroup(item[0])"
+                  tooltip="Ungroup"
+                  tooltip-position="bottom">
+                <icon-base name="remove"></icon-base>
+              </span>
+              </div>
+            </div>
+            <menu-tree-item
+              v-for="(section, i) in item"
+              :key="i"
+              :section="section"
+              :builder="builder"
+              :data-id="section.id"
+              :class="{ 'selected' : itemSelected(section) }"
+              is-group-item="true"
+              v-on:select="onSelect"
+              v-scroll-to="`#section_${section.id}`"
+              @click="setActive(section, $event)"
+              class="tree-node group-node draggable" />
+          </div>
+        </template>
+      </div>
     </base-scroll-container>
 
     <div class="b-menu-tree__group-control">
