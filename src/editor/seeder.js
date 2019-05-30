@@ -339,6 +339,7 @@ const data = new Map([
   )],
   [types.ToggleElement, () => (_.merge({}, DEFAULT_OPTIONS,
     {
+      box: true,
       aligned: true,
       typography: true,
       removable: true,
@@ -347,7 +348,8 @@ const data = new Map([
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-family': 'Lato',
-        'text-align': 'left'
+        'justify-content': 'flex-start',
+        'margin-bottom': '16px'
       },
       element: {
         color:  '#fff',
@@ -481,12 +483,7 @@ const data = new Map([
   /* === Custom sections === */
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
-      resizable: true,
-      removable: true,
-      background: true,
       hasProducts: true,
-      isTextEdit: true,
       products: {
         'Standart': { visible: true },
         'Full': { visible: true },

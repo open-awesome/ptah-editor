@@ -5,11 +5,11 @@ import * as _ from 'lodash-es'
 export default {
   data: () => ({
     flex: {
-      'left': ['align-items', 'flex-start'],
-      'center': ['align-items', 'center'],
-      'right': ['align-items', 'flex-end'],
-      'flex-start': ['align-items', 'left'],
-      'flex-end': ['align-items', 'right']
+      'left': ['justify-content', 'flex-start'],
+      'center': ['justify-content', 'center'],
+      'right': ['justify-content', 'flex-end'],
+      'flex-start': ['justify-content', 'left'],
+      'flex-end': ['justify-content', 'right']
     },
     text: {
       left: ['text-align', 'left'],
@@ -58,7 +58,7 @@ export default {
 
     aligned () {
       if (this.box) {
-        this.updateStyle('align-items', this.flex[this.align.value][1])
+        this.updateStyle('justify-content', this.flex[this.align.value][1])
       } else {
         this.updateStyle('text-align', this.text[this.align.value][1])
       }
@@ -73,7 +73,7 @@ export default {
 
   mounted () {
     if (this.box) {
-      this.align.value = this.flex[this.styles['align-items']][1]
+      this.align.value = this.flex[this.styles['justify-content']][1]
     } else {
       this.align.value = this.styles['text-align']
     }

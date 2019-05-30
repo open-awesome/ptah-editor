@@ -34,8 +34,14 @@ export default {
       }
     },
 
-    elSize () {
-      return this.settingObjectOptions.element.size
+    elSize: {
+      get () {
+        return this.settingObjectOptions.element.size
+      },
+
+      set (value) {
+        this.update('size', value)
+      }
     },
 
     elIcon () {
@@ -118,6 +124,11 @@ export default {
           </a>
         </div>
       </div>
+    </div>
+    <div class="b-text-controls__control" v-if="elIconVisible">
+      <base-range-slider v-model="elSize" label="Width icons" step="1" min="14" max="32">
+        {{ elSize }} px
+      </base-range-slider>
     </div>
     <div class="b-text-controls__control" v-if="elIconVisible">
       <base-select label="Icon" :options="icons.options" :value="icon" v-model="icon" @input="changeIcon"/>

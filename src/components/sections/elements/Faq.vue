@@ -9,17 +9,72 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'background-color': '#151C44',
-        'background-position': 'center center',
-        'background-size': 'cover',
         'font-family': 'Lato',
         'font-size': '1.8rem',
         'color': '#ffffff'
       },
       element: {
-        color: '#fff',
-        description: 'When will open game testing begin?',
-        text: 'The start date of the open test will be announced later. Follow the news in the official communities to stay up to date!'
+        color: 'rgba(248,231,28,1)',
+        icon: {
+          name: 'plus',
+          value: 'plus'
+        },
+        description: 'Will I be able to play "OUR GAME" this year?',
+        text: 'Yes you can. The exact date of the start of testing will be announced later.'
+      }
+    }
+  },
+  {
+    element: {
+      styles: {
+        'font-family': 'Lato',
+        'font-size': '1.8rem',
+        'color': '#ffffff'
+      },
+      element: {
+        color: 'rgba(248,231,28,1)',
+        icon: {
+          name: 'plus',
+          value: 'plus'
+        },
+        description: 'What anti-cheat do you plan to use?',
+        text: 'We integrate anti-cheat P1, which has already proven itself to protect users of our other projects. The developers of this software are now searching for game vulnerabilities and optimizing P1 for the needs of "OUR GAME".'
+      }
+    }
+  },
+  {
+    element: {
+      styles: {
+        'font-family': 'Lato',
+        'font-size': '1.8rem',
+        'color': '#ffffff'
+      },
+      element: {
+        color: 'rgba(248,231,28,1)',
+        icon: {
+          name: 'plus',
+          value: 'plus'
+        },
+        description: 'What is "OUR GAME"?',
+        text: '"OUR GAME" is a game that combines the classic gameplay of an isometric action-RPG of the old school with elements of MMO games.'
+      }
+    }
+  },
+  {
+    element: {
+      styles: {
+        'font-family': 'Lato',
+        'font-size': '1.8rem',
+        'color': '#ffffff'
+      },
+      element: {
+        color: 'rgba(248,231,28,1)',
+        icon: {
+          name: 'plus',
+          value: 'plus'
+        },
+        description: 'When will closed beta testing begin?',
+        text: 'Information about the start date of the PTA can be expected in 2019. We will definitely inform you about everything additionally - follow the news in the official communities of "OUR GAME"'
       }
     }
   }
@@ -28,7 +83,7 @@ const C_CUSTOM_COLUMN = [
 const C_CUSTOM = [
   {
     element: {
-      text: 'This is a short header',
+      text: 'FAQ',
       styles: {
         'font-family': 'Lato',
         'font-size': '3.2rem',
@@ -75,6 +130,27 @@ const COMPONENTS = [
     type: 'toggleElement',
     class: 'b-toggle-element',
     label: 'toggle element'
+  },
+  {
+    name: 'ToggleElement',
+    element: types.ToggleElement,
+    type: 'toggleElement',
+    class: 'b-toggle-element',
+    label: 'toggle element'
+  },
+  {
+    name: 'ToggleElement',
+    element: types.ToggleElement,
+    type: 'toggleElement',
+    class: 'b-toggle-element',
+    label: 'toggle element'
+  },
+  {
+    name: 'ToggleElement',
+    element: types.ToggleElement,
+    type: 'toggleElement',
+    class: 'b-toggle-element',
+    label: 'toggle element'
   }
 ]
 
@@ -98,14 +174,14 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/columns3.jpg',
+  cover: '/img/covers/faq.png',
 
   $schema: {
     mainStyle: types.Columns,
     container: types.StyleObject,
     container1: types.StyleObject,
-    components: _.merge([], HEADER, [{ key: 0 }]),
-    components1: _.merge([], COMPONENTS, [{ key: 1 }])
+    components: _.merge([], HEADER),
+    components1: _.merge([], COMPONENTS)
   },
 
   methods: {
@@ -132,7 +208,7 @@ export default {
 
 <template>
   <section
-    class="b-columns"
+    class="b-faq"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
@@ -142,83 +218,67 @@ export default {
     <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <sandbox
-          class="b-sandbox"
-          container-path="$sectionData.container"
-          components-path="$sectionData.components"
-          direction="column"
-          :style="$sectionData.container.styles"
-        >
-
-          <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
-            <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
-              <component class="b-columns-component"
-                 v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
-                 :is="component.name"
-                 :href="$sectionData.components[index].element.link.href"
-                 :target="$sectionData.components[index].element.link.target"
-                 :path="`components[${index}].element`"
-                 :style="$sectionData.components[index].element.styles"
-                 :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-              >
-                <div v-html="$sectionData.components[index].element.text"></div>
-              </component>
-            </div>
-          </draggable>
-        </sandbox>
-      </div>
-      <div class="b-columns__padd">
-        <div class="b-columns__padd-border">
-          <!-- Setting controls -->
-          <div class="b-columns__controls">
-            <div>
-              <a href="#" class="b-columns__control"
-                 tooltip="Number of columns"
-                 tooltip-position="right"
-                 @click.stop="showSettings('SectionColumnsSettings')">
-                <icon-base name="cog" width="12" height="15" />
-              </a>
-            </div>
-          </div>
-
-          <div class="b-grid__row">
-            <div class="b-grid__col-m-12"
-              :class="`b-grid__col-${12/$sectionData.mainStyle.count}`"
-              v-for="(column, key) in $sectionData"
-              v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) <= $sectionData.mainStyle.count"
-              :key="key"
-              >
-              <sandbox
-                class="b-sandbox"
-                :container-path="`$sectionData.container${key.split('components')[1]}`"
-                :components-path="`$sectionData.components${key.split('components')[1]}`"
-                direction="column"
-                :style="`$sectionData.container${key.split('components')[1]}.styles`"
+        <div class="b-grid__col-12">
+          <sandbox
+            class="b-sandbox"
+            container-path="$sectionData.container"
+            components-path="$sectionData.components"
+            direction="column"
+            :style="$sectionData.container.styles"
+            >
+            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">
+              <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+                <component class="b-faq-component"
+                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
+                   :is="component.name"
+                   :href="$sectionData.components[index].element.link.href"
+                   :target="$sectionData.components[index].element.link.target"
+                   :path="`components[${index}].element`"
+                   :style="$sectionData.components[index].element.styles"
+                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                 >
-                <draggable v-model="$sectionData[key]" class="b-draggable-slot" :style="$sectionData[`container${key.split('components')[1]}`].styles">
-                  <div :class="`b-draggable-slot__${component.type}`"
-                     v-for="(component, index) in $sectionData[key]"
-                     v-if="$sectionData[key].length !== 0"
-                     :key="index"
-                    >
-                    <component class="b-columns-component"
-                      v-styler:for="{ el: $sectionData[`${key}`][index].element, path: `$sectionData.${key}[${index}].element`, type: $sectionData[key][index].type, label: $sectionData[`${key}`][index].label }"
-                      :is="component.name"
-                      :href="$sectionData[key][index].element.link.href"
-                      :target="$sectionData[key][index].element.link.target"
-                      :path="`${key}[${index}].element`"
-                      :style="$sectionData[key][index].element.styles"
-                      :class="[$sectionData[key][index].element.classes, $sectionData[key][index].class]"
-                      >
-                      <div v-html="$sectionData[key][index].element.text"></div>
-                    </component>
-                  </div>
-                </draggable>
-              </sandbox>
-            </div><!--/.b-grid__col-3 b-grid__col-m-12-->
-          </div><!--/.b-grid__row-->
-        </div>
-      </div>
+                  <div v-html="$sectionData.components[index].element.text"></div>
+                </component>
+              </div>
+            </draggable>
+          </sandbox>
+        </div><!--/.b-grid__col-12-->
+      </div><!--/.b-grid__row-->
+      <div class="b-grid__row">
+        <div class="b-grid__col-12"
+          v-for="(column, key) in $sectionData"
+          v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) <= $sectionData.mainStyle.count"
+          :key="key"
+          >
+          <sandbox
+            class="b-sandbox"
+            :container-path="`$sectionData.container${key.split('components')[1]}`"
+            :components-path="`$sectionData.components${key.split('components')[1]}`"
+            direction="column"
+            :style="`$sectionData.container${key.split('components')[1]}.styles`"
+            >
+            <draggable v-model="$sectionData[key]" class="b-draggable-slot" :style="$sectionData[`container${key.split('components')[1]}`].styles">
+              <div :class="`b-draggable-slot__${component.type}`"
+                 v-for="(component, index) in $sectionData[key]"
+                 v-if="$sectionData[key].length !== 0"
+                 :key="index"
+                >
+                <component class="b-faq-component"
+                  v-styler:for="{ el: $sectionData[`${key}`][index].element, path: `$sectionData.${key}[${index}].element`, type: $sectionData[key][index].type, label: $sectionData[`${key}`][index].label }"
+                  :is="component.name"
+                  :href="$sectionData[key][index].element.link.href"
+                  :target="$sectionData[key][index].element.link.target"
+                  :path="`${key}[${index}].element`"
+                  :style="$sectionData[key][index].element.styles"
+                  :class="[$sectionData[key][index].element.classes, $sectionData[key][index].class]"
+                  >
+                  <div v-html="$sectionData[key][index].element.text"></div>
+                </component>
+              </div>
+            </draggable>
+          </sandbox>
+        </div><!--/.b-grid__col-12-->
+      </div><!--/.b-grid__row-->
     </div>
   </section>
 </template>
@@ -227,58 +287,10 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-columns
+.b-faq
   $this: &
-  &__padd
-    padding: $size-step/4
-
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: $size-step/4
-      transition: border 0.25s
-      border: 1px dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 1px dashed $dark-blue-krayola
-
-  &__controls
-    position: absolute
-    top: -14px
-    left: $size-step/4
-
-    display: flex
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
+  line-height: 1.4
+  justify-content: flex-start
+  .b-draggable-slot__toggleElement
+    width: 100%
 </style>
