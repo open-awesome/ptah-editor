@@ -30,9 +30,9 @@ import ThePanelAvailableStyle from './ThePanelAvailableStyle'
 import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
 import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineEdit from './ThePanelInlineEdit'
-import ThePanelIconSettings from './ThePanelIconSettings'
-import ThePanelIconStyle from './ThePanelIconStyle'
-import ThePanelIconEdit from './ThePanelIconEdit'
+import ThePanelIconWithTextSettings from './ThePanelIconWithTextSettings'
+import ThePanelIconWithTextStyles from './ThePanelIconWithTextStyles'
+import ThePanelIconWithTextEdit from './ThePanelIconWithTextEdit'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSlotBackground from './ThePanelSlotBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
@@ -97,9 +97,9 @@ export default {
     ThePanelInlineEdit,
     ThePanelImageSettings,
     ThePanelImageLink,
-    ThePanelIconSettings,
-    ThePanelIconStyle,
-    ThePanelIconEdit,
+    ThePanelIconWithTextSettings,
+    ThePanelIconWithTextStyles,
+    ThePanelIconWithTextEdit,
     ThePanelSectionBackground,
     ThePanelSlotBackground,
     ThePanelSectionSystemSettings,

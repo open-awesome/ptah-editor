@@ -314,12 +314,14 @@ const data = new Map([
     {
       aligned: true,
       removable: true,
+      typography: true,
       styles: {
         'text-align': 'left',
-        'font-size': '1.2rem',
+        'font-size': '1.4rem',
         'font-weight': 'normal',
         'font-style': 'normal',
-        'font-family': 'Lato'
+        'font-family': 'Lato',
+        'color': '#fff'
       },
       isIconWithText: true,
       colorFill: {
@@ -483,7 +485,12 @@ const data = new Map([
   /* === Custom sections === */
   [types.ProductSection, () => (_.merge({}, DEFAULT_OPTIONS,
     {
+      box: true,
+      resizable: true,
+      removable: true,
+      background: true,
       hasProducts: true,
+      isTextEdit: true,
       products: {
         'Standart': { visible: true },
         'Full': { visible: true },

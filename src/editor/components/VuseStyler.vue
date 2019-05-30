@@ -156,23 +156,23 @@
       </a>
 
       <!-- Icon with text -->
-      <template v-if="type === 'icon'">
+      <template v-if="type === 'iconWithText'">
         <a href="#" class="b-styler__control"
            tooltip="Text edit"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('IconEdit')">
+           @click.stop="setControlPanel('IconWithTextEdit')">
           <icon-base name="edit" width="12" height="15" />
         </a>
         <a href="#" class="b-styler__control"
            tooltip="Element styles"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('IconStyles')">
+           @click.stop="setControlPanel('IconWithTextStyles')">
           <icon-base name="style" width="12" height="15" />
         </a>
         <a href="#" class="b-styler__control"
            tooltip="Element settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('IconSettings')">
+           @click.stop="setControlPanel('IconWithTextSettings')">
           <icon-base name="settings" width="12" height="15" />
         </a>
       </template>

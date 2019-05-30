@@ -1,30 +1,24 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Icon settings
+      Icon text edit
     </h6>
 
     <!-- Control icon -->
     <div class="b-panel__control">
-      <control-icon-with-text-settings/>
-    </div>
-
-    <div class="b-panel__control">
-      <control-box/>
+      <control-icon-with-text-edit/>
     </div>
   </div>
 </template>
 
 <script>
-import ControlIconWithTextSettings from '../controls/TheControlIconWithTextSettings'
-import ControlBox from '../controls/TheControlBox'
+import ControlIconWithTextEdit from '../controls/TheControlIconWithTextEdit'
 
 export default {
-  name: 'ThePanelIconSettins',
+  name: 'ThePanelIconEdit',
 
   components: {
-    ControlBox,
-    ControlIconWithTextSettings
+    ControlIconWithTextEdit
   }
 }
 </script>
@@ -53,5 +47,5 @@ export default {
         text-transform: uppercase
 
     &__control
-      margin-bottom: 4rem
+      margin-bottom: 1.6rem
 </style>
