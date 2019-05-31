@@ -156,4 +156,7 @@ export default {
     border: 0
     background: transparent
     cursor: pointer
+
+    &:hover svg
+      fill: $dark-blue-krayola
 </style>

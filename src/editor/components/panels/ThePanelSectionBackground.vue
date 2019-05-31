@@ -1,11 +1,11 @@
 <template>
-  <div class="b-panel">
-    <h6 class="b-panel__title">
+  <div class="b-panel-section-bg">
+    <h6 class="b-panel-section-bg__title">
       Section Background
     </h6>
 
     <base-scroll-container backgroundBar="#999">
-      <div class="b-panel__inner">
+      <div class="b-panel-section-bg__inner">
         <template v-if="settingObjectOptions.background">
 
           <div class="b-section-settings__control">
@@ -328,7 +328,7 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-panel
+.b-panel-section-bg
   height: 100%
   width: 100%
 
