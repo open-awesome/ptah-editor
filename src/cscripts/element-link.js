@@ -7,7 +7,7 @@ export function initElementLink() {
   let elems = document.getElementsByTagName('*');
 
   [].forEach.call(elems, function (el, i) {
-      if (el.classList.contains('js-element-link') || el.tagName === 'a') {
+      if (el.classList.contains('js-element-link') || el.tagName === 'A' || el.tagName === 'LINK') {
         return
       } else  {
         let href = el.getAttribute('href')
