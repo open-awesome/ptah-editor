@@ -10,7 +10,7 @@
         <icon-base name="cog" fill="white" />
       </span>
       <span
-        tooltip="Section settings"
+        tooltip="Section background"
         tooltip-position="leftbottom"
         @click.stop="showBackgroundPanel"
         class="b-section-menu__settings-item b-section-menu__settings-item-slot-bg"
