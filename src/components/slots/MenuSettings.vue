@@ -2,12 +2,16 @@
   <div class="b-section-menu">
     <div class="b-section-menu__settings">
       <span
+        tooltip="Section settings"
+        tooltip-position="leftbottom"
         @click.stop="showSettingsBar"
         class="b-section-menu__settings-item b-section-menu__settings-item-settings"
         >
         <icon-base name="cog" fill="white" />
       </span>
       <span
+        tooltip="Section settings"
+        tooltip-position="leftbottom"
         @click.stop="showBackgroundPanel"
         class="b-section-menu__settings-item b-section-menu__settings-item-slot-bg"
         >
