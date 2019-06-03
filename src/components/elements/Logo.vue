@@ -1,7 +1,5 @@
 <template>
-  <div class="b-logo is-editable">
-    :alt="a"
-    :title="a"
+  <div class="b-logo is-editable"
     @dragover.prevent
     @drop="onDrop"
     >
@@ -49,7 +47,6 @@ export default {
 
   data: function () {
     return {
-      a: '',
       width: 0,
       height: 0,
       file: ''
