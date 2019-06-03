@@ -15,7 +15,6 @@ export default {
 
   data: () => ({
     device: null,
-    colorHamburger: '#C4C4C4',
     colorHome: '#333'
   }),
 
@@ -90,18 +89,19 @@ export default {
     <div class="b-top-bar-menu">
       <div class="b-top-bar-menu__left">
         <div class="b-top-bar-menu__ham"
-             :tooltip="$t('menu.sections')"
-             tooltip-position="bottom"
-             @click="toggleSidebarSection" v-if="!isExpanded">
-          <icon-base name="hamburgerDot" :color="colorHamburger"></icon-base>
+          :tooltip="$t('menu.sections')"
+          tooltip-position="bottom"
+          @click="toggleSidebarSection" v-if="!isExpanded"
+          >
+          <icon-base name="hamburgerDot"/>
         </div>
         <div class="b-top-bar-menu__crumbs">
           <span class="b-top-bar-menu__crumbs-home b-top-bar-menu__crumbs-link"
-                :tooltip="$t('nav.backToDashbord')"
-                tooltip-position="bottom"
-                @click="backToLandings"
+            :tooltip="$t('nav.backToDashbord')"
+            tooltip-position="bottom"
+            @click="backToLandings"
             >
-            <icon-base name="home" width="20" height="17" :color="colorHome"></icon-base>
+            <icon-base name="home" width="20" height="17" :color="colorHome"/>
           </span>
           <span class="b-top-bar-menu__crumbs-arrow">
             →
@@ -185,6 +185,8 @@ export default {
     &__ham
       cursor: pointer
       color: $grey
+      &:hover
+        color: $dark-blue-krayola
     &__crumbs
       display: flex
 
