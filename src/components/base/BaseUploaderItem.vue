@@ -15,7 +15,7 @@
 
     <div v-show="progress === 100" class="b-uploader-item__preview">
 
-      <div v-if="hasPreview">
+      <div v-if="hasPreview" @dragover.prevent @drop="onDrop">
         <BaseDropdownMenu
           class="b-uploader-item__preview"
           positionDropdown="left"
@@ -203,6 +203,23 @@ export default {
         return
       }
       this.$emit('replace', await this.getFileData(file))
+    },
+
+    onDrop (e) {
+      let files = e.dataTransfer.files
+
+      e.stopPropagation()
+      e.preventDefault()
+
+      if (!files || !files[0]) {
+        return
+      }
+
+      if (!/^image\//.test(files[0].type)) {
+        return
+      }
+
+      this.uploadFile(files[0])
     }
   }
 }
