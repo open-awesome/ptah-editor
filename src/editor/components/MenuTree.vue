@@ -24,6 +24,7 @@
             :class="{ 'selected' : itemSelected(item) }"
             @click="setActive(item, $event)"
             v-on:select="onSelect"
+            v-on:delete="onDelete"
             v-scroll-to="`#section_${item.id}`"
             class="tree-node draggable" />
           <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
@@ -53,6 +54,7 @@
               :class="{ 'selected' : itemSelected(section) }"
               is-group-item="true"
               v-on:select="onSelect"
+              v-on:delete="onDelete"
               v-scroll-to="`#section_${section.id}`"
               @click="setActive(section, $event)"
               class="tree-node group-node draggable" />
@@ -94,6 +96,10 @@ export default {
     },
     builder: {
       required: true
+    },
+    inc: {
+      type: Number,
+      required: true
     }
   },
 
@@ -117,6 +123,10 @@ export default {
   watch: {
     sectionsGroups () {
       this.buildTree()
+    },
+
+    inc () {
+      this.buildTree(true)
     }
   },
 
@@ -153,7 +163,7 @@ export default {
     ]),
 
     buildTree (renew = false) {
-      if (!this.init || !renew) {
+      if (!this.init || renew) {
         this.menuTree = []
 
         this.builderSections().forEach((section) => {
@@ -181,24 +191,22 @@ export default {
       let currentSection = this.getSectionById(nodeId)
       let group = Array.from(e.from.querySelectorAll('.tree-node')).map((node) => node.dataset.id)
 
-      console.log(e)
-
       if (e.item.classList.contains('tree-branch')) { // --- move group
         // section ids in the group
         let ids = Array.from(e.item.querySelectorAll('.tree-node')).map((node) => node.dataset.id)
 
         if (this.lastIndexes.indexOf(ids[0]) > newIndexes.indexOf(ids[0])) {
           ids.forEach((id) => {
-            this.builder.sort(this.lastIndexes.indexOf(id), newIndexes.indexOf(id))
+            this.sort(this.lastIndexes.indexOf(id), newIndexes.indexOf(id))
           })
         } else {
           _.forEachRight(ids, (id) => {
-            this.builder.sort(this.lastIndexes.indexOf(id), newIndexes.indexOf(id))
+            this.sort(this.lastIndexes.indexOf(id), newIndexes.indexOf(id))
           })
         }
       } else { // --- move 1 section
         if (e.to !== e.from) {
-          needReloadTree = true
+          // needReloadTree = true
           // move to group
           if (e.to.classList.contains('tree-branch')) {
             let mainSection = this.getSectionById(e.to.querySelector('.tree-node').dataset.id)
@@ -229,8 +237,8 @@ export default {
         if (e.from.classList.contains('tree-branch') && e.to.classList.contains('tree-branch')) {
           // The section becomes the new master
           if (e.newIndex === 0) {
-            let oldMaster = _.filter(this.builder.sections, (section) => {
-              return group.indexOf(section.id) > -1 && section.isMain
+            let oldMaster = _.find(this.builder.sections, (section) => {
+              return group.indexOf(section.id + '') > -1 && section.isMain
             })
             let absorb = oldMaster.data.mainStyle.absorb
 
@@ -248,8 +256,10 @@ export default {
           }
         }
 
-        this.builder.sort(this.lastIndexes.indexOf(nodeId), newIndexes.indexOf(nodeId))
+        this.sort(this.lastIndexes.indexOf(nodeId), newIndexes.indexOf(nodeId))
       }
+
+      resetIndents()
 
       this.lastIndexes = this.getIndexes() // renew indexes
       if (needReloadTree) {
@@ -258,6 +268,13 @@ export default {
       }
 
       this.saveState(this.builder.export('JSON'))
+    },
+
+    sort (oldIndex, newIndex) {
+      let headerOffset = this.headerSection() ? 1 : 0
+      oldIndex = parseInt(oldIndex)
+      newIndex = parseInt(newIndex)
+      this.builder.sort(oldIndex + headerOffset, newIndex + headerOffset)
     },
 
     getIndexes () {
@@ -286,6 +303,10 @@ export default {
       }
     },
 
+    onDelete () {
+      this.buildTree(true)
+    },
+
     onClickOutside () {
       this.selectedSections = []
     },
@@ -301,14 +322,17 @@ export default {
 
     ungroup (section) {
       this.setSectionData(section, 'absorb', 0)
+      resetIndents()
       this.buildTree(true)
     },
 
-    groupSections () {
+    async groupSections () {
       let newMain = this.getSectionById(_.head(this.selectedSections))
       this.absorbed = _.tail(this.selectedSections)
 
       this.applyGroup(newMain)
+
+      await this.$nextTick()
       this.buildTree(true)
     },
 

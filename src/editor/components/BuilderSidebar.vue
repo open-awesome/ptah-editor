@@ -27,7 +27,7 @@
         </span>
       </div>
       <div class="b-builder-sidebar__content-outer">
-      <menu-tree :sections="this.builder.sections" :builder="builder"></menu-tree>
+      <menu-tree :sections="this.builder.sections" :builder="builder" :inc="increment"></menu-tree>
 
       </div>
     </div>
@@ -118,7 +118,8 @@ export default {
 
   data () {
     return {
-      isSettingsOpenedisSettingsOpened: false
+      isSettingsOpenedisSettingsOpened: false,
+      increment: 0
     }
   },
 
@@ -156,6 +157,12 @@ export default {
     },
 
     async onAddSection (section) {
+      this.increment = this.increment + 1
+      // move header to top
+      if (section.isHeader) {
+        this.builder.sort(this.builder.sections.length, 0)
+      }
+
       await this.$nextTick()
       let target
 

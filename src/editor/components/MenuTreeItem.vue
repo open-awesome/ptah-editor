@@ -104,6 +104,8 @@ export default {
         resetIndents()
       }
 
+      this.$emit('delete', section)
+
       this.saveState(this.builder.export('JSON'))
     },
 
