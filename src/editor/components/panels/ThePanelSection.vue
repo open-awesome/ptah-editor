@@ -14,15 +14,6 @@
           <control-box></control-box>
         </div>
 
-        <!-- Header -->
-        <div class="b-section-settings__control" v-if="settingObjectOptions.hasHeader">
-          <BaseTextField
-            v-model="header"
-            label="Header"
-            @input="updateSimpleValue('header', header)"
-          />
-        </div>
-
         <!-- Carousel Images Multiple Upload -->
         <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
           <base-uploader
@@ -30,6 +21,8 @@
             @change="updateGalleryImages"
             label="Images upload"
             multiple/>
+          <br>
+          <base-switcher v-model="autoplay" label="Autoplay"></base-switcher>
           <br>
           <base-range-slider
             v-if="settingObjectSection.name === 'AutoplayCarousel'"
@@ -168,6 +161,34 @@ export default {
 
     mailchimpLink () {
       return `/editor/${this.$route.params.slug}/settings/integrations/mailchimp`
+    },
+
+    autoplay: {
+      get () {
+        return !!this.settingObjectOptions.swiper.autoplay
+      },
+
+      set (value) {
+        if (value) {
+          this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+            swiper: {
+              loop: true,
+              simulateTouch: false,
+              autoplay: {
+                disableOnInteraction: false,
+                waitForTransition: false,
+                delay: 2000
+              }
+            }
+          }))
+        } else {
+          this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+            swiper: {
+              autoplay: false
+            }
+          }))
+        }
+      }
     }
   },
 
