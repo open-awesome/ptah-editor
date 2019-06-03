@@ -1,7 +1,7 @@
 <template>
-    <a class="b-link is-editable">
-      <slot></slot>
-    </a>
+  <a class="b-link is-editable">
+    <slot></slot>
+  </a>
 </template>
 
 <script>

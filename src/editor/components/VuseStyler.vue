@@ -66,23 +66,23 @@
         <icon-base name="edit" width="12" height="15" />
       </a>
 
-      <!-- Social settings -->
+      <!-- Networks settings -->
       <template v-if="type === 'networks'">
         <a href="#" class="b-styler__control"
            tooltip="Add/remove networks"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('SocialSettings')">
+           @click.stop="setControlPanel('NetworksSettings')">
           <icon-base name="settings" width="16" height="16" />
         </a>
         <a href="#" class="b-styler__control"
-           tooltip="Social icons style"
+           tooltip="Networks icons style"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('SocialStyle')">
+           @click.stop="setControlPanel('NetworksStyle')">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
 
-      <!-- available settings -->
+      <!-- Available settings -->
       <template v-if="type === 'available'">
         <a href="#" class="b-styler__control"
            tooltip="Add/remove platform"
@@ -156,17 +156,39 @@
       </a>
 
       <!-- Icon with text -->
-      <template v-if="type === 'icon'">
+      <template v-if="type === 'iconWithText'">
         <a href="#" class="b-styler__control"
-           tooltip="Icon styles"
+           tooltip="Text edit"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('IconEdit')">
+           @click.stop="setControlPanel('IconWithTextEdit')">
+          <icon-base name="edit" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control"
+           tooltip="Element styles"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('IconWithTextStyles')">
+          <icon-base name="style" width="12" height="15" />
+        </a>
+        <a href="#" class="b-styler__control"
+           tooltip="Element settings"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('IconWithTextSettings')">
+          <icon-base name="settings" width="12" height="15" />
+        </a>
+      </template>
+
+      <!-- Toggle element -->
+      <template v-if="type === 'toggleElement'">
+        <a href="#" class="b-styler__control"
+           tooltip="Edit texts"
+           tooltip-position="bottom"
+           @click.stop="setControlPanel('ToggleElementEdit')">
           <icon-base name="edit" width="12" height="15" />
         </a>
         <a href="#" class="b-styler__control"
            tooltip="Element settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('Icon')">
+           @click.stop="setControlPanel('ToggleElementSettings')">
           <icon-base name="settings" width="12" height="15" />
         </a>
       </template>
@@ -187,7 +209,7 @@
         </a>
       </template>
 
-      <!-- duplicate element -->
+      <!-- Duplicate element -->
       <template v-if="options.removable">
         <a href="#" class="b-styler__control"
            tooltip="Clone element"
@@ -206,7 +228,7 @@
       </a>
     </div>
 
-    <!-- modals -->
+    <!-- Modals -->
     <div class="b-styler__modal"
        :class="[ modal.button.classV, modal.button.classH ]"
        ref="buttonModal"
@@ -427,7 +449,7 @@ export default {
       this.el.dataset.video = this.options.video
     }
 
-    if (this.options.link && this.options.link.action === '') {
+    if (this.options.hasLink && this.options.link && this.options.link.action === '') {
       this.el.classList.add('js-element-link')
     }
 
@@ -752,7 +774,7 @@ export default {
     },
 
     async dblclick (event) {
-      let name = _.startCase(this.type)
+      let name = _.upperFirst(_.camelCase(this.type))
 
       // clear timer after dbl click
       clearTimeout(this.timer)

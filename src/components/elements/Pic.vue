@@ -1,7 +1,5 @@
 <template>
-  <a class="b-image is-editable"
-    :alt="a"
-    :title="a"
+  <div class="b-image is-editable"
     @dragover.prevent
     @drop="onDrop"
     >
@@ -27,7 +25,7 @@
       :z="999"
      />
      <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
-  </a>
+  </div>
 </template>
 
 <script>
@@ -49,7 +47,6 @@ export default {
 
   data: function () {
     return {
-      a: '',
       width: 0,
       height: 0,
       file: ''

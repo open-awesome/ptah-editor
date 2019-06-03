@@ -23,4 +23,5 @@ export class Slogan { }
 export class SystemRequirements { }
 export class TextInherit { }
 export class IconWithText { }
+export class ToggleElement { }
 export class Columns { }
