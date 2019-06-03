@@ -4,6 +4,20 @@ export function initElementLink() {
     return
   }
 
+  let elems = document.getElementsByTagName('*');
+
+  [].forEach.call(elems, function (el, i) {
+      if (el.classList.contains('js-element-link') || el.tagName === 'A' || el.tagName === 'LINK') {
+        return
+      } else  {
+        let href = el.getAttribute('href')
+        let target = el.getAttribute('target')
+
+        if (href) el.removeAttribute('href')
+        if (target) el.removeAttribute('target')
+      }
+  });
+
   document.body.addEventListener('click', function(e) {
     let link = e.target.closest('.js-element-link')
     let bl = document.getElementById('main')

@@ -9,7 +9,7 @@ const LIST_ICONS = [
 ]
 
 export default {
-  name: 'ControlTextWithIcon',
+  name: 'ControlTextWithIconSettings',
 
   components: {
     VuseIcon
@@ -65,20 +65,15 @@ export default {
       <div>Visible icon</div>
       <div class="b-icon-with-text">
         <div class="b-icon-with-text__item"
-             :class="{ 'b-icon-with-text__item_opacity' : false === icon.visible }"
-             @click="visibleIcon"
+          :class="{ 'b-icon-with-text__item_opacity' : false === icon.visible }"
+          @click="visibleIcon"
         >
-
-            <span class="b-icon-with-text__item-eye"
-                  title="Show / Hide"
-            >
-              <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
-            </span>
-
+          <span class="b-icon-with-text__item-eye" title="Show / Hide" >
+            <VuseIcon class="vuse-icon" name="eye"></VuseIcon>
+          </span>
           <span>
-              Visible
-            </span>
-
+            Visible
+          </span>
         </div>
       </div>
     </div>

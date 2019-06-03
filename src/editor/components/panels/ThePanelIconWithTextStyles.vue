@@ -1,24 +1,38 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Icon text edit
+      Icon style
     </h6>
+
+    <!-- Typography -->
+    <div class="b-panel__control" v-if="settingObjectOptions.typography">
+      <control-typography :show-text-styles="false"/>
+    </div>
 
     <!-- Control icon -->
     <div class="b-panel__control">
-      <control-text-with-icon-edit/>
+      <control-icon-with-text-styles/>
     </div>
   </div>
 </template>
 
 <script>
-import ControlTextWithIconEdit from '../controls/TheControlIconWithTextEdit'
+import { mapState } from 'vuex'
+import ControlIconWithTextStyles from '../controls/TheControlIconWithTextStyles'
+import ControlTypography from '../controls/TheControlTypography'
 
 export default {
-  name: 'ThePanelIconEdit',
+  name: 'ThePanelIconWithTextStyles',
 
   components: {
-    ControlTextWithIconEdit
+    ControlIconWithTextStyles,
+    ControlTypography
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ])
   }
 }
 </script>

@@ -1,24 +1,24 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Icon style
+      Icon text edit
     </h6>
 
     <!-- Control icon -->
     <div class="b-panel__control">
-      <control-text-with-icon-style></control-text-with-icon-style>
+      <control-icon-with-text-edit/>
     </div>
   </div>
 </template>
 
 <script>
-import ControlTextWithIconStyle from '../controls/TheControlIconWithTextStyle'
+import ControlIconWithTextEdit from '../controls/TheControlIconWithTextEdit'
 
 export default {
-  name: 'ThePanelIconStyle',
+  name: 'ThePanelIconEdit',
 
   components: {
-    ControlTextWithIconStyle
+    ControlIconWithTextEdit
   }
 }
 </script>
