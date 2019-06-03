@@ -490,15 +490,21 @@ export default {
     stylerInit (event) {
       const stopNames = [
         'b-draggable-slot',
-        'b-draggable-slot active'
+        'b-draggable-slot active',
+        'ProseMirror',
+        'editor__content'
       ]
-
-      this.initPopper()
 
       if (this.isCurrentStyler && !this.checkStylerNodes(event, stopNames)) {
         this.isCurrentStyler = false
         return
       }
+
+      if (this.textEditorActive) {
+        return
+      }
+
+      this.initPopper()
 
       // hide modal settings
       this.isModalsPropsShow = false
