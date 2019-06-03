@@ -1,0 +1,33 @@
+.b-panel
+  height: 100%
+  width: 100%
+
+  padding-bottom: 4.5rem
+
+  display: flex
+  flex-direction: column
+  align-items: stretch
+  justify-content: flex-start
+  &__title
+    color: $black
+    font-size: 2rem
+    line-height: 1.2
+    font-weight: normal
+
+    margin: 0 0 1.6rem 0
+    padding: 0
+    & div
+      width: 24rem
+      display: block
+      white-space: nowrap
+      text-overflow: ellipsis
+      overflow: hidden
+    &:first-letter
+      text-transform: uppercase
+
+  &__control
+    margin-bottom: 1.6rem
+
+  &__inner
+    max-width: 25.5rem
+    padding: 0

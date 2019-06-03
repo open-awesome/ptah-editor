@@ -133,8 +133,7 @@ export default {
   &__title
     flex-grow: 1
     display: flex
-
-    line-height: 4.8rem
+    align-items: center
     &-num
       width: $size-step
       text-align: center
@@ -146,7 +145,7 @@ export default {
       overflow: hidden
   &__icons
     width: 5rem
-    margin: 0 $size-step/4 0 $size-step/4.5
+    margin: 0 0.6rem
     display: flex
     flex-wrap: nowrap
     align-items: center

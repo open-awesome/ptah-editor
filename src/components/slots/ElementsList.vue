@@ -3,9 +3,8 @@
     <aside class="b-elements__list ptah-control">
       <div class="b-elements__title">
         {{ $t('c.elementsLibrary') }}
-
         <div class="b-elements__close" @click="hideList">
-          <icon-base name="close" width="12" height="12" fill="#C4C4C4"></icon-base>
+          <icon-base name="close" width="12" height="12"/>
         </div>
       </div>
       <ul>
@@ -122,10 +121,11 @@ export default {
     li
       padding: 0
   &__title
-    padding: 2.5rem 0 3.2rem 2.5rem
+    padding: 1.7rem 3.1rem
     color: $white
     font-weight: normal
     font-size: 2rem
+    line-height: 1.2
     letter-spacing: -0.02em
     text-align: left
     position: relative
@@ -133,7 +133,7 @@ export default {
     display: block
     background: transparent
     color: $pigeon-blue
-    padding: 1.4rem 2.6rem
+    padding: 1.4rem 3.2rem
     width: 100%
     text-decoration: none
     font-size: 1.4rem
@@ -144,8 +144,12 @@ export default {
       background: $dark-blue-krayola
       color: $white
   &__close
+    color: $grey
     position: absolute
-    right: 2.5rem
-    top: 2.5rem
+    top: 18px
+    right: 26px
     cursor: pointer
+    &:hover
+      color: $dark-blue-krayola
+
 </style>

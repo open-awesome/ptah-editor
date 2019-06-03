@@ -227,34 +227,6 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-panel
-  height: 100%
-  width: 100%
-
-  padding-bottom: 4.5rem
-
-  display: flex
-  flex-direction: column
-  align-items: stretch
-  justify-content: flex-start
-  &__title
-    color: $black
-    font-size: 2rem
-    font-weight: bold
-
-    min-width: 24rem
-    margin: 0 0 2.8rem 0
-    padding: 0
-    &:first-letter
-      text-transform: uppercase
-
-  &__control
-    margin-bottom: 1.6rem
-
-  &__inner
-    max-width: 24rem
-    padding: 0 0 2.4rem 0
-
 .b-section-settings
   display: flex
   flex-direction: column
@@ -265,8 +237,6 @@ export default {
     margin-top: $size-step/2
     &_select-type
       margin: $size-step 0 $size-step/2
-  &__inner
-    padding: 0 2.4rem
   &__buttons
     position: absolute
     bottom: 1rem

@@ -1,9 +1,9 @@
 <template>
   <!-- @click.stop was here. this breaks down the color picker -->
   <div class="b-control-panel">
-    <button class="b-control-panel__close" @click="close()">
-      <icon-base color="#c4c4c4" width="10" height="10" name="close"/>
-    </button>
+    <span class="b-control-panel__close" @click="close()">
+      <icon-base width="14" height="14" name="close"/>
+    </span>
     <component :is="panelName" :builder="builder"/>
   </div>
 </template>
@@ -122,7 +122,7 @@ export default {
   position: relative
   width: $size-step*9
   height: 100%
-  padding: 2.4rem 1rem 2.4rem 1.6rem
+  padding: 1.7rem 1rem 1.7rem 1.6rem
 
   display: flex
   flex-direction: column
@@ -146,14 +146,12 @@ export default {
       text-transform: uppercase
 
   &__close
+    color: $grey
     position: absolute
-    right: 0.5rem
-    top: 2.1rem
-    z-index: 10
-
-    padding: 0.6rem 1rem
-
-    border: 0
-    background: transparent
+    top: 24px
+    right: 26px
     cursor: pointer
+    &:hover
+      color: $dark-blue-krayola
+
 </style>
