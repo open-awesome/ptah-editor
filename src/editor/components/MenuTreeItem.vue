@@ -91,8 +91,8 @@ export default {
 
     deleteSection (section) {
       // update group
-      if (this.isSlaveSection(section.Id)) {
-        let master = _.find(this.sectionsGroups, o => o.children.indexOf(section.Id) > -1).main
+      if (this.isSlaveSection(section.id)) {
+        let master = _.find(this.sectionsGroups, o => o.children.indexOf(section.id) > -1).main
         let absorb = master.data.mainStyle.absorb
         master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
       }
@@ -100,9 +100,7 @@ export default {
       this.builder.remove(section)
       this.clearSettingObject()
 
-      if (this.isMasterSection()) {
-        resetIndents()
-      }
+      resetIndents()
 
       this.$emit('delete', section)
 

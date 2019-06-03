@@ -304,7 +304,9 @@ export default {
     },
 
     onDelete () {
-      this.buildTree(true)
+      setTimeout(() => {
+        this.buildTree(true)
+      }, 300)
     },
 
     onClickOutside () {
@@ -327,8 +329,12 @@ export default {
     },
 
     async groupSections () {
-      let newMain = this.getSectionById(_.head(this.selectedSections))
-      this.absorbed = _.tail(this.selectedSections)
+      let group = this.builderSections().filter((section) => {
+        return this.selectedSections.indexOf(section.id) > -1
+      })
+
+      let newMain = _.head(group)
+      this.absorbed = _.tail(group)
 
       this.applyGroup(newMain)
 
@@ -404,6 +410,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.tree-root
+  padding-bottom: 5rem
+
 .b-menu-tree
   padding: 0 0 5rem
   margin: 0
