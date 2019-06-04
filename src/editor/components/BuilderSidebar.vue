@@ -158,10 +158,6 @@ export default {
 
     async onAddSection (section) {
       this.increment = this.increment + 1
-      // move header to top
-      if (section.isHeader) {
-        this.builder.sort(this.builder.sections.length, 0)
-      }
 
       await this.$nextTick()
       let target
@@ -173,6 +169,11 @@ export default {
       })
 
       target.click()
+
+      // move header to top
+      if (section.isHeader) {
+        this.builder.sort(this.builder.sections.length - 1, 0)
+      }
     },
 
     toggleSidebarSection () {
