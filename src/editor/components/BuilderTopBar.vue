@@ -14,8 +14,7 @@ export default {
   },
 
   data: () => ({
-    device: null,
-    colorHome: '#333'
+    device: null
   }),
 
   computed: {
@@ -101,7 +100,7 @@ export default {
             tooltip-position="bottom"
             @click="backToLandings"
             >
-            <icon-base name="home" width="20" height="17" :color="colorHome"/>
+            <icon-base name="home" width="20" height="17"/>
           </span>
           <span class="b-top-bar-menu__crumbs-arrow">
             →
@@ -194,7 +193,9 @@ export default {
       padding: 0 $size-step
       white-space: nowrap
       &-home
-       padding: 0 $size-step/4
+        padding: 0 $size-step/4
+        &:hover
+          color: $dark-blue-krayola
       &-arrow
         padding: 0 1rem
       &-link

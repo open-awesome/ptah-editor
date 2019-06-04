@@ -145,6 +145,7 @@ export default {
     color: $dark-grey
   .mx-input:hover
     border-color: $dark-blue-krayola
+    cursor: pointer
   .mx-calendar-icon
     color: $dark-blue-krayola
   .mx-calendar
