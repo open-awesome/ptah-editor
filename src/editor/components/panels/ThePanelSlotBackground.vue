@@ -1,20 +1,30 @@
 <template>
-  <div class="b-panel">
-    <h6 class="b-panel__title">
+  <div class="b-panel-slot-bg">
+    <h6 class="b-panel-slot-bg__title">
       Slot background
     </h6>
 
     <base-scroll-container backgroundBar="#999">
-      <div class="b-panel__inner">
+      <div class="b-panel-slot-bg__inner">
           <div class="b-section-settings__control">
             <div class="b-section-settings__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
               <base-color-picker v-model="backgroundPickers[index]" :label="`Color ${ index > 0 ? index : '' }`" @change="updateBgColor"/>
               <div class="b-section-settings__picker-buttons">
-                <span class="del" v-show="backgroundPickers.length > 1 && index > 0" @click="removeBackgroundPicker(index)">
-                  <icon-base name="close" color="#B1B1B1" width="10" height="10"></icon-base>
+                <span class="del"
+                  tooltip="Remove color"
+                  tooltip-position="left"
+                  v-show="backgroundPickers.length > 1 && index > 0"
+                  @click="removeBackgroundPicker(index)"
+                  >
+                   <icon-base name="close" color="#B1B1B1" width="10" height="10"></icon-base>
                 </span>
-                <span class="plus" v-show="index === 0 && backgroundPickers.length < 4" @click="addBackgroundPicker">
-                  <icon-base name="plus" color="#B1B1B1" width="14" height="14"></icon-base>
+                <span class="plus"
+                  tooltip="Add gradient"
+                  tooltip-position="left"
+                  v-show="index === 0 && backgroundPickers.length < 4"
+                  @click="addBackgroundPicker"
+                  >
+                    <icon-base name="plus" color="#B1B1B1" width="14" height="14"></icon-base>
                 </span>
               </div>
             </div>
@@ -227,11 +237,14 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-section-settings
+.b-panel-slot-bg
   display: flex
   flex-direction: column
   align-items: stretch
+  justify-content: flex-start
+
   padding-bottom: 4.5rem
+  height: 100%
   width: 100%
   &__control
     margin-top: $size-step/2
@@ -271,14 +284,22 @@ export default {
 
       border-radius: 100%
       border: 0.2rem solid $ligth-grey
+      transition: all .3s cubic-bezier(.2,.85,.4,1.275)
       &:hover
+        cursor: pointer
         background-color: $white
-      &.delete svg
+      &.del svg
         fill: $ligth-grey
-      &.delete:hover svg
-        fill: $orange
+      &.del:hover
+        border: 0.2rem solid $orange
+        & svg
+          fill: $orange
       &.plus svg
         fill: $dark-blue-krayola
+      &.plus:hover
+        border: 0.2rem solid $dark-blue-krayola
+        & svg
+          fill: $dark-blue-krayola
     &__description
       font-size: 1.4rem
       line-height: 1.7rem

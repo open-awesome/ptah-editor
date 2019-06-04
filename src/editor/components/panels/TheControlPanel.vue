@@ -30,9 +30,9 @@ import ThePanelAvailableStyle from './ThePanelAvailableStyle'
 import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
 import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineEdit from './ThePanelInlineEdit'
-import ThePanelIcon from './ThePanelIcon'
-import ThePanelIconStyle from './ThePanelIconStyle'
-import ThePanelIconEdit from './ThePanelIconEdit'
+import ThePanelIconWithTextSettings from './ThePanelIconWithTextSettings'
+import ThePanelIconWithTextStyles from './ThePanelIconWithTextStyles'
+import ThePanelIconWithTextEdit from './ThePanelIconWithTextEdit'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSlotBackground from './ThePanelSlotBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
@@ -45,6 +45,8 @@ import ThePanelFormStyles from './ThePanelFormStyles'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
 import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
 import ThePanelSectionColumnsSettings from './ThePanelSectionColumnsSettings'
+import ThePanelToggleElementEdit from './ThePanelToggleElementEdit'
+import ThePanelToggleElementSettings from './ThePanelToggleElementSettings'
 
 export default {
   name: 'TheControlPanel',
@@ -95,9 +97,9 @@ export default {
     ThePanelInlineEdit,
     ThePanelImageSettings,
     ThePanelImageLink,
-    ThePanelIcon,
-    ThePanelIconStyle,
-    ThePanelIconEdit,
+    ThePanelIconWithTextSettings,
+    ThePanelIconWithTextStyles,
+    ThePanelIconWithTextEdit,
     ThePanelSectionBackground,
     ThePanelSlotBackground,
     ThePanelSectionSystemSettings,
@@ -109,7 +111,9 @@ export default {
     ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,
     ThePanelSectionGalleryStyle,
-    ThePanelSectionColumnsSettings
+    ThePanelSectionColumnsSettings,
+    ThePanelToggleElementEdit,
+    ThePanelToggleElementSettings
   }
 }
 </script>
@@ -153,5 +157,4 @@ export default {
     cursor: pointer
     &:hover
       color: $dark-blue-krayola
-
 </style>

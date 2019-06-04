@@ -1,11 +1,11 @@
 <template>
   <div class="b-panel">
-    <h6 class="b-panel__title">
+    <span class="b-panel__title">
       Section Background
-    </h6>
+    </span>
 
     <base-scroll-container backgroundBar="#999">
-      <div class="b-panel__inner">
+      <div class="b-panel-section-bg__inner">
         <template v-if="settingObjectOptions.background">
 
           <div class="b-panel__control">

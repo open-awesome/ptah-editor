@@ -1,23 +1,29 @@
 <template>
   <div class="b-slot">
     <div class="b-slot__settings">
-      <span @click.stop="showSandboxSidebar($event, 'SlotSettings')"
-            tooltip="Slot settings"
-            tooltip-position="right"
-            class="b-slot__settings-item b-slot__settings-item-settings">
-        <icon-base name="cog" fill="white" />
+      <span
+        @click.stop="showSandboxSidebar($event, 'SlotSettings')"
+        tooltip="Slot settings"
+        tooltip-position="right"
+        class="b-slot__settings-item b-slot__settings-item-settings"
+        >
+          <icon-base name="cog" fill="white" />
       </span>
-      <span @click.stop="showSandboxSidebar($event, 'SlotBackground')"
-            tooltip="Slot background"
-            tooltip-position="right"
-            class="b-slot__settings-item b-slot__settings-item-slot-bg">
-        <icon-base name="background" fill="white" />
+      <span
+        @click.stop="showSandboxSidebar($event, 'SlotBackground')"
+        tooltip="Slot background"
+        tooltip-position="right"
+        class="b-slot__settings-item b-slot__settings-item-slot-bg"
+        >
+          <icon-base name="background" fill="white" />
       </span>
-      <span @click.stop="showSandboxSidebar($event, 'Slot')"
-            tooltip="Add element"
-            tooltip-position="right"
-            class="b-slot__settings-item b-slot__settings-item-add-el">
-        <icon-base name="plus" fill="white" />
+      <span
+        @click.stop="showSandboxSidebar($event, 'Slot')"
+        tooltip="Add element"
+        tooltip-position="right"
+        class="b-slot__settings-item b-slot__settings-item-add-el"
+        >
+          <icon-base name="plus" fill="white" />
       </span>
     </div>
     <slot/>
@@ -160,12 +166,14 @@ export default {
       box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
 
       cursor: pointer
+      transition: all .3s cubic-bezier(.2,.85,.4,1.275)
       & svg
-        fill:  $white
+        fill: $white
         width: 14px
         height: 14px
 
-      &:hover, .active
+      &:hover,
+      .active
         background: $white
         svg
           fill: $dark-blue-krayola

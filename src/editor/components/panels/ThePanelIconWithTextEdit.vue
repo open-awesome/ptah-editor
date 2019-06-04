@@ -6,19 +6,19 @@
 
     <!-- Control icon -->
     <div class="b-panel__control">
-      <control-text-with-icon-edit/>
+      <control-icon-with-text-edit/>
     </div>
   </div>
 </template>
 
 <script>
-import ControlTextWithIconEdit from '../controls/TheControlIconWithTextEdit'
+import ControlIconWithTextEdit from '../controls/TheControlIconWithTextEdit'
 
 export default {
   name: 'ThePanelIconEdit',
 
   components: {
-    ControlTextWithIconEdit
+    ControlIconWithTextEdit
   }
 }
 </script>

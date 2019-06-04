@@ -6,25 +6,25 @@
 
     <!-- Control icon -->
     <div class="b-panel__control">
-      <control-text-with-icon></control-text-with-icon>
+      <control-icon-with-text-settings/>
     </div>
 
     <div class="b-panel__control">
-      <control-box></control-box>
+      <control-box/>
     </div>
   </div>
 </template>
 
 <script>
-import ControlTextWithIcon from '../controls/TheControlIconWithText'
+import ControlIconWithTextSettings from '../controls/TheControlIconWithTextSettings'
 import ControlBox from '../controls/TheControlBox'
 
 export default {
-  name: 'ThePanelIcon',
+  name: 'ThePanelIconWithTextSettins',
 
   components: {
     ControlBox,
-    ControlTextWithIcon
+    ControlIconWithTextSettings
   }
 }
 </script>

@@ -1,7 +1,5 @@
 <template>
-  <a class="b-logo is-editable"
-    :alt="a"
-    :title="a"
+  <div class="b-logo is-editable"
     @dragover.prevent
     @drop="onDrop"
     >
@@ -27,7 +25,7 @@
       :z="999"
      />
      <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
-  </a>
+  </div>
 </template>
 
 <script>
@@ -49,7 +47,6 @@ export default {
 
   data: function () {
     return {
-      a: '',
       width: 0,
       height: 0,
       file: ''
@@ -146,7 +143,7 @@ export default {
   & .b-uploader
     opacity: 0
     z-index: 1
-  &:hover .b-uploader
+  &.is-editable:hover .b-uploader
     opacity: 0.2
     display: block
 

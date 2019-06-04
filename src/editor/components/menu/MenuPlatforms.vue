@@ -89,6 +89,9 @@ export default {
 
     outline: none
     cursor: pointer
+    &:hover
+      svg
+        fill: $dark-blue-krayola
     &_active
       color: $dark-blue-krayola
       opacity: 1

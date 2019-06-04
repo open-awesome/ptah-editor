@@ -194,9 +194,13 @@ export default {
         color: $blue
         border-radius: 3px
         margin-right: 6px
+
+        transition: all .3s cubic-bezier(.2,.85,.4,1.275)
         &:hover,
         &.active
           background: $dark-blue-krayola
+        &:hover
+          color: #ffffff
         &.active
           color: #ffffff
           cursor: default
