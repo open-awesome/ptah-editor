@@ -143,6 +143,9 @@ export default {
     font-size: 1.4rem
     font-weight: bold
     color: $dark-grey
+  .mx-input:hover
+    border-color: $dark-blue-krayola
+    cursor: pointer
   .mx-calendar-icon
     color: $dark-blue-krayola
   .mx-calendar

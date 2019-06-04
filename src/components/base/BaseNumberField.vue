@@ -1,14 +1,14 @@
 <template>
-  <div class="b-base-text-field"
-       :class="{'b-base-text-field_error': hasError}">
-    <label class="b-base-text-field__label">
+  <div class="b-base-number-field"
+       :class="{'b-base-number-field_error': hasError}">
+    <label class="b-base-number-field__label">
 
       <base-label v-if="label || $slots.label" :hasError="hasError" :hasFocus="hasFocus">
         {{label}}
         <slot name="label"></slot>
       </base-label>
 
-      <input class="b-base-text-field__input" type="number"
+      <input class="b-base-number-field__input" type="number"
              v-bind="$attrs"
              v-model="innerValue"
              :placeholder="placeholder"
@@ -71,7 +71,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-base-text-field
+.b-base-number-field
   font-size: 1.4rem
   line-height: 1.7rem
   width: 100%
@@ -101,8 +101,11 @@ export default {
     &::placeholder
       color: #CDCDCD
 
-    .b-base-text-field_error &
+    .b-base-number-field_error &
       border-color: #FF3737
+
+    &:hover
+      border-color: rgba(#0B99FF, 0.8)
 
     &:focus
       outline: none

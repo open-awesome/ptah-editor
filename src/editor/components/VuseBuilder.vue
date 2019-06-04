@@ -451,11 +451,14 @@ export default {
     transition: border 0.25s
     border: .2rem dotted transparent
     &:hover
+      cursor: pointer
       border-color: $dark-blue-krayola
     &.styler-active
       border-color: $white
       &:hover
         border-color: $white
+      &.b-text
+        cursor: text
   &.fp-scroll section
     height: 100vh !important
   &:before,

@@ -143,7 +143,7 @@ export default {
   & .b-uploader
     opacity: 0
     z-index: 1
-  &:hover .b-uploader
+  &.is-editable:hover .b-uploader
     opacity: 0.2
     display: block
 
