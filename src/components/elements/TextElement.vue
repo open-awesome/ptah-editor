@@ -26,6 +26,22 @@
 
           <button
             class="menubar__button"
+            :class="{ 'is-active': isActive.underline() }"
+            @click="commands.underline"
+          >
+            <icon-base name="fontUnderline" width="14" height="14" />
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.strike() }"
+            @click="commands.strike"
+          >
+            <icon-base name="strike" width="20" height="20" />
+          </button>
+
+          <button
+            class="menubar__button"
             :class="{ 'is-active': isActive.paragraph() }"
             @click.stop="commands.paragraph"
           >
@@ -35,7 +51,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-            @click.stop="commands.heading({ level: 1 })"
+            @click.stop="setHeading({ level: 1 })"
           >
             H1
           </button>
@@ -43,7 +59,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-            @click.stop="commands.heading({ level: 2 })"
+            @click.stop="setHeading({ level: 2 })"
           >
             H2
           </button>
@@ -51,7 +67,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-            @click.stop="commands.heading({ level: 3 })"
+            @click.stop="setHeading({ level: 3 })"
           >
             H3
           </button>
@@ -59,7 +75,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bullet_list() }"
-            @click.stop="toggleList('bullet', 'ordered')"
+            @click.stop="setList('bullet', 'ordered')"
           >
             <icon-base name="bulletList"></icon-base>
           </button>
@@ -67,7 +83,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.ordered_list() }"
-            @click.stop="toggleList('ordered', 'bullet')"
+            @click.stop="setList('ordered', 'bullet')"
           >
             <icon-base name="orderedList"></icon-base>
           </button>
@@ -80,7 +96,7 @@
             <icon-base name="link"></icon-base>
           </button>
 
-          <base-button color="blue" size="small" @click.stop="save">Done</base-button>
+          <!--base-button color="blue" size="small" @click.stop="save">Done</base-button-->
 
           <!-- Link form -->
           <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
@@ -102,6 +118,8 @@ import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
 import {
   Bold,
   Italic,
+  Strike,
+  Underline,
   Heading,
   ListItem,
   OrderedList,
@@ -138,6 +156,8 @@ export default {
           extensions: [
             new Bold(),
             new Italic(),
+            new Strike(),
+            new Underline(),
             new Heading({ levels: [1, 2, 3] }),
             new ListItem(),
             new OrderedList(),
@@ -157,6 +177,10 @@ export default {
         this.hideLinkMenu()
         this.isActive = false
       }
+    },
+
+    text (value) {
+      this.save()
     }
   },
 
@@ -182,7 +206,7 @@ export default {
 
     save () {
       this.updateSettingOptions(merge({}, this.settingObjectOptions, { text: this.text }))
-      this.textEditor(false)
+      // this.textEditor(false)
     },
 
     showLinkMenu (attrs) {
@@ -204,7 +228,11 @@ export default {
       this.editor.focus()
     },
 
-    toggleList (oldList, newList) {
+    setList (oldList, newList) {
+      if (this.editor.isActive.heading()) {
+        this.editor.commands.heading()
+      }
+
       if (this.editor.isActive[`${newList}_list`]()) {
         this.editor.commands[`${newList}_list`]()
 
@@ -213,6 +241,18 @@ export default {
         })
       } else {
         this.editor.commands[`${oldList}_list`]()
+      }
+    },
+
+    setHeading (obj) {
+      this.resetList('bullet')
+      this.resetList('ordered')
+      this.editor.commands.heading(obj)
+    },
+
+    resetList (list) {
+      if (this.editor.isActive[`${list}_list`]()) {
+        this.editor.commands[`${list}_list`]()
       }
     }
   }
@@ -246,8 +286,8 @@ export default {
 
   position: absolute
   top: -38px
-  width: 34rem
-  left: calc(50% - 17rem)
+  width: 36rem
+  left: calc(50% - 18rem)
   z-index: 9999
 
   background: $white
@@ -255,7 +295,7 @@ export default {
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25)
 
   &__button
-    width: 2.4rem
+    width: 3rem
     height: 2.4rem
     display: flex
     justify-content: center
