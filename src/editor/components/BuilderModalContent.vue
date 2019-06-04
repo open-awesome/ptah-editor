@@ -164,9 +164,8 @@ export default {
       top: $size-step
       right: $size-step
       cursor: pointer
-      &:hover
-        & svg
-          fill: $dark-grey
+      &:hover svg
+        fill: $dark-blue-krayola
 
 // Animations
 .slide-fade

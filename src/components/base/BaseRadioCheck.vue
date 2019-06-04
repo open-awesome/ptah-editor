@@ -72,7 +72,7 @@ export default {
   margin: 0 0 0 $size-step/2
   &__row
     cursor: pointer
-    transition: background-color 0.1s ease, color 0.1s ease
+    transition: background-color 0.1s ease, color 0.1s ease, opacity 0.1s ease
 
     display: flex
     align-items: center
@@ -81,6 +81,10 @@ export default {
 
     outline: none
     opacity: 0.5
+    &:hover
+      opacity: 1
+      .b-base-radio-check__icon
+        border: 0.2rem solid $dark-blue-krayola
     &_selected
       opacity: 1
       .b-base-radio-check__icon

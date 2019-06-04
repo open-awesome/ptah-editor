@@ -220,6 +220,9 @@ export default {
       cursor: pointer
       border: none
       color: $gray300
+
+      &:hover svg
+        fill: $dark-blue-krayola
   &__padd
     padding: 2.8rem 0 8rem
     height: calc(100% - 8rem)

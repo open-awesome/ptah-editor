@@ -75,6 +75,10 @@ export default {
     .b-base-switcher-core__body:after
       transform: translateX(2rem)
 
+  &:hover
+    .b-base-switcher-core
+      box-shadow: 0px 0px 4px rgba($emerald-green, 0.8)
+
   &_disabled
     background: #fff
     cursor: default

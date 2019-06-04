@@ -73,6 +73,8 @@ export default {
 
 <style lang="sass" scoped>
 .b-base-text-field
+  $this: &
+
   font-size: 1.4rem
   line-height: 1.7rem
   width: 100%
@@ -98,6 +100,9 @@ export default {
 
     .b-base-text-field_error &
       border-color: #FF3737
+
+    &:hover
+      border-color: rgba(#0B99FF, 0.8)
 
     &:focus
       outline: none
