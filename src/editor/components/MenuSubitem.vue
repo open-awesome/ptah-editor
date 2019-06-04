@@ -139,7 +139,7 @@ export default {
       text-align: center
     &-text
       display: inline-block
-      width: 16rem
+      width: 16.8rem
       white-space: nowrap
       text-overflow: ellipsis
       overflow: hidden

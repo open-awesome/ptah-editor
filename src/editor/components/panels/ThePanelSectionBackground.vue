@@ -5,7 +5,7 @@
     </span>
 
     <base-scroll-container backgroundBar="#999">
-      <div class="b-panel-section-bg__inner">
+      <div class="b-panel__inner">
         <template v-if="settingObjectOptions.background">
 
           <div class="b-panel__control">

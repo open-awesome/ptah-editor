@@ -435,7 +435,7 @@ $top-panel-height: 7.2rem
     color: $grey
     position: absolute
     top: 18px
-    right: 26px
+    right: 17px
     cursor: pointer
     &:hover
       color: $dark-blue-krayola

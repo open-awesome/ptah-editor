@@ -1,15 +1,15 @@
 <template>
-  <div class="b-panel-slot-bg">
-    <h6 class="b-panel-slot-bg__title">
+  <div class="b-panel">
+    <h6 class="b-panel__title">
       Slot background
     </h6>
 
     <base-scroll-container backgroundBar="#999">
-      <div class="b-panel-slot-bg__inner">
-          <div class="b-section-settings__control">
-            <div class="b-section-settings__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
+      <div class="b-panel__inner">
+          <div class="b-panel__control">
+            <div class="b-panel__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
               <base-color-picker v-model="backgroundPickers[index]" :label="`Color ${ index > 0 ? index : '' }`" @change="updateBgColor"/>
-              <div class="b-section-settings__picker-buttons">
+              <div class="b-panel__picker-buttons">
                 <span class="del"
                   tooltip="Remove color"
                   tooltip-position="left"
@@ -31,7 +31,7 @@
           </div>
 
           <div v-show="backgroundType !== 'video'">
-            <div class="b-section-settings__control">
+            <div class="b-panel__control">
               <base-uploader
                 v-model="sectionBgUrl"
                 @change="updateBgUrl"
@@ -40,7 +40,7 @@
               />
             </div>
             <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
-              <div class="b-section-settings__control">
+              <div class="b-panel__control">
                 <control-slot-background-position/>
               </div>
             </template>
@@ -237,7 +237,7 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-panel-slot-bg
+.b-panel
   display: flex
   flex-direction: column
   align-items: stretch

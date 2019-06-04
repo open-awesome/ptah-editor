@@ -4,7 +4,7 @@
       <div class="b-elements__title">
         {{ $t('c.elementsLibrary') }}
         <div class="b-elements__close" @click="hideList">
-          <icon-base name="close" width="12" height="12"/>
+          <icon-base name="close" width="14" height="14"/>
         </div>
       </div>
       <ul>
@@ -144,10 +144,10 @@ export default {
       background: $dark-blue-krayola
       color: $white
   &__close
-    color: $grey
+    color: $white
     position: absolute
     top: 18px
-    right: 26px
+    right: 17px
     cursor: pointer
     &:hover
       color: $dark-blue-krayola

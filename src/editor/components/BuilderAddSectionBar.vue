@@ -220,7 +220,7 @@ export default {
       color: $grey
       position: absolute
       top: 24px
-      right: 26px
+      right: 17px
       cursor: pointer
       &:hover
         color: $dark-blue-krayola
