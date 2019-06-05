@@ -10,17 +10,12 @@
     <div class="b-styler__controls">
       <!-- Button -->
       <template v-if="type === 'button'">
-        <a href="#" class="b-styler__control"
-           tooltip="Button style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('Button')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
 
         <a href="#" class="b-styler__control"
            tooltip="Edit text"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('InlineEdit')">
+           @click.stop="setPanels('Button', true)"
+          >
           <icon-base name="edit" width="12" height="15" />
         </a>
 
@@ -39,23 +34,16 @@
         </a>
       </template>
 
-      <!-- Text -->
-      <a href="#" class="b-styler__control"
-         tooltip="Text style"
-         tooltip-position="bottom"
-         @click.stop="setControlPanel('Text')"
-         v-if="type === 'text'">
-        <icon-base name="style" width="12" height="15" />
-      </a>
-
-      <!-- Text editor -->
-      <a href="#" class="b-styler__control b-styler__control_text"
-         tooltip="Edit"
-         tooltip-position="bottom"
-         @click.stop="editText = true"
-         v-if="type === 'text'">
-        <icon-base name="edit" width="12" height="15" />
-      </a>
+      <!-- Text element -->
+      <template v-if="type === 'text'">
+        <a href="#" class="b-styler__control b-styler__control_text"
+          tooltip="Edit"
+          tooltip-position="bottom"
+          @click.stop="setPanels('Text', true)"
+          >
+          <icon-base name="edit" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Inline text -->
       <a href="#" class="b-styler__control"
@@ -487,6 +475,14 @@ export default {
     ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
 
+    setPanels (panel, isEditText) {
+      this.setControlPanel(panel)
+
+      if (isEditText) {
+        this.editText = isEditText
+      }
+    },
+
     stylerInit (event) {
       const stopNames = [
         'b-draggable-slot',
@@ -796,11 +792,11 @@ export default {
 
       await this.$nextTick()
 
-      if (this.type === 'text') {
+      if (this.type === 'text' || this.type === 'button') {
         this.editText = true
         this.setControlPanel(name)
       } else {
-        if (this.type === 'button' || this.type === 'inline' || this.type === 'icon') {
+        if (this.type === 'inline' || this.type === 'icon') {
           this.setControlPanel(name + 'Edit')
         } else {
           this.setControlPanel(name + 'Settings')

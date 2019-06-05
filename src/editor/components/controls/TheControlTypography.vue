@@ -1,6 +1,7 @@
 <script>
-import { mapState } from 'vuex'
-import find from 'lodash-es/find'
+import { mapState, mapActions } from 'vuex'
+import { getPseudoTemplate, randomPoneId } from '../../util'
+import { find, merge } from 'lodash-es'
 const LIST_FONTS = [
   'Lato',
   'Montserrat',
@@ -12,7 +13,11 @@ export default {
   props: {
     showTextStyles: {
       type: Boolean,
-      default: true
+      default: false
+    },
+    colorTextHover: {
+      type: Boolean,
+      default: false
     }
   },
 
@@ -36,6 +41,7 @@ export default {
         { name: '72px', value: '7.2rem' }
       ],
       color: '',
+      colorHover: '',
       td: { prop: 'text-decoration', value: 'underline', base: 'none' },
       fs: { prop: 'font-style', value: 'italic', base: 'normal' },
       fw: { prop: 'font-weight', value: 'bold', base: 'normal' },
@@ -67,16 +73,22 @@ export default {
     this.fontName = { name: this.styles['font-family'], value: this.styles['font-family'] }
     this.size = find(this.sizes, { value: this.styles['font-size'] })
     this.color = this.styles['color']
+    if (this.colorTextHover) this.colorHover = this.pseudo['hover']['color']
   },
 
   computed: {
     ...mapState('Sidebar', [
       'settingObjectSection',
+      'settingObjectElement',
       'settingObjectOptions'
     ]),
 
     styles () {
       return this.settingObjectOptions.styles
+    },
+
+    pseudo () {
+      return this.settingObjectOptions.pseudo
     },
 
     fonts () {
@@ -90,16 +102,50 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     changeFont () {
       this.styles['font-family'] = this.fontName.value
     },
+
     changeSize () {
       this.styles['font-size'] = this.size.value
     },
+
     changeColor () {
-      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
+      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()})` : this.color
       this.styles['color'] = color
     },
+
+    changeColorHover () {
+      const color = this.colorHover.rgba ? `rgba(${Object.values(this.colorHover.rgba).toString()})` : this.colorHover
+
+      this.changePseudo('color', color)
+    },
+
+    changePseudo (attr, style, pseudoClass = 'hover') {
+      let pseudo = {}
+
+      if (style !== '') {
+        pseudo[pseudoClass] = {}
+        pseudo[pseudoClass][attr] = style + '!important'
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, { pseudo }))
+
+        this.changePseudoStyle(attr, style + '!important')
+      }
+    },
+
+    changePseudoStyle (attr, style, pseudoClass = 'hover') {
+      const poneId = randomPoneId()
+      this.settingObjectElement.dataset.pone = poneId
+
+      let styleTemplate = getPseudoTemplate(poneId, this.settingObjectOptions.pseudo)
+
+      document.head.insertAdjacentHTML('beforeend', styleTemplate)
+    },
+
     changeStyle () {
       this.style.list.forEach((style) => {
         if (find(this.style.valueMultiple, style.value)) {
@@ -141,7 +187,10 @@ export default {
     </div>
     <div class="b-typography-controls__control">
       <div class="b-typography-controls__control-col">
-        <base-color-picker label="Text color" v-model="color" @change="changeColor"></base-color-picker>
+        <base-color-picker label="Text" v-model="color" @change="changeColor"></base-color-picker>
+      </div>
+      <div class="b-typography-controls__control-col" v-if="colorTextHover">
+        <base-color-picker label="Hover" v-model="colorHover" @change="changeColorHover"></base-color-picker>
       </div>
       <div class="b-typography-controls__control-col" v-if="showTextStyles">
         <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>

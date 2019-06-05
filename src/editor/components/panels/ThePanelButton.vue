@@ -6,7 +6,7 @@
 
     <!-- Typography -->
     <div class="b-panel__control">
-      <control-typography/>
+      <control-typography :colorTextHover="true" />
     </div>
 
     <!-- Align -->
