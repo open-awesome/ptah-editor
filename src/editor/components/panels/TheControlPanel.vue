@@ -16,7 +16,6 @@ import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
 import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
-import ThePanelButtonEdit from './ThePanelButtonEdit'
 import ThePanelButtonSettings from './ThePanelButtonSettings'
 import ThePanelNetworksSettings from './ThePanelNetworksSettings'
 import ThePanelNetworksStyle from './ThePanelNetworksStyle'
@@ -31,8 +30,7 @@ import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
 import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineEdit from './ThePanelInlineEdit'
 import ThePanelIconWithTextSettings from './ThePanelIconWithTextSettings'
-import ThePanelIconWithTextStyles from './ThePanelIconWithTextStyles'
-import ThePanelIconWithTextEdit from './ThePanelIconWithTextEdit'
+import ThePanelIconWithText from './ThePanelIconWithText'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSlotBackground from './ThePanelSlotBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
@@ -81,7 +79,6 @@ export default {
     ThePanelSection,
     ThePanelSectionLayout,
     ThePanelButton,
-    ThePanelButtonEdit,
     ThePanelButtonSettings,
     ThePanelNetworksSettings,
     ThePanelNetworksStyle,
@@ -98,8 +95,7 @@ export default {
     ThePanelImageSettings,
     ThePanelImageLink,
     ThePanelIconWithTextSettings,
-    ThePanelIconWithTextStyles,
-    ThePanelIconWithTextEdit,
+    ThePanelIconWithText,
     ThePanelSectionBackground,
     ThePanelSlotBackground,
     ThePanelSectionSystemSettings,

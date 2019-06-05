@@ -148,14 +148,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Text edit"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('IconWithTextEdit')">
+           @click.stop="setPanels('IconWithText', true)">
           <icon-base name="edit" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Element styles"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('IconWithTextStyles')">
-          <icon-base name="style" width="12" height="15" />
         </a>
         <a href="#" class="b-styler__control"
            tooltip="Element settings"
@@ -792,11 +786,11 @@ export default {
 
       await this.$nextTick()
 
-      if (this.type === 'text' || this.type === 'button') {
+      if (this.type === 'text' || this.type === 'button' || this.type === 'iconWithText') {
         this.editText = true
         this.setControlPanel(name)
       } else {
-        if (this.type === 'inline' || this.type === 'icon') {
+        if (this.type === 'inline') {
           this.setControlPanel(name + 'Edit')
         } else {
           this.setControlPanel(name + 'Settings')

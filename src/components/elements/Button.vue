@@ -80,12 +80,7 @@ import {
   Italic,
   Strike,
   Underline,
-  Heading,
-  ListItem,
-  OrderedList,
-  BulletList,
-  HardBreak,
-  Link
+  Heading
 } from 'tiptap-extensions'
 import { merge } from 'lodash-es'
 
@@ -129,12 +124,7 @@ export default {
             new Italic(),
             new Strike(),
             new Underline(),
-            new Heading({ levels: [1, 2, 3] }),
-            new ListItem(),
-            new OrderedList(),
-            new BulletList(),
-            new HardBreak(),
-            new Link()
+            new Heading({ levels: [1, 2, 3] })
           ],
           content: self.settingObjectOptions.text,
           onUpdate (state) {
