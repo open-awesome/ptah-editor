@@ -41,6 +41,10 @@
           <icon-base name="strike" width="14" height="14" />
         </button>
 
+        <base-button color="blue" size="small" @click.stop="close">
+          Done
+        </base-button>
+
       </div>
     </editor-menu-bar>
 
@@ -189,7 +193,10 @@ export default {
 
     save () {
       this.updateSettingOptions(merge({}, this.settingObjectOptions, { text: this.text }))
-      // this.textEditor(false)
+    },
+
+    close () {
+      this.textEditor(false)
     },
 
     showLinkMenu (attrs) {
@@ -393,8 +400,8 @@ export default {
 
   position: absolute
   top: -26px
-  width: 14rem
-  left: calc(50% - 7rem)
+  width: 19rem
+  left: calc(50% - 9.5rem)
   z-index: 9999
 
   background: $white

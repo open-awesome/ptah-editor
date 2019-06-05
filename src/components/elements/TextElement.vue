@@ -96,12 +96,19 @@
           <icon-base name="link"></icon-base>
         </button>
 
+        <base-button color="blue" size="small" @click.stop="close">
+          Done
+        </base-button>
+
         <!-- Link form -->
         <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
           <input class="menubar__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="hideLinkMenu"/>
           <button class="menubar__button" @click.stop="setLinkUrl(commands.link, null)" type="button">
             <icon-base name="remove"></icon-base>
           </button>
+          <base-button class="menubar__button" color="blue" size="small" @click.stop="setLinkUrl(commands.link, linkUrl)">
+            Done
+          </base-button>
         </form>
       </div>
     </editor-menu-bar>
@@ -204,7 +211,10 @@ export default {
 
     save () {
       this.updateSettingOptions(merge({}, this.settingObjectOptions, { text: this.text }))
-      // this.textEditor(false)
+    },
+
+    close () {
+      this.textEditor(false)
     },
 
     showLinkMenu (attrs) {
@@ -287,8 +297,8 @@ export default {
 
   position: absolute
   top: -26px
-  width: 36rem
-  left: calc(50% - 18rem)
+  width: 43rem
+  left: calc(50% - 21.5rem)
   z-index: 9999
 
   background: $white
