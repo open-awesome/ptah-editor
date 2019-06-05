@@ -121,7 +121,7 @@ export default {
   },
 
   watch: {
-    sectionsGroups () {
+    sectionsGroups (value, oldValue) {
       this.buildTree()
     },
 
@@ -164,7 +164,7 @@ export default {
 
     buildTree (renew = false) {
       if (!this.init || renew) {
-        this.menuTree = []
+        this.menuTree.splice(0, this.menuTree.length)
 
         this.builderSections().forEach((section) => {
           if (this.isSimpleSection(section)) {
@@ -206,7 +206,6 @@ export default {
         }
       } else { // --- move 1 section
         if (e.to !== e.from) {
-          // needReloadTree = true
           // move to group
           if (e.to.classList.contains('tree-branch')) {
             let mainSection = this.getSectionById(e.to.querySelector('.tree-node').dataset.id)
@@ -219,16 +218,23 @@ export default {
               this.setSectionData(currentSection, 'absorb', absorb)
             }
           } else { // move from group
-            if (e.oldIndex !== 0) {
+            if (group.length < 2) {
+              // ungroup
               let mainSection = this.getSectionById(e.from.querySelector('.tree-node').dataset.id)
-              this.setSectionData(mainSection, 'absorb', mainSection.data.mainStyle.absorb - 1)
+              mainSection.isMain = false
+              this.setSectionData(mainSection, 'absorb', 0)
             } else {
-              // make new main
-              let absorb = currentSection.data.mainStyle.absorb - 1
-              let newMainSection = this.getSectionById(Array.from(e.from.querySelectorAll('.tree-node'))[1].dataset.id)
+              if (e.oldIndex !== 0) {
+                let mainSection = this.getSectionById(e.from.querySelector('.tree-node').dataset.id)
+                this.setSectionData(mainSection, 'absorb', mainSection.data.mainStyle.absorb - 1)
+              } else {
+                // make new main
+                let absorb = currentSection.data.mainStyle.absorb - 1
+                let newMainSection = this.getSectionById(Array.from(e.from.querySelectorAll('.tree-node'))[1].dataset.id)
 
-              this.setSectionData(currentSection, 'absorb', 0)
-              this.setSectionData(newMainSection, 'absorb', absorb)
+                this.setSectionData(currentSection, 'absorb', 0)
+                this.setSectionData(newMainSection, 'absorb', absorb)
+              }
             }
           }
         }
