@@ -1,15 +1,15 @@
 <template>
-  <div class="b-panel-slot-bg">
-    <h6 class="b-panel-slot-bg__title">
+  <div class="b-panel">
+    <h6 class="b-panel__title">
       Slot background
     </h6>
 
     <base-scroll-container backgroundBar="#999">
-      <div class="b-panel-slot-bg__inner">
-          <div class="b-section-settings__control">
-            <div class="b-section-settings__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
+      <div class="b-panel__inner">
+          <div class="b-panel__control">
+            <div class="b-panel__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
               <base-color-picker v-model="backgroundPickers[index]" :label="`Color ${ index > 0 ? index : '' }`" @change="updateBgColor"/>
-              <div class="b-section-settings__picker-buttons">
+              <div class="b-panel__picker-buttons">
                 <span class="del"
                   tooltip="Remove color"
                   tooltip-position="left"
@@ -31,7 +31,7 @@
           </div>
 
           <div v-show="backgroundType !== 'video'">
-            <div class="b-section-settings__control">
+            <div class="b-panel__control">
               <base-uploader
                 v-model="sectionBgUrl"
                 @change="updateBgUrl"
@@ -40,7 +40,7 @@
               />
             </div>
             <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
-              <div class="b-section-settings__control">
+              <div class="b-panel__control">
                 <control-slot-background-position/>
               </div>
             </template>
@@ -237,46 +237,19 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-panel-slot-bg
-  height: 100%
-  width: 100%
-
-  padding-bottom: 4.5rem
-
+.b-panel
   display: flex
   flex-direction: column
   align-items: stretch
   justify-content: flex-start
-  &__title
-    color: $black
-    font-size: 2rem
-    font-weight: bold
 
-    min-width: 24rem
-    margin: 0 0 2.8rem 0
-    padding: 0
-    &:first-letter
-      text-transform: uppercase
-
-  &__control
-    margin-bottom: 1.6rem
-
-  &__inner
-    max-width: 24rem
-    padding: 0 0 2.4rem 0
-
-.b-section-settings
-  display: flex
-  flex-direction: column
-  align-items: stretch
   padding-bottom: 4.5rem
+  height: 100%
   width: 100%
   &__control
     margin-top: $size-step/2
     &_select-type
       margin: $size-step 0 $size-step/2
-  &__inner
-    padding: 0 2.4rem
   &__buttons
     position: absolute
     bottom: 1rem
