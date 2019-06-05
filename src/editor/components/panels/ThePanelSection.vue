@@ -21,17 +21,6 @@
             @change="updateGalleryImages"
             label="Images upload"
             multiple/>
-          <br>
-          <base-switcher v-model="autoplay" label="Autoplay"></base-switcher>
-          <br>
-          <base-range-slider
-            v-if="settingObjectSection.name === 'AutoplayCarousel'"
-            :value="settingObjectSection.data.mainStyle.swiper.delay"
-            :label="`Autoplay slides delay (${settingObjectSection.data.mainStyle.swiper.delay})`"
-            @change="changeSwiperDelay"
-            step="1000"
-            min="1000"
-            max="10000"/>
         </div>
 
         <!-- Form -->
@@ -161,34 +150,6 @@ export default {
 
     mailchimpLink () {
       return `/editor/${this.$route.params.slug}/settings/integrations/mailchimp`
-    },
-
-    autoplay: {
-      get () {
-        return !!this.settingObjectOptions.swiper.autoplay
-      },
-
-      set (value) {
-        if (value) {
-          this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-            swiper: {
-              loop: true,
-              simulateTouch: false,
-              autoplay: {
-                disableOnInteraction: false,
-                waitForTransition: false,
-                delay: 2000
-              }
-            }
-          }))
-        } else {
-          this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-            swiper: {
-              autoplay: false
-            }
-          }))
-        }
-      }
     }
   },
 

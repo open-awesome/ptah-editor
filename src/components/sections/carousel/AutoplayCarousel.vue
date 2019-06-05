@@ -143,8 +143,9 @@ export default {
 
   methods: {
     getOptions () {
+      console.log(autoplay, pagination)
       return JSON.stringify(
-        merge(autoplay, { pagination: { el: pagination } })
+        { pagination: { el: pagination } }
       )
     }
   },
