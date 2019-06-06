@@ -389,7 +389,7 @@ export default {
   padding: 0 0.4rem
 
   position: absolute
-  top: -26px
+  top: -38px
   width: 19rem
   left: calc(50% - 9.5rem)
   z-index: 9999

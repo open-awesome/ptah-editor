@@ -791,7 +791,7 @@ export default {
         this.setControlPanel(name)
       } else {
         if (this.type === 'inline') {
-          this.setControlPanel(name + 'Edit')
+          this.editText = true
         } else {
           this.setControlPanel(name + 'Settings')
         }

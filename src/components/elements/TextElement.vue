@@ -2,7 +2,7 @@
   <div class="b-text is-editable" ref="text" @click.stop.stop>
     <slot v-if="!isActive"></slot>
 
-    <editor-menu-bar :editor="editor" v-if="isActive">
+    <editor-menu-bar :editor="editor" v-if="isActive && !hideMenubar">
       <div
         class="menubar is-hidden"
         :class="{ 'is-focused': focused, 'is-only-styles': isOnlyStyles }"
@@ -205,6 +205,10 @@ export default {
 
     isOnlyStyles () {
       return this.textOptions.styles && !this.textOptions.tags && !this.textOptions.link
+    },
+
+    hideMenubar () {
+      return !this.textOptions.styles && !this.textOptions.tags && !this.textOptions.link
     }
   },
 
@@ -306,7 +310,7 @@ export default {
   padding: 0 0.4rem
 
   position: absolute
-  top: -26px
+  top: -38px
   width: 43rem
   left: calc(50% - 21.5rem)
   z-index: 9999
