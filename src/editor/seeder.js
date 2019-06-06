@@ -87,6 +87,11 @@ const data = new Map([
       'justify-content': 'center'
     },
     isComplex: true,
+    editor: {
+      tags: true,
+      styles: true,
+      link: true
+    },
     textLinkStyles: {
       a: {
         'color': 'rgb(255, 109, 100)',

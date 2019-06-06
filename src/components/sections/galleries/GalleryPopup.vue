@@ -14,9 +14,9 @@ const GALLERY_ITEM = [
     file: null
   },
   {
-    name: 'Label',
-    element: types.TextInherit,
-    type: 'inline',
+    name: 'TextElement',
+    element: types.Text,
+    type: 'text',
     class: 'b-label',
     label: 'label'
   }
@@ -393,11 +393,11 @@ export default {
                         <icon-base name="cog" width="12" height="15" />
                       </a>
                     </div>
-                    <div>
+                    <!--div>
                       <a href="#" class="b-gallery-popup__control" @click.stop="showSettings('SectionGalleryStyle')">
                         <icon-base name="style" width="12" height="15" />
                       </a>
-                    </div>
+                    </div-->
                   </div>
                   <!-- .b-gallery-popup__wrap -->
                   <div class="b-gallery-popup__wrap">
@@ -430,20 +430,15 @@ export default {
                           </span>
                         </div>
                         <div v-if="$sectionData.mainStyle.isLabelPreview">
-                          <span class="b-gallery-popup__preview-title"
-                            v-styler:for="{ el: $sectionData[key][1].element, path:`$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][1].label }"
-                            v-html="$sectionData[key][1].element.text"
+                          <component class="b-gallery-popup__preview-title"
+                            v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
                             :path="`${key}[1].element`"
-                            :style="{
-                              'color' : $sectionData.mainStyle.textStyles.text['color'],
-                              'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
-                              'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
-                              'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
-                              'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
-                              'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
-                            }"
+                            :is="$sectionData[key][1].name"
+                            :style="$sectionData[key][1].element.styles"
+                            :class="[$sectionData[key][1].element.classes, $sectionData[key][1].class]"
                             >
-                          </span>
+                            <div v-html="$sectionData[key][1].element.text"></div>
+                          </component><!--/.b-preview__name -->
                         </div>
                       </div>
                     </div>
@@ -732,7 +727,7 @@ export default {
   padding: $size-step
   z-index: 99999
   .is-expanded &
-    top: 8rem
+    top: 6rem
     left: $size-step * 9
   &_flex
     display: flex

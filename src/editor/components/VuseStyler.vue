@@ -49,7 +49,7 @@
       <a href="#" class="b-styler__control"
          tooltip="Edit"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('InlineEdit')"
+         @click.stop="setPanels(false, true)"
          v-if="type === 'inline'">
         <icon-base name="edit" width="12" height="15" />
       </a>
