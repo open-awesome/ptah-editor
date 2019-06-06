@@ -331,7 +331,9 @@ export default {
     ungroup (section) {
       this.setSectionData(section, 'absorb', 0)
       resetIndents()
-      this.buildTree(true)
+      setTimeout(() => {
+        this.buildTree(true)
+      }, 300)
     },
 
     async groupSections () {
