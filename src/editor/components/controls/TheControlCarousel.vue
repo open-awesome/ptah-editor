@@ -4,19 +4,66 @@
       Carousel settings
     </base-label>
 
-    <base-switcher
-      v-model="autoplay"
-      label="Autoplay"
-      v-if="settingObjectSection.name === 'AutoplayCarousel'"/>
-    <br>
+    <!-- pagination -->
+    <div class="b-control">
+      <base-switcher
+        v-model="pagination"
+        label="Show/hide pagination"/>
+
+      <base-color-picker
+        class="b-optional"
+        label="Pagination color"
+        v-model="paginationColor"/>
+
+      <base-range-slider
+        class="b-optional"
+        v-model="navigationSize"
+        label="Nav bullets size"
+        step="1"
+        min="5"
+        max="50">
+        {{settingObjectSection.data.mainStyle.swiper.navSize}}
+      </base-range-slider>
+    </div>
+
+    <!-- navigation -->
+    <div class="b-control">
+      <base-switcher
+        v-model="navigation"
+        label="Show/hide navigation arrows"/>
+
+      <base-color-picker
+        class="b-optional"
+        label="Navigation color"
+        v-model="navigationColor"/>
+    </div>
+
+    <div class="b-control">
+      <base-switcher
+        v-model="autoplay"
+        label="Autoplay"/>
+      <base-range-slider
+        v-if="autoplay !== false"
+        class="b-optional"
+        :value="settingObjectSection.data.mainStyle.swiper.autoplay.delay"
+        label="Transition delay (ms)"
+        @change="changeSwiperDelay"
+        step="1000"
+        min="1000"
+        max="10000">
+        {{settingObjectSection.data.mainStyle.swiper.autoplay.delay}}
+      </base-range-slider>
+    </div>
+
     <base-range-slider
-      v-if="settingObjectSection.name === 'AutoplayCarousel' && autoplay !== false"
-      :value="settingObjectSection.data.mainStyle.swiper.delay"
-      :label="`Autoplay slides delay (${settingObjectSection.data.mainStyle.swiper.delay})`"
-      @change="changeSwiperDelay"
-      step="1000"
-      min="1000"
-      max="10000"/>
+      v-model="frameWidth"
+      label="Carousel width (columns)"
+      step="1"
+      min="2"
+      max="12">
+      {{frameWidth}}
+    </base-range-slider>
+
   </div>
 </template>
 
@@ -35,7 +82,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectElement'
+      'settingObjectElement',
+      'settingObjectSection'
     ]),
 
     autoplay: {
@@ -45,6 +93,94 @@ export default {
 
       set (value) {
         this.setAutoplay(value)
+      }
+    },
+
+    navigation: {
+      get () {
+        return this.settingObjectOptions.swiper.showNavigation
+      },
+
+      set (value) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+          swiper: {
+            showNavigation: value
+          }
+        }))
+      }
+    },
+
+    navigationColor: {
+      get () {
+        return this.settingObjectOptions.swiper.navColor
+      },
+
+      set (value) {
+        let color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
+
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+          swiper: {
+            navColor: color
+          }
+        }))
+      }
+    },
+
+    navigationSize: { // TODO: pagination size
+      get () {
+        return parseInt(this.settingObjectOptions.swiper.navSize)
+      },
+
+      set (value) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+          swiper: {
+            navSize: `${value}px`
+          }
+        }))
+      }
+    },
+
+    pagination: {
+      get () {
+        return this.settingObjectOptions.swiper.showPagination
+      },
+
+      set (value) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+          swiper: {
+            showPagination: value
+          }
+        }))
+      }
+    },
+
+    paginationColor: {
+      get () {
+        return this.settingObjectOptions.swiper.paginationColor
+      },
+
+      set (value) {
+        let color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
+
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+          swiper: {
+            paginationColor: color
+          }
+        }))
+      }
+    },
+
+    frameWidth: {
+      get () {
+        return this.settingObjectOptions.swiper.frameWidth
+      },
+
+      set (value) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+          swiper: {
+            frameWidth: value
+          }
+        }))
       }
     }
   },
@@ -58,8 +194,6 @@ export default {
       if (value) {
         this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
           swiper: {
-            loop: true,
-            simulateTouch: false,
             autoplay: {
               disableOnInteraction: false,
               waitForTransition: false,
@@ -74,11 +208,29 @@ export default {
           }
         }))
       }
+    },
+
+    changeSwiperDelay (delay) {
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, {
+          swiper: {
+            autoplay: {
+              delay
+            }
+          }
+        })
+      )
     }
   }
 }
 </script>
 
 <style lang="sass" scoped>
+.b-control
+  border-bottom: 0.2rem dotted rgba(0, 0, 0, 0.15)
+  padding-bottom: 2.5rem
+  margin-bottom: 2.5rem
 
+.b-optional
+  margin-top: 1.5rem
 </style>

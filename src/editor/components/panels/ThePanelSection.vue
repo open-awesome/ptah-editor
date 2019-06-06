@@ -10,10 +10,6 @@
           <control-section-height></control-section-height>
         </div>
 
-        <div class="b-section-settings__control">
-          <control-box></control-box>
-        </div>
-
         <!-- Carousel Images Multiple Upload -->
         <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
           <base-uploader
@@ -21,6 +17,11 @@
             @change="updateGalleryImages"
             label="Images upload"
             multiple/>
+        </div>
+
+        <!-- Carousel options -->
+        <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
+          <the-control-carousel></the-control-carousel>
         </div>
 
         <!-- Form -->
@@ -43,6 +44,10 @@
             </div>
             <p>Change this in <b><router-link :to="mailchimpLink">Integrations Settings</router-link></b></p>
           </div>
+        </div>
+
+        <div class="b-section-settings__control">
+          <control-box></control-box>
         </div>
 
         <!-- Group -->
@@ -104,9 +109,11 @@ import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
 import ControlBox from './../controls/TheControlBox'
 import { resetIndents } from '@editor/util'
+import TheControlCarousel from '../controls/TheControlCarousel'
 
 export default {
   components: {
+    TheControlCarousel,
     IconBase,
     BuilderSettingsBarGroup,
     BaseUploader,
@@ -202,14 +209,6 @@ export default {
         ..._.cloneDeep(this.settingObjectOptions),
         galleryImages
       })
-    },
-
-    changeSwiperDelay (delay) {
-      this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, {
-          swiper: { delay }
-        })
-      )
     },
 
     isMasterSection () {
