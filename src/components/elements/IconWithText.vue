@@ -250,7 +250,6 @@ export default {
   justify-content: flex-start
   align-items: flex-start
 
-  padding: 1.6rem 3.2rem
   color: inherit
   font-family: inherit
   &::selection,

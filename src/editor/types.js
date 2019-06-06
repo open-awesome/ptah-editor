@@ -1,4 +1,3 @@
-export class Title { }
 export class Text { }
 export class Logo { }
 export class Image { }

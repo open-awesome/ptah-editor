@@ -45,32 +45,6 @@ const DEFAULT_OPTIONS = {
  * @type {Map}
  */
 const data = new Map([
-  [types.Title, () => (_.merge({}, DEFAULT_OPTIONS, {
-    text: 'Title',
-    aligned: true,
-    removable: true,
-    typography: true,
-    styles: {
-      'font-family': 'Lato',
-      'font-size': '3.2rem',
-      'font-weight': 'normal',
-      'font-style': 'normal',
-      'text-decoration': 'none',
-      'text-align': 'center',
-      'color': '#000',
-      'justify-content': 'center'
-    },
-    textLinkStyles: {
-      a: {
-        'color': 'rgb(255, 109, 100)',
-        'text-decoration': 'underline'
-      },
-      hover: {
-        'color': 'rgb(255, 109, 100)',
-        'text-decoration': 'none'
-      }
-    }
-  }))],
   [types.Text, () => (_.merge({}, DEFAULT_OPTIONS, {
     text: 'Enter your text',
     removable: true,

@@ -46,7 +46,6 @@ export function getTypeFromSchema(target, schema) {
 
   if (value === types.Text) return 'text'
   if (value === types.Slogan) return 'text'
-  if (value === types.Title) return 'title'
   if (value === types.Button) return 'button'
   if (value === types.Link) return 'link'
   if (value === types.ClassList) return 'section'

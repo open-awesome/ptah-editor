@@ -157,10 +157,10 @@ const COMPONENTS = [
 const HEADER = [
   {
     name: 'TextElement',
-    element: types.Title,
+    element: types.Text,
     type: 'text',
-    class: 'b-title',
-    label: 'title'
+    class: 'b-text',
+    label: 'text'
   }
 ]
 

@@ -43,7 +43,7 @@ const GALLERY_ITEM_CUSTOM = [
 const HEADER = [
   {
     name: 'TextElement',
-    element: types.Title,
+    element: types.Text,
     type: 'text',
     class: 'b-title',
     label: 'title'
