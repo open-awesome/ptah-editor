@@ -212,18 +212,22 @@ $top-panel-height: 7.2rem
 
   &__header
     position: relative
+
     display: flex
     align-items: center
     justify-content: flex-start
+
     width: 100%
     padding: 1.7rem 3.1rem
     font-size: 2rem
+    line-height: 1.2
     letter-spacing: -0.02em
-
   &__content
     height: 100%
+
     display: flex
     flex-direction: column
+
     min-height: 0
     overflow: auto
     &-inner
@@ -255,21 +259,25 @@ $top-panel-height: 7.2rem
         margin-right: .8rem
 
   &__icon-add
-    width: 3.2rem
-    height: 3.2rem
-    color: $dark-blue-krayola
+    width: $size-step/2
+    height: $size-step/2
+    color: $grey
+
     display: flex
     align-items: center
     justify-content: center
+
     border-radius: 100%
     cursor: pointer
-    margin-left: 11px
+    margin: 1px 0 0 11px
+    &:hover
+      color: $dark-blue-krayola
 
   &__icon-close
     color: $grey
     position: absolute
-    top: 21px
-    right: 26px
+    top: 18px
+    right: 17px
     cursor: pointer
     &:hover
       color: $dark-blue-krayola

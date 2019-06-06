@@ -1,17 +1,17 @@
 <template>
-  <div class="b-panel-section-bg">
-    <h6 class="b-panel-section-bg__title">
+  <div class="b-panel">
+    <span class="b-panel__title">
       Section Background
-    </h6>
+    </span>
 
     <base-scroll-container backgroundBar="#999">
-      <div class="b-panel-section-bg__inner">
+      <div class="b-panel__inner">
         <template v-if="settingObjectOptions.background">
 
-          <div class="b-section-settings__control">
-            <div class="b-section-settings__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
+          <div class="b-panel__control">
+            <div class="b-panel__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
               <base-color-picker v-model="backgroundPickers[index]" :label="`Color ${ index > 0 ? index : '' }`" @change="updateBgColor"/>
-              <div class="b-section-settings__picker-buttons">
+              <div class="b-panel__picker-buttons">
                 <span class="del"
                       tooltip="Remove color"
                       tooltip-position="left"
@@ -30,12 +30,12 @@
             </div>
           </div>
 
-          <div class="b-section-settings__control">
-            <div class="b-section-settings__overlay">
-              <div class="b-section-settings__overlay-col">
+          <div class="b-panel__control">
+            <div class="b-panel__overlay">
+              <div class="b-panel__overlay-col">
                 <base-color-picker v-model="sectionOverlayColor" @change="updateOverlayColor" label="Overlay"></base-color-picker>
               </div>
-              <div class="b-section-settings__overlay-col">
+              <div class="b-panel__overlay-col">
                 <base-range-slider v-model="sectionOverlayOpacity" label="" step="1" min="0" max="100" @change="changeOverlayOpacity">
                   {{ sectionOverlayOpacity }} <span class="b-border-radius-control__px">%</span>
                 </base-range-slider>
@@ -43,7 +43,7 @@
             </div>
           </div>
 
-          <div class="b-section-settings__control b-section-settings__control_select-type">
+          <div class="b-panel__control b-panel__control_select-type">
             <base-switcher
               :value="backgroundType === 'video'"
               label="Use video as background"
@@ -51,7 +51,7 @@
           </div>
 
           <div v-show="backgroundType !== 'video'">
-            <div class="b-section-settings__control">
+            <div class="b-panel__control">
               <base-uploader
                 v-model="sectionBgUrl"
                 @change="updateBgUrl"
@@ -60,13 +60,13 @@
               />
             </div>
             <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
-              <div class="b-section-settings__control">
+              <div class="b-panel__control">
                 <control-background-position/>
               </div>
             </template>
           </div>
 
-          <div v-show="backgroundType === 'video'" class="b-section-settings__control b-section-settings__control--video">
+          <div v-show="backgroundType === 'video'" class="b-panel__control b-panel__control--video">
             <base-uploader
               v-model="settingObjectOptions.backgroundVideo"
               @upload="uploadVideo"
@@ -328,40 +328,7 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-panel-section-bg
-  height: 100%
-  width: 100%
-
-  padding-bottom: 4.5rem
-
-  display: flex
-  flex-direction: column
-  align-items: stretch
-  justify-content: flex-start
-  &__title
-    color: $black
-    font-size: 2rem
-    font-weight: bold
-
-    min-width: 24rem
-    margin: 0 0 2.8rem 0
-    padding: 0
-    &:first-letter
-      text-transform: uppercase
-
-  &__control
-    margin-bottom: 1.6rem
-
-  &__inner
-    max-width: 24rem
-    padding: 0 0 2.4rem 0
-
-.b-section-settings
-  display: flex
-  flex-direction: column
-  align-items: stretch
-  padding-bottom: 4.5rem
-  width: 100%
+.b-panel
   &__control
     margin-top: $size-step/2
     &_select-type
@@ -378,8 +345,6 @@ export default {
          padding-left: 1rem
          .range-slider
            width: $size-step * 2
-  &__inner
-    padding: 0 2.4rem
   &__buttons
     position: absolute
     bottom: 1rem

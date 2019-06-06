@@ -110,16 +110,16 @@ export default {
     </base-button>
 
     <div class="b-add-section__header">
-      <div>
-        <h6 class="b-add-section__title">
-          {{ title }}
-        </h6>
-      </div>
-      <div>
-        <button class="b-add-section__header-close-bt" @click="closeAddSectionBar">
-          <icon-base width="14" height="14" name="close"/>
-        </button>
-      </div>
+      <span class="b-add-section__title">
+        {{ title }}
+      </span>
+      <span class="b-add-section__header-close-bt" @click="closeAddSectionBar">
+        <icon-base
+          name="close"
+          width="14"
+          height="14"
+        />
+      </span>
     </div>
     <div class="b-add-section__padd">
       <BaseScrollContainer
@@ -208,23 +208,24 @@ export default {
     width: 17rem
 
   &__header
-    height: 8rem
+    position: relative
 
     display: flex
-    justify-content: space-between
     align-items: center
+    justify-content: flex-start
 
-    padding: $size-step/2 $size-step
+    width: 100%
+    padding: 1.7rem 3.1rem
     &-close-bt
-      background: transparent
+      color: $grey
+      position: absolute
+      top: 24px
+      right: 17px
       cursor: pointer
-      border: none
-      color: $gray300
-
-      &:hover svg
-        fill: $dark-blue-krayola
+      &:hover
+        color: $dark-blue-krayola
   &__padd
-    padding: 2.8rem 0 8rem
+    padding: 0 0 8rem
     height: calc(100% - 8rem)
 
     display: flex
@@ -232,10 +233,9 @@ export default {
 
   &__title
     color: $black
-    font-size: 1.8rem
-    font-weight: bold
-    letter-spacing: 0.02rem
-    text-transform: capitalize
+    font-size: 2rem
+    line-height: 1.2
+    letter-spacing: -0.02em
 
   &__closer
     position: absolute
