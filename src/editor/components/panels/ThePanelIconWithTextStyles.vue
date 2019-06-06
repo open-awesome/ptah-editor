@@ -4,21 +4,35 @@
       Icon style
     </h6>
 
+    <!-- Typography -->
+    <div class="b-panel__control" v-if="settingObjectOptions.typography">
+      <control-typography :show-text-styles="false"/>
+    </div>
+
     <!-- Control icon -->
     <div class="b-panel__control">
-      <control-text-with-icon-style></control-text-with-icon-style>
+      <control-icon-with-text-styles/>
     </div>
   </div>
 </template>
 
 <script>
-import ControlTextWithIconStyle from '../controls/TheControlIconWithTextStyle'
+import { mapState } from 'vuex'
+import ControlIconWithTextStyles from '../controls/TheControlIconWithTextStyles'
+import ControlTypography from '../controls/TheControlTypography'
 
 export default {
-  name: 'ThePanelIconStyle',
+  name: 'ThePanelIconWithTextStyles',
 
   components: {
-    ControlTextWithIconStyle
+    ControlIconWithTextStyles,
+    ControlTypography
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions'
+    ])
   }
 }
 </script>

@@ -119,9 +119,13 @@ export default {
 
   background-color: transparent
   border-bottom: 1px solid rgba($black, 0.15)
+
+  transition: border-color 0.1s ease
   cursor: pointer
   & *
     user-select: none
+  &:hover
+    border-color: $dark-blue-krayola
   &__container
     display: flex
     justify-content: space-between

@@ -26,6 +26,7 @@ import IconWithText from '@components/elements/IconWithText'
 import VideoElement from '@components/elements/VideoElement'
 import Timer from '@components/elements/Timer'
 import Form from '@components/elements/Form'
+import ToggleElement from '@components/elements/ToggleElement'
 
 // sections
 // --- header
@@ -56,8 +57,6 @@ import ProductsColumns from '@components/sections/products/ProductsColumns'
 import ProductsColumnsExtend from '@components/sections/products/ProductsColumnsExtend'
 // --- columns
 import Columns from '@components/sections/columns/Columns'
-// video
-import Video from '@components/sections/video/Video'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
@@ -70,6 +69,8 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 // --- other
 import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
+import Video from '@components/sections/video/Video'
+import Faq from '@components/sections/elements/Faq'
 
 import store from '@store'
 
@@ -88,7 +89,8 @@ const ELEMENTS = {
   IconWithText,
   VideoElement,
   Timer,
-  Form
+  Form,
+  ToggleElement
 }
 
 const COMPONENTS = {
@@ -130,7 +132,8 @@ const COMPONENTS = {
 
   Footer,
   System,
-  Video
+  Video,
+  Faq
 }
 
 Vuse.mix({ components: ELEMENTS })

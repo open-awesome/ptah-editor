@@ -54,7 +54,7 @@ export function getTypeFromSchema(target, schema) {
   if (value === types.Delimiter) return 'delimiter'
   if (value === types.SystemRequirements) return 'section'
   if (value === types.TextInherit) return 'inline'
-  if (value === types.IconWithText) return 'inline'
+  if (value === types.IconWithText) return 'iconWithText'
   if (value === types.VideoElement) return 'video'
 
   return null
@@ -393,7 +393,7 @@ export function elemtentList () {
     icontext: {
       name: 'IconWithText',
       element: types.IconWithText,
-      type: 'icon',
+      type: 'iconWithText',
       label: 'icon with text'
     },
     video: {

@@ -186,6 +186,8 @@ $main-font-size: 6rem
   font-size: $main-font-size
   text-align: center
   padding: 0.8rem
+  &.is-editable:hover
+    cursor: pointer
 
   .is-mobile &,
   .is-tablet &

@@ -1,30 +1,46 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Icon settings
+      Toggle settings
     </h6>
 
-    <!-- Control icon -->
+    <!-- Typography -->
     <div class="b-panel__control">
-      <control-text-with-icon></control-text-with-icon>
+      <control-typography :show-text-styles="false"></control-typography>
     </div>
 
+    <!-- Align -->
     <div class="b-panel__control">
-      <control-box></control-box>
+      <control-align/>
     </div>
+
+    <!-- Control settings-->
+    <div class="b-panel__control">
+      <control-toggle-element-settings/>
+    </div>
+
+    <!-- Control padding/margin-->
+    <div class="b-panel__control">
+      <control-box/>
+    </div>
+
   </div>
 </template>
 
 <script>
-import ControlTextWithIcon from '../controls/TheControlIconWithText'
+import ControlToggleElementSettings from '../controls/TheControlToggleElementSettings'
+import ControlTypography from '../controls/TheControlTypography'
+import ControlAlign from '../controls/TheControlAlign'
 import ControlBox from '../controls/TheControlBox'
 
 export default {
-  name: 'ThePanelIcon',
+  name: 'ThePanelToggleElementSettings',
 
   components: {
+    ControlToggleElementSettings,
     ControlBox,
-    ControlTextWithIcon
+    ControlTypography,
+    ControlAlign
   }
 }
 </script>
@@ -53,5 +69,5 @@ export default {
         text-transform: uppercase
 
     &__control
-      margin-bottom: 4rem
+      margin-bottom: 2.2rem
 </style>

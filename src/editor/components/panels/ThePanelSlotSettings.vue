@@ -161,27 +161,6 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-panel
-  padding-bottom: 4.5rem
-  display: flex
-  flex-direction: column
-  height: auto
-  width: 100%
-  align-items: stretch
-
-  &__title
-    color: $black
-    font-size: 2rem
-    font-weight: bold
-
-    min-width: 28rem
-    margin: 0 0 2.8rem 0
-    padding: 0
-    &:first-letter
-      text-transform: uppercase
-
-  &__control
-    margin-bottom: 1.6rem
-
   .direction
     width: 100%
     border: none
@@ -215,9 +194,13 @@ export default {
         color: $blue
         border-radius: 3px
         margin-right: 6px
+
+        transition: all .3s cubic-bezier(.2,.85,.4,1.275)
         &:hover,
         &.active
           background: $dark-blue-krayola
+        &:hover
+          color: #ffffff
         &.active
           color: #ffffff
           cursor: default

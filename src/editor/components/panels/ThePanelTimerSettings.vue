@@ -113,28 +113,6 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-panel
-  padding-bottom: 4.5rem
-  display: flex
-  flex-direction: column
-  height: auto
-  width: 100%
-  align-items: stretch
-
-  &__title
-    color: $black
-    font-size: 2rem
-    font-weight: bold
-
-    min-width: 28rem
-    margin: 0 0 2.8rem 0
-    padding: 0
-    &:first-letter
-      text-transform: uppercase
-
-  &__control
-    margin-bottom: 1.6rem
-
 /deep/
   .mx-input
     border: 0.2ren solid $dark-blue-krayola
@@ -143,6 +121,9 @@ export default {
     font-size: 1.4rem
     font-weight: bold
     color: $dark-grey
+  .mx-input:hover
+    border-color: $dark-blue-krayola
+    cursor: pointer
   .mx-calendar-icon
     color: $dark-blue-krayola
   .mx-calendar

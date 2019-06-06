@@ -49,17 +49,17 @@ export default {
       integrations: [
         {
           name: 'googleTag',
-          label: 'Add Google Tag',
+          label: 'Google Tag',
           icon: 'https://gn926.cdn.stg.gamenet.ru/0/7m0Jd/o_kfsYQ.png'
         },
         {
           name: 'googleAnalitycs',
-          label: 'Add Google Analitycs',
+          label: 'Google Analitycs',
           icon: 'https://gn517.cdn.stg.gamenet.ru/0/7m0Iw/o_2Gb9Ul.png'
         },
         {
           name: 'mailchimp',
-          label: 'Add Mailchimp',
+          label: 'Mailchimp',
           icon: 'https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png'
         }
       ],

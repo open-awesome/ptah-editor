@@ -667,30 +667,30 @@ const COMPONENTS_D = [
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'icon',
+    type: 'icon width text',
     class: 'b-text-icon',
-    label: 'icon'
+    label: 'icon with text'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'icon',
+    type: 'icon width text',
     class: 'b-text-icon',
-    label: 'icon'
+    label: 'icon with text'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'icon',
+    type: 'icon width text',
     class: 'b-text-icon',
-    label: 'icon'
+    label: 'icon with text'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'icon',
+    type: 'icon width text',
     class: 'b-text-icon',
-    label: 'icon'
+    label: 'icon with text'
   }
 ]
 
@@ -824,14 +824,14 @@ export default {
                 <icon-base name="cog" width="12" height="15" />
               </a>
             </div>
-            <div>
+            <!--div>
               <a href="#" class="b-products-columns-extend__control"
                  tooltip="Products style"
                  tooltip-position="bottom"
                  @click.stop="showSettings('SectionProductsColumnsStyle')">
                 <icon-base name="style" width="12" height="15" />
               </a>
-            </div>
+            </div-->
           </div>
 
           <div class="b-grid__row b-products-columns-extend__row">

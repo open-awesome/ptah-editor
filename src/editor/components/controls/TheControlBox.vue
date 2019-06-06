@@ -206,94 +206,108 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-  .control-box
-    width: 236px
-    height: 213px
-    box-sizing: border-box
-    border: 2px dotted #999999
-    margin: 0
-    padding: 2px
-    position: relative
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
+.control-box
+  $this: &
+
+  width: 236px
+  height: 213px
+  box-sizing: border-box
+  border: 2px dotted #999999
+  margin: 0
+  padding: 2px
+  position: relative
+
+  display: flex
+  justify-content: center
+  align-items: center
+
+  font-size: 1.4rem
+  transition: border-color 0.1s ease
+  &:hover
+    border-color: $dark-blue-krayola
+    #{$this}__element-edge
+      border-color: $dark-blue-krayola
+
+  &__element-edge
+    width: 153px
+    height: 126px
+    border: 2px solid #6D6D6D
 
     display: flex
     justify-content: center
     align-items: center
+    transition: border-color 0.1s ease
 
-    font-size: 1.4rem
+  &__content-edge
+    width: 68px
+    height: 38px
+    border: 2px dotted #999999
 
-    &__element-edge
-      width: 153px
-      height: 126px
-      border: 2px solid #6D6D6D
-
-      display: flex
-      justify-content: center
-      align-items: center
-
-    &__content-edge
-      width: 68px
-      height: 38px
-      border: 2px dotted #999999
-
-    &__title-m
-      position: absolute
-      top: 4px
-      left: 5px
-
-    &__title-p
-      position: absolute
-      top: 45px
-      left: 45px
-
-    &__lock
-      position: absolute
-      color: #C6C6C6
-      text-decoration: none
-
-      &.active
-        color: $dark-blue-krayola
-
-      &--margin
-        right: 8px
-        bottom: 8px
-
-      &--padding
-        right: 49px
-        bottom: 52px
-
-  .ctrl
+  &__title-m
     position: absolute
-    width: 2.6rem
+    top: 4px
+    left: 5px
 
-    &__m-left
-      left: 7px
-      top: calc(50% - 13px)
+  &__title-p
+    position: absolute
+    top: 45px
+    left: 45px
 
-    &__m-right
-      right: 7px
-      top: calc(50% - 13px)
+  &__lock
+    position: absolute
+    color: #C6C6C6
+    text-decoration: none
+    transition: color 0.1s ease
+    &.active
+      color: $dark-blue-krayola
 
-    &__m-top
-      right: calc(50% - 13px)
-      top: 4px
+    &:hover
+      color: rgba($dark-blue-krayola, 0.8)
 
-    &__m-bottom
-      right: calc(50% - 13px)
-      bottom: 4px
+    &--margin
+      right: 8px
+      bottom: 8px
 
-    &__p-left
-      top: calc(50% - 13px)
-      left: 49px
-
-    &__p-right
-      top: calc(50% - 13px)
-      right: 47px
-
-    &__p-top
-      right: calc(50% - 13px)
-      top: 51px
-
-    &__p-bottom
-      right: calc(50% - 13px)
+    &--padding
+      right: 49px
       bottom: 52px
+
+.ctrl
+  position: absolute
+  width: 2.6rem
+
+  &__m-left
+    left: 7px
+    top: calc(50% - 13px)
+
+  &__m-right
+    right: 7px
+    top: calc(50% - 13px)
+
+  &__m-top
+    right: calc(50% - 13px)
+    top: 4px
+
+  &__m-bottom
+    right: calc(50% - 13px)
+    bottom: 4px
+
+  &__p-left
+    top: calc(50% - 13px)
+    left: 49px
+
+  &__p-right
+    top: calc(50% - 13px)
+    right: 47px
+
+  &__p-top
+    right: calc(50% - 13px)
+    top: 51px
+
+  &__p-bottom
+    right: calc(50% - 13px)
+    bottom: 52px
 </style>

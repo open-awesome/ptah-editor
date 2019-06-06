@@ -88,15 +88,6 @@
           </control-social-networks>
         </div>
 
-        <!-- Text With Icon-->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.isIconWithText">
-          <control-icon-with-text
-            :expand="expandedIconWithText"
-            @open="onExpand"
-            >
-          </control-icon-with-text>
-        </div>
-
         <!-- Video -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.hasVideo">
           <control-video
@@ -132,7 +123,6 @@ import ControlForm from './controls/TheControlForm'
 import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms'
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks'
-import ControlIconWithText from './controls/TheControlIconWithText'
 import ControlVideo from './controls/TheControlVideo'
 import ControlBorderRadius from './controls/TheControlBorderRadius'
 import ControlHoverAnimation from './controls/TheControlHoverAnimation'
@@ -159,7 +149,6 @@ export default {
     ControlAvailablePlatforms,
     ControlAgeRestrictions,
     ControlSocialNetworks,
-    ControlIconWithText,
     ControlForm,
     ControlVideo,
     ControlBorderRadius,

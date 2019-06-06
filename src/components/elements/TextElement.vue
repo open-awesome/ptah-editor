@@ -240,47 +240,44 @@ export default {
     padding: 0 1em
 
 .menubar
-  height: 6.4rem
   display: flex
   align-items: center
-  padding: 0 8px
+  padding: 0 0.4rem
 
   position: absolute
-  width: 43rem
-  top: -66px
-  left: calc(50% - 21.5rem)
+  top: -38px
+  width: 34rem
+  left: calc(50% - 17rem)
   z-index: 9999
 
   background: $white
-  border-radius: 4px
+  border-radius: 2px
   box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25)
 
   &__button
-    width: 4rem
-    height: 4rem
+    width: 2.4rem
+    height: 2.4rem
     display: flex
     justify-content: center
     align-items: center
 
     background: transparent
-    border-radius: 3px
+    border-radius: 2px
     border: none
 
     color: $grey-middle
-
+    margin: 0.2rem
     svg
       fill: $grey-middle
       margin-bottom: 0
 
-    &:hover
-      background: rgba($cornflower-blue, .5)
-
+    &:hover,
     &.is-active
-      color: #000000
-
+      cursor: pointer
+      background: $dark-blue-krayola
+      color: #fff
       svg
-        fill: #000000
-
+        fill: #fff
   &__form
     width: 100%
     height: 100%

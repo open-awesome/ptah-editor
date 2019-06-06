@@ -148,6 +148,11 @@ $knob-shadow: 0px 2px 8px rgba($cornflower-blue, 0.2)
 
         position: relative
         z-index: 0
+        transition: all 0.1s ease
+      &:hover:before
+        content: ''
+        height: $knob-size*1.4
+        width: $knob-size*1.4
       &:after
         content: ''
         height: $knob-size/3
