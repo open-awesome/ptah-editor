@@ -1,5 +1,6 @@
 <template>
-  <div class="b-text is-editable" ref="text" @click.stop.stop>
+  <div class="b-text is-editable" ref="text" @click.stop.stop="">
+
     <slot v-if="!isActive"></slot>
 
     <editor-menu-bar :editor="editor" v-if="isActive && !hideMenubar">

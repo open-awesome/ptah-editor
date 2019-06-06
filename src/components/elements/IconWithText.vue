@@ -2,8 +2,11 @@
   <div class="b-text-icon is-editable"
     :class="{ 'b-text-icon_hide': !icon.visible }"
     ref="icon"
-    @click.stop.stop
+    @click.stop.stop=""
     >
+
+    <slot v-if="!isActive"></slot>
+
     <div class="b-text-icon__item">
       <div class="b-text-icon__item-col b-text-icon__item-col-icon" v-if="icon.visible">
         <span class="b-text-icon__icon" :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px'  }">

@@ -625,15 +625,15 @@ const COMPONENTS = [
   },
   {
     name: 'TextElement',
-    element: types.TextInherit,
-    type: 'inline',
+    element: types.Text,
+    type: 'text',
     class: 'b-text',
     label: 'text'
   },
   {
     name: 'TextElement',
-    element: types.TextInherit,
-    type: 'inline',
+    element: types.Text,
+    type: 'text',
     class: 'b-cost',
     label: 'cost'
   },
@@ -656,8 +656,8 @@ const COMPONENTS_M = [
   },
   {
     name: 'TextElement',
-    element: types.TextInherit,
-    type: 'inline',
+    element: types.Text,
+    type: 'text',
     class: 'b-text',
     label: 'text'
   }
