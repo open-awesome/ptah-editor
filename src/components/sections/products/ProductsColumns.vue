@@ -626,7 +626,7 @@ const COMPONENTS = [
   {
     name: 'TextElement',
     element: types.Text,
-    type: 'inline',
+    type: 'text',
     class: 'b-text',
     label: 'text'
   },

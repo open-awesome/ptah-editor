@@ -667,28 +667,28 @@ const COMPONENTS_D = [
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'icon width text',
+    type: 'iconWithText',
     class: 'b-text-icon',
     label: 'icon with text'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'icon width text',
+    type: 'iconWithText',
     class: 'b-text-icon',
     label: 'icon with text'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'icon width text',
+    type: 'iconWithText',
     class: 'b-text-icon',
     label: 'icon with text'
   },
   {
     name: 'IconWithText',
     element: types.IconWithText,
-    type: 'icon width text',
+    type: 'iconWithText',
     class: 'b-text-icon',
     label: 'icon with text'
   }
@@ -862,19 +862,6 @@ export default {
                             :key="index"
                             >
                             <component class="b-products-colums-component"
-                              v-if="component.type === 'inline' || component.type === 'icon'"
-                              v-styler:for="{ el: $sectionData[`components${key}M`][index].element, path: `$sectionData.components${key}M[${index}].element`, type: $sectionData[`components${key}M`][index].type, label: $sectionData[`components${key}M`][index].label }"
-                              :is="component.name"
-                              :href="$sectionData[`components${key}M`][index].element.link.href"
-                              :target="$sectionData[`components${key}M`][index].element.link.target"
-                              :path="`components${key}M[${index}].element`"
-                              :style="$sectionData.mainStyle.textStyles[component.label]"
-                              :class="[$sectionData[`components${key}M`][index].element.classes, $sectionData[`components${key}M`][index].class]"
-                              >
-                              <div v-html="$sectionData[`components${key}M`][index].element.text"></div>
-                            </component>
-                            <component class="b-products-colums-component"
-                              v-else
                               v-styler:for="{ el: $sectionData[`components${key}M`][index].element, path: `$sectionData.components${key}M[${index}].element`, type: $sectionData[`components${key}M`][index].type, label: $sectionData[`components${key}M`][index].label }"
                               :is="component.name"
                               :href="$sectionData[`components${key}M`][index].element.link.href"
@@ -916,19 +903,6 @@ export default {
                             :key="index"
                             >
                             <component class="b-products-colums-component"
-                              v-if="component.type === 'inline' || component.type === 'icon'"
-                              v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
-                              :is="component.name"
-                              :href="$sectionData[`components${key}`][index].element.link.href"
-                              :target="$sectionData[`components${key}`][index].element.link.target"
-                              :path="`components${key}[${index}].element`"
-                              :style="$sectionData.mainStyle.textStyles[component.label]"
-                              :class="[$sectionData[`components${key}`][index].element.classes, $sectionData[`components${key}`][index].class]"
-                              >
-                              <div v-html="$sectionData[`components${key}`][index].element.text"></div>
-                            </component>
-                            <component class="b-products-colums-component"
-                              v-else
                               v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
                               :is="component.name"
                               :href="$sectionData[`components${key}`][index].element.link.href"
@@ -956,19 +930,6 @@ export default {
                               :key="index"
                               >
                               <component class="b-products-colums-component"
-                                v-if="component.type === 'inline' || component.type === 'icon'"
-                                v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
-                                :is="component.name"
-                                :href="$sectionData[`components${key}D`][index].element.link.href"
-                                :target="$sectionData[`components${key}D`][index].element.link.target"
-                                :path="`components${key}D[${index}].element`"
-                                :style="$sectionData.mainStyle.textStyles[component.label]"
-                                :class="[$sectionData[`components${key}D`][index].element.classes, $sectionData[`components${key}D`][index].class]"
-                                >
-                                <div v-html="$sectionData[`components${key}D`][index].element.text"></div>
-                              </component>
-                              <component class="b-products-colums-component"
-                                v-else
                                 v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
                                 :is="component.name"
                                 :href="$sectionData[`components${key}D`][index].element.link.href"

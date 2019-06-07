@@ -28,6 +28,7 @@ const DEFAULT_OPTIONS = {
   isTextEdit: false, // edit text in settings panel
   isComplex: false, // TODO: deprecated
   video: false,
+  copyStyles: true,
 
   // --- Background type
   // --- variants: 'default' (default css background), 'video' (video background)

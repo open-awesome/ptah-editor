@@ -201,6 +201,20 @@
         </a>
       </template>
 
+      <!-- Copy el -->
+      <div class="b-styler__controls" v-if="options.copyStyles">
+        <a href="#" class="b-styler__control b-styler__control_copy" title="copy" @click.stop="copyStylesBuffer">
+          <icon-base name="copy" width="10" height="10"></icon-base>
+        </a>
+      </div>
+
+      <!-- Paste el -->
+      <div class="b-styler__controls" v-if="type === stylesBuffer.type">
+        <a href="#" class="b-styler__control b-styler__control_paste" title="paste" @click.stop="pasteStylesBuffer">
+          <icon-base name="paste" width="10" height="10"></icon-base>
+        </a>
+      </div>
+
     </div>
 
     <!-- Delete element -->
@@ -336,11 +350,10 @@ export default {
       }
     },
     timer: 0,
-    prevent: false,
-    stylesBuffer: null
+    prevent: false
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop', 'stylesBuffer']),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -468,7 +481,16 @@ export default {
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
+    ...mapActions('Sidebar', [
+      'setSettingElement',
+      'clearSettingObjectLight',
+      'setControlPanel',
+      'setSection',
+      'toggleResizeStop',
+      'toggleDragStop',
+      'updateSettingOptions',
+      'updateStylesBuffer']
+    ),
 
     setPanels (panel, isEditText) {
       this.setControlPanel(panel)
@@ -717,15 +739,22 @@ export default {
       this.components = [...this.components, el]
     },
 
-    copyStylesElement () {
-      let el = _.cloneDeep(_.get(this.section.data, this.path))
+    copyStylesBuffer () {
+      let element = { type: this.type, options: this.settingObjectOptions }
 
-      if (el.styles) {
-        this.stylesBuffer = el.styles
+      this.updateStylesBuffer(element)
+    },
+
+    pasteStylesBuffer () {
+      let type = this.stylesBuffer.type
+      let options = this.stylesBuffer.options
+
+      delete options['name']
+      delete options['sectionName']
+
+      if (this.type === type) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, options))
       }
-
-      el.key = randomPoneId()
-      this.components = [...this.components, el]
     },
 
     setModalProps () {
@@ -877,6 +906,17 @@ export default {
       svg
         width: 18px
         height: 18px
+
+    &_copy,
+    &_paste
+      background: $emerald-green
+      svg
+        fill: $white
+        margin-bottom: 0
+      &:hover, .active
+        background: $white
+        svg
+          fill: $dark-blue-krayola
 
   &__modal
     width: 40rem
