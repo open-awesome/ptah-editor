@@ -203,14 +203,22 @@
 
       <!-- Copy el -->
       <div class="b-styler__controls" v-if="options.copyStyles">
-        <a href="#" class="b-styler__control b-styler__control_copy" title="copy" @click.stop="copyStylesBuffer">
+        <a href="#" class="b-styler__control b-styler__control_copy"
+          tooltip="Copy"
+          tooltip-position="bottom"
+          @click.stop="copyStylesBuffer"
+          >
           <icon-base name="copy" width="10" height="10"></icon-base>
         </a>
       </div>
 
       <!-- Paste el -->
       <div class="b-styler__controls" v-if="type === stylesBuffer.type">
-        <a href="#" class="b-styler__control b-styler__control_paste" title="paste" @click.stop="pasteStylesBuffer">
+        <a href="#" class="b-styler__control b-styler__control_paste"
+          tooltip="Paste"
+          tooltip-position="bottom"
+          @click.stop="pasteStylesBuffer"
+          >
           <icon-base name="paste" width="10" height="10"></icon-base>
         </a>
       </div>
@@ -219,7 +227,11 @@
 
     <!-- Delete element -->
     <div class="b-styler__controls" v-if="options.removable">
-      <a href="#" class="b-styler__control b-styler__control_del" title="delete" @click.stop="removeElement">
+      <a href="#" class="b-styler__control b-styler__control_del"
+        tooltip="Delete"
+        tooltip-position="bottom"
+        @click.stop="removeElement"
+        >
         <icon-base name="close" width="10" height="10"></icon-base>
       </a>
     </div>
