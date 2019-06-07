@@ -112,6 +112,11 @@ export default {
   watch: {
     textEditorActive (value) {
       let self = this
+
+      if (!self.settingObjectOptions.icon) {
+        return
+      }
+
       self.text = self.settingObjectOptions.icon.text
       if (value && this.settingObjectElement === this.$refs.icon) {
         this.editor = new Editor({
