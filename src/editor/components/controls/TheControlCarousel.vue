@@ -55,14 +55,16 @@
       </base-range-slider>
     </div>
 
-    <base-range-slider
-      v-model="frameWidth"
-      label="Carousel width (columns)"
-      step="1"
-      min="2"
-      max="12">
-      {{frameWidth}}
-    </base-range-slider>
+    <div class="b-control">
+      <base-range-slider
+        v-model="frameWidth"
+        label="Carousel width (columns)"
+        step="1"
+        min="2"
+        max="12">
+        {{frameWidth}}
+      </base-range-slider>
+    </div>
 
   </div>
 </template>

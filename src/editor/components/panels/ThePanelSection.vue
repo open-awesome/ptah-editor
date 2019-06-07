@@ -6,10 +6,6 @@
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-panel__inner">
 
-        <div v-if="!isHeader" class="b-panel__control">
-          <control-section-height></control-section-height>
-        </div>
-
         <!-- Carousel Images Multiple Upload -->
         <div class="b-panel__control" v-if="settingObjectOptions.hasMultipleImages">
           <base-uploader
@@ -44,6 +40,10 @@
             </div>
             <p>Change this in <b><router-link :to="mailchimpLink">Integrations Settings</router-link></b></p>
           </div>
+        </div>
+
+        <div v-if="!isHeader" class="b-panel__control">
+          <control-section-height></control-section-height>
         </div>
 
         <div class="b-section-settings__control">
@@ -243,6 +243,10 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-panel
+  /deep/
+    .vb.vb-visible
+      padding-right: 0 !important
+      width: calc(100% + 17px) !important
   &__group
     border-bottom: 0.2rem dotted rgba($black, 0.15)
     padding-bottom: 2.4rem

@@ -9,7 +9,7 @@
   <slot name="video"/>
   <slot name="overlay"/>
 
-  <div class="b-header">
+  <div class="">
     <sandbox
       container-path="$sectionData.container"
       components-path="$sectionData.components"
@@ -243,4 +243,5 @@ export default {
   font-weight: bold
   padding: 5rem 10rem
   width: 60vw
+  background: rgba(255,255,255, .2)
 </style>
