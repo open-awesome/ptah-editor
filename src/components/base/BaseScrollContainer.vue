@@ -95,4 +95,8 @@ export default {
   background-color: var(--bg-color)
   opacity: 0.5
 
+.vb-content::-webkit-scrollbar
+  display: none
+  scrollbar-width: none
+
 </style>

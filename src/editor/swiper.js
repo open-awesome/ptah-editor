@@ -43,7 +43,7 @@ export default {
 
   autoplay: {
     loop: true,
-    simulateTouch: false,
+    simulateTouch: true,
     autoplay: {
       disableOnInteraction: false,
       waitForTransition: false,
