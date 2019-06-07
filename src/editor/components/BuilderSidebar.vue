@@ -27,94 +27,8 @@
         </span>
       </div>
       <div class="b-builder-sidebar__content-outer">
-      <base-scroll-container backgroundBar="#999">
-        <div class="b-builder-sidebar__content-inner">
-        <!-- Sections CONTENTS -->
-          <!-- header -->
-            <div class="no-sortable" ref="header">
-              <menu-subitem
-                  v-if="headerSection"
-                  v-scroll-to="`#section_${ headerSection.id }`"
-                  :id="`menu-item-${ headerSection.id }`"
-                  :is-selected="isActiveSection(headerSection.id)"
-                  :section-id="headerSection.id"
-                  @click="toggleSettingsBar(headerSection)"
-                  class="b-menu-subitem--header"
-                >
-                # -
-                <span class="b-menu-subitem__title-text">
-                  {{ headerSection.name }}
-                </span>
-                <div class="b-menu-subitem__icons">
-                  <span class="b-menu-subitem__icon"
-                      tooltip="Section settings"
-                      tooltip-position="bottom"
-                    @click.stop="showSettingsBar(headerSection)"
-                    >
-                    <icon-base name="cog"></icon-base>
-                  </span>
-                  <!--<span class="b-menu-subitem__icon"
-                    @click.stop="toggleSectionLayouts(headerSection)"
-                    >
-                    <icon-base name="layouts" color="#fff"></icon-base>
-                  </span>-->
-                  <span class="b-menu-subitem__icon"
-                    tooltip="Delete"
-                    tooltip-position="bottom"
-                    @click.stop="deleteSection(headerSection)"
-                    >
-                    <icon-base name="remove"></icon-base>
-                  </span>
-                </div>
-              </menu-subitem>
-            </div>
+      <menu-tree :sections="this.builder.sections" :builder="builder" :inc="increment"></menu-tree>
 
-            <div class="sortable" ref="sections">
-
-            <!-- sections -->
-              <menu-subitem
-                  v-for="(section, index) in builderSections"
-                  v-scroll-to="`#section_${section.id}`"
-                  :key="section.id"
-                  :id="`menu-item-${section.id}`"
-                  :is-selected="isActiveSection(section.id)"
-                  :is-main="section.isMain"
-                  :has-draggable-icon="true"
-                  :section-id="section.id"
-                  @click="toggleSettingsBar(section)"
-                >
-                <span class="b-menu-subitem__title-num">
-                  {{ `${ index + 1 } - `}}
-                </span>
-                <span class="b-menu-subitem__title-text">
-                  {{ section.name }}
-                </span>
-                <div class="b-menu-subitem__icons">
-                  <span class="b-menu-subitem__icon"
-                    tooltip="Section settings"
-                    tooltip-position="bottom"
-                    @click.stop="showSettingsBar(section)"
-                    >
-                    <icon-base name="cog"></icon-base>
-                  </span>
-                  <!--<span class="b-menu-subitem__icon"
-                    @click.stop="toggleSectionLayouts(section)"
-                    >
-                    <icon-base name="layouts" color="#fff"></icon-base>
-                  </span>-->
-                  <span class="b-menu-subitem__icon"
-                    tooltip="Delete"
-                    tooltip-position="bottom"
-                    @click.stop="deleteSection(section)"
-                    >
-                    <icon-base name="remove"></icon-base>
-                  </span>
-                </div>
-              </menu-subitem>
-
-            </div>
-        </div>
-      </base-scroll-container>
       </div>
     </div>
 
@@ -141,8 +55,6 @@
 </template>
 
 <script>
-import * as _ from 'lodash-es'
-import Sortable from 'sortablejs'
 import MenuItem from './MenuItem'
 import MenuSubitem from './MenuSubitem'
 import BuilderSettingsBar from './BuilderSettingsBar'
@@ -150,12 +62,13 @@ import BuilderSettingsSlots from './BuilderSettingsSlots'
 import BuilderAddSectionBar from './BuilderAddSectionBar'
 import { mapActions, mapState } from 'vuex'
 import TheControlPanel from './panels/TheControlPanel'
-import { resetIndents } from '@editor/util'
+import MenuTree from './MenuTree'
 
 export default {
   name: 'BuilderSidebar',
 
   components: {
+    MenuTree,
     TheControlPanel,
     MenuItem,
     MenuSubitem,
@@ -205,26 +118,12 @@ export default {
 
   data () {
     return {
-      isSettingsOpenedisSettingsOpened: false
+      isSettingsOpenedisSettingsOpened: false,
+      increment: 0
     }
   },
 
   updated () {
-    if (this.$refs.sections && this.builderSections.length) {
-      Sortable.create(this.$refs.sections, {
-        group: { name: 'sections' },
-        animation: 150,
-        sort: true,
-        disabled: false,
-        filter: 'no-sortable',
-        preventOnFilter: false,
-        onUpdate: (event) => {
-          let headerMod = this.headerSection ? 1 : 0
-          this.builder.sort(event.oldIndex + headerMod, event.newIndex + headerMod)
-        }
-      })
-    }
-
     // hack for update dropdown component
     window.dispatchEvent(new Event('resize'))
   },
@@ -253,93 +152,36 @@ export default {
       'saveState'
     ]),
 
-    toggleSettingsBar (section) {
-      this.closeSiteSettings()
-      this.setSettingSection(section)
-    },
-
-    showSettingsBar (section) {
-      this.closeSiteSettings()
-      this.setElement(document.getElementById(`section_${section.id}`))
-      this.setSettingSection(section)
-      this.setControlPanel('Section')
-    },
-
-    toggleSectionLayouts (section) {
-      this.closeSiteSettings()
-      this.setSettingSection(section)
-      this.setControlPanel('SectionLayout')
-    },
-
-    selectSection (section) {
-      this.toggleSettingsBar(section)
-    },
-
-    closeSettingsBar () {
-      this.clearSettingObjectLight()
-    },
-
-    closeSiteSettings () {
-      // this.setModalContent('')
-    },
-
-    closeAddSectionBar () {
-      this.toggleAddSectionMenu(false)
-    },
-
-    updateSectionsOrder (event) {
-      this.builder.sort(event.oldIndex, event.newIndex)
-    },
-
-    isActiveSection (id) {
-      return this.settingObjectSection.id === id
-    },
-
     showAddSectionBar () {
-      this.closeSiteSettings()
       this.toggleAddSectionMenu()
     },
 
     async onAddSection (section) {
+      this.increment = this.increment + 1
+
       await this.$nextTick()
-      let target = (section.isHeader)
-        ? this.$refs.header.lastElementChild
-        : this.$refs.sections.lastElementChild
+      let target
+
+      document.querySelectorAll('.menu-tree-item').forEach((node) => {
+        if (parseInt(node.dataset.id) === section.id) {
+          target = node
+        }
+      })
+
       target.click()
-    },
 
-    startScroll (x) {
-
+      // move header to top
+      if (section.isHeader) {
+        this.builder.sort(this.builder.sections.length - 1, 0)
+      }
     },
 
     toggleSidebarSection () {
       this.toggleSidebar()
     },
 
-    isMasterSection () {
-      return !!_.find(this.sectionsGroups, o => o.main.id === this.sectionId)
-    },
-
-    isSlaveSection (sectionId) {
-      return !!_.find(this.sectionsGroups, o => o.children.indexOf(sectionId) > -1)
-    },
-
-    deleteSection (section) {
-      // update group
-      if (this.isSlaveSection(section.Id)) {
-        let master = _.find(this.sectionsGroups, o => o.children.indexOf(section.Id) > -1).main
-        let absorb = master.data.mainStyle.absorb
-        master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
-      }
-
-      this.builder.remove(section)
-      this.clearSettingObject()
-
-      if (this.isMasterSection()) {
-        resetIndents()
-      }
-
-      this.saveState(this.builder.export('JSON'))
+    closeAddSectionBar () {
+      this.toggleAddSectionMenu(false)
     }
   }
 }

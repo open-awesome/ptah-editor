@@ -64,8 +64,8 @@
         </div>
 
         <!-- Group -->
-        <template v-if="!isLastSection() && !isHeader">
-          <div class="b-panel__control" v-if="!isSlaveSection()">
+        <!--<template v-if="!isLastSection() && !isHeader">
+          <div class="b-section-settings__control" v-if="!isSlaveSection()">
             <BaseButton
               :color="'gray'"
               :transparent="true"
@@ -84,7 +84,7 @@
               Group sections
             </BaseButton>
           </div>
-        </template>
+        </template>-->
 
       </div>
     </base-scroll-container>
