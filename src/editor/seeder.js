@@ -122,47 +122,6 @@ const data = new Map([
       'height': '96px'
     }
   }))],
-  [types.Link, () => (_.merge({}, DEFAULT_OPTIONS, {
-    canCopy: true,
-    removable: true,
-    typography: true,
-    isTextEdit: true,
-    text: 'Click Me!',
-    hasLink: true,
-    link: {
-      href: '',
-      target: '_blank'
-    },
-    styles: {
-      'font-family': 'Lato',
-      'font-size': '1.4rem',
-      'font-weight': 'normal',
-      'font-style': 'normal',
-      'text-decoration': 'none',
-      'text-align': 'center',
-      'color': '#000',
-      'background-image': '',
-      'background-position': 'center center',
-      'background-repeat': 'no-repeat',
-      'background-size': 'cover',
-      'background-color': ''
-    },
-    pseudo: {
-      hover: {
-        'background-color': '',
-        'background-image': '',
-        'background-position': 'center center',
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'color': ''
-      }
-    },
-    isHoverAnim: true,
-    animation: {
-      value: ''
-    }
-  })
-  )],
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
     {
       resizable: true,
@@ -240,53 +199,6 @@ const data = new Map([
         'height': '64px'
       },
       isComplex: true
-    })
-  )],
-  [types.Label, () => (_.merge({}, DEFAULT_OPTIONS,
-    {
-      resizable: true,
-      typography: true,
-      background: true,
-      aligned: true,
-      shape: true,
-      text: 'Label',
-      link: {
-        href: '',
-        target: '_blank'
-      },
-      styles: {
-        'background-image': '',
-        'background-position': 'center center',
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'background-color': '',
-        'color': '#000',
-        'border-color': '',
-        'font-size': '1.2rem',
-        'border-radius': 0,
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': 'none',
-        'justify-content': 'center',
-        'width': '',
-        'height': ''
-      }
-    })
-  )],
-  [types.Icon, () => (_.merge({}, DEFAULT_OPTIONS,
-    {
-      text: '',
-      styles: {
-        'background-image': '',
-        'background-position': 'center center',
-        'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'border-radius': '0',
-        'width': '',
-        'height': ''
-      }
     })
   )],
   [types.IconWithText, () => (_.merge({}, DEFAULT_OPTIONS,

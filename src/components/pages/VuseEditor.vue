@@ -14,7 +14,6 @@ import Sandbox from '@components/slots/Sandbox'
 
 // elements
 import Button from '@components/elements/Button'
-import Link from '@components/elements/Link'
 import TextElement from '@components/elements/TextElement'
 import Pic from '@components/elements/Pic'
 import Logo from '@components/elements/Logo'
@@ -80,7 +79,6 @@ const ELEMENTS = {
   Uploader,
   Sandbox,
   Button,
-  Link,
   TextElement,
   Pic,
   Logo,

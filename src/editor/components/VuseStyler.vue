@@ -336,7 +336,8 @@ export default {
       }
     },
     timer: 0,
-    prevent: false
+    prevent: false,
+    stylesBuffer: null
   }),
   computed: {
     ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
@@ -712,6 +713,17 @@ export default {
 
     duplicateElement () {
       let el = _.cloneDeep(_.get(this.section.data, this.path))
+      el.key = randomPoneId()
+      this.components = [...this.components, el]
+    },
+
+    copyStylesElement () {
+      let el = _.cloneDeep(_.get(this.section.data, this.path))
+
+      if (el.styles) {
+        this.stylesBuffer = el.styles
+      }
+
       el.key = randomPoneId()
       this.components = [...this.components, el]
     },
