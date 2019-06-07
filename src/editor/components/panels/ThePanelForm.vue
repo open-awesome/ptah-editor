@@ -24,7 +24,7 @@ import ControlFormStyles from './../controls/TheControlFormStyles'
 import ControlTypography from './../controls/TheControlTypography'
 
 export default {
-  name: 'ThePanelFormStyles',
+  name: 'ThePanelForm',
 
   props: {
     builder: {

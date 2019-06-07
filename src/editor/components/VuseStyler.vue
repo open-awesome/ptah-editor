@@ -186,7 +186,7 @@
         <a href="#" class="b-styler__control"
            tooltip="Form styles"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('FormStyles')">
+           @click.stop="setPanels('Form', true)">
           <icon-base name="style" width="12" height="15" />
         </a>
       </template>
@@ -827,7 +827,7 @@ export default {
 
       await this.$nextTick()
 
-      if (this.type === 'text' || this.type === 'button' || this.type === 'iconWithText') {
+      if (this.type === 'text' || this.type === 'button' || this.type === 'iconWithText' || this.type === 'form') {
         this.editText = true
         this.setControlPanel(name)
       } else {

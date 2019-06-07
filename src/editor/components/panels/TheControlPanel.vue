@@ -39,7 +39,7 @@ import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
 import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideoSettings from './ThePanelVideoSettings'
 import ThePanelFormSettings from './ThePanelFormSettings'
-import ThePanelFormStyles from './ThePanelFormStyles'
+import ThePanelForm from './ThePanelForm'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
 import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
 import ThePanelSectionColumnsSettings from './ThePanelSectionColumnsSettings'
@@ -101,7 +101,7 @@ export default {
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
     ThePanelFormSettings,
-    ThePanelFormStyles,
+    ThePanelForm,
     ThePanelVideoSettings,
     ThePanelSectionProductsColumnsSettings,
     ThePanelSectionProductsColumnsStyle,
