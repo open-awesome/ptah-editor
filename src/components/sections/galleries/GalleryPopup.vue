@@ -16,7 +16,7 @@ const GALLERY_ITEM = [
   {
     name: 'TextElement',
     element: types.Text,
-    type: 'text',
+    type: 'inline',
     class: 'b-label',
     label: 'label'
   }
@@ -35,7 +35,13 @@ const GALLERY_ITEM_CUSTOM = [
   },
   {
     element: {
-      removable: false
+      removable: false,
+      canCopy: false,
+      editor: {
+        tags: false,
+        link: false
+      },
+      text: 'Text for preview'
     }
   }
 ]
@@ -393,11 +399,11 @@ export default {
                         <icon-base name="cog" width="12" height="15" />
                       </a>
                     </div>
-                    <!--div>
+                    <div>
                       <a href="#" class="b-gallery-popup__control" @click.stop="showSettings('SectionGalleryStyle')">
                         <icon-base name="style" width="12" height="15" />
                       </a>
-                    </div-->
+                    </div>
                   </div>
                   <!-- .b-gallery-popup__wrap -->
                   <div class="b-gallery-popup__wrap">

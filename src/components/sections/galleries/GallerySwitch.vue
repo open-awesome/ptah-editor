@@ -51,14 +51,14 @@
                         <icon-base name="cog" width="12" height="15" />
                       </a>
                     </div>
-                    <!--div>
+                    <div>
                       <a href="#" class="b-gallery-one__control"
                          tooltip="Gallery style"
                          tooltip-position="bottom"
                          @click.stop="showSettings('SectionGalleryStyle')">
                         <icon-base name="style" width="12" height="15" />
                       </a>
-                    </div-->
+                    </div>
                   </div>
                 <!-- b-gallery-one-list -->
                   <div class="b-gallery-one-list flex__item flex flex_center">
@@ -89,7 +89,14 @@
                             v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
                             :path="`${key}[1].element`"
                             :is="$sectionData[key][1].name"
-                            :style="$sectionData[key][1].element.styles"
+                            :style="{
+                              'color' : $sectionData.mainStyle.textStyles.text['color'],
+                              'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                              'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                              'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                              'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                              'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                            }"
                             :class="[$sectionData[key][1].element.classes, $sectionData[key][1].class]"
                             >
                             <div v-html="$sectionData[key][1].element.text"></div>
@@ -107,7 +114,14 @@
                            v-styler:for="{ el: $sectionData[key][2].element, path:`$sectionData.${key}[2].element`, type: $sectionData[key][2].type, label: $sectionData[key][2].label }"
                            :path="`${key}[2].element`"
                            :is="$sectionData[key][2].name"
-                           :style="$sectionData[key][2].element.styles"
+                           :style="{
+                             'color' : $sectionData.mainStyle.textStyles.chapter['color'],
+                             'font-family' : $sectionData.mainStyle.textStyles.chapter['font-family'],
+                             'font-size' : $sectionData.mainStyle.textStyles.chapter['font-size'],
+                             'font-weight' : $sectionData.mainStyle.textStyles.chapter['font-weight'],
+                             'font-style' : $sectionData.mainStyle.textStyles.chapter['font-style'],
+                             'text-decoration' : $sectionData.mainStyle.textStyles.chapter['text-decoration'],
+                           }"
                            :class="[$sectionData[key][2].element.classes, $sectionData[key][2].class]"
                           >
                           <div v-html="$sectionData[key][2].element.text"></div>
@@ -129,7 +143,14 @@
                            v-styler:for="{ el: $sectionData[key][4].element, path:`$sectionData.${key}[4].element`, type: $sectionData[key][4].type, label: $sectionData[key][4].label }"
                            :path="`${key}[4].element`"
                            :is="$sectionData[key][4].name"
-                           :style="$sectionData[key][4].element.styles"
+                           :style="{
+                             'color' : $sectionData.mainStyle.textStyles.text['color'],
+                             'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                             'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                             'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                             'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                             'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                           }"
                            :class="[$sectionData[key][4].element.classes, $sectionData[key][4].class]"
                           >
                           <div v-html="$sectionData[key][4].element.text"></div>
@@ -168,15 +189,15 @@ const GALLERY_ITEM = [
   {
     name: 'TextElement',
     element: types.Text,
-    type: 'text',
-    class: 'b-text',
+    type: 'inline',
+    class: 'b-inline',
     label: 'text'
   },
   {
     name: 'TextElement',
     element: types.Text,
-    type: 'text',
-    class: 'b-chapter',
+    type: 'inline',
+    class: 'b-inline',
     label: 'chapter'
   },
   {
@@ -190,8 +211,8 @@ const GALLERY_ITEM = [
   {
     name: 'TextElement',
     element: types.Text,
-    type: 'text',
-    class: 'b-text',
+    type: 'inline',
+    class: 'b-inline',
     label: 'description'
   }
 ]
@@ -211,6 +232,7 @@ const GALLERY_ITEM_CUSTOM = [
   {
     element: {
       removable: false,
+      canCopy: false,
       editor: {
         tags: false,
         link: false
@@ -220,6 +242,7 @@ const GALLERY_ITEM_CUSTOM = [
   {
     element: {
       removable: false,
+      canCopy: false,
       editor: {
         tags: false,
         link: false
@@ -235,6 +258,7 @@ const GALLERY_ITEM_CUSTOM = [
   {
     element: {
       removable: false,
+      canCopy: false,
       editor: {
         tags: false,
         link: false
@@ -617,7 +641,7 @@ export default {
   position: relative
 
   width: 40rem
-  height: 40rem
+  height: 30rem
   margin: 0 auto
 
   & .b-uploader
