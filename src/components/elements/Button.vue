@@ -1,6 +1,8 @@
 <template>
   <a class="b-button is-editable">
-    <slot></slot>
+
+    <slot/>
+
     <vue-draggable-resizable
       class="b-button__resize"
       class-name-active="b-button__resize_active"
@@ -114,6 +116,9 @@ export default {
   user-select: none
   cursor: pointer
   transition: background-color, border 200ms
+  & .contenteditable
+    position: relative
+    z-index: 9999
   &__resize
     display: none
     border: none !important

@@ -1,16 +1,23 @@
 <template>
   <div class="b-base-button-tabs">
-    <button class="b-base-button-tabs-button"
-      type="button"
-      v-for="(item, index) in list"
-      :key="index"
-      :class="{'b-base-button-tabs-button_selected': isSelected(item.value)}"
-      :title="item.tooltipText"
-      @click="selectItem(item.value)">
+    <div class="b-base-button-tabs__row">
+      <base-label v-if="label != ''">
+        {{ label }}
+      </base-label>
+    </div>
+    <div class="b-base-button-tabs__row">
+      <button class="b-base-button-tabs-button"
+        type="button"
+        v-for="(item, index) in list"
+        :key="index"
+        :class="{'b-base-button-tabs-button_selected': isSelected(item.value)}"
+        :title="item.tooltipText"
+        @click="selectItem(item.value)">
 
-      <IconBase width="12" height="12" class="b-base-button-tabs-button__icon" v-if="item.iconName" :name="item.iconName" />
-      <span class="b-base-button-tabs-button__text" v-if="item.text" v-html="item.text"></span>
-    </button>
+        <IconBase width="12" height="12" class="b-base-button-tabs-button__icon" v-if="item.iconName" :name="item.iconName" />
+        <span class="b-base-button-tabs-button__text" v-if="item.text" v-html="item.text"></span>
+      </button>
+    </div>
   </div>
 </template>
 
@@ -43,6 +50,11 @@ export default {
      */
     value: {
       required: true
+    },
+
+    label: {
+      type: String,
+      default: ''
     }
   },
 
@@ -97,8 +109,8 @@ $border-color: rgba(#888888, 0.25)
 
 .b-base-button-tabs
   width: 100%
-  display: flex
-  flex-direction: row
+  &__row
+    display: flex
 
 .b-base-button-tabs-button
   @include button-style-reset

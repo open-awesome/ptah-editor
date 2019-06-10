@@ -420,7 +420,8 @@ const data = new Map([
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
-      'background-color':''
+      'background-color':'',
+      'align-items': 'flex-start'
     },
     overlay: {
       color: 'rgba(0,0,0,1)',
