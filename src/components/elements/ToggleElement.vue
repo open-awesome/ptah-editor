@@ -161,6 +161,7 @@ import {
   TableCell,
   TableRow
 } from 'tiptap-extensions'
+import { merge } from 'lodash-es'
 
 export default {
   name: 'ToggleElement',
@@ -264,7 +265,7 @@ export default {
     ...mapMutations('Landing', ['textEditor']),
 
     save () {
-      this.$section.set(`$sectionData.${this.path}.el.content`, this.text)
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, { el: { content: this.text } }))
     },
 
     close () {
@@ -321,7 +322,7 @@ export default {
     toggle () {
       let visible = !this.el.isTextVisible
 
-      this.$section.set(`$sectionData.${this.path}.el.isTextVisible`, visible)
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, { el: { isTextVisible: visible } }))
     }
   }
 }
