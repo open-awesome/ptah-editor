@@ -27,7 +27,6 @@
         </span>
       </div>
       <div class="b-builder-sidebar__content-outer">
-        {{controlPanel.expanded}}
       <menu-tree v-if="!controlPanel.expanded" :sections="this.builder.sections" :builder="builder" :inc="increment"></menu-tree>
 
       </div>
