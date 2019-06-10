@@ -191,6 +191,11 @@ export default {
   watch: {
     textEditorActive (value) {
       let self = this
+
+      if (!self.settingObjectOptions.el) {
+        return
+      }
+
       self.text = self.settingObjectOptions.el.content
       if (value && this.settingObjectElement === this.$refs.toggleEl) {
         this.editor = new Editor({
