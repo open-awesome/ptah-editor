@@ -34,7 +34,7 @@ import ControlAlign from '../controls/TheControlAlign'
 import ControlBox from '../controls/TheControlBox'
 
 export default {
-  name: 'ThePanelToggleElementSettings',
+  name: 'ThePanelToggleElement',
 
   components: {
     ControlToggleElementSettings,

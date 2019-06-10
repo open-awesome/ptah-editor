@@ -245,7 +245,12 @@ const data = new Map([
         'justify-content': 'flex-start',
         'margin-bottom': '16px'
       },
-      element: {
+      editor: {
+        tags: true,
+        styles: true,
+        link: true
+      },
+      el: {
         color:  '#fff',
         size: 14,
         icon: {
@@ -254,8 +259,18 @@ const data = new Map([
         },
         isIconVisible: true,
         isTextVisible: false,
-        description: 'When will open game testing begin?',
-        text: 'The start date of the open test will be announced later. Follow the news in the official communities to stay up to date!',
+        content: `
+          <table>
+            <tr >
+              <th>When will open game testing begin?</th>
+            </tr>
+            <tr>
+              <td>
+                <p>The start date of the open test will be announced later. Follow the news in the official communities to stay up to date!</p>
+              </td>
+            </tr>
+          </table>
+         `
       },
       isComplex: true
     })

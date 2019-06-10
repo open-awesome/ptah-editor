@@ -162,15 +162,9 @@
       <!-- Toggle element -->
       <template v-if="type === 'toggleElement'">
         <a href="#" class="b-styler__control"
-           tooltip="Edit texts"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('ToggleElementEdit')">
-          <icon-base name="edit" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
            tooltip="Element settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('ToggleElementSettings')">
+           @click.stop="setPanels('ToggleElement', true)">
           <icon-base name="settings" width="12" height="15" />
         </a>
       </template>
@@ -839,7 +833,7 @@ export default {
 
       await this.$nextTick()
 
-      if (this.type === 'text' || this.type === 'button' || this.type === 'iconWithText' || this.type === 'form') {
+      if (this.type === 'text' || this.type === 'button' || this.type === 'iconWithText' || this.type === 'form' || this.type === 'toggleElement') {
         this.editText = true
         this.setControlPanel(name)
       } else {
