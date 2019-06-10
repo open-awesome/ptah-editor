@@ -11,11 +11,13 @@
         label="Show/hide pagination"/>
 
       <base-color-picker
+        v-if="pagination"
         class="b-optional"
         label="Pagination color"
         v-model="paginationColor"/>
 
       <base-range-slider
+        v-if="pagination"
         class="b-optional"
         v-model="navigationSize"
         label="Nav bullets size"
@@ -33,6 +35,7 @@
         label="Show/hide navigation arrows"/>
 
       <base-color-picker
+        v-if="navigation"
         class="b-optional"
         label="Navigation color"
         v-model="navigationColor"/>

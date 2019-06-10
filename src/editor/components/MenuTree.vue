@@ -130,6 +130,10 @@ export default {
     }
   },
 
+  created () {
+    this.buildTree()
+  },
+
   updated () {
     let nodes = Array.from(document.querySelectorAll('.node-sortable'))
     let nested = []
