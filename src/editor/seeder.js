@@ -547,7 +547,17 @@ const data = new Map([
       },
       // --- swiper options
       swiper: {
-        delay: 2000
+        init: true,
+        loop: true,
+        frameWidth: 12,
+        simulateTouch: true,
+        pagination: {
+          type: 'bullets',
+          clickable: true
+        },
+        showNavigation: true,
+        showPagination: true,
+        navSize: '8px'
       }
     })
   )],

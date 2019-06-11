@@ -58,9 +58,7 @@ import ProductsColumnsExtend from '@components/sections/products/ProductsColumns
 // --- columns
 import Columns from '@components/sections/columns/Columns'
 // --- carousel
-import DefaultCarousel from '@components/sections/carousel/DefaultCarousel'
-import CoverflowCarousel from '@components/sections/carousel/CoverflowCarousel'
-import AutoplayCarousel from '@components/sections/carousel/AutoplayCarousel'
+import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
 import FormCenter from '@components/sections/forms/FormCenter'
 import FormRight from '@components/sections/forms/FormRightSide'
@@ -124,9 +122,7 @@ const COMPONENTS = {
 
   Columns,
 
-  DefaultCarousel,
-  CoverflowCarousel,
-  AutoplayCarousel,
+  Carousel,
 
   FormCenter,
   FormRight,
