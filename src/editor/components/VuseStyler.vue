@@ -790,9 +790,11 @@ export default {
 
       await this.$nextTick()
 
-      this.setControlPanel(name)
+      if (this.type !== 'inline') {
+        this.setControlPanel(name)
+      }
 
-      if (this.type === 'text' || this.type === 'button' || this.type === 'iconWithText' || this.type === 'form' || this.type === 'toggleElement') {
+      if (this.type === 'text' || this.type === 'inline' || this.type === 'button' || this.type === 'iconWithText' || this.type === 'form' || this.type === 'toggleElement') {
         this.editText = true
       } else {
         this.initPopper()
