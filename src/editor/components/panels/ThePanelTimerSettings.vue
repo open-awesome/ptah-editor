@@ -4,42 +4,91 @@
       Timer settings
     </h6>
 
-    <div class="b-panel__control">
-      <base-label v-text="'Set timer'"/>
-      <date-picker
-        v-model="timer.timestamp"
-        :minuteStep="10"
-        :editable="false"
-        :not-before="notBeforeDate"
-        :not-after="notAfterDate"
-        :disabled-days="getDisabledDays"
-        style="width:100%"
-        type="datetime"
-        format="DD.MM.YYYY hh:mm a"
-        value-type="timestamp"
-        placeholder="Select date and time"
-        lang="en"
-        confirm/>
-    </div>
+    <base-scroll-container backgroundBar="#999">
+      <div class="b-panel__inner">
+        <!-- Settings -->
+        <div class="b-panel__control">
+          <base-label v-text="'Set timer'"/>
+          <date-picker
+            v-model="timer.timestamp"
+            :minuteStep="10"
+            :editable="false"
+            :not-before="notBeforeDate"
+            :not-after="notAfterDate"
+            :disabled-days="getDisabledDays"
+            style="width:100%"
+            type="datetime"
+            format="DD.MM.YYYY hh:mm a"
+            value-type="timestamp"
+            placeholder="Select date and time"
+            lang="en"
+            confirm/>
+        </div>
 
-    <div class="b-panel__control">
-      <base-select
-        :options="UTCOptions"
-        :value="UTC"
-        @input="UTC = $event.value"
-        label="Time zone"/>
-    </div>
+        <div class="b-panel__control">
+          <base-select
+            :options="UTCOptions"
+            :value="UTC"
+            @input="UTC = $event.value"
+            label="Time zone"/>
+        </div>
+
+        <div class="b-panel__control">
+          <base-switcher v-model="labels.show" label="Labels"/>
+        </div>
+
+        <div class="b-panel__control" v-if="labels.show">
+          <base-select
+            :options="positionOptions"
+            :value="position"
+            @input="position = $event.value"
+            label="Position"/>
+        </div>
+
+        <div class="b-panel__control" v-if="labels.show">
+          <base-select
+            :options="languageOptions"
+            :value="language"
+            @input="language = $event.value"
+            label="Labels language"/>
+        </div>
+
+        <!-- Typography -->
+        <div class="b-panel__control">
+          <control-typography/>
+        </div>
+
+        <!-- Background -->
+        <div class="b-panel__control">
+          <control-background-timer/>
+        </div>
+
+        <!-- Padding/Margin -->
+        <div class="b-panel__control">
+          <control-box></control-box>
+        </div>
+
+      </div><!--/.b-panel__inner-->
+    </base-scroll-container>
   </div>
 </template>
 
 <script>
 import DatePicker from 'vue2-datepicker'
 import { mapState } from 'vuex'
+import ControlTypography from './../controls/TheControlTypography'
+import ControlBackgroundTimer from './../controls/TheControlBackgroundTimer'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelTimerSettings',
 
-  components: { DatePicker },
+  components: {
+    DatePicker,
+    ControlTypography,
+    ControlBackgroundTimer,
+    ControlBox
+  },
 
   data () {
     return {
@@ -69,6 +118,15 @@ export default {
         { name: 'UTC 10:00', value: 10 },
         { name: 'UTC 11:00', value: 11 },
         { name: 'UTC 12:00', value: 12 }
+      ],
+      languageOptions: [
+        { name: 'Russian', value: 'ru' },
+        { name: 'English', value: 'en' },
+        { name: 'German', value: 'de' }
+      ],
+      positionOptions: [
+        { name: 'Top', value: 'top' },
+        { name: 'Bottom', value: 'bottom' }
       ]
     }
   },
@@ -98,12 +156,40 @@ export default {
       set (value) {
         this.timer.UTC = value
       }
+    },
+
+    labels () {
+      return this.timer.labels
+    },
+
+    position: {
+      get () {
+        return this.getLabelsOption('position')
+      },
+      set (value) {
+        this.labels.position = value
+      }
+    },
+
+    language: {
+      get () {
+        return this.getLabelsOption('language')
+      },
+      set (value) {
+        this.labels.language = value
+      }
     }
   },
 
   methods: {
     getDisabledDays (date) {
       return new Date() >= date
+    },
+
+    getLabelsOption (name) {
+      let value = this.labels[name]
+      let option = this[`${ name }Options`].find(option => option.value === value)
+      return { name: option.name, value }
     }
   }
 }

@@ -4,20 +4,28 @@
       Video
     </h6>
 
+    <!-- Settings video element -->
     <div class="b-panel__control">
       <control-video :show-text-styles="false"></control-video>
+    </div>
+
+    <!-- Padding/Margin -->
+    <div class="b-panel__control">
+      <control-box></control-box>
     </div>
   </div>
 </template>
 
 <script>
 import ControlVideo from '../controls/TheControlVideo'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
-  name: 'ThePanelVideoSettings',
+  name: 'ThePanelVideo',
 
   components: {
-    ControlVideo
+    ControlVideo,
+    ControlBox
   },
 
   props: {

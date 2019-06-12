@@ -18,8 +18,7 @@ import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
 import ThePanelNetworks from './ThePanelNetworks'
 import ThePanelText from './ThePanelText'
-import ThePanelTimerSettings from './ThePanelTimerSettings'
-import ThePanelTimerStyle from './ThePanelTimerStyle'
+import ThePanelTimer from './ThePanelTimerSettings'
 import ThePanelImage from './ThePanelImage'
 import ThePanelImageLink from './ThePanelImageLink'
 import ThePanelAvailable from './ThePanelAvailable'
@@ -32,7 +31,7 @@ import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
 import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
-import ThePanelVideoSettings from './ThePanelVideoSettings'
+import ThePanelVideo from './ThePanelVideo'
 import ThePanelFormSettings from './ThePanelFormSettings'
 import ThePanelForm from './ThePanelForm'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
@@ -75,8 +74,7 @@ export default {
     ThePanelButton,
     ThePanelNetworks,
     ThePanelText,
-    ThePanelTimerSettings,
-    ThePanelTimerStyle,
+    ThePanelTimer,
     ThePanelSlot,
     ThePanelSlotSettings,
     ThePanelAvailable,
@@ -91,7 +89,7 @@ export default {
     ThePanelSectionSystemStyle,
     ThePanelFormSettings,
     ThePanelForm,
-    ThePanelVideoSettings,
+    ThePanelVideo,
     ThePanelSectionProductsColumnsSettings,
     ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,

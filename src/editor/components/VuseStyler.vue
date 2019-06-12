@@ -82,14 +82,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Timer settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('TimerSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Timer style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('TimerStyle')">
-          <icon-base name="style" width="12" height="15" />
+           @click.stop="setControlPanel('Timer')">
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
@@ -115,7 +109,7 @@
          tooltip-position="bottom"
          @click.stop="setControlPanel('VideoSettings')"
          v-if="type === 'video'">
-        <icon-base name="settings" width="14" height="16" />
+        <icon-base name="edit" width="14" height="16" />
       </a>
 
       <!-- Icon with text -->
