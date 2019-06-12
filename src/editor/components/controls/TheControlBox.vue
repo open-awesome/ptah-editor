@@ -213,7 +213,7 @@ export default {
   $this: &
 
   width: 100%
-  max-width: 25.5rem
+  max-width: 24rem
   height: 21rem
 
   box-sizing: border-box

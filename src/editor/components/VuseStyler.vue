@@ -68,14 +68,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Add/remove platform"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('AvailableSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Icons style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('AvailableStyle')">
-          <icon-base name="style" width="12" height="15" />
+           @click.stop="setControlPanel('Available')">
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
@@ -114,16 +108,16 @@
       <!-- Image -->
       <template v-if="type === 'image'">
         <a href="#" class="b-styler__control"
+          tooltip="Set/change image"
+          tooltip-position="bottom"
+          @click.stop="setControlPanel('Image')">
+          <icon-base name="edit" width="14" height="16" />
+        </a>
+        <a href="#" class="b-styler__control"
            tooltip="Image link"
            tooltip-position="bottom"
            @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
           <icon-base name="link" width="14" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-          tooltip="Set/change image"
-          tooltip-position="bottom"
-          @click.stop="setControlPanel('ImageSettings')">
-          <icon-base name="style" width="14" height="16" />
         </a>
       </template>
 
@@ -826,16 +820,11 @@ export default {
 
       await this.$nextTick()
 
+      this.setControlPanel(name)
+
       if (this.type === 'text' || this.type === 'button' || this.type === 'iconWithText' || this.type === 'form' || this.type === 'toggleElement') {
         this.editText = true
-        this.setControlPanel(name)
       } else {
-        if (this.type === 'inline') {
-          this.editText = true
-        } else {
-          this.setControlPanel(name + 'Settings')
-        }
-
         this.initPopper()
       }
     }

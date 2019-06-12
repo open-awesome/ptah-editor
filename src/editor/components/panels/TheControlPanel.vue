@@ -21,10 +21,9 @@ import ThePanelNetworksStyle from './ThePanelNetworksStyle'
 import ThePanelText from './ThePanelText'
 import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
-import ThePanelImageSettings from './ThePanelImageSettings'
+import ThePanelImage from './ThePanelImage'
 import ThePanelImageLink from './ThePanelImageLink'
-import ThePanelAvailableSettings from './ThePanelAvailableSettings'
-import ThePanelAvailableStyle from './ThePanelAvailableStyle'
+import ThePanelAvailable from './ThePanelAvailable'
 import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
 import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
 import ThePanelInlineEdit from './ThePanelInlineEdit'
@@ -84,12 +83,11 @@ export default {
     ThePanelTimerStyle,
     ThePanelSlot,
     ThePanelSlotSettings,
-    ThePanelAvailableSettings,
-    ThePanelAvailableStyle,
+    ThePanelAvailable,
     ThePanelRestrictionsSettings,
     ThePanelRestrictionsStyle,
     ThePanelInlineEdit,
-    ThePanelImageSettings,
+    ThePanelImage,
     ThePanelImageLink,
     ThePanelIconWithTextSettings,
     ThePanelIconWithText,
