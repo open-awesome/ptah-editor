@@ -16,7 +16,6 @@ import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
 import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
-import ThePanelButtonSettings from './ThePanelButtonSettings'
 import ThePanelNetworksSettings from './ThePanelNetworksSettings'
 import ThePanelNetworksStyle from './ThePanelNetworksStyle'
 import ThePanelText from './ThePanelText'
@@ -78,7 +77,6 @@ export default {
     ThePanelSection,
     ThePanelSectionLayout,
     ThePanelButton,
-    ThePanelButtonSettings,
     ThePanelNetworksSettings,
     ThePanelNetworksStyle,
     ThePanelText,
