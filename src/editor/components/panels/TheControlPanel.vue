@@ -32,7 +32,6 @@ import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
 import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
-import ThePanelFormSettings from './ThePanelFormSettings'
 import ThePanelForm from './ThePanelForm'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
 import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
@@ -87,7 +86,6 @@ export default {
     ThePanelSlotBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
-    ThePanelFormSettings,
     ThePanelForm,
     ThePanelVideo,
     ThePanelSectionProductsColumnsSettings,

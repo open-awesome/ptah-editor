@@ -14,6 +14,16 @@
       <control-form-styles/>
     </div>
 
+    <!-- Control Form -->
+    <div class="b-panel__control">
+      <control-form/>
+    </div>
+
+    <!-- Padding/Margin -->
+    <div class="b-panel__control">
+      <control-box></control-box>
+    </div>
+
   </div>
 </template>
 
@@ -22,6 +32,7 @@ import { mapState } from 'vuex'
 import ControlForm from '../controls/TheControlForm'
 import ControlFormStyles from './../controls/TheControlFormStyles'
 import ControlTypography from './../controls/TheControlTypography'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelForm',
@@ -36,7 +47,8 @@ export default {
   components: {
     ControlForm,
     ControlFormStyles,
-    ControlTypography
+    ControlTypography,
+    ControlBox
   },
 
   computed: {

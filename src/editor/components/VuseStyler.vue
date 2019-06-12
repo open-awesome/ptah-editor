@@ -107,7 +107,7 @@
       <a href="#" class="b-styler__control"
          tooltip="Video settings"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('VideoSettings')"
+         @click.stop="setControlPanel('Video')"
          v-if="type === 'video'">
         <icon-base name="edit" width="14" height="16" />
       </a>
@@ -128,7 +128,7 @@
            tooltip="Element settings"
            tooltip-position="bottom"
            @click.stop="setPanels('ToggleElement', true)">
-          <icon-base name="settings" width="12" height="15" />
+          <icon-base name="edit" width="12" height="15" />
         </a>
       </template>
 
@@ -137,14 +137,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Form settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('FormSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Form styles"
-           tooltip-position="bottom"
            @click.stop="setPanels('Form', true)">
-          <icon-base name="style" width="12" height="15" />
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
