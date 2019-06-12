@@ -11,22 +11,29 @@
 
     <!-- Control icon -->
     <div class="b-panel__control">
-      <control-icon-with-text-styles/>
+      <control-icon-with-text-settings/>
+    </div>
+
+    <!-- Padding/Margin -->
+    <div class="b-panel__control">
+      <control-box/>
     </div>
   </div>
 </template>
 
 <script>
 import { mapState } from 'vuex'
-import ControlIconWithTextStyles from '../controls/TheControlIconWithTextStyles'
 import ControlTypography from '../controls/TheControlTypography'
+import ControlIconWithTextSettings from '../controls/TheControlIconWithTextSettings'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelIconWithTextStyles',
 
   components: {
-    ControlIconWithTextStyles,
-    ControlTypography
+    ControlTypography,
+    ControlBox,
+    ControlIconWithTextSettings
   },
 
   computed: {

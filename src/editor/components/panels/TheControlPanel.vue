@@ -16,18 +16,15 @@ import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
 import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
-import ThePanelNetworksSettings from './ThePanelNetworksSettings'
-import ThePanelNetworksStyle from './ThePanelNetworksStyle'
+import ThePanelNetworks from './ThePanelNetworks'
 import ThePanelText from './ThePanelText'
 import ThePanelTimerSettings from './ThePanelTimerSettings'
 import ThePanelTimerStyle from './ThePanelTimerStyle'
 import ThePanelImage from './ThePanelImage'
 import ThePanelImageLink from './ThePanelImageLink'
 import ThePanelAvailable from './ThePanelAvailable'
-import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
-import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
+import ThePanelRestrictions from './ThePanelRestrictions'
 import ThePanelInlineEdit from './ThePanelInlineEdit'
-import ThePanelIconWithTextSettings from './ThePanelIconWithTextSettings'
 import ThePanelIconWithText from './ThePanelIconWithText'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSlotBackground from './ThePanelSlotBackground'
@@ -76,20 +73,17 @@ export default {
     ThePanelSection,
     ThePanelSectionLayout,
     ThePanelButton,
-    ThePanelNetworksSettings,
-    ThePanelNetworksStyle,
+    ThePanelNetworks,
     ThePanelText,
     ThePanelTimerSettings,
     ThePanelTimerStyle,
     ThePanelSlot,
     ThePanelSlotSettings,
     ThePanelAvailable,
-    ThePanelRestrictionsSettings,
-    ThePanelRestrictionsStyle,
+    ThePanelRestrictions,
     ThePanelInlineEdit,
     ThePanelImage,
     ThePanelImageLink,
-    ThePanelIconWithTextSettings,
     ThePanelIconWithText,
     ThePanelSectionBackground,
     ThePanelSlotBackground,

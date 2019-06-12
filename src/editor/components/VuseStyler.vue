@@ -52,14 +52,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Add/remove networks"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('NetworksSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Networks icons style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('NetworksStyle')">
-          <icon-base name="style" width="12" height="15" />
+           @click.stop="setControlPanel('Networks')">
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
@@ -78,14 +72,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Restrictions settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('RestrictionsSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Icon size & block style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('RestrictionsStyle')">
-          <icon-base name="style" width="12" height="15" />
+           @click.stop="setControlPanel('Restrictions')">
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
@@ -137,12 +125,6 @@
            tooltip-position="bottom"
            @click.stop="setPanels('IconWithText', true)">
           <icon-base name="edit" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Element settings"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('IconWithTextSettings')">
-          <icon-base name="settings" width="12" height="15" />
         </a>
       </template>
 
