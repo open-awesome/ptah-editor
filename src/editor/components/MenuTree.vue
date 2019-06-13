@@ -328,7 +328,7 @@ export default {
     },
 
     showBackgroundPanel (section) {
-      this.setControlPanel('SectionBackground')
+      this.setControlPanel('GroupBackground')
       this.setSettingSection(section)
     },
 
