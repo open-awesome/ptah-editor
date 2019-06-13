@@ -162,6 +162,7 @@ export default {
 
 .b-border-style
   margin-top: 2.2rem
+  max-width: 25.5rem
   &__control
     &_h
       margin-top: 1rem
@@ -198,6 +199,7 @@ export default {
          flex-direction: row-reverse
        .b-range-slider__text
          padding-left: 0.5rem
+         width: 5rem
        .b-range-slider
          padding-left: 1rem
          .range-slider

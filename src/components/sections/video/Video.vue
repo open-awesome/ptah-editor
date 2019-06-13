@@ -10,8 +10,8 @@ const BG_SECTION = 'url(https://gn123.cdn.stg.gamenet.ru/0/7opzP/o_NvNe4.jpg)'
 
 const COMPONENTS = [
   {
-    name: 'Title',
-    element: types.Title,
+    name: 'TextElement',
+    element: types.Text,
     type: 'text',
     class: 'b-title',
     label: 'title',

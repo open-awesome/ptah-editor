@@ -101,6 +101,16 @@ export default {
       text-transform: uppercase
   &__palette
     margin-top: .5rem
+  &_color-hover
+    /deep/
+      .b-pth-base-dropdown-menu__list
+        &:before
+         margin-left: 10.8rem
+        &:after
+         margin-left: 10.8rem
+      .b-pth-base-dropdown-menu__dropdown
+        &_left
+          left: -12.5rem !important
 
 /deep/
   .b-pth-base-dropdown-menu__dropdown

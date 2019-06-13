@@ -16,37 +16,27 @@ import ThePanelSectionLayout from './ThePanelSectionLayout'
 import ThePanelSlot from './ThePanelSlot'
 import ThePanelSlotSettings from './ThePanelSlotSettings'
 import ThePanelButton from './ThePanelButton'
-import ThePanelButtonEdit from './ThePanelButtonEdit'
-import ThePanelButtonSettings from './ThePanelButtonSettings'
-import ThePanelNetworksSettings from './ThePanelNetworksSettings'
-import ThePanelNetworksStyle from './ThePanelNetworksStyle'
+import ThePanelNetworks from './ThePanelNetworks'
 import ThePanelText from './ThePanelText'
-import ThePanelTimerSettings from './ThePanelTimerSettings'
-import ThePanelTimerStyle from './ThePanelTimerStyle'
-import ThePanelImageSettings from './ThePanelImageSettings'
+import ThePanelTimer from './ThePanelTimerSettings'
+import ThePanelImage from './ThePanelImage'
 import ThePanelImageLink from './ThePanelImageLink'
-import ThePanelAvailableSettings from './ThePanelAvailableSettings'
-import ThePanelAvailableStyle from './ThePanelAvailableStyle'
-import ThePanelRestrictionsSettings from './ThePanelRestrictionsSettings'
-import ThePanelRestrictionsStyle from './ThePanelRestrictionsStyle'
+import ThePanelAvailable from './ThePanelAvailable'
+import ThePanelRestrictions from './ThePanelRestrictions'
 import ThePanelInlineEdit from './ThePanelInlineEdit'
-import ThePanelIconWithTextSettings from './ThePanelIconWithTextSettings'
-import ThePanelIconWithTextStyles from './ThePanelIconWithTextStyles'
-import ThePanelIconWithTextEdit from './ThePanelIconWithTextEdit'
+import ThePanelIconWithText from './ThePanelIconWithText'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSlotBackground from './ThePanelSlotBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
 import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
-import ThePanelVideoSettings from './ThePanelVideoSettings'
-import ThePanelFormSettings from './ThePanelFormSettings'
-import ThePanelFormStyles from './ThePanelFormStyles'
+import ThePanelVideo from './ThePanelVideo'
+import ThePanelForm from './ThePanelForm'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
 import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
 import ThePanelSectionColumnsSettings from './ThePanelSectionColumnsSettings'
-import ThePanelToggleElementEdit from './ThePanelToggleElementEdit'
-import ThePanelToggleElementSettings from './ThePanelToggleElementSettings'
+import ThePanelToggleElement from './ThePanelToggleElement'
 
 export default {
   name: 'TheControlPanel',
@@ -81,39 +71,29 @@ export default {
     ThePanelSection,
     ThePanelSectionLayout,
     ThePanelButton,
-    ThePanelButtonEdit,
-    ThePanelButtonSettings,
-    ThePanelNetworksSettings,
-    ThePanelNetworksStyle,
+    ThePanelNetworks,
     ThePanelText,
-    ThePanelTimerSettings,
-    ThePanelTimerStyle,
+    ThePanelTimer,
     ThePanelSlot,
     ThePanelSlotSettings,
-    ThePanelAvailableSettings,
-    ThePanelAvailableStyle,
-    ThePanelRestrictionsSettings,
-    ThePanelRestrictionsStyle,
+    ThePanelAvailable,
+    ThePanelRestrictions,
     ThePanelInlineEdit,
-    ThePanelImageSettings,
+    ThePanelImage,
     ThePanelImageLink,
-    ThePanelIconWithTextSettings,
-    ThePanelIconWithTextStyles,
-    ThePanelIconWithTextEdit,
+    ThePanelIconWithText,
     ThePanelSectionBackground,
     ThePanelSlotBackground,
     ThePanelSectionSystemSettings,
     ThePanelSectionSystemStyle,
-    ThePanelFormSettings,
-    ThePanelFormStyles,
-    ThePanelVideoSettings,
+    ThePanelForm,
+    ThePanelVideo,
     ThePanelSectionProductsColumnsSettings,
     ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,
     ThePanelSectionGalleryStyle,
     ThePanelSectionColumnsSettings,
-    ThePanelToggleElementEdit,
-    ThePanelToggleElementSettings
+    ThePanelToggleElement
   }
 }
 </script>

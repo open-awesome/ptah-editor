@@ -454,9 +454,9 @@ export default {
       cursor: pointer
       border-color: $dark-blue-krayola
     &.styler-active
-      border-color: $white
+      border-color: $black
       &:hover
-        border-color: $white
+        border-color: $black
       &.b-text
         cursor: text
   &.fp-scroll section
