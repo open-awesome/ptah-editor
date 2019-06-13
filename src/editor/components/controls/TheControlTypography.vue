@@ -189,8 +189,8 @@ export default {
       <div class="b-typography-controls__control-col">
         <base-color-picker label="Text" v-model="color" @change="changeColor"></base-color-picker>
       </div>
-      <div class="b-typography-controls__control-col" v-if="colorTextHover">
-        <base-color-picker label="Hover" v-model="colorHover" @change="changeColorHover"></base-color-picker>
+      <div class="b-typography-controls__control-col b-typography-controls__control-col" v-if="colorTextHover">
+        <base-color-picker class="b-picker_color-hover" label="Hover" v-model="colorHover" @change="changeColorHover"></base-color-picker>
       </div>
       <div class="b-typography-controls__control-col" v-if="showTextStyles">
         <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
