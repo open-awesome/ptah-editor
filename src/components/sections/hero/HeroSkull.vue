@@ -185,10 +185,6 @@ export default {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
-  },
-
-  update (event) {
-    console.log(123)
   }
 }
 </script>
