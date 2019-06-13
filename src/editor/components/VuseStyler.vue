@@ -446,7 +446,6 @@ export default {
     ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', [
       'setSettingElement',
-      'clearSettingObjectLight',
       'setControlPanel',
       'setSection',
       'toggleResizeStop',
@@ -486,7 +485,6 @@ export default {
       this.isModalsPropsShow = false
 
       this.setControlPanel(false)
-      this.clearSettingObjectLight()
 
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
