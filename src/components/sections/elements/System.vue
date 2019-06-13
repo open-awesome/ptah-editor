@@ -184,11 +184,11 @@ const REQUIREMENTS_WINDOWS = [
   },
   {
     nameCol: 'OS-min',
-    element: { text: 'Windows 7, 8, 10', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Windows 7, 8, 10', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'OS-max',
-    element: { text: 'Windows 7, 8, 10', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Windows 7, 8, 10', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Processor-text',
@@ -196,11 +196,11 @@ const REQUIREMENTS_WINDOWS = [
   },
   {
     nameCol: 'Processor-min',
-    element: { text: 'Intel Core 2 Duo 2.5 GHz', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Intel Core 2 Duo 2.5 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Processor-max',
-    element: { text: 'Intel Core i5 3.0 GHz', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Intel Core i5 3.0 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Memory-text',
@@ -208,11 +208,11 @@ const REQUIREMENTS_WINDOWS = [
   },
   {
     nameCol: 'Memory-min',
-    element: { text: '1 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '1 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Memory-max',
-    element: { text: '2 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '2 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Graphics-text',
@@ -220,11 +220,11 @@ const REQUIREMENTS_WINDOWS = [
   },
   {
     nameCol: 'Graphics-min',
-    element: { text: 'NVIDIA 9xxx / ATI 2xxx', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'NVIDIA 9xxx / ATI 2xxx', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Graphics-max',
-    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Direct X-text',
@@ -232,11 +232,11 @@ const REQUIREMENTS_WINDOWS = [
   },
   {
     nameCol: 'Direct X-min',
-    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Direct X-max',
-    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Storage-text',
@@ -244,11 +244,11 @@ const REQUIREMENTS_WINDOWS = [
   },
   {
     nameCol: 'Storage-min',
-    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Storage-max',
-    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Sound Card-text',
@@ -256,11 +256,11 @@ const REQUIREMENTS_WINDOWS = [
   },
   {
     nameCol: 'Sound Card-min',
-    element: { text: '—', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Sound Card-max',
-    element: { text: '—', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
 const COMPONENTS_WINDOWS_KEYS = [
@@ -336,11 +336,11 @@ const REQUIREMENTS_OS = [
   },
   {
     nameCol: 'OS-min',
-    element: { text: 'Mac OSX 10.7.5', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Mac OSX 10.7.5', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'OS-max',
-    element: { text: 'Mac OSX 10.7.5', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Mac OSX 10.7.5', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Processor-text',
@@ -348,11 +348,11 @@ const REQUIREMENTS_OS = [
   },
   {
     nameCol: 'Processor-min',
-    element: { text: 'Intel Core 2 Duo 2.5 GHz', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Intel Core 2 Duo 2.5 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Processor-max',
-    element: { text: 'Intel Core i5 3.0 GHz', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Intel Core i5 3.0 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Memory-text',
@@ -360,11 +360,11 @@ const REQUIREMENTS_OS = [
   },
   {
     nameCol: 'Memory-min',
-    element: { text: '1 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '1 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Memory-max',
-    element: { text: '2 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '2 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Graphics-text',
@@ -372,11 +372,11 @@ const REQUIREMENTS_OS = [
   },
   {
     nameCol: 'Graphics-min',
-    element: { text: 'NVIDIA 9xxx / ATI 2xxx', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'NVIDIA 9xxx / ATI 2xxx', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Graphics-max',
-    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Direct X-text',
@@ -384,11 +384,11 @@ const REQUIREMENTS_OS = [
   },
   {
     nameCol: 'Direct X-min',
-    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Direct X-max',
-    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Storage-text',
@@ -396,11 +396,11 @@ const REQUIREMENTS_OS = [
   },
   {
     nameCol: 'Storage-min',
-    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Storage-max',
-    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Sound Card-text',
@@ -408,11 +408,11 @@ const REQUIREMENTS_OS = [
   },
   {
     nameCol: 'Sound Card-min',
-    element: { text: '—', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Sound Card-max',
-    element: { text: '—', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
 const COMPONENTS_OS_KEYS = [
@@ -488,11 +488,11 @@ const REQUIREMENTS_LINUX = [
   },
   {
     nameCol: 'OS-min',
-    element: { text: 'Ubuntu/SteamOS', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Ubuntu/SteamOS', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'OS-max',
-    element: { text: 'Ubuntu/SteamOS', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Ubuntu/SteamOS', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Processor-text',
@@ -500,11 +500,11 @@ const REQUIREMENTS_LINUX = [
   },
   {
     nameCol: 'Processor-min',
-    element: { text: 'Intel Core 2 Duo 2.5 GHz', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Intel Core 2 Duo 2.5 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Processor-max',
-    element: { text: 'Intel Core i5 3.0 GHz', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Intel Core i5 3.0 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Memory-text',
@@ -512,11 +512,11 @@ const REQUIREMENTS_LINUX = [
   },
   {
     nameCol: 'Memory-min',
-    element: { text: '1 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '1 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Memory-max',
-    element: { text: '2 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '2 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Graphics-text',
@@ -524,11 +524,11 @@ const REQUIREMENTS_LINUX = [
   },
   {
     nameCol: 'Graphics-min',
-    element: { text: 'NVIDIA 9xxx / ATI 2xxx', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'NVIDIA 9xxx / ATI 2xxx', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Graphics-max',
-    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Direct X-text',
@@ -536,11 +536,11 @@ const REQUIREMENTS_LINUX = [
   },
   {
     nameCol: 'Direct X-min',
-    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Direct X-max',
-    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Storage-text',
@@ -548,11 +548,11 @@ const REQUIREMENTS_LINUX = [
   },
   {
     nameCol: 'Storage-min',
-    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Storage-max',
-    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Sound Card-text',
@@ -560,11 +560,11 @@ const REQUIREMENTS_LINUX = [
   },
   {
     nameCol: 'Sound Card-min',
-    element: { text: '—', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
     nameCol: 'Sound Card-max',
-    element: { text: '—', removable: false, canCopy: false, editor: { styles: false, tags: false, link: false } }
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
 const COMPONENTS_LINUX_KEYS = [
