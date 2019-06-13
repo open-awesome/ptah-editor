@@ -223,6 +223,9 @@ export default {
         })
 
         this.isActive = true
+
+        // set focus on text
+        this.setTextFocus('toggleEl', 'editor__content')
       } else {
         if (this.editor !== null) this.editor.destroy()
         this.hideLinkMenu()
@@ -323,6 +326,16 @@ export default {
       let visible = !this.el.isTextVisible
 
       this.updateSettingOptions(merge({}, this.settingObjectOptions, { el: { isTextVisible: visible } }))
+    },
+
+    async setTextFocus (refName, getEl) {
+      let self = this
+
+      await this.$nextTick()
+
+      let t = self.$refs[refName].getElementsByClassName(getEl)
+      let t1 = t[0].firstChild
+      t1.focus()
     }
   }
 }

@@ -160,6 +160,9 @@ export default {
         })
 
         this.isActive = true
+
+        // set focus on text
+        this.setTextFocus('form', 'editor__content')
       } else {
         if (this.editor !== null) this.editor.destroy()
         this.hideLinkMenu()
@@ -270,6 +273,16 @@ export default {
       if (this.editor.isActive[`${list}_list`]()) {
         this.editor.commands[`${list}_list`]()
       }
+    },
+
+    async setTextFocus (refName, getEl) {
+      let self = this
+
+      await this.$nextTick()
+
+      let t = self.$refs[refName].getElementsByClassName(getEl)
+      let t1 = t[0].firstChild
+      t1.focus()
     }
   }
 }

@@ -48,7 +48,7 @@
       </div>
     </editor-menu-bar>
 
-    <editor-content class="editor__content" :editor="editor" v-if="isActive"/>
+    <editor-content class="editor__content" ref="editor" :editor="editor" v-if="isActive"/>
 
     <vue-draggable-resizable
       v-if="!isActive"
@@ -133,6 +133,9 @@ export default {
         })
 
         this.isActive = true
+
+        // set focus on text
+        this.setTextFocus('btn', 'editor__content')
       } else {
         if (this.editor !== null) this.editor.destroy()
         this.hideLinkMenu()
@@ -234,6 +237,16 @@ export default {
       if (this.editor.isActive[`${list}_list`]()) {
         this.editor.commands[`${list}_list`]()
       }
+    },
+
+    async setTextFocus (refName, getEl) {
+      let self = this
+
+      await this.$nextTick()
+
+      let t = self.$refs[refName].getElementsByClassName(getEl)
+      let t1 = t[0].firstChild
+      t1.focus()
     }
   },
 
