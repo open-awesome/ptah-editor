@@ -373,8 +373,8 @@ export default {
         this.builder.sort(hole.index, hole.index + 1)
       })
 
-      if (this.findHoles().length) {
-        this.moveSections()
+      if (this.findHoles(index).length) {
+        this.moveSections(index)
       }
     },
 
