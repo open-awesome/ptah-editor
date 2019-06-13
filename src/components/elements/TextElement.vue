@@ -120,7 +120,7 @@
       </div>
     </editor-menu-bar>
 
-    <editor-content class="editor__content" :editor="editor" v-if="isActive" />
+    <editor-content class="editor__content" :editor="editor" v-if="isActive"/>
   </div>
 </template>
 
@@ -290,6 +290,21 @@ export default {
       let t = self.$refs[refName].getElementsByClassName(getEl)
       let t1 = t[0].firstChild
       t1.focus()
+
+      // stop drop to this container
+      this.stopDrop(t1)
+    },
+
+    stopDrop (t1) {
+      t1.addEventListener('drop', function (e) {
+        e.preventDefault()
+        return false
+      }, true)
+
+      t1.addEventListener('dragover', function (e) {
+        e.preventDefault()
+        return false
+      }, true)
     }
   }
 }
