@@ -594,4 +594,5 @@ export default {
 // --- dirty hack. normalize artboard size
 .builder-last
   height: 1px
+  margin-top: -1px
 </style>
