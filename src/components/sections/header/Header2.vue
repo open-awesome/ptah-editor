@@ -39,7 +39,7 @@
               v-if="$sectionData.components.length"
               v-model="$sectionData.components"
               :style="$sectionData.container.styles"
-              class="b-draggable-slot b-draggable-slot_horizont"
+              class="b-draggable-slot b-draggable-slot_horizont b-draggable-slot_header"
               @change="dragStop"
             >
 
@@ -167,6 +167,7 @@ const defaultComponents2 = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
@@ -184,6 +185,7 @@ const defaultComponents2 = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
@@ -236,6 +238,13 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-section-header
+  .is-tablet &,
+  .is-mobile &
+    text-align: left
+
+  @media (max-width: 800px)
+    text-align: left
 .b-grid__col-4,
 .b-grid__col-8
   padding: .8rem 1.6rem
@@ -250,4 +259,19 @@ export default {
 
   @media (max-width: 800px)
     padding-left: 0
+
+.b-draggable-slot_header
+  .is-tablet &,
+  .is-mobile &
+    padding: 0
+  @media (max-width: 800px)
+    padding: 0
+
+.b-logo
+  .is-tablet &,
+  .is-mobile &
+    margin: 0 !important
+
+  @media (max-width: 800px)
+    margin: 0 !important
 </style>

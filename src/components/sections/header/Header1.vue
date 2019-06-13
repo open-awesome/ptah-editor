@@ -165,6 +165,7 @@ const defaultComponents2 = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
@@ -182,6 +183,7 @@ const defaultComponents2 = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
@@ -265,6 +267,14 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-section-header
+  .is-tablet &,
+  .is-mobile &
+    text-align: left
+
+  @media (max-width: 800px)
+    text-align: left
+
 .b-grid__col-3,
 .b-grid__col-9
   padding: .8rem 1.6rem
@@ -277,4 +287,12 @@ export default {
   @media (max-width: 800px)
     margin-top: auto !important
     order: 1
+
+.b-logo
+  .is-tablet &,
+  .is-mobile &
+    margin: 0 !important
+
+  @media (max-width: 800px)
+    margin: 0 !important
 </style>
