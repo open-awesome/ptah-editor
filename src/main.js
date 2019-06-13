@@ -79,6 +79,11 @@ axios.interceptors.request.use(setAuthCb)
 let refreshTokenPromise
 
 const createUpdateAuthInterceptor = (store, http) => async error => {
+  if (error.response.status === 500 &&
+    (error.response.config.url.indexOf('refresh') > -1 || error.response.config.url.indexOf('logout'))) {
+    localStorage.removeItem('token')
+    window.location.href = '/login'
+  }
   if (error.response.data.error.code !== 401) {
     return Promise.reject(error)
   }

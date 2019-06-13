@@ -9,7 +9,30 @@
   <slot name="video"/>
   <slot name="overlay"/>
 
-  <h3 class="b-header">{{ $sectionData.mainStyle.header }}</h3>
+  <div class="b-header">
+    <sandbox
+      container-path="$sectionData.container"
+      components-path="$sectionData.components"
+      direction="column"
+      class="b-sandbox">
+
+      <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @change="dragStop">
+        <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+          <component
+            v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
+            :is="component.name"
+            :href="$sectionData.components[index].element.link.href"
+            :target="$sectionData.components[index].element.link.target"
+            :style="$sectionData.components[index].element.styles"
+            :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+            :path="`components[${index}].element`"
+          >
+            <div v-html="$sectionData.components[index].element.text"></div>
+          </component>
+        </div>
+      </draggable>
+    </sandbox>
+  </div>
 
   <div
       :data-options="getOptions()"
@@ -61,13 +84,40 @@ const { next, prev, pagination, coreflow } = swiperOptions
 const GROUP_NAME = 'Carousel'
 const NAME = 'CoverflowCarousel'
 
+const COMPONENTS = [
+  {
+    name: 'TextElement',
+    element: types.Title,
+    type: 'text',
+    class: 'b-title',
+    label: 'title',
+    key: 0
+  }
+]
+
+const C_CUSTOM = [
+  {
+    element: {
+      text: 'This is a short header',
+      styles: {
+        'font-family': 'Heebo',
+        'font-size': '5.6rem',
+        'color': '#ffffff'
+      }
+    },
+    key: 0
+  }
+]
+
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': '#333'
+      'background-color': '#8CD2B5'
     },
     galleryImages: []
   },
+  components: merge([], C_CUSTOM),
+  container: {},
   edited: true
 }
 
@@ -81,7 +131,9 @@ export default {
   cover: '/img/covers/coverflow-carousel.png',
 
   $schema: {
-    mainStyle: types.GallerySlider
+    mainStyle: types.GallerySlider,
+    container: types.StyleObject,
+    components: COMPONENTS
   },
 
   inject: ['device'],
