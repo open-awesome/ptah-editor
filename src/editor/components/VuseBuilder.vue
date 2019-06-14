@@ -219,7 +219,9 @@ export default {
 
     this.$store.dispatch('Landing/updateGroups', groupList)
 
-    this.observeGroups()
+    try {
+      this.observeGroups()
+    } catch (e) { }
   },
 
   beforeDestroy () {
