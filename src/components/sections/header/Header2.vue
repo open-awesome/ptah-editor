@@ -162,18 +162,15 @@ const defaultComponents2 = [
     element: {
       text: 'Link 1',
       styles: {
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
+        'background-color': 'transparent',
+        'background-image': 'none',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px',
-        'width': 'auto'
+        'margin': '8px 16px'
       }
     },
     key: 1
@@ -182,18 +179,15 @@ const defaultComponents2 = [
     element: {
       text: 'Link 2',
       styles: {
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
+        'background-color': 'transparent',
+        'background-image': 'none',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px',
-        'width': 'auto'
+        'margin': '8px 16px'
       }
     },
     key: 2
@@ -228,8 +222,8 @@ export default {
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
     ],
     components2: [
-      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
-      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 }
+      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 }
     ]
   },
 

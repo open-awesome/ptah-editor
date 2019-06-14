@@ -128,7 +128,7 @@ export default {
         svg
           fill: $dark-blue-krayola
 
-section.is-editable:hover
+#artboard section:hover
   .b-section-menu
     opacity: 1
 </style>

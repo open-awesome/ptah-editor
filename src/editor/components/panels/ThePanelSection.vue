@@ -6,23 +6,6 @@
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-panel__inner">
 
-        <div v-if="!isHeader" class="b-panel__control">
-          <control-section-height></control-section-height>
-        </div>
-
-        <div class="b-panel__control">
-          <control-box></control-box>
-        </div>
-
-        <!-- Header -->
-        <div class="b-panel__control" v-if="settingObjectOptions.hasHeader">
-          <BaseTextField
-            v-model="header"
-            label="Header"
-            @input="updateSimpleValue('header', header)"
-          />
-        </div>
-
         <!-- Carousel Images Multiple Upload -->
         <div class="b-panel__control" v-if="settingObjectOptions.hasMultipleImages">
           <base-uploader
@@ -30,15 +13,11 @@
             @change="updateGalleryImages"
             label="Images upload"
             multiple/>
-          <br>
-          <base-range-slider
-            v-if="settingObjectSection.name === 'AutoplayCarousel'"
-            :value="settingObjectSection.data.mainStyle.swiper.delay"
-            :label="`Autoplay slides delay (${settingObjectSection.data.mainStyle.swiper.delay})`"
-            @change="changeSwiperDelay"
-            step="1000"
-            min="1000"
-            max="10000"/>
+        </div>
+
+        <!-- Carousel options -->
+        <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
+          <the-control-carousel></the-control-carousel>
         </div>
 
         <!-- Form -->
@@ -63,9 +42,17 @@
           </div>
         </div>
 
+        <div v-if="!isHeader" class="b-panel__control">
+          <control-section-height></control-section-height>
+        </div>
+
+        <div class="b-section-settings__control">
+          <control-box></control-box>
+        </div>
+
         <!-- Group -->
-        <template v-if="!isLastSection() && !isHeader">
-          <div class="b-panel__control" v-if="!isSlaveSection()">
+        <!--<template v-if="!isLastSection() && !isHeader">
+          <div class="b-section-settings__control" v-if="!isSlaveSection()">
             <BaseButton
               :color="'gray'"
               :transparent="true"
@@ -84,7 +71,7 @@
               Group sections
             </BaseButton>
           </div>
-        </template>
+        </template>-->
 
       </div>
     </base-scroll-container>
@@ -122,9 +109,11 @@ import BuilderSettingsBarGroup from './../BuilderSettingsBarGroup'
 import IconBase from '../../../components/base/icons/IconBase'
 import ControlBox from './../controls/TheControlBox'
 import { resetIndents } from '@editor/util'
+import TheControlCarousel from '../controls/TheControlCarousel'
 
 export default {
   components: {
+    TheControlCarousel,
     IconBase,
     BuilderSettingsBarGroup,
     BaseUploader,
@@ -222,14 +211,6 @@ export default {
       })
     },
 
-    changeSwiperDelay (delay) {
-      this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, {
-          swiper: { delay }
-        })
-      )
-    },
-
     isMasterSection () {
       return !!_.find(this.sectionsGroups, o => o.main.id === this.sectionId)
     },
@@ -262,6 +243,10 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-panel
+  /deep/
+    .vb.vb-visible
+      padding-right: 0 !important
+      width: calc(100% + 17px) !important
   &__group
     border-bottom: 0.2rem dotted rgba($black, 0.15)
     padding-bottom: 2.4rem

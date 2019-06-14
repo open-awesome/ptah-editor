@@ -1,9 +1,57 @@
 <template>
-  <a class="b-button is-editable">
+  <div class="b-button is-editable" ref="btn" @click.stop.stop="">
 
-    <slot/>
+    <slot v-if="!isActive"></slot>
+
+    <editor-menu-bar :editor="editor" v-if="isActive">
+      <div
+        class="menubar is-hidden"
+        :class="{ 'is-focused': focused }"
+        slot-scope="{ commands, isActive, focused, getMarkAttrs }"
+      >
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.bold() }"
+          @click.stop="commands.bold"
+        >
+          <icon-base name="fontBold" width="14" height="14"></icon-base>
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.italic() }"
+          @click.stop="commands.italic"
+        >
+          <icon-base name="fontItalic" width="14" height="14"></icon-base>
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.underline() }"
+          @click="commands.underline"
+        >
+          <icon-base name="fontUnderline" width="14" height="14" />
+        </button>
+
+        <button
+          class="menubar__button"
+          :class="{ 'is-active': isActive.strike() }"
+          @click="commands.strike"
+        >
+          <icon-base name="strike" width="14" height="14" />
+        </button>
+
+        <base-button color="blue" size="small" @click.stop="close">
+          Done
+        </base-button>
+
+      </div>
+    </editor-menu-bar>
+
+    <editor-content class="editor__content" ref="editor" :editor="editor" v-if="isActive"/>
 
     <vue-draggable-resizable
+      v-if="!isActive"
       class="b-button__resize"
       class-name-active="b-button__resize_active"
       class-name-handle="b-handle"
@@ -18,14 +66,23 @@
       :z="999"
       />
     <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
-  </a>
+  </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 import VueDraggableResizable from 'vue-draggable-resizable'
 // optionally import default styles
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+import { Editor, EditorContent, EditorMenuBar } from 'tiptap'
+import {
+  Bold,
+  Italic,
+  Strike,
+  Underline,
+  Heading
+} from 'tiptap-extensions'
+import { merge } from 'lodash-es'
 
 export default {
   name: 'Button',
@@ -33,13 +90,20 @@ export default {
   inject: ['$section'],
 
   components: {
+    EditorContent,
+    EditorMenuBar,
     VueDraggableResizable
   },
 
-  data: function () {
+  data: () => {
     return {
       width: 0,
-      height: 0
+      height: 0,
+      editor: null,
+      text: null,
+      isActive: false,
+      linkUrl: null,
+      linkMenuIsActive: false
     }
   },
 
@@ -49,17 +113,64 @@ export default {
     }
   },
 
+  watch: {
+    textEditorActive (value) {
+      let self = this
+      self.text = self.settingObjectOptions.text
+      if (value && this.settingObjectElement === this.$refs.btn) {
+        this.editor = new Editor({
+          extensions: [
+            new Bold(),
+            new Italic(),
+            new Strike(),
+            new Underline(),
+            new Heading({ levels: [1, 2, 3] })
+          ],
+          content: self.settingObjectOptions.text,
+          onUpdate (state) {
+            self.text = state.getHTML()
+          }
+        })
+
+        this.isActive = true
+
+        // set focus on text
+        this.setTextFocus('btn', 'editor__content')
+      } else {
+        if (this.editor !== null) this.editor.destroy()
+        this.hideLinkMenu()
+        this.isActive = false
+      }
+    },
+
+    text (value) {
+      this.save()
+    }
+  },
+
   computed: {
+    ...mapState('Landing', ['textEditorActive']),
+    ...mapState('Sidebar', ['settingObjectOptions', 'settingObjectElement']),
+
     styles () {
       return this.$section.get(`$sectionData.${this.path}.styles`)
     }
   },
 
+  beforeDestroy () {
+    try {
+      this.editor.destroy()
+      this.hideLinkMenu()
+    } catch (e) { }
+  },
+
   methods: {
     ...mapActions('Sidebar', [
       'toggleShowStyler',
-      'toggleResizeStop'
+      'toggleResizeStop',
+      'updateSettingOptions'
     ]),
+    ...mapMutations('Landing', ['textEditor']),
 
     onResize (x, y, width, height) {
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
@@ -71,6 +182,71 @@ export default {
     onResizeStop (x, y, width, height) {
       this.toggleShowStyler(true)
       this.toggleResizeStop(true)
+    },
+
+    save () {
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, { text: this.text }))
+    },
+
+    close () {
+      this.textEditor(false)
+    },
+
+    showLinkMenu (attrs) {
+      this.linkUrl = attrs.href
+      this.linkMenuIsActive = true
+      this.$nextTick(() => {
+        this.$refs.linkInput.focus()
+      })
+    },
+
+    hideLinkMenu () {
+      this.linkUrl = null
+      this.linkMenuIsActive = false
+    },
+
+    setLinkUrl (command, url) {
+      command({ href: url })
+      this.hideLinkMenu()
+      this.editor.focus()
+    },
+
+    setList (oldList, newList) {
+      if (this.editor.isActive.heading()) {
+        this.editor.commands.heading()
+      }
+
+      if (this.editor.isActive[`${newList}_list`]()) {
+        this.editor.commands[`${newList}_list`]()
+
+        this.$nextTick(function () {
+          this.editor.commands[`${oldList}_list`]()
+        })
+      } else {
+        this.editor.commands[`${oldList}_list`]()
+      }
+    },
+
+    setHeading (obj) {
+      this.resetList('bullet')
+      this.resetList('ordered')
+      this.editor.commands.heading(obj)
+    },
+
+    resetList (list) {
+      if (this.editor.isActive[`${list}_list`]()) {
+        this.editor.commands[`${list}_list`]()
+      }
+    },
+
+    async setTextFocus (refName, getEl) {
+      let self = this
+
+      await this.$nextTick()
+
+      let t = self.$refs[refName].getElementsByClassName(getEl)
+      let t1 = t[0].firstChild
+      t1.focus()
     }
   },
 
@@ -140,6 +316,8 @@ export default {
       &
         display: none
   &.is-editable
+    .styler-active
+      border-color: $white
     #{$self}__resize
       display: block
       .is-mobile &,
@@ -147,10 +325,6 @@ export default {
         display: none
   & span
     display: block
-  &:hover
-    filter: brightness(120%)
-  &:active
-    filter: brightness(50%)
   .is-mobile &,
   .is-tablet &
     max-width: 90% !important
@@ -224,5 +398,65 @@ export default {
     &-bl:hover,
     &-br:hover
       transform: scale(1.4)
+
+.menubar
+  display: flex
+  align-items: center
+  padding: 0 0.4rem
+
+  position: absolute
+  top: -38px
+  width: 19rem
+  left: calc(50% - 9.5rem)
+  z-index: 9999
+
+  background: $white
+  border-radius: 2px
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25)
+
+  &__button
+    width: $size-step
+    height: $size-step/1.5
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    background: transparent
+    border: none
+
+    color: $grey
+    margin: 0.2rem
+    svg
+      fill: $grey
+      width: 14px
+      height: 14px
+
+    &:hover,
+    &.is-active
+      cursor: pointer
+      color: $black
+      svg
+        fill: $black
+  &__form
+    width: 100%
+    height: 100%
+    padding: 0 .8rem
+    position: absolute
+    top: 0
+    left: 0
+    display: flex
+    align-items: center
+
+    background: $white
+    border-radius: 4px
+
+  &__input
+    width: 28em
+    padding: 1rem
+    margin-right: 1rem
+
+    border: 1px solid $grey-middle
+    border-radius: 4px
 
 </style>

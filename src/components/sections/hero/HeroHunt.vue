@@ -123,7 +123,7 @@ export default {
       },
       {
         name: 'TextElement',
-        element: types.Title,
+        element: types.Text,
         type: 'text',
         class: 'b-hunt-title',
         label: 'title',

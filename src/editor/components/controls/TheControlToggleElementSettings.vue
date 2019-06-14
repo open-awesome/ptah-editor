@@ -25,7 +25,7 @@ export default {
 
     elColor: {
       get () {
-        return this.settingObjectOptions.element.color
+        return this.settingObjectOptions.el.color
       },
 
       set (value) {
@@ -36,7 +36,7 @@ export default {
 
     elSize: {
       get () {
-        return this.settingObjectOptions.element.size
+        return this.settingObjectOptions.el.size
       },
 
       set (value) {
@@ -45,12 +45,12 @@ export default {
     },
 
     elIcon () {
-      return this.settingObjectOptions.element.icon
+      return this.settingObjectOptions.el.icon
     },
 
     elIconVisible: {
       get () {
-        return this.settingObjectOptions.element.isIconVisible
+        return this.settingObjectOptions.el.isIconVisible
       },
 
       set (value) {
@@ -87,10 +87,10 @@ export default {
     },
 
     update (prop, value) {
-      let element = {}
+      let el = {}
 
-      element[prop] = value
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { element }))
+      el[prop] = value
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { el }))
     }
   },
 

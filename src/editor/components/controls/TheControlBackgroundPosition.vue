@@ -1,5 +1,6 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import * as _ from 'lodash-es'
 
 export default {
 
@@ -105,33 +106,41 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', ['updateSettingOptions']),
+
     setParallax () {
       if (this.isParallax) {
-        this.styles['background-attachment'] = 'fixed'
+        this.update('background-attachment', 'fixed')
       } else {
-        this.styles['background-attachment'] = 'scroll'
+        this.update('background-attachment', 'scroll')
       }
     },
     changeSize () {
       if (this.backgroundFill === 'normal') {
-        this.styles['background-size'] = 'auto auto'
+        this.update('background-size', 'auto auto%')
       }
       if (this.backgroundFill === 'vertically') {
-        this.styles['background-size'] = 'auto 100%'
+        this.update('background-size', 'auto 100%')
       }
       if (this.backgroundFill === 'horizontally') {
-        this.styles['background-size'] = '100% auto'
+        this.update('background-size', '100% auto')
       }
       if (this.backgroundFill === 'both') {
-        this.styles['background-size'] = 'cover'
+        this.update('background-size', 'cover')
       }
       if (this.backgroundFill === 'stretch') {
-        this.styles['background-size'] = 'contain'
+        this.update('background-size', 'contain')
       }
     },
     setPosition (x, y) {
       this.bgPosition = `${x} ${y}`
-      this.styles['background-position'] = `${x} ${y}`
+      this.update('background-position', `${x} ${y}`)
+    },
+
+    update (prop, value) {
+      let styles = {}
+      styles[prop] = value
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
     }
   }
 }

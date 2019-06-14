@@ -10,25 +10,13 @@
     <div class="b-styler__controls">
       <!-- Button -->
       <template v-if="type === 'button'">
-        <a href="#" class="b-styler__control"
-           tooltip="Button style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('Button')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
 
         <a href="#" class="b-styler__control"
            tooltip="Edit text"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('InlineEdit')">
+           @click.stop="setPanels('Button', true)"
+          >
           <icon-base name="edit" width="12" height="15" />
-        </a>
-
-        <a href="#" class="b-styler__control"
-           tooltip="Button settings"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('ButtonSettings')">
-          <icon-base name="cog" width="12" height="15" />
         </a>
 
         <a href="#" class="b-styler__control"
@@ -39,29 +27,22 @@
         </a>
       </template>
 
-      <!-- Text -->
-      <a href="#" class="b-styler__control"
-         tooltip="Text style"
-         tooltip-position="bottom"
-         @click.stop="setControlPanel('Text')"
-         v-if="type === 'text'">
-        <icon-base name="style" width="12" height="15" />
-      </a>
-
-      <!-- Text editor -->
-      <a href="#" class="b-styler__control b-styler__control_text"
-         tooltip="Edit"
-         tooltip-position="bottom"
-         @click.stop="editText = true"
-         v-if="type === 'text'">
-        <icon-base name="edit" width="12" height="15" />
-      </a>
+      <!-- Text element -->
+      <template v-if="type === 'text'">
+        <a href="#" class="b-styler__control b-styler__control_text"
+          tooltip="Edit"
+          tooltip-position="bottom"
+          @click.stop="setPanels('Text', true)"
+          >
+          <icon-base name="edit" width="12" height="15" />
+        </a>
+      </template>
 
       <!-- Inline text -->
       <a href="#" class="b-styler__control"
          tooltip="Edit"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('InlineEdit')"
+         @click.stop="setPanels(false, true)"
          v-if="type === 'inline'">
         <icon-base name="edit" width="12" height="15" />
       </a>
@@ -71,14 +52,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Add/remove networks"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('NetworksSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Networks icons style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('NetworksStyle')">
-          <icon-base name="style" width="12" height="15" />
+           @click.stop="setControlPanel('Networks')">
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
@@ -87,14 +62,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Add/remove platform"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('AvailableSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Icons style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('AvailableStyle')">
-          <icon-base name="style" width="12" height="15" />
+           @click.stop="setControlPanel('Available')">
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
@@ -103,14 +72,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Restrictions settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('RestrictionsSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Icon size & block style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('RestrictionsStyle')">
-          <icon-base name="style" width="12" height="15" />
+           @click.stop="setControlPanel('Restrictions')">
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
@@ -119,30 +82,24 @@
         <a href="#" class="b-styler__control"
            tooltip="Timer settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('TimerSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Timer style"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('TimerStyle')">
-          <icon-base name="style" width="12" height="15" />
+           @click.stop="setControlPanel('Timer')">
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
       <!-- Image -->
       <template v-if="type === 'image'">
         <a href="#" class="b-styler__control"
+          tooltip="Set/change image"
+          tooltip-position="bottom"
+          @click.stop="setControlPanel('Image')">
+          <icon-base name="edit" width="14" height="16" />
+        </a>
+        <a href="#" class="b-styler__control"
            tooltip="Image link"
            tooltip-position="bottom"
            @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
           <icon-base name="link" width="14" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-          tooltip="Set/change image"
-          tooltip-position="bottom"
-          @click.stop="setControlPanel('ImageSettings')">
-          <icon-base name="style" width="14" height="16" />
         </a>
       </template>
 
@@ -150,9 +107,9 @@
       <a href="#" class="b-styler__control"
          tooltip="Video settings"
          tooltip-position="bottom"
-         @click.stop="setControlPanel('VideoSettings')"
+         @click.stop="setControlPanel('Video')"
          v-if="type === 'video'">
-        <icon-base name="settings" width="14" height="16" />
+        <icon-base name="edit" width="14" height="16" />
       </a>
 
       <!-- Icon with text -->
@@ -160,36 +117,18 @@
         <a href="#" class="b-styler__control"
            tooltip="Text edit"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('IconWithTextEdit')">
+           @click.stop="setPanels('IconWithText', true)">
           <icon-base name="edit" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Element styles"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('IconWithTextStyles')">
-          <icon-base name="style" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Element settings"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('IconWithTextSettings')">
-          <icon-base name="settings" width="12" height="15" />
         </a>
       </template>
 
       <!-- Toggle element -->
       <template v-if="type === 'toggleElement'">
         <a href="#" class="b-styler__control"
-           tooltip="Edit texts"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('ToggleElementEdit')">
-          <icon-base name="edit" width="12" height="15" />
-        </a>
-        <a href="#" class="b-styler__control"
            tooltip="Element settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('ToggleElementSettings')">
-          <icon-base name="settings" width="12" height="15" />
+           @click.stop="setPanels('ToggleElement', true)">
+          <icon-base name="edit" width="12" height="15" />
         </a>
       </template>
 
@@ -198,14 +137,8 @@
         <a href="#" class="b-styler__control"
            tooltip="Form settings"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('FormSettings')">
-          <icon-base name="settings" width="16" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Form styles"
-           tooltip-position="bottom"
-           @click.stop="setControlPanel('FormStyles')">
-          <icon-base name="style" width="12" height="15" />
+           @click.stop="setPanels('Form', true)">
+          <icon-base name="edit" width="16" height="16" />
         </a>
       </template>
 
@@ -219,11 +152,37 @@
         </a>
       </template>
 
+      <!-- Copy el -->
+      <div class="b-styler__controls" v-if="options.copyStyles">
+        <a href="#" class="b-styler__control b-styler__control_copy"
+          tooltip="Copy"
+          tooltip-position="bottom"
+          @click.stop="copyStylesBuffer"
+          >
+          <icon-base name="copy" width="10" height="10"></icon-base>
+        </a>
+      </div>
+
+      <!-- Paste el -->
+      <div class="b-styler__controls" v-if="type === stylesBuffer.type">
+        <a href="#" class="b-styler__control b-styler__control_paste"
+          tooltip="Paste"
+          tooltip-position="bottom"
+          @click.stop="pasteStylesBuffer"
+          >
+          <icon-base name="paste" width="10" height="10"></icon-base>
+        </a>
+      </div>
+
     </div>
 
     <!-- Delete element -->
     <div class="b-styler__controls" v-if="options.removable">
-      <a href="#" class="b-styler__control b-styler__control_del" title="delete" @click.stop="removeElement">
+      <a href="#" class="b-styler__control b-styler__control_del"
+        tooltip="Delete"
+        tooltip-position="bottom"
+        @click.stop="removeElement"
+        >
         <icon-base name="close" width="10" height="10"></icon-base>
       </a>
     </div>
@@ -357,7 +316,7 @@ export default {
     prevent: false
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop', 'stylesBuffer']),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -485,7 +444,24 @@ export default {
   methods: {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
-    ...mapActions('Sidebar', ['setSettingElement', 'clearSettingObjectLight', 'setControlPanel', 'setSection', 'toggleResizeStop', 'toggleDragStop']),
+    ...mapActions('Sidebar', [
+      'setSettingElement',
+      'clearSettingObjectLight',
+      'setControlPanel',
+      'setSection',
+      'toggleResizeStop',
+      'toggleDragStop',
+      'updateSettingOptions',
+      'updateStylesBuffer']
+    ),
+
+    setPanels (panel, isEditText) {
+      this.setControlPanel(panel)
+
+      if (isEditText) {
+        this.editText = isEditText
+      }
+    },
 
     stylerInit (event) {
       const stopNames = [
@@ -726,6 +702,24 @@ export default {
       this.components = [...this.components, el]
     },
 
+    copyStylesBuffer () {
+      let element = { type: this.type, options: this.settingObjectOptions }
+
+      this.updateStylesBuffer(element)
+    },
+
+    pasteStylesBuffer () {
+      let type = this.stylesBuffer.type
+      let options = this.stylesBuffer.options
+
+      delete options['name']
+      delete options['sectionName']
+
+      if (this.type === type) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, options))
+      }
+    },
+
     setModalProps () {
       this.isModalsPropsShow = !this.isModalsPropsShow
       this.setPosition()
@@ -796,16 +790,13 @@ export default {
 
       await this.$nextTick()
 
-      if (this.type === 'text') {
-        this.editText = true
+      if (this.type !== 'inline') {
         this.setControlPanel(name)
-      } else {
-        if (this.type === 'button' || this.type === 'inline' || this.type === 'icon') {
-          this.setControlPanel(name + 'Edit')
-        } else {
-          this.setControlPanel(name + 'Settings')
-        }
+      }
 
+      if (this.type === 'text' || this.type === 'inline' || this.type === 'button' || this.type === 'iconWithText' || this.type === 'form' || this.type === 'toggleElement') {
+        this.editText = true
+      } else {
         this.initPopper()
       }
     }
@@ -875,6 +866,17 @@ export default {
       svg
         width: 18px
         height: 18px
+
+    &_copy,
+    &_paste
+      background: $emerald-green
+      svg
+        fill: $white
+        margin-bottom: 0
+      &:hover, .active
+        background: $white
+        svg
+          fill: $dark-blue-krayola
 
   &__modal
     width: 40rem

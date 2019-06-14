@@ -131,7 +131,7 @@ export default {
 
   position: relative
   width: 100%
-  padding: 0 $size-step/1.5
+  padding: 0
   min-height: $size-step
 
   transition: border 0.25s
