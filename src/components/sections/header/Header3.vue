@@ -104,6 +104,7 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
@@ -121,6 +122,7 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
@@ -138,6 +140,7 @@ const defaultComponents = [
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
@@ -187,12 +190,26 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-section-header
+  .is-tablet &,
+  .is-mobile &
+    text-align: left
+
+  @media (max-width: 800px)
+    text-align: left
+
 .b-grid__col-12
   padding: .8rem 1.6rem
 
 .mobile-header
   padding: 0
   display: none
+  .is-mobile &
+    display: block
+  @media (max-width: 800px)
+    display: block
+
+.b-logo
   .is-mobile &
     display: block
   @media (max-width: 800px)
