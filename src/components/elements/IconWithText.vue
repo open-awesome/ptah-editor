@@ -25,6 +25,7 @@
       <div
         class="menubar is-hidden"
         :class="{ 'is-focused': focused }"
+        :style=" { 'top': posMenu.top, 'bottom': posMenu.bottom, }"
         slot-scope="{ commands, isActive, focused, getMarkAttrs }"
       >
         <button
@@ -99,7 +100,11 @@ export default {
       text: null,
       isActive: false,
       linkUrl: null,
-      linkMenuIsActive: false
+      linkMenuIsActive: false,
+      posMenu: {
+        top: '-38px',
+        bottom: 'auto'
+      }
     }
   },
 
@@ -137,6 +142,8 @@ export default {
 
         // set focus on text
         this.setTextFocus('icon', 'editor__content')
+        // set menu position
+        this.setPosition()
       } else {
         if (this.editor !== null) this.editor.destroy()
         this.hideLinkMenu()
@@ -265,6 +272,23 @@ export default {
         e.preventDefault()
         return false
       }, true)
+    },
+
+    async setPosition () {
+      await this.$nextTick()
+
+      let el = this.$refs.icon
+      let menu = el.getElementsByClassName('menubar')[0]
+      let pos = el.getBoundingClientRect()
+      let heightTopbar = document.getElementById('topbar').clientHeight
+
+      if (pos.top < (menu.clientHeight + heightTopbar)) {
+        this.posMenu.top = 'auto'
+        this.posMenu.bottom = '-38px'
+      } else {
+        this.posMenu.top = '-38px'
+        this.posMenu.bottom = 'auto'
+      }
     }
   }
 }
