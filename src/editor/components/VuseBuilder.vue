@@ -397,14 +397,14 @@ export default {
 
       this.removeGroupClasses(sectionsNodes)
 
-      this.$builder.sections.forEach((section, index) => {
+      this.builderSections.forEach((section, index) => {
         if (section.data.mainStyle.absorb > 0) {
           let group = {}
           group.main = section
           group.main_element = sectionsNodes[index]
           group.absorb = section.data.mainStyle.absorb
           group.childrenNodes = sectionsNodes.slice(index + 1, index + section.data.mainStyle.absorb + 1)
-          group.children = this.$builder.sections
+          group.children = this.builderSections
             .slice(index + 1, index + section.data.mainStyle.absorb + 1)
             .map(section => section.id)
 

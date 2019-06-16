@@ -341,7 +341,7 @@ export default {
     },
 
     async groupSections () {
-      let group = this.builderSections().filter((section) => {
+      let group = this.sections.filter((section) => {
         return this.selectedSections.indexOf(section.id) > -1
       })
 
