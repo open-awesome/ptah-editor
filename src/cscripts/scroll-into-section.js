@@ -22,7 +22,9 @@ export function scrollIntoSection (e) {
 
   if (section) {
     let behavior = target.dataset.behavior
-    closePopup()
+    try {
+      closePopup()
+    } catch (e) {}
     section.scrollIntoView({ block: 'start', behavior })
   }
 

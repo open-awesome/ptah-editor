@@ -99,18 +99,16 @@ const defaultComponents = [
     element: {
       text: 'Link 1',
       styles: {
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
+        'background-color': 'transparent',
+        'background-image': 'none',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '100px',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px',
-        'width': 'auto'
+        'margin': '8px 16px'
       }
     },
     key: 1
@@ -119,18 +117,16 @@ const defaultComponents = [
     element: {
       text: 'Link 2',
       styles: {
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
+        'background-color': 'transparent',
+        'background-image': 'none',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '100px',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px',
-        'width': 'auto'
+        'margin': '8px 16px'
       }
     },
     key: 2
@@ -139,18 +135,16 @@ const defaultComponents = [
     element: {
       text: 'Link 3',
       styles: {
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
+        'background-color': 'transparent',
+        'background-image': 'none',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '100px',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px',
-        'width': 'auto'
+        'margin': '8px 16px'
       }
     },
     key: 3
@@ -181,9 +175,9 @@ export default {
     mainStyle: StyleObject,
     container: StyleObject,
     components: [
-      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
-      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 },
-      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 3 }
+      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 3 }
     ]
   },
 
@@ -196,12 +190,26 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-section-header
+  .is-tablet &,
+  .is-mobile &
+    text-align: left
+
+  @media (max-width: 800px)
+    text-align: left
+
 .b-grid__col-12
   padding: .8rem 1.6rem
 
 .mobile-header
   padding: 0
   display: none
+  .is-mobile &
+    display: block
+  @media (max-width: 800px)
+    display: block
+
+.b-logo
   .is-mobile &
     display: block
   @media (max-width: 800px)

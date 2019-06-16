@@ -233,7 +233,6 @@ class Vuse {
             isHeader: component.isHeader
           }
           if (!sectionData.schema) {
-            console.log(this.components[sectionData.name])
             sectionData.schema = this.components[sectionData.name].options.$schema
           }
         }

@@ -4,34 +4,49 @@
       {{ settingObjectLabel }}
     </h6>
 
-    <!-- Typography -->
-    <div class="b-panel__control">
-      <control-typography/>
-    </div>
+    <base-scroll-container backgroundBar="#999">
+      <div class="b-panel__inner">
 
-    <!-- Align -->
-    <div class="b-panel__control" v-if="settingObjectOptions.aligned">
-      <control-align/>
-    </div>
+        <!-- Typography -->
+        <div class="b-panel__control">
+          <control-typography :colorTextHover="true" />
+        </div>
 
-    <!-- background -->
-    <div class="b-panel__control">
-      <control-background-color/>
-    </div>
-    <div class="b-panel__control">
-      <control-background-image/>
-    </div>
+        <!-- Align -->
+        <div class="b-panel__control" v-if="settingObjectOptions.aligned">
+          <control-align/>
+        </div>
 
-    <!-- Border style -->
-    <div class="b-panel__control">
-      <control-border-style/>
-    </div>
+        <!-- background -->
+        <div class="b-panel__control">
+          <control-background-color/>
+        </div>
+        <div class="b-panel__control">
+          <control-background-image/>
+        </div>
 
-    <!-- Border radius -->
-    <div class="b-panel__control">
-      <control-border-radius/>
-    </div>
+        <!-- Border style -->
+        <div class="b-panel__control">
+          <control-border-style/>
+        </div>
 
+        <!-- Border radius -->
+        <div class="b-panel__control">
+          <control-border-radius/>
+        </div>
+
+        <!-- Hover animation -->
+        <div class="b-panel__control">
+          <control-hover-animation/>
+        </div>
+
+        <!-- Padding/Margin -->
+        <div class="b-panel__control">
+          <control-box></control-box>
+        </div>
+
+      </div><!--/.b-panel__inner-->
+    </base-scroll-container>
   </div>
 </template>
 
@@ -43,6 +58,8 @@ import ControlBackgroundImage from './../controls/TheControlBackgroundImage'
 import ControlBorderRadius from './../controls/TheControlBorderRadius'
 import ControlBorderStyle from './../controls/TheControlBorderStyle'
 import ControlAlign from './../controls/TheControlAlign'
+import ControlHoverAnimation from './../controls/TheControlHoverAnimation'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
   name: 'ThePanelButton',
@@ -60,7 +77,9 @@ export default {
     ControlBackgroundColor,
     ControlBackgroundImage,
     ControlBorderRadius,
-    ControlBorderStyle
+    ControlBorderStyle,
+    ControlHoverAnimation,
+    ControlBox
   },
 
   computed: {

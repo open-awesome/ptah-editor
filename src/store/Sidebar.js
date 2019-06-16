@@ -15,6 +15,7 @@ export default {
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectLabel: '', // Styler slot label
     settingObjectOptions: {},
+    stylesBuffer: {}, // buffer element { type, { options } }
     settingObjectElement: false,
     settingObjectSection: {},
     siteSettingsMenu: [
@@ -75,6 +76,9 @@ export default {
     },
     setSettingObjectOptions (state, options) {
       state.settingObjectOptions = options
+    },
+    setStylesBuffer (state, element) {
+      state.stylesBuffer = element
     },
     setSection (state, section) {
       state.settingObjectSection = section
@@ -266,6 +270,16 @@ export default {
 
     toggleDragStop ({ commit, state }, value) {
       commit('setDragStop', (typeof value !== 'undefined') ? value : false)
+    },
+
+    /**
+    * save styles in buffer
+    * @param commit
+    * @param state
+    * @param options
+    */
+    updateStylesBuffer ({ commit, state }, element) {
+      commit('setStylesBuffer', element)
     }
   },
 
