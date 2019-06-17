@@ -5,8 +5,10 @@
     >
 
     <uploader
+      :diameter="40"
       :path="path"
       :file="file"
+      :showProgress="true"
       @change="changeSrc"
     />
 
@@ -136,14 +138,7 @@ export default {
   min-height: $size-step/2
 
   user-select: none
-  transition: background-color 200ms
-
-  & .b-uploader
-    opacity: 0
-    z-index: 1
-  &:hover .b-uploader
-    opacity: 0.2
-    display: block
+  transition: all 200ms
 
   &__resize
     border: none !important
