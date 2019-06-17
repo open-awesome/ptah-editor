@@ -223,7 +223,9 @@ export default {
 
     this.$store.dispatch('Landing/updateGroups', groupList)
 
-    this.observeGroups()
+    try {
+      this.observeGroups()
+    } catch (e) { }
   },
 
   beforeDestroy () {
@@ -466,9 +468,9 @@ export default {
       cursor: pointer
       border-color: $dark-blue-krayola
     &.styler-active
-      border-color: $white
+      border-color: $black
       &:hover
-        border-color: $white
+        border-color: $black
       &.b-text
         cursor: text
   &.fp-scroll section
@@ -605,4 +607,5 @@ export default {
 // --- dirty hack. normalize artboard size
 .builder-last
   height: 1px
+  margin-top: -1px
 </style>

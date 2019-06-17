@@ -8,245 +8,259 @@ import { mapActions } from 'vuex'
 
 const REQUIREMENTS = [
   {
-    name: 'OS-text',
+    name: 'TextElement',
+    nameCol: 'OS-text',
     prop: 'OS',
-    element: types.TextInherit
+    element: types.Text
   },
   {
-    name: 'OS-min',
+    name: 'TextElement',
+    nameCol: 'OS-min',
     prop: 'OS',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'OS-max',
+    name: 'TextElement',
+    nameCol: 'OS-max',
     prop: 'OS',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Processor-text',
+    name: 'TextElement',
+    nameCol: 'Processor-text',
     prop: 'Processor',
-    element: types.TextInherit
+    element: types.Text
   },
   {
-    name: 'Processor-min',
+    name: 'TextElement',
+    nameCol: 'Processor-min',
     prop: 'Processor',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Processor-max',
+    name: 'TextElement',
+    nameCol: 'Processor-max',
     prop: 'Processor',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Memory-text',
+    name: 'TextElement',
+    nameCol: 'Memory-text',
     prop: 'Memory',
-    element: types.TextInherit
+    element: types.Text
   },
   {
-    name: 'Memory-min',
+    name: 'TextElement',
+    nameCol: 'Memory-min',
     prop: 'Memory',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Memory-max',
+    name: 'TextElement',
+    nameCol: 'Memory-max',
     prop: 'Memory',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Graphics-text',
+    name: 'TextElement',
+    nameCol: 'Graphics-text',
     prop: 'Graphics',
-    element: types.TextInherit
+    element: types.Text
   },
   {
-    name: 'Graphics-min',
+    name: 'TextElement',
+    nameCol: 'Graphics-min',
     prop: 'Graphics',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Graphics-max',
+    name: 'TextElement',
+    nameCol: 'Graphics-max',
     prop: 'Graphics',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Direct X-text',
+    name: 'TextElement',
+    nameCol: 'Direct X-text',
     prop: 'Direct X',
-    element: types.TextInherit
+    element: types.Text
   },
   {
-    name: 'Direct X-min',
+    name: 'TextElement',
+    nameCol: 'Direct X-min',
     prop: 'Direct X',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Direct X-max',
+    name: 'TextElement',
+    nameCol: 'Direct X-max',
     prop: 'Direct X',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Storage-text',
+    name: 'TextElement',
+    nameCol: 'Storage-text',
     prop: 'Storage',
-    element: types.TextInherit
+    element: types.Text
   },
   {
-    name: 'Storage-min',
+    name: 'TextElement',
+    nameCol: 'Storage-min',
     prop: 'Storage',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Storage-max',
+    name: 'TextElement',
+    nameCol: 'Storage-max',
     prop: 'Storage',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Sound Card-text',
+    name: 'TextElement',
+    nameCol: 'Sound Card-text',
     prop: 'Sound Card',
-    element: types.TextInherit
+    element: types.Text
   },
   {
-    name: 'Sound Card-min',
+    name: 'TextElement',
+    nameCol: 'Sound Card-min',
     prop: 'Sound Card',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   },
   {
-    name: 'Sound Card-max',
+    name: 'TextElement',
+    nameCol: 'Sound Card-max',
     prop: 'Sound Card',
-    element: types.TextInherit,
+    element: types.Text,
     type: 'inline',
+    class: 'b-inline',
     label: 'Text'
   }
 ]
 
 const REQUIREMENTS_WINDOWS = [
   {
-    name: 'OS-text',
-    element: { text: 'OS version' },
-    key: 11
+    nameCol: 'OS-text',
+    element: { text: 'OS version' }
   },
   {
-    name: 'OS-min',
-    element: { text: 'Windows 7, 8, 10' },
-    key: 12
+    nameCol: 'OS-min',
+    element: { text: 'Windows 7, 8, 10', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'OS-max',
-    element: { text: 'Windows 7, 8, 10' },
-    key: 13
+    nameCol: 'OS-max',
+    element: { text: 'Windows 7, 8, 10', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Processor-text',
-    element: { text: 'CPU' },
-    key: 21
+    nameCol: 'Processor-text',
+    element: { text: 'CPU' }
   },
   {
-    name: 'Processor-min',
-    element: { text: 'Intel Core 2 Duo 2.5 GHz' },
-    key: 22
+    nameCol: 'Processor-min',
+    element: { text: 'Intel Core 2 Duo 2.5 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Processor-max',
-    element: { text: 'Intel Core i5 3.0 GHz' },
-    key: 23
+    nameCol: 'Processor-max',
+    element: { text: 'Intel Core i5 3.0 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Memory-text',
-    element: { text: 'RAM' },
-    key: 31
+    nameCol: 'Memory-text',
+    element: { text: 'RAM' }
   },
   {
-    name: 'Memory-min',
-    element: { text: '1 GB' },
-    key: 32
+    nameCol: 'Memory-min',
+    element: { text: '1 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Memory-max',
-    element: { text: '2 GB' },
-    key: 33
+    nameCol: 'Memory-max',
+    element: { text: '2 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Graphics-text',
-    element: { text: 'Graphics' },
-    key: 41
+    nameCol: 'Graphics-text',
+    element: { text: 'Graphics' }
   },
   {
-    name: 'Graphics-min',
-    element: { text: 'NVIDIA 9xxx / ATI 2xxx' },
-    key: 42
+    nameCol: 'Graphics-min',
+    element: { text: 'NVIDIA 9xxx / ATI 2xxx', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Graphics-max',
-    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' },
-    key: 43
+    nameCol: 'Graphics-max',
+    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Direct X-text',
-    element: { text: 'DX version' },
-    key: 41
+    nameCol: 'Direct X-text',
+    element: { text: 'DX version' }
   },
   {
-    name: 'Direct X-min',
-    element: { text: 'Version 9.0c' },
-    key: 42
+    nameCol: 'Direct X-min',
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Direct X-max',
-    element: { text: 'Version 9.0c' },
-    key: 43
+    nameCol: 'Direct X-max',
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Storage-text',
-    element: { text: 'Storage space' },
-    key: 51
+    nameCol: 'Storage-text',
+    element: { text: 'Storage space' }
   },
   {
-    name: 'Storage-min',
-    element: { text: '5 GB' },
-    key: 52
+    nameCol: 'Storage-min',
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Storage-max',
-    element: { text: '5 GB' },
-    key: 53
+    nameCol: 'Storage-max',
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Sound Card-text',
-    element: { text: 'Sound Card' },
-    key: 61
+    nameCol: 'Sound Card-text',
+    element: { text: 'Sound Card' }
   },
   {
-    name: 'Sound Card-min',
-    element: { text: '—' },
-    key: 62
+    nameCol: 'Sound Card-min',
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Sound Card-max',
-    element: { text: '—' },
-    key: 63
+    nameCol: 'Sound Card-max',
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
 const COMPONENTS_WINDOWS_KEYS = [
@@ -317,109 +331,88 @@ const COMPONENTS_WINDOWS_KEYS = [
 
 const REQUIREMENTS_OS = [
   {
-    name: 'OS-text',
-    element: { text: 'OS version' },
-    key: 111
+    nameCol: 'OS-text',
+    element: { text: 'OS version' }
   },
   {
-    name: 'OS-min',
-    element: { text: 'Mac OSX 10.7.5' },
-    key: 112
+    nameCol: 'OS-min',
+    element: { text: 'Mac OSX 10.7.5', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'OS-max',
-    element: { text: 'Mac OSX 10.7.5' },
-    key: 113
+    nameCol: 'OS-max',
+    element: { text: 'Mac OSX 10.7.5', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Processor-text',
-    element: { text: 'CPU' },
-    key: 121
+    nameCol: 'Processor-text',
+    element: { text: 'CPU' }
   },
   {
-    name: 'Processor-min',
-    element: { text: 'Intel Core 2 Duo 2.5 GHz' },
-    key: 122
+    nameCol: 'Processor-min',
+    element: { text: 'Intel Core 2 Duo 2.5 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Processor-max',
-    element: { text: 'Intel Core i5 3.0 GHz' },
-    key: 123
+    nameCol: 'Processor-max',
+    element: { text: 'Intel Core i5 3.0 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Memory-text',
-    element: { text: 'RAM' },
-    key: 131
+    nameCol: 'Memory-text',
+    element: { text: 'RAM' }
   },
   {
-    name: 'Memory-min',
-    element: { text: '1 GB' },
-    key: 132
+    nameCol: 'Memory-min',
+    element: { text: '1 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Memory-max',
-    element: { text: '2 GB' },
-    key: 133
+    nameCol: 'Memory-max',
+    element: { text: '2 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Graphics-text',
-    element: { text: 'Graphics' },
-    key: 141
+    nameCol: 'Graphics-text',
+    element: { text: 'Graphics' }
   },
   {
-    name: 'Graphics-min',
-    element: { text: 'NVIDIA 9xxx / ATI 2xxx' },
-    key: 142
+    nameCol: 'Graphics-min',
+    element: { text: 'NVIDIA 9xxx / ATI 2xxx', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Graphics-max',
-    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' },
-    key: 143
+    nameCol: 'Graphics-max',
+    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Direct X-text',
-    element: { text: 'DX version' },
-    key: 141
+    nameCol: 'Direct X-text',
+    element: { text: 'DX version' }
   },
   {
-    name: 'Direct X-min',
-    element: { text: 'Version 9.0c' },
-    key: 142
+    nameCol: 'Direct X-min',
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Direct X-max',
-    element: { text: 'Version 9.0c' },
-    key: 143
+    nameCol: 'Direct X-max',
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Storage-text',
-    element: { text: 'Storage space' },
-    key: 151
+    nameCol: 'Storage-text',
+    element: { text: 'Storage space' }
   },
   {
-    name: 'Storage-min',
-    element: { text: '5 GB' },
-    key: 152
+    nameCol: 'Storage-min',
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Storage-max',
-    element: { text: '5 GB' },
-    key: 153
+    nameCol: 'Storage-max',
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Sound Card-text',
-    element: { text: 'Sound Card' },
-    key: 161
+    nameCol: 'Sound Card-text',
+    element: { text: 'Sound Card' }
   },
   {
-    name: 'Sound Card-min',
-    element: { text: '—' },
-    key: 162
+    nameCol: 'Sound Card-min',
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Sound Card-max',
-    element: { text: '—' },
-    key: 163
+    nameCol: 'Sound Card-max',
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
 const COMPONENTS_OS_KEYS = [
@@ -490,109 +483,88 @@ const COMPONENTS_OS_KEYS = [
 
 const REQUIREMENTS_LINUX = [
   {
-    name: 'OS-text',
-    element: { text: 'OS version' },
-    key: 211
+    nameCol: 'OS-text',
+    element: { text: 'OS version' }
   },
   {
-    name: 'OS-min',
-    element: { text: 'Ubuntu/SteamOS' },
-    key: 212
+    nameCol: 'OS-min',
+    element: { text: 'Ubuntu/SteamOS', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'OS-max',
-    element: { text: 'Ubuntu/SteamOS' },
-    key: 213
+    nameCol: 'OS-max',
+    element: { text: 'Ubuntu/SteamOS', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Processor-text',
-    element: { text: 'CPU' },
-    key: 221
+    nameCol: 'Processor-text',
+    element: { text: 'CPU' }
   },
   {
-    name: 'Processor-min',
-    element: { text: 'Intel Core 2 Duo 2.5 GHz' },
-    key: 222
+    nameCol: 'Processor-min',
+    element: { text: 'Intel Core 2 Duo 2.5 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Processor-max',
-    element: { text: 'Intel Core i5 3.0 GHz' },
-    key: 223
+    nameCol: 'Processor-max',
+    element: { text: 'Intel Core i5 3.0 GHz', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Memory-text',
-    element: { text: 'RAM' },
-    key: 231
+    nameCol: 'Memory-text',
+    element: { text: 'RAM' }
   },
   {
-    name: 'Memory-min',
-    element: { text: '1 GB' },
-    key: 232
+    nameCol: 'Memory-min',
+    element: { text: '1 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Memory-max',
-    element: { text: '2 GB' },
-    key: 233
+    nameCol: 'Memory-max',
+    element: { text: '2 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Graphics-text',
-    element: { text: 'Graphics' },
-    key: 241
+    nameCol: 'Graphics-text',
+    element: { text: 'Graphics' }
   },
   {
-    name: 'Graphics-min',
-    element: { text: 'NVIDIA 9xxx / ATI 2xxx' },
-    key: 242
+    nameCol: 'Graphics-min',
+    element: { text: 'NVIDIA 9xxx / ATI 2xxx', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Graphics-max',
-    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X' },
-    key: 243
+    nameCol: 'Graphics-max',
+    element: { text: 'NVIDIA GeForce GTX 760 / AMD Radeon R9 280X', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Direct X-text',
-    element: { text: 'DX version' },
-    key: 241
+    nameCol: 'Direct X-text',
+    element: { text: 'DX version' }
   },
   {
-    name: 'Direct X-min',
-    element: { text: 'Version 9.0c' },
-    key: 242
+    nameCol: 'Direct X-min',
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Direct X-max',
-    element: { text: 'Version 9.0c' },
-    key: 243
+    nameCol: 'Direct X-max',
+    element: { text: 'Version 9.0c', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Storage-text',
-    element: { text: 'Storage space' },
-    key: 251
+    nameCol: 'Storage-text',
+    element: { text: 'Storage space' }
   },
   {
-    name: 'Storage-min',
-    element: { text: '5 GB' },
-    key: 252
+    nameCol: 'Storage-min',
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Storage-max',
-    element: { text: '5 GB' },
-    key: 253
+    nameCol: 'Storage-max',
+    element: { text: '5 GB', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Sound Card-text',
-    element: { text: 'Sound Card' },
-    key: 261
+    nameCol: 'Sound Card-text',
+    element: { text: 'Sound Card' }
   },
   {
-    name: 'Sound Card-min',
-    element: { text: '—' },
-    key: 262
+    nameCol: 'Sound Card-min',
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   },
   {
-    name: 'Sound Card-max',
-    element: { text: '—' },
-    key: 263
+    nameCol: 'Sound Card-max',
+    element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
 const COMPONENTS_LINUX_KEYS = [
@@ -706,7 +678,7 @@ const SCHEMA_CUSTOM = {
 const HEADER = [
   {
     name: 'TextElement',
-    element: types.Title,
+    element: types.Text,
     type: 'text',
     class: 'b-title',
     label: 'title'
@@ -911,23 +883,33 @@ export default {
                              v-if="col.prop === i"
                             >
                             <div class="b-system-requirements__table-col_name"
+                              v-if="$sectionData[`componentsRequirements${key}`][index].nameCol.indexOf('-text') !== -1"
                               v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
-                              v-if="$sectionData[`componentsRequirements${key}`][index].name.indexOf('-text') !== -1"
                               >
                             </div>
                             <div class=""
-                              v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type }"
-                              :style="$sectionData[`componentsRequirements${key}`][index].element.styles"
-                              v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
-                              v-if="$sectionData[`componentsRequirements${key}`][index].name.indexOf('-min') !== -1"
+                              v-if="$sectionData[`componentsRequirements${key}`][index].nameCol.indexOf('-min') !== -1"
                               >
+                              <component
+                                v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type, label: $sectionData[`componentsRequirements${key}`][index].label }"
+                                :path="`componentsRequirements${key}[${index}].element`"
+                                :is="$sectionData[`componentsRequirements${key}`][index].name"
+                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class]"
+                                >
+                                <div v-html="$sectionData[`componentsRequirements${key}`][index].element.text"></div>
+                              </component><!--/.-->
                             </div>
                             <div class=""
-                                 v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type }"
-                                 :style="$sectionData[`componentsRequirements${key}`][index].element.styles"
-                                 v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
-                                 v-if="$sectionData[`componentsRequirements${key}`][index].name.indexOf('-max') !== -1"
+                              v-if="$sectionData[`componentsRequirements${key}`][index].nameCol.indexOf('-max') !== -1"
                               >
+                              <component
+                                v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type, label: $sectionData[`componentsRequirements${key}`][index].label }"
+                                :path="`componentsRequirements${key}[${index}].element`"
+                                :is="$sectionData[`componentsRequirements${key}`][index].name"
+                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class]"
+                                >
+                                <div v-html="$sectionData[`componentsRequirements${key}`][index].element.text"></div>
+                              </component><!--/.-->
                             </div>
                           </div>
                         </div><!--/.b-system-requirements__table-row-->
@@ -1116,7 +1098,7 @@ export default {
           display: flex
       &-padd
     &-col
-      padding: $size-step/2
+      padding: $size-step/4
       width: 38%
       word-break: break-all
       text-align: left
@@ -1137,4 +1119,9 @@ export default {
         &
           padding: $size-step/4
           font-size: 1.4rem !important
+
+.b-text.b-inline
+  font-size: inherit
+  color: inherit
+  padding: 0.8rem 0
 </style>
