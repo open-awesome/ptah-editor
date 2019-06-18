@@ -7,6 +7,7 @@
       <div
         class="menubar is-hidden"
         :class="{ 'is-focused': focused, 'is-only-styles': isOnlyStyles }"
+        :style=" { 'top': posMenu.top, 'bottom': posMenu.bottom, }"
         slot-scope="{ commands, isActive, focused, getMarkAttrs }"
       >
         <template v-if="textOptions.styles">
@@ -120,7 +121,7 @@
       </div>
     </editor-menu-bar>
 
-    <editor-content class="editor__content" :editor="editor" v-if="isActive" />
+    <editor-content class="editor__content" :editor="editor" v-if="isActive"/>
   </div>
 </template>
 
@@ -155,7 +156,11 @@ export default {
       text: null,
       isActive: false,
       linkUrl: null,
-      linkMenuIsActive: false
+      linkMenuIsActive: false,
+      posMenu: {
+        top: '-38px',
+        bottom: 'auto'
+      }
     }
   },
 
@@ -187,6 +192,8 @@ export default {
 
         // set focus on text
         this.setTextFocus('text', 'editor__content')
+        // set menu position
+        this.setPosition()
       } else {
         if (this.editor !== null) this.editor.destroy()
         this.hideLinkMenu()
@@ -290,6 +297,38 @@ export default {
       let t = self.$refs[refName].getElementsByClassName(getEl)
       let t1 = t[0].firstChild
       t1.focus()
+
+      // stop drop to this container
+      this.stopDrop(t1)
+    },
+
+    stopDrop (t1) {
+      t1.addEventListener('drop', function (e) {
+        e.preventDefault()
+        return false
+      }, true)
+
+      t1.addEventListener('dragover', function (e) {
+        e.preventDefault()
+        return false
+      }, true)
+    },
+
+    async setPosition () {
+      await this.$nextTick()
+
+      let el = this.$refs.text
+      let menu = el.getElementsByClassName('menubar')[0]
+      let pos = el.getBoundingClientRect()
+      let heightTopbar = document.getElementById('topbar').clientHeight
+
+      if (pos.top < (menu.clientHeight + heightTopbar)) {
+        this.posMenu.top = 'auto'
+        this.posMenu.bottom = '-38px'
+      } else {
+        this.posMenu.top = '-38px'
+        this.posMenu.bottom = 'auto'
+      }
     }
   }
 }
