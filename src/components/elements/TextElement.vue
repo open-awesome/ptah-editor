@@ -121,7 +121,7 @@
       </div>
     </editor-menu-bar>
 
-    <editor-content class="editor__content" :editor="editor" v-if="isActive" />
+    <editor-content class="editor__content" :editor="editor" v-if="isActive"/>
   </div>
 </template>
 
