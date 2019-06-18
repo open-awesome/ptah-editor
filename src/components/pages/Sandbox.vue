@@ -78,6 +78,8 @@
       <icon-base name="background"></icon-base>
       <icon-base name="layouts"></icon-base>
       <icon-base name="lock"></icon-base>
+      <icon-base name="download"></icon-base>
+      <icon-base name="loadTo"></icon-base>
     </div>
 
     <hr>

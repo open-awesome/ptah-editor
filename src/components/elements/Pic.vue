@@ -4,6 +4,10 @@
     @drop="onDrop"
     >
 
+    <i class="b-load" @click.stop="upload" ref="upload">
+      <icon-base name="loadTo"></icon-base>
+    </i>
+
     <uploader
       :diameter="40"
       :path="path"
@@ -71,6 +75,13 @@ export default {
     }
   },
 
+  created () {
+    this.a = this.alt
+    this.file = this.styles['background-image']
+    this.width = parseInt(this.styles.width.split('px')[0]) || 96
+    this.height = parseInt(this.styles.height.split('px')[0]) || 96
+  },
+
   methods: {
     ...mapActions('Sidebar', [
       'toggleShowStyler',
@@ -108,14 +119,13 @@ export default {
       }
 
       this.file = files[0]
-    }
-  },
+    },
 
-  created () {
-    this.a = this.alt
-    this.file = this.styles['background-image']
-    this.width = parseInt(this.styles.width.split('px')[0]) || 96
-    this.height = parseInt(this.styles.height.split('px')[0]) || 96
+    upload (e) {
+      e.stopPropagation()
+      let input = this.$refs.upload.nextElementSibling.querySelectorAll('input')[1]
+      input.click()
+    }
   }
 }
 </script>

@@ -13,7 +13,7 @@
         :stopColor="`#2275D7`"
         :innerStrokeColor="`#E4E4E4`"
       >
-        {{progress}}%
+        <span class="b-uploader__progress">{{progress}}%</span>
       </radial-progress-bar>
 
       <form>
@@ -24,6 +24,8 @@
           @change="getFileData"
           v-if="$builder.isEditing && mode === 'input'"
           />
+
+        <input class="b-upload--alternative" type="file" hidden @change="uploadFile($event.target.files[0])">
       </form>
   </div>
 </template>
@@ -176,7 +178,7 @@ export default {
   right: 0
   bottom: 0
   left: 0
-  z-index: 1000
+  z-index: 900
   background: transparent
   display: flex
   align-items: center
@@ -193,4 +195,7 @@ export default {
     width: 100%
     opacity: 0
     cursor: pointer
+
+  &__progress
+    font-size: 1.2rem
 </style>

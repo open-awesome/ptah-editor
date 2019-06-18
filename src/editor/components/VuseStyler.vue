@@ -592,6 +592,10 @@ export default {
     },
 
     showStyler (event) {
+      if (event.target.classList.contains('b-upload--alternative')) {
+        return
+      }
+
       let self = this
 
       event.preventDefault()
