@@ -324,7 +324,7 @@ export default {
     },
 
     showBackgroundPanel (section) {
-      this.setControlPanel('SectionBackground')
+      this.setControlPanel('GroupBackground')
       this.setSettingSection(section)
     },
 
@@ -337,7 +337,7 @@ export default {
     },
 
     async groupSections () {
-      let group = this.builderSections().filter((section) => {
+      let group = this.sections.filter((section) => {
         return this.selectedSections.indexOf(section.id) > -1
       })
 

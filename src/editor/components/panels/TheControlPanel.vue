@@ -37,6 +37,7 @@ import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsCol
 import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
 import ThePanelSectionColumnsSettings from './ThePanelSectionColumnsSettings'
 import ThePanelToggleElement from './ThePanelToggleElement'
+import ThePanelGroupBackground from './ThePanelGroupBackground'
 
 export default {
   name: 'TheControlPanel',
@@ -93,7 +94,8 @@ export default {
     ThePanelSectionGallerySettings,
     ThePanelSectionGalleryStyle,
     ThePanelSectionColumnsSettings,
-    ThePanelToggleElement
+    ThePanelToggleElement,
+    ThePanelGroupBackground
   }
 }
 </script>
