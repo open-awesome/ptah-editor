@@ -450,7 +450,7 @@ export default {
     }
 
     if (this.options.hasLink && this.options.link && this.options.link.action === '') {
-      this.el.classList.add('js-element-link')
+      this.options.classes.push('js-element-link')
     }
 
     // Apply animation to element

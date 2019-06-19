@@ -25,7 +25,10 @@ export function scrollIntoSection (e) {
     try {
       closePopup()
     } catch (e) {}
-    section.scrollIntoView({ block: 'start', behavior })
+
+    requestAnimationFrame(() => {
+      section.scrollIntoView({ behavior, block: 'start', inline: 'nearest' })
+    })
   }
 
 
