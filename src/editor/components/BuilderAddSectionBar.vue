@@ -171,18 +171,6 @@ export default {
         </div>
         </BaseScrollContainer>
       </div>
-
-      <div class="b-add-section-footer"
-          :class="{ 'b-add-section-footer_add': isVisibleBar }">
-        <BaseButton
-          class="b-add-section-footer__bt"
-          :color="'light-gray'"
-          :transparent="true"
-          @click="closeAddSectionBar"
-          >
-          Cancel
-        </BaseButton>
-      </div>
     </div>
   </div>
 </template>
