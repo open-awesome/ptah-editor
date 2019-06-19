@@ -212,12 +212,13 @@ export default {
 .control-box
   $this: &
 
-  width: 236px
-  height: 213px
+  width: 100%
+  max-width: 24rem
+  height: 21rem
+
   box-sizing: border-box
   border: 2px dotted #999999
-  margin: 0
-  padding: 2px
+
   position: relative
 
   display: flex

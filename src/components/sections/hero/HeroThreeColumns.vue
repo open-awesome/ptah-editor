@@ -69,7 +69,7 @@
 </template>
 
 <script>
-import { StyleObject, Logo, Title, Text, Delimiter, Button } from '@editor/types'
+import { StyleObject, Logo, Text, Delimiter, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
@@ -197,7 +197,7 @@ export default {
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
     ],
     components2: [
-      { name: 'TextElement', element: Title, type: 'text', class: 'b-title', label: 'title', key: 1 },
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-title', label: 'title', key: 1 },
       { name: 'TextElement', element: Text, type: 'text', class: 'b-text', label: 'description', key: 2 },
       { name: 'Delimiter', element: Delimiter, type: 'delimiter', class: 'b-delimiter', label: 'delimiter', key: 8 },
       { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 }

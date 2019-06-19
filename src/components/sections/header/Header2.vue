@@ -39,7 +39,7 @@
               v-if="$sectionData.components.length"
               v-model="$sectionData.components"
               :style="$sectionData.container.styles"
-              class="b-draggable-slot b-draggable-slot_horizont"
+              class="b-draggable-slot b-draggable-slot_horizont b-draggable-slot_header"
               @change="dragStop"
             >
 
@@ -162,18 +162,16 @@ const defaultComponents2 = [
     element: {
       text: 'Link 1',
       styles: {
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
+        'background-color': 'transparent',
+        'background-image': 'none',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '100px',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px',
-        'width': 'auto'
+        'margin': '8px 16px'
       }
     },
     key: 1
@@ -182,18 +180,16 @@ const defaultComponents2 = [
     element: {
       text: 'Link 2',
       styles: {
-        'display': 'flex',
-        'align-items': 'center',
-        'justify-content': 'center',
+        'background-color': 'transparent',
+        'background-image': 'none',
         'color': '#ffffff',
         'font-family': 'Lato',
         'text-align': 'center',
-        'min-width': '100px',
+        'width': '100px',
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px',
-        'width': 'auto'
+        'margin': '8px 16px'
       }
     },
     key: 2
@@ -228,8 +224,8 @@ export default {
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
     ],
     components2: [
-      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
-      { name: 'Link', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 }
+      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 }
     ]
   },
 
@@ -242,6 +238,13 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+.b-section-header
+  .is-tablet &,
+  .is-mobile &
+    text-align: left
+
+  @media (max-width: 800px)
+    text-align: left
 .b-grid__col-4,
 .b-grid__col-8
   padding: .8rem 1.6rem
@@ -256,4 +259,19 @@ export default {
 
   @media (max-width: 800px)
     padding-left: 0
+
+.b-draggable-slot_header
+  .is-tablet &,
+  .is-mobile &
+    padding: 0
+  @media (max-width: 800px)
+    padding: 0
+
+.b-logo
+  .is-tablet &,
+  .is-mobile &
+    margin: 0 !important
+
+  @media (max-width: 800px)
+    margin: 0 !important
 </style>

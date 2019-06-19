@@ -130,10 +130,6 @@ export default {
     }
   },
 
-  created () {
-    this.buildTree()
-  },
-
   updated () {
     let nodes = Array.from(document.querySelectorAll('.node-sortable'))
     let nested = []
@@ -328,7 +324,7 @@ export default {
     },
 
     showBackgroundPanel (section) {
-      this.setControlPanel('SectionBackground')
+      this.setControlPanel('GroupBackground')
       this.setSettingSection(section)
     },
 
@@ -341,7 +337,7 @@ export default {
     },
 
     async groupSections () {
-      let group = this.builderSections().filter((section) => {
+      let group = this.sections.filter((section) => {
         return this.selectedSections.indexOf(section.id) > -1
       })
 
@@ -356,7 +352,7 @@ export default {
 
     applyGroup (newMain) {
       // sort sections in builder
-      this.moveSections()
+      this.moveSections(this.sIndex(newMain.id))
       // apply changes
       this.setSectionData(newMain, 'absorb', this.absorbed.length)
 
@@ -366,24 +362,34 @@ export default {
       this.absorbed = []
     },
 
-    moveSections () {
-      let holes = this.findHoles()
+    /**
+     * Moves sections together if they are marked through one
+     * @param index - index of the main section in the group
+     */
+    moveSections (index) {
+      let holes = this.findHoles(index)
 
       holes.forEach((hole) => {
         this.builder.sort(hole.index, hole.index + 1)
       })
 
-      if (this.findHoles().length) {
-        this.moveSections()
+      if (this.findHoles(index).length) {
+        this.moveSections(index)
       }
     },
 
-    findHoles () {
+    /**
+     * Finds the gaps between the marked sections
+     * @param index - index of the main section in the group
+     * @returns {array} - array of gaps {index, id}
+     */
+    findHoles (index) {
       let holes = []
       let stop = 0
 
-      for (let i = this.sIndex + 1; i < this.builder.sections.length; i++) {
-        if (this.absorbed.indexOf(this.builder.sections[i].id) === -1 && stop < this.absorbed.length) {
+      for (let i = index + 1; i < this.builder.sections.length; i++) {
+        if (this.absorbed.find((s) => s.id === this.builder.sections[i].id) === undefined
+          && stop < this.absorbed.length) {
           holes.push({ index: i, id: this.builder.sections[i].id })
         } else {
           stop++
@@ -416,6 +422,15 @@ export default {
 
     isActiveSection (id) {
       return this.settingObjectSection.id === id
+    },
+
+    /**
+     * Get section index in builder by id
+     * @param id
+     * @returns {number}
+     */
+    sIndex (id) {
+      return _.findIndex(this.builder.sections, (s) => s.id === id)
     }
   }
 }

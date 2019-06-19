@@ -32,7 +32,7 @@ const COMPONENTS = [
   },
   {
     name: 'TextElement',
-    element: types.Title,
+    element: types.Text,
     type: 'text',
     class: 'b-title',
     label: 'text',
@@ -92,8 +92,8 @@ const C_CUSTOM = [
   {
     element: {
       text: 'An sincerity so extremity he additions. Her yet there truth merit.' +
-      '<div>Mrs all projecting favourable now unpleasing. Son law garden chatty temper</div>' +
-      '<div>Oh children provided to mr elegance marriage strongly.</div>',
+      '<p>Mrs all projecting favourable now unpleasing. Son law garden chatty temper</p>' +
+      '<p>Oh children provided to mr elegance marriage strongly.</p>',
       styles: {
         'font-family': 'Lato',
         'font-size': '2rem',

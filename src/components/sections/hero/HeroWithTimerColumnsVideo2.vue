@@ -24,7 +24,7 @@ const BG_SECTION = 'url(https://gn728.cdn.stg.gamenet.ru/0/7oAt2/o_1A6qDa.jpg)'
 const COMPONENTS = [
   {
     name: 'TextElement',
-    element: types.Title,
+    element: types.Text,
     type: 'text',
     class: 'b-title',
     label: 'title',

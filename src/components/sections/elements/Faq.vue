@@ -3,7 +3,6 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
-import { mapActions } from 'vuex'
 
 const C_CUSTOM_COLUMN = [
   {
@@ -13,16 +12,27 @@ const C_CUSTOM_COLUMN = [
         'font-size': '1.8rem',
         'color': '#ffffff'
       },
-      element: {
+      el: {
         color: 'rgba(248,231,28,1)',
         icon: {
           name: 'plus',
           value: 'plus'
         },
-        description: 'Will I be able to play "OUR GAME" this year?',
-        text: 'Yes you can. The exact date of the start of testing will be announced later.'
+        content: `
+          <table>
+            <tr>
+              <th>Will I be able to play "OUR GAME" this year?</th>
+            </tr>
+            <tr>
+              <td>
+                <p>Yes you can. The exact date of the start of testing will be announced later.</p>
+              </td>
+            </tr>
+          </table>
+         `
       }
-    }
+    },
+    key: 1
   },
   {
     element: {
@@ -31,16 +41,27 @@ const C_CUSTOM_COLUMN = [
         'font-size': '1.8rem',
         'color': '#ffffff'
       },
-      element: {
+      el: {
         color: 'rgba(248,231,28,1)',
         icon: {
           name: 'plus',
           value: 'plus'
         },
-        description: 'What anti-cheat do you plan to use?',
-        text: 'We integrate anti-cheat P1, which has already proven itself to protect users of our other projects. The developers of this software are now searching for game vulnerabilities and optimizing P1 for the needs of "OUR GAME".'
+        content: `
+          <table>
+            <tr>
+              <th>What anti-cheat do you plan to use?</th>
+            </tr>
+            <tr>
+              <td>
+                <p>We integrate anti-cheat P1, which has already proven itself to protect users of our other projects. The developers of this software are now searching for game vulnerabilities and optimizing P1 for the needs of "OUR GAME".</p>
+              </td>
+            </tr>
+          </table>
+         `
       }
-    }
+    },
+    key: 2
   },
   {
     element: {
@@ -49,16 +70,27 @@ const C_CUSTOM_COLUMN = [
         'font-size': '1.8rem',
         'color': '#ffffff'
       },
-      element: {
+      el: {
         color: 'rgba(248,231,28,1)',
         icon: {
           name: 'plus',
           value: 'plus'
         },
-        description: 'What is "OUR GAME"?',
-        text: '"OUR GAME" is a game that combines the classic gameplay of an isometric action-RPG of the old school with elements of MMO games.'
+        content: `
+          <table>
+            <tr>
+              <th>What is "OUR GAME"?</th>
+            </tr>
+            <tr>
+              <td>
+                <p>"OUR GAME" is a game that combines the classic gameplay of an isometric action-RPG of the old school with elements of MMO games.</p>
+              </td>
+            </tr>
+          </table>
+         `
       }
-    }
+    },
+    key: 3
   },
   {
     element: {
@@ -67,16 +99,27 @@ const C_CUSTOM_COLUMN = [
         'font-size': '1.8rem',
         'color': '#ffffff'
       },
-      element: {
+      el: {
         color: 'rgba(248,231,28,1)',
         icon: {
           name: 'plus',
           value: 'plus'
         },
-        description: 'When will closed beta testing begin?',
-        text: 'Information about the start date of the PTA can be expected in 2019. We will definitely inform you about everything additionally - follow the news in the official communities of "OUR GAME"'
+        content: `
+          <table>
+            <tr>
+              <th>When will closed beta testing begin?</th>
+            </tr>
+            <tr>
+              <td>
+                <p>Information about the start date of the PTA can be expected in 2019. We will definitely inform you about everything additionally - follow the news in the official communities of "OUR GAME"</p>
+              </td>
+            </tr>
+          </table>
+         `
       }
-    }
+    },
+    key: 4
   }
 ]
 
@@ -157,10 +200,10 @@ const COMPONENTS = [
 const HEADER = [
   {
     name: 'TextElement',
-    element: types.Title,
+    element: types.Text,
     type: 'text',
-    class: 'b-title',
-    label: 'title'
+    class: 'b-text',
+    label: 'text'
   }
 ]
 
@@ -182,20 +225,6 @@ export default {
     container1: types.StyleObject,
     components: _.merge([], HEADER),
     components1: _.merge([], COMPONENTS)
-  },
-
-  methods: {
-    ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
-
-    async showSettings (panel) {
-      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
-
-      this.setSettingSection(this.$builder.sections[index])
-
-      await this.$nextTick()
-
-      this.setControlPanel(panel)
-    }
   },
 
   created () {
@@ -245,34 +274,26 @@ export default {
         </div><!--/.b-grid__col-12-->
       </div><!--/.b-grid__row-->
       <div class="b-grid__row">
-        <div class="b-grid__col-12"
-          v-for="(column, key) in $sectionData"
-          v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) <= $sectionData.mainStyle.count"
-          :key="key"
-          >
+        <div class="b-grid__col-12">
           <sandbox
             class="b-sandbox"
-            :container-path="`$sectionData.container${key.split('components')[1]}`"
-            :components-path="`$sectionData.components${key.split('components')[1]}`"
+            container-path="$sectionData.container1"
+            components-path="$sectionData.components1"
             direction="column"
-            :style="`$sectionData.container${key.split('components')[1]}.styles`"
+            :style="$sectionData.container1.styles"
             >
-            <draggable v-model="$sectionData[key]" class="b-draggable-slot" :style="$sectionData[`container${key.split('components')[1]}`].styles">
-              <div :class="`b-draggable-slot__${component.type}`"
-                 v-for="(component, index) in $sectionData[key]"
-                 v-if="$sectionData[key].length !== 0"
-                 :key="index"
-                >
+            <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1.styles">
+              <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components1" v-if="$sectionData.components1.length !== 0" :key="index">
                 <component class="b-faq-component"
-                  v-styler:for="{ el: $sectionData[`${key}`][index].element, path: `$sectionData.${key}[${index}].element`, type: $sectionData[key][index].type, label: $sectionData[`${key}`][index].label }"
-                  :is="component.name"
-                  :href="$sectionData[key][index].element.link.href"
-                  :target="$sectionData[key][index].element.link.target"
-                  :path="`${key}[${index}].element`"
-                  :style="$sectionData[key][index].element.styles"
-                  :class="[$sectionData[key][index].element.classes, $sectionData[key][index].class]"
-                  >
-                  <div v-html="$sectionData[key][index].element.text"></div>
+                   v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type, label: $sectionData.components1[index].label }"
+                   :is="component.name"
+                   :href="$sectionData.components1[index].element.link.href"
+                   :target="$sectionData.components1[index].element.link.target"
+                   :path="`components1[${index}].element`"
+                   :style="$sectionData.components1[index].element.styles"
+                   :class="[$sectionData.components1[index].element.classes, $sectionData.components1[index].class]"
+                >
+                  <div v-html="$sectionData.components1[index].element.text"></div>
                 </component>
               </div>
             </draggable>

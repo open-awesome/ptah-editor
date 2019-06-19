@@ -10,15 +10,6 @@ export default {
       'settingObjectOptions'
     ]),
 
-    button: {
-      get () {
-        return this.settingObjectOptions.buttonText
-      },
-      set (value) {
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, { buttonText: value }))
-      }
-    },
-
     placeholder: {
       get () {
         return this.settingObjectOptions.placeholder
@@ -39,10 +30,6 @@ export default {
 
 <template>
   <div class="b-text-controls">
-    <div class="b-text-controls__control">
-      <base-text-field v-model="button" :label="$t('s.buttonText')"></base-text-field>
-    </div>
-
     <div class="b-text-controls__control">
       <base-text-field v-model="placeholder" :label="$t('s.placeholder')"></base-text-field>
     </div>

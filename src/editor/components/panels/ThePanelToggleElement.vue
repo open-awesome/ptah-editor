@@ -1,38 +1,46 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Icon style
+      Toggle settings
     </h6>
 
     <!-- Typography -->
-    <div class="b-panel__control" v-if="settingObjectOptions.typography">
-      <control-typography :show-text-styles="false"/>
+    <div class="b-panel__control">
+      <control-typography :show-text-styles="false"></control-typography>
     </div>
 
-    <!-- Control icon -->
+    <!-- Align -->
     <div class="b-panel__control">
-      <control-icon-with-text-styles/>
+      <control-align/>
     </div>
+
+    <!-- Control settings-->
+    <div class="b-panel__control">
+      <control-toggle-element-settings/>
+    </div>
+
+    <!-- Control padding/margin-->
+    <div class="b-panel__control">
+      <control-box/>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex'
-import ControlIconWithTextStyles from '../controls/TheControlIconWithTextStyles'
+import ControlToggleElementSettings from '../controls/TheControlToggleElementSettings'
 import ControlTypography from '../controls/TheControlTypography'
+import ControlAlign from '../controls/TheControlAlign'
+import ControlBox from '../controls/TheControlBox'
 
 export default {
-  name: 'ThePanelIconWithTextStyles',
+  name: 'ThePanelToggleElement',
 
   components: {
-    ControlIconWithTextStyles,
-    ControlTypography
-  },
-
-  computed: {
-    ...mapState('Sidebar', [
-      'settingObjectOptions'
-    ])
+    ControlToggleElementSettings,
+    ControlBox,
+    ControlTypography,
+    ControlAlign
   }
 }
 </script>
@@ -61,5 +69,5 @@ export default {
         text-transform: uppercase
 
     &__control
-      margin-bottom: 1.6rem
+      margin-bottom: 2.2rem
 </style>

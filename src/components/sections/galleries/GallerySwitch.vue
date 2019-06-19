@@ -84,11 +84,11 @@
                               @change="changeSrc"
                             />
                           </div>
-                          <div class="b-preview__name"
+                          <component class="b-preview__name"
                             v-if="$sectionData.mainStyle.isLabelPreview"
                             v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
                             :path="`${key}[1].element`"
-                            v-html="$sectionData[key][1].element.text"
+                            :is="$sectionData[key][1].name"
                             :style="{
                               'color' : $sectionData.mainStyle.textStyles.text['color'],
                               'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
@@ -97,8 +97,10 @@
                               'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
                               'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
                             }"
+                            :class="[$sectionData[key][1].element.classes, $sectionData[key][1].class]"
                             >
-                          </div>
+                            <div v-html="$sectionData[key][1].element.text"></div>
+                          </component><!--/.b-preview__name -->
                       </div>
                     </div>
                     <div class="b-gallery-one-list__detail flex__item b-gallery-one-stage loader">
@@ -108,9 +110,10 @@
                          v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
                          :gallery-one-stage="key.split('components')[1]"
                         >
-                        <div class="b-gallery-one-stage__name"
-                           v-html="$sectionData[key][2].element.text"
+                        <component class="b-gallery-one-stage__name"
                            v-styler:for="{ el: $sectionData[key][2].element, path:`$sectionData.${key}[2].element`, type: $sectionData[key][2].type, label: $sectionData[key][2].label }"
+                           :path="`${key}[2].element`"
+                           :is="$sectionData[key][2].name"
                            :style="{
                              'color' : $sectionData.mainStyle.textStyles.chapter['color'],
                              'font-family' : $sectionData.mainStyle.textStyles.chapter['font-family'],
@@ -118,9 +121,11 @@
                              'font-weight' : $sectionData.mainStyle.textStyles.chapter['font-weight'],
                              'font-style' : $sectionData.mainStyle.textStyles.chapter['font-style'],
                              'text-decoration' : $sectionData.mainStyle.textStyles.chapter['text-decoration'],
-                         }"
+                           }"
+                           :class="[$sectionData[key][2].element.classes, $sectionData[key][2].class]"
                           >
-                        </div>
+                          <div v-html="$sectionData[key][2].element.text"></div>
+                        </component>
                         <div class="b-gallery-one-stage__img"
                           :style="$sectionData[key][3].element.styles"
                           v-styler:for="{ el: $sectionData[key][3].element, path:`$sectionData.${key}[3].element`, type: $sectionData[key][3].type, label: $sectionData[key][3].label }"
@@ -134,19 +139,22 @@
                             {{ parseFloat(key.split('components')[1]) + 1 }}
                           </span>
                         </div>
-                        <div class="b-gallery-one-stage__bio"
-                         v-styler:for="{ el: $sectionData[key][4].element, path: `$sectionData.${key}[4].element`, type: $sectionData[key][4].type, label: $sectionData[key][4].label }"
-                         v-html="$sectionData[key][4].element.text"
-                         :style="{
-                           'color' : $sectionData.mainStyle.textStyles.text['color'],
-                           'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
-                           'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
-                           'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
-                           'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
-                           'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
-                         }"
-                         >
-                        </div>
+                        <component class="b-gallery-one-stage__bio"
+                           v-styler:for="{ el: $sectionData[key][4].element, path:`$sectionData.${key}[4].element`, type: $sectionData[key][4].type, label: $sectionData[key][4].label }"
+                           :path="`${key}[4].element`"
+                           :is="$sectionData[key][4].name"
+                           :style="{
+                             'color' : $sectionData.mainStyle.textStyles.text['color'],
+                             'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                             'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                             'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                             'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                             'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                           }"
+                           :class="[$sectionData[key][4].element.classes, $sectionData[key][4].class]"
+                          >
+                          <div v-html="$sectionData[key][4].element.text"></div>
+                        </component>
                       </div>
                     </div>
                 </div><!--/.b-gallery-one-list -->
@@ -179,17 +187,17 @@ const GALLERY_ITEM = [
     file: null
   },
   {
-    name: 'Label',
-    element: types.TextInherit,
+    name: 'TextElement',
+    element: types.Text,
     type: 'inline',
-    class: 'b-label',
-    label: 'label'
+    class: 'b-inline',
+    label: 'text'
   },
   {
-    name: 'Chapter',
-    element: types.TextInherit,
+    name: 'TextElement',
+    element: types.Text,
     type: 'inline',
-    class: 'b-chapter',
+    class: 'b-inline',
     label: 'chapter'
   },
   {
@@ -201,10 +209,10 @@ const GALLERY_ITEM = [
     file: null
   },
   {
-    name: 'Text',
-    element: types.TextInherit,
+    name: 'TextElement',
+    element: types.Text,
     type: 'inline',
-    class: 'b-text',
+    class: 'b-inline',
     label: 'description'
   }
 ]
@@ -223,7 +231,39 @@ const GALLERY_ITEM_CUSTOM = [
   },
   {
     element: {
+      removable: false,
+      canCopy: false,
+      editor: {
+        tags: false,
+        link: false
+      }
+    }
+  },
+  {
+    element: {
+      removable: false,
+      canCopy: false,
+      editor: {
+        tags: false,
+        link: false
+      },
+      text: 'Chapter for big image'
+    }
+  },
+  {
+    element: {
       removable: false
+    }
+  },
+  {
+    element: {
+      removable: false,
+      canCopy: false,
+      editor: {
+        tags: false,
+        link: false
+      },
+      text: 'Description for big image'
     }
   }
 ]
@@ -231,7 +271,7 @@ const GALLERY_ITEM_CUSTOM = [
 const HEADER = [
   {
     name: 'TextElement',
-    element: types.Title,
+    element: types.Text,
     type: 'text',
     class: 'b-title',
     label: 'title'
@@ -459,16 +499,16 @@ export default {
     opacity: 0.6
 
   &__name
-    border-radius: 0rem
-    padding: 1rem 0.5rem
-    transition: all 200ms
     width: 100%
     height: auto
     min-height: 2rem
+    padding: 1rem 0.5rem
+
+    border-radius: 0
+
     position: relative
     z-index: 10
-    overflow: hidden
-
+    transition: all 200ms
   &_active
     transform: scale(1.1)
     box-shadow: 0 0 2rem 0 rgba($black, 0.6)
@@ -601,7 +641,7 @@ export default {
   position: relative
 
   width: 40rem
-  height: 40rem
+  height: 30rem
   margin: 0 auto
 
   & .b-uploader

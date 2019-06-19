@@ -1,13 +1,15 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Style restrictions
+      Video
     </h6>
 
+    <!-- Settings video element -->
     <div class="b-panel__control">
-      <control-age-restrictions-style/>
+      <control-video :show-text-styles="false"></control-video>
     </div>
 
+    <!-- Padding/Margin -->
     <div class="b-panel__control">
       <control-box></control-box>
     </div>
@@ -15,14 +17,22 @@
 </template>
 
 <script>
-import ControlAgeRestrictionsStyle from '../controls/TheControlAgeRestrictionsStyle'
+import ControlVideo from '../controls/TheControlVideo'
 import ControlBox from '../controls/TheControlBox'
+
 export default {
-  name: 'ThePanelRestrictionsStyle',
+  name: 'ThePanelVideo',
 
   components: {
-    ControlBox,
-    ControlAgeRestrictionsStyle
+    ControlVideo,
+    ControlBox
+  },
+
+  props: {
+    builder: {
+      type: Object,
+      required: true
+    }
   }
 }
 </script>

@@ -18,7 +18,7 @@ const COMPONENTS_1 = [
 const COMPONENTS_2 = [
   {
     name: 'TextElement',
-    element: types.Title,
+    element: types.Text,
     type: 'text',
     class: 'b-title',
     label: 'title',
