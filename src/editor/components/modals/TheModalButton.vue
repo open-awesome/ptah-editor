@@ -127,19 +127,11 @@ export default {
 
         this.classes.push('js-element-link')
       } else {
-        this.classes.forEach((name, index) => {
-          if (name.indexOf('js-element-link') > -1) {
-            this.classes.splice(index, 1)
-          }
-        })
+        _.remove(this.classes, (n) => n === 'js-element-link')
       }
 
       if (this.action.value !== 'ptah-d-video') {
-        this.classes.forEach((name, index) => {
-          if (name.indexOf('ptah-d-video') > -1) {
-            this.classes.splice(index, 1)
-          }
-        })
+        _.remove(this.classes, (n) => n === 'ptah-d-video')
       } else {
         this.classes.push('ptah-d-video')
       }

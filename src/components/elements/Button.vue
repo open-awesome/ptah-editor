@@ -1,5 +1,5 @@
 <template>
-  <div class="b-button is-editable" ref="btn" @click.stop.stop="">
+  <a class="b-button is-editable" ref="btn" @click.stop.stop="">
 
     <slot v-if="!isActive"></slot>
 
@@ -7,7 +7,7 @@
       <div
         class="menubar is-hidden"
         :class="{ 'is-focused': focused }"
-        :style=" { 'top': posMenu.top, 'bottom': posMenu.bottom, }"
+        :style="{ 'top': posMenu.top, 'bottom': posMenu.bottom }"
         slot-scope="{ commands, isActive, focused, getMarkAttrs }"
       >
         <button
@@ -67,7 +67,7 @@
       :z="999"
       />
     <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
-  </div>
+  </a>
 </template>
 
 <script>

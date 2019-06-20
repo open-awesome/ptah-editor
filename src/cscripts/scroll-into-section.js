@@ -20,12 +20,15 @@ export function scrollIntoSection (e) {
   let target = e.target.closest('a')
   let section = document.querySelector(target && target.getAttribute('href'))
 
-  if (section) {
+  if (section && !target.classList.contains('ptah-d-video')) {
     let behavior = target.dataset.behavior
     try {
       closePopup()
     } catch (e) {}
-    section.scrollIntoView({ block: 'start', behavior })
+
+    requestAnimationFrame(() => {
+      section.scrollIntoView({ behavior, block: 'start', inline: 'nearest' })
+    })
   }
 
 
