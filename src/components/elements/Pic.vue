@@ -244,5 +244,23 @@ export default {
     &-bl:hover,
     &-br:hover
       transform: scale(1.4)
+.b-load
+  position: absolute
+  top: 0
+  left: 0
+  z-index: 1000
 
+  display: none
+  justify-content: center
+  align-items: center
+  width: 2.6rem
+  height: 2.6rem
+
+  cursor: pointer
+  background: $white
+  color: $dark-blue-krayola
+
+  &:hover
+    color: $white
+    background: $dark-blue-krayola
 </style>
