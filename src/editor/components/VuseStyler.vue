@@ -445,6 +445,7 @@ export default {
     ...mapMutations('Sidebar', ['setSandboxPaths']),
     ...mapMutations('Landing', ['textEditor']),
     ...mapActions('Sidebar', [
+      'clearSettingObjectLight',
       'setSettingElement',
       'setControlPanel',
       'setSection',
