@@ -150,6 +150,9 @@ export default {
   user-select: none
   transition: all 200ms
 
+  &:hover .b-load
+    display: flex
+
   &__resize
     border: none !important
 
