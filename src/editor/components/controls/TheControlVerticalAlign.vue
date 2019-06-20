@@ -60,5 +60,5 @@ export default {
 </script>
 
 <template>
-  <BaseButtonTabs :list="align.list" label="Vertical align columns" v-model="align.value" @change="aligned"/>
+  <BaseButtonTabs :list="align.list" label="Vertical alignment" v-model="align.value" @change="aligned"/>
 </template>

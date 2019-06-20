@@ -43,17 +43,7 @@ export default {
 </script>
 
 <template>
-  <div class="b-text-controls">
-      <div class="b-text-controls__control">
-        <base-range-slider v-model="vCount" label="Count" @change="countChange" step="1" min="1" max="4">
-            {{ vCount }}
-        </base-range-slider>
-      </div>
-  </div>
+  <base-range-slider v-model="vCount" label="Count" @change="countChange" step="1" min="1" max="4">
+    {{ vCount }}
+  </base-range-slider>
 </template>
-
-<style lang="sass" scoped>
-.b-text-controls
-  &__control
-    margin-top: 2.2rem
-</style>

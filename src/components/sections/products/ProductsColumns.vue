@@ -829,7 +829,8 @@ export default {
                   </div-->
                 </div>
 
-              <div class="b-grid__row b-products-colums__row">
+              <div class="b-grid__row b-products-colums__row"
+                   :style="{ 'align-items' : $sectionData.mainStyle.styles['align-items']}">
                 <div class="b-grid__col-3 b-grid__col-m-12 "
                   v-for="(product, key) in $sectionData.mainStyle.products"
                   :key="key"

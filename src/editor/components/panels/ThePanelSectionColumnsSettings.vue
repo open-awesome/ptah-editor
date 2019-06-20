@@ -3,15 +3,18 @@
     <h6 class="b-panel__title">
       Columns settings
     </h6>
-    <base-scroll-container backgroundBar="#999">
-      <div class="b-panel__inner">
-        <!-- Columns settings -->
-        <control-section-columns/>
 
-        <!-- Vertical align -->
+    <div class="b-panel__inner">
+      <!-- Columns settings -->
+      <div class="b-panel__control">
+        <control-section-columns/>
+      </div>
+
+      <!-- Vertical align -->
+      <div class="b-panel__control">
         <control-vertical-align/>
       </div>
-    </base-scroll-container>
+    </div>
   </div>
 </template>
 
