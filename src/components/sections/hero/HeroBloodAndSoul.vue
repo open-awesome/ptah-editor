@@ -70,6 +70,12 @@ const SCHEMA_CUSTOM = {
       'background-repeat': 'no-repeat'
     }
   },
+  container: {
+    width: 12
+  },
+  container2: {
+    width: 12
+  },
   components: _.merge({}, C_CUSTOM),
   components2: _.merge({}, C_CUSTOM2),
   edited: true
@@ -142,7 +148,7 @@ export default {
 
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-12">
+        <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container.width}`">
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
@@ -170,7 +176,7 @@ export default {
     </div>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-12">
+        <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container2.width}`">
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"

@@ -15,11 +15,7 @@
       <div
           v-for="(prefix, index) in prefixes"
           :key="`hero-three-column-${ _uid }-${ index }`"
-          :class="{
-            'b-grid__col-6': prefix === '2',
-            'b-grid__col-3': prefix !== '2',
-            'b-grid__logo': prefix !== '2'
-          }"
+          :class="`b-grid__col-${$sectionData[`container${prefix}`].width}`"
           class="b-grid__col-m-12">
 
         <sandbox
@@ -174,6 +170,15 @@ const defaultSchema = {
       'background-repeat': 'no-repeat',
       'background-position': '75% 50%'
     }
+  },
+  container: {
+    width: 3
+  },
+  container2: {
+    width: 6
+  },
+  container3: {
+    width: 3
   },
   components: merge({}, defaultColumnComponents1),
   components2: merge({}, defaultColumnComponents2),

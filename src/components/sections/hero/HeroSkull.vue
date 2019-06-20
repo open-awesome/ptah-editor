@@ -162,7 +162,9 @@ const SCHEMA_CUSTOM = {
     }
   },
   components: _.merge([], C_CUSTOM),
-  container: {},
+  container: {
+    width: 8
+  },
   edited: true
 }
 
@@ -202,10 +204,7 @@ export default {
 
     <div class="b-grid">
       <div class="b-grid__row">
-
-        <div class="b-grid__col-2 hidden-m "/>
-
-        <div class="b-grid__col-m-12 b-grid__col-8">
+        <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container.width}`">
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
@@ -229,9 +228,6 @@ export default {
             </draggable>
           </sandbox>
         </div>
-
-        <div class="b-grid__col-2 hidden-m"/>
-
       </div>
     </div>
   </section>

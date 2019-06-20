@@ -47,6 +47,10 @@
       </div> <!-- /_b-panel__control-->
     </div><!-- /_direction-->
 
+    <div class="b-panel__control" v-if="settingObjectOptions.width">
+      <control-slot-width></control-slot-width>
+    </div>
+
     <div class="b-panel__control">
       <control-box></control-box>
     </div>
@@ -56,10 +60,11 @@
 <script>
 import { mapState } from 'vuex'
 import ControlBox from '../controls/TheControlBox'
+import ControlSlotWidth from '../controls/TheControlSlotWidth'
 
 export default {
   name: 'ThePanelSlotSettings',
-  components: { ControlBox },
+  components: { ControlSlotWidth, ControlBox },
   props: {
     builder: {
       type: Object,
