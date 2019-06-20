@@ -834,7 +834,8 @@ export default {
             </div-->
           </div>
 
-          <div class="b-grid__row b-products-columns-extend__row">
+          <div class="b-grid__row b-products-columns-extend__row"
+               :style="{ 'align-items' : $sectionData.mainStyle.styles['align-items']}">
             <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__left hidden-m">
               <!-- b-products-columns-extend__left -->
               <div class="b-grid__row b-products-columns-extend__row">

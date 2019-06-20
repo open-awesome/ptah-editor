@@ -331,6 +331,9 @@ export default {
   user-select: none
   cursor: pointer
   transition: background-color, border 200ms
+  & .contenteditable
+    position: relative
+    z-index: 9999
   &__resize
     display: none
     border: none !important

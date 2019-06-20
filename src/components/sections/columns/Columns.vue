@@ -244,7 +244,9 @@ export default {
             </div>
           </div>
 
-          <div class="b-grid__row">
+          <div class="b-grid__row"
+            :style="{ 'align-items' : $sectionData.mainStyle.styles['align-items']}"
+            >
             <div class="b-grid__col-m-12"
               :class="`b-grid__col-${12/$sectionData.mainStyle.count}`"
               v-for="(column, key) in $sectionData"

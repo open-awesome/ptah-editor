@@ -223,7 +223,13 @@ export default {
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   :path="`components[${index}].element`"
                   >
-                  <div v-html="$sectionData.components[index].element.text"></div>
+                  <div
+                    class="contenteditable"
+                    contenteditable="true"
+                    @blur="update"
+                    v-text="$sectionData.components[index].element.text"
+                    >
+                  </div>
                 </component>
               </div>
             </draggable>
