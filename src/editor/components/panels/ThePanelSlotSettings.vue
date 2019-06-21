@@ -59,6 +59,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import * as _ from 'lodash-es'
 import ControlBox from '../controls/TheControlBox'
 import ControlSlotWidth from '../controls/TheControlSlotWidth'
 
@@ -95,6 +96,10 @@ export default {
       return this.direction === 'column'
     },
 
+    slot () {
+      return this.settingObjectSection.get(this.sandbox.container) || {}
+    },
+
     styles () {
       return (this.settingObjectSection.get(this.sandbox.container) || {}).styles
     },
@@ -110,9 +115,9 @@ export default {
 
     direction: {
       set (value) {
-        this.settingObjectSection.set(this.sandbox.container, {
-          styles: { ...this.styles, 'flex-direction': value }
-        })
+        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
+          styles: { 'flex-direction': value }
+        }))
       },
       get () {
         return this.styles['flex-direction']
@@ -121,9 +126,9 @@ export default {
 
     align: {
       set (value) {
-        this.settingObjectSection.set(this.sandbox.container, {
-          styles: { ...this.styles, 'align-items': value }
-        })
+        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
+          styles: { 'align-items': value }
+        }))
       },
       get () {
         return this.styles['align-items']

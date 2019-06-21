@@ -14,36 +14,32 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
-import * as _ from 'lodash-es'
+import { mapState } from 'vuex'
 
 export default {
   name: 'TheControlSlotWidth',
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions',
-      'settingObjectElement',
+      'sandbox',
       'settingObjectSection'
     ]),
 
+    slot () {
+      return this.settingObjectSection.get(this.sandbox.container) || {}
+    },
+
     width: {
       get () {
-        return this.settingObjectOptions.width
+        return this.slot.width
       },
 
       set (value) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-          width: value
-        }))
+        this.settingObjectSection.set(this.sandbox.container, {
+          ...this.slot, width: value
+        })
       }
     }
-  },
-
-  methods: {
-    ...mapActions('Sidebar', [
-      'updateSettingOptions'
-    ])
   }
 }
 </script>
