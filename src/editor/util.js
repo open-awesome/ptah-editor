@@ -111,22 +111,26 @@ export function getTypeFromTagName(tagName) {
 
 export function cleanDOM(artboard) {
   const editables = Array.from(artboard.querySelectorAll('.is-editable'))
-  const uploaders = Array.from(artboard.querySelectorAll('.b-uploader-item, .b-uploader'))
-  const uploadIcons = Array.from(artboard.querySelectorAll('.pth-uploader'))
-  const stylers = Array.from(artboard.querySelectorAll('.styler'))
-  const controls = Array.from(artboard.querySelectorAll('.ptah-control'))
-  const resizers = Array
-    .from(artboard.querySelectorAll('.pth-resizer, .b-button__resize, .b-delimiter__resize, .b-video__resize'))
+
+  const nodes = `
+    .b-uploader-item,
+    .b-uploader,
+    .styler,
+    .b-section-menu,
+    .ptah-control,
+    .pth-resizer,
+    .pth-uploader,
+    .b-button__resize,
+    .b-delimiter__resize, 
+    .b-video__resize,
+    .b-slot__settings
+  `
 
   editables.forEach((el) => {
     el.contentEditable = 'inherit'
     el.classList.remove('is-editable')
   })
-  uploaders.forEach(el => el.remove())
-  stylers.forEach(styler => styler.remove())
-  controls.forEach(control => control.remove())
-  resizers.forEach(el => el.remove())
-  uploadIcons.forEach(el => el.remove())
+  Array.from(artboard.querySelectorAll(nodes)).forEach(el => el.remove())
 }
 
 export function randomPoneId() {
