@@ -6,7 +6,9 @@
     @preview="preview"
     @save="save">
 
-  <div
+  <draggable>
+    <div
+      @dragover.prevent="onDragover"
       :class="{
         'is-sorting': $builder.isSorting,
         'is-editable': $builder.isEditing,
@@ -17,37 +19,37 @@
       class="artboard"
       ref="artboard">
 
-    <component
+      <component
         v-if="headerSection"
         :is="headerSection.name"
         :id="headerSection.id"
         :class="{ 'video-background': headerSection.data.mainStyle.backgroundType === 'video' }"
         @click.native="selectSidebarSection(headerSection)">
 
-      <menu-settings slot="menu" :section="headerSection"/>
+        <menu-settings slot="menu" :section="headerSection"/>
 
-      <video
+        <video
           v-if="headerSection.data.mainStyle.backgroundType === 'video' && headerSection.data.mainStyle.backgroundVideo"
           :id="`bg-video-${ headerSection.id }`"
           slot="video"
           autoplay="true"
           muted="true"
           loop>
-        <source :src="headerSection.data.mainStyle.backgroundVideo">
-      </video>
+          <source :src="headerSection.data.mainStyle.backgroundVideo">
+        </video>
 
-      <div
-        class="b-overlay"
-        v-if="headerSection.data.mainStyle.overlay"
-        :id="`bg-overlay-${ headerSection.id }`"
-        slot="overlay"
-        :style="{ 'background-color' : headerSection.data.mainStyle.overlay.color, 'opacity' : headerSection.data.mainStyle.overlay.opacity }"
+        <div
+          class="b-overlay"
+          v-if="headerSection.data.mainStyle.overlay"
+          :id="`bg-overlay-${ headerSection.id }`"
+          slot="overlay"
+          :style="{ 'background-color' : headerSection.data.mainStyle.overlay.color, 'opacity' : headerSection.data.mainStyle.overlay.opacity }"
         >
-      </div>
+        </div>
 
-    </component>
+      </component>
 
-    <component
+      <component
         v-for="section in builderSections"
         :key="section.id"
         :is="section.name"
@@ -58,12 +60,12 @@
         <menu-settings slot="menu" :section="section"/>
 
         <video
-            v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
-            :id="`bg-video-${ section.id }`"
-            slot="video"
-            autoplay="true"
-            muted="true"
-            loop>
+          v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
+          :id="`bg-video-${ section.id }`"
+          slot="video"
+          autoplay="true"
+          muted="true"
+          loop>
           <source :src="section.data.mainStyle.backgroundVideo">
         </video>
 
@@ -73,29 +75,29 @@
           :id="`bg-overlay-${ section.id }`"
           slot="overlay"
           :style="{ 'background-color' : section.data.mainStyle.overlay.color, 'opacity' : section.data.mainStyle.overlay.opacity }"
-          >
+        >
         </div>
 
-    </component>
+      </component>
 
-    <div class="builder-last"></div>
+      <div class="builder-last"></div>
 
-    <div v-show="emptySections" class="controller-intro">
-      <h3>&larr; Choose layout from the menu</h3>
+      <div v-show="emptySections" class="controller-intro">
+        <h3>&larr; Choose layout from the menu</h3>
+      </div>
+
+      <div v-show="showIntro && !builder.sections.length" class="controller-intro">
+        <label for="projectName">Hello, start your project</label>
+        <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
+        <template v-if="themes">
+          <div class="controller-themes">
+            <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
+          </div>
+        </template>
+      </div>
+
     </div>
-
-    <div v-show="showIntro && !builder.sections.length" class="controller-intro">
-      <label for="projectName">Hello, start your project</label>
-      <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
-      <template v-if="themes">
-        <div class="controller-themes">
-          <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
-        </div>
-      </template>
-    </div>
-
-  </div>
-
+  </draggable>
 </builder-layout>
 </template>
 
@@ -105,6 +107,7 @@ import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import MenuSettings from '@components/slots/MenuSettings'
+import Draggable from 'vuedraggable'
 
 import { sectionsGroups } from '@cscripts/sectionsGroups'
 
@@ -114,7 +117,8 @@ export default {
   components: {
     VuseIcon,
     BuilderLayout,
-    MenuSettings
+    MenuSettings,
+    Draggable
   },
 
   props: {
@@ -434,7 +438,15 @@ export default {
         node.classList.remove('ptah-g-main')
         node.classList.remove('ptah-g-child')
       })
-    }
+    },
+
+    onDragover: _.throttle((e) => {
+      document.querySelector('#artboard').classList.add('drag-start')
+
+      setTimeout(() => {
+        document.querySelector('#artboard').classList.remove('drag-start')
+      }, 600)
+    }, 300)
   }
 }
 </script>
@@ -476,7 +488,6 @@ export default {
     right: 100%
   &:after
     left: 100%
-
 .controller
   box-sizing: border-box
   &-input

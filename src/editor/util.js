@@ -111,28 +111,26 @@ export function getTypeFromTagName(tagName) {
 
 export function cleanDOM(artboard) {
   const editables = Array.from(artboard.querySelectorAll('.is-editable'))
-  const uploaders = Array.from(artboard.querySelectorAll('.uploader'))
-  const stylers = Array.from(artboard.querySelectorAll('.styler'))
-  const controls = Array.from(artboard.querySelectorAll('.ptah-control'))
+
+  const nodes = `
+    .b-uploader-item,
+    .b-uploader,
+    .styler,
+    .b-section-menu,
+    .ptah-control,
+    .pth-resizer,
+    .pth-uploader,
+    .b-button__resize,
+    .b-delimiter__resize, 
+    .b-video__resize,
+    .b-slot__settings
+  `
 
   editables.forEach((el) => {
     el.contentEditable = 'inherit'
     el.classList.remove('is-editable')
   })
-  uploaders.forEach((el) => {
-    const input = el.querySelector(':scope > form input')
-    const image = el.querySelector(':scope > img')
-
-    image.classList.add('add-full-width')
-    el.classList.remove('uploader')
-    input.remove()
-  })
-  stylers.forEach((styler) => {
-    styler.remove()
-  })
-  controls.forEach((control) => {
-    control.remove()
-  })
+  Array.from(artboard.querySelectorAll(nodes)).forEach(el => el.remove())
 }
 
 export function randomPoneId() {

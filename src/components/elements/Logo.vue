@@ -4,14 +4,20 @@
     @drop="onDrop"
     >
 
+    <i class="b-load pth-uploader" @click.stop="upload" ref="upload">
+      <icon-base name="loadTo"></icon-base>
+    </i>
+
     <uploader
+      :diameter="40"
       :path="path"
       :file="file"
+      :showProgress="true"
       @change="changeSrc"
     />
 
     <vue-draggable-resizable
-      class="b-logo__resize"
+      class="b-logo__resize pth-resizer"
       class-name-active="b-logo__resize_active"
       class-name-handle="b-handle"
       :w="width"
@@ -69,6 +75,13 @@ export default {
     }
   },
 
+  created () {
+    this.a = this.alt
+    this.file = this.styles['background-image']
+    this.width = parseInt(this.styles.width.split('px')[0]) || 320
+    this.height = parseInt(this.styles.height.split('px')[0]) || 60
+  },
+
   methods: {
     ...mapActions('Sidebar', [
       'toggleShowStyler',
@@ -106,14 +119,13 @@ export default {
       }
 
       this.file = files[0]
-    }
-  },
+    },
 
-  created () {
-    this.a = this.alt
-    this.file = this.styles['background-image']
-    this.width = parseInt(this.styles.width.split('px')[0]) || 320
-    this.height = parseInt(this.styles.height.split('px')[0]) || 60
+    upload (e) {
+      e.stopPropagation()
+      let input = this.$refs.upload.nextElementSibling.querySelectorAll('input')[1]
+      input.click()
+    }
   }
 }
 </script>
@@ -138,14 +150,10 @@ export default {
   min-height: $size-step/2
 
   user-select: none
-  transition: background-color 200ms
+  transition: all 200ms
 
-  & .b-uploader
-    opacity: 0
-    z-index: 1
-  &.is-editable:hover .b-uploader
-    opacity: 0.2
-    display: block
+  &:hover .b-load
+    display: flex
 
   &__resize
     border: none !important
@@ -243,5 +251,23 @@ export default {
     &-bl:hover,
     &-br:hover
       transform: scale(1.4)
+.b-load
+  position: absolute
+  top: 0
+  right: 0
+  z-index: 1000
 
+  display: none
+  justify-content: center
+  align-items: center
+  width: 2.6rem
+  height: 2.6rem
+
+  cursor: pointer
+  background: $white
+  color: $dark-blue-krayola
+
+  &:hover
+    color: $white
+    background: $dark-blue-krayola
 </style>
