@@ -125,6 +125,10 @@ export default {
     },
 
     async uploadFile (file) {
+      if (file === undefined) {
+        return
+      }
+
       let data = {}
       if (!(typeof file !== 'string' && file && file.type.match(this.pattern))) {
         if (file !== '') this.$emit('change', { url: file, path: this.path })

@@ -4,7 +4,7 @@
     @drop="onDrop"
     >
 
-    <i class="b-load" @click.stop="upload" ref="upload">
+    <i class="b-load pth-uploader" @click.stop="upload" ref="upload">
       <icon-base name="loadTo"></icon-base>
     </i>
 
@@ -17,7 +17,7 @@
     />
 
     <vue-draggable-resizable
-      class="b-logo__resize"
+      class="b-logo__resize pth-resizer"
       class-name-active="b-logo__resize_active"
       class-name-handle="b-handle"
       :w="width"
