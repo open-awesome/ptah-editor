@@ -124,7 +124,7 @@ const SCHEMA_CUSTOM = {
   container: {
     width: 6,
     minWidth: 2,
-    maxWidth: 8,
+    maxWidth: 10,
     grow: ['$sectionData.container2'],
     selfName: '$sectionData.container',
     styles: {
@@ -134,7 +134,7 @@ const SCHEMA_CUSTOM = {
   container2: {
     width: 6,
     minWidth: 2,
-    maxWidth: 8,
+    maxWidth: 10,
     grow: ['$sectionData.container'],
     selfName: '$sectionData.container2',
     styles: {
