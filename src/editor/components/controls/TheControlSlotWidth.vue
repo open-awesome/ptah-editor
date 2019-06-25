@@ -50,7 +50,7 @@ export default {
           ...this.slot, width: value
         })
 
-        if (this.slot.grow !== undefined) {
+        if (this.slot.grow) {
           this.changeAdjacentSlots(diff)
         }
       }
