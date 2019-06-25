@@ -176,7 +176,6 @@ export default {
         <div class="b-grid__row b-footer__row">
           <div class="b-grid__col-12 b-grid__col-m-12">
             <sandbox
-                :style="$sectionData.container.styles"
                 container-path="$sectionData.container"
                 components-path="$sectionData.components"
                 class="b-footer__col b-footer__col_1">
