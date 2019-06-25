@@ -12,7 +12,7 @@
   <div class="b-grid">
     <div class="b-grid__row">
 
-      <div class="b-grid__col-6 b-grid__col-m-12">
+      <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container.width}`">
 
         <sandbox
             container-path="$sectionData.container"
@@ -56,7 +56,9 @@
 
       </div>
 
-      <div class="b-grid__col-6 hidden-m"></div>
+      <div class="hidden-m" :class="`b-grid__col-${12 - $sectionData.container.width}`">
+        <!-- empty col -->
+      </div>
 
     </div>
   </div>
@@ -157,6 +159,9 @@ const defaultSchema = {
       'background-repeat': 'no-repeat',
       'background-position': '75% 50%'
     }
+  },
+  container: {
+    width: 6
   },
   components: merge({}, defaultColumnComponents),
   edited: true

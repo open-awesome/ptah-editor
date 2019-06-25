@@ -134,6 +134,9 @@ const SCHEMA_CUSTOM = {
       'background-repeat': 'no-repeat'
     }
   },
+  container: {
+    width: 12
+  },
   components: _.merge({}, C_CUSTOM),
   edited: true
 }
@@ -174,9 +177,8 @@ export default {
     <div class="b-footer">
       <div class="b-grid">
         <div class="b-grid__row b-footer__row">
-          <div class="b-grid__col-12 b-grid__col-m-12">
+          <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container.width}`">
             <sandbox
-                :style="$sectionData.container.styles"
                 container-path="$sectionData.container"
                 components-path="$sectionData.components"
                 class="b-footer__col b-footer__col_1">

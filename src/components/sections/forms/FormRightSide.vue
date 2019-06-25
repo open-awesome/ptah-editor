@@ -122,11 +122,21 @@ const SCHEMA_CUSTOM = {
   components: _.merge({}, C_CUSTOM_1),
   components2: _.merge({}, C_CUSTOM_2),
   container: {
+    width: 6,
+    minWidth: 2,
+    maxWidth: 10,
+    grow: ['$sectionData.container2'],
+    selfName: '$sectionData.container',
     styles: {
       'align-items': 'flex-start'
     }
   },
   container2: {
+    width: 6,
+    minWidth: 2,
+    maxWidth: 10,
+    grow: ['$sectionData.container'],
+    selfName: '$sectionData.container2',
     styles: {
       'justify-content': 'flex-start',
       'align-items': 'flex-start',
@@ -176,7 +186,7 @@ export default {
     <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-m-12 b-grid__col-6">
+        <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container.width}`">
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
@@ -200,7 +210,7 @@ export default {
             </draggable>
           </sandbox>
         </div>
-        <div class="b-grid__col-6 b-grid__col-m-12">
+        <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container2.width}`">
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
