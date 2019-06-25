@@ -140,7 +140,11 @@ const data = new Map([
       overlay: {
         color: 'rgba(0,0,0,1)',
         opacity: '0'
-      }
+      },
+      width: null,
+      maxWidth: null,
+      minWidth: null,
+      grow: false
     })
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,

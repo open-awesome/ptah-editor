@@ -172,13 +172,25 @@ const defaultSchema = {
     }
   },
   container: {
-    width: 3
+    width: 3,
+    minWidth: 2,
+    maxWidth: 8,
+    grow: ['$sectionData.container2', '$sectionData.container3'],
+    selfName: '$sectionData.container'
   },
   container2: {
-    width: 6
+    width: 6,
+    minWidth: 2,
+    maxWidth: 8,
+    grow: ['$sectionData.container', '$sectionData.container3'],
+    selfName: '$sectionData.container2'
   },
   container3: {
-    width: 3
+    width: 3,
+    minWidth: 2,
+    maxWidth: 8,
+    grow: ['$sectionData.container', '$sectionData.container2'],
+    selfName: '$sectionData.container3'
   },
   components: merge({}, defaultColumnComponents1),
   components2: merge({}, defaultColumnComponents2),

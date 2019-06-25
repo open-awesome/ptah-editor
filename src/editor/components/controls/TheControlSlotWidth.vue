@@ -5,8 +5,8 @@
         v-model="width"
         label="Slot width (columns)"
         step="1"
-        min="2"
-        max="12">
+        :min="minWidth"
+        :max="maxWidth">
         {{ width }}
       </base-range-slider>
     </div>
@@ -15,6 +15,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import { find } from 'lodash-es'
 
 export default {
   name: 'TheControlSlotWidth',
@@ -29,16 +30,59 @@ export default {
       return this.settingObjectSection.get(this.sandbox.container) || {}
     },
 
+    minWidth () {
+      return this.slot.minWidth || 2
+    },
+
+    maxWidth () {
+      return this.slot.maxWidth || 12
+    },
+
     width: {
       get () {
         return this.slot.width
       },
 
       set (value) {
+        let diff = value - this.width
+
         this.settingObjectSection.set(this.sandbox.container, {
           ...this.slot, width: value
         })
+
+        if (this.slot.grow !== undefined) {
+          this.changeAdjacentSlots(diff)
+        }
       }
+    }
+  },
+
+  methods: {
+    changeAdjacentSlots (diff) {
+      let columnsWidth = this.columns().map(slot => slot.width)
+      let name
+      let adjacentSlot
+      let width
+
+      if (diff > 0) {
+        name = find(this.columns(), slot => slot.width === Math.max.apply(null, columnsWidth)).name
+        adjacentSlot = this.settingObjectSection.get(name)
+      } else {
+        name = find(this.columns(), slot => slot.width === Math.min.apply(null, columnsWidth)).name
+        adjacentSlot = this.settingObjectSection.get(name)
+      }
+
+      width = adjacentSlot.width + (diff * -1)
+
+      this.settingObjectSection.set(adjacentSlot.selfName, {
+        ...adjacentSlot, width
+      })
+    },
+
+    columns () {
+      return this.slot.grow.map(path => this.settingObjectSection.get(path)).map(slot => {
+        return { width: slot.width, name: slot.selfName || slot.name }
+      })
     }
   }
 }

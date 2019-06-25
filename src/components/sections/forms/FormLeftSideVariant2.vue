@@ -125,6 +125,10 @@ const SCHEMA_CUSTOM = {
   components2: _.merge({}, C_CUSTOM_2),
   container: {
     width: 6,
+    minWidth: 2,
+    maxWidth: 8,
+    grow: ['$sectionData.container2'],
+    selfName: '$sectionData.container',
     styles: {
       'align-items': 'flex-start',
       'justify-content': 'center'
@@ -132,6 +136,10 @@ const SCHEMA_CUSTOM = {
   },
   container2: {
     width: 6,
+    minWidth: 2,
+    maxWidth: 8,
+    grow: ['$sectionData.container'],
+    selfName: '$sectionData.container2',
     styles: {
       'justify-content': 'center',
       'align-items': 'flex-start',
