@@ -22,14 +22,32 @@
         <h6 v-show="direction" class="">Content direction</h6>
 
         <ul v-show="isRowDir">
-          <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
+          <li :class="{ active: align === 'flex-start' }" tooltip="Top" @click="changeAlign('flex-start')">
             <icon-base name="groupTop"/>
           </li>
-          <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
+          <li :class="{ active: align === 'center' }" tooltip="Vertical align center" @click="changeAlign('center')">
             <icon-base name="groupCenterVertical"/>
           </li>
-          <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
+          <li :class="{ active: align === 'flex-end' }" tooltip="Bottom" @click="changeAlign('flex-end')">
             <icon-base name="groupBottom"/>
+          </li>
+        </ul>
+
+        <ul v-show="isRowDir">
+          <li :class="{ active: justify === 'center' }" tooltip="Center" @click="changeJustify('center')">
+            <icon-base name="groupCenterVertical"/>
+          </li>
+
+          <li :class="{ active: justify === 'space-between' }" tooltip="Space between" @click="changeJustify('space-between')">
+            <icon-base name="groupCenterVertical"/>
+          </li>
+
+          <li :class="{ active: justify === 'flex-start' }" tooltip="Left" @click="changeJustify('flex-start')">
+            <icon-base name="groupCenterVertical"/>
+          </li>
+
+          <li :class="{ active: justify === 'flex-end' }" tooltip="Right" @click="changeJustify('flex-end')">
+            <icon-base name="groupCenterVertical"/>
           </li>
         </ul>
 
@@ -123,6 +141,18 @@ export default {
       get () {
         return this.styles['align-items']
       }
+    },
+
+    justify: {
+      get () {
+        return this.styles['justify-content']
+      },
+
+      set (value) {
+        this.settingObjectSection.set(this.sandbox.container, {
+          styles: { ...this.styles, 'justify-content': value }
+        })
+      }
     }
   },
 
@@ -151,6 +181,13 @@ export default {
         return
       }
       this.align = value
+    },
+
+    changeJustify (value) {
+      if (value === this.justify) {
+        return
+      }
+      this.justify = value
     }
   }
 }
@@ -184,7 +221,7 @@ export default {
       display: flex
       align-items: center
       list-style-type: none
-      margin: 0
+      margin: 0 0 1.5rem
       padding: 0
       &:last-child
         border-bottom: none
