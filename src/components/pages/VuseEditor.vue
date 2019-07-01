@@ -70,6 +70,7 @@ import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
 import Video from '@components/sections/video/Video'
 import Faq from '@components/sections/elements/Faq'
+import Banner from '@components/sections/banner/Banner'
 
 import store from '@store'
 
@@ -131,7 +132,8 @@ const COMPONENTS = {
   Footer,
   System,
   Video,
-  Faq
+  Faq,
+  Banner
 }
 
 Vuse.mix({ components: ELEMENTS })

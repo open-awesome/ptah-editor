@@ -20,6 +20,11 @@
           <the-control-carousel></the-control-carousel>
         </div>
 
+        <!-- Banner section options -->
+        <div class="b-section-settings__control" v-if="settingObjectOptions.bannerSection">
+          <the-control-section-banner></the-control-section-banner>
+        </div>
+
         <!-- Form -->
         <div class="b-panel__control mailchimp" v-if="settingObjectSection.group === 'Forms'">
           <div v-if="user.mailchimpIntegration && currentLanding.settings.mailchimpList">
@@ -110,9 +115,11 @@ import IconBase from '../../../components/base/icons/IconBase'
 import ControlBox from './../controls/TheControlBox'
 import { resetIndents } from '@editor/util'
 import TheControlCarousel from '../controls/TheControlCarousel'
+import TheControlSectionBanner from '../controls/TheControlSectionBanner'
 
 export default {
   components: {
+    TheControlSectionBanner,
     TheControlCarousel,
     IconBase,
     BuilderSettingsBarGroup,
