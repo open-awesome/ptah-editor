@@ -1,7 +1,7 @@
 <template>
   <transition name="slide-fade">
     <div class="b-builder-modal"
-      @click.self="closeContent"
+      @mousedown.self="closeContent"
       >
       <div
         class="b-builder-modal-content"
