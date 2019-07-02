@@ -118,9 +118,9 @@ const C_CUSTOM_COLUMN = [
     element: {
       text: 'This is a header',
       styles: {
-        'font-family': 'Lato',
-        'font-size': '2.4rem',
-        'color': '#ffffff'
+        'font-family': 'Montserrat',
+        'font-size': '6.4rem',
+        'color': '#000000'
       }
     }
   },
@@ -130,25 +130,25 @@ const C_CUSTOM_COLUMN = [
       '<div>Her yet there truth merit.</div>' +
       '<div>Mrs all projecting favourable now unpleasing.</div>',
       styles: {
-        'font-family': 'Lato',
-        'font-size': '1.6rem',
-        'color': 'rgba(255, 255, 255, 0.3)'
+        'font-family': 'Montserrat',
+        'font-size': '3.2rem',
+        'color': '#6D6D6D'
       }
     }
   },
   {},
   {
     element: {
-      text: 'Secondary',
+      text: 'Call to Action',
       styles: {
-        'background-color': 'rgba(255, 125, 125, 0.5)',
-        'color': '#ffffff',
-        'font-family': 'Lato',
+        'background-color': '#FFFFFF',
+        'color': '#003EDC',
+        'font-family': 'Montserrat',
         'font-size:': '1.4rem',
         'text-align': 'center',
         'width': '224px',
         'height': '56px',
-        'border-radius': '2px'
+        'border-radius': '50px'
       }
     }
   }
@@ -243,7 +243,7 @@ export default {
 
   inject: ['device'],
 
-  cover: '',
+  cover: 'https://gn823.cdn.stg.gamenet.ru/0/8Y52t/o_1XHdCo.png',
 
   data () {
     return {
