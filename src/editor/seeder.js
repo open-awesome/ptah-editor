@@ -8,6 +8,7 @@ const DEFAULT_OPTIONS = {
   styles: {},
   resizable: false,
   hasLink: false,
+  belongsGallery: false,
   link: {
     href: '#',
     target: '_blank',
@@ -82,8 +83,6 @@ const data = new Map([
     resizable: true,
     removable: true,
     alt: 'Default image',
-    src: 'https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png',
-    hasLink: false,
     link: {
       href: '',
       target: '_blank',
@@ -106,7 +105,6 @@ const data = new Map([
     resizable: true,
     removable: true,
     alt: 'Default logo',
-    src: 'https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png',
     hasLink: false,
     link: {
       href: '',

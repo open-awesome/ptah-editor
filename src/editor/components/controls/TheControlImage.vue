@@ -1,5 +1,7 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import * as _ from 'lodash-es'
+import { isValidUrl } from '../../util'
 
 const defaultBg = 'https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png'
 
@@ -10,8 +12,33 @@ export default {
       bgImage: '',
       bgSize: '',
       label: '',
-      isStretchImage: false
+      isStretchImage: false,
+      url: '',
+      error: {
+        url: false
+      }
     }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions',
+      'settingObjectElement',
+      'settingObjectType'
+    ]),
+
+    styles () {
+      return this.settingObjectOptions.styles
+    },
+
+    pseudo () {
+      return this.settingObjectOptions.pseudo
+    },
+
+    link () {
+      return this.settingObjectOptions.link
+    }
+
   },
 
   created () {
@@ -33,26 +60,14 @@ export default {
     }
 
     this.label = 'Image'
-  },
-
-  computed: {
-    ...mapState('Sidebar', [
-      'settingObjectOptions',
-      'settingObjectElement',
-      'settingObjectType'
-    ]),
-
-    styles () {
-      return this.settingObjectOptions.styles
-    },
-
-    pseudo () {
-      return this.settingObjectOptions.pseudo
-    }
-
+    this.url = this.link.href
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     changeImage () {
       let bg = 'none'
       if (this.bgImage !== null && this.bgImage !== '') {
@@ -69,22 +84,53 @@ export default {
       } else {
         this.styles['background-size'] = 'contain'
       }
+    },
+
+    validUrl (url) {
+      let v = true
+      let link = {}
+
+      if (url !== '') {
+        v = isValidUrl(url)
+      }
+
+      this.error.url = !v
+
+      if (v === false) {
+        return
+      }
+
+      link['href'] = url
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { link }))
     }
   }
 }
 </script>
 
 <template>
-  <div class="b-bg-controls"
+  <div class="b-controls"
        v-if="settingObjectType === 'button' || settingObjectType === 'image' || settingObjectType === 'slogan'">
-    <div class="b-bg-controls__control">
+    <div class="b-controls__control">
       <base-uploader
-          v-model="bgImage"
-          @change="changeImage"
-          :label="label"/>
+        v-model="bgImage"
+        @change="changeImage"
+        :label="label"
+      />
     </div>
-    <div class="b-bg-controls__control">
-      <BaseSwitcher v-model="isStretchImage" label="Stretch to fit" @change="setStretch" />
+    <div class="b-controls__control" v-if="!this.settingObjectOptions.belongsGallery">
+      <base-text-field v-model="url" label="Link from image" placeholder="https://www.url.com" :hasError="error.url" @input="validUrl(url)">
+        <span slot="error">
+          Invalid URL
+        </span>
+      </base-text-field>
+    </div>
+    <div class="b-controls__control">
+      <BaseSwitcher
+        v-model="isStretchImage"
+        label="Stretch to fit"
+        @change="setStretch"
+      />
     </div>
   </div>
 </template>
@@ -93,10 +139,9 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-bg-controls
+.b-controls
   margin-top: 2.2rem
   padding: 0 0 $size-step/2
-  border-bottom: 0.2rem dotted rgba($black, 0.15)
   &__control
     margin-bottom: $size-step/2
     &:lastt-child
