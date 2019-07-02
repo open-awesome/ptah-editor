@@ -30,6 +30,10 @@ export default {
           value: 'both'
         },
         {
+          text: 'Cover',
+          value: 'cover'
+        },
+        {
           text: 'Stretch',
           value: 'stretch'
         }
@@ -84,17 +88,20 @@ export default {
     this.bgSize = this.styles['background-size'] || 'contain'
     this.bgAttachment = this.styles['background-attachment'] || 'scroll'
 
-    if (this.bgSize === 'auto auto') {
+    if (this.bgSize === 'auto auto' && this.bgRepeat === 'no-repeat') {
       this.backgroundFill = 'normal'
     }
-    if (this.bgSize === 'auto 100%') {
+    if (this.bgSize === 'auto auto' && this.bgRepeat === 'repeat') {
+      this.backgroundFill = 'both'
+    }
+    if (this.bgSize === 'auto auto' && this.bgRepeat === 'repeat-y') {
       this.backgroundFill = 'vertically'
     }
-    if (this.bgSize === 'auto 100%') {
+    if (this.bgSize === 'auto auto' && this.bgRepeat === 'repeat-x') {
       this.backgroundFill = 'horizontally'
     }
     if (this.bgSize === 'cover') {
-      this.backgroundFill = 'both'
+      this.backgroundFill = 'cover'
     }
     if (this.bgSize === 'contain') {
       this.backgroundFill = 'stretch'
@@ -117,19 +124,28 @@ export default {
     },
     changeSize () {
       if (this.backgroundFill === 'normal') {
-        this.update('background-size', 'auto auto%')
+        this.update('background-size', 'auto auto')
+        this.update('background-repeat', 'no-repeat')
       }
       if (this.backgroundFill === 'vertically') {
-        this.update('background-size', 'auto 100%')
+        this.update('background-size', 'auto auto')
+        this.update('background-repeat', 'repeat-y')
       }
       if (this.backgroundFill === 'horizontally') {
-        this.update('background-size', '100% auto')
+        this.update('background-size', 'auto auto')
+        this.update('background-repeat', 'repeat-x')
       }
-      if (this.backgroundFill === 'both') {
+      if (this.backgroundFill === 'cover') {
         this.update('background-size', 'cover')
+        this.update('background-repeat', 'no-repeat')
       }
       if (this.backgroundFill === 'stretch') {
         this.update('background-size', 'contain')
+        this.update('background-repeat', 'no-repeat')
+      }
+      if (this.backgroundFill === 'both') {
+        this.update('background-size', 'auto auto')
+        this.update('background-repeat', 'repeat')
       }
     },
     setPosition (x, y) {
