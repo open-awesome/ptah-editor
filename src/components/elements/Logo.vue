@@ -2,6 +2,8 @@
   <div class="b-logo is-editable"
     @dragover.prevent
     @drop="onDrop"
+    :data-href="link.href"
+    :class="{'js-element-link' : isSetUrlImage }"
     >
 
     <i class="b-load pth-uploader" @click.stop="upload" ref="upload">
@@ -72,6 +74,18 @@ export default {
 
     styles () {
       return this.$section.get(`$sectionData.${this.path}.styles`)
+    },
+
+    link () {
+      return this.$section.get(`$sectionData.${this.path}.link`)
+    },
+
+    belongsGallery () {
+      return this.$section.get(`$sectionData.${this.path}.belongsGallery`)
+    },
+
+    isSetUrlImage () {
+      return !this.belongsGallery && this.link.href !== ''
     }
   },
 
@@ -190,6 +204,8 @@ export default {
     &
       max-width: 60% !important
       margin: $size-step/2 auto !important
+  &.js-element-link
+    cursor: pointer
 /deep/
   .b-handle
     position: absolute !important
