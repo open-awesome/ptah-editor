@@ -34,20 +34,20 @@
         </ul>
 
         <ul v-show="isRowDir">
-          <li :class="{ active: justify === 'center' }" tooltip="Center" @click="changeJustify('center')">
-            <icon-base name="groupCenterHorizontal"/>
-          </li>
-
-          <li :class="{ active: justify === 'space-between' }" tooltip="Space between" @click="changeJustify('space-between')">
-            <icon-base name="groupSpaceBetween"/>
-          </li>
-
           <li :class="{ active: justify === 'flex-start' }" tooltip="Left" @click="changeJustify('flex-start')">
             <icon-base name="groupLeft"/>
           </li>
 
           <li :class="{ active: justify === 'flex-end' }" tooltip="Right" @click="changeJustify('flex-end')">
             <icon-base name="groupRight"/>
+          </li>
+
+          <li :class="{ active: justify === 'center' }" tooltip="Center" @click="changeJustify('center')">
+            <icon-base name="groupCenterHorizontal"/>
+          </li>
+
+          <li :class="{ active: justify === 'space-between' }" tooltip="Space between" @click="changeJustify('space-between')">
+            <icon-base name="groupSpaceBetween"/>
           </li>
         </ul>
 
