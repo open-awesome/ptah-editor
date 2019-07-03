@@ -56,11 +56,18 @@
       <div class="b-uploader-item__label"
            :class="{ 'b-uploader-item__label--empty': !hasPreview }"
            v-if="label">
-        {{ label }}
+        <template v-if="!hasPreview && progress === 100">
+          Upload images or enter url
+        </template>
+        <template v-else>
+          {{ label }}
+        </template>
       </div>
       <div class="b-uploader-item__text">
         <base-text-field
           :value="path"
+          :hasError="error"
+          errorText="Invalid image url"
           @input="onInput"
         />
       </div>
@@ -105,7 +112,8 @@ export default {
   data () {
     return {
       progress: 100,
-      totalSteps: 100
+      totalSteps: 100,
+      error: false
     }
   },
 
@@ -226,11 +234,19 @@ export default {
         self.$emit('remove')
       }
 
-      if (value !== '' && self.hasPreview) {
-        self.$emit('replace', { name: 'file', path: value })
-      } else {
-        self.$emit('add', { name: 'file', path: value })
+      let image = new Image()
+      image.onload = () => {
+        self.error = false
+        if (value !== '' && self.hasPreview) {
+          self.$emit('replace', { name: 'file', path: value })
+        } else {
+          self.$emit('add', { name: 'file', path: value })
+        }
       }
+      image.onerror = () => {
+        self.error = true
+      }
+      image.src = value
     }, 300, { trailing: true })
   }
 }
