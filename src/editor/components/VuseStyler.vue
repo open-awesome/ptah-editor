@@ -606,9 +606,6 @@ export default {
 
       let self = this
 
-      event.preventDefault()
-      event.stopPropagation()
-
       self.stylerInit(event)
 
       this.timer = setTimeout(function () {

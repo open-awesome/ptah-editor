@@ -21,49 +21,121 @@
 
     </div>
 
-    <editor-menu-bar :editor="editor" v-if="isActive">
+    <editor-menu-bar :editor="editor" v-if="isActive && !hideMenubar">
       <div
         class="menubar is-hidden"
-        :class="{ 'is-focused': focused }"
+        :class="{ 'is-focused': focused, 'is-only-styles': isOnlyStyles }"
         :style=" { 'top': posMenu.top, 'bottom': posMenu.bottom, }"
         slot-scope="{ commands, isActive, focused, getMarkAttrs }"
       >
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.bold() }"
-          @click.stop="commands.bold"
-        >
-          <icon-base name="fontBold" width="14" height="14"></icon-base>
-        </button>
+        <template v-if="textOptions.styles">
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.bold() }"
+            @click.stop="commands.bold"
+          >
+            <icon-base name="fontBold" width="14" height="14"></icon-base>
+          </button>
 
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.italic() }"
-          @click.stop="commands.italic"
-        >
-          <icon-base name="fontItalic" width="14" height="14"></icon-base>
-        </button>
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.italic() }"
+            @click.stop="commands.italic"
+          >
+            <icon-base name="fontItalic" width="14" height="14"></icon-base>
+          </button>
 
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.underline() }"
-          @click="commands.underline"
-        >
-          <icon-base name="fontUnderline" width="14" height="14" />
-        </button>
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.underline() }"
+            @click="commands.underline"
+          >
+            <icon-base name="fontUnderline" width="14" height="14" />
+          </button>
 
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.strike() }"
-          @click="commands.strike"
-        >
-          <icon-base name="strike" width="14" height="14" />
-        </button>
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.strike() }"
+            @click="commands.strike"
+          >
+            <icon-base name="strike" width="20" height="20" />
+          </button>
+        </template>
 
-        <base-button color="blue" size="small" @click.stop="close">
-          Done
-        </base-button>
+        <template v-if="textOptions.tags">
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.paragraph() }"
+            @click.stop="commands.paragraph"
+          >
+            <icon-base name="paragraph" width="14" height="14"></icon-base>
+          </button>
 
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 1 }) }"
+            @click.stop="setHeading({ level: 1 })"
+          >
+            H1
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+            @click.stop="setHeading({ level: 2 })"
+          >
+            H2
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+            @click.stop="setHeading({ level: 3 })"
+          >
+            H3
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.bullet_list() }"
+            @click.stop="setList('bullet', 'ordered')"
+          >
+            <icon-base name="bulletList"></icon-base>
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.ordered_list() }"
+            @click.stop="setList('ordered', 'bullet')"
+          >
+            <icon-base name="orderedList"></icon-base>
+          </button>
+        </template>
+
+        <template v-if="textOptions.link">
+          <button
+            class="menubar__button"
+            @click.stop="showLinkMenu(getMarkAttrs('link'))"
+            :class="{ 'is-active': isActive.link() }"
+          >
+            <icon-base name="link"></icon-base>
+          </button>
+        </template>
+
+        <span class="menubar__close" @click.stop="close">
+          <icon-base name="close" width="14" height="14" />
+        </span>
+
+        <!-- Link form -->
+        <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
+          <input class="menubar__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="hideLinkMenu"/>
+          <button class="menubar__button" @click.stop="setLinkUrl(commands.link, null)" type="button">
+            <icon-base name="remove"></icon-base>
+          </button>
+          <base-button class="menubar__button" color="blue" size="small" @click.stop="setLinkUrl(commands.link, linkUrl)">
+            Done
+          </base-button>
+        </form>
       </div>
     </editor-menu-bar>
 
@@ -164,12 +236,26 @@ export default {
       return this.$section.get(`$sectionData.${this.path}.styles`)
     },
 
+    textOptions () {
+      return this.settingObjectOptions.editor
+    },
+
+    isOnlyStyles () {
+      return this.textOptions.styles && !this.textOptions.tags && !this.textOptions.link
+    },
+
+    hideMenubar () {
+      return !this.textOptions.styles && !this.textOptions.tags && !this.textOptions.link
+    },
+
     icon () {
       return this.$section.get(`$sectionData.${this.path}.icon`)
     },
+
     colorFill () {
       return this.$section.get(`$sectionData.${this.path}.colorFill`)
     },
+
     sizeIcons () {
       return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
     }
@@ -297,6 +383,7 @@ export default {
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
+@import '../../assets/sass/_menubar.sass'
 
 .b-text-icon
   color: #000
@@ -337,65 +424,5 @@ export default {
       fill: inherit
       width: 100%
       height: auto
-
-.menubar
-  display: flex
-  align-items: center
-  padding: 0 0.4rem
-
-  position: absolute
-  top: -26px
-  width: 19rem
-  left: calc(50% - 9.5rem)
-  z-index: 9999
-
-  background: $white
-  border-radius: 2px
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25)
-
-  &__button
-    width: $size-step
-    height: $size-step/1.5
-
-    display: flex
-    justify-content: center
-    align-items: center
-
-    background: transparent
-    border: none
-
-    color: $grey
-    margin: 0.2rem
-    svg
-      fill: $grey
-      width: 14px
-      height: 14px
-
-    &:hover,
-    &.is-active
-      cursor: pointer
-      color: $black
-      svg
-        fill: $black
-  &__form
-    width: 100%
-    height: 100%
-    padding: 0 .8rem
-    position: absolute
-    top: 0
-    left: 0
-    display: flex
-    align-items: center
-
-    background: $white
-    border-radius: 4px
-
-  &__input
-    width: 28em
-    padding: 1rem
-    margin-right: 1rem
-
-    border: 1px solid $grey-middle
-    border-radius: 4px
 
 </style>
