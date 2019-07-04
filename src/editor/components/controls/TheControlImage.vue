@@ -1,7 +1,5 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import * as _ from 'lodash-es'
-import { isValidUrl } from '../../util'
 
 const defaultBg = 'https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png'
 
@@ -12,11 +10,7 @@ export default {
       bgImage: '',
       bgSize: '',
       label: '',
-      isStretchImage: false,
-      url: '',
-      error: {
-        url: false
-      }
+      isStretchImage: false
     }
   },
 
@@ -33,12 +27,7 @@ export default {
 
     pseudo () {
       return this.settingObjectOptions.pseudo
-    },
-
-    link () {
-      return this.settingObjectOptions.link
     }
-
   },
 
   created () {
@@ -60,7 +49,6 @@ export default {
     }
 
     this.label = 'Image'
-    this.url = this.link.href
   },
 
   methods: {
@@ -84,25 +72,6 @@ export default {
       } else {
         this.styles['background-size'] = 'contain'
       }
-    },
-
-    validUrl (url) {
-      let v = true
-      let link = {}
-
-      if (url !== '') {
-        v = isValidUrl(url)
-      }
-
-      this.error.url = !v
-
-      if (v === false) {
-        return
-      }
-
-      link['href'] = url
-
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { link }))
     }
   }
 }
@@ -117,13 +86,6 @@ export default {
         @change="changeImage"
         :label="label"
       />
-    </div>
-    <div class="b-controls__control" v-if="!this.settingObjectOptions.belongsGallery">
-      <base-text-field v-model="url" label="Link from image" placeholder="https://www.url.com" :hasError="error.url" @input="validUrl(url)">
-        <span slot="error">
-          Invalid URL
-        </span>
-      </base-text-field>
     </div>
     <div class="b-controls__control">
       <BaseSwitcher
