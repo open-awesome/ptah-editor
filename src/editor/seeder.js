@@ -772,6 +772,7 @@ const data = new Map([
   }))],
   [types.Timer, () => (_.merge({}, DEFAULT_OPTIONS, {
     isComplex: true,
+    removable: true,
     timer: {
       // --- timer timestamp
       timestamp: null,
