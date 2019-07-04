@@ -272,7 +272,7 @@ export default {
 
       if (this.emptySections) {
         this.toggleSidebar(true)
-        this.showAddSectionBar(true)
+        this.showAddSectionBar()
       }
     },
     addTheme (theme) {
@@ -458,7 +458,7 @@ export default {
     }, 300),
 
     showAddSectionBar () {
-      this.toggleAddSectionMenu()
+      this.toggleAddSectionMenu(true)
     }
   }
 }
