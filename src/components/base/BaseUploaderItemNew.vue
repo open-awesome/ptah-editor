@@ -234,20 +234,29 @@ export default {
         self.$emit('remove')
       }
 
-      let image = new Image()
-      image.onload = () => {
-        self.error = false
-        if (value !== '' && self.hasPreview) {
-          self.$emit('replace', { name: 'file', path: value })
-        } else {
-          self.$emit('add', { name: 'file', path: value })
+      // validate image url
+      if (self.type === 'image') {
+        let image = new Image()
+        image.onload = () => {
+          self.error = false
+          self.inputDone(value)
         }
+        image.onerror = () => {
+          self.error = true
+        }
+        image.src = value
+      } else {
+        self.inputDone(value)
       }
-      image.onerror = () => {
-        self.error = true
+    }, 300, { trailing: true }),
+
+    inputDone (value) {
+      if (value !== '' && this.hasPreview) {
+        this.$emit('replace', { name: 'file', path: value })
+      } else {
+        this.$emit('add', { name: 'file', path: value })
       }
-      image.src = value
-    }, 300, { trailing: true })
+    }
   }
 }
 </script>
