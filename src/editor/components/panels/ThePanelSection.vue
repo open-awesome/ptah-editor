@@ -11,7 +11,7 @@
           <base-uploader
             :value="galleryImages"
             @change="updateGalleryImages"
-            label="Images upload"
+            label="Image"
             multiple/>
         </div>
 
