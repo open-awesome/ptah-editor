@@ -57,7 +57,8 @@
            :class="{ 'b-uploader-item__label--empty': !hasPreview }"
            v-if="label">
         <template v-if="!hasPreview && progress === 100">
-          Upload images or enter url
+          <template v-if="type === 'image'">Upload images or enter url</template>
+          <template v-if="type === 'video'">Upload video or enter url</template>
         </template>
         <template v-else>
           {{ label }}
