@@ -147,10 +147,6 @@
             </button>
           </template>
 
-        <span class="menubar__close" @click.stop="close">
-          <icon-base name="close" width="14" height="14" />
-        </span>
-
           <!-- Link form -->
           <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
             <input class="menubar__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="hideLinkMenu"/>
@@ -313,10 +309,6 @@ export default {
 
     save () {
       this.updateSettingOptions(merge({}, this.settingObjectOptions, { buttonText: this.text }))
-    },
-
-    close () {
-      this.textEditor(false)
     },
 
     showLinkMenu (attrs) {
