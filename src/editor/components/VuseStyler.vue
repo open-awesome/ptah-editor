@@ -639,8 +639,6 @@ export default {
         return
       }
 
-      console.log(event)
-
       if (this.popper) {
         this.popper.destroy()
         this.popper = null
