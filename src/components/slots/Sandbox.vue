@@ -83,7 +83,6 @@ export default {
     showSandboxSidebar (e, openElBar) {
       this.isAddSectionExpanded(false)
 
-      // set slot element
       this.setElement(this.$slots.default[0].elm)
 
       // --- clear active classes
