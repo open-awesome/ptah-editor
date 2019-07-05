@@ -1,5 +1,5 @@
 <template>
-  <a class="b-button is-editable" ref="btn" @click.stop.stop="">
+  <a class="b-button is-editable" ref="btn" @click.stop>
 
     <slot v-if="!isActive"></slot>
 
@@ -13,7 +13,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.bold() }"
-          @click.stop="commands.bold"
+          @click.stop.prevent="commands.bold"
         >
           <icon-base name="fontBold" width="14" height="14"></icon-base>
         </button>
@@ -21,7 +21,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.italic() }"
-          @click.stop="commands.italic"
+          @click.stop.prevent="commands.italic"
         >
           <icon-base name="fontItalic" width="14" height="14"></icon-base>
         </button>
