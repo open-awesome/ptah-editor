@@ -36,7 +36,6 @@
             class="b-sandbox">
 
           <draggable
-              v-if="$sectionData.components.length"
               v-model="$sectionData.components"
               :style="$sectionData.container.styles"
               class="b-draggable-slot b-draggable-slot_horizont b-draggable-slot_header"
@@ -46,6 +45,7 @@
             <div
                 v-for="(component, index) in $sectionData.components"
                 :key="`component-${ _uid }-${ index }`"
+                v-if="$sectionData.components.length"
                 :style="component.styles">
 
               <component
@@ -87,7 +87,6 @@
             class="b-sandbox">
 
           <draggable
-              v-if="$sectionData.components2.length"
               v-model="$sectionData.components2"
               :style="$sectionData.container2.styles"
               class="b-draggable-slot b-draggable-slot_horizont"
@@ -97,6 +96,7 @@
             <div
                 v-for="(component, index) in $sectionData.components2"
                 :key="`component-${ _uid }-${ index }`"
+                v-if="$sectionData.components2.length"
                 :style="component.styles">
 
               <component

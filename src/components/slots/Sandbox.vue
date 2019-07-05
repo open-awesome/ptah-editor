@@ -83,6 +83,8 @@ export default {
     showSandboxSidebar (e, openElBar) {
       this.isAddSectionExpanded(false)
 
+      this.setElement(this.$slots.default[0].elm)
+
       // --- clear active classes
       document.querySelectorAll('.b-draggable-slot.active')
         .forEach(el => el.classList.remove('active'))
