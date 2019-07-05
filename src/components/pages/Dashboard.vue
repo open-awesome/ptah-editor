@@ -29,7 +29,8 @@ export default {
       ],
       presetSelected: 0,
       newPageTitle: '',
-      invalid: false
+      invalid: false,
+      createProgress: false
     }
   },
 
@@ -60,12 +61,14 @@ export default {
     },
 
     newLanding () {
-      if (this.newPageTitle.length > 0) {
+      if (this.newPageTitle.length > 0 && !this.createProgress) {
         this.$Progress.start()
         this.invalid = false
+        this.createProgress = true
         this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
           .then((response) => {
             this.$router.push({ path: `/editor/${response._id}` })
+            this.createProgress = false
           })
       } else {
         this.invalid = true
@@ -137,7 +140,9 @@ export default {
             </div>
           </div>
 
-          <base-button color="blue" size="middle" @click="newLanding">Create</base-button>
+          <base-button color="blue" size="middle" @click="newLanding" :disabled="createProgress">
+            Create
+          </base-button>
         </div>
       </div>
     </transition>
