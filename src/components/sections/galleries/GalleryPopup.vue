@@ -271,8 +271,10 @@ export default {
       this.stopVideo()
       this.$sectionData.content = ''
 
-      el.style.height = ''
-      el.style.width = ''
+      if (el) {
+        el.style.height = ''
+        el.style.width = ''
+      }
     },
 
     matchYoutubeUrl (url) {
