@@ -9,7 +9,7 @@
         v-model="count"
         label="Number of slides in the banner"
         step="1"
-        min="1"
+        min="2"
         max="6">
         {{count}}
       </base-range-slider>

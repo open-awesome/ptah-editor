@@ -11,7 +11,7 @@
     <div
       ref="swiper"
       :data-options="options"
-      class="swiper-container b-gallery-carousel-body">
+      class="swiper-container b-gallery-carousel-body is-editable">
 
       <div class="swiper-wrapper b-gallery-carousel-body__items">
         <div
@@ -108,6 +108,8 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+
+import { mapActions } from 'vuex'
 
 import Swiper from 'swiper'
 import swiperOptions from '@editor/swiper'
@@ -247,7 +249,8 @@ export default {
 
   data () {
     return {
-      options: ''
+      options: '',
+      swiper: {}
     }
   },
 
@@ -273,20 +276,29 @@ export default {
         this.options = JSON.stringify(this.$sectionData.mainStyle.swiper)
       },
       deep: true
+    },
+
+    'device.type': {
+      handler () {
+        setTimeout(() => {
+          this.swiper.update()
+        }, 500)
+      }
     }
   },
 
   created () {
-    this.options = JSON.stringify(this.$sectionData.mainStyle.swiper)
-
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
+
+    this.options = JSON.stringify(this.$sectionData.mainStyle.swiper)
   },
 
   mounted () {
     this.$nextTick(function () {
-      let swiper = new Swiper(this.$refs.swiper, {
+      let self = this
+      this.swiper = new Swiper(this.$refs.swiper, {
         loop: true,
         navigation: {
           nextEl: this.$refs.next,
@@ -295,10 +307,20 @@ export default {
         pagination: {
           el: this.$refs.pagination,
           clickable: true
+        },
+        on: {
+          slideChange: function () {
+            self.setControlPanel(false)
+          }
         }
       })
-      console.log(swiper)
     })
+  },
+
+  methods: {
+    ...mapActions('Sidebar', [
+      'setControlPanel'
+    ])
   }
 }
 </script>
@@ -319,6 +341,10 @@ export default {
   .slide-number
     display: none
 
+.swiper-container
+  border: none !important
+  .b-draggable-slot
+    border: none !important
   &.is-editable
     .slide-number
       display: block
@@ -347,7 +373,6 @@ export default {
 .swiper-pagination
   width: 100%
   bottom: 2.5rem
-  padding-left: 2.5rem
   &-bullet
     margin: 0 .4rem
 
