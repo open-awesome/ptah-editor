@@ -68,10 +68,10 @@ export default {
         this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
           .then((response) => {
             this.$router.push({ path: `/editor/${response._id}` })
-            this.createProgress = false
           })
       } else {
         this.invalid = true
+        this.createProgress = false
       }
     }
   },
@@ -140,7 +140,7 @@ export default {
             </div>
           </div>
 
-          <base-button color="blue" size="middle" @click="newLanding" v-if="!createProgress">
+          <base-button color="blue" size="middle" @click="newLanding" :disabled="createProgress">
             Create
           </base-button>
         </div>
