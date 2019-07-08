@@ -325,7 +325,6 @@ const data = new Map([
     isChapter: false,
     isChapterStyle: false,
     isTextStyle: false,
-    isLabel: false,
     isLabelPreview: false,
     isLabel: false,
     isTop:  false,
@@ -487,6 +486,33 @@ const data = new Map([
         navSize: '8px'
       }
     })
+  )],
+  [types.BannerSection, () => (_.merge({}, DEFAULT_OPTIONS,
+      {
+        resizable: true,
+        removable: true,
+        background: true,
+        bannerSection: true,
+        hasHeader: true,
+        overlay: {
+          color: 'rgba(0,0,0,1)',
+          opacity: '0'
+        },
+        count: 3,
+        // --- swiper options
+        swiper: {
+          init: true,
+          loop: true,
+          simulateTouch: true,
+          pagination: {
+            type: 'bullets',
+            clickable: true
+          },
+          showNavigation: true,
+          showPagination: true,
+          navSize: '8px'
+        }
+      })
   )],
   [types.AvailablePlatforms, () => (_.merge({}, DEFAULT_OPTIONS,
     {
@@ -787,6 +813,7 @@ const data = new Map([
   }))],
   [types.Timer, () => (_.merge({}, DEFAULT_OPTIONS, {
     isComplex: true,
+    removable: true,
     timer: {
       // --- timer timestamp
       timestamp: null,

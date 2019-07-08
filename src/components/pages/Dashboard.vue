@@ -29,7 +29,8 @@ export default {
       ],
       presetSelected: 0,
       newPageTitle: '',
-      invalid: false
+      invalid: false,
+      createProgress: false
     }
   },
 
@@ -60,7 +61,8 @@ export default {
     },
 
     newLanding () {
-      if (this.newPageTitle.length > 0) {
+      if (this.newPageTitle.length > 0 && !this.createProgress) {
+        this.createProgress = true
         this.$Progress.start()
         this.invalid = false
         this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
@@ -69,6 +71,7 @@ export default {
           })
       } else {
         this.invalid = true
+        this.createProgress = false
       }
     }
   },
@@ -137,7 +140,9 @@ export default {
             </div>
           </div>
 
-          <base-button color="blue" size="middle" @click="newLanding">Create</base-button>
+          <base-button color="blue" size="middle" @click="newLanding" :disabled="createProgress">
+            Create
+          </base-button>
         </div>
       </div>
     </transition>

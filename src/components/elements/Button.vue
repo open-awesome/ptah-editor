@@ -1,5 +1,5 @@
 <template>
-  <a class="b-button is-editable" ref="btn" @click.stop.stop="">
+  <a class="b-button is-editable" ref="btn" @click.stop>
 
     <slot v-if="!isActive"></slot>
 
@@ -10,15 +10,15 @@
         :style=" { 'top': posMenu.top, 'bottom': posMenu.bottom, }"
         slot-scope="{ commands, isActive, focused, getMarkAttrs }"
       >
-        <template v-if="textOptions.styles">
+        <template v-if="textOptions.styles"> 
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bold() }"
             @click.stop="commands.bold"
-          >
+           >
             <icon-base name="fontBold" width="14" height="14"></icon-base>
           </button>
-
+    
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.italic() }"

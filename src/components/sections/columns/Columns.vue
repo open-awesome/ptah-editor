@@ -210,7 +210,6 @@ export default {
           container-path="$sectionData.container"
           components-path="$sectionData.components"
           direction="column"
-          :style="$sectionData.container.styles"
         >
 
           <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles">

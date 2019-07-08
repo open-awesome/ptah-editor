@@ -365,9 +365,7 @@ export default {
     },
 
     async showSettings (panel) {
-      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
-
-      this.setSettingSection(this.$builder.sections[index])
+      this.setSettingSection(this.$section)
 
       await this.$nextTick()
 
