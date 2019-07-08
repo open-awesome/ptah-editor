@@ -1,6 +1,9 @@
 <template>
   <div class="b-slot">
-    <div class="b-slot__settings">
+    <div class="b-slot__settings" :style="{
+      'margin-top': styles['margin-top'],
+      'margin-left': styles['margin-left']
+    }">
       <span
         @click.stop="showSandboxSidebar($event, 'SlotSettings')"
         tooltip="Slot settings"
