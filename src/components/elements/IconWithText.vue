@@ -324,9 +324,6 @@ export default {
     cursor: pointer
     &-col
       padding: 0 0.4rem
-      &-icon
-        width: 3.2rem
-        min-width: 3.2rem
     &-text
       max-width: 100%
   &_hide
