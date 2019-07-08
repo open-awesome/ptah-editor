@@ -70,7 +70,7 @@ import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
 import Video from '@components/sections/video/Video'
 import Faq from '@components/sections/elements/Faq'
-import Banner from '@components/sections/banner/Banner'
+import Slider from '@components/sections/slider/Slider'
 
 import store from '@store'
 
@@ -113,6 +113,8 @@ const COMPONENTS = {
   HeroWithTimerSlogan,
   HeroWithTimerSlogan2,
 
+  Slider,
+
   GallerySwitch,
   GalleryPopup,
 
@@ -132,8 +134,7 @@ const COMPONENTS = {
   Footer,
   System,
   Video,
-  Faq,
-  Banner
+  Faq
 }
 
 Vuse.mix({ components: ELEMENTS })

@@ -233,8 +233,8 @@ const COMPONENTS = [
   }
 ]
 
-const GROUP_NAME = 'Banner'
-const NAME = 'Banner'
+const GROUP_NAME = 'Slider'
+const NAME = 'Slider'
 
 export default {
   name: NAME,
@@ -345,6 +345,7 @@ export default {
   border: none !important
   .b-draggable-slot
     border: none !important
+    width: 100% !important
   &.is-editable
     .slide-number
       display: block

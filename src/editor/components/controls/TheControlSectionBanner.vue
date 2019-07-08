@@ -6,7 +6,7 @@
 
     <p class="b-warning">
       <icon-base name="pling" color="#F68125"></icon-base>
-      Carousel looping is off in development mode
+      Slide looping isn't supported in developer mode
     </p>
 
     <div class="b-control">
