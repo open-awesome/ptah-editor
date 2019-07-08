@@ -272,7 +272,7 @@ export default {
 
       if (this.emptySections) {
         this.toggleSidebar(true)
-        this.showAddSectionBar()
+        this.toggleAddSectionMenu(true)
       }
     },
     addTheme (theme) {
@@ -455,11 +455,7 @@ export default {
       setTimeout(() => {
         document.querySelector('#artboard').classList.remove('drag-start')
       }, 600)
-    }, 300),
-
-    showAddSectionBar () {
-      this.toggleAddSectionMenu(true)
-    }
+    }, 300)
   }
 }
 </script>
