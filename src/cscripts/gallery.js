@@ -5,8 +5,26 @@ const SWIPER_CONTAINERS = document.querySelectorAll(swiperOptions.container)
 
 export function initGallery () {
   SWIPER_CONTAINERS.forEach(el => {
+    el.querySelector('.swiper-button-disabled').classList.remove('swiper-button-disabled')
+
     let options = JSON.parse(el.dataset.options || '{}')
-    new Swiper(el, options)
+    new Swiper(el, {
+      ...options,
+      on: {
+        transitionEnd () {
+          // pause video after slide change
+          if (!!el.querySelector('.ptah-yt-video')) {
+            el
+              .querySelector('.ptah-yt-video')
+              .contentWindow
+              .postMessage('{"event":"command","func":"stopVideo","args":""}', '*')
+          }
+          if (!!el.querySelector('.ptah-video')) {
+            el.querySelector('.ptah-video').pause()
+          }
+        }
+      }
+    })
   })
 }
 
