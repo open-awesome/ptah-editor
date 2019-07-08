@@ -5,6 +5,8 @@ const SWIPER_CONTAINERS = document.querySelectorAll(swiperOptions.container)
 
 export function initGallery () {
   SWIPER_CONTAINERS.forEach(el => {
+    el.querySelector('.swiper-button-prev').classList.remove('swiper-button-disabled')
+
     let options = JSON.parse(el.dataset.options || '{}')
     new Swiper(el, {
       ...options,

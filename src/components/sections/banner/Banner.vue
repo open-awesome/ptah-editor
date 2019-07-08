@@ -299,7 +299,7 @@ export default {
     this.$nextTick(function () {
       let self = this
       this.swiper = new Swiper(this.$refs.swiper, {
-        loop: true,
+        loop: false,
         navigation: {
           nextEl: this.$refs.next,
           prevEl: this.$refs.prev

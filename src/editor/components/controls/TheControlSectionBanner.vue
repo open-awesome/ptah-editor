@@ -4,6 +4,11 @@
       Banner settings
     </base-label>
 
+    <p class="b-warning">
+      <icon-base name="pling" color="#F68125"></icon-base>
+      Carousel looping is off in development mode
+    </p>
+
     <div class="b-control">
       <base-range-slider
         v-model="count"
@@ -235,4 +240,13 @@ export default {
 
 .b-optional
   margin-top: 1.5rem
+
+.b-warning
+  margin: 1rem 0 2rem
+  font-size: 1.35rem
+  color: $gray300
+
+  svg
+    float: left
+    margin: 1rem .7rem 1rem 0
 </style>
