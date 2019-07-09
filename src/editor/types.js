@@ -12,6 +12,7 @@ export class ProductSection { }
 export class Form { }
 
 export class GallerySlider { }
+export class BannerSection { }
 export class AvailablePlatforms { }
 export class AgeRestrictions { }
 export class SocialNetworks { }

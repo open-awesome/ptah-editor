@@ -2,11 +2,12 @@
   <div class="b-base-uploader" :id="`uploader-${ _uid }`">
     <div class="b-base-uploader__row b-base-uploader__row_multiple" v-if="multiple">
       <draggable v-if="multiple" v-model="items" class="b-base-uploader__draggable">
-        <base-uploader-item
+        <base-uploader-item-new
           v-for="(item, index) in items"
           :key="`b-base-uploader-item-${ _uid }-${ index }`"
           :item="item"
           :type="type"
+          :label="labelUploader"
           @replace="replaceFile($event, index)"
           @remove="removeFile(index)"
           @labelProgress="labelChange"
@@ -15,46 +16,44 @@
     </div>
     <div class="b-base-uploader__row b-base-uploader__row_add-multiple" v-if="multiple">
       <div class="b-base-uploader__preview">
-        <base-uploader-item
+        <base-uploader-item-new
           v-if="src"
           :src="src"
           :type="type"
+          :label="labelUploader"
           @replace="replaceSrc"
           @remove="removeSrc"
           @labelProgress="labelChange"
          />
-        <base-uploader-item
+        <base-uploader-item-new
           v-if="hasAddMore"
           :multiple="multiple"
           :type="type"
+          :label="labelUploader"
           @add="addFile"
           @labelProgress="labelChange"
         />
       </div>
-      <div class="b-base-uploader__label" v-if="label && label !== ''">
-        {{ labelUploader }}
-      </div>
     </div>
     <div class="b-base-uploader__row" v-if="!multiple">
       <div class="b-base-uploader__preview">
-        <base-uploader-item
+        <base-uploader-item-new
           v-if="src"
           :src="src"
           :type="type"
+          :label="labelUploader"
           @replace="replaceSrc"
           @remove="removeSrc"
           @labelProgress="labelChange"
           />
-        <base-uploader-item
+        <base-uploader-item-new
           v-if="hasAddMore"
           :multiple="multiple"
           :type="type"
+          :label="labelUploader"
           @add="addFile"
           @labelProgress="labelChange"
           />
-      </div>
-      <div class="b-base-uploader__label" v-if="label && label !== ''">
-        {{ labelUploader }}
       </div>
     </div>
   </div>
@@ -62,7 +61,6 @@
 
 <script>
 import Draggable from 'vuedraggable'
-import BaseUploaderItem from './BaseUploaderItem'
 import { cloneDeep } from 'lodash-es'
 
 const VALID_TYPES = ['image', 'video']
@@ -70,7 +68,7 @@ const VALID_TYPES = ['image', 'video']
 export default {
   name: 'BaseUploader',
 
-  components: { Draggable, BaseUploaderItem },
+  components: { Draggable },
 
   props: {
     value: [Array, String],
@@ -174,8 +172,9 @@ export default {
     &_add-multiple
       margin-top: $size-step/4
   &__preview
-    width: $size-step*1.5
-    height: $size-step
+    width: 100%
+    // width: $size-step*1.5
+    // height: $size-step
   &__label
     color: $dark-grey
     margin-left: $size-step/2

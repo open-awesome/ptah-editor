@@ -70,6 +70,7 @@ import System from '@components/sections/elements/System'
 import Footer from '@components/sections/footers/Footer'
 import Video from '@components/sections/video/Video'
 import Faq from '@components/sections/elements/Faq'
+import Slider from '@components/sections/slider/Slider'
 
 import store from '@store'
 
@@ -111,6 +112,8 @@ const COMPONENTS = {
   HeroWithTimerColumnsVideo2,
   HeroWithTimerSlogan,
   HeroWithTimerSlogan2,
+
+  Slider,
 
   GallerySwitch,
   GalleryPopup,

@@ -621,6 +621,7 @@ export default {
         'b-styler__control_text',
         'b-control-panel',
         'menubar__button',
+        'menubar__button is-active',
         'editor__content',
         'menubar is-hidden'
       ]

@@ -124,10 +124,6 @@
           </button>
         </template>
 
-        <base-button color="blue" size="small" @click.stop="close">
-          Done
-        </base-button>
-
         <!-- Link form -->
         <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
           <input class="menubar__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="hideLinkMenu"/>
@@ -257,68 +253,5 @@ export default {
       fill: inherit
       width: 100%
       height: auto
-
-.menubar
-  display: flex
-  align-items: center
-  padding: 0 0.4rem
-
-  position: absolute
-  top: -38px
-  width: 43rem
-  left: calc(50% - 21.5rem)
-  z-index: 9999
-
-  background: $white
-  border-radius: 2px
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25)
-
-  &__button
-    width: $size-step
-    height: $size-step/1.5
-
-    display: flex
-    justify-content: center
-    align-items: center
-
-    background: transparent
-    border-radius: 2px
-    border: none
-
-    color: $grey
-    margin: 0.2rem
-    svg
-      fill: $grey
-      margin-bottom: 0
-
-    &:hover,
-    &.is-active
-      cursor: pointer
-      color: $black
-      svg
-        fill: $black
-  &__form
-    width: 100%
-    height: 100%
-    padding: 0 .8rem
-    position: absolute
-    top: 0
-    left: 0
-    display: flex
-    align-items: center
-
-    background: $white
-    border-radius: 4px
-
-  &__input
-    width: 28em
-    padding: 1rem
-    margin-right: 1rem
-
-    border: 1px solid $grey-middle
-    border-radius: 4px
-  &.is-only-styles
-    width: 20rem
-    left: calc(50% - 10rem)
 
 </style>

@@ -11,13 +11,18 @@
           <base-uploader
             :value="galleryImages"
             @change="updateGalleryImages"
-            label="Images upload"
+            label="Image"
             multiple/>
         </div>
 
         <!-- Carousel options -->
         <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
           <the-control-carousel></the-control-carousel>
+        </div>
+
+        <!-- Banner section options -->
+        <div class="b-section-settings__control" v-if="settingObjectOptions.bannerSection">
+          <the-control-section-banner></the-control-section-banner>
         </div>
 
         <!-- Form -->
@@ -110,9 +115,11 @@ import IconBase from '../../../components/base/icons/IconBase'
 import ControlBox from './../controls/TheControlBox'
 import { resetIndents } from '@editor/util'
 import TheControlCarousel from '../controls/TheControlCarousel'
+import TheControlSectionBanner from '../controls/TheControlSectionBanner'
 
 export default {
   components: {
+    TheControlSectionBanner,
     TheControlCarousel,
     IconBase,
     BuilderSettingsBarGroup,

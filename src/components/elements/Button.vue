@@ -1,19 +1,19 @@
 <template>
-  <a class="b-button is-editable" ref="btn" @click.stop.stop="">
+  <a class="b-button is-editable" ref="btn" @click.stop>
 
     <slot v-if="!isActive"></slot>
 
-    <editor-menu-bar :editor="editor" v-if="isActive">
+    <editor-menu-bar :editor="editor" v-if="isActive && !hideMenubar">
       <div
         class="menubar is-hidden"
-        :class="{ 'is-focused': focused }"
-        :style="{ 'top': posMenu.top, 'bottom': posMenu.bottom }"
+        :class="{ 'is-focused': focused, 'is-only-styles': isOnlyStyles }"
+        :style=" { 'top': posMenu.top, 'bottom': posMenu.bottom, }"
         slot-scope="{ commands, isActive, focused, getMarkAttrs }"
       >
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.bold() }"
-          @click.stop="commands.bold"
+          @click.stop.prevent="commands.bold"
         >
           <icon-base name="fontBold" width="14" height="14"></icon-base>
         </button>
@@ -21,7 +21,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.italic() }"
-          @click.stop="commands.italic"
+          @click.stop.prevent="commands.italic"
         >
           <icon-base name="fontItalic" width="14" height="14"></icon-base>
         </button>
@@ -29,7 +29,7 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.underline() }"
-          @click="commands.underline"
+          @click.stop.prevent="commands.underline"
         >
           <icon-base name="fontUnderline" width="14" height="14" />
         </button>
@@ -37,15 +37,21 @@
         <button
           class="menubar__button"
           :class="{ 'is-active': isActive.strike() }"
-          @click="commands.strike"
+          @click.stop.prevent="commands.strike"
         >
-          <icon-base name="strike" width="14" height="14" />
+          <icon-base name="strike" width="20" height="20" />
         </button>
 
-        <base-button color="blue" size="small" @click.stop="close">
-          Done
-        </base-button>
-
+        <!-- Link form -->
+        <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
+          <input class="menubar__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="hideLinkMenu"/>
+          <button class="menubar__button" @click.stop="setLinkUrl(commands.link, null)" type="button">
+            <icon-base name="remove"></icon-base>
+          </button>
+          <base-button class="menubar__button" color="blue" size="small" @click.stop="setLinkUrl(commands.link, linkUrl)">
+            Done
+          </base-button>
+        </form>
       </div>
     </editor-menu-bar>
 
@@ -130,6 +136,18 @@ export default {
 
     styles () {
       return this.$section.get(`$sectionData.${this.path}.styles`)
+    },
+
+    textOptions () {
+      return this.settingObjectOptions.editor
+    },
+
+    isOnlyStyles () {
+      return this.textOptions.styles && !this.textOptions.tags && !this.textOptions.link
+    },
+
+    hideMenubar () {
+      return !this.textOptions.styles && !this.textOptions.tags && !this.textOptions.link
     }
   },
 
@@ -163,6 +181,7 @@ export default {
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
+@import '../../assets/sass/_menubar.sass'
 
 .b-button
   $self: &
@@ -301,65 +320,5 @@ export default {
     &-bl:hover,
     &-br:hover
       transform: scale(1.4)
-
-.menubar
-  display: flex
-  align-items: center
-  padding: 0 0.4rem
-
-  position: absolute
-  top: -38px
-  width: 19rem
-  left: calc(50% - 9.5rem)
-  z-index: 9999
-
-  background: $white
-  border-radius: 2px
-  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25)
-
-  &__button
-    width: $size-step
-    height: $size-step/1.5
-
-    display: flex
-    justify-content: center
-    align-items: center
-
-    background: transparent
-    border: none
-
-    color: $grey
-    margin: 0.2rem
-    svg
-      fill: $grey
-      width: 14px
-      height: 14px
-
-    &:hover,
-    &.is-active
-      cursor: pointer
-      color: $black
-      svg
-        fill: $black
-  &__form
-    width: 100%
-    height: 100%
-    padding: 0 .8rem
-    position: absolute
-    top: 0
-    left: 0
-    display: flex
-    align-items: center
-
-    background: $white
-    border-radius: 4px
-
-  &__input
-    width: 28em
-    padding: 1rem
-    margin-right: 1rem
-
-    border: 1px solid $grey-middle
-    border-radius: 4px
 
 </style>

@@ -4,12 +4,14 @@
     <iframe
       v-if="videoType === 'youtube'"
       frameborder="0"
+      class="ptah-yt-video"
       allowfullscreen="allowfullscreen"
       :allow="allow"
       :src="youtubeVideoUrl">
     </iframe>
 
     <video
+      class="ptah-video"
       v-if="videoType === 'custom' && vAutoplay"
       ref="custom"
       :src="vUrl"
@@ -20,6 +22,7 @@
     </video>
 
     <video
+      class="ptah-video"
       v-if="videoType === 'custom' && !vAutoplay"
       ref="custom"
       :src="vUrl"

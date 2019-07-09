@@ -250,6 +250,9 @@ export default {
         if (!state.isExpanded) {
           commit('isExpanded', true)
         }
+
+        // close 'add section bar'
+        commit('isAddSectionExpanded', false)
       } else {
         commit('controlPanel', {
           expanded: false,

@@ -35,7 +35,6 @@
             class="b-sandbox">
 
           <draggable
-              v-if="$sectionData.components.length"
               v-model="$sectionData.components"
               :style="$sectionData.container.styles"
               class="b-draggable-slot b-draggable-slot_horizont"
@@ -45,13 +44,14 @@
             <div
                 v-for="(component, index) in $sectionData.components"
                 :key="`component-${ _uid }-${ index }`"
+                v-if="$sectionData.components.length !== 0"
                 :style="component.styles">
 
               <component
                   v-styler:for="{
-                    el: component.element,
-                    type: component.type,
-                    label: component.label,
+                    el: $sectionData.components[index].element,
+                    type: $sectionData.components[index].type,
+                    label: $sectionData.components[index].label,
                     path: `$sectionData.components[${index}].element`
                   }"
                   :is="component.name"
@@ -85,7 +85,6 @@
             class="b-sandbox">
 
           <draggable
-              v-if="$sectionData.components2.length"
               v-model="$sectionData.components2"
               :style="$sectionData.container2.styles"
               class="b-draggable-slot b-draggable-slot_horizont"
@@ -95,6 +94,7 @@
             <div
                 v-for="(component, index) in $sectionData.components2"
                 :key="`component-${ _uid }-${ index }`"
+                v-if="$sectionData.components2.length"
                 :style="component.styles"
                 :class="{ 'b-button-one': isOnlyOneButton(component) }">
 
