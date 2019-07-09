@@ -203,6 +203,11 @@ const data = new Map([
         'width': '256px',
         'height': '64px'
       },
+      editor: {
+        tags: false,
+        styles: true,
+        link: false
+      },
       isComplex: true
     })
   )],
@@ -231,6 +236,11 @@ const data = new Map([
         name: 'checkMark',
         text: 'Default icon text',
         visible: true
+      },
+      editor: {
+        tags: false,
+        styles: true,
+        link: false
       },
       isComplex: true
     })
@@ -390,6 +400,11 @@ const data = new Map([
       formStyles: {
         'button-color': '#f76a67',
         'input-color': '#ffffff'
+      },
+      editor: {
+        tags: false,
+        styles: true,
+        link: false
       }
     })
   )],
