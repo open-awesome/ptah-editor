@@ -1,5 +1,7 @@
 <script>
+import * as _ from 'lodash-es'
 import { mapState } from 'vuex'
+import { isValidUrl } from '@editor/util'
 
 export default {
   name: 'ControlSocialNetworks',
@@ -7,7 +9,10 @@ export default {
   data () {
     return {
       vTarget: '',
-      networks: []
+      networks: [],
+      error: {
+        url: false
+      }
     }
   },
 
@@ -51,6 +56,26 @@ export default {
       for (var key in this.networks) {
         this.networks[key].expand = false
       }
+    },
+    validUrl (key, url) {
+      let v = true
+
+      if (url !== '') {
+        v = isValidUrl(url)
+      }
+
+      this.error.url = !v
+
+      if (v === false) {
+        return
+      }
+
+      this.networks[key]['href'] = url
+      this.update()
+    },
+
+    update () {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { socialNetworks: this.networks }))
     }
   },
 
@@ -99,7 +124,11 @@ export default {
                 {{ `Add ${networks[key].name} link` }}
               </div>
               <div>
-              <base-text-field label="URL" v-model="networks[key].url" placeholder="Type link here"></base-text-field>
+              <base-text-field label="URL" v-model="networks[key].url" placeholder="https://www.url.com" :hasError="error.url" @input="validUrl(key, networks[key].url)">
+                <span slot="error">
+                  Invalid URL
+                </span>
+              </base-text-field>
               </div>
               <div class="b-social-networks-controls__item-set-link-modal-buttons">
                 <BaseButton
@@ -207,21 +236,21 @@ export default {
         border: 0.2rem solid rgba($cornflower-blue, 0.5)
     &-set-link
       &-modal
-        width: 40rem
+        width: 19rem
         background: $white
         position: absolute
-        right: -39rem
-        top: -2rem
+        right: 2rem
+        top: -2.4rem
         z-index: 1
         box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
-        padding: 0 2.3rem 2.3rem
+        padding: 0 1.6rem 1.63rem
         &:before
           content: ""
           position: absolute
           width: $size-step/2
           height: $size-step/2
           top: 2.4rem
-          left: -.7rem
+          right: -.7rem
           background: $white
           transform: rotate(-45deg)
           z-index: 2
