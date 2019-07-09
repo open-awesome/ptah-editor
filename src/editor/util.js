@@ -2,7 +2,7 @@ import * as _ from 'lodash-es'
 import * as types from './types'
 
 export function isValidUrl(url) {
-  let pattern = new RegExp(/(^https?:\/\/)?[a-z0-9~_\-.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/i)
+  let pattern = new RegExp(/(^https?:\/\/)?[a-z0-9~_\-.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?/i)
 
   if (pattern.test(url)) {
     return true
