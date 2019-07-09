@@ -233,6 +233,7 @@ const GALLERY_ITEM_CUSTOM = [
     element: {
       removable: false,
       canCopy: false,
+      belongsGallery: true,
       editor: {
         tags: false,
         link: false
@@ -252,6 +253,7 @@ const GALLERY_ITEM_CUSTOM = [
   },
   {
     element: {
+      belongsGallery: true,
       removable: false
     }
   },

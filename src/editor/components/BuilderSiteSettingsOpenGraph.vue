@@ -95,6 +95,7 @@
 import { mapState, mapActions } from 'vuex'
 import _ from 'lodash'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
+import { isValidUrl } from '../util'
 
 const LIST_LANG = [
   { name: 'English', value: 'en' },
@@ -229,6 +230,7 @@ export default {
     ...mapActions([
       'storeSettings'
     ]),
+
     updateSettings () {
       const settings = this.currentLanding.settings
 
@@ -255,6 +257,7 @@ export default {
         }
       })
     },
+
     applySettings () {
       const ogTags = this.ogFields.filter(({ value }) => value).map(({ id, value }) => {
         return {
@@ -269,14 +272,15 @@ export default {
       this.storeSettings(data)
       this.close()
     },
-    validUrl (str) {
-      let pattern = new RegExp(/(^https?:\/\/)?[a-z0-9~_\-.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?$/i)
 
-      if (!pattern.test(str)) {
-        this.error.url = true
-      } else {
-        this.error.url = false
+    validUrl (url) {
+      let v = true
+
+      if (url !== '') {
+        v = isValidUrl(url)
       }
+
+      this.error.url = !v
     },
 
     close () {

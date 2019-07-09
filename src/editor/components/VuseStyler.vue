@@ -22,7 +22,7 @@
         <a href="#" class="b-styler__control"
            tooltip="Button link"
            tooltip-position="bottom"
-           @click.stop="setModalProps()" ref="buttonModalProps">
+           @click.stop="setModalProps()" ref="modalProps">
           <icon-base name="link" width="18" height="18" />
         </a>
       </template>
@@ -98,8 +98,14 @@
         <a href="#" class="b-styler__control"
            tooltip="Image link"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink">
+           @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink && options.belongsGallery">
           <icon-base name="link" width="14" height="16" />
+        </a>
+        <a href="#" class="b-styler__control"
+           tooltip="Image link"
+           tooltip-position="bottom"
+           @click.stop="setModalProps()" ref="modalProps" v-if="!options.belongsGallery">
+          <icon-base name="link" width="18" height="18" />
         </a>
       </template>
 
@@ -189,12 +195,12 @@
 
     <!-- Modals -->
     <div class="b-styler__modal"
-       :class="[ modal.button.classV, modal.button.classH ]"
-       ref="buttonModal"
-       v-if="type === 'button' && isModalsPropsShow === true"
+       :class="[ modal.classV, modal.classH ]"
+       ref="modal"
+       v-if="(type === 'button' || type === 'image') && isModalsPropsShow === true"
        v-click-outside="closeModal"
        @clic.stop=""
-       :style="{ 'transform' : 'translate3d(' + transform.button.x +  'px' + ', ' + transform.button.y + 'px, 0)' }"
+       :style="{ 'transform' : 'translate3d(' + transform.x +  'px' + ', ' + transform.y + 'px, 0)' }"
       >
       <div class="b-styler__modal-close"
         @click="setModalProps">
@@ -206,7 +212,7 @@
         />
       </div>
       <div class="b-styler__modal-chapter">
-        Select button target
+        Select target
       </div>
       <div class="b-styler__modal-content">
         <modal-button :builder="$builder" @changeProps="changeButtonProps"/>
@@ -299,18 +305,14 @@ export default {
     ],
     isModalsPropsShow: false,
     modal: {
-      button: {
-        classV: '_top',
-        classH: '_right',
-        width: 400,
-        height: 340
-      }
+      classV: '_top',
+      classH: '_right',
+      width: 400,
+      height: 340
     },
     transform: {
-      button: {
-        x: 0,
-        y: 0
-      }
+      x: 0,
+      y: 0
     },
     timer: 0,
     prevent: false
@@ -744,18 +746,18 @@ export default {
       let heightTopbar = document.getElementById('topbar').clientHeight
       let right = widthBoard - (pos.right - widthSidebar)
 
-      if (pos.top < (this.modal[this.type].height + heightTopbar)) {
-        this.modal[this.type].classV = '_bottom'
+      if (pos.top < (this.modal.height + heightTopbar)) {
+        this.modal.classV = '_bottom'
       } else {
-        this.modal[this.type].classV = '_top'
+        this.modal.classV = '_top'
       }
 
-      if (right < this.modal[this.type].width) {
-        this.transform[this.type].x = -(this.modal[this.type].width - 55)
-        this.modal[this.type].classH = '_left'
+      if (right < this.modal.width) {
+        this.transform.x = -(this.modal.width - 55)
+        this.modal.classH = '_left'
       } else {
-        this.transform[this.type].x = 0
-        this.modal[this.type].classH = '_right'
+        this.transform.x = 0
+        this.modal.classH = '_right'
       }
     },
 
