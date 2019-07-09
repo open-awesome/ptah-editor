@@ -73,18 +73,21 @@
           </div>
 
           <!-- Pagination -->
+          <v-style>
+            .{{paginationClass}} span {
+            background-color: {{$sectionData.mainStyle.swiper.paginationColor}};
+            width: {{$sectionData.mainStyle.swiper.navSize}};
+            height: {{$sectionData.mainStyle.swiper.navSize}};
+            }
+          </v-style>
           <div
+            :class="paginationClass"
             v-show="$sectionData.mainStyle.galleryImages.length > 1 && $sectionData.mainStyle.swiper.showPagination"
             class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
             <span
               v-for="(_, index) in $sectionData.mainStyle.galleryImages"
               :key="`bullet-${index}-${_uid}`">
                 <span
-                  :style="{
-                  'background-color': $sectionData.mainStyle.swiper.paginationColor,
-                  'width': $sectionData.mainStyle.swiper.navSize,
-                  'height': $sectionData.mainStyle.swiper.navSize
-                  }"
                   :class="{ 'swiper-pagination-bullet-inactive': index !== 0 }"
                   :aria-label="`Go to slide ${index + 1}`"
                   class="swiper-pagination-bullet"
@@ -110,6 +113,8 @@ import defaults from '../../mixins/defaults'
 
 import 'swiper/dist/css/swiper.min.css'
 import swiperOptions from '@editor/swiper'
+
+import { randomPoneId } from '../../../editor/util'
 
 const GROUP_NAME = 'Carousel'
 const NAME = 'Carousel'
@@ -181,7 +186,8 @@ export default {
   data () {
     return {
       container: null,
-      options: ''
+      options: '',
+      paginationClass: ''
     }
   },
 
@@ -204,6 +210,8 @@ export default {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(merge(this.$sectionData, SCHEMA_CUSTOM))
     }
+
+    this.paginationClass = `custom-bullets-${randomPoneId()}`
   }
 }
 </script>
