@@ -1,7 +1,7 @@
 <script>
 import * as _ from 'lodash-es'
 import { mapState, mapActions } from 'vuex'
-import { getYoutubeVideoIdFromUrl } from '@editor/util'
+import { getYoutubeVideoIdFromUrl, isValidUrl } from '@editor/util'
 
 export default {
   name: 'TheModalButton',
@@ -28,7 +28,10 @@ export default {
         { name: 'Instant', value: 'instant' },
         { name: 'Smooth', value: 'smooth' }
       ],
-      scrollBehavior: { name: 'Auto', value: 'auto' }
+      scrollBehavior: { name: 'Auto', value: 'auto' },
+      error: {
+        url: false
+      }
     }
   },
 
@@ -103,8 +106,26 @@ export default {
       'updateSettingOptions'
     ]),
 
-    setUrl (value = this.link) {
-      this.elLink['href'] = value
+    setUrl (link) {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { link }))
+    },
+
+    validUrl (url) {
+      let v = true
+      let link = {}
+
+      if (url !== '') {
+        v = isValidUrl(url)
+      }
+
+      this.error.url = !v
+
+      if (v === false) {
+        return
+      }
+
+      link['href'] = url
+      this.setUrl(link)
     },
 
     changeTarget () {
@@ -184,7 +205,11 @@ export default {
 
     <!-- open link -->
     <div class="b-link-controls__control" v-if="action.value === ''">
-      <base-text-field v-model="link" label="URL" @input="setUrl" placeholder="Type link here"></base-text-field>
+      <base-text-field v-model="link" label="URL" placeholder="https://www.url.com" :hasError="error.url" @input="validUrl(link)">
+        <span slot="error">
+          Invalid URL
+        </span>
+      </base-text-field>
     </div>
     <div class="b-link-controls__control" v-if="action.value === ''">
       <BaseSwitcher v-model="target" label="Open in new window" @change="changeTarget" />

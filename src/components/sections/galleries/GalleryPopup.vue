@@ -30,7 +30,8 @@ const GALLERY_ITEM_CUSTOM = [
         'background-image': 'url(https://gn854.cdn.stg.gamenet.ru/0/836nk/o_e19nv.png)',
         'background-size': 'cover'
       },
-      hasLink: true
+      hasLink: true,
+      belongsGallery: true
     }
   },
   {

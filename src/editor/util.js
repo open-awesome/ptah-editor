@@ -1,6 +1,16 @@
 import * as _ from 'lodash-es'
 import * as types from './types'
 
+export function isValidUrl(url) {
+  let pattern = new RegExp(/(^https?:\/\/)?[a-z0-9~_\-.]+\.[a-z]{2,9}(\/|:|\?[!-~]*)?/i)
+
+  if (pattern.test(url)) {
+    return true
+  } else {
+    return false
+  }
+}
+
 export function isObject(obj) {
   return obj && typeof obj === 'object' && obj !== null && !Array.isArray(obj)
 }
@@ -121,7 +131,7 @@ export function cleanDOM(artboard) {
     .pth-resizer,
     .pth-uploader,
     .b-button__resize,
-    .b-delimiter__resize, 
+    .b-delimiter__resize,
     .b-video__resize,
     .b-slot__settings
   `

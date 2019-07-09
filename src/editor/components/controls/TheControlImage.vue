@@ -1,5 +1,5 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 const defaultBg = 'https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png'
 
@@ -11,6 +11,22 @@ export default {
       bgSize: '',
       label: '',
       isStretchImage: false
+    }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'settingObjectOptions',
+      'settingObjectElement',
+      'settingObjectType'
+    ]),
+
+    styles () {
+      return this.settingObjectOptions.styles
+    },
+
+    pseudo () {
+      return this.settingObjectOptions.pseudo
     }
   },
 
@@ -35,24 +51,11 @@ export default {
     this.label = 'Image'
   },
 
-  computed: {
-    ...mapState('Sidebar', [
-      'settingObjectOptions',
-      'settingObjectElement',
-      'settingObjectType'
+  methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
     ]),
 
-    styles () {
-      return this.settingObjectOptions.styles
-    },
-
-    pseudo () {
-      return this.settingObjectOptions.pseudo
-    }
-
-  },
-
-  methods: {
     changeImage () {
       let bg = 'none'
       if (this.bgImage !== null && this.bgImage !== '') {
@@ -75,16 +78,21 @@ export default {
 </script>
 
 <template>
-  <div class="b-bg-controls"
+  <div class="b-controls"
        v-if="settingObjectType === 'button' || settingObjectType === 'image' || settingObjectType === 'slogan'">
-    <div class="b-bg-controls__control">
+    <div class="b-controls__control">
       <base-uploader
-          v-model="bgImage"
-          @change="changeImage"
-          :label="label"/>
+        v-model="bgImage"
+        @change="changeImage"
+        :label="label"
+      />
     </div>
-    <div class="b-bg-controls__control">
-      <BaseSwitcher v-model="isStretchImage" label="Stretch to fit" @change="setStretch" />
+    <div class="b-controls__control">
+      <BaseSwitcher
+        v-model="isStretchImage"
+        label="Stretch to fit"
+        @change="setStretch"
+      />
     </div>
   </div>
 </template>
@@ -93,10 +101,9 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-bg-controls
+.b-controls
   margin-top: 2.2rem
   padding: 0 0 $size-step/2
-  border-bottom: 0.2rem dotted rgba($black, 0.15)
   &__control
     margin-bottom: $size-step/2
     &:lastt-child
