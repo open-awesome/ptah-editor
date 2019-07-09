@@ -360,7 +360,7 @@ export default {
     },
     isResizeStop: {
       handler: function (val, oldVal) {
-        if (val === true) this.el.addEventListener('click', this.showStyler)
+        if (val === true) this.el.addEventListener('mousedown', this.showStyler)
       }
     },
     isDragStop: {
@@ -386,8 +386,9 @@ export default {
   mounted () {
     if (this.$builder && !this.$builder.isEditing) return
 
-    this.el.addEventListener('click', this.showStyler)
+    this.el.addEventListener('mousedown', this.showStyler)
     this.el.addEventListener('dblclick', this.dblclick)
+    this.el.addEventListener('click', this.elClick)
 
     if (this.type === 'section') {
       this.el.id = `section_${this.section.id}`
@@ -438,9 +439,10 @@ export default {
     this.hideStyler()
     this.$refs.styler.remove()
     this.el.classList.remove('is-editable')
-    this.el.removeEventListener('click', this.showStyler)
+    this.el.removeEventListener('mousedown', this.showStyler)
+    this.el.removeEventListener('click', this.elClick)
     this.el.removeEventListener('dblclick', this.dblclick)
-    document.removeEventListener('click', this.hideStyler, true)
+    document.removeEventListener('mousedown', this.hideStyler, true)
   },
 
   methods: {
@@ -463,6 +465,11 @@ export default {
       if (isEditText) {
         this.editText = isEditText
       }
+    },
+
+    elClick () {
+      event.preventDefault()
+      event.stopPropagation()
     },
 
     stylerInit (event) {
@@ -591,7 +598,7 @@ export default {
         .querySelectorAll('.b-menu-subitem_selected')
         .forEach(el => el.classList.remove('b-menu-subitem_selected'))
 
-      document.addEventListener('click', this.hideStyler, true)
+      document.addEventListener('mousedown', this.hideStyler, true)
     },
 
     showStyler (event) {
@@ -601,14 +608,11 @@ export default {
 
       let self = this
 
-      event.preventDefault()
-      event.stopPropagation()
-
       self.stylerInit(event)
 
       this.timer = setTimeout(function () {
         if (!self.prevent) {
-          document.addEventListener('click', self.hideStyler, true)
+          document.addEventListener('mousedown', self.hideStyler, true)
         }
         self.prevent = false
       }, 150)
@@ -619,6 +623,7 @@ export default {
         'b-styler__control_text',
         'b-control-panel',
         'menubar__button',
+        'menubar__button is-active',
         'editor__content',
         'menubar is-hidden'
       ]
@@ -653,7 +658,7 @@ export default {
       this.isVisible = false
       this.editText = false
 
-      document.removeEventListener('click', this.hideStyler, true)
+      document.removeEventListener('mousedown', this.hideStyler, true)
       document.removeEventListener('blur', this.hideStyler, true)
     },
 
@@ -773,7 +778,7 @@ export default {
         this.isCurrentStyler = false
         this.toggleDragStop(false)
 
-        this.el.addEventListener('click', this.showStyler)
+        this.el.addEventListener('mousedown', this.showStyler)
         this.el.click()
       }
     },

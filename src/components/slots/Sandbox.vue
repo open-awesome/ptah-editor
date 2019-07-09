@@ -1,6 +1,9 @@
 <template>
   <div class="b-slot">
-    <div class="b-slot__settings">
+    <div class="b-slot__settings" :style="{
+      'margin-top': styles['margin-top'],
+      'margin-left': styles['margin-left']
+    }">
       <span
         @click.stop="showSandboxSidebar($event, 'SlotSettings')"
         tooltip="Slot settings"
@@ -83,7 +86,6 @@ export default {
     showSandboxSidebar (e, openElBar) {
       this.isAddSectionExpanded(false)
 
-      // set slot element
       this.setElement(this.$slots.default[0].elm)
 
       // --- clear active classes

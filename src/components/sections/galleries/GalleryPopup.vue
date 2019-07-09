@@ -196,9 +196,7 @@ export default {
   methods: {
     ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
     async showSettings (panel) {
-      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
-
-      this.setSettingSection(this.$builder.sections[index])
+      this.setSettingSection(this.$section)
 
       await this.$nextTick()
 
@@ -272,8 +270,10 @@ export default {
       this.stopVideo()
       this.$sectionData.content = ''
 
-      el.style.height = ''
-      el.style.width = ''
+      if (el) {
+        el.style.height = ''
+        el.style.width = ''
+      }
     },
 
     matchYoutubeUrl (url) {

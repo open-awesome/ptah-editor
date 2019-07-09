@@ -1,0 +1,63 @@
+.menubar
+  display: flex
+  align-items: center
+  padding: 0.4rem
+
+  position: absolute
+  top: -34px
+  width: 34rem
+  min-height: 1.8rem
+  left: calc(50% - 17rem)
+  z-index: 9999
+
+  background: $white
+  border-radius: 2px
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.25)
+
+  &__button
+    width: $size-step
+    height: $size-step/1.5
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    background: transparent
+    border-radius: 2px
+    border: none
+
+    color: $grey
+    svg
+      fill: $grey
+      margin-bottom: 0
+
+    &:hover,
+    &.is-active
+      cursor: pointer
+      color: $black
+      svg
+        fill: $black
+  &__form
+    width: 100%
+    height: 100%
+    padding: 0 .4rem
+    position: absolute
+    top: 0
+    left: 0
+    display: flex
+    align-items: center
+
+    background: $white
+    border-radius: 4px
+
+  &__input
+    width: 28em
+    padding: 0.4rem 1rem
+    margin-right: 1rem
+
+    border: 1px solid $grey-middle
+    border-radius: 4px
+
+  &.is-only-styles
+    width: 14rem
+    left: calc(50% - 7rem)
