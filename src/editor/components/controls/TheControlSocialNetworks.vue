@@ -1,6 +1,6 @@
 <script>
 import * as _ from 'lodash-es'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 import { isValidUrl } from '@editor/util'
 
 export default {
@@ -31,16 +31,23 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     visible (key) {
       this.closeModal()
       this.networks[key].visible = !this.networks[key].visible
     },
+
     changeTarget () {
       this.settings.target = this.vTarget ? '_blank' : '_self'
     },
-    applyLink () {
+
+    applyLink (key) {
       this.closeModal()
     },
+
     openModal (key) {
       this.closeModal()
 
@@ -52,13 +59,20 @@ export default {
         this.networks[key].expand = !this.networks[key].expand
       })
     },
+
     closeModal () {
       for (var key in this.networks) {
+        let v = this.valid(key)
+
+        if (!v) this.networks[key].url = ''
+
         this.networks[key].expand = false
       }
     },
-    validUrl (key, url) {
+
+    valid (key) {
       let v = true
+      let url = this.networks[key].url
 
       if (url !== '') {
         v = isValidUrl(url)
@@ -66,12 +80,13 @@ export default {
 
       this.error.url = !v
 
-      if (v === false) {
-        return
-      }
+      return v
+    },
 
-      this.networks[key]['href'] = url
-      this.update()
+    validUrl (key) {
+      let v = this.valid(key)
+
+      if (v) this.update()
     },
 
     update () {
@@ -124,7 +139,7 @@ export default {
                 {{ `Add ${networks[key].name} link` }}
               </div>
               <div>
-              <base-text-field label="URL" v-model="networks[key].url" placeholder="https://www.url.com" :hasError="error.url" @input="validUrl(key, networks[key].url)">
+              <base-text-field label="URL" v-model="networks[key].url" placeholder="https://www.url.com" :hasError="error.url" @input="valid(key)">
                 <span slot="error">
                   Invalid URL
                 </span>
@@ -136,18 +151,9 @@ export default {
                   :color="'gray'"
                   :transparent="true"
                   size="middle"
-                  @click="closeModal"
+                  @click="closeModal(key)"
                   >
-                  Cancel
-                </BaseButton>
-                <BaseButton
-                  class="b-social-networks-controls__item-set-link-modal-button"
-                  :color="'blue'"
-                  :transparent="false"
-                  size="middle"
-                  @click="applyLink"
-                  >
-                  Done
+                  Close
                 </BaseButton>
               </div>
             </div>
