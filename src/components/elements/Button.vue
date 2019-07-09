@@ -10,19 +10,19 @@
         :style=" { 'top': posMenu.top, 'bottom': posMenu.bottom, }"
         slot-scope="{ commands, isActive, focused, getMarkAttrs }"
       >
-        <template v-if="textOptions.styles"> 
+        <template v-if="textOptions.styles">
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bold() }"
-            @click.stop="commands.bold"
+            @click.stop.prevent="commands.bold"
            >
             <icon-base name="fontBold" width="14" height="14"></icon-base>
           </button>
-    
+
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.italic() }"
-            @click.stop="commands.italic"
+            @click.stop.prevent="commands.italic"
           >
             <icon-base name="fontItalic" width="14" height="14"></icon-base>
           </button>
@@ -30,7 +30,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.underline() }"
-            @click="commands.underline"
+            @click.stop.prevent="commands.underline"
           >
             <icon-base name="fontUnderline" width="14" height="14" />
           </button>
@@ -38,7 +38,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.strike() }"
-            @click="commands.strike"
+            @click.stop.prevent="commands.strike"
           >
             <icon-base name="strike" width="20" height="20" />
           </button>
@@ -48,7 +48,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.paragraph() }"
-            @click.stop="commands.paragraph"
+            @click.stop.prevent="commands.paragraph"
           >
             <icon-base name="paragraph" width="14" height="14"></icon-base>
           </button>
@@ -56,7 +56,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-            @click.stop="setHeading({ level: 1 })"
+            @click.stop.prevent="setHeading({ level: 1 })"
           >
             H1
           </button>
@@ -64,7 +64,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-            @click.stop="setHeading({ level: 2 })"
+            @click.stop.prevent="setHeading({ level: 2 })"
           >
             H2
           </button>
@@ -72,7 +72,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-            @click.stop="setHeading({ level: 3 })"
+            @click.stop.prevent="setHeading({ level: 3 })"
           >
             H3
           </button>
@@ -80,7 +80,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bullet_list() }"
-            @click.stop="setList('bullet', 'ordered')"
+            @click.stop.prevent="setList('bullet', 'ordered')"
           >
             <icon-base name="bulletList"></icon-base>
           </button>
@@ -88,7 +88,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.ordered_list() }"
-            @click.stop="setList('ordered', 'bullet')"
+            @click.stop.prevent="setList('ordered', 'bullet')"
           >
             <icon-base name="orderedList"></icon-base>
           </button>
@@ -97,7 +97,7 @@
         <template v-if="textOptions.link">
           <button
             class="menubar__button"
-            @click.stop="showLinkMenu(getMarkAttrs('link'))"
+            @click.stop.prevent="showLinkMenu(getMarkAttrs('link'))"
             :class="{ 'is-active': isActive.link() }"
           >
             <icon-base name="link"></icon-base>
