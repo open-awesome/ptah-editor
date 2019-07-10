@@ -2,6 +2,9 @@
 export function videoPopup () {
   Array.from(document.querySelectorAll('.ptah-d-video')).forEach(function(element) {
     element.onclick = function (e) {
+      e.preventDefault()
+      e.stopPropagation()
+
       createVideoPopup(element);
     };
   });

@@ -143,7 +143,7 @@ export default {
 
     changeAction () {
       if (this.action.value === '') {
-        this.link = (this.link.includes('#section_')) ? '' : this.link
+        this.link = (this.link.includes('#section_')) ? '' : this.link.href
         this.setUrl(this.link)
 
         this.classes.push('js-element-link')

@@ -1,5 +1,5 @@
 <template>
-  <builder-modal-content-layout>
+  <builder-modal-content-layout :noScroll="true">
     <div class="b-builder-site-settings-seo">
       <form @submit.prevent="applySettings">
 
