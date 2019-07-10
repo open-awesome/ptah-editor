@@ -86,14 +86,12 @@
             class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
             <span
               v-for="(_, index) in $sectionData.mainStyle.galleryImages"
-              :key="`bullet-${index}-${_uid}`">
-                <span
-                  :class="{ 'swiper-pagination-bullet-inactive': index !== 0 }"
-                  :aria-label="`Go to slide ${index + 1}`"
-                  class="swiper-pagination-bullet"
-                  tabindex="0"
-                  role="button">
-                </span>
+              :key="`bullet-${index}-${_uid}`"
+              :class="{ 'swiper-pagination-bullet-inactive': index !== 0 }"
+              :aria-label="`Go to slide ${index + 1}`"
+              class="swiper-pagination-bullet"
+              tabindex="0"
+              role="button">
             </span>
           </div>
 
