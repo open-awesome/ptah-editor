@@ -308,6 +308,7 @@ export default {
       let self = this
       this.swiper = new Swiper(this.$refs.swiper, {
         loop: false,
+        simulateTouch: false,
         navigation: {
           nextEl: this.$refs.next,
           prevEl: this.$refs.prev
