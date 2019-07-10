@@ -207,6 +207,7 @@ export default {
 
     this.getUser()
   },
+
   mounted () {
     this.$builder.rootEl = this.$refs.artboard
     this.initSettings()
@@ -238,7 +239,9 @@ export default {
       'updateSectionGroups',
       'setSettingSection',
       'toggleSidebar',
-      'setControlPanel'
+      'setControlPanel',
+      'toggleSidebar',
+      'toggleAddSectionMenu'
     ]),
     ...mapActions('Landing', [
       'saveState'
@@ -246,6 +249,7 @@ export default {
     ...mapActions('User', [
       'getUser'
     ]),
+
     initSettings () {
       const settings = this.currentLanding.settings
       this.$builder.landing = this.$route.params.slug
@@ -265,6 +269,11 @@ export default {
 
       this.styleArtboard(settings.styles)
       this.updateVideo()
+
+      if (this.emptySections) {
+        this.toggleSidebar(true)
+        this.toggleAddSectionMenu(true)
+      }
     },
     addTheme (theme) {
       this.$builder.set(theme)

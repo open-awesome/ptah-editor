@@ -1,5 +1,7 @@
 <script>
-import { mapState } from 'vuex'
+import * as _ from 'lodash-es'
+import { mapState, mapActions } from 'vuex'
+import { isValidUrl } from '@editor/util'
 
 export default {
   name: 'ControlSocialNetworks',
@@ -7,7 +9,10 @@ export default {
   data () {
     return {
       vTarget: '',
-      networks: []
+      networks: [],
+      error: {
+        url: false
+      }
     }
   },
 
@@ -26,16 +31,23 @@ export default {
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     visible (key) {
       this.closeModal()
       this.networks[key].visible = !this.networks[key].visible
     },
+
     changeTarget () {
       this.settings.target = this.vTarget ? '_blank' : '_self'
     },
-    applyLink () {
+
+    applyLink (key) {
       this.closeModal()
     },
+
     openModal (key) {
       this.closeModal()
 
@@ -47,10 +59,38 @@ export default {
         this.networks[key].expand = !this.networks[key].expand
       })
     },
+
     closeModal () {
       for (var key in this.networks) {
+        let v = this.valid(key)
+
+        if (!v) this.networks[key].url = ''
+
         this.networks[key].expand = false
       }
+    },
+
+    valid (key) {
+      let v = true
+      let url = this.networks[key].url
+
+      if (url !== '') {
+        v = isValidUrl(url)
+      }
+
+      this.error.url = !v
+
+      return v
+    },
+
+    validUrl (key) {
+      let v = this.valid(key)
+
+      if (v) this.update()
+    },
+
+    update () {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { socialNetworks: this.networks }))
     }
   },
 
@@ -99,7 +139,11 @@ export default {
                 {{ `Add ${networks[key].name} link` }}
               </div>
               <div>
-              <base-text-field label="URL" v-model="networks[key].url" placeholder="Type link here"></base-text-field>
+              <base-text-field label="URL" v-model="networks[key].url" placeholder="https://www.url.com" :hasError="error.url" @input="valid(key)">
+                <span slot="error">
+                  Invalid URL
+                </span>
+              </base-text-field>
               </div>
               <div class="b-social-networks-controls__item-set-link-modal-buttons">
                 <BaseButton
@@ -107,18 +151,9 @@ export default {
                   :color="'gray'"
                   :transparent="true"
                   size="middle"
-                  @click="closeModal"
+                  @click="closeModal(key)"
                   >
-                  Cancel
-                </BaseButton>
-                <BaseButton
-                  class="b-social-networks-controls__item-set-link-modal-button"
-                  :color="'blue'"
-                  :transparent="false"
-                  size="middle"
-                  @click="applyLink"
-                  >
-                  Done
+                  Close
                 </BaseButton>
               </div>
             </div>
@@ -207,21 +242,21 @@ export default {
         border: 0.2rem solid rgba($cornflower-blue, 0.5)
     &-set-link
       &-modal
-        width: 40rem
+        width: 19rem
         background: $white
         position: absolute
-        right: -39rem
-        top: -2rem
+        right: 2rem
+        top: -2.4rem
         z-index: 1
         box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
-        padding: 0 2.3rem 2.3rem
+        padding: 0 1.6rem 1.63rem
         &:before
           content: ""
           position: absolute
           width: $size-step/2
           height: $size-step/2
           top: 2.4rem
-          left: -.7rem
+          right: -.7rem
           background: $white
           transform: rotate(-45deg)
           z-index: 2
