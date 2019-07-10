@@ -19,6 +19,20 @@ export default {
         '--bg-color': this.backgroundBar
       }
     }
+  },
+  mounted () {
+    let vb = this.$refs.vueBar
+    let el = vb.querySelector('.vb-content')
+    let sel = el.querySelector('.selected')
+    let top = null
+    let h = null
+
+    if (sel) {
+      top = sel.offsetTop
+      h = el.offsetHeight / 2 // half height .vb-content
+    }
+
+    if (top !== null && top > h) el.scrollTop = top - h
   }
 }
 </script>
@@ -27,7 +41,8 @@ export default {
   <div
     class="vuebar-element"
     v-bar="{ preventParentScroll: true, scrollThrottle: 30 }"
-    :style="[styling, cssProps]">
+    :style="[styling, cssProps]"
+    ref="vueBar">
     <div>
       <slot></slot>
     </div>
