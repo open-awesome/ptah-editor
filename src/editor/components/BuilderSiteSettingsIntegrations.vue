@@ -1,5 +1,5 @@
 <template>
-  <builder-modal-content-layout>
+  <builder-modal-content-layout :noScroll="true">
     <div class="b-integrations">
       <div class="b-integrations__item"
         v-if="!isIntegrationVisible"

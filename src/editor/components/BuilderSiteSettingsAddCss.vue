@@ -1,5 +1,5 @@
 <template>
-  <builder-modal-content-layout>
+  <builder-modal-content-layout :noScroll="true">
     <div class="b-add-js-scripts">
       <base-heading level="2">Add custom CSS</base-heading>
       <textarea class="b-add-js-scripts__textarea" placeholder="Add custom CSS" v-model="css"/>
