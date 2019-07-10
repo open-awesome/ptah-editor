@@ -30,7 +30,7 @@
     "koa-static": "^5.0.0",
     "koa2-cors": "^2.0.6",
     "lodash": "^4.17.11",
-    "lodash-es": "^4.17.4",
+    "lodash-es": "^4.17.14",
     "mailchimp": "^1.2.1",
     "node-fetch": "^2.3.0",
     "pino": "^5.12.2",
