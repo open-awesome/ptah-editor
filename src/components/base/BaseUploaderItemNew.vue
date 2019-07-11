@@ -57,11 +57,13 @@
            :class="{ 'b-uploader-item__label--empty': !hasPreview }"
            v-if="label">
         <template v-if="!hasPreview && progress === 100">
-          <template v-if="type === 'image'">Upload images or enter url</template>
-          <template v-if="type === 'video'">Upload video or enter url</template>
-        </template>
-        <template v-else>
-          {{ label }}
+          <template v-if="label !== ''">
+            {{ label }}
+          </template>
+          <template v-else>
+            <template v-if="type === 'image'">Upload images or enter url</template>
+            <template v-if="type === 'video'">Upload video or enter url</template>
+          </template>
         </template>
       </div>
       <div class="b-uploader-item__text">
@@ -322,6 +324,7 @@ export default {
 
   &__label
     color: $black
+    text-transform: capitalize
     &--empty
       color: #999
 
