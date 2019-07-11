@@ -639,7 +639,7 @@ const C_CUSTOM = [
       text: 'System requirements',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '4rem',
+        'font-size': '3.6rem',
         'color': '#000'
       }
     },
