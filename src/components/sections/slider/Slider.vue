@@ -77,19 +77,23 @@
       </div>
 
       <!-- Pagination -->
+      <v-style>
+        .{{paginationClass}} span {
+          background-color: {{$sectionData.mainStyle.swiper.paginationColor}};
+          width: {{$sectionData.mainStyle.swiper.navSize}};
+          height: {{$sectionData.mainStyle.swiper.navSize}};
+        }
+      </v-style>
+
       <div
         ref="pagination"
+        :class="paginationClass"
         v-show="$sectionData.mainStyle.count > 1 && $sectionData.mainStyle.swiper.showPagination"
         class="swiper-pagination swiper-pagination-clickable swiper-pagination-bullets">
           <span
             v-for="(_, index) in $sectionData.mainStyle.count"
             :key="`bullet-${index}-${_uid}`">
               <span
-                :style="{
-                'background-color': $sectionData.mainStyle.swiper.paginationColor,
-                'width': $sectionData.mainStyle.swiper.navSize,
-                'height': $sectionData.mainStyle.swiper.navSize
-                }"
                 :class="{ 'swiper-pagination-bullet-inactive': index !== 0 }"
                 :aria-label="`Go to slide ${index + 1}`"
                 class="swiper-pagination-bullet"
@@ -114,6 +118,7 @@ import { mapActions } from 'vuex'
 import Swiper from 'swiper'
 import swiperOptions from '@editor/swiper'
 import 'swiper/dist/css/swiper.min.css'
+import { randomPoneId } from '../../../editor/util'
 
 const C_CUSTOM_COLUMN = [
   {
@@ -250,7 +255,8 @@ export default {
   data () {
     return {
       options: '',
-      swiper: {}
+      swiper: {},
+      paginationClass: ''
     }
   },
 
@@ -293,6 +299,8 @@ export default {
     }
 
     this.options = JSON.stringify(this.$sectionData.mainStyle.swiper)
+
+    this.paginationClass = `custom-bullets-${randomPoneId()}`
   },
 
   mounted () {
@@ -300,6 +308,7 @@ export default {
       let self = this
       this.swiper = new Swiper(this.$refs.swiper, {
         loop: false,
+        simulateTouch: false,
         navigation: {
           nextEl: this.$refs.next,
           prevEl: this.$refs.prev

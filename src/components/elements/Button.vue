@@ -1,5 +1,5 @@
 <template>
-  <a class="b-button is-editable" ref="btn" @click.stop>
+  <a class="b-button is-editable" ref="btn" @click.stop.prevent>
 
     <slot v-if="!isActive"></slot>
 
@@ -121,7 +121,7 @@
 
     <vue-draggable-resizable
       v-if="!isActive"
-      class="b-button__resize"
+      class="b-button__resize b-resize"
       class-name-active="b-button__resize_active"
       class-name-handle="b-handle"
       :w="width"

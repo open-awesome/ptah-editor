@@ -467,7 +467,11 @@ export default {
       }
     },
 
-    elClick () {
+    elClick (event) {
+      if (!event.target.classList.contains('b-button__resize')) {
+        return
+      }
+
       event.preventDefault()
       event.stopPropagation()
     },

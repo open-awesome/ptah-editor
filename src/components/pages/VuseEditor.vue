@@ -145,6 +145,12 @@ for (let component in COMPONENTS) {
 
 Vuse.use(pwa)
 
+Vue.component('v-style', {
+  render: function (createElement) {
+    return createElement('style', this.$slots.default)
+  }
+})
+
 export default {
   computed: {
     // TODO: delete this when CRUD UI is complete

@@ -27,15 +27,14 @@
         </span>
       </div>
       <div class="b-builder-sidebar__content-outer">
-      <menu-tree v-if="!controlPanel.expanded" :sections="this.builder.sections" :builder="builder" :inc="increment"></menu-tree>
+      <menu-tree v-if="!controlPanel.expanded && isExpanded" :sections="this.builder.sections" :builder="builder" :inc="increment"></menu-tree>
 
       </div>
     </div>
 
     <transition name="slide-fade">
       <div v-if="controlPanel.expanded" class="b-builder-sidebar-settings">
-        <the-control-panel
-          :title="settingObjectOptions.sectionName"
+        <control-panel
           :builder="builder" />
       </div>
     </transition>
@@ -61,7 +60,7 @@ import BuilderSettingsBar from './BuilderSettingsBar'
 import BuilderSettingsSlots from './BuilderSettingsSlots'
 import BuilderAddSectionBar from './BuilderAddSectionBar'
 import { mapActions, mapState } from 'vuex'
-import TheControlPanel from './panels/TheControlPanel'
+import ControlPanel from './panels/TheControlPanel'
 import MenuTree from './MenuTree'
 
 export default {
@@ -69,7 +68,7 @@ export default {
 
   components: {
     MenuTree,
-    TheControlPanel,
+    ControlPanel,
     MenuItem,
     MenuSubitem,
     BuilderSettingsBar,
