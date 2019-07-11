@@ -109,7 +109,8 @@ export default {
       lastIndexes: [],
       selectedSections: [],
       absorbed: [],
-      init: false
+      init: false,
+      nested: []
     }
   },
 
@@ -130,23 +131,18 @@ export default {
     }
   },
 
-  updated () {
-    let nodes = Array.from(document.querySelectorAll('.node-sortable'))
-    let nested = []
-    for (let i = 0; i < nodes.length; i++) {
-      nested[i] = new Sortable(nodes[i], {
-        group: 'nested',
-        animation: 150,
-        fallbackOnBody: true,
-        swapThreshold: 0.65,
-        draggable: '.draggable',
-        onEnd: (event) => {
-          this.treeUpdate(event)
-        }
-      })
-    }
+  mounted () {
+    this.$nextTick(function () {
+      this.initSortable()
+    })
+  },
 
+  updated () {
     this.lastIndexes = this.getIndexes()
+  },
+
+  beforeDestroy () {
+    this.destroySortable()
   },
 
   methods: {
@@ -162,6 +158,37 @@ export default {
       'saveState'
     ]),
 
+    initSortable () {
+      setTimeout(() => {
+        let nodes = Array.from(document.querySelectorAll('.node-sortable'))
+        for (let i = 0; i < nodes.length; i++) {
+          this.nested[i] = new Sortable(nodes[i], {
+            group: 'nested',
+            animation: 150,
+            fallbackOnBody: true,
+            swapThreshold: 0.65,
+            draggable: '.draggable',
+            onEnd: (event) => {
+              this.treeUpdate(event)
+            }
+          })
+        }
+      }, 300)
+    },
+
+    destroySortable () {
+      try {
+        this.nested.forEach((sortable) => {
+          sortable.destroy()
+        })
+
+        let nodes = Array.from(document.querySelectorAll('.group-node'))
+        nodes.forEach((node) => node.remove())
+      } catch (e) {
+        console.warn(e)
+      }
+    },
+
     buildTree (renew = false) {
       if (!this.init || renew) {
         this.menuTree.splice(0, this.menuTree.length)
@@ -175,11 +202,13 @@ export default {
             } else {
               try {
                 _.last(this.menuTree).push(section)
-              } catch (e) {}
+              } catch (e) {
+                this.menuTree.push(section)
+                console.warn(e)
+              }
             }
           }
         })
-
         this.init = true
       }
     },
@@ -220,7 +249,13 @@ export default {
           } else { // move from group
             if (group.length < 2) {
               // ungroup
-              let mainSection = this.getSectionById(e.from.querySelector('.tree-node').dataset.id)
+              let mainSection
+              needReloadTree = true
+              if (currentSection.isMain) {
+                mainSection = currentSection
+              } else {
+                mainSection = this.getSectionById(e.from.querySelector('.tree-node').dataset.id)
+              }
               mainSection.isMain = false
               this.setSectionData(mainSection, 'absorb', 0)
             } else {
@@ -269,7 +304,9 @@ export default {
 
       this.lastIndexes = this.getIndexes() // renew indexes
       if (needReloadTree) {
+        this.destroySortable()
         this.buildTree(true)
+        this.initSortable()
         needReloadTree = false
       }
 
@@ -332,7 +369,9 @@ export default {
       this.setSectionData(section, 'absorb', 0)
       resetIndents()
       setTimeout(() => {
+        this.destroySortable()
         this.buildTree(true)
+        this.initSortable()
       }, 300)
     },
 
@@ -347,7 +386,9 @@ export default {
       this.applyGroup(newMain)
 
       await this.$nextTick()
+      this.destroySortable()
       this.buildTree(true)
+      this.initSortable()
     },
 
     applyGroup (newMain) {
