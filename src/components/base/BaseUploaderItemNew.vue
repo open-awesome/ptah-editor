@@ -318,6 +318,10 @@ export default {
     position: relative
 
     &>div
+      display: flex
+      align-items: center
+      justify-content: center
+
       cursor: pointer
       &:hover
         border-color: $dark-blue-krayola
