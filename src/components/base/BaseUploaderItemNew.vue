@@ -62,12 +62,12 @@
           <span
             class="b-uploader-item__label-help"
             v-if="type === 'image'"
-            tooltip="Upload images or enter url"
+            tooltip="Upload image or enter url"
             tooltip-position="leftbottom"
             >
             <IconBase
               v-if="type === 'image'"
-              tooltip="Upload images or enter url"
+              tooltip="Upload image or enter url"
               tooltip-position="leftbottom"
               name="questionCircle"
               width="16"
@@ -78,7 +78,7 @@
           <span
             class="b-uploader-item__label-help"
             v-if="type === 'video'"
-            tooltip="Upload images or enter url"
+            tooltip="Upload image or enter url"
             tooltip-position="leftbottom"
             >
             <IconBase
