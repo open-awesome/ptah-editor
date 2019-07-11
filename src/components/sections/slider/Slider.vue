@@ -133,9 +133,9 @@ const C_CUSTOM_COLUMN = [
   },
   {
     element: {
-      text: 'An sincerity so extremity he additions.' +
-      '<div>Her yet there truth merit.</div>' +
-      '<div>Mrs all projecting favourable now unpleasing.</div>',
+      text: '<p>An sincerity so extremity he additions.</p>' +
+      '<p>Her yet there truth merit.</p>' +
+      '<p>Mrs all projecting favourable now unpleasing.</p>',
       styles: {
         'font-family': 'Montserrat',
         'font-size': '3.2rem',
@@ -308,6 +308,7 @@ export default {
       let self = this
       this.swiper = new Swiper(this.$refs.swiper, {
         loop: false,
+        touchStartPreventDefault: false,
         navigation: {
           nextEl: this.$refs.next,
           prevEl: this.$refs.prev
