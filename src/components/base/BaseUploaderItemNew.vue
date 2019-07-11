@@ -57,8 +57,34 @@
            :class="{ 'b-uploader-item__label--empty': !hasPreview }"
            v-if="label">
         <template v-if="!hasPreview && progress === 100">
-          <template v-if="type === 'image'">Upload images or enter url</template>
-          <template v-if="type === 'video'">Upload video or enter url</template>
+          {{ label }}
+
+          <span
+            class="b-uploader-item__label-help"
+            v-if="type === 'image'"
+            tooltip="Upload image or enter url"
+            tooltip-position="leftbottom"
+            >
+            <IconBase
+              name="questionCircle"
+              width="16"
+              height="16"
+              />
+          </span>
+
+          <span
+            class="b-uploader-item__label-help"
+            v-if="type === 'video'"
+            tooltip="Upload video or enter url"
+            tooltip-position="leftbottom"
+            >
+            <IconBase
+              name="questionCircle"
+              width="16"
+              height="16"
+              />
+          </span>
+
         </template>
         <template v-else>
           {{ label }}
@@ -286,6 +312,10 @@ export default {
     position: relative
 
     &>div
+      display: flex
+      align-items: center
+      justify-content: center
+
       cursor: pointer
       &:hover
         border-color: $dark-blue-krayola
@@ -322,6 +352,12 @@ export default {
 
   &__label
     color: $black
+    text-transform: capitalize
+    &-help
+      position: absolute
+      right: 0rem
+      text-transform: none
+      cursor: pointer
     &--empty
       color: #999
 
