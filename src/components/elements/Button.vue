@@ -10,37 +10,99 @@
         :style=" { 'top': posMenu.top, 'bottom': posMenu.bottom, }"
         slot-scope="{ commands, isActive, focused, getMarkAttrs }"
       >
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.bold() }"
-          @click.stop.prevent="commands.bold"
-        >
-          <icon-base name="fontBold" width="14" height="14"></icon-base>
-        </button>
+        <template v-if="textOptions.styles">
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.bold() }"
+            @click.stop.prevent="commands.bold"
+           >
+            <icon-base name="fontBold" width="14" height="14"></icon-base>
+          </button>
 
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.italic() }"
-          @click.stop.prevent="commands.italic"
-        >
-          <icon-base name="fontItalic" width="14" height="14"></icon-base>
-        </button>
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.italic() }"
+            @click.stop.prevent="commands.italic"
+          >
+            <icon-base name="fontItalic" width="14" height="14"></icon-base>
+          </button>
 
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.underline() }"
-          @click.stop.prevent="commands.underline"
-        >
-          <icon-base name="fontUnderline" width="14" height="14" />
-        </button>
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.underline() }"
+            @click.stop.prevent="commands.underline"
+          >
+            <icon-base name="fontUnderline" width="14" height="14" />
+          </button>
 
-        <button
-          class="menubar__button"
-          :class="{ 'is-active': isActive.strike() }"
-          @click.stop.prevent="commands.strike"
-        >
-          <icon-base name="strike" width="20" height="20" />
-        </button>
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.strike() }"
+            @click.stop.prevent="commands.strike"
+          >
+            <icon-base name="strike" width="20" height="20" />
+          </button>
+        </template>
+
+        <template v-if="textOptions.tags">
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.paragraph() }"
+            @click.stop.prevent="commands.paragraph"
+          >
+            <icon-base name="paragraph" width="14" height="14"></icon-base>
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 1 }) }"
+            @click.stop.prevent="setHeading({ level: 1 })"
+          >
+            H1
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 2 }) }"
+            @click.stop.prevent="setHeading({ level: 2 })"
+          >
+            H2
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.heading({ level: 3 }) }"
+            @click.stop.prevent="setHeading({ level: 3 })"
+          >
+            H3
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.bullet_list() }"
+            @click.stop.prevent="setList('bullet', 'ordered')"
+          >
+            <icon-base name="bulletList"></icon-base>
+          </button>
+
+          <button
+            class="menubar__button"
+            :class="{ 'is-active': isActive.ordered_list() }"
+            @click.stop.prevent="setList('ordered', 'bullet')"
+          >
+            <icon-base name="orderedList"></icon-base>
+          </button>
+        </template>
+
+        <template v-if="textOptions.link">
+          <button
+            class="menubar__button"
+            @click.stop.prevent="showLinkMenu(getMarkAttrs('link'))"
+            :class="{ 'is-active': isActive.link() }"
+          >
+            <icon-base name="link"></icon-base>
+          </button>
+        </template>
 
         <!-- Link form -->
         <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">

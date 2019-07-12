@@ -7,7 +7,7 @@
           {{  $t('s.openGraph') }}
           <base-help
             :hasLink="false"
-            link="//ogp.me/"
+            link="http://ogp.me/"
             >
             The Open Graph protocol enables any web page to become a rich object in a social graph.
           </base-help>
