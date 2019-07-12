@@ -451,6 +451,11 @@ export default {
       svg
         fill: $dark-blue-krayola
 
+  /deep/
+    .b-uploader__input
+      bottom: auto
+      height: 0
+
 .b-preview
   text-align: center
   display: inline-block

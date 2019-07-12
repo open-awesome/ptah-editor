@@ -618,6 +618,11 @@ export default {
       svg
         fill: $dark-blue-krayola
 
+  /deep/
+    .b-uploader__input
+      bottom: auto
+      height: 0
+
 .b-gallery-popup__item
   width: 25%
   min-width: 10rem
