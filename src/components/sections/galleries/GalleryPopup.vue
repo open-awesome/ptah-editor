@@ -424,11 +424,11 @@ export default {
                           :style="$sectionData[key][0].element.styles"
                           @dblclick="onClick($sectionData[key][0].element, parseFloat(key.split('components')[1]))"
                           >
-                          <!--<uploader
+                          <uploader
                             :path="`${key}[0].element`"
                             :file="$sectionData[key][0].file"
                             @change="changeSrc"
-                          />-->
+                          />
                           <span class="b-gallery-popup__preview-count"
                             v-text="parseFloat(key.split('components')[1]) + 1"
                           />
@@ -617,6 +617,11 @@ export default {
       background: $white
       svg
         fill: $dark-blue-krayola
+
+  /deep/
+    .b-uploader__input
+      bottom: auto
+      height: 0
 
 .b-gallery-popup__item
   width: 25%
