@@ -78,11 +78,11 @@
                             <span class="b-preview__count">
                               {{ parseFloat(key.split('components')[1]) + 1 }}
                             </span>
-                            <uploader
+                            <!--<uploader
                               :path="`${key}[0].element`"
                               :file="$sectionData[key][0].file"
                               @change="changeSrc"
-                            />
+                            />-->
                           </div>
                           <component class="b-preview__name"
                             v-if="$sectionData.mainStyle.isLabelPreview"
@@ -130,11 +130,11 @@
                           :style="$sectionData[key][3].element.styles"
                           v-styler:for="{ el: $sectionData[key][3].element, path:`$sectionData.${key}[3].element`, type: $sectionData[key][3].type, label: $sectionData[key][3].label }"
                           >
-                          <uploader
+                          <!--<uploader
                               :path="`${key}[3].element`"
                               :file="$sectionData[key][3].file"
                               @change="changeSrc"
-                            />
+                            />-->
                           <span class="b-gallery-one-stage__count">
                             {{ parseFloat(key.split('components')[1]) + 1 }}
                           </span>
