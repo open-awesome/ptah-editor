@@ -9,7 +9,7 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn560.cdn.stg.gamenet.ru/0/7KUKv/o_6j0hJ.png")',
+        'background-image': 'url("https://gn436.cdn.stg.gamenet.ru/0/8colJ/o_GfDXg.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -20,10 +20,10 @@ const C_CUSTOM_COLUMN = [
   },
   {
     element: {
-      text: 'This is a header',
+      text: '<p><strong>This is a header</strong></p>',
       styles: {
-        'font-family': 'Lato',
-        'font-size': '2.4rem',
+        'font-family': 'Montserrat',
+        'font-size': '3.2rem',
         'color': '#ffffff'
       }
     }
@@ -36,40 +36,44 @@ const C_CUSTOM_COLUMN = [
       styles: {
         'font-family': 'Lato',
         'font-size': '1.6rem',
-        'color': 'rgba(255, 255, 255, 0.3)'
+        'color': '#ffffff'
       }
     }
   },
   {},
   {
     element: {
-      text: 'Secondary',
+      text: '<p><strong>SECONDARY BUTTON</strong></p>',
       styles: {
-        'background-color': 'rgba(255, 125, 125, 0.5)',
-        'color': '#ffffff',
-        'font-family': 'Lato',
-        'font-size:': '1.4rem',
+        'background-color': 'transparent',
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size:': '1.6rem',
         'text-align': 'center',
-        'width': '224px',
-        'height': '56px',
-        'border-radius': '2px'
+        'width': '280px',
+        'height': '64px',
+        'border-radius': '100px',
+        'border-width': '2px',
+        'border-style': 'solid',
+        'border-color': '#F4BC64'
       }
     }
   }
 ]
 
-const C_CUSTOM = [
-  {
-    element: {
-      text: 'This is a short header',
-      styles: {
-        'font-family': 'Lato',
-        'font-size': '3.2rem',
-        'color': '#ffffff'
-      }
+const C_CUSTOM_COLUMN2 = _.cloneDeep(C_CUSTOM_COLUMN)
+C_CUSTOM_COLUMN2[0].element.styles['background-image'] = 'url("https://gn908.cdn.stg.gamenet.ru/0/8conm/o_1qkwy5.png")'
+
+const C_CUSTOM_COLUMN3 = _.cloneDeep(C_CUSTOM_COLUMN)
+C_CUSTOM_COLUMN3[0].element.styles['background-image'] = 'url("https://gn681.cdn.stg.gamenet.ru/0/8cooT/o_1AhevN.png")'
+
+const C_CUSTOM = [{
+  element: {
+    styles: {
+      height: '60px'
     }
   }
-]
+}]
 
 const C_CUSTOM_CONTAINER = {
   styles: {
@@ -81,18 +85,19 @@ const C_CUSTOM_CONTAINER = {
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn819.cdn.stg.gamenet.ru/0/7L5P8/o_Dyakc.png)',
+      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
       'background-color': '#151C44',
       'background-position': 'center center',
-      'background-size': 'cover'
+      'background-size': 'cover',
+      'padding-bottom': '122px'
     },
     count: 3
   },
   container: _.merge({}, C_CUSTOM_CONTAINER),
   components: _.merge({}, C_CUSTOM),
   components1: _.merge({}, C_CUSTOM_COLUMN),
-  components2: _.merge({}, C_CUSTOM_COLUMN),
-  components3: _.merge({}, C_CUSTOM_COLUMN),
+  components2: _.merge({}, C_CUSTOM_COLUMN2),
+  components3: _.merge({}, C_CUSTOM_COLUMN3),
   components4: _.merge({}, C_CUSTOM_COLUMN),
   edited: true
 }
@@ -137,11 +142,11 @@ const COMPONENTS = [
 
 const HEADER = [
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
-    class: 'b-title',
-    label: 'title'
+    name: 'Delimiter',
+    element: types.Delimiter,
+    type: 'delimiter',
+    class: 'b-delimiter',
+    label: 'delimiter'
   }
 ]
 
