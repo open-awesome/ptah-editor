@@ -5,8 +5,8 @@ import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
 const GROUP_NAME = 'FirstScreen'
-const NAME = 'FirstScreenSpace01'
-const BG_SECTION = 'url(https://gn36.cdn.stg.gamenet.ru/0/8cqkG/o_3xWrv.jpg)'
+const NAME = 'FirstScreenSpace02'
+const BG_SECTION = 'url(https://gn711.cdn.stg.gamenet.ru/0/8cvzR/o_ogapi.jpg)'
 const date = Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000
 
 const COMPONENTS = [
@@ -188,7 +188,7 @@ const SCHEMA_CUSTOM = {
   },
   components: _.merge({}, C_CUSTOM),
   container: {
-    width: 8
+    width: 5
   },
   edited: true
 }
@@ -200,7 +200,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/first-screen-space-01.jpg',
+  cover: '/img/covers/first-screen-space-02.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
