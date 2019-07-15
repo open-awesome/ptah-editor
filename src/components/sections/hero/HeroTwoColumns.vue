@@ -106,7 +106,7 @@ const defaultColumnComponents2 = [
       text: 'This is a short header',
       styles: {
         'font-family': 'Lato',
-        'font-size': '48px',
+        'font-size': '4.8rem',
         'color': '#ffffff'
       }
     },
@@ -121,7 +121,7 @@ const defaultColumnComponents2 = [
       `,
       styles: {
         'font-family': 'Lato',
-        'font-size': '20px',
+        'font-size': '2rem',
         'line-height': '1.5',
         'color': '#FFF'
       }
