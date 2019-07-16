@@ -55,8 +55,8 @@ import FirstScreenSpace02 from '@components/sections/first-screen/FirstScreenSpa
 import GallerySwitch from '@components/sections/galleries/GallerySwitch'
 import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 // --- products
-import ProductsColumns from '@components/sections/products/ProductsColumns'
-import ProductsColumnsExtend from '@components/sections/products/ProductsColumnsExtend'
+import Products from '@components/sections/products/Products'
+import ProductsExtend from '@components/sections/products/ProductsExtend'
 // --- columns
 import Columns from '@components/sections/columns/Columns'
 // --- carousel
@@ -124,8 +124,8 @@ const COMPONENTS = {
   GallerySwitch,
   GalleryPopup,
 
-  ProductsColumns,
-  ProductsColumnsExtend,
+  Products,
+  ProductsExtend,
 
   Columns,
 

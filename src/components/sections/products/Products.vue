@@ -705,7 +705,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Products'
-const NAME = 'ProductsColumns'
+const NAME = 'Products'
 
 export default {
   name: NAME,

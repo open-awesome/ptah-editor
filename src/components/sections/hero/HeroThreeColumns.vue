@@ -21,12 +21,12 @@
         <sandbox
             :container-path="`$sectionData.container${ prefix }`"
             :components-path="`$sectionData.components${ prefix }`"
+            align="center"
             :direction="(['', '3'].includes(prefix)) ? 'row' : 'column'"
             :class="`b-sandbox__${ prefix || 1 }`"
-            align="center"
             class="b-sandbox">
 
-          <!-- eslint-disable-next-line vue/valid-v-model -->`
+          <!-- eslint-disable-next-line vue/valid-v-model -->
           <draggable v-model="$sectionData[`components${ prefix }`]" :style="$sectionData[`container${ prefix }`].styles" class="b-draggable-slot" @change="dragStop">
 
             <div
@@ -106,7 +106,7 @@ const defaultColumnComponents2 = [
       text: 'This is a short header',
       styles: {
         'font-family': 'Lato',
-        'font-size': '48px',
+        'font-size': '4.8rem',
         'color': '#ffffff'
       }
     },
@@ -120,7 +120,7 @@ const defaultColumnComponents2 = [
       `,
       styles: {
         'font-family': 'Lato',
-        'font-size': '20px',
+        'font-size': '2rem',
         'line-height': '1.5',
         'color': '#FFF'
       }
