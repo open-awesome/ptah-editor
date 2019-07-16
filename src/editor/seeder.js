@@ -650,19 +650,19 @@ const data = new Map([
         'instagram': {
           name: 'Instagram',
           expand: false,
-          visible: false,
+          visible: true,
           url: ''
         },
         'vk': {
           name: 'Vk',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         },
         'twitter': {
           name: 'Twitter',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         },
         'youtube': {
@@ -674,7 +674,7 @@ const data = new Map([
         'discord': {
           name: 'Discord',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         },
         'kickstarter': {

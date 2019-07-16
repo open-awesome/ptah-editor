@@ -55,7 +55,7 @@ import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
 // --- columns
-import Columns from '@components/sections/columns/Columns'
+import ColumnsSpace from '@components/sections/columns/ColumnsSpace'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
@@ -67,7 +67,7 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 
 // --- other
 import System from '@components/sections/elements/System'
-import Footer from '@components/sections/footers/Footer'
+import FooterSpace from '@components/sections/footers/FooterSpace'
 import Video from '@components/sections/video/Video'
 import Faq from '@components/sections/elements/Faq'
 import Slider from '@components/sections/slider/Slider'
@@ -121,7 +121,7 @@ const COMPONENTS = {
   Products,
   ProductsExtend,
 
-  Columns,
+  ColumnsSpace,
 
   Carousel,
 
@@ -131,7 +131,7 @@ const COMPONENTS = {
   FormRight2,
   FormLeft2,
 
-  Footer,
+  FooterSpace,
   System,
   Video,
   Faq
