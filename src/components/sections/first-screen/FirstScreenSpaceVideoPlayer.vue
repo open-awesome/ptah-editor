@@ -5,9 +5,8 @@ import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
 const GROUP_NAME = 'FirstScreen'
-const NAME = 'FirstScreenSpace02'
-const BG_SECTION = 'url(https://gn711.cdn.stg.gamenet.ru/0/8cvzR/o_ogapi.jpg)'
-const date = Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000
+const NAME = 'FirstScreenSpace01'
+const BG_SECTION = 'url(https://gn36.cdn.stg.gamenet.ru/0/8cqkG/o_3xWrv.jpg)'
 
 const COMPONENTS = [
   {
@@ -18,11 +17,11 @@ const COMPONENTS = [
     label: 'logo'
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
-    class: 'b-text-fs',
-    label: 'text'
+    name: 'VideoElement',
+    element: types.VideoElement,
+    type: 'video',
+    class: 'b-video',
+    label: 'video'
   },
   {
     name: 'TextElement',
@@ -30,13 +29,6 @@ const COMPONENTS = [
     type: 'text',
     class: 'b-text-fs',
     label: 'text'
-  },
-  {
-    name: 'Timer',
-    element: types.Timer,
-    type: 'timer',
-    class: 'b-timer-fs',
-    label: 'timer'
   },
   {
     name: 'Button',
@@ -44,13 +36,6 @@ const COMPONENTS = [
     type: 'button',
     class: 'b-button-fs',
     label: 'button'
-  },
-  {
-    name: 'SocialNetworks',
-    element: types.SocialNetworks,
-    type: 'networks',
-    class: 'b-social-networks-fs',
-    label: 'Social Networks'
   }
 ]
 
@@ -70,45 +55,27 @@ const C_CUSTOM = [
   },
   {
     element: {
+      settings: {
+        loop: true,
+        autoplay: true,
+        rel: false,
+        controls: false,
+        url: 'https://gn657.cdn.stg.gamenet.ru/0/8dECC/o_1n2u0d.mp4'
+      },
+      styles: {
+        width: '570px',
+        height: '320px'
+      }
+    }
+  },
+  {
+    element: {
       text: '<p><b>Here should be a little text describing youre beautiful game</b></p>',
       styles: {
         'font-family': 'Montserrat',
         'font-size': '3.6rem',
         'color': '#ffffff',
-        'margin': '10px 0'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><b>Time left</b></p>',
-      styles: {
-        'font-family': 'Montserrat',
-        'font-size': '3.6rem',
-        'color': '#ffffff',
-        'margin': '21px 0 10px 0'
-      }
-    }
-  },
-  {
-    element: {
-      timer: {
-        timestamp: date,
-        UTC: new Date().getTimezoneOffset() / 60 * (-1),
-        labels: {
-          show: false
-        },
-        colorTile: 'rgba(0,0,0,0)'
-      },
-      styles: {
-        'background-color': 'rgba(0,0,0,0)',
-        'font-family': 'Roboto',
-        'font-size': '4rem',
-        'font-weight': '800',
-        'line-height': '1',
-        'color': '#ffffff',
-        'padding': '0 0.8rem 0.8rem 0.8rem',
-        'margin': '0 0 62px 0'
+        'margin': '10px 0px'
       }
     }
   },
@@ -132,46 +99,6 @@ const C_CUSTOM = [
         }
       }
     }
-  },
-  {
-    element: {
-      socialNetworks: {
-        'facebook': {
-          name: 'Facebook',
-          expand: false,
-          visible: true,
-          url: ''
-        },
-        'instagram': {
-          name: 'Instagram',
-          expand: false,
-          visible: true,
-          url: ''
-        },
-        'twitter': {
-          name: 'Twitter',
-          expand: false,
-          visible: true,
-          url: ''
-        },
-        'youtube': {
-          name: 'Youtube',
-          expand: false,
-          visible: true,
-          url: ''
-        }
-      },
-      styles: {
-        'margin': '25px 0 0'
-      },
-      colorFill: {
-        color: '#F4BC64'
-      },
-      sizeIcons: {
-        width: 32
-      }
-    },
-    key: 4
   }
 ]
 
@@ -188,7 +115,7 @@ const SCHEMA_CUSTOM = {
   },
   components: _.merge({}, C_CUSTOM),
   container: {
-    width: 5
+    width: 7
   },
   edited: true
 }
@@ -200,7 +127,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/first-screen-space-02.jpg',
+  cover: '/img/covers/first-screen-space-video-player.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
@@ -218,7 +145,7 @@ export default {
 
 <template>
   <section
-    class="b-first-screen-space-02"
+    class="b-first-screen-space-video-player"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
@@ -258,7 +185,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-first-screen-space-02
+.b-first-screen-space-video-player
   .b-text-fs
     letter-spacing: -0.02em
     /deep/

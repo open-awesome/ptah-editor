@@ -5,8 +5,8 @@ import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
 const GROUP_NAME = 'FirstScreen'
-const NAME = 'FirstScreenSpace02'
-const BG_SECTION = 'url(https://gn711.cdn.stg.gamenet.ru/0/8cvzR/o_ogapi.jpg)'
+const NAME = 'FirstScreenSpaceVideoBack'
+const BG_SECTION = 'url(https://gn533.cdn.stg.gamenet.ru/0/8dDGw/o_Nleuk.png)'
 const date = Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000
 
 const COMPONENTS = [
@@ -180,11 +180,13 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': BG_SECTION,
       'background-size': 'cover',
-      'background-color': '#000',
+      'background-color': '#4A4A4A',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
       'height': '100vh'
-    }
+    },
+    backgroundType: 'video',
+    backgroundVideo: 'https://gn385.cdn.stg.gamenet.ru/0/8dE9B/o_1ZJs6W.mp4'
   },
   components: _.merge({}, C_CUSTOM),
   container: {
@@ -200,7 +202,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/first-screen-space-02.jpg',
+  cover: '/img/covers/first-screen-space-video-back.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
@@ -218,7 +220,7 @@ export default {
 
 <template>
   <section
-    class="b-first-screen-space-02"
+    class="b-first-screen-space-video-back"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
@@ -258,7 +260,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-first-screen-space-02
+.b-first-screen-space-video-back
   .b-text-fs
     letter-spacing: -0.02em
     /deep/
