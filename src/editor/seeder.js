@@ -418,8 +418,8 @@ const data = new Map([
       products: {
         'Standart': { visible: true },
         'Full': { visible: true },
-        'Deluxe': { visible: false },
-        'Ultimate': { visible: false }
+        'Deluxe': { visible: true },
+        'Ultimate': { visible: true }
       },
       selectProduct: {
         name: 'Standart'
