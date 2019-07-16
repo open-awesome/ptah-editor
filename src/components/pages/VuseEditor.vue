@@ -68,6 +68,7 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 // --- other
 import System from '@components/sections/elements/System'
 import FooterSpace from '@components/sections/footers/FooterSpace'
+import SocialNetworksSpace from '@components/sections/socials/SocialNetworksSpace'
 import Video from '@components/sections/video/Video'
 import Faq from '@components/sections/elements/Faq'
 import Slider from '@components/sections/slider/Slider'
@@ -132,6 +133,7 @@ const COMPONENTS = {
   FormLeft2,
 
   FooterSpace,
+  SocialNetworksSpace,
   System,
   Video,
   Faq
