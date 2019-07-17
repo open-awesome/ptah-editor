@@ -107,7 +107,7 @@ const C_CUSTOM = [
         'font-weight': '800',
         'line-height': '1',
         'color': '#ffffff',
-        'padding': '0 0.8rem 0.8rem 0.8rem',
+        'padding': '0',
         'margin': '0 0 62px 0'
       }
     }
@@ -280,28 +280,5 @@ export default {
     @media only screen and (max-width: 768px)
       &
         margin: 0 auto 25px !important
-    /deep/
-      & .number
-        font-weight: bold
-        padding: 0
-        letter-spacing: 2.2rem
-        width: 9rem
-        .is-mobile &,
-        .is-tablet &
-          letter-spacing: 1rem
-        @media only screen and (max-width: 768px)
-          &
-            letter-spacing: 1rem
-        &-divider
-          font-size: 0.7em
-          letter-spacing: 2.2rem
-          .is-mobile &,
-          .is-tablet &
-            letter-spacing: 1rem
-          @media only screen and (max-width: 768px)
-            &
-              letter-spacing: 1rem
-        &:after
-          background: none
 
 </style>

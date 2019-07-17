@@ -826,11 +826,11 @@ const data = new Map([
         // --- labels position
         position: 'bottom'
       },
-      colorTile: '#4B35D4'
+      colorTile: 'rgba(0, 0, 0, 0)'
     },
     typography: true,
     styles: {
-      'background-color':'rgba(255, 255, 255, 0.5)',
+      'background-color':'rgba(0, 0, 0, 0)',
       'font-family': 'Lato',
       'font-size':  '3.2rem',
       'font-weight': 'normal',
