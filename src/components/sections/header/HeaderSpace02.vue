@@ -24,7 +24,7 @@
 
     </button>
 
-    <div class="b-grid__row b-footer__row">
+    <div class="b-grid__row">
       <div class="b-grid__col-3 b-grid__col-m-12 mobile-header">
 
         <sandbox
@@ -133,22 +133,22 @@
 </template>
 
 <script>
-import { StyleObject, Logo, Button } from '@editor/types'
+import { StyleObject, Logo, Button, SocialNetworks } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['Header1', 'header', '/img/covers/header-1.png']
+const [name, group, cover] = ['HeaderSpace02', 'header', '/img/covers/header-space-02.jpg']
 const defaultComponents = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn120.cdn.stg.gamenet.ru/0/7aITH/o_1vTdxd.png)',
+        'background-image': 'url("https://gn623.cdn.stg.gamenet.ru/0/8cqjM/o_1Y54Cu.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '150px',
-        'height': '50px',
+        'width': '154px',
+        'height': '60px',
         'margin': '8px 16px'
       }
     },
@@ -158,67 +158,127 @@ const defaultComponents = [
 const defaultComponents2 = [
   {
     element: {
-      text: 'Link 1',
+      text: 'Link1',
       styles: {
         'background-color': 'transparent',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '100px',
-        'height': '50px',
-        'border-radius': '2px',
-        'font-size': '1.8rem',
+        'width': '130px',
+        'height': '30px',
+        'font-size': '2.4rem',
         'margin': '8px 16px'
+      },
+      pseudo: {
+        hover: {
+          color: '#fff !important'
+        }
       }
     },
     key: 1
   },
   {
     element: {
-      text: 'Link 2',
+      text: 'Link2',
       styles: {
         'background-color': 'transparent',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '100px',
-        'height': '50px',
-        'border-radius': '2px',
-        'font-size': '1.8rem',
+        'width': '130px',
+        'height': '30px',
+        'font-size': '2.4rem',
         'margin': '8px 16px'
+      },
+      pseudo: {
+        hover: {
+          color: '#fff !important'
+        }
       }
     },
     key: 2
   },
   {
-    styles: { marginLeft: 'auto' },
     element: {
-      text: 'Button',
+      text: 'Link3',
       styles: {
-        'background-color': '#FF6D64',
+        'background-color': 'transparent',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '150px',
-        'height': '50px',
-        'max-width': '100%',
-        'border-radius': '2px',
+        'width': '130px',
+        'height': '30px',
+        'font-size': '2.4rem',
         'margin': '8px 16px'
+      },
+      pseudo: {
+        hover: {
+          color: '#fff !important'
+        }
       }
     },
-    key: 5
+    key: 2
+  },
+  {
+    element: {
+      socialNetworks: {
+        'facebook': {
+          name: 'Facebook',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'instagram': {
+          name: 'Instagram',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'twitter': {
+          name: 'Twitter',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'youtube': {
+          name: 'Youtube',
+          expand: false,
+          visible: true,
+          url: ''
+        }
+      },
+      colorFill: {
+        color: '#F4BC64'
+      },
+      sizeIcons: {
+        width: 30
+      }
+    },
+    key: 6
   }
 ]
 const defaultSchema = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn819.cdn.stg.gamenet.ru/0/7L5P8/o_Dyakc.png)',
-      'background-color': '#151C44',
+      'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)',
+      'background-color': '#121619',
       'background-position': 'center',
       'background-size': 'cover'
+    }
+  },
+  container: {
+    styles: {
+      'margin': '0 150px 0 0',
+      'padding': '0'
+    }
+  },
+  container2: {
+    styles: {
+      'padding': 0,
+      'justify-content': 'space-between'
     }
   },
   components: merge({}, defaultComponents),
@@ -244,7 +304,8 @@ export default {
     components2: [
       { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
       { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 },
-      { name: 'Button', element: Button, type: 'button', class: 'b-button', label: 'button', key: 5 }
+      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 3 },
+      { name: 'SocialNetworks', element: SocialNetworks, type: 'networks', class: 'b-social-networks-fs', label: 'Social Networks', key: 6 }
     ]
   },
 
@@ -275,6 +336,10 @@ export default {
   @media (max-width: 800px)
     text-align: left
 
+  .mobile-menu
+    @media (max-width: 800px)
+      background-color: rgba(#060e1c, .8)
+
 .b-grid__col-3,
 .b-grid__col-9
   padding: .8rem 1.6rem
@@ -289,10 +354,11 @@ export default {
     order: 1
 
 .b-logo
+  display: block
   .is-tablet &,
   .is-mobile &
-    margin: 0 !important
+    margin: 0.4rem auto !important
 
   @media (max-width: 800px)
-    margin: 0 !important
+    margin: 0.4rem auto !important
 </style>

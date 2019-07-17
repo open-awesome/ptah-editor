@@ -24,7 +24,7 @@ function toggleMobileMenu () {
 }
 
 function closeMobileMenu ({ target }) {
-  if (target.closest('#js-hamburger') || target.closest('[id^="mobile-menu"]')) {
+  if (!target.closest('.js-element-link') && (target.closest('#js-hamburger') || target.closest('[id^="mobile-menu"]'))) {
     return
   }
   if (menu) {

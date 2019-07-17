@@ -10,7 +10,7 @@
   <slot name="overlay"/>
 
   <div class="b-grid b-header">
-    <div class="b-grid__row b-footer__row">
+    <div class="b-grid__row">
 
       <div class="b-grid__col-12 b-grid__col-m-12 mobile-header">
 
@@ -31,7 +31,8 @@
 
       <div
           :id="`mobile-menu-${ _uid }`"
-          class="b-grid__col-12 b-grid__col-m-12 mobile-menu">
+          class="b-grid__col-12 b-grid__col-m-12 mobile-menu"
+        >
 
         <sandbox
             container-path="$sectionData.container"
@@ -94,40 +95,48 @@ import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['Header4', 'header', '/img/covers/header-4.png']
+const [name, group, cover] = ['HeaderSpace03', 'header', '/img/covers/header-space-03.jpg']
 const defaultComponents = [
   {
     element: {
-      text: 'Link 1',
+      text: 'Link1',
       styles: {
         'background-color': 'transparent',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '100px',
-        'height': '50px',
-        'border-radius': '2px',
-        'font-size': '1.8rem',
+        'width': '140px',
+        'height': '30px',
+        'font-size': '2.4rem',
         'margin': '8px 16px'
+      },
+      pseudo: {
+        hover: {
+          color: '#fff !important'
+        }
       }
     },
     key: 1
   },
   {
     element: {
-      text: 'Link 2',
+      text: 'Link2',
       styles: {
         'background-color': 'transparent',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '100px',
-        'height': '50px',
-        'border-radius': '2px',
-        'font-size': '1.8rem',
+        'width': '140px',
+        'height': '30px',
+        'font-size': '2.4rem',
         'margin': '8px 16px'
+      },
+      pseudo: {
+        hover: {
+          color: '#fff !important'
+        }
       }
     },
     key: 2
@@ -135,49 +144,57 @@ const defaultComponents = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn120.cdn.stg.gamenet.ru/0/7aITH/o_1vTdxd.png)',
+        'background-image': 'url("https://gn623.cdn.stg.gamenet.ru/0/8cqjM/o_1Y54Cu.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '150px',
-        'height': '50px',
-        'margin': '8px 0'
+        'width': '154px',
+        'height': '60px',
+        'margin': '8px 16px'
       }
     },
     key: 0
   },
   {
     element: {
-      text: 'Link 3',
+      text: 'Link3',
       styles: {
         'background-color': 'transparent',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '100px',
-        'height': '50px',
-        'border-radius': '2px',
-        'font-size': '1.8rem',
+        'width': '140px',
+        'height': '30px',
+        'font-size': '2.4rem',
         'margin': '8px 16px'
+      },
+      pseudo: {
+        hover: {
+          color: '#fff !important'
+        }
       }
     },
-    key: 3
+    key: 2
   },
   {
     element: {
-      text: 'Link 4',
+      text: 'Link4',
       styles: {
         'background-color': 'transparent',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '100px',
-        'height': '50px',
-        'border-radius': '2px',
-        'font-size': '1.8rem',
+        'width': '140px',
+        'height': '30px',
+        'font-size': '2.4rem',
         'margin': '8px 16px'
+      },
+      pseudo: {
+        hover: {
+          color: '#fff !important'
+        }
       }
     },
     key: 4
@@ -186,8 +203,8 @@ const defaultComponents = [
 const defaultSchema = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn819.cdn.stg.gamenet.ru/0/7L5P8/o_Dyakc.png)',
-      'background-color': '#151C44',
+      'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg',
+      'background-color': '#121619',
       'background-position': 'center',
       'background-size': 'cover'
     }
@@ -251,6 +268,10 @@ export default {
 
   @media (max-width: 800px)
     text-align: left
+
+  .mobile-menu
+    @media (max-width: 800px)
+      background-color: rgba(#060e1c, .8)
 
 .b-grid__col-12
   padding: .8rem 1.6rem

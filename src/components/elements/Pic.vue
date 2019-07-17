@@ -150,7 +150,7 @@ export default {
 
 .b-image
   position: relative
-  display: inline-block
+  display: block
 
   width: $size-step*8
   height: $size-step*5
