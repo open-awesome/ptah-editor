@@ -9,79 +9,50 @@ const C_CUSTOM_1 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn257.cdn.stg.gamenet.ru/0/8dAso/o_1O03Wg.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '120px',
+        'height': '143px'
       }
-    },
-    key: 0
+    }
   },
   {
     element: {
-      text: 'Start Edition',
+      text: '<p><strong>Start edition</strong></p>',
       styles: {
-        'color': '#fff'
+        'font-family': 'Montserrat',
+        'font-size': '2.8rem',
+        'color': '#ffffff'
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
-      text: '39$',
+      text: '<p><strong>BUY NOW</strong></p>',
       styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
-      }
-    },
-    key: 2
-  },
-  {
-    element: {
-      text: 'Buy now',
-      styles: {
-        'background-color': 'rgba(245,166,35,1)',
-        'color': '#000',
-        'font-family': 'Lato',
-        'font-size:': '1.2rem',
+        'background-color': 'transparent',
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size:': '1.6rem',
         'text-align': 'center',
-        'width': '192px',
-        'height': '52px',
-        'border-radius': '2px'
+        'width': '190px',
+        'height': '64px',
+        'border-radius': '100px',
+        'border-width': '2px',
+        'border-style': 'solid',
+        'border-color': '#F4BC64'
+      },
+      pseudo: {
+        hover: {
+          'color': '#FFFFFF !important',
+          'border-width': '2px !important',
+          'border-style': 'solid !important',
+          'border-color': '#FFFFFF !important'
+        }
       }
-    },
-    key: 3
-  }
-]
-
-const C_CUSTOM_1_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
-      }
-    },
-    key: 4
-  },
-  {
-    element: {
-      text: 'Start Edition',
-      styles: {
-        'color': '#fff'
-      }
-    },
-    key: 5
+    }
   }
 ]
 
@@ -89,54 +60,62 @@ const C_CUSTOM_1D = [
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Suit of Legacy Armor'
+        text: 'Digital game copy'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 6
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Mithril Box'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Starship mk1'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 7
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Heroic Boosters'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Kinetic weapon mk1'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 8
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(208,2,27,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Summon Mistfire Wolf Elite Skil'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Digital soundtrack'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 9
+    }
   }
 ]
 
@@ -144,79 +123,50 @@ const C_CUSTOM_2 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn292.cdn.stg.gamenet.ru/0/8dAtJ/o_1FdGcD.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '161px',
+        'height': '143px'
       }
-    },
-    key: 10
+    }
   },
   {
     element: {
-      text: 'Full Edition',
+      text: '<p><strong>Full edition</strong></p>',
       styles: {
-        'color': '#fff'
+        'font-family': 'Montserrat',
+        'font-size': '2.8rem',
+        'color': '#ffffff'
       }
-    },
-    key: 11
+    }
   },
   {
     element: {
-      text: '49$',
+      text: '<p><strong>BUY NOW</strong></p>',
       styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
-      }
-    },
-    key: 12
-  },
-  {
-    element: {
-      text: 'Buy now',
-      styles: {
-        'background-color': 'rgba(245,166,35,1)',
-        'color': '#000',
-        'font-family': 'Lato',
-        'font-size:': '1.2rem',
+        'background-color': 'transparent',
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size:': '1.6rem',
         'text-align': 'center',
-        'width': '192px',
-        'height': '52px',
-        'border-radius': '2px'
+        'width': '190px',
+        'height': '64px',
+        'border-radius': '100px',
+        'border-width': '2px',
+        'border-style': 'solid',
+        'border-color': '#F4BC64'
+      },
+      pseudo: {
+        hover: {
+          'color': '#FFFFFF !important',
+          'border-width': '2px !important',
+          'border-style': 'solid !important',
+          'border-color': '#FFFFFF !important'
+        }
       }
-    },
-    key: 13
-  }
-]
-
-const C_CUSTOM_2_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
-      }
-    },
-    key: 14
-  },
-  {
-    element: {
-      text: 'Full Edition',
-      styles: {
-        'color': '#fff'
-      }
-    },
-    key: 15
+    }
   }
 ]
 
@@ -224,54 +174,62 @@ const C_CUSTOM_2D = [
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Suit of Legacy Armor'
+        text: 'Digital game copy'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 16
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Mithril Box'
+        text: 'Starship mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 17
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Heroic Boosters'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Kinetic weapon mk1'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 18
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Summon Mistfire Wolf Elite Skil'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Digital soundtrack'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 19
+    }
   }
 ]
 
@@ -279,79 +237,50 @@ const C_CUSTOM_3 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn546.cdn.stg.gamenet.ru/0/8dAtZ/o_2FiQhB.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '157px',
+        'height': '143px'
       }
-    },
-    key: 20
+    }
   },
   {
     element: {
-      text: 'Deluxe Edition',
+      text: '<p><strong>Delux edition</strong></p>',
       styles: {
-        'color': '#fff'
+        'font-family': 'Montserrat',
+        'font-size': '2.8rem',
+        'color': '#ffffff'
       }
-    },
-    key: 21
+    }
   },
   {
     element: {
-      text: '59$',
+      text: '<p><strong>BUY NOW</strong></p>',
       styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
-      }
-    },
-    key: 22
-  },
-  {
-    element: {
-      text: 'Buy now',
-      styles: {
-        'background-color': 'rgba(245,166,35,1)',
-        'color': '#000',
-        'font-family': 'Lato',
-        'font-size:': '1.2rem',
+        'background-color': 'transparent',
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size:': '1.6rem',
         'text-align': 'center',
-        'width': '192px',
-        'height': '52px',
-        'border-radius': '2px'
+        'width': '190px',
+        'height': '64px',
+        'border-radius': '100px',
+        'border-width': '2px',
+        'border-style': 'solid',
+        'border-color': '#F4BC64'
+      },
+      pseudo: {
+        hover: {
+          'color': '#FFFFFF !important',
+          'border-width': '2px !important',
+          'border-style': 'solid !important',
+          'border-color': '#FFFFFF !important'
+        }
       }
-    },
-    key: 23
-  }
-]
-
-const C_CUSTOM_3_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
-      }
-    },
-    key: 24
-  },
-  {
-    element: {
-      text: 'Deluxe Edition',
-      styles: {
-        'color': '#fff'
-      }
-    },
-    key: 25
+    }
   }
 ]
 
@@ -359,54 +288,62 @@ const C_CUSTOM_3D = [
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Suit of Legacy Armor'
+        text: 'Digital game copy'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 26
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Mithril Box'
+        text: 'Starship mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 27
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Heroic Boosters'
+        text: 'Kinetic weapon mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 28
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Summon Mistfire Wolf Elite Skil'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Digital soundtrack'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 29
+    }
   }
 ]
 
@@ -414,79 +351,50 @@ const C_CUSTOM_4 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn452.cdn.stg.gamenet.ru/0/8dAtj/o_1ZxHzN.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '157px',
+        'height': '143px'
       }
-    },
-    key: 30
+    }
   },
   {
     element: {
-      text: 'Ultimate Edition',
+      text: '<p><strong>Ultimate edition</strong></p>',
       styles: {
-        'color': '#fff'
+        'font-family': 'Montserrat',
+        'font-size': '2.8rem',
+        'color': '#ffffff'
       }
-    },
-    key: 31
+    }
   },
   {
     element: {
-      text: '79$',
+      text: '<p><strong>BUY NOW</strong></p>',
       styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
-      }
-    },
-    key: 32
-  },
-  {
-    element: {
-      text: 'Buy now',
-      styles: {
-        'background-color': 'rgba(245,166,35,1)',
-        'color': '#000',
-        'font-family': 'Lato',
-        'font-size:': '1.2rem',
+        'background-color': 'transparent',
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size:': '1.6rem',
         'text-align': 'center',
-        'width': '192px',
-        'height': '52px',
-        'border-radius': '2px'
+        'width': '190px',
+        'height': '64px',
+        'border-radius': '100px',
+        'border-width': '2px',
+        'border-style': 'solid',
+        'border-color': '#F4BC64'
+      },
+      pseudo: {
+        hover: {
+          'color': '#FFFFFF !important',
+          'border-width': '2px !important',
+          'border-style': 'solid !important',
+          'border-color': '#FFFFFF !important'
+        }
       }
-    },
-    key: 33
-  }
-]
-
-const C_CUSTOM_4_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
-      }
-    },
-    key: 34
-  },
-  {
-    element: {
-      text: 'Ultimate Edition',
-      styles: {
-        'color': '#fff'
-      }
-    },
-    key: 35
+    }
   }
 ]
 
@@ -494,123 +402,116 @@ const C_CUSTOM_4D = [
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Suit of Legacy Armor'
+        text: 'Digital game copy'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 36
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Mithril Box'
+        text: 'Starship mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 37
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Heroic Boosters'
+        text: 'Kinetic weapon mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 37
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Summon Mistfire Wolf Elite Skil'
+        text: 'Digital soundtrack'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 39
+    }
   }
 ]
 
 const C_CUSTOM_CONTAINER = {
   styles: {
     'flex-direction': 'column',
-    'align-items': 'center'
-  }
-}
-
-const C_CUSTOM_CONTAINER_M = {
-  styles: {
-    'flex-direction': 'column',
-    'align-items': 'flex-start'
+    'align-items': 'center',
+    'padding': '0px'
   }
 }
 
 const C_CUSTOM_CONTAINER_D = {
   styles: {
     'flex-direction': 'column',
-    'align-items': 'flex-start'
+    'align-items': 'flex-start',
+    'padding': '0 0 0 35px'
   }
 }
 
 const C_CUSTOM = [
   {
     element: {
-      text: 'Chapter for products',
       styles: {
-        'font-family': 'Lato',
-        'font-size': '4rem',
-        'color': '#fff'
+        'height': '60px'
       }
-    },
-    key: 0
+    }
   }
 ]
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn664.cdn.stg.gamenet.ru/0/7RIc1/o_4g83t.jpg)',
-      'background-color': 'rgba(21,28,68,1)'
+      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-color': 'rgba(21,28,68,1)',
+      'background-size': 'cover',
+      'padding': '50px 0 190px 0'
     }
   },
   components: _.merge({}, C_CUSTOM),
   containerStandart: _.merge({}, C_CUSTOM_CONTAINER),
-  containerStandartM: _.merge({}, C_CUSTOM_CONTAINER_M),
   containerStandartD: _.merge({}, C_CUSTOM_CONTAINER_D),
   containerFull: _.merge({}, C_CUSTOM_CONTAINER),
-  containerFullM: _.merge({}, C_CUSTOM_CONTAINER_M),
   containerFullD: _.merge({}, C_CUSTOM_CONTAINER_D),
   containerDeluxe: _.merge({}, C_CUSTOM_CONTAINER),
-  containerDeluxeM: _.merge({}, C_CUSTOM_CONTAINER_M),
   containerDeluxeD: _.merge({}, C_CUSTOM_CONTAINER_D),
   containerUltimate: _.merge({}, C_CUSTOM_CONTAINER),
-  containerUltimateM: _.merge({}, C_CUSTOM_CONTAINER_M),
   containerUltimateD: _.merge({}, C_CUSTOM_CONTAINER_D),
   componentsStandart: _.merge({}, C_CUSTOM_1),
-  componentsStandartM: _.merge({}, C_CUSTOM_1_M),
   componentsStandartD: _.merge({}, C_CUSTOM_1D),
   componentsFull: _.merge({}, C_CUSTOM_2),
-  componentsFullM: _.merge({}, C_CUSTOM_2_M),
   componentsFullD: _.merge({}, C_CUSTOM_2D),
   componentsDeluxe: _.merge({}, C_CUSTOM_3),
-  componentsDeluxeM: _.merge({}, C_CUSTOM_3_M),
   componentsDeluxeD: _.merge({}, C_CUSTOM_3D),
   componentsUltimate: _.merge({}, C_CUSTOM_4),
-  componentsUltimateM: _.merge({}, C_CUSTOM_4_M),
   componentsUltimateD: _.merge({}, C_CUSTOM_4D),
   edited: true
 }
@@ -631,35 +532,11 @@ const COMPONENTS = [
     label: 'text'
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
-    class: 'b-cost',
-    label: 'cost'
-  },
-  {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button-test',
     label: 'button'
-  }
-]
-
-const COMPONENTS_M = [
-  {
-    name: 'Pic',
-    element: types.Image,
-    type: 'image',
-    class: 'b-image',
-    label: 'Pic'
-  },
-  {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
-    class: 'b-text',
-    label: 'text'
   }
 ]
 
@@ -696,11 +573,11 @@ const COMPONENTS_D = [
 
 const HEADER = [
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
-    class: 'b-title',
-    label: 'title'
+    name: 'Delimiter',
+    element: types.Delimiter,
+    type: 'delimiter',
+    class: 'b-delimiter',
+    label: 'delimiter'
   }
 ]
 
@@ -721,29 +598,21 @@ export default {
     container: types.StyleObject,
     components: _.merge([], HEADER, { key: 0 }),
     containerStandart: types.StyleObject,
-    containerStandartM: types.StyleObject,
     containerStandartD: types.StyleObject,
     containerFull: types.StyleObject,
-    containerFullM: types.StyleObject,
     containerFullD: types.StyleObject,
     containerDeluxe: types.StyleObject,
-    containerDeluxeM: types.StyleObject,
     containerDeluxeD: types.StyleObject,
     containerUltimate: types.StyleObject,
-    containerUltimateM: types.StyleObject,
     containerUltimateD: types.StyleObject,
-    componentsStandart: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }]),
-    componentsStandartM: _.merge([], COMPONENTS_M, [{ key: 4 }, { key: 5 }]),
-    componentsStandartD: _.merge([], COMPONENTS_D, [{ key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
-    componentsFull: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }]),
-    componentsFullM: _.merge([], COMPONENTS_M, [{ key: 14 }, { key: 15 }]),
-    componentsFullD: _.merge([], COMPONENTS_D, [{ key: 16 }, { key: 17 }, { key: 18 }, { key: 19 }]),
-    componentsDeluxe: _.merge([], COMPONENTS, [{ key: 20 }, { key: 21 }, { key: 22 }, { key: 23 }]),
-    componentsDeluxeM: _.merge([], COMPONENTS_M, [{ key: 24 }, { key: 25 }]),
-    componentsDeluxeD: _.merge([], COMPONENTS_D, [{ key: 26 }, { key: 27 }, { key: 28 }, { key: 29 }]),
-    componentsUltimate: _.merge([], COMPONENTS, [{ key: 30 }, { key: 31 }, { key: 32 }, { key: 33 }]),
-    componentsUltimateM: _.merge([], COMPONENTS_M, [{ key: 34 }, { key: 35 }]),
-    componentsUltimateD: _.merge([], COMPONENTS_D, [{ key: 36 }, { key: 37 }, { key: 38 }, { key: 39 }])
+    componentsStandart: _.merge([], COMPONENTS),
+    componentsStandartD: _.merge([], COMPONENTS_D),
+    componentsFull: _.merge([], COMPONENTS),
+    componentsFullD: _.merge([], COMPONENTS_D),
+    componentsDeluxe: _.merge([], COMPONENTS),
+    componentsDeluxeD: _.merge([], COMPONENTS_D),
+    componentsUltimate: _.merge([], COMPONENTS),
+    componentsUltimateD: _.merge([], COMPONENTS_D)
   },
 
   methods: {
@@ -819,14 +688,6 @@ export default {
                       <icon-base name="cog" width="12" height="15" />
                     </a>
                   </div>
-                  <!--div>
-                    <a href="#" class="b-products-colums__control"
-                       tooltip="Products style"
-                       tooltip-position="bottom"
-                       @click.stop="showSettings('SectionProductsColumnsStyle')">
-                      <icon-base name="style" width="12" height="15" />
-                    </a>
-                  </div-->
                 </div>
 
               <div class="b-grid__row b-products-colums__row"
@@ -841,7 +702,7 @@ export default {
                     :container-path="`$sectionData.container${key}`"
                     :components-path="`$sectionData.components${key}`"
                     direction="column"
-                    :style="{ backgroundColor : $sectionData.mainStyle.styles['background-color'] }"
+                    :style="`$sectionData.container${key}.styles`"
                     >
                     <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @change="dragStop">
                       <div
@@ -868,7 +729,7 @@ export default {
                     :container-path="`$sectionData.container${key}D`"
                     :components-path="`$sectionData.components${key}D`"
                     direction="column"
-                    :style="{ backgroundColor : $sectionData.mainStyle.styles['background-color'] }"
+                    :style="`$sectionData.container${key}D.styles`"
                     >
                     <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @change="dragStop">
                       <div
@@ -913,7 +774,7 @@ export default {
     font-family: inherit
 
   &__padd
-    padding: $size-step/4
+    padding: 0
 
     transition: border 0.25s
     border: 0.2rem dotted transparent
@@ -925,7 +786,7 @@ export default {
       &
         padding: 0
     &-border
-      padding: $size-step/4
+      padding: 0
       transition: border 0.25s
       border: 1px dotted transparent
       .is-editable #{$this}__padd:hover &
@@ -964,5 +825,8 @@ export default {
       background: $white
       svg
         fill: $dark-blue-krayola
+
+  .b-grid__col-3
+    padding: .8rem
 
 </style>

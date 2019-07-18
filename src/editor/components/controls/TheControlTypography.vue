@@ -6,7 +6,8 @@ const LIST_FONTS = [
   'Lato',
   'Montserrat',
   'Heebo',
-  'PT Serif'
+  'PT Serif',
+  'Roboto'
 ]
 
 export default {
@@ -35,6 +36,7 @@ export default {
         { name: '28px', value: '2.8rem' },
         { name: '32px', value: '3.2rem' },
         { name: '36px', value: '3.6rem' },
+        { name: '40px', value: '4rem' },
         { name: '48px', value: '4.8rem' },
         { name: '56px', value: '5.6rem' },
         { name: '64px', value: '6.4rem' },

@@ -49,6 +49,11 @@ import HeroWithTimerColumnsVideo from '@components/sections/hero/HeroWithTimerCo
 import HeroWithTimerColumnsVideo2 from '@components/sections/hero/HeroWithTimerColumnsVideo2'
 import HeroWithTimerSlogan from '@components/sections/hero/HeroWithTimerSlogan'
 import HeroWithTimerSlogan2 from '@components/sections/hero/HeroWithTimerSlogan2'
+// --- First screen
+import FirstScreenSpace01 from '@components/sections/first-screen/FirstScreenSpace01'
+import FirstScreenSpace02 from '@components/sections/first-screen/FirstScreenSpace02'
+import FirstScreenSpaceVideoBack from '@components/sections/first-screen/FirstScreenSpaceVideoBack'
+import FirstScreenSpaceVideoPlayer from '@components/sections/first-screen/FirstScreenSpaceVideoPlayer'
 // --- gallery
 import GallerySwitch from '@components/sections/galleries/GallerySwitch'
 import GalleryPopup from '@components/sections/galleries/GalleryPopup'
@@ -115,6 +120,11 @@ const COMPONENTS = {
   HeroWithTimerColumnsVideo2,
   HeroWithTimerSlogan,
   HeroWithTimerSlogan2,
+
+  FirstScreenSpace01,
+  FirstScreenSpace02,
+  FirstScreenSpaceVideoBack,
+  FirstScreenSpaceVideoPlayer,
 
   Slider,
 
