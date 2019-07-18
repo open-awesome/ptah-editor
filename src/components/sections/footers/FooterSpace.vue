@@ -191,10 +191,6 @@ const SCHEMA_CUSTOM = {
       'background-position': 'top center',
       'background-repeat': 'no-repeat',
       'padding': '8px 0'
-    },
-    overlay: {
-      color: '#252525',
-      opacity: '0.5'
     }
   },
   container: {
