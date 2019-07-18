@@ -75,7 +75,7 @@ const C_CUSTOM = [
         'font-family': 'Montserrat',
         'font-size': '3.6rem',
         'color': '#ffffff',
-        'margin': '10px 0'
+        'margin': '10px 80px'
       }
     }
   },
@@ -183,14 +183,14 @@ const SCHEMA_CUSTOM = {
       'background-color': '#4A4A4A',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
-      'height': '100vh'
+      'height': 'auto'
     },
     backgroundType: 'video',
     backgroundVideo: 'https://gn385.cdn.stg.gamenet.ru/0/8dE9B/o_1ZJs6W.mp4'
   },
   components: _.merge({}, C_CUSTOM),
   container: {
-    width: 5
+    width: 7
   },
   edited: true
 }
@@ -269,18 +269,26 @@ export default {
     .is-mobile &,
     .is-tablet &
       font-size: 2.4rem !important
-    @media only screen and (max-width: 768px)
+      margin: 0 auto 8px !important
+      /deep/
+        p
+          line-height: 2.8rem !important
+    @media only screen and (max-width: 840px)
       &
         font-size: 2.4rem !important
+        margin: 0 auto 8px !important
+        & p
+          line-height: 2.8rem !important
   .b-button-fs
     box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
     transition: background-color 200ms
   .b-timer-fs
     .is-mobile &,
     .is-tablet &
-      margin: 0 auto 25px !important
-    @media only screen and (max-width: 768px)
+      margin: 0 auto 8px !important
+    @media only screen and (max-width: 840px)
       &
-        margin: 0 auto 25px !important
+        font-size: 2.4rem !important
+        margin: 0 auto 8px !important
 
 </style>
