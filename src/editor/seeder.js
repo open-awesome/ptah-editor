@@ -759,8 +759,9 @@ const data = new Map([
       selectPlatform: {
         name: 'apple'
       },
-      colorFill: {
-        color:  '#fff'
+      colorIcons: {
+        default:  '#000',
+        active:  '#fff'
       },
       sizeIcons: {
         width: 32

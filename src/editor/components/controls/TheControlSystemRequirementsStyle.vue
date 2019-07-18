@@ -1,5 +1,6 @@
 <script>
-import { mapState } from 'vuex'
+import * as _ from 'lodash-es'
+import { mapState, mapActions } from 'vuex'
 import ControlTable from './../controls/TheControlTable.vue'
 import ControlTableBody from './../controls/TheControlTableBody.vue'
 
@@ -13,7 +14,8 @@ export default {
 
   data () {
     return {
-      color: '',
+      colorDef: '',
+      colorAct: '',
       elWidth: 0
     }
   },
@@ -39,12 +41,16 @@ export default {
       return this.settingObjectOptions.sizeIcons
     },
 
-    colorFill () {
-      return this.settingObjectOptions.colorFill
+    colorIcons () {
+      return this.settingObjectOptions.colorIcons
     }
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     visible (key) {
       this.requirements[key].visible = !this.requirements[key].visible
 
@@ -61,9 +67,11 @@ export default {
     visibleRows (key) {
       this.rowsRequirements[key].visible = !this.rowsRequirements[key].visible
     },
-    changeColor () {
-      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
-      this.colorFill['color'] = color
+    changeColor (prop, color) {
+      const c = color ? `rgba(${Object.values(color.rgba).toString()}` : color
+      this.colorIcons[prop] = c
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { colorIcons: this.colorIcons }))
     },
     changeSize () {
       this.sizeIcons['width'] = this.elWidth
@@ -71,7 +79,8 @@ export default {
   },
 
   mounted () {
-    this.colorFill !== undefined ? this.color = this.colorFill.color : this.color = 'rgba(0, 0, 0, 1)'
+    this.colorIcons.default !== undefined ? this.colorDef = this.colorIcons.default : this.color = 'rgba(0, 0, 0, 1)'
+    this.colorIcons.active !== undefined ? this.colorAct = this.colorIcons.active : this.color = 'rgba(255, 255, 255, 1)'
     this.sizeIcons !== undefined ? this.elWidth = this.sizeIcons.width : this.elWidth = 32
   }
 }
@@ -86,7 +95,10 @@ export default {
         </base-range-slider>
       </div>
       <div class="b-text-controls__control">
-        <base-color-picker label="Icons color" v-model="color" @change="changeColor"></base-color-picker>
+        <base-color-picker label="Icons color" v-model="colorDef" @change="changeColor('default', colorDef)"></base-color-picker>
+      </div>
+      <div class="b-text-controls__control">
+        <base-color-picker label="Icons active" v-model="colorAct" @change="changeColor('active', colorAct)"></base-color-picker>
       </div>
     </div>
     <div>

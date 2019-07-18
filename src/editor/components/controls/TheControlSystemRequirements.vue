@@ -1,20 +1,8 @@
 <script>
 import { mapState } from 'vuex'
-import VuseIcon from '@editor/components/VuseIcon'
 
 export default {
   name: 'ControlSystemRequirements',
-
-  components: {
-    VuseIcon
-  },
-
-  data () {
-    return {
-      color: '',
-      elWidth: ''
-    }
-  },
 
   computed: {
     ...mapState('Sidebar', [
@@ -31,14 +19,6 @@ export default {
 
     selectPlatform () {
       return this.settingObjectOptions.selectPlatform
-    },
-
-    sizeIcons () {
-      return this.settingObjectOptions.sizeIcons
-    },
-
-    colorFill () {
-      return this.settingObjectOptions.colorFill
     }
   },
 
@@ -58,16 +38,7 @@ export default {
     },
     visibleRows (key) {
       this.rowsRequirements[key].visible = !this.rowsRequirements[key].visible
-    },
-    changeColor () {
-      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
-      this.colorFill['color'] = color
     }
-  },
-
-  mounted () {
-    this.color = this.colorFill.color
-    this.elWidth = this.sizeIcons.width
   }
 }
 </script>
