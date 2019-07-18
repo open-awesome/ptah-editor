@@ -365,7 +365,10 @@ export default {
   @media (max-width: 800px)
     margin-top: auto !important
     margin-bottom: 8px !important
-    order: 1
+  @media (max-height: 420px)
+    width: auto !important
+    margin-top: 8px !important
+    margin-bottom: 8px !important
 
 .b-header-logo
   display: block
@@ -375,4 +378,8 @@ export default {
 
   @media (max-width: 800px)
     margin: 0.4rem auto !important
+
+@media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
+  .b-slot .b-draggable-slot > div
+    width: auto !important
 </style>

@@ -98,7 +98,7 @@
                 :key="`component-${ _uid }-${ index }`"
                 v-if="$sectionData.components2.length"
                 :style="component.styles"
-                :class="{ 'b-button-one': isOnlyOneButton(component) }">
+                :class="{ 'b-one': isOnlyOneButton(component) }">
 
               <component
                   v-styler:for="{
@@ -373,7 +373,7 @@ export default {
       &
         padding: 0 !important
 
-.b-button-one
+.b-one
   .is-mobile &
     margin-top: auto !important
     order: 1
@@ -381,6 +381,10 @@ export default {
     margin-top: auto !important
     margin-bottom: 8px !important
     order: 1
+  @media (max-height: 420px)
+    width: auto !important
+    margin-top: 8px !important
+    margin-bottom: 8px !important
 
 .b-logo
   display: block
@@ -390,4 +394,8 @@ export default {
 
   @media (max-width: 800px)
     margin: 0.4rem auto !important
+
+@media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
+  .b-slot .b-draggable-slot > div
+    width: 50% !important
 </style>

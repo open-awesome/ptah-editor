@@ -337,7 +337,7 @@ export default {
     margin-top: 8px !important
     margin-bottom: 8px !important
 
-@media (max-height: 420px) and (max-width: 800px) and (min-width: 500px)
+@media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
   .b-slot .b-draggable-slot > div
     width: 50% !important
 </style>
