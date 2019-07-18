@@ -31,7 +31,7 @@
 
       <div
           :id="`mobile-menu-${ _uid }`"
-          class="b-grid__col-12 b-grid__col-m-12 mobile-menu"
+          class="b-grid__col-12 b-grid__col-m-12 mobile-menu mobile-menu_drop"
           :class="{ 'mobile-menu_hide': !isToggle }"
         >
 
