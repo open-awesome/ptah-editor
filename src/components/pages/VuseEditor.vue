@@ -32,8 +32,7 @@ import ToggleElement from '@components/elements/ToggleElement'
 import HeaderSpace01 from '@components/sections/header/HeaderSpace01'
 import HeaderSpace02 from '@components/sections/header/HeaderSpace02'
 import HeaderSpace03 from '@components/sections/header/HeaderSpace03'
-// import Header2 from '@components/sections/header/Header2'
-// import Header3 from '@components/sections/header/Header3'
+
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
@@ -103,8 +102,6 @@ const COMPONENTS = {
   HeaderSpace01,
   HeaderSpace02,
   HeaderSpace03,
-  // Header2,
-  // Header3,
 
   HeroUnit,
   HeroSkull,
