@@ -2,7 +2,7 @@
 <section
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }]"
     class="b-section-header">
 
   <slot name="menu"/>
@@ -19,7 +19,7 @@
             class="hamburger hamburger--slider"
             type="button"
             :data-target="`#mobile-menu-${ _uid }`"
-            @click.stop>
+            @click.stop="toggle">
 
           <span class="hamburger-box">
             <span class="hamburger-inner"></span>
@@ -32,6 +32,7 @@
       <div
           :id="`mobile-menu-${ _uid }`"
           class="b-grid__col-12 b-grid__col-m-12 mobile-menu"
+          :class="{ 'mobile-menu_hide': !isToggle }"
         >
 
         <sandbox
@@ -90,7 +91,7 @@
 </template>
 
 <script>
-import { StyleObject, Logo, Button } from '@editor/types'
+import { StyleObject, Logo, Text } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
@@ -99,21 +100,22 @@ const [name, group, cover] = ['HeaderSpace03', 'header', '/img/covers/header-spa
 const defaultComponents = [
   {
     element: {
-      text: 'Link1',
+      text: '<a href="#">About</a>',
       styles: {
-        'background-color': 'transparent',
-        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '140px',
-        'height': '30px',
-        'font-size': '2.4rem',
+        'font-size': '1.8rem',
         'margin': '8px 16px'
       },
-      pseudo: {
+      textLinkStyles: {
+        a: {
+          'color': '#F4BC64',
+          'text-decoration': 'none'
+        },
         hover: {
-          color: '#fff !important'
+          'color': '#fff',
+          'text-decoration': 'underline'
         }
       }
     },
@@ -121,21 +123,22 @@ const defaultComponents = [
   },
   {
     element: {
-      text: 'Link2',
+      text: '<a href="#">Features</a>',
       styles: {
-        'background-color': 'transparent',
-        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '140px',
-        'height': '30px',
-        'font-size': '2.4rem',
+        'font-size': '1.8rem',
         'margin': '8px 16px'
       },
-      pseudo: {
+      textLinkStyles: {
+        a: {
+          'color': '#F4BC64',
+          'text-decoration': 'none'
+        },
         hover: {
-          color: '#fff !important'
+          'color': '#fff',
+          'text-decoration': 'underline'
         }
       }
     },
@@ -157,43 +160,45 @@ const defaultComponents = [
   },
   {
     element: {
-      text: 'Link3',
+      text: '<a href="#">Media</a>',
       styles: {
-        'background-color': 'transparent',
-        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '140px',
-        'height': '30px',
-        'font-size': '2.4rem',
+        'font-size': '1.8rem',
         'margin': '8px 16px'
       },
-      pseudo: {
+      textLinkStyles: {
+        a: {
+          'color': '#F4BC64',
+          'text-decoration': 'none'
+        },
         hover: {
-          color: '#fff !important'
+          'color': '#fff',
+          'text-decoration': 'underline'
         }
       }
     },
-    key: 2
+    key: 3
   },
   {
     element: {
-      text: 'Link4',
+      text: '<a href="#">Packs</a>',
       styles: {
-        'background-color': 'transparent',
-        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '140px',
-        'height': '30px',
-        'font-size': '2.4rem',
+        'font-size': '1.8rem',
         'margin': '8px 16px'
       },
-      pseudo: {
+      textLinkStyles: {
+        a: {
+          'color': '#F4BC64',
+          'text-decoration': 'none'
+        },
         hover: {
-          color: '#fff !important'
+          'color': '#fff',
+          'text-decoration': 'underline'
         }
       }
     },
@@ -203,8 +208,8 @@ const defaultComponents = [
 const defaultSchema = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg',
-      'background-color': '#121619',
+      'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)',
+      'background-color': 'rgba(51, 51, 51, 0.95)',
       'background-position': 'center',
       'background-size': 'cover'
     }
@@ -225,12 +230,18 @@ export default {
     mainStyle: StyleObject,
     container: StyleObject,
     components: [
-      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
-      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 },
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 1 },
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 2 },
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
-      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 3 },
-      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 4 }
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 3 },
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 4 }
     ]
+  },
+
+  data () {
+    return {
+      isToggle: false
+    }
   },
 
   computed: {
@@ -255,6 +266,10 @@ export default {
       }
       let logos = this.$sectionData.components.filter(({ name }) => name === 'Logo')
       return logos.length === 1
+    },
+
+    toggle () {
+      this.isToggle = !this.isToggle
     }
   }
 }
@@ -264,17 +279,34 @@ export default {
 .b-section-header
   .is-tablet &,
   .is-mobile &
+    min-height: 7rem
     text-align: left
 
   @media (max-width: 800px)
+    min-height: 7rem
     text-align: left
 
   .mobile-menu
+    transition: all 200ms
+    .is-mobile &
+      &_hide
+        display: none
+    .is-mobile &
+      &_drop
+        background-color: var(--bg-color) !important
     @media (max-width: 800px)
-      background-color: rgba(#060e1c, .8)
+      &_drop
+        background-color: var(--bg-color) !important
 
-.b-grid__col-12
-  padding: .8rem 1.6rem
+  .b-grid__col-3,
+  .b-grid__col-9
+    padding: .8rem 1.6rem
+  .b-grid__row
+    .is-mobile &
+      padding: 0 !important
+    @media (max-width: 800px)
+      &
+        padding: 0 !important
 
 .mobile-header
   padding: 0
@@ -283,6 +315,7 @@ export default {
     display: block
   @media (max-width: 800px)
     display: block
+
 .b-logo
   .is-mobile &
     display: block
@@ -297,5 +330,14 @@ export default {
     order: 1
   @media (max-width: 800px)
     margin-top: auto !important
+    margin-bottom: 8px !important
     order: 1
+  @media (max-height: 420px)
+    width: auto !important
+    margin-top: 8px !important
+    margin-bottom: 8px !important
+
+@media (max-height: 420px) and (max-width: 800px) and (min-width: 500px)
+  .b-slot .b-draggable-slot > div
+    width: 50% !important
 </style>

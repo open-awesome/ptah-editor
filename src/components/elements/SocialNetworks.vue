@@ -76,6 +76,8 @@ export default {
       height: auto !important
   &__item
     position: relative
+    cursor: pointer
+
     margin: 1.6rem
     &-button
       border: none
