@@ -142,6 +142,11 @@ export default {
       display: none
       width: 1.5rem
 
+    &__name
+      max-width: 15rem
+      overflow: hidden
+      text-overflow: ellipsis
+
     &:hover
       background: rgba(116, 169, 230, 0.25)
       .menu-tree-item__name
