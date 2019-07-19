@@ -37,8 +37,17 @@ export default {
       return this.settingObjectOptions.selectPlatform
     },
 
-    sizeIcons () {
-      return this.settingObjectOptions.sizeIcons
+    sizeIcons: {
+      get () {
+        return this.settingObjectOptions.sizeIcons.width
+      },
+
+      set (width) {
+        let sizeIcons = {
+          'width': width
+        }
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { sizeIcons }))
+      }
     },
 
     colorIcons () {
@@ -72,16 +81,12 @@ export default {
       this.colorIcons[prop] = c
 
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { colorIcons: this.colorIcons }))
-    },
-    changeSize () {
-      this.sizeIcons['width'] = this.elWidth
     }
   },
 
   mounted () {
     this.colorIcons.default !== undefined ? this.colorDef = this.colorIcons.default : this.color = 'rgba(0, 0, 0, 1)'
     this.colorIcons.active !== undefined ? this.colorAct = this.colorIcons.active : this.color = 'rgba(255, 255, 255, 1)'
-    this.sizeIcons !== undefined ? this.elWidth = this.sizeIcons.width : this.elWidth = 32
   }
 }
 </script>
@@ -90,8 +95,8 @@ export default {
   <div class="b-text-controls">
     <div>
       <div class="b-text-controls__control">
-        <base-range-slider v-model="elWidth" @change="changeSize" label="Icons size" step="8" min="16" max="72">
-          {{ elWidth }} px
+        <base-range-slider v-model="sizeIcons" label="Icons size" step="8" min="16" max="72">
+          {{ sizeIcons }} px
         </base-range-slider>
       </div>
       <div class="b-text-controls__control">

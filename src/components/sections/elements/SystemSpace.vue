@@ -839,7 +839,8 @@ export default {
                       <span class="b-system-platforms__item__tab-icon"
                         :style="{
                           width: $sectionData.mainStyle.sizeIcons.width + 'px',
-                          fill: key === $sectionData.mainStyle.selectPlatform.name ? $sectionData.mainStyle.colorIcons.active : $sectionData.mainStyle.colorIcons.default
+                          '--color-default': $sectionData.mainStyle.colorIcons.default,
+                          '--color-active': $sectionData.mainStyle.colorIcons.active
                          }"
                          >
                         <VuseIcon :name="key"></VuseIcon>
@@ -1024,10 +1025,13 @@ export default {
         &-icon
           display: inline-block
           margin: 0.8rem
-          & .vuse-icon
+          svg
             width: 100%
-            height: auto
-            fill: inherit
+            height: 100%
+            fill: var(--color-default)
+          #{$item}_active &
+            svg
+              fill: var(--color-active)
         &-corner
           display: none
         &:hover,
