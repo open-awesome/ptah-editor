@@ -70,8 +70,9 @@ export default {
 
 <template>
   <div class="b-bg-controls">
+    <base-label>Picture or video that will be opened in the pop-up</base-label>
     <div class="b-bg-controls__control">
-      <BaseSwitcher v-model="typeC" label="Image or Video" @change="setType(typeC)" />
+      <BaseSwitcher v-model="typeC" label="Image/Video" @change="setType(typeC)" />
     </div>
     <div class="b-bg-controls__control" v-if="!typeC">
       <base-uploader

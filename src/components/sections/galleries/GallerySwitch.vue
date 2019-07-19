@@ -69,11 +69,13 @@
                           v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
                         >
                           <div class="b-preview__image"
+                            @click="current = key"
                             v-styler:for="{ el: $sectionData[key][0].element, path: `$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
                             :style="$sectionData[key][0].element.styles"
                             :path="`${key}[0].element`"
                             :data-index="key.split('components')[1]"
                             :gallery-one-preview="'loader__content_show'"
+                            :class="{ 'b-preview_active' : current === key}"
                             >
                             <span class="b-preview__count">
                               {{ parseFloat(key.split('components')[1]) + 1 }}
@@ -109,6 +111,7 @@
                          :key="key"
                          v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
                          :gallery-one-stage="key.split('components')[1]"
+                         :class="{'loader__content_show': current === key}"
                         >
                         <component class="b-gallery-one-stage__name"
                            v-styler:for="{ el: $sectionData[key][2].element, path:`$sectionData.${key}[2].element`, type: $sectionData[key][2].type, label: $sectionData[key][2].label }"
@@ -171,7 +174,6 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import { galleryPreviewClick } from '@cscripts/gallery1'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 import { mapActions } from 'vuex'
@@ -217,58 +219,81 @@ const GALLERY_ITEM = [
   }
 ]
 
-const GALLERY_ITEM_CUSTOM = [
-  {
-    element: {
-      removable: false,
-      styles: {
-        'background-image': 'url(https://gn854.cdn.stg.gamenet.ru/0/836nk/o_e19nv.png)',
-        'background-size': 'cover',
-        'width': '128px',
-        'height': '160px'
-      }
-    }
-  },
-  {
-    element: {
-      removable: false,
-      canCopy: false,
-      belongsGallery: true,
-      editor: {
-        tags: false,
-        link: false
-      }
-    }
-  },
-  {
-    element: {
-      removable: false,
-      canCopy: false,
-      editor: {
-        tags: false,
-        link: false
-      },
-      text: 'Chapter for big image'
-    }
-  },
-  {
-    element: {
-      belongsGallery: true,
-      removable: false
-    }
-  },
-  {
-    element: {
-      removable: false,
-      canCopy: false,
-      editor: {
-        tags: false,
-        link: false
-      },
-      text: 'Description for big image'
-    }
-  }
+let thumbs = [
+  'https://gn830.cdn.stg.gamenet.ru/0/8dvLH/o_110MxE.png',
+  'https://gn354.cdn.stg.gamenet.ru/0/8dvLR/o_2CscoP.png',
+  'https://gn876.cdn.stg.gamenet.ru/0/8dvLj/o_193U4o.png'
 ]
+
+let prev = [
+  'https://gn687.cdn.stg.gamenet.ru/0/8dwEL/o_OqWNO.png',
+  'https://gn792.cdn.stg.gamenet.ru/0/8dwFJ/o_1TgrhD.png',
+  'https://gn66.cdn.stg.gamenet.ru/0/8dwFp/o_1puIZ.png'
+]
+
+const [
+  GALLERY_ITEM_CUSTOM0,
+  GALLERY_ITEM_CUSTOM1,
+  GALLERY_ITEM_CUSTOM2
+] = Array.from(new Array(3), (x, i) => {
+  return [
+    {
+      element: {
+        removable: false,
+        styles: {
+          'background-image': `url(${thumbs[i]})`,
+          'background-size': 'contain',
+          'width': '100%',
+          'height': '160px'
+        }
+      }
+    },
+    {
+      element: {
+        removable: false,
+        canCopy: false,
+        belongsGallery: true,
+        editor: {
+          tags: false,
+          link: false
+        }
+      }
+    },
+    {
+      element: {
+        removable: false,
+        canCopy: false,
+        editor: {
+          tags: false,
+          link: false
+        },
+        text: 'Chapter for big image'
+      }
+    },
+    {
+      element: {
+        belongsGallery: true,
+        removable: false,
+        styles: {
+          'background-image': `url(${prev[i]})`,
+          'background-size': 'contain',
+          'width': '100%'
+        }
+      }
+    },
+    {
+      element: {
+        removable: false,
+        canCopy: false,
+        editor: {
+          tags: false,
+          link: false
+        },
+        text: 'Description for big image'
+      }
+    }
+  ]
+})
 
 const HEADER = [
   {
@@ -283,11 +308,11 @@ const HEADER = [
 const C_CUSTOM = [
   {
     element: {
-      text: 'Your beautiful header should be here!',
+      text: '<strong>Gallery Header</strong>',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '3.2rem',
-        'color': '#000'
+        'font-size': '3.6rem',
+        'color': '#fff'
       }
     },
     key: 0
@@ -300,7 +325,7 @@ const NAME = 'GallerySwitch'
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': '#8CD2B5'
+      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)'
     },
     isChapter: true,
     isChapterStyle: true,
@@ -309,15 +334,15 @@ const SCHEMA_CUSTOM = {
     isLabelPreview: true
   },
   components: _.merge([], C_CUSTOM),
-  components0: _.merge([], GALLERY_ITEM_CUSTOM),
-  components1: _.merge([], GALLERY_ITEM_CUSTOM),
-  components2: _.merge([], GALLERY_ITEM_CUSTOM),
-  components3: _.merge([], GALLERY_ITEM_CUSTOM),
-  components4: _.merge([], GALLERY_ITEM_CUSTOM),
-  components5: _.merge([], GALLERY_ITEM_CUSTOM),
-  components6: _.merge([], GALLERY_ITEM_CUSTOM),
-  components7: _.merge([], GALLERY_ITEM_CUSTOM),
-  components8: _.merge([], GALLERY_ITEM_CUSTOM),
+  components0: _.merge([], GALLERY_ITEM_CUSTOM0),
+  components1: _.merge([], GALLERY_ITEM_CUSTOM1),
+  components2: _.merge([], GALLERY_ITEM_CUSTOM2),
+  components3: _.merge([], GALLERY_ITEM_CUSTOM0),
+  components4: _.merge([], GALLERY_ITEM_CUSTOM1),
+  components5: _.merge([], GALLERY_ITEM_CUSTOM2),
+  components6: _.merge([], GALLERY_ITEM_CUSTOM0),
+  components7: _.merge([], GALLERY_ITEM_CUSTOM1),
+  components8: _.merge([], GALLERY_ITEM_CUSTOM2),
   edited: true
 }
 
@@ -328,6 +353,12 @@ export default {
 
   components: {
     Uploader
+  },
+
+  data () {
+    return {
+      current: 'components0'
+    }
   },
 
   mixins: [defaults],
@@ -350,21 +381,8 @@ export default {
     index: 0
   },
 
-  watch: {
-    '$sectionData.mainStyle.count': {
-      handler: function (val, old) {
-        setTimeout(val > old ? this.bindingClickPreview(old) : this.bindingClickPreview(val - 1), 250)
-      },
-      deep: true
-    }
-  },
-
   methods: {
     ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
-
-    bindingClickPreview (index) {
-      galleryPreviewClick(index)
-    },
 
     async showSettings (panel) {
       this.setSettingSection(this.$section)
@@ -383,10 +401,6 @@ export default {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
-  },
-
-  mounted: function () {
-    this.bindingClickPreview(0)
   }
 }
 </script>
@@ -399,7 +413,7 @@ export default {
 .b-gallery-one
   $this: &
   &__padd
-    padding: $size-step/4
+    padding: 0
 
     transition: border 0.25s
     border: 0.2rem dotted transparent
@@ -411,7 +425,7 @@ export default {
       &
         padding: 0
     &-border
-      padding: $size-step/4 $size-step/4 $size-step/2
+      padding: 0
       transition: border 0.25s
       border: 1px dotted transparent
       .is-editable #{$this}__padd:hover &
@@ -461,8 +475,8 @@ export default {
   display: inline-block
   vertical-align: top
 
-  width: $size-step*4
-  min-height: $size-step*5
+  width: 30%
+  min-height: $size-step*6
 
   margin: $size-step/3
   padding: 0
@@ -501,7 +515,11 @@ export default {
 
     position: relative
     z-index: 0
-    opacity: 0.6
+    opacity: 0.8
+    filter: grayscale(.75)
+    transition: all .2s ease-out
+    &:hover
+      filter: none
 
   &__name
     width: 100%
@@ -516,12 +534,12 @@ export default {
     transition: all 200ms
   &_active
     transform: scale(1.1)
-    box-shadow: 0 0 2rem 0 rgba($black, 0.6)
+    filter: none
+    // box-shadow: 0 0 2rem 0 rgba($black, 0.6)
     opacity: 1
 
 .b-gallery-one-list
  width: 100%
- max-width: 98rem
  margin: 0 auto
 
 .b-gallery-one-list__tiles
@@ -593,6 +611,7 @@ export default {
   justify-content: center
   align-items: center
   flex-direction: column
+  transition: all .2s ease-out
   &_show
    opacity: 1
    visibility: visible

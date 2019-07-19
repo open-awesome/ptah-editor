@@ -23,7 +23,7 @@ import ThePanelImage from './ThePanelImage'
 import ThePanelImageLink from './ThePanelImageLink'
 import ThePanelAvailable from './ThePanelAvailable'
 import ThePanelRestrictions from './ThePanelRestrictions'
-import ThePanelInlineEdit from './ThePanelInlineEdit'
+import ThePanelInline from './ThePanelInlineEdit'
 import ThePanelIconWithText from './ThePanelIconWithText'
 import ThePanelSectionBackground from './ThePanelSectionBackground'
 import ThePanelSlotBackground from './ThePanelSlotBackground'
@@ -79,7 +79,7 @@ export default {
     ThePanelSlotSettings,
     ThePanelAvailable,
     ThePanelRestrictions,
-    ThePanelInlineEdit,
+    ThePanelInline,
     ThePanelImage,
     ThePanelImageLink,
     ThePanelIconWithText,

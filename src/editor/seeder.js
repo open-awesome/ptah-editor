@@ -304,20 +304,20 @@ const data = new Map([
     },
     textStyles: {
       chapter: {
-        'font-family': 'Lato',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
+        'font-family': 'Montserrat',
+        'font-size': '3.6rem',
+        'font-weight': 'bold',
         'font-style': 'normal',
         'text-decoration': 'none',
-        'color': 'rgba(0, 0, 0, 1)'
+        'color': 'rgba(255, 255, 255, 1)'
       },
       text: {
         'font-family': 'Lato',
-        'font-size': '1.4rem',
+        'font-size': '1.6rem',
         'font-weight': 'normal',
         'font-style': 'normal',
         'text-decoration': 'none',
-        'color': 'rgba(0, 0, 0, 1)'
+        'color': 'rgba(255, 255, 255, 1)'
       }
     },
     isChapter: false,

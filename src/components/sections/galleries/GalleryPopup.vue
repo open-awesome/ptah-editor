@@ -22,30 +22,52 @@ const GALLERY_ITEM = [
   }
 ]
 
-const GALLERY_ITEM_CUSTOM = [
-  {
-    element: {
-      removable: false,
-      styles: {
-        'background-image': 'url(https://gn854.cdn.stg.gamenet.ru/0/836nk/o_e19nv.png)',
-        'background-size': 'cover'
-      },
-      hasLink: true,
-      belongsGallery: true
-    }
-  },
-  {
-    element: {
-      removable: false,
-      canCopy: false,
-      editor: {
-        tags: false,
-        link: false
-      },
-      text: 'Text for preview'
-    }
-  }
+let thumbs = [
+  'https://gn285.cdn.stg.gamenet.ru/0/8eFwh/o_YYKWx.jpg',
+  'https://gn362.cdn.stg.gamenet.ru/0/8eFx7/o_hJ0YE.jpg',
+  'https://gn191.cdn.stg.gamenet.ru/0/8eFxH/o_7IKPH.jpg'
 ]
+
+let prev = [
+  'https://gn171.cdn.stg.gamenet.ru/0/8eFyT/o_1guior.jpg',
+  'https://gn645.cdn.stg.gamenet.ru/0/8eFyc/o_UJvfQ.jpg',
+  'https://gn375.cdn.stg.gamenet.ru/0/8eFyk/o_1LsLbz.jpg'
+]
+
+const [
+  GALLERY_ITEM_CUSTOM0,
+  GALLERY_ITEM_CUSTOM1,
+  GALLERY_ITEM_CUSTOM2
+] = Array.from(new Array(3), (x, i) => {
+  return [
+    {
+      element: {
+        removable: false,
+        styles: {
+          'background-image': `url(${thumbs[i]})`,
+          'background-size': 'contain',
+          'width': '340px'
+        },
+        link: {
+          imageUrl: prev[i]
+        },
+        hasLink: true,
+        belongsGallery: true
+      }
+    },
+    {
+      element: {
+        removable: false,
+        canCopy: false,
+        editor: {
+          tags: false,
+          link: false
+        },
+        text: 'Text for preview'
+      }
+    }
+  ]
+})
 
 const HEADER = [
   {
@@ -60,68 +82,14 @@ const HEADER = [
 const C_CUSTOM = [
   {
     element: {
-      text: 'Your beautiful header should be here!',
+      text: '<strong>Gallery Header</strong>',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '3.2rem',
-        'color': '#000'
+        'font-size': '3.6rem',
+        'color': '#fff'
       }
     },
     key: 0
-  }
-]
-
-const TOP_POPUP = [
-  {
-    name: 'Logo',
-    element: types.Logo,
-    type: 'image',
-    class: 'b-logo',
-    label: 'logo'
-  }
-]
-
-const C_CUSTOM_TOP_POPUP = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '110px',
-        'height': '64px'
-      }
-    },
-    key: 1
-  }
-]
-
-const BOTTOM_POPUP = [
-  {
-    name: 'Button',
-    element: types.Button,
-    type: 'button',
-    class: 'b-button',
-    label: 'button'
-  }
-]
-
-const C_CUSTOM_BOTTOM_POPUP = [
-  {
-    element: {
-      text: 'Call to Action',
-      styles: {
-        'background-color': '#FF6D64',
-        'color': '#ffffff',
-        'font-family': 'Lato',
-        'text-align': 'center',
-        'width': '352px',
-        'height': '64px',
-        'border-radius': '2px'
-      }
-    },
-    key: 2
   }
 ]
 
@@ -131,7 +99,7 @@ const NAME = 'GalleryPopup'
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': '#8CD2B5'
+      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)'
     },
     isTextStyle: true,
     isLabel: true,
@@ -141,17 +109,15 @@ const SCHEMA_CUSTOM = {
     isTop: true
   },
   components: _.merge([], C_CUSTOM),
-  components0: _.merge([], GALLERY_ITEM_CUSTOM),
-  components1: _.merge([], GALLERY_ITEM_CUSTOM),
-  components2: _.merge([], GALLERY_ITEM_CUSTOM),
-  components3: _.merge([], GALLERY_ITEM_CUSTOM),
-  components4: _.merge([], GALLERY_ITEM_CUSTOM),
-  components5: _.merge([], GALLERY_ITEM_CUSTOM),
-  components6: _.merge([], GALLERY_ITEM_CUSTOM),
-  components7: _.merge([], GALLERY_ITEM_CUSTOM),
-  components8: _.merge([], GALLERY_ITEM_CUSTOM),
-  componentsTopPopup: _.merge([], C_CUSTOM_TOP_POPUP),
-  componentsBottomPopup: _.merge([], C_CUSTOM_BOTTOM_POPUP),
+  components0: _.merge([], GALLERY_ITEM_CUSTOM0),
+  components1: _.merge([], GALLERY_ITEM_CUSTOM1),
+  components2: _.merge([], GALLERY_ITEM_CUSTOM2),
+  components3: _.merge([], GALLERY_ITEM_CUSTOM0),
+  components4: _.merge([], GALLERY_ITEM_CUSTOM1),
+  components5: _.merge([], GALLERY_ITEM_CUSTOM2),
+  components6: _.merge([], GALLERY_ITEM_CUSTOM0),
+  components7: _.merge([], GALLERY_ITEM_CUSTOM1),
+  components8: _.merge([], GALLERY_ITEM_CUSTOM2),
   edited: true
 }
 
@@ -177,10 +143,6 @@ export default {
     components6: _.merge([], GALLERY_ITEM, [{ key: 70 }, { key: 71 }]),
     components7: _.merge([], GALLERY_ITEM, [{ key: 80 }, { key: 81 }]),
     components8: _.merge([], GALLERY_ITEM, [{ key: 90 }, { key: 91 }]),
-    containerTopPopup: types.StyleObject,
-    componentsTopPopup: _.merge([], TOP_POPUP, [{ key: 1 }]),
-    containerBottomPopup: types.StyleObject,
-    componentsBottomPopup: _.merge([], BOTTOM_POPUP, [{ key: 2 }]),
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
@@ -422,7 +384,6 @@ export default {
                           :gallery-two-popup-type-content="$sectionData[key][0].element.link.type"
                           v-styler:for="{ el: $sectionData[key][0].element, path:`$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
                           :style="$sectionData[key][0].element.styles"
-                          @dblclick="onClick($sectionData[key][0].element, parseFloat(key.split('components')[1]))"
                           >
                           <uploader
                             :path="`${key}[0].element`"
@@ -441,7 +402,14 @@ export default {
                             v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
                             :path="`${key}[1].element`"
                             :is="$sectionData[key][1].name"
-                            :style="$sectionData[key][1].element.styles"
+                            :style="{
+                              'color' : $sectionData.mainStyle.textStyles.text['color'],
+                              'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                              'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                              'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                              'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                              'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                            }"
                             :class="[$sectionData[key][1].element.classes, $sectionData[key][1].class]"
                             >
                             <div v-html="$sectionData[key][1].element.text"></div>
@@ -469,37 +437,7 @@ export default {
             >
             <icon-base name="close" color="#fff" width="14" height="14" />
           </div>
-          <div class="b-grid"
-             v-if="$sectionData.mainStyle.isTopPopup"
-            >
-            <div class="b-grid__row">
-                <div class="b-grid__col-12">
-                  <sandbox
-                    class="b-sandbox"
-                    container-path="$sectionData.containerTopPopup"
-                    components-path="$sectionData.componentsTopPopup"
-                    direction="column"
-                    :style="$sectionData.containerTopPopup.styles"
-                  >
-                    <draggable v-model="$sectionData.componentsTopPopup" class="b-draggable-slot" :style="$sectionData.containerTopPopup.styles">
-                      <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.componentsTopPopup" v-if="$sectionData.componentsTopPopup.length !== 0" :key="index">
-                        <component
-                           v-styler:for="{ el: $sectionData.componentsTopPopup[index].element, path: `$sectionData.componentsTopPopup[${index}].element`, type: $sectionData.componentsTopPopup[index].type, label: $sectionData.componentsTopPopup[index].label }"
-                           :is="component.name"
-                           :href="$sectionData.componentsTopPopup[index].element.link.href"
-                           :target="$sectionData.componentsTopPopup[index].element.link.target"
-                           :path="`componentsTopPopup[${index}].element`"
-                           :style="$sectionData.componentsTopPopup[index].element.styles"
-                           :class="[$sectionData.componentsTopPopup[index].element.classes, $sectionData.componentsTopPopup[index].class]"
-                        >
-                          <div v-html="$sectionData.componentsTopPopup[index].element.text"></div>
-                        </component>
-                      </div>
-                    </draggable>
-                  </sandbox>
-              </div>
-            </div>
-          </div><!--/.b-grid-->
+
           <div id="layoutContent" class="l-popup__content" v-click-outside="onClickOutside">
             <div id="content"
               class="l-popup__content-block"
@@ -514,37 +452,7 @@ export default {
               <icon-base name="arrowRight" color="#fff" width="8" height="14" />
             </div>
           </div>
-          <div class="b-grid"
-            v-if="$sectionData.mainStyle.isBottomPopup"
-            >
-            <div class="b-grid__row">
-                <div class="b-grid__col-12">
-                  <sandbox
-                    class="b-sandbox"
-                    container-path="$sectionData.containerBottomPopup"
-                    components-path="$sectionData.componentsBottomPopup"
-                    direction="column"
-                    :style="$sectionData.containerBottomPopup.styles"
-                  >
-                    <draggable v-model="$sectionData.componentsBottomPopup" class="b-draggable-slot" :style="$sectionData.containerBottomPopup.styles">
-                      <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.componentsBottomPopup" v-if="$sectionData.componentsBottomPopup.length !== 0" :key="index">
-                        <component
-                           v-styler:for="{ el: $sectionData.componentsBottomPopup[index].element, path: `$sectionData.componentsBottomPopup[${index}].element`, type: $sectionData.componentsBottomPopup[index].type, label: $sectionData.componentsBottomPopup[index].label }"
-                           :is="component.name"
-                           :href="$sectionData.componentsBottomPopup[index].element.link.href"
-                           :target="$sectionData.componentsBottomPopup[index].element.link.target"
-                           :path="`componentsBottomPopup[${index}].element`"
-                           :style="$sectionData.componentsBottomPopup[index].element.styles"
-                           :class="[$sectionData.componentsBottomPopup[index].element.classes, $sectionData.componentsBottomPopup[index].class]"
-                        >
-                          <div v-html="$sectionData.componentsBottomPopup[index].element.text"></div>
-                        </component>
-                      </div>
-                    </draggable>
-                  </sandbox>
-              </div>
-            </div>
-          </div><!--/.b-grid-->
+
           <span class="l-popup__count"
             v-text="$sectionData.index + 1"
           />
@@ -624,9 +532,9 @@ export default {
       height: 0
 
 .b-gallery-popup__item
-  width: 25%
+  width: 32%
   min-width: 10rem
-  height: 22rem
+  height: 26rem
   min-height: 5rem
   margin: $size-step/8
 
