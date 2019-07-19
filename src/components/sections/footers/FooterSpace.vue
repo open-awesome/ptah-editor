@@ -27,25 +27,25 @@ const COMPONENTS = [
     label: 'Social Networks'
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    name: 'Button',
+    element: types.Button,
+    type: 'button',
     class: 'b-footer-link',
-    label: 'text'
+    label: 'button'
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    name: 'Button',
+    element: types.Button,
+    type: 'button',
     class: 'b-footer-link',
-    label: 'text'
+    label: 'button'
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    name: 'Button',
+    element: types.Button,
+    type: 'button',
     class: 'b-footer-link',
-    label: 'text'
+    label: 'button'
   }
 ]
 
@@ -70,7 +70,7 @@ const C_CUSTOM = [
         'font-size': '1.4rem',
         'color': '#fff',
         'margin': '0px',
-        'padding': '0px'
+        'padding': '0px 16px'
       }
     }
   },
@@ -112,66 +112,66 @@ const C_CUSTOM = [
   },
   {
     element: {
-      text: '<a href="#">Information</a>',
+      text: 'Information',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '0 20px'
+        'margin': '0'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     }
   },
   {
     element: {
-      text: '<a href="#">Legal</a>',
+      text: 'Legal',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '0 20px'
+        'margin': '0'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     }
   },
   {
     element: {
-      text: '<a href="#">Blog</a>',
+      text: 'Blog',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '0 20px'
+        'margin': '0'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     }
@@ -194,7 +194,7 @@ const SCHEMA_CUSTOM = {
     }
   },
   container: {
-    width: 12
+    width: 11
   },
   components: _.merge({}, C_CUSTOM),
   edited: true
@@ -303,6 +303,11 @@ export default {
     &
       position: relative
       height: auto
+  &-link
+    .is-mobile &
+      font-size: 1.6rem
+    @media (max-width: 800px)
+      font-size: 1.6rem
 
   &-component
     margin: 0.8rem

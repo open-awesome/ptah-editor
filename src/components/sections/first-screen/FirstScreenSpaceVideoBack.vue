@@ -188,7 +188,7 @@ const SCHEMA_CUSTOM = {
     backgroundType: 'video',
     backgroundVideo: 'https://gn385.cdn.stg.gamenet.ru/0/8dE9B/o_1ZJs6W.mp4',
     overlay: {
-      color: '#4A4A4A',
+      color: '#000000',
       opacity: '0.5'
     }
   },

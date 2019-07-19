@@ -91,7 +91,7 @@
 </template>
 
 <script>
-import { StyleObject, Logo, Text } from '@editor/types'
+import { StyleObject, Logo, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
@@ -100,22 +100,22 @@ const [name, group, cover] = ['HeaderSpace03', 'header', '/img/covers/header-spa
 const defaultComponents = [
   {
     element: {
-      text: '<a href="#">About</a>',
+      text: 'About',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin': '0 16px'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     },
@@ -123,22 +123,22 @@ const defaultComponents = [
   },
   {
     element: {
-      text: '<a href="#">Features</a>',
+      text: 'Features',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin': '0 16px'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     },
@@ -160,22 +160,22 @@ const defaultComponents = [
   },
   {
     element: {
-      text: '<a href="#">Media</a>',
+      text: 'Media',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin': '0 16px'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     },
@@ -183,22 +183,22 @@ const defaultComponents = [
   },
   {
     element: {
-      text: '<a href="#">Packs</a>',
+      text: 'Packs',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin': '0 16px'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     },
@@ -230,11 +230,11 @@ export default {
     mainStyle: StyleObject,
     container: StyleObject,
     components: [
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 1 },
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 2 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 1 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 2 },
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 3 },
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 4 }
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 3 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 4 }
     ]
   },
 
@@ -323,6 +323,12 @@ export default {
   @media (max-width: 800px)
     display: block
     background-position: center !important
+
+.b-header-link
+  .is-mobile &
+    font-size: 1.6rem
+  @media (max-width: 800px)
+    font-size: 1.6rem
 
 .b-logo-one
   .is-mobile &

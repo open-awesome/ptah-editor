@@ -135,7 +135,7 @@
 </template>
 
 <script>
-import { StyleObject, Logo, SocialNetworks, Text } from '@editor/types'
+import { StyleObject, Logo, SocialNetworks, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
@@ -160,22 +160,22 @@ const defaultComponents = [
 const defaultComponents2 = [
   {
     element: {
-      text: '<a href="#">About</a>',
+      text: 'About',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin': '0'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     },
@@ -183,22 +183,22 @@ const defaultComponents2 = [
   },
   {
     element: {
-      text: '<a href="#">Features</a>',
+      text: 'Features',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin': '0'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     },
@@ -206,22 +206,22 @@ const defaultComponents2 = [
   },
   {
     element: {
-      text: '<a href="#">Media</a>',
+      text: 'Media',
       styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin': '0'
       },
-      textLinkStyles: {
-        a: {
-          'color': '#F4BC64',
-          'text-decoration': 'none'
-        },
+      pseudo: {
         hover: {
-          'color': '#fff',
-          'text-decoration': 'underline'
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
         }
       }
     },
@@ -307,9 +307,9 @@ export default {
       { name: 'Logo', element: Logo, type: 'image', class: 'b-header-logo', label: 'logo', key: 0 }
     ],
     components2: [
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 1 },
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 2 },
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-header-link', label: 'link', key: 3 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 1 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 2 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 3 },
       { name: 'SocialNetworks', element: SocialNetworks, type: 'networks', class: 'b-social-networks-fs', label: 'Social Networks', key: 6 }
     ]
   },
@@ -385,6 +385,12 @@ export default {
     width: auto !important
     margin-top: 8px !important
     margin-bottom: 8px !important
+
+.b-header-link
+  .is-mobile &
+    font-size: 1.6rem
+  @media (max-width: 800px)
+    font-size: 1.6rem
 
 .b-logo
   display: block
