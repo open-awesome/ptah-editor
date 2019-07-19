@@ -159,7 +159,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Columns'
-const NAME = 'Columns'
+const NAME = 'ColumnsSpace'
 
 export default {
   name: NAME,
@@ -168,7 +168,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/columns3.jpg',
+  cover: '/img/covers/columns-space.jpg',
 
   $schema: {
     mainStyle: types.Columns,

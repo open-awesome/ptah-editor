@@ -29,10 +29,10 @@ import ToggleElement from '@components/elements/ToggleElement'
 
 // sections
 // --- header
-import Header1 from '@components/sections/header/Header1'
-import Header2 from '@components/sections/header/Header2'
-import Header3 from '@components/sections/header/Header3'
-import Header4 from '@components/sections/header/Header4'
+import HeaderSpace01 from '@components/sections/header/HeaderSpace01'
+import HeaderSpace02 from '@components/sections/header/HeaderSpace02'
+import HeaderSpace03 from '@components/sections/header/HeaderSpace03'
+
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
@@ -60,7 +60,7 @@ import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
 // --- columns
-import Columns from '@components/sections/columns/Columns'
+import ColumnsSpace from '@components/sections/columns/ColumnsSpace'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
@@ -72,7 +72,8 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 
 // --- other
 import System from '@components/sections/elements/System'
-import Footer from '@components/sections/footers/Footer'
+import FooterSpace from '@components/sections/footers/FooterSpace'
+import SocialNetworksSpace from '@components/sections/socials/SocialNetworksSpace'
 import Video from '@components/sections/video/Video'
 import Faq from '@components/sections/elements/Faq'
 import Slider from '@components/sections/slider/Slider'
@@ -98,10 +99,9 @@ const ELEMENTS = {
 }
 
 const COMPONENTS = {
-  Header1,
-  Header2,
-  Header3,
-  Header4,
+  HeaderSpace01,
+  HeaderSpace02,
+  HeaderSpace03,
 
   HeroUnit,
   HeroSkull,
@@ -131,7 +131,7 @@ const COMPONENTS = {
   Products,
   ProductsExtend,
 
-  Columns,
+  ColumnsSpace,
 
   Carousel,
 
@@ -141,7 +141,8 @@ const COMPONENTS = {
   FormRight2,
   FormLeft2,
 
-  Footer,
+  FooterSpace,
+  SocialNetworksSpace,
   System,
   Video,
   Faq

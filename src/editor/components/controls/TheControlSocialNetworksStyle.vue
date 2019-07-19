@@ -47,7 +47,7 @@ export default {
 <template>
   <div class="b-social-networks-controls">
       <div class="b-size-controls__control">
-        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="8" min="16" max="64">
+        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="2" min="16" max="64">
           {{ sizeIcons.width }} px
         </base-range-slider>
       </div>

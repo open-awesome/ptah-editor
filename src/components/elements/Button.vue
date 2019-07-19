@@ -275,7 +275,7 @@ export default {
 
   user-select: none
   cursor: pointer
-  transition: background-color, border 200ms
+  transition: background 200ms, border 200ms
   & .contenteditable
     position: relative
     z-index: 9999

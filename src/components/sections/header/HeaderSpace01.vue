@@ -2,7 +2,7 @@
 <section
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }]"
     class="b-section-header">
 
   <slot name="menu"/>
@@ -16,7 +16,7 @@
         class="hamburger hamburger--slider"
         type="button"
         :data-target="`#mobile-menu-${ _uid }`"
-        @click.stop>
+        @click.stop="toggle">
 
       <span class="hamburger-box">
         <span class="hamburger-inner"></span>
@@ -24,7 +24,7 @@
 
     </button>
 
-    <div class="b-grid__row b-footer__row">
+    <div class="b-grid__row">
       <div class="b-grid__col-3 b-grid__col-m-12 mobile-header">
 
         <sandbox
@@ -45,7 +45,7 @@
                 v-for="(component, index) in $sectionData.components"
                 :key="`component-${ _uid }-${ index }`"
                 v-if="$sectionData.components.length !== 0"
-                :style="component.styles">
+                >
 
               <component
                   v-styler:for="{
@@ -75,7 +75,9 @@
         </sandbox>
 
       </div>
-      <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-9 b-grid__col-m-12 mobile-menu">
+      <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-9 b-grid__col-m-12 mobile-menu mobile-menu_drop"
+        :class="{ 'mobile-menu_hide': !isToggle }"
+        >
 
         <sandbox
             container-path="$sectionData.container2"
@@ -138,17 +140,17 @@ import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['Header1', 'header', '/img/covers/header-1.png']
+const [name, group, cover] = ['HeaderSpace01', 'header', '/img/covers/header-space-01.jpg']
 const defaultComponents = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn120.cdn.stg.gamenet.ru/0/7aITH/o_1vTdxd.png)',
+        'background-image': 'url("https://gn623.cdn.stg.gamenet.ru/0/8cqjM/o_1Y54Cu.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '150px',
-        'height': '50px',
+        'width': '154px',
+        'height': '60px',
         'margin': '8px 16px'
       }
     },
@@ -158,55 +160,91 @@ const defaultComponents = [
 const defaultComponents2 = [
   {
     element: {
-      text: 'Link 1',
+      text: 'About',
       styles: {
-        'background-color': 'transparent',
+        'background-color': 'rgba(0,0,0,0)',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '100px',
-        'height': '50px',
-        'border-radius': '2px',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin': '0'
+      },
+      pseudo: {
+        hover: {
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
+        }
       }
     },
     key: 1
   },
   {
     element: {
-      text: 'Link 2',
+      text: 'Features',
       styles: {
-        'background-color': 'transparent',
+        'background-color': 'rgba(0,0,0,0)',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '100px',
-        'height': '50px',
-        'border-radius': '2px',
+        'width': '80px',
+        'height': '32px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin': '0'
+      },
+      pseudo: {
+        hover: {
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
+        }
       }
     },
     key: 2
   },
   {
-    styles: { marginLeft: 'auto' },
     element: {
-      text: 'Button',
+      text: 'Media',
       styles: {
-        'background-color': '#FF6D64',
+        'background-color': 'rgba(0,0,0,0)',
         'background-image': 'none',
-        'color': '#ffffff',
+        'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '150px',
-        'height': '50px',
-        'max-width': '100%',
-        'border-radius': '2px',
-        'margin': '8px 16px'
+        'width': '80px',
+        'height': '32px',
+        'font-size': '1.8rem',
+        'margin': '0'
+      },
+      pseudo: {
+        hover: {
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
+        }
+      }
+    },
+    key: 3
+  },
+  {
+    element: {
+      text: '<b>Call to Action</b>',
+      styles: {
+        'background-color': '#F4BC64',
+        'color': '#000000',
+        'font-family': 'Montserrat',
+        'font-size': '2rem',
+        'text-align': 'center',
+        'width': '240px',
+        'height': '64px',
+        'border-radius': '100px',
+        'margin': '0'
+      },
+      pseudo: {
+        'hover': {
+          'background-color': '#ffffff !important'
+        }
       }
     },
     key: 5
@@ -215,10 +253,22 @@ const defaultComponents2 = [
 const defaultSchema = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn819.cdn.stg.gamenet.ru/0/7L5P8/o_Dyakc.png)',
-      'background-color': '#151C44',
+      'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)',
+      'background-color': 'rgba(51, 51, 51, 0.95)',
       'background-position': 'center',
       'background-size': 'cover'
+    }
+  },
+  container: {
+    styles: {
+      margin: '0 150px 0 0',
+      padding: '0'
+    }
+  },
+  container2: {
+    styles: {
+      padding: 0,
+      'justify-content': 'space-between'
     }
   },
   components: merge({}, defaultComponents),
@@ -239,13 +289,20 @@ export default {
     container: StyleObject,
     container2: StyleObject,
     components: [
-      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-header-logo', label: 'logo', key: 0 }
     ],
     components2: [
-      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 1 },
-      { name: 'Button', element: Button, type: 'button', class: 'b-link', label: 'link', key: 2 },
-      { name: 'Button', element: Button, type: 'button', class: 'b-button', label: 'button', key: 5 }
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 1 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 2 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 3 },
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-button', label: 'button', key: 5 }
     ]
+  },
+
+  data () {
+    return {
+      isToggle: false
+    }
   },
 
   created () {
@@ -261,6 +318,10 @@ export default {
       }
       let buttons = this.$sectionData.components2.filter(({ name }) => name === 'Button')
       return buttons.length === 1
+    },
+
+    toggle () {
+      this.isToggle = !this.isToggle
     }
   }
 }
@@ -275,24 +336,56 @@ export default {
   @media (max-width: 800px)
     text-align: left
 
-.b-grid__col-3,
-.b-grid__col-9
-  padding: .8rem 1.6rem
+  .mobile-menu
+    transition: all 200ms
+    .is-mobile &
+      &_hide
+        display: none
+    .is-mobile &
+      &_drop
+        background-color: var(--bg-color) !important
+    @media (max-width: 800px)
+      &_drop
+        background-color: var(--bg-color) !important
+
+  .b-grid__col-3,
+  .b-grid__col-9
+    padding: .8rem 1.6rem
+  .b-grid__row
+    .is-mobile &
+      padding: 0 !important
+    @media (max-width: 800px)
+      &
+        padding: 0 !important
 
 .b-button-one
-  margin-left: auto
   .is-mobile &
     margin-top: auto !important
     order: 1
   @media (max-width: 800px)
     margin-top: auto !important
-    order: 1
+    margin-bottom: 8px !important
+  @media (max-height: 420px)
+    width: auto !important
+    margin-top: 8px !important
+    margin-bottom: 8px !important
 
-.b-logo
+.b-header-link
+  .is-mobile &
+    font-size: 1.6rem
+  @media (max-width: 800px)
+    font-size: 1.6rem
+
+.b-header-logo
+  display: block
   .is-tablet &,
   .is-mobile &
-    margin: 0 !important
+    margin: 0.4rem auto !important
 
   @media (max-width: 800px)
-    margin: 0 !important
+    margin: 0.4rem auto !important
+
+@media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
+  .b-slot .b-draggable-slot > div
+    width: auto !important
 </style>
