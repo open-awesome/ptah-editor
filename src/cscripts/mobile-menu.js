@@ -24,9 +24,15 @@ function toggleMobileMenu () {
 }
 
 function closeMobileMenu ({ target }) {
-  if (!target.closest('.js-element-link') && (target.closest('#js-hamburger') || target.closest('[id^="mobile-menu"]'))) {
+  const hasMenuLink = target.closest('.js-element-link') ? true : false
+  const hasPopupLink = target.closest('.ptah-d-video') ? true : false
+  const hasHamburger = target.closest('#js-hamburger') ? true : false
+  const hasMobileMenu = target.closest('[id^="mobile-menu"]') ? true : false
+
+  if (!hasMenuLink && !hasPopupLink && (hasHamburger || hasMobileMenu)) {
     return
   }
+
   if (menu) {
     menu.classList.remove('is-active')
   }
