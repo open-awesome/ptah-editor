@@ -893,7 +893,7 @@ export default {
                             'background-color' : $sectionData.mainStyle.table.body['background-color']
                           }"
                           >
-                          <div class="b-system-requirements__table-col flex"
+                          <div class="b-system-requirements__table-col"
                              v-for="(col, index) in $sectionData[`componentsRequirements${key}`]"
                              :key="index"
                              v-if="col.prop === i"
@@ -1113,8 +1113,17 @@ export default {
     &-col
       padding: $size-step/4
       width: 38%
-      word-break: break-all
       text-align: left
+
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      overflow: hidden
+      & > div
+        max-width: 100%
+
+      & .b-text
+        text-align: left
       &:nth-child(1)
         width: 24%
         white-space: nowrap
