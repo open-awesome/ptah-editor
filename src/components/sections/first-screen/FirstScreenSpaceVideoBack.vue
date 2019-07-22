@@ -183,7 +183,7 @@ const SCHEMA_CUSTOM = {
       'background-color': '#4A4A4A',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
-      'height': 'auto'
+      'height': '100vh'
     },
     backgroundType: 'video',
     backgroundVideo: 'https://gn385.cdn.stg.gamenet.ru/0/8dE9B/o_1ZJs6W.mp4',

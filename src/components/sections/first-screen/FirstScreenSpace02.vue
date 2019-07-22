@@ -183,7 +183,7 @@ const SCHEMA_CUSTOM = {
       'background-color': '#000',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
-      'height': 'auto'
+      'height': '100vh'
     }
   },
   components: _.merge({}, C_CUSTOM),
