@@ -1,5 +1,6 @@
 <script>
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
+import { merge } from 'lodash-es'
 
 export default {
   data () {
@@ -29,11 +30,29 @@ export default {
 
     formStyles () {
       return this.settingObjectOptions.formStyles
+    },
+
+    formHeight: {
+      get () {
+        return this.formStyles['height'] || 64
+      },
+
+      set (value) {
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+          formStyles: {
+            height: value
+          }
+        }))
+      }
     }
 
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     changeFormColor () {
       const color = this.formColor.rgba ? `rgba(${Object.values(this.formColor.rgba).toString()})` : this.formColor
 
@@ -71,6 +90,11 @@ export default {
     <div class="b-bg-controls">
       <div class="b-bg-controls__control">
         <base-color-picker label="input color" v-model="inputColor" @change="changeInputColor"/>
+      </div>
+      <div class="b-bg-controls__control">
+        <base-range-slider v-model="formHeight" min="30" max="100" label="Form height">
+          {{ formHeight }}px
+        </base-range-slider>
       </div>
     </div>
   </div>

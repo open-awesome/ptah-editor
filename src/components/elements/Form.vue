@@ -22,7 +22,8 @@
           'font-size' : styles['font-size'],
           'font-weight' : styles['font-weight'],
           'font-style' : styles['font-style'],
-          'text-decoration' : styles['text-decoration']
+          'text-decoration' : styles['text-decoration'],
+          'height': `${formStyles.height}px`
         }"
         :placeholder="placeholder"
         class="b-form-element-input ptah-input"
@@ -31,15 +32,16 @@
         <input type="text" :name="roboCheck" tabindex="-1" value="" class="ptah-valid">
       </div>
       <button type="submit" class="b-form-element-button ptah-submit"
+       @click.prevent
        :style="{
         'color': styles['color'],
         'background-color': formStyles['button-color'],
-        'color' : styles['color'],
         'font-family' : styles['font-family'],
         'font-size' : styles['font-size'],
         'font-weight' : styles['font-weight'],
         'font-style' : styles['font-style'],
-        'text-decoration' : styles['text-decoration']
+        'text-decoration' : styles['text-decoration'],
+        'height': `${formStyles.height}px`
        }"
         >
         <span v-html="buttonText" v-if="!isActive"/>
@@ -296,7 +298,7 @@ export default {
 
     font-family: 'Lato', sans-serif
 
-    transition: all ease-out .4s
+    transition: all ease-out .2s
     position: relative
     &.submited
       background-color: $emerald-green
@@ -319,6 +321,9 @@ export default {
     color: #2a2a2a
     border-radius: 0.2rem
     padding: 1rem
+    flex-grow: 1
+    margin-right: 4rem
+    transition: all ease-out .2s
     .is-mobile &,
     .is-tablet &
       width: 100%

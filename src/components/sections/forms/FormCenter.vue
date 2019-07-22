@@ -14,14 +14,6 @@ const COMPONENTS = [
     key: 1
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
-    class: 'b-text',
-    label: 'description',
-    key: 2
-  },
-  {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
@@ -44,23 +36,12 @@ const C_CUSTOM = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Lato',
+        'font-family': 'Montserrat',
         'font-size': '4.2rem',
         'color': '#ffffff'
       }
     },
     key: 1
-  },
-  {
-    element: {
-      text: 'An sincerity so extremity he additions. Her yet there truth merit.',
-      styles: {
-        'font-family': 'Lato',
-        'font-size': '2rem',
-        'color': 'rgba(255, 255, 255, 0.5)'
-      }
-    },
-    key: 2
   },
   {
     key: 3
@@ -86,15 +67,14 @@ const C_CUSTOM = [
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-size': 'cover',
-      'background-color': 'rgb(21, 28, 68, 1)',
-      'background-repeat': 'no-repeat',
-      'background-attachment': 'scroll'
+      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-position': 'center center',
+      'background-size': 'cover'
     }
   },
   components: _.merge({}, C_CUSTOM),
   container: {
-    width: 12
+    width: 7
   },
   edited: true
 }
@@ -167,6 +147,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-form
+.b-draggable-slot > div
+  width: 100%
 
 </style>
