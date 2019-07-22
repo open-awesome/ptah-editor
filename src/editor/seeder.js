@@ -662,7 +662,7 @@ const data = new Map([
         'twitter': {
           name: 'Twitter',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         },
         'youtube': {
