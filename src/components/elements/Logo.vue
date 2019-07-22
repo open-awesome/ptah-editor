@@ -152,13 +152,14 @@ export default {
   $this: &
 
   position: relative
-  display: inline-block
+  display: block
 
   width: $size-step*3
   height: $size-step*3
+  background-position: center center
 
-  max-width: 100% !important
-  max-height: 100% !important
+  max-width: 100%
+  max-height: 100%
 
   min-width: $size-step*2
   min-height: $size-step/2

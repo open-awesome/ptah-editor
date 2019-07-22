@@ -56,6 +56,14 @@ const C_CUSTOM_COLUMN = [
         'border-width': '2px',
         'border-style': 'solid',
         'border-color': '#F4BC64'
+      },
+      pseudo: {
+        hover: {
+          'color': '#FFFFFF !important',
+          'border-width': '2px !important',
+          'border-style': 'solid !important',
+          'border-color': '#FFFFFF !important'
+        }
       }
     }
   }
@@ -151,7 +159,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Columns'
-const NAME = 'Columns'
+const NAME = 'ColumnsSpace'
 
 export default {
   name: NAME,
@@ -160,7 +168,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/columns3.jpg',
+  cover: '/img/covers/columns-space.jpg',
 
   $schema: {
     mainStyle: types.Columns,

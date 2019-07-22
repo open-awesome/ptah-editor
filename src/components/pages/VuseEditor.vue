@@ -29,10 +29,10 @@ import ToggleElement from '@components/elements/ToggleElement'
 
 // sections
 // --- header
-import Header1 from '@components/sections/header/Header1'
-import Header2 from '@components/sections/header/Header2'
-import Header3 from '@components/sections/header/Header3'
-import Header4 from '@components/sections/header/Header4'
+import HeaderSpace01 from '@components/sections/header/HeaderSpace01'
+import HeaderSpace02 from '@components/sections/header/HeaderSpace02'
+import HeaderSpace03 from '@components/sections/header/HeaderSpace03'
+
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
 import HeroSkull from '@components/sections/hero/HeroSkull'
@@ -48,6 +48,11 @@ import HeroWithTimerColumnsVideo from '@components/sections/hero/HeroWithTimerCo
 import HeroWithTimerColumnsVideo2 from '@components/sections/hero/HeroWithTimerColumnsVideo2'
 import HeroWithTimerSlogan from '@components/sections/hero/HeroWithTimerSlogan'
 import HeroWithTimerSlogan2 from '@components/sections/hero/HeroWithTimerSlogan2'
+// --- First screen
+import FirstScreenSpace01 from '@components/sections/first-screen/FirstScreenSpace01'
+import FirstScreenSpace02 from '@components/sections/first-screen/FirstScreenSpace02'
+import FirstScreenSpaceVideoBack from '@components/sections/first-screen/FirstScreenSpaceVideoBack'
+import FirstScreenSpaceVideoPlayer from '@components/sections/first-screen/FirstScreenSpaceVideoPlayer'
 // --- gallery
 import GallerySwitch from '@components/sections/galleries/GallerySwitch'
 import GalleryPopup from '@components/sections/galleries/GalleryPopup'
@@ -55,7 +60,7 @@ import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
 // --- columns
-import Columns from '@components/sections/columns/Columns'
+import ColumnsSpace from '@components/sections/columns/ColumnsSpace'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
@@ -66,8 +71,9 @@ import FormLeft from '@components/sections/forms/FormLeftSideVariant'
 import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 
 // --- other
-import System from '@components/sections/elements/System'
-import Footer from '@components/sections/footers/Footer'
+import SystemSpace from '@components/sections/elements/SystemSpace'
+import FooterSpace from '@components/sections/footers/FooterSpace'
+import SocialNetworksSpace from '@components/sections/socials/SocialNetworksSpace'
 import Video from '@components/sections/video/Video'
 import Faq from '@components/sections/elements/Faq'
 import Slider from '@components/sections/slider/Slider'
@@ -93,10 +99,9 @@ const ELEMENTS = {
 }
 
 const COMPONENTS = {
-  Header1,
-  Header2,
-  Header3,
-  Header4,
+  HeaderSpace01,
+  HeaderSpace02,
+  HeaderSpace03,
 
   HeroUnit,
   HeroSkull,
@@ -113,6 +118,11 @@ const COMPONENTS = {
   HeroWithTimerSlogan,
   HeroWithTimerSlogan2,
 
+  FirstScreenSpace01,
+  FirstScreenSpace02,
+  FirstScreenSpaceVideoBack,
+  FirstScreenSpaceVideoPlayer,
+
   Slider,
 
   GallerySwitch,
@@ -121,7 +131,7 @@ const COMPONENTS = {
   Products,
   ProductsExtend,
 
-  Columns,
+  ColumnsSpace,
 
   Carousel,
 
@@ -131,8 +141,9 @@ const COMPONENTS = {
   FormRight2,
   FormLeft2,
 
-  Footer,
-  System,
+  FooterSpace,
+  SocialNetworksSpace,
+  SystemSpace,
   Video,
   Faq
 }

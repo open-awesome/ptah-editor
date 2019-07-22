@@ -10,48 +10,42 @@ const COMPONENTS = [
     element: types.Logo,
     type: 'image',
     class: 'b-footer-game-logo',
-    label: 'logo',
-    key: 0
+    label: 'logo'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-footer-copyright',
-    label: 'description',
-    key: 1
+    label: 'description'
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    name: 'SocialNetworks',
+    element: types.SocialNetworks,
+    type: 'networks',
+    class: 'b-social-networks-fs',
+    label: 'Social Networks'
+  },
+  {
+    name: 'Button',
+    element: types.Button,
+    type: 'button',
     class: 'b-footer-link',
-    label: 'text',
-    key: 2
+    label: 'button'
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    name: 'Button',
+    element: types.Button,
+    type: 'button',
     class: 'b-footer-link',
-    label: 'text',
-    key: 3
+    label: 'button'
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
+    name: 'Button',
+    element: types.Button,
+    type: 'button',
     class: 'b-footer-link',
-    label: 'text',
-    key: 4
-  },
-  {
-    name: 'AgeRestrictions',
-    element: types.AgeRestrictions,
-    type: 'restrictions',
-    class: 'b-age-restrictions',
-    label: 'age restrictions',
-    key: 5
+    label: 'button'
   }
 ]
 
@@ -59,71 +53,134 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn341.cdn.stg.gamenet.ru/0/7MZTn/o_21pVfk.svg")',
+        'background-image': 'url("https://gn623.cdn.stg.gamenet.ru/0/8cqjM/o_1Y54Cu.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
-        'background-size': 'cover',
-        'width': '153px',
-        'height': '71px'
+        'background-size': 'contain',
+        'width': '118px',
+        'height': '46px'
       }
-    },
-    key: 0
+    }
   },
   {
     element: {
       text: '2018—2019. Some text for footer',
       styles: {
-        'font-family': 'PT Serif',
-        'font-size': '1.6rem',
-        'color': 'rgba(255, 255, 255, 0.3)'
+        'font-family': 'Lato',
+        'font-size': '1.4rem',
+        'color': '#fff',
+        'margin': '0px',
+        'padding': '0px 16px'
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
-      text: '<a href="#">Information</a>',
-      styles: {
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'color': '#FF6D64',
-        'font-family': 'PT Serif',
-        'text-align': 'center',
-        'font-size': '1.6rem'
+      socialNetworks: {
+        'facebook': {
+          name: 'Facebook',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'instagram': {
+          name: 'Instagram',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'twitter': {
+          name: 'Twitter',
+          expand: false,
+          visible: true,
+          url: ''
+        },
+        'youtube': {
+          name: 'Youtube',
+          expand: false,
+          visible: true,
+          url: ''
+        }
+      },
+      colorFill: {
+        color: '#F4BC64'
+      },
+      sizeIcons: {
+        width: 30
       }
-    },
-    key: 2
+    }
   },
   {
     element: {
-      text: '<a href="#">Legal</a>',
+      text: 'Information',
       styles: {
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'color': '#FF6D64',
-        'font-family': 'PT Serif',
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
+        'color': '#F4BC64',
+        'font-family': 'Lato',
         'text-align': 'center',
-        'font-size': '1.6rem'
+        'width': '80px',
+        'height': '32px',
+        'font-size': '1.8rem',
+        'margin': '0'
+      },
+      pseudo: {
+        hover: {
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
+        }
       }
-    },
-    key: 3
+    }
   },
   {
     element: {
-      text: '<a href="#">Something</a>',
+      text: 'Legal',
       styles: {
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'color': '#FF6D64',
-        'font-family': 'PT Serif',
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
+        'color': '#F4BC64',
+        'font-family': 'Lato',
         'text-align': 'center',
-        'font-size': '1.6rem'
+        'width': '80px',
+        'height': '32px',
+        'font-size': '1.8rem',
+        'margin': '0'
+      },
+      pseudo: {
+        hover: {
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
+        }
       }
-    },
-    key: 4
+    }
+  },
+  {
+    element: {
+      text: 'Blog',
+      styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'background-image': 'none',
+        'color': '#F4BC64',
+        'font-family': 'Lato',
+        'text-align': 'center',
+        'width': '80px',
+        'height': '32px',
+        'font-size': '1.8rem',
+        'margin': '0'
+      },
+      pseudo: {
+        hover: {
+          'color': '#fff !important',
+          'background-color': 'rgba(0,0,0,0)'
+        }
+      }
+    }
   }
 ]
 
 const GROUP_NAME = 'Footer'
-const NAME = 'Footer'
-const BG_SECTION = 'url(https://gn685.cdn.stg.gamenet.ru/0/7MZzz/o_bJr44.jpg)'
+const NAME = 'FooterSpace'
+const BG_SECTION = 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)'
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
@@ -131,11 +188,13 @@ const SCHEMA_CUSTOM = {
       'background-image': BG_SECTION,
       'background-color': '#151C44',
       'background-size': 'cover',
-      'background-repeat': 'no-repeat'
+      'background-position': 'top center',
+      'background-repeat': 'no-repeat',
+      'padding': '8px 0'
     }
   },
   container: {
-    width: 12
+    width: 11
   },
   components: _.merge({}, C_CUSTOM),
   edited: true
@@ -148,7 +207,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/footer.jpg',
+  cover: '/img/covers/footer-space.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
@@ -244,6 +303,11 @@ export default {
     &
       position: relative
       height: auto
+  &-link
+    .is-mobile &
+      font-size: 1.6rem
+    @media (max-width: 800px)
+      font-size: 1.6rem
 
   &-component
     margin: 0.8rem

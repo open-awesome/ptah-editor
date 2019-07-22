@@ -418,8 +418,8 @@ const data = new Map([
       products: {
         'Standart': { visible: true },
         'Full': { visible: true },
-        'Deluxe': { visible: false },
-        'Ultimate': { visible: false }
+        'Deluxe': { visible: true },
+        'Ultimate': { visible: true }
       },
       selectProduct: {
         name: 'Standart'
@@ -650,19 +650,19 @@ const data = new Map([
         'instagram': {
           name: 'Instagram',
           expand: false,
-          visible: false,
+          visible: true,
           url: ''
         },
         'vk': {
           name: 'Vk',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         },
         'twitter': {
           name: 'Twitter',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         },
         'youtube': {
@@ -674,7 +674,7 @@ const data = new Map([
         'discord': {
           name: 'Discord',
           expand: false,
-          visible: true,
+          visible: false,
           url: ''
         },
         'kickstarter': {
@@ -759,8 +759,9 @@ const data = new Map([
       selectPlatform: {
         name: 'apple'
       },
-      colorFill: {
-        color:  '#fff'
+      colorIcons: {
+        default:  '#000',
+        active:  '#fff'
       },
       sizeIcons: {
         width: 32
@@ -826,11 +827,11 @@ const data = new Map([
         // --- labels position
         position: 'bottom'
       },
-      colorTile: '#4B35D4'
+      colorTile: 'rgba(0, 0, 0, 0)'
     },
     typography: true,
     styles: {
-      'background-color':'rgba(255, 255, 255, 0.5)',
+      'background-color':'rgba(0, 0, 0, 0)',
       'font-family': 'Lato',
       'font-size':  '3.2rem',
       'font-weight': 'normal',

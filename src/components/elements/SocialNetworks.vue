@@ -10,6 +10,7 @@
         :target="target"
         :href="networks[key].url"
         :title="networks[key].name"
+        @click.prevent="clickStop"
         >
         <VuseIcon :name="key"></VuseIcon>
       </a>
@@ -48,6 +49,13 @@ export default {
     target () {
       return this.$section.get(`$sectionData.${this.path}.settings.target`)
     }
+  },
+
+  methods: {
+    clickStop (event) {
+      event.preventDefault()
+      event.stopPropagation()
+    }
   }
 }
 </script>
@@ -76,6 +84,8 @@ export default {
       height: auto !important
   &__item
     position: relative
+    cursor: pointer
+
     margin: 1.6rem
     &-button
       border: none
