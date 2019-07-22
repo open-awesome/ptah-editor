@@ -636,11 +636,11 @@ const COMPONENTS_LINUX_KEYS = [
 const C_CUSTOM = [
   {
     element: {
-      text: 'System requirements',
+      text: '<b>System requirements</b>',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '3.6rem',
-        'color': '#000'
+        'font-size': '4rem',
+        'color': '#fff'
       }
     },
     key: 0
@@ -650,7 +650,8 @@ const C_CUSTOM = [
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': '#8CD2B5',
+      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-color': '#000',
       'background-position': 'center center',
       'background-size': 'cover',
       'font-family': 'Lato',
@@ -662,10 +663,25 @@ const SCHEMA_CUSTOM = {
       'color': '#fff'
     },
     sizeIcons: {
-      width: 32
+      width: 39
     },
-    colorFill: {
-      color: '#393192'
+    colorIcons: {
+      default: '#F4BC64',
+      active: '#ffffff'
+    },
+    table: {
+      head: {
+        'font-family': 'Lato',
+        'font-size': '1.6rem',
+        'color': '#ffffff',
+        'background-color': 'rgba(0,0,0,0)'
+      },
+      body: {
+        'font-family': 'Lato',
+        'font-size': '1.6rem',
+        'color': '#ffffff',
+        'background-color': 'rgba(0,0,0,0)'
+      }
     }
   },
   componentsRequirementswindows: _.merge({}, REQUIREMENTS_WINDOWS),
@@ -686,7 +702,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'System'
-const NAME = 'System'
+const NAME = 'SystemSpace'
 
 export default {
   name: NAME,
@@ -814,19 +830,19 @@ export default {
                       class="b-system-platforms__item__tab"
                       @click.stop="selectPlatform(key)"
                       :class="{ 'b-system-platforms__item__tab_active': key === $sectionData.mainStyle.selectPlatform.name }"
-                      :style="{
-                        'background-color' : $sectionData.mainStyle.table.body['background-color'],
-                        'border-color' : $sectionData.mainStyle.table.head['background-color']
-                      }"
                       >
-                      <span class="b-system-platforms__item__tab-corner"
-                        :style="{
-                          'background-color' : $sectionData.mainStyle.table.body['background-color']
-                        }"
-                      />
+                      <span class="b-system-platforms__item__tab-corner">
+                        <svg width="32" height="9" viewBox="0 0 32 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                          <path d="M31.5885 8.5L16 1L0.41156 8.5" :stroke="$sectionData.mainStyle.colorIcons.active"/>
+                        </svg>
+                      </span>
                       <span class="b-system-platforms__item__tab-icon"
-                        :style="{ width: $sectionData.mainStyle.sizeIcons.width + 'px', fill: $sectionData.mainStyle.colorFill.color }"
-                        >
+                        :style="{
+                          width: $sectionData.mainStyle.sizeIcons.width + 'px',
+                          '--color-default': $sectionData.mainStyle.colorIcons.default,
+                          '--color-active': $sectionData.mainStyle.colorIcons.active
+                         }"
+                         >
                         <VuseIcon :name="key"></VuseIcon>
                       </span>
                     </div>
@@ -877,7 +893,7 @@ export default {
                             'background-color' : $sectionData.mainStyle.table.body['background-color']
                           }"
                           >
-                          <div class="b-system-requirements__table-col flex"
+                          <div class="b-system-requirements__table-col"
                              v-for="(col, index) in $sectionData[`componentsRequirements${key}`]"
                              :key="index"
                              v-if="col.prop === i"
@@ -958,7 +974,7 @@ export default {
       .is-editable #{$this}__padd:hover &
         border: 1px dashed $dark-blue-krayola
   &-platforms
-    justify-content: flex-start
+    justify-content: center
 
     position: relative
     z-index: 0
@@ -991,9 +1007,6 @@ export default {
 
         display: flex
         align-items: center
-
-        border: 0.2rem solid rgba($black, 0.1)
-        border-radius: 0.4rem
         &-text
           display: inline-block
           position: relative
@@ -1012,30 +1025,30 @@ export default {
         &-icon
           display: inline-block
           margin: 0.8rem
-          & .vuse-icon
+          svg
             width: 100%
-            height: auto
-            fill: inherit
+            height: 100%
+            fill: var(--color-default)
+          #{$item}_active &
+            svg
+              fill: var(--color-active)
+        &-corner
+          display: none
         &:hover,
         &_active
           cursor: pointer
-          background-color: #fff
-          border: 0.2rem solid  #fff
-          border-radius: 4px
-          box-shadow: 0px 4px 32px rgba(0, 0, 0, 0.25)
         #{$item}_active &
           #{$tab}-corner
             content: ""
             position: absolute
+            display: block
             left: 50%
             bottom: 0
 
-            width: $size-step/2
-            height: $size-step/2
-            margin: $size-step/4 -$size-step/2 0 -$size-step/4
-            background-color: #fff
+            width: $size-step
+            height: $size-step/4
+            margin-left: -$size-step/2
 
-            transform: rotate(45deg)
             transition: all 200ms
   &__controls
     position: absolute
@@ -1100,8 +1113,17 @@ export default {
     &-col
       padding: $size-step/4
       width: 38%
-      word-break: break-all
       text-align: left
+
+      display: flex
+      align-items: center
+      justify-content: flex-start
+      overflow: hidden
+      & > div
+        max-width: 100%
+
+      & .b-text
+        text-align: left
       &:nth-child(1)
         width: 24%
         white-space: nowrap

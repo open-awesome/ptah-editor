@@ -1,5 +1,6 @@
 <script>
-import { mapState } from 'vuex'
+import * as _ from 'lodash-es'
+import { mapState, mapActions } from 'vuex'
 import ControlTable from './../controls/TheControlTable.vue'
 import ControlTableBody from './../controls/TheControlTableBody.vue'
 
@@ -13,7 +14,8 @@ export default {
 
   data () {
     return {
-      color: '',
+      colorDef: '',
+      colorAct: '',
       elWidth: 0
     }
   },
@@ -35,16 +37,29 @@ export default {
       return this.settingObjectOptions.selectPlatform
     },
 
-    sizeIcons () {
-      return this.settingObjectOptions.sizeIcons
+    sizeIcons: {
+      get () {
+        return this.settingObjectOptions.sizeIcons.width
+      },
+
+      set (width) {
+        let sizeIcons = {
+          'width': width
+        }
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { sizeIcons }))
+      }
     },
 
-    colorFill () {
-      return this.settingObjectOptions.colorFill
+    colorIcons () {
+      return this.settingObjectOptions.colorIcons
     }
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     visible (key) {
       this.requirements[key].visible = !this.requirements[key].visible
 
@@ -61,18 +76,17 @@ export default {
     visibleRows (key) {
       this.rowsRequirements[key].visible = !this.rowsRequirements[key].visible
     },
-    changeColor () {
-      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
-      this.colorFill['color'] = color
-    },
-    changeSize () {
-      this.sizeIcons['width'] = this.elWidth
+    changeColor (prop, color) {
+      const c = color ? `rgba(${Object.values(color.rgba).toString()}` : color
+      this.colorIcons[prop] = c
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { colorIcons: this.colorIcons }))
     }
   },
 
   mounted () {
-    this.colorFill !== undefined ? this.color = this.colorFill.color : this.color = 'rgba(0, 0, 0, 1)'
-    this.sizeIcons !== undefined ? this.elWidth = this.sizeIcons.width : this.elWidth = 32
+    this.colorIcons.default !== undefined ? this.colorDef = this.colorIcons.default : this.color = 'rgba(0, 0, 0, 1)'
+    this.colorIcons.active !== undefined ? this.colorAct = this.colorIcons.active : this.color = 'rgba(255, 255, 255, 1)'
   }
 }
 </script>
@@ -81,12 +95,15 @@ export default {
   <div class="b-text-controls">
     <div>
       <div class="b-text-controls__control">
-        <base-range-slider v-model="elWidth" @change="changeSize" label="Icons size" step="8" min="16" max="72">
-          {{ elWidth }} px
+        <base-range-slider v-model="sizeIcons" label="Icons size" step="8" min="16" max="72">
+          {{ sizeIcons }} px
         </base-range-slider>
       </div>
       <div class="b-text-controls__control">
-        <base-color-picker label="Icons color" v-model="color" @change="changeColor"></base-color-picker>
+        <base-color-picker label="Icons color" v-model="colorDef" @change="changeColor('default', colorDef)"></base-color-picker>
+      </div>
+      <div class="b-text-controls__control">
+        <base-color-picker label="Icons active" v-model="colorAct" @change="changeColor('active', colorAct)"></base-color-picker>
       </div>
     </div>
     <div>
