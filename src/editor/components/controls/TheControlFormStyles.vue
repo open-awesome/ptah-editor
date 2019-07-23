@@ -3,20 +3,6 @@ import { mapState, mapActions } from 'vuex'
 import { merge } from 'lodash-es'
 
 export default {
-  data () {
-    return {
-      formColor: '',
-      buttonColor: '',
-      inputColor: ''
-    }
-  },
-
-  created () {
-    this.formColor = this.styles['background-color']
-    this.buttonColor = this.formStyles['button-color']
-    this.inputColor = this.formStyles['input-color']
-  },
-
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
@@ -34,7 +20,7 @@ export default {
 
     formHeight: {
       get () {
-        return this.formStyles['height'] || 64
+        return parseInt(this.formStyles['height']) || 64
       },
 
       set (value) {
@@ -44,33 +30,59 @@ export default {
           }
         }))
       }
-    }
+    },
 
+    buttonColor: {
+      get () {
+        return this.formStyles['button-color']
+      },
+
+      set (value) {
+        const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
+
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+          formStyles: {
+            'button-color': color
+          }
+        }))
+      }
+    },
+
+    buttonHoverColor: {
+      get () {
+        return this.formStyles.buttonHoverColor
+      },
+
+      set (value) {
+        const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
+
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+          formStyles: {
+            buttonHoverColor: color
+          }
+        }))
+      }
+    },
+
+    buttonBorderRadius: {
+      get () {
+        return parseInt(this.formStyles['border-radius'])
+      },
+
+      set (value) {
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+          formStyles: {
+            'border-radius': value
+          }
+        }))
+      }
+    }
   },
 
   methods: {
     ...mapActions('Sidebar', [
       'updateSettingOptions'
-    ]),
-
-    changeFormColor () {
-      const color = this.formColor.rgba ? `rgba(${Object.values(this.formColor.rgba).toString()})` : this.formColor
-
-      this.styles['background-color'] = color
-    },
-
-    changeButtonColor () {
-      const color = this.buttonColor.rgba ? `rgba(${Object.values(this.buttonColor.rgba).toString()})` : this.buttonColor
-
-      this.formStyles['button-color'] = color
-    },
-
-    changeInputColor () {
-      const color = this.inputColor.rgba ? `rgba(${Object.values(this.inputColor.rgba).toString()})` : this.inputColor
-
-      this.formStyles['input-color'] = color
-    }
-
+    ])
   }
 }
 </script>
@@ -79,18 +91,18 @@ export default {
   <div>
     <div class="b-bg-controls">
       <div class="b-bg-controls__control">
-        <base-color-picker label="Form color" v-model="formColor" @change="changeFormColor"/>
+        <base-color-picker label="Button color" v-model="buttonColor"/>
+      </div>
+      <div class="b-bg-controls__control">
+        <base-color-picker label="Button hover color" v-model="buttonHoverColor"/>
+      </div>
+      <div class="b-bg-controls__control">
+        <base-range-slider v-model="buttonBorderRadius" min="0" max="50" label="Button border radius">
+          {{ buttonBorderRadius }}px
+        </base-range-slider>
       </div>
     </div>
     <div class="b-bg-controls">
-      <div class="b-bg-controls__control">
-        <base-color-picker label="Button color" v-model="buttonColor" @change="changeButtonColor"/>
-      </div>
-    </div>
-    <div class="b-bg-controls">
-      <div class="b-bg-controls__control">
-        <base-color-picker label="input color" v-model="inputColor" @change="changeInputColor"/>
-      </div>
       <div class="b-bg-controls__control">
         <base-range-slider v-model="formHeight" min="30" max="100" label="Form height">
           {{ formHeight }}px
@@ -109,6 +121,5 @@ export default {
   padding: 0 0 $size-step/2
   border-bottom: 0.2rem dotted rgba($black, 0.15)
   &__control
-    &:first-child
-      margin-bottom: $size-step/2
+    margin-bottom: $size-step/2
 </style>

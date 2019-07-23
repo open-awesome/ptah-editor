@@ -19,6 +19,10 @@ export function formsSender () {
     req.onreadystatechange = function () {
       let button = form.getElementsByClassName('ptah-submit')[0]
       button.classList.add('submited')
+
+      setTimeout(() => {
+        button.classList.remove('submited')
+      }, 1000)
     }
 
     req.send(body)

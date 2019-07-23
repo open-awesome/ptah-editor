@@ -14,14 +14,6 @@ const COMPONENTS = [
     key: 1
   },
   {
-    name: 'Delimiter',
-    element: types.Delimiter,
-    type: 'delimiter',
-    class: 'b-delimiter',
-    label: 'delimiter',
-    key: 3
-  },
-  {
     name: 'Form',
     element: types.Form,
     type: 'form',
@@ -34,30 +26,34 @@ const COMPONENTS = [
 const C_CUSTOM = [
   {
     element: {
-      text: 'This is a short header',
+      text: '<b>Header about form</b>',
       styles: {
         'font-family': 'Montserrat',
         'font-size': '4.2rem',
-        'color': '#ffffff'
+        'color': '#ffffff',
+        'padding-bottom': '67px'
       }
     },
     key: 1
   },
   {
-    key: 3
-  },
-  {
     element: {
       placeholder: 'Email',
-      buttonText: 'Submit',
+      buttonText: '<b>Call to Action</b>',
       styles: {
         'color': '#000000',
         'border-radius': '2px',
-        'font-family': 'Lato',
+        'font-family': 'Montserrat',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-size': '1.6rem',
         'text-decoration': 'none'
+      },
+      formStyles: {
+        'button-color': '#F4BC64',
+        'border-radius': '50',
+        'height': 64,
+        'buttonHoverColor': '#F4BC64'
       }
     },
     key: 4
@@ -69,12 +65,13 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
       'background-position': 'center center',
-      'background-size': 'cover'
+      'background-size': 'cover',
+      'padding': '62px 0 236px'
     }
   },
   components: _.merge({}, C_CUSTOM),
   container: {
-    width: 7
+    width: 9
   },
   edited: true
 }

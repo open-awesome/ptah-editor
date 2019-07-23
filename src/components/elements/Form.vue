@@ -8,7 +8,7 @@
       method="post"
       target="_blank"
       :style="{
-        'background-color' : styles['background-color'],
+        '--b-hover-color': formStyles.buttonHoverColor
       }"
       >
       <input
@@ -17,7 +17,6 @@
         required
         :style="{
           'color' : styles['color'],
-          'background-color': formStyles['input-color'],
           'font-family' : styles['font-family'],
           'font-size' : styles['font-size'],
           'font-weight' : styles['font-weight'],
@@ -36,6 +35,7 @@
        :style="{
         'color': styles['color'],
         'background-color': formStyles['button-color'],
+        'border-radius': `${formStyles['border-radius']}px`,
         'font-family' : styles['font-family'],
         'font-size' : styles['font-size'],
         'font-weight' : styles['font-weight'],
@@ -269,7 +269,6 @@ export default {
 
   width: 100%
   padding: 0.4rem 0.8rem
-  box-shadow: 0px 4px 40px rgba(0, 0, 0, 0.08)
 
   position: relative
   .is-mobile &,
@@ -292,16 +291,18 @@ export default {
     word-break: keep-all
     overflow: hidden
 
-    padding: 0 2rem
+    padding: 0 5rem
     border-radius: 0.2rem
     border: none
 
-    font-family: 'Lato', sans-serif
-
     transition: all ease-out .2s
     position: relative
+    &:active
+      top: 1px
+    &:hover
+      background-color: var(--b-hover-color) !important
     &.submited
-      background-color: $emerald-green
+      background-color: $emerald-green !important
     .is-mobile &,
     .is-tablet &
       width: 100%
@@ -320,19 +321,21 @@ export default {
     background: #fff
     color: #2a2a2a
     border-radius: 0.2rem
-    padding: 1rem
+    padding: 0 2.4rem
     flex-grow: 1
-    margin-right: 4rem
+    margin-right: 3rem
     transition: all ease-out .2s
     .is-mobile &,
     .is-tablet &
       width: 100%
       max-width: 100%
       margin-bottom: 1rem
+      margin-right: 0
     @media only screen and (max-width: 768px)
       &
         width: 100%
         max-width: 100%
         margin-bottom: 1rem
+        margin-right: 0
 
 </style>
