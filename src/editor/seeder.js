@@ -55,6 +55,7 @@ const data = new Map([
     styles: {
       'font-family': 'Lato',
       'font-size': '1.6rem',
+      'line-height': '1.4',
       'font-weight': 'normal',
       'font-style': 'normal',
       'text-decoration': 'none',
@@ -187,6 +188,7 @@ const data = new Map([
         'color': '#000',
         'border-color': '',
         'font-size': '1.6rem',
+        'line-height': '1.4',
         'border-radius': 0,
         'border-color': '#fff',
         'border-width': '0px',
@@ -217,6 +219,7 @@ const data = new Map([
       styles: {
         'text-align': 'left',
         'font-size': '1.4rem',
+        'line-height': '1.4',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-family': 'Lato',
@@ -251,6 +254,7 @@ const data = new Map([
       removable: true,
       styles: {
         'font-size': '1.2rem',
+        'line-height': '1.4',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-family': 'Lato',
@@ -306,6 +310,7 @@ const data = new Map([
       chapter: {
         'font-family': 'Lato',
         'font-size': '3.2rem',
+        'line-height': '1.4',
         'font-weight': 'normal',
         'font-style': 'normal',
         'text-decoration': 'none',
@@ -314,6 +319,7 @@ const data = new Map([
       text: {
         'font-family': 'Lato',
         'font-size': '1.4rem',
+        'line-height': '1.4',
         'font-weight': 'normal',
         'font-style': 'normal',
         'text-decoration': 'none',
@@ -393,6 +399,7 @@ const data = new Map([
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-size': '1.6rem',
+        'line-height': '1.4',
         'text-decoration': 'none'
       },
       formStyles: {
@@ -432,6 +439,7 @@ const data = new Map([
         text: {
           'font-family': 'Lato',
           'font-size': '1.4rem',
+          'line-height': '1.4',
           'font-weight': 'normal',
           'font-style': 'normal',
           'text-decoration': 'none',
@@ -440,6 +448,7 @@ const data = new Map([
         icon: {
           'font-family': 'Lato',
           'font-size': '1.4rem',
+          'line-height': '1.4',
           'font-weight': 'normal',
           'font-style': 'normal',
           'text-decoration': 'none',
@@ -448,6 +457,7 @@ const data = new Map([
         cost: {
           'color': '#e4a11e',
           'font-size': '3.2rem',
+          'line-height': '1.4',
           'font-weight': 'normal',
           'font-style': 'normal',
           'font-family': 'Lato',
@@ -710,6 +720,7 @@ const data = new Map([
       styles: {
         'font-family': 'Lato',
         'font-size':  '4.8rem',
+        'line-height': '1.4',
         'font-weight': 'normal',
         'font-style': 'normal',
         'text-decoration': 'none',
@@ -770,6 +781,7 @@ const data = new Map([
         head: {
           'font-family': 'Lato',
           'font-size': '1.4rem',
+          'line-height': '1.4',
           'font-weight': 'normal',
           'font-style': 'normal',
           'text-decoration': 'none',
@@ -779,6 +791,7 @@ const data = new Map([
         body: {
           'font-family': 'Lato',
           'font-size': '1.4rem',
+          'line-height': '1.4',
           'font-weight': 'normal',
           'font-style': 'normal',
           'text-decoration': 'none',
@@ -795,6 +808,7 @@ const data = new Map([
         'background-color':'',
         'font-family': 'Lato',
         'font-size':  '1.6rem',
+        'line-height': '1.4',
         'font-weight': 'normal',
         'font-style': 'normal',
         'text-decoration': 'none',
@@ -834,6 +848,7 @@ const data = new Map([
       'background-color':'rgba(0, 0, 0, 0)',
       'font-family': 'Lato',
       'font-size':  '3.2rem',
+      'line-height': '1.4',
       'font-weight': 'normal',
       'font-style': 'normal',
       'text-decoration': 'none',

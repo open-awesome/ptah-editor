@@ -1,14 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import { getPseudoTemplate, randomPoneId } from '../../util'
+import { getPseudoTemplate, randomPoneId, FONT_SIZES_LIST, LINES_HEIGHT_LIST, FONTS_LIST } from '../../util'
 import { find, merge } from 'lodash-es'
-const LIST_FONTS = [
-  'Lato',
-  'Montserrat',
-  'Heebo',
-  'PT Serif',
-  'Roboto'
-]
 
 export default {
   props: {
@@ -26,22 +19,8 @@ export default {
     return {
       fontName: {},
       size: {},
-      sizes: [
-        { name: '12px', value: '1.2rem' },
-        { name: '14px', value: '1.4rem' },
-        { name: '16px', value: '1.6rem' },
-        { name: '18px', value: '1.8rem' },
-        { name: '20px', value: '2rem' },
-        { name: '24px', value: '2.4rem' },
-        { name: '28px', value: '2.8rem' },
-        { name: '32px', value: '3.2rem' },
-        { name: '36px', value: '3.6rem' },
-        { name: '40px', value: '4rem' },
-        { name: '48px', value: '4.8rem' },
-        { name: '56px', value: '5.6rem' },
-        { name: '64px', value: '6.4rem' },
-        { name: '72px', value: '7.2rem' }
-      ],
+      sizes: FONT_SIZES_LIST,
+      linesHeight: LINES_HEIGHT_LIST,
       color: '',
       colorHover: '',
       td: { prop: 'text-decoration', value: 'underline', base: 'none' },
@@ -94,11 +73,24 @@ export default {
     },
 
     fonts () {
-      const options = LIST_FONTS.map((font) => {
+      const options = FONTS_LIST.map((font) => {
         return { name: font, value: font }
       })
       return {
         options
+      }
+    },
+
+    lineHeight: {
+      get () {
+        return { name: this.styles['line-height'] || 1.4, value: this.styles['line-height'] || 1.4 }
+      },
+      set (value) {
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+          styles: {
+            'line-height': value.value
+          }
+        }))
       }
     }
   },
@@ -185,6 +177,9 @@ export default {
       </div>
       <div class="b-typography-controls__control-col">
         <base-select label="Size" :options="sizes" v-model="size" @input="changeSize" height="23"></base-select>
+      </div>
+      <div class="b-typography-controls__control-col">
+        <base-select label="Line" :options="linesHeight" v-model="lineHeight" height="23"></base-select>
       </div>
     </div>
     <div class="b-typography-controls__control">
