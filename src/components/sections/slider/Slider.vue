@@ -202,7 +202,7 @@ const C_CUSTOM_CONTAINER3 = {
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': '#8CD2B5',
+      'background-color': 'transparent',
       'height': '80vh'
     },
     swiper: {
@@ -428,6 +428,18 @@ export default {
 
 .swiper-button-next
   right: 20px
+  .is-mobile &,
+  .is-tablet &
+    right: 5px
+    @media only screen and (max-width: 768px)
+      &
+        right: 5px
 .swiper-button-prev
   left: 20px
+  .is-mobile &,
+  .is-tablet &
+    left: 5px
+    @media only screen and (max-width: 768px)
+      &
+        left: 5px
 </style>

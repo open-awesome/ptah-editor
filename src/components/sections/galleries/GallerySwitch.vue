@@ -63,7 +63,7 @@
                 <!-- b-gallery-one-list -->
                   <div class="b-gallery-one-list flex__item flex flex_center">
                     <div class="b-gallery-one-list__tiles b-gallery-one-list__tiles_mobile">
-                      <div class="b-preview"
+                      <div class="b-preview b-gallery-item"
                           v-for="(components, key) in $sectionData"
                           :key="key"
                           v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
@@ -129,7 +129,7 @@
                           >
                           <div v-html="$sectionData[key][2].element.text"></div>
                         </component>
-                        <div class="b-gallery-one-stage__img"
+                        <div class="b-gallery-one-stage__img b-gallery-item"
                           :style="$sectionData[key][3].element.styles"
                           v-styler:for="{ el: $sectionData[key][3].element, path:`$sectionData.${key}[3].element`, type: $sectionData[key][3].type, label: $sectionData[key][3].label }"
                           >

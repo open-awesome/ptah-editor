@@ -371,7 +371,7 @@ export default {
                   <!-- .b-gallery-popup__wrap -->
                   <div class="b-gallery-popup__wrap">
                     <div class="b-gallery-popup">
-                      <div class="b-gallery-popup__item"
+                      <div class="b-gallery-popup__item b-gallery-item"
                         v-for="(components, key) in $sectionData"
                         :key="key"
                         v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"

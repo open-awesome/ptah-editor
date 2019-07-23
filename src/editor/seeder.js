@@ -59,7 +59,7 @@ const data = new Map([
       'font-style': 'normal',
       'text-decoration': 'none',
       'text-align': 'center',
-      'color': '#000',
+      'color': '#9B9B9B',
       'justify-content': 'center'
     },
     isComplex: true,
