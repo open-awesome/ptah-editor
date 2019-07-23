@@ -53,7 +53,7 @@ const C_CUSTOM = [
         'button-color': '#F4BC64',
         'border-radius': '50',
         'height': 64,
-        'buttonHoverColor': '#F4BC64'
+        'buttonHoverColor': '#fff'
       }
     },
     key: 4

@@ -297,6 +297,7 @@ export default {
 
     transition: all ease-out .2s
     position: relative
+    cursor: pointer
     &:active
       top: 1px
     &:hover
