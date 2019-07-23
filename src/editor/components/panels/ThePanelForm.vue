@@ -4,6 +4,11 @@
       {{ settingObjectLabel }} styles
     </h6>
 
+    <!-- Control Form -->
+    <div class="b-panel__control">
+      <control-form/>
+    </div>
+
     <!-- Background Color -->
     <div class="b-panel__control">
       <control-typography/>
@@ -12,11 +17,6 @@
     <!-- Background Color -->
     <div class="b-panel__control">
       <control-form-styles/>
-    </div>
-
-    <!-- Control Form -->
-    <div class="b-panel__control">
-      <control-form/>
     </div>
 
     <!-- Padding/Margin -->

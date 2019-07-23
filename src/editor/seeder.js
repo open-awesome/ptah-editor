@@ -386,7 +386,6 @@ const data = new Map([
       placeholder: 'Placeholder',
       buttonText: 'Submit',
       styles: {
-        'background-color': 'rgba(0, 0, 0, 0.4)',
         'color': '#000',
         'border-radius': '2px',
         'font-family': 'Lato',
@@ -397,7 +396,9 @@ const data = new Map([
       },
       formStyles: {
         'button-color': '#f76a67',
-        'input-color': '#ffffff'
+        'buttonHoverColor': '#f76a67',
+        'height': 48,
+        'border-radius': '3'
       },
       editor: {
         tags: false,

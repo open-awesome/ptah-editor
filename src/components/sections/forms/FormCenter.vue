@@ -14,22 +14,6 @@ const COMPONENTS = [
     key: 1
   },
   {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
-    class: 'b-text',
-    label: 'description',
-    key: 2
-  },
-  {
-    name: 'Delimiter',
-    element: types.Delimiter,
-    type: 'delimiter',
-    class: 'b-delimiter',
-    label: 'delimiter',
-    key: 3
-  },
-  {
     name: 'Form',
     element: types.Form,
     type: 'form',
@@ -42,41 +26,34 @@ const COMPONENTS = [
 const C_CUSTOM = [
   {
     element: {
-      text: 'This is a short header',
+      text: '<b>Header about form</b>',
       styles: {
-        'font-family': 'Lato',
+        'font-family': 'Montserrat',
         'font-size': '4.2rem',
-        'color': '#ffffff'
+        'color': '#ffffff',
+        'padding-bottom': '67px'
       }
     },
     key: 1
   },
   {
     element: {
-      text: 'An sincerity so extremity he additions. Her yet there truth merit.',
-      styles: {
-        'font-family': 'Lato',
-        'font-size': '2rem',
-        'color': 'rgba(255, 255, 255, 0.5)'
-      }
-    },
-    key: 2
-  },
-  {
-    key: 3
-  },
-  {
-    element: {
       placeholder: 'Email',
-      buttonText: 'Submit',
+      buttonText: '<b>Call to Action</b>',
       styles: {
         'color': '#000000',
         'border-radius': '2px',
-        'font-family': 'Lato',
+        'font-family': 'Montserrat',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-size': '1.6rem',
         'text-decoration': 'none'
+      },
+      formStyles: {
+        'button-color': '#F4BC64',
+        'border-radius': '50',
+        'height': 64,
+        'buttonHoverColor': '#fff'
       }
     },
     key: 4
@@ -86,15 +63,15 @@ const C_CUSTOM = [
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
+      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-position': 'center center',
       'background-size': 'cover',
-      'background-color': 'rgb(21, 28, 68, 1)',
-      'background-repeat': 'no-repeat',
-      'background-attachment': 'scroll'
+      'padding': '62px 0 236px'
     }
   },
   components: _.merge({}, C_CUSTOM),
   container: {
-    width: 12
+    width: 9
   },
   edited: true
 }
@@ -167,6 +144,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-form
+.b-draggable-slot > div
+  width: 100%
 
 </style>
