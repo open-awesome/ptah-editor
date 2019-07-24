@@ -155,6 +155,7 @@ const data = new Map([
       background: true,
       isTextEdit: true,
       shape: true,
+      resizable: true,
       pseudo: {
         hover: {
           'background-color': '',
