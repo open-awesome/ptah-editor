@@ -74,6 +74,7 @@ const C_CUSTOM = [
       styles: {
         'font-family': 'Montserrat',
         'font-size': '3.6rem',
+        'line-height': '1.2',
         'color': '#ffffff',
         'margin': '10px 80px'
       }
@@ -85,6 +86,7 @@ const C_CUSTOM = [
       styles: {
         'font-family': 'Montserrat',
         'font-size': '3.6rem',
+        'line-height': '1.2',
         'color': '#ffffff',
         'margin': '21px 0 0 0'
       }
@@ -261,22 +263,14 @@ export default {
 .b-first-screen-space-01
   .b-text-fs
     letter-spacing: -0.02em
-    /deep/
-      p
-        line-height: 4.4rem !important
     .is-mobile &,
     .is-tablet &
       font-size: 2.4rem !important
       margin: 0 auto 8px !important
-      /deep/
-        p
-          line-height: 2.8rem !important
     @media only screen and (max-width: 840px)
       &
         font-size: 2.4rem !important
         margin: 0 auto 8px !important
-        & p
-          line-height: 2.8rem !important
   .b-button-fs
     box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
     transition: background-color 200ms

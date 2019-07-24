@@ -1,13 +1,7 @@
 <script>
-import { mapState } from 'vuex'
-import find from 'lodash-es/find'
-
-const LIST_FONTS = [
-  'Lato',
-  'Montserrat',
-  'Heebo',
-  'PT Serif'
-]
+import { mapState, mapActions } from 'vuex'
+import { find, merge } from 'lodash-es'
+import { FONT_SIZES_LIST, LINES_HEIGHT_LIST, FONTS_LIST } from '../../util'
 
 export default {
 
@@ -15,15 +9,8 @@ export default {
     return {
       fontName: {},
       size: {},
-      sizes: [
-        { name: '12px', value: '1.2rem' },
-        { name: '14px', value: '1.4rem' },
-        { name: '16px', value: '1.6rem' },
-        { name: '18px', value: '1.8rem' },
-        { name: '20px', value: '2rem' },
-        { name: '24px', value: '2.4rem' },
-        { name: '28px', value: '2.8rem' }
-      ],
+      sizes: FONT_SIZES_LIST,
+      linesHeight: LINES_HEIGHT_LIST,
       color: '',
       td: { prop: 'text-decoration', value: 'underline', base: 'none' },
       fs: { prop: 'font-style', value: 'italic', base: 'normal' },
@@ -71,16 +58,33 @@ export default {
     },
 
     fonts () {
-      const options = LIST_FONTS.map((font) => {
+      const options = FONTS_LIST.map((font) => {
         return { name: font, value: font }
       })
       return {
         options
       }
+    },
+
+    lineHeight: {
+      get () {
+        return { name: this.table.body['line-height'] || 1.4, value: this.table.body['line-height'] || 1.4 }
+      },
+      set (value) {
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+          table: {
+            body: { 'line-height': value.value }
+          }
+        }))
+      }
     }
   },
 
   methods: {
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
+
     changeFont () {
       this.table.body['font-family'] = this.fontName.value
     },
@@ -135,6 +139,9 @@ export default {
       </div>
       <div class="b-table-controls__control-col">
         <base-select label="Size" :options="sizes" v-model="size" @input="changeSize"></base-select>
+      </div>
+      <div class="b-table-controls__control-col">
+        <base-select label="Line" :options="linesHeight" v-model="lineHeight" height="23"></base-select>
       </div>
     </div>
     <div class="b-table-controls__control">
