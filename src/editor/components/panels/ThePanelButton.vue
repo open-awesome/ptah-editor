@@ -45,6 +45,11 @@
           <control-box></control-box>
         </div>
 
+        <!-- Width / Height -->
+        <div class="b-panel__control" v-if="settingObjectOptions.resizable">
+          <control-size></control-size>
+        </div>
+
       </div><!--/.b-panel__inner-->
     </base-scroll-container>
   </div>
@@ -60,6 +65,7 @@ import ControlBorderStyle from './../controls/TheControlBorderStyle'
 import ControlAlign from './../controls/TheControlAlign'
 import ControlHoverAnimation from './../controls/TheControlHoverAnimation'
 import ControlBox from '../controls/TheControlBox'
+import ControlSize from '../controls/TheControlSize'
 
 export default {
   name: 'ThePanelButton',
@@ -79,7 +85,8 @@ export default {
     ControlBorderRadius,
     ControlBorderStyle,
     ControlHoverAnimation,
-    ControlBox
+    ControlBox,
+    ControlSize
   },
 
   computed: {

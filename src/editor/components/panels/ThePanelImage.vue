@@ -10,6 +10,10 @@
     <div class="b-panel__control">
       <control-box :hidePadding="true"></control-box>
     </div>
+    <!-- Width / Height -->
+    <div class="b-panel__control" v-if="settingObjectOptions.resizable">
+       <control-size></control-size>
+    </div>
     <!-- Alt prop for image -->
     <!-- TODO: We're still not using <img>
     <div class="b-panel__control">
@@ -24,6 +28,7 @@ import { mapState } from 'vuex'
 import ControlAlt from './../controls/TheControlAlt'
 import ControlImage from './../controls/TheControlImage'
 import ControlBox from '../controls/TheControlBox'
+import ControlSize from '../controls/TheControlSize'
 
 export default {
   name: 'ThePanelImageSettings',
@@ -38,11 +43,13 @@ export default {
   components: {
     ControlAlt,
     ControlImage,
-    ControlBox
+    ControlBox,
+    ControlSize
   },
 
   computed: {
     ...mapState('Sidebar', [
+      'settingObjectOptions',
       'settingObjectLabel'
     ])
   }
