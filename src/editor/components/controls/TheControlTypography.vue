@@ -1,7 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import { getPseudoTemplate, randomPoneId, FONT_SIZES_LIST, LINES_HEIGHT_LIST, FONTS_LIST } from '../../util'
-import { find, merge } from 'lodash-es'
+import * as _ from 'lodash-es'
 
 export default {
   props: {
@@ -52,7 +52,7 @@ export default {
 
   created () {
     this.fontName = { name: this.styles['font-family'], value: this.styles['font-family'] }
-    this.size = find(this.sizes, { value: this.styles['font-size'] })
+    this.size = _.find(this.sizes, { value: this.styles['font-size'] })
     this.color = this.styles['color']
     if (this.colorTextHover) this.colorHover = this.pseudo['hover']['color']
   },
@@ -83,10 +83,21 @@ export default {
 
     lineHeight: {
       get () {
-        return { name: this.styles['line-height'] || 1.4, value: this.styles['line-height'] || 1.4 }
+        let s = _.get(this.settingObjectOptions, `styles['line-height']`)
+        let gotLineHeight = s
+
+        if (s === undefined) {
+          let style = window.getComputedStyle(this.settingObjectElement)
+          let lineHeight = parseFloat(style['line-height'])
+          let fontSize = parseFloat(style['font-size'])
+
+          gotLineHeight = Math.round((lineHeight / fontSize) * 10) / 10
+        }
+
+        return { name: gotLineHeight, value: gotLineHeight }
       },
       set (value) {
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
           styles: {
             'line-height': value.value
           }
@@ -125,7 +136,7 @@ export default {
       if (style !== '') {
         pseudo[pseudoClass] = {}
         pseudo[pseudoClass][attr] = style + '!important'
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, { pseudo }))
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { pseudo }))
 
         this.changePseudoStyle(attr, style + '!important')
       }
