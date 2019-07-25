@@ -209,13 +209,15 @@ const HEADER = [
   }
 ]
 
-const GROUP_NAME = 'Faq'
-const NAME = 'Faq'
+const GROUP_NAME = 'Elements'
+const NAME = 'FAQ'
 
 export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'Interactive FAQ presentation screen',
 
   mixins: [defaults],
 

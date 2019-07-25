@@ -1,0 +1,7 @@
+<template>
+  <svg viewBox="0 0 18 18">
+    <rect x="1" y="1" width="16" height="16" rx="1" stroke="#333333" stroke-width="2"/>
+    <path d="M9 3L9.89806 5.76393H12.8042L10.4531 7.47214L11.3511 10.2361L9 8.52786L6.64886 10.2361L7.54692 7.47214L5.19577 5.76393H8.10194L9 3Z" fill="#333333"/>
+    <line x1="5" y1="13" x2="13" y2="13" stroke="#333333" stroke-width="2"/>
+  </svg>
+</template>

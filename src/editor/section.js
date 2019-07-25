@@ -14,6 +14,7 @@ export default class Section {
     this.id = counter++
     options = Object.assign({}, SECTION_OPTIONS, options)
     this.name = options.name
+    this.description = options.description
     this.group = options.group
     this.schema = options.schema
     this.data = options.data || Seeder.seed(options.schema)

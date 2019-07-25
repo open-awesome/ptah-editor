@@ -198,6 +198,8 @@ export default {
 
   group: GROUP_NAME,
 
+  description: 'Space title face the Countdown main screen',
+
   mixins: [defaults],
 
   cover: '/img/covers/first-screen-space-02.jpg',

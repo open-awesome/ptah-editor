@@ -72,7 +72,7 @@ import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['HeroArtLeft', 'Hero', '/img/covers/hero-art-left.png']
+const [name, group, cover] = ['VideoSplitScreen', 'FirstScreen', '/img/covers/hero-art-left.png']
 
 /**
  * Base keys for elements in Hero sections
@@ -171,6 +171,8 @@ export default {
   name,
   group,
   cover,
+
+  description: 'Game character to leftward of video main screen',
 
   mixins: [defaults],
 

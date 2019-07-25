@@ -70,7 +70,7 @@ import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['HeroTwoColumns', 'Hero', '/img/covers/hero-two-columns.png']
+const [name, group, cover] = ['TwoSegmentHeroScreen', 'FirstScreen', '/img/covers/hero-two-columns.png']
 
 /**
  * Base keys for elements in Hero sections
@@ -180,6 +180,8 @@ export default {
   name,
   group,
   cover,
+
+  description: 'Two parts split main screen',
 
   mixins: [defaults],
 

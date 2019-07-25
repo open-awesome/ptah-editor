@@ -17,7 +17,7 @@ import Button from '@components/elements/Button'
 import TextElement from '@components/elements/TextElement'
 import Pic from '@components/elements/Pic'
 import Logo from '@components/elements/Logo'
-import Delimiter from '@components/elements/Delimiter'
+import Spacer from '@components/elements/Spacer'
 import AvailablePlatforms from '@components/elements/AvailablePlatforms'
 import AgeRestrictions from '@components/elements/AgeRestrictions'
 import SocialNetworks from '@components/elements/SocialNetworks'
@@ -35,7 +35,6 @@ import HeaderSpace03 from '@components/sections/header/HeaderSpace03'
 
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
-import HeroSkull from '@components/sections/hero/HeroSkull'
 import HeroTwoColumns from '@components/sections/hero/HeroTwoColumns'
 import HeroThreeColumns from '@components/sections/hero/HeroThreeColumns'
 import HeroArtRight from '@components/sections/hero/HeroArtRight'
@@ -73,8 +72,6 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 // --- other
 import SystemSpace from '@components/sections/elements/SystemSpace'
 import FooterSpace from '@components/sections/footers/FooterSpace'
-import SocialNetworksSpace from '@components/sections/socials/SocialNetworksSpace'
-import Video from '@components/sections/video/Video'
 import Faq from '@components/sections/elements/Faq'
 import Slider from '@components/sections/slider/Slider'
 
@@ -87,7 +84,7 @@ const ELEMENTS = {
   TextElement,
   Pic,
   Logo,
-  Delimiter,
+  Spacer,
   AvailablePlatforms,
   AgeRestrictions,
   SocialNetworks,
@@ -103,8 +100,11 @@ const COMPONENTS = {
   HeaderSpace02,
   HeaderSpace03,
 
+  FirstScreenSpace01,
+  FirstScreenSpace02,
+  FirstScreenSpaceVideoBack,
+  FirstScreenSpaceVideoPlayer,
   HeroUnit,
-  HeroSkull,
   HeroTwoColumns,
   HeroThreeColumns,
   HeroArtRight,
@@ -117,11 +117,6 @@ const COMPONENTS = {
   HeroWithTimerColumnsVideo2,
   HeroWithTimerSlogan,
   HeroWithTimerSlogan2,
-
-  FirstScreenSpace01,
-  FirstScreenSpace02,
-  FirstScreenSpaceVideoBack,
-  FirstScreenSpaceVideoPlayer,
 
   Slider,
 
@@ -142,9 +137,7 @@ const COMPONENTS = {
   FormLeft2,
 
   FooterSpace,
-  SocialNetworksSpace,
   SystemSpace,
-  Video,
   Faq
 }
 

@@ -140,7 +140,7 @@ import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['HeaderSpace01', 'header', '/img/covers/header-space-01.jpg']
+const [name, group, cover] = ['ActionButtonHeader', 'Header', '/img/covers/header-space-01.jpg']
 const defaultComponents = [
   {
     element: {
@@ -280,6 +280,8 @@ export default {
   name,
   group,
   cover,
+
+  description: 'Lined up upper block with set of elements',
 
   mixins: [defaults],
 

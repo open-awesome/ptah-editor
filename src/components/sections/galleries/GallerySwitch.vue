@@ -326,6 +326,8 @@ export default {
 
   group: GROUP_NAME,
 
+  description: 'Gallery side expanded picture view',
+
   components: {
     Uploader
   },
