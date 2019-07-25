@@ -37,7 +37,7 @@
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState } from 'vuex'
 import Uploader from '@editor/plugins/Uploader.vue'
 import VueDraggableResizable from 'vue-draggable-resizable'
 // optionally import default styles
@@ -68,6 +68,8 @@ export default {
   },
 
   computed: {
+    ...mapState('Sidebar', ['settingObjectElement']),
+
     alt () {
       return this.$section.get(`$sectionData.${this.path}.alt`)
     },
@@ -103,6 +105,18 @@ export default {
     ]),
 
     onResize (x, y, width, height) {
+      let parents = {}
+      let max = {}
+
+      parents['width'] = this.settingObjectElement.closest('.b-draggable-slot')
+      parents['height'] = this.settingObjectElement.closest('section')
+
+      max['width'] = parents['width'].offsetWidth
+      max['height'] = parseInt(parents['height'].offsetHeight / 2)
+
+      if (width > max['width']) width = max['width']
+      if (height > max['height']) height = max['height']
+
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
 

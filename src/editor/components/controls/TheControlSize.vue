@@ -15,10 +15,6 @@ export default {
           value: false,
           text: 'Error'
         }
-      },
-      max: {
-        width: 0,
-        height: 0
       }
     }
   },
@@ -47,6 +43,19 @@ export default {
       set (value) {
         this.update('height', value)
       }
+    },
+
+    maxProps () {
+      let parents = {}
+      let max = {}
+
+      parents['width'] = this.settingObjectElement.closest('.b-draggable-slot')
+      parents['height'] = this.settingObjectElement.closest('section')
+
+      max['width'] = parents['width'].offsetWidth
+      max['height'] = parseInt(parents['height'].offsetHeight / 2)
+
+      return max
     }
 
   },
@@ -64,20 +73,18 @@ export default {
         let style = window.getComputedStyle(this.settingObjectElement)
         s = style[prop]
       }
+
       return parseInt(s)
     },
 
     update (prop, value) {
       let styles = {}
-      let parent = this.settingObjectElement.closest('.b-draggable-slot')
 
-      this.max[prop] = parent[`offset${_.upperFirst(prop)}`]
-
-      if (value > this.max[prop]) {
+      if (value > this.maxProps[prop]) {
         this.error[prop].value = true
-        this.error[prop].text = `Max ${prop} ${this.max[prop]}`
+        this.error[prop].text = `Max ${prop} ${this.maxProps[prop]}`
 
-        value = this.max[prop]
+        value = this.maxProps[prop]
       } else {
         this.error[prop].value = false
       }
