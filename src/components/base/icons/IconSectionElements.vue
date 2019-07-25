@@ -1,16 +1,7 @@
 <template>
-  <svg viewBox="0 0 20 17" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <mask id="path-1-inside-1" fill="white">
-      <rect y="8" width="12" height="9" rx="1"/>
-    </mask>
-    <rect y="8" width="12" height="9" rx="1" stroke="#B1B1B1" stroke-width="4" mask="url(#path-1-inside-1)"/>
-    <mask id="path-2-inside-2" fill="white">
-      <rect width="12" height="6" rx="1"/>
-    </mask>
-    <rect width="12" height="6" rx="1" stroke="#B1B1B1" stroke-width="4" mask="url(#path-2-inside-2)"/>
-    <mask id="path-3-inside-3" fill="white">
-      <rect x="14" width="6" height="17" rx="1"/>
-    </mask>
-    <rect x="14" width="6" height="17" rx="1" stroke="#B1B1B1" stroke-width="4" mask="url(#path-3-inside-3)"/>
+  <svg viewBox="0 0 20 17">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M2 10V15H10V10H2ZM1 8C0.447715 8 0 8.44772 0 9V16C0 16.5523 0.447715 17 1 17H11C11.5523 17 12 16.5523 12 16V9C12 8.44772 11.5523 8 11 8H1Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M2 2V4H10V2H2ZM1 0C0.447715 0 0 0.447715 0 1V5C0 5.55228 0.447715 6 1 6H11C11.5523 6 12 5.55228 12 5V1C12 0.447715 11.5523 0 11 0H1Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M16 2V15H18V2H16ZM15 0C14.4477 0 14 0.447715 14 1V16C14 16.5523 14.4477 17 15 17H19C19.5523 17 20 16.5523 20 16V1C20 0.447715 19.5523 0 19 0H15Z"/>
   </svg>
 </template>

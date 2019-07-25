@@ -10,7 +10,7 @@
       <ul>
         <li v-for="(el, name) in elSrc" :key="name" @click.prevent="addEl(name)" class="b-elements__button">
           <div class="b-elements__icon">
-
+            <icon-base :name="el.ico" :width="el.width" />
           </div>
           <div class="b-elements__title">
             <div class="b-elements__title--name">
@@ -41,52 +41,62 @@ export default {
       button: {
         name: 'Button',
         descr: 'Standard clickable button',
-        ico: ''
+        ico: 'elButton',
+        width: 20
       },
       text: {
         name: 'Text',
         descr: 'Editable text block',
-        ico: ''
+        ico: 'elText',
+        width: 15
       },
       pic: {
         name: 'Image',
         descr: 'Insert image here',
-        ico: ''
+        ico: 'elImage',
+        width: 18
       },
       spacer: {
         name: 'Spacer',
         descr: 'Custom spacer between page elements',
-        ico: ''
+        ico: 'elSpacer',
+        width: 20
       },
       platforms: {
         name: 'Available platforms',
         descr: 'List of supported game platforms',
-        ico: ''
+        ico: 'elPlatforms',
+        width: 22
       },
       restrictions: {
         name: 'Age restrictions',
         descr: 'Verify your customers age',
-        ico: ''
+        ico: 'elAge',
+        width: 20
       },
       social: {
         name: 'Social networks',
         descr: 'Add graphical links to a social media',
-        ico: ''
+        ico: 'elSocial',
+        width: 17
       },
       icontext: {
         name: 'Icon with text',
         descr: 'Check marked feature list',
-        ico: ''
+        ico: 'elIconText',
+        width: 19
       },
       video: {
         name: 'Video',
         descr: 'Embedded window for a Youtube video',
-        ico: ''
+        ico: 'elVideo',
+        width: 18
       },
       timer: {
         name: 'Timer',
         descr: 'Countdown to release setup',
-        ico: ''
+        ico: 'elTimer',
+        width: 16
       }
     }
   }),
@@ -151,9 +161,11 @@ export default {
     margin-top: .1rem
     cursor: pointer
     color: #474747
+
     &:hover, &.active
       background: #fff
       color: #355CCC
+
     img
       width: 2rem
       height: 2rem
@@ -184,15 +196,19 @@ export default {
   &__button
     display: flex
     background: transparent
-    padding: .3b-top-bar-menu__crumbs-linrem 3rem 0
+    padding: .3rem 3rem 0 2rem
     width: 100%
     height: 6.6rem
     text-align: left
     box-sizing: border-box
     cursor: pointer
+    svg
+      fill: $grey-middle
 
     &:hover
       background-color: rgba(116, 169, 230, 0.25)
+      svg
+        fill: $dark-grey
   &__title
     &--name
       font-size: 1.6rem
@@ -205,6 +221,13 @@ export default {
       font-size: 1.4rem
       line-height: 1.7rem
       color: $grey-middle
+
+  &__icon
+    width: 4.6rem
+    display: flex
+    justify-content: center
+    flex-shrink: 0
+    padding-top: .5rem
 
   &__close
     color: $grey-middle

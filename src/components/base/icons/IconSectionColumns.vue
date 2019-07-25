@@ -1,16 +1,16 @@
 <template>
-  <svg viewBox="0 0 26 21" fill="none" xmlns="http://www.w3.org/2000/svg">
-    <circle cx="4.5" cy="4.5" r="1.5" fill="#B1B1B1"/>
-    <rect x="1" y="1" width="10" height="10" rx="1" stroke="#B1B1B1" stroke-width="2"/>
-    <rect x="1" y="1" width="10" height="10" rx="1" stroke="#B1B1B1" stroke-width="2"/>
-    <path d="M5.42667 9.01167L7.42667 6L10 10H2L4 6.99611L5.42667 9.01167Z" fill="#B1B1B1"/>
-    <circle cx="18.5" cy="4.5" r="1.5" fill="#B1B1B1"/>
-    <rect x="15" y="1" width="10" height="10" rx="1" stroke="#B1B1B1" stroke-width="2"/>
-    <rect x="15" y="1" width="10" height="10" rx="1" stroke="#B1B1B1" stroke-width="2"/>
-    <path d="M19.4267 9.01167L21.4267 6L24 10H16L18 6.99611L19.4267 9.01167Z" fill="#B1B1B1"/>
-    <line y1="15" x2="12" y2="15" stroke="#B1B1B1" stroke-width="2"/>
-    <line x1="14" y1="15" x2="26" y2="15" stroke="#B1B1B1" stroke-width="2"/>
-    <rect y="18" width="12" height="3" rx="1.5" fill="#B1B1B1"/>
-    <rect x="14" y="18" width="12" height="3" rx="1.5" fill="#B1B1B1"/>
+  <svg viewBox="0 0 26 21">
+    <path d="M6 4.5C6 5.32843 5.32843 6 4.5 6C3.67157 6 3 5.32843 3 4.5C3 3.67157 3.67157 3 4.5 3C5.32843 3 6 3.67157 6 4.5Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M10 2H2L2 10H10V2ZM2 0C0.895431 0 0 0.895431 0 2V10C0 11.1046 0.895431 12 2 12H10C11.1046 12 12 11.1046 12 10V2C12 0.895431 11.1046 0 10 0H2Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M10 2H2L2 10H10V2ZM2 0C0.895431 0 0 0.895431 0 2V10C0 11.1046 0.895431 12 2 12H10C11.1046 12 12 11.1046 12 10V2C12 0.895431 11.1046 0 10 0H2Z"/>
+    <path d="M5.42667 9.01167L7.42667 6L10 10H2L4 6.99611L5.42667 9.01167Z"/>
+    <path d="M20 4.5C20 5.32843 19.3284 6 18.5 6C17.6716 6 17 5.32843 17 4.5C17 3.67157 17.6716 3 18.5 3C19.3284 3 20 3.67157 20 4.5Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M24 2H16L16 10H24V2ZM16 0C14.8954 0 14 0.895431 14 2V10C14 11.1046 14.8954 12 16 12H24C25.1046 12 26 11.1046 26 10V2C26 0.895431 25.1046 0 24 0H16Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M24 2H16L16 10H24V2ZM16 0C14.8954 0 14 0.895431 14 2V10C14 11.1046 14.8954 12 16 12H24C25.1046 12 26 11.1046 26 10V2C26 0.895431 25.1046 0 24 0H16Z"/>
+    <path d="M19.4267 9.01167L21.4267 6L24 10H16L18 6.99611L19.4267 9.01167Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M12 16H0V14H12V16Z"/>
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M26 16H14V14H26V16Z"/>
+    <path d="M0 19.5C0 18.6716 0.671573 18 1.5 18H10.5C11.3284 18 12 18.6716 12 19.5C12 20.3284 11.3284 21 10.5 21H1.5C0.671573 21 0 20.3284 0 19.5Z"/>
+    <path d="M14 19.5C14 18.6716 14.6716 18 15.5 18H24.5C25.3284 18 26 18.6716 26 19.5C26 20.3284 25.3284 21 24.5 21H15.5C14.6716 21 14 20.3284 14 19.5Z"/>
   </svg>
 </template>

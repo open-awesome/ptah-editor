@@ -26,39 +26,48 @@ export default {
       groupSrc: {
         Header: {
           descr: 'Small section for external navigation',
-          ico: 'https://gn350.cdn.stg.gamenet.ru/0/8gRoN/o_1WpHYB.svg'
+          ico: 'sectionHeader',
+          width: 25
         },
         FirstScreen: {
           descr: 'Your project face and make-up',
-          ico: 'https://gn529.cdn.stg.gamenet.ru/0/8gRnB/o_nKK6E.svg'
+          ico: 'sectionFirstScreen',
+          width: 18
         },
         Columns: {
           descr: 'Additional features short description',
-          ico: 'https://gn695.cdn.stg.gamenet.ru/0/8gRma/o_24YBuZ.svg'
+          ico: 'sectionColumns',
+          width: 26
         },
         Elements: {
           descr: 'Additional page customization details',
-          ico: 'https://gn907.cdn.stg.gamenet.ru/0/8gRn0/o_1DpBbC.svg'
+          ico: 'sectionElements',
+          width: 20
         },
         Footer: {
           descr: 'Page finalization small section',
-          ico: 'https://gn325.cdn.stg.gamenet.ru/0/8gRnZ/o_232BMu.svg'
+          ico: 'sectionFooter',
+          width: 23
         },
         Forms: {
           descr: 'Subscribe your visitors for updates',
-          ico: 'https://gn140.cdn.stg.gamenet.ru/0/8gRnt/o_t37Ui.svg'
+          ico: 'sectionForms',
+          width: 21
         },
         Galleries: {
           descr: 'Picture gallery for a spectacular presentation',
-          ico: 'https://gn194.cdn.stg.gamenet.ru/0/8gRoA/o_1UkqFx.svg'
+          ico: 'sectionGallery',
+          width: 26
         },
         Products: {
           descr: 'List your game editions, bundles and packs.',
-          ico: 'https://gn980.cdn.stg.gamenet.ru/0/8gRoX/o_8iBNj.svg'
+          ico: 'sectionProducts',
+          width: 26
         },
         Slider: {
           descr: 'Main features fullscreen slider',
-          ico: 'https://gn83.cdn.stg.gamenet.ru/0/8gRoi/o_xU7ra.svg'
+          ico: 'sectionSlider',
+          width: 32
         }
       }
     }
@@ -172,7 +181,7 @@ export default {
               v-if="group.length"
               @click="showSelectSection(group)">
             <div class="b-add-section__menu-ico">
-              <img :src="groupSrc[name].ico" alt="">
+              <icon-base :name="groupSrc[name].ico" :width="groupSrc[name].width" />
             </div>
             <div class="b-add-section__menu-header">
               <span class="b-add-section__menu-title">{{ name }}</span>
@@ -293,12 +302,14 @@ export default {
       cursor: pointer
 
       svg
-        fill: #B1B1B1
+        fill: $grey-middle
 
       &_selected,
       &:hover
         color: $dark-grey
         background-color: rgba(116, 169, 230, 0.25)
+        svg
+          fill: $dark-grey
     &-title
       font-size: 1.6rem
       line-height: 1.9rem
