@@ -4,21 +4,6 @@ import * as _ from 'lodash-es'
 
 export default {
 
-  data () {
-    return {
-      error: {
-        width: {
-          value: false,
-          text: 'Error'
-        },
-        height: {
-          value: false,
-          text: 'Error'
-        }
-      }
-    }
-  },
-
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
@@ -80,15 +65,6 @@ export default {
     update (prop, value) {
       let styles = {}
 
-      if (value > this.maxProps[prop]) {
-        this.error[prop].value = true
-        this.error[prop].text = `Max ${prop} ${this.maxProps[prop]}`
-
-        value = this.maxProps[prop]
-      } else {
-        this.error[prop].value = false
-      }
-
       if (value === '') value = 0
       styles[prop] = value + 'px'
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
@@ -104,10 +80,10 @@ export default {
     </base-label>
     <div class="b-size-controls">
       <div class="b-size-controls__control">
-        <base-number-field v-model="width" label="Width" :hasError="error.width.value" :errorText="error.width.text" class=""></base-number-field>
+        <base-number-field :maximum="maxProps['width']" v-model="width" label="Width" class=""></base-number-field>
       </div>
       <div class="b-size-controls__control">
-        <base-number-field v-model="height" label="Height" :hasError="error.height.value" :errorText="error.height.text" class=""></base-number-field>
+        <base-number-field :maximum="maxProps['height']" v-model="height" label="Height" class=""></base-number-field>
       </div>
     </div>
   </div>

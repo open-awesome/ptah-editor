@@ -37,6 +37,10 @@ export default {
       type: Number,
       default: 0
     },
+    maximum: {
+      type: Number,
+      default: 0
+    },
     hasError: {
       type: Boolean,
       default: false
@@ -57,13 +61,13 @@ export default {
 
   watch: {
     value (value) {
-      this.innerValue = value
+      this.innerValue = Math.min(value, this.maximum)
     }
   },
 
   data () {
     return {
-      innerValue: this.value,
+      innerValue: Math.min(this.value, this.maximum),
       hasFocus: false
     }
   }
