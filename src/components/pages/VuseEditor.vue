@@ -120,15 +120,14 @@ const COMPONENTS = {
 
   Slider,
 
+  ColumnsSpace,
+
   GallerySwitch,
   GalleryPopup,
+  Carousel,
 
   Products,
   ProductsExtend,
-
-  ColumnsSpace,
-
-  Carousel,
 
   FormCenter,
   FormRight,
@@ -136,9 +135,10 @@ const COMPONENTS = {
   FormRight2,
   FormLeft2,
 
-  FooterSpace,
   SystemSpace,
-  Faq
+  Faq,
+
+  FooterSpace
 }
 
 Vuse.mix({ components: ELEMENTS })

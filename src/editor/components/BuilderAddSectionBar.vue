@@ -82,7 +82,7 @@ export default {
 
     groups () {
       if (this.hasHeader) {
-        return omit(this.builderGroups, 'header')
+        return omit(this.builderGroups, 'Header')
       }
       return this.builderGroups
     },
@@ -212,7 +212,7 @@ export default {
               <div class="b-add-section-bar__menu-imageholder">
                 <img class="b-add-section-bar__menu-image" v-if="section.cover" :src="section.cover"/>
                 <div class="b-add-section-bar__menu-title">
-                  {{ section.name }}
+                  {{ section.title }}
                 </div>
                 <div class="b-add-section-bar__menu-descr">
                   {{ section.description }}
