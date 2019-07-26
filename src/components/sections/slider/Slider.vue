@@ -246,6 +246,8 @@ export default {
 
   group: GROUP_NAME,
 
+  description: 'Fullscreen feature slider',
+
   mixins: [defaults],
 
   inject: ['device'],

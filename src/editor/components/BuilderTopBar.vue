@@ -100,7 +100,7 @@ export default {
             tooltip-position="bottom"
             @click="backToLandings"
             >
-            <icon-base name="home" width="20" height="17"/>
+            <icon-base name="home" width="20" height="17" color="rgba(51, 51, 51, 0.45)"/>
           </span>
           <span class="b-top-bar-menu__crumbs-arrow">
             →

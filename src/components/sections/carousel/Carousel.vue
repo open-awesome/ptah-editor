@@ -114,7 +114,7 @@ import swiperOptions from '@editor/swiper'
 
 import { randomPoneId } from '../../../editor/util'
 
-const GROUP_NAME = 'Carousel'
+const GROUP_NAME = 'Galleries'
 const NAME = 'Carousel'
 
 const COMPONENTS = [
@@ -168,6 +168,8 @@ const SCHEMA_CUSTOM = {
 export default {
   name: NAME,
   group: GROUP_NAME,
+
+  description: 'Fullscreen sliding gallery',
 
   mixins: [defaults],
 

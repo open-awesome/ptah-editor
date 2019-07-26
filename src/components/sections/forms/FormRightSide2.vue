@@ -153,6 +153,8 @@ const NAME = 'FormRight2'
 export default {
   name: NAME,
 
+  description: 'Right-centered large e-mail form screen',
+
   mixins: [defaults],
 
   cover: 'https://gn149.cdn.stg.gamenet.ru/0/7jjF9/o_1gtlEL.png',

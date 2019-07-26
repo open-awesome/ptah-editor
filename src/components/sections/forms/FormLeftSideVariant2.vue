@@ -155,6 +155,8 @@ const NAME = 'FormLeft2'
 export default {
   name: NAME,
 
+  description: 'Left-centered large e-mail form screen',
+
   mixins: [defaults],
 
   cover: 'https://gn287.cdn.stg.gamenet.ru/0/7qZQz/o_W6Gz6.png',

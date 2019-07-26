@@ -704,13 +704,15 @@ const HEADER = [
   }
 ]
 
-const GROUP_NAME = 'ProductsExtend'
+const GROUP_NAME = 'Products'
 const NAME = 'ProductsExtend'
 
 export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'Product list side expanded view',
 
   mixins: [defaults],
 

@@ -159,12 +159,14 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Columns'
-const NAME = 'ColumnsSpace'
+const NAME = 'Columns'
 
 export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'Three columns additional features presentation',
 
   mixins: [defaults],
 

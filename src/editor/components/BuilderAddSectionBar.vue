@@ -22,7 +22,54 @@ export default {
       isVisibleBar: false,
       fullScreenView: false,
       search: '', // filter sections,
-      processing: false
+      processing: false,
+      groupSrc: {
+        Header: {
+          descr: 'Small section for external navigation',
+          ico: 'sectionHeader',
+          width: 25
+        },
+        FirstScreen: {
+          descr: 'Your project face and make-up',
+          ico: 'sectionFirstScreen',
+          width: 18
+        },
+        Columns: {
+          descr: 'Additional features short description',
+          ico: 'sectionColumns',
+          width: 26
+        },
+        Elements: {
+          descr: 'Additional page customization details',
+          ico: 'sectionElements',
+          width: 20
+        },
+        Footer: {
+          descr: 'Page finalization small section',
+          ico: 'sectionFooter',
+          width: 23
+        },
+        Forms: {
+          descr: 'Subscribe your visitors for updates',
+          ico: 'sectionForms',
+          width: 21
+        },
+        Galleries: {
+          descr: 'Picture gallery for a spectacular presentation',
+          ico: 'sectionGallery',
+          width: 26
+        },
+        Products: {
+          descr: 'List your game editions, bundles and packs.',
+          ico: 'sectionProducts',
+          width: 26
+        },
+        Slider: {
+          descr: 'Main features fullscreen slider',
+          ico: 'sectionSlider',
+          width: 32
+        }
+      }
     }
   },
 
@@ -35,7 +82,7 @@ export default {
 
     groups () {
       if (this.hasHeader) {
-        return omit(this.builderGroups, 'header')
+        return omit(this.builderGroups, 'Header')
       }
       return this.builderGroups
     },
@@ -128,12 +175,17 @@ export default {
       >
         <ul class="b-add-section__menu is-visiable" ref="menu">
           <li class="b-add-section__menu-group"
-              :class="{ 'b-add-section__menu-group_selected': group === selectedGroup }"
+              :class="[{ 'b-add-section__menu-group_selected': group === selectedGroup}, `g_${name}`]"
               v-for="(group, name) in groups"
               :key="name"
-              v-if="group.length">
-            <div class="b-add-section__menu-header" @click="showSelectSection(group)">
+              v-if="group.length"
+              @click="showSelectSection(group)">
+            <div class="b-add-section__menu-ico">
+              <icon-base :name="groupSrc[name].ico" :width="groupSrc[name].width" />
+            </div>
+            <div class="b-add-section__menu-header">
               <span class="b-add-section__menu-title">{{ name }}</span>
+              <span class="b-add-section__menu-descr">{{ groupSrc[name].descr }}</span>
             </div>
           </li>
         </ul>
@@ -159,12 +211,12 @@ export default {
                  @click="selectSection(section)">
               <div class="b-add-section-bar__menu-imageholder">
                 <img class="b-add-section-bar__menu-image" v-if="section.cover" :src="section.cover"/>
-                <span class="b-add-section-bar__menu-title">
-                  {{ section.name }}
-                </span>
-              </div>
-              <div class="b-add-section-bar__menu-button">
-                <span>{{ $t('s.add') }}</span>
+                <div class="b-add-section-bar__menu-title">
+                  {{ section.title }}
+                </div>
+                <div class="b-add-section-bar__menu-descr">
+                  {{ section.description }}
+                </div>
               </div>
             </div>
           </template>
@@ -238,20 +290,45 @@ export default {
     padding: 0
     margin: 0
     &-group
-      padding: 0 $size-step
+      display: flex
+      justify-content: flex-start
+      align-items: flex-start
+
+      padding: 0 $size-step 0 1rem
       list-style: none
-      height: 4.8rem
-      line-height: 4.6rem
+      height: 6.6rem
       font-size: 1.4rem
       color: $gray300
       cursor: pointer
+
+      svg
+        fill: $grey-middle
+
       &_selected,
       &:hover
-        color: $black
+        color: $dark-grey
         background-color: rgba(116, 169, 230, 0.25)
+        svg
+          fill: $dark-grey
     &-title
-      display: inline-block
+      font-size: 1.6rem
+      line-height: 1.9rem
+      margin-bottom: .2rem
+      color: #4F4F4F
+      display: block
       text-transform: capitalize
+
+    &-descr
+      font-size: 1.4rem
+      line-height: 1.7rem
+      color: $grey-middle
+
+    &-ico
+      width: 4.6rem
+      display: flex
+      justify-content: center
+      flex-shrink: 0
+      padding-top: .5rem
 
   &-bar
     position: absolute
@@ -261,15 +338,16 @@ export default {
     width: calc(100vw - #{$size-step*9})
     background-color: rgba($dark-blue, 0.45)
     transition: left 0.3s ease-in-out
+
     &>div
-     background: $white
-     transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
+      background: $white
+      transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
+      box-shadow: inset -1px 0px 8px rgba(0, 0, 0, 0.15)
     &__menu
       padding: 3.2rem 0 8rem
       &-element
         overflow: hidden
         box-sizing: border-box
-        background-color: $white
         margin: 0
         cursor: pointer
         display: flex
@@ -278,8 +356,16 @@ export default {
         border: 0.2rem solid transparent
         transition: all 0.1s ease-in-out
         position: relative
-        &:hover .b-add-section-bar__menu-button
-          display: flex
+        &:hover::after
+          content: ''
+          display: block
+          top: 0
+          left: 0
+          right: 0
+          bottom: 0
+          position: absolute
+          background: rgba(47, 110, 205, 0.2)
+
         &_selected
           background-color: #436FEE
           border: 0.2rem solid transparent
@@ -292,7 +378,7 @@ export default {
       &-imageholder
         background: url("https://gn790.cdn.stg.gamenet.ru/0/7k3Ee/o_jGfAw.png") no-repeat
         width: 24rem
-        height: 18.6rem
+        min-height: 18.6rem
         padding: 1.2rem .2rem 0
         margin: 2.1rem 2.1rem 1.1rem
         position: relative
@@ -300,7 +386,13 @@ export default {
         max-width: 100%
       &-title
         font-size: 1.6rem
-        color: $black
+        color: $dark-grey
+        margin-bottom: .6rem
+      &-descr
+        font-size: 1.2rem
+        line-height: 1.4rem
+        color: $grey-middle
+
       &-button
         display: none
         position: absolute

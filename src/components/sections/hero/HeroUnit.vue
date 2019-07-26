@@ -4,8 +4,8 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const GROUP_NAME = 'Hero'
-const NAME = 'HeroUnit'
+const GROUP_NAME = 'FirstScreen'
+const NAME = 'GenericMainScreen'
 const BG_SECTION = 'url(https://gn987.cdn.stg.gamenet.ru/0/7K0NZ/o_1zKuK8.png)'
 
 /**
@@ -173,6 +173,8 @@ export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'Simplified all-purpose main screen',
 
   mixins: [defaults],
 

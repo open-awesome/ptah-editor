@@ -160,6 +160,8 @@ export default {
 
   group: GROUP_NAME,
 
+  description: 'Gallery fullscreen pop-up picture view',
+
   mixins: [section],
 
   cover: '/img/covers/gallery2.png',

@@ -206,6 +206,8 @@ export default {
 
   group: GROUP_NAME,
 
+  description: 'Space title animated background main screen',
+
   mixins: [defaults],
 
   cover: '/img/covers/first-screen-space-video-back.jpg',

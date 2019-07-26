@@ -81,13 +81,15 @@ const SCHEMA_CUSTOM = {
   edited: true
 }
 
-const GROUP_NAME = 'Hero'
+const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroBAS'
 
 export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'Fantasy title Play Game main screen',
 
   mixins: [defaults],
 

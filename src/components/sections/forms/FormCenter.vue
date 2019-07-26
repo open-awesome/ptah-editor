@@ -82,6 +82,8 @@ const NAME = 'FormCenter'
 export default {
   name: NAME,
 
+  description: 'Centered e-mail gathering form screen',
+
   mixins: [defaults],
 
   cover: 'https://gn982.cdn.stg.gamenet.ru/TY0Xv53wUG/7mH9m/o_1qPg3L.png',
