@@ -72,7 +72,7 @@ import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['VideoSplitScreen', 'FirstScreen', '/img/covers/hero-art-left.png']
+const [name, group, cover] = ['HeroVideoSplitScreen', 'FirstScreen', '/img/covers/hero-art-left.png']
 
 /**
  * Base keys for elements in Hero sections

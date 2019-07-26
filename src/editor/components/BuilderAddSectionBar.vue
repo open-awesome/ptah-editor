@@ -378,7 +378,7 @@ export default {
       &-imageholder
         background: url("https://gn790.cdn.stg.gamenet.ru/0/7k3Ee/o_jGfAw.png") no-repeat
         width: 24rem
-        height: 18.6rem
+        min-height: 18.6rem
         padding: 1.2rem .2rem 0
         margin: 2.1rem 2.1rem 1.1rem
         position: relative
