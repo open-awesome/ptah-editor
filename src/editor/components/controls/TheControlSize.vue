@@ -16,7 +16,7 @@ export default {
       },
 
       set (value) {
-        this.update('width', value)
+        // this.update('width', value)
       }
     },
 
@@ -26,7 +26,7 @@ export default {
       },
 
       set (value) {
-        this.update('height', value)
+        // this.update('height', value)
       }
     },
 
@@ -68,6 +68,20 @@ export default {
       if (value === '') value = 0
       styles[prop] = value + 'px'
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+    },
+
+    upload (obj) {
+      console.log(obj)
+      let styles = {}
+      let value = parseInt(obj.value)
+
+      if (value === '') value = 0
+      if (value > this.maxProps[obj.prop]) value = this.maxProps[obj.prop]
+
+      styles[obj.prop] = value + 'px'
+      this[obj.prop] = value
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
     }
   }
 }
@@ -80,10 +94,10 @@ export default {
     </base-label>
     <div class="b-size-controls">
       <div class="b-size-controls__control">
-        <base-number-field :maximum="maxProps['width']" v-model="width" label="Width" class=""></base-number-field>
+        <base-number-field @upload="upload" par="width" :maximum="maxProps['width']" v-model="width" label="Width" class=""></base-number-field>
       </div>
       <div class="b-size-controls__control">
-        <base-number-field :maximum="maxProps['height']" v-model="height" label="Height" class=""></base-number-field>
+        <base-number-field @upload="upload" par="height" :maximum="maxProps['height']" v-model="height" label="Height" class=""></base-number-field>
       </div>
     </div>
   </div>

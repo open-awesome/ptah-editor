@@ -53,6 +53,10 @@ export default {
       type: String,
       default: ''
     },
+    par: {
+      type: String,
+      default: ''
+    },
     placeholder: {
       type: String,
       default: ''
@@ -61,7 +65,11 @@ export default {
 
   watch: {
     value (value) {
-      this.innerValue = Math.min(value, this.maximum)
+      this.innerValue = value
+    },
+    innerValue (value) {
+      let v = Math.min(value, this.maximum)
+      this.$emit('upload', { prop: this.par, value: v })
     }
   },
 
