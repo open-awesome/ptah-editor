@@ -430,16 +430,20 @@ export default {
   right: 20px
   .is-mobile &,
   .is-tablet &
-    right: 5px
-    @media only screen and (max-width: 768px)
-      &
-        right: 5px
+    right: 0
+    transform: scale(.7)
+  @media only screen and (max-width: 768px)
+    &
+      right: 0
+      transform: scale(.7)
 .swiper-button-prev
   left: 20px
   .is-mobile &,
   .is-tablet &
-    left: 5px
-    @media only screen and (max-width: 768px)
-      &
-        left: 5px
+    left: 0
+    transform: scale(.7)
+  @media only screen and (max-width: 768px)
+    &
+      left: 0
+      transform: scale(.7)
 </style>

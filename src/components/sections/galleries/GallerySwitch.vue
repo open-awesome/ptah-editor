@@ -433,10 +433,8 @@ export default {
 
   &__controls
     position: absolute
-    top: -14px
-    left: $size-step/3.4
-
-    display: flex
+    top: -21px
+    left: 0
     align-items: flex-end
     justify-content: flex-start
 
