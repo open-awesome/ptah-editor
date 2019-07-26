@@ -1,14 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import { getPseudoTemplate, randomPoneId } from '../../util'
-import { find, merge } from 'lodash-es'
-const LIST_FONTS = [
-  'Lato',
-  'Montserrat',
-  'Heebo',
-  'PT Serif',
-  'Roboto'
-]
+import { getPseudoTemplate, randomPoneId, FONT_SIZES_LIST, LINES_HEIGHT_LIST, FONTS_LIST } from '../../util'
+import * as _ from 'lodash-es'
 
 export default {
   props: {
@@ -26,22 +19,8 @@ export default {
     return {
       fontName: {},
       size: {},
-      sizes: [
-        { name: '12px', value: '1.2rem' },
-        { name: '14px', value: '1.4rem' },
-        { name: '16px', value: '1.6rem' },
-        { name: '18px', value: '1.8rem' },
-        { name: '20px', value: '2rem' },
-        { name: '24px', value: '2.4rem' },
-        { name: '28px', value: '2.8rem' },
-        { name: '32px', value: '3.2rem' },
-        { name: '36px', value: '3.6rem' },
-        { name: '40px', value: '4rem' },
-        { name: '48px', value: '4.8rem' },
-        { name: '56px', value: '5.6rem' },
-        { name: '64px', value: '6.4rem' },
-        { name: '72px', value: '7.2rem' }
-      ],
+      sizes: FONT_SIZES_LIST,
+      linesHeight: LINES_HEIGHT_LIST,
       color: '',
       colorHover: '',
       td: { prop: 'text-decoration', value: 'underline', base: 'none' },
@@ -73,7 +52,7 @@ export default {
 
   created () {
     this.fontName = { name: this.styles['font-family'], value: this.styles['font-family'] }
-    this.size = find(this.sizes, { value: this.styles['font-size'] })
+    this.size = _.find(this.sizes, { value: this.styles['font-size'] })
     this.color = this.styles['color']
     if (this.colorTextHover) this.colorHover = this.pseudo['hover']['color']
   },
@@ -94,11 +73,35 @@ export default {
     },
 
     fonts () {
-      const options = LIST_FONTS.map((font) => {
+      const options = FONTS_LIST.map((font) => {
         return { name: font, value: font }
       })
       return {
         options
+      }
+    },
+
+    lineHeight: {
+      get () {
+        let s = _.get(this.settingObjectOptions, `styles['line-height']`)
+        let gotLineHeight = s
+
+        if (s === undefined) {
+          let style = window.getComputedStyle(this.settingObjectElement)
+          let lineHeight = parseFloat(style['line-height'])
+          let fontSize = parseFloat(style['font-size'])
+
+          gotLineHeight = Math.round((lineHeight / fontSize) * 10) / 10
+        }
+
+        return { name: gotLineHeight, value: gotLineHeight }
+      },
+      set (value) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+          styles: {
+            'line-height': value.value
+          }
+        }))
       }
     }
   },
@@ -133,7 +136,7 @@ export default {
       if (style !== '') {
         pseudo[pseudoClass] = {}
         pseudo[pseudoClass][attr] = style + '!important'
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, { pseudo }))
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { pseudo }))
 
         this.changePseudoStyle(attr, style + '!important')
       }
@@ -185,6 +188,9 @@ export default {
       </div>
       <div class="b-typography-controls__control-col">
         <base-select label="Size" :options="sizes" v-model="size" @input="changeSize" height="23"></base-select>
+      </div>
+      <div class="b-typography-controls__control-col">
+        <base-select label="Line" :options="linesHeight" v-model="lineHeight" height="23"></base-select>
       </div>
     </div>
     <div class="b-typography-controls__control">

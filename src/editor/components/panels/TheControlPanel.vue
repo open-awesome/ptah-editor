@@ -34,7 +34,6 @@ import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
 import ThePanelForm from './ThePanelForm'
 import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsColumnsSettings'
-import ThePanelSectionProductsColumnsStyle from './ThePanelSectionProductsColumnsStyle'
 import ThePanelSectionColumnsSettings from './ThePanelSectionColumnsSettings'
 import ThePanelToggleElement from './ThePanelToggleElement'
 import ThePanelGroupBackground from './ThePanelGroupBackground'
@@ -90,7 +89,6 @@ export default {
     ThePanelForm,
     ThePanelVideo,
     ThePanelSectionProductsColumnsSettings,
-    ThePanelSectionProductsColumnsStyle,
     ThePanelSectionGallerySettings,
     ThePanelSectionGalleryStyle,
     ThePanelSectionColumnsSettings,
