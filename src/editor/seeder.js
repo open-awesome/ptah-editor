@@ -436,6 +436,7 @@ const data = new Map([
         color: 'rgba(0,0,0,1)',
         opacity: '0'
       },
+      itemHoverColor: '#fff',
       textStyles: {
         text: {
           'font-family': 'Lato',
