@@ -71,12 +71,10 @@ export default {
     },
 
     upload (obj) {
-      console.log(obj)
       let styles = {}
       let value = parseInt(obj.value)
 
       if (value === '') value = 0
-      if (value > this.maxProps[obj.prop]) value = this.maxProps[obj.prop]
 
       styles[obj.prop] = value + 'px'
       this[obj.prop] = value

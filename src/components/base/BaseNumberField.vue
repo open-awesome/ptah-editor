@@ -65,18 +65,36 @@ export default {
 
   watch: {
     value (value) {
-      this.innerValue = value
+      let v = value
+
+      if (value !== '') {
+        if (this.maximum > 0) v = Math.min(value, this.maximum)
+      } else {
+        v = 0
+      }
+
+      this.innerValue = v
     },
     innerValue (value) {
-      let v = Math.min(value, this.maximum)
-      this.$emit('upload', { prop: this.par, value: v })
+      if (value === '') value = 0
+
+      // width/height upload
+      this.$emit('upload', { prop: this.par, value: value })
     }
   },
 
   data () {
     return {
-      innerValue: Math.min(this.value, this.maximum),
+      innerValue: 0,
       hasFocus: false
+    }
+  },
+
+  mounted () {
+    if (this.maximum > 0) {
+      this.innerValue = Math.min(this.value, this.maximum)
+    } else {
+      this.innerValue = this.value
     }
   }
 }
