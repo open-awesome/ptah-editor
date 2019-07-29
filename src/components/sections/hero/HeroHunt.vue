@@ -100,13 +100,15 @@ const SCHEMA_CUSTOM = {
   edited: true
 }
 
-const GROUP_NAME = 'Hero'
+const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroHunt'
 
 export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'Shooter title Early Access main screen',
 
   mixins: [defaults],
 

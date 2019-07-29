@@ -126,6 +126,8 @@ export default {
 
   group: GROUP_NAME,
 
+  description: 'Space title Video to Action main screen',
+
   mixins: [defaults],
 
   cover: '/img/covers/first-screen-space-video-player.jpg',

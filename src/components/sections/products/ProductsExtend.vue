@@ -780,6 +780,8 @@ export default {
 
   group: GROUP_NAME,
 
+  description: 'Product list side expanded view',
+
   mixins: [defaults],
 
   cover: '/img/covers/products_e.jpg',

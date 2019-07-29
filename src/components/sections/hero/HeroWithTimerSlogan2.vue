@@ -4,7 +4,7 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const GROUP_NAME = 'Hero'
+const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroWithTimerSlogan2'
 const BG_SECTION = 'url(https://gn866.cdn.stg.gamenet.ru/0/7oE1x/o_1ToUuI.jpg)'
 
@@ -128,6 +128,8 @@ export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'Shooter title Right Countdown main screen',
 
   mixins: [defaults],
 

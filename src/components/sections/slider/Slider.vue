@@ -120,63 +120,89 @@ import swiperOptions from '@editor/swiper'
 import 'swiper/dist/css/swiper.min.css'
 import { randomPoneId } from '../../../editor/util'
 
-const C_CUSTOM_COLUMN = [
-  {
-    element: {
-      text: 'This is a header',
-      styles: {
-        'font-family': 'Montserrat',
-        'font-size': '6.4rem',
-        'color': '#000000'
+let [
+  C_CUSTOM_COLUMN,
+  C_CUSTOM_COLUMN1,
+  C_CUSTOM_COLUMN2,
+  C_CUSTOM_COLUMN3,
+  C_CUSTOM_COLUMN4,
+  C_CUSTOM_COLUMN5
+] = Array.from(new Array(6), (x, i) => {
+  return [
+    {
+      element: {
+        text: `<strong>${i + 1} feature title<strong>`,
+        styles: {
+          'font-family': 'Montserrat',
+          'font-size': '3.5rem',
+          'color': '#FFFFFF'
+        }
+      }
+    },
+    {
+      element: {
+        text: '<p> Here should be text describing <br> first amazing feature of your terrific<br> game.  </p>',
+        styles: {
+          'font-family': 'Montserrat',
+          'font-size': '2.8rem',
+          'line-height': '29px',
+          'color': '#FFFFFF'
+        }
+      }
+    },
+    {},
+    {
+      element: {
+        text: '<strong>Call to Action</strong>',
+        styles: {
+          'background-color': '#F4BC64',
+          'color': '#000000',
+          'font-family': 'Montserrat',
+          'font-size:': '2rem',
+          'text-align': 'center',
+          'width': '240px',
+          'height': '64px',
+          'border-radius': '50px'
+        },
+        pseudo: {
+          hover: {
+            'background-color': '#FFFFFF !important',
+            'color': '#000000 !important'
+          }
+        }
       }
     }
-  },
-  {
-    element: {
-      text: '<p>An sincerity so extremity he additions.</p>' +
-      '<p>Her yet there truth merit.</p>' +
-      '<p>Mrs all projecting favourable now unpleasing.</p>',
-      styles: {
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem',
-        'color': '#6D6D6D'
-      }
-    }
-  },
-  {},
-  {
-    element: {
-      text: 'Call to Action',
-      styles: {
-        'background-color': '#FFFFFF',
-        'color': '#003EDC',
-        'font-family': 'Montserrat',
-        'font-size:': '1.4rem',
-        'text-align': 'center',
-        'width': '224px',
-        'height': '56px',
-        'border-radius': '50px'
-      }
-    }
-  }
-]
+  ]
+})
 
 const C_CUSTOM_CONTAINER = {
   styles: {
-    'background-color': '#55D287'
+    'background-color': '#000000',
+    'background-image': 'url(https://gn147.cdn.stg.gamenet.ru/0/8dWma/o_os2RO.jpg)',
+    'background-size': 'cover'
   }
 }
 
 const C_CUSTOM_CONTAINER2 = {
   styles: {
-    'background-color': '#72AEF3'
+    'background-color': '#000000',
+    'background-image': 'url(https://gn913.cdn.stg.gamenet.ru/0/8dWmn/o_hDJWI.jpg)',
+    'background-size': 'cover'
+  }
+}
+
+const C_CUSTOM_CONTAINER3 = {
+  styles: {
+    'background-color': '#000000',
+    'background-image': 'url(https://gn285.cdn.stg.gamenet.ru/0/8dWne/o_1hyDuA.jpg)',
+    'background-size': 'cover'
   }
 }
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': '#8CD2B5',
+      'background-color': 'transparent',
       'height': '80vh'
     },
     swiper: {
@@ -187,23 +213,23 @@ const SCHEMA_CUSTOM = {
         prevEl: swiperOptions.prev
       },
       frameWidth: 12,
-      paginationColor: '#2275D7',
-      navColor: '#2275D7'
+      paginationColor: '#F4BC64',
+      navColor: '#F4BC64'
     },
     count: 3
   },
   container1: _.merge({}, C_CUSTOM_CONTAINER),
   container2: _.merge({}, C_CUSTOM_CONTAINER2),
-  container3: _.merge({}, C_CUSTOM_CONTAINER),
-  container4: _.merge({}, C_CUSTOM_CONTAINER2),
-  container5: _.merge({}, C_CUSTOM_CONTAINER),
-  container6: _.merge({}, C_CUSTOM_CONTAINER2),
+  container3: _.merge({}, C_CUSTOM_CONTAINER3),
+  container4: _.merge({}, C_CUSTOM_CONTAINER),
+  container5: _.merge({}, C_CUSTOM_CONTAINER2),
+  container6: _.merge({}, C_CUSTOM_CONTAINER3),
   components1: _.merge({}, C_CUSTOM_COLUMN),
-  components2: _.merge({}, C_CUSTOM_COLUMN),
-  components3: _.merge({}, C_CUSTOM_COLUMN),
-  components4: _.merge({}, C_CUSTOM_COLUMN),
-  components5: _.merge({}, C_CUSTOM_COLUMN),
-  components6: _.merge({}, C_CUSTOM_COLUMN),
+  components2: _.merge({}, C_CUSTOM_COLUMN1),
+  components3: _.merge({}, C_CUSTOM_COLUMN2),
+  components4: _.merge({}, C_CUSTOM_COLUMN3),
+  components5: _.merge({}, C_CUSTOM_COLUMN4),
+  components6: _.merge({}, C_CUSTOM_COLUMN5),
   edited: true
 }
 
@@ -245,6 +271,8 @@ export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'Fullscreen feature slider',
 
   mixins: [defaults],
 
@@ -365,7 +393,7 @@ export default {
 
       font-size: 5rem
       font-weight: bold
-      color: rgba($black, .2)
+      color: rgba($white, .5)
 
 .swiper-container, .b-sandbox, .swiper-slide
   height: 100% !important
@@ -395,4 +423,29 @@ export default {
 .swiper-button-next,
 .swiper-button-prev
   background-image: none
+
+  svg
+    width: 100%
+    height: 100%
+
+.swiper-button-next
+  right: 20px
+  .is-mobile &,
+  .is-tablet &
+    right: 0
+    transform: scale(.7)
+  @media only screen and (max-width: 768px)
+    &
+      right: 0
+      transform: scale(.7)
+.swiper-button-prev
+  left: 20px
+  .is-mobile &,
+  .is-tablet &
+    left: 0
+    transform: scale(.7)
+  @media only screen and (max-width: 768px)
+    &
+      left: 0
+      transform: scale(.7)
 </style>

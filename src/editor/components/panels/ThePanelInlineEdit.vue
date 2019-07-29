@@ -3,21 +3,22 @@
     <h6 class="b-panel__title">
       Text
     </h6>
-    <!-- Text -->
+
+    <!-- Typography -->
     <div class="b-panel__control">
-      <control-text/>
+      <control-typography :show-text-styles="false"></control-typography>
     </div>
   </div>
 </template>
 
 <script>
-import ControlText from './../controls/TheControlText'
+import ControlTypography from '../controls/TheControlTypography'
 
 export default {
-  name: 'ThePanelInlineEdit',
+  name: 'ThePanelInline',
 
   components: {
-    ControlText
+    ControlTypography
   },
 
   props: {

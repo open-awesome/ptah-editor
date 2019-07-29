@@ -701,13 +701,15 @@ const HEADER = [
   }
 ]
 
-const GROUP_NAME = 'System'
-const NAME = 'SystemSpace'
+const GROUP_NAME = 'Elements'
+const NAME = 'SystemRequirements'
 
 export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'System requirements presentation screen',
 
   mixins: [defaults],
 

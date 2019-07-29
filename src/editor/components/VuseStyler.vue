@@ -98,12 +98,6 @@
         <a href="#" class="b-styler__control"
            tooltip="Image link"
            tooltip-position="bottom"
-           @click.stop="setControlPanel('ImageLink')" v-if="options.hasLink && options.belongsGallery">
-          <icon-base name="link" width="14" height="16" />
-        </a>
-        <a href="#" class="b-styler__control"
-           tooltip="Image link"
-           tooltip-position="bottom"
            @click.stop="setModalProps()" ref="modalProps" v-if="!options.belongsGallery">
           <icon-base name="link" width="18" height="18" />
         </a>
