@@ -72,7 +72,7 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 // --- other
 import SystemSpace from '@components/sections/elements/SystemSpace'
 import FooterSpace from '@components/sections/footers/FooterSpace'
-import Faq from '@components/sections/elements/Faq'
+import FaqSpace from '@components/sections/elements/FaqSpace'
 import Slider from '@components/sections/slider/Slider'
 
 import store from '@store'
@@ -136,7 +136,7 @@ const COMPONENTS = {
   FormLeft2,
 
   SystemSpace,
-  Faq,
+  FaqSpace,
 
   FooterSpace
 }

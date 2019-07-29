@@ -8,12 +8,13 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'font-family': 'Lato',
-        'font-size': '1.8rem',
+        'font-family': 'Montserrat',
+        'font-size': '2.8rem',
+        'line-height': '1.2',
         'color': '#ffffff'
       },
       el: {
-        color: 'rgba(248,231,28,1)',
+        color: '#F4BC64',
         icon: {
           name: 'plus',
           value: 'plus'
@@ -21,7 +22,7 @@ const C_CUSTOM_COLUMN = [
         content: `
           <table>
             <tr>
-              <th>Will I be able to play "OUR GAME" this year?</th>
+              <th>Will i be able to play game this year?</th>
             </tr>
             <tr>
               <td>
@@ -37,12 +38,13 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'font-family': 'Lato',
-        'font-size': '1.8rem',
+        'font-family': 'Montserrat',
+        'font-size': '2.8rem',
+        'line-height': '1.2',
         'color': '#ffffff'
       },
       el: {
-        color: 'rgba(248,231,28,1)',
+        color: '#F4BC64',
         icon: {
           name: 'plus',
           value: 'plus'
@@ -50,7 +52,7 @@ const C_CUSTOM_COLUMN = [
         content: `
           <table>
             <tr>
-              <th>What anti-cheat do you plan to use?</th>
+              <th>Want anti-cheat do you plan to use?</th>
             </tr>
             <tr>
               <td>
@@ -66,12 +68,13 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'font-family': 'Lato',
-        'font-size': '1.8rem',
+        'font-family': 'Montserrat',
+        'font-size': '2.8rem',
+        'line-height': '1.2',
         'color': '#ffffff'
       },
       el: {
-        color: 'rgba(248,231,28,1)',
+        color: '#F4BC64',
         icon: {
           name: 'plus',
           value: 'plus'
@@ -79,7 +82,7 @@ const C_CUSTOM_COLUMN = [
         content: `
           <table>
             <tr>
-              <th>What is "OUR GAME"?</th>
+              <th>What is this game about?</th>
             </tr>
             <tr>
               <td>
@@ -95,12 +98,13 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'font-family': 'Lato',
-        'font-size': '1.8rem',
+        'font-family': 'Montserrat',
+        'font-size': '2.8rem',
+        'line-height': '1.2',
         'color': '#ffffff'
       },
       el: {
-        color: 'rgba(248,231,28,1)',
+        color: '#F4BC64',
         icon: {
           name: 'plus',
           value: 'plus'
@@ -108,7 +112,7 @@ const C_CUSTOM_COLUMN = [
         content: `
           <table>
             <tr>
-              <th>When will closed beta testing begin?</th>
+              <th>When will closed beta begins?</th>
             </tr>
             <tr>
               <td>
@@ -126,10 +130,11 @@ const C_CUSTOM_COLUMN = [
 const C_CUSTOM = [
   {
     element: {
-      text: 'FAQ',
+      text: '<b>Frequently Asked Questions</b>',
       styles: {
-        'font-family': 'Lato',
-        'font-size': '3.2rem',
+        'font-family': 'Montserrat',
+        'font-size': '4rem',
+        'line-height': '1.2',
         'color': '#ffffff'
       }
     }
@@ -155,10 +160,13 @@ const C_CUSTOM_CONTAINER_1 = {
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn819.cdn.stg.gamenet.ru/0/7L5P8/o_Dyakc.png)',
+      'background-image': 'url(https://gn309.cdn.stg.gamenet.ru/0/8hwba/o_O5UBP.jpg)',
       'background-color': '#151C44',
       'background-position': 'center center',
-      'background-size': 'cover'
+      'background-size': 'cover',
+      'padding-top': '24px',
+      'padding-bottom': '24px',
+      'height': '70vh'
     }
   },
   container: _.merge({}, C_CUSTOM_CONTAINER),
@@ -210,7 +218,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Elements'
-const NAME = 'FAQ'
+const NAME = 'FrequentlyAskedQuestionsSpace'
 
 export default {
   name: NAME,
@@ -221,7 +229,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/faq.png',
+  cover: '/img/covers/faq-space.png',
 
   $schema: {
     mainStyle: types.Columns,
