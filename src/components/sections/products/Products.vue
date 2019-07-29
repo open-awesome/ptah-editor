@@ -589,6 +589,8 @@ export default {
 
   group: GROUP_NAME,
 
+  description: 'Product list horizontal view',
+
   mixins: [defaults],
 
   cover: '/img/covers/products.jpg',

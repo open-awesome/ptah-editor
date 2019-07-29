@@ -60,7 +60,7 @@ const data = new Map([
       'font-style': 'normal',
       'text-decoration': 'none',
       'text-align': 'center',
-      'color': '#000',
+      'color': '#9B9B9B',
       'justify-content': 'center'
     },
     isComplex: true,
@@ -309,22 +309,22 @@ const data = new Map([
     },
     textStyles: {
       chapter: {
-        'font-family': 'Lato',
-        'font-size': '3.2rem',
+        'font-family': 'Montserrat',
+        'font-size': '3.6rem',
         'line-height': '1.4',
-        'font-weight': 'normal',
+        'font-weight': 'bold',
         'font-style': 'normal',
         'text-decoration': 'none',
-        'color': 'rgba(0, 0, 0, 1)'
+        'color': 'rgba(255, 255, 255, 1)'
       },
       text: {
         'font-family': 'Lato',
-        'font-size': '1.4rem',
+        'font-size': '1.6rem',
         'line-height': '1.4',
         'font-weight': 'normal',
         'font-style': 'normal',
         'text-decoration': 'none',
-        'color': 'rgba(0, 0, 0, 1)'
+        'color': 'rgba(255, 255, 255, 1)'
       }
     },
     isChapter: false,

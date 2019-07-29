@@ -200,6 +200,8 @@ export default {
 
   group: GROUP_NAME,
 
+  description: 'Space title Maximum main screen',
+
   mixins: [defaults],
 
   cover: '/img/covers/first-screen-space-01.jpg',

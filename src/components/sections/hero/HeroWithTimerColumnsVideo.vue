@@ -4,7 +4,7 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const GROUP_NAME = 'Hero'
+const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroWithTimerColumnsVideo'
 const BG_SECTION = 'url(https://gn728.cdn.stg.gamenet.ru/0/7oAt2/o_1A6qDa.jpg)'
 
@@ -207,6 +207,8 @@ export default {
   name: NAME,
 
   group: GROUP_NAME,
+
+  description: 'Shooter title Video | Countdown split screen',
 
   mixins: [defaults],
 
