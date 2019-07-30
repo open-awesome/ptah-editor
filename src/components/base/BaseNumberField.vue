@@ -10,7 +10,6 @@
 
       <input class="b-base-number-field__input" type="number"
              v-bind="$attrs"
-             :max="maximum"
              v-model="innerValue"
              :placeholder="placeholder"
              @input="$emit('input', innerValue)"
@@ -68,8 +67,11 @@ export default {
   },
 
   watch: {
-    value (value) {
-      this.innerValue = value !== '' ? Math.min(value, this.maximum) : 0
+    innerValue  (value) {
+      let val = value !== '' ? Math.min(value, this.maximum) : 0
+      this.innerValue = val
+
+      this.$emit('input', val)
     }
   },
 
