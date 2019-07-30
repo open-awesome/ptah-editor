@@ -81,10 +81,10 @@ export default {
     </base-label>
     <div class="b-size-controls">
       <div class="b-size-controls__control">
-        <base-number-field parameterSize="width" :maximum="maxProps['width']" v-model="width" label="Width" class=""></base-number-field>
+        <base-number-field :maximum="maxProps['width']" v-model="width" label="Width" class=""></base-number-field>
       </div>
       <div class="b-size-controls__control">
-        <base-number-field parameterSize="height" :maximum="maxProps['height']" v-model="height" label="Height" class=""></base-number-field>
+        <base-number-field :maximum="maxProps['height']" v-model="height" label="Height" class=""></base-number-field>
       </div>
     </div>
   </div>

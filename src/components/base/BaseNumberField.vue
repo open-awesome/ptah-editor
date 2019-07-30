@@ -56,10 +56,6 @@ export default {
       type: String,
       default: ''
     },
-    parameterSize: {
-      type: String,
-      default: ''
-    },
     placeholder: {
       type: String,
       default: ''
