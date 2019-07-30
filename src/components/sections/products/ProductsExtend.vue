@@ -772,7 +772,7 @@ const COMPONENTS_D = [
     label: 'icon with text'
   }
 ]
-const GROUP_NAME = 'ProductsExtend'
+const GROUP_NAME = 'Products'
 const NAME = 'ProductsExtend'
 
 export default {
