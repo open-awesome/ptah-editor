@@ -52,6 +52,7 @@ import FirstScreenSpace01 from '@components/sections/first-screen/FirstScreenSpa
 import FirstScreenSpace02 from '@components/sections/first-screen/FirstScreenSpace02'
 import FirstScreenSpaceVideoBack from '@components/sections/first-screen/FirstScreenSpaceVideoBack'
 import FirstScreenSpaceVideoPlayer from '@components/sections/first-screen/FirstScreenSpaceVideoPlayer'
+import FirstScreenFantasyVideoBack from '@components/sections/first-screen/FirstScreenFantasyVideoBack'
 // --- gallery
 import GallerySwitch from '@components/sections/galleries/GallerySwitch'
 import GalleryPopup from '@components/sections/galleries/GalleryPopup'
@@ -104,6 +105,7 @@ const COMPONENTS = {
   FirstScreenSpace02,
   FirstScreenSpaceVideoBack,
   FirstScreenSpaceVideoPlayer,
+  FirstScreenFantasyVideoBack,
   HeroUnit,
   HeroTwoColumns,
   HeroThreeColumns,
