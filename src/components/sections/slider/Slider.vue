@@ -278,7 +278,7 @@ export default {
 
   inject: ['device'],
 
-  cover: 'https://gn823.cdn.stg.gamenet.ru/0/8Y52t/o_1XHdCo.png',
+  cover: 'https://gn738.cdn.stg.gamenet.ru/0/8iECW/o_1bOZmd.jpg',
 
   data () {
     return {

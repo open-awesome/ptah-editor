@@ -593,7 +593,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/products.jpg',
+  cover: 'https://gn709.cdn.stg.gamenet.ru/0/8iEAD/o_1uYktu.jpg',
 
   $schema: {
     mainStyle: types.ProductSection,
