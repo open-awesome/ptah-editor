@@ -10,6 +10,7 @@
 
       <input class="b-base-number-field__input" type="number"
              v-bind="$attrs"
+             :max="maximum"
              v-model="innerValue"
              :placeholder="placeholder"
              @input="$emit('input', innerValue)"
@@ -39,7 +40,10 @@ export default {
     },
     maximum: {
       type: Number,
-      default: 0
+      default: Infinity,
+      validator: function (value) {
+        return value > 0
+      }
     },
     hasError: {
       type: Boolean,
@@ -53,7 +57,7 @@ export default {
       type: String,
       default: ''
     },
-    par: {
+    parameterSize: {
       type: String,
       default: ''
     },
@@ -65,21 +69,7 @@ export default {
 
   watch: {
     value (value) {
-      let v = value
-
-      if (value !== '') {
-        if (this.maximum > 0) v = Math.min(value, this.maximum)
-      } else {
-        v = 0
-      }
-
-      this.innerValue = v
-    },
-    innerValue (value) {
-      if (value === '') value = 0
-
-      // width/height upload
-      this.$emit('upload', { prop: this.par, value: value })
+      this.innerValue = value !== '' ? Math.min(value, this.maximum) : 0
     }
   },
 
@@ -91,11 +81,7 @@ export default {
   },
 
   mounted () {
-    if (this.maximum > 0) {
-      this.innerValue = Math.min(this.value, this.maximum)
-    } else {
-      this.innerValue = this.value
-    }
+    this.innerValue = this.value !== '' ? Math.min(this.value, this.maximum) : 0
   }
 }
 </script>
