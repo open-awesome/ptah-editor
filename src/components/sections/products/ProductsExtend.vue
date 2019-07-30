@@ -716,7 +716,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/products_e.jpg',
+  cover: 'https://gn199.cdn.stg.gamenet.ru/0/8iE9h/o_2BSWcG.jpg',
 
   $schema: {
     mainStyle: types.ProductSection,
