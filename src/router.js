@@ -23,7 +23,6 @@ router.beforeEach(
     const allowedPaths = ['/', '/login', '/editor/demo', '/404']
 
     if (!allowedPaths.includes(to.path) && (localStorage.getItem('token') === null)) {
-      console.log(allowedPaths.includes(to.path), to.path)
       next('/login')
       return
     }
