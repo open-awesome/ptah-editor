@@ -166,7 +166,7 @@ const SCHEMA_CUSTOM = {
       'background-size': 'cover',
       'padding-top': '24px',
       'padding-bottom': '24px',
-      'height': '70vh'
+      'height': 'auto'
     }
   },
   container: _.merge({}, C_CUSTOM_CONTAINER),
