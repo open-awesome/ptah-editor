@@ -53,8 +53,10 @@ export default {
     },
 
     saveState ({ commit, dispatch }, landing) {
-      commit('saveState', landing)
-      dispatch('saveLanding', landing, { root: true })
+      if (localStorage.getItem('guest') === null) {
+        commit('saveState', landing)
+        dispatch('saveLanding', landing, { root: true })
+      }
     }
   },
 

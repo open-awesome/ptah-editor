@@ -1,13 +1,24 @@
 <template>
   <div class="intro">
+    <button @click="goDemo" class="">DEMO</button>
     <router-link to="/dashboard/">Dashboard</router-link> |
     <router-link to="/login">Login</router-link>
   </div>
 </template>
 
 <script>
+import { mapMutations } from 'vuex'
 export default {
-  name: 'Intro'
+  name: 'Intro',
+
+  methods: {
+    ...mapMutations('User', ['setGuestUser']),
+
+    goDemo () {
+      this.setGuestUser(true)
+      this.$router.push({ path: `/editor/demo` })
+    }
+  }
 }
 </script>
 
