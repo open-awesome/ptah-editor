@@ -5,10 +5,11 @@ import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
 const GROUP_NAME = 'FirstScreen'
-const NAME = 'FirstScreenFantasy01'
-const BG_SECTION = 'url(https://gn823.cdn.stg.gamenet.ru/0/8ifGM/o_7byuz.jpg)'
+const NAME = 'FirstScreenFantasy02'
+const BG_SECTION = 'url(https://gn904.cdn.stg.gamenet.ru/0/8igWN/o_1jz4qB.jpg)'
+const date = Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000
 
-const COMPONENTS_2 = [
+const COMPONENTS_1 = [
   {
     name: 'Logo',
     element: types.Logo,
@@ -24,6 +25,13 @@ const COMPONENTS_2 = [
     label: 'text'
   },
   {
+    name: 'Timer',
+    element: types.Timer,
+    type: 'timer',
+    class: 'b-timer-fs',
+    label: 'timer'
+  },
+  {
     name: 'Button',
     element: types.Button,
     type: 'button',
@@ -32,7 +40,7 @@ const COMPONENTS_2 = [
   }
 ]
 
-const C_CUSTOM_2 = [
+const C_CUSTOM_1 = [
   {
     element: {
       styles: {
@@ -58,6 +66,28 @@ const C_CUSTOM_2 = [
         'margin': '25px 0 20px 15px',
         'text-align': 'left',
         'padding': '0 0 0 13px'
+      }
+    }
+  },
+  {
+    element: {
+      timer: {
+        timestamp: date,
+        UTC: new Date().getTimezoneOffset() / 60 * (-1),
+        labels: {
+          show: false
+        },
+        colorTile: 'rgba(0,0,0,0)'
+      },
+      styles: {
+        'background-color': 'rgba(0,0,0,0)',
+        'font-family': 'Cinzel',
+        'font-size': '4rem',
+        'font-weight': 'normal',
+        'line-height': '1',
+        'color': '#ffffff',
+        'padding': '0',
+        'margin': '0 0 27px 25px'
       }
     }
   },
@@ -143,20 +173,20 @@ const SCHEMA_CUSTOM = {
       'background-color': '#4A4A4A',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
-      'background-position': 'right bottom',
+      'background-position': 'center top',
       'height': '100vh'
     }
   },
+  components: _.merge({}, C_CUSTOM_1),
   container: {
-    width: 5
-  },
-  components2: _.merge({}, C_CUSTOM_2),
-  container2: {
-    width: 7,
+    width: 9,
     styles: {
       'padding': '0',
       'align-items': 'flex-start'
     }
+  },
+  container2: {
+    width: 3
   },
   container3: {
     width: 12
@@ -170,19 +200,19 @@ export default {
 
   group: GROUP_NAME,
 
-  description: 'Fantasy title Maximum main screen',
+  description: 'Fantasy title face the Countdown main screen',
 
   mixins: [defaults],
 
-  cover: '/img/covers/first-screen-fantasy-01.jpg',
+  cover: '/img/covers/first-screen-fantasy-02.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
     container: types.StyleObject,
     container2: types.StyleObject,
     container3: types.StyleObject,
-    components: [],
-    components2: COMPONENTS_2,
+    components: COMPONENTS_1,
+    components2: [],
     components3: COMPONENTS_3
   },
 
@@ -206,7 +236,7 @@ export default {
     <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-m-12 hidden-m" :class="`b-grid__col-${$sectionData.container.width}`">
+        <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container.width}`">
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
@@ -230,7 +260,7 @@ export default {
             </draggable>
           </sandbox>
         </div>
-        <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container2.width}`">
+        <div class="b-grid__col-m-12 hidden-m" :class="`b-grid__col-${$sectionData.container2.width}`">
           <sandbox
               container-path="$sectionData.container2"
               components-path="$sectionData.components2"
