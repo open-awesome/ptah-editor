@@ -56,7 +56,7 @@ export default {
         ico: 'elImage',
         width: 18
       },
-      spacer: {
+      delimiter: {
         name: 'Spacer',
         descr: 'Custom spacer between page elements',
         ico: 'elSpacer',
