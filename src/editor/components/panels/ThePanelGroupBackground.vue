@@ -379,8 +379,8 @@ export default {
     display: flex
     &-col
       /deep/
-      .b-range-slider__row
-        flex-direction: row-reverse
+        .b-range-slider__row
+          flex-direction: row-reverse
         .b-range-slider__text
           padding-left: 0.5rem
         .b-range-slider
