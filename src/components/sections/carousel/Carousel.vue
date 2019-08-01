@@ -259,6 +259,10 @@ export default {
 .swiper-button-prev
   background-image: none
 
+  svg
+    width: 100%
+    height: 100%
+
 .b-empty-carousel
   border: 5px dashed rgba(0,0,0, .35)
   color: rgba(0,0,0, .35)
