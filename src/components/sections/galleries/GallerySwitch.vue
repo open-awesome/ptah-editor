@@ -365,7 +365,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/gallery1.png',
+  cover: 'https://gn249.cdn.stg.gamenet.ru/0/8iEB7/o_Rg7b5.jpg',
 
   $schema: {
     mainStyle: types.Gallery,

@@ -130,7 +130,7 @@ export default {
 
   mixins: [section],
 
-  cover: '/img/covers/gallery2.png',
+  cover: 'https://gn128.cdn.stg.gamenet.ru/0/8iEAd/o_1SRy55.jpg',
 
   $schema: {
     mainStyle: types.Gallery,

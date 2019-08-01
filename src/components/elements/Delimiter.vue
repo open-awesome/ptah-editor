@@ -25,7 +25,7 @@ import VueDraggableResizable from 'vue-draggable-resizable'
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
 
 export default {
-  name: 'Spacer',
+  name: 'Delimiter',
 
   inject: ['$section'],
 

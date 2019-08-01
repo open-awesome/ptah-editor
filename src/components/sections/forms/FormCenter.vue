@@ -86,7 +86,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: 'https://gn982.cdn.stg.gamenet.ru/TY0Xv53wUG/7mH9m/o_1qPg3L.png',
+  cover: 'https://gn133.cdn.stg.gamenet.ru/0/8iE90/o_1LlVoh.jpg',
 
   group: GROUP_NAME,
 

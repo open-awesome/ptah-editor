@@ -17,7 +17,7 @@ import Button from '@components/elements/Button'
 import TextElement from '@components/elements/TextElement'
 import Pic from '@components/elements/Pic'
 import Logo from '@components/elements/Logo'
-import Spacer from '@components/elements/Spacer'
+import Delimiter from '@components/elements/Delimiter'
 import AvailablePlatforms from '@components/elements/AvailablePlatforms'
 import AgeRestrictions from '@components/elements/AgeRestrictions'
 import SocialNetworks from '@components/elements/SocialNetworks'
@@ -72,7 +72,7 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 // --- other
 import SystemSpace from '@components/sections/elements/SystemSpace'
 import FooterSpace from '@components/sections/footers/FooterSpace'
-import Faq from '@components/sections/elements/Faq'
+import FaqSpace from '@components/sections/elements/FaqSpace'
 import Slider from '@components/sections/slider/Slider'
 
 import store from '@store'
@@ -84,7 +84,7 @@ const ELEMENTS = {
   TextElement,
   Pic,
   Logo,
-  Spacer,
+  Delimiter,
   AvailablePlatforms,
   AgeRestrictions,
   SocialNetworks,
@@ -136,7 +136,7 @@ const COMPONENTS = {
   FormLeft2,
 
   SystemSpace,
-  Faq,
+  FaqSpace,
 
   FooterSpace
 }
