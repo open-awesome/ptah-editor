@@ -294,7 +294,7 @@ export default {
       justify-content: flex-start
       align-items: flex-start
 
-      padding: 0 $size-step 0 1rem
+      padding: $size-step/8 $size-step 0 1rem
       list-style: none
       height: 6.6rem
       font-size: 1.4rem
