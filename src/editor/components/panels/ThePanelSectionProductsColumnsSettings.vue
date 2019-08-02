@@ -9,7 +9,9 @@
         <control-section-products/>
 
         <!-- Vertical align -->
-        <control-vertical-align :propAlign="`align-items`"/>
+        <div class="b-panel__control">
+          <control-vertical-align :propAlign="`align-items`"/>
+        </div>
       </div>
     </base-scroll-container>
   </div>
