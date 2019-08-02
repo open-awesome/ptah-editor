@@ -494,7 +494,7 @@ const data = new Map([
         },
         showNavigation: true,
         showPagination: true,
-        navSize: '8px'
+        navSize: '20px'
       }
     })
   )],

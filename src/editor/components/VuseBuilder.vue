@@ -159,7 +159,6 @@ export default {
   watch: {
     title (value) {
       this.$builder.title = value
-      document.title = value
     },
 
     currentLanding (value) {
