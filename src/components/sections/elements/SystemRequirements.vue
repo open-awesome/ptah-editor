@@ -702,7 +702,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Elements'
-const NAME = 'SystemRequirementsSpace'
+const NAME = 'SystemRequirements'
 
 export default {
   name: NAME,

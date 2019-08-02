@@ -159,7 +159,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Columns'
-const NAME = 'ColumnsSpace'
+const NAME = 'Columns'
 
 export default {
   name: NAME,

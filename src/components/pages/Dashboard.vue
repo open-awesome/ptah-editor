@@ -12,19 +12,19 @@ export default {
         },
         {
           type: 'Simple page',
-          sections: ['FirstScreenSpaceVideoBack', 'FooterSpace']
-        },
-        {
-          type: 'Closed beta test page',
-          sections: ['FirstScreenSpaceVideoBack', 'ColumnsSpace', 'GalleryPopupSpace', 'FormCenterSpace', 'FooterSpace']
-        },
-        {
-          type: 'Space page',
-          sections: ['FirstScreenSpaceVideoBack', 'ColumnsSpace', 'GalleryPopupSpace', 'ProductsSpace', 'SystemRequirementsSpace', 'FrequentlyAskedQuestionsSpace', 'FooterSpace']
+          sections: ['FirstScreenSpace01', 'FooterSpace']
         },
         {
           type: 'Simple page with menu',
-          sections: ['SmmHeaderSpace', 'FirstScreenSpaceVideoBack', 'FooterSpace']
+          sections: ['ActionButtonHeader', 'FirstScreenSpaceVideoPlayer', 'FooterSpace']
+        },
+        {
+          type: 'Closed beta test page',
+          sections: ['FirstScreenSpaceVideoBack', 'Columns', 'GalleryPopup', 'FormCenter', 'FooterSpace']
+        },
+        {
+          type: 'Space page',
+          sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace']
         }
       ],
       presetSelected: 0,
@@ -65,7 +65,6 @@ export default {
         this.createProgress = true
         this.$Progress.start()
         this.invalid = false
-        console.log(this.presets[this.presetSelected].sections)
         this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
           .then((response) => {
             this.$router.push({ path: `/editor/${response._id}` })

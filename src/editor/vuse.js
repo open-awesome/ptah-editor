@@ -206,6 +206,7 @@ class Vuse {
 
   set (data) {
     this.title = data.title !== undefined ? data.title : this.title
+
     if (data.sections && Array.isArray(data.sections)) {
       this.sections = data.sections.map(section => {
         let component
@@ -217,7 +218,7 @@ class Vuse {
             name: component.name,
             group: component.group,
             schema: component.schema,
-            data: component.data
+            isHeader: component.isHeader
           }
           if (!sectionData.schema) {
             sectionData.schema = this.components[sectionData.name].options.$schema
@@ -229,7 +230,6 @@ class Vuse {
             name: component.name,
             group: component.group,
             schema: component.schema,
-            data: section.data,
             isHeader: component.isHeader
           }
           if (!sectionData.schema) {

@@ -320,7 +320,7 @@ const C_CUSTOM = [
 ]
 
 const GROUP_NAME = 'Galleries'
-const NAME = 'GallerySwitchSpace'
+const NAME = 'GallerySwitch'
 
 const SCHEMA_CUSTOM = {
   mainStyle: {

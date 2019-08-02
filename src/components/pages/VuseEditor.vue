@@ -29,9 +29,9 @@ import ToggleElement from '@components/elements/ToggleElement'
 
 // sections
 // --- header
-import ActionButtonHeaderSpace from '@components/sections/header/ActionButtonHeaderSpace'
-import SmmHeaderSpace from '@components/sections/header/SmmHeaderSpace'
-import CenteredLogoHeaderSpace from '@components/sections/header/CenteredLogoHeaderSpace'
+import ActionButtonHeader from '@components/sections/header/ActionButtonHeader'
+import SmmHeader from '@components/sections/header/SmmHeader'
+import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
 
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
@@ -53,27 +53,27 @@ import FirstScreenSpace02 from '@components/sections/first-screen/FirstScreenSpa
 import FirstScreenSpaceVideoBack from '@components/sections/first-screen/FirstScreenSpaceVideoBack'
 import FirstScreenSpaceVideoPlayer from '@components/sections/first-screen/FirstScreenSpaceVideoPlayer'
 // --- gallery
-import GallerySwitchSpace from '@components/sections/galleries/GallerySwitchSpace'
-import GalleryPopupSpace from '@components/sections/galleries/GalleryPopupSpace'
+import GallerySwitch from '@components/sections/galleries/GallerySwitch'
+import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 // --- products
-import ProductsSpace from '@components/sections/products/ProductsSpace'
+import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
 // --- columns
-import ColumnsSpace from '@components/sections/columns/ColumnsSpace'
+import Columns from '@components/sections/columns/Columns'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
-import FormCenterSpace from '@components/sections/forms/FormCenterSpace'
+import FormCenter from '@components/sections/forms/FormCenter'
 import FormRight from '@components/sections/forms/FormRightSide'
 import FormRight2 from '@components/sections/forms/FormRightSide2'
 import FormLeft from '@components/sections/forms/FormLeftSideVariant'
 import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 
 // --- other
-import SystemRequirementsSpace from '@components/sections/elements/SystemRequirementsSpace'
+import SystemRequirements from '@components/sections/elements/SystemRequirements'
 import FooterSpace from '@components/sections/footers/FooterSpace'
-import FrequentlyAskedQuestionsSpace from '@components/sections/elements/FrequentlyAskedQuestionsSpace'
-import SliderSpace from '@components/sections/slider/SliderSpace'
+import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
+import Slider from '@components/sections/slider/Slider'
 
 import store from '@store'
 
@@ -96,9 +96,9 @@ const ELEMENTS = {
 }
 
 const COMPONENTS = {
-  ActionButtonHeaderSpace,
-  SmmHeaderSpace,
-  CenteredLogoHeaderSpace,
+  ActionButtonHeader,
+  SmmHeader,
+  CenteredLogoHeader,
 
   FirstScreenSpace01,
   FirstScreenSpace02,
@@ -118,25 +118,25 @@ const COMPONENTS = {
   HeroWithTimerSlogan,
   HeroWithTimerSlogan2,
 
-  SliderSpace,
+  Slider,
 
-  ColumnsSpace,
+  Columns,
 
-  GallerySwitchSpace,
-  GalleryPopupSpace,
+  GallerySwitch,
+  GalleryPopup,
   Carousel,
 
-  ProductsSpace,
+  Products,
   ProductsExtend,
 
-  FormCenterSpace,
+  FormCenter,
   FormRight,
   FormLeft,
   FormRight2,
   FormLeft2,
 
-  SystemRequirementsSpace,
-  FrequentlyAskedQuestionsSpace,
+  SystemRequirements,
+  FrequentlyAskedQuestions,
 
   FooterSpace
 }
@@ -165,10 +165,9 @@ export default {
 
   async beforeRouteEnter (to, from, next) {
     try {
-      await store.dispatch('getLandingForUser', to.params.slug)
+      await store.dispatch('getLandingData', to.params.slug)
       next()
     } catch (e) {
-      console.warn(e)
       next({ path: '/404' })
     }
   },

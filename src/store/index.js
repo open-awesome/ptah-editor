@@ -101,6 +101,7 @@ const actions = {
         commit('updateCurrentLanding', landing)
         commit('name', data.name)
         commit('version', data.currentVersion)
+
         return landing
       })
       .catch((error) => {

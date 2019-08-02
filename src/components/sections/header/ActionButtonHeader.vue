@@ -76,7 +76,7 @@
 
       </div>
       <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-9 b-grid__col-m-12 mobile-menu mobile-menu_drop"
-        :class="{ 'mobile-menu_hide': !$sectionData.isToggle }"
+        :class="{ 'mobile-menu_hide': !isToggle }"
         >
 
         <sandbox
@@ -140,7 +140,8 @@ import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['ActionButtonHeaderSpace', 'Header', '/img/covers/header-space-01.jpg']
+const [name, group, cover] = ['ActionButtonHeader', 'Header', '/img/covers/header-space-01.jpg']
+
 const defaultComponents = [
   {
     element: {
@@ -298,8 +299,13 @@ export default {
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 2 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 3 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-button', label: 'button', key: 5 }
-    ],
-    isToggle: false
+    ]
+  },
+
+  data () {
+    return {
+      isToggle: false
+    }
   },
 
   created () {
@@ -318,7 +324,7 @@ export default {
     },
 
     toggle () {
-      this.$sectionData.isToggle = !this.$sectionData.isToggle
+      this.isToggle = !this.isToggle
     }
   }
 }
