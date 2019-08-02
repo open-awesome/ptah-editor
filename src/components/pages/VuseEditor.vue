@@ -29,9 +29,9 @@ import ToggleElement from '@components/elements/ToggleElement'
 
 // sections
 // --- header
-import HeaderSpace01 from '@components/sections/header/HeaderSpace01'
-import HeaderSpace02 from '@components/sections/header/HeaderSpace02'
-import HeaderSpace03 from '@components/sections/header/HeaderSpace03'
+import ActionButtonHeader from '@components/sections/header/ActionButtonHeader'
+import SmmHeader from '@components/sections/header/SmmHeader'
+import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
 
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
@@ -59,7 +59,7 @@ import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 import Products from '@components/sections/products/Products'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
 // --- columns
-import ColumnsSpace from '@components/sections/columns/ColumnsSpace'
+import Columns from '@components/sections/columns/Columns'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
@@ -70,9 +70,9 @@ import FormLeft from '@components/sections/forms/FormLeftSideVariant'
 import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 
 // --- other
-import SystemSpace from '@components/sections/elements/SystemSpace'
+import SystemRequirements from '@components/sections/elements/SystemRequirements'
 import FooterSpace from '@components/sections/footers/FooterSpace'
-import FaqSpace from '@components/sections/elements/FaqSpace'
+import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
 import Slider from '@components/sections/slider/Slider'
 
 import store from '@store'
@@ -96,9 +96,9 @@ const ELEMENTS = {
 }
 
 const COMPONENTS = {
-  HeaderSpace01,
-  HeaderSpace02,
-  HeaderSpace03,
+  ActionButtonHeader,
+  SmmHeader,
+  CenteredLogoHeader,
 
   FirstScreenSpace01,
   FirstScreenSpace02,
@@ -120,7 +120,7 @@ const COMPONENTS = {
 
   Slider,
 
-  ColumnsSpace,
+  Columns,
 
   GallerySwitch,
   GalleryPopup,
@@ -135,8 +135,8 @@ const COMPONENTS = {
   FormRight2,
   FormLeft2,
 
-  SystemSpace,
-  FaqSpace,
+  SystemRequirements,
+  FrequentlyAskedQuestions,
 
   FooterSpace
 }

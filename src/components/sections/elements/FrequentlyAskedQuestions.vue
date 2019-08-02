@@ -218,7 +218,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Elements'
-const NAME = 'FrequentlyAskedQuestionsSpace'
+const NAME = 'FrequentlyAskedQuestions'
 
 export default {
   name: NAME,

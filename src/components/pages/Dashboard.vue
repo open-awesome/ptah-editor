@@ -11,20 +11,20 @@ export default {
           sections: []
         },
         {
-          type: 'Simple landing',
-          sections: ['HeroUnit', 'Columns', 'Footer']
+          type: 'Simple page',
+          sections: ['FirstScreenSpace01', 'FooterSpace']
         },
         {
-          type: 'Skull',
-          sections: ['HeroSkull']
+          type: 'Simple page with menu',
+          sections: ['ActionButtonHeader', 'FirstScreenSpaceVideoPlayer', 'FooterSpace']
         },
         {
-          type: 'Products',
-          sections: ['ProductsColumns']
+          type: 'Closed beta test page',
+          sections: ['FirstScreenSpaceVideoBack', 'Columns', 'GalleryPopup', 'FormCenter', 'FooterSpace']
         },
         {
-          type: 'Game',
-          sections: ['System']
+          type: 'Space page',
+          sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace']
         }
       ],
       presetSelected: 0,
@@ -263,9 +263,13 @@ export default {
     background: $ligth-grey
     border: 2px solid rgba($dark-blue, 0.2)
     margin-left: 3rem
+    padding: 1rem
+
     display: flex
     align-items: center
     justify-content: center
+    text-align: center
+
     color: $dark-blue-krayola
     cursor: pointer
     transition: all .2s ease-out
