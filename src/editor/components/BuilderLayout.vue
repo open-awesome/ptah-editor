@@ -87,7 +87,11 @@ export default {
 
   methods: {
     backToLandings () {
-      this.$router.push({ path: `/dashboard` })
+      if (localStorage.getItem('guest') === null) {
+        this.$router.push({ path: `/dashboard` })
+      } else {
+        this.$router.push({ path: `/` })
+      }
     },
     setDevice (device) {
       this.device = device

@@ -13,13 +13,16 @@ import BuilderSiteSettingsIntegrationsMailchimp from '@editor/components/Builder
 const routes = [
   {
     path: '/',
+    component: () => import(/* webpackChunkName: "Intro" */'@components/Intro')
+  },
+  {
+    path: '/dashboard/',
     component: () => import(/* webpackChunkName: "Layout" */'@components/Layout'),
     children: [
       {
-        path: 'dashboard',
+        path: '',
         component: () => lazyLoadView(import(/* webpackChunkName: "Dashboard" */ '@components/pages/Dashboard')),
-        name: 'Dashboard',
-        alias: ''
+        name: 'Dashboard'
       }
     ]
   },
