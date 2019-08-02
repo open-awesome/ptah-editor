@@ -70,7 +70,15 @@ function parseTime (value, remainder) {
 }
 
 function checkTime(value) {
-  return (value && value > 0) ? value : 0
+  if (value && value > 0) {
+    if (value.toString().length < 2) {
+      return '0' + value
+    } else {
+      return value
+    }
+  } else {
+    return '00'
+  }
 }
 
 void initTimer(timers)
