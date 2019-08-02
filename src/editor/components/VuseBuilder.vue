@@ -205,7 +205,9 @@ export default {
     this.updateBuilderSections(this.sections)
     this.updateBuilderGroups(this.groups)
 
-    this.getUser()
+    if (localStorage.getItem('guest') === null) {
+      this.getUser()
+    }
   },
 
   mounted () {
@@ -305,7 +307,11 @@ export default {
     },
     backToLandings () {
       this.save()
-      this.$router.push({ path: `/dashboard` })
+      if (localStorage.getItem('guest') === null) {
+        this.$router.push({ path: `/dashboard` })
+      } else {
+        this.$router.push({ path: `/` })
+      }
     },
     styleArtboard (styles) {
       Object.keys(styles).forEach((styleName) => {

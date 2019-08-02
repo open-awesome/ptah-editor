@@ -11,7 +11,7 @@
         </div>
         <div class="b-404__btn">
           <BaseButton color="blue" @click="returnToBoard">
-            Return to Dashboard
+            {{buttonText}}
           </BaseButton>
         </div>
       </div>
@@ -29,9 +29,19 @@ export default {
     FooterComponent
   },
 
+  computed: {
+    isGuest () {
+      return localStorage.getItem('guest') !== null
+    },
+
+    buttonText () {
+      return this.isGuest ? 'Return to main page' : 'Return to Dashboard'
+    }
+  },
+
   methods: {
     returnToBoard () {
-      this.$router.push('/dashboard/')
+      this.$router.push(this.isGuest ? '/' : '/dashboard/')
     }
   }
 }
