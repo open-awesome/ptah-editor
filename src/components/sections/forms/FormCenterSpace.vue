@@ -77,7 +77,7 @@ const SCHEMA_CUSTOM = {
 }
 
 const GROUP_NAME = 'Forms'
-const NAME = 'FormCenter'
+const NAME = 'FormCenterSpace'
 
 export default {
   name: NAME,

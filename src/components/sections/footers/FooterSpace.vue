@@ -179,7 +179,7 @@ const C_CUSTOM = [
 ]
 
 const GROUP_NAME = 'Footer'
-const NAME = 'Footer'
+const NAME = 'FooterSpace'
 const BG_SECTION = 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)'
 
 const SCHEMA_CUSTOM = {

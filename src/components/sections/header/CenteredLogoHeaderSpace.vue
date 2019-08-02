@@ -32,7 +32,7 @@
       <div
           :id="`mobile-menu-${ _uid }`"
           class="b-grid__col-12 b-grid__col-m-12 mobile-menu mobile-menu_drop"
-          :class="{ 'mobile-menu_hide': !isToggle }"
+          :class="{ 'mobile-menu_hide': !$sectionData.isToggle }"
         >
 
         <sandbox
@@ -96,7 +96,7 @@ import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['CenteredLogoHeader', 'Header', '/img/covers/header-space-03.jpg']
+const [name, group, cover] = ['CenteredLogoHeaderSpace', 'Header', '/img/covers/header-space-03.jpg']
 const defaultComponents = [
   {
     element: {
@@ -237,13 +237,8 @@ export default {
       { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 3 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 4 }
-    ]
-  },
-
-  data () {
-    return {
-      isToggle: false
-    }
+    ],
+    isToggle: false
   },
 
   computed: {
@@ -271,7 +266,7 @@ export default {
     },
 
     toggle () {
-      this.isToggle = !this.isToggle
+      this.$sectionData.isToggle = !this.$sectionData.isToggle
     }
   }
 }

@@ -94,7 +94,7 @@ const C_CUSTOM = [
 ]
 
 const GROUP_NAME = 'Galleries'
-const NAME = 'GalleryPopup'
+const NAME = 'GalleryPopupSpace'
 
 const SCHEMA_CUSTOM = {
   mainStyle: {

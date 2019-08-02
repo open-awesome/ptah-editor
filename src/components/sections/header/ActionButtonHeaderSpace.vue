@@ -45,7 +45,7 @@
                 v-for="(component, index) in $sectionData.components"
                 :key="`component-${ _uid }-${ index }`"
                 v-if="$sectionData.components.length !== 0"
-                :style="component.styles">
+                >
 
               <component
                   v-styler:for="{
@@ -76,7 +76,7 @@
 
       </div>
       <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-9 b-grid__col-m-12 mobile-menu mobile-menu_drop"
-        :class="{ 'mobile-menu_hide': !isToggle }"
+        :class="{ 'mobile-menu_hide': !$sectionData.isToggle }"
         >
 
         <sandbox
@@ -98,7 +98,7 @@
                 :key="`component-${ _uid }-${ index }`"
                 v-if="$sectionData.components2.length"
                 :style="component.styles"
-                :class="{ 'b-one': isOnlyOneButton(component) }">
+                :class="{ 'b-button-one': isOnlyOneButton(component) }">
 
               <component
                   v-styler:for="{
@@ -135,12 +135,12 @@
 </template>
 
 <script>
-import { StyleObject, Logo, SocialNetworks, Button } from '@editor/types'
+import { StyleObject, Logo, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-const [name, group, cover] = ['SmmHeader', 'Header', '/img/covers/header-space-02.jpg']
+const [name, group, cover] = ['ActionButtonHeaderSpace', 'Header', '/img/covers/header-space-01.jpg']
 const defaultComponents = [
   {
     element: {
@@ -229,40 +229,25 @@ const defaultComponents2 = [
   },
   {
     element: {
-      socialNetworks: {
-        'facebook': {
-          name: 'Facebook',
-          expand: false,
-          visible: true,
-          url: ''
-        },
-        'instagram': {
-          name: 'Instagram',
-          expand: false,
-          visible: true,
-          url: ''
-        },
-        'twitter': {
-          name: 'Twitter',
-          expand: false,
-          visible: true,
-          url: ''
-        },
-        'youtube': {
-          name: 'Youtube',
-          expand: false,
-          visible: true,
-          url: ''
+      text: '<b>Call to Action</b>',
+      styles: {
+        'background-color': '#F4BC64',
+        'color': '#000000',
+        'font-family': 'Montserrat',
+        'font-size': '2rem',
+        'text-align': 'center',
+        'width': '240px',
+        'height': '64px',
+        'border-radius': '100px',
+        'margin': '0'
+      },
+      pseudo: {
+        'hover': {
+          'background-color': '#ffffff !important'
         }
-      },
-      colorFill: {
-        color: '#F4BC64'
-      },
-      sizeIcons: {
-        width: 30
       }
     },
-    key: 6
+    key: 5
   }
 ]
 const defaultSchema = {
@@ -276,8 +261,8 @@ const defaultSchema = {
   },
   container: {
     styles: {
-      'margin': '0 150px 0 0',
-      'padding': '0'
+      margin: '0 150px 0 0',
+      padding: '0'
     }
   },
   container2: {
@@ -312,14 +297,9 @@ export default {
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 1 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 2 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 3 },
-      { name: 'SocialNetworks', element: SocialNetworks, type: 'networks', class: 'b-social-networks-fs', label: 'Social Networks', key: 6 }
-    ]
-  },
-
-  data () {
-    return {
-      isToggle: false
-    }
+      { name: 'Button', element: Button, type: 'button', class: 'b-header-button', label: 'button', key: 5 }
+    ],
+    isToggle: false
   },
 
   created () {
@@ -330,15 +310,15 @@ export default {
 
   methods: {
     isOnlyOneButton ({ name }) {
-      if (name !== 'SocialNetworks') {
+      if (name !== 'Button') {
         return false
       }
-      let socilas = this.$sectionData.components2.filter(({ name }) => name === 'SocialNetworks')
-      return socilas.length === 1
+      let buttons = this.$sectionData.components2.filter(({ name }) => name === 'Button')
+      return buttons.length === 1
     },
 
     toggle () {
-      this.isToggle = !this.isToggle
+      this.$sectionData.isToggle = !this.$sectionData.isToggle
     }
   }
 }
@@ -375,14 +355,13 @@ export default {
       &
         padding: 0 !important
 
-.b-one
+.b-button-one
   .is-mobile &
     margin-top: auto !important
     order: 1
   @media (max-width: 800px)
     margin-top: auto !important
     margin-bottom: 8px !important
-    order: 1
   @media (max-height: 420px)
     width: auto !important
     margin-top: 8px !important
@@ -394,7 +373,7 @@ export default {
   @media (max-width: 800px)
     font-size: 1.6rem
 
-.b-logo
+.b-header-logo
   display: block
   .is-tablet &,
   .is-mobile &
@@ -405,5 +384,5 @@ export default {
 
 @media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
   .b-slot .b-draggable-slot > div
-    width: 50% !important
+    width: auto !important
 </style>

@@ -29,9 +29,9 @@ import ToggleElement from '@components/elements/ToggleElement'
 
 // sections
 // --- header
-import HeaderSpace01 from '@components/sections/header/HeaderSpace01'
-import HeaderSpace02 from '@components/sections/header/HeaderSpace02'
-import HeaderSpace03 from '@components/sections/header/HeaderSpace03'
+import ActionButtonHeaderSpace from '@components/sections/header/ActionButtonHeaderSpace'
+import SmmHeaderSpace from '@components/sections/header/SmmHeaderSpace'
+import CenteredLogoHeaderSpace from '@components/sections/header/CenteredLogoHeaderSpace'
 
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
@@ -53,27 +53,27 @@ import FirstScreenSpace02 from '@components/sections/first-screen/FirstScreenSpa
 import FirstScreenSpaceVideoBack from '@components/sections/first-screen/FirstScreenSpaceVideoBack'
 import FirstScreenSpaceVideoPlayer from '@components/sections/first-screen/FirstScreenSpaceVideoPlayer'
 // --- gallery
-import GallerySwitch from '@components/sections/galleries/GallerySwitch'
-import GalleryPopup from '@components/sections/galleries/GalleryPopup'
+import GallerySwitchSpace from '@components/sections/galleries/GallerySwitchSpace'
+import GalleryPopupSpace from '@components/sections/galleries/GalleryPopupSpace'
 // --- products
-import Products from '@components/sections/products/Products'
+import ProductsSpace from '@components/sections/products/ProductsSpace'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
 // --- columns
 import ColumnsSpace from '@components/sections/columns/ColumnsSpace'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
-import FormCenter from '@components/sections/forms/FormCenter'
+import FormCenterSpace from '@components/sections/forms/FormCenterSpace'
 import FormRight from '@components/sections/forms/FormRightSide'
 import FormRight2 from '@components/sections/forms/FormRightSide2'
 import FormLeft from '@components/sections/forms/FormLeftSideVariant'
 import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 
 // --- other
-import SystemSpace from '@components/sections/elements/SystemSpace'
+import SystemRequirementsSpace from '@components/sections/elements/SystemRequirementsSpace'
 import FooterSpace from '@components/sections/footers/FooterSpace'
-import FaqSpace from '@components/sections/elements/FaqSpace'
-import Slider from '@components/sections/slider/Slider'
+import FrequentlyAskedQuestionsSpace from '@components/sections/elements/FrequentlyAskedQuestionsSpace'
+import SliderSpace from '@components/sections/slider/SliderSpace'
 
 import store from '@store'
 
@@ -96,9 +96,9 @@ const ELEMENTS = {
 }
 
 const COMPONENTS = {
-  HeaderSpace01,
-  HeaderSpace02,
-  HeaderSpace03,
+  ActionButtonHeaderSpace,
+  SmmHeaderSpace,
+  CenteredLogoHeaderSpace,
 
   FirstScreenSpace01,
   FirstScreenSpace02,
@@ -118,25 +118,25 @@ const COMPONENTS = {
   HeroWithTimerSlogan,
   HeroWithTimerSlogan2,
 
-  Slider,
+  SliderSpace,
 
   ColumnsSpace,
 
-  GallerySwitch,
-  GalleryPopup,
+  GallerySwitchSpace,
+  GalleryPopupSpace,
   Carousel,
 
-  Products,
+  ProductsSpace,
   ProductsExtend,
 
-  FormCenter,
+  FormCenterSpace,
   FormRight,
   FormLeft,
   FormRight2,
   FormLeft2,
 
-  SystemSpace,
-  FaqSpace,
+  SystemRequirementsSpace,
+  FrequentlyAskedQuestionsSpace,
 
   FooterSpace
 }

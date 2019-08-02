@@ -265,7 +265,7 @@ const COMPONENTS = [
 ]
 
 const GROUP_NAME = 'Slider'
-const NAME = 'Slider'
+const NAME = 'SliderSpace'
 
 export default {
   name: NAME,

@@ -582,7 +582,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Products'
-const NAME = 'Products'
+const NAME = 'ProductsSpace'
 
 export default {
   name: NAME,
