@@ -218,7 +218,7 @@ class Vuse {
             name: component.name,
             group: component.group,
             schema: component.schema,
-            isHeader: component.isHeader
+            data: component.data
           }
           if (!sectionData.schema) {
             sectionData.schema = this.components[sectionData.name].options.$schema
@@ -230,6 +230,7 @@ class Vuse {
             name: component.name,
             group: component.group,
             schema: component.schema,
+            data: section.data,
             isHeader: component.isHeader
           }
           if (!sectionData.schema) {
