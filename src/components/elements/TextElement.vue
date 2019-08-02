@@ -168,6 +168,13 @@ export default {
     savePath () {
       return 'text'
     }
+  },
+
+  updated () {
+    let links = this.$el.querySelectorAll('a')
+    links.forEach((link) => {
+      link.addEventListener('click', e => e.preventDefault())
+    })
   }
 }
 </script>

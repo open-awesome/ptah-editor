@@ -65,7 +65,6 @@ export default {
         this.createProgress = true
         this.$Progress.start()
         this.invalid = false
-        console.log(this.presets[this.presetSelected].sections)
         this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
           .then((response) => {
             this.$router.push({ path: `/editor/${response._id}` })
