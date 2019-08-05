@@ -8,7 +8,7 @@
       <control-image/>
     </div>
 
-    <div class="b-panel__control" v-if="settingObjectOptions.belongsGallery">
+    <div class="b-panel__control" v-if="settingObjectOptions.hasLink">
       <control-image-link/>
     </div>
 
