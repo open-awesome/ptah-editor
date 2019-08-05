@@ -13,7 +13,7 @@ Vue.use(Vuex)
 Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
-const demoLanding = 'https://s3.protocol.one/files/demoLanding333.json'
+const demoLanding = 'https://s3.protocol.one/files/demoLandingSimplePage.json'
 
 const state = {
   storefrontPreview: false,
