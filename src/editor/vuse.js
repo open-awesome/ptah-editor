@@ -217,8 +217,7 @@ class Vuse {
           sectionData = {
             name: component.name,
             group: component.group,
-            schema: component.schema,
-            data: component.data
+            schema: component.schema
           }
           if (!sectionData.schema) {
             sectionData.schema = this.components[sectionData.name].options.$schema
