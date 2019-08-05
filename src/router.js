@@ -20,7 +20,9 @@ let router = new VueRouter(
 
 router.beforeEach(
   (to, from, next) => {
-    if (to.path !== '/login' && (localStorage.getItem('token') === null)) {
+    const allowedPaths = ['/', '/login', '/editor/demo', '/404']
+
+    if (!allowedPaths.includes(to.path) && (localStorage.getItem('token') === null)) {
       next('/login')
       return
     }
@@ -28,5 +30,9 @@ router.beforeEach(
     next()
   }
 )
+
+router.afterEach((to) => {
+  document.title = to.meta.title ? to.meta.title : 'Ptah'
+})
 
 export default router

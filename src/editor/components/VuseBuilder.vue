@@ -23,20 +23,9 @@
         v-if="headerSection"
         :is="headerSection.name"
         :id="headerSection.id"
-        :class="{ 'video-background': headerSection.data.mainStyle.backgroundType === 'video' }"
         @click.native="selectSidebarSection(headerSection)">
 
         <menu-settings slot="menu" :section="headerSection"/>
-
-        <video
-          v-if="headerSection.data.mainStyle.backgroundType === 'video' && headerSection.data.mainStyle.backgroundVideo"
-          :id="`bg-video-${ headerSection.id }`"
-          slot="video"
-          autoplay="true"
-          muted="true"
-          loop>
-          <source :src="headerSection.data.mainStyle.backgroundVideo">
-        </video>
 
         <div
           class="b-overlay"
@@ -170,7 +159,6 @@ export default {
   watch: {
     title (value) {
       this.$builder.title = value
-      document.title = value
     },
 
     currentLanding (value) {
@@ -205,7 +193,9 @@ export default {
     this.updateBuilderSections(this.sections)
     this.updateBuilderGroups(this.groups)
 
-    this.getUser()
+    if (localStorage.getItem('guest') === null) {
+      this.getUser()
+    }
   },
 
   mounted () {
@@ -305,7 +295,11 @@ export default {
     },
     backToLandings () {
       this.save()
-      this.$router.push({ path: `/dashboard` })
+      if (localStorage.getItem('guest') === null) {
+        this.$router.push({ path: `/dashboard` })
+      } else {
+        this.$router.push({ path: `/` })
+      }
     },
     styleArtboard (styles) {
       Object.keys(styles).forEach((styleName) => {

@@ -37,6 +37,13 @@ export default {
       type: Number,
       default: 0
     },
+    maximum: {
+      type: Number,
+      default: Infinity,
+      validator: function (value) {
+        return value > 0
+      }
+    },
     hasError: {
       type: Boolean,
       default: false
@@ -56,16 +63,23 @@ export default {
   },
 
   watch: {
-    value (value) {
-      this.innerValue = value
+    innerValue  (value) {
+      let val = value !== '' ? Math.min(value, this.maximum) : 0
+      this.innerValue = val
+
+      this.$emit('input', val)
     }
   },
 
   data () {
     return {
-      innerValue: this.value,
+      innerValue: 0,
       hasFocus: false
     }
+  },
+
+  mounted () {
+    this.innerValue = this.value !== '' ? Math.min(this.value, this.maximum) : 0
   }
 }
 </script>

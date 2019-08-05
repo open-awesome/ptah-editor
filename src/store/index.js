@@ -13,6 +13,8 @@ Vue.use(Vuex)
 Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
+const demoLanding = 'https://s3.protocol.one/files/demoLanding333.json'
+
 const state = {
   storefrontPreview: false,
   landings: [],
@@ -99,10 +101,43 @@ const actions = {
         commit('updateCurrentLanding', landing)
         commit('name', data.name)
         commit('version', data.currentVersion)
+
         return landing
       })
       .catch((error) => {
         return Promise.reject(error)
+      })
+  },
+
+  /**
+   * Returns the demo landing page for the guest user
+   * @param dispatch
+   * @param slug
+   * @returns {Promise}
+   */
+  getLandingForUser ({ dispatch }, slug) {
+    return localStorage.getItem('guest') !== null ?
+      dispatch('fetchLandingFromFile', { slug, url: demoLanding }) : dispatch('getLandingData', slug)
+  },
+
+  /**
+   * Get landing from url
+   * @param commit
+   * @param slug
+   * @returns {Promise<Response>}
+   */
+  fetchLandingFromFile ({ commit }, { slug, url }) {
+    return fetch(url)
+      .then((response) => {
+        return response.json()
+      })
+      .then((data) => {
+        commit('slug', slug)
+        commit('isSaved', false)
+        commit('updateCurrentLanding', data)
+        commit('name', data.title)
+
+        return data
       })
   },
 

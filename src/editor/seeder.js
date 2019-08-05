@@ -156,6 +156,7 @@ const data = new Map([
       background: true,
       isTextEdit: true,
       shape: true,
+      resizable: true,
       pseudo: {
         hover: {
           'background-color': '',
@@ -436,6 +437,7 @@ const data = new Map([
         color: 'rgba(0,0,0,1)',
         opacity: '0'
       },
+      itemHoverColor: '#fff',
       textStyles: {
         text: {
           'font-family': 'Lato',
@@ -492,7 +494,7 @@ const data = new Map([
         },
         showNavigation: true,
         showPagination: true,
-        navSize: '8px'
+        navSize: '20px'
       }
     })
   )],

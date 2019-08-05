@@ -131,21 +131,36 @@ const COMPONENTS = [
 const C_CUSTOM = [
   {
     element: {
-      text: 'This is a short header',
+      text: '<b>Header</b>',
       styles: {
-        'font-family': 'Heebo',
-        'font-size': '5.6rem',
-        'color': '#ffffff'
+        'font-family': 'Montserrat',
+        'font-size': '4.2rem',
+        'line-height': '49px',
+        'color': '#ffffff',
+        'padding-bottom': '48px'
       }
     },
     key: 0
   }
 ]
 
+const C_IMAGES = [
+  {
+    name: '1.jpg',
+    path: 'https://gn913.cdn.stg.gamenet.ru/0/8dWmn/o_hDJWI.jpg'
+  },
+  {
+    name: '2.jpg',
+    path: 'https://gn285.cdn.stg.gamenet.ru/0/8dWne/o_1hyDuA.jpg'
+  }
+]
+
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-color': '#8CD2B5'
+      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-position': 'center center',
+      'background-size': 'cover'
     },
     swiper: {
       autoHeight: true,
@@ -155,10 +170,10 @@ const SCHEMA_CUSTOM = {
         prevEl: swiperOptions.prev
       },
       frameWidth: 12,
-      paginationColor: '#2275D7',
-      navColor: '#2275D7'
+      paginationColor: '#F4BC64',
+      navColor: '#F4BC64'
     },
-    galleryImages: []
+    galleryImages: C_IMAGES
   },
   components: merge([], C_CUSTOM),
   container: {},
@@ -173,7 +188,7 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/autoplay-carousel.png',
+  cover: 'https://gn659.cdn.stg.gamenet.ru/0/8iyZR/o_1jkJaZ.jpg',
 
   $schema: {
     mainStyle: types.GallerySlider,
@@ -205,13 +220,13 @@ export default {
   },
 
   created () {
-    this.options = JSON.stringify(this.$sectionData.mainStyle.swiper)
-
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(merge(this.$sectionData, SCHEMA_CUSTOM))
     }
 
     this.paginationClass = `custom-bullets-${randomPoneId()}`
+
+    this.options = JSON.stringify(this.$sectionData.mainStyle.swiper)
   }
 }
 </script>
@@ -243,6 +258,10 @@ export default {
 .swiper-button-next,
 .swiper-button-prev
   background-image: none
+
+  svg
+    width: 100%
+    height: 100%
 
 .b-empty-carousel
   border: 5px dashed rgba(0,0,0, .35)

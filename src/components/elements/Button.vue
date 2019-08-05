@@ -221,6 +221,18 @@ export default {
     ]),
 
     onResize (x, y, width, height) {
+      let parents = {}
+      let max = {}
+
+      parents['width'] = this.settingObjectElement.closest('.b-draggable-slot')
+      parents['height'] = this.settingObjectElement.closest('section')
+
+      max['width'] = parents['width'].offsetWidth
+      max['height'] = parseInt(parents['height'].offsetHeight / 2)
+
+      if (width > max['width']) width = max['width']
+      if (height > max['height']) height = max['height']
+
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
 

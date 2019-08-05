@@ -25,6 +25,14 @@ export default {
 
     modalContentID () {
       return this.$route.path.split('/')[4] || ''
+    },
+
+    isGuest () {
+      return localStorage.getItem('guest') !== null
+    },
+
+    homeTooltipText () {
+      return this.isGuest ? 'Back to main' : this.$t('nav.backToDashbord')
     }
   },
 
@@ -96,7 +104,7 @@ export default {
         </div>
         <div class="b-top-bar-menu__crumbs">
           <span class="b-top-bar-menu__crumbs-home b-top-bar-menu__crumbs-link"
-            :tooltip="$t('nav.backToDashbord')"
+            :tooltip="homeTooltipText"
             tooltip-position="bottom"
             @click="backToLandings"
             >

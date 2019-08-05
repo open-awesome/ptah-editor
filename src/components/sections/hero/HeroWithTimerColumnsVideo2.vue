@@ -160,7 +160,7 @@ const C_CUSTOM_2 = [
   {
     element: {
       styles: {
-        'height': '276px'
+        'height': '140px'
       }
     },
     key: 8

@@ -13,13 +13,22 @@ import BuilderSiteSettingsIntegrationsMailchimp from '@editor/components/Builder
 const routes = [
   {
     path: '/',
+    component: () => import(/* webpackChunkName: "Intro" */'@components/Intro'),
+    meta: {
+      title: 'Ptah'
+    }
+  },
+  {
+    path: '/dashboard/',
     component: () => import(/* webpackChunkName: "Layout" */'@components/Layout'),
     children: [
       {
-        path: 'dashboard',
+        path: '',
+        meta: {
+          title: 'Dashboard - Ptah'
+        },
         component: () => lazyLoadView(import(/* webpackChunkName: "Dashboard" */ '@components/pages/Dashboard')),
-        name: 'Dashboard',
-        alias: ''
+        name: 'Dashboard'
       }
     ]
   },
@@ -27,6 +36,9 @@ const routes = [
     path: '/editor/:slug',
     component: () => import(/* webpackChunkName: "VuseEditor" */ '@components/pages/VuseEditor'),
     name: 'VuseEditor',
+    meta: {
+      title: 'Ptah'
+    },
     alias: '',
     children: [
       {
@@ -83,6 +95,9 @@ const routes = [
     path: '/login/',
     component: () => import('@components/pages/Login'),
     name: 'Login',
+    meta: {
+      title: 'Login - Ptah'
+    },
     alias: ''
   },
   {
@@ -100,7 +115,10 @@ const routes = [
   {
     path: '/404',
     name: '404',
-    component: () => import('@components/NotFound')
+    component: () => import('@components/NotFound'),
+    meta: {
+      title: '404 - Ptah'
+    }
   },
   {
     path: '*',

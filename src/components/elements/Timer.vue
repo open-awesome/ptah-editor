@@ -73,7 +73,17 @@ export default {
   inject: ['$section'],
 
   filters: {
-    check: value => (value && value > 0) ? value : 0
+    check: function (value) {
+      if (value && value > 0) {
+        if (value.toString().length < 2) {
+          return '0' + value
+        } else {
+          return value
+        }
+      } else {
+        return '00'
+      }
+    }
   },
 
   props: {

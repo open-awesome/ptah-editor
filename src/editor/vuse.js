@@ -206,6 +206,7 @@ class Vuse {
 
   set (data) {
     this.title = data.title !== undefined ? data.title : this.title
+
     if (data.sections && Array.isArray(data.sections)) {
       this.sections = data.sections.map(section => {
         let component

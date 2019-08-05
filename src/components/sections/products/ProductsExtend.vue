@@ -9,54 +9,65 @@ const C_CUSTOM_1 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn787.cdn.stg.gamenet.ru/0/8hwOK/o_G1wMi.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '157px',
+        'height': '194px'
       }
     },
     key: 0
   },
   {
     element: {
-      text: 'Start Edition',
+      text: '<b>Start Edition</b>',
       styles: {
-        'color': '#fff'
+        'color': '#fff',
+        'font-family': 'Montserrat',
+        'font-size': '32px',
+        'line-height': '39px'
       }
     },
     key: 1
   },
   {
     element: {
-      text: '39$',
+      text: '<b>10$</b>',
       styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
+        'color': '#fff',
+        'font-family': 'Montserrat',
+        'font-size': '32px',
+        'line-height': '39px'
       }
     },
     key: 2
   },
   {
     element: {
-      text: 'Buy now',
+      text: '<p><strong>BUY NOW</strong></p>',
       styles: {
-        'background-color': 'rgba(245,166,35,1)',
-        'color': '#000',
-        'font-family': 'Lato',
-        'font-size:': '1.2rem',
+        'background-color': 'transparent',
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size:': '1.6rem',
         'text-align': 'center',
-        'width': '192px',
-        'height': '52px',
-        'border-radius': '2px'
+        'width': '190px',
+        'height': '64px',
+        'border-radius': '100px',
+        'border-width': '2px',
+        'border-style': 'solid',
+        'border-color': '#F4BC64'
+      },
+      pseudo: {
+        hover: {
+          'color': '#FFFFFF !important',
+          'border-width': '2px !important',
+          'border-style': 'solid !important',
+          'border-color': '#FFFFFF !important'
+        }
       }
-    },
-    key: 3
+    }
   }
 ]
 
@@ -64,21 +75,25 @@ const C_CUSTOM_1_M = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn257.cdn.stg.gamenet.ru/0/8dAso/o_1O03Wg.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '120px',
+        'height': '143px'
       }
     },
     key: 4
   },
   {
     element: {
-      text: 'Start Edition',
+      text: '<b>Start Edition</b>',
       styles: {
-        'color': '#fff'
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size': '24px',
+        'line-height': '29px',
+        'padding': '30px 0 0 0'
       }
     },
     key: 5
@@ -89,54 +104,62 @@ const C_CUSTOM_1D = [
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Suit of Legacy Armor'
+        text: 'Digital game copy'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 6
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Mithril Box'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Starship mk1'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 7
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Heroic Boosters'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Kinetic weapon mk1'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 8
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(208,2,27,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Summon Mistfire Wolf Elite Skil'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Digital soundtrack'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 9
+    }
   }
 ]
 
@@ -144,54 +167,65 @@ const C_CUSTOM_2 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn936.cdn.stg.gamenet.ru/0/8hwOw/o_AtAIl.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '219px',
+        'height': '194px'
       }
     },
     key: 10
   },
   {
     element: {
-      text: 'Full Edition',
+      text: '<b>Full Edition</b>',
       styles: {
-        'color': '#fff'
+        'color': '#fff',
+        'font-family': 'Montserrat',
+        'font-size': '32px',
+        'line-height': '39px'
       }
     },
     key: 11
   },
   {
     element: {
-      text: '49$',
+      text: '<b>19$</b>',
       styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
+        'color': '#fff',
+        'font-family': 'Montserrat',
+        'font-size': '32px',
+        'line-height': '39px'
       }
     },
     key: 12
   },
   {
     element: {
-      text: 'Buy now',
+      text: '<p><strong>BUY NOW</strong></p>',
       styles: {
-        'background-color': 'rgba(245,166,35,1)',
-        'color': '#000',
-        'font-family': 'Lato',
-        'font-size:': '1.2rem',
+        'background-color': 'transparent',
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size:': '1.6rem',
         'text-align': 'center',
-        'width': '192px',
-        'height': '52px',
-        'border-radius': '2px'
+        'width': '190px',
+        'height': '64px',
+        'border-radius': '100px',
+        'border-width': '2px',
+        'border-style': 'solid',
+        'border-color': '#F4BC64'
+      },
+      pseudo: {
+        hover: {
+          'color': '#FFFFFF !important',
+          'border-width': '2px !important',
+          'border-style': 'solid !important',
+          'border-color': '#FFFFFF !important'
+        }
       }
-    },
-    key: 13
+    }
   }
 ]
 
@@ -199,21 +233,25 @@ const C_CUSTOM_2_M = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn292.cdn.stg.gamenet.ru/0/8dAtJ/o_1FdGcD.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '161px',
+        'height': '143px'
       }
     },
     key: 14
   },
   {
     element: {
-      text: 'Full Edition',
+      text: '<b>Full Edition</b>',
       styles: {
-        'color': '#fff'
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size': '24px',
+        'line-height': '29px',
+        'padding': '30px 0 0 0'
       }
     },
     key: 15
@@ -224,54 +262,62 @@ const C_CUSTOM_2D = [
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Suit of Legacy Armor'
+        text: 'Digital game copy'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 16
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Mithril Box'
+        text: 'Starship mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 17
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Heroic Boosters'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Kinetic weapon mk1'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 18
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Summon Mistfire Wolf Elite Skil'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Digital soundtrack'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 19
+    }
   }
 ]
 
@@ -279,54 +325,65 @@ const C_CUSTOM_3 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn128.cdn.stg.gamenet.ru/0/8hwPz/o_1fOpA2.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '215px',
+        'height': '194px'
       }
     },
     key: 20
   },
   {
     element: {
-      text: 'Deluxe Edition',
+      text: '<b>Deluxe Edition</b>',
       styles: {
-        'color': '#fff'
+        'color': '#fff',
+        'font-family': 'Montserrat',
+        'font-size': '32px',
+        'line-height': '39px'
       }
     },
     key: 21
   },
   {
     element: {
-      text: '59$',
+      text: '<b>29$</b>',
       styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
+        'color': '#fff',
+        'font-family': 'Montserrat',
+        'font-size': '32px',
+        'line-height': '39px'
       }
     },
     key: 22
   },
   {
     element: {
-      text: 'Buy now',
+      text: '<p><strong>BUY NOW</strong></p>',
       styles: {
-        'background-color': 'rgba(245,166,35,1)',
-        'color': '#000',
-        'font-family': 'Lato',
-        'font-size:': '1.2rem',
+        'background-color': 'transparent',
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size:': '1.6rem',
         'text-align': 'center',
-        'width': '192px',
-        'height': '52px',
-        'border-radius': '2px'
+        'width': '190px',
+        'height': '64px',
+        'border-radius': '100px',
+        'border-width': '2px',
+        'border-style': 'solid',
+        'border-color': '#F4BC64'
+      },
+      pseudo: {
+        hover: {
+          'color': '#FFFFFF !important',
+          'border-width': '2px !important',
+          'border-style': 'solid !important',
+          'border-color': '#FFFFFF !important'
+        }
       }
-    },
-    key: 23
+    }
   }
 ]
 
@@ -334,21 +391,25 @@ const C_CUSTOM_3_M = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn546.cdn.stg.gamenet.ru/0/8dAtZ/o_2FiQhB.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '157px',
+        'height': '143px'
       }
     },
     key: 24
   },
   {
     element: {
-      text: 'Deluxe Edition',
+      text: '<b>Deluxe Edition</b>',
       styles: {
-        'color': '#fff'
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size': '24px',
+        'line-height': '29px',
+        'padding': '30px 0 0 0'
       }
     },
     key: 25
@@ -359,54 +420,62 @@ const C_CUSTOM_3D = [
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Suit of Legacy Armor'
+        text: 'Digital game copy'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 26
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Mithril Box'
+        text: 'Starship mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 27
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Heroic Boosters'
+        text: 'Kinetic weapon mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 28
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(74,74,74,1)'
+        color: 'rgba(0,0,0,0)'
       },
       icon: {
-        value: 'close',
-        name: 'close',
-        text: 'Summon Mistfire Wolf Elite Skil'
+        value: 'checkMark',
+        name: 'checkMark',
+        text: 'Digital soundtrack'
+      },
+      styles: {
+        color: '#818181'
       }
-    },
-    key: 29
+    }
   }
 ]
 
@@ -414,54 +483,65 @@ const C_CUSTOM_4 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn573.cdn.stg.gamenet.ru/0/8hwQa/o_pphTq.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '213px',
+        'height': '194px'
       }
     },
     key: 30
   },
   {
     element: {
-      text: 'Ultimate Edition',
+      text: '<b>Ultimate Edition</b>',
       styles: {
-        'color': '#fff'
+        'color': '#fff',
+        'font-family': 'Montserrat',
+        'font-size': '32px',
+        'line-height': '39px'
       }
     },
     key: 31
   },
   {
     element: {
-      text: '79$',
+      text: '<b>39$</b>',
       styles: {
-        'color': '#e4a11e',
-        'font-size': '3.2rem',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'font-family': 'Lato',
-        'text-decoration': ''
+        'color': '#fff',
+        'font-family': 'Montserrat',
+        'font-size': '32px',
+        'line-height': '39px'
       }
     },
     key: 32
   },
   {
     element: {
-      text: 'Buy now',
+      text: '<p><strong>BUY NOW</strong></p>',
       styles: {
-        'background-color': 'rgba(245,166,35,1)',
-        'color': '#000',
-        'font-family': 'Lato',
-        'font-size:': '1.2rem',
+        'background-color': 'transparent',
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size:': '1.6rem',
         'text-align': 'center',
-        'width': '192px',
-        'height': '52px',
-        'border-radius': '2px'
+        'width': '190px',
+        'height': '64px',
+        'border-radius': '100px',
+        'border-width': '2px',
+        'border-style': 'solid',
+        'border-color': '#F4BC64'
+      },
+      pseudo: {
+        hover: {
+          'color': '#FFFFFF !important',
+          'border-width': '2px !important',
+          'border-style': 'solid !important',
+          'border-color': '#FFFFFF !important'
+        }
       }
-    },
-    key: 33
+    }
   }
 ]
 
@@ -469,21 +549,25 @@ const C_CUSTOM_4_M = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn537.cdn.stg.gamenet.ru/0/7RH35/o_1XowOi.png")',
+        'background-image': 'url("https://gn452.cdn.stg.gamenet.ru/0/8dAtj/o_1ZxHzN.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
-        'width': '160px',
-        'height': '130px'
+        'width': '157px',
+        'height': '143px'
       }
     },
     key: 34
   },
   {
     element: {
-      text: 'Ultimate Edition',
+      text: '<b>Ultimate Edition</b>',
       styles: {
-        'color': '#fff'
+        'color': '#F4BC64',
+        'font-family': 'Montserrat',
+        'font-size': '24px',
+        'line-height': '29px',
+        'padding': '30px 0 0 0'
       }
     },
     key: 35
@@ -494,54 +578,62 @@ const C_CUSTOM_4D = [
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Suit of Legacy Armor'
+        text: 'Digital game copy'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 36
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Mithril Box'
+        text: 'Starship mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 37
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Heroic Boosters'
+        text: 'Kinetic weapon mk1'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 37
+    }
   },
   {
     element: {
       colorFill: {
-        color: 'rgba(245,166,35,1)'
+        color: '#00FF0A'
       },
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Summon Mistfire Wolf Elite Skil'
+        text: 'Digital soundtrack'
+      },
+      styles: {
+        color: '#ffffff'
       }
-    },
-    key: 39
+    }
   }
 ]
 
@@ -562,32 +654,19 @@ const C_CUSTOM_CONTAINER_M = {
 const C_CUSTOM_CONTAINER_D = {
   styles: {
     'flex-direction': 'column',
-    'align-items': 'flex-start'
+    'align-items': 'flex-start',
+    'padding': '10px 0 0 85px'
   }
 }
-
-const C_CUSTOM = [
-  {
-    element: {
-      text: 'Chapter for products',
-      styles: {
-        'font-family': 'Lato',
-        'font-size': '4rem',
-        'color': '#fff'
-      }
-    },
-    key: 0
-  }
-]
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn664.cdn.stg.gamenet.ru/0/7RIc1/o_4g83t.jpg)',
-      'background-color': 'rgba(21,28,68,1)'
+      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-color': 'rgba(21,28,68,1)',
+      'padding': '130px 0'
     }
   },
-  components: _.merge({}, C_CUSTOM),
   containerStandart: _.merge({}, C_CUSTOM_CONTAINER),
   containerStandartM: _.merge({}, C_CUSTOM_CONTAINER_M),
   containerStandartD: _.merge({}, C_CUSTOM_CONTAINER_D),
@@ -693,17 +772,6 @@ const COMPONENTS_D = [
     label: 'icon with text'
   }
 ]
-
-const HEADER = [
-  {
-    name: 'TextElement',
-    element: types.Text,
-    type: 'text',
-    class: 'b-title',
-    label: 'title'
-  }
-]
-
 const GROUP_NAME = 'Products'
 const NAME = 'ProductsExtend'
 
@@ -716,12 +784,11 @@ export default {
 
   mixins: [defaults],
 
-  cover: '/img/covers/products_e.jpg',
+  cover: 'https://gn199.cdn.stg.gamenet.ru/0/8iE9h/o_2BSWcG.jpg',
 
   $schema: {
     mainStyle: types.ProductSection,
     container: types.StyleObject,
-    components: _.merge([], HEADER, { key: 0 }),
     containerStandart: types.StyleObject,
     containerStandartM: types.StyleObject,
     containerStandartD: types.StyleObject,
@@ -734,18 +801,18 @@ export default {
     containerUltimate: types.StyleObject,
     containerUltimateM: types.StyleObject,
     containerUltimateD: types.StyleObject,
-    componentsStandart: _.merge([], COMPONENTS, [{ key: 0 }, { key: 1 }, { key: 2 }, { key: 3 }]),
-    componentsStandartM: _.merge([], COMPONENTS_M, [{ key: 4 }, { key: 5 }]),
-    componentsStandartD: _.merge([], COMPONENTS_D, [{ key: 6 }, { key: 7 }, { key: 8 }, { key: 9 }]),
-    componentsFull: _.merge([], COMPONENTS, [{ key: 10 }, { key: 11 }, { key: 12 }, { key: 13 }]),
-    componentsFullM: _.merge([], COMPONENTS_M, [{ key: 14 }, { key: 15 }]),
-    componentsFullD: _.merge([], COMPONENTS_D, [{ key: 16 }, { key: 17 }, { key: 18 }, { key: 19 }]),
-    componentsDeluxe: _.merge([], COMPONENTS, [{ key: 20 }, { key: 21 }, { key: 22 }, { key: 23 }]),
-    componentsDeluxeM: _.merge([], COMPONENTS_M, [{ key: 24 }, { key: 25 }]),
-    componentsDeluxeD: _.merge([], COMPONENTS_D, [{ key: 26 }, { key: 27 }, { key: 28 }, { key: 29 }]),
-    componentsUltimate: _.merge([], COMPONENTS, [{ key: 30 }, { key: 31 }, { key: 32 }, { key: 33 }]),
-    componentsUltimateM: _.merge([], COMPONENTS_M, [{ key: 34 }, { key: 35 }]),
-    componentsUltimateD: _.merge([], COMPONENTS_D, [{ key: 36 }, { key: 37 }, { key: 38 }, { key: 39 }])
+    componentsStandart: _.merge([], COMPONENTS),
+    componentsStandartM: _.merge([], COMPONENTS_M),
+    componentsStandartD: _.merge([], COMPONENTS_D),
+    componentsFull: _.merge([], COMPONENTS),
+    componentsFullM: _.merge([], COMPONENTS_M),
+    componentsFullD: _.merge([], COMPONENTS_D),
+    componentsDeluxe: _.merge([], COMPONENTS),
+    componentsDeluxeM: _.merge([], COMPONENTS_M),
+    componentsDeluxeD: _.merge([], COMPONENTS_D),
+    componentsUltimate: _.merge([], COMPONENTS),
+    componentsUltimateM: _.merge([], COMPONENTS_M),
+    componentsUltimateD: _.merge([], COMPONENTS_D)
   },
 
   methods: {
@@ -786,33 +853,6 @@ export default {
     <slot name="overlay"/>
 
     <div class="b-grid">
-      <div class="b-grid__row">
-        <div class="b-grid__col-12">
-          <sandbox
-            class="b-sandbox"
-            container-path="$sectionData.container"
-            components-path="$sectionData.components"
-            direction="column"
-            :style="$sectionData.container.styles"
-            >
-              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @change="dragStop">
-                <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
-                  <component
-                    v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
-                    :is="component.name"
-                    :href="$sectionData.components[index].element.link.href"
-                    :target="$sectionData.components[index].element.link.target"
-                    :path="`components[${index}].element`"
-                    :style="$sectionData.components[index].element.styles"
-                    :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                    >
-                    <div v-html="$sectionData.components[index].element.text"></div>
-                  </component>
-                </div>
-              </draggable>
-          </sandbox>
-        </div>
-      </div>
       <div class="b-products-columns-extend__padd">
 
         <div class="b-products-columns-extend__padd-border">
@@ -826,19 +866,14 @@ export default {
                 <icon-base name="cog" width="12" height="15" />
               </a>
             </div>
-            <!--div>
-              <a href="#" class="b-products-columns-extend__control"
-                 tooltip="Products style"
-                 tooltip-position="bottom"
-                 @click.stop="showSettings('SectionProductsColumnsStyle')">
-                <icon-base name="style" width="12" height="15" />
-              </a>
-            </div-->
           </div>
 
           <div class="b-grid__row b-products-columns-extend__row"
-               :style="{ 'align-items' : $sectionData.mainStyle.styles['align-items']}">
-            <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__left hidden-m">
+               :style="{
+                 'align-items' : $sectionData.mainStyle.styles['align-items'],
+                 '--color-active': $sectionData.mainStyle.itemHoverColor
+                 }">
+            <div class="b-grid__col-8 b-grid__col-m-12 b-products-columns-extend__left hidden-m">
               <!-- b-products-columns-extend__left -->
               <div class="b-grid__row b-products-columns-extend__row">
                 <div class="b-grid__col-6 b-products-columns-extend__left-item"
@@ -855,7 +890,6 @@ export default {
                     :container-path="`$sectionData.container${key}M`"
                     :components-path="`$sectionData.components${key}M`"
                     direction="column"
-                    :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
                     >
 
                     <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}M`].styles" @change="dragStop">
@@ -881,73 +915,71 @@ export default {
                 </div>
               </div><!--/.b-products-columns-extend__left-->
             </div>
-            <div class="b-grid__col-6 b-grid__col-m-12 b-products-columns-extend__right">
-                   <!-- b-products-columns-extend__right -->
-                    <div class="b-grid__row">
-                      <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
-                        v-for="(product, key) in $sectionData.mainStyle.products"
-                        :key="key"
-                        v-show="$sectionData.mainStyle.selectProduct.name === key && $sectionData.mainStyle.products[key].visible"
-                        :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === key }"
-                        :product-extend-stage="key"
-                        :data-index="key"
+            <div class="b-grid__col-4 b-grid__col-m-12 b-products-columns-extend__right">
+               <!-- b-products-columns-extend__right -->
+                <div class="b-grid__row">
+                  <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
+                    v-for="(product, key) in $sectionData.mainStyle.products"
+                    :key="key"
+                    v-show="$sectionData.mainStyle.selectProduct.name === key && $sectionData.mainStyle.products[key].visible"
+                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === key }"
+                    :product-extend-stage="key"
+                    :data-index="key"
+                    >
+                    <sandbox
+                      class="b-sandbox"
+                      :container-path="`$sectionData.container${key}`"
+                      :components-path="`$sectionData.components${key}`"
+                      direction="column"
+                      >
+                      <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @change="dragStop">
+                      <div
+                        v-for="(component, index) in $sectionData[`components${key}`]"
+                        v-if="$sectionData[`components${key}`].length !== 0"
+                        :key="index"
                         >
-                        <sandbox
-                          class="b-sandbox"
-                          :container-path="`$sectionData.container${key}`"
-                          :components-path="`$sectionData.components${key}`"
-                          direction="column"
-                          :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
+                        <component class="b-products-colums-component"
+                          v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
+                          :is="component.name"
+                          :href="$sectionData[`components${key}`][index].element.link.href"
+                          :target="$sectionData[`components${key}`][index].element.link.target"
+                          :path="`components${key}[${index}].element`"
+                          :style="$sectionData[`components${key}`][index].element.styles"
+                          :class="[$sectionData[`components${key}`][index].element.classes, $sectionData[`components${key}`][index].class]"
                           >
-                          <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot b-draggable-slot_row" :style="$sectionData[`container${key}`].styles" @change="dragStop">
-                          <div
-                            v-for="(component, index) in $sectionData[`components${key}`]"
-                            v-if="$sectionData[`components${key}`].length !== 0"
-                            :key="index"
-                            >
-                            <component class="b-products-colums-component"
-                              v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
-                              :is="component.name"
-                              :href="$sectionData[`components${key}`][index].element.link.href"
-                              :target="$sectionData[`components${key}`][index].element.link.target"
-                              :path="`components${key}[${index}].element`"
-                              :style="$sectionData[`components${key}`][index].element.styles"
-                              :class="[$sectionData[`components${key}`][index].element.classes, $sectionData[`components${key}`][index].class]"
-                              >
-                              <div v-html="$sectionData[`components${key}`][index].element.text"></div>
-                            </component>
-                          </div>
-                        </draggable>
-                      </sandbox>
-                      <sandbox
-                          class="b-sandbox"
-                          :container-path="`$sectionData.container${key}D`"
-                          :components-path="`$sectionData.components${key}D`"
-                          direction="column"
-                          :style="{ 'background-color' : $sectionData.mainStyle.styles['background-color'] }"
-                          >
-                          <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @change="dragStop">
-                            <div
-                              v-for="(component, index) in $sectionData[`components${key}D`]"
-                              v-if="$sectionData[`components${key}D`].length !== 0"
-                              :key="index"
-                              >
-                              <component class="b-products-colums-component"
-                                v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
-                                :is="component.name"
-                                :href="$sectionData[`components${key}D`][index].element.link.href"
-                                :target="$sectionData[`components${key}D`][index].element.link.target"
-                                :path="`components${key}D[${index}].element`"
-                                :style="$sectionData[`components${key}D`][index].element.styles"
-                                :class="[$sectionData[`components${key}D`][index].element.classes, $sectionData[`components${key}D`][index].class]"
-                                >
-                                <div v-html="$sectionData[`components${key}D`][index].element.text"></div>
-                              </component>
-                            </div>
-                          </draggable>
-                        </sandbox>
+                          <div v-html="$sectionData[`components${key}`][index].element.text"></div>
+                        </component>
                       </div>
-                  </div><!--/.b-products-columns-extend__right-->
+                    </draggable>
+                  </sandbox>
+                  <sandbox
+                      class="b-sandbox"
+                      :container-path="`$sectionData.container${key}D`"
+                      :components-path="`$sectionData.components${key}D`"
+                      direction="column"
+                      >
+                      <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @change="dragStop">
+                        <div
+                          v-for="(component, index) in $sectionData[`components${key}D`]"
+                          v-if="$sectionData[`components${key}D`].length !== 0"
+                          :key="index"
+                          >
+                          <component class="b-products-colums-component"
+                            v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
+                            :is="component.name"
+                            :href="$sectionData[`components${key}D`][index].element.link.href"
+                            :target="$sectionData[`components${key}D`][index].element.link.target"
+                            :path="`components${key}D[${index}].element`"
+                            :style="$sectionData[`components${key}D`][index].element.styles"
+                            :class="[$sectionData[`components${key}D`][index].element.classes, $sectionData[`components${key}D`][index].class]"
+                            >
+                            <div v-html="$sectionData[`components${key}D`][index].element.text"></div>
+                          </component>
+                        </div>
+                      </draggable>
+                    </sandbox>
+                  </div>
+              </div><!--/.b-products-columns-extend__right-->
             </div>
           </div>
         </div>
@@ -1026,8 +1058,8 @@ export default {
     &-item
       &:hover,
       &_active
+        color: var(--color-active) !important
         & .b-slot
-          box-shadow: 0 0.4rem 2rem rgba(0, 0, 0, 0.8)
           cursor: pointer
   &__right
     position: relative
@@ -1088,4 +1120,6 @@ export default {
   & > div
     margin: $size-step/8
 
+.b-slot
+  min-height: auto !important
 </style>
