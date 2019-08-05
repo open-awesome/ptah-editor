@@ -223,6 +223,9 @@ export default {
       margin: $size-step/4 auto
       width: 100% !important
       height: $size-step*5 !important
+  @media only screen and (max-width: 900px) and (max-height: 450px)
+    &
+      height: $size-step*5 !important
   &__padd
     margin: $size-step/8
     width: 100%

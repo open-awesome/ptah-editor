@@ -118,6 +118,13 @@ const C_CUSTOM_1 = [
 
 const COMPONENTS_3 = [
   {
+    name: 'Delimiter',
+    element: types.Delimiter,
+    type: 'delimiter',
+    class: 'b-delimiter-fs',
+    label: 'Spacer'
+  },
+  {
     name: 'SocialNetworks',
     element: types.SocialNetworks,
     type: 'networks',
@@ -127,6 +134,14 @@ const COMPONENTS_3 = [
 ]
 
 const C_CUSTOM_3 = [
+  {
+    element: {
+      styles: {
+        width: '40px',
+        height: '120px'
+      }
+    }
+  },
   {
     element: {
       socialNetworks: {
@@ -226,7 +241,7 @@ export default {
 
 <template>
   <section
-    class="b-first-screen-fantasy-video-back"
+    class="b-first-screen-fantasy-02"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
     v-styler:section="$sectionData.mainStyle"
@@ -316,19 +331,56 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-first-screen-fantasy-video-back
+.b-first-screen-fantasy-02
+  @media only screen and (width: 1024px) and (height: 1366px)
+    &
+      background-position: 75% bottom !important
+  .is-mobile &,
+    background-position: 75% bottom !important
+  @media only screen and (max-width: 500px) and (max-height: 1000px)
+    &
+      background-position: 75% bottom !important
+  .b-logo-fs
+    @media only screen and (max-width: 900px) and (max-height: 450px)
+      &
+        margin: 1.6rem 0 !important
   .b-text-fs
     letter-spacing: -0.02em
     .is-mobile &,
     .is-tablet &
       font-size: 2.4rem !important
       margin: 0 auto 8px !important
+      text-align: center !important
+    @media only screen and (width: 768px) and (height: 1024px)
+      &
+        padding: 0px 0px 0px 40px !important
     @media only screen and (max-width: 840px)
       &
         font-size: 2.4rem !important
         margin: 0 auto 8px !important
+    @media only screen and (max-width: 500px)
+      &
+        text-align: center !important
+    @media only screen and (max-width: 900px) and (max-height: 450px)
+      &
+        text-align: left !important
   .b-button-fs
     box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
     transition: background-color 200ms
+    @media only screen and (max-width: 900px) and (max-height: 450px)
+      &
+        margin: 1.6rem !important
+  .b-timer-fs
+    @media only screen and (max-width: 768px) and (min-height: 700px)
+      &
+        width: 90% !important
+    @media only screen and (max-width: 900px) and (max-height: 450px)
+      &
+        width: auto !important
+        margin: 1.6rem 0 !important
+  .b-delimiter-fs
+    @media only screen and (max-width: 980px) and (max-height: 700px)
+      &
+        display: none !important
 
 </style>
