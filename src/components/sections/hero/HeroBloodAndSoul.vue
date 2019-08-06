@@ -50,7 +50,7 @@ const C_CUSTOM2 = [
       text: 'Play game',
       styles: {
         'font-family': 'PT Serif',
-        'font-size': '36px',
+        'font-size': '3.6rem',
         'color': '#000000',
         'background-color': '#ffa800',
         'width': '256px',
@@ -162,8 +162,8 @@ export default {
                 <component class="b-hero-component"
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"
                   :is="component.name"
-                  :href="$sectionData.components[index].element.href"
-                  :target="$sectionData.components[index].element.target"
+                  :href="$sectionData.components[index].element.link.href"
+                  :target="$sectionData.components[index].element.link.target"
                   :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
@@ -190,8 +190,8 @@ export default {
                 <component class="b-hero-component"
                   v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
                   :is="component.name"
-                  :href="$sectionData.components2[index].element.href"
-                  :target="$sectionData.components2[index].element.target"
+                  :href="$sectionData.components2[index].element.link.href"
+                  :target="$sectionData.components2[index].element.link.target"
                   :path="`components2[${index}].element`"
                   :style="$sectionData.components2[index].element.styles"
                   :class="[$sectionData.components2[index].element.classes, $sectionData.components2[index].class]"
