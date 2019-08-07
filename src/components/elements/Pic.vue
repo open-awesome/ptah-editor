@@ -212,7 +212,7 @@ export default {
       margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px) and (min-height: 700px)
     &
-      max-width: 60% !important
+      max-width: 90% !important
       margin: $size-step/2 auto !important
   &.js-element-link
     cursor: pointer

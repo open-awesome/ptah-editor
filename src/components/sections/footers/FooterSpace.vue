@@ -119,7 +119,7 @@ const C_CUSTOM = [
         'color': '#F4BC64',
         'font-family': 'Lato',
         'text-align': 'center',
-        'width': '80px',
+        'width': '130px',
         'height': '32px',
         'font-size': '1.8rem',
         'margin': '0'

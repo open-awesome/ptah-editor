@@ -208,13 +208,13 @@ export default {
           width: auto
       .is-mobile &,
       .is-tablet &
-        width: 96%
+        width: 100%
         > div
-          width: 96%
+          width: 100%
       @media only screen and (max-width: 768px)
         &
-          width: 96%
+          width: 100%
           > div
-            width: 96%
+            width: 100%
 
 </style>

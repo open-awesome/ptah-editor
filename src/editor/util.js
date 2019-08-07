@@ -456,6 +456,7 @@ export const FONTS_LIST = [
   'Heebo',
   'PT Serif',
   'Roboto',
+  'Cinzel',
   'IBM Plex Sans'
 ]
 
