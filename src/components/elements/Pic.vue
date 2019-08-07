@@ -94,8 +94,8 @@ export default {
   created () {
     this.a = this.alt
     this.file = this.styles['background-image']
-    this.width = parseInt(this.styles.width.split('px')[0]) || 96
-    this.height = parseInt(this.styles.height.split('px')[0]) || 96
+    this.width = parseInt(this.styles.width.split('px')[0]) || 32
+    this.height = parseInt(this.styles.height.split('px')[0]) || 32
   },
 
   methods: {
@@ -172,8 +172,8 @@ export default {
   max-width: 100% !important
   max-height: 100% !important
 
-  min-width: $size-step*2
-  min-height: $size-step/2
+  min-width: $size-step
+  min-height: $size-step
 
   user-select: none
   transition: all 200ms

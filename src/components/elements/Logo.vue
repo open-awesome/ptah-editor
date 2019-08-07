@@ -175,8 +175,8 @@ export default {
   max-width: 100%
   max-height: 100%
 
-  min-width: $size-step*2
-  min-height: $size-step/2
+  min-width: $size-step
+  min-height: $size-step
 
   user-select: none
   transition: all 200ms
