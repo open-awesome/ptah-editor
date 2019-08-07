@@ -451,6 +451,7 @@ export const FONTS_LIST = [
   'Montserrat',
   'Heebo',
   'PT Serif',
-  'Roboto'
+  'Roboto',
+  'Cinzel'
 ]
 
