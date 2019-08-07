@@ -172,7 +172,7 @@ export default {
   async beforeRouteEnter (to, from, next) {
     try {
       await store.dispatch('getLandingForUser', to.params.slug)
-      to.meta.title = store.state.name + ' - Ptah'
+      to.meta.title = store.state.name + ' - Editor - Ptah'
       next()
     } catch (e) {
       console.warn(e)
@@ -204,6 +204,7 @@ export default {
       builder.export('preview')
     },
     onSave (builder) {
+      console.log(builder.export('json'))
       this.saveLanding(builder.export('json'))
     }
   }

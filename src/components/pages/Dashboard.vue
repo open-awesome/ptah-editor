@@ -24,7 +24,8 @@ export default {
         },
         {
           type: 'Space page',
-          sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace']
+          sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace'],
+          url: 'https://s3.protocol.one/files/templateSpacePage.json'
         }
       ],
       presetSelected: 0,
@@ -44,7 +45,9 @@ export default {
     ...mapActions([
       'fetchLandings',
       'createLanding',
-      'deleteLanding'
+      'deleteLanding',
+      'fetchLandingFromFile',
+      'saveLanding'
     ]),
 
     openLanding (item) {
@@ -61,13 +64,20 @@ export default {
     },
 
     newLanding () {
+      let self = this
+
       if (this.newPageTitle.length > 0 && !this.createProgress) {
         this.createProgress = true
         this.$Progress.start()
         this.invalid = false
         this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
           .then((response) => {
-            this.$router.push({ path: `/editor/${response._id}` })
+            let url = this.presets[this.presetSelected].url
+
+            return self.fetchLandingFromFile({ slug: response._id, url: url })
+          })
+          .then((data) => {
+            this.$router.push({ path: `/editor/${data.slug}` })
           })
       } else {
         this.invalid = true
