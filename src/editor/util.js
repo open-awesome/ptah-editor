@@ -425,10 +425,13 @@ export const FONT_SIZES_LIST = [
   { name: '20px', value: '2rem' },
   { name: '24px', value: '2.4rem' },
   { name: '28px', value: '2.8rem' },
+  { name: '30px', value: '3rem' },
   { name: '32px', value: '3.2rem' },
   { name: '36px', value: '3.6rem' },
   { name: '40px', value: '4rem' },
+  { name: '44px', value: '4.4rem' },
   { name: '48px', value: '4.8rem' },
+  { name: '52px', value: '5.2rem' },
   { name: '56px', value: '5.6rem' },
   { name: '64px', value: '6.4rem' },
   { name: '72px', value: '7.2rem' }
@@ -436,6 +439,7 @@ export const FONT_SIZES_LIST = [
 
 export const LINES_HEIGHT_LIST = [
   { name: '1', value: '1' },
+  { name: '1.1', value: '1.1' },
   { name: '1.2', value: '1.2' },
   { name: '1.4', value: '1.4' },
   { name: '1.6', value: '1.6' },
@@ -451,6 +455,7 @@ export const FONTS_LIST = [
   'Montserrat',
   'Heebo',
   'PT Serif',
-  'Roboto'
+  'Roboto',
+  'IBM Plex Sans'
 ]
 

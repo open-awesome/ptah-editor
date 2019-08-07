@@ -124,7 +124,7 @@ function download (assets) {
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="shortcut icon" href="${icon}"/>
             <link rel="manifest" href="/manifest.json">
-            <link href="https://fonts.googleapis.com/css?family=Lato|Heebo|PT+Serif|Montserrat:400,500|Roboto:400,700&amp;subset=cyrillic" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=Lato|Heebo|PT+Serif|Montserrat:400,500|Roboto:400,700|IBM+Plex+Sans&amp;subset=cyrillic" rel="stylesheet">
             ${scrollSetup.style}
             ${og}
             <style>
