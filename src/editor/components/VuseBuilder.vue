@@ -465,7 +465,8 @@ export default {
   margin: 0 auto
   transition: 0.2s
   position: relative
-  &.is-editable div.is-editable
+  &.is-editable div.is-editable,
+  &.is-editable table.is-editable
     outline: none
     transition: border 0.25s
     border: .2rem dotted transparent
@@ -473,9 +474,21 @@ export default {
       cursor: pointer
       border-color: $dark-blue-krayola
     &.styler-active
-      border-color: $black
+      border-color: transparent !important
       &:hover
-        border-color: $black
+        border-color: transparent !important
+  &.is-editable div.b-border,
+  &.is-editable table.b-border
+    outline: none
+    transition: border 0.25s
+    border: .2rem dotted transparent
+    &:hover
+      cursor: pointer
+      border-color: $dark-blue-krayola
+    &.styler-active
+      border-color: $white !important
+      &:hover
+        border-color: $white !important
       &.b-text
         cursor: text
   &.fp-scroll section

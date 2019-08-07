@@ -1,5 +1,5 @@
 <template>
-  <div class="b-form" @click.stop.stop="" ref="form">
+  <div class="b-form b-border" @click.stop.stop="" ref="form">
 
     <slot v-if="!isActive"></slot>
 

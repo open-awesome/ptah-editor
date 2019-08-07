@@ -1,7 +1,7 @@
 <template>
   <div
     data-toggle-element=""
-    class="b-toggle-element is-editable"
+    class="b-toggle-element is-editable b-border"
     ref="toggleEl"
     :style="{ 'justify-content': styles['justify-content'] }"
     @click.stop.stop=""
