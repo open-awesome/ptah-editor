@@ -68,8 +68,6 @@ export default {
     },
 
     newLanding () {
-      let self = this
-
       if (this.newPageTitle.length > 0 && !this.createProgress) {
         this.createProgress = true
         this.$Progress.start()
@@ -78,7 +76,11 @@ export default {
           .then((response) => {
             let url = this.presets[this.presetSelected].url
 
-            return self.fetchLandingFromFile({ slug: response._id, url: url })
+            if (url === '') {
+              Promise.resolve(response)
+            } else {
+              return this.fetchLandingFromFile({ slug: response._id, url: url })
+            }
           })
           .then((data) => {
             this.$router.push({ path: `/editor/${data.slug}` })

@@ -58,7 +58,7 @@ const actions = {
    */
   getLandingData ({ state, commit }, slug) {
     if (state.slug === slug) {
-      return
+      return Promise.resolve(true)
     }
 
     commit('slug', slug)
