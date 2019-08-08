@@ -13,7 +13,7 @@ Vue.use(Vuex)
 Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
-const demoLanding = 'https://s3.protocol.one/files/demoLandingSimplePage.json'
+const demoLanding = 'https://s3.protocol.one/files/demoLanding.json'
 
 const state = {
   storefrontPreview: false,
@@ -57,6 +57,10 @@ const actions = {
    * @param slug
    */
   getLandingData ({ state, commit }, slug) {
+    if (state.slug === slug) {
+      return Promise.resolve(true)
+    }
+
     commit('slug', slug)
 
     return api.request({
@@ -132,10 +136,16 @@ const actions = {
         return response.json()
       })
       .then((data) => {
+        data['slug'] = slug
+
+        if (state.name === '' && data.title !== '') {
+          commit('name', data.title)
+        }
+
         commit('slug', slug)
         commit('isSaved', false)
+        commit('version', 1)
         commit('updateCurrentLanding', data)
-        commit('name', data.title)
 
         return data
       })
@@ -163,6 +173,8 @@ const actions = {
         }
       }
     }).then((response) => {
+      commit('name', name)
+
       return response
     })
   },

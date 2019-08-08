@@ -12,19 +12,23 @@ export default {
         },
         {
           type: 'Simple page',
-          sections: ['FirstScreenSpace01', 'FooterSpace']
+          sections: ['FirstScreenSpace01', 'FooterSpace'],
+          url: 'https://s3.protocol.one/files/templateSimplePage.json'
         },
         {
           type: 'Simple page with menu',
-          sections: ['ActionButtonHeader', 'FirstScreenSpaceVideoPlayer', 'FooterSpace']
+          sections: ['ActionButtonHeader', 'FirstScreenSpaceVideoPlayer', 'FooterSpace'],
+          url: 'https://s3.protocol.one/files/templateSimplePageWithMenu.json'
         },
         {
-          type: 'Closed beta test page',
-          sections: ['FirstScreenSpaceVideoBack', 'Columns', 'GalleryPopup', 'FormCenter', 'FooterSpace']
+          type: 'Page with subscription form',
+          sections: ['FirstScreenSpaceVideoBack', 'Columns', 'GalleryPopup', 'FormCenter', 'FooterSpace'],
+          url: 'https://s3.protocol.one/files/templatePageWithSubscriptionForm.json'
         },
         {
           type: 'Space page',
-          sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace']
+          sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace'],
+          url: 'https://s3.protocol.one/files/templateSpacePage.json'
         }
       ],
       presetSelected: 0,
@@ -44,7 +48,9 @@ export default {
     ...mapActions([
       'fetchLandings',
       'createLanding',
-      'deleteLanding'
+      'deleteLanding',
+      'fetchLandingFromFile',
+      'saveLanding'
     ]),
 
     openLanding (item) {
@@ -67,7 +73,17 @@ export default {
         this.invalid = false
         this.createLanding({ name: this.newPageTitle, sections: this.presets[this.presetSelected].sections })
           .then((response) => {
-            this.$router.push({ path: `/editor/${response._id}` })
+            let url = this.presets[this.presetSelected].url
+
+            if (url === undefined || url === '') {
+              response['slug'] = response._id
+              return Promise.resolve(response)
+            } else {
+              return this.fetchLandingFromFile({ slug: response._id, url: url })
+            }
+          })
+          .then((data) => {
+            this.$router.push({ path: `/editor/${data.slug}` })
           })
       } else {
         this.invalid = true
