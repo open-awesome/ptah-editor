@@ -70,6 +70,7 @@
                         >
                           <div class="b-preview__image"
                             @click="current = key"
+                            :class="{ 'b-preview_active' : current === key }"
                             >
                             <component
                               v-styler:for="{ el: $sectionData[key][0].element, path:`$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
@@ -77,9 +78,8 @@
                               :href="$sectionData[key][0].element.link.href"
                               :target="$sectionData[key][0].element.link.target"
                               :style="$sectionData[key][0].element.styles"
-                              :class="[$sectionData[key][0].element.classes, $sectionData[key][0].class, { 'b-preview_active' : current === key }]"
+                              :class="[$sectionData[key][0].element.classes, $sectionData[key][0].class]"
                               :path="`${key}[0].element`"
-                              class="b-gallery-popup__preview"
                               :gallery-one-preview="'loader__content_show'"
                               :data-index="key.split('components')[1]"
                               >
@@ -539,7 +539,6 @@ export default {
   &_active
     transform: scale(1.1)
     filter: none
-    // box-shadow: 0 0 2rem 0 rgba($black, 0.6)
     opacity: 1
 
 .b-gallery-one-list
