@@ -76,7 +76,7 @@
 
       </div>
       <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-m-12 mobile-menu mobile-menu_drop"
-        :class="[{ 'mobile-menu_hide': !isToggle }, `b-grid__col-${$sectionData.container2.width}`]"
+        :class="[{ 'mobile-menu_hide': !$sectionData.isToggle }, `b-grid__col-${$sectionData.container2.width}`]"
         >
 
         <sandbox

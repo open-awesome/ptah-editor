@@ -76,7 +76,7 @@
 
       </div>
       <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-m-12 mobile-menu mobile-menu_drop"
-        :class="[{ 'mobile-menu_hide': !isToggle }, `b-grid__col-${$sectionData.container2.width}`]"
+        :class="[{ 'mobile-menu_hide': !$sectionData.isToggle }, `b-grid__col-${$sectionData.container2.width}`]"
         >
 
         <sandbox
@@ -309,13 +309,8 @@ export default {
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 2 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 3 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-button', label: 'button', key: 5 }
-    ]
-  },
-
-  data () {
-    return {
-      isToggle: false
-    }
+    ],
+    isToggle: false
   },
 
   created () {
@@ -334,7 +329,7 @@ export default {
     },
 
     toggle () {
-      this.isToggle = !this.isToggle
+      this.$sectionData.isToggle = !this.$sectionData.isToggle
     }
   }
 }
