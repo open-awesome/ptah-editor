@@ -172,7 +172,7 @@ export default {
   async beforeRouteEnter (to, from, next) {
     try {
       await store.dispatch('getLandingForUser', to.params.slug)
-      to.meta.title = store.state.name + ' - Editor - Ptah'
+      to.meta.title = store.state.name + ' - Ptah'
       next()
     } catch (e) {
       console.warn(e)
