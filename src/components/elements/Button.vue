@@ -120,7 +120,6 @@
     <editor-content class="editor__content" ref="editor" :editor="editor" v-if="isActive"/>
 
     <vue-draggable-resizable
-      v-if="!isActive"
       class="b-button__resize b-resize"
       class-name-active="b-button__resize_active"
       class-name-handle="b-handle"
