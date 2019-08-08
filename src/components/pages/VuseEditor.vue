@@ -204,7 +204,6 @@ export default {
       builder.export('preview')
     },
     onSave (builder) {
-      console.log(builder.export('json'))
       this.saveLanding(builder.export('json'))
     }
   }
