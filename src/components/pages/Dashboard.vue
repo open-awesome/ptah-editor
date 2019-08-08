@@ -8,19 +8,23 @@ export default {
       presets: [
         {
           type: 'Blank page',
-          sections: []
+          sections: [],
+          url: 'https://s3.protocol.one/files/templateBlankPage.json'
         },
         {
           type: 'Simple page',
-          sections: ['FirstScreenSpace01', 'FooterSpace']
+          sections: ['FirstScreenSpace01', 'FooterSpace'],
+          url: 'https://s3.protocol.one/files/templateSimplePage.json'
         },
         {
           type: 'Simple page with menu',
-          sections: ['ActionButtonHeader', 'FirstScreenSpaceVideoPlayer', 'FooterSpace']
+          sections: ['ActionButtonHeader', 'FirstScreenSpaceVideoPlayer', 'FooterSpace'],
+          url: 'https://s3.protocol.one/files/templateSimplePageWithMenu.json'
         },
         {
-          type: 'Closed beta test page',
-          sections: ['FirstScreenSpaceVideoBack', 'Columns', 'GalleryPopup', 'FormCenter', 'FooterSpace']
+          type: 'Page with subscription form',
+          sections: ['FirstScreenSpaceVideoBack', 'Columns', 'GalleryPopup', 'FormCenter', 'FooterSpace'],
+          url: 'https://s3.protocol.one/files/templatePageWithSubscriptionForm.json'
         },
         {
           type: 'Space page',
