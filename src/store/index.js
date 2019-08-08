@@ -138,6 +138,10 @@ const actions = {
       .then((data) => {
         data['slug'] = slug
 
+        if (state.name === '' && data.title !== '') {
+          commit('name', data.title)
+        }
+
         commit('slug', slug)
         commit('isSaved', false)
         commit('version', 1)
