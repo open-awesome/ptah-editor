@@ -441,8 +441,12 @@ export const LINES_HEIGHT_LIST = [
   { name: '1', value: '1' },
   { name: '1.1', value: '1.1' },
   { name: '1.2', value: '1.2' },
+  { name: '1.3', value: '1.3' },
   { name: '1.4', value: '1.4' },
+  { name: '1.5', value: '1.5' },
   { name: '1.6', value: '1.6' },
+  { name: '1.7', value: '1.7' },
+  { name: '1.9', value: '1.9' },
   { name: '1.8', value: '1.8' },
   { name: '2', value: '2' },
   { name: '2.4', value: '2.4' },
@@ -457,6 +461,7 @@ export const FONTS_LIST = [
   'PT Serif',
   'Roboto',
   'Cinzel',
-  'IBM Plex Sans'
+  'IBM Plex Sans',
+  'IBM Plex Mono'
 ]
 

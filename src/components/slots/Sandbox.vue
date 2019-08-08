@@ -141,7 +141,7 @@ export default {
     position: absolute
     top: 0
     left: 0
-    z-index: 1
+    z-index: 1000
 
     width: $size-step/1.5
     padding: 0

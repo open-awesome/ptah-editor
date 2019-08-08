@@ -209,15 +209,15 @@ export default {
     display: block
   .is-mobile &,
   .is-tablet &
-    max-width: 90% !important
+    max-width: 100% !important
     margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px)
     &
-      max-width: 90% !important
+      max-width: 100% !important
       margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px) and (min-height: 700px)
     &
-      max-width: 90% !important
+      max-width: 100% !important
       margin: $size-step/2 auto !important
   &.js-element-link
     cursor: pointer
