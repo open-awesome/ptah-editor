@@ -8,8 +8,7 @@ export default {
       presets: [
         {
           type: 'Blank page',
-          sections: [],
-          url: 'https://s3.protocol.one/files/templateBlankPage.json'
+          sections: []
         },
         {
           type: 'Simple page',
@@ -76,8 +75,9 @@ export default {
           .then((response) => {
             let url = this.presets[this.presetSelected].url
 
-            if (url === '') {
-              Promise.resolve(response)
+            if (url === undefined || url === '') {
+              response['slug'] = response._id
+              return Promise.resolve(response)
             } else {
               return this.fetchLandingFromFile({ slug: response._id, url: url })
             }
