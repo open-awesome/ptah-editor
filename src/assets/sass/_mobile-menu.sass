@@ -3,6 +3,9 @@
   --mobile-header-height: 6rem
 
 .mobile-header
+  .is-mobile &
+    height: var(--mobile-header-height) !important
+    padding: 0 1.6rem !important
   @media (max-width: 800px)
     height: var(--mobile-header-height) !important
     padding: 0 1.6rem !important

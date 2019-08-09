@@ -202,5 +202,15 @@ export default {
   ol
     margin: 0
     padding: 0 1em
+  h1
+    .is-mobile &
+      font-size: 3.6rem
+    @media (max-width: 800px)
+      font-size: 3.6rem
+  h2
+    .is-mobile &
+      font-size: 2.6rem
+    @media (max-width: 800px)
+      font-size: 2.6rem
 
 </style>

@@ -47,7 +47,6 @@
       @resizestop="onResizeStop"
       :draggable="false"
       :z="999"
-      :lock-aspect-ratio="true"
      />
      <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
 </div>

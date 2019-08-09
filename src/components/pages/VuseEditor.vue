@@ -35,7 +35,7 @@ import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
 
 // --- hero
 import HeroUnit from '@components/sections/hero/HeroUnit'
-import HeroTwoColumns from '@components/sections/hero/HeroTwoColumns'
+import TwoSegmentHeroScreen from '@components/sections/hero/TwoSegmentHeroScreen'
 import HeroThreeColumns from '@components/sections/hero/HeroThreeColumns'
 import HeroArtRight from '@components/sections/hero/HeroArtRight'
 import HeroArtLeft from '@components/sections/hero/HeroArtLeft'
@@ -111,7 +111,7 @@ const COMPONENTS = {
   FirstScreenFantasy02,
   FirstScreenFantasyVideoBack,
   HeroUnit,
-  HeroTwoColumns,
+  TwoSegmentHeroScreen,
   HeroThreeColumns,
   HeroArtRight,
   HeroArtLeft,

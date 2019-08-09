@@ -125,7 +125,7 @@ export default {
           </div>
           <div class="b-dashboard__item-cell-top"></div>
           <div class="b-dashboard__item-cell-bottom">
-            {{ item._id }}
+            {{ item.name }}
           </div>
         </div>
       </figure>

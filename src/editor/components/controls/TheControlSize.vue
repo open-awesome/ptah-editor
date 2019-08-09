@@ -38,7 +38,7 @@ export default {
       parents['height'] = this.settingObjectElement.closest('section')
 
       max['width'] = parents['width'].offsetWidth
-      max['height'] = parseInt(parents['height'].offsetHeight / 2)
+      max['height'] = parseInt(parents['height'].offsetHeight)
 
       return max
     }
