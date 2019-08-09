@@ -195,22 +195,46 @@ export default {
   position: relative
   display: block
 
+  letter-spacing: -0.02em
+  .is-mobile &,
+  .is-tablet &
+    margin: 0 auto 8px !important
+    text-align: center !important
+  @media only screen and (width: 768px) and (height: 1024px)
+    &
+      padding: 0px 0px 0px 40px !important
+  @media only screen and (max-width: 840px)
+    &
+      margin: 0 auto 8px !important
+  @media only screen and (max-width: 500px)
+    &
+      text-align: center !important
+  @media only screen and (max-width: 900px) and (max-height: 450px)
+    &
+      text-align: left !important
+
   &::selection, & ::selection
     color: #ff0
     background: #000
+
   ul,
   ol
     margin: 0
     padding: 0 1em
+  p
+    .is-mobile &
+      font-size: 1.6rem !important
+    @media (max-width: 800px)
+      font-size: 1.6rem !important
   h1
     .is-mobile &
-      font-size: 3.6rem
+      font-size: 3.6rem !important
     @media (max-width: 800px)
-      font-size: 3.6rem
+      font-size: 3.6rem !important
   h2
     .is-mobile &
-      font-size: 2.6rem
+      font-size: 2.6rem !important
     @media (max-width: 800px)
-      font-size: 2.6rem
+      font-size: 2.6rem !important
 
 </style>
