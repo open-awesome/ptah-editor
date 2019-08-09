@@ -16,9 +16,9 @@ export default {
           url: 'https://s3.protocol.one/files/templateSimplePage.json'
         },
         {
-          type: 'Simple page with menu',
-          sections: ['ActionButtonHeader', 'FirstScreenSpaceVideoPlayer', 'FooterSpace'],
-          url: 'https://s3.protocol.one/files/templateSimplePageWithMenu.json'
+          type: 'Ptah page',
+          sections: [],
+          url: 'https://s3.protocol.one/files/templatePtah.json'
         },
         {
           type: 'Page with subscription form',
@@ -50,7 +50,8 @@ export default {
       'createLanding',
       'deleteLanding',
       'fetchLandingFromFile',
-      'saveLanding'
+      'saveLanding',
+      'clearSlug'
     ]),
 
     openLanding (item) {
@@ -77,6 +78,7 @@ export default {
 
             if (url === undefined || url === '') {
               response['slug'] = response._id
+
               return Promise.resolve(response)
             } else {
               return this.fetchLandingFromFile({ slug: response._id, url: url })
@@ -96,6 +98,10 @@ export default {
     this.fetchLandings().then(() => {
       this.$Progress.finish()
     })
+  },
+
+  mounted () {
+    this.clearSlug()
   }
 }
 </script>
@@ -119,7 +125,7 @@ export default {
           </div>
           <div class="b-dashboard__item-cell-top"></div>
           <div class="b-dashboard__item-cell-bottom">
-            {{ item.name }}
+            {{ item._id }}
           </div>
         </div>
       </figure>
