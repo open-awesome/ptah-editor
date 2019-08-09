@@ -83,13 +83,15 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
     display: flex
     flex-wrap: nowrap
     justify-content: center
-    align-items: stretch
+    align-items: center
 
     width: 100%
 
     max-width: 100%
     box-sizing: border-box
     padding: 0 $basis / 2 * 1px
+    .is-editable &
+      align-items: stretch
     .is-tablet &,
     .is-mobile &
       flex-wrap: wrap

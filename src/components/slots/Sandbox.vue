@@ -133,11 +133,13 @@ export default {
 
   position: relative
   width: 100%
-  height: 100%
   padding: 0
   min-height: $size-step
 
   transition: border 0.25s
+  .is-editable &
+    height: 100%
+
   &__settings
     position: absolute
     top: 0
