@@ -7,7 +7,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectElement'
+      'settingObjectElement',
+      'device'
     ]),
 
     width: {
@@ -75,7 +76,7 @@ export default {
 </script>
 
 <template>
-  <div class="b-size">
+  <div class="b-size" v-if="device !== 'is-mobile'">
     <base-label>
       Size
     </base-label>

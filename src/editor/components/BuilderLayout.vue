@@ -5,7 +5,6 @@
       'b-builder-layout__top-bar_sidebar-expanded' : isExpanded
       }">
       <BuilderTopBar
-        @setDevice="setDevice"
         @backToLandings="backToLandings"
         @preview="$emit('preview', $event)"
         @export="$emit('export', $event)"
@@ -51,18 +50,6 @@ import { sectionsGroups } from '@cscripts/sectionsGroups'
 export default {
   name: 'BuilderLayout',
 
-  provide () {
-    let device = {}
-    Object.defineProperty(device, 'type', { enumerable: true, get: () => this.device })
-    return { device }
-  },
-
-  data () {
-    return {
-      device: 'is-desktop'
-    }
-  },
-
   props: {
     builder: {
       required: true
@@ -77,11 +64,20 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'isExpanded'
+      'isExpanded',
+      'device'
     ]),
 
     isContentVisible () {
       return this.$route.path.split('/').indexOf('settings') > 0
+    }
+  },
+
+  watch: {
+    device: function (value) {
+      setTimeout(function () {
+        sectionsGroups()
+      }, 300)
     }
   },
 
@@ -92,12 +88,6 @@ export default {
       } else {
         this.$router.push({ path: `/` })
       }
-    },
-    setDevice (device) {
-      this.device = device
-      setTimeout(function () {
-        sectionsGroups()
-      }, 300)
     }
   }
 }
