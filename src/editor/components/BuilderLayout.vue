@@ -50,6 +50,13 @@ import { sectionsGroups } from '@cscripts/sectionsGroups'
 export default {
   name: 'BuilderLayout',
 
+  provide () {
+    let device = {}
+    Object.defineProperty(device, 'type', { enumerable: true, get: () => this.device })
+
+    return { device }
+  },
+
   props: {
     builder: {
       required: true
