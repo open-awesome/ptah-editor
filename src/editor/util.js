@@ -120,7 +120,7 @@ export function getTypeFromTagName(tagName) {
 }
 
 export function cleanDOM(artboard) {
-  const editables = Array.from(artboard.querySelectorAll('.is-editable'))
+  const classes = ['is-editable', 'is-mobile', 'is-tablet', 'is-desktop']
 
   const nodes = `
     .b-uploader-item,
@@ -136,10 +136,17 @@ export function cleanDOM(artboard) {
     .b-slot__settings
   `
 
-  editables.forEach((el) => {
-    el.contentEditable = 'inherit'
-    el.classList.remove('is-editable')
+  classes.forEach((className) => {
+    let editables = Array.from(artboard.querySelectorAll('.' + className))
+
+    if (editables.length > 0) {
+      editables.forEach((el) => {
+        el.contentEditable = 'inherit'
+        el.classList.remove(className)
+      })
+    }
   })
+
   Array.from(artboard.querySelectorAll(nodes)).forEach(el => el.remove())
 }
 

@@ -23,7 +23,7 @@
         v-if="headerSection"
         :is="headerSection.name"
         :id="headerSection.id"
-        :class="device"
+        :class="[ $builder.isEditing ? device: '' ]"
         @click.native="selectSidebarSection(headerSection)">
 
         <menu-settings slot="menu" :section="headerSection"/>
@@ -44,7 +44,7 @@
         :key="section.id"
         :is="section.name"
         :id="section.id"
-        :class="[{ 'video-background': section.data.mainStyle.backgroundType === 'video' }, device]"
+        :class="[{ 'video-background': section.data.mainStyle.backgroundType === 'video' }, $builder.isEditing ? device: '']"
         @click.native="selectSidebarSection(section)">
 
         <menu-settings slot="menu" :section="section"/>
@@ -277,6 +277,7 @@ export default {
       let tokenizer = /([\s\S]+?)\{([\s\S]*?)\}/gi
       let rules = []
       let rule, token
+      let check = false
 
       text = text.replace(/\/\*[\s\S]*?\*\//g, '')
 
@@ -289,9 +290,25 @@ export default {
           style: style
         }
 
+        // Not push @media styles
+        if (token[1].indexOf('@media') !== -1) {
+          check = true
+        }
+
+        if (token[1].indexOf('}') !== -1 && token[1].indexOf('@media') === -1) {
+          let temp = rule.selectorText.replace('}', '')
+          let tempM = temp.replace('\n', '')
+
+          rule.selectorText = tempM
+          check = false
+        }
+        // Not push @media styles
+
         rule.cssText = rule.selectorText + ' { ' + rule.style.cssText + ' }'
-        rules.push(rule)
+
+        if (!check) rules.push(rule)
       }
+
       return rules
     },
 
