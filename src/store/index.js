@@ -208,6 +208,8 @@ const actions = {
     }
     const resultDataString = JSON.stringify(mergedData)
 
+    console.log(resultDataString)
+
     return api.request({
       url: `landings/${state.slug}`,
       method: 'patch',
