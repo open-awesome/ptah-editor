@@ -214,7 +214,7 @@ export default {
         width: 100%
         > div
           width: 100%
-      @media only screen and (max-width: 768px)
+      @media only screen and (max-width: 576px)
         &
           width: 100%
           > div

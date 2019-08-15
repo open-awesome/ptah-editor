@@ -25,7 +25,7 @@
     </button>
 
     <div class="b-grid__row">
-      <div class="b-grid__col-m-12 mobile-header" :class="`b-grid__col-${$sectionData.container.width}`">
+      <div class="b-grid__col-m-12 b-grid__col-l-12 mobile-header" :class="`b-grid__col-${$sectionData.container.width}`">
 
         <sandbox
             container-path="$sectionData.container"
