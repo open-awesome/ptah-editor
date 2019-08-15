@@ -1,7 +1,8 @@
-const habmurger = document.getElementById('js-hamburger')
 let menu = null
 
 export function initMobileMenu () {
+  const habmurger = document.getElementById('js-hamburger')
+
   if (!habmurger) {
     return
   }
