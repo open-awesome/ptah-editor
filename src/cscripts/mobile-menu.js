@@ -25,6 +25,7 @@ function toggleMobileMenu () {
 }
 
 function closeMobileMenu ({ target }) {
+  const habmurger = document.getElementById('js-hamburger')
   const hasMenuLink = target.closest('.js-element-link') ? true : false
   const hasPopupLink = target.closest('.ptah-d-video') ? true : false
   const hasHamburger = target.closest('#js-hamburger') ? true : false
@@ -37,7 +38,9 @@ function closeMobileMenu ({ target }) {
   if (menu) {
     menu.classList.remove('is-active')
   }
-  habmurger.classList.remove('is-active')
+  if (habmurger) {
+    habmurger.classList.remove('is-active')
+  }
   document.body.style.overflow = ''
 }
 

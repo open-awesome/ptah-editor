@@ -54,8 +54,6 @@ export function scrollIntoSection (e) {
   function closeMobileMenu() {
     const menu = document.querySelector(".mobile-menu")
     const habmurger = document.getElementById('js-hamburger')
-    console.log(menu)
-
     if (!menu) {
       return
     }

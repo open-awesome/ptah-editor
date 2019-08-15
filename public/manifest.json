@@ -1,1 +1,53 @@
-{"name":"Ptah — Easy-to-use open-source landing page builder  for video games","description":"","icons":[{"src":"https://protocol.one/wp-content/uploads/2018/09/03.png","sizes":"64x64"}],"start_url":"."}
+{
+  "name": "Ptah",
+  "short_name": "Ptah",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#fafafa",
+  "theme_color": "#fafafa",
+  "description": "Ptah — landing page builder for games.",
+  "icons": [
+    {
+      "src": "https://s3.protocol.one/files/android-icon-36x36.png",
+      "sizes": "36x36",
+      "type": "image\/png",
+      "density": "0.75"
+    },
+    {
+      "src": "https://s3.protocol.one/files/android-icon-48x48.png",
+      "sizes": "48x48",
+      "type": "image\/png",
+      "density": "1.0"
+    },
+    {
+      "src": "https://s3.protocol.one/files/android-icon-72x72.png",
+      "sizes": "72x72",
+      "type": "image\/png",
+      "density": "1.5"
+    },
+    {
+      "src": "https://s3.protocol.one/files/android-icon-96x96.png",
+      "sizes": "96x96",
+      "type": "image\/png",
+      "density": "2.0"
+    },
+    {
+      "src": "https://s3.protocol.one/files/android-icon-144x144.png",
+      "sizes": "144x144",
+      "type": "image\/png",
+      "density": "3.0"
+    },
+    {
+      "src": "https://s3.protocol.one/files/android-icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image\/png",
+      "density": "4.0"
+    },
+    {
+      "src": "https://s3.protocol.one/files/android-icon-512x512.png",
+      "sizes": "512x512",
+      "type": "image\/png",
+      "density": "4.0"
+    }
+  ]
+}
