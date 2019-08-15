@@ -71,6 +71,8 @@
                           <div class="b-preview__image"
                             @click="current = key"
                             :class="{ 'b-preview_active' : current === key }"
+                            :data-index="key.split('components')[1]"
+                            :gallery-one-preview="'loader__content_show'"
                             >
                             <component
                               v-styler:for="{ el: $sectionData[key][0].element, path:`$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
@@ -80,8 +82,6 @@
                               :style="$sectionData[key][0].element.styles"
                               :class="[$sectionData[key][0].element.classes, $sectionData[key][0].class]"
                               :path="`${key}[0].element`"
-                              :gallery-one-preview="'loader__content_show'"
-                              :data-index="key.split('components')[1]"
                               >
                             </component>
                             <span class="b-preview__count">
