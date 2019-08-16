@@ -1,5 +1,5 @@
 <template>
-  <div class="b-social-networks">
+  <div class="b-social-networks b-border">
     <div class="b-social-networks__item"
       v-for="(value, key) in networks" :key="key"
       v-if="networks[key].visible"

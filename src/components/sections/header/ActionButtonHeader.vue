@@ -25,7 +25,7 @@
     </button>
 
     <div class="b-grid__row">
-      <div class="b-grid__col-3 b-grid__col-m-12 mobile-header">
+      <div class="b-grid__col-m-12 b-grid__col-l-12 mobile-header" :class="`b-grid__col-${$sectionData.container.width}`">
 
         <sandbox
             container-path="$sectionData.container"
@@ -75,8 +75,8 @@
         </sandbox>
 
       </div>
-      <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-9 b-grid__col-m-12 mobile-menu mobile-menu_drop"
-        :class="{ 'mobile-menu_hide': !isToggle }"
+      <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-m-12 mobile-menu mobile-menu_drop"
+        :class="[{ 'mobile-menu_hide': !$sectionData.isToggle }, `b-grid__col-${$sectionData.container2.width}`]"
         >
 
         <sandbox
@@ -264,13 +264,23 @@ const defaultSchema = {
     styles: {
       margin: '0 150px 0 0',
       padding: '0'
-    }
+    },
+    width: 3,
+    minWidth: 2,
+    maxWidth: 10,
+    grow: ['$sectionData.container2'],
+    selfName: '$sectionData.container'
   },
   container2: {
     styles: {
       padding: 0,
       'justify-content': 'space-between'
-    }
+    },
+    width: 9,
+    minWidth: 2,
+    maxWidth: 10,
+    grow: ['$sectionData.container'],
+    selfName: '$sectionData.container2'
   },
   components: merge({}, defaultComponents),
   components2: merge({}, defaultComponents2),
@@ -299,13 +309,8 @@ export default {
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 2 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-link', label: 'link', key: 3 },
       { name: 'Button', element: Button, type: 'button', class: 'b-header-button', label: 'button', key: 5 }
-    ]
-  },
-
-  data () {
-    return {
-      isToggle: false
-    }
+    ],
+    isToggle: false
   },
 
   created () {
@@ -324,7 +329,7 @@ export default {
     },
 
     toggle () {
-      this.isToggle = !this.isToggle
+      this.$sectionData.isToggle = !this.$sectionData.isToggle
     }
   }
 }

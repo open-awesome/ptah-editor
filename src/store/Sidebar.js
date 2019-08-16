@@ -58,7 +58,8 @@ export default {
     sandbox: {
       components: [], // sandbox current section's components
       styles: {} // sandbox current section's styles
-    }
+    },
+    device: 'is-desktop'
   },
 
   mutations: {
@@ -112,6 +113,9 @@ export default {
     },
     setDragStop (state, value) {
       state.isDragStop = value
+    },
+    device (state, value) {
+      state.device = value
     }
   },
 
@@ -283,6 +287,10 @@ export default {
     */
     updateStylesBuffer ({ commit, state }, element) {
       commit('setStylesBuffer', element)
+    },
+
+    setDevice ({ state, commit }, value) {
+      commit('device', (typeof value !== 'undefined') ? value : 'is-desktop')
     }
   },
 

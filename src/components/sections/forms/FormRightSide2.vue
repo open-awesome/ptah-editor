@@ -221,7 +221,11 @@ export default {
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles" @change="dragStop">
-              <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
+              <div v-for="(component, index) in $sectionData.components2"
+                   v-if="$sectionData.components2.length !== 0"
+                   :key="index"
+                   :class="{ 'b-draggable-slot__div-100' : $sectionData.components2[index].type === 'form' }"
+                >
                 <component class="b-hero-component"
                            v-styler:for="{ el: $sectionData.components2[index].element, path: `$sectionData.components2[${index}].element`, type: $sectionData.components2[index].type, label: component.label }"
                            :is="component.name"
@@ -254,4 +258,6 @@ export default {
     @media only screen and (max-width: 768px)
       &
         align-items: center !important
+    &__div-100
+      width: 100%
 </style>

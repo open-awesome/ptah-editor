@@ -175,8 +175,8 @@ export default {
   max-width: 100%
   max-height: 100%
 
-  min-width: $size-step*2
-  min-height: $size-step/2
+  min-width: $size-step
+  min-height: $size-step
 
   user-select: none
   transition: all 200ms
@@ -209,15 +209,15 @@ export default {
     display: block
   .is-mobile &,
   .is-tablet &
-    max-width: 90% !important
+    max-width: 100% !important
     margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px)
     &
-      max-width: 90% !important
+      max-width: 100% !important
       margin: $size-step/2 auto !important
   @media only screen and (max-width: 768px) and (min-height: 700px)
     &
-      max-width: 90% !important
+      max-width: 100% !important
       margin: $size-step/2 auto !important
   &.js-element-link
     cursor: pointer

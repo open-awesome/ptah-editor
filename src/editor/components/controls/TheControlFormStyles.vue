@@ -64,6 +64,54 @@ export default {
       }
     },
 
+    buttonTextColor: {
+      get () {
+        return this.formStyles.buttonTextColor
+      },
+
+      set (value) {
+        const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
+
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+          formStyles: {
+            buttonTextColor: color
+          }
+        }))
+      }
+    },
+
+    buttonHoverTextColor: {
+      get () {
+        return this.formStyles.buttonHoverTextColor
+      },
+
+      set (value) {
+        const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
+
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+          formStyles: {
+            buttonHoverTextColor: color
+          }
+        }))
+      }
+    },
+
+    inputBgColor: {
+      get () {
+        return this.formStyles.inputBgColor
+      },
+
+      set (value) {
+        const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
+
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+          formStyles: {
+            inputBgColor: color
+          }
+        }))
+      }
+    },
+
     buttonBorderRadius: {
       get () {
         return parseInt(this.formStyles['border-radius'])
@@ -90,6 +138,15 @@ export default {
 <template>
   <div>
     <div class="b-bg-controls">
+      <div class="b-bg-controls__control">
+        <base-color-picker label="Background text" v-model="inputBgColor"/>
+      </div>
+      <div class="b-bg-controls__control">
+        <base-color-picker label="Button text color" v-model="buttonTextColor"/>
+      </div>
+      <div class="b-bg-controls__control">
+        <base-color-picker label="Button hover text color" v-model="buttonHoverTextColor"/>
+      </div>
       <div class="b-bg-controls__control">
         <base-color-picker label="Button color" v-model="buttonColor"/>
       </div>

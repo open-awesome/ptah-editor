@@ -15,7 +15,7 @@ const routes = [
     path: '/',
     component: () => import(/* webpackChunkName: "Intro" */'@components/Intro'),
     meta: {
-      title: 'Ptah'
+      title: 'Ptah — landing page builder for games'
     }
   },
   {

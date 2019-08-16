@@ -403,8 +403,11 @@ const data = new Map([
         'text-decoration': 'none'
       },
       formStyles: {
+        'inputBgColor': '#fff',
         'button-color': '#f76a67',
         'buttonHoverColor': '#f76a67',
+        'buttonTextColor': '#000',
+        'buttonHoverTextColor': '#000',
         'height': 48,
         'border-radius': '3'
       },

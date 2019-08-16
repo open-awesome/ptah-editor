@@ -1,12 +1,13 @@
 <script>
+import { mapState, mapActions } from 'vuex'
+
 export default {
   data: () => ({
-    device: '',
     activeColor: '#2275D7',
     inactiveColor: 'rgba(51, 51, 51, 0.3)',
     items: [
       {
-        name: 'mobile',
+        name: 'is-mobile',
         icon: {
           name: 'platformMobile',
           width: 10,
@@ -14,7 +15,7 @@ export default {
         }
       },
       {
-        name: 'laptop',
+        name: 'is-laptop',
         icon: {
           name: 'platformLaptop',
           width: 20.5,
@@ -22,7 +23,7 @@ export default {
         }
       },
       {
-        name: 'desktop',
+        name: 'is-desktop',
         icon: {
           name: 'platformDesktop',
           width: 16,
@@ -31,15 +32,23 @@ export default {
       }
     ]
   }),
-  methods: {
-    setDevice (type) {
-      this.device = type
-      this.$emit('setDevice', 'is-' + this.device)
-    }
+
+  computed: {
+    ...mapState('Sidebar', [
+      'device'
+    ])
   },
-  mounted () {
-    this.device = 'desktop'
+
+  methods: {
+    ...mapActions('Sidebar', [
+      'setDevice'
+    ]),
+
+    selectDevice (type) {
+      this.setDevice(type)
+    }
   }
+
 }
 </script>
 
@@ -55,7 +64,7 @@ export default {
         `b-menu-platforms__button_${item.name}`,
         {'b-menu-platforms__button_active': device === item.name}
       ]"
-      @click="setDevice(item.name)">
+      @click.prevent="selectDevice(item.name)">
       <icon-base
         :name="item.icon.name"
         :width="item.icon.width"

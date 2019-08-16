@@ -30,6 +30,7 @@ export function scrollIntoSection (e) {
       section.scrollIntoView({ behavior, block: 'start', inline: 'nearest' })
     })
   }
+  closeMobileMenu()
 
 
   function mainClassToggle() {
@@ -48,6 +49,22 @@ export function scrollIntoSection (e) {
     popup.style.display = "none"
 
     mainClassToggle()
+  }
+
+  function closeMobileMenu() {
+    const menu = document.querySelector(".mobile-menu")
+    const habmurger = document.getElementById('js-hamburger')
+    if (!menu) {
+      return
+    }
+
+    if (menu.classList.contains('is-active')) {
+      menu.classList.remove('is-active')
+      document.body.style.overflow = ''
+    }
+    if (habmurger.classList.contains('is-active')) {
+      habmurger.classList.remove('is-active')
+    }
   }
 }
 

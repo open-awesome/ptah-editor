@@ -195,13 +195,21 @@ const SCHEMA_CUSTOM = {
   components: _.merge({}, C_CUSTOM_1),
   container: {
     width: 9,
+    minWidth: 2,
+    maxWidth: 10,
+    grow: ['$sectionData.container2'],
+    selfName: '$sectionData.container',
     styles: {
       'padding': '0',
       'align-items': 'flex-start'
     }
   },
   container2: {
-    width: 3
+    width: 3,
+    minWidth: 2,
+    maxWidth: 10,
+    grow: ['$sectionData.container'],
+    selfName: '$sectionData.container2'
   },
   container3: {
     width: 12
