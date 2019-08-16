@@ -598,7 +598,7 @@ export default {
   $schema: {
     mainStyle: types.ProductSection,
     container: types.StyleObject,
-    components: _.merge([], HEADER, { key: 0 }),
+    components: _.merge([], HEADER),
     containerStandart: types.StyleObject,
     containerStandartD: types.StyleObject,
     containerFull: types.StyleObject,
@@ -663,14 +663,14 @@ export default {
                 <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @change="dragStop">
                   <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                     <component
-                      v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
-                      :is="component.name"
-                      :href="$sectionData.components[index].element.link.href"
-                      :target="$sectionData.components[index].element.link.target"
-                      :path="`components[${index}].element`"
-                      :style="$sectionData.components[index].element.styles"
-                      :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                      >
+                       v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
+                       :is="component.name"
+                       :href="$sectionData.components[index].element.link.href"
+                       :target="$sectionData.components[index].element.link.target"
+                       :path="`components[${index}].element`"
+                       :style="$sectionData.components[index].element.styles"
+                       :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                    >
                       <div v-html="$sectionData.components[index].element.text"></div>
                     </component>
                   </div>
