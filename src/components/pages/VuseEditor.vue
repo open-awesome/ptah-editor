@@ -34,11 +34,11 @@ import SmmHeader from '@components/sections/header/SmmHeader'
 import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
 
 // --- hero
-import HeroUnit from '@components/sections/hero/HeroUnit'
-import HeroTwoColumns from '@components/sections/hero/HeroTwoColumns'
-import HeroThreeColumns from '@components/sections/hero/HeroThreeColumns'
-import HeroArtRight from '@components/sections/hero/HeroArtRight'
-import HeroArtLeft from '@components/sections/hero/HeroArtLeft'
+import GenericMainScreen from '@components/sections/hero/HeroUnit'
+import TwoSegmentHeroScreen from '@components/sections/hero/HeroTwoColumns'
+import ThreeSegmentHeroScreen from '@components/sections/hero/HeroThreeColumns'
+import VideoHeroSplitScreen from '@components/sections/hero/HeroArtRight'
+import HeroVideoSplitScreen from '@components/sections/hero/HeroArtLeft'
 import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
 import HeroHunt from '@components/sections/hero/HeroHunt'
 import HeroWithTimer from '@components/sections/hero/HeroWithTimer'
@@ -110,13 +110,13 @@ const COMPONENTS = {
   FirstScreenFantasy01,
   FirstScreenFantasy02,
   FirstScreenFantasyVideoBack,
-  HeroUnit,
-  HeroTwoColumns,
-  HeroThreeColumns,
-  HeroArtRight,
-  HeroArtLeft,
+  TwoSegmentHeroScreen,
+  ThreeSegmentHeroScreen,
+  VideoHeroSplitScreen,
+  HeroVideoSplitScreen,
   HeroBAS,
   HeroHunt,
+  GenericMainScreen,
   HeroWithTimer,
   HeroWithTimerColumns,
   HeroWithTimerColumnsVideo,
