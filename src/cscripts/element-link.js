@@ -30,8 +30,9 @@ export function initElementLink() {
     if (!url || url === "javascript:void(0)") {
       return
     }
-
+    e.preventDefault()
     window.open(url, link.getAttribute('target') || '_self')
+
     e.stopImmediatePropagation()
 
 
