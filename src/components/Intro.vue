@@ -12707,6 +12707,7 @@ import { initMobileMenu } from '@cscripts/mobile-menu'
 import { initScrollIntoSection } from '@cscripts/scroll-into-section'
 import { initElementLink } from '@cscripts/element-link'
 import { fixEmptyHref } from '@cscripts/fix-empty-href'
+import { formsSender } from '@cscripts/forms'
 
 Vue.component('v-style', {
   render: function (createElement) {
@@ -12731,6 +12732,7 @@ export default {
     initScrollIntoSection()
     initElementLink()
     fixEmptyHref()
+    formsSender()
   }
 }
 </script>
