@@ -1,5 +1,5 @@
 <template>
-  <div class="b-text-icon is-editable"
+  <div class="b-text-icon is-editable b-border"
     :class="{ 'b-text-icon_hide': !icon.visible }"
     ref="icon"
     @click.stop.stop=""

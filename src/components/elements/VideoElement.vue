@@ -47,7 +47,6 @@
       @resizestop="onResizeStop"
       :draggable="false"
       :z="999"
-      :lock-aspect-ratio="true"
      />
      <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
 </div>
@@ -245,7 +244,6 @@ export default {
 
       position: relative
   &.is-editable:hover
-    opacity: 0.6
     #{$self}__padd > iframe,
       display: none
     #{$self}__padd > video
@@ -306,10 +304,6 @@ export default {
         display: none
   & span
     display: block
-  &:hover
-    filter: brightness(120%)
-  &:active
-    filter: brightness(50%)
   .is-mobile &,
   .is-tablet &
     margin: $size-step/2 auto !important

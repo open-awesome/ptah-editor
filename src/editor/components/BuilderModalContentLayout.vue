@@ -53,6 +53,7 @@ export default {
   margin: 0
   flex-grow: 1
   &__inner
+    height: 100%
     padding: $size-step/2 $size-step
 
 </style>

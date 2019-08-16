@@ -13,7 +13,7 @@
         'is-sorting': $builder.isSorting,
         'is-editable': $builder.isEditing,
         'fp-scroll': currentLanding.settings.fullPageScroll === 'yes',
-        'is-expanded': isExpanded
+        'is-expanded': isExpanded,
       }"
       id="artboard"
       class="artboard"
@@ -23,6 +23,7 @@
         v-if="headerSection"
         :is="headerSection.name"
         :id="headerSection.id"
+        :class="[ $builder.isEditing ? device: '' ]"
         @click.native="selectSidebarSection(headerSection)">
 
         <menu-settings slot="menu" :section="headerSection"/>
@@ -43,7 +44,7 @@
         :key="section.id"
         :is="section.name"
         :id="section.id"
-        :class="{ 'video-background': section.data.mainStyle.backgroundType === 'video' }"
+        :class="[{ 'video-background': section.data.mainStyle.backgroundType === 'video' }, $builder.isEditing ? device: '']"
         @click.native="selectSidebarSection(section)">
 
         <menu-settings slot="menu" :section="section"/>
@@ -84,6 +85,10 @@
           </div>
         </template>
       </div>
+
+      <v-style>
+        {{ parsedCss.content }}
+      </v-style>
 
     </div>
   </draggable>
@@ -129,14 +134,20 @@ export default {
       title: null,
       groups: {},
       isSectionsInited: false,
-      sections: this.getSections()
+      sections: this.getSections(),
+      parsedCss: {
+        array: [],
+        prop: '.artboard',
+        content: ''
+      }
     }
   },
 
   computed: {
     ...mapState(['currentLanding']),
     ...mapState('Sidebar', [
-      'isExpanded'
+      'isExpanded',
+      'device'
     ]),
 
     builder () {
@@ -173,6 +184,13 @@ export default {
         this.saveState(this.$builder.export('JSON'))
       },
       deep: true
+    },
+
+    'currentLanding.settings.css': {
+      handler (value) {
+        this.parsing(value)
+      },
+      deep: true
     }
   },
 
@@ -199,8 +217,12 @@ export default {
   },
 
   mounted () {
+    let css = this.currentLanding.settings.css
+
     this.$builder.rootEl = this.$refs.artboard
     this.initSettings()
+
+    this.parsing(css)
   },
 
   updated () {
@@ -239,6 +261,79 @@ export default {
     ...mapActions('User', [
       'getUser'
     ]),
+
+    parsing (textCss) {
+      let self = this
+
+      this.parsedCss.array = this.parseCss(textCss)
+      this.parsedCss.content = ''
+
+      this.parsedCss.array.forEach(function (item, i, arr) {
+        self.parsedCss.content += `${self.parsedCss.prop} ${item.cssText} \n`
+      })
+    },
+
+    parseCss (text) {
+      let tokenizer = /([\s\S]+?)\{([\s\S]*?)\}/gi
+      let rules = []
+      let rule, token
+      let check = false
+
+      text = text.replace(/\/\*[\s\S]*?\*\//g, '')
+
+      while ((token = tokenizer.exec(text))) {
+        let style = this.parseRule(token[2].trim())
+
+        style.cssText = this.stringifyRule(style)
+        rule = {
+          selectorText: token[1].trim().replace(/\s*,\s*/, ', '),
+          style: style
+        }
+
+        // Not push @media styles
+        if (token[1].indexOf('@media') !== -1) {
+          check = true
+        }
+
+        if (token[1].indexOf('}') !== -1 && token[1].indexOf('@media') === -1) {
+          let temp = rule.selectorText.replace('}', '')
+          let tempM = temp.replace('\n', '')
+
+          rule.selectorText = tempM
+          check = false
+        }
+        // Not push @media styles
+
+        rule.cssText = rule.selectorText + ' { ' + rule.style.cssText + ' }'
+
+        if (!check) rules.push(rule)
+      }
+
+      return rules
+    },
+
+    parseRule (css) {
+      let tokenizer = /\s*([a-z-]+)s*:\s*((?:[^;]*url(.*?)[^;]*|[^;]*)*)\s*(?:;|$)/gi
+      let obj = {}
+      let token
+
+      while ((token = tokenizer.exec(css))) {
+        obj[token[1].toLowerCase()] = token[2]
+      }
+
+      return obj
+    },
+
+    stringifyRule (style) {
+      let text = ''
+      let keys = Object.keys(style).sort()
+
+      for (let i = 0; i < keys.length; i++) {
+        text += ' ' + keys[i] + ': ' + style[keys[i]] + ';'
+      }
+
+      return text.substring(1)
+    },
 
     initSettings () {
       const settings = this.currentLanding.settings
@@ -465,7 +560,8 @@ export default {
   margin: 0 auto
   transition: 0.2s
   position: relative
-  &.is-editable div.is-editable
+  &.is-editable div.is-editable,
+  &.is-editable table.is-editable
     outline: none
     transition: border 0.25s
     border: .2rem dotted transparent
@@ -473,9 +569,21 @@ export default {
       cursor: pointer
       border-color: $dark-blue-krayola
     &.styler-active
-      border-color: $black
+      border-color: transparent !important
       &:hover
-        border-color: $black
+        border-color: transparent !important
+  &.is-editable div.b-border,
+  &.is-editable table.b-border
+    outline: none
+    transition: border 0.25s
+    border: .2rem dotted transparent
+    &:hover
+      cursor: pointer
+      border-color: $dark-blue-krayola
+    &.styler-active
+      border-color: $white !important
+      &:hover
+        border-color: $white !important
       &.b-text
         cursor: text
   &.fp-scroll section

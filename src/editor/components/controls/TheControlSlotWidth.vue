@@ -40,7 +40,7 @@ export default {
 
     width: {
       get () {
-        return this.slot.width
+        return parseInt(this.slot.width)
       },
 
       set (value) {

@@ -159,9 +159,9 @@ export default {
       },
 
       set (value) {
-        this.settingObjectSection.set(this.sandbox.container, {
+        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
           styles: { ...this.styles, 'justify-content': value }
-        })
+        }))
       }
     }
   },

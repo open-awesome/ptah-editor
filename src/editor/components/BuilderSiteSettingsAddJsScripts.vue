@@ -59,7 +59,7 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-add-js-scripts
-  height: $size-step*5
+  height: 80%
   &__textarea
     width: 100%
     height: 100%

@@ -120,7 +120,7 @@ export function getTypeFromTagName(tagName) {
 }
 
 export function cleanDOM(artboard) {
-  const editables = Array.from(artboard.querySelectorAll('.is-editable'))
+  const classes = ['is-editable', 'is-mobile', 'is-tablet', 'is-desktop']
 
   const nodes = `
     .b-uploader-item,
@@ -136,10 +136,17 @@ export function cleanDOM(artboard) {
     .b-slot__settings
   `
 
-  editables.forEach((el) => {
-    el.contentEditable = 'inherit'
-    el.classList.remove('is-editable')
+  classes.forEach((className) => {
+    let editables = Array.from(artboard.querySelectorAll('.' + className))
+
+    if (editables.length > 0) {
+      editables.forEach((el) => {
+        el.contentEditable = 'inherit'
+        el.classList.remove(className)
+      })
+    }
   })
+
   Array.from(artboard.querySelectorAll(nodes)).forEach(el => el.remove())
 }
 
@@ -425,10 +432,13 @@ export const FONT_SIZES_LIST = [
   { name: '20px', value: '2rem' },
   { name: '24px', value: '2.4rem' },
   { name: '28px', value: '2.8rem' },
+  { name: '30px', value: '3rem' },
   { name: '32px', value: '3.2rem' },
   { name: '36px', value: '3.6rem' },
   { name: '40px', value: '4rem' },
+  { name: '44px', value: '4.4rem' },
   { name: '48px', value: '4.8rem' },
+  { name: '52px', value: '5.2rem' },
   { name: '56px', value: '5.6rem' },
   { name: '64px', value: '6.4rem' },
   { name: '72px', value: '7.2rem' }
@@ -436,9 +446,14 @@ export const FONT_SIZES_LIST = [
 
 export const LINES_HEIGHT_LIST = [
   { name: '1', value: '1' },
+  { name: '1.1', value: '1.1' },
   { name: '1.2', value: '1.2' },
+  { name: '1.3', value: '1.3' },
   { name: '1.4', value: '1.4' },
+  { name: '1.5', value: '1.5' },
   { name: '1.6', value: '1.6' },
+  { name: '1.7', value: '1.7' },
+  { name: '1.9', value: '1.9' },
   { name: '1.8', value: '1.8' },
   { name: '2', value: '2' },
   { name: '2.4', value: '2.4' },
@@ -452,6 +467,8 @@ export const FONTS_LIST = [
   'Heebo',
   'PT Serif',
   'Roboto',
-  'Cinzel'
+  'Cinzel',
+  'IBM Plex Sans',
+  'IBM Plex Mono'
 ]
 

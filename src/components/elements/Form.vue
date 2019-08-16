@@ -1,5 +1,5 @@
 <template>
-  <div class="b-form" @click.stop.stop="" ref="form">
+  <div class="b-form b-border" @click.stop.stop="" ref="form">
 
     <slot v-if="!isActive"></slot>
 
@@ -8,7 +8,8 @@
       method="post"
       target="_blank"
       :style="{
-        '--b-hover-color': formStyles.buttonHoverColor
+        '--b-hover-color': formStyles.buttonHoverColor,
+        '--b-hover-text-color': formStyles.buttonTextHoverColor
       }"
       >
       <input
@@ -22,7 +23,8 @@
           'font-weight' : styles['font-weight'],
           'font-style' : styles['font-style'],
           'text-decoration' : styles['text-decoration'],
-          'height': `${formStyles.height}px`
+          'height': `${formStyles.height}px`,
+          'background-color': `${formStyles.inputBgColor}`,
         }"
         :placeholder="placeholder"
         class="b-form-element-input ptah-input"
@@ -33,7 +35,7 @@
       <button type="submit" class="b-form-element-button ptah-submit"
        @click.prevent
        :style="{
-        'color': styles['color'],
+        'color': `${formStyles.buttonTextColor}`,
         'background-color': formStyles['button-color'],
         'border-radius': `${formStyles['border-radius']}px`,
         'font-family' : styles['font-family'],
@@ -302,6 +304,7 @@ export default {
       top: 1px
     &:hover
       background-color: var(--b-hover-color) !important
+      color: var(--b-hover-text-color) !important
     &.submited
       background-color: $emerald-green !important
     .is-mobile &,

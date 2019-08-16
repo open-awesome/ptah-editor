@@ -7,7 +7,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectElement'
+      'settingObjectElement',
+      'device'
     ]),
 
     width: {
@@ -38,7 +39,7 @@ export default {
       parents['height'] = this.settingObjectElement.closest('section')
 
       max['width'] = parents['width'].offsetWidth
-      max['height'] = parseInt(parents['height'].offsetHeight / 2)
+      max['height'] = parseInt(parents['height'].offsetHeight)
 
       return max
     }
@@ -75,7 +76,7 @@ export default {
 </script>
 
 <template>
-  <div class="b-size">
+  <div class="b-size" v-if="device !== 'is-mobile'">
     <base-label>
       Size
     </base-label>

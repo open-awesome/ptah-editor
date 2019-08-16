@@ -23,7 +23,7 @@
 
 <template>
 <table
-    class="b-timer is-editable js-timer"
+    class="b-timer is-editable js-timer b-border"
     :data-timestamp="timer.timestamp"
     :data-utc-offset="timer.UTC">
 

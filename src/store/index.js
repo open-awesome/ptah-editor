@@ -238,6 +238,10 @@ const actions = {
 
     commit('updateCurrentLanding', landingData)
     commit('isSaved', false)
+  },
+
+  clearSlug ({ commit }) {
+    commit('slug', '')
   }
 }
 

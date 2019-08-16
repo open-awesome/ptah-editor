@@ -137,11 +137,14 @@ export default {
   min-height: $size-step
 
   transition: border 0.25s
+  .is-editable &
+    height: 100%
+
   &__settings
     position: absolute
     top: 0
     left: 0
-    z-index: 1
+    z-index: 1000
 
     width: $size-step/1.5
     padding: 0
@@ -211,7 +214,7 @@ export default {
         width: 100%
         > div
           width: 100%
-      @media only screen and (max-width: 768px)
+      @media only screen and (max-width: 576px)
         &
           width: 100%
           > div

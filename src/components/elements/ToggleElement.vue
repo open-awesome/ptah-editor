@@ -1,13 +1,13 @@
 <template>
   <div
     data-toggle-element=""
-    class="b-toggle-element is-editable"
+    class="b-toggle-element is-editable b-border"
     ref="toggleEl"
     :style="{ 'justify-content': styles['justify-content'] }"
     @click.stop.stop=""
     >
 
-    <div class="b-toggle-element__item is-editable"
+    <div class="b-toggle-element__item"
       >
       <div class="b-toggle-element__item-col b-toggle-element__item-col-icon" v-if="el.isIconVisible"
         >
