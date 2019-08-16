@@ -12,11 +12,6 @@
 
       <div class="b-elem-settings__inner">
 
-        <!-- Text -->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.isTextEdit">
-          <control-text/>
-        </div>
-
         <!-- Typography -->
         <div class="b-elem-settings__control" v-if="settingObjectOptions.typography">
           <control-typography/>

@@ -26,7 +26,6 @@ const DEFAULT_OPTIONS = {
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
   isHoverAnim: false, // hover anim for button/link
-  isTextEdit: false, // edit text in settings panel
   isComplex: false, // TODO: deprecated
   video: false,
   copyStyles: true,
@@ -154,7 +153,6 @@ const data = new Map([
       aligned: false,
       typography: true,
       background: true,
-      isTextEdit: true,
       shape: true,
       resizable: true,
       pseudo: {
@@ -426,7 +424,6 @@ const data = new Map([
       removable: true,
       background: true,
       hasProducts: true,
-      isTextEdit: true,
       products: {
         'Standart': { visible: true },
         'Full': { visible: true },
