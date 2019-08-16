@@ -35,7 +35,7 @@ import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
 
 // --- hero
 import GenericMainScreen from '@components/sections/hero/HeroUnit'
-import TwoSegmentHeroScreen from '@components/sections/hero/HeroTwoColumns'
+import TwoSegmentHeroScreen from '@components/sections/hero/TwoSegmentHeroScreen'
 import ThreeSegmentHeroScreen from '@components/sections/hero/HeroThreeColumns'
 import VideoHeroSplitScreen from '@components/sections/hero/HeroArtRight'
 import HeroVideoSplitScreen from '@components/sections/hero/HeroArtLeft'
