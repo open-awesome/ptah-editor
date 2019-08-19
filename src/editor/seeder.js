@@ -247,15 +247,13 @@ const data = new Map([
   )],
   [types.ToggleElement, () => (_.merge({}, DEFAULT_OPTIONS,
     {
-      box: true,
+      box: false,
       aligned: true,
       typography: true,
       removable: true,
       styles: {
         'font-size': '1.2rem',
         'line-height': '1.4',
-        'font-weight': 'normal',
-        'font-style': 'normal',
         'font-family': 'Lato',
         'justify-content': 'flex-start',
         'margin-bottom': '16px'
