@@ -841,6 +841,7 @@ export default {
                       <span class="b-system-platforms__item__tab-icon"
                         :style="{
                           width: $sectionData.mainStyle.sizeIcons.width + 'px',
+                          height: $sectionData.mainStyle.sizeIcons.width + 'px',
                           '--color-default': $sectionData.mainStyle.colorIcons.default,
                           '--color-active': $sectionData.mainStyle.colorIcons.active
                          }"

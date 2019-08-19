@@ -3,7 +3,6 @@
     data-toggle-element=""
     class="b-toggle-element is-editable b-border"
     ref="toggleEl"
-    :style="{ 'justify-content': styles['justify-content'] }"
     @click.stop.stop=""
     >
 
@@ -11,12 +10,20 @@
       >
       <div class="b-toggle-element__item-col b-toggle-element__item-col-icon" v-if="el.isIconVisible"
         >
-        <span class="b-toggle-element__icon" :style="{ fill: el.color, width: el.size + 'px'  }" @click="toggle">
+        <span class="b-toggle-element__icon" :style="{ fill: el.color, width: el.size + 'px', 'margin-top': -el.size/6 + 'px'  }" @click="toggle">
           <icon-base :name="el.icon.value"/>
         </span>
       </div>
       <div data-toggle-element-text="" class="b-toggle-element__item-col b-toggle-element__item-col-content"
         :class="{ 'b-toggle-element__item-col-content_hide-text': !el.isTextVisible }"
+        :style="{
+          '--text-align': styles['text-align'],
+          '--font-family': styles['font-family'],
+          '--font-size': styles['font-size'],
+          '--font-style': styles['font-style'],
+          '--line-height': styles['line-height'],
+          '--color': styles['color']
+        }"
         >
         <div v-html="el.content" v-if="!isActive"/>
         <editor-content class="editor__content" :editor="editor" v-if="isActive" />
@@ -240,15 +247,33 @@ export default {
         width: 3.2rem
         min-width: 3.2rem
       &-content
-        max-width: 100%
+        width: 100%
+        > div
+          text-align: var(--text-align) !important
         &_hide-text
           /deep/
+            table,
+            table th,
+            table td
+              width: 100%
             table > tbody > tr:last-child
               display: none
+            table > tbody > tr
+              display: flex
+              justify-content: var(--justify-content) !important
+            table > tbody > tr > th,
+            table > tbody > tr > td
+              text-align: var(--text-align) !important
+              font-size: var(--font-size) !important
+              line-height: var(--line-height) !important
+              font-style: var(--font-style) !important
+              font-family: var(--font-family) !important
+              color: var(--color) !important
   &_hide
     padding: 0 1.6rem
   &__icon
-    display: inline-block
+    display: flex
+    padding-top: 1rem
     svg
       fill: inherit
       width: 100%
