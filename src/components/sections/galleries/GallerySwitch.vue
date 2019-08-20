@@ -61,7 +61,7 @@
                     </div>
                   </div>
                 <!-- b-gallery-one-list -->
-                  <div class="b-gallery-one-list flex__item flex flex_center">
+                  <div class="b-gallery-one-list flex__item flex flex_center b-draggable-slot">
                     <div class="b-gallery-one-list__tiles b-gallery-one-list__tiles_mobile">
                       <div class="b-preview b-gallery-item"
                           v-for="(components, key) in $sectionData"
@@ -70,21 +70,23 @@
                         >
                           <div class="b-preview__image"
                             @click="current = key"
-                            v-styler:for="{ el: $sectionData[key][0].element, path: `$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
-                            :style="$sectionData[key][0].element.styles"
-                            :path="`${key}[0].element`"
+                            :class="{ 'b-preview_active' : current === key }"
                             :data-index="key.split('components')[1]"
                             :gallery-one-preview="'loader__content_show'"
-                            :class="{ 'b-preview_active' : current === key}"
                             >
+                            <component
+                              v-styler:for="{ el: $sectionData[key][0].element, path:`$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
+                              :is="$sectionData[key][0].name"
+                              :href="$sectionData[key][0].element.link.href"
+                              :target="$sectionData[key][0].element.link.target"
+                              :style="$sectionData[key][0].element.styles"
+                              :class="[$sectionData[key][0].element.classes, $sectionData[key][0].class]"
+                              :path="`${key}[0].element`"
+                              >
+                            </component>
                             <span class="b-preview__count">
                               {{ parseFloat(key.split('components')[1]) + 1 }}
                             </span>
-                            <uploader
-                              :path="`${key}[0].element`"
-                              :file="$sectionData[key][0].file"
-                              @change="changeSrc"
-                            />
                           </div>
                           <component class="b-preview__name"
                             v-if="$sectionData.mainStyle.isLabelPreview"
@@ -129,15 +131,19 @@
                           >
                           <div v-html="$sectionData[key][2].element.text"></div>
                         </component>
-                        <div class="b-gallery-one-stage__img b-gallery-item"
-                          :style="$sectionData[key][3].element.styles"
-                          v-styler:for="{ el: $sectionData[key][3].element, path:`$sectionData.${key}[3].element`, type: $sectionData[key][3].type, label: $sectionData[key][3].label }"
+                        <div class="b-gallery-one-stage__img"
                           >
-                          <uploader
-                              :path="`${key}[3].element`"
-                              :file="$sectionData[key][3].file"
-                              @change="changeSrc"
-                            />
+                          <component
+                            v-styler:for="{ el: $sectionData[key][3].element, path:`$sectionData.${key}[3].element`, type: $sectionData[key][3].type, label: $sectionData[key][3].label }"
+                            :is="$sectionData[key][3].name"
+                            :href="$sectionData[key][3].element.link.href"
+                            :target="$sectionData[key][3].element.link.target"
+                            :style="$sectionData[key][3].element.styles"
+                            :class="[$sectionData[key][3].element.classes, $sectionData[key][3].class]"
+                            :path="`${key}[3].element`"
+                            class="b-gallery-item"
+                            >
+                          </component>
                           <span class="b-gallery-one-stage__count">
                             {{ parseFloat(key.split('components')[1]) + 1 }}
                           </span>
@@ -239,12 +245,13 @@ const [
   return [
     {
       element: {
+        belongsGallery: true,
         removable: false,
         styles: {
           'background-image': `url(${thumbs[i]})`,
           'background-size': 'contain',
-          'width': '100%',
-          'height': '160px'
+          'width': '175px',
+          'height': '175px'
         }
       }
     },
@@ -272,12 +279,12 @@ const [
     },
     {
       element: {
-        belongsGallery: true,
         removable: false,
         styles: {
           'background-image': `url(${prev[i]})`,
           'background-size': 'contain',
-          'width': '100%'
+          'width': '400px',
+          'height': '400px'
         }
       }
     },
@@ -475,9 +482,6 @@ export default {
   display: inline-block
   vertical-align: top
 
-  width: 30%
-  min-height: $size-step*6
-
   margin: $size-step/3
   padding: 0
   border: 0.2rem dotted transparent
@@ -535,7 +539,6 @@ export default {
   &_active
     transform: scale(1.1)
     filter: none
-    // box-shadow: 0 0 2rem 0 rgba($black, 0.6)
     opacity: 1
 
 .b-gallery-one-list
@@ -668,12 +671,9 @@ export default {
   height: 30rem
   margin: 0 auto
 
-  & .b-uploader
-    opacity: 0
-    z-index: 1
-  &:hover .b-uploader
-    opacity: 0.2
-    display: block
+  display: flex
+  align-items: center
+  justify-content: center
 
   .is-tablet &,
   .is-mobile &

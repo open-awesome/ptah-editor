@@ -33,6 +33,10 @@
       :z="999"
      />
      <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
+
+    <span class="b-image__preview-video" v-if="link && link.type === 'video'">
+      <icon-base name="video" color="#fff" width="64" height="64" />
+    </span>
   </div>
 </template>
 
@@ -163,6 +167,7 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-image
+  $this: &
   position: relative
   display: block
 
@@ -216,6 +221,19 @@ export default {
       margin: $size-step/2 auto !important
   &.js-element-link
     cursor: pointer
+  &__preview-video
+    position: absolute
+    top: 50%
+    left: 50%
+
+    margin: -$size-step 0 0 -2.4rem
+
+    width: $size-step*2
+    height: $size-step*2
+  &:hover
+    #{$this}__preview-video
+      transition: all 200ms
+      transform: rotate(360deg)
 /deep/
   .b-handle
     position: absolute !important

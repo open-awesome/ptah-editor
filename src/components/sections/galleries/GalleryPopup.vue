@@ -46,7 +46,8 @@ const [
         styles: {
           'background-image': `url(${thumbs[i]})`,
           'background-size': 'contain',
-          'width': '340px'
+          'width': '340px',
+          'height': '190px'
         },
         link: {
           imageUrl: prev[i]
@@ -373,31 +374,31 @@ export default {
                   <!-- .b-gallery-popup__wrap -->
                   <div class="b-gallery-popup__wrap">
                     <div class="b-gallery-popup">
-                      <div class="b-gallery-popup__item b-gallery-item"
+                      <div class="b-gallery-popup__item b-gallery-item b-draggable-slot"
                         v-for="(components, key) in $sectionData"
                         :key="key"
                         v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
                         :data-index="parseFloat(key.split('components')[1])"
                       >
-                        <div class="b-gallery-popup__preview"
-                          gallery-two-popup-link=""
-                          :gallery-two-popup-image-url="$sectionData[key][0].element.link.imageUrl"
-                          :gallery-two-popup-video-url="$sectionData[key][0].element.link.videoUrl"
-                          :gallery-two-popup-type-content="$sectionData[key][0].element.link.type"
-                          v-styler:for="{ el: $sectionData[key][0].element, path:`$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
-                          :style="$sectionData[key][0].element.styles"
-                          >
-                          <uploader
+                        <div class="b-gallery-popup__preview">
+                          <component
+                            v-styler:for="{ el: $sectionData[key][0].element, path:`$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
+                            :is="$sectionData[key][0].name"
+                            :href="$sectionData[key][0].element.link.href"
+                            :target="$sectionData[key][0].element.link.target"
+                            :style="$sectionData[key][0].element.styles"
+                            :class="[$sectionData[key][0].element.classes, $sectionData[key][0].class]"
                             :path="`${key}[0].element`"
-                            :file="$sectionData[key][0].file"
-                            @change="changeSrc"
-                          />
+                            class="b-gallery-popup__preview"
+                            gallery-two-popup-link=""
+                            :gallery-two-popup-image-url="$sectionData[key][0].element.link.imageUrl"
+                            :gallery-two-popup-video-url="$sectionData[key][0].element.link.videoUrl"
+                            :gallery-two-popup-type-content="$sectionData[key][0].element.link.type"
+                            >
+                          </component>
                           <span class="b-gallery-popup__preview-count"
                             v-text="parseFloat(key.split('components')[1]) + 1"
                           />
-                          <span class="b-gallery-popup__preview-video" v-if="$sectionData[key][0].element.link.type === 'video'">
-                            <icon-base name="video" color="#fff" width="64" height="64" />
-                          </span>
                         </div>
                         <div v-if="$sectionData.mainStyle.isLabelPreview">
                           <component class="b-gallery-popup__preview-title"
@@ -561,19 +562,9 @@ export default {
   transition: all 200ms
   position: relative
   &:hover
-    // transform: scale(1.1)
     #{$this}-video
       transition: all 200ms
       transform: rotate(360deg)
-  & .b-uploader
-    opacity: 0
-    z-index: 1
-  &:hover .b-uploader
-    opacity: 0.2
-    display: block
-  .is-editable &:hover
-    border: 0.2rem dotted #fff
-    box-shadow: 0 0 2rem 0 rgba(0, 0, 0, 0.6)
   &-count
     position: absolute
     top: $size-step/3
