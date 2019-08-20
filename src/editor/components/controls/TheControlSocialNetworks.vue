@@ -38,6 +38,8 @@ export default {
     visible (key) {
       this.closeModal()
       this.networks[key].visible = !this.networks[key].visible
+
+      this.update()
     },
 
     changeTarget () {
@@ -61,12 +63,14 @@ export default {
     },
 
     closeModal () {
-      for (var key in this.networks) {
+      for (let key in this.networks) {
         let v = this.valid(key)
+
+        this.networks[key].expand = false
 
         if (!v) this.networks[key].url = ''
 
-        this.networks[key].expand = false
+        this.update()
       }
     },
 
@@ -139,7 +143,7 @@ export default {
                 {{ `Add ${networks[key].name} link` }}
               </div>
               <div>
-              <base-text-field label="URL" v-model="networks[key].url" placeholder="https://www.url.com" :hasError="error.url" @input="valid(key)">
+              <base-text-field label="URL" v-model="networks[key].url" placeholder="https://www.url.com" :hasError="error.url" @input="validUrl(key)">
                 <span slot="error">
                   Invalid URL
                 </span>
@@ -151,7 +155,7 @@ export default {
                   :color="'gray'"
                   :transparent="true"
                   size="middle"
-                  @click="closeModal(key)"
+                  @click="closeModal()"
                   >
                   Close
                 </BaseButton>
