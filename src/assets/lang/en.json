@@ -18,7 +18,9 @@
         "cancel":                       "Cancel",
         "delete":                       "Delete",
         "apply":                        "Apply",
-        "back":                         "Back"
+        "back":                         "Back",
+        "create":                       "Create",
+        "addSection":                   "Add section"
     },
     "s": {
         "background":                   "Background",
@@ -57,6 +59,26 @@
         "elementsLibrary":              "Elements library"
     },
     "d": {
-        "createNew":                    "Create new landing"
+        "createNew":                    "Create new landing",
+        "allSites":                     "All sites",
+        "cmodalHeader":                 "Create new Landing page",
+        "cmodalLabel":                  "Landing name",
+        "cmodalErrorText":              "Give a name to your landing page"
+    },
+    "notFound":                         "Sorry! We can't find the page you're looking for.",
+    "notFoundReturn1":                  "Return to main page",
+    "notFoundReturn2":                  "Return to Dashboard",
+    "el": {
+        "buttonDescr":                  "Standard clickable button",
+        "textDesc":                     "Editable text block",
+        "imageDescr":                   "Insert image here",
+        "spacerDescr":                  "Custom spacer between page elements",
+        "platformsDescr":               "List of supported game platforms",
+        "ageDescr":                     "Verify your customers age",
+        "socialDescr":                  "Add graphical links to a social media",
+        "icontextDescr":                "Check marked feature list",
+        "videoDescr":                   "Embedded window for a Youtube video",
+        "timerDescr":                   "Countdown to release setup",
+        "textDescr":                    "Editable text block"
     }
 }

@@ -12,7 +12,7 @@
           :class="{'b-page__header-crumbs-home_active': pageIs('/dashboard') === false}"
           @click="returnToBoard"
           >
-          All sites
+          {{ $t('d.allSites') }}
         </span>
       </div>
 

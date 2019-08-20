@@ -23,5 +23,8 @@ module.exports = {
   },
   css: {
     extract: false
-  }
+  },
+  transpileDependencies: [
+    'vue-update-message'
+  ]
 }

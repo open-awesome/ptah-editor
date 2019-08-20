@@ -7,7 +7,7 @@
           404
         </div>
         <div class="b-404__text">
-          Sorry! We can't find the page you're looking for.
+          {{ $t('notFound') }}
         </div>
         <div class="b-404__btn">
           <BaseButton color="blue" @click="returnToBoard">
@@ -35,7 +35,7 @@ export default {
     },
 
     buttonText () {
-      return this.isGuest ? 'Return to main page' : 'Return to Dashboard'
+      return this.isGuest ? this.$t('notFoundReturn1') : this.$t('notFoundReturn1')
     }
   },
 
