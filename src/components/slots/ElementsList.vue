@@ -34,72 +34,74 @@ import { randomPoneId, elemtentList } from '@editor/util'
 
 export default {
   name: 'ElementsList',
-  data: () => ({
-    showList: false,
-    elements: {},
-    elSrc: {
-      button: {
-        name: 'Button',
-        descr: 'Standard clickable button',
-        ico: 'elButton',
-        width: 20
-      },
-      text: {
-        name: 'Text',
-        descr: 'Editable text block',
-        ico: 'elText',
-        width: 15
-      },
-      pic: {
-        name: 'Image',
-        descr: 'Insert image here',
-        ico: 'elImage',
-        width: 18
-      },
-      delimiter: {
-        name: 'Spacer',
-        descr: 'Custom spacer between page elements',
-        ico: 'elSpacer',
-        width: 20
-      },
-      platforms: {
-        name: 'Available platforms',
-        descr: 'List of supported game platforms',
-        ico: 'elPlatforms',
-        width: 22
-      },
-      restrictions: {
-        name: 'Age restrictions',
-        descr: 'Verify your customers age',
-        ico: 'elAge',
-        width: 20
-      },
-      social: {
-        name: 'Social networks',
-        descr: 'Add graphical links to a social media',
-        ico: 'elSocial',
-        width: 17
-      },
-      icontext: {
-        name: 'Icon with text',
-        descr: 'Check marked feature list',
-        ico: 'elIconText',
-        width: 19
-      },
-      video: {
-        name: 'Video',
-        descr: 'Embedded window for a Youtube video',
-        ico: 'elVideo',
-        width: 18
-      },
-      timer: {
-        name: 'Timer',
-        descr: 'Countdown to release setup',
-        ico: 'elTimer',
-        width: 16
+  data () {
+    return {
+      showList: false,
+      elements: {},
+      elSrc: {
+        button: {
+          name: 'Button',
+          descr: this.$t('el.buttonDescr'),
+          ico: 'elButton',
+          width: 20
+        },
+        text: {
+          name: 'Text',
+          descr: this.$t('el.textDescr'),
+          ico: 'elText',
+          width: 15
+        },
+        pic: {
+          name: 'Image',
+          descr: this.$t('el.imageDescr'),
+          ico: 'elImage',
+          width: 18
+        },
+        delimiter: {
+          name: 'Spacer',
+          descr: this.$t('el.spacerDescr'),
+          ico: 'elSpacer',
+          width: 20
+        },
+        platforms: {
+          name: 'Available platforms',
+          descr: this.$t('el.platformsDescr'),
+          ico: 'elPlatforms',
+          width: 22
+        },
+        restrictions: {
+          name: 'Age restrictions',
+          descr: this.$t('el.ageDescr'),
+          ico: 'elAge',
+          width: 20
+        },
+        social: {
+          name: 'Social networks',
+          descr: this.$t('el.socialDescr'),
+          ico: 'elSocial',
+          width: 17
+        },
+        icontext: {
+          name: 'Icon with text',
+          descr: this.$t('el.icontextDescr'),
+          ico: 'elIconText',
+          width: 19
+        },
+        video: {
+          name: 'Video',
+          descr: this.$t('el.videoDescr'),
+          ico: 'elVideo',
+          width: 18
+        },
+        timer: {
+          name: 'Timer',
+          descr: this.$t('el.timerDescr'),
+          ico: 'elTimer',
+          width: 16
+        }
       }
     }
-  }),
+  },
 
   computed: {
     ...mapState('Sidebar', [

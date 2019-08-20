@@ -9,7 +9,7 @@
 
         <span class="b-builder-sidebar__icon-add"
           slot="icon"
-          tooltip="Add section"
+          :tooltip="$t('nav.addSection')"
           tooltip-position="bottom"
           @click.stop="showAddSectionBar">
            <IconBase
@@ -43,7 +43,7 @@
       <div class="b-builder-sidebar-add-section" v-if="isExpanded && isAddSectionExpanded">
         <BuilderAddSectionBar
           :builder="builder"
-          title="Add Section"
+          :title="$t('nav.addSection')"
           @add="onAddSection"
           @requestClose="closeAddSectionBar">
         </BuilderAddSectionBar>

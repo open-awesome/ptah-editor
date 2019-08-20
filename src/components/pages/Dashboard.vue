@@ -143,13 +143,13 @@ export default {
               height="14"
             />
           </div>
-          <h3>Create new Landing page</h3>
+          <h3>{{ $t('d.cmodalHeader') }}</h3>
 
           <base-text-field
             v-model="newPageTitle"
             :hasError="invalid"
-            errorText="Give a name to your landing page"
-            label="Landing name">
+            :errorText="$t('d.cmodalErrorText')"
+            :label="$t('d.cmodalLabel')">
           </base-text-field>
 
           <div class="b-presets">
@@ -163,7 +163,7 @@ export default {
           </div>
 
           <base-button color="blue" size="middle" @click="newLanding" :disabled="createProgress">
-            Create
+            {{ $t('nav.create') }}
           </base-button>
         </div>
       </div>
