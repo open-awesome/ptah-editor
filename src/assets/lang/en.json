@@ -78,6 +78,7 @@
         "socialDescr":                  "Add graphical links to a social media",
         "icontextDescr":                "Check marked feature list",
         "videoDescr":                   "Embedded window for a Youtube video",
-        "timerDescr":                   "Countdown to release setup"
+        "timerDescr":                   "Countdown to release setup",
+        "textDescr":                    "Editable text block"
     }
 }
