@@ -3,7 +3,7 @@
     ref="styler"
     id="styler"
     v-if="$builder.isEditing"
-    :class="{ 'is-visible': isVisible && !editText && isShowStyler }"
+    :class="{ 'is-visible': isVisible && !editText }"
     @click.stop=""
   >
 
@@ -312,7 +312,7 @@ export default {
     prevent: false
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isShowStyler', 'isResizeStop', 'isDragStop', 'stylesBuffer']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isResizeStop', 'isDragStop', 'stylesBuffer']),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -351,11 +351,6 @@ export default {
         }
       },
       deep: true
-    },
-    isResizeStop: {
-      handler: function (val, oldVal) {
-        if (val === true) this.el.addEventListener('mousedown', this.showStyler)
-      }
     },
     isDragStop: {
       handler: function (val, oldVal) {
@@ -623,21 +618,34 @@ export default {
         'menubar__button',
         'menubar__button is-active',
         'editor__content',
-        'menubar is-hidden'
+        'menubar is-hidden',
+        'b-handle',
+        'b-handle b-handle-tl',
+        'b-handle b-handle-tm',
+        'b-handle b-handle-tr',
+        'b-handle b-handle-mr',
+        'b-handle b-handle-br',
+        'b-handle b-handle-bm',
+        'b-handle b-handle-bl',
+        'b-handle b-handle-ml'
       ]
 
-      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames))) || this.isResizeStop) {
+      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames)))) {
         this.isCurrentStyler = true
 
-        if (this.isResizeStop) this.isCurrentStyler = false
-        this.toggleResizeStop(false)
+        if (`$sectionData.${this.isResizeStop}` === this.settingObjectOptions.name) {
+          this.toggleResizeStop(false)
+        }
 
         return
       }
 
       if (event && MouseEvent && isParentTo(event.target, this.$el)) {
+        this.isCurrentStyler = true
         return
       }
+
+      this.isCurrentStyler = false
 
       if (this.popper) {
         this.popper.destroy()
