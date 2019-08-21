@@ -1,5 +1,7 @@
 <template>
-    <div class="b-delimiter is-editable">
+    <div class="b-delimiter is-editable"
+      :path="path"
+      >
       <vue-draggable-resizable
       class="b-delimiter__resize"
       class-name-active="b-delimiter__resize_active"

@@ -4,6 +4,7 @@
     @drop="onDrop"
     :data-href="link.href"
     :class="{'js-element-link' : isSetUrlImage }"
+    :path="path"
     >
 
     <i class="b-load pth-uploader" @click.stop="upload" ref="upload">

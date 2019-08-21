@@ -31,6 +31,7 @@ import Seeder from '@editor/seeder'
 import * as _ from 'lodash-es'
 import { mapActions, mapState } from 'vuex'
 import { randomPoneId, elemtentList } from '@editor/util'
+import VueScrollTo from 'vue-scrollto'
 
 export default {
   name: 'ElementsList',
@@ -131,12 +132,58 @@ export default {
       element.element.removable = true
       element.key = randomPoneId()
       this.components = [...this.components, element]
+
+      this.$nextTick(() => {
+        this.selectElement()
+      })
+    },
+
+    selectElement () {
+      let idSection = this.settingObjectSection.id
+      let section = document.getElementById(`section_${idSection}`)
+      let nameArray = this.sandbox.components.split('.')[1]
+      let el = section.querySelector(`[path="${nameArray}[${this.components.length - 1}].element"]`)
+      let resize = el.querySelector(`.resizable.vdr`)
+
+      if (resize) {
+        el = resize
+      }
+
+      el.id = `section${idSection}${nameArray}${this.components.length - 1}`
+      this.clickOnElement(el)
+    },
+
+    scrollTo (element) {
+      let options = {
+        container: '.b-builder-layout-content__main .vb-content',
+        duration: 500,
+        easing: 'ease',
+        offset: -80,
+        force: true,
+        cancelable: true,
+        onStart: false,
+        onDone: false,
+        onCancel: false,
+        x: false,
+        y: true
+      }
+
+      VueScrollTo.scrollTo(`#${element.getAttribute('id')}`, 500, options)
+    },
+
+    clickOnElement (el) {
+      let machineEvent = new Event('mousedown', { bubbles: true })
+      el.dispatchEvent(machineEvent)
+      el.dispatchEvent(machineEvent)
+
+      this.scrollTo(el)
     },
 
     addEl (name) {
       const el = _.merge({}, Seeder.seed(this.elements[name]))
       this.addElement(el)
     },
+
     hideList () {
       this.setControlPanel(false)
       document.removeEventListener('click', this.hideList, true)

@@ -3,6 +3,7 @@
     @dragover.prevent
     @drop="onDrop"
     :data-href="link.href"
+    :path="path"
     :class="{'js-element-link' : isSetUrlImage }"
     >
 

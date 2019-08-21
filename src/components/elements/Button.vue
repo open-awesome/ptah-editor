@@ -1,5 +1,8 @@
 <template>
-  <a class="b-button is-editable" ref="btn" @click.stop.prevent>
+  <a class="b-button is-editable" ref="btn"
+     @click.stop.prevent
+     :path="path"
+    >
 
     <slot v-if="!isActive"></slot>
 

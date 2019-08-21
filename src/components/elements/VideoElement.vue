@@ -1,5 +1,7 @@
 <template>
-<div class="b-video">
+<div class="b-video"
+  :path="path"
+  >
   <div class="b-video__padd">
     <iframe
       v-if="videoType === 'youtube'"
