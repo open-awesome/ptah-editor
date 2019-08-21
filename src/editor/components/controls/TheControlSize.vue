@@ -78,14 +78,14 @@ export default {
 <template>
   <div class="b-size" v-if="device !== 'is-mobile'">
     <base-label>
-      Size
+      {{ $t('c.size') }}
     </base-label>
     <div class="b-size-controls">
       <div class="b-size-controls__control">
-        <base-number-field :maximum="maxProps['width']" v-model="width" label="Width" class=""></base-number-field>
+        <base-number-field :maximum="maxProps['width']" v-model="width" :label="$t('c.width')" class=""></base-number-field>
       </div>
       <div class="b-size-controls__control">
-        <base-number-field :maximum="maxProps['height']" v-model="height" label="Height" class=""></base-number-field>
+        <base-number-field :maximum="maxProps['height']" v-model="height" :label="$t('c.height')" class=""></base-number-field>
       </div>
     </div>
   </div>

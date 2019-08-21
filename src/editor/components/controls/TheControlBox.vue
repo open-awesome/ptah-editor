@@ -158,7 +158,7 @@ export default {
 <template>
 <div>
   <base-label>
-    Edit indents
+    {{ $t('c.editIndents') }}
   </base-label>
   <div class="control-box">
 
@@ -167,8 +167,8 @@ export default {
       <div class="control-box__content-edge">
       </div>
     </div>
-    <div class="control-box__title-m" v-if="!hideMargin">Margin</div>
-    <div class="control-box__title-p" v-if="!hidePadding">Padding</div>
+    <div class="control-box__title-m" v-if="!hideMargin">{{ $t('c.margin') }}</div>
+    <div class="control-box__title-p" v-if="!hidePadding">{{ $t('c.padding') }}</div>
     <!-- CONTROLS -->
     <!-- margin -->
     <template v-if="!hideMargin">

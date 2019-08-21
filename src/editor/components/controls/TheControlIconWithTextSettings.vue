@@ -91,7 +91,7 @@ export default {
 <template>
   <div class="b-text-controls">
     <div class="b-text-controls__control">
-      <div>Visible icon</div>
+      <div>{{ $t('c.visibleIcon') }}</div>
       <div class="b-icon-with-text">
         <div class="b-icon-with-text__item"
           :class="{ 'b-icon-with-text__item_opacity' : false === icon.visible }"
@@ -110,22 +110,22 @@ export default {
           <a class="b-icon-with-text__item-button"
             title="Visible icon"
             >
-            Visible
+            {{ $t('c.visible') }}
           </a>
 
         </div>
       </div>
     </div>
     <div class="b-text-controls__control" v-if="icon.visible">
-      <base-select label="Icon" :options="icons.options" :value="iconName" v-model="iconName" @input="changeIcon"></base-select>
+      <base-select :label="$t('c.icon')" :options="icons.options" :value="iconName" v-model="iconName" @input="changeIcon"></base-select>
     </div>
     <div class="b-text-controls__control" v-if="icon.visible">
-      <base-range-slider v-model="sizeIcons.width" label="Width icons" step="2" min="14" max="34">
+      <base-range-slider v-model="sizeIcons.width" :label="$t('c.iconsWidth')" step="2" min="14" max="34">
         {{ sizeIcons.width }} px
       </base-range-slider>
     </div>
     <div class="b-text-controls__control" v-if="icon.visible">
-      <base-color-picker label="Color icon" v-model="color" @change="changeColor"></base-color-picker>
+      <base-color-picker :label="$t('c.iconsColor')" v-model="color" @change="changeColor"></base-color-picker>
     </div>
   </div>
 </template>

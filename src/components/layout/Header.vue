@@ -55,6 +55,7 @@ export default {
     select: {
       handler: function (status, old) {
         this.$i18n.locale = status.selected.value
+        localStorage.setItem('locale', status.selected.value)
       },
       deep: true
     }
