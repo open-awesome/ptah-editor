@@ -94,7 +94,20 @@
         "relatedVideos":                "Show/hide related videos",
         "setTimer":                     "Set timer",
         "timeZone":                     "Time zone",
-        "labels":                       "Labels"
+        "labels":                       "Labels",
+        "sectionHeight":                "Section height",
+        "shAuto":                       "Auto",
+        "shVH":                         "Viewport Height",
+        "shPx":                         "Pixels",
+        "sliderWarn":                   "Slide looping isn't supported in developer mode",
+        "sliderNumber":                 "Number of slides in the banner",
+        "pagiShow":                     "Show/hide pagination",
+        "pagiColor":                    "Pagination color",
+        "pagiSize":                     "Nav bullets size",
+        "navShow":                      "Show/hide navigation arrows",
+        "navColor":                     "Navigation color",
+        "transDelay":                   "Transition delay (ms)",
+        "carouselWidth":                "Carousel width (columns)"
     },
     "d": {
         "createNew":                    "Create new landing",
@@ -118,5 +131,8 @@
         "videoDescr":                   "Embedded window for a Youtube video",
         "timerDescr":                   "Countdown to release setup",
         "textDescr":                    "Editable text block"
+    },
+    "с": {
+        "shVhLabel":                    "1 vh is equivalent To 1% of the height of the browser window"
     }
 }
