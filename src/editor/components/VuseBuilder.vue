@@ -581,9 +581,9 @@ export default {
       cursor: pointer
       border-color: $dark-blue-krayola
     &.styler-active
-      border-color: $white !important
+      border-color: $dark-blue-krayola !important
       &:hover
-        border-color: $white !important
+        border-color: $dark-blue-krayola !important
       &.b-text
         cursor: text
   &.fp-scroll section

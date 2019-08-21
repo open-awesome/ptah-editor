@@ -198,7 +198,7 @@ export default {
 
     z-index: 2
     &_active
-      border: 0.2rem dotted $white !important
+      border: 0.2rem dotted $dark-blue-krayola !important
     .is-mobile &,
     .is-tablet &
       display: none
