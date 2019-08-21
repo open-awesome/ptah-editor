@@ -7,15 +7,15 @@ export default {
     return {
       heightValueTypesList: [
         {
-          text: 'auto',
+          text: this.$t('c.shAuto'),
           value: 'auto'
         },
         {
-          text: 'Viewport Height',
+          text: this.$t('c.shVH'),
           value: 'vh'
         },
         {
-          text: 'Pixels',
+          text: this.$t('c.shPx'),
           value: 'px'
         }
       ],
@@ -125,7 +125,7 @@ export default {
 
     <div class="control-height__input" v-if="heigthValueType === 'vh'">
       <!-- slider -->
-      <p>1 vh is equivalent To 1% of the height of the browser window</p>
+      <p>{{ $t('с.shVhLabel') }}</p>
       <base-range-slider
         v-model="vhValue"
          step="1" min="1" max="100">

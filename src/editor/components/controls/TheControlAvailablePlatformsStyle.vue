@@ -47,12 +47,12 @@ export default {
 <template>
   <div class="b-text-controls">
     <div class="b-size-controls__control">
-      <base-range-slider v-model="sizeIcons.width" label="Icons width" step="8" min="16" max="128">
+      <base-range-slider v-model="sizeIcons.width" :label="$t('c.iconsWidth')" step="8" min="16" max="128">
         {{ sizeIcons.width }} px
       </base-range-slider>
     </div>
     <div class="b-text-controls__control">
-      <base-color-picker label="Icons color" v-model="color" @change="changeColor"></base-color-picker>
+      <base-color-picker :label="$t('c.iconsColor')" v-model="color" @change="changeColor"></base-color-picker>
     </div>
   </div>
 </template>

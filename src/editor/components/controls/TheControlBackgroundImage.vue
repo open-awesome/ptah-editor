@@ -135,7 +135,7 @@ export default {
         :label="labelHover"/>
     </div>
     <div class="b-bg-controls__control">
-      <BaseSwitcher v-model="isStretchImage" label="Stretch to fit" @change="setStretch" />
+      <BaseSwitcher v-model="isStretchImage" :label="$t('c.stretch')" @change="setStretch" />
     </div>
   </div>
 </template>

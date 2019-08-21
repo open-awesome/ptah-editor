@@ -90,7 +90,7 @@ export default {
     <div class="b-controls__control">
       <BaseSwitcher
         v-model="isStretchImage"
-        label="Stretch to fit"
+        :label="$t('c.stretch')"
         @change="setStretch"
       />
     </div>

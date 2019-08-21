@@ -122,7 +122,7 @@ export default {
 <template>
 <div class="b-border-style">
   <div class="b-border-style__control">
-    <base-label>Border style</base-label>
+    <base-label>{{ $t('c.borderStyle') }}</base-label>
     <div class="b-border-style__color-style">
       <div class="b-border-style__color-style-col">
         <base-color-picker v-model="borderColor" @change="changeColor" label=""/>
@@ -138,7 +138,7 @@ export default {
     </div>
   </div>
   <div class="b-border-style__control b-border-style__control_h">
-    <base-label>Border hover</base-label>
+    <base-label>{{ $t('c.borderHover') }}</base-label>
     <div class="b-border-style__color-style">
       <div class="b-border-style__color-style-col">
         <base-color-picker v-model="borderColorHover" @change="changeColorHover" label=""/>

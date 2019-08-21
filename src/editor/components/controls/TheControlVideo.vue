@@ -5,20 +5,20 @@
       <div class="b-video-control__control">
         <BaseUploadInput
           v-model="vUrl"
-          label="Video URL"
+          :label="$t('c.videoUrl')"
           @upload="updateSettings('url', vUrl)"
         />
       </div>
 
       <div class="b-video-control__description">
-        YouTube video url or any mp4 file url is allowed.
+        {{ $t('c.videoHint') }}
       </div>
 
       <!-- Loop video -->
       <div class="b-video-control__control">
         <BaseSwitcher
           v-model="vLoop"
-          label="Loop"
+          :label="$t('c.loop')"
           @change="updateSettings('loop', vLoop)"
         />
       </div>
@@ -27,7 +27,7 @@
       <div class="b-video-control__control">
         <BaseSwitcher
           v-model="vAutoplay"
-          label="Autoplay"
+          :label="$t('c.autoplay')"
           @change="updateSettings('autoplay', vAutoplay)"
         />
       </div>
@@ -36,7 +36,7 @@
       <div class="b-video-control__control">
         <BaseSwitcher
           v-model="vControls"
-          label="Show/hide controls"
+          :label="$t('c.controlsShow')"
           @change="updateSettings('controls', vControls)"
         />
       </div>
@@ -45,7 +45,7 @@
       <div class="b-video-control__control" v-if="videoType === 'youtube'">
         <BaseSwitcher
           v-model="vRel"
-          label="Show/hide related videos"
+          :label="$t('c.relatedVideos')"
           @change="updateSettings('rel', vRel)"
         />
       </div>

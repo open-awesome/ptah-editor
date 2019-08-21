@@ -31,7 +31,7 @@ gulp.task('cjs', function (callback) {
 })
 
 gulp.task('public-image', function () {
-  gulp.src([
+  return gulp.src([
     './src/assets/img/**/*.jpg',
     './src/assets/img/**/*.png',
     './src/assets/img/**/*.gif',
