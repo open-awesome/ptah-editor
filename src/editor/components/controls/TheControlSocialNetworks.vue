@@ -167,7 +167,7 @@ export default {
       </div><!--/.b-social-networks-controls-->
     </div>
     <div class="b-social-networks-controls__control">
-      <BaseSwitcher v-model="vTarget" label="Open links in new window" @change="changeTarget" />
+      <BaseSwitcher v-model="vTarget" :label="$t('c.openLinksInNewWindow')" @change="changeTarget" />
     </div>
   </div>
 </template>

@@ -47,12 +47,12 @@ export default {
 <template>
   <div class="b-social-networks-controls">
       <div class="b-size-controls__control">
-        <base-range-slider v-model="sizeIcons.width" label="Width icons" step="2" min="16" max="64">
+        <base-range-slider v-model="sizeIcons.width" :label="$t('c.iconsWidth')" step="2" min="16" max="64">
           {{ sizeIcons.width }} px
         </base-range-slider>
       </div>
       <div class="b-social-networks-controls__control">
-        <base-color-picker label="Color icons" v-model="color" @change="changeColor"></base-color-picker>
+        <base-color-picker :label="$t('c.iconsColor')" v-model="color" @change="changeColor"></base-color-picker>
       </div>
   </div>
 </template>

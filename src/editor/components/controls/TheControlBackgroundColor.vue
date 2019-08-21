@@ -16,10 +16,10 @@ export default {
     this.bgColor = this.styles['background-color']
 
     if (this.settingObjectType !== 'button') {
-      this.label = 'Background color'
+      this.label = this.$t('c.background')
     } else {
-      this.label = this.settingObjectType + ' color'
-      this.labelHover = 'Hover color'
+      this.label = this.$t('c.buttonColor')
+      this.labelHover = this.$t('c.bgHover')
     }
 
     if (this.settingObjectType === 'button') {

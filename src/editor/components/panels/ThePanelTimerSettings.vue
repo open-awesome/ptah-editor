@@ -8,7 +8,7 @@
       <div class="b-panel__inner">
         <!-- Settings -->
         <div class="b-panel__control">
-          <base-label v-text="'Set timer'"/>
+          <base-label v-text="$t('c.setTimer')"/>
           <date-picker
             v-model="timer.timestamp"
             :minuteStep="10"
@@ -30,11 +30,11 @@
             :options="UTCOptions"
             :value="UTC"
             @input="UTC = $event.value"
-            label="Time zone"/>
+            :label="$t('c.timeZone')"/>
         </div>
 
         <div class="b-panel__control">
-          <base-switcher v-model="labels.show" label="Labels"/>
+          <base-switcher v-model="labels.show" :label="$t('c.timeZone')"/>
         </div>
 
         <div class="b-panel__control" v-if="labels.show">

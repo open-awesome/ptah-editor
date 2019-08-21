@@ -2,19 +2,19 @@
   <div class="b-text-link">
     <div class="b-text-link__control-group">
       <div class="b-text-link__control">
-        <base-color-picker label="Link color" v-model="color"></base-color-picker>
+        <base-color-picker :label="$t('c.linkColor')" v-model="color"></base-color-picker>
       </div>
       <div class="b-text-link__control">
-        <BaseSwitcher v-model="underline" label="underline" />
+        <BaseSwitcher v-model="underline" :label="$t('c.underline')" />
       </div>
     </div>
 
     <div class="b-text-link__control-group">
       <div class="b-text-link__control">
-        <base-color-picker label="Link hover color" v-model="hoverColor"></base-color-picker>
+        <base-color-picker :label="$t('c.linkColorHover')" v-model="hoverColor"></base-color-picker>
       </div>
       <div class="b-text-link__control">
-        <BaseSwitcher v-model="underlineHover" label="underline hover" />
+        <BaseSwitcher v-model="underlineHover" :label="$t('c.underlineHover')" />
       </div>
     </div>
 

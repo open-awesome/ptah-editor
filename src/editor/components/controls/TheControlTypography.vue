@@ -184,21 +184,21 @@ export default {
   <div class="b-typography-controls">
     <div class="b-typography-controls__control">
       <div class="b-typography-controls__control-col b-typography-controls__control-col-font-name">
-        <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont" height="14"></base-select>
+        <base-select :label="$t('c.font')" :options="fonts.options" v-model="fontName" @input="changeFont" height="14"></base-select>
       </div>
       <div class="b-typography-controls__control-col">
-        <base-select label="Size" :options="sizes" v-model="size" @input="changeSize" height="23"></base-select>
+        <base-select :label="$t('c.size')" :options="sizes" v-model="size" @input="changeSize" height="23"></base-select>
       </div>
       <div class="b-typography-controls__control-col">
-        <base-select label="Line" :options="linesHeight" v-model="lineHeight" height="23"></base-select>
+        <base-select :label="$t('c.line')" :options="linesHeight" v-model="lineHeight" height="23"></base-select>
       </div>
     </div>
     <div class="b-typography-controls__control">
       <div class="b-typography-controls__control-col">
-        <base-color-picker label="Text" v-model="color" @change="changeColor"></base-color-picker>
+        <base-color-picker :label="$t('c.text')" v-model="color" @change="changeColor"></base-color-picker>
       </div>
       <div class="b-typography-controls__control-col b-typography-controls__control-col" v-if="colorTextHover">
-        <base-color-picker class="b-picker_color-hover" label="Hover" v-model="colorHover" @change="changeColorHover"></base-color-picker>
+        <base-color-picker class="b-picker_color-hover" :label="$t('c.hover')" v-model="colorHover" @change="changeColorHover"></base-color-picker>
       </div>
       <div class="b-typography-controls__control-col" v-if="showTextStyles">
         <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>

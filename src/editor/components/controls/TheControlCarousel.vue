@@ -8,19 +8,19 @@
     <div class="b-control">
       <base-switcher
         v-model="pagination"
-        label="Show/hide pagination"/>
+        :label="$t('c.pagiShow')"/>
 
       <base-color-picker
         v-if="pagination"
         class="b-optional"
-        label="Pagination color"
+        :label="$t('c.pagiColor')"
         v-model="paginationColor"/>
 
       <base-range-slider
         v-if="pagination"
         class="b-optional"
         v-model="navigationSize"
-        label="Nav bullets size"
+        :label="$t('c.pagiSize')"
         step="1"
         min="5"
         max="50">
@@ -32,24 +32,24 @@
     <div class="b-control">
       <base-switcher
         v-model="navigation"
-        label="Show/hide navigation arrows"/>
+        :label="$t('c.navShow')"/>
 
       <base-color-picker
         v-if="navigation"
         class="b-optional"
-        label="Navigation color"
+        :label="$t('c.navColor')"
         v-model="navigationColor"/>
     </div>
 
     <div class="b-control">
       <base-switcher
         v-model="autoplay"
-        label="Autoplay"/>
+        :label="$t('c.autoplay')"/>
       <base-range-slider
         v-if="autoplay !== false"
         class="b-optional"
         :value="settingObjectSection.data.mainStyle.swiper.autoplay.delay"
-        label="Transition delay (ms)"
+        :label="$t('c.transDelay')"
         @change="changeSwiperDelay"
         step="1000"
         min="1000"
@@ -61,7 +61,7 @@
     <div class="b-control">
       <base-range-slider
         v-model="frameWidth"
-        label="Carousel width (columns)"
+        :label="$t('c.carouselWidth')"
         step="1"
         min="2"
         max="12">

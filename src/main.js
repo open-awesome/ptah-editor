@@ -49,11 +49,12 @@ Vue.use(VueScrollTo, {
 
 sync(store, router)
 
-const messages = {
-  en, ru
-}
+const [messages, locale] = [
+  { en, ru },
+  localStorage.getItem('locale') !== null ? localStorage.getItem('locale') : en
+]
 const i18n = new VueI18n({
-  locale: 'en',
+  locale: locale,
   messages,
   fallbackLocale: 'en'
 })

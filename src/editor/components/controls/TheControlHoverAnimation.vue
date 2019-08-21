@@ -79,7 +79,7 @@ export default {
 
 <template>
   <div class="b-hover-animation-control">
-    <base-select label="Hover animation" :options="animationList" v-model="animationClass" @input="changeAnimation"></base-select>
+    <base-select :label="$t('c.hoverAnim')" :options="animationList" v-model="animationClass" @input="changeAnimation" />
   </div>
 </template>
 
