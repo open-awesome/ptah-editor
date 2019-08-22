@@ -13,7 +13,7 @@
         v-scroll-to="`#section_${headerSection().id}`" />
 
       <!-- tree menu -->
-      <div class="node-sortable tree-root" v-click-outside="onClickOutside">
+      <div class="node-sortable tree-root">
         <template v-for="(item, index) in menuTree">
           <menu-tree-item
             v-if="!isGroup(item)"
