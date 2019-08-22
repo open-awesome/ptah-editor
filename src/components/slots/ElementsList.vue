@@ -174,7 +174,6 @@ export default {
     clickOnElement (el) {
       let machineEvent = new Event('mousedown', { bubbles: true })
       el.dispatchEvent(machineEvent)
-      el.dispatchEvent(machineEvent)
 
       this.scrollTo(el)
     },
