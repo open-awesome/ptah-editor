@@ -13,7 +13,7 @@
         v-scroll-to="`#section_${headerSection().id}`" />
 
       <!-- tree menu -->
-      <div class="node-sortable tree-root">
+      <div class="node-sortable tree-root" ref="tree">
         <template v-for="(item, index) in menuTree">
           <menu-tree-item
             v-if="!isGroup(item)"
@@ -135,6 +135,8 @@ export default {
     this.$nextTick(function () {
       this.initSortable()
     })
+
+    this.treeOutsideClick()
   },
 
   updated () {
@@ -352,10 +354,6 @@ export default {
       }, 300)
     },
 
-    onClickOutside () {
-      this.selectedSections = []
-    },
-
     itemSelected (section) {
       return this.selectedSections.indexOf(section.id) > -1 || this.isActiveSection(section.id)
     },
@@ -472,6 +470,21 @@ export default {
      */
     sIndex (id) {
       return _.findIndex(this.builder.sections, (s) => s.id === id)
+    },
+
+    /**
+     *  outside click
+     */
+    treeOutsideClick () {
+      const tree = this.$refs.tree
+
+      document.addEventListener('click', e => {
+        const target = e.target
+
+        if (target === tree || tree.contains(target)) {
+          this.selectedSections = []
+        }
+      })
     }
   }
 }
