@@ -221,6 +221,13 @@ export default {
       margin: $size-step/2 auto !important
   &.js-element-link
     cursor: pointer
+  .b-uploader
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
 /deep/
   .b-handle
     position: absolute !important
