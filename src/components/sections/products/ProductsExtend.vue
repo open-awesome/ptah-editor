@@ -816,15 +816,6 @@ export default {
     heightRightStage: 0
   },
 
-  watch: {
-    '$sectionData': {
-      handler () {
-        this.calcHeightRightStage()
-      },
-      deep: true
-    }
-  },
-
   methods: {
     ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
 
@@ -844,6 +835,7 @@ export default {
 
     calcHeightRightStage () {
       let height = 0
+      let slotsHeight = 0
       let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
       let section = document.getElementById(`section_${index}`)
 
@@ -853,7 +845,12 @@ export default {
       allItems.forEach(function (item, i, arr) {
         if (item.classList.contains('_hide')) return
 
-        if (item.offsetHeight > height) height = item.offsetHeight
+        item.querySelectorAll('.b-slot').forEach(function (slot, i, arr) {
+          slotsHeight += slot.offsetHeight
+        })
+
+        if (slotsHeight > height) height = slotsHeight
+        slotsHeight = 0
       })
 
       this.$sectionData.heightRightStage = height
@@ -867,6 +864,10 @@ export default {
   },
 
   mounted () {
+    this.calcHeightRightStage()
+  },
+
+  updated () {
     this.calcHeightRightStage()
   }
 }
