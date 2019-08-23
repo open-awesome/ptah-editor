@@ -51,7 +51,7 @@ sync(store, router)
 
 const [messages, locale] = [
   { en, ru },
-  localStorage.getItem('locale') !== null ? localStorage.getItem('locale') : en
+  localStorage.getItem('locale') !== null ? localStorage.getItem('locale') : 'en'
 ]
 const i18n = new VueI18n({
   locale: locale,
