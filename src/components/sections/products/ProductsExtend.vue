@@ -1135,8 +1135,11 @@ export default {
       justify-content: center
       align-items: center
       flex-direction: column
+
+      opacity: 0
       &_active
         visibility: visible
+        opacity: 1
       .is-mobile &,
       .is-tablet &
         width: 100%
