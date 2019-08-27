@@ -1,5 +1,7 @@
 <template>
-  <div class="b-available-platforms b-border">
+  <div class="b-available-platforms b-border"
+    :path="path"
+    >
     <div class="b-available-platforms__item"
       v-for="(value, key) in platforms" :key="key"
       v-if="platforms[key].visible"

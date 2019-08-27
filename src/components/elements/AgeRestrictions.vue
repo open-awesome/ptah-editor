@@ -1,5 +1,7 @@
 <template>
-  <div class="b-age-restrictions b-border">
+  <div class="b-age-restrictions b-border"
+      :path="path"
+    >
     <div class="b-age-restrictions__item"
       v-for="(value, key) in restrictions" :key="key"
       v-if="restrictions[key].visible"

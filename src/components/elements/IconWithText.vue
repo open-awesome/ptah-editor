@@ -3,6 +3,7 @@
     :class="{ 'b-text-icon_hide': !icon.visible }"
     ref="icon"
     @click.stop.stop=""
+    :path="path"
     >
 
     <slot v-if="!isActive"></slot>

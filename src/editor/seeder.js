@@ -92,7 +92,7 @@ const data = new Map([
     },
     background: true,
     styles: {
-      'background-image': 'url(https://gn788.cdn.stg.gamenet.ru/0/7vmhx/o_1Y5SfI.png)',
+      'background-image': 'url(https://gn680.cdn.stg.gamenet.ru/0/8qGME/o_OIgnu.png)',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
       'background-size': 'contain',
@@ -112,7 +112,7 @@ const data = new Map([
     },
     background: true,
     styles: {
-      'background-image': 'url(https://gn451.cdn.gamenet.ru/TY0Xv2riHu/772cm/o_s1Xtu.png)',
+      'background-image': 'url(https://gn680.cdn.stg.gamenet.ru/0/8qGME/o_OIgnu.png)',
       'background-position': 'center center',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',

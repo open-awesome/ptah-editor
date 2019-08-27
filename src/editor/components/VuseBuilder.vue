@@ -561,13 +561,14 @@ export default {
   transition: 0.2s
   position: relative
   &.is-editable div.is-editable,
+  &.is-editable a.is-editable,
   &.is-editable table.is-editable
     outline: none
     transition: border 0.25s
     border: .2rem dotted transparent
     &:hover
       cursor: pointer
-      border-color: $dark-blue-krayola
+      border-color: $dark-blue-krayola !important
     &.styler-active
       border-color: transparent !important
       &:hover
@@ -579,11 +580,11 @@ export default {
     border: .2rem dotted transparent
     &:hover
       cursor: pointer
-      border-color: $dark-blue-krayola
+      border-color: $dark-blue-krayola !important
     &.styler-active
-      border-color: $white !important
+      border-color: $dark-blue-krayola !important
       &:hover
-        border-color: $white !important
+        border-color: $dark-blue-krayola !important
       &.b-text
         cursor: text
   &.fp-scroll section

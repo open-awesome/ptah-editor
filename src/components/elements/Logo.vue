@@ -4,6 +4,7 @@
     @drop="onDrop"
     :data-href="link.href"
     :class="{'js-element-link' : isSetUrlImage }"
+    :path="path"
     >
 
     <i class="b-load pth-uploader" @click.stop="upload" ref="upload">
@@ -198,7 +199,7 @@ export default {
 
     z-index: 2
     &_active
-      border: 0.2rem dotted $white !important
+      border: 0.2rem dotted $dark-blue-krayola !important
     .is-mobile &,
     .is-tablet &
       display: none

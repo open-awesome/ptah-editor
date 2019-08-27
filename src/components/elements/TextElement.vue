@@ -1,5 +1,7 @@
 <template>
-  <div class="b-text is-editable b-border" ref="text" @click.stop.stop="">
+  <div class="b-text is-editable b-border" ref="text" @click.stop.stop=""
+    :path="path"
+    >
 
     <slot v-if="!isActive"></slot>
 
@@ -134,6 +136,12 @@ export default {
   components: {
     EditorContent,
     EditorMenuBar
+  },
+
+  props: {
+    path: {
+      type: String
+    }
   },
 
   computed: {

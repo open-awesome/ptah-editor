@@ -1,5 +1,7 @@
 <template>
-    <div class="b-delimiter is-editable">
+    <div class="b-delimiter is-editable"
+      :path="path"
+      >
       <vue-draggable-resizable
       class="b-delimiter__resize"
       class-name-active="b-delimiter__resize_active"
@@ -132,7 +134,7 @@ export default {
     width: auto !important
     height: auto !important
     &_active
-      border: 0.2rem dotted $white !important
+      border: 0.2rem dotted $dark-blue-krayola !important
     .is-mobile &,
     .is-tablet &
       display: none

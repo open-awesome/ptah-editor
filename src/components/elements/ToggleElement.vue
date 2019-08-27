@@ -4,6 +4,7 @@
     class="b-toggle-element is-editable b-border"
     ref="toggleEl"
     @click.stop.stop=""
+    :path="path"
     >
 
     <div class="b-toggle-element__item"
