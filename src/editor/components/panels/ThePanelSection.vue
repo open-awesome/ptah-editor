@@ -55,29 +55,6 @@
           <control-box></control-box>
         </div>
 
-        <!-- Group -->
-        <!--<template v-if="!isLastSection() && !isHeader">
-          <div class="b-section-settings__control" v-if="!isSlaveSection()">
-            <BaseButton
-              :color="'gray'"
-              :transparent="true"
-              @click="toggleGrouping(true)"
-            >
-              Group sections
-            </BaseButton>
-          </div>
-
-          <div class="b-panel__control" v-if="isSlaveSection()">
-            <BaseButton
-              :color="'gray'"
-              :transparent="true"
-              @click="openSlaveGrouping()"
-            >
-              Group sections
-            </BaseButton>
-          </div>
-        </template>-->
-
       </div>
     </base-scroll-container>
 
