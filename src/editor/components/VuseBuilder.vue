@@ -573,6 +573,13 @@ export default {
       border-color: transparent !important
       &:hover
         border-color: transparent !important
+      .is-mobile &.b-image,
+      .is-mobile &.b-logo,
+      .is-tablet &.b-image,
+      .is-tablet &.b-logo,
+        border-color: $dark-blue-krayola !important
+        &:hover
+          border-color: $dark-blue-krayola !important
   &.is-editable div.b-border,
   &.is-editable table.b-border
     outline: none

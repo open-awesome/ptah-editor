@@ -202,6 +202,7 @@ export default {
     @media only screen and (max-width: 768px)
       &
         display: none
+
   & span
     display: block
   .is-mobile &,
@@ -231,6 +232,17 @@ export default {
     #{$this}__preview-video
       transition: all 200ms
       transform: rotate(360deg)
+  .b-uploader
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
+  .styler-active
+    .is-mobile &,
+    .is-tablet &
+      border: .2rem dotted $dark-blue-krayola
 /deep/
   .b-handle
     position: absolute !important
