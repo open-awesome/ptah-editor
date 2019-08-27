@@ -836,7 +836,7 @@ export default {
     calcHeightRightStage () {
       let height = 0
       let slotsHeight = 0
-      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
+      let index = this.$section.id
       let section = document.getElementById(`section_${index}`)
 
       let rightStage = section.querySelector('.b-products-columns-extend__right')
