@@ -63,7 +63,6 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'toggleShowStyler',
       'toggleResizeStop'
     ]),
 
@@ -81,13 +80,10 @@ export default {
       if (height > max['height']) height = max['height']
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
-
-      this.toggleShowStyler(false)
     },
 
     onResizeStop (x, y, width, height) {
-      this.toggleShowStyler(true)
-      this.toggleResizeStop(true)
+      this.toggleResizeStop(this.path)
     }
   },
 

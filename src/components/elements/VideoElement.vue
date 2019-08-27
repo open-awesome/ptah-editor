@@ -139,7 +139,6 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'toggleShowStyler',
       'toggleResizeStop'
     ]),
 
@@ -176,13 +175,10 @@ export default {
 
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
-
-      this.toggleShowStyler(false)
     },
 
     onResizeStop (x, y, width, height) {
-      this.toggleShowStyler(true)
-      this.toggleResizeStop(true)
+      this.toggleResizeStop(this.path)
     }
   },
 
