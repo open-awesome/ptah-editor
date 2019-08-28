@@ -76,7 +76,7 @@ const C_CUSTOM_1D = [
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Starship mk1'
+        text: 'Horse'
       },
       styles: {
         color: '#818181'
@@ -91,7 +91,7 @@ const C_CUSTOM_1D = [
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Kinetic weapon mk1'
+        text: 'Great sword'
       },
       styles: {
         color: '#818181'
@@ -186,7 +186,7 @@ const C_CUSTOM_2D = [
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Starship mk1'
+        text: 'Horse'
       },
       styles: {
         color: '#ffffff'
@@ -201,7 +201,7 @@ const C_CUSTOM_2D = [
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Kinetic weapon mk1'
+        text: 'Great sword'
       },
       styles: {
         color: '#818181'
@@ -296,7 +296,7 @@ const C_CUSTOM_3D = [
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Starship mk1'
+        text: 'Horse'
       },
       styles: {
         color: '#ffffff'
@@ -311,7 +311,7 @@ const C_CUSTOM_3D = [
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Kinetic weapon mk1'
+        text: 'Great sword'
       },
       styles: {
         color: '#ffffff'
@@ -406,7 +406,7 @@ const C_CUSTOM_4D = [
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Starship mk1'
+        text: 'Horse'
       },
       styles: {
         color: '#ffffff'
@@ -421,7 +421,7 @@ const C_CUSTOM_4D = [
       icon: {
         value: 'checkMark',
         name: 'checkMark',
-        text: 'Kinetic weapon mk1'
+        text: 'Great sword'
       },
       styles: {
         color: '#ffffff'
