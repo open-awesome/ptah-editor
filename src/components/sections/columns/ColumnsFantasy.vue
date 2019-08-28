@@ -68,7 +68,7 @@ const C_CUSTOM_CONTAINER = {
   }
 }
 
-const [C_CUSTOM_CONTAINER_1, C_CUSTOM_CONTAINER_2, C_CUSTOM_CONTAINER_3] = [
+const [C_CUSTOM_CONTAINER_1, C_CUSTOM_CONTAINER_2, C_CUSTOM_CONTAINER_3, C_CUSTOM_CONTAINER_4] = [
   _.merge({}, C_CUSTOM_CONTAINER, {
     styles: {
       'background-image': 'url(https://s3.protocol.one/images/Vred.png)'
@@ -82,6 +82,11 @@ const [C_CUSTOM_CONTAINER_1, C_CUSTOM_CONTAINER_2, C_CUSTOM_CONTAINER_3] = [
   _.merge({}, C_CUSTOM_CONTAINER, {
     styles: {
       'background-image': 'url(https://s3.protocol.one/images/Bolla.png)'
+    }
+  }),
+  _.merge({}, C_CUSTOM_CONTAINER, {
+    styles: {
+      'background-image': 'url(https://s3.protocol.one/images/Mabok_s.png)'
     }
   })
 ]
@@ -109,7 +114,7 @@ const SCHEMA_CUSTOM = {
   container1: _.merge({}, C_CUSTOM_CONTAINER_1),
   container2: _.merge({}, C_CUSTOM_CONTAINER_2),
   container3: _.merge({}, C_CUSTOM_CONTAINER_3),
-  container4: _.merge({}, C_CUSTOM_CONTAINER_1),
+  container4: _.merge({}, C_CUSTOM_CONTAINER_4),
   components: _.merge({}, C_CUSTOM),
   components1: _.merge({}, C_CUSTOM_COLUMN),
   components2: _.merge({}, C_CUSTOM_COLUMN2),
