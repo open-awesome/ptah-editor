@@ -1,0 +1,81 @@
+# Default values for p1-auth.
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+enableCertIssuer: true
+enableRedis: true
+
+ingress:
+  hostname: storefront.tst.protocol.one
+  hostnamePrefix: ""
+  pathFrontend:
+   - /
+  pathBackend:
+   - /auth1
+   - /mailchimp
+
+certIssuer:
+  email: admin@protocol.one
+
+frontend:
+  name: nginx
+  role: frontend
+  image: "p1hub/storefront.protocol.one-nginx"
+  imageTag: latest
+  port: 80
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 80
+    protocol: TCP
+  configMap:
+    mountPath: /etc/nginx/conf.d/
+
+backend:
+  name: nodejs
+  role: backend
+  image: "p1hub/storefront.protocol.one-nodejs"
+  imageTag: latest
+  port: 8080
+  replicas: 1
+  service:
+    type: ClusterIP
+    port: 8080
+    protocol: TCP
+  env:
+  - AUTH1_CLIENT_ID
+  - AUTH1_CLIENT_SCOPE
+  - AUTH1_CLIENT_SECRET
+  - AUTH1_ISSUER_URL
+  - CORS_VALID_ORIGINS
+  - POST_MESSAGE_TARGET_ORIGIN
+  - PTAH_API_HOST_URL
+  - MAILCHIMP_CLIENT_ID
+  - MAILCHIMP_CLIENT_SECRET
+  - PUBLIC_HOST
+  - REDIS_HOST
+  - REDIS_PORT
+  - ROUTES_PREFIX
+  - SENTRY_DSN
+  - SESSION_COOKIE_NAME
+  - SESSION_COOKIE_SIGN_KEY
+  - SESSION_MAX_AGE
+  - SERVER_PORT
+
+resources: {}
+  # We usually recommend not to specify default resources and to leave this as a conscious
+  # choice for the user. This also increases chances charts run on environments with little
+  # resources, such as Minikube. If you do want to specify resources, uncomment the following
+  # lines, adjust them as necessary, and remove the curly braces after 'resources:'.
+  # limits:
+  #  cpu: 100m
+  #  memory: 128Mi
+  # requests:
+  #  cpu: 100m
+  #  memory: 128Mi
+
+nodeSelector: {}
+
+tolerations: []
+
+affinity: {}

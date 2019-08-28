@@ -1,20 +1,29 @@
-.section
-  padding: 20px 30px
-  &-title
-    font-size: 30px
-    color: $dark
+section
+  position: relative
+  width: 100%
+  margin: 0
 
-  &-paragraph
-    font-size: 16px
-    color: lighten($dark, 20%)
+  text-align: center
 
-  &.is-red
-    background: $red
-  &.is-black
-    background: $black
-  &.is-green
-    background: $green
-  &.is-blue
-    background: $blue
-  &.is-white
-    background: $white
+  display: flex
+  justify-content: flex-start
+  flex-direction: column
+
+  transition: background 200ms
+  z-index: 1
+  .is-tablet &
+    padding: $size-step/4 !important
+  .is-mobile
+    padding: $size-step/8 !important
+  .is-tablet &,
+  .is-mobile &
+    height: auto !important
+  @media only screen and (max-width: 840px)
+    &
+      padding: $size-step/8
+      height: auto !important
+
+.main
+  &_showPopup
+    & > section:not(.b-gallery-popup)
+      z-index: 0 !important

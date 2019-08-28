@@ -1,26 +1,128 @@
+import BuilderModalContent from '@editor/components/BuilderModalContent'
+import BuilderSiteSettingsSeo from '@editor/components/BuilderSiteSettingsSeo'
+import BuilderSiteSettingsCookies from '@editor/components/BuilderSiteSettingsCookies'
+import BuilderSiteSettingsVisual from '@editor/components/BuilderSiteSettingsVisual'
+import BuilderSiteSettingsAddJsScripts from '@editor/components/BuilderSiteSettingsAddJsScripts'
+import BuilderSiteSettingsAddCss from '@editor/components/BuilderSiteSettingsAddCss'
+import BuilderSiteSettingsIntegrations from '@editor/components/BuilderSiteSettingsIntegrations'
+import BuilderSiteSettingsOpenGraph from '@editor/components/BuilderSiteSettingsOpenGraph'
+import BuilderSiteSettingsIntegrationsGoogleTag from '@editor/components/BuilderSiteSettingsIntegrationsGoogleTag'
+import BuilderSiteSettingsIntegrationsGoogleAnalitycs from '@editor/components/BuilderSiteSettingsIntegrationsGoogleAnalitycs'
+import BuilderSiteSettingsIntegrationsMailchimp from '@editor/components/BuilderSiteSettingsIntegrationsMailchimp'
+
 const routes = [
   {
     path: '/',
+    component: () => import(/* webpackChunkName: "Intro" */'@components/Intro'),
+    meta: {
+      title: 'Ptah — landing page builder for games'
+    }
+  },
+  {
+    path: '/dashboard/',
     component: () => import(/* webpackChunkName: "Layout" */'@components/Layout'),
     children: [
       {
-        path: 'dashboard',
+        path: '',
+        meta: {
+          title: 'Dashboard - Ptah'
+        },
         component: () => lazyLoadView(import(/* webpackChunkName: "Dashboard" */ '@components/pages/Dashboard')),
-        name: 'Dashboard',
-        alias: ''
+        name: 'Dashboard'
       }
     ]
   },
   {
-    path: '/editor',
+    path: '/editor/:slug',
     component: () => import(/* webpackChunkName: "VuseEditor" */ '@components/pages/VuseEditor'),
     name: 'VuseEditor',
+    meta: {
+      title: 'Ptah'
+    },
+    alias: '',
+    children: [
+      {
+        path: 'settings',
+        component: BuilderModalContent,
+        children: [
+          {
+            path: 'visualSettings',
+            component: BuilderSiteSettingsVisual
+          },
+          {
+            path: 'seoSettings',
+            component: BuilderSiteSettingsSeo
+          },
+          {
+            path: 'cookiesSettings',
+            component: BuilderSiteSettingsCookies
+          },
+          {
+            path: 'addJsScrips',
+            component: BuilderSiteSettingsAddJsScripts
+          },
+          {
+            path: 'addCss',
+            component: BuilderSiteSettingsAddCss
+          },
+          {
+            path: 'integrations',
+            component: BuilderSiteSettingsIntegrations,
+            children: [
+              {
+                path: 'googleTag',
+                component: BuilderSiteSettingsIntegrationsGoogleTag
+              },
+              {
+                path: 'googleAnalitycs',
+                component: BuilderSiteSettingsIntegrationsGoogleAnalitycs
+              },
+              {
+                path: 'mailchimp',
+                component: BuilderSiteSettingsIntegrationsMailchimp
+              }
+            ]
+          },
+          {
+            path: 'openGraph',
+            component: BuilderSiteSettingsOpenGraph
+          }
+        ]
+      }
+    ]
+  },
+  {
+    path: '/login/',
+    component: () => import('@components/pages/Login'),
+    name: 'Login',
+    meta: {
+      title: 'Login - Ptah'
+    },
+    alias: ''
+  },
+  {
+    path: '/_sandbox/',
+    component: () => import('@components/pages/Sandbox'),
+    name: 'Sandbox',
+    alias: ''
+  },
+  {
+    path: '/oauth_complete/',
+    component: () => import('@components/pages/OauthComplete'),
+    name: 'OauthComplete',
     alias: ''
   },
   {
     path: '/404',
     name: '404',
-    component: lazyLoadView(import(/* webpackChunkName: "404" */ '@components/NotFound'))
+    component: () => import('@components/NotFound'),
+    meta: {
+      title: '404 - Ptah'
+    }
+  },
+  {
+    path: '*',
+    redirect: '/404'
   }
 ]
 
@@ -42,10 +144,10 @@ function lazyLoadView (AsyncView) {
   const AsyncHandler = () => ({
     component: AsyncView,
     // A component to use while the component is loading.
-    loading: import('@components/base/_base-loading'),
+    loading: import('@components/base/BaseLoading'),
     // A fallback component in case the timeout is exceeded
     // when loading the component.
-    error: import('@components/base/_base-timeout'),
+    error: import('@components/base/BaseTimeout'),
     // Delay before showing the loading component.
     // Default: 200 (milliseconds).
     delay: 70,

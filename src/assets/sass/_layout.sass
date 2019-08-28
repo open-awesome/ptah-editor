@@ -1,0 +1,151 @@
+*
+  box-sizing: border-box
+  &:before, &:after
+    box-sizing: border-box
+
+html
+  font-size: 10px
+
+@media only screen and (max-width: 1100px)
+  html
+    font-size: 8px
+
+@media only screen and (max-width: 768px)
+  html
+    font-size: 10px
+
+::selection
+  color: $white !important
+  background: $black !important
+
+body
+  font-family: Lato, Helvetica, Arial, sans-serif
+  font-size: 1.6rem
+  line-height: 1
+  font-weight: 400
+  color: $dark-grey
+
+  margin: 0
+  // -webkit-font-smoothing: subpixel-antialiased
+  // -moz-osx-font-smoothing: auto
+
+  text-shadow: 1px 1px 1px rgba(0, 0, 0, 0.004)
+  text-rendering: optimizeLegibility !important
+  -webkit-font-smoothing: antialiased !important
+  -moz-osx-font-smoothing: antialiased !important
+  font-smooth: always
+.b-body
+  &_preview,
+  &_export
+    background-color: $white
+    position: relative
+    overflow: auto
+    overflow-x: hidden
+
+.b-page
+  min-height: 100vh
+  position: relative
+  background-color: #5D7899
+  &__header, &__content, &__footer
+    position: relative
+    z-index: 5
+  &__header, &__footer
+    height: 8rem
+  &__header
+    background-color: $white
+    box-shadow: 0 4px 24px rgba(0, 0, 0, 0.06), inset 0px -1px 0px rgba(0, 0, 0, 0.07)
+  &__footer
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    z-index: 0
+    height: 4rem
+
+    background-color: $dark-blue
+  &__content
+    flex-grow: 1
+
+#video_bg
+  position: absolute
+  top: 0
+  left: 50%
+  right: 0
+  z-index: 0
+  width: 120%
+  margin: 0 0 0 -60%
+  height: auto
+  .is-tablet &,
+  .is-mobile &
+    position: absolute
+    min-height: 10rem
+    z-index: -1
+  @media only screen and (max-width: 768px)
+    &
+      position: absolute
+      width: 100%
+      margin: 0
+      left: 0
+      min-height: 10rem
+  &.fixed
+    position: fixed
+    height: auto
+    min-height: 100vh
+    @media only screen and (max-width: 768px)
+      &
+        width: auto
+
+.b-video-popup
+  display: flex
+  position: fixed
+  z-index: 9999
+  background-color: rgba(0,0,0, .8)
+  justify-content: center
+  align-items: center
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+  &__container
+    width: 50vw
+    height: 70vh
+    @media only screen and (max-width: 768px)
+      &
+        width: 100vw
+  &__inner
+    float: none
+    clear: both
+    width: 100%
+    position: relative
+    padding-bottom: 56.25%
+    padding-top: 25px
+    height: 0
+    iframe
+      position: absolute
+      top: 0
+      left: 0
+      width: 100%
+      height: 100%
+  &__close
+    font-size: 7rem
+    color: #ffffff
+    cursor: pointer
+    position: absolute
+    top: -6rem
+    right: -6rem
+    @media only screen and (max-width: 768px)
+      &
+        top: -7rem
+        right: 0
+
+.b-text
+  padding: .8rem
+  ul, ol
+    text-align: left
+
+.b-button
+  margin: .8rem
+
+.drag-start
+  .b-logo, .b-image, .b-gallery-item
+    border: .2rem dotted $dark-blue-krayola !important

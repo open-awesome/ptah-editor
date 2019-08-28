@@ -1,0 +1,62 @@
+;
+export function productExtendPreviewClick(num) {
+  const TARGET_PREVIEW = 'product-extend-preview';
+  const TARGET_STAGE = 'product-extend-stage';
+  const PREVIEW_ACTIVE_CLASS = 'b-products-columns-extend__left-item_active';
+  var previews = document.querySelectorAll('[' + TARGET_PREVIEW + ']'),
+    stages = document.querySelectorAll('[' + TARGET_STAGE + ']');
+
+  if (previews.length === 0) {
+    return;
+  }
+
+  function clickPreview(el) {
+    var index = el.getAttribute('data-index'),
+      target = el.getAttribute(TARGET_PREVIEW);
+
+    previewReset(previews, index);
+
+    [].forEach.call(stages, function (el, i) {
+      if (el.getAttribute('data-index') == index) {
+        el.classList.add(target);
+        el.style.display = "flex";
+      } else if (el.classList.contains(target)) {
+        el.classList.remove(target);
+      }
+    });
+
+  }
+
+  function previewsFor(items) {
+    [].forEach.call(items, function (el, i) {
+      el.onclick = function (e) {
+        clickPreview(el);
+      };
+      /** Manually calling click may cause errors in styler behavior */
+      if (el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
+        clickPreview(el);
+      } else if (el.getAttribute('data-index') == num) {
+        clickPreview(el);
+      }
+    });
+  }
+
+  function previewReset(items, index) {
+    [].forEach.call(items, function (el, i) {
+      if (el.getAttribute('data-index') == index && el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
+        return;
+      }
+
+      if (el.getAttribute('data-index') == index) {
+        el.classList.add(PREVIEW_ACTIVE_CLASS);
+      } else if (el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
+        el.classList.remove(PREVIEW_ACTIVE_CLASS);
+      }
+    });
+  }
+
+  previewsFor(previews);
+
+}
+
+productExtendPreviewClick('Standart');

@@ -1,6 +1,5 @@
 <template>
     <footer class="b-page__footer" v-if="this.isStorefrontPreview == false">
-        Это футер
     </footer>
 </template>
 

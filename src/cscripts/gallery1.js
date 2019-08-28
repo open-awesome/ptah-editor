@@ -2,9 +2,13 @@
 export function galleryPreviewClick(num) {
   const TARGET_PREVIEW = 'gallery-one-preview';
   const TARGET_STAGE = 'gallery-one-stage';
-  const PREVIEW_ACTIVE_CLASS = 'hero-tile_active';
-  var previews = document.querySelectorAll('['+ TARGET_PREVIEW +']'),
-    stages = document.querySelectorAll('['+ TARGET_STAGE +']');
+  const PREVIEW_ACTIVE_CLASS = 'b-preview_active';
+  var previews = document.querySelectorAll('[' + TARGET_PREVIEW + ']'),
+    stages = document.querySelectorAll('[' + TARGET_STAGE + ']');
+
+  if (previews.length === 0) {
+    return;
+  }
 
   function clickPreview(el) {
     var index = el.getAttribute('data-index'),
@@ -12,7 +16,7 @@ export function galleryPreviewClick(num) {
 
     previewReset(previews, index);
 
-    [].forEach.call(stages, function(el, i) {
+    [].forEach.call(stages, function (el, i) {
       if (i == index) {
         el.classList.add(target);
       } else if (el.classList.contains(target)) {
@@ -23,20 +27,20 @@ export function galleryPreviewClick(num) {
   }
 
   function previewsFor(items) {
-    [].forEach.call(items, function(el, i) {
-      el.onclick = function(e) {
+    [].forEach.call(items, function (el, i) {
+      el.onclick = function (e) {
         clickPreview(el);
       };
       if (el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
-        el.click();
+        clickPreview(el);
       } else if (i == num) {
-        el.click();
+        clickPreview(el);
       }
     });
   }
 
   function previewReset(items, index) {
-    [].forEach.call(items, function(el, i) {
+    [].forEach.call(items, function (el, i) {
       if (i == index && el.classList.contains(PREVIEW_ACTIVE_CLASS)) {
         return;
       }

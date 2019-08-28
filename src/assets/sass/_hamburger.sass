@@ -1,0 +1,32 @@
+.hamburger
+  position: absolute
+  top: 2.2rem
+  right: 1.6rem
+  z-index: 9999
+
+  display: none
+  padding: .8rem 1.6rem
+
+  color: $white
+  cursor: pointer
+
+  &:focus,
+  &:active
+    outline: none
+
+  &-box
+    width: 3rem
+
+  &-inner,
+  &-inner::before,
+  &-inner::after
+    width: 3rem
+    background-color: $white !important
+
+  .is-mobile &
+    top: 1.2rem
+    display: inline-block
+
+  @media (max-width: 800px)
+    top: 1.6rem
+    display: inline-block

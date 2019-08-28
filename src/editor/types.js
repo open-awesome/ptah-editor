@@ -1,0 +1,24 @@
+export class Text { }
+export class Logo { }
+export class Image { }
+export class ClassList { }
+export class Button { }
+export class Gallery { }
+export class StyleObject { }
+export class Delimiter { }
+export class VideoElement { }
+export class Timer { }
+export class ProductSection { }
+export class Form { }
+
+export class GallerySlider { }
+export class BannerSection { }
+export class AvailablePlatforms { }
+export class AgeRestrictions { }
+export class SocialNetworks { }
+export class Slogan { }
+export class SystemRequirements { }
+export class TextInherit { }
+export class IconWithText { }
+export class ToggleElement { }
+export class Columns { }

@@ -1,85 +1,210 @@
 <template>
-    <VuseBuilder @saved="onSave" @preview="onPreview" />
+    <VuseBuilder v-bind:show-intro="showIntro" @saved="onDownload" @preview="onPreview" @save="onSave" />
 </template>
 
 <script>
 import Vue from 'vue'
-import Vuse from '@plugins/Vuse'
-import pwa from '@plugins/Vuse/plugins/pwa'
-import Uploader from '@plugins/Vuse/plugins/Uploader.vue'
+import { mapActions } from 'vuex'
+import Vuse from '@editor/vuse'
+import pwa from '@editor/plugins/pwa'
+import Uploader from '@editor/plugins/Uploader.vue'
 
-import section1 from '@components/landings/sections/section1.vue'
-import section2 from '@components/landings/sections/section2.vue'
-import newsletter from '@components/landings/forms/newsletter.vue'
-import hero1 from '@components/landings/hero/hero1.vue'
-import hero2 from '@components/landings/hero/hero2.vue'
-import social1 from '@components/landings/social/social1.vue'
-import social2 from '@components/landings/social/social2.vue'
-import social3 from '@components/landings/social/social3.vue'
-import social4 from '@components/landings/social/social4.vue'
-import layout1 from '@components/landings/layouts/layout1.vue'
-import layout2 from '@components/landings/layouts/layout2.vue'
-import gallery1 from '@components/landings/galleries/gallery1.vue'
-import gallery2 from '@components/landings/galleries/gallery2.vue'
-import buttons from '@components/landings/elements/buttons'
+// slot base
+import Sandbox from '@components/slots/Sandbox'
 
-Vuse.mix({
-  components: {
-    Uploader
-  }
-})
+// elements
+import Button from '@components/elements/Button'
+import TextElement from '@components/elements/TextElement'
+import Pic from '@components/elements/Pic'
+import Logo from '@components/elements/Logo'
+import Delimiter from '@components/elements/Delimiter'
+import AvailablePlatforms from '@components/elements/AvailablePlatforms'
+import AgeRestrictions from '@components/elements/AgeRestrictions'
+import SocialNetworks from '@components/elements/SocialNetworks'
+import IconWithText from '@components/elements/IconWithText'
+import VideoElement from '@components/elements/VideoElement'
+import Timer from '@components/elements/Timer'
+import Form from '@components/elements/Form'
+import ToggleElement from '@components/elements/ToggleElement'
 
-Vuse.component(section1)
-Vuse.component(section2)
-Vuse.component(newsletter)
-Vuse.component(hero1)
-Vuse.component(hero2)
-Vuse.component(social1)
-Vuse.component(social2)
-Vuse.component(social3)
-Vuse.component(social4)
-Vuse.component(layout1)
-Vuse.component(layout2)
-Vuse.component(gallery1)
-Vuse.component(gallery2)
-Vuse.component(buttons)
+// sections
+// --- header
+import ActionButtonHeader from '@components/sections/header/ActionButtonHeader'
+import SmmHeader from '@components/sections/header/SmmHeader'
+import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
+
+// --- hero
+import GenericMainScreen from '@components/sections/hero/HeroUnit'
+import TwoSegmentHeroScreen from '@components/sections/hero/TwoSegmentHeroScreen'
+import ThreeSegmentHeroScreen from '@components/sections/hero/HeroThreeColumns'
+import VideoHeroSplitScreen from '@components/sections/hero/HeroArtRight'
+import HeroVideoSplitScreen from '@components/sections/hero/HeroArtLeft'
+import HeroBAS from '@components/sections/hero/HeroBloodAndSoul'
+import HeroHunt from '@components/sections/hero/HeroHunt'
+import HeroWithTimer from '@components/sections/hero/HeroWithTimer'
+import HeroWithTimerColumns from '@components/sections/hero/HeroWithTimerColumns'
+import HeroWithTimerColumnsVideo from '@components/sections/hero/HeroWithTimerColumnsVideo'
+import HeroWithTimerColumnsVideo2 from '@components/sections/hero/HeroWithTimerColumnsVideo2'
+import HeroWithTimerSlogan from '@components/sections/hero/HeroWithTimerSlogan'
+import HeroWithTimerSlogan2 from '@components/sections/hero/HeroWithTimerSlogan2'
+// --- First screen
+import FirstScreenSpace01 from '@components/sections/first-screen/FirstScreenSpace01'
+import FirstScreenSpace02 from '@components/sections/first-screen/FirstScreenSpace02'
+import FirstScreenSpaceVideoBack from '@components/sections/first-screen/FirstScreenSpaceVideoBack'
+import FirstScreenSpaceVideoPlayer from '@components/sections/first-screen/FirstScreenSpaceVideoPlayer'
+import FirstScreenFantasy01 from '@components/sections/first-screen/FirstScreenFantasy01'
+import FirstScreenFantasy02 from '@components/sections/first-screen/FirstScreenFantasy02'
+import FirstScreenFantasyVideoBack from '@components/sections/first-screen/FirstScreenFantasyVideoBack'
+// --- gallery
+import GallerySwitch from '@components/sections/galleries/GallerySwitch'
+import GalleryPopup from '@components/sections/galleries/GalleryPopup'
+// --- products
+import Products from '@components/sections/products/Products'
+import ProductsExtend from '@components/sections/products/ProductsExtend'
+// --- columns
+import Columns from '@components/sections/columns/Columns'
+// --- carousel
+import Carousel from '@components/sections/carousel/Carousel'
+// --- forms
+import FormCenter from '@components/sections/forms/FormCenter'
+import FormRight from '@components/sections/forms/FormRightSide'
+import FormRight2 from '@components/sections/forms/FormRightSide2'
+import FormLeft from '@components/sections/forms/FormLeftSideVariant'
+import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
+
+// --- other
+import SystemRequirements from '@components/sections/elements/SystemRequirements'
+import FooterSpace from '@components/sections/footers/FooterSpace'
+import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
+import Slider from '@components/sections/slider/Slider'
+
+import store from '@store'
+
+const ELEMENTS = {
+  Uploader,
+  Sandbox,
+  Button,
+  TextElement,
+  Pic,
+  Logo,
+  Delimiter,
+  AvailablePlatforms,
+  AgeRestrictions,
+  SocialNetworks,
+  IconWithText,
+  VideoElement,
+  Timer,
+  Form,
+  ToggleElement
+}
+
+const COMPONENTS = {
+  ActionButtonHeader,
+  SmmHeader,
+  CenteredLogoHeader,
+
+  FirstScreenSpace01,
+  FirstScreenSpace02,
+  FirstScreenSpaceVideoBack,
+  FirstScreenSpaceVideoPlayer,
+  FirstScreenFantasy01,
+  FirstScreenFantasy02,
+  FirstScreenFantasyVideoBack,
+  TwoSegmentHeroScreen,
+  ThreeSegmentHeroScreen,
+  VideoHeroSplitScreen,
+  HeroVideoSplitScreen,
+  HeroBAS,
+  HeroHunt,
+  GenericMainScreen,
+  HeroWithTimer,
+  HeroWithTimerColumns,
+  HeroWithTimerColumnsVideo,
+  HeroWithTimerColumnsVideo2,
+  HeroWithTimerSlogan,
+  HeroWithTimerSlogan2,
+
+  Slider,
+
+  Columns,
+
+  GallerySwitch,
+  GalleryPopup,
+  Carousel,
+
+  Products,
+  ProductsExtend,
+
+  FormCenter,
+  FormRight,
+  FormLeft,
+  FormRight2,
+  FormLeft2,
+
+  SystemRequirements,
+  FrequentlyAskedQuestions,
+
+  FooterSpace
+}
+
+Vuse.mix({ components: ELEMENTS })
+
+for (let component in COMPONENTS) {
+  Vuse.component(component, COMPONENTS[component])
+}
 
 Vuse.use(pwa)
 
-Vue.use(Vuse, {
-  css: 'css/app.css',
-  js: 'js/cjs.js',
-  themes: [
-    {
-      name: 'Layout 1',
-      sections: [layout1]
-    },
-    {
-      name: 'Layout 2',
-      sections: [layout2, gallery1]
-    },
-    {
-      name: 'Gallery 1',
-      sections: [gallery1]
-    },
-    {
-      name: 'Gallery 2',
-      sections: [gallery2]
-    },
-    {
-      name: 'Buttons',
-      sections: [buttons]
-    }
-  ]
+Vue.component('v-style', {
+  render: function (createElement) {
+    return createElement('style', this.$slots.default)
+  }
 })
 
 export default {
+  computed: {
+    // TODO: delete this when CRUD UI is complete
+    showIntro () {
+      return this.$route.params.slug === 'new'
+    }
+  },
+
+  async beforeRouteEnter (to, from, next) {
+    try {
+      await store.dispatch('getLandingForUser', to.params.slug)
+      to.meta.title = store.state.name + ' - Ptah'
+      next()
+    } catch (e) {
+      console.warn(e)
+      next({ path: '/404' })
+    }
+  },
+
+  created () {
+    let themes = []
+
+    Vue.use(Vuse, {
+      js: './../js/cjs.js',
+      themes: themes
+    })
+  },
+
+  mounted () {
+    this.$Progress.finish()
+  },
+
   methods: {
-    onSave (builder) {
+    ...mapActions([
+      'saveLanding'
+    ]),
+    onDownload (builder) {
       builder.export('pwa')
     },
-    onPreview: function (builder) {
-      builder.export('preview-devices')
+    onPreview (builder) {
+      builder.export('preview')
+    },
+    onSave (builder) {
+      this.saveLanding(builder.export('json'))
     }
   }
 }

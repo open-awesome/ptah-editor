@@ -1,9 +1,9 @@
 /.idea/
-/public/js/
-/public/css/
 /node_modules/
 /package-lock.json
 .dist/*
+/dist/*
+/public/js/cjs.js
 .vscode/*
 .DS_Store
 *.log

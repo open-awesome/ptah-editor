@@ -1,0 +1,87 @@
+\:root
+  --vh: 100vh
+  --mobile-header-height: 6rem
+
+.mobile-header
+  .is-mobile &
+    height: var(--mobile-header-height) !important
+    padding: 0 1.6rem !important
+  @media (max-width: 800px)
+    height: var(--mobile-header-height) !important
+    padding: 0 1.6rem !important
+
+.mobile-menu
+  .is-mobile &
+    .b-draggable-slot
+      height: 100%
+      flex-direction: column !important
+      justify-content: flex-start !important
+      > *
+        margin: 0 !important
+
+    .b-sandbox
+      height: 100%
+
+  @media (max-width: 800px)
+    position: fixed
+    top: 6.8rem
+    right: 0
+    z-index: 9999
+
+    display: none
+    width: 100vw
+    max-width: 100%
+    height: calc(var(--vh, 1vh) * 100 - var(--mobile-header-height))
+    flex-basis: 100%
+
+    border: 0
+    background-color: rgba(0, 0, 0, .9)
+
+    &.is-active
+      display: block
+
+    .b-draggable-slot
+      height: 100%
+      flex-direction: column !important
+      justify-content: flex-start !important
+      > *
+        margin: 0 !important
+
+    .b-sandbox
+      height: 100%
+
+.b-section-header
+
+  position: sticky
+  z-index: 9999
+
+  ~ section[class^="b-"]
+    z-index: 1
+
+  .b-sandbox
+    min-height: 5rem !important
+
+  .b-draggable-slot
+    width: 100%
+
+  .b-link,
+  .b-button
+    .is-tablet &
+      font-size: 1.6rem !important
+    .is-mobile &
+      font-size: 1.4rem !important
+    @media (max-width: 1024px)
+      font-size: 1.6rem !important
+    @media (max-width: 800px)
+      font-size: 1.4rem !important
+
+  .b-logo
+    .is-mobile &
+      max-height: 5rem !important
+      margin: 0.4rem !important
+    @media (max-width: 800px)
+      max-height: 5rem !important
+      margin: 0.4rem !important
+
+  .b-builder-layout &
+    position: static
