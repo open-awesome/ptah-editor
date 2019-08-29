@@ -4,6 +4,7 @@
     @drop="onDrop"
     :data-href="link.href"
     :class="{'js-element-link' : isSetUrlImage }"
+    :path="path"
     >
 
     <i class="b-load pth-uploader" @click.stop="upload" ref="upload">
@@ -100,7 +101,6 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'toggleShowStyler',
       'toggleResizeStop'
     ]),
 
@@ -119,13 +119,10 @@ export default {
 
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
-
-      this.toggleShowStyler(false)
     },
 
     onResizeStop (x, y, width, height) {
-      this.toggleShowStyler(true)
-      this.toggleResizeStop(true)
+      this.toggleResizeStop(this.path)
     },
 
     changeSrc (data) {
@@ -198,7 +195,7 @@ export default {
 
     z-index: 2
     &_active
-      border: 0.2rem dotted $white !important
+      border: 0.2rem dotted $dark-blue-krayola !important
     .is-mobile &,
     .is-tablet &
       display: none
@@ -221,6 +218,13 @@ export default {
       margin: $size-step/2 auto !important
   &.js-element-link
     cursor: pointer
+  .b-uploader
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
 /deep/
   .b-handle
     position: absolute !important

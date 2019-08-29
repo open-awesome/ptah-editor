@@ -664,7 +664,7 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
       'background-color': 'rgba(21,28,68,1)',
-      'padding': '130px 0'
+      'padding': '30px 0'
     }
   },
   containerStandart: _.merge({}, C_CUSTOM_CONTAINER),
@@ -812,7 +812,8 @@ export default {
     componentsDeluxeD: _.merge([], COMPONENTS_D),
     componentsUltimate: _.merge([], COMPONENTS),
     componentsUltimateM: _.merge([], COMPONENTS_M),
-    componentsUltimateD: _.merge([], COMPONENTS_D)
+    componentsUltimateD: _.merge([], COMPONENTS_D),
+    heightRightStage: 0
   },
 
   methods: {
@@ -830,6 +831,29 @@ export default {
 
     selectProduct (key) {
       this.$sectionData.mainStyle.selectProduct.name = key
+    },
+
+    calcHeightRightStage () {
+      let height = 0
+      let slotsHeight = 0
+      let index = this.$section.id
+      let section = document.getElementById(`section_${index}`)
+
+      let rightStage = section.querySelector('.b-products-columns-extend__right')
+      let allItems = rightStage.querySelectorAll('.b-products-columns-extend__right-item')
+
+      allItems.forEach(function (item, i, arr) {
+        if (item.classList.contains('_hide')) return
+
+        item.querySelectorAll('.b-slot').forEach(function (slot, i, arr) {
+          slotsHeight += slot.offsetHeight
+        })
+
+        if (slotsHeight > height) height = slotsHeight
+        slotsHeight = 0
+      })
+
+      this.$sectionData.heightRightStage = height
     }
   },
 
@@ -837,6 +861,14 @@ export default {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
     }
+  },
+
+  mounted () {
+    this.calcHeightRightStage()
+  },
+
+  updated () {
+    this.calcHeightRightStage()
   }
 }
 </script>
@@ -915,14 +947,15 @@ export default {
                 </div>
               </div><!--/.b-products-columns-extend__left-->
             </div>
-            <div class="b-grid__col-4 b-grid__col-m-12 b-products-columns-extend__right">
+            <div class="b-grid__col-4 b-grid__col-m-12 b-products-columns-extend__right"
+              :style="{ height: $sectionData.heightRightStage + 'px' }"
+              >
                <!-- b-products-columns-extend__right -->
-                <div class="b-grid__row">
-                  <div class="b-grid__col-12 b-grid__col-m-12 b-products-columns-extend__right-item"
+                <div class="b-products-columns-extend__right-stage">
+                  <div class="b-products-columns-extend__right-item"
                     v-for="(product, key) in $sectionData.mainStyle.products"
                     :key="key"
-                    v-show="$sectionData.mainStyle.selectProduct.name === key && $sectionData.mainStyle.products[key].visible"
-                    :class="{ 'b-products-columns-extend__right-item_active': $sectionData.mainStyle.selectProduct.name === key }"
+                    :class="[{ 'b-products-columns-extend__right-item_active': ($sectionData.mainStyle.selectProduct.name === key && $sectionData.mainStyle.products[key].visible)}, { '_hide' : !$sectionData.mainStyle.products[key].visible }]"
                     :product-extend-stage="key"
                     :data-index="key"
                     >
@@ -1070,34 +1103,43 @@ export default {
     justify-content: center
     .is-mobile &
       width: 100%
-      height: 100%
-      min-height: auto
+      height: auto !important
+      min-height: auto !important
     .is-tablet &
-      height: auto
-      min-height: auto
+      height: auto !important
+      min-height: auto !important
     @media only screen and (max-width: 768px)
       &
-        height: auto
-        min-height: auto
+        height: auto !important
+        min-height: auto !important
+    &-stage
+      height: 100%
+      display: flex
+      width: 100%
+      flex-direction: column
+      align-items: center
+      justify-content: center
     &-item
       position: absolute
       top: 0
       right: 0
-      bottom: 0
       left: 0
 
       width: 100%
-      height: 100%
+      min-height: 100%
       padding: 0
 
       visibility: hidden
 
       display: flex
       justify-content: center
-      align-items: flex-start
+      align-items: center
       flex-direction: column
+
+      opacity: 0
       &_active
         visibility: visible
+        opacity: 1
       .is-mobile &,
       .is-tablet &
         width: 100%
@@ -1121,5 +1163,5 @@ export default {
     margin: $size-step/8
 
 .b-slot
-  min-height: auto !important
+  height: auto !important
 </style>

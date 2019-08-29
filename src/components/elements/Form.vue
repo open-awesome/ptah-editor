@@ -1,5 +1,7 @@
 <template>
-  <div class="b-form b-border" @click.stop.stop="" ref="form">
+  <div class="b-form b-border" @click.stop.stop="" ref="form"
+    :path="path"
+    >
 
     <slot v-if="!isActive"></slot>
 

@@ -25,7 +25,9 @@
 <table
     class="b-timer is-editable js-timer b-border"
     :data-timestamp="timer.timestamp"
-    :data-utc-offset="timer.UTC">
+    :data-utc-offset="timer.UTC"
+    :path="path"
+  >
 
   <thead v-show="labels.show && labels.position === 'top'" class="b-timer__labels">
     <tr>

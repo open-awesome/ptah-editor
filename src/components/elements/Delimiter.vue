@@ -1,5 +1,7 @@
 <template>
-    <div class="b-delimiter is-editable">
+    <div class="b-delimiter is-editable"
+      :path="path"
+      >
       <vue-draggable-resizable
       class="b-delimiter__resize"
       class-name-active="b-delimiter__resize_active"
@@ -61,7 +63,6 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'toggleShowStyler',
       'toggleResizeStop'
     ]),
 
@@ -79,13 +80,10 @@ export default {
       if (height > max['height']) height = max['height']
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
-
-      this.toggleShowStyler(false)
     },
 
     onResizeStop (x, y, width, height) {
-      this.toggleShowStyler(true)
-      this.toggleResizeStop(true)
+      this.toggleResizeStop(this.path)
     }
   },
 
@@ -132,7 +130,7 @@ export default {
     width: auto !important
     height: auto !important
     &_active
-      border: 0.2rem dotted $white !important
+      border: 0.2rem dotted $dark-blue-krayola !important
     .is-mobile &,
     .is-tablet &
       display: none

@@ -1,5 +1,7 @@
 <template>
-<div class="b-video">
+<div class="b-video"
+  :path="path"
+  >
   <div class="b-video__padd">
     <iframe
       v-if="videoType === 'youtube'"
@@ -137,7 +139,6 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'toggleShowStyler',
       'toggleResizeStop'
     ]),
 
@@ -174,13 +175,10 @@ export default {
 
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
-
-      this.toggleShowStyler(false)
     },
 
     onResizeStop (x, y, width, height) {
-      this.toggleShowStyler(true)
-      this.toggleResizeStop(true)
+      this.toggleResizeStop(this.path)
     }
   },
 
@@ -289,7 +287,7 @@ export default {
 
     display: none
     &_active
-      border: 0.2rem dotted $white !important
+      border: 0.2rem dotted $dark-blue-krayola !important
     .is-mobile &,
     .is-tablet &
       display: none

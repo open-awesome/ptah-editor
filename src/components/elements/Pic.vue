@@ -3,6 +3,7 @@
     @dragover.prevent
     @drop="onDrop"
     :data-href="link.href"
+    :path="path"
     :class="{'js-element-link' : isSetUrlImage }"
     >
 
@@ -104,7 +105,6 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'toggleShowStyler',
       'toggleResizeStop'
     ]),
 
@@ -123,13 +123,10 @@ export default {
 
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
-
-      this.toggleShowStyler(false)
     },
 
     onResizeStop (x, y, width, height) {
-      this.toggleShowStyler(true)
-      this.toggleResizeStop(true)
+      this.toggleResizeStop(this.path)
     },
 
     changeSrc (data) {
@@ -198,13 +195,14 @@ export default {
     width: auto !important
     height: auto !important
     &_active
-      border: 0.2rem dotted $white !important
+      border: 0.2rem dotted $dark-blue-krayola !important
     .is-mobile &,
     .is-tablet &
       display: none
     @media only screen and (max-width: 768px)
       &
         display: none
+
   & span
     display: block
   .is-mobile &,
@@ -234,6 +232,17 @@ export default {
     #{$this}__preview-video
       transition: all 200ms
       transform: rotate(360deg)
+  .b-uploader
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
+  .styler-active
+    .is-mobile &,
+    .is-tablet &
+      border: .2rem dotted $dark-blue-krayola
 /deep/
   .b-handle
     position: absolute !important

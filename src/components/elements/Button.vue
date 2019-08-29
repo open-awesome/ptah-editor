@@ -1,5 +1,8 @@
 <template>
-  <a class="b-button is-editable" ref="btn" @click.stop.prevent>
+  <a class="b-button is-editable" ref="btn"
+     @click.stop.prevent
+     :path="path"
+    >
 
     <slot v-if="!isActive"></slot>
 
@@ -214,7 +217,6 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'toggleShowStyler',
       'toggleResizeStop',
       'updateSettingOptions'
     ]),
@@ -234,13 +236,10 @@ export default {
 
       this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
       this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
-
-      this.toggleShowStyler(false)
     },
 
     onResizeStop (x, y, width, height) {
-      this.toggleShowStyler(true)
-      this.toggleResizeStop(true)
+      this.toggleResizeStop(this.path)
     }
   },
 
@@ -303,7 +302,7 @@ export default {
     width: auto !important
     height: auto !important
     &_active
-      border: 0.2rem dotted $white !important
+      border: 0.2rem dotted $dark-blue-krayola !important
     .is-mobile &,
     .is-tablet &
       display: none
