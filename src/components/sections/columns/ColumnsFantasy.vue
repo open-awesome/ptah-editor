@@ -45,7 +45,7 @@ const C_CUSTOM_COLUMN = [
       },
       pseudo: {
         hover: {
-          'background-color': '#AF2E11 !important'
+          'background-color': '#A9893C !important'
         }
       }
     }
@@ -106,6 +106,7 @@ const SCHEMA_CUSTOM = {
       'background-color': '#151C44',
       'background-position': 'center center',
       'background-size': 'cover',
+      'padding-top': '30px',
       'padding-bottom': '0px'
     },
     count: 3

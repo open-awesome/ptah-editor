@@ -155,7 +155,7 @@ const C_CUSTOM_2 = [
       },
       pseudo: {
         hover: {
-          'background-color': '#AF2E11 !important'
+          'background-color': '#A9893C !important'
         }
       }
     }
@@ -265,7 +265,7 @@ const C_CUSTOM_3 = [
       },
       pseudo: {
         hover: {
-          'background-color': '#AF2E11 !important'
+          'background-color': '#A9893C !important'
         }
       }
     }
@@ -375,7 +375,7 @@ const C_CUSTOM_4 = [
       },
       pseudo: {
         hover: {
-          'background-color': '#AF2E11 !important'
+          'background-color': '#A9893C !important'
         }
       }
     }

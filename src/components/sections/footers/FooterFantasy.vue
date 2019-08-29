@@ -65,13 +65,14 @@ const C_CUSTOM = [
   },
   {
     element: {
-      text: '2018—2019. Some text for footer',
+      text: '<p>2018—2019.<br> Some text for footer</p>',
       styles: {
         'font-family': 'Lato',
         'font-size': '1.4rem',
         'color': '#fff',
         'margin': '0px',
-        'padding': '0px 16px'
+        'padding': '0px 16px',
+        'text-align': 'left'
       }
     }
   },
