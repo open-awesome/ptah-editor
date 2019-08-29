@@ -66,6 +66,7 @@ import GalleryPopupFantasy from '@components/sections/galleries/GalleryPopupFant
 import Products from '@components/sections/products/Products'
 import ProductsFantasy from '@components/sections/products/ProductsFantasy'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
+import ProductsExtendFantasy from '@components/sections/products/ProductsExtendFantasy'
 // --- columns
 import Columns from '@components/sections/columns/Columns'
 import ColumnsFantasy from '@components/sections/columns/ColumnsFantasy'
@@ -83,6 +84,7 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 import SystemRequirements from '@components/sections/elements/SystemRequirements'
 import SystemRequirementsFantasy from '@components/sections/elements/SystemRequirementsFantasy'
 import FooterSpace from '@components/sections/footers/FooterSpace'
+import FooterFantasy from '@components/sections/footers/FooterFantasy'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
 import Slider from '@components/sections/slider/Slider'
 import SliderFantasy from '@components/sections/slider/SliderFantasy'
@@ -150,6 +152,7 @@ const COMPONENTS = {
   Products,
   ProductsExtend,
   ProductsFantasy,
+  ProductsExtendFantasy,
 
   FormCenter,
   FormRight,
@@ -162,7 +165,8 @@ const COMPONENTS = {
   SystemRequirementsFantasy,
   FrequentlyAskedQuestions,
 
-  FooterSpace
+  FooterSpace,
+  FooterFantasy
 }
 
 Vuse.mix({ components: ELEMENTS })
