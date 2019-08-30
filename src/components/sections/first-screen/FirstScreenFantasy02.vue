@@ -108,8 +108,8 @@ const C_CUSTOM_1 = [
       },
       pseudo: {
         'hover': {
-          'background-color': '#000000 !important',
-          'border': '1px solid AF2E120 !important'
+          'background-color': '#333333 !important',
+          'border': '1px solid #AF2E12 !important'
         }
       }
     }

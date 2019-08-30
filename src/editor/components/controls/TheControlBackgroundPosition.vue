@@ -1,8 +1,17 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
+const VALID_TYPES = ['section', 'slot']
 
 export default {
+
+  props: {
+    container: {
+      type: String,
+      default: VALID_TYPES[0],
+      validator: value => VALID_TYPES.includes(value)
+    }
+  },
 
   data () {
     return {
@@ -45,18 +54,25 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
+      'sandbox',
       'settingObjectSection',
-      'settingObjectOptions',
-      'settingObjectElement',
-      'settingObjectType'
+      'settingObjectOptions'
     ]),
+
+    options () {
+      return this.settingObjectSection.get(this.sandbox.container)
+    },
 
     isHeader () {
       return this.settingObjectSection.isHeader
     },
 
     styles () {
-      return this.settingObjectOptions.styles
+      if (this.container === VALID_TYPES[0]) {
+        return this.settingObjectOptions.styles
+      } else {
+        return (this.settingObjectSection.get(this.sandbox.container) || {}).styles
+      }
     }
   },
 
@@ -106,7 +122,6 @@ export default {
     if (this.bgSize === 'contain') {
       this.backgroundFill = 'stretch'
     }
-
     if (this.bgAttachment === 'fixed') {
       this.isParallax = true
     }
@@ -154,9 +169,19 @@ export default {
     },
 
     update (prop, value) {
-      let styles = {}
-      styles[prop] = value
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+      if (this.container === VALID_TYPES[0]) {
+        let styles = {}
+        styles[prop] = value
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+      } else {
+        this.setProps(prop, value)
+      }
+    },
+
+    setProps (prop, value) {
+      let s = {}
+      s[prop] = value
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, { styles: this.styles }, { styles: s }))
     }
   }
 }
