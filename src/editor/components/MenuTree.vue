@@ -481,7 +481,7 @@ export default {
       document.addEventListener('click', e => {
         const target = e.target
 
-        if (target === tree || tree.contains(target)) {
+        if (target !== tree && !tree.contains(target)) {
           this.selectedSections = []
         }
       })

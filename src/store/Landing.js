@@ -6,7 +6,8 @@ export default {
     sectionData: {}, // saved section data,
     groups: [], // landings sections groups
     savedStates: [], // stack of saved states,
-    textEditorActive: false
+    textEditorActive: false,
+    onBoarding: false
   },
 
   mutations: {
@@ -36,6 +37,11 @@ export default {
 
     textEditor (state, value) {
       state.textEditorActive = value
+    },
+
+    updateOnBoarding (state, value) {
+      localStorage.setItem('showTips', value)
+      state.onBoarding = value
     }
   },
 
