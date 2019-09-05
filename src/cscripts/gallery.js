@@ -10,8 +10,7 @@ export function initGallery () {
     } catch (e) {}
 
     let options = JSON.parse(el.dataset.options || '{}')
-    new Swiper(el, {
-      ...options,
+    new Swiper(el, Object.assign(options, {
       on: {
         transitionEnd () {
           // pause video after slide change
@@ -26,7 +25,7 @@ export function initGallery () {
           }
         }
       }
-    })
+    }))
   })
 }
 
