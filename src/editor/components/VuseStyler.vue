@@ -352,13 +352,7 @@ export default {
       },
       deep: true
     },
-    isDragStop: {
-      handler: function (val, oldVal) {
-        if (val) {
-          this.showStylerAfterDragEl()
-        }
-      }
-    },
+
     textEditorActive: {
       handler: function (val) {
         if (val === false && this.isCurrentStyler) {
@@ -630,7 +624,7 @@ export default {
         'b-handle b-handle-ml'
       ]
 
-      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames)))) {
+      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames))) && this.isDragStop === false) {
         this.isCurrentStyler = true
 
         if (`$sectionData.${this.isResizeStop}` === this.settingObjectOptions.name) {
@@ -640,7 +634,7 @@ export default {
         return
       }
 
-      if (event && MouseEvent && isParentTo(event.target, this.$el)) {
+      if (event && MouseEvent && isParentTo(event.target, this.$el) && this.isDragStop === false) {
         this.isCurrentStyler = true
         return
       }
@@ -710,6 +704,7 @@ export default {
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
       this.hideStyler()
+      this.$destroy()
     },
 
     duplicateElement () {
@@ -773,19 +768,6 @@ export default {
       }
       if (props && props.video) {
         this.el.dataset.video = props.video
-      }
-    },
-
-    showStylerAfterDragEl () {
-      if (undefined !== this.options['isDragged'] && this.options['isDragged']) {
-        delete this.options['isDragged']
-
-        this.isVisible = false
-        this.isCurrentStyler = false
-        this.toggleDragStop(false)
-
-        this.el.addEventListener('mousedown', this.showStyler)
-        this.el.click()
       }
     },
 

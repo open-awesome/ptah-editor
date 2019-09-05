@@ -6,6 +6,12 @@ export default {
     Draggable
   },
 
+  data () {
+    return {
+      arrayName: ''
+    }
+  },
+
   props: {
     id: {
       type: Number,
@@ -28,8 +34,28 @@ export default {
     ...mapActions('Sidebar', ['toggleDragStop']),
 
     dragStop (event) {
+      this.selectElement(event.moved.newIndex)
+
+      this.toggleDragStop(false)
+    },
+
+    drag (arrayName) {
+      this.arrayName = arrayName
+
       this.toggleDragStop(true)
-      event.moved.element.element['isDragged'] = true
+    },
+
+    selectElement (newIndex) {
+      let idSection = this.id
+      let section = document.getElementById(`section_${idSection}`)
+      let el = section.querySelector(`[path="${this.arrayName}[${newIndex}].element"]`)
+
+      this.clickOnElement(el)
+    },
+
+    clickOnElement (el) {
+      let machineEvent = new Event('mousedown', { bubbles: true })
+      el.dispatchEvent(machineEvent)
     }
   }
 }
