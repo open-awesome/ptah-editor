@@ -72,10 +72,13 @@ export default {
         this.setTextFocus('editor__content')
         // set menu position
         this.setPosition()
+
+        window.addEventListener('scroll', this.setPosition, true)
       } else {
         if (this.editor !== null) this.editor.destroy()
         this.hideLinkMenu()
         this.isActive = false
+        window.removeEventListener('scroll', this.setPosition, true)
       }
     },
 
