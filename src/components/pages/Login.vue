@@ -20,6 +20,10 @@
       </div>
 
       <div class="b-login__form">
+        <div class="b-login__already" v-if="alreadyLogged">
+          You are already authorized <br>
+          <router-link to="/dashboard">Go to dashboard</router-link>
+        </div>
         <iframe :src="frameSrc" frameborder="none" width="100%" height="100%"></iframe>
       </div>
 
@@ -32,6 +36,12 @@ import { mapActions } from 'vuex'
 
 export default {
   name: 'Login',
+
+  data () {
+    return {
+      alreadyLogged: false
+    }
+  },
 
   computed: {
     frameSrc () {
@@ -62,11 +72,14 @@ export default {
         // the client has lost the token
         // logout & reload
         if (data.error === 'user-already-logged') {
-          this.logout()
-
-          setTimeout(() => {
-            window.location.reload()
-          }, 500)
+          if (localStorage.getItem('token') !== null) {
+            this.alreadyLogged = true
+          } else {
+            this.logout()
+            setTimeout(() => {
+              window.location.reload()
+            }, 500)
+          }
         }
       })
     }
@@ -112,6 +125,17 @@ export default {
 
     img
       max-width: 100%
+
+  &__already
+    color: #FFFFFF
+    font-size: 1.7rem
+    line-height: 2.6rem
+    a
+      font-size: 3rem
+      color: $emerald-green
+      text-decoration: none
+      &:hover
+        text-decoration: underline
 
 iframe
   border: none
