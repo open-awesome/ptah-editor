@@ -86,9 +86,13 @@ export default {
       if (value) {
         this.initTips()
       } else {
-        this.tips.forEach(tip => tip.destroy())
+        this.destroyTips()
       }
     }
+  },
+
+  beforeDestroy () {
+    this.destroyTips()
   },
 
   methods: {
@@ -156,6 +160,10 @@ export default {
       } else {
         return container.querySelector(className)
       }
+    },
+
+    destroyTips () {
+      this.tips.forEach(tip => tip.destroy())
     }
   }
 }

@@ -35,9 +35,6 @@
         <!--<BuilderModalContent :builder="builder" />-->
         <router-view :builder="builder"></router-view>
       </main>
-
-      <onboarding-tips :builder="builder"></onboarding-tips>
-
     </div>
   </div>
 </template>
@@ -48,7 +45,6 @@ import BuilderSidebar from './BuilderSidebar.vue'
 import BuilderTopBar from './BuilderTopBar.vue'
 import BuilderModalContent from './BuilderModalContent.vue'
 import { sectionsGroups } from '@cscripts/sectionsGroups'
-import OnboardingTips from './OnboardingTips'
 
 export default {
   name: 'BuilderLayout',
@@ -67,7 +63,6 @@ export default {
   },
 
   components: {
-    OnboardingTips,
     BuilderSidebar,
     BuilderTopBar,
     BuilderModalContent

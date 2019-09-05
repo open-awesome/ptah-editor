@@ -92,6 +92,8 @@
 
     </div>
   </draggable>
+
+  <onboarding-tips :builder="builder"></onboarding-tips>
 </builder-layout>
 </template>
 
@@ -102,6 +104,7 @@ import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import MenuSettings from '@components/slots/MenuSettings'
 import Draggable from 'vuedraggable'
+import OnboardingTips from './OnboardingTips'
 
 import { sectionsGroups } from '@cscripts/sectionsGroups'
 
@@ -112,7 +115,8 @@ export default {
     VuseIcon,
     BuilderLayout,
     MenuSettings,
-    Draggable
+    Draggable,
+    OnboardingTips
   },
 
   props: {
