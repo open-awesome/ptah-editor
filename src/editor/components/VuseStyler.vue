@@ -353,6 +353,14 @@ export default {
       deep: true
     },
 
+    isDragStop: {
+      handler: function (val, oldVal) {
+        if (val) {
+          this.isVisible = false
+        }
+      }
+    },
+
     textEditorActive: {
       handler: function (val) {
         if (val === false && this.isCurrentStyler) {
