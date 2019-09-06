@@ -366,6 +366,7 @@ export default {
     this.dimensions.width = this.el.offsetWidth
     this.dimensions.height = this.el.offsetHeight
   },
+
   mounted () {
     if (this.$builder && !this.$builder.isEditing) return
 

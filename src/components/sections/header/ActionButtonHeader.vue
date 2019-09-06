@@ -90,7 +90,7 @@
               v-model="$sectionData.components2"
               :style="$sectionData.container2.styles"
               class="b-draggable-slot b-draggable-slot_horizont"
-              @start="drag('components')" @change="dragStop"
+              @start="drag('components2')" @change="dragStop"
             >
 
             <div

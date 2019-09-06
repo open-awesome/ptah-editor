@@ -913,7 +913,7 @@ export default {
                     direction="column"
                   >
 
-                    <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}M`].styles" @start="drag('components')" @change="dragStop">
+                    <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}M`].styles" @start="drag(`components${key}M`)" @change="dragStop">
                       <div
                         v-for="(component, index) in $sectionData[`components${key}M`]"
                         v-if="$sectionData[`components${key}M`].length !== 0"
@@ -954,7 +954,7 @@ export default {
                     :components-path="`$sectionData.components${key}`"
                     direction="column"
                   >
-                    <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @start="drag('components')" @change="dragStop">
+                    <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @start="drag(`components${key}`)" @change="dragStop">
                       <div
                         v-for="(component, index) in $sectionData[`components${key}`]"
                         v-if="$sectionData[`components${key}`].length !== 0"
@@ -980,7 +980,7 @@ export default {
                     :components-path="`$sectionData.components${key}D`"
                     direction="column"
                   >
-                    <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @start="drag('components')" @change="dragStop">
+                    <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @start="drag(`components${key}D`)" @change="dragStop">
                       <div
                         v-for="(component, index) in $sectionData[`components${key}D`]"
                         v-if="$sectionData[`components${key}D`].length !== 0"
