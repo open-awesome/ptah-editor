@@ -710,6 +710,13 @@ export default {
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
       this.hideStyler()
+      this.popper.destroy()
+      this.$refs.styler.remove()
+      this.el.classList.remove('is-editable')
+      this.el.removeEventListener('mousedown', this.showStyler)
+      this.el.removeEventListener('click', this.elClick)
+      this.el.removeEventListener('dblclick', this.dblclick)
+      document.removeEventListener('mousedown', this.hideStyler, true)
     },
 
     duplicateElement () {
