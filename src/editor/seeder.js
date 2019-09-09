@@ -76,7 +76,8 @@ const data = new Map([
       hover: {
         'color': 'rgb(255, 109, 100)',
         'text-decoration': 'none'
-      }
+      },
+      openNewWindow: true
     }
   }))],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
