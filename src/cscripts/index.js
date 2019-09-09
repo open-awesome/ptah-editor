@@ -1,7 +1,6 @@
 import './gallery'
-import './gallery1'
-// import './gallery2'
 import './galleryPopup'
+import './gallerySwitch'
 import './galleryCarousel'
 import './tabs'
 import './productExtend'
