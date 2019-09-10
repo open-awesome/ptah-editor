@@ -51,6 +51,10 @@
           <control-section-height></control-section-height>
         </div>
 
+        <div v-if="isHeader" class="b-panel__control">
+          <control-section-sticky></control-section-sticky>
+        </div>
+
         <div class="b-section-settings__control">
           <control-box></control-box>
         </div>
@@ -93,6 +97,7 @@ import ControlBox from './../controls/TheControlBox'
 import { resetIndents } from '@editor/util'
 import TheControlCarousel from '../controls/TheControlCarousel'
 import TheControlSectionBanner from '../controls/TheControlSectionBanner'
+import ControlSectionSticky from '../controls/TheControlSectionSticky'
 
 export default {
   components: {
@@ -102,7 +107,8 @@ export default {
     BuilderSettingsBarGroup,
     BaseUploader,
     ControlBox,
-    ControlSectionHeight
+    ControlSectionHeight,
+    ControlSectionSticky
   },
   name: 'BuilderSettingsBarSection',
 

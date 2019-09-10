@@ -1,7 +1,7 @@
 <template>
 <section
     v-styler:section="$sectionData.mainStyle"
-    :class="$sectionData.mainStyle.classes"
+    :class="[$sectionData.mainStyle.classes, {'_sticky' : $sectionData.mainStyle.sticky }]"
     :style="$sectionData.mainStyle.styles"
     class="b-section-header">
 
