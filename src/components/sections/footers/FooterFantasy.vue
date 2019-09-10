@@ -229,7 +229,7 @@ export default {
 </script>
 
 <template>
-  <section
+  <footer
     class="b-section-footer"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
@@ -268,7 +268,7 @@ export default {
         </div><!--/.b-grid__row.b-footer__row-->
       </div><!--/.b-grid-->
     </div><!--/.b-footer-->
-  </section>
+  </footer>
 </template>
 
 <style lang="sass" scoped>

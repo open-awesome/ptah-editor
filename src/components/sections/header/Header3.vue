@@ -1,5 +1,5 @@
 <template>
-<section
+<header
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
@@ -84,7 +84,7 @@
     </div>
   </div>
 
-</section>
+</header>
 </template>
 
 <script>
