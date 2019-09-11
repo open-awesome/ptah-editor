@@ -7,6 +7,7 @@ export default {
       type: String,
       validator (value) {
         const values = [
+          'default',
           'black',
           'blue',
           'gray',
@@ -158,11 +159,11 @@ export default {
     border: 0.2rem rgba($white, 0.1) solid
   &_orange
     color: #fff
-    background-color: $orange
+    background-color: $orange-down500
     border-radius: .4rem
     &:hover
-      background-color: $orange !important
-      border-color: $orange !important
+      background-color: $orange-down200 !important
+      border-color: $orange-down200 !important
       opacity: .8
   &_transparent
     background-color: transparent
