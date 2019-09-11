@@ -93,7 +93,7 @@ export default {
           direction="column"
           class="b-sandbox">
 
-          <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @change="dragStop">
+          <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
             <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
               <component
                 v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"

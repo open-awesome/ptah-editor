@@ -25,7 +25,7 @@
             align="center"
             class="b-sandbox">
 
-          <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot" @change="dragStop">
+          <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot" @start="drag('components')" @change="dragStop">
 
             <div
                 v-for="(component, index) in $sectionData.components"
