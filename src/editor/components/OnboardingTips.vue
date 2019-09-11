@@ -70,14 +70,23 @@ export default {
       'onBoarding'
     ]),
 
+    ...mapState('Sidebar', [
+      'device',
+      'settingObjectElement'
+    ]),
+
     sections () {
       return this.builder.sections
     }
   },
 
   watch: {
-    sections: function (val, oldVal) {
-      if ((val.length !== oldVal.length) && this.onBoarding) {
+    sections: function (val) {
+      if (val.length === 0) {
+        return this.destroyTips()
+      }
+
+      if (this.onBoarding) {
         this.initTips()
       }
     },
@@ -87,6 +96,23 @@ export default {
         this.initTips()
       } else {
         this.destroyTips()
+      }
+    },
+
+    device: function (value) {
+      if (value === 'is-mobile') {
+        this.destroyTips()
+      } else if (this.onBoarding) {
+        setTimeout(() => {
+          this.initTips()
+        }, 500)
+      }
+    },
+
+    settingObjectElement () {
+      if (this.onBoarding) {
+        this.destroyTips()
+        this.initTips()
       }
     }
   },
@@ -113,16 +139,23 @@ export default {
     createTip (referenceElement, popper) {
       const container = document.getElementById('artboard')
       const tip = new Popper(referenceElement, popper, {
-        placement: 'right-start',
+        placement: 'right',
         modifiers: {
+          applyStyle: { enabled: true },
           flip: {
-            behavior: ['left-start', 'top']
+            enabled: true,
+            behavior: ['left', 'top'],
+            boundariesElement: container,
+            flipVariations: true,
+            flipVariationsByContent: true
           },
           preventOverflow: {
             boundariesElement: container
           }
         }
       })
+
+      console.log(tip)
 
       this.tips.push(tip)
     },
@@ -163,6 +196,7 @@ export default {
     },
 
     destroyTips () {
+      document.querySelectorAll('.b-onboarding-tip').forEach(item => item.remove())
       this.tips.forEach(tip => tip.destroy())
     }
   }
