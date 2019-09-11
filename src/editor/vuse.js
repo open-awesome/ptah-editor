@@ -307,11 +307,11 @@ class Vuse {
               ${artboard.innerHTML}
             </div>
             ${this.getCookiesPreview()}
-            <script src="${window.location.origin + '/js/cjs.js'}"></script>
             ${scrollSetup.setup}
             <script>
               ${script}
             </script>
+            <script src="${window.location.origin + '/js/cjs.js'}"></script>
           <body>
         </html>`
     )
@@ -396,10 +396,31 @@ class Vuse {
 
     if (this.settings.fullPageScroll === 'yes') {
       scroll.style = `
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-          <script src="${window.location.origin + '/js/onepage-scroll.min.js'}"></script>
-          <link href="${window.location.origin + '/css/onepage-scroll.css'}" rel="stylesheet">`
-      scroll.setup = `<script>$(".main").onepage_scroll();</script>`
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="${window.location.origin + '/js/onepage-scroll.min.js'}"></script>
+        <link href="${window.location.origin + '/css/onepage-scroll.css'}" rel="stylesheet">
+      `
+      scroll.setup = `
+        <script>
+          let windowWidth = window.screen.width < window.outerWidth ? window.screen.width : window.outerWidth;
+          let mobile = windowWidth < 500;
+
+          if (!mobile) {
+            $(".main").onepage_scroll();
+          }
+
+          window.onresize = function(event) {
+            let className = 'disabled-onepage-scroll'
+
+            if (mobile) {
+              $(".main").disable();
+              $("body").addClass(className);
+            } else {
+              $(".main").onepage_scroll();
+              if ($("body").hasClass(className)) $("body").removeClass(className);
+            }
+          };
+      </script>`
     }
 
     return scroll
