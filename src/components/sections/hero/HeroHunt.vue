@@ -35,7 +35,7 @@ const C_CUSTOM = [
       text: 'Early Access Available Now',
       styles: {
         'font-family': 'PT Serif',
-        'font-size': '32px',
+        'font-size': '3.2rem',
         'color': '#ffffff'
       }
     },
