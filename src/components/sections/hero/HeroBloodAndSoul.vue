@@ -36,7 +36,7 @@ const C_CUSTOM = [
       text: 'Chronicles of your ascent',
       styles: {
         'font-family': 'PT Serif',
-        'font-size': '28px',
+        'font-size': '2.8rem',
         'color': '#000000'
       }
     },
