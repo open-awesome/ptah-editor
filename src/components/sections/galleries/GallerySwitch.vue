@@ -1,5 +1,5 @@
 <template>
-  <section class="b-gallery-one"
+  <section class="b-gallery-one b-gallery-switch"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"

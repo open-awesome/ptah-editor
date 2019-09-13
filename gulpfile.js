@@ -16,6 +16,19 @@ gulp.task('cjs', function (callback) {
       path: path.join(__dirname, './public/js'),
       publicPath: './public/js',
       filename: 'cjs.js'
+    },
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: ['@babel/preset-env']
+            }
+          }
+        }
+      ]
     }
   }
 

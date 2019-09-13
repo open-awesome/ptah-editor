@@ -1,7 +1,8 @@
 <script>
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
-import section from '../../mixins/section.js'
+import defaults from '../../mixins/defaults'
+import Seeder from '@editor/seeder'
 import { mapActions } from 'vuex'
 
 const GALLERY_ITEM = [
@@ -129,7 +130,7 @@ export default {
 
   description: 'Gallery fullscreen pop-up picture view',
 
-  mixins: [section],
+  mixins: [defaults],
 
   cover: 'https://gn128.cdn.stg.gamenet.ru/0/8iEAd/o_1SRy55.jpg',
 
@@ -166,161 +167,22 @@ export default {
       await this.$nextTick()
 
       this.setControlPanel(panel)
-    },
-
-    onClick (el, index) {
-      let youtubeVideoUrl = false
-      let imageUrl = el.link.imageUrl
-      let videoUrl = el.link.videoUrl
-      let typeContent = el.link.type
-      let url = ''
-      let contentPopup = ''
-
-      if (imageUrl !== '') {
-        url = imageUrl
-      } else if (videoUrl !== '') {
-        url = videoUrl
-      } else {
-        url = this.$sectionData.url
-      }
-
-      this.$sectionData.content = contentPopup
-      youtubeVideoUrl = this.matchYoutubeUrl(videoUrl)
-
-      if (typeContent === 'default') {
-        contentPopup = '<img style="max-width: 100%; max-height: 100%;" id="content" src="' + url + '"></img>'
-      } else {
-        if (youtubeVideoUrl) {
-          contentPopup = '<iframe allow="autoplay" id="content" width="100%" height="100%" src="https://www.youtube.com/embed/' + youtubeVideoUrl + '?rel=0&amp;wmode=transparent&amp;autoplay=1&amp;enablejsapi=1&amp;showinfo=0" frameborder="0" allowfullscreen></iframe>'
-        } else {
-          contentPopup = '<video autoplay="autoplay" style="width: 100%; height: 100%;" id="content" controls="controls" src="' + videoUrl + '" loop="loop" type="video/mp4"></video>'
-        }
-      }
-
-      this.$sectionData.content = contentPopup
-      this.$sectionData.typeContent = typeContent
-      this.openPopup(this.$sectionData.content)
-      this.setIndex(index)
-    },
-
-    setIndex (index) {
-      this.$sectionData.index = index
-    },
-
-    openPopup () {
-      setTimeout(() => {
-        this.setHeight()
-      }, 250)
-    },
-
-    setHeight () {
-      this.$sectionData.isShowPopup = true
-
-      let el = document.getElementById('layoutContent')
-      let ab = document.getElementById('artboard')
-      let actualWidth = null
-
-      actualWidth = undefined !== ab ? ab.clientWidth : el.clientWidth
-      this.$sectionData.popupStyles['width'] = actualWidth + 'px'
-      this.$sectionData.popupStyles['margin'] = '0 auto'
-
-      el.click()
-      this.$sectionData.isShowPopup = true
-    },
-
-    closePopup () {
-      let el = document.getElementById('layoutContent')
-
-      this.$sectionData.isShowPopup = false
-      this.stopVideo()
-      this.$sectionData.content = ''
-
-      if (el) {
-        el.style.height = ''
-        el.style.width = ''
-      }
-    },
-
-    matchYoutubeUrl (url) {
-      let p = /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/
-      let matches = url.match(p)
-      if (matches) {
-        return matches[1]
-      }
-      return false
-    },
-
-    clickArr (type) {
-      let index = this.$sectionData.index
-      let num = 0
-      let el = null
-
-      if (type === 'prev') {
-        num = index - 1
-      } else {
-        num = index + 1
-      }
-
-      el = this.$sectionData[`components${num}`][0].element
-      this.onClick(el, num)
-    },
-
-    clickEl () {
-      if (this.isShowPopup) {
-        let bl = document.getElementById('builderLayout')
-        bl.style.zIndex = 19
-      }
-    },
-
-    onClickOutside () {
-      this.closePopup()
-    },
-
-    stopVideo () {
-      if (this.$sectionData.typeContent === 'video') {
-        const TARGET_POPUP = 'gallery-two-popup'
-        const TARGET_POPUP_IFRAME = 'iframe'
-        const TARGET_POPUP_VIDEO = 'video'
-
-        var popup = document.querySelectorAll('[' + TARGET_POPUP + ']')[0]
-        var popupI = popup.getElementsByTagName(TARGET_POPUP_IFRAME)[0]
-        var popupV = popup.getElementsByTagName(TARGET_POPUP_VIDEO)[0]
-
-        if (popupI) {
-          popupI.contentWindow.postMessage('{"event":"command","func":"' + 'pauseVideo' + '","args":""}', '*')
-          popupI.removeAttribute('src')
-        }
-
-        if (popupV) {
-          popupV.pause()
-          popupV.removeAttribute('src') // empty source
-          popupV.load()
-        }
-      }
-    },
-
-    changeSrc (data) {
-      this.$section.set(`$sectionData.${data.path}.styles['background-image']`, `url(${data.url})`)
     }
   },
 
   created () {
-    let groupDataStore = this.$store.state.Landing.groupData[GROUP_NAME]
-    let sectionDataStore = this.$store.state.Landing.sectionData[NAME]
-    let sectionData = this.canRestore(GROUP_NAME, NAME) ? sectionDataStore : SCHEMA_CUSTOM
-    let $sectionData = this.$sectionData
-
-    this.createdSection(groupDataStore, sectionDataStore, sectionData, $sectionData, GROUP_NAME, NAME, SCHEMA_CUSTOM)
+    if (this.$sectionData.edited === undefined) {
+      Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
+    }
   }
 }
 </script>
 
 <template>
   <section class="b-gallery-popup"
-    @resize="closePopup"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }]"
+    :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '2' }]"
     >
       <slot name="menu"/>
       <slot name="video"/>
@@ -426,43 +288,7 @@ export default {
           </div>
         </div>
       </div>
-
-      <!-- Popup -->
-      <div v-show="$sectionData.isShowPopup"
-         @click.self="closePopup"
-         ref="gallery-container"
-         class="l-popup l-popup_flex"
-         gallery-two-popup=""
-        >
-        <div gallery-two-popup-padd="" class="l-popup__padd" :style="$sectionData.popupStyles" @click.self="closePopup">
-          <div gallery-two-popup-close="" class="l-popup__close"
-            @click="closePopup"
-            >
-            <icon-base name="close" color="#fff" width="14" height="14" />
-          </div>
-
-          <div id="layoutContent" class="l-popup__content" v-click-outside="onClickOutside">
-            <div id="content"
-              class="l-popup__content-block"
-              gallery-two-popup-content=""
-              v-html="$sectionData.content"
-              >
-            </div>
-            <div gallery-two-popup-prev="" class="l-popup__arr l-popup__arr_prev" @click="clickArr('prev')" v-show="$sectionData.index > 0">
-              <icon-base name="arrowRight" color="#fff" width="8" height="14" />
-            </div>
-            <div gallery-two-popup-next="" class="l-popup__arr l-popup__arr_next" @click="clickArr('next')" v-show="$sectionData.index < $sectionData.mainStyle.count - 1">
-              <icon-base name="arrowRight" color="#fff" width="8" height="14" />
-            </div>
-          </div>
-
-          <span class="l-popup__count"
-            v-text="$sectionData.index + 1"
-          />
-        </div>
-      </div><!--/.l-popup-->
-
-  </section>
+    </section>
 </template>
 
 <style lang="sass" scoped="scoped">
@@ -624,121 +450,4 @@ export default {
     width: 100%
     padding: 0 0 2rem 0
 
-.l-popup
-  position: fixed
-
-  display: none
-  justify-content: center
-  align-items: center
-
-  top: 0
-  right: 0
-  left: 0
-  bottom: 0
-
-  background-color: rgba(0, 0, 0, 0.9)
-  padding: $size-step
-  z-index: 99999
-  .is-expanded &
-    top: 6rem
-    left: $size-step * 9
-  &_flex
-    display: flex
-    jusitify-content: center
-    align-items: center
-  &__padd
-    position: relative
-    width: 100%
-    height: 100%
-
-    display: flex
-    align-items: center
-    justify-content: center
-    flex-direction: column
-  &__content
-
-    width: 80%
-    min-width: 50%
-    max-height: 80%
-    min-height: 40%
-
-    cursor: auto
-    transition: all 200ms
-
-    position: relative
-    height: auto
-
-    display: flex
-    justify-content: center
-    align-items: center
-    flex-grow: 1
-    &-block
-      display: flex
-      align-items: center
-      justify-content: center
-
-      height: 100%
-      width: 80%
-
-      transition: all 200ms
-  &__content_video
-    width: 70%
-  &__close
-    position: absolute
-    top: 0.5rem
-    right: 1rem
-    z-index: 10
-
-    transition: all 200ms
-    &:hover
-      transform: rotate(90deg)
-      cursor: pointer
-    & svg
-      width: 2.8rem
-      height: 2.8rem
-  &__arr
-    position: absolute
-    top: 0
-    bottom: 0
-    z-index: 0
-
-    display: flex
-    justify-content: center
-    align-items: center
-
-    transition: all 200ms
-    cursor: pointer
-    & svg
-      width: 2.8rem
-      height: 2.8rem
-
-      transition: all 200ms
-    &:hover svg
-      fill: $grey
-    &_prev
-      left: -15%
-      right: 100%
-      & svg
-        transform: rotate(-180deg)
-    &_next
-      right: -15%
-      left: 100%
-  &__count
-    position: absolute
-    top: $size-step/3
-    left: $size-step/3
-
-    width: $size-step/2
-    height: $size-step/2
-
-    background-color: rgba($white, 1)
-    border-radius: 100%
-    color: $dark-grey
-    font-size: 1.2rem
-
-    display: none
-  .is-editable &__count
-    display: flex
-    justify-content: center
-    align-items: center
 </style>
