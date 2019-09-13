@@ -1148,6 +1148,7 @@ export default {
         visibility: visible
         margin: 1.6rem 0
         display: flex !important
+        opacity: 1 !important
       @media only screen and (max-width: 768px)
         &
           width: 100%
@@ -1156,6 +1157,7 @@ export default {
           visibility: visible
           margin: 1.6rem 0
           display: flex !important
+          opacity: 1 !important
 
 .b-draggable-slot_row
   flex-direction: row !important
