@@ -15,7 +15,6 @@ export function checkOnePageScroll () {
     let posY = 0
     let footers = container.querySelectorAll('footer:not(.ptah-g-child)')
 
-    console.log(countSections)
 
     if (headers[0] && sections[0]) {
       headerHeight = headers[0].offsetHeight
