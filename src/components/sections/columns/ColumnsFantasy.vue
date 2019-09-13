@@ -257,7 +257,7 @@ export default {
                 direction="column"
                 :style="`$sectionData.container${key.split('components')[1]}.styles`"
               >
-                <draggable v-model="$sectionData[key]" class="b-draggable-slot" :style="$sectionData[`container${key.split('components')[1]}`].styles">
+                <draggable v-model="$sectionData[key]" class="b-draggable-slot" :style="$sectionData[`container${key.split('components')[1]}`].styles" @start="drag(`components${key.split('components')[1]}`)" @change="dragStop">
                   <div :class="`b-draggable-slot__${component.type}`"
                    v-for="(component, index) in $sectionData[key]"
                    v-if="$sectionData[key].length !== 0"
