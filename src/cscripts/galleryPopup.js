@@ -1,4 +1,36 @@
 export function galleryPopup () {
+  const popUpTemplate = `
+  <div class="l-popup" gallery-two-popup="">
+    <div gallery-two-popup-padd="" class="l-popup__padd">
+      <div gallery-two-popup-close="" class="l-popup__close">
+        <svg viewBox="0 0 8 8" width="14" height="14" fill="#fff">
+          <g>
+            <path d="M6.82118 0.202253C7.09085 -0.0674173 7.52808 -0.0674171 7.79775 0.202253C8.06742 0.471924 8.06742 0.909146 7.79775 1.17882L1.17882 7.79775C0.909146 8.06742 0.471923 8.06742 0.202253 7.79775C-0.0674175 7.52808 -0.0674177 7.09085 0.202253 6.82118L6.82118 0.202253Z"/>
+            <path d="M7.79775 6.82118C8.06742 7.09085 8.06742 7.52808 7.79775 7.79775C7.52808 8.06742 7.09085 8.06742 6.82118 7.79775L0.202254 1.17882C-0.0674168 0.909146 -0.0674165 0.471923 0.202254 0.202253C0.471925 -0.0674177 0.909147 -0.0674176 1.17882 0.202253L7.79775 6.82118Z"/>
+          </g>
+        </svg>
+      </div>
+
+      <div id="layoutContent" class="l-popup__content">
+        <div id="content" class="l-popup__content-block" gallery-two-popup-content="">
+        </div>
+        <div gallery-two-popup-prev="" class="l-popup__arr l-popup__arr_prev">
+          <svg data-v-05947b34="" data-v-96cc3888="" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg" fill="#fff" stroke="" width="8" height="14" aria-labelledby="arrowRight" role="presentation"><path d="M1 1L7 7L1 13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+        <div gallery-two-popup-next="" class="l-popup__arr l-popup__arr_next">
+          <svg data-v-05947b34="" data-v-96cc3888="" viewBox="0 0 8 14" xmlns="http://www.w3.org/2000/svg" fill="#fff" stroke="" width="8" height="14" aria-labelledby="arrowRight" role="presentation"><path d="M1 1L7 7L1 13" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"></path></svg>
+        </div>
+      </div>
+
+      <span class="l-popup__count" />
+    </div>
+  </div>
+  `
+
+  const node = document.createElement('div')
+  node.innerHTML = popUpTemplate
+  document.querySelector('body').appendChild(node)
+
   const [popup, prev, next, defUrl, popupP, popupC, popupX] = [
     document.querySelectorAll('[gallery-two-popup]')[0], // popup window node
     document.querySelectorAll('[gallery-two-popup-prev]')[0], // prev arrow

@@ -1,0 +1,117 @@
+.l-popup
+  position: fixed
+
+  display: none
+  justify-content: center
+  align-items: center
+
+  top: 0
+  right: 0
+  left: 0
+  bottom: 0
+
+  background-color: rgba(0, 0, 0, 0.9)
+  padding: $size-step
+  z-index: 99999
+  .is-expanded &
+    top: 6rem
+    left: $size-step * 9
+  &_flex
+    display: flex
+    jusitify-content: center
+    align-items: center
+  &__padd
+    position: relative
+    width: 100%
+    height: 100%
+
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+  &__content
+
+    width: 80%
+    min-width: 50%
+    max-height: 80%
+    min-height: 40%
+
+    cursor: auto
+    transition: all 200ms
+
+    position: relative
+    height: auto
+
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-grow: 1
+    &-block
+      display: flex
+      align-items: center
+      justify-content: center
+
+      height: 100%
+      width: 80%
+
+      transition: all 200ms
+  &__content_video
+    width: 70%
+  &__close
+    position: absolute
+    top: 0.5rem
+    right: 1rem
+    z-index: 10
+
+    transition: all 200ms
+    &:hover
+      transform: rotate(90deg)
+      cursor: pointer
+    & svg
+      width: 2.8rem
+      height: 2.8rem
+  &__arr
+    position: absolute
+    top: 0
+    bottom: 0
+    z-index: 0
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    transition: all 200ms
+    cursor: pointer
+    & svg
+      width: 2.8rem
+      height: 2.8rem
+
+      transition: all 200ms
+    &:hover svg
+      fill: $grey
+    &_prev
+      left: -15%
+      right: 100%
+      & svg
+        transform: rotate(-180deg)
+    &_next
+      right: -15%
+      left: 100%
+  &__count
+    position: absolute
+    top: $size-step/3
+    left: $size-step/3
+
+    width: $size-step/2
+    height: $size-step/2
+
+    background-color: rgba($white, 1)
+    border-radius: 100%
+    color: $dark-grey
+    font-size: 1.2rem
+
+    display: none
+  .is-editable &__count
+    display: flex
+    justify-content: center
+    align-items: center
