@@ -337,6 +337,7 @@ export default {
 
 <style lang="sass" scoped>
 .b-section-header
+  z-index: 2
   .is-tablet &,
   .is-mobile &
     text-align: left
