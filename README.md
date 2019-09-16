@@ -102,3 +102,9 @@ with result of authorization.
 
 Result will be an json-serialized object with success sign and error code (if it occures). 
 Actual structure of object you may see in `backend/templates/mailchimp.postmessage.html.template` file.
+
+---
+
+Cross-browser testing provided by:
+
+<a rel="nofollow" target="_blank" href="http://browserstack.com"><img width="150" height="32" src="https://github.com/ProtocolONE/ptah-editor/blob/develop/public/img/browserstack-logo.svg" alt="BrowserStack"></a>
