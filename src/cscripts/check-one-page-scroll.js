@@ -23,7 +23,7 @@ export function checkOnePageScroll () {
     }
     if (footers[0] && lastSection) {
       footerHeight = footers[0].offsetHeight
-      posY = (container.offsetHeight * (countSections - 1)) - footerHeight - headerHeight
+      posY = (container.offsetHeight * countSections) - footerHeight - headerHeight
 
       lastSection.style.height = 'calc(100% -' + footerHeight + 'px';
       footers[0].style.transform = 'translateY(' + posY + 'px)'
