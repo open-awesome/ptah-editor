@@ -232,7 +232,7 @@ import { isParentTo, randomPoneId, getPseudoTemplate, getLinkStyles, composedPat
 import * as _ from 'lodash-es'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import Popper from 'popper.js'
-
+import VueScrollTo from 'vue-scrollto'
 import ModalButton from './modals/TheModalButton'
 
 export default {
@@ -720,6 +720,51 @@ export default {
       let el = _.cloneDeep(_.get(this.section.data, this.path))
       el.key = randomPoneId()
       this.components = [...this.components, el]
+
+      this.selectElement()
+    },
+
+    async selectElement () {
+      await this.$nextTick()
+
+      let idSection = this.section.id
+      let section = document.getElementById(`section_${idSection}`)
+      let nameArray = this.sandbox.components.split('.')[1]
+      let el = section.querySelector(`[path="${nameArray}[${this.components.length - 1}].element"]`)
+
+      let resize = el.querySelector(`.resizable.vdr`)
+
+      if (resize) {
+        el = resize
+      }
+
+      el.id = `section${idSection}${nameArray}${this.components.length - 1}`
+      this.clickOnElement(el)
+    },
+
+    clickOnElement (el) {
+      let machineEvent = new Event('mousedown', { bubbles: true })
+      el.dispatchEvent(machineEvent)
+
+      this.scrollTo(el)
+    },
+
+    scrollTo (element) {
+      let options = {
+        container: '.b-builder-layout-content__main .vb-content',
+        duration: 500,
+        easing: 'ease',
+        offset: -80,
+        force: true,
+        cancelable: true,
+        onStart: false,
+        onDone: false,
+        onCancel: false,
+        x: false,
+        y: true
+      }
+
+      VueScrollTo.scrollTo(`#${element.getAttribute('id')}`, 500, options)
     },
 
     copyStylesBuffer () {
