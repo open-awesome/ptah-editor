@@ -70,9 +70,14 @@
           To group sections select them both holding “Ctrl” key
         </div>
       </div>
+
+      <base-confirm title="Group selected" @confirm="groupSections" @close="showConfirm = false" v-if="showConfirm">
+        After grouping, the background of all child sections will be deleted
+      </base-confirm>
+
       <base-button
         v-show="selectedSections.length > 1"
-        @click="groupSections"
+        @click="showConfirm = true"
         size="middle"
         color="gray"
         class="b-menu-tree__group-together">Group selected</base-button>
@@ -110,7 +115,8 @@ export default {
       selectedSections: [],
       absorbed: [],
       init: false,
-      nested: []
+      nested: [],
+      showConfirm: false
     }
   },
 
@@ -381,12 +387,18 @@ export default {
       let newMain = _.head(group)
       this.absorbed = _.tail(group)
 
+      this.clearBackgrounds(this.absorbed)
+      this.autoHeightToMain(newMain)
       this.applyGroup(newMain)
 
       await this.$nextTick()
       this.destroySortable()
       this.buildTree(true)
       this.initSortable()
+
+      setTimeout(() => {
+        this.showBackgroundPanel(newMain)
+      }, 600)
     },
 
     applyGroup (newMain) {
@@ -481,10 +493,29 @@ export default {
       document.addEventListener('click', e => {
         const target = e.target
 
-        if (target === tree || tree.contains(target)) {
+        if (target.classList.contains('b-menu-tree__group-together')) {
+          return
+        }
+
+        if (target !== tree && !tree.contains(target)) {
           this.selectedSections = []
         }
       })
+    },
+
+    /**
+     * Clear background from absorbed secitons
+     * @param sections {Array} - list of absorbed sections
+     */
+    clearBackgrounds (sections) {
+      sections.forEach((section) => {
+        section.set(`$sectionData.mainStyle.styles['background-image']`, 'none')
+        section.set(`$sectionData.mainStyle.styles['background-color']`, 'transparent')
+      })
+    },
+
+    autoHeightToMain (mainSection) {
+      mainSection.set(`$sectionData.mainStyle.styles['height']`, 'auto')
     }
   }
 }
