@@ -172,10 +172,11 @@ export default {
     async getFileData (file) {
       this.progress = 0
       return new Promise((resolve, reject) => {
+        console.log(process.env.S3_UPLOAD, process.env.VUE_APP_S3)
         let xhr = new XMLHttpRequest()
 
         xhr.upload.onprogress = this.loadingProgress // --- uploading progress
-        xhr.open('POST', '//images.stg.gamenet.ru/restapi')
+        xhr.open('POST', `${process.env.VUE_APP_S3}`)
         xhr.send(getFormData(file))
 
         xhr.onload = xhr.onerror = () => {
