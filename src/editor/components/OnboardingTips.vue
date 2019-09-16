@@ -72,11 +72,26 @@ export default {
 
     ...mapState('Sidebar', [
       'device',
-      'settingObjectElement'
+      'settingObjectOptions',
+      'settingObjectElement',
+      'settingObjectSection',
+      'sandbox'
     ]),
 
     sections () {
       return this.builder.sections
+    },
+
+    widthSlot () {
+      let container = this.sandbox.container
+      let name = ''
+
+      if (container) {
+        name = container.split('.')[1]
+        return this.settingObjectSection.data[name]
+      } else {
+        return ''
+      }
     }
   },
 
@@ -109,11 +124,24 @@ export default {
       }
     },
 
-    settingObjectElement () {
-      if (this.onBoarding) {
-        this.destroyTips()
-        this.initTips()
-      }
+    settingObjectOptions: {
+      handler: function (val, oldVal) {
+        if (this.onBoarding) {
+          this.destroyTips()
+          this.initTips()
+        }
+      },
+      deep: true
+    },
+
+    widthSlot: {
+      handler: function (val, oldVal) {
+        if (this.onBoarding) {
+          this.destroyTips()
+          this.initTips()
+        }
+      },
+      deep: true
     }
   },
 
@@ -138,13 +166,21 @@ export default {
 
     createTip (referenceElement, popper) {
       const container = document.getElementById('artboard')
+
+      let applyReactStyle = (data) => {
+        data.offsets.popper.right = data.offsets.reference.right
+      }
+
       const tip = new Popper(referenceElement, popper, {
         placement: 'right',
         modifiers: {
-          applyStyle: { enabled: true },
+          applyReactStyle: {
+            enabled: true,
+            fn: applyReactStyle,
+            order: 900
+          },
           flip: {
             enabled: true,
-            behavior: ['left', 'top'],
             boundariesElement: container,
             flipVariations: true,
             flipVariationsByContent: true
@@ -154,8 +190,6 @@ export default {
           }
         }
       })
-
-      console.log(tip)
 
       this.tips.push(tip)
     },
@@ -235,4 +269,15 @@ export default {
       background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAATCAYAAACHrr18AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEySURBVHgBvZTNbYNAEIVnAQlxSwkpAXfgdBAqcDgBp5AKnA4SHxDiR0KpIHYFSQdOCS4hZ0CQN5GIHNvYxl72k1YaCVaf3s7sEimkKIqbJEnuuRY0MnEc3xqGMWvbdoplYy1N03waRczJ6rp+3JK9sTAIgs/uH6lipJvquj7vk21j0JV06ZqmeYBog3plWZbjuu73sX0XizthWZYhhF9Ybl86aeI0TVn4LIRYIukEwg0NZJCYJxQ9LCAjJHSGJNzl7OHilJCFKBee573SlZxMzL2squoFpY2kd5cc62AxHy16+YGkK9/3JyQRre9DFEW2pmlrlAtIQ5LMQXGe5zM8c+84WkdGPw+xN1zdEMns50lxlmVzfoHGlv4Tq5Qyvz3mnqqUMoLvKa7MWqX0D76vpJgfPtnTbmLOFr0AAAAASUVORK5CYII=')
       left: 0px
       top: 20px
+
+  &[x-placement^="left"]
+    .b-onboarding-tip__inner
+      margin-right: 28px
+    &:after
+      width: 28px
+      height: 17px
+      background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAB4AAAATCAYAAACHrr18AAAACXBIWXMAAAsTAAALEwEAmpwYAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAEySURBVHgBvZTNbYNAEIVnAQlxSwkpAXfgdBAqcDgBp5AKnA4SHxDiR0KpIHYFSQdOCS4hZ0CQN5GIHNvYxl72k1YaCVaf3s7sEimkKIqbJEnuuRY0MnEc3xqGMWvbdoplYy1N03waRczJ6rp+3JK9sTAIgs/uH6lipJvquj7vk21j0JV06ZqmeYBog3plWZbjuu73sX0XizthWZYhhF9Ybl86aeI0TVn4LIRYIukEwg0NZJCYJxQ9LCAjJHSGJNzl7OHilJCFKBee573SlZxMzL2squoFpY2kd5cc62AxHy16+YGkK9/3JyQRre9DFEW2pmlrlAtIQ5LMQXGe5zM8c+84WkdGPw+xN1zdEMns50lxlmVzfoHGlv4Tq5Qyvz3mnqqUMoLvKa7MWqX0D76vpJgfPtnTbmLOFr0AAAAASUVORK5CYII=')
+      right: 0px
+      top: 20px
+      transform: rotate(60deg)
 </style>
