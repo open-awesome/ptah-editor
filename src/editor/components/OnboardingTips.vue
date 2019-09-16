@@ -167,18 +167,9 @@ export default {
     createTip (referenceElement, popper) {
       const container = document.getElementById('artboard')
 
-      let applyReactStyle = (data) => {
-        data.offsets.popper.right = data.offsets.reference.right
-      }
-
       const tip = new Popper(referenceElement, popper, {
         placement: 'right',
         modifiers: {
-          applyReactStyle: {
-            enabled: true,
-            fn: applyReactStyle,
-            order: 900
-          },
           flip: {
             enabled: true,
             boundariesElement: container,
