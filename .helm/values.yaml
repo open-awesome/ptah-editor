@@ -43,6 +43,7 @@ backend:
     port: 8080
     protocol: TCP
   env:
+  - APP_PROXY_BASEURL
   - AUTH1_CLIENT_ID
   - AUTH1_CLIENT_SCOPE
   - AUTH1_CLIENT_SECRET
