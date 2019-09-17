@@ -26,11 +26,12 @@ export function initElementLink() {
       return
     }
 
+    e.preventDefault()
+
     let url = link.getAttribute('href')
     if (!url || url === "javascript:void(0)") {
       return
     }
-    e.preventDefault()
     window.open(url, link.getAttribute('target') || '_self')
 
     e.stopImmediatePropagation()
