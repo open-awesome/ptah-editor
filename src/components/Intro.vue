@@ -4337,6 +4337,7 @@
         .b-section-header {
         position: sticky;
         z-index: 9999;
+        top: 0;
         }
         .b-section-header ~ section[class^="b-"] {
         z-index: 1;

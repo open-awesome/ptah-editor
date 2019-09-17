@@ -52,8 +52,10 @@
 
 .b-section-header
 
-  position: sticky
-  z-index: 9999
+  &._sticky
+    position: sticky
+    z-index: 9999
+    top: 0
 
   ~ section[class^="b-"]
     z-index: 1
