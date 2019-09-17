@@ -11,7 +11,7 @@
 
       <div class="b-confirm__footer">
         <base-button size="middle" @click="$emit('close')">{{ $t('nav.cancel') }}</base-button>
-        <base-button size="middle" color="orange" @click="$emit('confirm'), $emit('close')">OK</base-button>
+        <base-button size="middle" color="orange" @click="$emit('confirm'), $emit('close')">{{button}}</base-button>
       </div>
     </div>
   </div>
@@ -24,6 +24,11 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    // confirm button text
+    button: {
+      type: String,
+      default: 'OK'
     }
   }
 }

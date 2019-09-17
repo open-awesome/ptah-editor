@@ -46,7 +46,10 @@ export default {
       presetSelected: 0,
       newPageTitle: '',
       invalid: false,
-      createProgress: false
+      createProgress: false,
+      showConfirmDelete: false,
+      showConfirmClone: false,
+      currentItem: ''
     }
   },
 
@@ -63,7 +66,8 @@ export default {
       'deleteLanding',
       'fetchLandingFromFile',
       'saveLanding',
-      'clearSlug'
+      'clearSlug',
+      'copyLanding'
     ]),
 
     openLanding (item) {
@@ -72,11 +76,26 @@ export default {
       this.$router.push({ path: `/editor/${item._id}` })
     },
 
+    openSettigs (item) {
+      this.$Progress.start()
+      this.$router.push({ path: `/editor/${item._id}/settings` })
+    },
+
     openWindow () {
       this.createWindow = true
       this.$nextTick(() => {
         document.querySelector('.b-base-text-field__input').focus()
       })
+    },
+
+    deleteItem (item) {
+      this.currentItem = item
+      this.showConfirmDelete = true
+    },
+
+    cloneItem (item) {
+      this.currentItem = item
+      this.showConfirmClone = true
     },
 
     newLanding () {
@@ -103,6 +122,30 @@ export default {
         this.invalid = true
         this.createProgress = false
       }
+    },
+
+    getUpdatedLeftTime (dateString) {
+      let date = new Date(dateString)
+      let now = new Date(Date.now())
+      let leftMs = now.getTime() - date.getTime()
+      let leftDays = (leftMs / 1000 / 60 / 60 / 24).toFixed()
+      let leftHours = null
+      let leftMinutes = null
+
+      if (leftDays < 1) {
+        leftHours = (leftMs / 1000 / 60 / 60).toFixed()
+
+        if (parseInt(leftHours) === 0) {
+          leftMinutes = (leftMs / 1000 / 60).toFixed()
+
+          return parseInt(leftMinutes) === 0 ? `Updated one minute ago` : `Updated ${leftMinutes} minutes ago`
+        }
+      }
+      return leftHours === null ? `Updated ${leftDays} days ago` : `Updated ${leftHours} hours ago`
+    },
+
+    getItemCover (item) {
+      return item.cover || 'https://s3.protocol.one/images/placeholder.png'
     }
   },
   created () {
@@ -121,6 +164,7 @@ export default {
 <template>
   <div class="b-page__content">
     <div class="b-dashboard">
+      <!-- create new -->
       <figure class="b-dashboard__item create" @click="openWindow()">
         <div class="b-dashboard__item-cell b-dashboard__item--create">
           <icon-base name="plus" width="40" height="40" color="#2275D7"></icon-base>
@@ -128,21 +172,30 @@ export default {
         </div>
       </figure>
 
+      <!-- cards -->
       <figure v-for="(item, index) in landings" :key="index" class="b-dashboard__item" @click="openLanding(item)">
         <div class="b-dashboard__item-cell">
           <div class="b-dashboard__item-icons">
-            <div class="b-dashboard__icon" @click.stop="deleteLanding(item._id)">
+            <a @click.stop="openSettigs(item)" class="b-dashboard__icon" tooltip="Settings">
+              <icon-base name="cog" color="#2275D7" width="18" hight="18"></icon-base>
+            </a>
+            <div class="b-dashboard__icon" @click.stop="cloneItem(item)" tooltip="Duplicate landing">
+              <icon-base name="duplicate" color="#2275D7" width="18" hight="18"></icon-base>
+            </div>
+            <div class="b-dashboard__icon" @click.stop="deleteItem(item)" tooltip="Delete">
               <icon-base name="remove" color="#2275D7" width="18" hight="18"></icon-base>
             </div>
           </div>
-          <div class="b-dashboard__item-cell-top"></div>
+          <div class="b-dashboard__item-cell-top" :style="{ 'background-image': `url(${getItemCover(item)})` }"></div>
           <div class="b-dashboard__item-cell-bottom">
-            {{ item.name }}
+            <div class="b-dashboard__item--name">{{ item.name }}</div>
+            <div class="b-dashboard__item--update">{{ getUpdatedLeftTime(item.updateDate) }}</div>
           </div>
         </div>
       </figure>
     </div>
 
+    <!-- modal window -->
     <transition name="slide-fade">
       <div class="b-create" v-if="createWindow" @click.self="createWindow = false">
         <div class="b-create__inner">
@@ -180,6 +233,25 @@ export default {
         </div>
       </div>
     </transition>
+
+    <!-- confirm windows -->
+    <base-confirm
+      title="Delete landing"
+      @confirm="deleteLanding(currentItem._id)"
+      @close="showConfirmDelete = false"
+      v-if="showConfirmDelete"
+      button="Delete">
+      You are going to delete <b>{{currentItem.name}}</b>, this cannot be undone. Confirm deleting?
+    </base-confirm>
+
+    <base-confirm
+      title="Clone landing"
+      @confirm="copyLanding([currentItem._id])"
+      @close="showConfirmClone = false"
+      v-if="showConfirmClone"
+      button="Clone">
+      Copy landing <b>{{currentItem.name}}</b>?
+    </base-confirm>
   </div>
 </template>
 
@@ -193,7 +265,7 @@ export default {
   padding: $size-step*1.5 /* $size-step: 3.2rem */
   margin: 0 auto
 
-  font-family: 'Lato', Helvetica Neue, Helvetica, Arial
+  font-family: 'Lato', Helvetica Neue, Helvetica, Arial, sans-serif
 
   display: flex
   flex-wrap: wrap
@@ -208,7 +280,7 @@ export default {
       margin: $size-step/2
 
       background: $ligth-grey
-      box-shadow: 0 ($size-step/8) $size-step rgba($black, 0.25)
+      // box-shadow: 0 2px 16px rgba(0, 0, 0, 0.25)
 
       font-size: $size-step/2
       cursor: pointer
@@ -217,9 +289,15 @@ export default {
       flex-direction: column
       justify-content: center
       align-items: stretch
+      transition: all .2s ease-out
+      &:hover
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15)
       &-top
         height: 100%
+        background-size: cover
+        background-position: top center
       &-bottom
+        text-align: center
         height: 2.5 * $size-step
         padding: $size-step/2 $size-step/1.33
         background-color: $white
@@ -234,6 +312,16 @@ export default {
         font-size: 1.6rem
         color: $dark-blue-krayola
         letter-spacing: -0.02em
+
+    &--name
+      font-weight: bold
+      font-size: 1.6rem
+      line-height: 1.9rem
+      padding-bottom: .6rem
+    &--update
+      color: $grey-middle
+      font-size: 1.4rem
+      line-height: 1.7rem
     &-icons
       position: absolute
       top: 3.2rem
@@ -249,6 +337,7 @@ export default {
 
     width: 4rem
     height: 4rem
+    margin-left: .8rem
     display: flex
     justify-content: center
     align-items: center
