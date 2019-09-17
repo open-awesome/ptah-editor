@@ -402,24 +402,34 @@ class Vuse {
       `
       scroll.setup = `
         <script>
-          let windowWidth = window.screen.width < window.outerWidth ? window.screen.width : window.outerWidth;
-          let mobile = windowWidth < 500;
+          let mobile = window.innerWidth < 500 ? true : false;
 
           if (!mobile) {
             $(".main").onepage_scroll();
           }
 
-          window.onresize = function(event) {
-            let className = 'disabled-onepage-scroll'
+          $(window).resize(function() {
+            let className = 'disabled-onepage-scroll';
+            let classWrapName = 'onepage-wrapper';
+
+            mobile = window.innerWidth < 500 ? true : false;
 
             if (mobile) {
-              $(".main").disable();
+              if ($(".main").data("onepage_scroll")){
+                $(".main").disable();
+                $(".main").data("onepage_scroll").destroy();
+
+                if ($(".main").hasClass(classWrapName)) $(".main").removeClass(classWrapName);
+              }
               $("body").addClass(className);
             } else {
               $(".main").onepage_scroll();
+              $("body").addClass(className);
+              $("body").css('overflow', 'hidden !important')
+
               if ($("body").hasClass(className)) $("body").removeClass(className);
             }
-          };
+          });
       </script>`
     }
 
