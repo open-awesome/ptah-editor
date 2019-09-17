@@ -256,7 +256,8 @@ const data = new Map([
         'line-height': '1.4',
         'font-family': 'Lato',
         'justify-content': 'flex-start',
-        'margin-bottom': '16px'
+        'margin-bottom': '16px',
+        'text-align': 'left'
       },
       editor: {
         tags: true,
