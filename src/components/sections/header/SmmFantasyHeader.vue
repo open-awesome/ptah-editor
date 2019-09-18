@@ -1,5 +1,5 @@
 <template>
-  <section
+  <header
     v-styler:section="$sectionData.mainStyle"
     :class="[$sectionData.mainStyle.classes, {'_sticky' : $sectionData.mainStyle.sticky }]"
     :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }]"
@@ -131,7 +131,7 @@
       </div>
     </div>
 
-  </section>
+  </header>
 </template>
 
 <script>

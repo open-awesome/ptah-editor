@@ -36,7 +36,7 @@ export default {
       let max = {}
 
       parents['width'] = this.settingObjectElement.closest('.b-draggable-slot')
-      parents['height'] = this.settingObjectElement.closest('section')
+      parents['height'] = this.settingObjectElement.closest('section') || this.settingObjectElement.closest('header') || this.settingObjectElement.closest('footer')
 
       max['width'] = parents['width'].offsetWidth
       max['height'] = parseInt(parents['height'].offsetHeight)
