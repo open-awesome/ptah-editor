@@ -115,9 +115,7 @@ import * as _ from 'lodash-es'
 
 function getFormData (file) {
   let formData = new FormData()
-  formData.append('file[]', file)
-  formData.append('method', 'storefront.upload')
-  formData.append('format', 'json')
+  formData.append('file', file)
   return formData
 }
 
@@ -182,10 +180,10 @@ export default {
         xhr.onload = xhr.onerror = () => {
           if (xhr.status === 200) {
             try {
-              let { response } = JSON.parse(xhr.response)
-              let { name, src: path } = response.data[0]
+              let file = JSON.parse(xhr.response).file
+              let path = `https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/${file}`
               this.clearProgress(path)
-              resolve({ name, path })
+              resolve({ name: file, path })
             } catch (error) {
               reject(error)
             }
