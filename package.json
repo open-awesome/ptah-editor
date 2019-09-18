@@ -6,6 +6,7 @@
     "serve": "vue-cli-service serve --host 127.0.0.1 --port 8080",
     "serve:network": "vue-cli-service serve --host 0.0.0.0 --port 8000",
     "build": "vue-cli-service build",
+    "build-tst": "vue-cli-service build --mode tst",
     "lint": "vue-cli-service lint",
     "cjs": "gulp cjs",
     "start-app:local": "cross-env NODE_ENV=local nodemon --watch './backend' -w ./*.js ./index.js"

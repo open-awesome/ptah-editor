@@ -1,4 +1,4 @@
 VUE_APP_API=https://ptahapi.tst.protocol.one/api/v1/
-VUE_APP_DOMAIN=http://127.0.0.1
+VUE_APP_DOMAIN=https://storefront.tst.protocol.one
 VUE_APP_S3=https://ptahs3.tst.protocol.one/upload
 VUE_APP_S3BUCKET=https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com

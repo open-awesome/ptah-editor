@@ -170,7 +170,6 @@ export default {
     async getFileData (file) {
       this.progress = 0
       return new Promise((resolve, reject) => {
-        console.log(process.env.S3_UPLOAD, process.env.VUE_APP_S3)
         let xhr = new XMLHttpRequest()
 
         xhr.upload.onprogress = this.loadingProgress // --- uploading progress
@@ -180,10 +179,10 @@ export default {
         xhr.onload = xhr.onerror = () => {
           if (xhr.status === 200) {
             try {
-              let file = JSON.parse(xhr.response).file
-              let path = `https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/${file}`
+              let response = JSON.parse(xhr.response)
+              let path = `${process.env.VUE_APP_S3BUCKET}${response.relative_path}`
               this.clearProgress(path)
-              resolve({ name: file, path })
+              resolve({ name: response.file, path })
             } catch (error) {
               reject(error)
             }
