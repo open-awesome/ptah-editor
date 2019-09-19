@@ -10,6 +10,9 @@ export function tabsClick() {
       (function(i) {
         var link = links[i];
         link.onclick = function() {
+          if (link.classList.contains('b-system-platforms__item_active')) {
+            return false
+          }
           for(var k=0; k < links.length; k++) {
             var l = links[k];
 
