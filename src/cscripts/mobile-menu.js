@@ -30,6 +30,7 @@ function closeMobileMenu ({ target }) {
   const hasPopupLink = target.closest('.ptah-d-video') ? true : false
   const hasHamburger = target.closest('#js-hamburger') ? true : false
   const hasMobileMenu = target.closest('[id^="mobile-menu"]') ? true : false
+  const container = document.getElementById('main')
 
   if (!hasMenuLink && !hasPopupLink && (hasHamburger || hasMobileMenu)) {
     return
@@ -38,10 +39,14 @@ function closeMobileMenu ({ target }) {
   if (menu) {
     menu.classList.remove('is-active')
   }
+
   if (habmurger) {
     habmurger.classList.remove('is-active')
   }
-  document.body.style.overflow = ''
+
+  if (!container.classList.contains('onepage-wrapper')) {
+    document.body.style.overflow = ''
+  }
 }
 
 function calculateViewportHeight () {
