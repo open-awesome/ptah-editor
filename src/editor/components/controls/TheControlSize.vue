@@ -11,6 +11,10 @@ export default {
       'device'
     ]),
 
+    isMobile () {
+      return this.device === 'is-mobile'
+    },
+
     width: {
       get () {
         return this.getStyleNumberValue('width')
@@ -52,7 +56,13 @@ export default {
     ]),
 
     getStyleNumberValue (prop) {
-      let s = _.get(this.settingObjectOptions, `styles[${prop}]`)
+      let props = 'styles'
+
+      if (this.isMobile) {
+        props = `media[${this.device}]`
+      }
+
+      let s = _.get(this.settingObjectOptions, `${props}[${prop}]`)
 
       if (s === undefined) {
         // get values from node
@@ -64,19 +74,27 @@ export default {
     },
 
     update (prop, value) {
+      let props = {}
       let styles = {}
+      let media = {}
 
       if (value === '') value = 0
 
       styles[prop] = value + 'px'
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+
+      media[`${this.device}`] = {}
+      media[`${this.device}`][prop] = value + 'px'
+
+      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
     }
   }
 }
 </script>
 
 <template>
-  <div class="b-size" v-if="device !== 'is-mobile'">
+  <div class="b-size">
     <base-label>
       {{ $t('c.size') }}
     </base-label>

@@ -5,6 +5,10 @@
     :data-href="link.href"
     :path="path"
     :class="{'js-element-link' : isSetUrlImage }"
+    :style="{
+      '--mobile-width': media['is-mobile']['width'],
+      '--mobile-height': media['is-mobile']['height']
+    }"
     >
 
     <i class="b-load pth-uploader" @click.stop="upload" ref="upload">
@@ -38,6 +42,16 @@
     <span class="b-image__preview-video" v-if="link && link.type === 'video'">
       <icon-base name="video" color="#fff" width="64" height="64" />
     </span>
+
+    <!-- Mobile styles -->
+    <v-style scoped>
+      @media only screen and (max-width: 768px) {
+        .b-image {
+          width: {{ media['is-mobile'].width }} !important;
+          height: {{ media['is-mobile'].height }} !important;
+        }
+      }
+    </v-style>
   </div>
 </template>
 
@@ -73,7 +87,14 @@ export default {
   },
 
   computed: {
-    ...mapState('Sidebar', ['settingObjectElement']),
+    ...mapState('Sidebar', [
+      'settingObjectElement',
+      'device'
+    ]),
+
+    isMobile () {
+      return this.device === 'is-mobile'
+    },
 
     alt () {
       return this.$section.get(`$sectionData.${this.path}.alt`)
@@ -81,6 +102,10 @@ export default {
 
     styles () {
       return this.$section.get(`$sectionData.${this.path}.styles`)
+    },
+
+    media () {
+      return this.$section.get(`$sectionData.${this.path}.media`)
     },
 
     link () {
@@ -111,6 +136,7 @@ export default {
     onResize (x, y, width, height) {
       let parents = {}
       let max = {}
+      let prop = 'styles'
 
       parents['width'] = this.settingObjectElement.closest('.b-draggable-slot')
       parents['height'] = this.settingObjectElement.closest('section')
@@ -121,8 +147,12 @@ export default {
       if (width > max['width']) width = max['width']
       if (height > max['height']) height = max['height']
 
-      this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
-      this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
+      if (this.isMobile) {
+        prop = `media[${this.device}]`
+      }
+
+      this.$section.set(`$sectionData.${this.path}.${prop}.width`, width + 'px')
+      this.$section.set(`$sectionData.${this.path}.${prop}.height`, height + 'px')
     },
 
     onResizeStop (x, y, width, height) {
@@ -196,16 +226,12 @@ export default {
     height: auto !important
     &_active
       border: 0.2rem dotted $dark-blue-krayola !important
-    .is-mobile &,
-    .is-tablet &
-      display: none
-    @media only screen and (max-width: 768px)
-      &
-        display: none
 
   & span
     display: block
-  .is-mobile &,
+  .is-mobile &
+    width: var(--mobile-width) !important
+    height: var(--mobile-height) !important
   .is-tablet &
     max-width: 100% !important
     margin: $size-step/2 auto !important

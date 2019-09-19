@@ -99,6 +99,12 @@ const data = new Map([
       'background-color': 'rgba(0, 0, 0, 0)',
       'width': '256px',
       'height': '160'
+    },
+    media: {
+      'is-mobile': {
+        width: '100px',
+        height: '100px'
+      }
     }
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -119,6 +125,12 @@ const data = new Map([
       'background-color': 'rgba(0, 0, 0, 0)',
       'width': '96px',
       'height': '96px'
+    },
+    media: {
+      'is-mobile': {
+        width: '100px',
+        height: '100px'
+      }
     }
   }))],
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
