@@ -596,6 +596,8 @@ export default {
         cursor: text
   &.fp-scroll section:not(.b-section-header):not(.b-section-footer):not(.is-mobile)
     height: 100vh !important
+  &.fp-scroll section.is-editable:not(.b-section-header):not(.b-section-footer):not(.is-mobile)
+    height: calc(100vh - 6rem) !important
   &:before,
   &:after
     content: ''
