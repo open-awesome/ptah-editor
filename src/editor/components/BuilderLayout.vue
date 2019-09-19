@@ -35,7 +35,6 @@
         <!--<BuilderModalContent :builder="builder" />-->
         <router-view :builder="builder"></router-view>
       </main>
-
     </div>
   </div>
 </template>

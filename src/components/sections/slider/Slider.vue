@@ -115,7 +115,7 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 
-import { mapActions } from 'vuex'
+import { mapActions, mapMutations } from 'vuex'
 
 import Swiper from 'swiper'
 import swiperOptions from '@editor/swiper'
@@ -350,6 +350,7 @@ export default {
         on: {
           slideChange: function () {
             self.setControlPanel(false)
+            self.updateOnBoarding(false)
           }
         }
       })
@@ -359,7 +360,9 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'setControlPanel'
-    ])
+    ]),
+
+    ...mapMutations('Landing', ['updateOnBoarding'])
   }
 }
 </script>

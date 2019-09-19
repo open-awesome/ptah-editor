@@ -134,5 +134,18 @@
     },
     "с": {
         "shVhLabel":                    "1 vh is equivalent To 1% of the height of the browser window"
+    },
+    "onboard": {
+        "age":                          "Define age restrictions for your game",
+        "platforms":                    "What platforms does your game support?",
+        "button":                       "Change button settings, here for example you can link it to play your game trailer",
+        "spacer":                       "",
+        "textIcon":                     "Double click to customize the appearance of the text icon",
+        "logo":                         "Load your game logo by dropping it here",
+        "image":                        "Add your game feature images by dropping it here",
+        "social":                       "Change links for your social medias",
+        "text":                         "Change text by double cllicking",
+        "timer":                        "Double click to set countdown timer",
+        "video":                        "Upload a video or add a link to a Youtube video"
     }
 }

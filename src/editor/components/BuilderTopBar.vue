@@ -1,6 +1,6 @@
 <script>
 import MenuPlatforms from './menu/MenuPlatforms.vue'
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapMutations } from 'vuex'
 
 export default {
   components: {
@@ -23,6 +23,10 @@ export default {
       'isExpanded'
     ]),
 
+    ...mapState('Landing', [
+      'onBoarding'
+    ]),
+
     modalContentID () {
       return this.$route.path.split('/')[4] || ''
     },
@@ -36,12 +40,22 @@ export default {
     }
   },
 
+  created () {
+    if (localStorage.getItem('showTips') === 'true' || localStorage.getItem('showTips') === null) {
+      this.updateOnBoarding(true)
+    } else {
+      this.updateOnBoarding(false)
+    }
+  },
+
   methods: {
     ...mapActions('Sidebar', [
       'clearSettingObject',
       'clearSettingObjectLight',
       'toggleSidebar'
     ]),
+
+    ...mapMutations('Landing', ['updateOnBoarding']),
 
     setDevice (type) {
       this.$emit('setDevice', type)
@@ -126,6 +140,11 @@ export default {
           ></MenuPlatforms>
       </div>
       <div class="b-top-bar-menu__right">
+        <span tooltip="Show hints" tooltip-position="bottom"
+              :class="{ 'active': onBoarding }"
+              @click="updateOnBoarding(!onBoarding)">
+          <icon-base name="questionCircle" />
+        </span>
         <span :tooltip="$t('menu.siteSettings')" tooltip-position="bottom"
               @click="toggleMenuItem('siteSettings')">
           <icon-base name="cog"></icon-base>
@@ -181,6 +200,9 @@ export default {
       order: 3
       width: 45%
       text-align: right
+      .active
+        svg
+          color: $dark-blue-krayola
       span
         margin-left: 1.6rem
       svg
