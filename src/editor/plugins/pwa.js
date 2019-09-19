@@ -139,11 +139,11 @@ function download (assets) {
             </div>
             ${video}
             ${this.getCookiesPreview()}
-          <script src="js/cjs.js"></script>
           ${scrollSetup.setup}
           <script>
             ${script}
           </script>
+          <script src="js/cjs.js"></script>
           </body>
         </html>`)
 

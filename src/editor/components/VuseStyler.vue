@@ -232,7 +232,7 @@ import { isParentTo, randomPoneId, getPseudoTemplate, getLinkStyles, composedPat
 import * as _ from 'lodash-es'
 import { mapMutations, mapActions, mapState } from 'vuex'
 import Popper from 'popper.js'
-
+import VueScrollTo from 'vue-scrollto'
 import ModalButton from './modals/TheModalButton'
 
 export default {
@@ -352,13 +352,15 @@ export default {
       },
       deep: true
     },
+
     isDragStop: {
       handler: function (val, oldVal) {
         if (val) {
-          this.showStylerAfterDragEl()
+          this.isVisible = false
         }
       }
     },
+
     textEditorActive: {
       handler: function (val) {
         if (val === false && this.isCurrentStyler) {
@@ -372,6 +374,7 @@ export default {
     this.dimensions.width = this.el.offsetWidth
     this.dimensions.height = this.el.offsetHeight
   },
+
   mounted () {
     if (this.$builder && !this.$builder.isEditing) return
 
@@ -630,7 +633,7 @@ export default {
         'b-handle b-handle-ml'
       ]
 
-      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames)))) {
+      if ((event && (event.target === this.el || this.checkStylerNodes(event, stopNames))) && this.isDragStop === false) {
         this.isCurrentStyler = true
 
         if (`$sectionData.${this.isResizeStop}` === this.settingObjectOptions.name) {
@@ -640,7 +643,7 @@ export default {
         return
       }
 
-      if (event && MouseEvent && isParentTo(event.target, this.$el)) {
+      if (event && MouseEvent && isParentTo(event.target, this.$el) && this.isDragStop === false) {
         this.isCurrentStyler = true
         return
       }
@@ -710,12 +713,58 @@ export default {
       this.components.splice(index, 1)
       this.clearSettingObjectLight()
       this.hideStyler()
+      this.$destroy()
     },
 
     duplicateElement () {
       let el = _.cloneDeep(_.get(this.section.data, this.path))
       el.key = randomPoneId()
       this.components = [...this.components, el]
+
+      this.selectElement()
+    },
+
+    async selectElement () {
+      await this.$nextTick()
+
+      let idSection = this.section.id
+      let section = document.getElementById(`section_${idSection}`)
+      let nameArray = this.sandbox.components.split('.')[1]
+      let el = section.querySelector(`[path="${nameArray}[${this.components.length - 1}].element"]`)
+
+      let resize = el.querySelector(`.resizable.vdr`)
+
+      if (resize) {
+        el = resize
+      }
+
+      el.id = `section${idSection}${nameArray}${this.components.length - 1}`
+      this.clickOnElement(el)
+    },
+
+    clickOnElement (el) {
+      let machineEvent = new Event('mousedown', { bubbles: true })
+      el.dispatchEvent(machineEvent)
+
+      this.scrollTo(el)
+    },
+
+    scrollTo (element) {
+      let options = {
+        container: '.b-builder-layout-content__main .vb-content',
+        duration: 500,
+        easing: 'ease',
+        offset: -80,
+        force: true,
+        cancelable: true,
+        onStart: false,
+        onDone: false,
+        onCancel: false,
+        x: false,
+        y: true
+      }
+
+      VueScrollTo.scrollTo(`#${element.getAttribute('id')}`, 500, options)
     },
 
     copyStylesBuffer () {
@@ -773,19 +822,6 @@ export default {
       }
       if (props && props.video) {
         this.el.dataset.video = props.video
-      }
-    },
-
-    showStylerAfterDragEl () {
-      if (undefined !== this.options['isDragged'] && this.options['isDragged']) {
-        delete this.options['isDragged']
-
-        this.isVisible = false
-        this.isCurrentStyler = false
-        this.toggleDragStop(false)
-
-        this.el.addEventListener('mousedown', this.showStyler)
-        this.el.click()
       }
     },
 

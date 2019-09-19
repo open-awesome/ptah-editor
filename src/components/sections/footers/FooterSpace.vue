@@ -226,7 +226,7 @@ export default {
 </script>
 
 <template>
-  <section
+  <footer
     class="b-section-footer"
     :class="$sectionData.mainStyle.classes"
     :style="$sectionData.mainStyle.styles"
@@ -244,7 +244,7 @@ export default {
                 components-path="$sectionData.components"
                 class="b-footer__col b-footer__col_1">
 
-              <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_horizont" :style="$sectionData.container.styles" @change="dragStop">
+              <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_horizont" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
                 <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                   <component
                     v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
@@ -265,7 +265,7 @@ export default {
         </div><!--/.b-grid__row.b-footer__row-->
       </div><!--/.b-grid-->
     </div><!--/.b-footer-->
-  </section>
+  </footer>
 </template>
 
 <style lang="sass" scoped>

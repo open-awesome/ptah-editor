@@ -123,8 +123,8 @@ const C_CUSTOM = [
       },
       pseudo: {
         'hover': {
-          'background-color': '#000000 !important',
-          'border': '1px solid AF2E120 !important'
+          'background-color': '#333333 !important',
+          'border': '1px solid #AF2E12 !important'
         }
       }
     }
@@ -202,7 +202,7 @@ export default {
               direction="column"
               class="b-sandbox">
 
-            <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @change="dragStop">
+            <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: component.label }"

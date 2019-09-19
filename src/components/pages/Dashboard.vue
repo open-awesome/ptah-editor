@@ -29,6 +29,18 @@ export default {
           type: 'Space page',
           sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace'],
           url: 'https://s3.protocol.one/files/templateSpacePage.json'
+        },
+        {
+          type: 'Fantasy page',
+          sections: [
+            'SmmFantasyHeader',
+            'FirstScreenFantasy02',
+            'ColumnsFantasy',
+            'ProductsFantasy',
+            'SliderFantasy',
+            'SystemRequirementsFantasy',
+            'FooterFantasy'
+          ]
         }
       ],
       presetSelected: 0,
@@ -253,9 +265,9 @@ export default {
     position: absolute
     left: 50%
     top: 50%
-    margin-left: -$size-step*29/2
+    margin-left: -$size-step*33/2
     margin-top: -$size-step*16/2
-    width: $size-step*29
+    width: $size-step*33
     height: $size-step*16
     z-index: 10
     padding: 5rem

@@ -16,6 +16,10 @@ export default {
       'settingObjectOptions'
     ]),
 
+    maxCount () {
+      return this.settingObjectOptions.maxCount || 9
+    },
+
     count: {
       get: function () {
         return this.settingObjectOptions.count
@@ -53,7 +57,7 @@ export default {
 <template>
   <div class="b-text-controls">
       <div class="b-text-controls__control">
-        <base-range-slider v-model="vCount" label="Count" @change="countChange" step="1" min="1" max="9">
+        <base-range-slider v-model="vCount" label="Count" @change="countChange" step="1" min="1" :max="maxCount">
             {{ vCount }}
         </base-range-slider>
       </div>

@@ -41,7 +41,7 @@
             </div>
             <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
               <div class="b-panel__control">
-                <control-slot-background-position/>
+                <control-background-position container="slot"/>
               </div>
             </template>
           </div>
@@ -54,7 +54,7 @@
 import { mapState } from 'vuex'
 import * as _ from 'lodash-es'
 import BaseUploader from '../../../components/base/BaseUploader'
-import ControlSlotBackgroundPosition from './../controls/TheControlSlotBackgroundPosition'
+import ControlBackgroundPosition from './../controls/TheControlBackgroundPosition'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -70,7 +70,7 @@ export default {
 
   components: {
     BaseUploader,
-    ControlSlotBackgroundPosition
+    ControlBackgroundPosition
   },
 
   props: {

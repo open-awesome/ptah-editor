@@ -30,7 +30,9 @@ import ToggleElement from '@components/elements/ToggleElement'
 // sections
 // --- header
 import ActionButtonHeader from '@components/sections/header/ActionButtonHeader'
+import ActionButtonFantasyHeader from '@components/sections/header/ActionButtonFantasyHeader'
 import SmmHeader from '@components/sections/header/SmmHeader'
+import SmmFantasyHeader from '@components/sections/header/SmmFantasyHeader'
 import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
 
 // --- hero
@@ -57,16 +59,22 @@ import FirstScreenFantasy02 from '@components/sections/first-screen/FirstScreenF
 import FirstScreenFantasyVideoBack from '@components/sections/first-screen/FirstScreenFantasyVideoBack'
 // --- gallery
 import GallerySwitch from '@components/sections/galleries/GallerySwitch'
+import GallerySwitchFantasy from '@components/sections/galleries/GallerySwitchFantasy'
 import GalleryPopup from '@components/sections/galleries/GalleryPopup'
+import GalleryPopupFantasy from '@components/sections/galleries/GalleryPopupFantasy'
 // --- products
 import Products from '@components/sections/products/Products'
+import ProductsFantasy from '@components/sections/products/ProductsFantasy'
 import ProductsExtend from '@components/sections/products/ProductsExtend'
+import ProductsExtendFantasy from '@components/sections/products/ProductsExtendFantasy'
 // --- columns
 import Columns from '@components/sections/columns/Columns'
+import ColumnsFantasy from '@components/sections/columns/ColumnsFantasy'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
 import FormCenter from '@components/sections/forms/FormCenter'
+import FormCenterFantasy from '@components/sections/forms/FormCenterFantasy'
 import FormRight from '@components/sections/forms/FormRightSide'
 import FormRight2 from '@components/sections/forms/FormRightSide2'
 import FormLeft from '@components/sections/forms/FormLeftSideVariant'
@@ -74,9 +82,12 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 
 // --- other
 import SystemRequirements from '@components/sections/elements/SystemRequirements'
+import SystemRequirementsFantasy from '@components/sections/elements/SystemRequirementsFantasy'
 import FooterSpace from '@components/sections/footers/FooterSpace'
+import FooterFantasy from '@components/sections/footers/FooterFantasy'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
 import Slider from '@components/sections/slider/Slider'
+import SliderFantasy from '@components/sections/slider/SliderFantasy'
 
 import store from '@store'
 
@@ -102,6 +113,8 @@ const COMPONENTS = {
   ActionButtonHeader,
   SmmHeader,
   CenteredLogoHeader,
+  ActionButtonFantasyHeader,
+  SmmFantasyHeader,
 
   FirstScreenSpace01,
   FirstScreenSpace02,
@@ -125,26 +138,35 @@ const COMPONENTS = {
   HeroWithTimerSlogan2,
 
   Slider,
+  SliderFantasy,
 
   Columns,
+  ColumnsFantasy,
 
   GallerySwitch,
   GalleryPopup,
   Carousel,
+  GalleryPopupFantasy,
+  GallerySwitchFantasy,
 
   Products,
   ProductsExtend,
+  ProductsFantasy,
+  ProductsExtendFantasy,
 
   FormCenter,
   FormRight,
   FormLeft,
   FormRight2,
   FormLeft2,
+  FormCenterFantasy,
 
   SystemRequirements,
+  SystemRequirementsFantasy,
   FrequentlyAskedQuestions,
 
-  FooterSpace
+  FooterSpace,
+  FooterFantasy
 }
 
 Vuse.mix({ components: ELEMENTS })

@@ -598,7 +598,7 @@ export default {
         border-color: $dark-blue-krayola !important
       &.b-text
         cursor: text
-  &.fp-scroll section
+  &.fp-scroll section:not(.b-section-header):not(.b-section-footer):not(.is-mobile)
     height: 100vh !important
   &:before,
   &:after
