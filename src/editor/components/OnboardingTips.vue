@@ -262,6 +262,7 @@ export default {
       top: 20px
 
   &[x-placement^="left"]
+    text-align: right
     .b-onboarding-tip__inner
       margin-right: 28px
     &:after
