@@ -1,34 +1,46 @@
 <script>
 import { mapActions, mapState } from 'vuex'
+import BaseScrollContainer from '../base/BaseScrollContainer'
 
 export default {
+  components: { BaseScrollContainer },
   data () {
     return {
       createWindow: false,
       presets: [
         {
           type: 'Blank page',
-          sections: []
+          sections: [],
+          image: 'https://s3.protocol.one/images/BlankPage.png',
+          description: ''
         },
         {
           type: 'Simple page',
           sections: ['FirstScreenSpace01', 'FooterSpace'],
-          url: 'https://s3.protocol.one/files/templateSimplePage.json'
+          url: 'https://s3.protocol.one/files/templateSimplePage.json',
+          image: 'https://s3.protocol.one/images/1_r.jpg',
+          description: 'Simple Sci-fi template width video background. Sections: First Screen, Footer'
         },
         {
           type: 'Ptah page',
           sections: [],
-          url: 'https://s3.protocol.one/files/templatePtah.json'
+          url: 'https://s3.protocol.one/files/templatePtah.json',
+          image: 'https://s3.protocol.one/images/2ptah_r.jpg',
+          description: 'Look at how the landing page was created which stands on the main page of the Ptah page builder'
         },
         {
           type: 'Page with subscription form',
           sections: ['FirstScreenSpaceVideoBack', 'Columns', 'GalleryPopup', 'FormCenter', 'FooterSpace'],
-          url: 'https://s3.protocol.one/files/templatePageWithSubscriptionForm.json'
+          url: 'https://s3.protocol.one/files/templatePageWithSubscriptionForm.json',
+          image: 'https://s3.protocol.one/images/3_r.jpg',
+          description: 'Sci-fi template width video background and subscription form. Sections: First screen, columns, gallery, form, footer'
         },
         {
           type: 'Space page',
           sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace'],
-          url: 'https://s3.protocol.one/files/templateSpacePage.json'
+          url: 'https://s3.protocol.one/files/templateSpacePage.json',
+          image: 'https://s3.protocol.one/images/4_r.jpg',
+          description: 'Sci-fi styled template with: Menu, First screen, columns, slider, products, system requirments, FAQ and footer'
         },
         {
           type: 'Fantasy page',
@@ -40,7 +52,9 @@ export default {
             'SliderFantasy',
             'SystemRequirementsFantasy',
             'FooterFantasy'
-          ]
+          ],
+          image: 'https://s3.protocol.one/images/5_r.jpg',
+          description: 'Fantasy styled template with: Menu, First screen, columns, slider, products, system requirments, FAQ and footer'
         }
       ],
       presetSelected: 0,
@@ -208,28 +222,43 @@ export default {
               height="14"
             />
           </div>
-          <h3>{{ $t('d.cmodalHeader') }}</h3>
-
-          <base-text-field
-            v-model="newPageTitle"
-            :hasError="invalid"
-            :errorText="$t('d.cmodalErrorText')"
-            :label="$t('d.cmodalLabel')">
-          </base-text-field>
-
-          <div class="b-presets">
-            <div class="b-presets__item"
-                 v-for="(item, index) in presets"
-                 :key="index"
-                 :class="{ 'selected': presetSelected == index }"
-                 @click="presetSelected = index">
-              {{item.type}}
-            </div>
+          <div class="b-create__header">
+            <base-text-field
+              v-model="newPageTitle"
+              placeholder="New Landing Page"
+              :hasError="invalid"
+              :errorText="$t('d.cmodalErrorText')">
+            </base-text-field>
           </div>
 
-          <base-button color="blue" size="middle" @click="newLanding" :disabled="createProgress">
-            {{ $t('nav.create') }}
-          </base-button>
+          <base-scroll-container backgroundBar="#999">
+            <div class="b-presets">
+              <div class="b-presets__item"
+                   v-for="(item, index) in presets"
+                   :key="index"
+                   :style="{ 'background-image': `url(${item.image})` }"
+                   :class="{ 'selected': presetSelected == index, 'first': index === 0 }"
+                   @click="presetSelected = index">
+                <div class="b-presets__item-inner">
+                  <div class="b-presets__item-name">
+                    {{item.type}}
+                  </div>
+                  <div class="b-presets__item-description">
+                    {{item.description}}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </base-scroll-container>
+
+          <div class="b-create__footer">
+            <base-button color="gray" size="middle" @click="createWindow = false" :disabled="createProgress">
+              {{ $t('nav.cancel') }}
+            </base-button>
+            <base-button color="blue" size="middle" @click="newLanding" :disabled="createProgress">
+              {{ $t('nav.create') }}
+            </base-button>
+          </div>
         </div>
       </div>
     </transition>
@@ -350,22 +379,36 @@ export default {
   left: 0
   background-color: rgba($dark-blue, 0.2)
 
+  display: flex
+  justify-content: center
+  align-items: center
+
   &__inner
-    position: absolute
-    left: 50%
-    top: 50%
-    margin-left: -$size-step*33/2
-    margin-top: -$size-step*16/2
-    width: $size-step*33
-    height: $size-step*16
+    width: 66rem
+    height: 85vh
     z-index: 10
-    padding: 5rem
 
     background: $white
 
     display: flex
     flex-direction: column
     justify-content: stretch
+    position: relative
+    border-radius: 4px
+
+  &__header
+    padding: 1.5rem 2.4rem
+    width: 60%
+
+    input
+      font-size: 2rem !important
+      line-height: 2.4rem
+      height: 4rem !important
+
+  &__footer
+    padding: 1.5rem 2.4rem
+    display: flex
+    justify-content: flex-end
 
   &__close
     position: absolute
@@ -377,27 +420,67 @@ export default {
         fill: $dark-grey
 
 .b-presets
-  margin: 2rem 0 2rem -3rem
   display: flex
+  justify-content: space-between
+  flex-wrap: wrap
+  width: 61rem
+  margin-left: 2.4rem
+  padding: 2.4rem 0
 
   &__item
-    width: 15rem
-    height: 20rem
-    background: $ligth-grey
-    border: 2px solid rgba($dark-blue, 0.2)
-    margin-left: 3rem
+    width: 29rem
+    height: 24rem
+    background-color: $white
+    background-size: contain
+    background-position: top center
+    background-repeat: no-repeat
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1)
+    border-radius: 2px
+    margin-bottom: 3rem
     padding: 1rem
 
     display: flex
     align-items: center
     justify-content: center
     text-align: center
+    position: relative
 
-    color: $dark-blue-krayola
     cursor: pointer
     transition: all .2s ease-out
     &.selected
-      border: 2px solid $dark-blue-krayola
+      &:after
+        content: ''
+        display: block
+        position: absolute
+        top: 10px
+        left: 10px
+        width: 2.4rem
+        height: 2.4rem
+        background: url('https://s3.protocol.one/images/checked.png') no-repeat
+
+    &.first
+      border: 1px solid #E6E6E6
+      background-size: auto
+      background-position: center center
+    &-inner
+      position: absolute
+      bottom: 0
+      right: 0
+      left: 0
+      padding: 1.5rem
+
+      background: $white
+
+    &-name
+      font-size: 1.6rem
+      line-height: 1.9rem
+      color: $dark-grey
+      padding-bottom: 1rem
+
+    &-description
+      font-size: 1.4rem
+      line-height: 1.7rem
+      color: $grey-middle
 
 // Animations
 .slide-fade
@@ -411,4 +494,9 @@ export default {
   &-leave-to
     opacity: 0
     transform: translateX(-0.8rem)
+
+.vb>.vb-dragger
+  z-index: 5
+  width: 1rem
+  right: 0
 </style>
