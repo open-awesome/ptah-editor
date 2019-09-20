@@ -402,9 +402,11 @@ class Vuse {
       `
       scroll.setup = `
         <script>
-          let mobile = window.innerWidth < 500 ? true : false;
+          function detectMobile () {
+            return $(window).width() < 500 ? true : false;
+          }
 
-          if (!mobile) {
+          if (!detectMobile()) {
             $(".main").onepage_scroll();
           }
 
@@ -412,9 +414,7 @@ class Vuse {
             let className = 'disabled-onepage-scroll';
             let classWrapName = 'onepage-wrapper';
 
-            mobile = window.innerWidth < 500 ? true : false;
-
-            if (mobile) {
+            if (detectMobile()) {
               if ($(".main").data("onepage_scroll")){
                 $(".main").disable();
                 $(".main").data("onepage_scroll").destroy();
@@ -422,10 +422,14 @@ class Vuse {
                 if ($(".main").hasClass(classWrapName)) $(".main").removeClass(classWrapName);
               }
               $("body").addClass(className);
+              $("body").css('overflow', '')
+
             } else {
-              $(".main").onepage_scroll();
-              $("body").addClass(className);
-              $("body").css('overflow', 'hidden !important')
+              if (!$(".main").data("onepage_scroll")){
+                $(".main").onepage_scroll();
+              }
+
+              $("body").css('overflow', 'hidden');
 
               if ($("body").hasClass(className)) $("body").removeClass(className);
             }
