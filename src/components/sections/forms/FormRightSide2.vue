@@ -115,7 +115,7 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-size': 'cover',
-      'background-color': 'rgb(21, 28, 68, 1)',
+      'background-color': 'rgba(21, 28, 68, 1)',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll'
     }

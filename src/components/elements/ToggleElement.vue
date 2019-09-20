@@ -231,6 +231,7 @@ export default {
   width: 100%
   position: relative
   text-align: left
+
   &::selection,
   & ::selection
     color: #ff0
