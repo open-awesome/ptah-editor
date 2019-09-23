@@ -61,7 +61,9 @@ export default {
   methods: {
     onUploadClick (event) {
       this.uploadFile(event)
-        .then((data) => { this.url = data.src })
+        .then((response) => {
+          this.url = `${process.env.VUE_APP_S3BUCKET}${response.data.relative_path}`
+        })
         .catch((error) => console.warn(error))
     },
 
