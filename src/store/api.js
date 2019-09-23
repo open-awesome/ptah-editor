@@ -27,16 +27,7 @@ export default {
    * @returns {Promise.<TResult>|Promise<any>}
    */
   uploadFile (request) {
-    return axios.post(`${process.env.VUE_APP_S3}`, request)
-      .then(function (response) {
-        if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response') ||
-          !response['data']['response'].hasOwnProperty('data') ||
-          !Array.isArray(response['data']['response']['data'])) {
-          return
-        }
-
-        return response['data']['response']['data'][0]
-      })
+    return axios.post(process.env.VUE_APP_S3, request)
   },
 
   /**
