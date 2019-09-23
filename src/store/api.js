@@ -27,7 +27,7 @@ export default {
    * @returns {Promise.<TResult>|Promise<any>}
    */
   uploadFile (request) {
-    return axios.post('//images.stg.gamenet.ru/restapi', request)
+    return axios.post(`${process.env.VUE_APP_S3}`, request)
       .then(function (response) {
         if (!response.hasOwnProperty('data') || !response['data'].hasOwnProperty('response') ||
           !response['data']['response'].hasOwnProperty('data') ||
@@ -53,9 +53,7 @@ export default {
 
     let request = new FormData()
 
-    request.append('file[]', file[0])
-    request.append('method', 'storefront.upload')
-    request.append('format', 'json')
+    request.append('file', file[0])
 
     return this.uploadFile(request)
   },
@@ -63,9 +61,7 @@ export default {
   uploadFileByFile (file) {
     let request = new FormData()
 
-    request.append('file[]', file)
-    request.append('method', 'storefront.upload')
-    request.append('format', 'json')
+    request.append('file', file)
 
     return this.uploadFile(request)
   }
