@@ -15,7 +15,7 @@
             <BaseImageUpload
               v-model="favicon"
               :label="$t('s.favicon')"
-              description="32 x 32 px, .ico, .bmp or .png" />
+              description="32 x 32 px, .ico or .png" />
           </base-fieldset-row>
 
         </base-fieldset>
