@@ -51,12 +51,12 @@ export default {
 
 .b-confirm
   width: 45rem
-  height: 20rem
+  min-height: 20rem
   border-radius: 2px
   padding: 2.4rem
   position: relative
 
-  font-family: Lato
+  font-family: Lato, sans-serif
   background: #FFFFFF
 
   h3

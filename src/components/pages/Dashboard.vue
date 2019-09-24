@@ -202,7 +202,7 @@ export default {
           </div>
           <div class="b-dashboard__item-cell-top" :style="{ 'background-image': `url(${getItemCover(item)})` }"></div>
           <div class="b-dashboard__item-cell-bottom">
-            <div class="b-dashboard__item--name">{{ item.name }}</div>
+            <div class="b-dashboard__item--name" :title="item.name">{{ item.name }}</div>
             <div class="b-dashboard__item--update">{{ getUpdatedLeftTime(item.updateDate) }}</div>
           </div>
         </div>
@@ -347,6 +347,11 @@ export default {
       font-size: 1.6rem
       line-height: 1.9rem
       padding-bottom: .6rem
+      -ms-text-overflow: ellipsis
+      text-overflow: ellipsis
+      overflow: hidden
+      max-height: 4rem
+      white-space: nowrap
     &--update
       color: $grey-middle
       font-size: 1.4rem
