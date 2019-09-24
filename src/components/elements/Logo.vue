@@ -38,16 +38,6 @@
       :z="999"
      />
     <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
-
-    <!-- Mobile styles -->
-    <v-style scoped>
-      @media only screen and (max-width: 768px) {
-        .b-logo {
-          width: {{ media['is-mobile'].width }} !important;
-          height: {{ media['is-mobile'].height }} !important;
-        }
-      }
-    </v-style>
   </div>
 </template>
 
@@ -231,7 +221,10 @@ export default {
         display: none
   & span
     display: block
-  .is-mobile &
+  .is-mobile &,
+    width: var(--mobile-width) !important
+    height: var(--mobile-height) !important
+  @media only screen and (max-width: 768px)
     width: var(--mobile-width) !important
     height: var(--mobile-height) !important
   .is-tablet &

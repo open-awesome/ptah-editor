@@ -65,7 +65,7 @@
       </div> <!-- /_b-panel__control-->
     </div><!-- /_direction-->
 
-    <div class="b-panel__control" v-if="settingObjectOptions.width">
+    <div class="b-panel__control" v-if="settingObjectOptions.width && !isMobile">
       <control-slot-width></control-slot-width>
     </div>
 
@@ -92,7 +92,16 @@ export default {
   },
 
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectSection', 'settingObjectOptions']),
+    ...mapState('Sidebar', [
+      'sandbox',
+      'settingObjectSection',
+      'settingObjectOptions',
+      'device'
+    ]),
+
+    isMobile () {
+      return this.device === 'is-mobile'
+    },
 
     options () {
       return this.settingObjectOptions
@@ -122,6 +131,10 @@ export default {
       return (this.settingObjectSection.get(this.sandbox.container) || {}).styles
     },
 
+    mediaStyles () {
+      return (this.settingObjectSection.get(this.sandbox.container) || {}).media
+    },
+
     components: {
       set (value) {
         this.settingObjectSection.set(this.sandbox.components, value)
@@ -133,35 +146,29 @@ export default {
 
     direction: {
       set (value) {
-        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
-          styles: { 'flex-direction': value }
-        }))
+        this.update('flex-direction', value)
       },
       get () {
-        return this.styles['flex-direction']
+        return this.getPropValue('flex-direction')
       }
     },
 
     align: {
       set (value) {
-        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
-          styles: { 'align-items': value }
-        }))
+        this.update('align-items', value)
       },
       get () {
-        return this.styles['align-items']
+        return this.getPropValue('align-items')
       }
     },
 
     justify: {
-      get () {
-        return this.styles['justify-content']
+      set (value) {
+        this.update('justify-content', value)
       },
 
-      set (value) {
-        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
-          styles: { ...this.styles, 'justify-content': value }
-        }))
+      get () {
+        return this.getPropValue('justify-content')
       }
     }
   },
@@ -198,6 +205,35 @@ export default {
         return
       }
       this.justify = value
+    },
+
+    update (prop, value) {
+      let props = {}
+      let styles = {}
+      let media = {}
+      let device = 'is-mobile'
+
+      styles[prop] = value
+
+      media[device] = {}
+      media[device][prop] = value
+
+      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, props))
+    },
+
+    getPropValue (prop) {
+      let s = ''
+      let device = 'is-mobile'
+
+      if (this.isMobile && this.mediaStyles[device] && this.mediaStyles[device][prop]) {
+        s = this.mediaStyles[device][prop]
+      } else {
+        s = this.styles[prop]
+      }
+
+      return s
     }
   }
 }

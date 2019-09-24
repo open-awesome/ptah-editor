@@ -1,9 +1,15 @@
 <template>
-  <div class="b-slot">
-    <div class="b-slot__settings" :style="{
-      'margin-top': styles['margin-top'],
-      'margin-left': styles['margin-left']
+  <div class="b-slot" :style="{
+      '--mobile-flex-direction': mediaStyles['is-mobile']['flex-direction'],
+      '--mobile-align-items': mediaStyles['is-mobile']['align-items'],
+      '--mobile-justify-content': mediaStyles['is-mobile']['justify-content'],
+      '--mobile-background-color': mediaStyles['is-mobile']['background-color'],
+      '--mobile-background-image': mediaStyles['is-mobile']['background-image']
     }">
+    <div class="b-slot__settings" :style="{
+        'margin-top': styles['margin-top'],
+        'margin-left': styles['margin-left']
+      }">
       <span
         @click.stop="showSandboxSidebar($event, 'SlotSettings')"
         tooltip="Slot settings"
@@ -35,6 +41,7 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
+import * as _ from 'lodash-es'
 
 export default {
   name: 'Sandbox',
@@ -43,30 +50,67 @@ export default {
 
   props: {
     containerPath: String,
-    componentsPath: String,
-    direction: {
-      type: String,
-      default: 'row'
-    },
-    align: {
-      type: String,
-      default: 'center'
-    }
+    componentsPath: String
   },
 
   computed: {
     ...mapState('Sidebar', [
       'sandbox',
-      'settingObjectSection'
+      'settingObjectOptions',
+      'settingObjectSection',
+      'device'
     ]),
+
+    slot () {
+      return this.settingObjectSection.get(this.sandbox.container) || {}
+    },
+
+    isMobile () {
+      return this.device === 'is-mobile'
+    },
 
     styles () {
       return this.$section.get(this.containerPath).styles
+    },
+
+    mediaStyles: {
+      get () {
+        let device = 'is-mobile'
+        let media = { 'is-mobile': {} }
+        let stylesMedia = this.$section.get(this.containerPath).media
+
+        console.log(1)
+
+        if (stylesMedia[device]) {
+          for (let key in this.styles) {
+            media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
+          }
+        } else {
+          media[device] = this.styles
+        }
+
+        return media
+      },
+      set (value) {
+        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
+          media: value
+        }))
+        console.log(1)
+      }
+    },
+
+    direction () {
+      return this.getPropValue('flex-direction')
+    },
+
+    align () {
+      return this.getPropValue('align-items')
     }
   },
 
   created () {
     this.styles['flex-direction'] = this.styles['flex-direction'] || this.direction
+    this.styles['align-items'] = this.styles['align-items'] || this.align
     this.styles['align-items'] = this.styles['align-items'] || this.align
   },
 
@@ -117,6 +161,18 @@ export default {
       this.toggleSidebar(true)
 
       this.setControlPanel(openElBar)
+    },
+
+    getPropValue (prop) {
+      let s = ''
+
+      if (this.isMobile && this.mediaStyles[`${this.device}`] && this.mediaStyles[`${this.device}`][prop]) {
+        s = this.mediaStyles[`${this.device}`][prop]
+      } else {
+        s = this.styles[prop]
+      }
+
+      return s
     }
   }
 }
@@ -188,13 +244,29 @@ export default {
       opacity: 1
     .b-draggable-slot
       border: 1px dashed $dark-blue-krayola
+
+  .is-mobile & .b-draggable-slot
+    flex-direction: var(--mobile-flex-direction) !important
+    align-items: var(--mobile-align-items) !important
+    justify-content: var(--mobile-justify-content) !important
+    background-color: var(--mobile-background-color) !important
+    background-image: var(--mobile-background-image) !important
+
+  @media only screen and (max-width: 768px)
+    & .b-draggable-slot
+      flex-direction: var(--mobile-flex-direction) !important
+      align-items: var(--mobile-align-items) !important
+      justify-content: var(--mobile-justify-content) !important
+      background-color: var(--mobile-background-color) !important
+      background-image: var(--mobile-background-image) !important
+
   /deep/
     .b-draggable-slot
       display: flex
       flex-wrap: wrap
-      flex-direction: column
-      justify-content: center
-      align-items: center
+      // flex-direction: column
+      // justify-content: center
+      // align-items: center
       color: inherit
 
       width: 100%
@@ -205,19 +277,8 @@ export default {
       &
         > div
           max-width: 100%
-          // padding: .8rem
       &_horizont
         > div
           width: auto
-      .is-mobile &,
-      .is-tablet &
-        width: 100%
-        > div
-          width: 100%
-      @media only screen and (max-width: 576px)
-        &
-          width: 100%
-          > div
-            width: 100%
 
 </style>

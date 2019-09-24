@@ -98,12 +98,12 @@ const data = new Map([
       'background-size': 'contain',
       'background-color': 'rgba(0, 0, 0, 0)',
       'width': '256px',
-      'height': '160'
+      'height': '160px'
     },
     media: {
       'is-mobile': {
-        width: '100px',
-        height: '100px'
+        'width': '256px',
+        'height': '160px'
       }
     }
   }))],
@@ -123,13 +123,13 @@ const data = new Map([
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-color': 'rgba(0, 0, 0, 0)',
-      'width': '96px',
-      'height': '96px'
+      'width': '256px',
+      'height': '160px'
     },
     media: {
       'is-mobile': {
-        width: '100px',
-        height: '100px'
+        'width': '256px',
+        'height': '160px'
       }
     }
   }))],
@@ -145,7 +145,10 @@ const data = new Map([
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': 'rgba(0,0,0,0)',
-        'background-attachment': 'scroll'
+        'background-attachment': 'scroll',
+        'flex-direction': 'column',
+        'align-items': 'center',
+        'justify-content': 'flex-start'
       },
       overlay: {
         color: 'rgba(0,0,0,1)',
@@ -154,7 +157,10 @@ const data = new Map([
       width: null,
       maxWidth: null,
       minWidth: null,
-      grow: false
+      grow: false,
+      media: {
+        'is-mobile': {}
+      }
     })
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,

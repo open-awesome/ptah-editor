@@ -42,16 +42,6 @@
     <span class="b-image__preview-video" v-if="link && link.type === 'video'">
       <icon-base name="video" color="#fff" width="64" height="64" />
     </span>
-
-    <!-- Mobile styles -->
-    <v-style scoped>
-      @media only screen and (max-width: 768px) {
-        .b-image {
-          width: {{ media['is-mobile'].width }} !important;
-          height: {{ media['is-mobile'].height }} !important;
-        }
-      }
-    </v-style>
   </div>
 </template>
 
@@ -230,6 +220,9 @@ export default {
   & span
     display: block
   .is-mobile &
+    width: var(--mobile-width) !important
+    height: var(--mobile-height) !important
+  @media only screen and (max-width: 768px)
     width: var(--mobile-width) !important
     height: var(--mobile-height) !important
   .is-tablet &

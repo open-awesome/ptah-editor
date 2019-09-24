@@ -93,18 +93,42 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'sandbox',
-      'settingObjectSection'
+      'settingObjectSection',
+      'device'
     ]),
 
-    bgAttachmentCheckbox: {
-      set (value) {
-        this.bgAttachment = value ? 'fixed' : 'scroll'
-        this.settingObjectSection.set(this.sandbox.container, {
-          backgroundType: this.bgAttachment
-        })
-      },
+    isMobile () {
+      return this.device === 'is-mobile'
+    },
+
+    slot () {
+      return this.settingObjectSection.get(this.sandbox.container) || {}
+    },
+
+    styles () {
+      return (this.settingObjectSection.get(this.sandbox.container) || {}).styles
+    },
+
+    mediaStyles: {
       get () {
-        return this.options.bgAttachment === 'fixed'
+        let device = 'is-mobile'
+        let media = { 'is-mobile': {} }
+        let stylesMedia = (this.settingObjectSection.get(this.sandbox.container) || {}).media
+
+        if (stylesMedia[device]) {
+          for (let key in this.styles) {
+            media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
+          }
+        } else {
+          media[device] = this.styles
+        }
+
+        return media
+      },
+      set (value) {
+        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
+          media: value
+        }))
       }
     },
 
@@ -115,16 +139,8 @@ export default {
         })
       },
       get () {
-        return this.options.backgroundType
+        return this.slot.backgroundType
       }
-    },
-
-    options () {
-      return this.settingObjectSection.get(this.sandbox.container) || {}
-    },
-
-    styles () {
-      return (this.settingObjectSection.get(this.sandbox.container) || {}).styles
     }
   },
 
@@ -143,7 +159,8 @@ export default {
 
   methods: {
     updateProps () {
-      let styles = this.styles
+      let styles = this.isMobile ? this.mediaStyles['is-mobile'] : this.styles
+
       let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
         styles['background-image'] : ''
       let bgimage = image.match(/url\((.*?)\)/)
@@ -173,6 +190,7 @@ export default {
       let pickers = this.backgroundPickers
       let bgimage = this.sectionBgUrl
       let styles = { 'background-color': '' }
+      let props = {}
 
       switch (pickers.length) {
         case 1:
@@ -189,7 +207,9 @@ export default {
           break
       }
 
-      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, { styles: styles }))
+      this.isMobile ? props = { 'media': styles } : props = { 'styles': styles }
+
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, props))
     },
 
     updateBgUrl () {
@@ -228,6 +248,33 @@ export default {
     removeBackgroundPicker (index) {
       this.backgroundPickers.splice(index, 1)
       this.updateBgColor()
+    },
+
+    update (prop, value) {
+      let props = {}
+      let styles = {}
+      let media = {}
+
+      styles[prop] = value
+
+      media[`${this.device}`] = {}
+      media[`${this.device}`][prop] = value
+
+      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, props))
+    },
+
+    getPropValue (prop) {
+      let s = ''
+
+      if (this.isMobile && this.mediaStyles[`${this.device}`] && this.mediaStyles[`${this.device}`][prop]) {
+        s = this.mediaStyles[`${this.device}`][prop]
+      } else {
+        s = this.styles[prop]
+      }
+
+      return s
     }
   }
 }
