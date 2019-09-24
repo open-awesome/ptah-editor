@@ -83,8 +83,6 @@ export default {
         let media = { 'is-mobile': {} }
         let stylesMedia = this.$section.get(this.containerPath).media
 
-        console.log(1)
-
         if (stylesMedia[device]) {
           for (let key in this.styles) {
             media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
@@ -99,7 +97,6 @@ export default {
         this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
           media: value
         }))
-        console.log(1)
       }
     },
 
@@ -266,6 +263,9 @@ export default {
       justify-content: var(--mobile-justify-content) !important
       background-color: var(--mobile-background-color) !important
       background-image: var(--mobile-background-image) !important
+      background-position: var(--mobile-background-position) !important
+      background-repeat: var(--mobile-background-repeat) !important
+      background-attachment: var(--mobile-background-attachment) !important
 
   /deep/
     .b-draggable-slot

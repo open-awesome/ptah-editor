@@ -229,9 +229,20 @@ export default {
 <template>
   <div class="b-bg-controls">
     <div class="b-section-settings__control">
-      <div class="b-background-position">
+      <div class="b-background-position" :style="{
+        '--mobile-background-color': mediaStyles['is-mobile']['background-color'],
+        '--mobile-background-image': mediaStyles['is-mobile']['background-image'],
+        '--mobile-background-position': mediaStyles['is-mobile']['background-position'],
+        '--mobile-background-repeat': mediaStyles['is-mobile']['background-repeat'],
+        '--mobile-background-size': mediaStyles['is-mobile']['background-size'],
+        '--mobile-background-attachment': mediaStyles['is-mobile']['background-attachment']
+      }">
         <div class="b-background-position__content"
-          :style="{ 'background-image' : `url(${bgImage})`, 'background-size': styles['background-size'], 'background-position': styles['background-position']  }"
+          :style="{
+            'background-image' : `url(${bgImage})`,
+            'background-size': styles['background-size'],
+            'background-position': styles['background-position']
+          }"
           >
           <span class="b-background-position__btn b-background-position__btn_center"
                 :class="{ 'selected' : bgPosition === 'center center' }"
@@ -301,6 +312,22 @@ export default {
     background-repeat: no-repeat
 
     position: relative
+  .is-mobile &__content
+    background-color: var(--mobile-background-color) !important
+    background-image: var(--mobile-background-image) !important
+    background-position: var(--mobile-background-position) !important
+    background-repeat: var(--mobile-background-repeat) !important
+    background-size: var(--mobile-background-size) !important
+    background-attachment: var(--mobile-background-attachment) !important
+
+  @media only screen and (max-width: 768px)
+    &__content
+      background-color: var(--mobile-background-color) !important
+      background-image: var(--mobile-background-image) !important
+      background-position: var(--mobile-background-position) !important
+      background-repeat: var(--mobile-background-repeat) !important
+      background-size: var(--mobile-background-size) !important
+      background-attachment: var(--mobile-background-attachment) !important
   &__btn
     position: absolute
     width: 1rem
