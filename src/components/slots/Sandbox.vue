@@ -4,7 +4,11 @@
       '--mobile-align-items': mediaStyles['is-mobile']['align-items'],
       '--mobile-justify-content': mediaStyles['is-mobile']['justify-content'],
       '--mobile-background-color': mediaStyles['is-mobile']['background-color'],
-      '--mobile-background-image': mediaStyles['is-mobile']['background-image']
+      '--mobile-background-image': mediaStyles['is-mobile']['background-image'],
+      '--mobile-background-position': mediaStyles['is-mobile']['background-position'],
+      '--mobile-background-repeat': mediaStyles['is-mobile']['background-repeat'],
+      '--mobile-background-size': mediaStyles['is-mobile']['background-size'],
+      '--mobile-background-attachment': mediaStyles['is-mobile']['background-attachment']
     }">
     <div class="b-slot__settings" :style="{
         'margin-top': styles['margin-top'],
@@ -251,6 +255,9 @@ export default {
     justify-content: var(--mobile-justify-content) !important
     background-color: var(--mobile-background-color) !important
     background-image: var(--mobile-background-image) !important
+    background-position: var(--mobile-background-position) !important
+    background-repeat: var(--mobile-background-repeat) !important
+    background-attachment: var(--mobile-background-attachment) !important
 
   @media only screen and (max-width: 768px)
     & .b-draggable-slot

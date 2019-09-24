@@ -56,8 +56,13 @@ export default {
     ...mapState('Sidebar', [
       'sandbox',
       'settingObjectSection',
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'device'
     ]),
+
+    isMobile () {
+      return this.device === 'is-mobile'
+    },
 
     options () {
       return this.settingObjectSection.get(this.sandbox.container)
@@ -72,6 +77,35 @@ export default {
         return this.settingObjectOptions.styles
       } else {
         return (this.settingObjectSection.get(this.sandbox.container) || {}).styles
+      }
+    },
+
+    mediaStyles: {
+      get () {
+        let device = 'is-mobile'
+        let media = { 'is-mobile': {} }
+        let stylesMedia = {}
+
+        if (this.container === VALID_TYPES[0]) {
+          stylesMedia = this.settingObjectOptions.media
+        } else {
+          stylesMedia = (this.settingObjectSection.get(this.sandbox.container) || {}).media
+        }
+
+        if (stylesMedia[device]) {
+          for (let key in this.styles) {
+            media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
+          }
+        } else {
+          media[device] = this.styles
+        }
+
+        return media
+      },
+      set (value) {
+        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
+          media: value
+        }))
       }
     }
   },
@@ -90,8 +124,10 @@ export default {
   },
 
   created () {
-    let image = (!!this.styles['background-image'] && typeof this.styles['background-image'] === 'string') ?
-      this.styles['background-image'] : ''
+    let styles = this.isMobile ? this.mediaStyles['is-mobile'] : this.styles
+
+    let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
+      styles['background-image'] : ''
     let bgimage = image.match(/url\((.*?)\)/)
 
     if (bgimage) {
@@ -99,10 +135,10 @@ export default {
       this.bgImage = bgimage || ''
     }
 
-    this.bgPosition = this.styles['background-position'] || 'center center'
-    this.bgRepeat = this.styles['background-repeat'] || 'no-repeat'
-    this.bgSize = this.styles['background-size'] || 'contain'
-    this.bgAttachment = this.styles['background-attachment'] || 'scroll'
+    this.bgPosition = styles['background-position'] || 'center center'
+    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+    this.bgSize = styles['background-size'] || 'contain'
+    this.bgAttachment = styles['background-attachment'] || 'scroll'
 
     if (this.bgSize === 'auto auto' && this.bgRepeat === 'no-repeat') {
       this.backgroundFill = 'normal'
@@ -169,19 +205,22 @@ export default {
     },
 
     update (prop, value) {
-      if (this.container === VALID_TYPES[0]) {
-        let styles = {}
-        styles[prop] = value
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
-      } else {
-        this.setProps(prop, value)
-      }
-    },
+      let props = {}
+      let styles = {}
+      let media = {}
 
-    setProps (prop, value) {
-      let s = {}
-      s[prop] = value
-      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, { styles: this.styles }, { styles: s }))
+      styles[prop] = value
+
+      media[`${this.device}`] = {}
+      media[`${this.device}`][prop] = value
+
+      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+      if (this.container === VALID_TYPES[0]) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+      } else {
+        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, { styles: this.styles }, props))
+      }
     }
   }
 }

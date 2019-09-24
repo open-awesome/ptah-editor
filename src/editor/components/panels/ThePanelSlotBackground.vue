@@ -207,7 +207,7 @@ export default {
           break
       }
 
-      this.isMobile ? props = { 'media': styles } : props = { 'styles': styles }
+      this.isMobile ? props = { 'media': { 'is-mobile': styles } } : props = { 'styles': styles }
 
       this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, props))
     },
