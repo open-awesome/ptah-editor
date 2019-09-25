@@ -227,6 +227,24 @@ const actions = {
   }, 2800),
 
   /**
+   * Copy
+   * @param dispatch
+   * @param ids {Array} array of lansing ids
+   * @returns {*}
+   */
+  copyLanding ({ dispatch }, ids) {
+    return api.request({
+      url: `landings/copy`,
+      method: 'POST',
+      params: {
+        ids
+      }
+    }).then(() => {
+      dispatch('fetchLandings')
+    })
+  },
+
+  /**
    * Stores settings data
    *
    * @param {Object} settingsPart some fields of settings data

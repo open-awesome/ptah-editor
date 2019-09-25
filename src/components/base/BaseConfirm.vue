@@ -1,7 +1,7 @@
 <template>
   <div class="b-confirm-overlay">
     <div class="b-confirm">
-      <a tabindex="0" href="#" @click="$emit('close')" class="b-confirm__close">&times;</a>
+      <a tabindex="0" href="#" @click.prevent="$emit('close')" class="b-confirm__close">&times;</a>
       <h3>{{title}}</h3>
 
       <div class="b-confirm__content">
@@ -10,8 +10,8 @@
       </div>
 
       <div class="b-confirm__footer">
-        <base-button size="middle" @click="$emit('close')">{{ $t('nav.cancel') }}</base-button>
-        <base-button size="middle" color="orange" @click="$emit('confirm'), $emit('close')">OK</base-button>
+        <base-button size="middle" @click.prevent="$emit('close')">{{ $t('nav.cancel') }}</base-button>
+        <base-button size="middle" color="orange" @click.prevent="$emit('confirm'), $emit('close')">{{button}}</base-button>
       </div>
     </div>
   </div>
@@ -24,6 +24,11 @@ export default {
     title: {
       type: String,
       required: true
+    },
+    // confirm button text
+    button: {
+      type: String,
+      default: 'OK'
     }
   }
 }
@@ -46,12 +51,12 @@ export default {
 
 .b-confirm
   width: 45rem
-  height: 20rem
+  min-height: 20rem
   border-radius: 2px
   padding: 2.4rem
   position: relative
 
-  font-family: Lato
+  font-family: Lato, sans-serif
   background: #FFFFFF
 
   h3
