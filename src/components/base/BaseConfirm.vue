@@ -10,8 +10,8 @@
       </div>
 
       <div class="b-confirm__footer">
-        <base-button size="middle" @click="$emit('close')">{{ $t('nav.cancel') }}</base-button>
-        <base-button size="middle" color="orange" @click="$emit('confirm'), $emit('close')">{{button}}</base-button>
+        <base-button size="middle" @click.prevent="$emit('close')">{{ $t('nav.cancel') }}</base-button>
+        <base-button size="middle" color="orange" @click.prevent="$emit('confirm'), $emit('close')">{{button}}</base-button>
       </div>
     </div>
   </div>
