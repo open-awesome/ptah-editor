@@ -111,6 +111,11 @@ export default {
   },
 
   watch: {
+    device () {
+      console.log(1)
+      this.getStyles()
+    },
+
     styles (value) {
       let image = (!!value['background-image'] && typeof value['background-image'] === 'string') ?
         value['background-image'] : ''
@@ -124,47 +129,51 @@ export default {
   },
 
   created () {
-    let styles = this.isMobile ? this.mediaStyles['is-mobile'] : this.styles
-
-    let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
-      styles['background-image'] : ''
-    let bgimage = image.match(/url\((.*?)\)/)
-
-    if (bgimage) {
-      bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-      this.bgImage = bgimage || ''
-    }
-
-    this.bgPosition = styles['background-position'] || 'center center'
-    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
-    this.bgSize = styles['background-size'] || 'contain'
-    this.bgAttachment = styles['background-attachment'] || 'scroll'
-
-    if (this.bgSize === 'auto auto' && this.bgRepeat === 'no-repeat') {
-      this.backgroundFill = 'normal'
-    }
-    if (this.bgSize === 'auto auto' && this.bgRepeat === 'repeat') {
-      this.backgroundFill = 'both'
-    }
-    if (this.bgSize === 'auto auto' && this.bgRepeat === 'repeat-y') {
-      this.backgroundFill = 'vertically'
-    }
-    if (this.bgSize === 'auto auto' && this.bgRepeat === 'repeat-x') {
-      this.backgroundFill = 'horizontally'
-    }
-    if (this.bgSize === 'cover') {
-      this.backgroundFill = 'cover'
-    }
-    if (this.bgSize === 'contain') {
-      this.backgroundFill = 'stretch'
-    }
-    if (this.bgAttachment === 'fixed') {
-      this.isParallax = true
-    }
+    this.getStyles()
   },
 
   methods: {
     ...mapActions('Sidebar', ['updateSettingOptions']),
+
+    getStyles () {
+      let styles = this.isMobile ? this.mediaStyles['is-mobile'] : this.styles
+
+      let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
+        styles['background-image'] : ''
+      let bgimage = image.match(/url\((.*?)\)/)
+
+      if (bgimage) {
+        bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+        this.bgImage = bgimage || ''
+      }
+
+      this.bgPosition = styles['background-position'] || 'center center'
+      this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+      this.bgSize = styles['background-size'] || 'contain'
+      this.bgAttachment = styles['background-attachment'] || 'scroll'
+
+      if (this.bgSize === 'auto auto' && this.bgRepeat === 'no-repeat') {
+        this.backgroundFill = 'normal'
+      }
+      if (this.bgSize === 'auto auto' && this.bgRepeat === 'repeat') {
+        this.backgroundFill = 'both'
+      }
+      if (this.bgSize === 'auto auto' && this.bgRepeat === 'repeat-y') {
+        this.backgroundFill = 'vertically'
+      }
+      if (this.bgSize === 'auto auto' && this.bgRepeat === 'repeat-x') {
+        this.backgroundFill = 'horizontally'
+      }
+      if (this.bgSize === 'cover') {
+        this.backgroundFill = 'cover'
+      }
+      if (this.bgSize === 'contain') {
+        this.backgroundFill = 'stretch'
+      }
+      if (this.bgAttachment === 'fixed') {
+        this.isParallax = true
+      }
+    },
 
     setParallax () {
       if (this.isParallax) {
@@ -173,6 +182,7 @@ export default {
         this.update('background-attachment', 'scroll')
       }
     },
+
     changeSize () {
       if (this.backgroundFill === 'normal') {
         this.update('background-size', 'auto auto')
@@ -199,6 +209,7 @@ export default {
         this.update('background-repeat', 'repeat')
       }
     },
+
     setPosition (x, y) {
       this.bgPosition = `${x} ${y}`
       this.update('background-position', `${x} ${y}`)
@@ -222,6 +233,10 @@ export default {
         this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, { styles: this.styles }, props))
       }
     }
+  },
+
+  updated () {
+    this.getStyles()
   }
 }
 </script>
@@ -238,11 +253,11 @@ export default {
         '--mobile-background-attachment': mediaStyles['is-mobile']['background-attachment']
       }">
         <div class="b-background-position__content"
-          :style="{
-            'background-image' : `url(${bgImage})`,
-            'background-size': styles['background-size'],
-            'background-position': styles['background-position']
-          }"
+          :style="[
+            isMobile ? { 'background-image': mediaStyles['is-mobile']['background-image'] } : { 'background-image': `url(${bgImage})` },
+            isMobile ? { 'background-size': mediaStyles['is-mobile']['background-size'] } : { 'background-size': styles['background-size'] },
+            isMobile ? { 'background-position': mediaStyles['is-mobile']['background-position'] } : { 'background-position': styles['background-position'] }
+          ]"
           >
           <span class="b-background-position__btn b-background-position__btn_center"
                 :class="{ 'selected' : bgPosition === 'center center' }"
@@ -314,7 +329,6 @@ export default {
     position: relative
   .is-mobile &__content
     background-color: var(--mobile-background-color) !important
-    background-image: var(--mobile-background-image) !important
     background-position: var(--mobile-background-position) !important
     background-repeat: var(--mobile-background-repeat) !important
     background-size: var(--mobile-background-size) !important

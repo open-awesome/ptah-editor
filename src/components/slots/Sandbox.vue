@@ -254,6 +254,7 @@ export default {
     background-image: var(--mobile-background-image) !important
     background-position: var(--mobile-background-position) !important
     background-repeat: var(--mobile-background-repeat) !important
+    background-size: var(--mobile-background-size) !important
     background-attachment: var(--mobile-background-attachment) !important
 
   @media only screen and (max-width: 768px)
@@ -265,6 +266,7 @@ export default {
       background-image: var(--mobile-background-image) !important
       background-position: var(--mobile-background-position) !important
       background-repeat: var(--mobile-background-repeat) !important
+      background-size: var(--mobile-background-size) !important
       background-attachment: var(--mobile-background-attachment) !important
 
   /deep/
