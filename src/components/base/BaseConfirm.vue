@@ -1,7 +1,7 @@
 <template>
   <div class="b-confirm-overlay">
     <div class="b-confirm">
-      <a tabindex="0" href="#" @click="$emit('close')" class="b-confirm__close">&times;</a>
+      <a tabindex="0" href="#" @click.prevent="$emit('close')" class="b-confirm__close">&times;</a>
       <h3>{{title}}</h3>
 
       <div class="b-confirm__content">
