@@ -8,12 +8,20 @@
       '--mobile-background-position': mediaStyles['is-mobile']['background-position'],
       '--mobile-background-repeat': mediaStyles['is-mobile']['background-repeat'],
       '--mobile-background-size': mediaStyles['is-mobile']['background-size'],
-      '--mobile-background-attachment': mediaStyles['is-mobile']['background-attachment']
+      '--mobile-background-attachment': mediaStyles['is-mobile']['background-attachment'],
+      '--mobile-margin-top': mediaStyles['is-mobile']['margin-top'],
+      '--mobile-margin-right': mediaStyles['is-mobile']['margin-right'],
+      '--mobile-margin-bottom': mediaStyles['is-mobile']['margin-bottom'],
+      '--mobile-margin-left': mediaStyles['is-mobile']['margin-left'],
+      '--mobile-padding-top': mediaStyles['is-mobile']['padding-top'],
+      '--mobile-padding-right': mediaStyles['is-mobile']['padding-right'],
+      '--mobile-padding-bottom': mediaStyles['is-mobile']['padding-bottom'],
+      '--mobile-padding-left': mediaStyles['is-mobile']['padding-left']
     }">
-    <div class="b-slot__settings" :style="{
-        'margin-top': styles['margin-top'],
-        'margin-left': styles['margin-left']
-      }">
+    <div class="b-slot__settings" :style="[
+        isMobile ? { 'margin-top': mediaStyles['is-mobile']['margin-top'] } : { 'margin-top': styles['margin-top'] },
+        isMobile ? { 'margin-left': mediaStyles['is-mobile']['margin-left'] } : { 'margin-left': styles['margin-left'] },
+      ]">
       <span
         @click.stop="showSandboxSidebar($event, 'SlotSettings')"
         tooltip="Slot settings"
@@ -256,6 +264,14 @@ export default {
     background-repeat: var(--mobile-background-repeat) !important
     background-size: var(--mobile-background-size) !important
     background-attachment: var(--mobile-background-attachment) !important
+    margin-top: var(--mobile-margin-top) !important
+    margin-right: var(--mobile-margin-right) !important
+    margin-bottom: var(--mobile-margin-bottom) !important
+    margin-left: var(--mobile-margin-left) !important
+    padding-top: var(--mobile-padding-top) !important
+    padding-right: var(--mobile-padding-right) !important
+    padding-bottom: var(--mobile-padding-bottom) !important
+    padding-left: var(--mobile-padding-left) !important
 
   @media only screen and (max-width: 768px)
     & .b-draggable-slot
@@ -268,6 +284,14 @@ export default {
       background-repeat: var(--mobile-background-repeat) !important
       background-size: var(--mobile-background-size) !important
       background-attachment: var(--mobile-background-attachment) !important
+      margin-top: var(--mobile-margin-top) !important
+      margin-right: var(--mobile-margin-right) !important
+      margin-bottom: var(--mobile-margin-bottom) !important
+      margin-left: var(--mobile-margin-left) !important
+      padding-top: var(--mobile-padding-top) !important
+      padding-right: var(--mobile-padding-right) !important
+      padding-bottom: var(--mobile-padding-bottom) !important
+      padding-left: var(--mobile-padding-left) !important
 
   /deep/
     .b-draggable-slot

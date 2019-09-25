@@ -38,8 +38,13 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectElement'
+      'settingObjectElement',
+      'device'
     ]),
+
+    isMobile () {
+      return this.device === 'is-mobile'
+    },
 
     marginLeft: {
       get () {
@@ -128,7 +133,17 @@ export default {
     ]),
 
     getStyleNumberValue (prop) {
-      let s = _.get(this.settingObjectOptions, `styles[${prop}]`)
+      let s = ''
+      let props = ''
+
+      if (this.isMobile) {
+        props = `media['is-mobile']`
+      } else {
+        props = 'styles'
+      }
+
+      s = _.get(this.settingObjectOptions, `${props}[${prop}]`)
+
       if (s === undefined) {
         // get values from node
         let style = window.getComputedStyle(this.settingObjectElement)
@@ -146,10 +161,16 @@ export default {
     },
 
     update (group, prop, value) {
-      let [styles, property] = [{}, this[group][prop]]
+      let [props, styles, media, property] = [{}, {}, {}, this[group][prop]]
       if (value === '') value = 0
+
       styles[property] = value + 'px'
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+      media['is-mobile'] = {}
+      media['is-mobile'][property] = value + 'px'
+
+      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
     }
   }
 }
