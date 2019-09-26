@@ -272,7 +272,8 @@ const defaultSchema = {
   container: {
     styles: {
       'margin': '0 150px 0 0',
-      'padding': '0'
+      'padding': '0',
+      'flex-direction': 'row'
     },
     width: 3,
     minWidth: 2,
@@ -283,6 +284,7 @@ const defaultSchema = {
   container2: {
     styles: {
       padding: 0,
+      'flex-direction': 'row',
       'justify-content': 'space-between'
     },
     width: 9,

@@ -196,7 +196,8 @@ const SCHEMA_CUSTOM = {
   container: {
     width: 12,
     styles: {
-      padding: '8px 0'
+      padding: '8px 0',
+      'flex-direction': 'row'
     }
   },
   components: _.merge({}, C_CUSTOM),

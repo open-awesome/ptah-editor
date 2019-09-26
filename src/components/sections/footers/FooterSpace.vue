@@ -194,7 +194,10 @@ const SCHEMA_CUSTOM = {
     }
   },
   container: {
-    width: 11
+    width: 11,
+    styles: {
+      'flex-direction': 'row'
+    }
   },
   components: _.merge({}, C_CUSTOM),
   edited: true

@@ -91,7 +91,13 @@ export default {
     },
 
     media () {
-      return this.$section.get(`$sectionData.${this.path}.media`)
+      let media = this.$section.get(`$sectionData.${this.path}.media`)
+
+      if (media === undefined) {
+        media = { 'is-mobile': {} }
+      }
+
+      return media
     },
 
     link () {

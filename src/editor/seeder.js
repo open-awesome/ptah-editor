@@ -37,7 +37,10 @@ const DEFAULT_OPTIONS = {
   // --- background video
   backgroundVideo: null,
 
-  absorb: 0
+  absorb: 0,
+  media: {
+    'is-mobile': {}
+  }
 }
 
 /**

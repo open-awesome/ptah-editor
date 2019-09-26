@@ -91,6 +91,10 @@ export default {
         let media = { 'is-mobile': {} }
         let stylesMedia = this.$section.get(this.containerPath).media
 
+        if (stylesMedia === undefined) {
+          stylesMedia = media
+        }
+
         if (stylesMedia[device]) {
           for (let key in this.styles) {
             media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]

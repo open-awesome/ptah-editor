@@ -159,6 +159,11 @@ const defaultSchema = {
       'background-size': 'cover'
     }
   },
+  container: {
+    styles: {
+      'flex-direction': 'row'
+    }
+  },
   components: merge({}, defaultComponents),
   edited: true
 }
