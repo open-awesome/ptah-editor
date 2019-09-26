@@ -5,10 +5,7 @@
     :data-href="link.href"
     :path="path"
     :class="{'js-element-link' : isSetUrlImage }"
-    :style="{
-      '--mobile-width': media['is-mobile']['width'],
-      '--mobile-height': media['is-mobile']['height']
-    }"
+    :style="objVarsMedia"
     >
 
     <i class="b-load pth-uploader" @click.stop="upload" ref="upload">
@@ -51,11 +48,12 @@ import Uploader from '@editor/plugins/Uploader.vue'
 import VueDraggableResizable from 'vue-draggable-resizable'
 // optionally import default styles
 import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
+import element from '../mixins/element'
 
 export default {
   name: 'Pic',
 
-  inject: ['$section'],
+  mixins: [element],
 
   components: {
     VueDraggableResizable,
@@ -78,35 +76,11 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectElement',
-      'device'
+      'settingObjectElement'
     ]),
-
-    isMobile () {
-      return this.device === 'is-mobile'
-    },
 
     alt () {
       return this.$section.get(`$sectionData.${this.path}.alt`)
-    },
-
-    styles () {
-      return this.$section.get(`$sectionData.${this.path}.styles`)
-    },
-
-    media () {
-      let media = this.$section.get(`$sectionData.${this.path}.media`)
-
-      if (media === undefined) {
-        media = {
-          'is-mobile': {
-            width: this.styles.width,
-            height: this.styles.height
-          }
-        }
-      }
-
-      return media
     },
 
     link () {
@@ -193,6 +167,7 @@ export default {
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
+@import '../../assets/sass/element.sass'
 
 .b-image
   $this: &
@@ -230,12 +205,6 @@ export default {
 
   & span
     display: block
-  .is-mobile &
-    width: var(--mobile-width) !important
-    height: var(--mobile-height) !important
-  @media only screen and (max-width: 768px)
-    width: var(--mobile-width) !important
-    height: var(--mobile-height) !important
   .is-tablet &
     max-width: 100% !important
     margin: $size-step/2 auto !important
