@@ -1,7 +1,7 @@
 <template>
-<section
+<header
     v-styler:section="$sectionData.mainStyle"
-    :class="$sectionData.mainStyle.classes"
+    :class="[$sectionData.mainStyle.classes, {'_sticky' : $sectionData.mainStyle.sticky }]"
     :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }]"
     class="b-section-header">
 
@@ -131,7 +131,7 @@
     </div>
   </div>
 
-</section>
+</header>
 </template>
 
 <script>
@@ -337,6 +337,7 @@ export default {
 
 <style lang="sass" scoped>
 .b-section-header
+  z-index: 2
   .is-tablet &,
   .is-mobile &
     text-align: left

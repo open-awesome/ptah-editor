@@ -139,6 +139,7 @@ export default {
   &_blue
    +active
   &_gray
+    background: $white
     color: $dark-blue-krayola
     border: 0.2rem rgba($black, 0.1) solid
     border: 0.2rem rgba($black, 0.1) solid

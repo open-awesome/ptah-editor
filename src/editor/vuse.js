@@ -307,11 +307,11 @@ class Vuse {
               ${artboard.innerHTML}
             </div>
             ${this.getCookiesPreview()}
-            <script src="${window.location.origin + '/js/cjs.js'}"></script>
             ${scrollSetup.setup}
             <script>
               ${script}
             </script>
+            <script src="${window.location.origin + '/js/cjs.js'}"></script>
           <body>
         </html>`
     )
@@ -396,10 +396,45 @@ class Vuse {
 
     if (this.settings.fullPageScroll === 'yes') {
       scroll.style = `
-          <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-          <script src="${window.location.origin + '/js/onepage-scroll.min.js'}"></script>
-          <link href="${window.location.origin + '/css/onepage-scroll.css'}" rel="stylesheet">`
-      scroll.setup = `<script>$(".main").onepage_scroll();</script>`
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script src="${window.location.origin + '/js/onepage-scroll.min.js'}"></script>
+        <link href="${window.location.origin + '/css/onepage-scroll.css'}" rel="stylesheet">
+      `
+      scroll.setup = `
+        <script>
+          function detectMobile () {
+            return $(window).width() < 500 ? true : false;
+          }
+
+          if (!detectMobile()) {
+            $(".main").onepage_scroll();
+          }
+
+          $(window).resize(function() {
+            let className = 'disabled-onepage-scroll';
+            let classWrapName = 'onepage-wrapper';
+
+            if (detectMobile()) {
+              if ($(".main").data("onepage_scroll")){
+                $(".main").disable();
+                $(".main").data("onepage_scroll").destroy();
+
+                if ($(".main").hasClass(classWrapName)) $(".main").removeClass(classWrapName);
+              }
+              $("body").addClass(className);
+              $("body").css('overflow', '')
+
+            } else {
+              if (!$(".main").data("onepage_scroll")){
+                $(".main").onepage_scroll();
+              }
+
+              $("body").css('overflow', 'hidden');
+
+              if ($("body").hasClass(className)) $("body").removeClass(className);
+            }
+          });
+      </script>`
     }
 
     return scroll

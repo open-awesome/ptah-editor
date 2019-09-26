@@ -1,19 +1,8 @@
 <template>
-    <header class="b-page__header" v-if="this.isStorefrontPreview == false">
+    <header class="b-page__header b-header" v-if="this.isStorefrontPreview == false">
 
-      <div class="b-page__header-crumbs">
-        <span class="b-page__header-crumbs-home"
-          :class="{'b-page__header-crumbs-home_active': pageIs('/dashboard') === false}"
-          @click="returnToBoard"
-          >
-          <icon-base name="home" :color="colorHome"></icon-base>
-        </span>
-        <span class="b-page__header-crumbs-home"
-          :class="{'b-page__header-crumbs-home_active': pageIs('/dashboard') === false}"
-          @click="returnToBoard"
-          >
-          {{ $t('d.allSites') }}
-        </span>
+      <div class="b-header__logo">
+        <img src="https://s3.protocol.one/images/ptah_logo_dashboard.png" alt="Ptah logo">
       </div>
 
       <div class="b-locale-changer">
@@ -83,7 +72,7 @@ export default {
 
 .b-page__header
   width: 100%
-  padding: $size-step/1.33 $size-step
+  padding: 4rem 6.5rem 1.7rem
 
   position: relative
   z-index: 10
@@ -108,6 +97,10 @@ export default {
         &:hover
           opacity: 1
 .b-locale-changer
+  .b-pth-base-select
+    border-bottom: 1px solid transparent
+    &:hover
+      border-bottom: 1px solid transparent
   .b-pth-base-select__dropdown
-    max-height: 6rem !important
+    max-height: 7rem !important
 </style>

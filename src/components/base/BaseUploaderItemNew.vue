@@ -115,9 +115,7 @@ import * as _ from 'lodash-es'
 
 function getFormData (file) {
   let formData = new FormData()
-  formData.append('file[]', file)
-  formData.append('method', 'storefront.upload')
-  formData.append('format', 'json')
+  formData.append('file', file)
   return formData
 }
 
@@ -175,16 +173,16 @@ export default {
         let xhr = new XMLHttpRequest()
 
         xhr.upload.onprogress = this.loadingProgress // --- uploading progress
-        xhr.open('POST', '//images.stg.gamenet.ru/restapi')
+        xhr.open('POST', `${process.env.VUE_APP_S3}`)
         xhr.send(getFormData(file))
 
         xhr.onload = xhr.onerror = () => {
           if (xhr.status === 200) {
             try {
-              let { response } = JSON.parse(xhr.response)
-              let { name, src: path } = response.data[0]
+              let response = JSON.parse(xhr.response)
+              let path = `${process.env.VUE_APP_S3BUCKET}${response.relative_path}`
               this.clearProgress(path)
-              resolve({ name, path })
+              resolve({ name: response.file, path })
             } catch (error) {
               reject(error)
             }
