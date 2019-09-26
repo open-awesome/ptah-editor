@@ -86,10 +86,12 @@ export default {
         let media = { 'is-mobile': {} }
         let stylesMedia = {}
 
-        if (this.container === VALID_TYPES[0]) {
+        if (this.container === VALID_TYPES[0] && this.settingObjectOptions.media) {
           stylesMedia = this.settingObjectOptions.media
-        } else {
+        } else if ((this.settingObjectSection.get(this.sandbox.container) || {}).media) {
           stylesMedia = (this.settingObjectSection.get(this.sandbox.container) || {}).media
+        } else {
+          stylesMedia = media
         }
 
         if (stylesMedia[device]) {
