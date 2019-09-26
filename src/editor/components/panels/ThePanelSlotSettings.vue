@@ -132,7 +132,12 @@ export default {
     },
 
     mediaStyles () {
-      return (this.settingObjectSection.get(this.sandbox.container) || {}).media
+      let media = (this.settingObjectSection.get(this.sandbox.container) || {}).media
+
+      if (media === undefined) {
+        media = { 'is-mobile': {} }
+      }
+      return media
     },
 
     components: {
