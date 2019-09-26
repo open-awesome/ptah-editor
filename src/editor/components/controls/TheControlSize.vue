@@ -56,13 +56,24 @@ export default {
     ]),
 
     getStyleNumberValue (prop) {
-      let props = 'styles'
+      let props = {}
+      let s = {}
+      let styles = this.settingObjectOptions.styles
+      let stylesMedia = {}
 
-      if (this.isMobile) {
-        props = `media[${this.device}]`
+      if (this.settingObjectOptions.media && this.settingObjectOptions.media['is-mobile']) {
+        stylesMedia = this.settingObjectOptions.media['is-mobile']
+      } else {
+        stylesMedia[prop] = styles[prop]
       }
 
-      let s = _.get(this.settingObjectOptions, `${props}[${prop}]`)
+      if (this.isMobile) {
+        props = stylesMedia
+      } else {
+        props = styles
+      }
+
+      s = props[prop]
 
       if (s === undefined) {
         // get values from node

@@ -98,7 +98,12 @@ export default {
       let media = this.$section.get(`$sectionData.${this.path}.media`)
 
       if (media === undefined) {
-        media = { 'is-mobile': {} }
+        media = {
+          'is-mobile': {
+            width: this.styles.width,
+            height: this.styles.height
+          }
+        }
       }
 
       return media

@@ -198,6 +198,11 @@ const SCHEMA_CUSTOM = {
     styles: {
       padding: '8px 0',
       'flex-direction': 'row'
+    },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column'
+      }
     }
   },
   components: _.merge({}, C_CUSTOM),

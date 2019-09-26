@@ -105,8 +105,8 @@ const data = new Map([
     },
     media: {
       'is-mobile': {
-        'width': '256px',
-        'height': '160px'
+        'width': '130px',
+        'height': '80px'
       }
     }
   }))],
@@ -131,8 +131,8 @@ const data = new Map([
     },
     media: {
       'is-mobile': {
-        'width': '256px',
-        'height': '160px'
+        'width': '130px',
+        'height': '80px'
       }
     }
   }))],
@@ -162,7 +162,9 @@ const data = new Map([
       minWidth: null,
       grow: false,
       media: {
-        'is-mobile': {}
+        'is-mobile': {
+          'flex-direction': 'column'
+        }
       }
     })
   )],
