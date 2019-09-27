@@ -2,7 +2,7 @@
   <a class="b-button is-editable" ref="btn"
      @click.stop.prevent
      :path="path"
-     :style="[objVarsMedia, objVarsResize]"
+     :style="[objVarsMedia, objVarsResize, objVarsTypo]"
     >
 
     <slot v-if="!isActive"></slot>

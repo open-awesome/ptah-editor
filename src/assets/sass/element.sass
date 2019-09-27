@@ -30,3 +30,15 @@
       padding-right: var(--mobile-padding-right) !important
       padding-bottom: var(--mobile-padding-bottom) !important
       padding-left: var(--mobile-padding-left) !important
+
+.b-button,
+.b-text
+  .is-mobile &
+    font-family: var(--mobile-font-family) !important
+    font-size: var(--mobile-font-size) !important
+    line-height: var(--mobile-line-height) !important
+  @media only screen and (max-width: 768px)
+    &
+      font-family: var(--mobile-font-family) !important
+      font-size: var(--mobile-font-size) !important
+      line-height: var(--mobile-line-height) !important

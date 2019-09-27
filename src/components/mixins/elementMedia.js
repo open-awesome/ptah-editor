@@ -40,6 +40,14 @@ export default {
         '--mobile-padding-bottom': this.mediaStyles['is-mobile']['padding-bottom'],
         '--mobile-padding-left': this.mediaStyles['is-mobile']['padding-left']
       }
+    },
+
+    objVarsTypo () {
+      return {
+        '--mobile-font-family': this.mediaStyles['is-mobile']['font-family'],
+        '--mobile-font-size': this.mediaStyles['is-mobile']['font-size'],
+        '--line-height': this.mediaStyles['is-mobile']['line-height']
+      }
     }
   }
 }

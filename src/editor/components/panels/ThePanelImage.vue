@@ -4,11 +4,11 @@
       {{ settingObjectLabel }}
     </h6>
     <!-- image -->
-    <div class="b-panel__control">
+    <div class="b-panel__control" v-if="!isMobile">
       <control-image/>
     </div>
 
-    <div class="b-panel__control" v-if="settingObjectOptions.hasLink">
+    <div class="b-panel__control" v-if="settingObjectOptions.hasLink && !isMobile">
       <control-image-link/>
     </div>
 
@@ -58,8 +58,13 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectLabel'
-    ])
+      'settingObjectLabel',
+      'device'
+    ]),
+
+    isMobile () {
+      return this.device === 'is-mobile'
+    }
   }
 }
 </script>

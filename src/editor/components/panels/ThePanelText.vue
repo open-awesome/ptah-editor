@@ -15,7 +15,7 @@
     </div>
 
     <!-- Text Link -->
-    <div class="b-panel__control">
+    <div class="b-panel__control" v-if="!isMobile">
       <control-text-link></control-text-link>
     </div>
 
@@ -26,6 +26,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import ControlTypography from '../controls/TheControlTypography'
 import ControlAlign from '../controls/TheControlAlign'
 import ControlTextLink from '../controls/TheControlTextLink'
@@ -46,6 +47,12 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'isMobile'
+    ])
   }
 }
 </script>

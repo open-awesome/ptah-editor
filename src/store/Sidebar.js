@@ -58,7 +58,8 @@ export default {
       components: [], // sandbox current section's components
       styles: {} // sandbox current section's styles
     },
-    device: 'is-desktop'
+    device: 'is-desktop',
+    isMobile: false
   },
 
   mutations: {
@@ -112,6 +113,9 @@ export default {
     },
     device (state, value) {
       state.device = value
+    },
+    isMobile (state, value) {
+      state.isMobile = value
     }
   },
 
@@ -283,6 +287,12 @@ export default {
 
     setDevice ({ state, commit }, value) {
       commit('device', (typeof value !== 'undefined') ? value : 'is-desktop')
+
+      if (value === 'is-mobile') {
+        commit('isMobile', true)
+      } else {
+        commit('isMobile', false)
+      }
     }
   },
 

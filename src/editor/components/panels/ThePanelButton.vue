@@ -18,25 +18,25 @@
         </div>
 
         <!-- background -->
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <control-background-color/>
         </div>
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <control-background-image/>
         </div>
 
         <!-- Border style -->
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <control-border-style/>
         </div>
 
         <!-- Border radius -->
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <control-border-radius/>
         </div>
 
         <!-- Hover animation -->
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <control-hover-animation/>
         </div>
 
@@ -92,7 +92,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectLabel'
+      'settingObjectLabel',
+      'isMobile'
     ])
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="b-text is-editable b-border" ref="text" @click.stop.stop=""
     :path="path"
-    :style="objVarsMedia"
+    :style="[objVarsMedia, objVarsTypo]"
     >
 
     <slot v-if="!isActive"></slot>
@@ -236,18 +236,18 @@ export default {
     padding: 0 1em
   p
     .is-mobile &
-      font-size: 1.6rem !important
+      // font-size: var(--mobile-font-size) !important
     @media (max-width: 800px)
-      font-size: 1.6rem !important
+      // font-size: var(--mobile-font-size) !important
   h1
     .is-mobile &
-      font-size: 3.6rem !important
+      // font-size: 3.6rem !important
     @media (max-width: 800px)
-      font-size: 3.6rem !important
+      // font-size: 3.6rem !important
   h2
     .is-mobile &
-      font-size: 2.6rem !important
+      // font-size: 2.6rem !important
     @media (max-width: 800px)
-      font-size: 2.6rem !important
+      // font-size: 2.6rem !important
 
 </style>

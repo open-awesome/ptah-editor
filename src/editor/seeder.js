@@ -233,8 +233,10 @@ const data = new Map([
       isComplex: true,
       media: {
         'is-mobile': {
-          'width': '130px',
-          'height': '80px'
+          'width': '160px',
+          'height': '64px',
+          'margin-top': '16px',
+          'margin-bottom': '16px'
         }
       }
     })
