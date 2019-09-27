@@ -1,6 +1,7 @@
 <template>
   <div class="b-text is-editable b-border" ref="text" @click.stop.stop=""
     :path="path"
+    :style="objVarsMedia"
     >
 
     <slot v-if="!isActive"></slot>
@@ -125,13 +126,16 @@
 
 <script>
 import { EditorContent, EditorMenuBar } from 'tiptap'
-
+import elementMedia from '../mixins/elementMedia'
 import textElement from '../mixins/textElement'
 
 export default {
   name: 'TextElement',
 
-  mixins: [textElement],
+  mixins: [
+    elementMedia,
+    textElement
+  ],
 
   components: {
     EditorContent,
@@ -191,6 +195,7 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 @import '../../assets/sass/_menubar.sass'
+@import '../../assets/sass/element.sass'
 
 .b-text
   color: #000

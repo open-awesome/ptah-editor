@@ -1,6 +1,7 @@
 <template>
   <div class="b-available-platforms b-border"
     :path="path"
+    :style="objVarsMedia"
     >
     <div class="b-available-platforms__item"
       v-for="(value, key) in platforms" :key="key"
@@ -18,10 +19,15 @@
 
 <script>
 import VuseIcon from '@editor/components/VuseIcon'
+import elementMedia from '../mixins/elementMedia'
 
 export default {
   name: 'AvailablePlatforms',
-  inject: ['$section'],
+
+  mixins: [
+    elementMedia
+  ],
+
   components: {
     VuseIcon
   },
@@ -47,6 +53,7 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
+@import '../../assets/sass/element.sass'
 
 .b-available-platforms
   width: auto

@@ -27,6 +27,7 @@
     :data-timestamp="timer.timestamp"
     :data-utc-offset="timer.UTC"
     :path="path"
+    :style="objVarsMedia"
   >
 
   <thead v-show="labels.show && labels.position === 'top'" class="b-timer__labels">
@@ -69,10 +70,14 @@
 </template>
 
 <script>
+import elementMedia from '../mixins/elementMedia'
+
 export default {
   name: 'Timer',
 
-  inject: ['$section'],
+  mixins: [
+    elementMedia
+  ],
 
   filters: {
     check: function (value) {
@@ -171,6 +176,7 @@ export default {
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
+@import '../../assets/sass/element.sass'
 
 $main-font-size: 6rem
 

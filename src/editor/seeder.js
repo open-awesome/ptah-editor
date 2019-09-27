@@ -230,7 +230,13 @@ const data = new Map([
         styles: true,
         link: false
       },
-      isComplex: true
+      isComplex: true,
+      media: {
+        'is-mobile': {
+          'width': '130px',
+          'height': '80px'
+        }
+      }
     })
   )],
   [types.IconWithText, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -380,6 +386,12 @@ const data = new Map([
       styles: {
         'width': '',
         'height': ''
+      },
+      media: {
+        'is-mobile': {
+          'width': '80px',
+          'height': '80px'
+        }
       }
     })
   )],
@@ -401,7 +413,13 @@ const data = new Map([
         'width': '',
         'height': ''
       },
-      isComplex: true
+      isComplex: true,
+      media: {
+        'is-mobile': {
+          'width': '278px',
+          'height': '152px'
+        }
+      }
     })
   )],
   [types.Form, () => (_.merge({}, DEFAULT_OPTIONS,

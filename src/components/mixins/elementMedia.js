@@ -23,6 +23,7 @@ export default {
         media = {
           'is-mobile': this.styles
         }
+        this.$section.set(`$sectionData.${this.path}.media`, media)
       }
 
       return media
@@ -30,8 +31,6 @@ export default {
 
     objVarsMedia () {
       return {
-        '--mobile-width': this.mediaStyles['is-mobile']['width'],
-        '--mobile-height': this.mediaStyles['is-mobile']['height'],
         '--mobile-margin-top': this.mediaStyles['is-mobile']['margin-top'],
         '--mobile-margin-right': this.mediaStyles['is-mobile']['margin-right'],
         '--mobile-margin-bottom': this.mediaStyles['is-mobile']['margin-bottom'],

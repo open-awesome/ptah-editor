@@ -1,6 +1,7 @@
 <template>
   <div class="b-form b-border" @click.stop.stop="" ref="form"
     :path="path"
+    :style="objVarsMedia"
     >
 
     <slot v-if="!isActive"></slot>
@@ -173,15 +174,18 @@
 import { getParameterByName } from '@editor/util'
 import { mapState } from 'vuex'
 import { EditorContent, EditorMenuBar } from 'tiptap'
-
+import elementMedia from '../mixins/elementMedia'
 import textElement from '../mixins/textElement'
 
 export default {
   name: 'Form',
 
-  mixins: [textElement],
+  mixins: [
+    elementMedia,
+    textElement
+  ],
 
-  inject: ['$section', '$builder'],
+  inject: ['$builder'],
 
   components: {
     EditorContent,
@@ -265,6 +269,7 @@ export default {
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
+@import '../../assets/sass/element.sass'
 
 .b-form-element
   display: flex

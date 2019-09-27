@@ -5,7 +5,7 @@
     :data-href="link.href"
     :class="{'js-element-link' : isSetUrlImage }"
     :path="path"
-    :style="objVarsMedia"
+    :style="[objVarsMedia, objVarsResize]"
     >
 
     <i class="b-load pth-uploader" @click.stop="upload" ref="upload">
@@ -39,27 +39,24 @@
 </template>
 
 <script>
-import { mapActions, mapState } from 'vuex'
 import Uploader from '@editor/plugins/Uploader.vue'
-import VueDraggableResizable from 'vue-draggable-resizable'
-// optionally import default styles
-import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
-import element from '../mixins/element'
+import elementMedia from '../mixins/elementMedia'
+import elementResize from '../mixins/elementResize'
 
 export default {
   name: 'Logo',
 
-  mixins: [element],
+  mixins: [
+    elementMedia,
+    elementResize
+  ],
 
   components: {
-    VueDraggableResizable,
     Uploader
   },
 
   data: function () {
     return {
-      width: 0,
-      height: 0,
       file: ''
     }
   },
@@ -71,10 +68,6 @@ export default {
   },
 
   computed: {
-    ...mapState('Sidebar', [
-      'settingObjectElement'
-    ]),
-
     alt () {
       return this.$section.get(`$sectionData.${this.path}.alt`)
     },
@@ -95,41 +88,9 @@ export default {
   created () {
     this.a = this.alt
     this.file = this.styles['background-image']
-    this.width = parseInt(this.styles.width.split('px')[0]) || 320
-    this.height = parseInt(this.styles.height.split('px')[0]) || 60
   },
 
   methods: {
-    ...mapActions('Sidebar', [
-      'toggleResizeStop'
-    ]),
-
-    onResize (x, y, width, height) {
-      let parents = {}
-      let max = {}
-      let prop = 'styles'
-
-      parents['width'] = this.settingObjectElement.closest('.b-draggable-slot')
-      parents['height'] = this.settingObjectElement.closest('section') || this.settingObjectElement.closest('header') || this.settingObjectElement.closest('footer')
-
-      max['width'] = parents['width'].offsetWidth
-      max['height'] = parseInt(parents['height'].offsetHeight)
-
-      if (width > max['width']) width = max['width']
-      if (height > max['height']) height = max['height']
-
-      if (this.isMobile) {
-        prop = `media[${this.device}]`
-      }
-
-      this.$section.set(`$sectionData.${this.path}.${prop}.width`, width + 'px')
-      this.$section.set(`$sectionData.${this.path}.${prop}.height`, height + 'px')
-    },
-
-    onResizeStop (x, y, width, height) {
-      this.toggleResizeStop(this.path)
-    },
-
     changeSrc (data) {
       this.$section.set(`$sectionData.${data.path}.styles['background-image']`, `url(${data.url})`)
     },
@@ -164,6 +125,7 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 @import '../../assets/sass/element.sass'
+@import '../../assets/sass/element-resize.sass'
 
 .b-logo
   $this: &
@@ -187,37 +149,16 @@ export default {
   &:hover .b-load
     display: flex
 
-  &__resize
-    border: none !important
-
-    top: -0.4rem !important
-    right: -0.4rem !important
-    bottom: -0.4rem !important
-    left: -0.4rem !important
-
-    border-radius: 0.5rem
-    width: auto !important
-    height: auto !important
-
-    z-index: 2
-    &_active
-      border: 0.2rem dotted $dark-blue-krayola !important
-    @media only screen and (max-width: 768px)
-      &
-        display: none
   & span
     display: block
   .is-tablet &
-    max-width: 100% !important
-    margin: $size-step/2 auto !important
+    margin: $size-step/2 auto
   @media only screen and (max-width: 768px)
     &
-      max-width: 100% !important
-      margin: $size-step/2 auto !important
+      margin: $size-step/2 auto
   @media only screen and (max-width: 768px) and (min-height: 700px)
     &
-      max-width: 100% !important
-      margin: $size-step/2 auto !important
+      margin: $size-step/2 auto
   &.js-element-link
     cursor: pointer
   .b-uploader
@@ -227,67 +168,7 @@ export default {
     @media only screen and (max-width: 768px)
       &
         display: none
-/deep/
-  .b-handle
-    position: absolute !important
 
-    background: $dark-blue-krayola !important
-    border: 0.2rem solid $white !important
-    box-sizing: border-box !important
-    box-shadow: 0px 2px 2px rgba($black, 0.15) !important
-    border-radius: 1px !important
-
-    height: $size-step/4 !important
-    width: $size-step/4 !important
-
-    transition: all 300ms linear !important
-    .is-mobile &,
-    .is-tablet &
-      display: none
-    @media only screen and (max-width: 768px)
-      &
-        display: none
-    &-tl
-      top: -$size-step/8
-      left: -$size-step/8
-      cursor: nw-resize
-    &-tm
-      top: -$size-step/8
-      left: 50%
-      margin-left: -$size-step/16
-      cursor: n-resize
-    &-tr
-      top: -$size-step/8
-      right: -$size-step/8
-      cursor: ne-resize
-    &-ml
-      top: 50%
-      margin-top: -$size-step/16
-      left: -$size-step/8
-      cursor: w-resize
-    &-mr
-      top: 50%
-      margin-top: -$size-step/16
-      right: -$size-step/8
-      cursor: e-resize
-    &-bl
-      bottom: -$size-step/8
-      left: -$size-step/8
-      cursor: sw-resize
-    &-bm
-      bottom: -$size-step/8
-      left: 50%
-      margin-left: -$size-step/16
-      cursor: s-resize
-    &-br
-      bottom: -$size-step/8
-      right: -$size-step/8
-      cursor: se-resize
-    &-tl:hover,
-    &-tr:hover,
-    &-bl:hover,
-    &-br:hover
-      transform: scale(1.4)
 .b-load
   position: absolute
   top: 0

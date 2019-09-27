@@ -1,6 +1,7 @@
 <template>
   <div class="b-social-networks b-border"
     :path="path"
+    :style="objVarsMedia"
     >
     <div class="b-social-networks__item"
       v-for="(value, key) in networks" :key="key"
@@ -22,11 +23,14 @@
 
 <script>
 import VuseIcon from '@editor/components/VuseIcon'
+import elementMedia from '../mixins/elementMedia'
 
 export default {
   name: 'SocialNetworks',
 
-  inject: ['$section'],
+  mixins: [
+    elementMedia
+  ],
 
   components: {
     VuseIcon
@@ -63,6 +67,7 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
+@import '../../assets/sass/element.sass'
 
 .b-social-networks
   width: auto

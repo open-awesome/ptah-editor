@@ -4,6 +4,7 @@
     ref="icon"
     @click.stop.stop=""
     :path="path"
+    :style="objVarsMedia"
     >
 
     <slot v-if="!isActive"></slot>
@@ -141,15 +142,16 @@
 
 <script>
 import { EditorContent, EditorMenuBar } from 'tiptap'
-
+import elementMedia from '../mixins/elementMedia'
 import textElement from '../mixins/textElement'
 
 export default {
   name: 'IconWithText',
 
-  mixins: [textElement],
-
-  inject: ['$section'],
+  mixins: [
+    elementMedia,
+    textElement
+  ],
 
   components: {
     EditorContent,
@@ -217,6 +219,7 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 @import '../../assets/sass/_menubar.sass'
+@import '../../assets/sass/element.sass'
 
 .b-text-icon
   color: #000

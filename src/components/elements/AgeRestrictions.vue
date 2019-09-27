@@ -1,6 +1,7 @@
 <template>
   <div class="b-age-restrictions b-border"
       :path="path"
+      :style="objVarsMedia"
     >
     <div class="b-age-restrictions__item"
       v-for="(value, key) in restrictions" :key="key"
@@ -20,10 +21,15 @@
 
 <script>
 import VuseIcon from '@editor/components/VuseIcon'
+import elementMedia from '../mixins/elementMedia'
 
 export default {
   name: 'AgeRestrictions',
-  inject: ['$section'],
+
+  mixins: [
+    elementMedia
+  ],
+
   components: {
     VuseIcon
   },
@@ -46,6 +52,8 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
+@import '../../assets/sass/element.sass'
+
 .b-age-restrictions
   margin: 0 auto
   min-height: 5rem

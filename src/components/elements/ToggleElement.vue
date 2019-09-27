@@ -5,6 +5,7 @@
     ref="toggleEl"
     @click.stop.stop=""
     :path="path"
+    :style="objVarsMedia"
     >
 
     <div class="b-toggle-element__item"
@@ -150,15 +151,16 @@
 <script>
 import { merge } from 'lodash-es'
 import { EditorContent, EditorMenuBar } from 'tiptap'
-
+import elementMedia from '../mixins/elementMedia'
 import textElement from '../mixins/textElement'
 
 export default {
   name: 'ToggleElement',
 
-  mixins: [textElement],
-
-  inject: ['$section'],
+  mixins: [
+    elementMedia,
+    textElement
+  ],
 
   components: {
     EditorContent,
@@ -226,6 +228,7 @@ export default {
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
+@import '../../assets/sass/element.sass'
 
 .b-toggle-element
   width: 100%
