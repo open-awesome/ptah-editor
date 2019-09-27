@@ -322,10 +322,10 @@ export default {
 .b-logo
   .is-mobile &
     display: block
-    background-position: center !important
+    background-position: center
   @media (max-width: 800px)
     display: block
-    background-position: center !important
+    background-position: center
 
 .b-header-link
   .is-mobile &
@@ -335,16 +335,16 @@ export default {
 
 .b-logo-one
   .is-mobile &
-    margin-top: auto !important
+    margin-top: auto
     order: 1
   @media (max-width: 800px)
-    margin-top: auto !important
-    margin-bottom: 8px !important
+    margin-top: auto
+    margin-bottom: 8px
     order: 1
   @media (max-height: 420px)
-    width: auto !important
-    margin-top: 8px !important
-    margin-bottom: 8px !important
+    width: auto
+    margin-top: 8px
+    margin-bottom: 8px
 
 @media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
   .b-slot .b-draggable-slot > div

@@ -281,8 +281,8 @@ export default {
 .b-logo
   .is-tablet &,
   .is-mobile &
-    margin: 0 !important
+    margin: 0
 
   @media (max-width: 800px)
-    margin: 0 !important
+    margin: 0
 </style>

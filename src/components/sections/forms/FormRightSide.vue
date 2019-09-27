@@ -248,8 +248,8 @@ export default {
   .b-draggable-slot
     .is-mobile &,
     .is-tablet &
-      align-items: center !important
+      align-items: center
     @media only screen and (max-width: 768px)
       &
-        align-items: center !important
+        align-items: center
 </style>

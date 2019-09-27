@@ -211,6 +211,6 @@ $h: 100vh
   transition: background 200ms
 
 .b-link:hover
-  text-decoration: underline !important
+  text-decoration: underline
 
 </style>

@@ -71,7 +71,7 @@ export default {
 
 .b-social-networks
   width: auto
-  max-width: 100rem
+  max-width: 100%
   min-height: 5rem
   min-width: 5rem
 

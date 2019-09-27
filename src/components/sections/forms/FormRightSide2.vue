@@ -254,10 +254,10 @@ export default {
     align-items: flex-start
     .is-mobile &,
     .is-tablet &
-      align-items: center !important
+      align-items: center
     @media only screen and (max-width: 768px)
       &
-        align-items: center !important
+        align-items: center
     &__div-100
       width: 100%
 </style>

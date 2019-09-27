@@ -211,20 +211,20 @@ export default {
   letter-spacing: -0.02em
   .is-mobile &,
   .is-tablet &
-    margin: 0 auto 8px !important
-    text-align: center !important
+    margin: 0 auto 8px
+    text-align: center
   @media only screen and (width: 768px) and (height: 1024px)
     &
-      padding: 0px 0px 0px 40px !important
+      padding: 0px 0px 0px 40px
   @media only screen and (max-width: 840px)
     &
-      margin: 0 auto 8px !important
+      margin: 0 auto 8px
   @media only screen and (max-width: 500px)
     &
-      text-align: center !important
+      text-align: center
   @media only screen and (max-width: 900px) and (max-height: 450px)
     &
-      text-align: left !important
+      text-align: left
 
   &::selection, & ::selection
     color: #ff0

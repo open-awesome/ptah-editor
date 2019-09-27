@@ -368,15 +368,15 @@ export default {
 
 .b-button-one
   .is-mobile &
-    margin-top: auto !important
+    margin-top: auto
     order: 1
   @media (max-width: 800px)
-    margin-top: auto !important
-    margin-bottom: 8px !important
+    margin-top: auto
+    margin-bottom: 8px
   @media (max-height: 420px)
-    width: auto !important
-    margin-top: 8px !important
-    margin-bottom: 8px !important
+    width: auto
+    margin-top: 8px
+    margin-bottom: 8px
 
 .b-header-link
   .is-mobile &
@@ -388,10 +388,10 @@ export default {
   display: block
   .is-tablet &,
   .is-mobile &
-    margin: 0.4rem auto !important
+    margin: 0.4rem auto
 
   @media (max-width: 800px)
-    margin: 0.4rem auto !important
+    margin: 0.4rem auto
 
 @media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
   .b-slot .b-draggable-slot > div

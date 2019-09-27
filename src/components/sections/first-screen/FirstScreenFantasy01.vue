@@ -312,38 +312,38 @@ export default {
 .b-first-screen-fantasy-01
   @media only screen and (width: 1024px) and (height: 1366px)
     &
-      background-position: 45% bottom !important
+      background-position: 45% bottom
   .b-logo-fs
     @media only screen and (max-width: 900px) and (max-height: 450px)
       &
-        margin: 1.6rem 0 !important
+        margin: 1.6rem 0
   .b-text-fs
     letter-spacing: -0.02em
     .is-mobile &,
     .is-tablet &
-      font-size: 2.4rem !important
-      margin: 0 auto 8px !important
-      text-align: center !important
+      font-size: 2.4rem
+      margin: 0 auto 8px
+      text-align: center
     @media only screen and (max-width: 840px)
       &
-        font-size: 2.4rem !important
-        margin: 0 auto 8px !important
+        font-size: 2.4rem
+        margin: 0 auto 8px
     @media only screen and (max-width: 500px)
       &
-        text-align: center !important
+        text-align: center
     @media only screen and (max-width: 900px) and (max-height: 450px)
       &
-        text-align: left !important
+        text-align: left
   .b-button-fs
     box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
     transition: background-color 200ms
     @media only screen and (max-width: 900px) and (max-height: 450px)
       &
-        margin: 1.6rem !important
+        margin: 1.6rem
 
   .b-delimiter-fs
     @media only screen and (max-width: 980px) and (max-height: 700px)
       &
-        display: none !important
+        display: none
 
 </style>
