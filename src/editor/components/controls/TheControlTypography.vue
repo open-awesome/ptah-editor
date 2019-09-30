@@ -61,16 +61,25 @@ export default {
     },
 
     mediaStyles () {
-      let media = this.settingObjectOptions.media
+      let device = 'is-mobile'
+      let stylesMedia = this.settingObjectOptions.media
+      let media = { 'is-mobile': {} }
 
-      if (media === undefined) {
-        media = {
-          'is-mobile': this.styles
-        }
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-          media: media
-        }))
+      if (stylesMedia === undefined) {
+        stylesMedia = media
       }
+
+      if (stylesMedia[device]) {
+        for (let key in this.styles) {
+          media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
+        }
+      } else {
+        media[device] = this.styles
+      }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        media: media
+      }))
 
       return media
     },
@@ -150,15 +159,13 @@ export default {
         let styles = {}
         let media = {}
 
-        styles['line-height'] = value + 'px'
+        styles['line-height'] = value.value
         media['is-mobile'] = {}
         media['is-mobile']['line-height'] = styles['line-height']
 
         this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
 
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-          props
-        }))
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
       }
     }
   },

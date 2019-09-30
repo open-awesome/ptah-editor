@@ -7,8 +7,8 @@
       v-for="(value, key) in networks" :key="key"
       v-if="networks[key].visible"
       :style="{
-        margin:  isMobile ? mediaSizeIcons['width']/4 + 'px ' + mediaSizeIcons['width']/2 + 'px': sizeIcons.width/4 + 'px ' + sizeIcons.width/2 + 'px',
-        '--mobile-width': mediaSizeIcons['width'] + 'px'
+        margin:  isMobile ? mediaStyles['is-mobile']['sizeIcons']['width']/4 + 'px ' + mediaStyles['is-mobile']['sizeIcons']['width']/2 + 'px': sizeIcons.width/4 + 'px ' + sizeIcons.width/2 + 'px',
+        '--mobile-width': mediaStyles['is-mobile']['sizeIcons']['width'] + 'px'
       }"
       >
       <a class="b-social-networks__item-button flex flex_center"
@@ -57,20 +57,6 @@ export default {
     },
     target () {
       return this.$section.get(`$sectionData.${this.path}.settings.target`)
-    },
-    mediaSizeIcons () {
-      let media = this.$section.get(`$sectionData.${this.path}.media['is-mobile']['sizeIcons']`)
-
-      if (media === undefined) {
-        media = {
-          'is-mobile': {
-            sizeIcons: this.sizeIcons
-          }
-        }
-        this.$section.set(`$sectionData.${this.path}.media`, media)
-      }
-
-      return media
     }
   },
 

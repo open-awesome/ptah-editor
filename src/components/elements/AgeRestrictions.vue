@@ -7,7 +7,7 @@
       v-for="(value, key) in restrictions" :key="key"
       v-if="restrictions[key].visible"
       :style="{
-        '--mobile-width': mediaSizeIcons['width'] + 'px'
+        '--mobile-width': mediaStyles['is-mobile']['sizeIcons']['width'] + 'px'
       }"
       >
       <div class="b-age-restrictions__item-img"
@@ -49,20 +49,6 @@ export default {
     },
     sizeIcons () {
       return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
-    },
-    mediaSizeIcons () {
-      let media = this.$section.get(`$sectionData.${this.path}.media['is-mobile']['sizeIcons']`)
-
-      if (media === undefined) {
-        media = {
-          'is-mobile': {
-            sizeIcons: this.sizeIcons
-          }
-        }
-        this.$section.set(`$sectionData.${this.path}.media`, media)
-      }
-
-      return media
     }
   }
 }

@@ -1,7 +1,7 @@
 <template>
   <div class="b-form b-border" @click.stop.stop="" ref="form"
     :path="path"
-    :style="objVarsMedia"
+    :style="[objVarsMedia, objVarsTypo]"
     >
 
     <slot v-if="!isActive"></slot>
@@ -12,7 +12,8 @@
       target="_blank"
       :style="{
         '--b-hover-color': formStyles.buttonHoverColor,
-        '--b-hover-text-color': formStyles.buttonTextHoverColor
+        '--b-hover-text-color': formStyles.buttonTextHoverColor,
+        '--mobile-form-styles-height': mediaStyles['is-mobile'].formStyles.height + 'px'
       }"
       >
       <input

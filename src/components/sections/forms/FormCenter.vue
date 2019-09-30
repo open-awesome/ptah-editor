@@ -29,7 +29,7 @@ const C_CUSTOM = [
       text: '<b>Header about form</b>',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '4.2rem',
+        'font-size': '4rem',
         'color': '#ffffff',
         'padding-bottom': '67px'
       }
