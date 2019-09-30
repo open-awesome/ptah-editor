@@ -5,7 +5,7 @@
     </h6>
 
     <!-- Settings video element -->
-    <div class="b-panel__control">
+    <div class="b-panel__control" v-if="!isMobile">
       <control-video :show-text-styles="false"></control-video>
     </div>
 
@@ -45,7 +45,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'isMobile'
     ])
   }
 }

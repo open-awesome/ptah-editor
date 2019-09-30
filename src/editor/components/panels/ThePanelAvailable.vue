@@ -10,7 +10,7 @@
     </div>
 
     <!-- Visible platforms -->
-    <div class="b-panel__control">
+    <div class="b-panel__control" v-if="!isMobile">
       <control-available-platforms/>
     </div>
 
@@ -22,6 +22,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import ControlAvailablePlatformsStyle from '../controls/TheControlAvailablePlatformsStyle'
 import ControlAvailablePlatforms from '../controls/TheControlAvailablePlatforms'
 import ControlBox from '../controls/TheControlBox'
@@ -40,6 +41,12 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'isMobile'
+    ])
   }
 }
 </script>

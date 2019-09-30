@@ -6,6 +6,9 @@
     <div class="b-age-restrictions__item"
       v-for="(value, key) in restrictions" :key="key"
       v-if="restrictions[key].visible"
+      :style="{
+        '--mobile-width': mediaSizeIcons['width'] + 'px'
+      }"
       >
       <div class="b-age-restrictions__item-img"
         :style="{ width: sizeIcons.width + 'px'  }">
@@ -46,6 +49,20 @@ export default {
     },
     sizeIcons () {
       return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
+    },
+    mediaSizeIcons () {
+      let media = this.$section.get(`$sectionData.${this.path}.media['is-mobile']['sizeIcons']`)
+
+      if (media === undefined) {
+        media = {
+          'is-mobile': {
+            sizeIcons: this.sizeIcons
+          }
+        }
+        this.$section.set(`$sectionData.${this.path}.media`, media)
+      }
+
+      return media
     }
   }
 }
@@ -73,24 +90,13 @@ export default {
     position: relative
     margin: 1.6rem
     text-align: center
-    &-select
-      background: #fff
-      color: #323c47
-      border: 0
-      outline: 0
-      width: auto
-      height: 3rem
-      border-radius: 3rem
-      font-size: 1.4rem
-      margin: 1rem auto
-      padding: 0.5rem
-      width: 6rem
-      display: block
-      & option:checked
-        background-color: #333
-        color: #fff
     &-img
       display: inline-block
+      .is-mobile &
+        width: var(--mobile-width) !important
+      @media only screen and (max-width: 768px)
+        &
+          width: var(--mobile-width) !important
       & img
         width: 100%
         height: auto

@@ -46,7 +46,9 @@ export default {
       return {
         '--mobile-font-family': this.mediaStyles['is-mobile']['font-family'],
         '--mobile-font-size': this.mediaStyles['is-mobile']['font-size'],
-        '--line-height': this.mediaStyles['is-mobile']['line-height']
+        '--mobile-line-height': this.mediaStyles['is-mobile']['line-height'],
+        '--mobile-text-align': this.mediaStyles['is-mobile']['text-align'],
+        '--mobile-justify-content': this.mediaStyles['is-mobile']['justify-content']
       }
     }
   }

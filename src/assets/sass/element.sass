@@ -32,7 +32,10 @@
       padding-left: var(--mobile-padding-left) !important
 
 .b-button,
-.b-text
+.b-text,
+.b-text-icon,
+.b-timer,
+.b-toggle-element
   .is-mobile &
     font-family: var(--mobile-font-family) !important
     font-size: var(--mobile-font-size) !important
@@ -42,3 +45,19 @@
       font-family: var(--mobile-font-family) !important
       font-size: var(--mobile-font-size) !important
       line-height: var(--mobile-line-height) !important
+
+.b-text,
+.b-toggle-element
+  .is-mobile &
+    p,
+    h1,
+    h2
+      text-align: var(--mobile-text-align) !important
+      justify-content: var(--mobile-justify-content) !important
+  @media only screen and (max-width: 768px)
+    &
+      p,
+      h1,
+      h2
+        text-align: var(--mobile-text-align) !important
+        justify-content: var(--mobile-justify-content) !important

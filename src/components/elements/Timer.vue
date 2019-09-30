@@ -27,7 +27,7 @@
     :data-timestamp="timer.timestamp"
     :data-utc-offset="timer.UTC"
     :path="path"
-    :style="objVarsMedia"
+    :style="[objVarsMedia, objVarsTypo]"
   >
 
   <thead v-show="labels.show && labels.position === 'top'" class="b-timer__labels">
@@ -210,15 +210,12 @@ $main-font-size: 6rem
   .is-mobile &,
   .is-tablet &
     width: 90%
-    font-size: 2.2rem !important
   @media only screen and (max-width: 768px)
     &
       width: 90%
-      font-size: 2.2rem !important
   @media only screen and (max-width: 768px) and (min-height: 700px)
     &
       width: 90%
-      font-size: 2.2rem !important
 
   @include tabletFontSize($main-font-size)
   @include mobileFontSize($main-font-size)

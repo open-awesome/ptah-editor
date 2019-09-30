@@ -6,9 +6,15 @@
     <div class="b-available-platforms__item"
       v-for="(value, key) in platforms" :key="key"
       v-if="platforms[key].visible"
+      :style="{
+        '--mobile-width': mediaSizeIcons['width'] + 'px'
+      }"
       >
       <a class="b-available-platforms__item-button flex flex_center"
-        :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px'  }"
+        :style="{
+          fill: colorFill['color'],
+          width: sizeIcons.width + 'px'
+        }"
         :title="platforms[key].name"
         >
         <VuseIcon :name="key"></VuseIcon>
@@ -47,6 +53,20 @@ export default {
     },
     sizeIcons () {
       return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
+    },
+    mediaSizeIcons () {
+      let media = this.$section.get(`$sectionData.${this.path}.media['is-mobile']['sizeIcons']`)
+
+      if (media === undefined) {
+        media = {
+          'is-mobile': {
+            sizeIcons: this.sizeIcons
+          }
+        }
+        this.$section.set(`$sectionData.${this.path}.media`, media)
+      }
+
+      return media
     }
   }
 }
@@ -79,6 +99,11 @@ export default {
     &-button
       border: none
       position: relative
+      .is-mobile &
+        width: var(--mobile-width) !important
+      @media only screen and (max-width: 768px)
+        &
+          width: var(--mobile-width) !important
       .vuse-icon
         width: inherit
         height: auto

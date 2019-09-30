@@ -40,14 +40,128 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'isMobile'
     ]),
 
     box () {
       return this.settingObjectOptions.box
     },
+
     styles () {
       return this.settingObjectOptions.styles
+    },
+
+    mediaStyles () {
+      let device = 'is-mobile'
+      let media = { 'is-mobile': {} }
+      let stylesMedia = this.settingObjectOptions.media
+
+      if (stylesMedia === undefined) {
+        stylesMedia = media
+      }
+
+      if (stylesMedia[device]) {
+        for (let key in this.styles) {
+          media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
+        }
+      } else {
+        media[device] = this.styles
+      }
+
+      return media
+    },
+
+    mediaTextAlign: {
+      get () {
+        let w = _.get(this.settingObjectOptions, `media['text-align']`)
+
+        if (w === undefined) w = _.get(this.settingObjectOptions, `styles['text-align']`)
+
+        return w
+      },
+
+      set (value) {
+        let props = {}
+        let styles = {
+          'text-align': value
+        }
+        let media = {
+          'is-mobile': styles
+        }
+
+        this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+      }
+    },
+
+    mediaJustifyContent: {
+      get () {
+        let w = _.get(this.settingObjectOptions, `media['justify-content']`)
+
+        if (w === undefined) w = _.get(this.settingObjectOptions, `styles['justify-content']`)
+
+        return w
+      },
+
+      set (value) {
+        let props = {}
+        let styles = {
+          'justify-content': value
+        }
+        let media = {
+          'is-mobile': styles
+        }
+
+        this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+      }
+    },
+
+    textAlign: {
+      get () {
+        let w = 0
+
+        if (this.isMobile) {
+          w = this.mediaTextAlign
+        } else {
+          w = this.styles['text-align']
+        }
+
+        return w
+      },
+
+      set (value) {
+        if (this.isMobile) {
+          this.mediaTextAlign = value
+        } else {
+          this.styles['text-align'] = value
+        }
+      }
+    },
+
+    justifyContent: {
+      get () {
+        let w = 0
+
+        if (this.isMobile) {
+          w = this.mediaJustifyContent
+        } else {
+          w = this.styles['justify-content']
+        }
+
+        return w
+      },
+
+      set (value) {
+        if (this.isMobile) {
+          this.mediaJustifyContent = value
+        } else {
+          this.styles['justify-content'] = value
+        }
+      }
     }
   },
 
@@ -65,17 +179,27 @@ export default {
     },
 
     updateStyle (prop, value) {
+      let props = {}
+      let media = {}
       let styles = {}
+
       styles[prop] = value
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+      media['is-mobile'] = {}
+      media['is-mobile'][prop] = value
+
+      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
     }
   },
 
   mounted () {
+    let styles = this.isMobile ? this.mediaStyles['is-mobile'] : this.styles
+
     if (this.box) {
-      this.align.value = this.flex[this.styles['justify-content']][1]
+      this.align.value = this.flex[styles['justify-content']][1]
     } else {
-      this.align.value = this.styles['text-align']
+      this.align.value = styles['text-align']
     }
   }
 }

@@ -5,7 +5,7 @@
     ref="toggleEl"
     @click.stop.stop=""
     :path="path"
-    :style="objVarsMedia"
+    :style="[objVarsMedia, objVarsTypo]"
     >
 
     <div class="b-toggle-element__item"
@@ -255,6 +255,11 @@ export default {
         width: 100%
         > div
           text-align: var(--text-align) !important
+          .is-mobile &
+            text-align: var(--mobile-text-align) !important
+          @media only screen and (max-width: 768px)
+            &
+              text-align: var(--mobile-text-align) !important
         &_hide-text
           /deep/
             table,
@@ -266,14 +271,26 @@ export default {
             table > tbody > tr
               display: flex
               justify-content: var(--justify-content) !important
+              .is-mobile &
+                justify-content: var(--mobile-justify-content) !important
             table > tbody > tr > th,
             table > tbody > tr > td
               text-align: var(--text-align) !important
               font-size: var(--font-size) !important
               line-height: var(--line-height) !important
-              font-style: var(--font-style) !important
               font-family: var(--font-family) !important
               color: var(--color) !important
+              .is-mobile &
+                text-align: var(--mobile-text-align) !important
+                font-size: var(--mobile-font-size) !important
+                line-height: var(--mobile-line-height) !important
+                font-family: var(--mobile-font-family) !important
+              @media only screen and (max-width: 768px)
+                &
+                  text-align: var(--mobile-text-align) !important
+                  font-size: var(--mobile-font-size) !important
+                  line-height: var(--mobile-line-height) !important
+                  font-family: var(--mobile-font-family) !important
   &_hide
     padding: 0 1.6rem
   &__icon

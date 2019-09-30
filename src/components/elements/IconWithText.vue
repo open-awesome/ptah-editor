@@ -4,14 +4,21 @@
     ref="icon"
     @click.stop.stop=""
     :path="path"
-    :style="objVarsMedia"
+    :style="[objVarsMedia, objVarsTypo]"
     >
 
     <slot v-if="!isActive"></slot>
 
     <div class="b-text-icon__item">
-      <div class="b-text-icon__item-col b-text-icon__item-col-icon" v-if="icon.visible">
-        <span class="b-text-icon__icon" :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px'  }">
+      <div class="b-text-icon__item-col b-text-icon__item-col-icon" v-if="icon.visible"
+        :style="{
+          '--mobile-width': mediaSizeIcons['width'] + 'px'
+        }"
+        >
+        <span class="b-text-icon__icon" :style="{
+          fill: colorFill['color'],
+          width: sizeIcons.width + 'px'
+        }">
           <icon-base :name="icon.value"></icon-base>
         </span>
       </div>
@@ -210,6 +217,20 @@ export default {
 
     sizeIcons () {
       return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
+    },
+    mediaSizeIcons () {
+      let media = this.$section.get(`$sectionData.${this.path}.media['is-mobile']['sizeIcons']`)
+
+      if (media === undefined) {
+        media = {
+          'is-mobile': {
+            sizeIcons: this.sizeIcons
+          }
+        }
+        this.$section.set(`$sectionData.${this.path}.media`, media)
+      }
+
+      return media
     }
   }
 }
@@ -253,6 +274,11 @@ export default {
     padding: 0 1.6rem
   &__icon
     display: inline-block
+    .is-mobile &
+      width: var(--mobile-width) !important
+    @media only screen and (max-width: 768px)
+      &
+        width: var(--mobile-width) !important
     svg
       fill: inherit
       width: 100%

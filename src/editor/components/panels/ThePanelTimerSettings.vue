@@ -7,7 +7,7 @@
     <base-scroll-container backgroundBar="#999">
       <div class="b-panel__inner">
         <!-- Settings -->
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <base-label v-text="$t('c.setTimer')"/>
           <date-picker
             v-model="timer.timestamp"
@@ -25,7 +25,7 @@
             confirm/>
         </div>
 
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <base-select
             :options="UTCOptions"
             :value="UTC"
@@ -33,11 +33,11 @@
             :label="$t('c.timeZone')"/>
         </div>
 
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <base-switcher v-model="labels.show" :label="$t('c.timeZone')"/>
         </div>
 
-        <div class="b-panel__control" v-if="labels.show">
+        <div class="b-panel__control" v-if="labels.show && !isMobile">
           <base-select
             :options="positionOptions"
             :value="position"
@@ -45,7 +45,7 @@
             label="Position"/>
         </div>
 
-        <div class="b-panel__control" v-if="labels.show">
+        <div class="b-panel__control" v-if="labels.show && !isMobile">
           <base-select
             :options="languageOptions"
             :value="language"
@@ -59,7 +59,7 @@
         </div>
 
         <!-- Background -->
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <control-background-timer/>
         </div>
 
@@ -132,7 +132,10 @@ export default {
   },
 
   computed: {
-    ...mapState('Sidebar', ['settingObjectOptions']),
+    ...mapState('Sidebar', [
+      'settingObjectOptions',
+      'isMobile'
+    ]),
 
     timer () {
       return this.settingObjectOptions.timer
