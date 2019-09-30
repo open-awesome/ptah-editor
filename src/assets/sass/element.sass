@@ -35,8 +35,7 @@
 .b-text,
 .b-text-icon,
 .b-timer,
-.b-toggle-element,
-.b-form
+.b-toggle-element
   .is-mobile &
     font-family: var(--mobile-font-family) !important
     font-size: var(--mobile-font-size) !important
@@ -50,6 +49,7 @@
 .b-text,
 .b-toggle-element
   .is-mobile &
+    b,
     p,
     h1,
     h2
@@ -57,6 +57,7 @@
       justify-content: var(--mobile-justify-content) !important
   @media only screen and (max-width: 768px)
     &
+      b,
       p,
       h1,
       h2
@@ -67,9 +68,17 @@
   .is-mobile &
     .b-form-element-button,
     .b-form-element-input
+      font-family: var(--mobile-font-family) !important
+      font-size: var(--mobile-font-size) !important
+      line-height: var(--mobile-line-height) !important
+
       height: var(--mobile-form-styles-height) !important
   @media only screen and (max-width: 768px)
     &
       .b-form-element-button,
       .b-form-element-input
+        font-family: var(--mobile-font-family) !important
+        font-size: var(--mobile-font-size) !important
+        line-height: var(--mobile-line-height) !important
+
         height: var(--mobile-form-styles-height) !important

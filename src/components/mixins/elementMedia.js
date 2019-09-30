@@ -34,7 +34,7 @@ export default {
 
       // set formStyles for form
       if (formStyles) {
-        media[device]['formStyles'] = stylesMedia[device]['formStyles'] !== undefined ? stylesMedia[device]['formStyles'] : sizeIcons
+        media[device]['formStyles'] = stylesMedia[device]['formStyles'] !== undefined ? stylesMedia[device]['formStyles'] : formStyles
       }
 
       if (stylesMedia[device]) {
