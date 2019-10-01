@@ -26,7 +26,7 @@ const COMPONENTS = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<b>Header about form</b>',
+      text: '<p><b>Header about form</b></p>',
       styles: {
         'font-family': 'Montserrat',
         'font-size': '4rem',
@@ -39,7 +39,7 @@ const C_CUSTOM = [
   {
     element: {
       placeholder: 'Email',
-      buttonText: '<b>Call to Action</b>',
+      buttonText: '<p><b>Call to Action</b></p>',
       styles: {
         'color': '#000000',
         'border-radius': '2px',
