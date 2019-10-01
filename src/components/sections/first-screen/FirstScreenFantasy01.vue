@@ -225,11 +225,11 @@ export default {
 </script>
 
 <template>
-<div :style="$sectionData.objVarsMedia">
+<div>
   <section
     class="b-first-screen-fantasy-01"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
