@@ -64,7 +64,8 @@ const C_CUSTOM = [
         'background-size': 'contain',
         'width': '246px',
         'height': '96px',
-        'margin': '25px 0'
+        'margin-top': '25px',
+        'margin-bottom': '25px'
       }
     }
   },

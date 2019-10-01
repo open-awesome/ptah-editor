@@ -39,12 +39,9 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectElement',
-      'device'
+      'device',
+      'isMobile'
     ]),
-
-    isMobile () {
-      return this.device === 'is-mobile'
-    },
 
     marginLeft: {
       get () {
@@ -133,16 +130,24 @@ export default {
     ]),
 
     getStyleNumberValue (prop) {
-      let s = ''
-      let props = ''
+      let props = {}
+      let s = {}
+      let styles = this.settingObjectOptions.styles
+      let stylesMedia = {}
 
-      if (this.isMobile) {
-        props = `media['is-mobile']`
+      if (this.settingObjectOptions.media && this.settingObjectOptions.media['is-mobile']) {
+        stylesMedia = this.settingObjectOptions.media['is-mobile']
       } else {
-        props = 'styles'
+        stylesMedia[prop] = styles[prop]
       }
 
-      s = _.get(this.settingObjectOptions, `${props}[${prop}]`)
+      if (this.isMobile) {
+        props = stylesMedia
+      } else {
+        props = styles
+      }
+
+      s = props[prop]
 
       if (s === undefined) {
         // get values from node

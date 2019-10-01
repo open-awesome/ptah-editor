@@ -8,12 +8,9 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectElement',
-      'device'
+      'device',
+      'isMobile'
     ]),
-
-    isMobile () {
-      return this.device === 'is-mobile'
-    },
 
     width: {
       get () {

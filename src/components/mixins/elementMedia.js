@@ -1,4 +1,5 @@
 import { mapState } from 'vuex'
+import * as _ from 'lodash-es'
 
 export default {
   inject: ['$section'],
@@ -16,38 +17,49 @@ export default {
       return this.$section.get(`$sectionData.${this.path}.styles`)
     },
 
-    mediaStyles () {
-      let device = 'is-mobile'
-      let stylesMedia = this.$section.get(`$sectionData.${this.path}.media`)
-      let sizeIcons = this.$section.get(`$sectionData.${this.path}.sizeIcons`)
-      let formStyles = this.$section.get(`$sectionData.${this.path}.formStyles`)
-      let media = { 'is-mobile': {} }
+    media () {
+      return this.$section.get(`$sectionData.${this.path}.media`)
+    },
 
-      if (stylesMedia === undefined) {
-        stylesMedia = media
-      }
+    mediaStyles: {
+      get () {
+        let device = 'is-mobile'
+        let stylesMedia = this.$section.get(`$sectionData.${this.path}.media`)
+        let sizeIcons = this.$section.get(`$sectionData.${this.path}.sizeIcons`)
+        let formStyles = this.$section.get(`$sectionData.${this.path}.formStyles`)
+        let media = { 'is-mobile': {} }
 
-      // set sizeIcons for elements
-      if (sizeIcons) {
-        media[device]['sizeIcons'] = stylesMedia[device]['sizeIcons'] !== undefined ? stylesMedia[device]['sizeIcons'] : sizeIcons
-      }
-
-      // set formStyles for form
-      if (formStyles) {
-        media[device]['formStyles'] = stylesMedia[device]['formStyles'] !== undefined ? stylesMedia[device]['formStyles'] : formStyles
-      }
-
-      if (stylesMedia[device]) {
-        for (let key in this.styles) {
-          media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
+        if (stylesMedia === undefined) {
+          stylesMedia = media
         }
-      } else {
-        media[device] = this.styles
+
+        // set sizeIcons for elements
+        if (sizeIcons) {
+          media[device]['sizeIcons'] = stylesMedia[device]['sizeIcons'] !== undefined ? stylesMedia[device]['sizeIcons'] : sizeIcons
+        }
+
+        // set formStyles for form
+        if (formStyles) {
+          media[device]['formStyles'] = stylesMedia[device]['formStyles'] !== undefined ? stylesMedia[device]['formStyles'] : formStyles
+        }
+
+        if (stylesMedia[device]) {
+          for (let key in this.styles) {
+            media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
+          }
+        } else {
+          media[device] = this.styles
+        }
+
+        this.$section.set(`$sectionData.${this.path}.media`, media)
+
+        return media
+      },
+      set (value) {
+        this.settingObjectSection.set(`$sectionData.${this.path}.media`, _.merge({}, this.media, {
+          media: value
+        }))
       }
-
-      this.$section.set(`$sectionData.${this.path}.media`, media)
-
-      return media
     },
 
     objVarsMedia () {

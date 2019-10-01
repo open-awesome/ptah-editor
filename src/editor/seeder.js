@@ -5,7 +5,16 @@ import * as _ from 'lodash-es'
 const DEFAULT_OPTIONS = {
   text: '',
   classes: [],
-  styles: {},
+  styles: {
+    'margin-top': 0,
+    'margin-right': 0,
+    'margin-bottom': 0,
+    'margin-left': 0,
+    'padding-top': 0,
+    'padding-right': 0,
+    'padding-bottom': 0,
+    'padding-left': 0
+  },
   resizable: false,
   hasLink: false,
   belongsGallery: false,
@@ -79,6 +88,15 @@ const data = new Map([
       hover: {
         'color': 'rgb(255, 109, 100)',
         'text-decoration': 'none'
+      }
+    },
+    media: {
+      'is-mobile': {
+        'font-size': '1.6rem',
+        'margin-top': '16px',
+        'margin-bottom': '16px',
+        'margin-left': '32px',
+        'margin-right': '32px'
       }
     }
   }))],
@@ -233,6 +251,7 @@ const data = new Map([
       isComplex: true,
       media: {
         'is-mobile': {
+          'font-size': '1.6rem',
           'width': '160px',
           'height': '64px',
           'margin-top': '16px',
@@ -273,7 +292,12 @@ const data = new Map([
         styles: true,
         link: false
       },
-      isComplex: true
+      isComplex: true,
+      media: {
+        'is-mobile': {
+          'font-size': '1.4rem'
+        }
+      }
     })
   )],
   [types.ToggleElement, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -317,7 +341,12 @@ const data = new Map([
           </table>
          `
       },
-      isComplex: true
+      isComplex: true,
+      media: {
+        'is-mobile': {
+          'font-size': '1.2rem'
+        }
+      }
     })
   )],
   [types.Gallery, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -455,6 +484,13 @@ const data = new Map([
         tags: false,
         styles: true,
         link: false
+      },
+      media: {
+        'is-mobile': {
+          formStyles: {
+            'height': 48,
+          }
+        }
       }
     })
   )],
@@ -607,7 +643,13 @@ const data = new Map([
       sizeIcons: {
         width: 24
       },
-      isComplex: true
+      media: {
+        'is-mobile': {
+          sizeIcons: {
+            width: 24
+          }
+        }
+      }
     })
   )],
   [types.AgeRestrictions, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -677,7 +719,13 @@ const data = new Map([
       sizeIcons: {
         width: 48
       },
-      isComplex: true
+      media: {
+        'is-mobile': {
+          sizeIcons: {
+            width: 32
+          }
+        }
+      }
     })
   )],
   [types.SocialNetworks, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -751,7 +799,13 @@ const data = new Map([
       sizeIcons: {
         width: 24
       },
-      isComplex: true
+      media: {
+        'is-mobile': {
+          sizeIcons: {
+            width: 24
+          }
+        }
+      }
     })
   )],
   [types.Slogan, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -863,6 +917,13 @@ const data = new Map([
       overlay: {
         color: 'rgba(0,0,0,1)',
         opacity: '0'
+      },
+      media: {
+        'is-mobile': {
+          sizeIcons: {
+            width: 24
+          }
+        }
       }
     })
   )],
@@ -899,6 +960,11 @@ const data = new Map([
       'text-decoration': 'none',
       'text-align': 'center',
       'color': '#fff'
+    },
+    media: {
+      'is-mobile': {
+        'font-size': '2.4rem'
+      }
     }
   }))]
 ])
