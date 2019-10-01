@@ -238,8 +238,7 @@ const [
           'background-size': 'contain',
           'background-position': 'bottom center',
           'width': '190px',
-          'height': '285px',
-          'margin': '0'
+          'height': '285px'
         }
       }
     },
@@ -273,8 +272,7 @@ const [
           'background-size': 'contain',
           'background-position': 'bottom center',
           'width': '300px',
-          'height': '450px',
-          'margin': '0'
+          'height': '450px'
         }
       }
     },

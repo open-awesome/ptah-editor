@@ -164,9 +164,7 @@ let [
           'text-align': 'center',
           'width': '240px',
           'height': '64px',
-          'border': '1px solid #000000',
-          'margin': '0',
-          'padding': '0'
+          'border': '1px solid #000000'
         },
         pseudo: {
           'hover': {

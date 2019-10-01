@@ -42,8 +42,9 @@ const C_CUSTOM_2 = [
         'background-size': 'contain',
         'width': '500px',
         'height': '121px',
-        'margin': '25px 0 20px 13px',
-        'padding': '0'
+        'margin-top': '25px',
+        'margin-bottom': '20px',
+        'margin-left': '13px'
       }
     }
   },
@@ -55,9 +56,11 @@ const C_CUSTOM_2 = [
         'font-size': '5.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '25px 0 20px 15px',
         'text-align': 'left',
-        'padding': '0 0 0 13px'
+        'margin-top': '25px',
+        'margin-bottom': '20px',
+        'margin-left': '13px',
+        'padding-left': '13px'
       }
     }
   },
@@ -73,8 +76,9 @@ const C_CUSTOM_2 = [
         'width': '240px',
         'height': '64px',
         'border': '1px solid #000000',
-        'margin': '25px 0 70px 38px',
-        'padding': '0'
+        'margin-top': '25px',
+        'margin-bottom': '70px',
+        'margin-left': '38px'
       },
       pseudo: {
         'hover': {
@@ -177,7 +181,6 @@ const SCHEMA_CUSTOM = {
     grow: ['$sectionData.container'],
     selfName: '$sectionData.container2',
     styles: {
-      'padding': '0',
       'align-items': 'flex-start'
     }
   },

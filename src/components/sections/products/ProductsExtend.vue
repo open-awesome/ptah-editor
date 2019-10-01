@@ -93,7 +93,7 @@ const C_CUSTOM_1_M = [
         'font-family': 'Montserrat',
         'font-size': '24px',
         'line-height': '29px',
-        'padding': '30px 0 0 0'
+        'padding-top': '30px'
       }
     },
     key: 5
@@ -251,7 +251,7 @@ const C_CUSTOM_2_M = [
         'font-family': 'Montserrat',
         'font-size': '24px',
         'line-height': '29px',
-        'padding': '30px 0 0 0'
+        'padding-top': '30px'
       }
     },
     key: 15
@@ -409,7 +409,7 @@ const C_CUSTOM_3_M = [
         'font-family': 'Montserrat',
         'font-size': '24px',
         'line-height': '29px',
-        'padding': '30px 0 0 0'
+        'padding-top': '30px'
       }
     },
     key: 25
@@ -567,7 +567,7 @@ const C_CUSTOM_4_M = [
         'font-family': 'Montserrat',
         'font-size': '24px',
         'line-height': '29px',
-        'padding': '30px 0 0 0'
+        'padding-top': '30px'
       }
     },
     key: 35
@@ -655,7 +655,8 @@ const C_CUSTOM_CONTAINER_D = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'flex-start',
-    'padding': '10px 0 0 85px'
+    'padding-top': '10px',
+    'padding-left': '85px'
   }
 }
 
@@ -664,7 +665,8 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
       'background-color': 'rgba(21,28,68,1)',
-      'padding': '30px 0'
+      'padding-top': '30px',
+      'padding-bottom': '30px'
     }
   },
   containerStandart: _.merge({}, C_CUSTOM_CONTAINER),

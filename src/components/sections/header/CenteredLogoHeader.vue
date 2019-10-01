@@ -110,7 +110,8 @@ const defaultComponents = [
         'width': '80px',
         'height': '32px',
         'font-size': '1.8rem',
-        'margin': '0 16px'
+        'margin-right': '16px',
+        'margin-left': '16px'
       },
       pseudo: {
         hover: {
@@ -133,7 +134,8 @@ const defaultComponents = [
         'width': '80px',
         'height': '32px',
         'font-size': '1.8rem',
-        'margin': '0 16px'
+        'margin-right': '16px',
+        'margin-left': '16px'
       },
       pseudo: {
         hover: {
@@ -153,7 +155,10 @@ const defaultComponents = [
         'background-size': 'contain',
         'width': '154px',
         'height': '60px',
-        'margin': '8px 16px'
+        'margin-top': '8px',
+        'margin-right': '16px',
+        'margin-bottom': '8px',
+        'margin-left': '16px'
       }
     },
     key: 0
@@ -170,7 +175,8 @@ const defaultComponents = [
         'width': '80px',
         'height': '32px',
         'font-size': '1.8rem',
-        'margin': '0 16px'
+        'margin-right': '16px',
+        'margin-left': '16px'
       },
       pseudo: {
         hover: {
@@ -193,7 +199,8 @@ const defaultComponents = [
         'width': '80px',
         'height': '32px',
         'font-size': '1.8rem',
-        'margin': '0 16px'
+        'margin-right': '16px',
+        'margin-left': '16px'
       },
       pseudo: {
         hover: {

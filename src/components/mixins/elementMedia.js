@@ -51,8 +51,6 @@ export default {
           media[device] = this.styles
         }
 
-        this.$section.set(`$sectionData.${this.path}.media`, media)
-
         return media
       },
       set (value) {

@@ -49,7 +49,8 @@ const C_CUSTOM = [
         'background-size': 'contain',
         'width': '246px',
         'height': '96px',
-        'margin': '25px 0'
+        'margin-top': '25px',
+        'margin-bottom': '25px'
       }
     }
   },
@@ -76,7 +77,10 @@ const C_CUSTOM = [
         'font-size': '3.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '10px 80px'
+        'margin-top': '10px',
+        'margin-right': '80px',
+        'margin-bottom': '10px',
+        'margin-left': '80px'
       }
     }
   },
@@ -92,7 +96,8 @@ const C_CUSTOM = [
         'width': '240px',
         'height': '64px',
         'border-radius': '100px',
-        'margin': '25px 0'
+        'margin-top': '25px',
+        'margin-bottom': '25px'
       },
       pseudo: {
         'hover': {

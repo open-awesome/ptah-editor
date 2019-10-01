@@ -1,22 +1,22 @@
 <template>
   <div class="b-slot" :style="{
-      '--mobile-flex-direction': mediaStyles['is-mobile']['flex-direction'],
-      '--mobile-align-items': mediaStyles['is-mobile']['align-items'],
-      '--mobile-justify-content': mediaStyles['is-mobile']['justify-content'],
-      '--mobile-background-color': mediaStyles['is-mobile']['background-color'],
-      '--mobile-background-image': mediaStyles['is-mobile']['background-image'],
-      '--mobile-background-position': mediaStyles['is-mobile']['background-position'],
-      '--mobile-background-repeat': mediaStyles['is-mobile']['background-repeat'],
-      '--mobile-background-size': mediaStyles['is-mobile']['background-size'],
-      '--mobile-background-attachment': mediaStyles['is-mobile']['background-attachment'],
-      '--mobile-margin-top': mediaStyles['is-mobile']['margin-top'],
-      '--mobile-margin-right': mediaStyles['is-mobile']['margin-right'],
-      '--mobile-margin-bottom': mediaStyles['is-mobile']['margin-bottom'],
-      '--mobile-margin-left': mediaStyles['is-mobile']['margin-left'],
-      '--mobile-padding-top': mediaStyles['is-mobile']['padding-top'],
-      '--mobile-padding-right': mediaStyles['is-mobile']['padding-right'],
-      '--mobile-padding-bottom': mediaStyles['is-mobile']['padding-bottom'],
-      '--mobile-padding-left': mediaStyles['is-mobile']['padding-left']
+      '--mobile-slot-flex-direction': mediaStyles['is-mobile']['flex-direction'],
+      '--mobile-slot-align-items': mediaStyles['is-mobile']['align-items'],
+      '--mobile-slot-justify-content': mediaStyles['is-mobile']['justify-content'],
+      '--mobile-slot-background-color': mediaStyles['is-mobile']['background-color'],
+      '--mobile-slot-background-image': mediaStyles['is-mobile']['background-image'],
+      '--mobile-slot-background-position': mediaStyles['is-mobile']['background-position'],
+      '--mobile-slot-background-repeat': mediaStyles['is-mobile']['background-repeat'],
+      '--mobile-slot-background-size': mediaStyles['is-mobile']['background-size'],
+      '--mobile-slot-background-attachment': mediaStyles['is-mobile']['background-attachment'],
+      '--mobile-slot-margin-top': mediaStyles['is-mobile']['margin-top'],
+      '--mobile-slot-margin-right': mediaStyles['is-mobile']['margin-right'],
+      '--mobile-slot-margin-bottom': mediaStyles['is-mobile']['margin-bottom'],
+      '--mobile-slot-margin-left': mediaStyles['is-mobile']['margin-left'],
+      '--mobile-slot-padding-top': mediaStyles['is-mobile']['padding-top'],
+      '--mobile-slot-padding-right': mediaStyles['is-mobile']['padding-right'],
+      '--mobile-slot-padding-bottom': mediaStyles['is-mobile']['padding-bottom'],
+      '--mobile-slot-padding-left': mediaStyles['is-mobile']['padding-left']
     }">
     <div class="b-slot__settings" :style="[
         isMobile ? { 'margin-top': mediaStyles['is-mobile']['margin-top'] } : { 'margin-top': styles['margin-top'] },
@@ -259,43 +259,43 @@ export default {
       border: 1px dashed $dark-blue-krayola
 
   .is-mobile & .b-draggable-slot
-    flex-direction: var(--mobile-flex-direction) !important
-    align-items: var(--mobile-align-items) !important
-    justify-content: var(--mobile-justify-content) !important
-    background-color: var(--mobile-background-color) !important
-    background-image: var(--mobile-background-image) !important
-    background-position: var(--mobile-background-position) !important
-    background-repeat: var(--mobile-background-repeat) !important
-    background-size: var(--mobile-background-size) !important
-    background-attachment: var(--mobile-background-attachment) !important
-    margin-top: var(--mobile-margin-top) !important
-    margin-right: var(--mobile-margin-right) !important
-    margin-bottom: var(--mobile-margin-bottom) !important
-    margin-left: var(--mobile-margin-left) !important
-    padding-top: var(--mobile-padding-top) !important
-    padding-right: var(--mobile-padding-right) !important
-    padding-bottom: var(--mobile-padding-bottom) !important
-    padding-left: var(--mobile-padding-left) !important
+    flex-direction: var(--mobile-slot-flex-direction) !important
+    align-items: var(--mobile-slot-align-items) !important
+    justify-content: var(--mobile-slot-justify-content) !important
+    background-color: var(--mobile-slot-background-color) !important
+    background-image: var(--mobile-slot-background-image) !important
+    background-position: var(--mobile-slot-background-position) !important
+    background-repeat: var(--mobile-slot-background-repeat) !important
+    background-size: var(--mobile-slot-background-size) !important
+    background-attachment: var(--mobile-slot-background-attachment) !important
+    margin-top: var(--mobile-slot-margin-top) !important
+    margin-right: var(--mobile-slot-margin-right) !important
+    margin-bottom: var(--mobile-slot-margin-bottom) !important
+    margin-left: var(--mobile-slot-margin-left) !important
+    padding-top: var(--mobile-slot-padding-top) !important
+    padding-right: var(--mobile-slot-padding-right) !important
+    padding-bottom: var(--mobile-slot-padding-bottom) !important
+    padding-left: var(--mobile-slot-padding-left) !important
 
   @media only screen and (max-width: 768px)
     & .b-draggable-slot
-      flex-direction: var(--mobile-flex-direction) !important
-      align-items: var(--mobile-align-items) !important
-      justify-content: var(--mobile-justify-content) !important
-      background-color: var(--mobile-background-color) !important
-      background-image: var(--mobile-background-image) !important
-      background-position: var(--mobile-background-position) !important
-      background-repeat: var(--mobile-background-repeat) !important
-      background-size: var(--mobile-background-size) !important
-      background-attachment: var(--mobile-background-attachment) !important
-      margin-top: var(--mobile-margin-top) !important
-      margin-right: var(--mobile-margin-right) !important
-      margin-bottom: var(--mobile-margin-bottom) !important
-      margin-left: var(--mobile-margin-left) !important
-      padding-top: var(--mobile-padding-top) !important
-      padding-right: var(--mobile-padding-right) !important
-      padding-bottom: var(--mobile-padding-bottom) !important
-      padding-left: var(--mobile-padding-left) !important
+      flex-direction: var(--mobile-slot-flex-direction) !important
+      align-items: var(--mobile-slot-align-items) !important
+      justify-content: var(--mobile-slot-justify-content) !important
+      background-color: var(--mobile-slot-background-color) !important
+      background-image: var(--mobile-slot-background-image) !important
+      background-position: var(--mobile-slot-background-position) !important
+      background-repeat: var(--mobile-slot-background-repeat) !important
+      background-size: var(--mobile-slot-background-size) !important
+      background-attachment: var(--mobile-slot-background-attachment) !important
+      margin-top: var(--mobile-slot-margin-top) !important
+      margin-right: var(--mobile-slot-margin-right) !important
+      margin-bottom: var(--mobile-slot-margin-bottom) !important
+      margin-left: var(--mobile-slot-margin-left) !important
+      padding-top: var(--mobile-slot-padding-top) !important
+      padding-right: var(--mobile-slot-padding-right) !important
+      padding-bottom: var(--mobile-slot-padding-bottom) !important
+      padding-left: var(--mobile-slot-padding-left) !important
 
   /deep/
     .b-draggable-slot

@@ -88,8 +88,7 @@ const C_CUSTOM_1_M = [
         'color': '#fff',
         'font-family': 'Cinzel',
         'font-size': '24px',
-        'line-height': '29px',
-        'padding': '0'
+        'line-height': '29px'
       }
     },
     key: 5
@@ -242,8 +241,7 @@ const C_CUSTOM_2_M = [
         'color': '#fff',
         'font-family': 'Cinzel',
         'font-size': '24px',
-        'line-height': '29px',
-        'padding': '0'
+        'line-height': '29px'
       }
     },
     key: 15
@@ -396,8 +394,7 @@ const C_CUSTOM_3_M = [
         'color': '#fff',
         'font-family': 'Cinzel',
         'font-size': '24px',
-        'line-height': '29px',
-        'padding': '0'
+        'line-height': '29px'
       }
     },
     key: 25
@@ -550,8 +547,7 @@ const C_CUSTOM_4_M = [
         'color': '#fff',
         'font-family': 'Cinzel',
         'font-size': '24px',
-        'line-height': '29px',
-        'padding': '0'
+        'line-height': '29px'
       }
     },
     key: 35
@@ -639,7 +635,8 @@ const C_CUSTOM_CONTAINER_D = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'flex-start',
-    'padding': '10px 0 0 85px'
+    'padding-top': '10px',
+    'padding-left': '85px'
   }
 }
 
@@ -647,7 +644,8 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-image': 'url(https://s3.protocol.one/images/travel_map.jpg)',
-      'padding': '80px 0 125px',
+      'padding-top': '80px',
+      'padding-bottom': '125px',
       'background-position': 'center center',
       'background-size': 'cover'
     },

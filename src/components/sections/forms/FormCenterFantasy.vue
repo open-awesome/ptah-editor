@@ -63,7 +63,8 @@ const SCHEMA_CUSTOM = {
       'background-color': '#000000',
       'background-position': 'center center',
       'background-size': 'cover',
-      'padding': '62px 0 236px'
+      'padding-top': '62px',
+      'padding-bottom': '236px'
     }
   },
   components: _.merge({}, C_CUSTOM),

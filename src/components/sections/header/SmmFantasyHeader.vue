@@ -150,8 +150,7 @@ const defaultComponents = [
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'width': '303px',
-        'height': '73px',
-        'margin': '0'
+        'height': '73px'
       }
     }
   }
@@ -168,8 +167,7 @@ const defaultComponents2 = [
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
-        'font-size': '2.4rem',
-        'margin': '0'
+        'font-size': '2.4rem'
       },
       pseudo: {
         hover: {
@@ -190,8 +188,7 @@ const defaultComponents2 = [
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
-        'font-size': '2.4rem',
-        'margin': '0'
+        'font-size': '2.4rem'
       },
       pseudo: {
         hover: {
@@ -212,8 +209,7 @@ const defaultComponents2 = [
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
-        'font-size': '2.4rem',
-        'margin': '0'
+        'font-size': '2.4rem'
       },
       pseudo: {
         hover: {
@@ -271,9 +267,8 @@ const defaultSchema = {
   },
   container: {
     styles: {
-      'margin': '0 150px 0 0',
-      'padding': '0',
-      'flex-direction': 'row'
+      'flex-direction': 'row',
+      'margin-right': '150px'
     },
     width: 3,
     minWidth: 2,
@@ -283,7 +278,6 @@ const defaultSchema = {
   },
   container2: {
     styles: {
-      padding: 0,
       'flex-direction': 'row',
       'justify-content': 'space-between'
     },

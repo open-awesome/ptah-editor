@@ -464,8 +464,7 @@ const C_CUSTOM_4D = [
 const C_CUSTOM_CONTAINER = {
   styles: {
     'flex-direction': 'column',
-    'align-items': 'center',
-    'padding': '0px'
+    'align-items': 'center'
   }
 }
 
@@ -473,7 +472,7 @@ const C_CUSTOM_CONTAINER_D = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'flex-start',
-    'padding': '0 0 0 35px'
+    'padding-left': '35px'
   }
 }
 
@@ -493,7 +492,8 @@ const SCHEMA_CUSTOM = {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
       'background-color': 'rgba(21,28,68,1)',
       'background-size': 'cover',
-      'padding': '50px 0 190px 0'
+      'padding-top': '50px',
+      'padding-bottom': '190px'
     }
   },
   components: _.merge({}, C_CUSTOM),

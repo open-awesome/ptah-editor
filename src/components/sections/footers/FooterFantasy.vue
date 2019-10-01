@@ -58,8 +58,7 @@ const C_CUSTOM = [
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'width': '228px',
-        'height': '55px',
-        'padding': '0'
+        'height': '55px'
       }
     }
   },
@@ -70,8 +69,8 @@ const C_CUSTOM = [
         'font-family': 'Lato',
         'font-size': '1.4rem',
         'color': '#fff',
-        'margin': '0px',
-        'padding': '0px 16px',
+        'padding-right': '16px',
+        'padding-left': '16px',
         'text-align': 'left'
       }
     }
@@ -123,8 +122,7 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '130px',
         'height': '32px',
-        'font-size': '1.8rem',
-        'margin': '0'
+        'font-size': '1.8rem'
       },
       pseudo: {
         hover: {
@@ -145,8 +143,7 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
-        'font-size': '1.8rem',
-        'margin': '0'
+        'font-size': '1.8rem'
       },
       pseudo: {
         hover: {
@@ -167,8 +164,7 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
-        'font-size': '1.8rem',
-        'margin': '0'
+        'font-size': '1.8rem'
       },
       pseudo: {
         hover: {
@@ -190,13 +186,15 @@ const SCHEMA_CUSTOM = {
       'background-size': 'cover',
       'background-position': 'top center',
       'background-repeat': 'no-repeat',
-      'padding': '8px 0'
+      'padding-top': '8px',
+      'padding-bottom': '8px'
     }
   },
   container: {
     width: 12,
     styles: {
-      padding: '8px 0',
+      'padding-top': '8px',
+      'padding-bottom': '8px',
       'flex-direction': 'row'
     },
     media: {

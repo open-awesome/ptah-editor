@@ -65,13 +65,14 @@ const SCHEMA_CUSTOM = {
       'background-size': 'cover',
       'background-position': 'top center',
       'background-repeat': 'no-repeat',
-      'padding': '8px 0'
+      'padding-top': '8px',
+      'padding-bottom': '8px'
     }
   },
   container: {
     styles: {
-      margin: '0',
-      padding: '30px 0'
+      'padding-top': '30px',
+      'padding-bottom': '30px'
     },
     width: 12
   },

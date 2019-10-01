@@ -7,13 +7,13 @@ const DEFAULT_OPTIONS = {
   classes: [],
   styles: {
     'margin-top': 0,
-    'margin-right': 0,
     'margin-bottom': 0,
     'margin-left': 0,
+    'margin-right': 0,
     'padding-top': 0,
-    'padding-right': 0,
     'padding-bottom': 0,
-    'padding-left': 0
+    'padding-left': 0,
+    'padding-right': 0
   },
   resizable: false,
   hasLink: false,
@@ -93,10 +93,10 @@ const data = new Map([
     media: {
       'is-mobile': {
         'font-size': '1.6rem',
-        'margin-top': '16px',
-        'margin-bottom': '16px',
-        'margin-left': '32px',
-        'margin-right': '32px'
+        'margin-top': '4px',
+        'margin-bottom': '4px',
+        'margin-left': '8px',
+        'margin-right': '8px'
       }
     }
   }))],
@@ -124,7 +124,11 @@ const data = new Map([
     media: {
       'is-mobile': {
         'width': '130px',
-        'height': '80px'
+        'height': '80px',
+        'margin-top': '4px',
+        'margin-bottom': '4px',
+        'margin-left': '8px',
+        'margin-right': '8px'
       }
     }
   }))],
@@ -150,7 +154,11 @@ const data = new Map([
     media: {
       'is-mobile': {
         'width': '130px',
-        'height': '80px'
+        'height': '80px',
+        'margin-top': '4px',
+        'margin-bottom': '4px',
+        'margin-left': '8px',
+        'margin-right': '8px'
       }
     }
   }))],
@@ -254,8 +262,10 @@ const data = new Map([
           'font-size': '1.6rem',
           'width': '160px',
           'height': '64px',
-          'margin-top': '16px',
-          'margin-bottom': '16px'
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px'
         }
       }
     })
@@ -295,7 +305,11 @@ const data = new Map([
       isComplex: true,
       media: {
         'is-mobile': {
-          'font-size': '1.4rem'
+          'font-size': '1.4rem',
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px'
         }
       }
     })
@@ -344,7 +358,11 @@ const data = new Map([
       isComplex: true,
       media: {
         'is-mobile': {
-          'font-size': '1.2rem'
+          'font-size': '1.2rem',
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px'
         }
       }
     })
@@ -487,6 +505,10 @@ const data = new Map([
       },
       media: {
         'is-mobile': {
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px',
           formStyles: {
             'height': 48,
           }
@@ -645,6 +667,10 @@ const data = new Map([
       },
       media: {
         'is-mobile': {
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px',
           sizeIcons: {
             width: 24
           }
@@ -721,6 +747,10 @@ const data = new Map([
       },
       media: {
         'is-mobile': {
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px',
           sizeIcons: {
             width: 32
           }
@@ -801,6 +831,10 @@ const data = new Map([
       },
       media: {
         'is-mobile': {
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px',
           sizeIcons: {
             width: 24
           }
@@ -963,6 +997,10 @@ const data = new Map([
     },
     media: {
       'is-mobile': {
+        'margin-top': '4px',
+        'margin-bottom': '4px',
+        'margin-left': '8px',
+        'margin-right': '8px',
         'font-size': '2.4rem'
       }
     }

@@ -77,7 +77,10 @@ const C_CUSTOM = [
         'font-size': '3.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '10px 80px'
+        'margin-top': '10px',
+        'margin-right': '80px',
+        'margin-bottom': '10px',
+        'margin-left': '80px'
       }
     }
   },
@@ -89,7 +92,7 @@ const C_CUSTOM = [
         'font-size': '3.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '21px 0 0 0'
+        'margin-top': '21px'
       }
     }
   },
@@ -110,8 +113,7 @@ const C_CUSTOM = [
         'font-weight': '800',
         'line-height': '1',
         'color': '#ffffff',
-        'padding': '0',
-        'margin': '0 0 62px 0'
+        'margin-bottom': '62px'
       }
     }
   },
@@ -127,7 +129,8 @@ const C_CUSTOM = [
         'width': '240px',
         'height': '64px',
         'border-radius': '100px',
-        'margin': '25px 0'
+        'margin-top': '25px',
+        'margin-bottom': '25px'
       },
       pseudo: {
         'hover': {
@@ -165,7 +168,7 @@ const C_CUSTOM = [
         }
       },
       styles: {
-        'margin': '25px 0 0'
+        'margin-top': '25px'
       },
       colorFill: {
         color: '#F4BC64'

@@ -57,7 +57,10 @@ const C_CUSTOM = [
         'background-size': 'contain',
         'width': '500px',
         'height': '121px',
-        'margin': '25px 0 20px'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '20px',
+        'margin-left': '0px'
       }
     }
   },
@@ -69,7 +72,10 @@ const C_CUSTOM = [
         'font-size': '5.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '25px 0 20px'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '20px',
+        'margin-left': '0px'
       }
     }
   },
@@ -81,7 +87,10 @@ const C_CUSTOM = [
         'font-size': '3.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '25px 0 12px'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '12px',
+        'margin-left': '0px'
       }
     }
   },
@@ -102,8 +111,10 @@ const C_CUSTOM = [
         'font-weight': 'normal',
         'line-height': '1',
         'color': '#ffffff',
-        'padding': '0',
-        'margin': '0 0 27px 0'
+        'margin-top': '0px',
+        'margin-right': '0px',
+        'margin-bottom': '27px',
+        'margin-left': '0px'
       }
     }
   },
@@ -119,7 +130,10 @@ const C_CUSTOM = [
         'width': '240px',
         'height': '64px',
         'border': '1px solid #000000',
-        'margin': '25px 0'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '25px',
+        'margin-left': '0px'
       },
       pseudo: {
         'hover': {
@@ -152,7 +166,7 @@ const SCHEMA_CUSTOM = {
   container: {
     width: 9,
     styles: {
-      padding: '0 0 120px 0'
+      'padding-bottom': '120px'
     }
   },
   edited: true

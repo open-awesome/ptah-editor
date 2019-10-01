@@ -85,8 +85,7 @@ const C_CUSTOM_2 = [
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'width': '264px',
-        'height': '164px',
-        'margin': '0'
+        'height': '164px'
       }
     },
     key: 0

@@ -448,8 +448,7 @@ const C_CUSTOM_4D = [
 const C_CUSTOM_CONTAINER = {
   styles: {
     'flex-direction': 'column',
-    'align-items': 'center',
-    'padding': '0px'
+    'align-items': 'center'
   }
 }
 
@@ -457,7 +456,7 @@ const C_CUSTOM_CONTAINER_D = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'flex-start',
-    'padding': '0 0 0 35px'
+    'padding-left': '35px'
   }
 }
 
@@ -477,7 +476,7 @@ const SCHEMA_CUSTOM = {
       'background-image': 'url(https://s3.protocol.one/images/ash_prod_bg_2.jpg)',
       'background-color': 'rgba(21,28,68,1)',
       'background-size': 'cover',
-      'padding': '0px 0 190px 0'
+      'padding-bottom': '190px'
     }
   },
   components: _.merge({}, C_CUSTOM),

@@ -108,7 +108,10 @@ const defaultComponents = [
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin-top': '8px',
+        'margin-right': '16px',
+        'margin-bottom': '8px',
+        'margin-left': '16px'
       }
     },
     key: 1
@@ -126,7 +129,10 @@ const defaultComponents = [
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin-top': '8px',
+        'margin-right': '16px',
+        'margin-bottom': '8px',
+        'margin-left': '16px'
       }
     },
     key: 2
@@ -144,7 +150,10 @@ const defaultComponents = [
         'height': '50px',
         'border-radius': '2px',
         'font-size': '1.8rem',
-        'margin': '8px 16px'
+        'margin-top': '8px',
+        'margin-right': '16px',
+        'margin-bottom': '8px',
+        'margin-left': '16px'
       }
     },
     key: 3
