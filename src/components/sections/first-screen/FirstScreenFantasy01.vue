@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenFantasy01'
@@ -198,7 +199,10 @@ export default {
 
   description: 'Fantasy title Maximum main screen',
 
-  mixins: [defaults],
+  mixins: [
+    defaults,
+    sectionMedia
+  ],
 
   cover: '/img/covers/first-screen-fantasy-01.jpg',
 
@@ -221,6 +225,7 @@ export default {
 </script>
 
 <template>
+<div :style="$sectionData.objVarsMedia">
   <section
     class="b-first-screen-fantasy-01"
     :class="$sectionData.mainStyle.classes"
@@ -309,44 +314,38 @@ export default {
       </div>
     </div>
   </section>
+</div>
 </template>
 
 <style lang="sass" scoped>
+section
+  .is-mobile &
+    margin-top: var(--mobile-section-margin-top) !important
+    margin-right: var(--mobile-section-margin-right) !important
+    margin-bottom: var(--mobile-section-margin-bottom) !important
+    margin-left: var(--mobile-section-margin-left) !important
+    padding-top: var(--mobile-section-padding-top) !important
+    padding-right: var(--mobile-section-padding-right) !important
+    padding-bottom: var(--mobile-section-padding-bottom) !important
+    padding-left: var(--mobile-section-padding-left) !important
+  @media only screen and (max-width: 768px)
+    &
+      margin-top: var(--mobile-section-margin-top) !important
+      margin-right: var(--mobile-section-margin-right) !important
+      margin-bottom: var(--mobile-section-margin-bottom) !important
+      margin-left: var(--mobile-section-margin-left) !important
+      padding-top: var(--mobile-section-padding-top) !important
+      padding-right: var(--mobile-section-padding-right) !important
+      padding-bottom: var(--mobile-section-padding-bottom) !important
+      padding-left: var(--mobile-section-padding-left) !important
+
 .b-first-screen-fantasy-01
   @media only screen and (width: 1024px) and (height: 1366px)
     &
       background-position: 45% bottom
-  .b-logo-fs
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        margin: 1.6rem 0
-  .b-text-fs
-    letter-spacing: -0.02em
-    .is-mobile &,
-    .is-tablet &
-      font-size: 2.4rem
-      margin: 0 auto 8px
-      text-align: center
-    @media only screen and (max-width: 840px)
-      &
-        font-size: 2.4rem
-        margin: 0 auto 8px
-    @media only screen and (max-width: 500px)
-      &
-        text-align: center
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        text-align: left
+
   .b-button-fs
     box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
     transition: background-color 200ms
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        margin: 1.6rem
-
-  .b-delimiter-fs
-    @media only screen and (max-width: 980px) and (max-height: 700px)
-      &
-        display: none
 
 </style>
