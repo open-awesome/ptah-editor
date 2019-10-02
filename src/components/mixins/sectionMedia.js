@@ -22,7 +22,13 @@ export default {
         '--mobile-section-padding-top': this.$sectionData.mainStyle.media['is-mobile']['padding-top'],
         '--mobile-section-padding-right': this.$sectionData.mainStyle.media['is-mobile']['padding-right'],
         '--mobile-section-padding-bottom': this.$sectionData.mainStyle.media['is-mobile']['padding-bottom'],
-        '--mobile-section-padding-left': this.$sectionData.mainStyle.media['is-mobile']['padding-left']
+        '--mobile-section-padding-left': this.$sectionData.mainStyle.media['is-mobile']['padding-left'],
+        '--mobile-section-background-color': this.$sectionData.mainStyle.media['is-mobile']['background-color'],
+        '--mobile-section-background-image': this.$sectionData.mainStyle.media['is-mobile']['background-image'],
+        '--mobile-section-background-position': this.$sectionData.mainStyle.media['is-mobile']['background-position'],
+        '--mobile-section-background-repeat': this.$sectionData.mainStyle.media['is-mobile']['background-repeat'],
+        '--mobile-section-background-size': this.$sectionData.mainStyle.media['is-mobile']['background-size'],
+        '--mobile-section-background-attachment': this.$sectionData.mainStyle.media['is-mobile']['background-attachment']
       }
     }
   }

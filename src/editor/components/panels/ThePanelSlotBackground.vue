@@ -94,12 +94,9 @@ export default {
     ...mapState('Sidebar', [
       'sandbox',
       'settingObjectSection',
-      'device'
+      'device',
+      'isMobile'
     ]),
-
-    isMobile () {
-      return this.device === 'is-mobile'
-    },
 
     slot () {
       return this.settingObjectSection.get(this.sandbox.container) || {}
@@ -252,33 +249,6 @@ export default {
     removeBackgroundPicker (index) {
       this.backgroundPickers.splice(index, 1)
       this.updateBgColor()
-    },
-
-    update (prop, value) {
-      let props = {}
-      let styles = {}
-      let media = {}
-
-      styles[prop] = value
-
-      media[`${this.device}`] = {}
-      media[`${this.device}`][prop] = value
-
-      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
-
-      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, props))
-    },
-
-    getPropValue (prop) {
-      let s = ''
-
-      if (this.isMobile && this.mediaStyles[`${this.device}`] && this.mediaStyles[`${this.device}`][prop]) {
-        s = this.mediaStyles[`${this.device}`][prop]
-      } else {
-        s = this.styles[prop]
-      }
-
-      return s
     }
   }
 }
