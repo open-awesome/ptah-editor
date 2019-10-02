@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const COMPONENTS = [
   {
@@ -214,7 +215,7 @@ export default {
 
   description: 'Lined up lower block with set of elements',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/FootFantCover3.jpg',
 
@@ -236,7 +237,7 @@ export default {
   <footer
     class="b-section-footer"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -276,6 +277,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-section-footer
   position: relative
   width: 100%

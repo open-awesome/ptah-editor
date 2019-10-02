@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const C_CUSTOM_COLUMN = [
   {
@@ -227,7 +228,7 @@ export default {
 
   description: 'Interactive FAQ presentation screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/faq-space.png',
 
@@ -251,7 +252,7 @@ export default {
   <section
     class="b-faq"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -317,6 +318,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 

@@ -4,6 +4,7 @@ import * as _ from 'lodash-es'
 import VuseIcon from '@editor/components/VuseIcon'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
 const REQUIREMENTS = [
@@ -711,7 +712,7 @@ export default {
 
   description: 'System requirements presentation screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/CQbIwraB_cover_sr.jpg',
 
@@ -766,7 +767,7 @@ export default {
   <section class="l-system"
            v-styler:section="$sectionData.mainStyle"
            :class="$sectionData.mainStyle.classes"
-           :style="$sectionData.mainStyle.styles"
+           :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
   >
     <slot name="menu"/>
     <slot name="video"/>
@@ -948,6 +949,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+  @import '../../../assets/sass/sectionMedia.sass'
   @import '../../../assets/sass/_colors.sass'
   @import '../../../assets/sass/_variables.sass'
   @import '../../../assets/sass/_flex.sass'

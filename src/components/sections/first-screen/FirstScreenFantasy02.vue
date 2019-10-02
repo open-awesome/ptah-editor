@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenFantasy02'
@@ -241,7 +242,7 @@ export default {
 
   description: 'Fantasy title face the Countdown main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/first-screen-fantasy-02.jpg',
 
@@ -267,7 +268,7 @@ export default {
   <section
     class="b-first-screen-fantasy-02"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -355,6 +356,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-first-screen-fantasy-02
   @media only screen and (width: 1024px) and (height: 1366px)
     &

@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const COMPONENTS = [
   {
@@ -82,7 +83,7 @@ export default {
 
   description: 'Centered e-mail gathering form screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/form_cover.jpg',
 
@@ -106,7 +107,7 @@ export default {
   <section
     class="b-form"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -144,6 +145,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-draggable-slot > div
   width: 100%
 </style>

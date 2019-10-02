@@ -2,7 +2,7 @@
 <section
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     class="b-hero">
 
   <slot name="menu"/>
@@ -71,6 +71,7 @@ import { StyleObject, Logo, VideoElement, Text, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const [name, group, cover] = ['HeroVideoSplitScreen', 'FirstScreen', '/img/covers/hero-art-left.png']
 
@@ -174,7 +175,7 @@ export default {
 
   description: 'Game character to leftward of video main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   $schema: {
     mainStyle: StyleObject,
@@ -197,6 +198,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 $h: 100vh
 
 .b-hero

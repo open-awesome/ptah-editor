@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const COMPONENTS_1 = [
   {
@@ -156,7 +157,7 @@ export default {
 
   description: 'Left-centered large e-mail form screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn287.cdn.stg.gamenet.ru/0/7qZQz/o_W6Gz6.png',
 
@@ -182,7 +183,7 @@ export default {
   <section
     class="b-form"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -244,6 +245,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-form
   &__left-col
     align-items: stretch

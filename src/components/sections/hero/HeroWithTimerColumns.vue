@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroWithTimerColumns'
@@ -196,7 +197,7 @@ export default {
 
   description: 'Shooter title Countdown two columns main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/hero-with-timer-columns.jpg',
 
@@ -220,7 +221,7 @@ export default {
   <section
     class="b-hero-with-timer-two-columns"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
     >
     <slot name="menu"/>
@@ -281,9 +282,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
-
-.b-hero-with-timer-two-columns
-
 </style>

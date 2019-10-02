@@ -2,7 +2,7 @@
   <section
     class="b-top"
     :class="[$sectionData.mainStyle.classes, device.type]"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -114,6 +114,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 import { mapActions, mapMutations } from 'vuex'
 
@@ -276,7 +277,7 @@ export default {
 
   description: 'Fullscreen feature slider',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   inject: ['device'],
 
@@ -368,6 +369,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-top
   width: 100%
   max-width: 100vw

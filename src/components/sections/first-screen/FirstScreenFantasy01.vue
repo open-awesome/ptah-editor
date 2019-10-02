@@ -199,10 +199,7 @@ export default {
 
   description: 'Fantasy title Maximum main screen',
 
-  mixins: [
-    defaults,
-    sectionMedia
-  ],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/first-screen-fantasy-01.jpg',
 
@@ -225,7 +222,6 @@ export default {
 </script>
 
 <template>
-<div>
   <section
     class="b-first-screen-fantasy-01"
     :class="$sectionData.mainStyle.classes"
@@ -314,30 +310,10 @@ export default {
       </div>
     </div>
   </section>
-</div>
 </template>
 
 <style lang="sass" scoped>
-section
-  .is-mobile &
-    margin-top: var(--mobile-section-margin-top) !important
-    margin-right: var(--mobile-section-margin-right) !important
-    margin-bottom: var(--mobile-section-margin-bottom) !important
-    margin-left: var(--mobile-section-margin-left) !important
-    padding-top: var(--mobile-section-padding-top) !important
-    padding-right: var(--mobile-section-padding-right) !important
-    padding-bottom: var(--mobile-section-padding-bottom) !important
-    padding-left: var(--mobile-section-padding-left) !important
-  @media only screen and (max-width: 768px)
-    &
-      margin-top: var(--mobile-section-margin-top) !important
-      margin-right: var(--mobile-section-margin-right) !important
-      margin-bottom: var(--mobile-section-margin-bottom) !important
-      margin-left: var(--mobile-section-margin-left) !important
-      padding-top: var(--mobile-section-padding-top) !important
-      padding-right: var(--mobile-section-padding-right) !important
-      padding-bottom: var(--mobile-section-padding-bottom) !important
-      padding-left: var(--mobile-section-padding-left) !important
+@import '../../../assets/sass/sectionMedia.sass'
 
 .b-first-screen-fantasy-01
   @media only screen and (width: 1024px) and (height: 1366px)

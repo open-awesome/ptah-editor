@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 /**
  * Base keys for elements in Hero sections
  * Logo - 0
@@ -110,7 +111,7 @@ export default {
 
   description: 'Shooter title Early Access main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn372.cdn.stg.gamenet.ru/0/7cELj/o_1DWDoa.png',
 
@@ -165,7 +166,7 @@ export default {
   <section
     class="b-hunt"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -207,6 +208,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-hunt
   .b-grid,
   .b-grid__row

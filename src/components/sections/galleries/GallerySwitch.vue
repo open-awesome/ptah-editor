@@ -2,7 +2,7 @@
   <section class="b-gallery-one b-gallery-switch"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     >
       <slot name="menu"/>
       <slot name="video"/>
@@ -182,6 +182,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 import Uploader from '@editor/plugins/Uploader.vue'
 
@@ -370,7 +371,7 @@ export default {
     }
   },
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn249.cdn.stg.gamenet.ru/0/8iEB7/o_Rg7b5.jpg',
 
@@ -415,6 +416,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'

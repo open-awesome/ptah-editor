@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'Video'
 const NAME = 'Video'
@@ -73,7 +74,7 @@ export default {
 
   group: GROUP_NAME,
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/video-thumbnail.png',
 
@@ -95,7 +96,7 @@ export default {
   <section
     class="b-video-section"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
    >
     <slot name="menu"/>
@@ -134,8 +135,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
-
-.b-video-section
 </style>

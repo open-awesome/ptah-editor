@@ -2,7 +2,7 @@
 <section
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     class="b-hero">
 
   <slot name="menu"/>
@@ -69,6 +69,7 @@ import { StyleObject, Logo, Text, Delimiter, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const [name, group, cover] = ['ThreeSegmentHeroScreen', 'FirstScreen', '/img/covers/hero-three-columns.png']
 
@@ -205,7 +206,7 @@ export default {
 
   description: 'Three parts split main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   $schema: {
     mainStyle: StyleObject,
@@ -241,6 +242,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-hero
-
+ @import '../../../assets/sass/sectionMedia.sass'
 </style>

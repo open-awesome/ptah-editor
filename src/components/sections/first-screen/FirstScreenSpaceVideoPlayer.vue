@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenSpace01'
@@ -133,7 +134,7 @@ export default {
 
   description: 'Space title Video to Action main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/first-screen-space-video-player.jpg',
 
@@ -155,7 +156,7 @@ export default {
   <section
     class="b-first-screen-space-video-player"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -193,6 +194,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-first-screen-space-video-player
   .b-text-fs
     letter-spacing: -0.02em

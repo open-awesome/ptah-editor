@@ -2,7 +2,7 @@
 <header
     v-styler:section="$sectionData.mainStyle"
     :class="[$sectionData.mainStyle.classes, {'_sticky' : $sectionData.mainStyle.sticky }]"
-    :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }]"
+    :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }, $sectionData.objVarsMedia]"
     class="b-section-header">
 
   <slot name="menu"/>
@@ -139,6 +139,7 @@ import { StyleObject, Logo, SocialNetworks, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const [name, group, cover] = ['SmmHeader', 'Header', '/img/covers/header-space-02.jpg']
 const defaultComponents = [
@@ -308,7 +309,7 @@ export default {
 
   description: 'Lined up upper block with set of elements',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   $schema: {
     isHeader: true,
@@ -350,6 +351,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-section-header
   z-index: 2
   .is-tablet &,

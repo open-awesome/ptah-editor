@@ -2,6 +2,7 @@
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import Seeder from '@editor/seeder'
 import { mapActions } from 'vuex'
 
@@ -132,7 +133,7 @@ export default {
 
   description: 'Gallery fullscreen pop-up picture view',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/gpopup_cover.jpg',
 
@@ -184,7 +185,7 @@ export default {
   <section class="b-gallery-popup"
    v-styler:section="$sectionData.mainStyle"
    :class="$sectionData.mainStyle.classes"
-   :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }]"
+   :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }], $sectionData.objVarsMedia"
   >
     <slot name="menu"/>
     <slot name="video"/>
@@ -295,6 +296,7 @@ export default {
 <style lang="sass" scoped="scoped">
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
+@import '../../../assets/sass/sectionMedia.sass'
 
 .b-gallery-popup
   $this: &

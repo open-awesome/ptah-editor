@@ -2,7 +2,7 @@
 <header
     v-styler:section="$sectionData.mainStyle"
     :class="[$sectionData.mainStyle.classes, {'_sticky' : $sectionData.mainStyle.sticky }]"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     class="b-section-header">
 
   <slot name="menu"/>
@@ -139,6 +139,7 @@ import { StyleObject, Logo, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const [name, group, cover] = ['Header2', 'header', '/img/covers/header-2.png']
 const defaultComponents = [
@@ -232,7 +233,7 @@ export default {
   name,
   group,
   cover,
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   $schema: {
     isHeader: true,
@@ -257,6 +258,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-section-header
   z-index: 2
   .is-tablet &,

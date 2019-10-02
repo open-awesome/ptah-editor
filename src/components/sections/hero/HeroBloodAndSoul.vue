@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 /**
  * Base keys for elements in Hero sections
@@ -91,7 +92,7 @@ export default {
 
   description: 'Fantasy title Play Game main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn811.cdn.stg.gamenet.ru/0/7cEKX/o_182BvQ.png',
 
@@ -141,7 +142,7 @@ export default {
   <section
     class="b-hero"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle">
 
     <slot name="menu"/>
@@ -208,6 +209,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-hero
   position: relative
   width: 100%

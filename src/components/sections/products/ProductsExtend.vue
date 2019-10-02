@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
 const C_CUSTOM_1 = [
@@ -784,7 +785,7 @@ export default {
 
   description: 'Product list side expanded view',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn199.cdn.stg.gamenet.ru/0/8iE9h/o_2BSWcG.jpg',
 
@@ -879,7 +880,7 @@ export default {
   <section
     class="b-products-columns-extend"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -1024,6 +1025,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
 @import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
 

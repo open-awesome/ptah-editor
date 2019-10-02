@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenFantasyVideoBack'
@@ -179,7 +180,7 @@ export default {
 
   description: 'Fantasy title animated background main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/first-screen-fantasy-video-back.jpg',
 
@@ -201,7 +202,7 @@ export default {
   <section
     class="b-first-screen-space-video-back"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -239,6 +240,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/sectionMedia.sass'
+
 .b-first-screen-space-video-back
   .b-text-fs
     letter-spacing: -0.02em
