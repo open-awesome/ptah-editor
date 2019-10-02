@@ -39,12 +39,12 @@
       <div class="b-grid__row">
         <div class="b-grid__col-12">
           <div class="b-gallery-one">
-            <div class="b-gallery-one__padd">
-              <div class="b-gallery-one__padd-border">
+            <div class="b-section-padd">
+              <div class="b-section-padd-border">
                 <!-- Setting controls -->
-                <div class="b-gallery-one__controls">
+                <div class="b-section-menu__controls">
                   <div>
-                    <a href="#" class="b-gallery-one__control"
+                    <a href="#" class="b-section-menu__control"
                        tooltip="Items count"
                        tooltip-position="bottom"
                        @click.stop="showSettings('SectionGallerySettings')">
@@ -52,7 +52,7 @@
                     </a>
                   </div>
                   <div>
-                    <a href="#" class="b-gallery-one__control"
+                    <a href="#" class="b-section-menu__control"
                        tooltip="Gallery style"
                        tooltip-position="bottom"
                        @click.stop="showSettings('SectionGalleryStyle')">
@@ -425,7 +425,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/sectionMedia.sass'
+@import '../../../assets/sass/section-media.sass'
+@import '../../../assets/sass/section-menu.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
@@ -433,56 +434,6 @@ export default {
 .b-gallery-one
   margin-bottom: -20px
   $this: &
-  &__padd
-    padding: 0
-
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: 0
-      transition: border 0.25s
-      border: 1px dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 1px dashed $dark-blue-krayola
-
-  &__controls
-    position: absolute
-    top: -21px
-    left: 0
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
 
   /deep/
   .b-uploader__input

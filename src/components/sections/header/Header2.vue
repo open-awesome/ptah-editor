@@ -258,7 +258,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/sectionMedia.sass'
+@import '../../../assets/sass/section-media.sass'
 
 .b-section-header
   z-index: 2

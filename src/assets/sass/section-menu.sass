@@ -1,0 +1,57 @@
+@import '_variables.sass'
+
+section
+  .b-section-padd
+    padding: $size-step/4
+
+    transition: border 0.25s
+    border: 0.2rem dotted transparent
+
+    position: relative
+    .is-mobile &
+      padding: 0
+    @media only screen and (max-width: 540px)
+      &
+        padding: 0
+    &-border
+      padding: $size-step/4
+      transition: border 0.25s
+      border: 1px dotted transparent
+    .is-editable &:hover .b-section-padd-border
+      border: 1px dashed $dark-blue-krayola
+    .is-mobile .is-editable &:hover .b-section-padd-border
+      border: 1px dotted transparent
+    .is-editable &:hover .b-section-menu__controls
+      display: flex !important
+    .is-mobile .is-editable &:hover .b-section-menu__controls
+      display: none !important
+  .b-section-menu
+    &__controls
+      position: absolute
+      top: -14px
+      left: $size-step/4
+      align-items: flex-end
+      justify-content: flex-start
+
+      display: none
+    &__control
+      display: flex
+      align-items: center
+      justify-content: center
+
+      width: $size-step/1.5
+      height: $size-step/1.5
+
+      background: $dark-blue-krayola
+      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+
+      cursor: pointer
+      & svg
+        fill:  $white
+        width: 14px
+        height: 14px
+
+      &:hover, .active
+        background: $white
+        svg
+          fill: $dark-blue-krayola

@@ -803,11 +803,11 @@ export default {
       <div class="b-grid__row">
         <div class="b-grid__col-12">
           <div class="b-system">
-            <div class="b-system__padd">
+            <div class="b-section-padd">
               <!-- Setting controls -->
-              <div class="b-system__controls">
+              <div class="b-section-menu__controls">
                 <div>
-                  <a href="#" class="b-system__control"
+                  <a href="#" class="b-section-menu__control"
                      tooltip="Settings"
                      tooltip-position="bottom"
                      @click.stop="showSettings('SectionSystemSettings')">
@@ -815,7 +815,7 @@ export default {
                   </a>
                 </div>
                 <div>
-                  <a href="#" class="b-system__control"
+                  <a href="#" class="b-section-menu__control"
                      tooltip="Table style"
                      tooltip-position="bottom"
                      @click.stop="showSettings('SectionSystemStyle')">
@@ -824,7 +824,7 @@ export default {
                 </div>
               </div>
 
-              <div class="b-system__padd-border">
+              <div class="b-section-padd-border">
                 <div class="b-system-platforms flex flex_center">
                   <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.mainStyle.systemRequirements" :key="key"
                        v-show="$sectionData.mainStyle.systemRequirements[key].visible"
@@ -949,7 +949,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/sectionMedia.sass'
+@import '../../../assets/sass/section-media.sass'
+@import '../../../assets/sass/section-menu.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
@@ -962,24 +963,6 @@ export default {
       flex-wrap: wrap
       height: auto !important
       padding: 0
-  &__padd
-    padding: $size-step/4
-
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: $size-step/4
-      transition: border 0.25s
-      border: 1px dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 1px dashed $dark-blue-krayola
   &-platforms
     justify-content: center
 
@@ -1057,39 +1040,6 @@ export default {
             margin-left: -$size-step/2
 
             transition: all 200ms
-  &__controls
-    position: absolute
-    top: -14px
-    left: $size-step/3.4
-
-    display: flex
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
 
 .b-system-requirements
   &__table

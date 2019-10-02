@@ -185,7 +185,7 @@ export default {
   <section class="b-gallery-popup"
    v-styler:section="$sectionData.mainStyle"
    :class="$sectionData.mainStyle.classes"
-   :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }], $sectionData.objVarsMedia"
+   :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }, $sectionData.objVarsMedia]"
   >
     <slot name="menu"/>
     <slot name="video"/>
@@ -221,17 +221,17 @@ export default {
       </div>
       <div class="b-grid__row">
         <div class="b-grid__col-12">
-          <div class="b-gallery-popup__padd">
-            <div class="b-gallery-popup__padd-border">
+          <div class="b-section-padd">
+            <div class="b-section-padd-border">
               <!-- Setting controls -->
-              <div class="b-gallery-popup__controls">
+              <div class="b-section-menu__controls">
                 <div>
-                  <a href="#" class="b-gallery-popup__control" @click.stop="showSettings('SectionGallerySettings')">
+                  <a href="#" class="b-section-menu__control" @click.stop="showSettings('SectionGallerySettings')">
                     <icon-base name="cog" width="12" height="15" />
                   </a>
                 </div>
                 <div>
-                  <a href="#" class="b-gallery-popup__control" @click.stop="showSettings('SectionGalleryStyle')">
+                  <a href="#" class="b-section-menu__control" @click.stop="showSettings('SectionGalleryStyle')">
                     <icon-base name="style" width="12" height="15" />
                   </a>
                 </div>
@@ -296,7 +296,8 @@ export default {
 <style lang="sass" scoped="scoped">
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
-@import '../../../assets/sass/sectionMedia.sass'
+@import '../../../assets/sass/section-media.sass'
+@import '../../../assets/sass/section-menu.sass'
 
 .b-gallery-popup
   $this: &
@@ -305,58 +306,6 @@ export default {
   align-items: center
   justify-content: center
   flex-wrap: wrap
-  &__padd
-    padding: $size-step/4
-
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: $size-step/4 $size-step/4 $size-step/2
-      transition: border 0.25s
-      border: 0.2rem dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 0.2rem dotted #fff
-
-  &__controls
-    position: absolute
-    top: -14px
-    left: $size-step/3.4
-
-    display: flex
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
 
   /deep/
   .b-uploader__input
