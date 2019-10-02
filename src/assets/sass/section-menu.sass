@@ -19,11 +19,9 @@ section
       border: 1px dotted transparent
     .is-editable &:hover .b-section-padd-border
       border: 1px dashed $dark-blue-krayola
-    .is-mobile .is-editable &:hover .b-section-padd-border
-      border: 1px dotted transparent
     .is-editable &:hover .b-section-menu__controls
       display: flex !important
-    .is-mobile .is-editable &:hover .b-section-menu__controls
+    .is-mobile .is-editable &:hover .b-section-menu__controls > div:nth-child(1)
       display: none !important
   .b-section-menu
     &__controls
