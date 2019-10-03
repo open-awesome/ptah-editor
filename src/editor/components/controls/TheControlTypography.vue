@@ -155,17 +155,7 @@ export default {
         return { name: gotLineHeight, value: gotLineHeight }
       },
       set (value) {
-        let props = {}
-        let styles = {}
-        let media = {}
-
-        styles['line-height'] = value.value
-        media['is-mobile'] = {}
-        media['is-mobile']['line-height'] = styles['line-height']
-
-        this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
-
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+        this.update('line-height', value.value)
       }
     }
   },
@@ -200,10 +190,6 @@ export default {
           this.style.valueMultiple.push(this.temp[key])
         }
       }
-    },
-
-    changeSize () {
-      this.update('font-size', this.size.value)
     },
 
     changeColor () {
@@ -275,13 +261,13 @@ export default {
   <div class="b-typography-controls">
     <div class="b-typography-controls__control">
       <div class="b-typography-controls__control-col b-typography-controls__control-col-font-name">
-        <base-select :label="$t('c.font')" :options="fonts.options" v-model="fontName" height="14"></base-select>
+        <base-select :label="$t('c.font')" :options="fonts.options" v-model="fontName" height="14" @input="updateProps"></base-select>
       </div>
       <div class="b-typography-controls__control-col">
-        <base-select :label="$t('c.size')" :options="sizes" v-model="size" @input="changeSize" height="23"></base-select>
+        <base-select :label="$t('c.size')" :options="sizes" v-model="size" height="23" @input="updateProps"></base-select>
       </div>
       <div class="b-typography-controls__control-col">
-        <base-select :label="$t('c.line')" :options="linesHeight" v-model="lineHeight" height="23"></base-select>
+        <base-select :label="$t('c.line')" :options="linesHeight" v-model="lineHeight" height="23" @input="updateProps"></base-select>
       </div>
     </div>
     <div class="b-typography-controls__control" v-if="!isMobile">
@@ -292,7 +278,7 @@ export default {
         <base-color-picker class="b-picker_color-hover" :label="$t('c.hover')" v-model="colorHover" @change="changeColorHover"></base-color-picker>
       </div>
     </div>
-     <div class="b-typography-controls__control">
+    <div class="b-typography-controls__control" v-if="!isMobile">
       <div class="b-typography-controls__control-col" v-if="showTextStyles">
         <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
       </div>

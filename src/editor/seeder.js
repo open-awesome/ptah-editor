@@ -410,7 +410,15 @@ const data = new Map([
     isTop:  false,
     isTopPopup:  false,
     isBottom:  false,
-    isBottomPopup:  false
+    isBottomPopup:  false,
+    media: {
+      'is-mobile': {
+        textStyles: {
+          chapter: {},
+          text: {}
+        }
+      }
+    }
   }))],
   [types.Columns, () => (_.merge({}, DEFAULT_OPTIONS, {
     background: true,

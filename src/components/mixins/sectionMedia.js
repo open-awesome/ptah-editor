@@ -15,6 +15,7 @@ export default {
   methods: {
     mediaStyles () {
       let obj = {}
+      let objTypo = {}
       let list = [
         'margin-top',
         'margin-right',
@@ -31,14 +32,32 @@ export default {
         'background-size',
         'background-attachment'
       ]
+      let listTypo = [
+        'font-family',
+        'font-size',
+        'color'
+      ]
 
       list.forEach((e) => {
         obj[`--mobile-section-${e}`] = this.$sectionData.mainStyle.media['is-mobile'][e]
           ? this.$sectionData.mainStyle.media['is-mobile'][e]
           : this.$sectionData.mainStyle.styles[e]
       })
-
       this.$sectionData.objVarsMedia = obj
+
+      // for gallery
+      if (this.$sectionData.mainStyle['textStyles']) {
+        listTypo.forEach((e) => {
+          objTypo[`--mobile-section-text-styles-chapter-${e}`] = this.$sectionData.mainStyle.media['is-mobile']['textStyles']['chapter'][e]
+            ? this.$sectionData.mainStyle.media['is-mobile']['textStyles']['chapter'][e]
+            : this.$sectionData.mainStyle['textStyles']['chapter'][e]
+
+          objTypo[`--mobile-section-text-styles-text-${e}`] = this.$sectionData.mainStyle.media['is-mobile']['textStyles']['text'][e]
+            ? this.$sectionData.mainStyle.media['is-mobile']['textStyles']['text'][e]
+            : this.$sectionData.mainStyle['textStyles']['text'][e]
+        })
+        this.$sectionData.objVarsTypo = objTypo
+      }
     }
   }
 }

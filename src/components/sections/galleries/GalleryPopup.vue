@@ -183,7 +183,7 @@ export default {
   <section class="b-gallery-popup"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '2' }, $sectionData.objVarsMedia]"
+    :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '2' }, $sectionData.objVarsMedia, $sectionData.objVarsTypo]"
     >
       <slot name="menu"/>
       <slot name="video"/>
@@ -360,6 +360,16 @@ export default {
     display: flex
     justify-content: center
     align-items: center
+  &-title
+    .is-mobile &
+      font-family: var(--mobile-section-text-styles-text-font-family) !important
+      font-size: var(--mobile-section-text-styles-text-font-size) !important
+      color: var(--mobile-section-text-styles-text-color) !important
+    @media only screen and (max-width: 768px)
+      &
+       font-family: var(--mobile-section-text-styles-text-font-family) !important
+       font-size: var(--mobile-section-text-styles-text-font-size) !important
+       color: var(--mobile-section-text-styles-text-color) !important
 
 .b-gallery-popup__text
   position: absolute

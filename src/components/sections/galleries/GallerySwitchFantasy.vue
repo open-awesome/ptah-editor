@@ -2,7 +2,7 @@
   <section class="b-gallery-one b-gallery-switch"
    v-styler:section="$sectionData.mainStyle"
    :class="$sectionData.mainStyle.classes"
-   :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
+   :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia, $sectionData.objVarsTypo]"
   >
     <slot name="menu"/>
     <slot name="video"/>
@@ -25,7 +25,7 @@
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
                   :target="$sectionData.components[index].element.link.target"
-                  :path="`components0[${index}].element`"
+                  :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                 >
@@ -623,6 +623,28 @@ export default {
 .b-gallery-one-stage__bio
   max-width: 50rem
   margin: $size-step/2 auto
+
+.b-gallery-one-stage__name
+  .is-mobile &
+    font-family: var(--mobile-section-text-styles-chapter-font-family) !important
+    font-size: var(--mobile-section-text-styles-chapter-font-size) !important
+    color: var(--mobile-section-text-styles-chapter-color) !important
+  @media only screen and (max-width: 768px)
+    &
+     font-family: var(--mobile-section-text-styles-chapter-font-family) !important
+     font-size: var(--mobile-section-text-styles-chapter-font-size) !important
+     color: var(--mobile-section-text-styles-chapter-color) !important
+
+.b-gallery-one-stage__bio
+  .is-mobile &
+    font-family: var(--mobile-section-text-styles-text-font-family) !important
+    font-size: var(--mobile-section-text-styles-text-font-size) !important
+    color: var(--mobile-section-text-styles-text-color) !important
+  @media only screen and (max-width: 768px)
+    &
+     font-family: var(--mobile-section-text-styles-text-font-family) !important
+     font-size: var(--mobile-section-text-styles-text-font-size) !important
+     color: var(--mobile-section-text-styles-text-color) !important
 
 .b-gallery-one-stage__img
   position: relative

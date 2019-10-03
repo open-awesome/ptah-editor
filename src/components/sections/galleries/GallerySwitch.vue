@@ -2,7 +2,7 @@
   <section class="b-gallery-one b-gallery-switch"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia, $sectionData.objVarsTypo]"
     >
       <slot name="menu"/>
       <slot name="video"/>
@@ -15,8 +15,6 @@
               class="b-sandbox"
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
-              :style="$sectionData.container.styles"
             >
               <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
                 <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
@@ -25,7 +23,7 @@
                      :is="component.name"
                      :href="$sectionData.components[index].element.link.href"
                      :target="$sectionData.components[index].element.link.target"
-                     :path="`components0[${index}].element`"
+                     :path="`components[${index}].element`"
                      :style="$sectionData.components[index].element.styles"
                      :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                   >
@@ -275,7 +273,7 @@ const [
           tags: false,
           link: false
         },
-        text: 'Chapter for big image'
+        text: '<p>Chapter for big image</p>'
       }
     },
     {
@@ -297,7 +295,7 @@ const [
           tags: false,
           link: false
         },
-        text: 'Description for big image'
+        text: '<p>Description for big image</p>'
       }
     }
   ]
@@ -308,7 +306,7 @@ const HEADER = [
     name: 'TextElement',
     element: types.Text,
     type: 'text',
-    class: 'b-title',
+    class: 'b-text',
     label: 'title'
   }
 ]
@@ -316,7 +314,7 @@ const HEADER = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<strong>Gallery Header</strong>',
+      text: '<p>Gallery Header<p>',
       styles: {
         'font-family': 'Montserrat',
         'font-size': '3.6rem',
@@ -615,6 +613,28 @@ export default {
 .b-gallery-one-stage__bio
   max-width: 50rem
   margin: $size-step/2 auto
+
+.b-gallery-one-stage__name
+  .is-mobile &
+    font-family: var(--mobile-section-text-styles-chapter-font-family) !important
+    font-size: var(--mobile-section-text-styles-chapter-font-size) !important
+    color: var(--mobile-section-text-styles-chapter-color) !important
+  @media only screen and (max-width: 768px)
+    &
+     font-family: var(--mobile-section-text-styles-chapter-font-family) !important
+     font-size: var(--mobile-section-text-styles-chapter-font-size) !important
+     color: var(--mobile-section-text-styles-chapter-color) !important
+
+.b-gallery-one-stage__bio
+  .is-mobile &
+    font-family: var(--mobile-section-text-styles-text-font-family) !important
+    font-size: var(--mobile-section-text-styles-text-font-size) !important
+    color: var(--mobile-section-text-styles-text-color) !important
+  @media only screen and (max-width: 768px)
+    &
+     font-family: var(--mobile-section-text-styles-text-font-family) !important
+     font-size: var(--mobile-section-text-styles-text-font-size) !important
+     color: var(--mobile-section-text-styles-text-color) !important
 
 .b-gallery-one-stage__img
   position: relative
