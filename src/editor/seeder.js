@@ -545,36 +545,7 @@ const data = new Map([
         color: 'rgba(0,0,0,1)',
         opacity: '0'
       },
-      itemHoverColor: '#fff',
-      textStyles: {
-        text: {
-          'font-family': 'Lato',
-          'font-size': '1.4rem',
-          'line-height': '1.4',
-          'font-weight': 'normal',
-          'font-style': 'normal',
-          'text-decoration': 'none',
-          'color': 'rgba(255, 255, 255, 1)'
-        },
-        icon: {
-          'font-family': 'Lato',
-          'font-size': '1.4rem',
-          'line-height': '1.4',
-          'font-weight': 'normal',
-          'font-style': 'normal',
-          'text-decoration': 'none',
-          'color': 'rgba(255, 255, 255, 1)'
-        },
-        cost: {
-          'color': '#e4a11e',
-          'font-size': '3.2rem',
-          'line-height': '1.4',
-          'font-weight': 'normal',
-          'font-style': 'normal',
-          'font-family': 'Lato',
-          'text-decoration': 'none'
-        }
-      }
+      itemHoverColor: '#fff'
     })
   )],
   [types.GallerySlider, () => (_.merge({}, DEFAULT_OPTIONS,
