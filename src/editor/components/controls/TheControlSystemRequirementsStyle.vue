@@ -22,7 +22,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'isMobile'
     ]),
 
     requirements () {
@@ -39,14 +40,19 @@ export default {
 
     sizeIcons: {
       get () {
-        return this.settingObjectOptions.sizeIcons.width
-      },
+        let props = `sizeIcons`
+        let size = ''
 
-      set (width) {
-        let sizeIcons = {
-          'width': width
-        }
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { sizeIcons }))
+        if (this.isMobile) props = `media['is-mobile']['sizeIcons']`
+
+        size = _.get(this.settingObjectOptions, `${props}['width']`)
+
+        if (size === undefined) size = _.get(this.settingObjectOptions, `sizeIcons['width']`)
+
+        return size
+      },
+      set (value) {
+        this.update('width', value)
       }
     },
 
@@ -73,14 +79,30 @@ export default {
         }
       }
     },
+
     visibleRows (key) {
       this.rowsRequirements[key].visible = !this.rowsRequirements[key].visible
     },
+
     changeColor (prop, color) {
       const c = color ? `rgba(${Object.values(color.rgba).toString()}` : color
       this.colorIcons[prop] = c
 
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { colorIcons: this.colorIcons }))
+    },
+
+    update (prop, value) {
+      let props = {}
+      let sizeIcons = {}
+      let device = 'is-mobile'
+      let media = { 'is-mobile': { 'sizeIcons': sizeIcons } }
+
+      sizeIcons[prop] = value
+      media[device]['sizeIcons'][prop] = value
+
+      this.isMobile ? props = { 'media': media } : props = { 'sizeIcons': sizeIcons }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
     }
   },
 
@@ -99,10 +121,10 @@ export default {
           {{ sizeIcons }} px
         </base-range-slider>
       </div>
-      <div class="b-text-controls__control">
+      <div class="b-text-controls__control" v-if="!isMobile">
         <base-color-picker label="Icons color" v-model="colorDef" @change="changeColor('default', colorDef)"></base-color-picker>
       </div>
-      <div class="b-text-controls__control">
+      <div class="b-text-controls__control" v-if="!isMobile">
         <base-color-picker label="Icons active" v-model="colorAct" @change="changeColor('active', colorAct)"></base-color-picker>
       </div>
     </div>

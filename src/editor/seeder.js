@@ -964,6 +964,10 @@ const data = new Map([
         'is-mobile': {
           sizeIcons: {
             width: 24
+          },
+          table: {
+            head: {},
+            body: {}
           }
         }
       }

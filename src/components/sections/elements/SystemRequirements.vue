@@ -767,7 +767,7 @@ export default {
   <section class="l-system"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia, $sectionData.objVarsSizeIcons, $sectionData.objVarsTable]"
     >
     <slot name="menu"/>
     <slot name="video"/>
@@ -782,7 +782,7 @@ export default {
               direction="column"
               :style="$sectionData.container.styles"
             >
-              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
+              <div class="b-draggable-slot" :style="$sectionData.container.styles">
                 <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                   <component
                      v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
@@ -796,7 +796,7 @@ export default {
                     <div v-html="$sectionData.components[index].element.text"></div>
                   </component>
                 </div>
-              </draggable>
+              </div>
             </sandbox>
         </div>
       </div>
@@ -839,7 +839,7 @@ export default {
                           <path d="M31.5885 8.5L16 1L0.41156 8.5" :stroke="$sectionData.mainStyle.colorIcons.active"/>
                         </svg>
                       </span>
-                      <span class="b-system-platforms__item__tab-icon"
+                      <span class="b-system-platforms__item__tab-icon b-size-icons"
                         :style="{
                           width: $sectionData.mainStyle.sizeIcons.width + 'px',
                           height: $sectionData.mainStyle.sizeIcons.width + 'px',
@@ -857,7 +857,7 @@ export default {
                     <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.mainStyle.systemRequirements" :key="key"
                         v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
                       <div>
-                        <div class="b-system-requirements__table-row  flex"
+                        <div class="b-system-requirements__table-row b-table-media-head flex"
                           :style="{
                             'color' : $sectionData.mainStyle.table.head['color'],
                             'font-family' : $sectionData.mainStyle.table.head['font-family'],
@@ -885,7 +885,7 @@ export default {
                             </span>
                           </div>
                         </div><!--/.b-system-requirements__table-row-->
-                        <div class="b-system-requirements__table-row flex"
+                        <div class="b-system-requirements__table-row b-table-media-body flex"
                           v-for="(row, i) in $sectionData.mainStyle.rowsRequirements" :key="i"
                           v-show="$sectionData.mainStyle.rowsRequirements[i].visible"
                           :style="{
@@ -904,7 +904,7 @@ export default {
                              :key="index"
                              v-if="col.prop === i"
                             >
-                            <div class="b-system-requirements__table-col_name"
+                            <div class="b-system-requirements__table-col_name b-table-media-body"
                               v-if="$sectionData[`componentsRequirements${key}`][index].nameCol.indexOf('-text') !== -1"
                               v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
                               >
@@ -916,7 +916,7 @@ export default {
                                 v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type, label: $sectionData[`componentsRequirements${key}`][index].label }"
                                 :path="`componentsRequirements${key}[${index}].element`"
                                 :is="$sectionData[`componentsRequirements${key}`][index].name"
-                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class]"
+                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class, 'b-table-media-body']"
                                 >
                                 <div v-html="$sectionData[`componentsRequirements${key}`][index].element.text"></div>
                               </component><!--/.-->
@@ -928,7 +928,7 @@ export default {
                                 v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type, label: $sectionData[`componentsRequirements${key}`][index].label }"
                                 :path="`componentsRequirements${key}[${index}].element`"
                                 :is="$sectionData[`componentsRequirements${key}`][index].name"
-                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class]"
+                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class, 'b-table-media-body']"
                                 >
                                 <div v-html="$sectionData[`componentsRequirements${key}`][index].element.text"></div>
                               </component><!--/.-->
@@ -949,6 +949,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/table-media.sass'
 @import '../../../assets/sass/section-media.sass'
 @import '../../../assets/sass/section-menu.sass'
 @import '../../../assets/sass/_colors.sass'
@@ -1091,13 +1092,6 @@ export default {
             width: 35%
       &_name
         opacity: 0.6
-      .is-mobile &
-        padding: $size-step/4
-        font-size: 1.4rem !important
-      @media only screen and (max-width: 540px)
-        &
-          padding: $size-step/4
-          font-size: 1.4rem !important
 
 .b-text.b-inline
   font-size: inherit
