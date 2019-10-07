@@ -61,7 +61,7 @@ export default {
         @change="toggleSticky"/>
     </div>
     <div class="b-control-sticky__control" v-if="isMobile">
-      <base-range-slider v-model="hamPosition" :label="`Position menu`" step="1" min="0" max="64">
+      <base-range-slider v-model="hamPosition" :label="`Menu icon position`" step="1" min="0" max="64">
         {{ hamPosition }} <span class="b-border-radius-control__px">px</span>
       </base-range-slider>
     </div>

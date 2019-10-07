@@ -16,6 +16,7 @@
         class="hamburger hamburger--slider"
         type="button"
         :data-target="`#mobile-menu-${ _uid }`"
+        :style="{'top': $sectionData.mainStyle.hamPosition + 'px'}"
         @click.stop="toggle">
 
       <span class="hamburger-box">
@@ -25,7 +26,7 @@
     </button>
 
     <div class="b-grid__row">
-      <div class="b-grid__col-m-12 mobile-header" :class="`b-grid__col-${$sectionData.container.width}`">
+      <div class="b-grid__col-m-12 mobile-header b-section-header__col" :class="`b-grid__col-${$sectionData.container.width}`">
 
         <sandbox
             container-path="$sectionData.container"
@@ -75,7 +76,7 @@
         </sandbox>
 
       </div>
-      <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-m-12 mobile-menu mobile-menu_drop"
+      <div :id="`mobile-menu-${ _uid }`" class="b-grid__col-m-12 mobile-menu mobile-menu_drop b-section-header__col"
         :class="[{ 'mobile-menu_hide': !$sectionData.isToggle }, `b-grid__col-${$sectionData.container2.width}`]"
         >
 
@@ -156,6 +157,16 @@ const defaultComponents = [
         'margin-right': '16px',
         'margin-bottom': '8px',
         'margin-left': '16px'
+      },
+      media: {
+        'is-mobile': {
+          width: '100px',
+          height: '40px',
+          'margin-top': '8px',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0'
+        }
       }
     },
     key: 0
@@ -181,8 +192,7 @@ const defaultComponents2 = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -203,8 +213,7 @@ const defaultComponents2 = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 2
+    }
   },
   {
     element: {
@@ -225,8 +234,7 @@ const defaultComponents2 = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 3
+    }
   },
   {
     element: {
@@ -261,13 +269,19 @@ const defaultComponents2 = [
       },
       sizeIcons: {
         width: 30
+      },
+      media: {
+        'is-mobile': {
+          'margin-top': '32px',
+          'margin-bottom': '16px'
+        }
       }
-    },
-    key: 6
+    }
   }
 ]
 const defaultSchema = {
   mainStyle: {
+    hamPosition: 17,
     styles: {
       'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)',
       'background-color': 'rgba(51, 51, 51, 0.95)',
@@ -277,8 +291,14 @@ const defaultSchema = {
   },
   container: {
     styles: {
-      'margin-right': '150px',
-      'flex-direction': 'row'
+      'flex-direction': 'row',
+      'justify-content': 'flex-start',
+      'align-items': 'flex-start'
+    },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column'
+      }
     },
     width: 3,
     minWidth: 2,
@@ -290,6 +310,13 @@ const defaultSchema = {
     styles: {
       'flex-direction': 'row',
       'justify-content': 'space-between'
+    },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column',
+        'justify-content': 'flex-start',
+        'align-items': 'center'
+      }
     },
     width: 9,
     minWidth: 2,
@@ -374,9 +401,9 @@ export default {
       &_drop
         background-color: var(--bg-color) !important
 
-  .b-grid__col-3,
-  .b-grid__col-9
-    padding: .8rem 1.6rem
+  &__col
+    padding: 0 1.6rem !important
+
   .b-grid__row
     .is-mobile &
       padding: 0 !important

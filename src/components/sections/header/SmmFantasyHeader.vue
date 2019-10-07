@@ -16,6 +16,7 @@
         class="hamburger hamburger--slider"
         type="button"
         :data-target="`#mobile-menu-${ _uid }`"
+        :style="{'top': $sectionData.mainStyle.hamPosition + 'px'}"
         @click.stop="toggle">
 
       <span class="hamburger-box">
@@ -25,7 +26,7 @@
       </button>
 
       <div class="b-grid__row">
-        <div class="b-grid__col-m-12 mobile-header" :class="`b-grid__col-${$sectionData.container.width}`">
+        <div class="b-grid__col-m-12 mobile-header b-section-header__col" :class="`b-grid__col-${$sectionData.container.width}`">
 
           <sandbox
             container-path="$sectionData.container"
@@ -152,6 +153,16 @@ const defaultComponents = [
         'background-size': 'contain',
         'width': '303px',
         'height': '73px'
+      },
+      media: {
+        'is-mobile': {
+          width: '190px',
+          height: '60px',
+          'margin-top': '4px',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0'
+        }
       }
     }
   }
@@ -259,6 +270,7 @@ const defaultComponents2 = [
 ]
 const defaultSchema = {
   mainStyle: {
+    hamPosition: 21,
     styles: {
       'background-image': 'none',
       'background-color': '#000',
@@ -269,7 +281,13 @@ const defaultSchema = {
   container: {
     styles: {
       'flex-direction': 'row',
-      'margin-right': '150px'
+      'justify-content': 'flex-start',
+      'align-items': 'flex-start'
+    },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column'
+      }
     },
     width: 3,
     minWidth: 2,
@@ -281,6 +299,13 @@ const defaultSchema = {
     styles: {
       'flex-direction': 'row',
       'justify-content': 'space-between'
+    },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column',
+        'justify-content': 'flex-start',
+        'align-items': 'center'
+      }
     },
     width: 9,
     minWidth: 2,
@@ -346,12 +371,6 @@ export default {
 
 .b-section-header
   z-index: 2
-  .is-tablet &,
-  .is-mobile &
-    text-align: left
-
-  @media (max-width: 800px)
-    text-align: left
 
   .mobile-menu
     transition: all 200ms
@@ -365,9 +384,9 @@ export default {
       &_drop
         background-color: var(--bg-color) !important
 
-  .b-grid__col-3,
-  .b-grid__col-9
-    padding: .8rem 1.6rem
+  &__col
+    padding: 0 1.6rem !important
+
   .b-grid__row
     .is-mobile &
       padding: 0 !important

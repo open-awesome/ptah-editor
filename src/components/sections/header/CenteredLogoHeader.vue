@@ -12,13 +12,14 @@
   <div class="b-grid b-header">
     <div class="b-grid__row">
 
-      <div class="b-grid__col-12 b-grid__col-m-12 mobile-header">
+      <div class="b-grid__col-12 b-grid__col-m-12 mobile-header b-section-header__col">
 
         <button
             id="js-hamburger"
             class="hamburger hamburger--slider"
             type="button"
             :data-target="`#mobile-menu-${ _uid }`"
+            :style="{'top': $sectionData.mainStyle.hamPosition + 'px'}"
             @click.stop="toggle">
 
           <span class="hamburger-box">
@@ -31,7 +32,7 @@
 
       <div
           :id="`mobile-menu-${ _uid }`"
-          class="b-grid__col-12 b-grid__col-m-12 mobile-menu mobile-menu_drop"
+          class="b-grid__col-12 b-grid__col-m-12 mobile-menu mobile-menu_drop b-section-header__col"
           :class="{ 'mobile-menu_hide': !$sectionData.isToggle }"
         >
 
@@ -120,8 +121,7 @@ const defaultComponents = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -144,8 +144,7 @@ const defaultComponents = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 2
+    }
   },
   {
     element: {
@@ -160,9 +159,18 @@ const defaultComponents = [
         'margin-right': '16px',
         'margin-bottom': '8px',
         'margin-left': '16px'
+      },
+      media: {
+        'is-mobile': {
+          width: '100px',
+          height: '40px',
+          'margin-top': '32px',
+          'margin-right': '0',
+          'margin-bottom': '16px',
+          'margin-left': '0'
+        }
       }
-    },
-    key: 0
+    }
   },
   {
     element: {
@@ -185,8 +193,7 @@ const defaultComponents = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 3
+    }
   },
   {
     element: {
@@ -209,12 +216,12 @@ const defaultComponents = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 4
+    }
   }
 ]
 const defaultSchema = {
   mainStyle: {
+    hamPosition: 17,
     styles: {
       'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)',
       'background-color': 'rgba(51, 51, 51, 0.95)',
@@ -224,7 +231,15 @@ const defaultSchema = {
   },
   container: {
     styles: {
-      'flex-direction': 'row'
+      'flex-direction': 'row',
+      'justify-content': 'center',
+      'align-items': 'center'
+    },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column',
+        'justify-content': 'flex-start'
+      }
     }
   },
   components: merge({}, defaultComponents),
@@ -290,14 +305,6 @@ export default {
 
 .b-section-header
   z-index: 2
-  .is-tablet &,
-  .is-mobile &
-    min-height: 7rem
-    text-align: left
-
-  @media (max-width: 800px)
-    min-height: 7rem
-    text-align: left
 
   .mobile-menu
     transition: all 200ms
@@ -311,9 +318,9 @@ export default {
       &_drop
         background-color: var(--bg-color) !important
 
-  .b-grid__col-3,
-  .b-grid__col-9
-    padding: .8rem 1.6rem
+  &__col
+    padding: 0 1.6rem !important
+
   .b-grid__row
     .is-mobile &
       padding: 0 !important
@@ -329,32 +336,11 @@ export default {
   @media (max-width: 800px)
     display: block
 
-.b-logo
-  .is-mobile &
-    display: block
-    background-position: center
-  @media (max-width: 800px)
-    display: block
-    background-position: center
-
-.b-header-link
-  .is-mobile &
-    font-size: 1.6rem
-  @media (max-width: 800px)
-    font-size: 1.6rem
-
 .b-logo-one
   .is-mobile &
-    margin-top: auto
     order: 1
   @media (max-width: 800px)
-    margin-top: auto
-    margin-bottom: 8px
     order: 1
-  @media (max-height: 420px)
-    width: auto
-    margin-top: 8px
-    margin-bottom: 8px
 
 @media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
   .b-slot .b-draggable-slot > div
