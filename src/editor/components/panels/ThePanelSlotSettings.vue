@@ -22,44 +22,59 @@
         <h6 v-show="direction" class="">Content direction</h6>
 
         <ul v-show="isRowDir">
-          <li :class="{ active: align === 'flex-start' }" tooltip="Top" @click="changeAlign('flex-start')">
+          <li :class="{ active: align === 'flex-start' }" tooltip="Vertical align Top" @click="changeAlign('flex-start')">
             <icon-base name="groupTop"/>
           </li>
-          <li :class="{ active: align === 'center' }" tooltip="Vertical align center" @click="changeAlign('center')">
+          <li :class="{ active: align === 'center' }" tooltip="Vertical align Center" @click="changeAlign('center')">
             <icon-base name="groupCenterVertical"/>
           </li>
-          <li :class="{ active: align === 'flex-end' }" tooltip="Bottom" @click="changeAlign('flex-end')">
+          <li :class="{ active: align === 'flex-end' }" tooltip="Vertical align Bottom" @click="changeAlign('flex-end')">
             <icon-base name="groupBottom"/>
           </li>
         </ul>
 
         <ul v-show="isRowDir">
-          <li :class="{ active: justify === 'flex-start' }" tooltip="Left" @click="changeJustify('flex-start')">
+          <li :class="{ active: justify === 'flex-start' }" tooltip="Horizontal align Left" @click="changeJustify('flex-start')">
             <icon-base name="groupLeft"/>
           </li>
 
-          <li :class="{ active: justify === 'flex-end' }" tooltip="Right" @click="changeJustify('flex-end')">
+          <li :class="{ active: justify === 'flex-end' }" tooltip="Horizontal align Right" @click="changeJustify('flex-end')">
             <icon-base name="groupRight"/>
           </li>
 
-          <li :class="{ active: justify === 'center' }" tooltip="Center" @click="changeJustify('center')">
+          <li :class="{ active: justify === 'center' }" tooltip="Horizontal align Center" @click="changeJustify('center')">
             <icon-base name="groupCenterHorizontal"/>
           </li>
 
-          <li :class="{ active: justify === 'space-between' }" tooltip="Space between" @click="changeJustify('space-between')">
+          <li :class="{ active: justify === 'space-between' }" tooltip="Horizontal align Space between" @click="changeJustify('space-between')">
             <icon-base name="groupSpaceBetween"/>
           </li>
         </ul>
 
         <ul v-show="isColumnDir">
-          <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
+          <li :class="{ active: align === 'flex-start' }" tooltip="Horizontal align Left" @click="changeAlign('flex-start')">
             <icon-base name="groupLeft"/>
           </li>
-          <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
+          <li :class="{ active: align === 'center' }" tooltip="Horizontal align Center" @click="changeAlign('center')">
             <icon-base name="groupCenterHorizontal"/>
           </li>
-          <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
+          <li :class="{ active: align === 'flex-end' }" tooltip="Horizontal align Right" @click="changeAlign('flex-end')">
             <icon-base name="groupRight"/>
+          </li>
+        </ul>
+
+        <ul v-show="isColumnDir">
+          <li :class="{ active: justify === 'flex-start' }" tooltip="Vertical align Top" @click="changeJustify('flex-start')">
+            <icon-base name="groupTop"/>
+          </li>
+          <li :class="{ active: justify === 'center' }" tooltip="Vertical align Center" @click="changeJustify('center')">
+            <icon-base name="groupCenterVertical"/>
+          </li>
+          <li :class="{ active: justify === 'flex-end' }" tooltip="Vertical align Bottom" @click="changeJustify('flex-end')">
+            <icon-base name="groupBottom"/>
+          </li>
+          <li :class="{ active: justify === 'space-between' }" tooltip="Horizontal align Space between" @click="changeJustify('space-between')">
+            <icon-base class="b-groupSpaceBetween" name="groupSpaceBetween"/>
           </li>
         </ul>
       </div> <!-- /_b-panel__control-->
@@ -292,4 +307,7 @@ export default {
         &.active
           color: #ffffff
           cursor: default
+
+.b-groupSpaceBetween
+  transform: rotate(90deg)
 </style>

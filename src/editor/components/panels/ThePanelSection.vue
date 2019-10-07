@@ -51,7 +51,7 @@
           <control-section-height></control-section-height>
         </div>
 
-        <div class="b-panel__control" v-if="isHeader && !isMobile">
+        <div class="b-panel__control" v-if="isHeader">
           <control-section-sticky></control-section-sticky>
         </div>
 

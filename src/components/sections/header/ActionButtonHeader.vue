@@ -16,6 +16,9 @@
         class="hamburger hamburger--slider"
         type="button"
         :data-target="`#mobile-menu-${ _uid }`"
+        :style="{
+          'top': $sectionData.mainStyle.hamPosition + 'px'
+        }"
         @click.stop="toggle">
 
       <span class="hamburger-box">
@@ -30,8 +33,6 @@
         <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="row"
-            align="center"
             class="b-sandbox">
 
           <draggable
@@ -82,8 +83,6 @@
         <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
-            direction="row"
-            align="center"
             class="b-sandbox">
 
           <draggable
@@ -157,6 +156,16 @@ const defaultComponents = [
         'margin-right': '16px',
         'margin-bottom': '8px',
         'margin-left': '16px'
+      },
+      media: {
+        'is-mobile': {
+          width: '100px',
+          height: '40px',
+          'margin-top': '0',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0'
+        }
       }
     },
     key: 0
@@ -182,8 +191,7 @@ const defaultComponents2 = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -204,8 +212,7 @@ const defaultComponents2 = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 2
+    }
   },
   {
     element: {
@@ -226,8 +233,7 @@ const defaultComponents2 = [
           'background-color': 'rgba(0,0,0,0)'
         }
       }
-    },
-    key: 3
+    }
   },
   {
     element: {
@@ -246,13 +252,19 @@ const defaultComponents2 = [
         'hover': {
           'background-color': '#ffffff !important'
         }
+      },
+      media: {
+        'is-mobile': {
+          'margin-top': '32px',
+          'margin-bottom': '16px'
+        }
       }
-    },
-    key: 5
+    }
   }
 ]
 const defaultSchema = {
   mainStyle: {
+    hamPosition: 17,
     styles: {
       'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)',
       'background-color': 'rgba(51, 51, 51, 0.95)',
@@ -265,6 +277,13 @@ const defaultSchema = {
       'margin-right': '150px',
       'flex-direction': 'row'
     },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column',
+        'justify-content': 'flex-start',
+        'align-items': 'flex-start'
+      }
+    },
     width: 3,
     minWidth: 2,
     maxWidth: 10,
@@ -275,6 +294,13 @@ const defaultSchema = {
     styles: {
       'flex-direction': 'row',
       'justify-content': 'space-between'
+    },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column',
+        'justify-content': 'flex-start',
+        'align-items': 'center'
+      }
     },
     width: 9,
     minWidth: 2,

@@ -11,7 +11,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'isMobile'
     ]),
 
     sticky: {
@@ -20,6 +21,15 @@ export default {
       },
       set: function (newValue) {
         this.setPosition('sticky', newValue)
+      }
+    },
+
+    hamPosition: {
+      get: function () {
+        return _.get(this.settingObjectOptions, 'hamPosition') || 12
+      },
+      set: function (newValue) {
+        this.setPosition('hamPosition', newValue)
       }
     }
   },
@@ -44,11 +54,16 @@ export default {
 
 <template>
   <div class="b-control-sticky">
-    <div class="b-control-sticky__control">
+    <div class="b-control-sticky__control" v-if="!isMobile">
       <base-switcher
         :value="sticky"
         label="Sticky position"
         @change="toggleSticky"/>
+    </div>
+    <div class="b-control-sticky__control" v-if="isMobile">
+      <base-range-slider v-model="hamPosition" :label="`Position menu`" step="1" min="0" max="64">
+        {{ hamPosition }} <span class="b-border-radius-control__px">px</span>
+      </base-range-slider>
     </div>
   </div>
 </template>
