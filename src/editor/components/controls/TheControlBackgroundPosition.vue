@@ -19,6 +19,8 @@ export default {
       bgPosition: '',
       bgRepeat: '',
       bgSize: '',
+      left: 0,
+      top: 0,
       bgAttachment: '',
       isParallax: false,
       backgroundFillTypes: [
@@ -139,6 +141,7 @@ export default {
 
     getStyles () {
       let styles = this.isMobile ? this.mediaStyles['is-mobile'] : this.styles
+      let bgPosition = ''
 
       let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
         styles['background-image'] : ''
@@ -150,6 +153,14 @@ export default {
       }
 
       this.bgPosition = styles['background-position'] || 'center center'
+      bgPosition = this.bgPosition
+      if (bgPosition.indexOf(' ') !== -1) {
+        bgPosition = bgPosition.split(' ')
+
+        if (bgPosition[0].indexOf('%') !== -1) this.left = parseInt(bgPosition[0].split('%')[0])
+        if (bgPosition[1].indexOf('%') !== -1) this.top = parseInt(bgPosition[1].split('%')[0])
+      }
+
       this.bgRepeat = styles['background-repeat'] || 'no-repeat'
       this.bgSize = styles['background-size'] || 'contain'
       this.bgAttachment = styles['background-attachment'] || 'scroll'
@@ -210,11 +221,22 @@ export default {
         this.update('background-size', 'auto auto')
         this.update('background-repeat', 'repeat')
       }
+      if (this.backgroundFill === 'set') {
+        this.update('background-size', `${this.left}% ${this.top}%`)
+        this.update('background-repeat', 'no-repeat')
+      }
     },
 
     setPosition (x, y) {
       this.bgPosition = `${x} ${y}`
       this.update('background-position', `${x} ${y}`)
+    },
+
+    setLeftTopPosition () {
+      let x = this.left
+      let y = this.top
+      this.bgPosition = `${x}% ${y}%`
+      this.update('background-position', `${x}% ${y}%`)
     },
 
     update (prop, value) {
@@ -263,32 +285,44 @@ export default {
           >
           <span class="b-background-position__btn b-background-position__btn_center"
                 :class="{ 'selected' : bgPosition === 'center center' }"
-                @click="setPosition('center', 'center')"/>
+                @click="setPosition('50%', '50%')"/>
           <span class="b-background-position__btn b-background-position__btn_lt"
                 :class="{ 'selected' : bgPosition === 'left top' }"
-                @click="setPosition('left', 'top')" />
+                @click="setPosition('0%', '0%')" />
           <span class="b-background-position__btn b-background-position__btn_lb"
                 :class="{ 'selected' : bgPosition === 'left bottom' }"
-                @click="setPosition('left', 'bottom')"/>
+                @click="setPosition('0%', '100%')"/>
           <span class="b-background-position__btn b-background-position__btn_rt"
                 :class="{ 'selected' : bgPosition === 'right top' }"
-                @click="setPosition('right', 'top')"/>
+                @click="setPosition('100%', '0%')"/>
           <span class="b-background-position__btn b-background-position__btn_rb"
                 :class="{ 'selected' : bgPosition === 'right bottom' }"
-                @click="setPosition('right', 'bottom')"/>
+                @click="setPosition('100%', '100%')"/>
 
           <span class="b-background-position__btn b-background-position__btn_tc"
                 :class="{ 'selected' : bgPosition === 'top center' }"
-                @click="setPosition('top', 'center')"></span>
+                @click="setPosition('0%', '50%')"></span>
           <span class="b-background-position__btn b-background-position__btn_rc"
                 :class="{ 'selected' : bgPosition === 'right center' }"
-                @click="setPosition('right', 'center')"></span>
+                @click="setPosition('100%', '50%')"></span>
           <span class="b-background-position__btn b-background-position__btn_bc"
                 :class="{ 'selected' : bgPosition === 'bottom center' }"
-                @click="setPosition('bottom', 'center')"></span>
+                @click="setPosition('100%', '50%')"></span>
           <span class="b-background-position__btn b-background-position__btn_lc"
                 :class="{ 'selected' : bgPosition === 'left center' }"
-                @click="setPosition('left', 'center')"></span>
+                @click="setPosition('0%', '50%')"></span>
+        </div>
+      </div>
+      <div class="b-size-controls">
+        <div class="b-size-controls__control">
+          <base-range-slider v-model="left" :label="`Left`" step="1" min="-100" max="100" @change="setLeftTopPosition">
+            {{ left }} <span class="b-size-controls__px">%</span>
+          </base-range-slider>
+        </div>
+        <div class="b-size-controls__control">
+          <base-range-slider v-model="top" :label="`Top`" step="1" min="-100" max="100" @change="setLeftTopPosition">
+            {{ top }} <span class="b-size-controls__px">%</span>
+          </base-range-slider>
         </div>
       </div>
     </div>
@@ -434,4 +468,16 @@ export default {
       border-top: none
       border-right: none
       border-bottom: none
+
+.b-size
+  margin-top: $size-step/2
+  &-controls
+    display: flex
+    justify-content: stretch
+    align-items: flex-start
+    &__control
+      width: 50%
+      margin-right: $size-step/4
+    &__px
+     color: $grey-middle
 </style>
