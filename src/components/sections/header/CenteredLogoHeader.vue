@@ -39,8 +39,6 @@
         <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="row"
-            align="center"
             class="b-sandbox">
 
           <draggable

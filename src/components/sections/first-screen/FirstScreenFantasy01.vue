@@ -46,6 +46,16 @@ const C_CUSTOM_2 = [
         'margin-top': '25px',
         'margin-bottom': '20px',
         'margin-left': '13px'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '100px',
+          'margin-top': '25px',
+          'margin-rihgt': '0',
+          'margin-bottom': '0',
+          'margin-left': '0'
+        }
       }
     }
   },
@@ -62,6 +72,18 @@ const C_CUSTOM_2 = [
         'margin-bottom': '20px',
         'margin-left': '13px',
         'padding-left': '13px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'line-height': '1.4',
+          'text-align': 'right',
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '20px',
+          'margin-right': '8px',
+          'padding-left': '80px'
+        }
       }
     }
   },
@@ -84,7 +106,8 @@ const C_CUSTOM_2 = [
       pseudo: {
         'hover': {
           'background-color': '#333333 !important',
-          'border': '1px solid #AF2E12 !important'
+          'border': '1px solid #AF2E12 !important',
+          'margin-left': '20px'
         }
       }
     }
@@ -92,13 +115,6 @@ const C_CUSTOM_2 = [
 ]
 
 const COMPONENTS_3 = [
-  {
-    name: 'Delimiter',
-    element: types.Delimiter,
-    type: 'delimiter',
-    class: 'b-delimiter-fs',
-    label: 'Spacer'
-  },
   {
     name: 'SocialNetworks',
     element: types.SocialNetworks,
@@ -112,13 +128,8 @@ const C_CUSTOM_3 = [
   {
     element: {
       styles: {
-        width: '40px',
-        height: '120px'
-      }
-    }
-  },
-  {
-    element: {
+        'margin-top': '120px'
+      },
       socialNetworks: {
         'facebook': {
           name: 'Facebook',
@@ -150,6 +161,15 @@ const C_CUSTOM_3 = [
       },
       sizeIcons: {
         width: 30
+      },
+      media: {
+        'is-mobile': {
+          'margin-top': '20px',
+          'margin-left': '13px'
+        },
+        sizeIcons: {
+          width: 20
+        }
       }
     }
   }
@@ -163,8 +183,13 @@ const SCHEMA_CUSTOM = {
       'background-color': '#4A4A4A',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
-      'background-position': 'right bottom',
+      'background-position': 'center top',
       'height': '100vh'
+    },
+    media: {
+      'is-mobile': {
+        'background-position': 'center center'
+      }
     }
   },
   container: {
@@ -183,10 +208,20 @@ const SCHEMA_CUSTOM = {
     selfName: '$sectionData.container2',
     styles: {
       'align-items': 'flex-start'
+    },
+    media: {
+      'is-mobile': {
+        'align-items': 'flex-end'
+      }
     }
   },
   container3: {
-    width: 12
+    width: 12,
+    media: {
+      'is-mobile': {
+        'align-items': 'flex-end'
+      }
+    }
   },
   components3: _.merge({}, C_CUSTOM_3),
   edited: true
@@ -237,7 +272,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -261,8 +295,7 @@ export default {
           <sandbox
               container-path="$sectionData.container2"
               components-path="$sectionData.components2"
-              direction="column"
-              class="b-sandbox">
+               class="b-sandbox">
 
             <draggable v-model="$sectionData.components2" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles" @start="drag('components2')" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
@@ -287,7 +320,6 @@ export default {
           <sandbox
             container-path="$sectionData.container3"
             components-path="$sectionData.components3"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components3" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3.styles" @start="drag('components3')" @change="dragStop">

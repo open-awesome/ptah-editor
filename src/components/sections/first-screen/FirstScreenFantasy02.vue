@@ -56,6 +56,16 @@ const C_CUSTOM_1 = [
         'margin-bottom': '20px',
         'margin-left': '13px'
       }
+    },
+    media: {
+      'is-mobile': {
+        width: '270px',
+        height: '100px',
+        'margin-top': '25px',
+        'margin-rihgt': '0',
+        'margin-bottom': '0',
+        'margin-left': '0'
+      }
     }
   },
   {
@@ -72,6 +82,18 @@ const C_CUSTOM_1 = [
         'margin-bottom': '20px',
         'margin-left': '15px',
         'padding-left': '13px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'line-height': '1.4',
+          'text-align': 'right',
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '20px',
+          'margin-right': '8px',
+          'padding-left': '80px'
+        }
       }
     }
   },
@@ -206,8 +228,13 @@ const SCHEMA_CUSTOM = {
       'background-color': '#4A4A4A',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
-      'background-position': 'center top',
+      'background-position': 'right top',
       'height': '100vh'
+    },
+    media: {
+      'is-mobile': {
+        'background-position': 'right top'
+      }
     }
   },
   components: _.merge({}, C_CUSTOM_1),
