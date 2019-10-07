@@ -177,7 +177,7 @@ const data = new Map([
         'background-attachment': 'scroll',
         'flex-direction': 'column',
         'align-items': 'center',
-        'justify-content': 'flex-start'
+        'justify-content': 'center'
       },
       overlay: {
         color: 'rgba(0,0,0,1)',
