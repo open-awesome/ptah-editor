@@ -21,8 +21,6 @@
         <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
-            align="center"
             class="b-sandbox">
 
           <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot" @start="drag('components')" @change="dragStop">

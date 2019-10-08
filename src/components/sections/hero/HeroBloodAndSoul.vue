@@ -158,7 +158,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox"
           >
             <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -186,7 +185,6 @@ export default {
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
-            direction="column"
             class="b-sandbox"
           >
             <draggable v-model="$sectionData.components2" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles" @start="drag('components2')" @change="dragStop">
