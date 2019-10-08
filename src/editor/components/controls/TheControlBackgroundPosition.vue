@@ -152,13 +152,16 @@ export default {
         this.bgImage = bgimage || ''
       }
 
-      this.bgPosition = styles['background-position'] || 'center center'
-      bgPosition = this.bgPosition
+      bgPosition = styles['background-position'] || 'center center'
       if (bgPosition.indexOf(' ') !== -1) {
         bgPosition = bgPosition.split(' ')
 
         if (bgPosition[0].indexOf('%') !== -1) this.left = parseInt(bgPosition[0].split('%')[0])
         if (bgPosition[1].indexOf('%') !== -1) this.top = parseInt(bgPosition[1].split('%')[0])
+
+        this.bgPosition = `${this.left}% ${this.top}%`
+      } else {
+        this.bgPosition = styles['background-position'] || 'center center'
       }
 
       this.bgRepeat = styles['background-repeat'] || 'no-repeat'
@@ -284,32 +287,32 @@ export default {
           ]"
           >
           <span class="b-background-position__btn b-background-position__btn_center"
-                :class="{ 'selected' : bgPosition === 'center center' }"
+                :class="{ 'selected' : bgPosition === '50% 50%' }"
                 @click="setPosition('50%', '50%')"/>
           <span class="b-background-position__btn b-background-position__btn_lt"
-                :class="{ 'selected' : bgPosition === 'left top' }"
+                :class="{ 'selected' : bgPosition === '0% 0%' }"
                 @click="setPosition('0%', '0%')" />
           <span class="b-background-position__btn b-background-position__btn_lb"
-                :class="{ 'selected' : bgPosition === 'left bottom' }"
+                :class="{ 'selected' : bgPosition === '0% 100%' }"
                 @click="setPosition('0%', '100%')"/>
           <span class="b-background-position__btn b-background-position__btn_rt"
-                :class="{ 'selected' : bgPosition === 'right top' }"
+                :class="{ 'selected' : bgPosition === '100% 0%' }"
                 @click="setPosition('100%', '0%')"/>
           <span class="b-background-position__btn b-background-position__btn_rb"
-                :class="{ 'selected' : bgPosition === 'right bottom' }"
+                :class="{ 'selected' : bgPosition === '100% 100%' }"
                 @click="setPosition('100%', '100%')"/>
 
           <span class="b-background-position__btn b-background-position__btn_tc"
-                :class="{ 'selected' : bgPosition === 'top center' }"
+                :class="{ 'selected' : bgPosition === '0% 50%' }"
                 @click="setPosition('0%', '50%')"></span>
           <span class="b-background-position__btn b-background-position__btn_rc"
                 :class="{ 'selected' : bgPosition === 'right center' }"
                 @click="setPosition('100%', '50%')"></span>
           <span class="b-background-position__btn b-background-position__btn_bc"
-                :class="{ 'selected' : bgPosition === 'bottom center' }"
-                @click="setPosition('100%', '50%')"></span>
+                :class="{ 'selected' : bgPosition === '50% 100%' }"
+                @click="setPosition('50%', '100%%')"></span>
           <span class="b-background-position__btn b-background-position__btn_lc"
-                :class="{ 'selected' : bgPosition === 'left center' }"
+                :class="{ 'selected' : bgPosition === '0% 50%' }"
                 @click="setPosition('0%', '50%')"></span>
         </div>
       </div>
