@@ -14,6 +14,11 @@ const C_CUSTOM_COLUMN = [
         'font-family': 'Montserrat',
         'font-size': '3.2rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
     }
   },
@@ -66,6 +71,11 @@ const C_CUSTOM_CONTAINER = {
     'background-size': 'contain',
     'margin-bottom': '-36px',
     'padding-bottom': '300px'
+  },
+  media: {
+    'is-mobile': {
+      'margin-bottom': '64px'
+    }
   }
 }
 

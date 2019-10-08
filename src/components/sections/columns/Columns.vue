@@ -16,6 +16,12 @@ const C_CUSTOM_COLUMN = [
         'background-size': 'contain',
         'width': '256px',
         'height': '221px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '200px',
+          'height': '200px'
+        }
       }
     }
   },
