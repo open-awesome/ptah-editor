@@ -16,9 +16,14 @@ const C_CUSTOM_1 = [
         'background-size': 'contain',
         'width': '157px',
         'height': '194px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '157px',
+          'height': '194px'
+        }
       }
-    },
-    key: 0
+    }
   },
   {
     element: {
@@ -26,11 +31,14 @@ const C_CUSTOM_1 = [
       styles: {
         'color': '#fff',
         'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+        'font-size': '3.2rem'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -38,11 +46,14 @@ const C_CUSTOM_1 = [
       styles: {
         'color': '#fff',
         'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+        'font-size': '3.2rem'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
-    },
-    key: 2
+    }
   },
   {
     element: {
@@ -83,8 +94,7 @@ const C_CUSTOM_1_M = [
         'width': '120px',
         'height': '143px'
       }
-    },
-    key: 4
+    }
   },
   {
     element: {
@@ -92,12 +102,10 @@ const C_CUSTOM_1_M = [
       styles: {
         'color': '#F4BC64',
         'font-family': 'Montserrat',
-        'font-size': '24px',
-        'line-height': '29px',
+        'font-size': '2.2rem',
         'padding-top': '30px'
       }
-    },
-    key: 5
+    }
   }
 ]
 
@@ -174,9 +182,14 @@ const C_CUSTOM_2 = [
         'background-size': 'contain',
         'width': '219px',
         'height': '194px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '219px',
+          'height': '194px'
+        }
       }
-    },
-    key: 10
+    }
   },
   {
     element: {
@@ -184,11 +197,14 @@ const C_CUSTOM_2 = [
       styles: {
         'color': '#fff',
         'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+        'font-size': '3.2rem'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
-    },
-    key: 11
+    }
   },
   {
     element: {
@@ -196,11 +212,14 @@ const C_CUSTOM_2 = [
       styles: {
         'color': '#fff',
         'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+        'font-size': '3.2rem'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
-    },
-    key: 12
+    }
   },
   {
     element: {
@@ -241,8 +260,7 @@ const C_CUSTOM_2_M = [
         'width': '161px',
         'height': '143px'
       }
-    },
-    key: 14
+    }
   },
   {
     element: {
@@ -250,12 +268,10 @@ const C_CUSTOM_2_M = [
       styles: {
         'color': '#F4BC64',
         'font-family': 'Montserrat',
-        'font-size': '24px',
-        'line-height': '29px',
+        'font-size': '2.2rem',
         'padding-top': '30px'
       }
-    },
-    key: 15
+    }
   }
 ]
 
@@ -332,9 +348,14 @@ const C_CUSTOM_3 = [
         'background-size': 'contain',
         'width': '215px',
         'height': '194px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '215px',
+          'height': '194px'
+        }
       }
-    },
-    key: 20
+    }
   },
   {
     element: {
@@ -342,11 +363,14 @@ const C_CUSTOM_3 = [
       styles: {
         'color': '#fff',
         'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+        'font-size': '3.2rem'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
-    },
-    key: 21
+    }
   },
   {
     element: {
@@ -354,11 +378,14 @@ const C_CUSTOM_3 = [
       styles: {
         'color': '#fff',
         'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+        'font-size': '3.2rem'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
-    },
-    key: 22
+    }
   },
   {
     element: {
@@ -399,8 +426,7 @@ const C_CUSTOM_3_M = [
         'width': '157px',
         'height': '143px'
       }
-    },
-    key: 24
+    }
   },
   {
     element: {
@@ -408,12 +434,9 @@ const C_CUSTOM_3_M = [
       styles: {
         'color': '#F4BC64',
         'font-family': 'Montserrat',
-        'font-size': '24px',
-        'line-height': '29px',
-        'padding-top': '30px'
+        'font-size': '2.2rem'
       }
-    },
-    key: 25
+    }
   }
 ]
 
@@ -490,9 +513,14 @@ const C_CUSTOM_4 = [
         'background-size': 'contain',
         'width': '213px',
         'height': '194px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '213px',
+          'height': '194px'
+        }
       }
-    },
-    key: 30
+    }
   },
   {
     element: {
@@ -500,11 +528,14 @@ const C_CUSTOM_4 = [
       styles: {
         'color': '#fff',
         'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+        'font-size': '3.2rem'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
-    },
-    key: 31
+    }
   },
   {
     element: {
@@ -512,11 +543,14 @@ const C_CUSTOM_4 = [
       styles: {
         'color': '#fff',
         'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+        'font-size': '3.2rem'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
-    },
-    key: 32
+    }
   },
   {
     element: {
@@ -557,8 +591,7 @@ const C_CUSTOM_4_M = [
         'width': '157px',
         'height': '143px'
       }
-    },
-    key: 34
+    }
   },
   {
     element: {
@@ -566,12 +599,10 @@ const C_CUSTOM_4_M = [
       styles: {
         'color': '#F4BC64',
         'font-family': 'Montserrat',
-        'font-size': '24px',
-        'line-height': '29px',
+        'font-size': '2.2rem',
         'padding-top': '30px'
       }
-    },
-    key: 35
+    }
   }
 ]
 
@@ -658,6 +689,11 @@ const C_CUSTOM_CONTAINER_D = {
     'align-items': 'flex-start',
     'padding-top': '10px',
     'padding-left': '85px'
+  },
+  media: {
+    'is-mobile': {
+      'padding-left': '70px'
+    }
   }
 }
 

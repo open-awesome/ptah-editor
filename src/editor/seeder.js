@@ -72,7 +72,11 @@ const data = new Map([
       'text-decoration': 'none',
       'text-align': 'center',
       'color': '#9B9B9B',
-      'justify-content': 'center'
+      'justify-content': 'center',
+      'margin-top': '8px',
+      'margin-bottom': '8px',
+      'margin-left': '0',
+      'margin-right': '0'
     },
     isComplex: true,
     editor: {

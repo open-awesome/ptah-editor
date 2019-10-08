@@ -16,6 +16,12 @@ const C_CUSTOM_1 = [
         'background-size': 'contain',
         'width': '120px',
         'height': '143px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '120px',
+          'height': '143px'
+        }
       }
     }
   },
@@ -26,6 +32,11 @@ const C_CUSTOM_1 = [
         'font-family': 'Montserrat',
         'font-size': '2.8rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem'
+        }
       }
     }
   },
@@ -130,6 +141,12 @@ const C_CUSTOM_2 = [
         'background-size': 'contain',
         'width': '161px',
         'height': '143px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '120px',
+          'height': '143px'
+        }
       }
     }
   },
@@ -140,6 +157,11 @@ const C_CUSTOM_2 = [
         'font-family': 'Montserrat',
         'font-size': '2.8rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem'
+        }
       }
     }
   },
@@ -244,6 +266,12 @@ const C_CUSTOM_3 = [
         'background-size': 'contain',
         'width': '157px',
         'height': '143px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '120px',
+          'height': '143px'
+        }
       }
     }
   },
@@ -254,6 +282,11 @@ const C_CUSTOM_3 = [
         'font-family': 'Montserrat',
         'font-size': '2.8rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem'
+        }
       }
     }
   },
@@ -358,6 +391,12 @@ const C_CUSTOM_4 = [
         'background-size': 'contain',
         'width': '157px',
         'height': '143px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '120px',
+          'height': '143px'
+        }
       }
     }
   },
@@ -368,6 +407,11 @@ const C_CUSTOM_4 = [
         'font-family': 'Montserrat',
         'font-size': '2.8rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem'
+        }
       }
     }
   },
@@ -474,6 +518,11 @@ const C_CUSTOM_CONTAINER_D = {
     'flex-direction': 'column',
     'align-items': 'flex-start',
     'padding-left': '35px'
+  },
+  media: {
+    'is-mobile': {
+      'padding-left': '70px'
+    }
   }
 }
 
