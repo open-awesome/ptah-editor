@@ -6,108 +6,137 @@ import defaults from '../../mixins/defaults'
 import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
-const C_CUSTOM_1 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn787.cdn.stg.gamenet.ru/0/8hwOK/o_G1wMi.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '157px',
-        'height': '194px'
-      },
-      media: {
-        'is-mobile': {
-          'width': '157px',
-          'height': '194px'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>Start Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem'
-      },
-      media: {
-        'is-mobile': {
-          'font-size': '3.2rem'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>10$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem'
-      },
-      media: {
-        'is-mobile': {
-          'font-size': '3.2rem'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': 'transparent',
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '190px',
-        'height': '64px',
-        'border-radius': '100px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#F4BC64'
-      },
-      pseudo: {
-        hover: {
-          'color': '#FFFFFF !important',
-          'border-width': '2px !important',
-          'border-style': 'solid !important',
-          'border-color': '#FFFFFF !important'
-        }
-      }
-    }
-  }
+let prev = [
+  'https://gn257.cdn.stg.gamenet.ru/0/8dAso/o_1O03Wg.png',
+  'https://gn292.cdn.stg.gamenet.ru/0/8dAtJ/o_1FdGcD.png',
+  'https://gn546.cdn.stg.gamenet.ru/0/8dAtZ/o_2FiQhB.png',
+  'https://gn452.cdn.stg.gamenet.ru/0/8dAtj/o_1ZxHzN.png'
 ]
 
-const C_CUSTOM_1_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn257.cdn.stg.gamenet.ru/0/8dAso/o_1O03Wg.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '120px',
-        'height': '143px'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>Start Edition</b>',
-      styles: {
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size': '2.2rem',
-        'padding-top': '30px'
-      }
-    }
-  }
+let label = [
+  'Start', 'Full', 'Delux', 'Ultimate'
 ]
+
+let price = [
+  '10', '19', '29', '39'
+]
+
+const [
+  C_CUSTOM_1,
+  C_CUSTOM_2,
+  C_CUSTOM_3,
+  C_CUSTOM_4
+] = Array.from(new Array(4), (x, i) => {
+  return [
+    {
+      element: {
+        styles: {
+          'background-image': `url(${prev[i]})`,
+          'background-color': 'rgba(0, 0, 0, 0)',
+          'background-repeat': 'no-repeat',
+          'background-size': 'contain',
+          'width': '120px',
+          'height': '143px'
+        },
+        media: {
+          'is-mobile': {
+            'width': '120px',
+            'height': '143px'
+          }
+        }
+      }
+    },
+    {
+      element: {
+        text: `<p><strong>${label[i]} edition</strong></p>`,
+        styles: {
+          'font-family': 'Montserrat',
+          'font-size': '2.8rem',
+          'color': '#ffffff'
+        },
+        media: {
+          'is-mobile': {
+            'font-size': '3rem'
+          }
+        }
+      }
+    },
+    {
+      element: {
+        text: `<b>${price[i]}$</b>`,
+        styles: {
+          'color': '#fff',
+          'font-family': 'Montserrat',
+          'font-size': '3.2rem'
+        },
+        media: {
+          'is-mobile': {
+            'font-size': '3.2rem'
+          }
+        }
+      }
+    },
+    {
+      element: {
+        text: '<p><strong>BUY NOW</strong></p>',
+        styles: {
+          'background-color': 'transparent',
+          'color': '#F4BC64',
+          'font-family': 'Montserrat',
+          'font-size:': '1.6rem',
+          'text-align': 'center',
+          'width': '190px',
+          'height': '64px',
+          'border-radius': '100px',
+          'border-width': '2px',
+          'border-style': 'solid',
+          'border-color': '#F4BC64'
+        },
+        pseudo: {
+          hover: {
+            'color': '#FFFFFF !important',
+            'border-width': '2px !important',
+            'border-style': 'solid !important',
+            'border-color': '#FFFFFF !important'
+          }
+        }
+      }
+    }
+  ]
+})
+
+const [
+  C_CUSTOM_1_M,
+  C_CUSTOM_2_M,
+  C_CUSTOM_3_M,
+  C_CUSTOM_4_M
+] = Array.from(new Array(4), (x, i) => {
+  return [
+    {
+      element: {
+        styles: {
+          'background-image': `url(${prev[i]})`,
+          'background-color': 'rgba(0, 0, 0, 0)',
+          'background-repeat': 'no-repeat',
+          'background-size': 'contain',
+          'width': '120px',
+          'height': '143px'
+        }
+      }
+    },
+    {
+      element: {
+        text: `<b>${label[i]} Edition</b>`,
+        styles: {
+          'color': '#F4BC64',
+          'font-family': 'Montserrat',
+          'font-size': '2.2rem',
+          'padding-top': '30px'
+        }
+      }
+    }
+  ]
+})
 
 const C_CUSTOM_1D = [
   {
@@ -167,109 +196,6 @@ const C_CUSTOM_1D = [
       },
       styles: {
         color: '#818181'
-      }
-    }
-  }
-]
-
-const C_CUSTOM_2 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn936.cdn.stg.gamenet.ru/0/8hwOw/o_AtAIl.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '219px',
-        'height': '194px'
-      },
-      media: {
-        'is-mobile': {
-          'width': '219px',
-          'height': '194px'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>Full Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem'
-      },
-      media: {
-        'is-mobile': {
-          'font-size': '3.2rem'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>19$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem'
-      },
-      media: {
-        'is-mobile': {
-          'font-size': '3.2rem'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': 'transparent',
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '190px',
-        'height': '64px',
-        'border-radius': '100px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#F4BC64'
-      },
-      pseudo: {
-        hover: {
-          'color': '#FFFFFF !important',
-          'border-width': '2px !important',
-          'border-style': 'solid !important',
-          'border-color': '#FFFFFF !important'
-        }
-      }
-    }
-  }
-]
-
-const C_CUSTOM_2_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn292.cdn.stg.gamenet.ru/0/8dAtJ/o_1FdGcD.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '161px',
-        'height': '143px'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>Full Edition</b>',
-      styles: {
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size': '2.2rem',
-        'padding-top': '30px'
       }
     }
   }
@@ -338,108 +264,6 @@ const C_CUSTOM_2D = [
   }
 ]
 
-const C_CUSTOM_3 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn128.cdn.stg.gamenet.ru/0/8hwPz/o_1fOpA2.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '215px',
-        'height': '194px'
-      },
-      media: {
-        'is-mobile': {
-          'width': '215px',
-          'height': '194px'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>Deluxe Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem'
-      },
-      media: {
-        'is-mobile': {
-          'font-size': '3.2rem'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>29$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem'
-      },
-      media: {
-        'is-mobile': {
-          'font-size': '3.2rem'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': 'transparent',
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '190px',
-        'height': '64px',
-        'border-radius': '100px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#F4BC64'
-      },
-      pseudo: {
-        hover: {
-          'color': '#FFFFFF !important',
-          'border-width': '2px !important',
-          'border-style': 'solid !important',
-          'border-color': '#FFFFFF !important'
-        }
-      }
-    }
-  }
-]
-
-const C_CUSTOM_3_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn546.cdn.stg.gamenet.ru/0/8dAtZ/o_2FiQhB.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '157px',
-        'height': '143px'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>Deluxe Edition</b>',
-      styles: {
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size': '2.2rem'
-      }
-    }
-  }
-]
-
 const C_CUSTOM_3D = [
   {
     element: {
@@ -498,109 +322,6 @@ const C_CUSTOM_3D = [
       },
       styles: {
         color: '#818181'
-      }
-    }
-  }
-]
-
-const C_CUSTOM_4 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn573.cdn.stg.gamenet.ru/0/8hwQa/o_pphTq.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '213px',
-        'height': '194px'
-      },
-      media: {
-        'is-mobile': {
-          'width': '213px',
-          'height': '194px'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>Ultimate Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem'
-      },
-      media: {
-        'is-mobile': {
-          'font-size': '3.2rem'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>39$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '3.2rem'
-      },
-      media: {
-        'is-mobile': {
-          'font-size': '3.2rem'
-        }
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': 'transparent',
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '190px',
-        'height': '64px',
-        'border-radius': '100px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#F4BC64'
-      },
-      pseudo: {
-        hover: {
-          'color': '#FFFFFF !important',
-          'border-width': '2px !important',
-          'border-style': 'solid !important',
-          'border-color': '#FFFFFF !important'
-        }
-      }
-    }
-  }
-]
-
-const C_CUSTOM_4_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn452.cdn.stg.gamenet.ru/0/8dAtj/o_1ZxHzN.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '157px',
-        'height': '143px'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<b>Ultimate Edition</b>',
-      styles: {
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size': '2.2rem',
-        'padding-top': '30px'
       }
     }
   }

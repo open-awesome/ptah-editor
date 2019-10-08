@@ -6,95 +6,133 @@ import defaults from '../../mixins/defaults'
 import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
-const C_CUSTOM_1 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/Bonecrusher.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '275px',
-        'height': '244px'
+let prev = [
+  'https://s3.protocol.one/images/Bonecrusher.png',
+  'https://s3.protocol.one/images/Ens_Javelin.png',
+  'https://s3.protocol.one/images/Gellas_Warrior.png',
+  'https://s3.protocol.one/images/Friz_arbalester.png'
+]
+
+let label = [
+  'Start', 'Full', 'Delux', 'Ultimate'
+]
+
+let price = [
+  '10', '19', '29', '39'
+]
+
+const [
+  C_CUSTOM_1,
+  C_CUSTOM_2,
+  C_CUSTOM_3,
+  C_CUSTOM_4
+] = Array.from(new Array(4), (x, i) => {
+  return [
+    {
+      element: {
+        styles: {
+          'background-image': `url(${prev[i]})`,
+          'background-color': 'rgba(0, 0, 0, 0)',
+          'background-repeat': 'no-repeat',
+          'background-size': 'contain',
+          'width': '275px',
+          'height': '275px'
+        },
+        media: {
+          'is-mobile': {
+            'width': '275px',
+            'height': '275px'
+          }
+        }
       }
     },
-    key: 0
-  },
-  {
-    element: {
-      text: '<b>Start Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '32px',
-        'line-height': '39px'
+    {
+      element: {
+        text: `<p><strong>${label[i]} edition</strong></p>`,
+        styles: {
+          'font-family': 'Cinzel',
+          'font-size': '2.8rem',
+          'color': '#ffffff'
+        },
+        media: {
+          'is-mobile': {
+            'font-size': '3rem'
+          }
+        }
       }
     },
-    key: 1
-  },
-  {
-    element: {
-      text: '<b>10$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '32px',
-        'line-height': '39px'
+    {
+      element: {
+        text: `<b>${price[i]}$</b>`,
+        styles: {
+          'color': '#fff',
+          'font-family': 'Cinzel',
+          'font-size': '3rem'
+        },
+        media: {
+          'is-mobile': {
+            'font-size': '3rem'
+          }
+        }
       }
     },
-    key: 2
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': '#333333',
-        'color': '#FFFFFF',
-        'font-family': 'Cinzel',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '161px',
-        'height': '64px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#AF2E11'
-      },
-      pseudo: {
-        hover: {
-          'background-color': '#A9893C !important'
+    {
+      element: {
+        text: '<p><strong>BUY NOW</strong></p>',
+        styles: {
+          'background-color': '#333333',
+          'color': '#FFFFFF',
+          'font-family': 'Cinzel',
+          'font-size:': '1.6rem',
+          'text-align': 'center',
+          'width': '161px',
+          'height': '64px',
+          'border-width': '2px',
+          'border-style': 'solid',
+          'border-color': '#AF2E11'
+        },
+        pseudo: {
+          hover: {
+            'background-color': '#A9893C !important'
+          }
         }
       }
     }
-  }
-]
+  ]
+})
 
-const C_CUSTOM_1_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/Bonecrusher.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '220px',
-        'height': '195px'
+const [
+  C_CUSTOM_1_M,
+  C_CUSTOM_2_M,
+  C_CUSTOM_3_M,
+  C_CUSTOM_4_M
+] = Array.from(new Array(4), (x, i) => {
+  return [
+    {
+      element: {
+        styles: {
+          'background-image': `url(${prev[i]})`,
+          'background-color': 'rgba(0, 0, 0, 0)',
+          'background-repeat': 'no-repeat',
+          'background-size': 'contain',
+          'width': '220px',
+          'height': '195px'
+        }
       }
     },
-    key: 4
-  },
-  {
-    element: {
-      text: '<b>Start Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '24px',
-        'line-height': '29px'
+    {
+      element: {
+        text: `<b>${label[i]} Edition</b>`,
+        styles: {
+          'color': '#fff',
+          'font-family': 'Cinzel',
+          'font-size': '24px',
+          'line-height': '29px'
+        }
       }
-    },
-    key: 5
-  }
-]
+    }
+  ]
+})
 
 const C_CUSTOM_1D = [
   {
@@ -156,96 +194,6 @@ const C_CUSTOM_1D = [
         color: '#818181'
       }
     }
-  }
-]
-
-const C_CUSTOM_2 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/Ens_Javelin.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '275px',
-        'height': '244px'
-      }
-    },
-    key: 10
-  },
-  {
-    element: {
-      text: '<b>Full Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 11
-  },
-  {
-    element: {
-      text: '<b>19$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 12
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': '#333333',
-        'color': '#FFFFFF',
-        'font-family': 'Cinzel',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '161px',
-        'height': '64px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#AF2E11'
-      },
-      pseudo: {
-        hover: {
-          'background-color': '#A9893C !important'
-        }
-      }
-    }
-  }
-]
-
-const C_CUSTOM_2_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/Ens_Javelin.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '220px',
-        'height': '195px'
-      }
-    },
-    key: 14
-  },
-  {
-    element: {
-      text: '<b>Full Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '24px',
-        'line-height': '29px'
-      }
-    },
-    key: 15
   }
 ]
 
@@ -312,96 +260,6 @@ const C_CUSTOM_2D = [
   }
 ]
 
-const C_CUSTOM_3 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/Gellas_Warrior.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '275px',
-        'height': '244px'
-      }
-    },
-    key: 20
-  },
-  {
-    element: {
-      text: '<b>Deluxe Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 21
-  },
-  {
-    element: {
-      text: '<b>29$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 22
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': '#333333',
-        'color': '#FFFFFF',
-        'font-family': 'Cinzel',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '161px',
-        'height': '64px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#AF2E11'
-      },
-      pseudo: {
-        hover: {
-          'background-color': '#A9893C !important'
-        }
-      }
-    }
-  }
-]
-
-const C_CUSTOM_3_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/Gellas_Warrior.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '220px',
-        'height': '195px'
-      }
-    },
-    key: 24
-  },
-  {
-    element: {
-      text: '<b>Deluxe Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '24px',
-        'line-height': '29px'
-      }
-    },
-    key: 25
-  }
-]
-
 const C_CUSTOM_3D = [
   {
     element: {
@@ -462,96 +320,6 @@ const C_CUSTOM_3D = [
         color: '#818181'
       }
     }
-  }
-]
-
-const C_CUSTOM_4 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/Friz_arbalester.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '275px',
-        'height': '244px'
-      }
-    },
-    key: 30
-  },
-  {
-    element: {
-      text: '<b>Ultimate Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 31
-  },
-  {
-    element: {
-      text: '<b>39$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 32
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': '#333333',
-        'color': '#FFFFFF',
-        'font-family': 'Cinzel',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '161px',
-        'height': '64px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#AF2E11'
-      },
-      pseudo: {
-        hover: {
-          'background-color': '#A9893C !important'
-        }
-      }
-    }
-  }
-]
-
-const C_CUSTOM_4_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/Friz_arbalester.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '220px',
-        'height': '195px'
-      }
-    },
-    key: 34
-  },
-  {
-    element: {
-      text: '<b>Ultimate Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Cinzel',
-        'font-size': '24px',
-        'line-height': '29px'
-      }
-    },
-    key: 35
   }
 ]
 
@@ -909,7 +677,6 @@ export default {
                     class="b-sandbox"
                     :container-path="`$sectionData.container${key}M`"
                     :components-path="`$sectionData.components${key}M`"
-                    direction="column"
                   >
 
                     <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}M`].styles" @start="drag(`components${key}M`)" @change="dragStop">
@@ -951,7 +718,6 @@ export default {
                     class="b-sandbox"
                     :container-path="`$sectionData.container${key}`"
                     :components-path="`$sectionData.components${key}`"
-                    direction="column"
                   >
                     <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @start="drag(`components${key}`)" @change="dragStop">
                       <div
@@ -977,7 +743,6 @@ export default {
                     class="b-sandbox"
                     :container-path="`$sectionData.container${key}D`"
                     :components-path="`$sectionData.components${key}D`"
-                    direction="column"
                   >
                     <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @start="drag(`components${key}D`)" @change="dragStop">
                       <div
