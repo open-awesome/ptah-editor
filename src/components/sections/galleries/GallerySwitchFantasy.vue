@@ -274,6 +274,12 @@ const [
           'background-position': 'bottom center',
           'width': '300px',
           'height': '450px'
+        },
+        media: {
+          'is-mobile': {
+            'width': '300px',
+            'height': '300px'
+          }
         }
       }
     },
@@ -309,9 +315,13 @@ const C_CUSTOM = [
         'font-family': 'Cinzel',
         'font-size': '4.0rem',
         'color': '#fff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem'
+        }
       }
-    },
-    key: 0
+    }
   }
 ]
 
@@ -347,6 +357,20 @@ const SCHEMA_CUSTOM = {
         'font-style': 'normal',
         'text-decoration': 'none',
         'color': 'rgba(255, 255, 255, 1)'
+      }
+    },
+    media: {
+      'is-mobile': {
+        'textStyles': {
+          'chapter': {
+            'color': 'rgba(255, 255, 255, 1)',
+            'font-size': '1.6rem'
+          },
+          'text': {
+            'color': 'rgba(255, 255, 255, 1)',
+            'font-size': '1.6rem'
+          }
+        }
       }
     }
   },

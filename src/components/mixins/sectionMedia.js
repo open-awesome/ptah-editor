@@ -1,3 +1,5 @@
+import { mapState } from 'vuex'
+
 const LIST_PROPS_STYLES = [
   'margin-top',
   'margin-right',
@@ -32,6 +34,12 @@ export default {
     objVarsTable: {}
   },
 
+  computed: {
+    ...mapState('Sidebar', [
+      'device'
+    ])
+  },
+
   watch: {
     '$sectionData.mainStyle.styles': {
       handler () {
@@ -56,6 +64,11 @@ export default {
         this.mediaTableStyles()
       },
       deep: true
+    },
+    'device': {
+      handler () {
+        this.mediaStyles()
+      }
     }
   },
 
@@ -120,5 +133,12 @@ export default {
         this.$sectionData.objVarsTable = obj
       }
     }
+  },
+
+  mounted () {
+    this.mediaStyles()
+    this.mediaTextStyles()
+    this.mediaSizeIcons()
+    this.mediaTableStyles()
   }
 }

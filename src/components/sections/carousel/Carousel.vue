@@ -124,8 +124,7 @@ const COMPONENTS = [
     element: types.Text,
     type: 'text',
     class: 'b-title',
-    label: 'title',
-    key: 0
+    label: 'title'
   }
 ]
 
@@ -136,12 +135,16 @@ const C_CUSTOM = [
       styles: {
         'font-family': 'Montserrat',
         'font-size': '4.2rem',
-        'line-height': '49px',
         'color': '#ffffff',
-        'padding-bottom': '48px'
+        'padding-top': '32px',
+        'padding-bottom': '16px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem'
+        }
       }
-    },
-    key: 0
+    }
   }
 ]
 
@@ -160,7 +163,7 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover'
     },
     swiper: {

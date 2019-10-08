@@ -114,7 +114,7 @@ const data = new Map([
     background: true,
     styles: {
       'background-image': 'url(https://gn680.cdn.stg.gamenet.ru/0/8qGME/o_OIgnu.png)',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'contain',
       'background-color': 'rgba(0, 0, 0, 0)',
@@ -144,7 +144,7 @@ const data = new Map([
     background: true,
     styles: {
       'background-image': 'url(https://gn680.cdn.stg.gamenet.ru/0/8qGME/o_OIgnu.png)',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-color': 'rgba(0, 0, 0, 0)',
@@ -170,7 +170,7 @@ const data = new Map([
       absorb: 0,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': 'rgba(0,0,0,0)',
@@ -208,7 +208,7 @@ const data = new Map([
         hover: {
           'background-color': '',
           'background-image': '',
-          'background-position': 'center center',
+          'background-position': '50% 50%',
           'background-repeat': 'no-repeat',
           'background-size': 'cover',
           'color': '',
@@ -229,7 +229,7 @@ const data = new Map([
       removable: true,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': '',
@@ -373,7 +373,7 @@ const data = new Map([
     count: 3,
     styles: {
       'background-image': '',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-color':''
@@ -386,19 +386,11 @@ const data = new Map([
       chapter: {
         'font-family': 'Montserrat',
         'font-size': '3.6rem',
-        'line-height': '1.4',
-        'font-weight': 'bold',
-        'font-style': 'normal',
-        'text-decoration': 'none',
         'color': 'rgba(255, 255, 255, 1)'
       },
       text: {
         'font-family': 'Lato',
         'font-size': '1.6rem',
-        'line-height': '1.4',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'text-decoration': 'none',
         'color': 'rgba(255, 255, 255, 1)'
       }
     },
@@ -413,9 +405,15 @@ const data = new Map([
     isBottomPopup:  false,
     media: {
       'is-mobile': {
-        textStyles: {
-          chapter: {},
-          text: {}
+        'textStyles': {
+          'chapter': {
+            'color': 'rgba(255, 255, 255, 1)',
+            'font-size': '3.6rem'
+          },
+          'text': {
+            'color': 'rgba(255, 255, 255, 1)',
+            'font-size': '1.6rem'
+          }
         }
       }
     }
@@ -425,7 +423,7 @@ const data = new Map([
     count: 2,
     styles: {
       'background-image': '',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-color':'',
@@ -610,7 +608,7 @@ const data = new Map([
       background: true,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': ''
@@ -663,7 +661,7 @@ const data = new Map([
       background: true,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': ''
@@ -746,7 +744,7 @@ const data = new Map([
       background: true,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': ''
@@ -839,7 +837,7 @@ const data = new Map([
         'text-align': 'center',
         'color': '#fff',
         'background-image': 'url(https://gn793.cdn.stg.gamenet.ru/0/79yeF/o_1PRuEc.png)',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'background-color': 'rgba(0, 0, 0, 0)',
@@ -914,7 +912,7 @@ const data = new Map([
       typography: false,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color':'',

@@ -51,6 +51,12 @@ const [
           'width': '340px',
           'height': '190px'
         },
+        media: {
+          'is-mobile': {
+            'width': '290px',
+            'height': '160px'
+          }
+        },
         link: {
           imageUrl: prev[i]
         },
@@ -90,9 +96,13 @@ const C_CUSTOM = [
         'font-family': 'Cinzel',
         'font-size': '4.0rem',
         'color': '#fff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem'
+        }
       }
-    },
-    key: 0
+    }
   }
 ]
 
