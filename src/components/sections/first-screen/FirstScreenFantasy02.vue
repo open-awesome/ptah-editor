@@ -55,16 +55,16 @@ const C_CUSTOM_1 = [
         'margin-right': '0px',
         'margin-bottom': '20px',
         'margin-left': '13px'
-      }
-    },
-    media: {
-      'is-mobile': {
-        width: '270px',
-        height: '100px',
-        'margin-top': '25px',
-        'margin-rihgt': '0',
-        'margin-bottom': '0',
-        'margin-left': '0'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '100px',
+          'margin-top': '25px',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '12px'
+        }
       }
     }
   },
@@ -87,12 +87,12 @@ const C_CUSTOM_1 = [
         'is-mobile': {
           'font-size': '2rem',
           'line-height': '1.4',
-          'text-align': 'right',
+          'text-align': 'left',
           'margin-top': '16px',
           'margin-bottom': '16px',
-          'margin-left': '20px',
-          'margin-right': '8px',
-          'padding-left': '80px'
+          'margin-left': '8px',
+          'margin-right': '20px',
+          'padding-right': '80px'
         }
       }
     }
@@ -122,6 +122,16 @@ const C_CUSTOM_1 = [
         'padding-right': '0px',
         'padding-bottom': '0px',
         'padding-left': '0px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '8px',
+          'margin-right': '20px',
+          'padding-right': '80px'
+        }
       }
     }
   },
@@ -150,6 +160,14 @@ const C_CUSTOM_1 = [
         'hover': {
           'background-color': '#333333 !important',
           'border': '1px solid #AF2E12 !important'
+        }
+      },
+      media: {
+        'is-mobile': {
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '25px',
+          'margin-right': '0'
         }
       }
     }
@@ -233,7 +251,7 @@ const SCHEMA_CUSTOM = {
     },
     media: {
       'is-mobile': {
-        'background-position': 'right top'
+        'background-position': '78% top'
       }
     }
   },
@@ -307,7 +325,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -331,7 +348,6 @@ export default {
           <sandbox
               container-path="$sectionData.container2"
               components-path="$sectionData.components2"
-              direction="column"
               class="b-sandbox">
 
             <draggable v-model="$sectionData.components2" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles" @start="drag('components2')" @change="dragStop">
@@ -357,7 +373,6 @@ export default {
           <sandbox
             container-path="$sectionData.container3"
             components-path="$sectionData.components3"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components3" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3.styles" @start="drag('components3')" @change="dragStop">

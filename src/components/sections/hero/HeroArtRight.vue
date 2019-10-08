@@ -199,15 +199,4 @@ export default {
 
 <style lang="sass" scoped>
 @import '../../../assets/sass/section-media.sass'
-
-.b-hero
-  position: relative
-  width: 100%
-  margin: 0
-  padding: 1rem
-  display: flex
-  text-align: center
-  justify-content: center
-  flex-direction: column
-  transition: background 200ms
 </style>

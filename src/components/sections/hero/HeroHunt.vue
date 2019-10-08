@@ -88,11 +88,9 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn157.cdn.stg.gamenet.ru/0/7T30j/o_1zIylP.jpg)',
       'background-size': 'cover',
-      'background-repeat': 'no-repeat'
-    },
-    classes: [
-      'full-height'
-    ]
+      'background-repeat': 'no-repeat',
+      'height': '80vh'
+    }
   },
   container: {
     width: 6

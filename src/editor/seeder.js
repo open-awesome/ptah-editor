@@ -446,8 +446,8 @@ const data = new Map([
       },
       media: {
         'is-mobile': {
-          'width': '80px',
-          'height': '80px'
+          'width': '32px',
+          'height': '32px'
         }
       }
     })
@@ -976,12 +976,14 @@ const data = new Map([
       'font-style': 'normal',
       'text-decoration': 'none',
       'text-align': 'center',
-      'color': '#fff'
+      'color': '#fff',
+      'margin-top': '16px',
+      'margin-bottom': '32px'
     },
     media: {
       'is-mobile': {
         'margin-top': '4px',
-        'margin-bottom': '4px',
+        'margin-bottom': '16px',
         'margin-left': '8px',
         'margin-right': '8px',
         'font-size': '2.4rem'

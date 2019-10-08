@@ -62,6 +62,16 @@ const C_CUSTOM = [
         'margin-right': '0px',
         'margin-bottom': '20px',
         'margin-left': '0px'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '100px',
+          'margin-top': '25px',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0'
+        }
       }
     }
   },
@@ -77,6 +87,17 @@ const C_CUSTOM = [
         'margin-right': '0px',
         'margin-bottom': '20px',
         'margin-left': '0px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'line-height': '1.4',
+          'text-align': 'center',
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '32px',
+          'margin-right': '32px'
+        }
       }
     }
   },
@@ -166,8 +187,10 @@ const SCHEMA_CUSTOM = {
   components: _.merge({}, C_CUSTOM),
   container: {
     width: 9,
-    styles: {
-      'padding-bottom': '120px'
+    media: {
+      'is-mobile': {
+        'padding-bottom': '25px'
+      }
     }
   },
   edited: true
@@ -214,7 +237,6 @@ export default {
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
               class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">

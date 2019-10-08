@@ -5,19 +5,6 @@ import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 import sectionMedia from '../../mixins/sectionMedia'
 
-/**
- * Base keys for elements in Hero sections
- * Logo - 0
- * Title - 1
- * Description - 2
- * Button - 3
- * Available Platforms - 4
- * Video - 5
- * Slogan - 6
- * Link - 7
- * Delimiter- 8
- * Timer - 9
- * */
 const C_CUSTOM = [
   {
     element: {
@@ -27,10 +14,17 @@ const C_CUSTOM = [
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'width': '544px',
-        'height': '70px'
+        'height': '70px',
+        'margin-bottom': '32px'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '80px',
+          'margin-bottom': '0'
+        }
       }
-    },
-    key: 0
+    }
   },
   {
     element: {
@@ -38,10 +32,16 @@ const C_CUSTOM = [
       styles: {
         'font-family': 'PT Serif',
         'font-size': '2.8rem',
-        'color': '#000000'
+        'color': '#000000',
+        'margin-bottom': '200px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-bottom': '100px'
+        }
       }
-    },
-    key: 1
+    }
   }
 ]
 
@@ -58,8 +58,7 @@ const C_CUSTOM2 = [
         'height': '70px',
         'border-radius': '2px'
       }
-    },
-    key: 3
+    }
   }
 ]
 
@@ -68,7 +67,14 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn717.cdn.gamenet.ru/TY0Xv85rCS/6MG9a/o_2UvGS.jpg)',
       'background-size': 'cover',
-      'background-repeat': 'no-repeat'
+      'background-position': 'center top',
+      'background-repeat': 'no-repeat',
+      'height': '80vh'
+    },
+    media: {
+      'is-mobile': {
+        'background-position': '17% 0%'
+      }
     }
   },
   container: {
@@ -106,16 +112,14 @@ export default {
         element: types.Logo,
         type: 'image',
         class: 'b-logo',
-        label: 'logo',
-        key: 0
+        label: 'logo'
       },
       {
         name: 'TextElement',
         element: types.Text,
         type: 'text',
         class: 'b-title',
-        label: 'title',
-        key: 1
+        label: 'title'
       }
     ],
     components2: [
@@ -124,8 +128,7 @@ export default {
         element: types.Button,
         type: 'button',
         class: 'b-button',
-        label: 'button',
-        key: 3
+        label: 'button'
       }
     ]
   },
@@ -210,15 +213,4 @@ export default {
 
 <style lang="sass" scoped>
 @import '../../../assets/sass/section-media.sass'
-
-.b-hero
-  position: relative
-  width: 100%
-  margin: 0
-  display: flex
-  flex-direction: column
-  justify-content: space-around
-  align-items: center
-  .b-div
-    height: 4rem
 </style>

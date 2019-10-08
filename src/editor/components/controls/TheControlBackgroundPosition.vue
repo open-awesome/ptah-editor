@@ -152,7 +152,7 @@ export default {
         this.bgImage = bgimage || ''
       }
 
-      bgPosition = styles['background-position'] || 'center center'
+      bgPosition = styles['background-position'] || '50% 0%'
       if (bgPosition.indexOf(' ') !== -1) {
         bgPosition = bgPosition.split(' ')
 
@@ -161,7 +161,7 @@ export default {
 
         this.bgPosition = `${this.left}% ${this.top}%`
       } else {
-        this.bgPosition = styles['background-position'] || 'center center'
+        this.bgPosition = styles['background-position'] || '50% 0%'
       }
 
       this.bgRepeat = styles['background-repeat'] || 'no-repeat'
@@ -303,8 +303,8 @@ export default {
                 @click="setPosition('100%', '100%')"/>
 
           <span class="b-background-position__btn b-background-position__btn_tc"
-                :class="{ 'selected' : bgPosition === '0% 50%' }"
-                @click="setPosition('0%', '50%')"></span>
+                :class="{ 'selected' : bgPosition === '50% 0%' }"
+                @click="setPosition('50%', '0%')"></span>
           <span class="b-background-position__btn b-background-position__btn_rc"
                 :class="{ 'selected' : bgPosition === 'right center' }"
                 @click="setPosition('100%', '50%')"></span>
