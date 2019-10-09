@@ -16,7 +16,10 @@ export default {
         },
         {
           type: 'Simple page',
-          sections: ['FirstScreenSpace01', 'FooterSpace'],
+          sections: [
+            'FirstScreenSpace01',
+            'FooterSpace'
+          ],
           url: 'https://s3.protocol.one/files/templateSimplePage.json',
           image: 'https://s3.protocol.one/images/1_r.jpg',
           description: 'Simple Sci-fi template width video background. Sections: First Screen, Footer'
@@ -30,14 +33,29 @@ export default {
         },
         {
           type: 'Page with subscription form',
-          sections: ['FirstScreenSpaceVideoBack', 'Columns', 'GalleryPopup', 'FormCenter', 'FooterSpace'],
+          sections: [
+            'FirstScreenSpaceVideoBack',
+            'Columns',
+            'GalleryPopup',
+            'FormCenter',
+            'FooterSpace'
+          ],
           url: 'https://s3.protocol.one/files/templatePageWithSubscriptionForm.json',
           image: 'https://s3.protocol.one/images/3_r.jpg',
           description: 'Sci-fi template width video background and subscription form. Sections: First screen, columns, gallery, form, footer'
         },
         {
           type: 'Space page',
-          sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace'],
+          sections: [
+            'SmmHeader',
+            'FirstScreenSpace02',
+            'Columns',
+            'Slider',
+            'Products',
+            'SystemRequirements',
+            'FrequentlyAskedQuestions',
+            'FooterSpace'
+          ],
           url: 'https://s3.protocol.one/files/templateSpacePage.json',
           image: 'https://s3.protocol.one/images/4_r.jpg',
           description: 'Sci-fi styled template with: Menu, First screen, columns, slider, products, system requirments, FAQ and footer'

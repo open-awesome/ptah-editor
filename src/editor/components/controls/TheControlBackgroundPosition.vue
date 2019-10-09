@@ -116,7 +116,6 @@ export default {
 
   watch: {
     device () {
-      console.log(1)
       this.getStyles()
     },
 

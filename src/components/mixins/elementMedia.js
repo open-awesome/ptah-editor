@@ -1,11 +1,11 @@
 import { mapState } from 'vuex'
-import * as _ from 'lodash-es'
 
 export default {
   inject: ['$section'],
 
   computed: {
     ...mapState('Sidebar', [
+      'settingObjectSection',
       'device'
     ]),
 
@@ -17,47 +17,8 @@ export default {
       return this.$section.get(`$sectionData.${this.path}.styles`)
     },
 
-    media () {
+    mediaStyles () {
       return this.$section.get(`$sectionData.${this.path}.media`)
-    },
-
-    mediaStyles: {
-      get () {
-        let device = 'is-mobile'
-        let stylesMedia = this.$section.get(`$sectionData.${this.path}.media`)
-        let sizeIcons = this.$section.get(`$sectionData.${this.path}.sizeIcons`)
-        let formStyles = this.$section.get(`$sectionData.${this.path}.formStyles`)
-        let media = { 'is-mobile': {} }
-
-        if (stylesMedia === undefined) {
-          stylesMedia = media
-        }
-
-        // set sizeIcons for elements
-        if (sizeIcons) {
-          media[device]['sizeIcons'] = stylesMedia[device]['sizeIcons'] !== undefined ? stylesMedia[device]['sizeIcons'] : sizeIcons
-        }
-
-        // set formStyles for form
-        if (formStyles) {
-          media[device]['formStyles'] = stylesMedia[device]['formStyles'] !== undefined ? stylesMedia[device]['formStyles'] : formStyles
-        }
-
-        if (stylesMedia[device]) {
-          for (let key in this.styles) {
-            media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
-          }
-        } else {
-          media[device] = this.styles
-        }
-
-        return media
-      },
-      set (value) {
-        this.settingObjectSection.set(`$sectionData.${this.path}.media`, _.merge({}, this.media, {
-          media: value
-        }))
-      }
     },
 
     objVarsMedia () {
@@ -82,5 +43,37 @@ export default {
         '--mobile-justify-content': this.mediaStyles['is-mobile']['justify-content']
       }
     }
+  },
+
+  created () {
+    let device = 'is-mobile'
+    let stylesMedia = this.$section.get(`$sectionData.${this.path}.media`)
+    let sizeIcons = this.$section.get(`$sectionData.${this.path}.sizeIcons`)
+    let formStyles = this.$section.get(`$sectionData.${this.path}.formStyles`)
+    let media = { 'is-mobile': {} }
+
+    if (stylesMedia === undefined) {
+      stylesMedia = media
+    }
+
+    // set sizeIcons for elements
+    if (sizeIcons) {
+      media[device]['sizeIcons'] = stylesMedia[device]['sizeIcons'] !== undefined ? stylesMedia[device]['sizeIcons'] : sizeIcons
+    }
+
+    // set formStyles for form
+    if (formStyles) {
+      media[device]['formStyles'] = stylesMedia[device]['formStyles'] !== undefined ? stylesMedia[device]['formStyles'] : formStyles
+    }
+
+    if (stylesMedia[device]) {
+      for (let key in this.styles) {
+        media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
+      }
+    } else {
+      media[device] = this.styles
+    }
+
+    this.$section.set(`$sectionData.${this.path}.media`, media)
   }
 }

@@ -75,12 +75,27 @@ export default {
   methods: {
     mediaStyles () {
       let obj = {}
+      let mediaStyles = {}
+      let styles = this.$sectionData.mainStyle.styles
+      let customMedia = { 'is-mobile': styles }
+
+      if (this.$sectionData.mainStyle.media === undefined) {
+        this.$section.set(`$sectionData.mainStyle.media`, customMedia)
+      }
+
+      mediaStyles = this.$sectionData.mainStyle.media
 
       LIST_PROPS_STYLES.forEach((e) => {
-        let propM = this.$sectionData.mainStyle.media['is-mobile'][e]
-        let propS = this.$sectionData.mainStyle.styles[e]
+        let propM = mediaStyles['is-mobile'][e]
+        let propS = styles[e]
 
-        obj[`--mobile-section-${e}`] = propM && propM !== '' ? propM : propS
+        if (propM && propM !== '') {
+          obj[`--mobile-section-${e}`] = propM
+        } else {
+          obj[`--mobile-section-${e}`] = propS
+
+          this.$section.set(`$sectionData.mainStyle.media['is-mobile'][${e}]`, propS)
+        }
       })
       this.$sectionData.objVarsMedia = obj
     },
@@ -145,10 +160,10 @@ export default {
   },
 
   mounted () {
-    this.setBg()
     this.mediaStyles()
     this.mediaTextStyles()
     this.mediaSizeIcons()
     this.mediaTableStyles()
+    this.setBg()
   }
 }
