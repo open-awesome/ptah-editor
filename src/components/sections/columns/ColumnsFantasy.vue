@@ -66,7 +66,7 @@ const C_CUSTOM_CONTAINER = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'center',
-    'background-position': '50% 50%',
+    'background-position': '50% 100%',
     'background-repeat': 'no-repeat',
     'background-size': 'contain',
     'margin-bottom': '-36px',
@@ -265,8 +265,6 @@ export default {
                 class="b-sandbox"
                 :container-path="`$sectionData.container${key.split('components')[1]}`"
                 :components-path="`$sectionData.components${key.split('components')[1]}`"
-                direction="column"
-                :style="`$sectionData.container${key.split('components')[1]}.styles`"
               >
                 <draggable v-model="$sectionData[key]" class="b-draggable-slot" :style="$sectionData[`container${key.split('components')[1]}`].styles" @start="drag(`components${key.split('components')[1]}`)" @change="dragStop">
                   <div :class="`b-draggable-slot__${component.type}`"

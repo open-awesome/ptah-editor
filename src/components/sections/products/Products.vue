@@ -539,8 +539,6 @@ export default {
                 class="b-sandbox"
                 container-path="$sectionData.container"
                 components-path="$sectionData.components"
-                direction="column"
-                :style="$sectionData.container.styles"
               >
                 <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
                   <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
@@ -585,8 +583,6 @@ export default {
                     class="b-sandbox"
                     :container-path="`$sectionData.container${key}`"
                     :components-path="`$sectionData.components${key}`"
-                    direction="column"
-                    :style="`$sectionData.container${key}.styles`"
                     >
                     <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @start="drag(`components${key}`)" @change="dragStop">
                       <div
@@ -612,8 +608,6 @@ export default {
                     class="b-sandbox"
                     :container-path="`$sectionData.container${key}D`"
                     :components-path="`$sectionData.components${key}D`"
-                    direction="column"
-                    :style="`$sectionData.container${key}D.styles`"
                     >
                     <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @start="drag(`components${key}D`)" @change="dragStop">
                       <div

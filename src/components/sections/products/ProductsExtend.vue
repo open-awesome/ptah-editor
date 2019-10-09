@@ -681,7 +681,6 @@ export default {
                     class="b-sandbox"
                     :container-path="`$sectionData.container${key}M`"
                     :components-path="`$sectionData.components${key}M`"
-                    direction="column"
                     >
 
                     <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}M`].styles" @start="drag(`components${key}M`)" @change="dragStop">
@@ -723,7 +722,6 @@ export default {
                       class="b-sandbox"
                       :container-path="`$sectionData.container${key}`"
                       :components-path="`$sectionData.components${key}`"
-                      direction="column"
                       >
                       <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @start="drag(`$sectionData.components${key}`)" @change="dragStop">
                       <div
@@ -749,7 +747,6 @@ export default {
                       class="b-sandbox"
                       :container-path="`$sectionData.container${key}D`"
                       :components-path="`$sectionData.components${key}D`"
-                      direction="column"
                       >
                       <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @start="drag(`components${key}D`)" @change="dragStop">
                         <div

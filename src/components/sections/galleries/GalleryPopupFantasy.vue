@@ -208,8 +208,6 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
-            :style="$sectionData.container.styles"
           >
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
               <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">

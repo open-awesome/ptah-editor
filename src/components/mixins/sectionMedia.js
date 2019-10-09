@@ -135,10 +135,17 @@ export default {
         })
         this.$sectionData.objVarsTable = obj
       }
+    },
+
+    setBg () {
+      let sectionBg = this.$sectionData.mainStyle.styles['background-image']
+
+      this.$section.set(`$sectionData.mainStyle.media['is-mobile']['background-image']`, sectionBg)
     }
   },
 
   mounted () {
+    this.setBg()
     this.mediaStyles()
     this.mediaTextStyles()
     this.mediaSizeIcons()
