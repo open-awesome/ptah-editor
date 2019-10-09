@@ -60,6 +60,12 @@ const C_CUSTOM = [
         'background-size': 'contain',
         'width': '228px',
         'height': '55px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '220px',
+          'height': '50px'
+        }
       }
     }
   },
@@ -73,6 +79,11 @@ const C_CUSTOM = [
         'padding-right': '16px',
         'padding-left': '16px',
         'text-align': 'left'
+      },
+      media: {
+        'is-mobile': {
+          'text-align': 'center'
+        }
       }
     }
   },
@@ -200,7 +211,8 @@ const SCHEMA_CUSTOM = {
     },
     media: {
       'is-mobile': {
-        'flex-direction': 'column'
+        'flex-direction': 'column',
+        'align-items': 'center'
       }
     }
   },
