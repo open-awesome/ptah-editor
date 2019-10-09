@@ -264,71 +264,6 @@ const REQUIREMENTS_WINDOWS = [
     element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
-const COMPONENTS_WINDOWS_KEYS = [
-  {
-    key: 11
-  },
-  {
-    key: 12
-  },
-  {
-    key: 13
-  },
-  {
-    key: 21
-  },
-  {
-    key: 22
-  },
-  {
-    key: 23
-  },
-  {
-    key: 31
-  },
-  {
-    key: 32
-  },
-  {
-    key: 33
-  },
-  {
-    key: 41
-  },
-  {
-    key: 42
-  },
-  {
-    key: 43
-  },
-  {
-    key: 41
-  },
-  {
-    key: 42
-  },
-  {
-    key: 43
-  },
-  {
-    key: 51
-  },
-  {
-    key: 52
-  },
-  {
-    key: 53
-  },
-  {
-    key: 61
-  },
-  {
-    key: 62
-  },
-  {
-    key: 63
-  }
-]
 
 const REQUIREMENTS_OS = [
   {
@@ -414,71 +349,6 @@ const REQUIREMENTS_OS = [
   {
     nameCol: 'Sound Card-max',
     element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
-  }
-]
-const COMPONENTS_OS_KEYS = [
-  {
-    key: 111
-  },
-  {
-    key: 112
-  },
-  {
-    key: 113
-  },
-  {
-    key: 121
-  },
-  {
-    key: 122
-  },
-  {
-    key: 123
-  },
-  {
-    key: 131
-  },
-  {
-    key: 132
-  },
-  {
-    key: 133
-  },
-  {
-    key: 141
-  },
-  {
-    key: 142
-  },
-  {
-    key: 143
-  },
-  {
-    key: 141
-  },
-  {
-    key: 142
-  },
-  {
-    key: 143
-  },
-  {
-    key: 151
-  },
-  {
-    key: 152
-  },
-  {
-    key: 153
-  },
-  {
-    key: 161
-  },
-  {
-    key: 162
-  },
-  {
-    key: 163
   }
 ]
 
@@ -568,71 +438,6 @@ const REQUIREMENTS_LINUX = [
     element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
-const COMPONENTS_LINUX_KEYS = [
-  {
-    key: 211
-  },
-  {
-    key: 212
-  },
-  {
-    key: 213
-  },
-  {
-    key: 221
-  },
-  {
-    key: 222
-  },
-  {
-    key: 223
-  },
-  {
-    key: 231
-  },
-  {
-    key: 232
-  },
-  {
-    key: 233
-  },
-  {
-    key: 241
-  },
-  {
-    key: 242
-  },
-  {
-    key: 243
-  },
-  {
-    key: 241
-  },
-  {
-    key: 242
-  },
-  {
-    key: 243
-  },
-  {
-    key: 251
-  },
-  {
-    key: 252
-  },
-  {
-    key: 253
-  },
-  {
-    key: 261
-  },
-  {
-    key: 262
-  },
-  {
-    key: 263
-  }
-]
 
 const C_CUSTOM = [
   {
@@ -642,9 +447,13 @@ const C_CUSTOM = [
         'font-family': 'Montserrat',
         'font-size': '4rem',
         'color': '#fff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem'
+        }
       }
-    },
-    key: 0
+    }
   }
 ]
 
@@ -723,10 +532,10 @@ export default {
   $schema: {
     mainStyle: types.SystemRequirements,
     container: types.StyleObject,
-    components: _.merge([], HEADER, { key: 0 }),
-    componentsRequirementswindows: _.merge([], REQUIREMENTS, COMPONENTS_WINDOWS_KEYS),
-    componentsRequirementsapple: _.merge([], REQUIREMENTS, COMPONENTS_OS_KEYS),
-    componentsRequirementslinux: _.merge([], REQUIREMENTS, COMPONENTS_LINUX_KEYS)
+    components: _.merge([], HEADER),
+    componentsRequirementswindows: _.merge([], REQUIREMENTS),
+    componentsRequirementsapple: _.merge([], REQUIREMENTS),
+    componentsRequirementslinux: _.merge([], REQUIREMENTS)
   },
 
   methods: {
@@ -779,7 +588,6 @@ export default {
               class="b-sandbox"
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
               :style="$sectionData.container.styles"
             >
               <div class="b-draggable-slot" :style="$sectionData.container.styles">

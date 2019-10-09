@@ -125,9 +125,9 @@ export default {
       if (this.$sectionData.mainStyle['table']) {
         LIST_PROPS_TYPO.forEach((e) => {
           let propMH = this.$sectionData.mainStyle.media['is-mobile']['table']['head'][e]
-          let propSH = this.$sectionData.mainStyle['textStyles']['chapter'][e]
-          let propMB = this.$sectionData.mainStyle.media['is-mobile']['textStyles']['text'][e]
-          let propSB = this.$sectionData.mainStyle['textStyles']['text'][e]
+          let propSH = this.$sectionData.mainStyle['table']['head'][e]
+          let propMB = this.$sectionData.mainStyle.media['is-mobile']['table']['body'][e]
+          let propSB = this.$sectionData.mainStyle['table']['body'][e]
 
           obj[`--mobile-section-table-head-${e}`] = propMH && propMH !== '' ? propMH : propSH
 

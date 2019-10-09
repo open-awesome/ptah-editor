@@ -37,11 +37,14 @@ export default {
 
     elSize: {
       get () {
-        return this.settingObjectOptions.el.size
+        return this.settingObjectOptions.sizeIcons.width
       },
 
       set (value) {
-        this.update('size', value)
+        let sizeIcons = {}
+
+        sizeIcons['width'] = value
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { sizeIcons: sizeIcons }))
       }
     },
 

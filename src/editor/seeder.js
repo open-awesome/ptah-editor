@@ -337,9 +337,11 @@ const data = new Map([
         styles: true,
         link: true
       },
+      sizeIcons: {
+        width: 14
+      },
       el: {
         color:  '#fff',
-        size: 14,
         icon: {
           value: 'checkMark',
           name: 'checkMark'

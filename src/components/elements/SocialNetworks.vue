@@ -7,12 +7,16 @@
       v-for="(value, key) in networks" :key="key"
       v-if="networks[key].visible"
       :style="{
-        margin:  isMobile ? mediaStyles['is-mobile']['sizeIcons']['width']/4 + 'px ' + mediaStyles['is-mobile']['sizeIcons']['width']/2 + 'px': sizeIcons.width/4 + 'px ' + sizeIcons.width/2 + 'px',
-        '--mobile-width': mediaStyles['is-mobile']['sizeIcons']['width'] + 'px'
+        margin: sizeIcons.width/4 + 'px ' + sizeIcons.width/2 + 'px',
+        '--mobile-margin': mediaStyles['is-mobile']['sizeIcons']['width']/4 + 'px ' + mediaStyles['is-mobile']['sizeIcons']['width']/2 + 'px'
       }"
       >
       <a class="b-social-networks__item-button flex flex_center"
-        :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px' }"
+        :style="{
+          fill: colorFill['color'],
+          width: sizeIcons.width + 'px',
+          '--mobile-width': mediaStyles['is-mobile']['sizeIcons']['width'] + 'px',
+        }"
         :target="target"
         :href="networks[key].url"
         :title="networks[key].name"
@@ -97,6 +101,12 @@ export default {
     cursor: pointer
 
     margin: 1.6rem
+
+    .is-mobile &
+      margin: var(--mobile-margin) !important
+    @media only screen and (max-width: 768px)
+      &
+        margin: var(--mobile-margin) !important
     &-button
       border: none
       position: relative

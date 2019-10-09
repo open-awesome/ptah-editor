@@ -12,7 +12,15 @@
       >
       <div class="b-toggle-element__item-col b-toggle-element__item-col-icon" v-if="el.isIconVisible"
         >
-        <span class="b-toggle-element__icon" :style="{ fill: el.color, width: el.size + 'px', 'margin-top': -el.size/6 + 'px'  }" @click="toggle">
+        <span class="b-toggle-element__icon"
+          :style="{
+            fill: el.color,
+            width: sizeIcons.width + 'px',
+            'margin-top':  sizeIcons.width/4 + 'px',
+            '--mobile-toggle-el-width': mediaStyles['is-mobile']['sizeIcons']['width'] + 'px',
+            '--mobile-toggle-el--margin-top': mediaStyles['is-mobile']['sizeIcons']['width']/4 + 'px'
+          }"
+          @click="toggle">
           <icon-base :name="el.icon.value"/>
         </span>
       </div>
@@ -202,6 +210,10 @@ export default {
       return this.$section.get(`$sectionData.${this.path}.el`)
     },
 
+    sizeIcons () {
+      return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
+    },
+
     textOptions () {
       return this.$section.get(`$sectionData.${this.path}.editor`)
     },
@@ -295,7 +307,13 @@ export default {
     padding: 0 1.6rem
   &__icon
     display: flex
-    padding-top: 1rem
+    .is-mobile &
+      width: var(--mobile-toggle-el-width)
+      margin-top: var(--mobile-toggle-el-margin-top)
+    @media only screen and (max-width: 768px)
+      &
+        width: var(--mobile-toggle-el-width)
+        margin-top: var(--mobile-toggle-el-margin-top)
     svg
       fill: inherit
       width: 100%

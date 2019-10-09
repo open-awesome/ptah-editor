@@ -10,9 +10,24 @@ const C_CUSTOM_COLUMN = [
     element: {
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '2.8rem',
+        'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      'sizeIcons': {
+        width: 20
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '0',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0',
+          'sizeIcons': {
+            width: 20
+          }
+        }
       },
       el: {
         color: '#F4BC64',
@@ -33,16 +48,30 @@ const C_CUSTOM_COLUMN = [
           </table>
          `
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '2.8rem',
+        'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      'sizeIcons': {
+        width: 20
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '0',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0',
+          'sizeIcons': {
+            width: 20
+          }
+        }
       },
       el: {
         color: '#F4BC64',
@@ -70,9 +99,24 @@ const C_CUSTOM_COLUMN = [
     element: {
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '2.8rem',
+        'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      'sizeIcons': {
+        width: 20
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '0',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0',
+          'sizeIcons': {
+            width: 20
+          }
+        }
       },
       el: {
         color: '#F4BC64',
@@ -100,9 +144,24 @@ const C_CUSTOM_COLUMN = [
     element: {
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '2.8rem',
+        'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      'sizeIcons': {
+        width: 20
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '0',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0',
+          'sizeIcons': {
+            width: 20
+          }
+        }
       },
       el: {
         color: '#F4BC64',
@@ -137,6 +196,11 @@ const C_CUSTOM = [
         'font-size': '4rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem'
+        }
       }
     }
   }
@@ -154,7 +218,13 @@ const C_CUSTOM_CONTAINER_1 = {
   width: 12,
   styles: {
     'flex-direction': 'column',
-    'align-items': 'flex-start'
+    'align-items': 'flex-start',
+    'padding-left': '16px'
+  },
+  media: {
+    'is-mobile': {
+      'padding-left': '0'
+    }
   }
 }
 
@@ -265,7 +335,6 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             :style="$sectionData.container.styles"
             >
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -292,7 +361,6 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container1"
             components-path="$sectionData.components1"
-            direction="column"
             :style="$sectionData.container1.styles"
             >
             <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1.styles" @start="drag('components1')" @change="dragStop">
@@ -321,11 +389,4 @@ export default {
 @import '../../../assets/sass/section-media.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
-
-.b-faq
-  $this: &
-  line-height: 1.4
-  justify-content: flex-start
-  .b-draggable-slot__toggleElement
-    width: 100%
 </style>
