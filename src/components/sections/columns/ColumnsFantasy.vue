@@ -66,7 +66,7 @@ const C_CUSTOM_CONTAINER = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'center',
-    'background-position': 'center bottom',
+    'background-position': '50% 50%',
     'background-repeat': 'no-repeat',
     'background-size': 'contain',
     'margin-bottom': '-36px',
@@ -115,7 +115,7 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://s3.protocol.one/images/c_bg.jpg)',
       'background-color': '#151C44',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover',
       'padding-top': '30px',
       'padding-bottom': '0px'

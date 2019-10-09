@@ -281,7 +281,7 @@ const defaultSchema = {
     styles: {
       'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)',
       'background-color': 'rgba(51, 51, 51, 0.95)',
-      'background-position': 'center',
+      'background-position': '50% 50%',
       'background-size': 'cover'
     }
   },

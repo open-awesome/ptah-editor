@@ -186,7 +186,7 @@ const SCHEMA_CUSTOM = {
       'background-image': BG_SECTION,
       'background-color': '#151C44',
       'background-size': 'cover',
-      'background-position': 'top center',
+      'background-position': '50% 0%',
       'background-repeat': 'no-repeat',
       'padding-top': '8px',
       'padding-bottom': '8px'

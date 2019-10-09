@@ -161,7 +161,7 @@ export default {
 
         if (stylesMedia[device]) {
           for (let key in this.styles) {
-            media[device][key] = stylesMedia[device][key] !== undefined ? stylesMedia[device][key] : this.styles[key]
+            media[device][key] = stylesMedia[device][key] !== undefined && stylesMedia[device][key] !== '' ? stylesMedia[device][key] : this.styles[key]
           }
         } else {
           media[device] = this.styles
@@ -211,10 +211,13 @@ export default {
 
     updateProps () {
       let styles = this.isMobile ? this.mediaStyles['is-mobile'] : this.styles
+      let image = ''
+      let bgimage = ''
 
-      let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
+      image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
         styles['background-image'] : ''
-      let bgimage = image.match(/url\((.*?)\)/)
+
+      bgimage = image.match(/url\((.*?)\)/)
 
       if (bgimage) {
         bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')

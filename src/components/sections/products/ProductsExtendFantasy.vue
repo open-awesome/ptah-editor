@@ -415,7 +415,7 @@ const SCHEMA_CUSTOM = {
       'background-image': 'url(https://s3.protocol.one/images/travel_map.jpg)',
       'padding-top': '80px',
       'padding-bottom': '125px',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover'
     },
     overlay: {

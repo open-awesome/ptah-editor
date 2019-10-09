@@ -163,7 +163,7 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn309.cdn.stg.gamenet.ru/0/8hwba/o_O5UBP.jpg)',
       'background-color': '#151C44',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover',
       'padding-top': '24px',
       'padding-bottom': '24px',

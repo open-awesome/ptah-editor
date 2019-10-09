@@ -653,7 +653,7 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://s3.protocol.one/images/ash_prod_bg_2.jpg)',
       'background-color': '#000',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover',
       'font-family': 'Lato',
       'font-size': 1.4,

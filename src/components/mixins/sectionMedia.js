@@ -77,9 +77,10 @@ export default {
       let obj = {}
 
       LIST_PROPS_STYLES.forEach((e) => {
-        obj[`--mobile-section-${e}`] = this.$sectionData.mainStyle.media['is-mobile'][e]
-          ? this.$sectionData.mainStyle.media['is-mobile'][e]
-          : this.$sectionData.mainStyle.styles[e]
+        let propM = this.$sectionData.mainStyle.media['is-mobile'][e]
+        let propS = this.$sectionData.mainStyle.styles[e]
+
+        obj[`--mobile-section-${e}`] = propM && propM !== '' ? propM : propS
       })
       this.$sectionData.objVarsMedia = obj
     },
@@ -90,13 +91,13 @@ export default {
       // for section gallery
       if (this.$sectionData.mainStyle['textStyles']) {
         LIST_PROPS_TYPO.forEach((e) => {
-          obj[`--mobile-section-text-styles-chapter-${e}`] = this.$sectionData.mainStyle.media['is-mobile']['textStyles']['chapter'][e]
-            ? this.$sectionData.mainStyle.media['is-mobile']['textStyles']['chapter'][e]
-            : this.$sectionData.mainStyle['textStyles']['chapter'][e]
+          let propMC = this.$sectionData.mainStyle.media['is-mobile']['textStyles']['chapter'][e]
+          let propSC = this.$sectionData.mainStyle['textStyles']['chapter'][e]
+          let propMT = this.$sectionData.mainStyle.media['is-mobile']['textStyles']['text'][e]
+          let propST = this.$sectionData.mainStyle['textStyles']['text'][e]
 
-          obj[`--mobile-section-text-styles-text-${e}`] = this.$sectionData.mainStyle.media['is-mobile']['textStyles']['text'][e]
-            ? this.$sectionData.mainStyle.media['is-mobile']['textStyles']['text'][e]
-            : this.$sectionData.mainStyle['textStyles']['text'][e]
+          obj[`--mobile-section-text-styles-chapter-${e}`] = propMC && propMC !== '' ? propMC : propSC
+          obj[`--mobile-section-text-styles-text-${e}`] = propMT && propMT !== '' ? propMT : propST
         })
         this.$sectionData.objVarsTypo = obj
       }
@@ -108,9 +109,10 @@ export default {
       // for section system
       if (this.$sectionData.mainStyle['sizeIcons']) {
         LIST_PROPS_SIZE.forEach((e) => {
-          obj[`--mobile-section-size-icons-${e}`] = this.$sectionData.mainStyle.media['is-mobile']['sizeIcons'][e]
-            ? this.$sectionData.mainStyle.media['is-mobile']['sizeIcons'][e] + 'px'
-            : this.$sectionData.mainStyle['sizeIcons'][e] + 'px'
+          let propM = this.$sectionData.mainStyle.media['is-mobile']['sizeIcons'][e]
+          let propS = this.$sectionData.mainStyle['sizeIcons'][e]
+
+          obj[`--mobile-section-size-icons-${e}`] = propM && propM !== '' ? propM + 'px' : propS + 'px'
         })
         this.$sectionData.objVarsSizeIcons = obj
       }
@@ -122,13 +124,14 @@ export default {
       // for table
       if (this.$sectionData.mainStyle['table']) {
         LIST_PROPS_TYPO.forEach((e) => {
-          obj[`--mobile-section-table-head-${e}`] = this.$sectionData.mainStyle.media['is-mobile']['table']['head'][e]
-            ? this.$sectionData.mainStyle.media['is-mobile']['table']['head'][e]
-            : this.$sectionData.mainStyle['table']['head'][e]
+          let propMH = this.$sectionData.mainStyle.media['is-mobile']['table']['head'][e]
+          let propSH = this.$sectionData.mainStyle['textStyles']['chapter'][e]
+          let propMB = this.$sectionData.mainStyle.media['is-mobile']['textStyles']['text'][e]
+          let propSB = this.$sectionData.mainStyle['textStyles']['text'][e]
 
-          obj[`--mobile-section-table-body-${e}`] = this.$sectionData.mainStyle.media['is-mobile']['table']['body'][e]
-            ? this.$sectionData.mainStyle.media['is-mobile']['table']['body'][e]
-            : this.$sectionData.mainStyle['table']['body'][e]
+          obj[`--mobile-section-table-head-${e}`] = propMH && propMH !== '' ? propMH : propSH
+
+          obj[`--mobile-section-table-body-${e}`] = propMB && propMB !== '' ? propMB : propSB
         })
         this.$sectionData.objVarsTable = obj
       }

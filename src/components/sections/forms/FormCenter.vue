@@ -11,16 +11,14 @@ const COMPONENTS = [
     element: types.Text,
     type: 'text',
     class: 'b-title',
-    label: 'title',
-    key: 1
+    label: 'title'
   },
   {
     name: 'Form',
     element: types.Form,
     type: 'form',
     class: 'b-form',
-    label: 'form',
-    key: 4
+    label: 'form'
   }
 ]
 
@@ -33,9 +31,14 @@ const C_CUSTOM = [
         'font-size': '4rem',
         'color': '#ffffff',
         'padding-bottom': '67px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem',
+          'padding-bottom': '16px'
+        }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -56,8 +59,7 @@ const C_CUSTOM = [
         'height': 64,
         'buttonHoverColor': '#fff'
       }
-    },
-    key: 4
+    }
   }
 ]
 
@@ -65,10 +67,16 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
+      'background-color': '#000',
       'background-size': 'cover',
       'padding-top': '62px',
       'padding-bottom': '236px'
+    },
+    media: {
+      'is-mobile': {
+        'padding-bottom': '64px'
+      }
     }
   },
   components: _.merge({}, C_CUSTOM),
@@ -122,7 +130,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -149,8 +156,4 @@ export default {
 
 <style lang="sass" scoped>
 @import '../../../assets/sass/section-media.sass'
-
-.b-draggable-slot > div
-  width: 100%
-
 </style>

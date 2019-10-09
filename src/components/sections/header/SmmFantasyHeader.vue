@@ -270,7 +270,7 @@ const defaultSchema = {
     styles: {
       'background-image': 'none',
       'background-color': '#000',
-      'background-position': 'center',
+      'background-position': '50% 50%',
       'background-size': 'cover'
     }
   },

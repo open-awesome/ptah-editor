@@ -237,7 +237,7 @@ const [
         styles: {
           'background-image': `url(${thumbs[i]})`,
           'background-size': 'contain',
-          'background-position': 'bottom center',
+          'background-position': '50% 100%',
           'width': '190px',
           'height': '285px'
         }
@@ -271,7 +271,7 @@ const [
         styles: {
           'background-image': `url(${prev[i]})`,
           'background-size': 'contain',
-          'background-position': 'bottom center',
+          'background-position': '50% 100%',
           'width': '300px',
           'height': '450px'
         },

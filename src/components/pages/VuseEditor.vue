@@ -155,11 +155,11 @@ const COMPONENTS = {
   ProductsExtendFantasy,
 
   FormCenter,
+  FormCenterFantasy,
   FormRight,
   FormLeft,
   FormRight2,
   FormLeft2,
-  FormCenterFantasy,
 
   SystemRequirements,
   SystemRequirementsFantasy,

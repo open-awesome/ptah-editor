@@ -31,6 +31,12 @@ const C_CUSTOM = [
         'font-size': '4.0rem',
         'color': '#ffffff',
         'padding-bottom': '67px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem',
+          'padding-bottom': '16px'
+        }
       }
     }
   },
@@ -62,10 +68,15 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-color': '#000000',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover',
       'padding-top': '62px',
       'padding-bottom': '236px'
+    },
+    media: {
+      'is-mobile': {
+        'padding-bottom': '64px'
+      }
     }
   },
   components: _.merge({}, C_CUSTOM),
@@ -119,7 +130,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -146,7 +156,4 @@ export default {
 
 <style lang="sass" scoped>
 @import '../../../assets/sass/section-media.sass'
-
-.b-draggable-slot > div
-  width: 100%
 </style>

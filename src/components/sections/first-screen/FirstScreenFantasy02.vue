@@ -246,12 +246,12 @@ const SCHEMA_CUSTOM = {
       'background-color': '#4A4A4A',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
-      'background-position': 'right top',
+      'background-position': '100% 0%',
       'height': '100vh'
     },
     media: {
       'is-mobile': {
-        'background-position': '78% top'
+        'background-position': '78% 0%'
       }
     }
   },

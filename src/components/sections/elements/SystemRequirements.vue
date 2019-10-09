@@ -653,7 +653,7 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
       'background-color': '#000',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover',
       'font-family': 'Lato',
       'font-size': 1.4,

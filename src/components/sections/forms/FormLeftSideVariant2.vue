@@ -11,16 +11,14 @@ const COMPONENTS_1 = [
     element: types.Text,
     type: 'text',
     class: 'b-title',
-    label: 'title',
-    key: 1
+    label: 'title'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description',
-    key: 2
+    label: 'description'
   }
 ]
 
@@ -30,24 +28,21 @@ const COMPONENTS_2 = [
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo',
-    key: 0
+    label: 'logo'
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter',
-    key: 3
+    label: 'delimiter'
   },
   {
     name: 'Form',
     element: types.Form,
     type: 'form',
     class: 'b-form',
-    label: 'form',
-    key: 4
+    label: 'form'
   }
 ]
 
@@ -61,8 +56,7 @@ const C_CUSTOM_1 = [
         'color': '#ffffff',
         'text-align': 'center'
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -72,8 +66,7 @@ const C_CUSTOM_1 = [
         'font-size': '1.4rem',
         'color': 'rgba(255, 255, 255, 0.5)'
       }
-    },
-    key: 2
+    }
   }
 ]
 
@@ -88,12 +81,9 @@ const C_CUSTOM_2 = [
         'width': '264px',
         'height': '164px'
       }
-    },
-    key: 0
+    }
   },
-  {
-    key: 3
-  },
+  {},
   {
     element: {
       placeholder: 'Email',
@@ -107,8 +97,7 @@ const C_CUSTOM_2 = [
         'font-size': '1.6rem',
         'text-decoration': 'none'
       }
-    },
-    key: 4
+    }
   }
 ]
 
@@ -130,8 +119,14 @@ const SCHEMA_CUSTOM = {
     grow: ['$sectionData.container2'],
     selfName: '$sectionData.container',
     styles: {
-      'align-items': 'flex-start',
+      'align-items': 'center',
       'justify-content': 'center'
+    },
+    media: {
+      'is-mobile': {
+        'justify-content': 'flex-start',
+        'align-items': 'center'
+      }
     }
   },
   container2: {
@@ -142,8 +137,13 @@ const SCHEMA_CUSTOM = {
     selfName: '$sectionData.container2',
     styles: {
       'justify-content': 'center',
-      'align-items': 'flex-start',
-      'width': '100%'
+      'align-items': 'center'
+    },
+    media: {
+      'is-mobile': {
+        'justify-content': 'flex-start',
+        'align-items': 'center'
+      }
     }
   },
   edited: true
@@ -195,7 +195,6 @@ export default {
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
-            direction="column"
             class="b-sandbox  b-form__left-col">
 
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles" @start="drag('components2')" @change="dragStop">
@@ -219,7 +218,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox b-grid__col-m-12">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -246,15 +244,4 @@ export default {
 
 <style lang="sass" scoped>
 @import '../../../assets/sass/section-media.sass'
-
-.b-form
-  &__left-col
-    align-items: stretch
-  .b-draggable-slot
-    .is-mobile &,
-    .is-tablet &
-      align-items: center
-    @media only screen and (max-width: 768px)
-      &
-        align-items: center
 </style>
