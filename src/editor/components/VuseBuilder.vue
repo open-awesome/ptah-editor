@@ -6,9 +6,8 @@
     @preview="preview"
     @save="save">
 
-  <draggable>
+  <div>
     <div
-      @dragover.prevent="onDragover"
       :class="{
         'is-sorting': $builder.isSorting,
         'is-editable': $builder.isEditing,
@@ -91,7 +90,7 @@
       </v-style>
 
     </div>
-  </draggable>
+  </div>
 
   <onboarding-tips :builder="builder"></onboarding-tips>
 </builder-layout>
