@@ -32,6 +32,11 @@ const C_CUSTOM_COLUMN = [
         'font-family': 'Montserrat',
         'font-size': '3.2rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
     }
   },

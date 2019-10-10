@@ -31,13 +31,13 @@ const [
           'background-color': 'rgba(0, 0, 0, 0)',
           'background-repeat': 'no-repeat',
           'background-size': 'contain',
-          'width': '120px',
-          'height': '143px'
+          'width': '160px',
+          'height': '160px'
         },
         media: {
           'is-mobile': {
-            'width': '120px',
-            'height': '143px'
+            'width': '160px',
+            'height': '160px'
           }
         }
       }
