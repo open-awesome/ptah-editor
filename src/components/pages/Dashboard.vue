@@ -28,7 +28,7 @@ export default {
           type: 'Ptah page',
           sections: [],
           url: 'https://s3.protocol.one/files/Ptah-page-2019.json',
-          image: 'https://s3.protocol.one/images/2ptah_r.jpg',
+          image: 'https://s3.protocol.one/images/2ptah_r1.jpg',
           description: 'Look at how the landing page was created which stands on the main page of the Ptah page builder'
         },
         {
