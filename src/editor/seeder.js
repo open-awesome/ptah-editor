@@ -2,19 +2,21 @@ import * as types from './types'
 import { isObject } from './util'
 import * as _ from 'lodash-es'
 
+const DEF_MARG_PADD = {
+  'margin-top': 0,
+  'margin-bottom': 0,
+  'margin-left': 0,
+  'margin-right': 0,
+  'padding-top': 0,
+  'padding-bottom': 0,
+  'padding-left': 0,
+  'padding-right': 0
+}
+
 const DEFAULT_OPTIONS = {
   text: '',
   classes: [],
-  styles: {
-    'margin-top': 0,
-    'margin-bottom': 0,
-    'margin-left': 0,
-    'margin-right': 0,
-    'padding-top': 0,
-    'padding-bottom': 0,
-    'padding-left': 0,
-    'padding-right': 0
-  },
+  styles: _.merge({}, DEF_MARG_PADD),
   resizable: false,
   hasLink: false,
   belongsGallery: false,
@@ -48,7 +50,7 @@ const DEFAULT_OPTIONS = {
 
   absorb: 0,
   media: {
-    'is-mobile': {}
+    'is-mobile': _.merge({}, DEF_MARG_PADD)
   }
 }
 

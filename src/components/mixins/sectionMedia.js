@@ -154,8 +154,11 @@ export default {
 
     setBg () {
       let sectionBg = this.$sectionData.mainStyle.styles['background-image']
+      let sectionMobileBg = this.$sectionData.mainStyle.media['is-mobile']['background-image']
 
-      this.$section.set(`$sectionData.mainStyle.media['is-mobile']['background-image']`, sectionBg)
+      if (sectionMobileBg === undefined || sectionMobileBg === '') {
+        this.$section.set(`$sectionData.mainStyle.media['is-mobile']['background-image']`, sectionBg)
+      }
     }
   },
 
