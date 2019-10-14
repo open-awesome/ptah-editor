@@ -74,7 +74,8 @@ const C_CUSTOM_CONTAINER = {
   },
   media: {
     'is-mobile': {
-      'margin-bottom': '64px'
+      'margin-bottom': '64px',
+      'padding-bottom': '300px'
     }
   }
 }
