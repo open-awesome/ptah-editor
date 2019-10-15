@@ -58,8 +58,8 @@ export default {
       components: [], // sandbox current section's components
       styles: {} // sandbox current section's styles
     },
-    device: 'is-desktop',
-    isMobile: false
+    device: 'is-desktop', // selected platform in platforms menu
+    isMobile: false // detect mobile mode
   },
 
   mutations: {

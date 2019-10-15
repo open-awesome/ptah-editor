@@ -97,7 +97,7 @@ export default {
           this.$section.set(`$sectionData.mainStyle.media['is-mobile'][${e}]`, propS)
         }
       })
-      this.$sectionData.objVarsMedia = obj
+      this.$section.set('$sectionData.objVarsMedia', obj)
     },
 
     mediaTextStyles () {
@@ -114,7 +114,7 @@ export default {
           obj[`--mobile-section-text-styles-chapter-${e}`] = propMC && propMC !== '' ? propMC : propSC
           obj[`--mobile-section-text-styles-text-${e}`] = propMT && propMT !== '' ? propMT : propST
         })
-        this.$sectionData.objVarsTypo = obj
+        this.$section.set('$sectionData.objVarsTypo', obj)
       }
     },
 
@@ -129,7 +129,7 @@ export default {
 
           obj[`--mobile-section-size-icons-${e}`] = propM && propM !== '' ? propM + 'px' : propS + 'px'
         })
-        this.$sectionData.objVarsSizeIcons = obj
+        this.$section.set('$sectionData.objVarsSizeIcons', obj)
       }
     },
 
@@ -148,7 +148,7 @@ export default {
 
           obj[`--mobile-section-table-body-${e}`] = propMB && propMB !== '' ? propMB : propSB
         })
-        this.$sectionData.objVarsTable = obj
+        this.$section.set('$sectionData.objVarsTable', obj)
       }
     },
 
