@@ -262,7 +262,7 @@ const data = new Map([
       editor: {
         tags: true,
         styles: true,
-        link: true
+        link: false
       },
       el: {
         color:  '#fff',
