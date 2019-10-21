@@ -53,7 +53,8 @@
         "fullScreenView":               "View on full screen",
         "minimize":                     "Minimize",
         "openGraph":                    "Open Graph",
-        "integrations":                 "Integrations"
+        "integrations":                 "Integrations",
+        "sectionOfGroup":               "The section in the group"
     },
     "c": {
         "elementsLibrary":              "Elements library",
@@ -146,6 +147,8 @@
         "social":                       "Change links for your social medias",
         "text":                         "Change text by double cllicking",
         "timer":                        "Double click to set countdown timer",
-        "video":                        "Upload a video or add a link to a Youtube video"
+        "video":                        "Upload a video or add a link to a Youtube video",
+        "form":                         "Change form settings and content by double clicking",
+        "toggle":                       "Change text and icons by double clicking"
     }
 }

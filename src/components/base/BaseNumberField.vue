@@ -9,12 +9,14 @@
       </base-label>
 
       <input class="b-base-number-field__input" type="number"
-             v-bind="$attrs"
-             v-model="innerValue"
-             :placeholder="placeholder"
-             @input="$emit('input', innerValue)"
-             @focus="$emit('focus', $event), hasFocus = true"
-             @blur="$emit('blur', $event), hasFocus = false" />
+        v-bind="$attrs"
+        v-model="innerValue"
+        :placeholder="placeholder"
+        @input="$emit('input', innerValue)"
+        @focus="$emit('focus', $event), hasFocus = true"
+        @blur="$emit('blur', $event), hasFocus = false"
+        :disabled="disabled"
+      />
 
       <base-error-text v-if="hasError">
         {{errorText}}
@@ -59,6 +61,11 @@ export default {
     placeholder: {
       type: String,
       default: ''
+    },
+    /* is disabled */
+    disabled: {
+      default: false,
+      type: Boolean
     }
   },
 
@@ -128,5 +135,6 @@ export default {
     &:disabled
       border-color: transparent
       color: #888888
+      cursor: not-allowed
 
 </style>

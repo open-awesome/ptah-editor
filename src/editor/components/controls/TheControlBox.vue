@@ -121,6 +121,30 @@ export default {
       set (value) {
         this.setter('padding', 'paddingBottom', value)
       }
+    },
+
+    isMain () {
+      return this.settingObjectElement.classList.contains('ptah-g-main')
+    },
+
+    isChild () {
+      return this.settingObjectElement.classList.contains('ptah-g-child')
+    },
+
+    isTextTooltipMain () {
+      return this.isMain ? this.$t('s.sectionOfGroup') : ''
+    },
+
+    tooltipMain () {
+      return this.isMain ? 'tooltip' : ''
+    },
+
+    isTextTooltipChild () {
+      return this.isChild ? this.$t('s.sectionOfGroup') : ''
+    },
+
+    tooltipChild () {
+      return this.isChild ? 'tooltip' : ''
     }
   },
 
@@ -149,7 +173,7 @@ export default {
 
       s = props[prop]
 
-      if (s === undefined) {
+      if (s === undefined || this.isMain || this.isChild) {
         // get values from node
         let style = window.getComputedStyle(this.settingObjectElement)
         s = style[_.camelCase(prop)]
@@ -201,14 +225,23 @@ export default {
       <base-number-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern=""></base-number-field>
       <base-number-field v-model="marginRight" class="ctrl ctrl__m-right"></base-number-field>
       <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"></base-number-field>
-      <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom"></base-number-field>
+      <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom"
+        :disabled="isChild"
+        :[tooltipChild]="isTextTooltipChild"
+        tooltip-position="bottom"
+        >
+      </base-number-field>
     </template>
     <!-- padding -->
     <template v-if="!hidePadding">
       <base-number-field v-model="paddingLeft" class="ctrl ctrl__p-left"></base-number-field>
       <base-number-field v-model="paddingRight" class="ctrl ctrl__p-right"></base-number-field>
       <base-number-field v-model="paddingTop" class="ctrl ctrl__p-top"></base-number-field>
-      <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"></base-number-field>
+      <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"
+        :disabled="isMain"
+        :[tooltipMain]="isTextTooltipMain"
+        tooltip-position="bottom"
+        ></base-number-field>
     </template>
     <!-- locks -->
     <a href="#"
