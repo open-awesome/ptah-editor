@@ -10,12 +10,6 @@ footer:not(.ptah-g-main):not(.ptah-g-child)
     padding-right: var(--mobile-section-padding-right) !important
     padding-bottom: var(--mobile-section-padding-bottom) !important
     padding-left: var(--mobile-section-padding-left) !important
-    background-color: var(--mobile-section-background-color) !important
-    background-image: var(--mobile-section-background-image) !important
-    background-position: var(--mobile-section-background-position) !important
-    background-repeat: var(--mobile-section-background-repeat) !important
-    background-size: var(--mobile-section-background-size) !important
-    background-attachment: var(--mobile-section-background-attachment) !important
   @media only screen and (max-width: 768px)
     &
       margin-top: var(--mobile-section-margin-top) !important
@@ -26,6 +20,19 @@ footer:not(.ptah-g-main):not(.ptah-g-child)
       padding-right: var(--mobile-section-padding-right) !important
       padding-bottom: var(--mobile-section-padding-bottom) !important
       padding-left: var(--mobile-section-padding-left) !important
+
+section,
+header,
+footer
+  .is-mobile &
+    background-color: var(--mobile-section-background-color) !important
+    background-image: var(--mobile-section-background-image) !important
+    background-position: var(--mobile-section-background-position) !important
+    background-repeat: var(--mobile-section-background-repeat) !important
+    background-size: var(--mobile-section-background-size) !important
+    background-attachment: var(--mobile-section-background-attachment) !important
+  @media only screen and (max-width: 768px)
+    &
       background-color: var(--mobile-section-background-color) !important
       background-image: var(--mobile-section-background-image) !important
       background-position: var(--mobile-section-background-position) !important

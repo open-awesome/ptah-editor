@@ -193,6 +193,12 @@ export default {
     }
   },
 
+  watch: {
+    device () {
+      this.updateProps()
+    }
+  },
+
   created () {
     this.updateProps()
   },

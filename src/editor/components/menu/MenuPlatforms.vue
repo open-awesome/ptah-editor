@@ -41,10 +41,12 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
+      'setControlPanel',
       'setDevice'
     ]),
 
     selectDevice (type) {
+      this.setControlPanel(false)
       this.setDevice(type)
     }
   }

@@ -217,30 +217,6 @@ export default {
       this.updateBgColor()
     },
 
-    changeRepeat () {
-      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, {
-        styles: {
-          'background-repeat': this.bgRepeat
-        }
-      }))
-    },
-
-    changeSize () {
-      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, {
-        styles: {
-          'background-size': this.bgSize
-        }
-      }))
-    },
-
-    changeAttachment () {
-      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.options, {
-        styles: {
-          'background-attachment': this.bgAttachment ? 'fixed' : 'scroll'
-        }
-      }))
-    },
-
     addBackgroundPicker () {
       this.backgroundPickers.push(DEFAULT_COLOR)
       this.updateBgColor()
