@@ -31,7 +31,6 @@ let _Vue = null
 class Vuse {
   constructor (options) {
     this.isEditing = true
-    this.isSorting = false
     this.isRendered = false
     this.title = options.title
     this.landing = options.landing
@@ -175,7 +174,6 @@ class Vuse {
     // configer assets output location
     Vue.util.defineReactive(builder, 'sections', builder.sections)
     Vue.util.defineReactive(builder, 'isEditing', builder.isEditing)
-    Vue.util.defineReactive(builder, 'isSorting', builder.isSorting)
     const extension = {
       components: builder.components,
       beforeCreate () {

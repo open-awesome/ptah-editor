@@ -94,7 +94,8 @@ const data = new Map([
       hover: {
         'color': 'rgb(255, 109, 100)',
         'text-decoration': 'none'
-      }
+      },
+      openNewWindow: true
     },
     media: {
       'is-mobile': {
@@ -337,7 +338,7 @@ const data = new Map([
       editor: {
         tags: true,
         styles: true,
-        link: true
+        link: false
       },
       sizeIcons: {
         width: 14

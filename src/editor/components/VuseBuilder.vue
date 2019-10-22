@@ -6,11 +6,9 @@
     @preview="preview"
     @save="save">
 
-  <draggable>
+  <div>
     <div
-      @dragover.prevent="onDragover"
       :class="{
-        'is-sorting': $builder.isSorting,
         'is-editable': $builder.isEditing,
         'fp-scroll': currentLanding.settings.fullPageScroll === 'yes',
         'is-expanded': isExpanded,
@@ -91,7 +89,7 @@
       </v-style>
 
     </div>
-  </draggable>
+  </div>
 
   <onboarding-tips :builder="builder"></onboarding-tips>
 </builder-layout>
@@ -103,7 +101,6 @@ import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import MenuSettings from '@components/slots/MenuSettings'
-import Draggable from 'vuedraggable'
 import OnboardingTips from './OnboardingTips'
 
 import { sectionsGroups } from '@cscripts/sectionsGroups'
@@ -115,7 +112,6 @@ export default {
     VuseIcon,
     BuilderLayout,
     MenuSettings,
-    Draggable,
     OnboardingTips
   },
 
@@ -367,17 +363,6 @@ export default {
     addTheme (theme) {
       this.$builder.set(theme)
     },
-    toggleSort () {
-      this.$builder.isSorting = !this.$builder.isSorting
-      this.$builder.isEditing = !this.$builder.isSorting
-      if (!this.$builder.isSorting && this.sortable) {
-        this.sortable.option('sort', false)
-        this.sortable.option('disabled', true)
-        return
-      }
-      this.sortable.option('disabled', false)
-      this.sortable.option('sort', true)
-    },
     toggleGroupVisibility (e) {
       const element = e.target
       const group = element.closest('.menu-group')
@@ -542,15 +527,7 @@ export default {
         node.classList.remove('ptah-g-main')
         node.classList.remove('ptah-g-child')
       })
-    },
-
-    onDragover: _.throttle((e) => {
-      document.querySelector('#artboard').classList.add('drag-start')
-
-      setTimeout(() => {
-        document.querySelector('#artboard').classList.remove('drag-start')
-      }, 600)
-    }, 300)
+    }
   }
 }
 </script>

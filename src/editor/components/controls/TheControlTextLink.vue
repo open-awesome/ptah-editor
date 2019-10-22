@@ -7,6 +7,9 @@
       <div class="b-text-link__control">
         <BaseSwitcher v-model="underline" :label="$t('c.underline')" />
       </div>
+      <div class="b-text-link__control">
+        <BaseSwitcher v-model="openNewWindow" label="Open new window" />
+      </div>
     </div>
 
     <div class="b-text-link__control-group">
@@ -32,6 +35,16 @@ export default {
       'settingObjectOptions',
       'settingObjectElement'
     ]),
+
+    // link target
+    openNewWindow: {
+      get: function () {
+        return _.get(this.settingObjectOptions, 'textLinkStyles.openNewWindow') || ''
+      },
+      set: function (newValue) {
+        this.setLinkTarget('textLinkStyles.openNewWindow', newValue)
+      }
+    },
 
     // link color
     color: {
@@ -99,6 +112,42 @@ export default {
       let obj = _.set({}, path, underline)
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
       this.changeLinkStyle()
+    },
+
+    setLinkTarget (path, target) {
+      let obj = _.set({}, path, target)
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
+
+      this.setText('text', this.settingObjectOptions.text)
+    },
+
+    setText (path, newValue) {
+      const str = 'target="_self"'
+      const strBlank = 'target="_blank"'
+
+      let text = newValue
+
+      if (this.openNewWindow) {
+        let t = text
+
+        if (text.indexOf(str) !== -1) {
+          text = t.replace(/target="_self"/g, strBlank)
+        } else {
+          text = t.replace(/<a href/g, `<a ${strBlank} href`)
+        }
+      } else {
+        let t = text
+
+        if (text.indexOf(strBlank) === -1) {
+          text = t.replace(/<a href/g, `<a ${str} href`)
+        } else {
+          text = t.replace(/target="_blank"/g, str)
+        }
+      }
+
+      const obj = _.set({}, path, text)
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
     }
   }
 }
