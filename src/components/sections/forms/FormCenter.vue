@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const COMPONENTS = [
   {
@@ -10,36 +11,39 @@ const COMPONENTS = [
     element: types.Text,
     type: 'text',
     class: 'b-title',
-    label: 'title',
-    key: 1
+    label: 'title'
   },
   {
     name: 'Form',
     element: types.Form,
     type: 'form',
     class: 'b-form',
-    label: 'form',
-    key: 4
+    label: 'form'
   }
 ]
 
 const C_CUSTOM = [
   {
     element: {
-      text: '<b>Header about form</b>',
+      text: '<p><b>Header about form</b></p>',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '4.2rem',
+        'font-size': '4rem',
         'color': '#ffffff',
         'padding-bottom': '67px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem',
+          'padding-bottom': '16px'
+        }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
       placeholder: 'Email',
-      buttonText: '<b>Call to Action</b>',
+      buttonText: '<p><b>Call to Action</b></p>',
       styles: {
         'color': '#000000',
         'border-radius': '2px',
@@ -55,8 +59,7 @@ const C_CUSTOM = [
         'height': 64,
         'buttonHoverColor': '#fff'
       }
-    },
-    key: 4
+    }
   }
 ]
 
@@ -64,9 +67,16 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
+      'background-color': '#000',
       'background-size': 'cover',
-      'padding': '62px 0 236px'
+      'padding-top': '62px',
+      'padding-bottom': '236px'
+    },
+    media: {
+      'is-mobile': {
+        'padding-bottom': '64px'
+      }
     }
   },
   components: _.merge({}, C_CUSTOM),
@@ -84,7 +94,7 @@ export default {
 
   description: 'Centered e-mail gathering form screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn133.cdn.stg.gamenet.ru/0/8iE90/o_1LlVoh.jpg',
 
@@ -108,7 +118,7 @@ export default {
   <section
     class="b-form"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -120,7 +130,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -146,7 +155,5 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-draggable-slot > div
-  width: 100%
-
+@import '../../../assets/sass/section-media.sass'
 </style>

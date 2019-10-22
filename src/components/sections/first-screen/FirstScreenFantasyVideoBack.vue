@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenFantasyVideoBack'
@@ -57,7 +58,20 @@ const C_CUSTOM = [
         'background-size': 'contain',
         'width': '500px',
         'height': '121px',
-        'margin': '25px 0 20px'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '20px',
+        'margin-left': '0px'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '100px',
+          'margin-top': '25px',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0'
+        }
       }
     }
   },
@@ -69,7 +83,21 @@ const C_CUSTOM = [
         'font-size': '5.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '25px 0 20px'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '20px',
+        'margin-left': '0px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'line-height': '1.4',
+          'text-align': 'center',
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '32px',
+          'margin-right': '32px'
+        }
       }
     }
   },
@@ -81,7 +109,10 @@ const C_CUSTOM = [
         'font-size': '3.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '25px 0 12px'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '12px',
+        'margin-left': '0px'
       }
     }
   },
@@ -102,8 +133,10 @@ const C_CUSTOM = [
         'font-weight': 'normal',
         'line-height': '1',
         'color': '#ffffff',
-        'padding': '0',
-        'margin': '0 0 27px 0'
+        'margin-top': '0px',
+        'margin-right': '0px',
+        'margin-bottom': '27px',
+        'margin-left': '0px'
       }
     }
   },
@@ -119,7 +152,10 @@ const C_CUSTOM = [
         'width': '240px',
         'height': '64px',
         'border': '1px solid #000000',
-        'margin': '25px 0'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '25px',
+        'margin-left': '0px'
       },
       pseudo: {
         'hover': {
@@ -151,8 +187,10 @@ const SCHEMA_CUSTOM = {
   components: _.merge({}, C_CUSTOM),
   container: {
     width: 9,
-    styles: {
-      padding: '0 0 120px 0'
+    media: {
+      'is-mobile': {
+        'padding-bottom': '25px'
+      }
     }
   },
   edited: true
@@ -165,7 +203,7 @@ export default {
 
   description: 'Fantasy title animated background main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/first-screen-fantasy-video-back.jpg',
 
@@ -187,7 +225,7 @@ export default {
   <section
     class="b-first-screen-space-video-back"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -199,7 +237,6 @@ export default {
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
               class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -225,27 +262,29 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .b-first-screen-space-video-back
   .b-text-fs
     letter-spacing: -0.02em
     .is-mobile &,
     .is-tablet &
-      font-size: 2.4rem !important
-      margin: 0 auto 8px !important
+      font-size: 2.4rem
+      margin: 0 auto 8px
     @media only screen and (max-width: 840px)
       &
-        font-size: 2.4rem !important
-        margin: 0 auto 8px !important
+        font-size: 2.4rem
+        margin: 0 auto 8px
   .b-button-fs
     box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
     transition: background-color 200ms
   .b-timer-fs
     .is-mobile &,
     .is-tablet &
-      margin: 0 auto 8px !important
+      margin: 0 auto 8px
     @media only screen and (max-width: 840px)
       &
-        font-size: 2.4rem !important
-        margin: 0 auto 8px !important
+        font-size: 2.4rem
+        margin: 0 auto 8px
 
 </style>

@@ -3,54 +3,84 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
-const C_CUSTOM_1 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/ash_p_1.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '185px',
-        'height': '319px'
+let prev = [
+  'https://s3.protocol.one/images/ash_p_1.png',
+  'https://s3.protocol.one/images/ash_p_2.png',
+  'https://s3.protocol.one/images/ash_p_3.png',
+  'https://s3.protocol.one/images/ash_p_4.png'
+]
+
+let label = [
+  'Start', 'Full', 'Delux', 'Ultimate'
+]
+
+const [
+  C_CUSTOM_1,
+  C_CUSTOM_2,
+  C_CUSTOM_3,
+  C_CUSTOM_4
+] = Array.from(new Array(4), (x, i) => {
+  return [
+    {
+      element: {
+        styles: {
+          'background-image': `url(${prev[i]})`,
+          'background-color': 'rgba(0, 0, 0, 0)',
+          'background-repeat': 'no-repeat',
+          'background-size': 'contain',
+          'width': '185px',
+          'height': '319px'
+        },
+        media: {
+          'is-mobile': {
+            'width': '185px',
+            'height': '185px'
+          }
+        }
       }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>START EDITION</strong></p>',
-      styles: {
-        'font-family': 'Cinzel',
-        'font-size': '2.4rem',
-        'color': '#ffffff'
+    },
+    {
+      element: {
+        text: `<p><strong>${label[i]} edition</strong></p>`,
+        styles: {
+          'font-family': 'Cinzel',
+          'font-size': '3rem',
+          'color': '#ffffff'
+        },
+        media: {
+          'is-mobile': {
+            'font-size': '3rem'
+          }
+        }
       }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': '#333333',
-        'color': '#FFFFFF',
-        'font-family': 'Cinzel',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '161px',
-        'height': '64px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#AF2E11'
-      },
-      pseudo: {
-        hover: {
-          'background-color': '#A9893C !important'
+    },
+    {
+      element: {
+        text: '<p><strong>BUY NOW</strong></p>',
+        styles: {
+          'background-color': '#333333',
+          'color': '#FFFFFF',
+          'font-family': 'Cinzel',
+          'font-size:': '1.6rem',
+          'text-align': 'center',
+          'width': '161px',
+          'height': '64px',
+          'border-width': '2px',
+          'border-style': 'solid',
+          'border-color': '#AF2E11'
+        },
+        pseudo: {
+          hover: {
+            'background-color': '#A9893C !important'
+          }
         }
       }
     }
-  }
-]
+  ]
+})
 
 const C_CUSTOM_1D = [
   {
@@ -110,53 +140,6 @@ const C_CUSTOM_1D = [
       },
       styles: {
         color: '#818181'
-      }
-    }
-  }
-]
-
-const C_CUSTOM_2 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/ash_p_2.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '185px',
-        'height': '319px'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>FULL EDITION</strong></p>',
-      styles: {
-        'font-family': 'Cinzel',
-        'font-size': '2.4rem',
-        'color': '#ffffff'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': '#333333',
-        'color': '#FFFFFF',
-        'font-family': 'Cinzel',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '161px',
-        'height': '64px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#AF2E11'
-      },
-      pseudo: {
-        hover: {
-          'background-color': '#A9893C !important'
-        }
       }
     }
   }
@@ -225,53 +208,6 @@ const C_CUSTOM_2D = [
   }
 ]
 
-const C_CUSTOM_3 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/ash_p_3.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '185px',
-        'height': '319px'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>DELUX EDITION</strong></p>',
-      styles: {
-        'font-family': 'Cinzel',
-        'font-size': '2.4rem',
-        'color': '#ffffff'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': '#333333',
-        'color': '#FFFFFF',
-        'font-family': 'Cinzel',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '161px',
-        'height': '64px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#AF2E11'
-      },
-      pseudo: {
-        hover: {
-          'background-color': '#A9893C !important'
-        }
-      }
-    }
-  }
-]
-
 const C_CUSTOM_3D = [
   {
     element: {
@@ -330,53 +266,6 @@ const C_CUSTOM_3D = [
       },
       styles: {
         color: '#818181'
-      }
-    }
-  }
-]
-
-const C_CUSTOM_4 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://s3.protocol.one/images/ash_p_4.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '185px',
-        'height': '319px'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>ULTIMATE EDITION</strong></p>',
-      styles: {
-        'font-family': 'Cinzel',
-        'font-size': '2.4rem',
-        'color': '#ffffff'
-      }
-    }
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': '#333333',
-        'color': '#FFFFFF',
-        'font-family': 'Cinzel',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '161px',
-        'height': '64px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#AF2E11'
-      },
-      pseudo: {
-        hover: {
-          'background-color': '#A9893C !important'
-        }
       }
     }
   }
@@ -448,8 +337,7 @@ const C_CUSTOM_4D = [
 const C_CUSTOM_CONTAINER = {
   styles: {
     'flex-direction': 'column',
-    'align-items': 'center',
-    'padding': '0px'
+    'align-items': 'center'
   }
 }
 
@@ -457,7 +345,7 @@ const C_CUSTOM_CONTAINER_D = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'flex-start',
-    'padding': '0 0 0 35px'
+    'padding-left': '35px'
   }
 }
 
@@ -477,7 +365,7 @@ const SCHEMA_CUSTOM = {
       'background-image': 'url(https://s3.protocol.one/images/ash_prod_bg_2.jpg)',
       'background-color': 'rgba(21,28,68,1)',
       'background-size': 'cover',
-      'padding': '0px 0 190px 0'
+      'padding-bottom': '190px'
     }
   },
   components: _.merge({}, C_CUSTOM),
@@ -575,7 +463,7 @@ export default {
 
   description: 'Product list horizontal view',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/ash_p_cover.jpg',
 
@@ -627,7 +515,7 @@ export default {
   <section
     class="b-products-colums"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -641,7 +529,6 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             :style="$sectionData.container.styles"
           >
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -662,12 +549,12 @@ export default {
           </sandbox>
         </div>
       </div>
-      <div class="b-products-colums__padd">
-        <div class="b-products-colums__padd-border">
+      <div class="b-section-padd">
+        <div class="b-section-padd-border">
           <!-- Setting controls -->
-          <div class="b-products-colums__controls">
+          <div class="b-section-menu__controls">
             <div>
-              <a href="#" class="b-products-colums__control"
+              <a href="#" class="b-section-menu__control"
                  tooltip="Products"
                  tooltip-position="bottom"
                  @click.stop="showSettings('SectionProductsColumnsSettings')">
@@ -687,7 +574,6 @@ export default {
                 class="b-sandbox"
                 :container-path="`$sectionData.container${key}`"
                 :components-path="`$sectionData.components${key}`"
-                direction="column"
                 :style="`$sectionData.container${key}.styles`"
               >
                 <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @start="drag(`components${key}`)" @change="dragStop">
@@ -714,7 +600,6 @@ export default {
                 class="b-sandbox"
                 :container-path="`$sectionData.container${key}D`"
                 :components-path="`$sectionData.components${key}D`"
-                direction="column"
                 :style="`$sectionData.container${key}D.styles`"
               >
                 <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @start="drag(`components${key}D`)" @change="dragStop">
@@ -746,6 +631,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+@import '../../../assets/sass/section-menu.sass'
 @import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
 
@@ -758,59 +645,6 @@ export default {
   &__icon-with-text
     color: inherit
     font-family: inherit
-
-  &__padd
-    padding: 0
-
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: 0
-      transition: border 0.25s
-      border: 1px dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 1px dashed $dark-blue-krayola
-
-  &__controls
-    position: absolute
-    top: -14px
-    left: $size-step/3.4
-
-    display: flex
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
 
   .b-grid__col-3
     padding: .8rem

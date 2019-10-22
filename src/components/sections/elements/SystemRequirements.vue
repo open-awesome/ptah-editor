@@ -4,6 +4,7 @@ import * as _ from 'lodash-es'
 import VuseIcon from '@editor/components/VuseIcon'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
 const REQUIREMENTS = [
@@ -263,71 +264,6 @@ const REQUIREMENTS_WINDOWS = [
     element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
-const COMPONENTS_WINDOWS_KEYS = [
-  {
-    key: 11
-  },
-  {
-    key: 12
-  },
-  {
-    key: 13
-  },
-  {
-    key: 21
-  },
-  {
-    key: 22
-  },
-  {
-    key: 23
-  },
-  {
-    key: 31
-  },
-  {
-    key: 32
-  },
-  {
-    key: 33
-  },
-  {
-    key: 41
-  },
-  {
-    key: 42
-  },
-  {
-    key: 43
-  },
-  {
-    key: 41
-  },
-  {
-    key: 42
-  },
-  {
-    key: 43
-  },
-  {
-    key: 51
-  },
-  {
-    key: 52
-  },
-  {
-    key: 53
-  },
-  {
-    key: 61
-  },
-  {
-    key: 62
-  },
-  {
-    key: 63
-  }
-]
 
 const REQUIREMENTS_OS = [
   {
@@ -413,71 +349,6 @@ const REQUIREMENTS_OS = [
   {
     nameCol: 'Sound Card-max',
     element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
-  }
-]
-const COMPONENTS_OS_KEYS = [
-  {
-    key: 111
-  },
-  {
-    key: 112
-  },
-  {
-    key: 113
-  },
-  {
-    key: 121
-  },
-  {
-    key: 122
-  },
-  {
-    key: 123
-  },
-  {
-    key: 131
-  },
-  {
-    key: 132
-  },
-  {
-    key: 133
-  },
-  {
-    key: 141
-  },
-  {
-    key: 142
-  },
-  {
-    key: 143
-  },
-  {
-    key: 141
-  },
-  {
-    key: 142
-  },
-  {
-    key: 143
-  },
-  {
-    key: 151
-  },
-  {
-    key: 152
-  },
-  {
-    key: 153
-  },
-  {
-    key: 161
-  },
-  {
-    key: 162
-  },
-  {
-    key: 163
   }
 ]
 
@@ -567,71 +438,6 @@ const REQUIREMENTS_LINUX = [
     element: { text: '—', removable: false, canCopy: false, editor: { styles: true, tags: false, link: false } }
   }
 ]
-const COMPONENTS_LINUX_KEYS = [
-  {
-    key: 211
-  },
-  {
-    key: 212
-  },
-  {
-    key: 213
-  },
-  {
-    key: 221
-  },
-  {
-    key: 222
-  },
-  {
-    key: 223
-  },
-  {
-    key: 231
-  },
-  {
-    key: 232
-  },
-  {
-    key: 233
-  },
-  {
-    key: 241
-  },
-  {
-    key: 242
-  },
-  {
-    key: 243
-  },
-  {
-    key: 241
-  },
-  {
-    key: 242
-  },
-  {
-    key: 243
-  },
-  {
-    key: 251
-  },
-  {
-    key: 252
-  },
-  {
-    key: 253
-  },
-  {
-    key: 261
-  },
-  {
-    key: 262
-  },
-  {
-    key: 263
-  }
-]
 
 const C_CUSTOM = [
   {
@@ -641,9 +447,13 @@ const C_CUSTOM = [
         'font-family': 'Montserrat',
         'font-size': '4rem',
         'color': '#fff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem'
+        }
       }
-    },
-    key: 0
+    }
   }
 ]
 
@@ -652,7 +462,7 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
       'background-color': '#000',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover',
       'font-family': 'Lato',
       'font-size': 1.4,
@@ -711,7 +521,7 @@ export default {
 
   description: 'System requirements presentation screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/system.jpg',
 
@@ -722,10 +532,10 @@ export default {
   $schema: {
     mainStyle: types.SystemRequirements,
     container: types.StyleObject,
-    components: _.merge([], HEADER, { key: 0 }),
-    componentsRequirementswindows: _.merge([], REQUIREMENTS, COMPONENTS_WINDOWS_KEYS),
-    componentsRequirementsapple: _.merge([], REQUIREMENTS, COMPONENTS_OS_KEYS),
-    componentsRequirementslinux: _.merge([], REQUIREMENTS, COMPONENTS_LINUX_KEYS)
+    components: _.merge([], HEADER),
+    componentsRequirementswindows: _.merge([], REQUIREMENTS),
+    componentsRequirementsapple: _.merge([], REQUIREMENTS),
+    componentsRequirementslinux: _.merge([], REQUIREMENTS)
   },
 
   methods: {
@@ -766,7 +576,7 @@ export default {
   <section class="l-system"
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia, $sectionData.objVarsSizeIcons, $sectionData.objVarsTable]"
     >
     <slot name="menu"/>
     <slot name="video"/>
@@ -778,7 +588,6 @@ export default {
               class="b-sandbox"
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
               :style="$sectionData.container.styles"
             >
               <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -802,11 +611,11 @@ export default {
       <div class="b-grid__row">
         <div class="b-grid__col-12">
           <div class="b-system">
-            <div class="b-system__padd">
+            <div class="b-section-padd">
               <!-- Setting controls -->
-              <div class="b-system__controls">
+              <div class="b-section-menu__controls">
                 <div>
-                  <a href="#" class="b-system__control"
+                  <a href="#" class="b-section-menu__control"
                      tooltip="Settings"
                      tooltip-position="bottom"
                      @click.stop="showSettings('SectionSystemSettings')">
@@ -814,7 +623,7 @@ export default {
                   </a>
                 </div>
                 <div>
-                  <a href="#" class="b-system__control"
+                  <a href="#" class="b-section-menu__control"
                      tooltip="Table style"
                      tooltip-position="bottom"
                      @click.stop="showSettings('SectionSystemStyle')">
@@ -823,7 +632,7 @@ export default {
                 </div>
               </div>
 
-              <div class="b-system__padd-border">
+              <div class="b-section-padd-border">
                 <div class="b-system-platforms flex flex_center">
                   <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.mainStyle.systemRequirements" :key="key"
                        v-show="$sectionData.mainStyle.systemRequirements[key].visible"
@@ -838,7 +647,7 @@ export default {
                           <path d="M31.5885 8.5L16 1L0.41156 8.5" :stroke="$sectionData.mainStyle.colorIcons.active"/>
                         </svg>
                       </span>
-                      <span class="b-system-platforms__item__tab-icon"
+                      <span class="b-system-platforms__item__tab-icon b-size-icons"
                         :style="{
                           width: $sectionData.mainStyle.sizeIcons.width + 'px',
                           height: $sectionData.mainStyle.sizeIcons.width + 'px',
@@ -856,7 +665,7 @@ export default {
                     <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.mainStyle.systemRequirements" :key="key"
                         v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
                       <div>
-                        <div class="b-system-requirements__table-row  flex"
+                        <div class="b-system-requirements__table-row b-table-media-head flex"
                           :style="{
                             'color' : $sectionData.mainStyle.table.head['color'],
                             'font-family' : $sectionData.mainStyle.table.head['font-family'],
@@ -884,7 +693,7 @@ export default {
                             </span>
                           </div>
                         </div><!--/.b-system-requirements__table-row-->
-                        <div class="b-system-requirements__table-row flex"
+                        <div class="b-system-requirements__table-row b-table-media-body flex"
                           v-for="(row, i) in $sectionData.mainStyle.rowsRequirements" :key="i"
                           v-show="$sectionData.mainStyle.rowsRequirements[i].visible"
                           :style="{
@@ -903,7 +712,7 @@ export default {
                              :key="index"
                              v-if="col.prop === i"
                             >
-                            <div class="b-system-requirements__table-col_name"
+                            <div class="b-system-requirements__table-col_name b-table-media-body"
                               v-if="$sectionData[`componentsRequirements${key}`][index].nameCol.indexOf('-text') !== -1"
                               v-html="$sectionData[`componentsRequirements${key}`][index].element.text"
                               >
@@ -915,7 +724,7 @@ export default {
                                 v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type, label: $sectionData[`componentsRequirements${key}`][index].label }"
                                 :path="`componentsRequirements${key}[${index}].element`"
                                 :is="$sectionData[`componentsRequirements${key}`][index].name"
-                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class]"
+                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class, 'b-table-media-body']"
                                 >
                                 <div v-html="$sectionData[`componentsRequirements${key}`][index].element.text"></div>
                               </component><!--/.-->
@@ -927,7 +736,7 @@ export default {
                                 v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type, label: $sectionData[`componentsRequirements${key}`][index].label }"
                                 :path="`componentsRequirements${key}[${index}].element`"
                                 :is="$sectionData[`componentsRequirements${key}`][index].name"
-                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class]"
+                                :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class, 'b-table-media-body']"
                                 >
                                 <div v-html="$sectionData[`componentsRequirements${key}`][index].element.text"></div>
                               </component><!--/.-->
@@ -948,6 +757,9 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/table-media.sass'
+@import '../../../assets/sass/section-media.sass'
+@import '../../../assets/sass/section-menu.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
@@ -960,24 +772,6 @@ export default {
       flex-wrap: wrap
       height: auto !important
       padding: 0
-  &__padd
-    padding: $size-step/4
-
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: $size-step/4
-      transition: border 0.25s
-      border: 1px dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 1px dashed $dark-blue-krayola
   &-platforms
     justify-content: center
 
@@ -1055,39 +849,6 @@ export default {
             margin-left: -$size-step/2
 
             transition: all 200ms
-  &__controls
-    position: absolute
-    top: -14px
-    left: $size-step/3.4
-
-    display: flex
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
 
 .b-system-requirements
   &__table
@@ -1139,13 +900,6 @@ export default {
             width: 35%
       &_name
         opacity: 0.6
-      .is-mobile &
-        padding: $size-step/4
-        font-size: 1.4rem !important
-      @media only screen and (max-width: 540px)
-        &
-          padding: $size-step/4
-          font-size: 1.4rem !important
 
 .b-text.b-inline
   font-size: inherit

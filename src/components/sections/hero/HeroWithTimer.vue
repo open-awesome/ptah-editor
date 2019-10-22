@@ -3,64 +3,47 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroWithTimer'
 const BG_SECTION = 'url(https://gn269.cdn.stg.gamenet.ru/0/7o9OH/o_l6SvX.jpg)'
 
-/**
-* Base keys for elements in Hero sections
- * Logo - 0
- * Title - 1
- * Description - 2
- * Button - 3
- * Available Platforms - 4
- * Video - 5
- * Slogan - 6
- * Link - 7
- * Delimiter- 8
- * Timer - 9
- * */
 const COMPONENTS = [
   {
     name: 'Logo',
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo',
-    key: 0
+    label: 'logo'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-title',
-    label: 'text',
-    key: 1
+    label: 'text'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'text',
-    key: 2
+    label: 'text'
   },
   {
     name: 'Timer',
     element: types.Timer,
     type: 'timer',
     class: 'b-timer',
-    label: 'Timer',
-    key: 9
+    label: 'Timer'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button',
-    label: 'button',
-    key: 3
+    label: 'button'
   }
 ]
 
@@ -74,9 +57,15 @@ const C_CUSTOM = [
         'background-size': 'contain',
         'width': '600px',
         'height': '124px'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '80px',
+          'margin-bottom': '0'
+        }
       }
-    },
-    key: 0
+    }
   },
   {
     element: {
@@ -85,9 +74,14 @@ const C_CUSTOM = [
         'font-family': 'PT Serif',
         'font-size': '5.6rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem',
+          'line-height': '1.4'
+        }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -95,13 +89,29 @@ const C_CUSTOM = [
       styles: {
         'font-family': 'PT Serif',
         'font-size': '2rem',
-        'color': 'rgba(255, 255, 255, 0.3)'
+        'color': 'rgba(255, 255, 255, 0.3)',
+        'margin-bottom': '100px'
+      },
+      media: {
+        'is-mobile': {
+          'margin-bottom': '32px'
+        }
       }
-    },
-    key: 2
+    }
   },
   {
-    key: 9
+    element: {
+      styles: {
+        'margin-top': '16px',
+        'margin-bottom': '16px'
+      },
+      media: {
+        'is-mobile': {
+          'margin-top': '16px',
+          'margin-bottom': '16px'
+        }
+      }
+    }
   },
   {
     element: {
@@ -116,8 +126,7 @@ const C_CUSTOM = [
         'height': '64px',
         'border-radius': '2px'
       }
-    },
-    key: 3
+    }
   }
 ]
 
@@ -128,9 +137,14 @@ const SCHEMA_CUSTOM = {
       'background-color': '#151C44',
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
-      'background-attachment': 'scroll'
+      'background-attachment': 'scroll',
+      'height': '80vh'
     },
-    classes: ['full-height']
+    media: {
+      'is-mobile': {
+        'background-position': '17% 0%'
+      }
+    }
   },
   components: _.merge([], C_CUSTOM),
   container: {
@@ -146,7 +160,7 @@ export default {
 
   description: 'Fantasy title Countdown main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/hero-with-timer.jpg',
 
@@ -168,7 +182,7 @@ export default {
   <section
     class="b-hero-with-timer"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -181,7 +195,6 @@ export default {
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
               class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -207,9 +220,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
-
-.b-hero-with-timer
-
 </style>

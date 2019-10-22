@@ -2,7 +2,7 @@
   <section class="b-gallery-one b-gallery-switch"
    v-styler:section="$sectionData.mainStyle"
    :class="$sectionData.mainStyle.classes"
-   :style="$sectionData.mainStyle.styles"
+   :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia, $sectionData.objVarsTypo]"
   >
     <slot name="menu"/>
     <slot name="video"/>
@@ -15,8 +15,6 @@
             class="b-sandbox"
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
-            :style="$sectionData.container.styles"
           >
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
               <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
@@ -25,7 +23,7 @@
                   :is="component.name"
                   :href="$sectionData.components[index].element.link.href"
                   :target="$sectionData.components[index].element.link.target"
-                  :path="`components0[${index}].element`"
+                  :path="`components[${index}].element`"
                   :style="$sectionData.components[index].element.styles"
                   :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
                 >
@@ -39,12 +37,12 @@
       <div class="b-grid__row">
         <div class="b-grid__col-12">
           <div class="b-gallery-one">
-            <div class="b-gallery-one__padd">
-              <div class="b-gallery-one__padd-border">
+            <div class="b-section-padd">
+              <div class="b-section-padd-border">
                 <!-- Setting controls -->
-                <div class="b-gallery-one__controls">
+                <div class="b-section-menu__controls">
                   <div>
-                    <a href="#" class="b-gallery-one__control"
+                    <a href="#" class="b-section-menu__control"
                        tooltip="Items count"
                        tooltip-position="bottom"
                        @click.stop="showSettings('SectionGallerySettings')">
@@ -52,7 +50,7 @@
                     </a>
                   </div>
                   <div>
-                    <a href="#" class="b-gallery-one__control"
+                    <a href="#" class="b-section-menu__control"
                        tooltip="Gallery style"
                        tooltip-position="bottom"
                        @click.stop="showSettings('SectionGalleryStyle')">
@@ -168,6 +166,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 import Uploader from '@editor/plugins/Uploader.vue'
 
@@ -236,10 +235,9 @@ const [
         styles: {
           'background-image': `url(${thumbs[i]})`,
           'background-size': 'contain',
-          'background-position': 'bottom center',
+          'background-position': '50% 100%',
           'width': '190px',
-          'height': '285px',
-          'margin': '0'
+          'height': '285px'
         }
       }
     },
@@ -271,10 +269,15 @@ const [
         styles: {
           'background-image': `url(${prev[i]})`,
           'background-size': 'contain',
-          'background-position': 'bottom center',
+          'background-position': '50% 100%',
           'width': '300px',
-          'height': '450px',
-          'margin': '0'
+          'height': '450px'
+        },
+        media: {
+          'is-mobile': {
+            'width': '300px',
+            'height': '300px'
+          }
         }
       }
     },
@@ -310,9 +313,13 @@ const C_CUSTOM = [
         'font-family': 'Cinzel',
         'font-size': '4.0rem',
         'color': '#fff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem'
+        }
       }
-    },
-    key: 0
+    }
   }
 ]
 
@@ -349,6 +356,20 @@ const SCHEMA_CUSTOM = {
         'text-decoration': 'none',
         'color': 'rgba(255, 255, 255, 1)'
       }
+    },
+    media: {
+      'is-mobile': {
+        'textStyles': {
+          'chapter': {
+            'color': 'rgba(255, 255, 255, 1)',
+            'font-size': '1.6rem'
+          },
+          'text': {
+            'color': 'rgba(255, 255, 255, 1)',
+            'font-size': '1.6rem'
+          }
+        }
+      }
     }
   },
   components: _.merge([], C_CUSTOM),
@@ -381,7 +402,7 @@ export default {
     }
   },
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/gswitch_f_cover.jpg',
 
@@ -426,6 +447,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+@import '../../../assets/sass/section-menu.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
@@ -433,56 +456,6 @@ export default {
 .b-gallery-one
   margin-bottom: -20px
   $this: &
-  &__padd
-    padding: 0
-
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: 0
-      transition: border 0.25s
-      border: 1px dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 1px dashed $dark-blue-krayola
-
-  &__controls
-    position: absolute
-    top: -21px
-    left: 0
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
 
   /deep/
   .b-uploader__input
@@ -672,6 +645,28 @@ export default {
 .b-gallery-one-stage__bio
   max-width: 50rem
   margin: $size-step/2 auto
+
+.b-gallery-one-stage__name
+  .is-mobile &
+    font-family: var(--mobile-section-text-styles-chapter-font-family) !important
+    font-size: var(--mobile-section-text-styles-chapter-font-size) !important
+    color: var(--mobile-section-text-styles-chapter-color) !important
+  @media only screen and (max-width: 768px)
+    &
+     font-family: var(--mobile-section-text-styles-chapter-font-family) !important
+     font-size: var(--mobile-section-text-styles-chapter-font-size) !important
+     color: var(--mobile-section-text-styles-chapter-color) !important
+
+.b-gallery-one-stage__bio
+  .is-mobile &
+    font-family: var(--mobile-section-text-styles-text-font-family) !important
+    font-size: var(--mobile-section-text-styles-text-font-size) !important
+    color: var(--mobile-section-text-styles-text-color) !important
+  @media only screen and (max-width: 768px)
+    &
+     font-family: var(--mobile-section-text-styles-text-font-family) !important
+     font-size: var(--mobile-section-text-styles-text-font-size) !important
+     color: var(--mobile-section-text-styles-text-color) !important
 
 .b-gallery-one-stage__img
   position: relative

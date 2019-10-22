@@ -4,6 +4,9 @@
     <span class="b-control-panel__close" @click="close()">
       <icon-base width="14" height="14" name="close"/>
     </span>
+    <div class="b-control-panel__mobile" v-if="isMobile">
+      Settings for mobile devices
+    </div>
     <component :is="panelName" :builder="builder"/>
   </div>
 </template>
@@ -51,7 +54,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectType',
-      'controlPanel'
+      'controlPanel',
+      'isMobile'
     ]),
 
     panelName () {
@@ -118,6 +122,11 @@ export default {
   font-size: 1.4rem
   letter-spacing: -0.01em
 
+  &__mobile
+    font-size: 1.2rem
+
+    padding: $size-step/8 0
+    color: $dark-blue-krayola
   &__title
     color: $black
     font-size: 2rem

@@ -20,7 +20,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'isMobile'
     ]),
 
     icon () {
@@ -42,6 +43,54 @@ export default {
 
     sizeIcons () {
       return this.settingObjectOptions.sizeIcons
+    },
+
+    mediaSizeIconsWidth: {
+      get () {
+        let w = _.get(this.settingObjectOptions, `media['is-mobile']['sizeIcons']['width']`)
+
+        if (w === undefined) w = _.get(this.settingObjectOptions, `sizeIcons['width']`)
+
+        return w
+      },
+
+      set (value) {
+        let props = {}
+        let sizeIcons = {
+          width: value
+        }
+        let media = {
+          'is-mobile': {
+            'sizeIcons': sizeIcons
+          }
+        }
+
+        this.isMobile ? props = { 'media': media } : props = { 'sizeIcons': sizeIcons }
+
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+      }
+    },
+
+    elWidth: {
+      get () {
+        let w = 0
+
+        if (this.isMobile) {
+          w = this.mediaSizeIconsWidth
+        } else {
+          w = this.sizeIcons.width
+        }
+
+        return w
+      },
+
+      set (value) {
+        if (this.isMobile) {
+          this.mediaSizeIconsWidth = value
+        } else {
+          this.sizeIcons.width = value
+        }
+      }
     }
   },
 
@@ -83,14 +132,13 @@ export default {
   mounted () {
     this.iconName = this.icon
     this.color = this.colorFill.color
-    this.elWidth = this.sizeIcons.width
   }
 }
 </script>
 
 <template>
   <div class="b-text-controls">
-    <div class="b-text-controls__control">
+    <div class="b-text-controls__control" v-if="!isMobile">
       <div>{{ $t('c.visibleIcon') }}</div>
       <div class="b-icon-with-text">
         <div class="b-icon-with-text__item"
@@ -116,15 +164,15 @@ export default {
         </div>
       </div>
     </div>
-    <div class="b-text-controls__control" v-if="icon.visible">
+    <div class="b-text-controls__control" v-if="icon.visible && !isMobile">
       <base-select :label="$t('c.icon')" :options="icons.options" :value="iconName" v-model="iconName" @input="changeIcon"></base-select>
     </div>
     <div class="b-text-controls__control" v-if="icon.visible">
-      <base-range-slider v-model="sizeIcons.width" :label="$t('c.iconsWidth')" step="2" min="14" max="34">
-        {{ sizeIcons.width }} px
+      <base-range-slider v-model="elWidth" :label="$t('c.iconsWidth')" step="2" min="14" max="34">
+        {{ elWidth }} px
       </base-range-slider>
     </div>
-    <div class="b-text-controls__control" v-if="icon.visible">
+    <div class="b-text-controls__control" v-if="icon.visible && !isMobile">
       <base-color-picker :label="$t('c.iconsColor')" v-model="color" @change="changeColor"></base-color-picker>
     </div>
   </div>

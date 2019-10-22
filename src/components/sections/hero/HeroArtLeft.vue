@@ -2,7 +2,7 @@
 <section
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     class="b-hero">
 
   <slot name="menu"/>
@@ -21,8 +21,6 @@
         <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
-            align="center"
             class="b-sandbox">
 
           <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot" @start="drag('components')" @change="dragStop">
@@ -71,6 +69,7 @@ import { StyleObject, Logo, VideoElement, Text, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const [name, group, cover] = ['HeroVideoSplitScreen', 'FirstScreen', '/img/covers/hero-art-left.png']
 
@@ -174,7 +173,7 @@ export default {
 
   description: 'Game character to leftward of video main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   $schema: {
     mainStyle: StyleObject,
@@ -197,20 +196,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-$h: 100vh
-
-.b-hero
-  position: relative
-  width: 100%
-  margin: 0
-  padding: 1rem
-  display: flex
-  text-align: center
-  justify-content: center
-  flex-direction: column
-  transition: background 200ms
-
-.b-link:hover
-  text-decoration: underline !important
-
+@import '../../../assets/sass/section-media.sass'
 </style>

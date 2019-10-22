@@ -2,10 +2,21 @@ import * as types from './types'
 import { isObject } from './util'
 import * as _ from 'lodash-es'
 
+const DEF_MARG_PADD = {
+  'margin-top': 0,
+  'margin-bottom': 0,
+  'margin-left': 0,
+  'margin-right': 0,
+  'padding-top': 0,
+  'padding-bottom': 0,
+  'padding-left': 0,
+  'padding-right': 0
+}
+
 const DEFAULT_OPTIONS = {
   text: '',
   classes: [],
-  styles: {},
+  styles: _.merge({}, DEF_MARG_PADD),
   resizable: false,
   hasLink: false,
   belongsGallery: false,
@@ -37,7 +48,10 @@ const DEFAULT_OPTIONS = {
   // --- background video
   backgroundVideo: null,
 
-  absorb: 0
+  absorb: 0,
+  media: {
+    'is-mobile': _.merge({}, DEF_MARG_PADD)
+  }
 }
 
 /**
@@ -60,7 +74,11 @@ const data = new Map([
       'text-decoration': 'none',
       'text-align': 'center',
       'color': '#9B9B9B',
-      'justify-content': 'center'
+      'justify-content': 'center',
+      'margin-top': '8px',
+      'margin-bottom': '8px',
+      'margin-left': '0',
+      'margin-right': '0'
     },
     isComplex: true,
     editor: {
@@ -78,6 +96,15 @@ const data = new Map([
         'text-decoration': 'none'
       },
       openNewWindow: true
+    },
+    media: {
+      'is-mobile': {
+        'font-size': '1.6rem',
+        'margin-top': '4px',
+        'margin-bottom': '4px',
+        'margin-left': '8px',
+        'margin-right': '8px'
+      }
     }
   }))],
   [types.Image, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -94,12 +121,22 @@ const data = new Map([
     background: true,
     styles: {
       'background-image': 'url(https://gn680.cdn.stg.gamenet.ru/0/8qGME/o_OIgnu.png)',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'contain',
       'background-color': 'rgba(0, 0, 0, 0)',
       'width': '256px',
-      'height': '160'
+      'height': '160px'
+    },
+    media: {
+      'is-mobile': {
+        'width': '130px',
+        'height': '80px',
+        'margin-top': '4px',
+        'margin-bottom': '4px',
+        'margin-left': '8px',
+        'margin-right': '8px'
+      }
     }
   }))],
   [types.Logo, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -114,12 +151,22 @@ const data = new Map([
     background: true,
     styles: {
       'background-image': 'url(https://gn680.cdn.stg.gamenet.ru/0/8qGME/o_OIgnu.png)',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-color': 'rgba(0, 0, 0, 0)',
-      'width': '96px',
-      'height': '96px'
+      'width': '256px',
+      'height': '160px'
+    },
+    media: {
+      'is-mobile': {
+        'width': '130px',
+        'height': '80px',
+        'margin-top': '4px',
+        'margin-bottom': '4px',
+        'margin-left': '8px',
+        'margin-right': '8px'
+      }
     }
   }))],
   [types.StyleObject, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -130,11 +177,14 @@ const data = new Map([
       absorb: 0,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': 'rgba(0,0,0,0)',
-        'background-attachment': 'scroll'
+        'background-attachment': 'scroll',
+        'flex-direction': 'column',
+        'align-items': 'center',
+        'justify-content': 'center'
       },
       overlay: {
         color: 'rgba(0,0,0,1)',
@@ -143,7 +193,12 @@ const data = new Map([
       width: null,
       maxWidth: null,
       minWidth: null,
-      grow: false
+      grow: false,
+      media: {
+        'is-mobile': {
+          'flex-direction': 'column'
+        }
+      }
     })
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -160,7 +215,7 @@ const data = new Map([
         hover: {
           'background-color': '',
           'background-image': '',
-          'background-position': 'center center',
+          'background-position': '50% 50%',
           'background-repeat': 'no-repeat',
           'background-size': 'cover',
           'color': '',
@@ -181,7 +236,7 @@ const data = new Map([
       removable: true,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': '',
@@ -208,7 +263,18 @@ const data = new Map([
         styles: true,
         link: false
       },
-      isComplex: true
+      isComplex: true,
+      media: {
+        'is-mobile': {
+          'font-size': '1.6rem',
+          'width': '160px',
+          'height': '64px',
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px'
+        }
+      }
     })
   )],
   [types.IconWithText, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -243,7 +309,16 @@ const data = new Map([
         styles: true,
         link: false
       },
-      isComplex: true
+      isComplex: true,
+      media: {
+        'is-mobile': {
+          'font-size': '1.4rem',
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px'
+        }
+      }
     })
   )],
   [types.ToggleElement, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -265,9 +340,11 @@ const data = new Map([
         styles: true,
         link: false
       },
+      sizeIcons: {
+        width: 14
+      },
       el: {
         color:  '#fff',
-        size: 14,
         icon: {
           value: 'checkMark',
           name: 'checkMark'
@@ -287,7 +364,16 @@ const data = new Map([
           </table>
          `
       },
-      isComplex: true
+      isComplex: true,
+      media: {
+        'is-mobile': {
+          'font-size': '1.2rem',
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px'
+        }
+      }
     })
   )],
   [types.Gallery, () => (_.merge({}, DEFAULT_OPTIONS, {
@@ -296,7 +382,7 @@ const data = new Map([
     count: 3,
     styles: {
       'background-image': '',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-color':''
@@ -309,19 +395,11 @@ const data = new Map([
       chapter: {
         'font-family': 'Montserrat',
         'font-size': '3.6rem',
-        'line-height': '1.4',
-        'font-weight': 'bold',
-        'font-style': 'normal',
-        'text-decoration': 'none',
         'color': 'rgba(255, 255, 255, 1)'
       },
       text: {
         'font-family': 'Lato',
         'font-size': '1.6rem',
-        'line-height': '1.4',
-        'font-weight': 'normal',
-        'font-style': 'normal',
-        'text-decoration': 'none',
         'color': 'rgba(255, 255, 255, 1)'
       }
     },
@@ -333,14 +411,28 @@ const data = new Map([
     isTop:  false,
     isTopPopup:  false,
     isBottom:  false,
-    isBottomPopup:  false
+    isBottomPopup:  false,
+    media: {
+      'is-mobile': {
+        'textStyles': {
+          'chapter': {
+            'color': 'rgba(255, 255, 255, 1)',
+            'font-size': '3.6rem'
+          },
+          'text': {
+            'color': 'rgba(255, 255, 255, 1)',
+            'font-size': '1.6rem'
+          }
+        }
+      }
+    }
   }))],
   [types.Columns, () => (_.merge({}, DEFAULT_OPTIONS, {
     background: true,
     count: 2,
     styles: {
       'background-image': '',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
       'background-color':'',
@@ -358,6 +450,12 @@ const data = new Map([
       styles: {
         'width': '',
         'height': ''
+      },
+      media: {
+        'is-mobile': {
+          'width': '32px',
+          'height': '32px'
+        }
       }
     })
   )],
@@ -379,7 +477,13 @@ const data = new Map([
         'width': '',
         'height': ''
       },
-      isComplex: true
+      isComplex: true,
+      media: {
+        'is-mobile': {
+          'width': '278px',
+          'height': '152px'
+        }
+      }
     })
   )],
   [types.Form, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -413,6 +517,17 @@ const data = new Map([
         tags: false,
         styles: true,
         link: false
+      },
+      media: {
+        'is-mobile': {
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px',
+          formStyles: {
+            'height': 48,
+          }
+        }
       }
     })
   )],
@@ -437,36 +552,7 @@ const data = new Map([
         color: 'rgba(0,0,0,1)',
         opacity: '0'
       },
-      itemHoverColor: '#fff',
-      textStyles: {
-        text: {
-          'font-family': 'Lato',
-          'font-size': '1.4rem',
-          'line-height': '1.4',
-          'font-weight': 'normal',
-          'font-style': 'normal',
-          'text-decoration': 'none',
-          'color': 'rgba(255, 255, 255, 1)'
-        },
-        icon: {
-          'font-family': 'Lato',
-          'font-size': '1.4rem',
-          'line-height': '1.4',
-          'font-weight': 'normal',
-          'font-style': 'normal',
-          'text-decoration': 'none',
-          'color': 'rgba(255, 255, 255, 1)'
-        },
-        cost: {
-          'color': '#e4a11e',
-          'font-size': '3.2rem',
-          'line-height': '1.4',
-          'font-weight': 'normal',
-          'font-style': 'normal',
-          'font-family': 'Lato',
-          'text-decoration': 'none'
-        }
-      }
+      itemHoverColor: '#fff'
     })
   )],
   [types.GallerySlider, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -531,7 +617,7 @@ const data = new Map([
       background: true,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': ''
@@ -565,7 +651,17 @@ const data = new Map([
       sizeIcons: {
         width: 24
       },
-      isComplex: true
+      media: {
+        'is-mobile': {
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px',
+          sizeIcons: {
+            width: 24
+          }
+        }
+      }
     })
   )],
   [types.AgeRestrictions, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -574,7 +670,7 @@ const data = new Map([
       background: true,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': ''
@@ -635,7 +731,17 @@ const data = new Map([
       sizeIcons: {
         width: 48
       },
-      isComplex: true
+      media: {
+        'is-mobile': {
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px',
+          sizeIcons: {
+            width: 32
+          }
+        }
+      }
     })
   )],
   [types.SocialNetworks, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -647,7 +753,7 @@ const data = new Map([
       background: true,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color': ''
@@ -709,7 +815,17 @@ const data = new Map([
       sizeIcons: {
         width: 24
       },
-      isComplex: true
+      media: {
+        'is-mobile': {
+          'margin-top': '4px',
+          'margin-bottom': '4px',
+          'margin-left': '8px',
+          'margin-right': '8px',
+          sizeIcons: {
+            width: 24
+          }
+        }
+      }
     })
   )],
   [types.Slogan, () => (_.merge({}, DEFAULT_OPTIONS,
@@ -730,7 +846,7 @@ const data = new Map([
         'text-align': 'center',
         'color': '#fff',
         'background-image': 'url(https://gn793.cdn.stg.gamenet.ru/0/79yeF/o_1PRuEc.png)',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'background-color': 'rgba(0, 0, 0, 0)',
@@ -805,7 +921,7 @@ const data = new Map([
       typography: false,
       styles: {
         'background-image': '',
-        'background-position': 'center center',
+        'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color':'',
@@ -821,6 +937,17 @@ const data = new Map([
       overlay: {
         color: 'rgba(0,0,0,1)',
         opacity: '0'
+      },
+      media: {
+        'is-mobile': {
+          sizeIcons: {
+            width: 24
+          },
+          table: {
+            head: {},
+            body: {}
+          }
+        }
       }
     })
   )],
@@ -856,7 +983,18 @@ const data = new Map([
       'font-style': 'normal',
       'text-decoration': 'none',
       'text-align': 'center',
-      'color': '#fff'
+      'color': '#fff',
+      'margin-top': '16px',
+      'margin-bottom': '32px'
+    },
+    media: {
+      'is-mobile': {
+        'margin-top': '4px',
+        'margin-bottom': '16px',
+        'margin-left': '8px',
+        'margin-right': '8px',
+        'font-size': '2.4rem'
+      }
     }
   }))]
 ])

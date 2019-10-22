@@ -5,11 +5,11 @@
     </h6>
 
     <!-- Control Form -->
-    <div class="b-panel__control">
+    <div class="b-panel__control" v-if="!isMobile">
       <control-form/>
     </div>
 
-    <!-- Background Color -->
+    <!-- Control typography -->
     <div class="b-panel__control">
       <control-typography/>
     </div>
@@ -53,7 +53,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectLabel'
+      'settingObjectLabel',
+      'isMobile'
     ])
   }
 }

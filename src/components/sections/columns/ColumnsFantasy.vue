@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
 const C_CUSTOM_COLUMN = [
@@ -13,6 +14,11 @@ const C_CUSTOM_COLUMN = [
         'font-family': 'Montserrat',
         'font-size': '3.2rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.2rem'
+        }
       }
     }
   },
@@ -60,11 +66,17 @@ const C_CUSTOM_CONTAINER = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'center',
-    'background-position': 'center bottom',
+    'background-position': '50% 100%',
     'background-repeat': 'no-repeat',
     'background-size': 'contain',
     'margin-bottom': '-36px',
     'padding-bottom': '300px'
+  },
+  media: {
+    'is-mobile': {
+      'margin-bottom': '64px',
+      'padding-bottom': '300px'
+    }
   }
 }
 
@@ -104,7 +116,7 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://s3.protocol.one/images/c_bg.jpg)',
       'background-color': '#151C44',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover',
       'padding-top': '30px',
       'padding-bottom': '0px'
@@ -175,7 +187,7 @@ export default {
 
   description: 'Three columns additional features presentation',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/ash_cover_col.jpg',
 
@@ -219,7 +231,7 @@ export default {
   <section
     class="b-columns"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -227,12 +239,12 @@ export default {
     <slot name="overlay"/>
     <div class="b-grid">
 
-      <div class="b-columns__padd">
-        <div class="b-columns__padd-border">
+      <div class="b-section-padd">
+        <div class="b-section-padd-border">
           <!-- Setting controls -->
-          <div class="b-columns__controls">
+          <div class="b-section-menu__controls">
             <div>
-              <a href="#" class="b-columns__control"
+              <a href="#" class="b-section-menu__control"
                  tooltip="Number of columns"
                  tooltip-position="right"
                  @click.stop="showSettings('SectionColumnsSettings')">
@@ -254,8 +266,6 @@ export default {
                 class="b-sandbox"
                 :container-path="`$sectionData.container${key.split('components')[1]}`"
                 :components-path="`$sectionData.components${key.split('components')[1]}`"
-                direction="column"
-                :style="`$sectionData.container${key.split('components')[1]}.styles`"
               >
                 <draggable v-model="$sectionData[key]" class="b-draggable-slot" :style="$sectionData[`container${key.split('components')[1]}`].styles" @start="drag(`components${key.split('components')[1]}`)" @change="dragStop">
                   <div :class="`b-draggable-slot__${component.type}`"
@@ -286,61 +296,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+@import '../../../assets/sass/section-menu.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
-
-.b-columns
-  $this: &
-  &__padd
-    padding: $size-step/4
-
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: $size-step/4
-      transition: border 0.25s
-      border: 1px dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 1px dashed $dark-blue-krayola
-
-  &__controls
-    position: absolute
-    top: -14px
-    left: $size-step/4
-
-    display: flex
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
 </style>

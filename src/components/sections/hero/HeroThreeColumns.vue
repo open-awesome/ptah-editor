@@ -2,7 +2,7 @@
 <section
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     class="b-hero">
 
   <slot name="menu"/>
@@ -21,8 +21,6 @@
         <sandbox
             :container-path="`$sectionData.container${ prefix }`"
             :components-path="`$sectionData.components${ prefix }`"
-            align="center"
-            :direction="(['', '3'].includes(prefix)) ? 'row' : 'column'"
             :class="`b-sandbox__${ prefix || 1 }`"
             class="b-sandbox">
 
@@ -69,22 +67,10 @@ import { StyleObject, Logo, Text, Delimiter, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const [name, group, cover] = ['ThreeSegmentHeroScreen', 'FirstScreen', '/img/covers/hero-three-columns.png']
 
-/**
- * Base keys for elements in Hero sections
- * Logo - 0
- * Title - 1
- * Description - 2
- * Button - 3
- * Available Platforms - 4
- * Video - 5
- * Slogan - 6
- * Link - 7
- * Delimiter- 8
- * Timer - 9
- * */
 const defaultColumnComponents1 = [
   {
     element: {
@@ -96,8 +82,7 @@ const defaultColumnComponents1 = [
         'width': '220px',
         'height': '150px'
       }
-    },
-    key: 0
+    }
   }
 ]
 const defaultColumnComponents2 = [
@@ -108,9 +93,13 @@ const defaultColumnComponents2 = [
         'font-family': 'Lato',
         'font-size': '4.8rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem'
+        }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -124,12 +113,9 @@ const defaultColumnComponents2 = [
         'line-height': '1.5',
         'color': '#FFF'
       }
-    },
-    key: 2
+    }
   },
-  {
-    key: 8
-  },
+  {},
   {
     element: {
       text: 'Call to Action',
@@ -143,8 +129,7 @@ const defaultColumnComponents2 = [
         'height': '64px',
         'border-radius': '2px'
       }
-    },
-    key: 3
+    }
   }
 ]
 const defaultColumnComponents3 = [
@@ -158,8 +143,7 @@ const defaultColumnComponents3 = [
         'width': '220px',
         'height': '150px'
       }
-    },
-    key: 9
+    }
   }
 ]
 const defaultSchema = {
@@ -205,7 +189,7 @@ export default {
 
   description: 'Three parts split main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   $schema: {
     mainStyle: StyleObject,
@@ -213,16 +197,16 @@ export default {
     container2: StyleObject,
     container3: StyleObject,
     components: [
-      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' }
     ],
     components2: [
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-title', label: 'title', key: 1 },
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-text', label: 'description', key: 2 },
-      { name: 'Delimiter', element: Delimiter, type: 'delimiter', class: 'b-delimiter', label: 'delimiter', key: 8 },
-      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 }
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-title', label: 'title' },
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-text', label: 'description' },
+      { name: 'Delimiter', element: Delimiter, type: 'delimiter', class: 'b-delimiter', label: 'delimiter' },
+      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button' }
     ],
     components3: [
-      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 9 }
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' }
     ]
   },
 
@@ -241,6 +225,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-hero
-
+ @import '../../../assets/sass/section-media.sass'
 </style>

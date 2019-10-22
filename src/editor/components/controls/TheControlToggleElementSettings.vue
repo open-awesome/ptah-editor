@@ -20,7 +20,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectOptions'
+      'settingObjectOptions',
+      'isMobile'
     ]),
 
     elColor: {
@@ -36,11 +37,14 @@ export default {
 
     elSize: {
       get () {
-        return this.settingObjectOptions.el.size
+        return this.settingObjectOptions.sizeIcons.width
       },
 
       set (value) {
-        this.update('size', value)
+        let sizeIcons = {}
+
+        sizeIcons['width'] = value
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { sizeIcons: sizeIcons }))
       }
     },
 
@@ -103,7 +107,7 @@ export default {
 
 <template>
   <div class="b-text-controls">
-    <div class="b-text-controls__control">
+    <div class="b-text-controls__control" v-if="!isMobile">
       <div class="b-icon-with-text">
         <div class="b-toggle-element-settings__item"
           :class="{ 'b-toggle-element-settings__item_opacity' : false === elIconVisible }"
@@ -130,10 +134,10 @@ export default {
         {{ elSize }} px
       </base-range-slider>
     </div>
-    <div class="b-text-controls__control" v-if="elIconVisible">
+    <div class="b-text-controls__control" v-if="elIconVisible && !isMobile">
       <base-select label="Icon" :options="icons.options" :value="icon" v-model="icon" @input="changeIcon"/>
     </div>
-    <div class="b-text-controls__control" v-if="elIconVisible">
+    <div class="b-text-controls__control" v-if="elIconVisible && !isMobile">
       <base-color-picker label="Color icon" v-model="color" @change="changeColor"/>
     </div>
   </div>

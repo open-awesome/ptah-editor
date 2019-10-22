@@ -1,8 +1,12 @@
 <script>
 import { mapState } from 'vuex'
 import { getPseudoTemplate, randomPoneId } from '../../util'
+import ControlBackgroundPosition from './../controls/TheControlBackgroundPosition'
 
 export default {
+  components: {
+    ControlBackgroundPosition
+  },
 
   data () {
     return {
@@ -134,6 +138,11 @@ export default {
         @change="changeBgHoverImage"
         :label="labelHover"/>
     </div>
+    <template v-if="settingObjectType === 'button' && bgImage !== '' && bgImage !== null">
+      <div class="b-panel__control">
+        <control-background-position/>
+      </div>
+    </template>
     <div class="b-bg-controls__control">
       <BaseSwitcher v-model="isStretchImage" :label="$t('c.stretch')" @change="setStretch" />
     </div>

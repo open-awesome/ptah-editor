@@ -5,7 +5,7 @@
     </h6>
     <base-scroll-container backgroundBar="#999">
       <div class="b-panel__inner">
-        <!-- System requirements -->
+        <!-- Gallery settings-->
         <control-section-gallery/>
       </div>
     </base-scroll-container>

@@ -2,6 +2,7 @@
   <a class="b-button is-editable" ref="btn"
      @click.stop.prevent
      :path="path"
+     :style="[objVarsMedia, objVarsResize, objVarsTypo]"
     >
 
     <slot v-if="!isActive"></slot>
@@ -142,30 +143,23 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import VueDraggableResizable from 'vue-draggable-resizable'
-import 'vue-draggable-resizable/dist/VueDraggableResizable.css'
-
 import { EditorContent, EditorMenuBar } from 'tiptap'
 import textElement from '../mixins/textElement'
+import elementMedia from '../mixins/elementMedia'
+import elementResize from '../mixins/elementResize'
 
 export default {
   name: 'Button',
 
-  mixins: [textElement],
-
-  inject: ['$section'],
+  mixins: [
+    textElement,
+    elementMedia,
+    elementResize
+  ],
 
   components: {
     EditorContent,
-    EditorMenuBar,
-    VueDraggableResizable
-  },
-
-  data: () => {
-    return {
-      width: 0,
-      height: 0
-    }
+    EditorMenuBar
   },
 
   props: {
@@ -176,7 +170,7 @@ export default {
 
   computed: {
     ...mapState('Landing', ['textEditorActive']),
-    ...mapState('Sidebar', ['settingObjectOptions', 'settingObjectElement']),
+    ...mapState('Sidebar', ['settingObjectOptions']),
 
     currentEl () {
       return this.$refs.btn
@@ -198,10 +192,6 @@ export default {
       return 'text'
     },
 
-    styles () {
-      return this.$section.get(`$sectionData.${this.path}.styles`)
-    },
-
     textOptions () {
       return this.settingObjectOptions.editor
     },
@@ -217,35 +207,8 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'toggleResizeStop',
       'updateSettingOptions'
-    ]),
-
-    onResize (x, y, width, height) {
-      let parents = {}
-      let max = {}
-
-      parents['width'] = this.settingObjectElement.closest('.b-draggable-slot')
-      parents['height'] = this.settingObjectElement.closest('section') || this.settingObjectElement.closest('header') || this.settingObjectElement.closest('footer')
-
-      max['width'] = parents['width'].offsetWidth
-      max['height'] = parseInt(parents['height'].offsetHeight)
-
-      if (width > max['width']) width = max['width']
-      if (height > max['height']) height = max['height']
-
-      this.$section.set(`$sectionData.${this.path}.styles.width`, width + 'px')
-      this.$section.set(`$sectionData.${this.path}.styles.height`, height + 'px')
-    },
-
-    onResizeStop (x, y, width, height) {
-      this.toggleResizeStop(this.path)
-    }
-  },
-
-  created () {
-    this.width = parseInt(this.styles.width.split('px')[0]) || 320
-    this.height = parseInt(this.styles.height.split('px')[0]) || 60
+    ])
   }
 }
 </script>
@@ -254,6 +217,8 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 @import '../../assets/sass/_menubar.sass'
+@import '../../assets/sass/element.sass'
+@import '../../assets/sass/element-resize.sass'
 
 .b-button
   $self: &
@@ -289,108 +254,16 @@ export default {
   & .contenteditable
     position: relative
     z-index: 9999
-  &__resize
-    display: none
-    border: none !important
-
-    top: -0.4rem !important
-    right: -0.4rem !important
-    bottom: -0.4rem !important
-    left: -0.4rem !important
-
-    border-radius: 0.5rem
-    width: auto !important
-    height: auto !important
-    &_active
-      border: 0.2rem dotted $dark-blue-krayola !important
-    .is-mobile &,
-    .is-tablet &
-      display: none
-    @media only screen and (max-width: 768px)
-      &
-        display: none
   &.is-editable
     .styler-active
       border-color: $white
-    #{$self}__resize
-      display: block
-      .is-mobile &,
-      .is-tablet &
-        display: none
   & span
     display: block
   .is-mobile &,
   .is-tablet &
-    max-width: 90% !important
-    margin: $size-step/2 auto !important
+    margin: $size-step/2 auto
   @media only screen and (max-width: 768px)
     &
-      max-width: 90% !important
-      margin: $size-step/2 auto !important
-  @media only screen and (max-width: 768px) and (min-height: 700px)
-    &
-      max-width: 60% !important
-      margin: $size-step/2 auto !important
-/deep/
-  .b-handle
-    position: absolute !important
-
-    background: $dark-blue-krayola !important
-    border: 0.2rem solid $white !important
-    box-sizing: border-box !important
-    box-shadow: 0px 2px 2px rgba($black, 0.15) !important
-    border-radius: 1px !important
-
-    height: $size-step/4 !important
-    width: $size-step/4 !important
-
-    transition: all 300ms linear !important
-    .is-mobile &,
-    .is-tablet &
-      display: none
-    @media only screen and (max-width: 768px)
-      &
-        display: none
-    &-tl
-      top: -$size-step/8
-      left: -$size-step/8
-      cursor: nw-resize
-    &-tm
-      top: -$size-step/8
-      left: 50%
-      margin-left: -$size-step/16
-      cursor: n-resize
-    &-tr
-      top: -$size-step/8
-      right: -$size-step/8
-      cursor: ne-resize
-    &-ml
-      top: 50%
-      margin-top: -$size-step/16
-      left: -$size-step/8
-      cursor: w-resize
-    &-mr
-      top: 50%
-      margin-top: -$size-step/16
-      right: -$size-step/8
-      cursor: e-resize
-    &-bl
-      bottom: -$size-step/8
-      left: -$size-step/8
-      cursor: sw-resize
-    &-bm
-      bottom: -$size-step/8
-      left: 50%
-      margin-left: -$size-step/16
-      cursor: s-resize
-    &-br
-      bottom: -$size-step/8
-      right: -$size-step/8
-      cursor: se-resize
-    &-tl:hover,
-    &-tr:hover,
-    &-bl:hover,
-    &-br:hover
-      transform: scale(1.4)
+      margin: $size-step/2 auto
 
 </style>

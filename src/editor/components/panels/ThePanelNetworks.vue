@@ -13,12 +13,12 @@
         </div>
 
         <!-- Background color -->
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <control-background-color/>
         </div>
 
         <!-- Visible elements -->
-        <div class="b-panel__control">
+        <div class="b-panel__control" v-if="!isMobile">
           <control-social-networks/>
         </div>
 
@@ -58,7 +58,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'settingObjectLabel'
+      'settingObjectLabel',
+      'isMobile'
     ])
   }
 }

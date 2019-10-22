@@ -3,64 +3,47 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'GenericMainScreen'
 const BG_SECTION = 'url(https://gn987.cdn.stg.gamenet.ru/0/7K0NZ/o_1zKuK8.png)'
 
-/**
- * Base keys for elements in Hero sections
- * Logo - 0
- * Title - 1
- * Description - 2
- * Button - 3
- * Available Platforms - 4
- * Video - 5
- * Slogan - 6
- * Link - 7
- * Delimiter- 8
- * Timer - 9
- * */
 const COMPONENTS = [
   {
     name: 'Logo',
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo',
-    key: 0
+    label: 'logo'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-title',
-    label: 'text',
-    key: 1
+    label: 'text'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: ' ',
-    label: 'text',
-    key: 2
+    label: 'text'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button',
-    label: 'button',
-    key: 3
+    label: 'button'
   },
   {
     name: 'AvailablePlatforms',
     element: types.AvailablePlatforms,
     type: 'available',
     class: 'b-available-platforms',
-    label: 'Available Platforms',
-    key: 4
+    label: 'Available Platforms'
   }
 ]
 
@@ -75,8 +58,7 @@ const C_CUSTOM = [
         'width': '110px',
         'height': '64px'
       }
-    },
-    key: 0
+    }
   },
   {
     element: {
@@ -84,10 +66,16 @@ const C_CUSTOM = [
       styles: {
         'font-family': 'Lato',
         'font-size': '4.8rem',
-        'color': '#ffffff'
+        'color': '#ffffff',
+        'margin-bottom': '32px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem',
+          'line-height': '1.4'
+        }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -99,8 +87,7 @@ const C_CUSTOM = [
         'font-size': '2rem',
         'color': 'rgba(255, 255, 255, 0.3)'
       }
-    },
-    key: 2
+    }
   },
   {
     element: {
@@ -114,8 +101,7 @@ const C_CUSTOM = [
         'height': '64px',
         'border-radius': '2px'
       }
-    },
-    key: 3
+    }
   },
   {
     element: {
@@ -147,8 +133,7 @@ const C_CUSTOM = [
       sizeIcons: {
         width: 15
       }
-    },
-    key: 4
+    }
   }
 ]
 
@@ -176,7 +161,7 @@ export default {
 
   description: 'Simplified all-purpose main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/hero-unit.png',
 
@@ -198,7 +183,7 @@ export default {
   <section
     class="b-hero"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -210,7 +195,6 @@ export default {
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
               class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -236,6 +220,5 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-hero
-
+  @import '../../../assets/sass/section-media.sass'
 </style>

@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'Carousel'
 const NAME = 'DefaultCarousel'
@@ -49,7 +50,7 @@ export default {
 
   group: GROUP_NAME,
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/default-carousel.png',
 
@@ -79,7 +80,7 @@ export default {
   <section
     class="b-gallery-carousel"
     :class="[$sectionData.mainStyle.classes, device.type]"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
     >
       <slot name="menu"/>
@@ -90,7 +91,6 @@ export default {
         <sandbox
           container-path="$sectionData.container"
           components-path="$sectionData.components"
-          direction="column"
           class="b-sandbox">
 
           <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -142,3 +142,7 @@ export default {
   </section>
 
 </template>
+
+<style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+</style>

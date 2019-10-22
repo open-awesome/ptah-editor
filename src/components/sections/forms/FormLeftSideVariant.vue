@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const COMPONENTS_1 = [
   {
@@ -10,8 +11,7 @@ const COMPONENTS_1 = [
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo',
-    key: 0
+    label: 'logo'
   }
 ]
 
@@ -21,8 +21,7 @@ const COMPONENTS_2 = [
     element: types.Text,
     type: 'text',
     class: 'b-title',
-    label: 'title',
-    key: 1
+    label: 'title'
   },
   {
     name: 'TextElement',
@@ -37,16 +36,14 @@ const COMPONENTS_2 = [
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter',
-    key: 3
+    label: 'delimiter'
   },
   {
     name: 'Form',
     element: types.Form,
     type: 'form',
     class: 'b-form',
-    label: 'form',
-    key: 4
+    label: 'form'
   }
 ]
 
@@ -59,10 +56,10 @@ const C_CUSTOM_1 = [
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'width': '110px',
-        'height': '64px'
+        'height': '64px',
+        'margin-top': '32px'
       }
-    },
-    key: 0
+    }
   }
 ]
 
@@ -72,26 +69,28 @@ const C_CUSTOM_2 = [
       text: 'This is a short header',
       styles: {
         'font-family': 'Lato',
-        'font-size': '2.8rem',
+        'font-size': '5.6rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem',
+          'padding-bottom': '16px'
+        }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
       text: 'An sincerity so extremity he additions. Her yet there truth merit.',
       styles: {
         'font-family': 'Lato',
-        'font-size': '1.4rem',
+        'font-size': '1.6rem',
         'color': 'rgba(255, 255, 255, 0.5)'
       }
-    },
-    key: 2
+    }
   },
-  {
-    key: 3
-  },
+  {},
   {
     element: {
       placeholder: 'Email',
@@ -105,8 +104,7 @@ const C_CUSTOM_2 = [
         'font-size': '1.6rem',
         'text-decoration': 'none'
       }
-    },
-    key: 4
+    }
   }
 ]
 
@@ -128,16 +126,27 @@ const SCHEMA_CUSTOM = {
     grow: ['$sectionData.container2'],
     selfName: '$sectionData.container',
     styles: {
-      'align-items': 'flex-start',
-      'justify-content': 'center'
+      'align-items': 'center',
+      'justify-content': 'flex-start'
+    },
+    media: {
+      'is-mobile': {
+        'align-items': 'center',
+        'justify-content': 'flex-start'
+      }
     }
   },
   container2: {
     width: 6,
     styles: {
       'justify-content': 'center',
-      'align-items': 'flex-start',
-      'width': '100%'
+      'align-items': 'center'
+    },
+    media: {
+      'is-mobile': {
+        'justify-content': 'flex-start',
+        'align-items': 'center'
+      }
     },
     minWidth: 2,
     maxWidth: 10,
@@ -155,7 +164,7 @@ export default {
 
   description: 'Left-centered small e-mail form screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn259.cdn.stg.gamenet.ru/0/7qYxO/o_1Nioez.png',
 
@@ -181,7 +190,7 @@ export default {
   <section
     class="b-form"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -193,7 +202,6 @@ export default {
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles" @start="drag('components2')" @change="dragStop">
@@ -217,7 +225,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox b-grid__col-m-12 b-form__left-col">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -243,14 +250,5 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-form
-  &__left-col
-    align-items: stretch
-  .b-draggable-slot
-    .is-mobile &,
-    .is-tablet &
-      align-items: center !important
-    @media only screen and (max-width: 768px)
-      &
-        align-items: center !important
+@import '../../../assets/sass/section-media.sass'
 </style>

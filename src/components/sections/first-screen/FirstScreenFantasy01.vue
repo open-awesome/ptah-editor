@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenFantasy01'
@@ -42,8 +43,19 @@ const C_CUSTOM_2 = [
         'background-size': 'contain',
         'width': '500px',
         'height': '121px',
-        'margin': '25px 0 20px 13px',
-        'padding': '0'
+        'margin-top': '25px',
+        'margin-bottom': '20px',
+        'margin-left': '13px'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '100px',
+          'margin-top': '25px',
+          'margin-rihgt': '0',
+          'margin-bottom': '0',
+          'margin-left': '0'
+        }
       }
     }
   },
@@ -55,9 +67,23 @@ const C_CUSTOM_2 = [
         'font-size': '5.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '25px 0 20px 15px',
         'text-align': 'left',
-        'padding': '0 0 0 13px'
+        'margin-top': '25px',
+        'margin-bottom': '20px',
+        'margin-left': '13px',
+        'padding-left': '13px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'line-height': '1.4',
+          'text-align': 'right',
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '20px',
+          'margin-right': '8px',
+          'padding-left': '80px'
+        }
       }
     }
   },
@@ -73,13 +99,15 @@ const C_CUSTOM_2 = [
         'width': '240px',
         'height': '64px',
         'border': '1px solid #000000',
-        'margin': '25px 0 70px 38px',
-        'padding': '0'
+        'margin-top': '25px',
+        'margin-bottom': '70px',
+        'margin-left': '38px'
       },
       pseudo: {
         'hover': {
           'background-color': '#333333 !important',
-          'border': '1px solid #AF2E12 !important'
+          'border': '1px solid #AF2E12 !important',
+          'margin-left': '20px'
         }
       }
     }
@@ -87,13 +115,6 @@ const C_CUSTOM_2 = [
 ]
 
 const COMPONENTS_3 = [
-  {
-    name: 'Delimiter',
-    element: types.Delimiter,
-    type: 'delimiter',
-    class: 'b-delimiter-fs',
-    label: 'Spacer'
-  },
   {
     name: 'SocialNetworks',
     element: types.SocialNetworks,
@@ -107,13 +128,8 @@ const C_CUSTOM_3 = [
   {
     element: {
       styles: {
-        width: '40px',
-        height: '120px'
-      }
-    }
-  },
-  {
-    element: {
+        'margin-top': '120px'
+      },
       socialNetworks: {
         'facebook': {
           name: 'Facebook',
@@ -145,6 +161,15 @@ const C_CUSTOM_3 = [
       },
       sizeIcons: {
         width: 30
+      },
+      media: {
+        'is-mobile': {
+          'margin-top': '20px',
+          'margin-left': '13px'
+        },
+        sizeIcons: {
+          width: 20
+        }
       }
     }
   }
@@ -158,8 +183,13 @@ const SCHEMA_CUSTOM = {
       'background-color': '#4A4A4A',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
-      'background-position': 'right bottom',
+      'background-position': '50% 0%',
       'height': '100vh'
+    },
+    media: {
+      'is-mobile': {
+        'background-position': '50% 50%'
+      }
     }
   },
   container: {
@@ -177,12 +207,21 @@ const SCHEMA_CUSTOM = {
     grow: ['$sectionData.container'],
     selfName: '$sectionData.container2',
     styles: {
-      'padding': '0',
       'align-items': 'flex-start'
+    },
+    media: {
+      'is-mobile': {
+        'align-items': 'flex-end'
+      }
     }
   },
   container3: {
-    width: 12
+    width: 12,
+    media: {
+      'is-mobile': {
+        'align-items': 'flex-end'
+      }
+    }
   },
   components3: _.merge({}, C_CUSTOM_3),
   edited: true
@@ -195,7 +234,7 @@ export default {
 
   description: 'Fantasy title Maximum main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/first-screen-fantasy-01.jpg',
 
@@ -221,7 +260,7 @@ export default {
   <section
     class="b-first-screen-fantasy-01"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -233,7 +272,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -257,8 +295,7 @@ export default {
           <sandbox
               container-path="$sectionData.container2"
               components-path="$sectionData.components2"
-              direction="column"
-              class="b-sandbox">
+               class="b-sandbox">
 
             <draggable v-model="$sectionData.components2" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles" @start="drag('components2')" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
@@ -283,7 +320,6 @@ export default {
           <sandbox
             container-path="$sectionData.container3"
             components-path="$sectionData.components3"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components3" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3.styles" @start="drag('components3')" @change="dragStop">
@@ -309,41 +345,15 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .b-first-screen-fantasy-01
   @media only screen and (width: 1024px) and (height: 1366px)
     &
-      background-position: 45% bottom !important
-  .b-logo-fs
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        margin: 1.6rem 0 !important
-  .b-text-fs
-    letter-spacing: -0.02em
-    .is-mobile &,
-    .is-tablet &
-      font-size: 2.4rem !important
-      margin: 0 auto 8px !important
-      text-align: center !important
-    @media only screen and (max-width: 840px)
-      &
-        font-size: 2.4rem !important
-        margin: 0 auto 8px !important
-    @media only screen and (max-width: 500px)
-      &
-        text-align: center !important
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        text-align: left !important
+      background-position: 45% bottom
+
   .b-button-fs
     box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
     transition: background-color 200ms
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        margin: 1.6rem !important
-
-  .b-delimiter-fs
-    @media only screen and (max-width: 980px) and (max-height: 700px)
-      &
-        display: none !important
 
 </style>

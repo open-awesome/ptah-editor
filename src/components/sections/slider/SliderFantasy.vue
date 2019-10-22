@@ -2,7 +2,7 @@
   <section
     class="b-top"
     :class="[$sectionData.mainStyle.classes, device.type]"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -28,7 +28,6 @@
               class="b-sandbox"
               :container-path="`$sectionData.container${key.split('components')[1]}`"
               :components-path="`$sectionData.components${key.split('components')[1]}`"
-              direction="column"
               :style="`$sectionData.container${key.split('components')[1]}.styles`">
               <draggable
                 v-model="$sectionData[key]"
@@ -114,6 +113,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 import { mapActions } from 'vuex'
 
@@ -138,6 +138,11 @@ let [
           'font-family': 'Cinzel',
           'font-size': '3.6rem',
           'color': '#FFFFFF'
+        },
+        media: {
+          'is-mobile': {
+            'font-size': '3.6rem'
+          }
         }
       }
     },
@@ -164,9 +169,7 @@ let [
           'text-align': 'center',
           'width': '240px',
           'height': '64px',
-          'border': '1px solid #000000',
-          'margin': '0',
-          'padding': '0'
+          'border': '1px solid #000000'
         },
         pseudo: {
           'hover': {
@@ -184,6 +187,12 @@ const C_CUSTOM_CONTAINER = {
     'background-color': '#000000',
     'background-image': 'url(https://s3.protocol.one/images/slider_ash_1.jpg)',
     'background-size': 'cover'
+  },
+  media: {
+    'is-mobile': {
+      'padding-top': '32px',
+      'padding-bottom': '64px'
+    }
   }
 }
 
@@ -192,6 +201,12 @@ const C_CUSTOM_CONTAINER2 = {
     'background-color': '#000000',
     'background-image': 'url(https://s3.protocol.one/images/slider_ash_2.jpg)',
     'background-size': 'cover'
+  },
+  media: {
+    'is-mobile': {
+      'padding-top': '32px',
+      'padding-bottom': '64px'
+    }
   }
 }
 
@@ -200,6 +215,12 @@ const C_CUSTOM_CONTAINER3 = {
     'background-color': '#000000',
     'background-image': 'url(https://s3.protocol.one/images/slider_ash_3.jpg)',
     'background-size': 'cover'
+  },
+  media: {
+    'is-mobile': {
+      'padding-top': '32px',
+      'padding-bottom': '64px'
+    }
   }
 }
 
@@ -278,7 +299,7 @@ export default {
 
   description: 'Fullscreen feature slider',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   inject: ['device'],
 
@@ -367,6 +388,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .b-top
   width: 100%
   max-width: 100vw

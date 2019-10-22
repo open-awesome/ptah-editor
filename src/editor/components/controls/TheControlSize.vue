@@ -8,7 +8,8 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectElement',
-      'device'
+      'device',
+      'isMobile'
     ]),
 
     width: {
@@ -52,7 +53,24 @@ export default {
     ]),
 
     getStyleNumberValue (prop) {
-      let s = _.get(this.settingObjectOptions, `styles[${prop}]`)
+      let props = {}
+      let s = {}
+      let styles = this.settingObjectOptions.styles
+      let stylesMedia = {}
+
+      if (this.settingObjectOptions.media && this.settingObjectOptions.media['is-mobile']) {
+        stylesMedia = this.settingObjectOptions.media['is-mobile']
+      } else {
+        stylesMedia[prop] = styles[prop]
+      }
+
+      if (this.isMobile) {
+        props = stylesMedia
+      } else {
+        props = styles
+      }
+
+      s = props[prop]
 
       if (s === undefined) {
         // get values from node
@@ -64,19 +82,27 @@ export default {
     },
 
     update (prop, value) {
+      let props = {}
       let styles = {}
+      let media = {}
 
       if (value === '') value = 0
 
       styles[prop] = value + 'px'
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+
+      media[`${this.device}`] = {}
+      media[`${this.device}`][prop] = value + 'px'
+
+      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
     }
   }
 }
 </script>
 
 <template>
-  <div class="b-size" v-if="device !== 'is-mobile'">
+  <div class="b-size">
     <base-label>
       {{ $t('c.size') }}
     </base-label>

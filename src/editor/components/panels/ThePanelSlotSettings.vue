@@ -22,50 +22,65 @@
         <h6 v-show="direction" class="">Content direction</h6>
 
         <ul v-show="isRowDir">
-          <li :class="{ active: align === 'flex-start' }" tooltip="Top" @click="changeAlign('flex-start')">
+          <li :class="{ active: align === 'flex-start' }" tooltip="Vertical align Top" @click="changeAlign('flex-start')">
             <icon-base name="groupTop"/>
           </li>
-          <li :class="{ active: align === 'center' }" tooltip="Vertical align center" @click="changeAlign('center')">
+          <li :class="{ active: align === 'center' }" tooltip="Vertical align Center" @click="changeAlign('center')">
             <icon-base name="groupCenterVertical"/>
           </li>
-          <li :class="{ active: align === 'flex-end' }" tooltip="Bottom" @click="changeAlign('flex-end')">
+          <li :class="{ active: align === 'flex-end' }" tooltip="Vertical align Bottom" @click="changeAlign('flex-end')">
             <icon-base name="groupBottom"/>
           </li>
         </ul>
 
         <ul v-show="isRowDir">
-          <li :class="{ active: justify === 'flex-start' }" tooltip="Left" @click="changeJustify('flex-start')">
+          <li :class="{ active: justify === 'flex-start' }" tooltip="Horizontal align Left" @click="changeJustify('flex-start')">
             <icon-base name="groupLeft"/>
           </li>
 
-          <li :class="{ active: justify === 'flex-end' }" tooltip="Right" @click="changeJustify('flex-end')">
+          <li :class="{ active: justify === 'flex-end' }" tooltip="Horizontal align Right" @click="changeJustify('flex-end')">
             <icon-base name="groupRight"/>
           </li>
 
-          <li :class="{ active: justify === 'center' }" tooltip="Center" @click="changeJustify('center')">
+          <li :class="{ active: justify === 'center' }" tooltip="Horizontal align Center" @click="changeJustify('center')">
             <icon-base name="groupCenterHorizontal"/>
           </li>
 
-          <li :class="{ active: justify === 'space-between' }" tooltip="Space between" @click="changeJustify('space-between')">
+          <li :class="{ active: justify === 'space-between' }" tooltip="Horizontal align Space between" @click="changeJustify('space-between')">
             <icon-base name="groupSpaceBetween"/>
           </li>
         </ul>
 
         <ul v-show="isColumnDir">
-          <li :class="{ active: align === 'flex-start' }" @click="changeAlign('flex-start')">
+          <li :class="{ active: align === 'flex-start' }" tooltip="Horizontal align Left" @click="changeAlign('flex-start')">
             <icon-base name="groupLeft"/>
           </li>
-          <li :class="{ active: align === 'center' }" @click="changeAlign('center')">
+          <li :class="{ active: align === 'center' }" tooltip="Horizontal align Center" @click="changeAlign('center')">
             <icon-base name="groupCenterHorizontal"/>
           </li>
-          <li :class="{ active: align === 'flex-end' }" @click="changeAlign('flex-end')">
+          <li :class="{ active: align === 'flex-end' }" tooltip="Horizontal align Right" @click="changeAlign('flex-end')">
             <icon-base name="groupRight"/>
+          </li>
+        </ul>
+
+        <ul v-show="isColumnDir">
+          <li :class="{ active: justify === 'flex-start' }" tooltip="Vertical align Top" @click="changeJustify('flex-start')">
+            <icon-base name="groupTop"/>
+          </li>
+          <li :class="{ active: justify === 'center' }" tooltip="Vertical align Center" @click="changeJustify('center')">
+            <icon-base name="groupCenterVertical"/>
+          </li>
+          <li :class="{ active: justify === 'flex-end' }" tooltip="Vertical align Bottom" @click="changeJustify('flex-end')">
+            <icon-base name="groupBottom"/>
+          </li>
+          <li :class="{ active: justify === 'space-between' }" tooltip="Horizontal align Space between" @click="changeJustify('space-between')">
+            <icon-base class="b-groupSpaceBetween" name="groupSpaceBetween"/>
           </li>
         </ul>
       </div> <!-- /_b-panel__control-->
     </div><!-- /_direction-->
 
-    <div class="b-panel__control" v-if="settingObjectOptions.width">
+    <div class="b-panel__control" v-if="settingObjectOptions.width && !isMobile">
       <control-slot-width></control-slot-width>
     </div>
 
@@ -92,7 +107,16 @@ export default {
   },
 
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectSection', 'settingObjectOptions']),
+    ...mapState('Sidebar', [
+      'sandbox',
+      'settingObjectSection',
+      'settingObjectOptions',
+      'device'
+    ]),
+
+    isMobile () {
+      return this.device === 'is-mobile'
+    },
 
     options () {
       return this.settingObjectOptions
@@ -122,6 +146,15 @@ export default {
       return (this.settingObjectSection.get(this.sandbox.container) || {}).styles
     },
 
+    mediaStyles () {
+      let media = (this.settingObjectSection.get(this.sandbox.container) || {}).media
+
+      if (media === undefined) {
+        media = { 'is-mobile': {} }
+      }
+      return media
+    },
+
     components: {
       set (value) {
         this.settingObjectSection.set(this.sandbox.components, value)
@@ -133,35 +166,29 @@ export default {
 
     direction: {
       set (value) {
-        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
-          styles: { 'flex-direction': value }
-        }))
+        this.update('flex-direction', value)
       },
       get () {
-        return this.styles['flex-direction']
+        return this.getPropValue('flex-direction')
       }
     },
 
     align: {
       set (value) {
-        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
-          styles: { 'align-items': value }
-        }))
+        this.update('align-items', value)
       },
       get () {
-        return this.styles['align-items']
+        return this.getPropValue('align-items')
       }
     },
 
     justify: {
-      get () {
-        return this.styles['justify-content']
+      set (value) {
+        this.update('justify-content', value)
       },
 
-      set (value) {
-        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
-          styles: { ...this.styles, 'justify-content': value }
-        }))
+      get () {
+        return this.getPropValue('justify-content')
       }
     }
   },
@@ -198,6 +225,35 @@ export default {
         return
       }
       this.justify = value
+    },
+
+    update (prop, value) {
+      let props = {}
+      let styles = {}
+      let media = {}
+      let device = 'is-mobile'
+
+      styles[prop] = value
+
+      media[device] = {}
+      media[device][prop] = value
+
+      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+      this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, props))
+    },
+
+    getPropValue (prop) {
+      let s = ''
+      let device = 'is-mobile'
+
+      if (this.isMobile && this.mediaStyles[device] && this.mediaStyles[device][prop]) {
+        s = this.mediaStyles[device][prop]
+      } else {
+        s = this.styles[prop]
+      }
+
+      return s
     }
   }
 }
@@ -251,4 +307,7 @@ export default {
         &.active
           color: #ffffff
           cursor: default
+
+.b-groupSpaceBetween
+  transform: rotate(90deg)
 </style>

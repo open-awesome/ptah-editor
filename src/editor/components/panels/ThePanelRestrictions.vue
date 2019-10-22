@@ -10,7 +10,7 @@
     </div>
 
     <!-- Visible elements -->
-    <div class="b-panel__control">
+    <div class="b-panel__control" v-if="!isMobile">
       <control-age-restrictions/>
     </div>
 
@@ -23,6 +23,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import ControlAgeRestrictionsStyle from '../controls/TheControlAgeRestrictionsStyle'
 import ControlAgeRestrictions from '../controls/TheControlAgeRestrictions'
 import ControlBox from '../controls/TheControlBox'
@@ -41,6 +42,12 @@ export default {
       type: Object,
       required: true
     }
+  },
+
+  computed: {
+    ...mapState('Sidebar', [
+      'isMobile'
+    ])
   }
 }
 </script>

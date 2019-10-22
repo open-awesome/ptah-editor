@@ -16,29 +16,47 @@ export default {
         },
         {
           type: 'Simple page',
-          sections: ['FirstScreenSpace01', 'FooterSpace'],
-          url: 'https://s3.protocol.one/files/templateSimplePage.json',
+          sections: [
+            'FirstScreenSpace01',
+            'FooterSpace'
+          ],
+          url: 'https://s3.protocol.one/files/Simple-page.json',
           image: 'https://s3.protocol.one/images/1_r.jpg',
           description: 'Simple Sci-fi template width video background. Sections: First Screen, Footer'
         },
         {
           type: 'Ptah page',
           sections: [],
-          url: 'https://s3.protocol.one/files/templatePtah.json',
-          image: 'https://s3.protocol.one/images/2ptah_r.jpg',
+          url: 'https://s3.protocol.one/files/Ptah-page-2019.json',
+          image: 'https://s3.protocol.one/images/2ptah_r1.jpg',
           description: 'Look at how the landing page was created which stands on the main page of the Ptah page builder'
         },
         {
           type: 'Page with subscription form',
-          sections: ['FirstScreenSpaceVideoBack', 'Columns', 'GalleryPopup', 'FormCenter', 'FooterSpace'],
-          url: 'https://s3.protocol.one/files/templatePageWithSubscriptionForm.json',
+          sections: [
+            'FirstScreenSpaceVideoBack',
+            'Columns',
+            'GalleryPopup',
+            'FormCenter',
+            'FooterSpace'
+          ],
+          url: 'https://s3.protocol.one/files/SpaceWithSubscriptionForm-page.json',
           image: 'https://s3.protocol.one/images/3_r.jpg',
           description: 'Sci-fi template width video background and subscription form. Sections: First screen, columns, gallery, form, footer'
         },
         {
           type: 'Space page',
-          sections: ['SmmHeader', 'FirstScreenSpace02', 'Columns', 'Slider', 'Products', 'SystemRequirements', 'FrequentlyAskedQuestions', 'FooterSpace'],
-          url: 'https://s3.protocol.one/files/templateSpacePage.json',
+          sections: [
+            'SmmHeader',
+            'FirstScreenSpace02',
+            'Columns',
+            'Slider',
+            'Products',
+            'SystemRequirements',
+            'FrequentlyAskedQuestions',
+            'FooterSpace'
+          ],
+          url: 'https://s3.protocol.one/files/Space-page.json',
           image: 'https://s3.protocol.one/images/4_r.jpg',
           description: 'Sci-fi styled template with: Menu, First screen, columns, slider, products, system requirments, FAQ and footer'
         },

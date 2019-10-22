@@ -7,7 +7,7 @@
       <div class="b-panel__inner">
 
         <!-- Carousel Images Multiple Upload -->
-        <div class="b-panel__control" v-if="settingObjectOptions.hasMultipleImages">
+        <div class="b-panel__control" v-if="settingObjectOptions.hasMultipleImages && !isMobile">
           <base-uploader
             :value="galleryImages"
             @change="updateGalleryImages"
@@ -16,17 +16,17 @@
         </div>
 
         <!-- Carousel options -->
-        <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages">
+        <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages && !isMobile">
           <the-control-carousel></the-control-carousel>
         </div>
 
         <!-- Banner section options -->
-        <div class="b-section-settings__control" v-if="settingObjectOptions.bannerSection">
+        <div class="b-section-settings__control" v-if="settingObjectOptions.bannerSection && !isMobile">
           <the-control-section-banner></the-control-section-banner>
         </div>
 
         <!-- Form -->
-        <div class="b-panel__control mailchimp" v-if="settingObjectSection.group === 'Forms'">
+        <div class="b-panel__control mailchimp" v-if="settingObjectSection.group === 'Forms' && !isMobile">
           <div v-if="user.mailchimpIntegration && currentLanding.settings.mailchimpList">
             <div class="mailchimp_complete">
               <img src="https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png" alt="">
@@ -47,11 +47,11 @@
           </div>
         </div>
 
-        <div v-if="!isHeader" class="b-panel__control">
+        <div class="b-panel__control" v-if="!isHeader && !isMobile">
           <control-section-height></control-section-height>
         </div>
 
-        <div v-if="isHeader" class="b-panel__control">
+        <div class="b-panel__control" v-if="isHeader">
           <control-section-sticky></control-section-sticky>
         </div>
 
@@ -131,7 +131,8 @@ export default {
       'settingObjectSection',
       'sectionsGroups',
       'isGrouping',
-      'settingObjectElement'
+      'settingObjectElement',
+      'isMobile'
     ]),
 
     ...mapState('User', ['user']),

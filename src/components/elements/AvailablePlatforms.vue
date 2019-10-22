@@ -1,13 +1,20 @@
 <template>
   <div class="b-available-platforms b-border"
     :path="path"
+    :style="objVarsMedia"
     >
     <div class="b-available-platforms__item"
       v-for="(value, key) in platforms" :key="key"
       v-if="platforms[key].visible"
+      :style="{
+        '--mobile-width': mediaStyles['is-mobile']['sizeIcons']['width'] + 'px'
+      }"
       >
       <a class="b-available-platforms__item-button flex flex_center"
-        :style="{ fill: colorFill['color'], width: sizeIcons.width + 'px'  }"
+        :style="{
+          fill: colorFill['color'],
+          width: sizeIcons.width + 'px'
+        }"
         :title="platforms[key].name"
         >
         <VuseIcon :name="key"></VuseIcon>
@@ -18,10 +25,15 @@
 
 <script>
 import VuseIcon from '@editor/components/VuseIcon'
+import elementMedia from '../mixins/elementMedia'
 
 export default {
   name: 'AvailablePlatforms',
-  inject: ['$section'],
+
+  mixins: [
+    elementMedia
+  ],
+
   components: {
     VuseIcon
   },
@@ -47,6 +59,7 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
+@import '../../assets/sass/element.sass'
 
 .b-available-platforms
   width: auto
@@ -72,6 +85,11 @@ export default {
     &-button
       border: none
       position: relative
+      .is-mobile &
+        width: var(--mobile-width) !important
+      @media only screen and (max-width: 768px)
+        &
+          width: var(--mobile-width) !important
       .vuse-icon
         width: inherit
         height: auto

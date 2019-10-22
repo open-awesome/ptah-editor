@@ -2,7 +2,7 @@
 <section
     v-styler:section="$sectionData.mainStyle"
     :class="[$sectionData.mainStyle.classes, device.type]"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     class="b-gallery-carousel">
 
   <slot name="menu"/>
@@ -13,7 +13,6 @@
     <sandbox
       container-path="$sectionData.container"
       components-path="$sectionData.components"
-      direction="column"
       class="b-sandbox">
 
       <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -75,6 +74,7 @@ import * as types from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 import 'swiper/dist/css/swiper.min.css'
 import swiperOptions from '@editor/swiper'
@@ -126,7 +126,7 @@ export default {
 
   group: GROUP_NAME,
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/coverflow-carousel.png',
 
@@ -175,6 +175,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .swiper-slide-item
   width: 100%
   height: 100%

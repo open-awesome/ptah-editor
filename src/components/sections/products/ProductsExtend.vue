@@ -3,102 +3,140 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
-const C_CUSTOM_1 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn787.cdn.stg.gamenet.ru/0/8hwOK/o_G1wMi.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '157px',
-        'height': '194px'
+let prev = [
+  'https://gn257.cdn.stg.gamenet.ru/0/8dAso/o_1O03Wg.png',
+  'https://gn292.cdn.stg.gamenet.ru/0/8dAtJ/o_1FdGcD.png',
+  'https://gn546.cdn.stg.gamenet.ru/0/8dAtZ/o_2FiQhB.png',
+  'https://gn452.cdn.stg.gamenet.ru/0/8dAtj/o_1ZxHzN.png'
+]
+
+let label = [
+  'Start', 'Full', 'Delux', 'Ultimate'
+]
+
+let price = [
+  '10', '19', '29', '39'
+]
+
+const [
+  C_CUSTOM_1,
+  C_CUSTOM_2,
+  C_CUSTOM_3,
+  C_CUSTOM_4
+] = Array.from(new Array(4), (x, i) => {
+  return [
+    {
+      element: {
+        styles: {
+          'background-image': `url(${prev[i]})`,
+          'background-color': 'rgba(0, 0, 0, 0)',
+          'background-repeat': 'no-repeat',
+          'background-size': 'contain',
+          'width': '120px',
+          'height': '143px'
+        },
+        media: {
+          'is-mobile': {
+            'width': '120px',
+            'height': '143px'
+          }
+        }
       }
     },
-    key: 0
-  },
-  {
-    element: {
-      text: '<b>Start Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+    {
+      element: {
+        text: `<p><strong>${label[i]} edition</strong></p>`,
+        styles: {
+          'font-family': 'Montserrat',
+          'font-size': '2.8rem',
+          'color': '#ffffff'
+        },
+        media: {
+          'is-mobile': {
+            'font-size': '3rem'
+          }
+        }
       }
     },
-    key: 1
-  },
-  {
-    element: {
-      text: '<b>10$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
+    {
+      element: {
+        text: `<b>${price[i]}$</b>`,
+        styles: {
+          'color': '#fff',
+          'font-family': 'Montserrat',
+          'font-size': '3.2rem'
+        },
+        media: {
+          'is-mobile': {
+            'font-size': '3.2rem'
+          }
+        }
       }
     },
-    key: 2
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': 'transparent',
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '190px',
-        'height': '64px',
-        'border-radius': '100px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#F4BC64'
-      },
-      pseudo: {
-        hover: {
-          'color': '#FFFFFF !important',
-          'border-width': '2px !important',
-          'border-style': 'solid !important',
-          'border-color': '#FFFFFF !important'
+    {
+      element: {
+        text: '<p><strong>BUY NOW</strong></p>',
+        styles: {
+          'background-color': 'transparent',
+          'color': '#F4BC64',
+          'font-family': 'Montserrat',
+          'font-size:': '1.6rem',
+          'text-align': 'center',
+          'width': '190px',
+          'height': '64px',
+          'border-radius': '100px',
+          'border-width': '2px',
+          'border-style': 'solid',
+          'border-color': '#F4BC64'
+        },
+        pseudo: {
+          hover: {
+            'color': '#FFFFFF !important',
+            'border-width': '2px !important',
+            'border-style': 'solid !important',
+            'border-color': '#FFFFFF !important'
+          }
         }
       }
     }
-  }
-]
+  ]
+})
 
-const C_CUSTOM_1_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn257.cdn.stg.gamenet.ru/0/8dAso/o_1O03Wg.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '120px',
-        'height': '143px'
+const [
+  C_CUSTOM_1_M,
+  C_CUSTOM_2_M,
+  C_CUSTOM_3_M,
+  C_CUSTOM_4_M
+] = Array.from(new Array(4), (x, i) => {
+  return [
+    {
+      element: {
+        styles: {
+          'background-image': `url(${prev[i]})`,
+          'background-color': 'rgba(0, 0, 0, 0)',
+          'background-repeat': 'no-repeat',
+          'background-size': 'contain',
+          'width': '120px',
+          'height': '143px'
+        }
       }
     },
-    key: 4
-  },
-  {
-    element: {
-      text: '<b>Start Edition</b>',
-      styles: {
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size': '24px',
-        'line-height': '29px',
-        'padding': '30px 0 0 0'
+    {
+      element: {
+        text: `<b>${label[i]} Edition</b>`,
+        styles: {
+          'color': '#F4BC64',
+          'font-family': 'Montserrat',
+          'font-size': '2.2rem',
+          'padding-top': '30px'
+        }
       }
-    },
-    key: 5
-  }
-]
+    }
+  ]
+})
 
 const C_CUSTOM_1D = [
   {
@@ -160,101 +198,6 @@ const C_CUSTOM_1D = [
         color: '#818181'
       }
     }
-  }
-]
-
-const C_CUSTOM_2 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn936.cdn.stg.gamenet.ru/0/8hwOw/o_AtAIl.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '219px',
-        'height': '194px'
-      }
-    },
-    key: 10
-  },
-  {
-    element: {
-      text: '<b>Full Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 11
-  },
-  {
-    element: {
-      text: '<b>19$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 12
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': 'transparent',
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '190px',
-        'height': '64px',
-        'border-radius': '100px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#F4BC64'
-      },
-      pseudo: {
-        hover: {
-          'color': '#FFFFFF !important',
-          'border-width': '2px !important',
-          'border-style': 'solid !important',
-          'border-color': '#FFFFFF !important'
-        }
-      }
-    }
-  }
-]
-
-const C_CUSTOM_2_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn292.cdn.stg.gamenet.ru/0/8dAtJ/o_1FdGcD.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '161px',
-        'height': '143px'
-      }
-    },
-    key: 14
-  },
-  {
-    element: {
-      text: '<b>Full Edition</b>',
-      styles: {
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size': '24px',
-        'line-height': '29px',
-        'padding': '30px 0 0 0'
-      }
-    },
-    key: 15
   }
 ]
 
@@ -321,101 +264,6 @@ const C_CUSTOM_2D = [
   }
 ]
 
-const C_CUSTOM_3 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn128.cdn.stg.gamenet.ru/0/8hwPz/o_1fOpA2.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '215px',
-        'height': '194px'
-      }
-    },
-    key: 20
-  },
-  {
-    element: {
-      text: '<b>Deluxe Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 21
-  },
-  {
-    element: {
-      text: '<b>29$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 22
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': 'transparent',
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '190px',
-        'height': '64px',
-        'border-radius': '100px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#F4BC64'
-      },
-      pseudo: {
-        hover: {
-          'color': '#FFFFFF !important',
-          'border-width': '2px !important',
-          'border-style': 'solid !important',
-          'border-color': '#FFFFFF !important'
-        }
-      }
-    }
-  }
-]
-
-const C_CUSTOM_3_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn546.cdn.stg.gamenet.ru/0/8dAtZ/o_2FiQhB.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '157px',
-        'height': '143px'
-      }
-    },
-    key: 24
-  },
-  {
-    element: {
-      text: '<b>Deluxe Edition</b>',
-      styles: {
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size': '24px',
-        'line-height': '29px',
-        'padding': '30px 0 0 0'
-      }
-    },
-    key: 25
-  }
-]
-
 const C_CUSTOM_3D = [
   {
     element: {
@@ -476,101 +324,6 @@ const C_CUSTOM_3D = [
         color: '#818181'
       }
     }
-  }
-]
-
-const C_CUSTOM_4 = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn573.cdn.stg.gamenet.ru/0/8hwQa/o_pphTq.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '213px',
-        'height': '194px'
-      }
-    },
-    key: 30
-  },
-  {
-    element: {
-      text: '<b>Ultimate Edition</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 31
-  },
-  {
-    element: {
-      text: '<b>39$</b>',
-      styles: {
-        'color': '#fff',
-        'font-family': 'Montserrat',
-        'font-size': '32px',
-        'line-height': '39px'
-      }
-    },
-    key: 32
-  },
-  {
-    element: {
-      text: '<p><strong>BUY NOW</strong></p>',
-      styles: {
-        'background-color': 'transparent',
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size:': '1.6rem',
-        'text-align': 'center',
-        'width': '190px',
-        'height': '64px',
-        'border-radius': '100px',
-        'border-width': '2px',
-        'border-style': 'solid',
-        'border-color': '#F4BC64'
-      },
-      pseudo: {
-        hover: {
-          'color': '#FFFFFF !important',
-          'border-width': '2px !important',
-          'border-style': 'solid !important',
-          'border-color': '#FFFFFF !important'
-        }
-      }
-    }
-  }
-]
-
-const C_CUSTOM_4_M = [
-  {
-    element: {
-      styles: {
-        'background-image': 'url("https://gn452.cdn.stg.gamenet.ru/0/8dAtj/o_1ZxHzN.png")',
-        'background-color': 'rgba(0, 0, 0, 0)',
-        'background-repeat': 'no-repeat',
-        'background-size': 'contain',
-        'width': '157px',
-        'height': '143px'
-      }
-    },
-    key: 34
-  },
-  {
-    element: {
-      text: '<b>Ultimate Edition</b>',
-      styles: {
-        'color': '#F4BC64',
-        'font-family': 'Montserrat',
-        'font-size': '24px',
-        'line-height': '29px',
-        'padding': '30px 0 0 0'
-      }
-    },
-    key: 35
   }
 ]
 
@@ -655,7 +408,13 @@ const C_CUSTOM_CONTAINER_D = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'flex-start',
-    'padding': '10px 0 0 85px'
+    'padding-top': '10px',
+    'padding-left': '85px'
+  },
+  media: {
+    'is-mobile': {
+      'padding-left': '70px'
+    }
   }
 }
 
@@ -664,7 +423,8 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
       'background-color': 'rgba(21,28,68,1)',
-      'padding': '30px 0'
+      'padding-top': '30px',
+      'padding-bottom': '30px'
     }
   },
   containerStandart: _.merge({}, C_CUSTOM_CONTAINER),
@@ -782,7 +542,7 @@ export default {
 
   description: 'Product list side expanded view',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn199.cdn.stg.gamenet.ru/0/8iE9h/o_2BSWcG.jpg',
 
@@ -877,7 +637,7 @@ export default {
   <section
     class="b-products-columns-extend"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -885,13 +645,13 @@ export default {
     <slot name="overlay"/>
 
     <div class="b-grid">
-      <div class="b-products-columns-extend__padd">
+      <div class="b-section-padd">
 
-        <div class="b-products-columns-extend__padd-border">
+        <div class="b-section-padd-border">
           <!-- Setting controls -->
-          <div class="b-products-columns-extend__controls">
+          <div class="b-section-menu__controls">
             <div>
-              <a href="#" class="b-products-columns-extend__control"
+              <a href="#" class="b-section-menu__control"
                  tooltip="Products"
                  tooltip-position="bottom"
                  @click.stop="showSettings('SectionProductsColumnsSettings')">
@@ -921,7 +681,6 @@ export default {
                     class="b-sandbox"
                     :container-path="`$sectionData.container${key}M`"
                     :components-path="`$sectionData.components${key}M`"
-                    direction="column"
                     >
 
                     <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}M`].styles" @start="drag(`components${key}M`)" @change="dragStop">
@@ -963,7 +722,6 @@ export default {
                       class="b-sandbox"
                       :container-path="`$sectionData.container${key}`"
                       :components-path="`$sectionData.components${key}`"
-                      direction="column"
                       >
                       <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @start="drag(`$sectionData.components${key}`)" @change="dragStop">
                       <div
@@ -989,7 +747,6 @@ export default {
                       class="b-sandbox"
                       :container-path="`$sectionData.container${key}D`"
                       :components-path="`$sectionData.components${key}D`"
-                      direction="column"
                       >
                       <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @start="drag(`components${key}D`)" @change="dragStop">
                         <div
@@ -1022,6 +779,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+@import '../../../assets/sass/section-menu.sass'
 @import '../../../assets/sass/_variables.sass'
 @import '../../../assets/sass/_flex.sass'
 
@@ -1034,58 +793,7 @@ export default {
   &__icon-with-text
     color: inherit
     font-family: inherit
-  &__padd
-    padding: $size-step/4
 
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: $size-step/4
-      transition: border 0.25s
-      border: 1px dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 1px dashed $dark-blue-krayola
-
-  &__controls
-    position: absolute
-    top: -14px
-    left: $size-step/3.4
-
-    display: flex
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
   &__left
     flex-wrap: wrap
     &-item

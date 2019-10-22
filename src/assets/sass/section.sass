@@ -1,7 +1,6 @@
 section
   position: relative
   width: 100%
-  margin: 0
 
   text-align: center
 
@@ -11,17 +10,16 @@ section
 
   transition: background 200ms
   z-index: 1
-  .is-tablet &
-    padding: $size-step/4 !important
-  .is-mobile
-    padding: $size-step/8 !important
   .is-tablet &,
   .is-mobile &
     height: auto !important
   @media only screen and (max-width: 840px)
     &
-      padding: $size-step/8
       height: auto !important
+  @media only screen and (max-height: 668px)
+    &
+      height: auto !important
+      min-height: 100% !important
 
 .main
   &_showPopup

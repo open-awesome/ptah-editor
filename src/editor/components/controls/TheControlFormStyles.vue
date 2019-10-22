@@ -1,13 +1,14 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import { merge } from 'lodash-es'
+import * as _ from 'lodash-es'
 
 export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectElement',
-      'settingObjectType'
+      'settingObjectType',
+      'isMobile'
     ]),
 
     styles () {
@@ -18,17 +19,51 @@ export default {
       return this.settingObjectOptions.formStyles
     },
 
-    formHeight: {
+    mediaFormStylesHeight: {
       get () {
-        return parseInt(this.formStyles['height']) || 64
+        let w = _.get(this.settingObjectOptions, `media['is-mobile']['formStyles']['height']`)
+
+        if (w === undefined) w = _.get(this.settingObjectOptions, `formStyles['height']`)
+
+        return w
       },
 
       set (value) {
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
-          formStyles: {
-            height: value
+        let props = {}
+        let formStyles = {
+          height: value
+        }
+        let media = {
+          'is-mobile': {
+            'formStyles': formStyles
           }
-        }))
+        }
+
+        this.isMobile ? props = { 'media': media } : props = { 'formStyles': formStyles }
+
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+      }
+    },
+
+    elHeight: {
+      get () {
+        let h = 0
+
+        if (this.isMobile) {
+          h = this.mediaFormStylesHeight
+        } else {
+          h = this.formStyles.height
+        }
+
+        return h
+      },
+
+      set (value) {
+        if (this.isMobile) {
+          this.mediaFormStylesHeight = value
+        } else {
+          this.formStyles.height = value
+        }
       }
     },
 
@@ -40,7 +75,7 @@ export default {
       set (value) {
         const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
 
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
           formStyles: {
             'button-color': color
           }
@@ -56,7 +91,7 @@ export default {
       set (value) {
         const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
 
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
           formStyles: {
             buttonHoverColor: color
           }
@@ -72,7 +107,7 @@ export default {
       set (value) {
         const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
 
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
           formStyles: {
             buttonTextColor: color
           }
@@ -88,7 +123,7 @@ export default {
       set (value) {
         const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
 
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
           formStyles: {
             buttonHoverTextColor: color
           }
@@ -104,7 +139,7 @@ export default {
       set (value) {
         const color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
 
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
           formStyles: {
             inputBgColor: color
           }
@@ -118,7 +153,7 @@ export default {
       },
 
       set (value) {
-        this.updateSettingOptions(merge({}, this.settingObjectOptions, {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
           formStyles: {
             'border-radius': value
           }
@@ -137,7 +172,7 @@ export default {
 
 <template>
   <div>
-    <div class="b-bg-controls">
+    <div class="b-bg-controls" v-if="!isMobile">
       <div class="b-bg-controls__control">
         <base-color-picker label="Background text" v-model="inputBgColor"/>
       </div>
@@ -161,8 +196,8 @@ export default {
     </div>
     <div class="b-bg-controls">
       <div class="b-bg-controls__control">
-        <base-range-slider v-model="formHeight" min="30" max="100" label="Form height">
-          {{ formHeight }}px
+        <base-range-slider v-model="elHeight" min="30" max="100" label="Form height">
+          {{ elHeight }}px
         </base-range-slider>
       </div>
     </div>

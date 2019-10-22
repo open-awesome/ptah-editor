@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenFantasy02'
@@ -50,8 +51,20 @@ const C_CUSTOM_1 = [
         'background-size': 'contain',
         'width': '500px',
         'height': '121px',
-        'margin': '25px 0 20px 13px',
-        'padding': '0'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '20px',
+        'margin-left': '13px'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '100px',
+          'margin-top': '25px',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '12px'
+        }
       }
     }
   },
@@ -63,9 +76,24 @@ const C_CUSTOM_1 = [
         'font-size': '5.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '25px 0 20px 15px',
         'text-align': 'left',
-        'padding': '0 0 0 13px'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '20px',
+        'margin-left': '15px',
+        'padding-left': '13px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'line-height': '1.4',
+          'text-align': 'left',
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '8px',
+          'margin-right': '20px',
+          'padding-right': '80px'
+        }
       }
     }
   },
@@ -86,8 +114,24 @@ const C_CUSTOM_1 = [
         'font-weight': 'normal',
         'line-height': '1',
         'color': '#ffffff',
-        'padding': '0',
-        'margin': '0 0 27px 25px'
+        'margin-top': '0px',
+        'margin-right': '0px',
+        'margin-bottom': '27px',
+        'margin-left': '25px',
+        'padding-top': '0px',
+        'padding-right': '0px',
+        'padding-bottom': '0px',
+        'padding-left': '0px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '8px',
+          'margin-right': '20px',
+          'padding-right': '80px'
+        }
       }
     }
   },
@@ -103,13 +147,27 @@ const C_CUSTOM_1 = [
         'width': '240px',
         'height': '64px',
         'border': '1px solid #000000',
-        'margin': '25px 0 70px 38px',
-        'padding': '0'
+        'margin-top': '25px',
+        'margin-right': '0px',
+        'margin-bottom': '70px',
+        'margin-left': '38px',
+        'padding-top': '0px',
+        'padding-right': '0px',
+        'padding-bottom': '0px',
+        'padding-left': '0px'
       },
       pseudo: {
         'hover': {
           'background-color': '#333333 !important',
           'border': '1px solid #AF2E12 !important'
+        }
+      },
+      media: {
+        'is-mobile': {
+          'margin-top': '16px',
+          'margin-bottom': '16px',
+          'margin-left': '25px',
+          'margin-right': '0'
         }
       }
     }
@@ -188,8 +246,13 @@ const SCHEMA_CUSTOM = {
       'background-color': '#4A4A4A',
       'background-repeat': 'no-repeat',
       'background-attachment': 'scroll',
-      'background-position': 'center top',
+      'background-position': '100% 0%',
       'height': '100vh'
+    },
+    media: {
+      'is-mobile': {
+        'background-position': '78% 0%'
+      }
     }
   },
   components: _.merge({}, C_CUSTOM_1),
@@ -200,7 +263,6 @@ const SCHEMA_CUSTOM = {
     grow: ['$sectionData.container2'],
     selfName: '$sectionData.container',
     styles: {
-      'padding': '0',
       'align-items': 'flex-start'
     }
   },
@@ -225,7 +287,7 @@ export default {
 
   description: 'Fantasy title face the Countdown main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/first-screen-fantasy-02.jpg',
 
@@ -251,7 +313,7 @@ export default {
   <section
     class="b-first-screen-fantasy-02"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -263,7 +325,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -287,7 +348,6 @@ export default {
           <sandbox
               container-path="$sectionData.container2"
               components-path="$sectionData.components2"
-              direction="column"
               class="b-sandbox">
 
             <draggable v-model="$sectionData.components2" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container2.styles" @start="drag('components2')" @change="dragStop">
@@ -313,7 +373,6 @@ export default {
           <sandbox
             container-path="$sectionData.container3"
             components-path="$sectionData.components3"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components3" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container3.styles" @start="drag('components3')" @change="dragStop">
@@ -339,56 +398,58 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .b-first-screen-fantasy-02
   @media only screen and (width: 1024px) and (height: 1366px)
     &
-      background-position: 75% bottom !important
+      background-position: 75% bottom
   .is-mobile &,
-    background-position: 75% bottom !important
+    background-position: 75% bottom
   @media only screen and (max-width: 500px) and (max-height: 1000px)
     &
-      background-position: 75% bottom !important
+      background-position: 75% bottom
   .b-logo-fs
     @media only screen and (max-width: 900px) and (max-height: 450px)
       &
-        margin: 1.6rem 0 !important
+        margin: 1.6rem 0
   .b-text-fs
     letter-spacing: -0.02em
     .is-mobile &,
     .is-tablet &
-      font-size: 2.4rem !important
-      margin: 0 auto 8px !important
-      text-align: center !important
+      font-size: 2.4rem
+      margin: 0 auto 8px
+      text-align: center
     @media only screen and (width: 768px) and (height: 1024px)
       &
-        padding: 0px 0px 0px 40px !important
+        padding: 0px 0px 0px 40px
     @media only screen and (max-width: 840px)
       &
-        font-size: 2.4rem !important
-        margin: 0 auto 8px !important
+        font-size: 2.4rem
+        margin: 0 auto 8px
     @media only screen and (max-width: 500px)
       &
-        text-align: center !important
+        text-align: center
     @media only screen and (max-width: 900px) and (max-height: 450px)
       &
-        text-align: left !important
+        text-align: left
   .b-button-fs
     box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
     transition: background-color 200ms
     @media only screen and (max-width: 900px) and (max-height: 450px)
       &
-        margin: 1.6rem !important
+        margin: 1.6rem
   .b-timer-fs
     @media only screen and (max-width: 768px) and (min-height: 700px)
       &
-        width: 90% !important
+        width: 90
     @media only screen and (max-width: 900px) and (max-height: 450px)
       &
-        width: auto !important
-        margin: 1.6rem 0 !important
+        width: auto
+        margin: 1.6rem 0
   .b-delimiter-fs
     @media only screen and (max-width: 980px) and (max-height: 700px)
       &
-        display: none !important
+        display: none
 
 </style>

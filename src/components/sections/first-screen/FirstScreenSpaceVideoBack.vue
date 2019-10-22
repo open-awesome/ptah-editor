@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenSpaceVideoBack'
@@ -64,7 +65,8 @@ const C_CUSTOM = [
         'background-size': 'contain',
         'width': '246px',
         'height': '96px',
-        'margin': '25px 0'
+        'margin-top': '25px',
+        'margin-bottom': '25px'
       }
     }
   },
@@ -76,7 +78,10 @@ const C_CUSTOM = [
         'font-size': '3.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '10px 80px'
+        'margin-top': '10px',
+        'margin-right': '80px',
+        'margin-bottom': '10px',
+        'margin-left': '80px'
       }
     }
   },
@@ -88,7 +93,8 @@ const C_CUSTOM = [
         'font-size': '3.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
-        'margin': '21px 0 10px 0'
+        'margin-top': '21px',
+        'margin-bottom': '10px'
       }
     }
   },
@@ -109,8 +115,7 @@ const C_CUSTOM = [
         'font-weight': '800',
         'line-height': '1',
         'color': '#ffffff',
-        'padding': '0',
-        'margin': '0 0 62px 0'
+        'margin-bottom': '62px'
       }
     }
   },
@@ -126,7 +131,8 @@ const C_CUSTOM = [
         'width': '240px',
         'height': '64px',
         'border-radius': '100px',
-        'margin': '25px 0'
+        'margin-top': '25px',
+        'margin-bottom': '25px'
       },
       pseudo: {
         'hover': {
@@ -164,7 +170,7 @@ const C_CUSTOM = [
         }
       },
       styles: {
-        'margin': '25px 0 0'
+        'margin-top': '25px'
       },
       colorFill: {
         color: '#F4BC64'
@@ -208,7 +214,7 @@ export default {
 
   description: 'Space title animated background main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/first-screen-space-video-back.jpg',
 
@@ -230,7 +236,7 @@ export default {
   <section
     class="b-first-screen-space-video-back"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -242,7 +248,6 @@ export default {
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
               class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot b-draggable-slot_100" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -268,27 +273,29 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .b-first-screen-space-video-back
   .b-text-fs
     letter-spacing: -0.02em
     .is-mobile &,
     .is-tablet &
-      font-size: 2.4rem !important
-      margin: 0 auto 8px !important
+      font-size: 2.4rem
+      margin: 0 auto 8px
     @media only screen and (max-width: 840px)
       &
-        font-size: 2.4rem !important
-        margin: 0 auto 8px !important
+        font-size: 2.4rem
+        margin: 0 auto 8px
   .b-button-fs
     box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
     transition: background-color 200ms
   .b-timer-fs
     .is-mobile &,
     .is-tablet &
-      margin: 0 auto 8px !important
+      margin: 0 auto 8px
     @media only screen and (max-width: 840px)
       &
-        font-size: 2.4rem !important
-        margin: 0 auto 8px !important
+        font-size: 2.4rem
+        margin: 0 auto 8px
 
 </style>

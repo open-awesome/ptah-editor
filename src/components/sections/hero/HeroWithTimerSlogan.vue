@@ -3,56 +3,40 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroWithTimerSlogan'
 const BG_SECTION = 'url(https://gn866.cdn.stg.gamenet.ru/0/7oE1x/o_1ToUuI.jpg)'
 
-/**
- * Base keys for elements in Hero sections
- * Logo - 0
- * Title - 1
- * Description - 2
- * Button - 3
- * Available Platforms - 4
- * Video - 5
- * Slogan - 6
- * Link - 7
- * Delimiter- 8
- * Timer - 9
- * */
 const COMPONENTS = [
   {
     name: 'Logo',
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo',
-    key: 0
+    label: 'logo'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-slogan',
-    label: 'slogan',
-    key: 6
+    label: 'slogan'
   },
   {
     name: 'Timer',
     element: types.Timer,
     type: 'timer',
     class: 'b-timer',
-    label: 'Timer',
-    key: 9
+    label: 'Timer'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button',
-    label: 'button',
-    key: 3
+    label: 'button'
   }
 ]
 
@@ -66,9 +50,15 @@ const C_CUSTOM = [
         'background-size': 'contain',
         'width': '440px',
         'height': '124px'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '80px',
+          'margin-bottom': '0'
+        }
       }
-    },
-    key: 0
+    }
   },
   {
     element: {
@@ -78,13 +68,16 @@ const C_CUSTOM = [
         'text-align': 'center',
         'font-size': '4.8rem',
         'font-weight': 'bold'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem',
+          'line-height': '1.4'
+        }
       }
-    },
-    key: 6
+    }
   },
-  {
-    key: 9
-  },
+  {},
   {
     element: {
       text: 'Play Now',
@@ -96,13 +89,23 @@ const C_CUSTOM = [
         'font-family': 'Heebo',
         'text-align': 'center',
         'font-size': '3.6rem',
-        'width': '384x',
+        'width': '384px',
         'height': '116px',
         'border-radius': '0',
-        'font-weight': 'bold'
+        'font-weight': 'bold',
+        'padding-bottom': '14px'
+      },
+      media: {
+        'is-mobile': {
+          width: '270px',
+          height: '110px',
+          'margin-bottom': '0',
+          'font-size': '2.4rem',
+          'line-height': '1',
+          'padding-bottom': '8px'
+        }
       }
-    },
-    key: 3
+    }
   }
 ]
 
@@ -113,9 +116,10 @@ const SCHEMA_CUSTOM = {
       'background-color': '#151C44',
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
-      'background-attachment': 'scroll'
-    },
-    classes: ['full-height']
+      'background-attachment': 'scroll',
+      'background-position': '50% 0%',
+      'height': '100vh'
+    }
   },
   components: _.merge([], C_CUSTOM),
   container: {
@@ -131,7 +135,7 @@ export default {
 
   description: 'Shooter title Left Countdown main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/hero-with-timer-slogan.jpg',
 
@@ -153,7 +157,7 @@ export default {
   <section
     class="b-hero-with-timer-two-columns"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
     >
     <slot name="menu"/>
@@ -166,7 +170,6 @@ export default {
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
               class="b-sandbox">
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
@@ -194,19 +197,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
-
-.b-hero-with-timer-two-columns
-  .is-mobile &,
-  .is-tablet &
-    position: relative
-    height: auto
-    padding: $size-step/2 0 $size-step/4
-  @media only screen and (max-width: 768px)
-    &
-      position: relative
-      height: auto
-      padding: 2rem 0 1rem
-
 </style>

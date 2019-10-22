@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const COMPONENTS = [
   {
@@ -69,8 +70,8 @@ const C_CUSTOM = [
         'font-family': 'Lato',
         'font-size': '1.4rem',
         'color': '#fff',
-        'margin': '0px',
-        'padding': '0px 16px'
+        'padding-right': '16px',
+        'padding-left': '16px'
       }
     }
   },
@@ -121,8 +122,7 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '130px',
         'height': '32px',
-        'font-size': '1.8rem',
-        'margin': '0'
+        'font-size': '1.8rem'
       },
       pseudo: {
         hover: {
@@ -143,8 +143,7 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
-        'font-size': '1.8rem',
-        'margin': '0'
+        'font-size': '1.8rem'
       },
       pseudo: {
         hover: {
@@ -165,8 +164,7 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
-        'font-size': '1.8rem',
-        'margin': '0'
+        'font-size': '1.8rem'
       },
       pseudo: {
         hover: {
@@ -188,13 +186,22 @@ const SCHEMA_CUSTOM = {
       'background-image': BG_SECTION,
       'background-color': '#151C44',
       'background-size': 'cover',
-      'background-position': 'top center',
+      'background-position': '50% 0%',
       'background-repeat': 'no-repeat',
-      'padding': '8px 0'
+      'padding-top': '8px',
+      'padding-bottom': '8px'
     }
   },
   container: {
-    width: 11
+    width: 11,
+    styles: {
+      'flex-direction': 'row'
+    },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column'
+      }
+    }
   },
   components: _.merge({}, C_CUSTOM),
   edited: true
@@ -207,7 +214,7 @@ export default {
 
   description: 'Lined up lower block with set of elements',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/footer-space.jpg',
 
@@ -229,7 +236,7 @@ export default {
   <footer
     class="b-section-footer"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -269,6 +276,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .b-section-footer
   position: relative
   width: 100%

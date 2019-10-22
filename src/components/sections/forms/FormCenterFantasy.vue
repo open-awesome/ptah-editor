@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const COMPONENTS = [
   {
@@ -24,19 +25,25 @@ const COMPONENTS = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<b>Header about form</b>',
+      text: '<p><b>Header about form</b></p>',
       styles: {
         'font-family': 'Cinzel',
         'font-size': '4.0rem',
         'color': '#ffffff',
         'padding-bottom': '67px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem',
+          'padding-bottom': '16px'
+        }
       }
     }
   },
   {
     element: {
       placeholder: 'Email',
-      buttonText: '<b>Call to Action</b>',
+      buttonText: '<p><b>Call to Action</b></p>',
       styles: {
         'color': '#000000',
         'border-radius': '2px',
@@ -61,9 +68,15 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-color': '#000000',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover',
-      'padding': '62px 0 236px'
+      'padding-top': '62px',
+      'padding-bottom': '236px'
+    },
+    media: {
+      'is-mobile': {
+        'padding-bottom': '64px'
+      }
     }
   },
   components: _.merge({}, C_CUSTOM),
@@ -81,7 +94,7 @@ export default {
 
   description: 'Centered e-mail gathering form screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/form_cover.jpg',
 
@@ -105,7 +118,7 @@ export default {
   <section
     class="b-form"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -117,7 +130,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox">
 
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -143,6 +155,5 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-.b-draggable-slot > div
-  width: 100%
+@import '../../../assets/sass/section-media.sass'
 </style>

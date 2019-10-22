@@ -2,7 +2,7 @@
 <section
     v-styler:section="$sectionData.mainStyle"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     class="b-hero">
 
   <slot name="menu"/>
@@ -21,8 +21,6 @@
         <sandbox
             :container-path="`$sectionData.container${ prefix }`"
             :components-path="`$sectionData.components${ prefix }`"
-            :align="(prefix === '') ? 'flex-start' : 'center'"
-            :direction="(prefix === '') ? 'row' : 'column'"
             :class="`b-sandbox__${ prefix || 1 }`"
             class="b-sandbox">
 
@@ -69,22 +67,10 @@ import { StyleObject, Logo, Text, Delimiter, Button } from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const [name, group, cover] = ['TwoSegmentHeroScreen', 'FirstScreen', '/img/covers/hero-two-columns.png']
 
-/**
- * Base keys for elements in Hero sections
- * Logo - 0
- * Title - 1
- * Description - 2
- * Button - 3
- * Available Platforms - 4
- * Video - 5
- * Slogan - 6
- * Link - 7
- * Delimiter- 8
- * Timer - 9
- * */
 const defaultColumnComponents1 = [
   {
     element: {
@@ -96,8 +82,7 @@ const defaultColumnComponents1 = [
         'width': '110px',
         'height': '64px'
       }
-    },
-    key: 0
+    }
   }
 ]
 const defaultColumnComponents2 = [
@@ -108,9 +93,13 @@ const defaultColumnComponents2 = [
         'font-family': 'Lato',
         'font-size': '4.8rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem'
+        }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -125,12 +114,9 @@ const defaultColumnComponents2 = [
         'line-height': '1.5',
         'color': '#FFF'
       }
-    },
-    key: 2
+    }
   },
-  {
-    key: 8
-  },
+  {},
   {
     element: {
       text: 'Call to Action',
@@ -144,8 +130,7 @@ const defaultColumnComponents2 = [
         'height': '64px',
         'border-radius': '2px'
       }
-    },
-    key: 3
+    }
   }
 ]
 const defaultSchema = {
@@ -155,6 +140,11 @@ const defaultSchema = {
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
       'background-position': '75% 50%'
+    },
+    media: {
+      'is-mobile': {
+        'background-position': '65% 50%'
+      }
     }
   },
   container: {
@@ -169,7 +159,12 @@ const defaultSchema = {
     minWidth: 2,
     maxWidth: 10,
     grow: ['$sectionData.container'],
-    selfName: '$sectionData.container2'
+    selfName: '$sectionData.container2',
+    media: {
+      'is-mobile': {
+        'padding-bottom': '32px'
+      }
+    }
   },
   components: merge({}, defaultColumnComponents1),
   components2: merge({}, defaultColumnComponents2),
@@ -183,20 +178,20 @@ export default {
 
   description: 'Two parts split main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   $schema: {
     mainStyle: StyleObject,
     container: StyleObject,
     container2: StyleObject,
     components: [
-      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo', key: 0 }
+      { name: 'Logo', element: Logo, type: 'image', class: 'b-logo', label: 'logo' }
     ],
     components2: [
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-title', label: 'title', key: 1 },
-      { name: 'TextElement', element: Text, type: 'text', class: 'b-text', label: 'description', key: 2 },
-      { name: 'Delimiter', element: Delimiter, type: 'delimiter', class: 'b-delimiter', label: 'delimiter', key: 8 },
-      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button', key: 3 }
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-title', label: 'title' },
+      { name: 'TextElement', element: Text, type: 'text', class: 'b-text', label: 'description' },
+      { name: 'Delimiter', element: Delimiter, type: 'delimiter', class: 'b-delimiter', label: 'delimiter' },
+      { name: 'Button', element: Button, type: 'button', class: 'b-button-test', label: 'button' }
     ]
   },
 
@@ -215,13 +210,11 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-.b-hero
-
+@import '../../../assets/sass/section-media.sass'
 .b-grid__col-8
   .is-mobile &,
   .is-tablet &
     padding-top: 0
   @media only screen and (max-width: 768px)
     padding-top: 0
-
 </style>

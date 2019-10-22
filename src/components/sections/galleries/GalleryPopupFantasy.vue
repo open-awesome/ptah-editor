@@ -2,6 +2,7 @@
 import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 import Seeder from '@editor/seeder'
 import { mapActions } from 'vuex'
 
@@ -50,6 +51,12 @@ const [
           'width': '340px',
           'height': '190px'
         },
+        media: {
+          'is-mobile': {
+            'width': '290px',
+            'height': '160px'
+          }
+        },
         link: {
           imageUrl: prev[i]
         },
@@ -89,9 +96,13 @@ const C_CUSTOM = [
         'font-family': 'Cinzel',
         'font-size': '4.0rem',
         'color': '#fff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem'
+        }
       }
-    },
-    key: 0
+    }
   }
 ]
 
@@ -102,7 +113,8 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-image': 'url(https://s3.protocol.one/images/travel_map.jpg)',
-      'padding': '100px 0 190px'
+      'padding-top': '100px',
+      'padding-bottom': '190px'
     },
     isTextStyle: true,
     isLabel: true,
@@ -131,7 +143,7 @@ export default {
 
   description: 'Gallery fullscreen pop-up picture view',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/gpopup_cover.jpg',
 
@@ -183,7 +195,7 @@ export default {
   <section class="b-gallery-popup"
    v-styler:section="$sectionData.mainStyle"
    :class="$sectionData.mainStyle.classes"
-   :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }]"
+   :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }, $sectionData.objVarsMedia], $sectionData.objVarsTypo"
   >
     <slot name="menu"/>
     <slot name="video"/>
@@ -196,8 +208,6 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
-            :style="$sectionData.container.styles"
           >
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
               <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
@@ -219,17 +229,17 @@ export default {
       </div>
       <div class="b-grid__row">
         <div class="b-grid__col-12">
-          <div class="b-gallery-popup__padd">
-            <div class="b-gallery-popup__padd-border">
+          <div class="b-section-padd">
+            <div class="b-section-padd-border">
               <!-- Setting controls -->
-              <div class="b-gallery-popup__controls">
+              <div class="b-section-menu__controls">
                 <div>
-                  <a href="#" class="b-gallery-popup__control" @click.stop="showSettings('SectionGallerySettings')">
+                  <a href="#" class="b-section-menu__control" @click.stop="showSettings('SectionGallerySettings')">
                     <icon-base name="cog" width="12" height="15" />
                   </a>
                 </div>
                 <div>
-                  <a href="#" class="b-gallery-popup__control" @click.stop="showSettings('SectionGalleryStyle')">
+                  <a href="#" class="b-section-menu__control" @click.stop="showSettings('SectionGalleryStyle')">
                     <icon-base name="style" width="12" height="15" />
                   </a>
                 </div>
@@ -294,6 +304,8 @@ export default {
 <style lang="sass" scoped="scoped">
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
+@import '../../../assets/sass/section-media.sass'
+@import '../../../assets/sass/section-menu.sass'
 
 .b-gallery-popup
   $this: &
@@ -302,58 +314,6 @@ export default {
   align-items: center
   justify-content: center
   flex-wrap: wrap
-  &__padd
-    padding: $size-step/4
-
-    transition: border 0.25s
-    border: 0.2rem dotted transparent
-
-    position: relative
-    .is-mobile &
-      padding: 0
-    @media only screen and (max-width: 540px)
-      &
-        padding: 0
-    &-border
-      padding: $size-step/4 $size-step/4 $size-step/2
-      transition: border 0.25s
-      border: 0.2rem dotted transparent
-      .is-editable #{$this}__padd:hover &
-        border: 0.2rem dotted #fff
-
-  &__controls
-    position: absolute
-    top: -14px
-    left: $size-step/3.4
-
-    display: flex
-    align-items: flex-end
-    justify-content: flex-start
-
-    display: none
-    .is-editable #{$this}__padd:hover &
-      display: flex !important
-  &__control
-    display: flex
-    align-items: center
-    justify-content: center
-
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $dark-blue-krayola
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
-
-    cursor: pointer
-    & svg
-      fill:  $white
-      width: 14px
-      height: 14px
-
-    &:hover, .active
-      background: $white
-      svg
-        fill: $dark-blue-krayola
 
   /deep/
   .b-uploader__input
@@ -409,6 +369,16 @@ export default {
     display: flex
     justify-content: center
     align-items: center
+  &-title
+    .is-mobile &
+      font-family: var(--mobile-section-text-styles-text-font-family) !important
+      font-size: var(--mobile-section-text-styles-text-font-size) !important
+      color: var(--mobile-section-text-styles-text-color) !important
+    @media only screen and (max-width: 768px)
+      &
+       font-family: var(--mobile-section-text-styles-text-font-family) !important
+       font-size: var(--mobile-section-text-styles-text-font-size) !important
+       color: var(--mobile-section-text-styles-text-color) !important
 
 .b-gallery-popup__text
   position: absolute

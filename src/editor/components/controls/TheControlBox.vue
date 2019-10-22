@@ -38,7 +38,9 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
-      'settingObjectElement'
+      'settingObjectElement',
+      'device',
+      'isMobile'
     ]),
 
     marginLeft: {
@@ -119,6 +121,30 @@ export default {
       set (value) {
         this.setter('padding', 'paddingBottom', value)
       }
+    },
+
+    isMain () {
+      return this.settingObjectElement.classList.contains('ptah-g-main')
+    },
+
+    isChild () {
+      return this.settingObjectElement.classList.contains('ptah-g-child')
+    },
+
+    isTextTooltipMain () {
+      return this.isMain ? this.$t('s.sectionOfGroup') : ''
+    },
+
+    tooltipMain () {
+      return this.isMain ? 'tooltip' : ''
+    },
+
+    isTextTooltipChild () {
+      return this.isChild ? this.$t('s.sectionOfGroup') : ''
+    },
+
+    tooltipChild () {
+      return this.isChild ? 'tooltip' : ''
     }
   },
 
@@ -128,8 +154,26 @@ export default {
     ]),
 
     getStyleNumberValue (prop) {
-      let s = _.get(this.settingObjectOptions, `styles[${prop}]`)
-      if (s === undefined) {
+      let props = {}
+      let s = {}
+      let styles = this.settingObjectOptions.styles
+      let stylesMedia = {}
+
+      if (this.settingObjectOptions.media && this.settingObjectOptions.media['is-mobile']) {
+        stylesMedia = this.settingObjectOptions.media['is-mobile']
+      } else {
+        stylesMedia[prop] = styles[prop]
+      }
+
+      if (this.isMobile) {
+        props = stylesMedia
+      } else {
+        props = styles
+      }
+
+      s = props[prop]
+
+      if (s === undefined || this.isMain || this.isChild) {
         // get values from node
         let style = window.getComputedStyle(this.settingObjectElement)
         s = style[_.camelCase(prop)]
@@ -146,10 +190,16 @@ export default {
     },
 
     update (group, prop, value) {
-      let [styles, property] = [{}, this[group][prop]]
+      let [props, styles, media, property] = [{}, {}, {}, this[group][prop]]
       if (value === '') value = 0
+
       styles[property] = value + 'px'
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { styles }))
+      media['is-mobile'] = {}
+      media['is-mobile'][property] = value + 'px'
+
+      this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
     }
   }
 }
@@ -175,14 +225,23 @@ export default {
       <base-number-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern=""></base-number-field>
       <base-number-field v-model="marginRight" class="ctrl ctrl__m-right"></base-number-field>
       <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"></base-number-field>
-      <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom"></base-number-field>
+      <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom"
+        :disabled="isChild"
+        :[tooltipChild]="isTextTooltipChild"
+        tooltip-position="bottom"
+        >
+      </base-number-field>
     </template>
     <!-- padding -->
     <template v-if="!hidePadding">
       <base-number-field v-model="paddingLeft" class="ctrl ctrl__p-left"></base-number-field>
       <base-number-field v-model="paddingRight" class="ctrl ctrl__p-right"></base-number-field>
       <base-number-field v-model="paddingTop" class="ctrl ctrl__p-top"></base-number-field>
-      <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"></base-number-field>
+      <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"
+        :disabled="isMain"
+        :[tooltipMain]="isTextTooltipMain"
+        tooltip-position="bottom"
+        ></base-number-field>
     </template>
     <!-- locks -->
     <a href="#"

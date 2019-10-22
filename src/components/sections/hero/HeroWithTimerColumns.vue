@@ -3,40 +3,19 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroWithTimerColumns'
 const BG_SECTION = 'url(https://gn728.cdn.stg.gamenet.ru/0/7oAt2/o_1A6qDa.jpg)'
 
-/**
- * Base keys for elements in Hero sections
- * Logo - 0
- * Title - 1
- * Description - 2
- * Button - 3
- * Available Platforms - 4
- * Video - 5
- * Slogan - 6
- * Link - 7
- * Delimiter- 8
- * Timer - 9
- * */
 const COMPONENTS = [
   {
     name: 'Logo',
     element: types.Logo,
     type: 'image',
     class: 'b-logo',
-    label: 'logo',
-    key: 0
-  },
-  {
-    name: 'Delimiter',
-    element: types.Delimiter,
-    type: 'delimiter',
-    class: 'b-delimiter',
-    label: 'delimiter',
-    key: 8
+    label: 'logo'
   }
 ]
 
@@ -46,40 +25,35 @@ const COMPONENTS_2 = [
     element: types.Text,
     type: 'text',
     class: 'b-title',
-    label: 'title',
-    key: 1
+    label: 'title'
   },
   {
     name: 'TextElement',
     element: types.Text,
     type: 'text',
     class: 'b-text',
-    label: 'description',
-    key: 2
+    label: 'description'
   },
   {
     name: 'Delimiter',
     element: types.Delimiter,
     type: 'delimiter',
     class: 'b-delimiter',
-    label: 'delimiter',
-    key: 10
+    label: 'delimiter'
   },
   {
     name: 'Timer',
     element: types.Timer,
     type: 'timer',
     class: 'b-timer',
-    label: 'Timer',
-    key: 9
+    label: 'Timer'
   },
   {
     name: 'Button',
     element: types.Button,
     type: 'button',
     class: 'b-button',
-    label: 'button',
-    key: 3
+    label: 'button'
   }
 ]
 
@@ -93,31 +67,34 @@ const C_CUSTOM = [
         'background-size': 'contain',
         'width': '224px',
         'height': '124px'
+      },
+      media: {
+        'is-mobile': {
+          width: '240px',
+          height: '140px',
+          'margin-top': '0'
+        }
       }
-    },
-    key: 0
-  },
-  {
-    element: {
-      styles: {
-        'height': '500px'
-      }
-    },
-    key: 8
+    }
   }
 ]
 
 const C_CUSTOM_2 = [
   {
     element: {
-      text: `Excellent <div>title</div>`,
+      text: `Excellent title`,
       styles: {
         'font-family': 'PT Serif',
         'font-size': '5.6rem',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem',
+          'line-height': '1.4'
+        }
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
@@ -127,20 +104,16 @@ const C_CUSTOM_2 = [
         'font-size': '2rem',
         'color': 'rgba(255, 255, 255, 0.3)'
       }
-    },
-    key: 2
+    }
   },
   {
     element: {
       styles: {
         'height': '172px'
       }
-    },
-    key: 10
+    }
   },
-  {
-    key: 9
-  },
+  {},
   {
     element: {
       text: 'Play Now',
@@ -154,8 +127,7 @@ const C_CUSTOM_2 = [
         'height': '64px',
         'border-radius': '2px'
       }
-    },
-    key: 3
+    }
   }
 ]
 
@@ -166,9 +138,10 @@ const SCHEMA_CUSTOM = {
       'background-color': '#151C44',
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
-      'background-attachment': 'scroll'
-    },
-    classes: ['full-height']
+      'background-attachment': 'scroll',
+      'background-position': '50% 0%',
+      'height': '80vh'
+    }
   },
   components: _.merge([], C_CUSTOM),
   components2: _.merge([], C_CUSTOM_2),
@@ -176,6 +149,10 @@ const SCHEMA_CUSTOM = {
     width: 4,
     minWidth: 2,
     maxWidth: 10,
+    styles: {
+      'justify-content': 'flex-start',
+      'align-items': 'center'
+    },
     grow: ['$sectionData.container2'],
     selfName: '$sectionData.container'
   },
@@ -183,6 +160,10 @@ const SCHEMA_CUSTOM = {
     width: 8,
     minWidth: 2,
     maxWidth: 10,
+    styles: {
+      'justify-content': 'flex-start',
+      'align-items': 'center'
+    },
     grow: ['$sectionData.container'],
     selfName: '$sectionData.container2'
   },
@@ -196,7 +177,7 @@ export default {
 
   description: 'Shooter title Countdown two columns main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/hero-with-timer-columns.jpg',
 
@@ -220,7 +201,7 @@ export default {
   <section
     class="b-hero-with-timer-two-columns"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
     >
     <slot name="menu"/>
@@ -233,7 +214,6 @@ export default {
           <sandbox
               container-path="$sectionData.container"
               components-path="$sectionData.components"
-              direction="column"
               class="b-sandbox">
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
@@ -256,7 +236,6 @@ export default {
           <sandbox
             container-path="$sectionData.container2"
             components-path="$sectionData.components2"
-            direction="column"
             class="b-sandbox">
             <draggable v-model="$sectionData.components2" class="b-draggable-slot" :style="$sectionData.container2.styles" @start="drag('components2')" @change="dragStop">
               <div v-for="(component, index) in $sectionData.components2" v-if="$sectionData.components2.length !== 0" :key="index">
@@ -281,9 +260,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
-
-.b-hero-with-timer-two-columns
-
 </style>

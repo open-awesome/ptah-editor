@@ -1,36 +1,13 @@
 <script>
-import { mapState } from 'vuex'
-import find from 'lodash-es/find'
-
-const LIST_FONTS = [
-  'Lato',
-  'Montserrat',
-  'Heebo',
-  'PT Serif'
-]
+import { mapState, mapActions } from 'vuex'
+import { FONT_SIZES_LIST, FONTS_LIST } from '../../util'
+import * as _ from 'lodash-es'
 
 export default {
 
   data () {
     return {
-      fontName: {},
-      size: {},
-      sizes: [
-        { name: '12px', value: '1.2rem' },
-        { name: '14px', value: '1.4rem' },
-        { name: '16px', value: '1.6rem' },
-        { name: '18px', value: '1.8rem' },
-        { name: '20px', value: '2rem' },
-        { name: '24px', value: '2.4rem' },
-        { name: '28px', value: '2.8rem' },
-        { name: '32px', value: '3.2rem' },
-        { name: '36px', value: '3.6rem' },
-        { name: '48px', value: '4.8rem' },
-        { name: '56px', value: '5.6rem' },
-        { name: '64px', value: '6.4rem' },
-        { name: '72px', value: '7.2rem' }
-      ],
-      color: '',
+      sizes: FONT_SIZES_LIST,
       td: { prop: 'text-decoration', value: 'underline', base: 'none' },
       fs: { prop: 'font-style', value: 'italic', base: 'normal' },
       fw: { prop: 'font-weight', value: 'bold', base: 'normal' },
@@ -58,66 +35,131 @@ export default {
     }
   },
 
-  created () {
-    this.fontName = { name: this.textStyles.chapter['font-family'], value: this.textStyles.chapter['font-family'] }
-    this.size = find(this.sizes, { value: this.textStyles.chapter['font-size'] })
-    this.color = this.textStyles.chapter['color']
-  },
-
   computed: {
     ...mapState('Sidebar', [
       'settingObjectSection',
-      'settingObjectOptions'
+      'settingObjectElement',
+      'settingObjectOptions',
+      'isMobile'
     ]),
 
     textStyles () {
       return this.settingObjectOptions.textStyles
     },
 
+    mediaStyles () {
+      let device = 'is-mobile'
+      let stylesMedia = this.settingObjectOptions.media
+      let media = { 'is-mobile': { 'textStyles': { 'chapter': {} } } }
+
+      if (stylesMedia === undefined) {
+        stylesMedia = media
+      }
+
+      if (stylesMedia[device]['textStyles'] === undefined) {
+        stylesMedia[device]['textStyles'] = media[device]['textStyles']
+      }
+
+      if (stylesMedia[device]['textStyles']['chapter']) {
+        for (let key in this.textStyles) {
+          media[device]['textStyles']['chapter'][key] = stylesMedia[device]['textStyles']['chapter'][key] !== undefined
+            ? stylesMedia[device]['textStyles']['chapter'][key]
+            : this.textStyles[key]
+        }
+      } else {
+        media[device]['textStyles']['chapter'] = this.textStyles.chapter
+      }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        media: media
+      }))
+
+      return this.settingObjectOptions.media
+    },
+
     fonts () {
-      const options = LIST_FONTS.map((font) => {
+      const options = FONTS_LIST.map((font) => {
         return { name: font, value: font }
       })
       return {
         options
       }
+    },
+
+    fontName: {
+      get () {
+        let props = `textStyles['chapter']`
+        let name = ''
+
+        if (this.isMobile) props = `media['is-mobile']['textStyles']['chapter']`
+
+        name = _.get(this.settingObjectOptions, `${props}['font-family']`)
+
+        if (name === undefined) name = _.get(this.settingObjectOptions, `textStyles['chapter']['font-family']`)
+
+        return { name: name, value: name }
+      },
+      set (value) {
+        this.update('font-family', value.value)
+      }
+    },
+
+    size: {
+      get () {
+        let props = `textStyles['chapter']`
+        let size = ''
+
+        if (this.isMobile) props = `media['is-mobile']['textStyles']['chapter']`
+
+        size = _.get(this.settingObjectOptions, `${props}['font-size']`)
+
+        if (size === undefined) size = _.get(this.settingObjectOptions, `textStyles['chapter']['font-size']`)
+
+        return _.find(this.sizes, { value: size })
+      },
+      set (value) {
+        this.update('font-size', value.value)
+      }
+    },
+
+    color: {
+      get () {
+        let props = `textStyles['chapter']`
+        let color = ''
+
+        if (this.isMobile) props = `media['is-mobile']['textStyles']['chapter']`
+
+        color = _.get(this.settingObjectOptions, `${props}['color']`)
+
+        if (color === undefined) color = _.get(this.settingObjectOptions, `textStyles['chapter']['color']`)
+
+        return color
+      },
+      set (value) {
+        let color = value.rgba ? `rgba(${Object.values(value.rgba).toString()})` : value
+
+        this.update('color', color)
+      }
     }
   },
 
   methods: {
-    changeFont () {
-      this.textStyles.chapter['font-family'] = this.fontName.value
-    },
-    changeSize () {
-      this.textStyles.chapter['font-size'] = this.size.value
-    },
-    changeColor () {
-      const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
+    ...mapActions('Sidebar', [
+      'updateSettingOptions'
+    ]),
 
-      this.textStyles.chapter['color'] = color
-    },
-    changeStyle () {
-      this.style.list.forEach((style) => {
-        if (find(this.style.valueMultiple, style.value)) {
-          this.textStyles.chapter[style.value.prop] = style.value.value
-        } else {
-          this.textStyles.chapter[style.value.prop] = style.value.base
-        }
-      })
-    }
-  },
+    update (prop, value) {
+      let props = {}
+      let textStyles = { 'chapter': {} }
+      let device = 'is-mobile'
+      let media = { 'is-mobile': { 'textStyles': textStyles } }
 
-  mounted () {
-    this.style.list[0].value = this.td
-    this.style.list[1].value = this.fs
-    this.style.list[2].value = this.fw
-    this.temp['text-decoration'] = this.td
-    this.temp['font-style'] = this.fs
-    this.temp['font-weight'] = this.fw
-    for (let key in this.temp) {
-      if (this.textStyles.chapter[key] !== this.temp[key].base) {
-        this.style.valueMultiple.push(this.temp[key])
-      }
+      textStyles['chapter'][prop] = value
+      media[device]['textStyles']['chapter'][prop] = value
+
+      this.isMobile ? props = { 'media': media } : props = { 'textStyles': textStyles }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
     }
   }
 }
@@ -130,18 +172,15 @@ export default {
     </div>
     <div class="b-table-controls__control">
       <div class="b-table-controls__control-col b-table-controls__control-col-font-name">
-        <base-select label="Font" :options="fonts.options" v-model="fontName" @input="changeFont"></base-select>
+        <base-select :label="$t('c.font')" :options="fonts.options" v-model="fontName"></base-select>
       </div>
       <div class="b-table-controls__control-col">
-        <base-select label="Size" :options="sizes" v-model="size" @input="changeSize"></base-select>
+        <base-select :label="$t('c.size')" :options="sizes" v-model="size"></base-select>
       </div>
     </div>
     <div class="b-table-controls__control">
       <div class="b-table-controls__control-col">
-        <base-color-picker label="Text color" v-model="color" @change="changeColor"></base-color-picker>
-      </div>
-      <div class="b-table-controls__control-col">
-        <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
+        <base-color-picker :label="$t('c.text')" v-model="color"></base-color-picker>
       </div>
     </div>
   </div>
@@ -153,7 +192,6 @@ export default {
 
 .b-table-controls
   padding: 0 0 $size-step/2
-  border-bottom: 0.2rem dotted rgba($black, 0.15)
   &__control
     display: flex
     justify-content: stretch

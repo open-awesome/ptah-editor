@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const COMPONENTS = [
   {
@@ -58,8 +59,13 @@ const C_CUSTOM = [
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
         'width': '228px',
-        'height': '55px',
-        'padding': '0'
+        'height': '55px'
+      },
+      media: {
+        'is-mobile': {
+          'width': '220px',
+          'height': '50px'
+        }
       }
     }
   },
@@ -70,9 +76,14 @@ const C_CUSTOM = [
         'font-family': 'Lato',
         'font-size': '1.4rem',
         'color': '#fff',
-        'margin': '0px',
-        'padding': '0px 16px',
+        'padding-right': '16px',
+        'padding-left': '16px',
         'text-align': 'left'
+      },
+      media: {
+        'is-mobile': {
+          'text-align': 'center'
+        }
       }
     }
   },
@@ -123,8 +134,7 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '130px',
         'height': '32px',
-        'font-size': '1.8rem',
-        'margin': '0'
+        'font-size': '1.8rem'
       },
       pseudo: {
         hover: {
@@ -145,8 +155,7 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
-        'font-size': '1.8rem',
-        'margin': '0'
+        'font-size': '1.8rem'
       },
       pseudo: {
         hover: {
@@ -167,8 +176,7 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
-        'font-size': '1.8rem',
-        'margin': '0'
+        'font-size': '1.8rem'
       },
       pseudo: {
         hover: {
@@ -188,15 +196,24 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-color': '#000',
       'background-size': 'cover',
-      'background-position': 'top center',
+      'background-position': '50% 0%',
       'background-repeat': 'no-repeat',
-      'padding': '8px 0'
+      'padding-top': '8px',
+      'padding-bottom': '8px'
     }
   },
   container: {
     width: 12,
     styles: {
-      padding: '8px 0'
+      'padding-top': '8px',
+      'padding-bottom': '8px',
+      'flex-direction': 'row'
+    },
+    media: {
+      'is-mobile': {
+        'flex-direction': 'column',
+        'align-items': 'center'
+      }
     }
   },
   components: _.merge({}, C_CUSTOM),
@@ -210,7 +227,7 @@ export default {
 
   description: 'Lined up lower block with set of elements',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://s3.protocol.one/images/FootFantCover3.jpg',
 
@@ -232,7 +249,7 @@ export default {
   <footer
     class="b-section-footer"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -272,6 +289,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .b-section-footer
   position: relative
   width: 100%

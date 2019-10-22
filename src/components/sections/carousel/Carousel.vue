@@ -2,7 +2,7 @@
 <section
     v-styler:section="$sectionData.mainStyle"
     :class="[$sectionData.mainStyle.classes, device.type]"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     class="b-gallery-carousel">
 
   <slot name="menu"/>
@@ -13,7 +13,6 @@
     <sandbox
       container-path="$sectionData.container"
       components-path="$sectionData.components"
-      direction="column"
       class="b-sandbox">
 
       <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -108,6 +107,7 @@ import * as types from '@editor/types'
 import { merge } from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 import 'swiper/dist/css/swiper.min.css'
 import swiperOptions from '@editor/swiper'
@@ -123,8 +123,7 @@ const COMPONENTS = [
     element: types.Text,
     type: 'text',
     class: 'b-title',
-    label: 'title',
-    key: 0
+    label: 'title'
   }
 ]
 
@@ -135,12 +134,16 @@ const C_CUSTOM = [
       styles: {
         'font-family': 'Montserrat',
         'font-size': '4.2rem',
-        'line-height': '49px',
         'color': '#ffffff',
-        'padding-bottom': '48px'
+        'padding-top': '32px',
+        'padding-bottom': '16px'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3.6rem'
+        }
       }
-    },
-    key: 0
+    }
   }
 ]
 
@@ -159,7 +162,7 @@ const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
       'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover'
     },
     swiper: {
@@ -186,7 +189,7 @@ export default {
 
   description: 'Fullscreen sliding gallery',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn659.cdn.stg.gamenet.ru/0/8iyZR/o_1jkJaZ.jpg',
 
@@ -232,6 +235,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .swiper-slide-image
   max-width: 100%
 .swiper-slide-item

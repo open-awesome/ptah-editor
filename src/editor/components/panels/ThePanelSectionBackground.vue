@@ -30,7 +30,7 @@
             </div>
           </div>
 
-          <div class="b-panel__control">
+          <div class="b-panel__control" v-if="!isMobile">
             <div class="b-panel__overlay">
               <div class="b-panel__overlay-col">
                 <base-color-picker v-model="sectionOverlayColor" @change="updateOverlayColor" label="Overlay"></base-color-picker>
@@ -43,7 +43,7 @@
             </div>
           </div>
 
-          <div class="b-panel__control b-panel__control_select-type">
+          <div class="b-panel__control b-panel__control_select-type" v-if="!isMobile">
             <base-switcher
               :value="backgroundType === 'video'"
               label="Use video as background"
@@ -66,7 +66,7 @@
             </template>
           </div>
 
-          <div v-show="backgroundType === 'video'" class="b-panel__control b-panel__control--video">
+          <div v-show="backgroundType === 'video' && !isMobile" class="b-panel__control b-panel__control--video">
             <base-uploader
               v-model="settingObjectOptions.backgroundVideo"
               @upload="uploadVideo"
@@ -130,27 +130,7 @@ export default {
         { text: 'Fill', value: 'contain' }
       ],
 
-      galleryImages: [],
-      backgroundPickers: [],
-
-      /* vars for control system requirements */
-      systemRequirements: {},
-      rowsRequirements: {},
-      selectPlatform: {},
-      expandedSystemRequirements: true,
-
-      /* text styles */
-      fontSize: null,
-      fontFamily: '',
-      fontColor: '',
-      expandedFont: false,
-
-      styles: [],
-      products: {},
-      selectProduct: {},
-      expandedProducts: false,
-
-      isComplexText: false
+      backgroundPickers: []
     }
   },
 
@@ -160,15 +140,39 @@ export default {
       'settingObjectSection',
       'sectionsGroups',
       'isGrouping',
-      'settingObjectElement'
+      'settingObjectElement',
+      'device',
+      'isMobile'
     ]),
 
-    bgAttachmentCheckbox: {
-      set (value) {
-        this.bgAttachment = value ? 'fixed' : 'scroll'
-      },
+    styles () {
+      return this.settingObjectOptions.styles
+    },
+
+    mediaStyles: {
       get () {
-        return this.bgAttachment === 'fixed'
+        let device = 'is-mobile'
+        let media = { 'is-mobile': {} }
+        let stylesMedia = this.settingObjectOptions.media
+
+        if (stylesMedia === undefined) {
+          stylesMedia = media
+        }
+
+        if (stylesMedia[device]) {
+          for (let key in this.styles) {
+            media[device][key] = stylesMedia[device][key] !== undefined && stylesMedia[device][key] !== '' ? stylesMedia[device][key] : this.styles[key]
+          }
+        } else {
+          media[device] = this.styles
+        }
+
+        return media
+      },
+      set (value) {
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+          media: value
+        }))
       }
     },
 
@@ -189,35 +193,16 @@ export default {
     }
   },
 
-  created () {
-    let styles = this.settingObjectOptions.styles
-    let image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
-      styles['background-image'] : ''
-    let bgimage = image.match(/url\((.*?)\)/)
-
-    if (bgimage) {
-      bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
-      this.sectionBgUrl = bgimage || ''
+  watch: {
+    device () {
+      this.updateProps()
     }
-
-    let bggradient = image.match(/linear-gradient(\(.*\))/g)
-    if (bggradient) {
-      this.backgroundPickers = bggradient[0]
-        .replace(/^linear-gradient[(]/, '')
-        .replace(/[)]$/, '')
-        .split(', ')
-    } else {
-      this.backgroundPickers = [styles['background-color']]
-    }
-    this.updateBgColor(DEFAULT_COLOR)
-
-    this.sectionOverlayColor = this.overlay.color
-    this.sectionOverlayOpacity = parseInt(this.overlay.opacity * 100)
-
-    this.bgRepeat = styles['background-repeat'] || 'no-repeat'
-    this.bgSize = styles['background-size'] || 'cover'
-    this.bgAttachment = styles['background-attachment'] === 'fixed'
   },
+
+  created () {
+    this.updateProps()
+  },
+
   methods: {
     ...mapActions('Sidebar', [
       'updateSettingOptions',
@@ -230,11 +215,45 @@ export default {
       'saveState'
     ]),
 
+    updateProps () {
+      let styles = this.isMobile ? this.mediaStyles['is-mobile'] : this.styles
+      let image = ''
+      let bgimage = ''
+
+      image = (!!styles['background-image'] && typeof styles['background-image'] === 'string') ?
+        styles['background-image'] : ''
+
+      bgimage = image.match(/url\((.*?)\)/)
+
+      if (bgimage) {
+        bgimage = bgimage[0].replace(/^url[(]/, '').replace(/[)]$/, '')
+        this.sectionBgUrl = bgimage || ''
+      }
+
+      let bggradient = image.match(/linear-gradient(\(.*\))/g)
+      if (bggradient) {
+        this.backgroundPickers = bggradient[0]
+          .replace(/^linear-gradient[(]/, '')
+          .replace(/[)]$/, '')
+          .split(', ')
+      } else {
+        this.backgroundPickers = [styles['background-color']]
+      }
+      this.updateBgColor(DEFAULT_COLOR)
+
+      this.sectionOverlayColor = this.overlay.color
+      this.sectionOverlayOpacity = parseInt(this.overlay.opacity * 100)
+
+      this.bgRepeat = styles['background-repeat'] || 'no-repeat'
+      this.bgSize = styles['background-size'] || 'cover'
+      this.bgAttachment = styles['background-attachment'] === 'fixed'
+    },
+
     updateBgColor (value) {
-      let settings = this.settingObjectOptions
       let pickers = this.backgroundPickers
       let bgimage = this.sectionBgUrl
       let styles = { 'background-color': '' }
+      let props = {}
 
       switch (pickers.length) {
         case 1:
@@ -251,35 +270,13 @@ export default {
           break
       }
 
-      this.updateSettingOptions(_.merge({}, settings, { styles }))
+      this.isMobile ? props = { 'media': { 'is-mobile': styles } } : props = { 'styles': styles }
+
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
     },
 
     updateBgUrl () {
       this.updateBgColor()
-    },
-
-    changeRepeat () {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-repeat': this.bgRepeat
-        }
-      }))
-    },
-
-    changeSize () {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-size': this.bgSize
-        }
-      }))
-    },
-
-    changeAttachment () {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
-        styles: {
-          'background-attachment': this.bgAttachment ? 'fixed' : 'scroll'
-        }
-      }))
     },
 
     addBackgroundPicker () {

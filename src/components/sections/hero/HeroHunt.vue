@@ -3,6 +3,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 /**
  * Base keys for elements in Hero sections
  * Logo - 0
@@ -87,11 +88,9 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn157.cdn.stg.gamenet.ru/0/7T30j/o_1zIylP.jpg)',
       'background-size': 'cover',
-      'background-repeat': 'no-repeat'
-    },
-    classes: [
-      'full-height'
-    ]
+      'background-repeat': 'no-repeat',
+      'height': '80vh'
+    }
   },
   container: {
     width: 6
@@ -110,7 +109,7 @@ export default {
 
   description: 'Shooter title Early Access main screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: 'https://gn372.cdn.stg.gamenet.ru/0/7cELj/o_1DWDoa.png',
 
@@ -165,7 +164,7 @@ export default {
   <section
     class="b-hunt"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -178,7 +177,6 @@ export default {
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             class="b-sandbox b-hunt-sandbox"
           >
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -207,6 +205,8 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .b-hunt
   .b-grid,
   .b-grid__row

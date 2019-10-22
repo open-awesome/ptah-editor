@@ -5,13 +5,22 @@
     ref="toggleEl"
     @click.stop.stop=""
     :path="path"
+    :style="[objVarsMedia, objVarsTypo]"
     >
 
     <div class="b-toggle-element__item"
       >
       <div class="b-toggle-element__item-col b-toggle-element__item-col-icon" v-if="el.isIconVisible"
         >
-        <span class="b-toggle-element__icon" :style="{ fill: el.color, width: el.size + 'px', 'margin-top': -el.size/6 + 'px'  }" @click="toggle">
+        <span class="b-toggle-element__icon"
+          :style="{
+            fill: el.color,
+            width: sizeIcons.width + 'px',
+            'margin-top':  sizeIcons.width/4 + 'px',
+            '--mobile-toggle-el-width': mediaStyles['is-mobile']['sizeIcons']['width'] + 'px',
+            '--mobile-toggle-el--margin-top': mediaStyles['is-mobile']['sizeIcons']['width']/4 + 'px'
+          }"
+          @click="toggle">
           <icon-base :name="el.icon.value"/>
         </span>
       </div>
@@ -150,15 +159,16 @@
 <script>
 import { merge } from 'lodash-es'
 import { EditorContent, EditorMenuBar } from 'tiptap'
-
+import elementMedia from '../mixins/elementMedia'
 import textElement from '../mixins/textElement'
 
 export default {
   name: 'ToggleElement',
 
-  mixins: [textElement],
-
-  inject: ['$section'],
+  mixins: [
+    elementMedia,
+    textElement
+  ],
 
   components: {
     EditorContent,
@@ -200,6 +210,10 @@ export default {
       return this.$section.get(`$sectionData.${this.path}.el`)
     },
 
+    sizeIcons () {
+      return this.$section.get(`$sectionData.${this.path}.sizeIcons`)
+    },
+
     textOptions () {
       return this.$section.get(`$sectionData.${this.path}.editor`)
     },
@@ -226,6 +240,7 @@ export default {
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
+@import '../../assets/sass/element.sass'
 
 .b-toggle-element
   width: 100%
@@ -252,6 +267,11 @@ export default {
         width: 100%
         > div
           text-align: var(--text-align) !important
+          .is-mobile &
+            text-align: var(--mobile-text-align) !important
+          @media only screen and (max-width: 768px)
+            &
+              text-align: var(--mobile-text-align) !important
         &_hide-text
           /deep/
             table,
@@ -263,19 +283,37 @@ export default {
             table > tbody > tr
               display: flex
               justify-content: var(--justify-content) !important
+              .is-mobile &
+                justify-content: var(--mobile-justify-content) !important
             table > tbody > tr > th,
             table > tbody > tr > td
               text-align: var(--text-align) !important
               font-size: var(--font-size) !important
               line-height: var(--line-height) !important
-              font-style: var(--font-style) !important
               font-family: var(--font-family) !important
               color: var(--color) !important
+              .is-mobile &
+                text-align: var(--mobile-text-align) !important
+                font-size: var(--mobile-font-size) !important
+                line-height: var(--mobile-line-height) !important
+                font-family: var(--mobile-font-family) !important
+              @media only screen and (max-width: 768px)
+                &
+                  text-align: var(--mobile-text-align) !important
+                  font-size: var(--mobile-font-size) !important
+                  line-height: var(--mobile-line-height) !important
+                  font-family: var(--mobile-font-family) !important
   &_hide
     padding: 0 1.6rem
   &__icon
     display: flex
-    padding-top: 1rem
+    .is-mobile &
+      width: var(--mobile-toggle-el-width)
+      margin-top: var(--mobile-toggle-el-margin-top)
+    @media only screen and (max-width: 768px)
+      &
+        width: var(--mobile-toggle-el-width)
+        margin-top: var(--mobile-toggle-el-margin-top)
     svg
       fill: inherit
       width: 100%

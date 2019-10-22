@@ -3,15 +3,31 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '2.8rem',
+        'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      'sizeIcons': {
+        width: 20
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '0',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0',
+          'sizeIcons': {
+            width: 20
+          }
+        }
       },
       el: {
         color: '#F4BC64',
@@ -32,16 +48,30 @@ const C_CUSTOM_COLUMN = [
           </table>
          `
       }
-    },
-    key: 1
+    }
   },
   {
     element: {
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '2.8rem',
+        'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      'sizeIcons': {
+        width: 20
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '0',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0',
+          'sizeIcons': {
+            width: 20
+          }
+        }
       },
       el: {
         color: '#F4BC64',
@@ -69,9 +99,24 @@ const C_CUSTOM_COLUMN = [
     element: {
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '2.8rem',
+        'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      'sizeIcons': {
+        width: 20
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '0',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0',
+          'sizeIcons': {
+            width: 20
+          }
+        }
       },
       el: {
         color: '#F4BC64',
@@ -99,9 +144,24 @@ const C_CUSTOM_COLUMN = [
     element: {
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '2.8rem',
+        'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      'sizeIcons': {
+        width: 20
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '2rem',
+          'margin-top': '0',
+          'margin-right': '0',
+          'margin-bottom': '0',
+          'margin-left': '0',
+          'sizeIcons': {
+            width: 20
+          }
+        }
       },
       el: {
         color: '#F4BC64',
@@ -136,6 +196,11 @@ const C_CUSTOM = [
         'font-size': '4rem',
         'line-height': '1.2',
         'color': '#ffffff'
+      },
+      media: {
+        'is-mobile': {
+          'font-size': '3rem'
+        }
       }
     }
   }
@@ -153,7 +218,13 @@ const C_CUSTOM_CONTAINER_1 = {
   width: 12,
   styles: {
     'flex-direction': 'column',
-    'align-items': 'flex-start'
+    'align-items': 'flex-start',
+    'padding-left': '16px'
+  },
+  media: {
+    'is-mobile': {
+      'padding-left': '0'
+    }
   }
 }
 
@@ -162,7 +233,7 @@ const SCHEMA_CUSTOM = {
     styles: {
       'background-image': 'url(https://gn309.cdn.stg.gamenet.ru/0/8hwba/o_O5UBP.jpg)',
       'background-color': '#151C44',
-      'background-position': 'center center',
+      'background-position': '50% 50%',
       'background-size': 'cover',
       'padding-top': '24px',
       'padding-bottom': '24px',
@@ -227,7 +298,7 @@ export default {
 
   description: 'Interactive FAQ presentation screen',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   cover: '/img/covers/faq-space.png',
 
@@ -251,7 +322,7 @@ export default {
   <section
     class="b-faq"
     :class="$sectionData.mainStyle.classes"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -264,7 +335,6 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container"
             components-path="$sectionData.components"
-            direction="column"
             :style="$sectionData.container.styles"
             >
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
@@ -291,7 +361,6 @@ export default {
             class="b-sandbox"
             container-path="$sectionData.container1"
             components-path="$sectionData.components1"
-            direction="column"
             :style="$sectionData.container1.styles"
             >
             <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1.styles" @start="drag('components1')" @change="dragStop">
@@ -317,13 +386,7 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
-
-.b-faq
-  $this: &
-  line-height: 1.4
-  justify-content: flex-start
-  .b-draggable-slot__toggleElement
-    width: 100%
 </style>

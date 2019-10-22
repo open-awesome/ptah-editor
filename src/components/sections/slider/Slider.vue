@@ -2,7 +2,7 @@
   <section
     class="b-top"
     :class="[$sectionData.mainStyle.classes, device.type]"
-    :style="$sectionData.mainStyle.styles"
+    :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
     <slot name="menu"/>
@@ -28,7 +28,6 @@
               class="b-sandbox"
               :container-path="`$sectionData.container${key.split('components')[1]}`"
               :components-path="`$sectionData.components${key.split('components')[1]}`"
-              direction="column"
               :style="`$sectionData.container${key.split('components')[1]}.styles`">
               <draggable
                 v-model="$sectionData[key]"
@@ -114,6 +113,7 @@ import * as types from '@editor/types'
 import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
+import sectionMedia from '../../mixins/sectionMedia'
 
 import { mapActions, mapMutations } from 'vuex'
 
@@ -136,8 +136,13 @@ let [
         text: `<strong>${i + 1} feature title<strong>`,
         styles: {
           'font-family': 'Montserrat',
-          'font-size': '3.5rem',
+          'font-size': '3.6rem',
           'color': '#FFFFFF'
+        },
+        media: {
+          'is-mobile': {
+            'font-size': '3.6rem'
+          }
         }
       }
     },
@@ -182,6 +187,12 @@ const C_CUSTOM_CONTAINER = {
     'background-color': '#000000',
     'background-image': 'url(https://gn147.cdn.stg.gamenet.ru/0/8dWma/o_os2RO.jpg)',
     'background-size': 'cover'
+  },
+  media: {
+    'is-mobile': {
+      'padding-top': '32px',
+      'padding-bottom': '64px'
+    }
   }
 }
 
@@ -190,6 +201,12 @@ const C_CUSTOM_CONTAINER2 = {
     'background-color': '#000000',
     'background-image': 'url(https://gn913.cdn.stg.gamenet.ru/0/8dWmn/o_hDJWI.jpg)',
     'background-size': 'cover'
+  },
+  media: {
+    'is-mobile': {
+      'padding-top': '32px',
+      'padding-bottom': '64px'
+    }
   }
 }
 
@@ -198,6 +215,12 @@ const C_CUSTOM_CONTAINER3 = {
     'background-color': '#000000',
     'background-image': 'url(https://gn285.cdn.stg.gamenet.ru/0/8dWne/o_1hyDuA.jpg)',
     'background-size': 'cover'
+  },
+  media: {
+    'is-mobile': {
+      'padding-top': '32px',
+      'padding-bottom': '64px'
+    }
   }
 }
 
@@ -276,7 +299,7 @@ export default {
 
   description: 'Fullscreen feature slider',
 
-  mixins: [defaults],
+  mixins: [defaults, sectionMedia],
 
   inject: ['device'],
 
@@ -368,6 +391,8 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../../assets/sass/section-media.sass'
+
 .b-top
   width: 100%
   max-width: 100vw
