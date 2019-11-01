@@ -1,5 +1,7 @@
-## Ptah documentation
+## Ptah editor documentation
 This is just a start. Proper docs will appear here sometime.
+
+![ptah vue.js website builder](ptah-editor.jpg)
 
 ## Dependencies: 
 * Node.js v10+
