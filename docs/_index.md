@@ -15,10 +15,10 @@ Ptah enables marketing experts and designers to produce landing pages without an
 * Produces ready to deploy [PWA projects](https://developers.google.com/web/progressive-web-apps/)
 * Can be used as a standalone tool or intergrated into your CMS
 * Contains multiple ready to use building blocks such as galleries, system requirements, supported gaming platforms, social links, lead forms, presale options and more
-** Each building blog (a 'section') can be additionally tweaked to your needs and taste
-** Sections support drag-n-drop and live edits
+* * Each building blog (a 'section') can be additionally tweaked to your needs and taste
+* * Sections support drag-n-drop and live edits
 * Ships with a library of built-in templates that you can extend
-** All our templates feature responsive design out of the box and are mobile-friendly
+* * All our templates feature responsive design out of the box and are mobile-friendly
 
 ### [A demo is worth a thousand words](https://ptah.super.com/editor/demo)
 
