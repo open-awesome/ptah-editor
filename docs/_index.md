@@ -20,11 +20,11 @@ Ptah enables marketing experts and designers to produce landing pages without an
 * Ships with a library of built-in templates that you can extend
 * * All our templates feature responsive design out of the box and are mobile-friendly
 
-### [A demo is worth a thousand words](https://ptah.super.com/editor/demo)
+### [A good demo](https://ptah.super.com/editor/demo) is worth a thousand words
 
 As you have seen in the demo, Ptah is based on Vue components, created as editable sections with slot elements. You can use the editor to create templates, just like in the demo above, or export ready to deploy [PWA projects](https://developers.google.com/web/progressive-web-apps/).
 
-### [We built our own website with Ptah](https://ptah.super.com/)
+### We built [our own website](https://ptah.super.com/) with Ptah
 
 We created Ptah for internal use, and we were able to open source it under a friendly and popular license. If you're like what you see, we do inspire you to try out Ptah and perhaps see [CONTRIBUTING.md](CONTRIBUTING.md), once you're ready to contribute.
 
