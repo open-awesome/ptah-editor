@@ -26,7 +26,7 @@ As you have seen in the demo, Ptah is based on Vue components, created as editab
 
 ### We built [our own website](https://ptah.super.com/) with Ptah
 
-We created Ptah for internal use, and we were able to open source it under a friendly and popular license. If you're like what you see, we do inspire you to try out Ptah and perhaps see [CONTRIBUTING.md](CONTRIBUTING.md), once you're ready to contribute.
+We created Ptah for internal use, and we were able to open source it under a friendly and popular license. If you're like what you see, we do inspire you to try out Ptah and perhaps see [CONTRIBUTING.md](/CONTRIBUTING.md), once you're ready to contribute.
 
 
 # Getting Started
@@ -79,7 +79,7 @@ The user authorization process happens in an iframe. You will receive a postMess
 with the result of the authorization.
 * Open an `/auth1/login` URL in an iframe to have the user log in
 * The result is a postMessage with a json-serialized object with an auth token, expiration time and an error code if it occurs. 
-** See the actual structure of the object in [backend/templates/auth1.postmessage.html.template](backend/templates/auth1.postmessage.html.template)
+** See the actual structure of the object in [backend/templates/auth1.postmessage.html.template](../backend/templates/auth1.postmessage.html.template)
 * The auth token shall be stored in the browser's local storage
 * Pass the auth token as a bearer authorization header to all requests to the Ptah API.
 
@@ -94,6 +94,6 @@ You can link your MailChip account to collect your visitor emails on on your lan
 
 * Open an `/mailchimp/login` url in an iframe to have the user log in
 * The result is a postMessage with a json-serialized object with success sign and an error code if it occurs. 
-** See the actual structure of the object in [backend/templates/mailchimp.postmessage.html.template](backend/templates/auth1.postmessage.html.template)
+** See the actual structure of the object in [backend/templates/mailchimp.postmessage.html.template](../backend/templates/auth1.postmessage.html.template)
 
 ---
