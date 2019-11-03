@@ -1,32 +1,32 @@
 # Ptah editor documentation
-This is just a start. Proper docs will appear here sometime.
 
-## Ptah - Vue.js-based landing page builder
-![ptah vue.js website builder](/docs/ptah-editor.jpg)
+####This is just a start. Proper docs will appear here sometime.
 
 Ptah is a Vue.js-based open-source game-focused landing page builder framework that combines various ready-to-use templates. 
 It is can be used as a separate product or as an editor inside a CMS to empower less technical users to create modern and fast landing pages for games or e-commerce.
 
 Ptah enables marketing experts and designers to produce landing pages without any programmer assitance. We’ve developed Ptah to be an intuitive tool for creating landing pages where customers can buy and pre-order digital goods and provide leads.
 
+## Ptah - Vue.js-based landing page builder
+![ptah vue.js website builder](/docs/ptah-editor.jpg)
+
+We created Ptah for internal use, and we were able to open source it under a friendly and popular [Apache-2.0 license](/../develop/LICENSE). We do inspire you to try out Ptah and perhaps see [CONTRIBUTING.md](/CONTRIBUTING.md), once you're ready to contribute.
+
+
+
 #### Ptah overview:
-* Open source under [Apache-2.0 license](/../develop/LICENSE)
+* Try out a [demo version of Ptah](https://ptah.super.com/editor/demo) installed on Amazon Cloud
+* Check out [a landing page built with Ptah](https://ptah.super.com/) for demo purposes
+* Ptah is open source under [Apache-2.0 license](/../develop/LICENSE)
 * Built with Vue.js
 * Produces ready to deploy [PWA projects](https://developers.google.com/web/progressive-web-apps/)
 * Can be used as a standalone tool or intergrated into your CMS
-* Contains multiple ready to use building blocks such as galleries, system requirements, supported gaming platforms, social links, lead forms, presale options and more
-* * Each building blog (a 'section') can be additionally tweaked to your needs and taste
-* * Sections support drag-n-drop and live edits
 * Ships with a library of built-in templates that you can extend
 * * All our templates feature responsive design out of the box and are mobile-friendly
-
-### [A good demo](https://ptah.super.com/editor/demo) is worth a thousand words
-
-As you have seen in the demo, Ptah is based on Vue components, created as editable sections with slot elements. You can use the editor to create templates, just like in the demo above, or export ready to deploy [PWA projects](https://developers.google.com/web/progressive-web-apps/).
-
-### We built [our own website](https://ptah.super.com/) with Ptah
-
-We created Ptah for internal use, and we were able to open source it under a friendly and popular license. If you're like what you see, we do inspire you to try out Ptah and perhaps see [CONTRIBUTING.md](/CONTRIBUTING.md), once you're ready to contribute.
+* Contains multiple ready to use building blocks 
+* * Such as galleries, system requirements, supported gaming platforms, social links, lead forms, presale options and more
+* * Each building block (a 'section') can be additionally tweaked to your needs and taste
+* * Sections support drag-n-drop and live edits
 
 
 # Getting Started
