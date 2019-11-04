@@ -1,7 +1,9 @@
+[![License](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://opensource.org/licenses/Apache-2.0)
+[![Build Status](https://travis-ci.org/ProtocolOne/ptah-editor.svg?branch=master)](https://travis-ci.org/ProtocolOne/ptah-editor)
 [![Codacy Badge](https://api.codacy.com/project/badge/Grade/da503bb6111644f68a1266eea37309c7)](https://www.codacy.com/app/ProtocolOne/storefront)
 
 # Ptah - Vue.js-based landing page builder
-![ptah vue.js website builder](/docs/ptah-editor.jpg)
+![https://ptah.super.com/editor/demo](/docs/ptah-editor.gif)
 
 Ptah is a Vue.js-based open-source game-focused landing page builder framework that combines various ready-to-use templates. 
 It is can be used as a separate product or as an editor inside a CMS to empower less technical users to create modern and fast landing pages for games or e-commerce.
