@@ -72,7 +72,7 @@ const C_CUSTOM = [
   },
   {
     element: {
-      text: '<p><b>Here should be a little text describing youre beautiful game</b></p>',
+      text: '<p><b>Place for a short description of your beautiful game.</b></p>',
       styles: {
         'font-family': 'Montserrat',
         'font-size': '3.6rem',

@@ -684,7 +684,7 @@ export default {
                           </div>
                           <div class="b-system-requirements__table-col">
                             <span class="b-system-requirements__table-chapter">
-                              Minimal requirement
+                              Minimal
                             </span>
                           </div>
                           <div class="b-system-requirements__table-col">
