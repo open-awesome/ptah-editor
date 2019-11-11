@@ -148,7 +148,7 @@ let [
     },
     {
       element: {
-        text: '<p> Here should be text describing <br> first amazing feature of your terrific<br> game.  </p>',
+        text: '<p>Here can be the text describing <br> the first amazing feature of your terrific game.</p>',
         styles: {
           'font-family': 'Montserrat',
           'font-size': '2.8rem',

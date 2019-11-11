@@ -41,6 +41,12 @@ router.beforeEach(
     if (!allowedPaths.includes(to.path) && (localStorage.getItem('token') === null)) {
       next('/login')
       return
+    } else if ( // you can go to the direct link to the demo
+      allowedPaths.includes(to.path)
+      && localStorage.getItem('token') === null
+      && localStorage.getItem('guest') === null
+    ) {
+      localStorage.setItem('guest', true)
     }
 
     next()

@@ -38,7 +38,7 @@ const C_CUSTOM_COLUMN = [
         content: `
           <table>
             <tr>
-              <th>Will i be able to play game this year?</th>
+              <th>Will I be able to play the game this year?</th>
             </tr>
             <tr>
               <td>
@@ -172,7 +172,7 @@ const C_CUSTOM_COLUMN = [
         content: `
           <table>
             <tr>
-              <th>When will closed beta begins?</th>
+              <th>When does the closed beta start?</th>
             </tr>
             <tr>
               <td>
@@ -190,7 +190,7 @@ const C_CUSTOM_COLUMN = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<b>Frequently Asked Questions</b>',
+      text: '<b>FAQ</b>',
       styles: {
         'font-family': 'Montserrat',
         'font-size': '4rem',
