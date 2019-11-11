@@ -25,7 +25,7 @@ We created Ptah for internal use, and were able to open source it under a friend
 
 ## A good demo is worth a thousand words
 
-We're running a demo of Ptah on Amazon Cloud. [Check in out](https://ptah.super.com) by clicking the "Try demo editor" button. 
+We're running a demo of Ptah on Amazon Cloud. [Check it out](https://ptah.super.com) by clicking the "Try demo editor" button. 
 
 If you like what you see, we do inspire you to try out Ptah and perhaps see [CONTRIBUTING.md](CONTRIBUTING.md), once you're ready to contribute.
 
@@ -33,17 +33,10 @@ Ptah is based on Vue.js components, created as editable sections with slot eleme
 
 
 # Getting Started
-We've started working on [verbose docs for Ptah](docs/_index.md). So _Watch/Star_ the repo to return when we have more or _be brave, be bold_ and fork what we have today. Then fire up all [your questions as issues](/../../issues/new) so we have a motivation to finish the docs faster ;-) Obviously we'd also reply to your issues to our best ability.
+We've started working on [verbose docs for Ptah](docs/_index.md), so _Watch/Star_ the repo to follow the progress. 
 
-### Feature Requests and support
+Or _be brave, be bold_ and fork what we have today. Then fire up all [your questions as issues](/../../issues/new) so we have a motivation to finish the docs faster ;-) Obviously we'd also reply to your issues to our best ability.
 
-If you have an idea of how to improve Ptah or have general feedback, you're welcome to submit a [feature request](/../../issues/new?labels=type%3A+feature+request&template=2-feature_request.md).
-
-Chances are, you like what we have already but you may require a custom integration, a special license or something else big and specific to your needs that our community may not benefit from. We're generally open to such conversations.
-
-If you have a question and can't find the answer yourself, you can [raise an issue](/../../issues/new) and describe what exactly you're trying to do. We'll do our best to reply in a meaningful time.
-
-## Quick Start
 You can see the bigger picture [in the docs](docs/_index.md), but here's a quick start that gets you the Ptah editor running locally on your machine.
 
 #### Install and run
@@ -52,6 +45,14 @@ You can see the bigger picture [in the docs](docs/_index.md), but here's a quick
 * `gulp locale_sync`
 * `gulp public-image`
 * `yarn build`
+
+#### Feature Requests and support
+
+If you have an idea of how to improve Ptah or have general feedback, you're welcome to submit a [feature request](/../../issues/new?labels=type%3A+feature+request&template=2-feature_request.md).
+
+Chances are, you like what we have already but you may require a custom integration, a special license or something else big and specific to your needs that our community may not benefit from. We're generally open to such conversations.
+
+If you have a question and can't find the answer yourself, you can [raise an issue](/../../issues/new) and describe what exactly you're trying to do. We'll do our best to reply in a meaningful time.
 
 ---
 
