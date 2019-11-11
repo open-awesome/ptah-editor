@@ -15,7 +15,7 @@ It is can be used as a separate product or as an editor inside a CMS to empower 
 * Ships with 2 production quality templates
 * * All our templates feature responsive design out of the box and are mobile-friendly
 * * You can modify our templates or add your own
-* Contains multiple ready to use [building blocks](/components/sections) 
+* Contains multiple ready to use [building blocks](/src/components/sections) 
 * * Each building block (a 'section') can be additionally tweaked to your needs and taste
 * * Sections support drag-n-drop and live edits
 
