@@ -1,11 +1,18 @@
 # Getting Started with Ptah backend
 
-This document assumes you've built the front end part of Ptah, have checked that it works well and now you're happy to build [Ptah backend](https://github.com/ProtocolONE/ptah-editor/tree/develop/backend) and enable the full functionality.
+This document assumes you've built the [frontend part of Ptah](_index.md), have checked that it works well and now you're happy to build [Ptah backend](https://github.com/ProtocolONE/ptah-editor/tree/develop/backend) and enable the full functionality.
 
 ## These are the dependencies you need to have set up: 
 * Node.js v10+
 * NPM v6+
 * Redis v5+
+
+---
+**NOTE**
+
+Sometimes you just want to check that everything compiles and launches. You can skip `CORS, REDIS, SENTRY` parameters so that the default values are used. See [app.js code](/backend/app/app.js) for more info.
+
+---
 
 `NODE_ENV=production AUTH1_CLIENT_ID={string} AUTH1_CLIENT_SCOPE={string="openid,offline"} 
 AUTH1_CLIENT_SECRET={string} AUTH1_ISSUER_URL={string} CORS_VALID_ORIGINS={string} POST_MESSAGE_TARGET_ORIGIN={string} 
@@ -13,9 +20,9 @@ PTAH_API_HOST_URL={string} MAILCHIMP_CLIENT_ID={string} MAILCHIMP_CLIENT_SECRET=
 REDIS_HOST={string} REDIS_PORT={string} ROUTES_PREFIX={string} SENTRY_DSN={string} SESSION_COOKIE_NAME={string} 
 SESSION_COOKIE_SIGN_KEY={string} SESSION_MAX_AGE={string=21600} SERVER_POR={string=80} node ./index.js`
 
-Where:
+See [config.js code](/backend/config/config.js) for insights of the backend configuration settings.
 
-*Obligatory params*
+Where:
 ```
 {AUTH1_CLIENT_ID} - client id for OAuth2 authentication through Auth1 service
 {AUTH1_CLIENT_SCOPE} - required client scope for OAuth2 authentication through Auth1 service
