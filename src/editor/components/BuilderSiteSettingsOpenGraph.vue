@@ -93,7 +93,7 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 import { isValidUrl } from '../util'
 

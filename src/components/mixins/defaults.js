@@ -33,13 +33,13 @@ export default {
     ...mapActions('Landing', ['saveState']),
     ...mapActions('Sidebar', ['toggleDragStop']),
 
-    dragStop (event) {
+    $_dragStop (event) {
       this.selectElement(event.moved.newIndex)
 
       this.toggleDragStop(false)
     },
 
-    drag (arrayName) {
+    $_drag (arrayName) {
       this.arrayName = arrayName
 
       this.toggleDragStop(true)

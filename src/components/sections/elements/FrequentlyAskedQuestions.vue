@@ -337,7 +337,7 @@ export default {
             components-path="$sectionData.components"
             :style="$sectionData.container.styles"
             >
-            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
+            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="$_drag('components')" @change="$_dragStop">
               <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-faq-component"
                    v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
@@ -363,7 +363,7 @@ export default {
             components-path="$sectionData.components1"
             :style="$sectionData.container1.styles"
             >
-            <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1.styles" @start="drag('components1')" @change="dragStop">
+            <draggable v-model="$sectionData.components1" class="b-draggable-slot" :style="$sectionData.container1.styles" @start="$_drag('components1')" @change="$_dragStop">
               <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components1" v-if="$sectionData.components1.length !== 0" :key="index">
                 <component class="b-faq-component"
                    v-styler:for="{ el: $sectionData.components1[index].element, path: `$sectionData.components1[${index}].element`, type: $sectionData.components1[index].type, label: $sectionData.components1[index].label }"

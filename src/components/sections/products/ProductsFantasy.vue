@@ -531,7 +531,7 @@ export default {
             components-path="$sectionData.components"
             :style="$sectionData.container.styles"
           >
-            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="drag('components')" @change="dragStop">
+            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="$_drag('components')" @change="$_dragStop">
               <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component
                   v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
@@ -576,7 +576,7 @@ export default {
                 :components-path="`$sectionData.components${key}`"
                 :style="`$sectionData.container${key}.styles`"
               >
-                <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @start="drag(`components${key}`)" @change="dragStop">
+                <draggable v-model="$sectionData['components' + key]" class="b-draggable-slot" :style="$sectionData[`container${key}`].styles" @start="$_drag(`components${key}`)" @change="$_dragStop">
                   <div
                     v-for="(component, index) in $sectionData[`components${key}`]"
                     v-if="$sectionData[`components${key}`].length !== 0"
@@ -602,7 +602,7 @@ export default {
                 :components-path="`$sectionData.components${key}D`"
                 :style="`$sectionData.container${key}D.styles`"
               >
-                <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @start="drag(`components${key}D`)" @change="dragStop">
+                <draggable v-model="$sectionData['components' + key + 'D']" class="b-draggable-slot" :style="$sectionData[`container${key}D`].styles" @start="$_drag(`components${key}D`)" @change="$_dragStop">
                   <div
                     v-for="(component, index) in $sectionData[`components${key}D`]"
                     v-if="$sectionData[`components${key}D`].length !== 0"

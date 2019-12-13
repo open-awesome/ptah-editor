@@ -25,7 +25,7 @@
             class="b-sandbox">
 
           <!-- eslint-disable-next-line vue/valid-v-model -->
-          <draggable v-model="$sectionData[`components${ prefix }`]" :style="$sectionData[`container${ prefix }`].styles" class="b-draggable-slot" @start="drag(`components${ prefix }`)" @change="dragStop">
+          <draggable v-model="$sectionData[`components${ prefix }`]" :style="$sectionData[`container${ prefix }`].styles" class="b-draggable-slot" @start="$_drag(`components${ prefix }`)" @change="$_dragStop">
 
             <div
                 v-for="(component, index) in $sectionData[`components${ prefix }`]"
