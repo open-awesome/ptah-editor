@@ -115,7 +115,7 @@ import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 import sectionMedia from '../../mixins/sectionMedia'
 
-import { mapActions, mapMutations } from 'vuex'
+import { mapActions } from 'vuex'
 
 import Swiper from 'swiper'
 import swiperOptions from '@editor/swiper'
@@ -373,7 +373,6 @@ export default {
         on: {
           slideChange: function () {
             self.setControlPanel(false)
-            self.updateOnBoarding(false)
           }
         }
       })
@@ -383,9 +382,7 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'setControlPanel'
-    ]),
-
-    ...mapMutations('Landing', ['updateOnBoarding'])
+    ])
   }
 }
 </script>

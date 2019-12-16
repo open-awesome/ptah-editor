@@ -90,8 +90,6 @@
 
     </div>
   </div>
-
-  <onboarding-tips :builder="builder"></onboarding-tips>
 </builder-layout>
 </template>
 
@@ -101,7 +99,6 @@ import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import MenuSettings from '@components/slots/MenuSettings'
-import OnboardingTips from './OnboardingTips'
 
 import { sectionsGroups } from '@cscripts/sectionsGroups'
 
@@ -111,8 +108,7 @@ export default {
   components: {
     VuseIcon,
     BuilderLayout,
-    MenuSettings,
-    OnboardingTips
+    MenuSettings
   },
 
   props: {
