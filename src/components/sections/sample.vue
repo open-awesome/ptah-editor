@@ -22,7 +22,7 @@ export default {
 
   /**
    * Схема секции
-   * mainStyle - объект описывающий секцию[Node.js](https://nodejs.org/)
+   * mainStyle - объект описывающий секцию
    * container - объект описывающий слот внутри секции
    * components - массив элементов внутри слота
    *
