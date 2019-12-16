@@ -7,7 +7,7 @@ RUN npm install gulp -g
 
 WORKDIR /app
 
-COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js webpack.mix.js yarn.lock /app/
+COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js yarn.lock /app/
 # RUN npm install && npm prune --production
 RUN yarn install
 COPY . /app/
