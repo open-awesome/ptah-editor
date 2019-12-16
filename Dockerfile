@@ -7,7 +7,7 @@ RUN npm install gulp -g
 
 WORKDIR /app
 
-COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js webpack.mix.js yarn.lock /app/
+COPY .eslintrc.js aliases.config.js gulpfile.js package.json vue.config.js yarn.lock /app/
 # RUN npm install && npm prune --production
 RUN yarn install
 COPY . /app/
@@ -31,7 +31,7 @@ ENV NODE_ENV=production \
     SERVER_PORT=80 \
     SESSION_COOKIE_NAME="" \
     SESSION_COOKIE_SIGN_KEY="" \
-    SESSION_MAX_AGE=21600 
+    SESSION_MAX_AGE=21600
 
 EXPOSE 80
 
