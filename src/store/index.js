@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
-import _ from 'lodash'
+import _ from 'lodash-es'
 import api from '@store/api'
 import Sidebar from './Sidebar'
 import Landing from './Landing'

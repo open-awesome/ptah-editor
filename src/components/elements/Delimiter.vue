@@ -12,8 +12,8 @@
       :min-width="32"
       :min-height="32"
       :max-height="320"
-      @resizing="onResize"
-      @resizestop="onResizeStop"
+      @resizing="$_onResize"
+      @resizestop="$_onResizeStop"
       :draggable="false"
       :z="999"
      />

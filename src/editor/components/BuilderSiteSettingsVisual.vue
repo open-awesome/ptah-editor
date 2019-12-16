@@ -1,5 +1,5 @@
 <script>
-import _ from 'lodash'
+import _ from 'lodash-es'
 import { mapState, mapActions } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 

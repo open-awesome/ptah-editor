@@ -76,7 +76,7 @@ export default {
         window.addEventListener('scroll', this.setPosition, true)
       } else {
         if (this.editor !== null) this.editor.destroy()
-        this.hideLinkMenu()
+        this.$_hideLinkMenu()
         this.isActive = false
         window.removeEventListener('scroll', this.setPosition, true)
       }
@@ -95,7 +95,7 @@ export default {
   beforeDestroy () {
     try {
       this.editor.destroy()
-      this.hideLinkMenu()
+      this.$_hideLinkMenu()
     } catch (e) { }
   },
 
@@ -119,18 +119,18 @@ export default {
       })
     },
 
-    hideLinkMenu () {
+    $_hideLinkMenu () {
       this.linkUrl = null
       this.linkMenuIsActive = false
     },
 
-    setLinkUrl (command, url) {
+    $_setLinkUrl (command, url) {
       command({ href: url })
-      this.hideLinkMenu()
+      this.$_hideLinkMenu()
       this.editor.focus()
     },
 
-    setList (oldList, newList) {
+    $_setList (oldList, newList) {
       if (this.editor.isActive.heading()) {
         this.editor.commands.heading()
       }
@@ -146,7 +146,7 @@ export default {
       }
     },
 
-    setHeading (obj) {
+    $_setHeading (obj) {
       this.resetList('bullet')
       this.resetList('ordered')
       this.editor.commands.heading(obj)

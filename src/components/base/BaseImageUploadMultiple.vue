@@ -49,7 +49,7 @@
 </template>
 
 <script>
-import { forEach, findIndex, cloneDeep } from 'lodash'
+import { forEach, findIndex, cloneDeep } from 'lodash-es'
 import Draggable from 'vuedraggable'
 import api from '@store/api'
 

@@ -59,7 +59,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 1 }) }"
-            @click.stop="setHeading({ level: 1 })"
+            @click.stop="$_setHeading({ level: 1 })"
           >
             H1
           </button>
@@ -67,7 +67,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 2 }) }"
-            @click.stop="setHeading({ level: 2 })"
+            @click.stop="$_setHeading({ level: 2 })"
           >
             H2
           </button>
@@ -75,7 +75,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.heading({ level: 3 }) }"
-            @click.stop="setHeading({ level: 3 })"
+            @click.stop="$_setHeading({ level: 3 })"
           >
             H3
           </button>
@@ -83,7 +83,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.bullet_list() }"
-            @click.stop="setList('bullet', 'ordered')"
+            @click.stop="$_setList('bullet', 'ordered')"
           >
             <icon-base name="bulletList"></icon-base>
           </button>
@@ -91,7 +91,7 @@
           <button
             class="menubar__button"
             :class="{ 'is-active': isActive.ordered_list() }"
-            @click.stop="setList('ordered', 'bullet')"
+            @click.stop="$_setList('ordered', 'bullet')"
           >
             <icon-base name="orderedList"></icon-base>
           </button>
@@ -108,12 +108,12 @@
         </template>
 
         <!-- Link form -->
-        <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="setLinkUrl(commands.link, linkUrl)">
-          <input class="menubar__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="hideLinkMenu"/>
-          <button class="menubar__button" @click.stop="setLinkUrl(commands.link, null)" type="button">
+        <form class="menubar__form" v-if="linkMenuIsActive" @submit.prevent="$_setLinkUrl(commands.link, linkUrl)">
+          <input class="menubar__input" type="text" v-model="linkUrl" placeholder="https://" ref="linkInput" @keydown.esc="$_hideLinkMenu"/>
+          <button class="menubar__button" @click.stop="$_setLinkUrl(commands.link, null)" type="button">
             <icon-base name="remove"></icon-base>
           </button>
-          <base-button class="menubar__button" color="blue" size="small" @click.stop="setLinkUrl(commands.link, linkUrl)">
+          <base-button class="menubar__button" color="blue" size="small" @click.stop="$_setLinkUrl(commands.link, linkUrl)">
             Done
           </base-button>
         </form>

@@ -40,11 +40,11 @@ export default {
       'toggleResizeStop'
     ]),
 
-    onResizeStop (x, y, width, height) {
+    $_onResizeStop (x, y, width, height) {
       this.toggleResizeStop(this.path)
     },
 
-    onResize (x, y, width, height) {
+    $_onResize (x, y, width, height) {
       let parents = {}
       let max = {}
       let prop = 'styles'

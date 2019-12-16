@@ -23,7 +23,7 @@
             components-path="$sectionData.components"
             class="b-sandbox">
 
-          <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot" @start="drag('components')" @change="dragStop">
+          <draggable v-model="$sectionData.components" :style="$sectionData.container.styles" class="b-draggable-slot" @start="$_drag('components')" @change="$_dragStop">
 
             <div
                 v-for="(component, index) in $sectionData.components"
