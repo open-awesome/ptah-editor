@@ -7,7 +7,7 @@ import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenSpaceVideoBack'
-const BG_SECTION = 'url(https://gn533.cdn.stg.gamenet.ru/0/8dDGw/o_Nleuk.png)'
+const BG_SECTION = 'url(https://s3.protocol.one/src/o_Nleuk.png)'
 const date = Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000
 
 const COMPONENTS = [
@@ -59,7 +59,7 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn623.cdn.stg.gamenet.ru/0/8cqjM/o_1Y54Cu.svg")',
+        'background-image': 'url("https://s3.protocol.one/src/o_1Y54Cu.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -194,7 +194,7 @@ const SCHEMA_CUSTOM = {
       'height': '100vh'
     },
     backgroundType: 'video',
-    backgroundVideo: 'https://gn385.cdn.stg.gamenet.ru/0/8dE9B/o_1ZJs6W.mp4',
+    backgroundVideo: 'https://s3.protocol.one/src/o_1ZJs6W.mp4',
     overlay: {
       color: '#000000',
       opacity: '0.5'

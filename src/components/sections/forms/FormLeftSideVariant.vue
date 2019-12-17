@@ -51,7 +51,7 @@ const C_CUSTOM_1 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg")',
+        'background-image': 'url("https://s3.protocol.one/src/o_15rRBx.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -166,7 +166,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn259.cdn.stg.gamenet.ru/0/7qYxO/o_1Nioez.png',
+  cover: 'https://s3.protocol.one/src/o_1Nioez.png',
 
   group: GROUP_NAME,
 

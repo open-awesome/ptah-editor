@@ -185,7 +185,7 @@ let [
 const C_CUSTOM_CONTAINER = {
   styles: {
     'background-color': '#000000',
-    'background-image': 'url(https://gn147.cdn.stg.gamenet.ru/0/8dWma/o_os2RO.jpg)',
+    'background-image': 'url(https://s3.protocol.one/src/o_os2RO.jpg)',
     'background-size': 'cover'
   },
   media: {
@@ -199,7 +199,7 @@ const C_CUSTOM_CONTAINER = {
 const C_CUSTOM_CONTAINER2 = {
   styles: {
     'background-color': '#000000',
-    'background-image': 'url(https://gn913.cdn.stg.gamenet.ru/0/8dWmn/o_hDJWI.jpg)',
+    'background-image': 'url(https://s3.protocol.one/src/o_hDJWI.jpg)',
     'background-size': 'cover'
   },
   media: {
@@ -213,7 +213,7 @@ const C_CUSTOM_CONTAINER2 = {
 const C_CUSTOM_CONTAINER3 = {
   styles: {
     'background-color': '#000000',
-    'background-image': 'url(https://gn285.cdn.stg.gamenet.ru/0/8dWne/o_1hyDuA.jpg)',
+    'background-image': 'url(https://s3.protocol.one/src/o_1hyDuA.jpg)',
     'background-size': 'cover'
   },
   media: {
@@ -303,7 +303,7 @@ export default {
 
   inject: ['device'],
 
-  cover: 'https://gn738.cdn.stg.gamenet.ru/0/8iECW/o_1bOZmd.jpg',
+  cover: 'https://s3.protocol.one/src/o_1bOZmd.jpg',
 
   data () {
     return {

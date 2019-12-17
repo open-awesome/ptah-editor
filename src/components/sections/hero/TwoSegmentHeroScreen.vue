@@ -75,7 +75,7 @@ const defaultColumnComponents1 = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn675.cdn.stg.gamenet.ru/0/7K0Jf/o_15rRBx.svg)',
+        'background-image': 'url(https://s3.protocol.one/src/o_15rRBx.svg)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -136,7 +136,7 @@ const defaultColumnComponents2 = [
 const defaultSchema = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn367.cdn.stg.gamenet.ru/0/7a0MG/o_1SlgxQ.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_1SlgxQ.jpg)',
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
       'background-position': '75% 50%'

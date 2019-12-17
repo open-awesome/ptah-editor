@@ -7,7 +7,7 @@ import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroWithTimerSlogan2'
-const BG_SECTION = 'url(https://gn866.cdn.stg.gamenet.ru/0/7oE1x/o_1ToUuI.jpg)'
+const BG_SECTION = 'url(https://s3.protocol.one/src/o_1ToUuI.jpg)'
 
 const COMPONENTS = [
   {
@@ -44,7 +44,7 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn39.cdn.stg.gamenet.ru/0/7oE24/o_1iIFD9.png)',
+        'background-image': 'url(https://s3.protocol.one/src/o_1iIFD9.png)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -83,7 +83,7 @@ const C_CUSTOM = [
       text: 'Play Now',
       styles: {
         'background-color': 'rgba(0, 0, 0, 0)',
-        'background-image': 'url(https://gn757.cdn.stg.gamenet.ru/0/7oEGs/o_1KjCvL.png)',
+        'background-image': 'url(https://s3.protocol.one/src/o_1KjCvL.png)',
         'background-size': 'contain',
         'color': '#000',
         'font-family': 'Heebo',

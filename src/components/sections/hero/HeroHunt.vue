@@ -21,7 +21,7 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn119.cdn.stg.gamenet.ru/0/7RbIo/o_1Ci11S.png")',
+        'background-image': 'url("https://s3.protocol.one/src/o_1Ci11S.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -48,7 +48,7 @@ const C_CUSTOM = [
       video: 'Qg4n9IpjMg0',
       styles: {
         'background-color': 'transparent',
-        'background-image': 'url(https://gn267.cdn.stg.gamenet.ru/0/7RbUP/o_KcVd3.png)',
+        'background-image': 'url(https://s3.protocol.one/src/o_KcVd3.png)',
         'background-size': 'cover',
         'color': '#ffffff',
         'font-family': 'PT Serif',
@@ -67,7 +67,7 @@ const C_CUSTOM = [
       text: 'Play now',
       styles: {
         'background-color': 'transparent',
-        'background-image': 'url(https://gn342.cdn.stg.gamenet.ru/0/7RbXk/o_1j8P9r.png)',
+        'background-image': 'url(https://s3.protocol.one/src/o_1j8P9r.png)',
         'background-size': 'cover',
         'color': 'transparent',
         'font-family': 'PT Serif',
@@ -86,7 +86,7 @@ const C_CUSTOM = [
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn157.cdn.stg.gamenet.ru/0/7T30j/o_1zIylP.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_1zIylP.jpg)',
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
       'height': '80vh'
@@ -111,7 +111,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn372.cdn.stg.gamenet.ru/0/7cELj/o_1DWDoa.png',
+  cover: 'https://s3.protocol.one/src/o_1DWDoa.png',
 
   $schema: {
     mainStyle: types.StyleObject,

@@ -7,7 +7,7 @@ import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenFantasy02'
-const BG_SECTION = 'url(https://gn904.cdn.stg.gamenet.ru/0/8igWN/o_1jz4qB.jpg)'
+const BG_SECTION = 'url(https://s3.protocol.one/src/o_1jz4qB.jpg)'
 const date = Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000
 
 const COMPONENTS_1 = [
@@ -45,7 +45,7 @@ const C_CUSTOM_1 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn543.cdn.stg.gamenet.ru/0/8iMxM/o_18R5TC.svg")',
+        'background-image': 'url("https://s3.protocol.one/src/o_18R5TC.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',

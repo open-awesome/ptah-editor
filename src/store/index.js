@@ -96,7 +96,7 @@ const actions = {
           css: '',
           cookiesPolicy: {
             enabled: false,
-            pdf: 'https://gn338.cdn.stg.gamenet.ru/0/7XSEU/o_1ohKcv.pdf'
+            pdf: 'https://s3.protocol.one/src/o_1ohKcv.pdf'
           },
           mailchimpUrl: false,
           mailchimpList: false

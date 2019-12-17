@@ -231,7 +231,7 @@ const C_CUSTOM_CONTAINER_1 = {
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn309.cdn.stg.gamenet.ru/0/8hwba/o_O5UBP.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_O5UBP.jpg)',
       'background-color': '#151C44',
       'background-position': '50% 50%',
       'background-size': 'cover',
