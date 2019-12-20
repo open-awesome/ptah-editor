@@ -7,8 +7,8 @@ import sectionMedia from '../mixins/sectionMedia'
 
 export default {
   /**
-   * Имя, группа которой принадлежит секция, ее обложка и короткое описание
-   * Эта информация будет отображаться в левой панели редактора
+   * Name, the group that the section belongs to, the cover and a short description
+   * This information is used in the left panel of the editor
    */
   name: 'SampleSection',
   group: 'Elements',
@@ -16,22 +16,22 @@ export default {
   description: 'Description for section',
 
   /**
-   * Миксины необходимые для работы секции
+   * The mixins are required for the section to function
    */
   mixins: [defaults, sectionMedia],
 
   /**
-   * Схема секции
-   * mainStyle - объект описывающий секцию
-   * container - объект описывающий слот внутри секции
-   * components - массив элементов внутри слота
+   * The section's schema
+   * mainStyle - the object that describes the section
+   * container - the object that describes the section's slot
+   * components - the array of elements inside the slot
    *
-   * В данном примере секция содержит 1 слот внутри которого расположен заголов - элемент с типом 'text'
-   * Актуальный список элементов можно найти в компоненте src/components/slots/ElementsList.vue
+   * This example has 1 slot with a header, that is an element of a 'text' type
+   * The full list of available elements can be located in the component src/components/slots/ElementsList.vue
    *
-   * дефолтные значения для всех частей схемы заданы в Seeder
+   * The default values of all schema's parts are set in Seeder
    *
-   * после того как будет создан экземеляр секции, эти данные будут доступны в $sectionData
+   * As the section instantiates, this data will be available via $sectionData
    */
   $schema: {
     mainStyle: types.StyleObject,
@@ -49,7 +49,7 @@ export default {
 
   created () {
     /**
-     * Описываем кастомные стили для секции
+     * Defining custom styles for the section
      */
     const SCHEMA_CUSTOM = {
       mainStyle: {
@@ -75,23 +75,23 @@ export default {
         }
       ]),
       container: {
-        width: 9 // ширина слота внутри секции (задана в колонках, принимает значения от 1 до 12)
+        width: 9 // The width of the slot inside the section (in coloumns, can be 1 to 12)
       },
-      edited: true // этот флаг необходим
+      edited: true // This flag is required
     }
 
     /**
-     * Стилизуем все компоненты секции
+     * Stylng all section's components
      */
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(merge(this.$sectionData, SCHEMA_CUSTOM))
     }
 
     /**
-     * Внутри компонента доступны следующие свойства:
+     * These properties are available inside the component:
      *
-     * $section - экземпляр класса src/editor/section.js описывающий этот компонент
-     * $builder - экземплер класса в который добавляются все секции лендинга
+     * $section - the instance of src/editor/section.js class that describes this component
+     * $builder - the instance of the class that contains all sections of the landing page
      * $sectionData - Is a computed property that mirrors $section.data which contains the current
      * values (text, images, etc...) for the section.
      */
@@ -101,15 +101,14 @@ export default {
 
 <template>
   <!--
-    Для того, чтобы можно было отредкатировать стили и настройки секций и элементов используется
-    директива v-styler в которую необходимо передать путь до редактируемого элемента
+    The v-styler directive takes the path to the editable element so that elements' and styles' settings are editable
    -->
   <section
     :class="$sectionData.mainStyle.classes"
     :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
   >
-    <!-- menu, video, overlay - небходимы для правильной работы настроек и стилей -->
+    <!-- menu, video, overlay - are required for settings and styles to function -->
     <slot name="menu"/>
     <slot name="video"/>
     <slot name="overlay"/>
@@ -118,20 +117,21 @@ export default {
       <div class="b-grid__row">
         <div class="b-grid__col-m-12" :class="`b-grid__col-${$sectionData.container.width}`">
           <!--
-            Компонент <sandbox> описывает "слот", внутри которого будут находиться элементы.
-            В данной секции изначально будет только 1 текстовый элемент.
-            Sandbox принимает 2 параметра - путь до контейнера и компонентов описанные в схеме ($scheme).
+            The <sandbox> component describes a "slot" that contains elements.
+            This particular section contains just a single text element.
+            Sandbox takes 2 parameters - the path to the container and components described in the schema ($schema).
            -->
           <sandbox
             container-path="$sectionData.container"
             components-path="$sectionData.components"
             class="b-sandbox">
 
-            <!-- <draggable> нужен для работы перетаскивания внутри слота -->
+            <!-- <draggable> Is required for the drag'n'drop to function inside of the slot 
+-->
             <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="$_drag('components')" @change="$_dragStop">
               <!--
-                перечисляем элементы и выводим их с помощью мета-компонента <component>
-                для корректной работы в него нужно передать все параметры и директиву v-styler описанные ниже
+                Enumerating the elements and displaying them using meta-component <component>
+                It requires all parameters and the v-styler directive that are described below
                -->
               <div v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
                 <component class="b-hero-component"
