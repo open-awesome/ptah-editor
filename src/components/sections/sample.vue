@@ -81,14 +81,14 @@ export default {
     }
 
     /**
-     * Stylizing all section's components
+     * Stylng all section's components
      */
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(merge(this.$sectionData, SCHEMA_CUSTOM))
     }
 
     /**
-     * These properties are available inside of the component:
+     * These properties are available inside the component:
      *
      * $section - the instance of src/editor/section.js class that describes this component
      * $builder - the instance of the class that contains all sections of the landing page
