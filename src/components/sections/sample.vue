@@ -90,8 +90,8 @@ export default {
     /**
      * These properties are available inside of the component:
      *
-     * $section - the entity of src/editor/section.js class that describes this component
-     * $builder - the entity of the class that contains all sections of the landing page
+     * $section - the instance of src/editor/section.js class that describes this component
+     * $builder - the instance of the class that contains all sections of the landing page
      * $sectionData - Is a computed property that mirrors $section.data which contains the current
      * values (text, images, etc...) for the section.
      */
