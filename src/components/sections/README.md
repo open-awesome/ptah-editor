@@ -11,4 +11,4 @@ src/components/sections/
 You can make a new group or add your component to an existing one. It may be useful to take a look at [this well-commented example](https://github.com/ProtocolONE/ptah-editor/tree/develop/src/components/sections/sample.vue) before you create a new section as it explains the whole process well.
 You need to turn on the component [in the editor](https://github.com/ProtocolONE/ptah-editor/blob/develop/src/components/pages/VuseEditor.vue) after you have created it.
 
-Done. Now your section can be found in the left panel of Plat editor.
+Done. Now your section can be found in the left panel of Ptah editor.
