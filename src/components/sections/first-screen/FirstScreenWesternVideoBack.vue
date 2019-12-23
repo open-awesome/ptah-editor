@@ -6,7 +6,7 @@ import defaults from '../../mixins/defaults'
 import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
-const NAME = 'FirstScreenWestern01'
+const NAME = 'FirstScreenWesternVideoBack'
 const BG_SECTION = 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/5fd9c812-bd2a-48f4-a55b-795e7fa8fd6e.jpg)'
 const date = Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000
 
@@ -59,7 +59,7 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/1bd4af05-b7db-4784-b9d4-f5a2b88d821a.png)',
+        'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/61f6eb8d-9424-4803-8937-bf0f8f972863.png)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -77,7 +77,7 @@ const C_CUSTOM = [
         'font-family': 'Montserrat',
         'font-size': '3.6rem',
         'line-height': '1.2',
-        'color': '#000000',
+        'color': '#ffffff',
         'margin-top': '10px',
         'margin-right': '80px',
         'margin-bottom': '10px',
@@ -98,7 +98,7 @@ const C_CUSTOM = [
         'font-family': 'Montserrat',
         'font-size': '3.6rem',
         'line-height': '1.2',
-        'color': '#000000',
+        'color': '#ffffff',
         'margin-top': '21px'
       }
     }
@@ -119,7 +119,7 @@ const C_CUSTOM = [
         'font-size': '4rem',
         'font-weight': '800',
         'line-height': '1',
-        'color': '#000000',
+        'color': '#ffffff',
         'margin-bottom': '62px'
       }
     }
@@ -204,6 +204,12 @@ const SCHEMA_CUSTOM = {
         'background-position': '46% 0%',
         'background-size': 'auto'
       }
+    },
+    backgroundType: 'video',
+    backgroundVideo: 'https://s3.protocol.one/src/o_1vLDJn.mp4',
+    overlay: {
+      color: '#000000',
+      opacity: '0.5'
     }
   },
   components: _.merge({}, C_CUSTOM),
@@ -222,7 +228,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: '/img/covers/first-screen-western-01.jpg',
+  cover: '/img/covers/first-screen-western-video-back.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
@@ -240,7 +246,7 @@ export default {
 
 <template>
   <section
-    class="b-first-screen-western-01"
+    class="b-first-screen-western-video-back"
     :class="$sectionData.mainStyle.classes"
     :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"

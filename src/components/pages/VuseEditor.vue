@@ -60,6 +60,7 @@ import FirstScreenFantasyVideoBack from '@components/sections/first-screen/First
 import FirstScreenWestern01 from '@components/sections/first-screen/FirstScreenWestern01'
 import FirstScreenWesternVideoPlayer01 from '@components/sections/first-screen/FirstScreenWesternVideoPlayer01'
 import FirstScreenWesternVideoPlayer02 from '@components/sections/first-screen/FirstScreenWesternVideoPlayer02'
+import FirstScreenWesternVideoBack from '@components/sections/first-screen/FirstScreenWesternVideoBack'
 // --- gallery
 import GallerySwitch from '@components/sections/galleries/GallerySwitch'
 import GallerySwitchFantasy from '@components/sections/galleries/GallerySwitchFantasy'
@@ -129,6 +130,7 @@ const COMPONENTS = {
   FirstScreenWestern01,
   FirstScreenWesternVideoPlayer01,
   FirstScreenWesternVideoPlayer02,
+  FirstScreenWesternVideoBack,
 
   TwoSegmentHeroScreen,
   ThreeSegmentHeroScreen,
