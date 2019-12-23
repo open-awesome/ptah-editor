@@ -184,8 +184,7 @@ const C_CUSTOM = [
       sizeIcons: {
         width: 30
       }
-    },
-    key: 4
+    }
   }
 ]
 
@@ -241,7 +240,7 @@ export default {
 
 <template>
   <section
-    class="b-first-screen-space-01"
+    class="b-first-screen-western-01"
     :class="$sectionData.mainStyle.classes"
     :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
