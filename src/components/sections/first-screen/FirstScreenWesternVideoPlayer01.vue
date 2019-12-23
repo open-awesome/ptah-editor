@@ -6,7 +6,7 @@ import defaults from '../../mixins/defaults'
 import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
-const NAME = 'FirstScreenWesternVideoPlayer'
+const NAME = 'FirstScreenWesternVideoPlayer01'
 const BG_SECTION = 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/5fd9c812-bd2a-48f4-a55b-795e7fa8fd6e.jpg)'
 
 const COMPONENTS_2 = [
@@ -127,7 +127,7 @@ const C_CUSTOM_3 = [
       text: '<p><b>Here should be a little text describing your beautiful game</b></p>',
       styles: {
         'font-family': 'Montserrat',
-        'font-size': '3.2rem',
+        'font-size': '3.6rem',
         'line-height': '1.2',
         'color': '#000000',
         'text-align': 'left'
@@ -231,7 +231,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: '/img/covers/first-screen-western-video-player.jpg',
+  cover: '/img/covers/first-screen-western-video-player-01.jpg',
 
   $schema: {
     mainStyle: types.StyleObject,
