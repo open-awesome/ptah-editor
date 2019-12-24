@@ -86,6 +86,7 @@ import SystemRequirementsFantasy from '@components/sections/elements/SystemRequi
 import FooterSpace from '@components/sections/footers/FooterSpace'
 import FooterFantasy from '@components/sections/footers/FooterFantasy'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
+import FrequentlyAskedQuestionsWestern from '@components/sections/elements/FrequentlyAskedQuestionsWestern'
 import Slider from '@components/sections/slider/Slider'
 import SliderFantasy from '@components/sections/slider/SliderFantasy'
 
@@ -164,6 +165,7 @@ const COMPONENTS = {
   SystemRequirements,
   SystemRequirementsFantasy,
   FrequentlyAskedQuestions,
+  FrequentlyAskedQuestionsWestern,
 
   FooterSpace,
   FooterFantasy
