@@ -34,6 +34,7 @@ import ActionButtonFantasyHeader from '@components/sections/header/ActionButtonF
 import SmmHeader from '@components/sections/header/SmmHeader'
 import SmmFantasyHeader from '@components/sections/header/SmmFantasyHeader'
 import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
+import ActionButtonWesternHeader from '@components/sections/header/ActionButtonWesternHeader'
 
 // --- hero
 import GenericMainScreen from '@components/sections/hero/HeroUnit'
@@ -115,6 +116,7 @@ const COMPONENTS = {
   CenteredLogoHeader,
   ActionButtonFantasyHeader,
   SmmFantasyHeader,
+  ActionButtonWesternHeader,
 
   FirstScreenSpace01,
   FirstScreenSpace02,
