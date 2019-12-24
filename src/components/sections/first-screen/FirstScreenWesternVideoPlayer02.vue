@@ -75,7 +75,7 @@ const C_CUSTOM = [
         autoplay: true,
         rel: false,
         controls: false,
-        url: 'https://s3.protocol.one/src/o_1n2u0d.mp4'
+        url: 'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/video/12d0f9ed-754f-4c45-b84b-907db319ee09.mp4'
       },
       styles: {
         width: '540px',

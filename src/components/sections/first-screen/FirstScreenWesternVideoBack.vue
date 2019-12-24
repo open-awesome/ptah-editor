@@ -206,7 +206,7 @@ const SCHEMA_CUSTOM = {
       }
     },
     backgroundType: 'video',
-    backgroundVideo: 'https://s3.protocol.one/src/o_1vLDJn.mp4',
+    backgroundVideo: 'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/video/12d0f9ed-754f-4c45-b84b-907db319ee09.mp4',
     overlay: {
       color: '#000000',
       opacity: '0.5'
