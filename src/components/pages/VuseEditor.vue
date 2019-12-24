@@ -86,6 +86,7 @@ import SystemRequirements from '@components/sections/elements/SystemRequirements
 import SystemRequirementsFantasy from '@components/sections/elements/SystemRequirementsFantasy'
 import FooterSpace from '@components/sections/footers/FooterSpace'
 import FooterFantasy from '@components/sections/footers/FooterFantasy'
+import FooterWestern from '@components/sections/footers/FooterWestern'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
 import Slider from '@components/sections/slider/Slider'
 import SliderFantasy from '@components/sections/slider/SliderFantasy'
@@ -168,7 +169,8 @@ const COMPONENTS = {
   FrequentlyAskedQuestions,
 
   FooterSpace,
-  FooterFantasy
+  FooterFantasy,
+  FooterWestern
 }
 
 Vuse.mix({ components: ELEMENTS })
