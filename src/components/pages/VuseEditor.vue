@@ -83,6 +83,7 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 // --- other
 import SystemRequirements from '@components/sections/elements/SystemRequirements'
 import SystemRequirementsFantasy from '@components/sections/elements/SystemRequirementsFantasy'
+import SystemRequirementsWestern from '@components/sections/elements/SystemRequirementsWestern'
 import FooterSpace from '@components/sections/footers/FooterSpace'
 import FooterFantasy from '@components/sections/footers/FooterFantasy'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
@@ -164,6 +165,7 @@ const COMPONENTS = {
 
   SystemRequirements,
   SystemRequirementsFantasy,
+  SystemRequirementsWestern,
   FrequentlyAskedQuestions,
   FrequentlyAskedQuestionsWestern,
 
