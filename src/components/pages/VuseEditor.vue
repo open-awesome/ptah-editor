@@ -89,6 +89,7 @@ import FooterFantasy from '@components/sections/footers/FooterFantasy'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
 import Slider from '@components/sections/slider/Slider'
 import SliderFantasy from '@components/sections/slider/SliderFantasy'
+import SliderWestern from '@components/sections/slider/SliderWestern'
 
 import store from '@store'
 
@@ -140,6 +141,7 @@ const COMPONENTS = {
 
   Slider,
   SliderFantasy,
+  SliderWestern,
 
   Columns,
   ColumnsFantasy,
