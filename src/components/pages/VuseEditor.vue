@@ -62,6 +62,7 @@ import GallerySwitch from '@components/sections/galleries/GallerySwitch'
 import GallerySwitchFantasy from '@components/sections/galleries/GallerySwitchFantasy'
 import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 import GalleryPopupFantasy from '@components/sections/galleries/GalleryPopupFantasy'
+import GalleryPopupWestern from '@components/sections/galleries/GalleryPopupWestern'
 // --- products
 import Products from '@components/sections/products/Products'
 import ProductsFantasy from '@components/sections/products/ProductsFantasy'
@@ -148,6 +149,7 @@ const COMPONENTS = {
   Carousel,
   GalleryPopupFantasy,
   GallerySwitchFantasy,
+  GalleryPopupWestern,
 
   Products,
   ProductsExtend,

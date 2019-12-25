@@ -25,15 +25,15 @@ const GALLERY_ITEM = [
 ]
 
 let thumbs = [
-  'https://s3.protocol.one/images/slider1_thumb.jpg',
-  'https://s3.protocol.one/images/slider2_thumb.jpg',
-  'https://s3.protocol.one/images/slider3_thumb.jpg'
+  'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/b5ca75d4-db8f-4804-ba3f-3b8560f0964c.jpg',
+  'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/d0ce7a93-a2a9-49ea-83c1-7062928b2bf1.jpg',
+  'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/5a746619-af94-443f-809d-3a726f8db1dd.jpg'
 ]
 
 let prev = [
-  'https://s3.protocol.one/images/slider_ash_1.jpg',
-  'https://s3.protocol.one/images/slider_ash_2.jpg',
-  'https://s3.protocol.one/images/slider_ash_3.jpg'
+  'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/709ba068-5d79-4f48-ab37-c70c2e4bdde9.jpg',
+  'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/d847d1de-d4f8-4acb-b1af-9461a80100a7.jpg',
+  'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/72c431a9-a0ab-47b5-b888-d14ce6d67630.png'
 ]
 
 const [
@@ -48,8 +48,8 @@ const [
         styles: {
           'background-image': `url(${thumbs[i]})`,
           'background-size': 'contain',
-          'width': '340px',
-          'height': '190px'
+          'width': '350px',
+          'height': '210px'
         },
         media: {
           'is-mobile': {
@@ -93,9 +93,9 @@ const C_CUSTOM = [
     element: {
       text: '<strong>Gallery Header</strong>',
       styles: {
-        'font-family': 'Cinzel',
-        'font-size': '4.0rem',
-        'color': '#fff'
+        'font-family': 'Montserrat',
+        'font-size': '4rem',
+        'color': '#ffffff'
       },
       media: {
         'is-mobile': {
@@ -107,12 +107,13 @@ const C_CUSTOM = [
 ]
 
 const GROUP_NAME = 'Galleries'
-const NAME = 'GalleryPopupFantasy'
+const NAME = 'GalleryPopupWestern'
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://s3.protocol.one/images/travel_map.jpg)',
+      'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/50116473-7bb7-46f0-904c-066713b47b57.png)',
+      'background-color': '#000000',
       'padding-top': '100px',
       'padding-bottom': '190px'
     },
@@ -145,7 +146,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://s3.protocol.one/images/gpopup_cover.jpg',
+  cover: '/img/covers/gallery-western.jpg',
 
   $schema: {
     mainStyle: types.Gallery,
@@ -253,23 +254,6 @@ export default {
                    v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) + 1 <= $sectionData.mainStyle.count"
                    :data-index="parseFloat(key.split('components')[1])"
                   >
-                    <div v-if="$sectionData.mainStyle.isLabelPreview">
-                      <component class="b-gallery-popup__preview-title"
-                       v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
-                       :path="`${key}[1].element`"
-                       :is="$sectionData[key][1].name"
-                       :style="{
-                          'color' : $sectionData.mainStyle.textStyles.text['color'],
-                          'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
-                          'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
-                          'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
-                          'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
-                          'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
-                        }"
-                       :class="[$sectionData[key][1].element.classes, $sectionData[key][1].class]">
-                        <div v-html="$sectionData[key][1].element.text"></div>
-                      </component><!--/.b-preview__name -->
-                    </div>
                     <div class="b-gallery-popup__preview">
                       <component
                         v-styler:for="{ el: $sectionData[key][0].element, path:`$sectionData.${key}[0].element`, type: $sectionData[key][0].type, label: $sectionData[key][0].label }"
@@ -289,6 +273,23 @@ export default {
                       <span class="b-gallery-popup__preview-count"
                             v-text="parseFloat(key.split('components')[1]) + 1"
                       />
+                    </div>
+                    <div v-if="$sectionData.mainStyle.isLabelPreview">
+                      <component class="b-gallery-popup__preview-title"
+                       v-styler:for="{ el: $sectionData[key][1].element, path: `$sectionData.${key}[1].element`, type: $sectionData[key][1].type, label: $sectionData[key][0].label }"
+                       :path="`${key}[1].element`"
+                       :is="$sectionData[key][1].name"
+                       :style="{
+                          'color' : $sectionData.mainStyle.textStyles.text['color'],
+                          'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
+                          'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
+                          'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
+                          'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
+                          'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                        }"
+                       :class="[$sectionData[key][1].element.classes, $sectionData[key][1].class]">
+                        <div v-html="$sectionData[key][1].element.text"></div>
+                      </component><!--/.b-preview__name -->
                     </div>
                   </div>
                 </div>
