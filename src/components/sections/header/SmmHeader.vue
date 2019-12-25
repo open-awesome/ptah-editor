@@ -143,7 +143,7 @@ const defaultComponents = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn623.cdn.stg.gamenet.ru/0/8cqjM/o_1Y54Cu.svg")',
+        'background-image': 'url("https://s3.protocol.one/src/o_1Y54Cu.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -279,7 +279,7 @@ const defaultSchema = {
   mainStyle: {
     hamPosition: 17,
     styles: {
-      'background-image': 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_cm1BL.jpg)',
       'background-color': 'rgba(51, 51, 51, 0.95)',
       'background-position': '50% 50%',
       'background-size': 'cover'

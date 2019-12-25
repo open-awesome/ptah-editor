@@ -7,7 +7,7 @@ import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'Video'
 const NAME = 'Video'
-const BG_SECTION = 'url(https://gn123.cdn.stg.gamenet.ru/0/7opzP/o_NvNe4.jpg)'
+const BG_SECTION = 'url(https://s3.protocol.one/src/o_NvNe4.jpg)'
 
 const COMPONENTS = [
   {
@@ -42,7 +42,7 @@ const C_CUSTOM = [
   },
   {
     element: {
-      videoUrl: 'https://gn616.cdn.stg.gamenet.ru/0/7opu4/o_n0x1o.mp4',
+      videoUrl: 'https://s3.protocol.one/src/o_n0x1o.mp4',
       styles: {
         width: '640px',
         height: '400px'

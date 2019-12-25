@@ -25,15 +25,15 @@ const GALLERY_ITEM = [
 ]
 
 let thumbs = [
-  'https://gn285.cdn.stg.gamenet.ru/0/8eFwh/o_YYKWx.jpg',
-  'https://gn362.cdn.stg.gamenet.ru/0/8eFx7/o_hJ0YE.jpg',
-  'https://gn191.cdn.stg.gamenet.ru/0/8eFxH/o_7IKPH.jpg'
+  'https://s3.protocol.one/src/o_YYKWx.jpg',
+  'https://s3.protocol.one/src/o_hJ0YE.jpg',
+  'https://s3.protocol.one/src/o_7IKPH.jpg'
 ]
 
 let prev = [
-  'https://gn171.cdn.stg.gamenet.ru/0/8eFyT/o_1guior.jpg',
-  'https://gn645.cdn.stg.gamenet.ru/0/8eFyc/o_UJvfQ.jpg',
-  'https://gn375.cdn.stg.gamenet.ru/0/8eFyk/o_1LsLbz.jpg'
+  'https://s3.protocol.one/src/o_1guior.jpg',
+  'https://s3.protocol.one/src/o_UJvfQ.jpg',
+  'https://s3.protocol.one/src/o_1LsLbz.jpg'
 ]
 
 const [
@@ -112,7 +112,7 @@ const NAME = 'GalleryPopup'
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)'
+      'background-image': 'url(https://s3.protocol.one/src/o_u02v0.jpg)'
     },
     isTextStyle: true,
     isLabel: true,
@@ -143,7 +143,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn128.cdn.stg.gamenet.ru/0/8iEAd/o_1SRy55.jpg',
+  cover: 'https://s3.protocol.one/src/o_1SRy55.jpg',
 
   $schema: {
     mainStyle: types.Gallery,

@@ -216,15 +216,15 @@ const GALLERY_ITEM = [
 ]
 
 let thumbs = [
-  'https://gn830.cdn.stg.gamenet.ru/0/8dvLH/o_110MxE.png',
-  'https://gn354.cdn.stg.gamenet.ru/0/8dvLR/o_2CscoP.png',
-  'https://gn876.cdn.stg.gamenet.ru/0/8dvLj/o_193U4o.png'
+  'https://s3.protocol.one/src/o_110MxE.png',
+  'https://s3.protocol.one/src/o_2CscoP.png',
+  'https://s3.protocol.one/src/o_193U4o.png'
 ]
 
 let prev = [
-  'https://gn687.cdn.stg.gamenet.ru/0/8dwEL/o_OqWNO.png',
-  'https://gn792.cdn.stg.gamenet.ru/0/8dwFJ/o_1TgrhD.png',
-  'https://gn66.cdn.stg.gamenet.ru/0/8dwFp/o_1puIZ.png'
+  'https://s3.protocol.one/src/o_OqWNO.png',
+  'https://s3.protocol.one/src/o_1TgrhD.png',
+  'https://s3.protocol.one/src/o_1puIZ.png'
 ]
 
 const [
@@ -331,7 +331,7 @@ const NAME = 'GallerySwitch'
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)'
+      'background-image': 'url(https://s3.protocol.one/src/o_u02v0.jpg)'
     },
     isChapter: true,
     isChapterStyle: true,
@@ -385,7 +385,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn249.cdn.stg.gamenet.ru/0/8iEB7/o_Rg7b5.jpg',
+  cover: 'https://s3.protocol.one/src/o_Rg7b5.jpg',
 
   $schema: {
     mainStyle: types.Gallery,
