@@ -278,7 +278,6 @@ class Vuse {
     void cleanDOM(frag)
 
     let { video, title } = this.settings
-    let styles = this.getCss(frag)
     let customCss = this.getCustomCss()
     let script = this.getJsScript()
     let bodyStyles = this.getBodyStyles()
@@ -292,10 +291,10 @@ class Vuse {
             <title>${title}</title>
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
+            <link rel="stylesheet" href="${window.location.origin}/ptah_sections.css">
             <link href="https://fonts.googleapis.com/css?family=Lato|Heebo|PT+Serif|Montserrat:400,500|Roboto:400,700|Cinzel:400,700|IBM+Plex+Sans:400,600|IBM+Plex+Mono:400,600&amp;subset=cyrillic" rel="stylesheet">
             ${scrollSetup.style}
             <style>
-              ${styles}
               ${customCss}
             </style>
           </head>
@@ -331,15 +330,6 @@ class Vuse {
         </p>
       </div>
     `
-  }
-
-  getCss (fragment) {
-    let styles = ''
-    for (let node of fragment.querySelectorAll('style')) {
-      styles += node.innerHTML
-    }
-
-    return styles
   }
 
   getCustomCss () {

@@ -1,0 +1,521 @@
+.b-gallery-carousel
+  width: 100%
+  max-width: 100vw
+  padding: 5rem .4rem 10rem
+  .swiper-container
+    width: 100%
+
+  .swiper-pagination-bullet
+    width: 2rem
+    height: 2rem
+    text-align: center
+    line-height: 2rem
+    font-size: 1.2rem
+    opacity: .2
+    &-active
+      opacity: 1
+
+  .b-header
+    margin: 0
+    margin-bottom: 3.5rem
+    font-family: Montserrat, serif
+    font-style: normal
+    font-weight: bold
+    line-height: 4.8rem
+    font-size: 3.2rem
+    text-align: center
+    letter-spacing: 0.3rem
+    color: #fff
+    text-transform: uppercase
+    text-shadow: 1px 1px 5px black
+
+  .b-gallery-carousel-body
+    overflow: hidden
+    position: relative
+
+    &__inner
+      width: 200%
+      margin-left: -50%
+      padding-bottom: 44.8%
+      position: relative
+
+    &__items
+      // position: absolute
+      top: 0
+      left: 0
+      bottom: 0
+      right: 0
+      // display: flex
+
+    &__arrow-prev,
+    &__arrow-next
+      position: absolute
+      top: 0
+      bottom: 0
+      margin: auto
+      height: 150px
+      width: 80px
+      display: flex
+      justify-content: center
+      align-items: center
+      z-index: 10
+      cursor: pointer
+
+    &__arrow-prev
+      left: 6%
+      @media (max-width: 800px)
+        left: 0
+
+    &__arrow-next
+      right: 6%
+      transform: rotate(180deg)
+      @media (max-width: 800px)
+        right: 0
+
+  .b-gallery-carousel-body-item
+    height: 100%
+
+    &_grow
+      flex-grow: 1
+
+    &_transparent
+      opacity: .3
+
+    &_active
+      opacity: 1
+
+    &__img
+      height: 100%
+      background-color: rgba(0,0,0,0.1)
+      background-size: contain
+      background-repeat: no-repeat
+      background-position: center
+
+  .is-mobile .b-gallery-carousel-body__arrow-prev
+    left: 0
+
+  .is-mobile .b-gallery-carousel-body__arrow-next
+    right: 0
+
+  .swiper-slide-image
+    max-width: 100%
+  .swiper-slide-item
+    width: 100%
+    height: 100%
+
+    background-size: contain
+    background-position: center
+    background-repeat: no-repeat
+
+  .swiper-pagination
+    width: 100%
+    bottom: 2.5rem
+    padding-left: 2.5rem
+    &-bullet
+      margin: 0 .4rem
+  .swiper-button-next,
+  .swiper-button-prev
+    background-image: none
+
+    svg
+      width: 100%
+      height: 100%
+
+  .b-empty-carousel
+    border: 5px dashed rgba(0,0,0, .35)
+    color: rgba(0,0,0, .35)
+    font-size: 4.8rem
+    font-weight: bold
+    padding: 5rem 10rem
+    width: 60vw
+    background: rgba(255,255,255, .2)
+
+// gallery-switch
+.b-gallery-one
+  $this: &
+
+  /deep/
+  .b-uploader__input
+    bottom: auto
+    height: 0
+
+  .b-preview
+    text-align: center
+    display: inline-block
+    vertical-align: top
+
+    margin: $size-step/3
+    padding: 0
+    border: 0.2rem dotted transparent
+
+    position: relative
+    cursor: pointer
+    & .b-uploader
+      opacity: 0
+      z-index: 1
+    &:hover .b-uploader
+      opacity: 0.2
+      display: block
+    &__count
+      position: absolute
+      top: $size-step/3
+      left: $size-step/3
+
+      width: $size-step/2
+      height: $size-step/2
+
+      background-color: rgba($white, 1)
+      border-radius: 100%
+      color: $dark-grey
+      font-size: 1.2rem
+
+      display: none
+    .is-editable &__count
+      display: flex
+      justify-content: center
+      align-items: center
+
+    &__image
+      width: 100%
+
+      position: relative
+      z-index: 0
+      opacity: 0.8
+      filter: grayscale(.75)
+      transition: all .2s ease-out
+      &:hover
+        filter: none
+
+    &__name
+      width: 100%
+      height: auto
+      min-height: 2rem
+      padding: 1rem 0.5rem
+
+      border-radius: 0
+
+      position: relative
+      z-index: 10
+      transition: all 200ms
+    &_active
+      transform: scale(1.1)
+      filter: none
+      opacity: 1
+
+  .b-gallery-one-list
+    width: 100%
+    margin: 0 auto
+
+  .b-gallery-one-list__tiles
+    text-align: center
+    width: 60%
+    opacity: 1
+    height: auto
+    &_mobile
+      .is-tablet &,
+      .is-mobile &
+        opacity: 0
+        width: 0
+        height: 0
+        @media only screen and (max-width: 768px)
+          &
+            opacity: 0
+            width: 0
+            height: 0
+
+  .b-gallery-one-list__tiles
+    text-align: center
+
+  .b-gallery-one-list__detail
+    text-align: center
+    width: 40%
+    height: 50rem
+    .is-tablet &,
+    .is-mobile &
+      width: 100%
+      height: auto
+    @media only screen and (max-width: 768px)
+      &
+        width: 100%
+        height: auto
+  .is-tablet,
+  .is-mobile
+    .b-gallery-one-list
+      -webkit-box-orient: vertical
+      -webkit-box-direction: normal
+      -ms-flex-direction: column
+      flex-direction: column
+      .flex__item_size-2, .flex__item_size-1
+        -webkit-box-flex: 0
+        -ms-flex: 0 0 auto
+        flex: 0 0 auto
+
+  @media only screen and (max-width: 768px)
+    .b-gallery-one-list
+      -webkit-box-orient: vertical
+      -webkit-box-direction: normal
+      -ms-flex-direction: column
+      flex-direction: column
+      .flex__item_size-2, .flex__item_size-1
+        -webkit-box-flex: 0
+        -ms-flex: 0 0 auto
+        flex: 0 0 auto
+
+  .loader__content
+    transition: opacity 200ms
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    padding: 0
+    opacity: 0
+    visibility: hidden
+
+    display: flex
+    justify-content: center
+    align-items: center
+    flex-direction: column
+    transition: all .2s ease-out
+    &_show
+      opacity: 1
+      visibility: visible
+    &_mobile
+      .is-tablet &,
+      .is-mobile &
+        opacity: 1
+        visibility: visible
+        margin: $size-step 0
+        position: relative
+        @media only screen and (max-width: 768px)
+          &
+            opacity: 1
+            visibility: visible
+            margin: $size-step 0
+            position: relative
+  .b-gallery-one-stage
+    position: relative
+    &__count
+      position: absolute
+      top: $size-step/3
+      left: $size-step/3
+
+      width: $size-step/2
+      height: $size-step/2
+
+      background-color: rgba($white, 1)
+      border-radius: 100%
+      color: $dark-grey
+      font-size: 1.2rem
+
+      display: none
+    .is-editable &__count
+      display: flex
+      justify-content: center
+      align-items: center
+    .is-tablet &,
+    .is-mobile &
+      .b-gallery-one-stage
+        margin-bottom: 1rem
+    @media only screen and (max-width: 768px)
+      &
+        margin-bottom: 1rem
+
+  .b-gallery-one-stage__name,
+  .b-gallery-one-stage__bio
+    max-width: 50rem
+    margin: $size-step/2 auto
+
+  .b-gallery-one-stage__name
+    .is-mobile &
+      font-family: var(--mobile-section-text-styles-chapter-font-family) !important
+      font-size: var(--mobile-section-text-styles-chapter-font-size) !important
+      color: var(--mobile-section-text-styles-chapter-color) !important
+    @media only screen and (max-width: 768px)
+      &
+        font-family: var(--mobile-section-text-styles-chapter-font-family) !important
+        font-size: var(--mobile-section-text-styles-chapter-font-size) !important
+        color: var(--mobile-section-text-styles-chapter-color) !important
+
+  .b-gallery-one-stage__bio
+    .is-mobile &
+      font-family: var(--mobile-section-text-styles-text-font-family) !important
+      font-size: var(--mobile-section-text-styles-text-font-size) !important
+      color: var(--mobile-section-text-styles-text-color) !important
+    @media only screen and (max-width: 768px)
+      &
+        font-family: var(--mobile-section-text-styles-text-font-family) !important
+        font-size: var(--mobile-section-text-styles-text-font-size) !important
+        color: var(--mobile-section-text-styles-text-color) !important
+
+  .b-gallery-one-stage__img
+    position: relative
+
+    width: 40rem
+    height: 30rem
+    margin: 0 auto
+
+    display: flex
+    align-items: center
+    justify-content: center
+
+    .is-tablet &,
+    .is-mobile &
+      width: 30rem
+      height: 30rem
+    @media only screen and (max-width: 768px)
+      &
+        width: 30rem
+        height: 30rem
+
+
+.gallery-switch-fantasy
+  margin-bottom: -20px
+
+  .b-preview
+    border: 0
+
+    &_active
+      transform: none
+      filter: none
+      opacity: 1
+
+  .b-preview__image
+    opacity: 1
+
+  .b-gallery-one-list
+    align-items: flex-end !important
+
+  .b-gallery-one-list__tiles
+    text-align: center
+    width: 70%
+    opacity: 1
+    height: auto
+    &_mobile
+    .is-tablet &,
+    .is-mobile &
+      opacity: 0
+      width: 0
+      height: 0
+    @media only screen and (max-width: 768px)
+      &
+        display: none
+
+    .loader__content
+      transition: none
+    .b-gallery-one-stage__img
+      width: auto
+      height: auto
+
+// GALLERY POPUP
+.b-gallery-popup
+  $this: &
+
+  display: flex
+  align-items: center
+  justify-content: center
+  flex-wrap: wrap
+
+  /deep/
+  .b-uploader__input
+    bottom: auto
+    height: 0
+
+  .b-gallery-popup__item
+    width: 32%
+    min-width: 10rem
+    height: 26rem
+    min-height: 5rem
+    margin: $size-step/8
+
+    cursor: pointer
+    position: relative
+
+    display: flex
+    align-items: center
+    justify-content: center
+    flex-direction: column
+
+  .b-gallery-popup__preview
+    $this: &
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    width: 100%
+    height: 100%
+
+    transition: all 200ms
+    position: relative
+    &:hover
+      #{$this}-video
+        transition: all 200ms
+        transform: rotate(360deg)
+    &-count
+      position: absolute
+      top: $size-step/3
+      left: $size-step/3
+
+      width: $size-step/2
+      height: $size-step/2
+
+      background-color: rgba($white, 1)
+      border-radius: 100%
+      color: $dark-grey
+      font-size: 1.2rem
+
+      display: none
+    .is-editable &-count
+      display: flex
+      justify-content: center
+      align-items: center
+    &-title
+      .is-mobile &
+      font-family: var(--mobile-section-text-styles-text-font-family) !important
+      font-size: var(--mobile-section-text-styles-text-font-size) !important
+      color: var(--mobile-section-text-styles-text-color) !important
+      @media only screen and (max-width: 768px)
+        &
+          font-family: var(--mobile-section-text-styles-text-font-family) !important
+          font-size: var(--mobile-section-text-styles-text-font-size) !important
+          color: var(--mobile-section-text-styles-text-color) !important
+
+  .b-gallery-popup__text
+    position: absolute
+    bottom: 1.5rem
+
+    opacity: 0
+    width: 100%
+    text-align: center
+
+    transition: 200ms opacity
+    color: #000
+    z-index: 100
+
+  .b-gallery-popup__img
+    position: absolute
+    top: 0
+    left: 0
+    width: 100%
+    -o-object-fit: cover
+    object-fit: cover
+    height: 100%
+    z-index: 50
+
+  .is-tablet,
+  .is-mobile
+    .b-gallery-popup__item
+      width: 40%
+  .is-mobile
+    .b-gallery-popup
+      margin-right: 0
+    .b-gallery-popup__item
+      width: 100%
+      padding: 0 0 2rem 0
+
+  @media only screen and (max-width: 460px)
+    .b-gallery-popup
+      margin-right: 0
+    .b-gallery-popup__item
+      width: 100%
+      padding: 0 0 2rem 0

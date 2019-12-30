@@ -133,7 +133,8 @@ export function cleanDOM(artboard) {
     .b-button__resize,
     .b-delimiter__resize,
     .b-video__resize,
-    .b-slot__settings
+    .b-slot__settings,
+    .b-section-menu__controls
   `
 
   classes.forEach((className) => {

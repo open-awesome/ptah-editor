@@ -276,7 +276,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
 </style>
