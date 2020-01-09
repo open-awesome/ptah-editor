@@ -757,5 +757,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-
 </style>
