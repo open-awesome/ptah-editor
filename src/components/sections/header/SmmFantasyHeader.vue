@@ -3,7 +3,7 @@
     v-styler:section="$sectionData.mainStyle"
     :class="[$sectionData.mainStyle.classes, {'_sticky' : $sectionData.mainStyle.sticky }]"
     :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }, $sectionData.objVarsMedia]"
-    class="b-section-header">
+    class="b-smm-header">
 
     <slot name="menu"/>
     <slot name="video"/>
@@ -154,7 +154,7 @@ const defaultComponents = [
         'is-mobile': {
           width: '190px',
           height: '60px',
-          'margin-top': '4px',
+          'margin-top': '0',
           'margin-right': '0',
           'margin-bottom': '0',
           'margin-left': '0'
@@ -282,7 +282,8 @@ const defaultSchema = {
     },
     media: {
       'is-mobile': {
-        'flex-direction': 'column'
+        'flex-direction': 'column',
+        'margin-top': '-16px'
       }
     },
     width: 3,
@@ -363,62 +364,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-
-.b-section-header
-  z-index: 2
-
-  .mobile-menu
-    transition: all 200ms
-    .is-mobile &
-      &_hide
-        display: none
-    .is-mobile &
-      &_drop
-        background-color: var(--bg-color) !important
-    @media (max-width: 800px)
-      &_drop
-        background-color: var(--bg-color) !important
-
-  &__col
-    padding: 0 1.6rem !important
-
-  .b-grid__row
-    .is-mobile &
-      padding: 0 !important
-    @media (max-width: 800px)
-      &
-        padding: 0 !important
-
-.b-one
-  .is-mobile &
-    margin-top: auto
-    order: 1
-  @media (max-width: 800px)
-    margin-top: auto
-    margin-bottom: 8px
-    order: 1
-  @media (max-height: 420px)
-    width: auto
-    margin-top: 8px
-    margin-bottom: 8px
-
-.b-header-link
-  .is-mobile &
-    font-size: 1.6rem
-  @media (max-width: 800px)
-    font-size: 1.6rem
-
-.b-logo
-  display: block
-  .is-tablet &,
-  .is-mobile &
-    margin: 0.4rem auto
-
-  @media (max-width: 800px)
-    margin: 0.4rem auto
-
-@media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
-  .b-slot .b-draggable-slot > div
-    width: 50% !important
 </style>

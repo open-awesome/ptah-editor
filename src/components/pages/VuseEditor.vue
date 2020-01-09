@@ -211,6 +211,7 @@ export default {
 
     Vue.use(Vuse, {
       js: './../js/cjs.js',
+      css: './../ptah_sections.css',
       themes: themes
     })
   },

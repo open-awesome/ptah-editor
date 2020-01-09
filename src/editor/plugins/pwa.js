@@ -77,25 +77,31 @@ function createPWA (output, payload) {
   createSW(output, payload)
 }
 
+function getFile(path) {
+  return new Promise((resolve) => {
+    const assetsClient = new XMLHttpRequest()
+    assetsClient.open('GET', path)
+    assetsClient.onload = function () {
+      resolve(this.response)
+    }
+    assetsClient.send(null)
+  })
+}
+
 function download (assets) {
   const frag = this.outputFragment()
   const artboard = frag.querySelector('#artboard')
   const title = this.settings.title
   const zip = new JSZip()
   const output = zip.folder('project')
-  const jsFolder = output.folder('js/')
+  const [jsFolder, cssFolder] = [output.folder('js/'), output.folder('css/')]
   const manifest = this.getManifest()
+  const urls = [assets.css, assets.js]
 
-  var promise = new Promise((resolve, reject) => {
-    const assetsClient = new XMLHttpRequest()
-    assetsClient.open('GET', assets.js)
-    assetsClient.onload = function () {
-      resolve(this.response)
-    }
-    assetsClient.send(null)
-  })
+  Promise.all(urls.map(getFile))
     .then((content) => {
-      jsFolder.file('cjs.js', content)
+      cssFolder.file('styles.css', content[0])
+      jsFolder.file('cjs.js', content[1])
       return content
     })
     .then(() => {
@@ -103,7 +109,6 @@ function download (assets) {
     })
     .then(() => {
       cleanDOM(frag)
-      let styles = this.getCss(frag)
       let bodyStyles = this.getBodyStyles()
       let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
       let og = this.settings.ogTags ? this.getOgMetaTags(this.settings.ogTags) : ''
@@ -124,11 +129,10 @@ function download (assets) {
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="shortcut icon" href="${icon}"/>
             <link rel="manifest" href="/manifest.json">
-            <link href="https://fonts.googleapis.com/css?family=Lato|Heebo|PT+Serif|Montserrat:400,500|Roboto:400,700|Cinzel:400,700|IBM+Plex+Sans:400,600|IBM+Plex+Mono:400,600&amp;subset=cyrillic" rel="stylesheet">
+            <link rel="stylesheet" href="css/styles.css"> 
             ${scrollSetup.style}
             ${og}
             <style>
-              ${styles}
               ${customCss}
             </style>
           </head>
@@ -148,7 +152,7 @@ function download (assets) {
         </html>`)
 
       zip.generateAsync({ type: 'blob' }).then((blob) => {
-        saveAs(blob, 'project.zip')
+        saveAs(blob, `${this.settings.name}.zip`)
       })
     })
 }

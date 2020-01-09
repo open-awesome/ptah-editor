@@ -681,29 +681,6 @@ export default {
     padding: 1rem 0.5rem
     background: lighten(#18d88b, 40%)
 
-/* video background styles */
-.video-background
-  position: relative !important
-  background: none !important
-  overflow: hidden !important
-  video
-    position: absolute
-    top: 0
-    left: 0
-    min-width: 100%
-    min-height: 100%
-    + .b-footer
-      background: none !important
-
-/* overlay background */
-
-.b-overlay
-  position: absolute
-  top: 0
-  left: 0
-  right: 0
-  bottom: 0
-
 // --- dirty hack. normalize artboard size
 .builder-last
   height: 1px

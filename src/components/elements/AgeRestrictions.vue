@@ -55,35 +55,4 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
-@import '../../assets/sass/element.sass'
-
-.b-age-restrictions
-  margin: 0 auto
-  min-height: 5rem
-  min-width: 5rem
-  display: flex
-  justify-content: center
-  align-items: center
-  .is-tablet &,
-  .is-mobile &
-    flex-wrap: wrap
-    height: auto !important
-  @media only screen and (max-width: 768px)
-    &
-      flex-wrap: wrap
-      height: auto !important
-  &__item
-    position: relative
-    margin: 1.6rem
-    text-align: center
-    &-img
-      display: inline-block
-      .is-mobile &
-        width: var(--mobile-width) !important
-      @media only screen and (max-width: 768px)
-        &
-          width: var(--mobile-width) !important
-      & img
-        width: 100%
-        height: auto
 </style>

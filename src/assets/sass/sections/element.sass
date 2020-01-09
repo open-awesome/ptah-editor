@@ -1,0 +1,778 @@
+@import "../element-resize"
+
+
+//TODO: вот тут что-то ломается хотя переменные добавлены
+$size-step: 3.2rem
+$main-font-size: 6rem
+
+.b-logo,
+.b-image,
+.b-button,
+.b-delimiter,
+.b-video,
+.b-age-restrictions,
+.b-available-platforms,
+.b-form,
+.b-text-icon,
+.b-social-networks,
+.b-text,
+.b-timer,
+.b-toggle-element
+  .is-mobile &
+    margin-top: var(--mobile-margin-top) !important
+    margin-right: var(--mobile-margin-right) !important
+    margin-bottom: var(--mobile-margin-bottom) !important
+    margin-left: var(--mobile-margin-left) !important
+    padding-top: var(--mobile-padding-top) !important
+    padding-right: var(--mobile-padding-right) !important
+    padding-bottom: var(--mobile-padding-bottom) !important
+    padding-left: var(--mobile-padding-left) !important
+  @media only screen and (max-width: 768px)
+    &
+      margin-top: var(--mobile-margin-top) !important
+      margin-right: var(--mobile-margin-right) !important
+      margin-bottom: var(--mobile-margin-bottom) !important
+      margin-left: var(--mobile-margin-left) !important
+      padding-top: var(--mobile-padding-top) !important
+      padding-right: var(--mobile-padding-right) !important
+      padding-bottom: var(--mobile-padding-bottom) !important
+      padding-left: var(--mobile-padding-left) !important
+
+.b-button,
+.b-text,
+.b-text-icon,
+.b-timer,
+.b-toggle-element
+  .is-mobile &
+    font-family: var(--mobile-font-family) !important
+    font-size: var(--mobile-font-size) !important
+    line-height: var(--mobile-line-height) !important
+  @media only screen and (max-width: 768px)
+    &
+      font-family: var(--mobile-font-family) !important
+      font-size: var(--mobile-font-size) !important
+      line-height: var(--mobile-line-height) !important
+
+.b-text,
+.b-toggle-element
+  .is-mobile &
+    *
+      text-align: var(--mobile-text-align) !important
+      justify-content: var(--mobile-justify-content) !important
+  @media only screen and (max-width: 768px)
+    &
+      *
+        text-align: var(--mobile-text-align) !important
+        justify-content: var(--mobile-justify-content) !important
+
+.b-form
+  .is-mobile &
+    .b-form-element-button,
+    .b-form-element-input
+      font-family: var(--mobile-font-family) !important
+      font-size: var(--mobile-font-size) !important
+      line-height: var(--mobile-line-height) !important
+
+      height: var(--mobile-form-styles-height) !important
+  @media only screen and (max-width: 768px)
+    &
+      .b-form-element-button,
+      .b-form-element-input
+        font-family: var(--mobile-font-family) !important
+        font-size: var(--mobile-font-size) !important
+        line-height: var(--mobile-line-height) !important
+
+        height: var(--mobile-form-styles-height) !important
+
+.b-age-restrictions
+  margin: 0 auto
+  min-height: 5rem
+  min-width: 5rem
+  display: flex
+  justify-content: center
+  align-items: center
+  .is-tablet &,
+  .is-mobile &
+    flex-wrap: wrap
+    height: auto !important
+  @media only screen and (max-width: 768px)
+    &
+      flex-wrap: wrap
+      height: auto !important
+  &__item
+    position: relative
+    margin: 1.6rem
+    text-align: center
+    &-img
+      display: inline-block
+      .is-mobile &
+        width: var(--mobile-width) !important
+      @media only screen and (max-width: 768px)
+        &
+          width: var(--mobile-width) !important
+      & img
+        width: 100%
+        height: auto
+
+.b-available-platforms
+  width: auto
+  margin: 1.6rem
+  min-height: 5rem
+  min-width: 5rem
+  display: flex
+  justify-content: center
+  align-items: center
+  &.styler-active
+    border: 0.2rem $white dotted
+    border-radius: 0.5rem
+  .is-tablet &, .is-mobile &
+    flex-wrap: wrap
+    height: auto !important
+  @media only screen and (max-width: 768px)
+    &
+      flex-wrap: wrap
+      height: auto !important
+  &__item
+    position: relative
+    margin: 1.6rem
+    &-button
+      border: none
+      position: relative
+      .is-mobile &
+        width: var(--mobile-width) !important
+      @media only screen and (max-width: 768px)
+        &
+          width: var(--mobile-width) !important
+      .vuse-icon
+        width: inherit
+        height: auto
+        fill: inherit
+
+.b-button
+  $self: &
+  position: relative
+
+  font-size: 3rem
+  font-family: 'Lato'
+  line-height: 1.4
+  text-decoration: none
+  color: $black
+
+  box-sizing: border-box
+  width: $size-step*5
+
+  max-width: 100% !important
+  max-height: 100% !important
+
+  min-width: $size-step*2
+  min-height: $size-step/2
+
+  padding: 0 $size-step/2
+
+  background-color: #a7a1a1
+
+  display: flex
+  text-align: center
+  justify-content: center
+  flex-direction: column
+
+  user-select: none
+  cursor: pointer
+  transition: background 200ms, border 200ms
+  & .contenteditable
+    position: relative
+    z-index: 9999
+  &.is-editable
+    .styler-active
+      border-color: $white
+  & span
+    display: block
+  .is-mobile &,
+  .is-tablet &
+    margin: $size-step/2 auto
+  @media only screen and (max-width: 768px)
+    &
+      margin: $size-step/2 auto
+
+.b-delimiter
+  width: 4rem
+  height: 4rem
+
+  padding: 0
+
+  position: relative
+
+  display: flex
+  align-items: center
+  justify-content: center
+  &.is-editable
+    border: .1rem dashed rgba($dark-blue-krayola, 0.5) !important
+  & span
+    display: block
+  &:hover
+    filter: brightness(120%)
+  &:active
+    filter: brightness(50%)
+  .is-mobile &,
+  .is-tablet &
+    margin: $size-step/2 auto
+  @media only screen and (max-width: 768px)
+    &
+      margin: $size-step/2 auto
+  @media only screen and (max-width: 768px) and (min-height: 700px)
+    &
+      margin: $size-step/2 auto
+
+
+.b-form-element
+  display: flex
+  align-items: center
+  justify-content: center
+
+  width: 100%
+  padding: 0.4rem 0.8rem
+
+  position: relative
+  .is-mobile &,
+  .is-tablet &
+    flex-direction: column
+  @media only screen and (max-width: 768px)
+    &
+      flex-direction: column
+
+  &__hidden-input
+    position: absolute
+    left: -5000px
+
+  &-button
+    max-width: 50%
+    height: 4.8rem
+    margin: 0.2rem
+
+    font-size: 1.6rem
+    word-break: keep-all
+    overflow: hidden
+
+    padding: 0 5rem
+    border-radius: 0.2rem
+    border: none
+
+    transition: all ease-out .2s
+    position: relative
+    cursor: pointer
+    &:active
+      top: 1px
+    &:hover
+      background-color: var(--b-hover-color) !important
+      color: var(--b-hover-text-color) !important
+    &.submited
+      background-color: $emerald-green !important
+    .is-mobile &,
+    .is-tablet &
+      width: 100%
+      min-width: auto
+      max-width: 100%
+      margin-left: 0
+    @media only screen and (max-width: 768px)
+      &
+        width: 100%
+        min-width: auto
+        max-width: 100%
+        margin-left: 0
+
+  &-input
+    border: none
+    background: #fff
+    color: #2a2a2a
+    border-radius: 0.2rem
+    padding: 0 2.4rem
+    flex-grow: 1
+    margin-right: 3rem
+    transition: all ease-out .2s
+    .is-mobile &,
+    .is-tablet &
+      width: 100%
+      max-width: 100%
+      margin-bottom: 1rem
+      margin-right: 0
+    @media only screen and (max-width: 768px)
+      &
+        width: 100%
+        max-width: 100%
+        margin-bottom: 1rem
+        margin-right: 0
+
+.b-text-icon
+  color: #000
+  font-family: 'Lato'
+  position: relative
+  font-size: 1.4rem
+  line-height: 1.4
+
+  display: flex
+  justify-content: flex-start
+  align-items: flex-start
+
+  color: inherit
+  font-family: inherit
+  &::selection,
+  & ::selection
+    color: #ff0
+    background: #000
+  &__item
+    display: flex
+    align-items: flex-start
+    justify-content: inherit
+
+    padding: 0.8rem 0
+    cursor: pointer
+    &-col
+      padding: 0 0.4rem
+    &-text
+      max-width: 100%
+  &_hide
+    padding: 0 1.6rem
+  &__icon
+    display: inline-block
+    .is-mobile &
+      width: var(--mobile-width) !important
+    @media only screen and (max-width: 768px)
+      &
+        width: var(--mobile-width) !important
+    svg
+      fill: inherit
+      width: 100%
+      height: auto
+
+.b-image
+  $this: &
+  position: relative
+  display: block
+
+  width: $size-step*8
+  height: $size-step*5
+
+  max-width: 100% !important
+  max-height: 100% !important
+
+  min-width: $size-step
+  min-height: $size-step
+
+  user-select: none
+  transition: all 200ms
+
+  &:hover .b-load
+    display: flex
+
+  & span
+    display: block
+  .is-tablet &
+    margin: $size-step/2 auto
+  @media only screen and (max-width: 768px)
+    &
+      margin: $size-step/2 auto
+  @media only screen and (max-width: 768px) and (min-height: 700px)
+    &
+      margin: $size-step/2 auto
+  &.js-element-link
+    cursor: pointer
+  &__preview-video
+    position: absolute
+    top: 50%
+    left: 50%
+
+    margin: -$size-step 0 0 -2.4rem
+
+    width: $size-step*2
+    height: $size-step*2
+  &:hover
+    #{$this}__preview-video
+      transition: all 200ms
+      transform: rotate(360deg)
+  .b-uploader
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
+  .styler-active
+    .is-mobile &,
+    .is-tablet &
+      border: .2rem dotted $dark-blue-krayola
+
+.b-logo
+  $this: &
+
+  position: relative
+  display: block
+
+  width: $size-step*3
+  height: $size-step*3
+  background-position: center center
+
+  max-width: 100%
+  max-height: 100%
+
+  min-width: $size-step
+  min-height: $size-step
+
+  user-select: none
+  transition: all 200ms
+
+  &:hover .b-load
+    display: flex
+
+  & span
+    display: block
+  .is-tablet &
+    margin: $size-step/2 auto
+  @media only screen and (max-width: 768px)
+    &
+      margin: $size-step/2 auto
+  @media only screen and (max-width: 768px) and (min-height: 700px)
+    &
+      margin: $size-step/2 auto
+  &.js-element-link
+    cursor: pointer
+  .b-uploader
+    .is-mobile &,
+    .is-tablet &
+      display: none
+    @media only screen and (max-width: 768px)
+      &
+        display: none
+
+.b-load
+  position: absolute
+  top: 0
+  right: 0
+  z-index: 1000
+
+  display: none
+  justify-content: center
+  align-items: center
+  width: 2.6rem
+  height: 2.6rem
+
+  cursor: pointer
+  background: $white
+  color: $dark-blue-krayola
+
+  &:hover
+    color: $white
+    background: $dark-blue-krayola
+
+.b-social-networks
+  width: auto
+  max-width: 100%
+  min-height: 5rem
+  min-width: 5rem
+
+  display: flex
+  justify-content: center
+  align-items: center
+  flex-wrap: wrap
+  &.styler-active
+    border: 0.2rem $white dotted
+    border-radius: 0.5rem
+  .is-tablet &, .is-mobile &
+    flex-wrap: wrap
+    height: auto !important
+  @media only screen and (max-width: 768px)
+    &
+      flex-wrap: wrap
+      height: auto !important
+  &__item
+    position: relative
+    cursor: pointer
+
+    margin: 1.6rem
+
+    .is-mobile &
+      margin: var(--mobile-margin) !important
+    @media only screen and (max-width: 768px)
+      &
+        margin: var(--mobile-margin) !important
+    &-button
+      border: none
+      position: relative
+      .is-mobile &
+        width: var(--mobile-width) !important
+      @media only screen and (max-width: 768px)
+        &
+          width: var(--mobile-width) !important
+      .vuse-icon
+        width: inherit
+        height: auto
+        fill: inherit
+
+.b-text
+  color: #000
+
+  font-family: 'Lato'
+  font-size: 1.4rem
+  line-height: 1.4
+
+  position: relative
+  display: block
+
+  letter-spacing: -0.02em
+  .is-mobile &,
+  .is-tablet &
+    margin: 0 auto 8px
+  @media only screen and (width: 768px) and (height: 1024px)
+    &
+      padding: 0px 0px 0px 40px
+  @media only screen and (max-width: 840px)
+    &
+      margin: 0 auto 8px
+
+  &::selection, & ::selection
+    color: #ff0
+    background: #000
+
+  ul,
+  ol
+    margin: 0
+    padding: 0 1em
+
+
+// Timer
+
+@mixin tabletFontSize ($property)
+  .is-tablet &
+    font-size: $property - 1.5
+  @media (max-width: 800px)
+    font-size: $property - 1.5
+
+@mixin mobileFontSize ($property)
+  .is-mobile &
+    font-size: $property - 2.5
+  @media (max-width: 400px)
+    font-size: $property - 2.5
+
+@mixin columnsFontSize ($index, $font_size)
+  .b-columns#{$index} &
+    font-size: $font_size - .5
+    @include tabletFontSize($font_size - .5)
+    @include mobileFontSize($font_size + 1.5)
+
+// --- main
+.b-timer
+  color: #fff
+  font-size: $main-font-size
+  text-align: center
+  padding: 0.8rem
+  &.is-editable:hover
+    cursor: pointer
+
+  .is-mobile &,
+  .is-tablet &
+    width: 90%
+  @media only screen and (max-width: 768px)
+    &
+      width: 90%
+  @media only screen and (max-width: 768px) and (min-height: 700px)
+    &
+      width: 90%
+
+  @include tabletFontSize($main-font-size)
+  @include mobileFontSize($main-font-size)
+
+  @include columnsFontSize(2, $main-font-size - 1.5)
+  @include columnsFontSize(3, $main-font-size - 2)
+
+  .label
+    font-size: .5em
+
+  .number
+    min-width: 2.2em
+    padding: 0.2em 0 0.2em 0.4em
+
+    background: rgba(51, 51, 51, .5)
+
+    font-size: 1em
+    text-align: center
+
+    text-shadow: 0px 2px 2px rgba(0, 0, 0, 0.25)
+    letter-spacing: 0.4em
+    border-radius: .2rem
+
+    .is-mobile &,
+    .is-tablet &
+      min-width: auto
+      padding: 0.2em 0.2em
+      letter-spacing: 0
+    @media only screen and (max-width: 768px)
+      &
+        min-width: auto
+        padding: 0.2em 0.2em
+        letter-spacing: 0
+
+    position: relative
+
+    &-divider
+      width: .3em
+      font-size: .7em
+      &::before
+        content: ':'
+        position: relative
+        top: -.1em
+
+
+.b-toggle-element
+  width: 100%
+  position: relative
+  text-align: left
+
+  &::selection,
+  & ::selection
+    color: #ff0
+    background: #000
+  &__item
+    display: flex
+    align-items: flex-start
+    justify-content: inherit
+
+    padding: 0.8rem 0
+    cursor: pointer
+    &-col
+      padding: 0 0.4rem
+      &-icon
+        width: 3.2rem
+        min-width: 3.2rem
+      &-content
+        width: 100%
+        > div
+          text-align: var(--text-align) !important
+          .is-mobile &
+            text-align: var(--mobile-text-align) !important
+          @media only screen and (max-width: 768px)
+            &
+              text-align: var(--mobile-text-align) !important
+        &_hide-text
+          /deep/
+          table,
+          table th,
+          table td
+            width: 100%
+            table > tbody > tr:last-child
+              display: none
+            table > tbody > tr
+              display: flex
+              justify-content: var(--justify-content) !important
+              .is-mobile &
+                justify-content: var(--mobile-justify-content) !important
+            table > tbody > tr > th,
+            table > tbody > tr > td
+              text-align: var(--text-align) !important
+              font-size: var(--font-size) !important
+              line-height: var(--line-height) !important
+              font-family: var(--font-family) !important
+              color: var(--color) !important
+              .is-mobile &
+                text-align: var(--mobile-text-align) !important
+                font-size: var(--mobile-font-size) !important
+                line-height: var(--mobile-line-height) !important
+                font-family: var(--mobile-font-family) !important
+              @media only screen and (max-width: 768px)
+                &
+                  text-align: var(--mobile-text-align) !important
+                  font-size: var(--mobile-font-size) !important
+                  line-height: var(--mobile-line-height) !important
+                  font-family: var(--mobile-font-family) !important
+  &_hide
+    padding: 0 1.6rem
+  &__icon
+    display: flex
+    .is-mobile &
+      width: var(--mobile-toggle-el-width)
+      margin-top: var(--mobile-toggle-el-margin-top)
+    @media only screen and (max-width: 768px)
+      &
+        width: var(--mobile-toggle-el-width)
+        margin-top: var(--mobile-toggle-el-margin-top)
+    svg
+      fill: inherit
+      width: 100%
+      height: auto
+
+.b-video
+  $self: &
+  width: $size-step*10
+  height: $size-step*5.625
+
+  max-width: 100% !important
+  max-height: 100% !important
+
+  position: relative
+  display: flex
+  justify-content: center
+  align-items: center
+  .is-mobile &
+    margin: $size-step/4 auto
+  @media only screen and (max-width: 540px)
+    &
+      margin: $size-step/4 auto
+  &__padd
+    margin: $size-step/8
+    width: 100%
+    height: 100%
+
+    position: relative
+    overflow: hidden
+    & > iframe
+      width: 100%
+      height: 100%
+
+      position: relative
+    & > video
+      width: 100%
+      height: 100%
+      outline: none
+
+      position: relative
+  &.is-editable:hover
+    #{$self}__padd > iframe
+      display: none
+    #{$self}__padd > video
+      visibility: hidden
+  &__help
+    display: none
+  &.is-editable
+    &:before
+      content: ""
+      display: block
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      z-index: 1
+    &:hover
+      & #{$self}__help
+        display: block
+        position: absolute
+        top: 0
+        right: 0
+        bottom: 0
+        left: 0
+
+        display: flex
+        justify-content: center
+        align-items: center
+
+        z-index: 1
+        background-color: rgba(255, 255, 255, 0.8)
+  & span
+    display: block
+  .is-mobile &,
+  .is-tablet &
+    margin: $size-step/2 auto
+  @media only screen and (max-width: 768px)
+    &
+      margin: $size-step/2 auto
+  @media only screen and (max-width: 768px) and (min-height: 700px)
+    &
+      margin: $size-step/2 auto

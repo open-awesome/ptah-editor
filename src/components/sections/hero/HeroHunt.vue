@@ -205,15 +205,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-
-.b-hunt
-  .b-grid,
-  .b-grid__row
-    height: 80vh
-  .b-hunt-sandbox
-    height: 80vh
-    /deep/
-      .b-draggable-slot
-        justify-content: flex-end
 </style>

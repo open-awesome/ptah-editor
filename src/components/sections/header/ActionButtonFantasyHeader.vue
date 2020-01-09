@@ -3,7 +3,7 @@
     v-styler:section="$sectionData.mainStyle"
     :class="[$sectionData.mainStyle.classes, {'_sticky' : $sectionData.mainStyle.sticky }]"
     :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }, $sectionData.objVarsMedia]"
-    class="b-section-header">
+    class="b-smm-header b-fantasy-header">
 
     <slot name="menu"/>
     <slot name="video"/>
@@ -155,7 +155,7 @@ const defaultComponents = [
         'is-mobile': {
           width: '190px',
           height: '60px',
-          'margin-top': '4px',
+          'margin-top': '0',
           'margin-right': '0',
           'margin-bottom': '0',
           'margin-left': '0'
@@ -274,7 +274,8 @@ const defaultSchema = {
     },
     media: {
       'is-mobile': {
-        'flex-direction': 'column'
+        'flex-direction': 'column',
+        'margin-top': '-16px'
       }
     },
     width: 4,
@@ -355,40 +356,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-
-.b-section-header
-  z-index: 2
-
-  .mobile-menu
-    transition: all 200ms
-    .is-mobile &
-      &_hide
-        display: none
-    .is-mobile &
-      &_drop
-        background-color: var(--bg-color) !important
-    @media (max-width: 800px)
-      &_drop
-        background-color: var(--bg-color) !important
-
-  &__col
-    padding: 0 1.6rem !important
-
-  .b-grid__row
-    .is-mobile &
-      padding: 0 !important
-    @media (max-width: 800px)
-      &
-        padding: 0 !important
-
-.b-button-one
-  .is-mobile &
-    order: 1
-  @media (max-width: 800px)
-    order: 1
-
-@media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
-  .b-slot .b-draggable-slot > div
-    width: auto !important
 </style>
