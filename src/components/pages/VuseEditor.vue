@@ -34,6 +34,7 @@ import ActionButtonFantasyHeader from '@components/sections/header/ActionButtonF
 import SmmHeader from '@components/sections/header/SmmHeader'
 import SmmFantasyHeader from '@components/sections/header/SmmFantasyHeader'
 import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
+import ActionButtonWesternHeader from '@components/sections/header/ActionButtonWesternHeader'
 
 // --- hero
 import GenericMainScreen from '@components/sections/hero/HeroUnit'
@@ -91,6 +92,7 @@ import SystemRequirements from '@components/sections/elements/SystemRequirements
 import SystemRequirementsFantasy from '@components/sections/elements/SystemRequirementsFantasy'
 import FooterSpace from '@components/sections/footers/FooterSpace'
 import FooterFantasy from '@components/sections/footers/FooterFantasy'
+import FooterWestern from '@components/sections/footers/FooterWestern'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
 import Slider from '@components/sections/slider/Slider'
 import SliderFantasy from '@components/sections/slider/SliderFantasy'
@@ -122,6 +124,7 @@ const COMPONENTS = {
   CenteredLogoHeader,
   ActionButtonFantasyHeader,
   SmmFantasyHeader,
+  ActionButtonWesternHeader,
 
   FirstScreenSpace01,
   FirstScreenSpace02,
@@ -181,7 +184,8 @@ const COMPONENTS = {
   FrequentlyAskedQuestions,
 
   FooterSpace,
-  FooterFantasy
+  FooterFantasy,
+  FooterWestern
 }
 
 Vuse.mix({ components: ELEMENTS })
