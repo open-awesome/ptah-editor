@@ -75,6 +75,7 @@ import ProductsExtendFantasy from '@components/sections/products/ProductsExtendF
 // --- columns
 import Columns from '@components/sections/columns/Columns'
 import ColumnsFantasy from '@components/sections/columns/ColumnsFantasy'
+import ColumnsWestern from '@components/sections/columns/ColumnsWestern'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
@@ -154,6 +155,7 @@ const COMPONENTS = {
 
   Columns,
   ColumnsFantasy,
+  ColumnsWestern,
 
   GallerySwitch,
   GalleryPopup,
