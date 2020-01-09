@@ -100,7 +100,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn811.cdn.stg.gamenet.ru/0/7cEKX/o_182BvQ.png',
+  cover: 'https://s3.protocol.one/src/o_182BvQ.png',
 
   $schema: {
     mainStyle: types.StyleObject,
@@ -210,5 +210,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
 </style>

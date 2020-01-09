@@ -192,39 +192,4 @@ export default {
 </script>
 
 <style lang="sass">
-@import '../../assets/sass/_colors.sass'
-@import '../../assets/sass/_variables.sass'
-@import '../../assets/sass/_menubar.sass'
-@import '../../assets/sass/element.sass'
-
-.b-text
-  color: #000
-
-  font-family: 'Lato'
-  font-size: 1.4rem
-  line-height: 1.4
-
-  position: relative
-  display: block
-
-  letter-spacing: -0.02em
-  .is-mobile &,
-  .is-tablet &
-    margin: 0 auto 8px
-  @media only screen and (width: 768px) and (height: 1024px)
-    &
-      padding: 0px 0px 0px 40px
-  @media only screen and (max-width: 840px)
-    &
-      margin: 0 auto 8px
-
-  &::selection, & ::selection
-    color: #ff0
-    background: #000
-
-  ul,
-  ol
-    margin: 0
-    padding: 0 1em
-
 </style>

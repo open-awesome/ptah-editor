@@ -13,7 +13,7 @@ Vue.use(Vuex)
 Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
-const demoLanding = 'https://s3.protocol.one/files/Demo-page.json'
+const demoLanding = 'https://s3.protocol.one/files/Demo-page-12.json'
 
 const state = {
   storefrontPreview: false,
@@ -96,10 +96,11 @@ const actions = {
           css: '',
           cookiesPolicy: {
             enabled: false,
-            pdf: 'https://gn338.cdn.stg.gamenet.ru/0/7XSEU/o_1ohKcv.pdf'
+            pdf: 'https://s3.protocol.one/src/o_1ohKcv.pdf'
           },
           mailchimpUrl: false,
-          mailchimpList: false
+          mailchimpList: false,
+          name: data.name
         })
         commit('isSaved', false)
         commit('updateCurrentLanding', landing)

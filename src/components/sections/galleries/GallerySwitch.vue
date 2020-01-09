@@ -216,15 +216,15 @@ const GALLERY_ITEM = [
 ]
 
 let thumbs = [
-  'https://gn830.cdn.stg.gamenet.ru/0/8dvLH/o_110MxE.png',
-  'https://gn354.cdn.stg.gamenet.ru/0/8dvLR/o_2CscoP.png',
-  'https://gn876.cdn.stg.gamenet.ru/0/8dvLj/o_193U4o.png'
+  'https://s3.protocol.one/src/o_110MxE.png',
+  'https://s3.protocol.one/src/o_2CscoP.png',
+  'https://s3.protocol.one/src/o_193U4o.png'
 ]
 
 let prev = [
-  'https://gn687.cdn.stg.gamenet.ru/0/8dwEL/o_OqWNO.png',
-  'https://gn792.cdn.stg.gamenet.ru/0/8dwFJ/o_1TgrhD.png',
-  'https://gn66.cdn.stg.gamenet.ru/0/8dwFp/o_1puIZ.png'
+  'https://s3.protocol.one/src/o_OqWNO.png',
+  'https://s3.protocol.one/src/o_1TgrhD.png',
+  'https://s3.protocol.one/src/o_1puIZ.png'
 ]
 
 const [
@@ -331,7 +331,7 @@ const NAME = 'GallerySwitch'
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)'
+      'background-image': 'url(https://s3.protocol.one/src/o_u02v0.jpg)'
     },
     isChapter: true,
     isChapterStyle: true,
@@ -385,7 +385,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn249.cdn.stg.gamenet.ru/0/8iEB7/o_Rg7b5.jpg',
+  cover: 'https://s3.protocol.one/src/o_Rg7b5.jpg',
 
   $schema: {
     mainStyle: types.Gallery,
@@ -428,246 +428,5 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-@import '../../../assets/sass/section-menu.sass'
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-@import '../../../assets/sass/_flex.sass'
-
-.b-gallery-one
-  $this: &
-
-  /deep/
-    .b-uploader__input
-      bottom: auto
-      height: 0
-
-.b-preview
-  text-align: center
-  display: inline-block
-  vertical-align: top
-
-  margin: $size-step/3
-  padding: 0
-  border: 0.2rem dotted transparent
-
-  position: relative
-  cursor: pointer
-  & .b-uploader
-    opacity: 0
-    z-index: 1
-  &:hover .b-uploader
-    opacity: 0.2
-    display: block
-  &__count
-    position: absolute
-    top: $size-step/3
-    left: $size-step/3
-
-    width: $size-step/2
-    height: $size-step/2
-
-    background-color: rgba($white, 1)
-    border-radius: 100%
-    color: $dark-grey
-    font-size: 1.2rem
-
-    display: none
-  .is-editable &__count
-    display: flex
-    justify-content: center
-    align-items: center
-
-  &__image
-    width: 100%
-
-    position: relative
-    z-index: 0
-    opacity: 0.8
-    filter: grayscale(.75)
-    transition: all .2s ease-out
-    &:hover
-      filter: none
-
-  &__name
-    width: 100%
-    height: auto
-    min-height: 2rem
-    padding: 1rem 0.5rem
-
-    border-radius: 0
-
-    position: relative
-    z-index: 10
-    transition: all 200ms
-  &_active
-    transform: scale(1.1)
-    filter: none
-    opacity: 1
-
-.b-gallery-one-list
- width: 100%
- margin: 0 auto
-
-.b-gallery-one-list__tiles
-  text-align: center
-  width: 60%
-  opacity: 1
-  height: auto
-  &_mobile
-    .is-tablet &,
-    .is-mobile &
-      opacity: 0
-      width: 0
-      height: 0
-    @media only screen and (max-width: 768px)
-      &
-        opacity: 0
-        width: 0
-        height: 0
-
-.b-gallery-one-list__tiles
-  text-align: center
-
-.b-gallery-one-list__detail
-  text-align: center
-  width: 40%
-  height: 50rem
-  .is-tablet &,
-  .is-mobile &
-    width: 100%
-    height: auto
-  @media only screen and (max-width: 768px)
-    &
-      width: 100%
-      height: auto
-.is-tablet,
-.is-mobile
-  .b-gallery-one-list
-    -webkit-box-orient: vertical
-    -webkit-box-direction: normal
-    -ms-flex-direction: column
-    flex-direction: column
-    .flex__item_size-2, .flex__item_size-1
-      -webkit-box-flex: 0
-      -ms-flex: 0 0 auto
-      flex: 0 0 auto
-
-@media only screen and (max-width: 768px)
-  .b-gallery-one-list
-    -webkit-box-orient: vertical
-    -webkit-box-direction: normal
-    -ms-flex-direction: column
-    flex-direction: column
-    .flex__item_size-2, .flex__item_size-1
-      -webkit-box-flex: 0
-      -ms-flex: 0 0 auto
-      flex: 0 0 auto
-
-.loader__content
-  transition: opacity 200ms
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  padding: 0
-  opacity: 0
-  visibility: hidden
-
-  display: flex
-  justify-content: center
-  align-items: center
-  flex-direction: column
-  transition: all .2s ease-out
-  &_show
-   opacity: 1
-   visibility: visible
-  &_mobile
-    .is-tablet &,
-    .is-mobile &
-      opacity: 1
-      visibility: visible
-      margin: $size-step 0
-      position: relative
-    @media only screen and (max-width: 768px)
-      &
-        opacity: 1
-        visibility: visible
-        margin: $size-step 0
-        position: relative
-.b-gallery-one-stage
-  position: relative
-  &__count
-    position: absolute
-    top: $size-step/3
-    left: $size-step/3
-
-    width: $size-step/2
-    height: $size-step/2
-
-    background-color: rgba($white, 1)
-    border-radius: 100%
-    color: $dark-grey
-    font-size: 1.2rem
-
-    display: none
-  .is-editable &__count
-    display: flex
-    justify-content: center
-    align-items: center
-  .is-tablet &,
-  .is-mobile &
-    .b-gallery-one-stage
-      margin-bottom: 1rem
-  @media only screen and (max-width: 768px)
-    &
-      margin-bottom: 1rem
-
-.b-gallery-one-stage__name,
-.b-gallery-one-stage__bio
-  max-width: 50rem
-  margin: $size-step/2 auto
-
-.b-gallery-one-stage__name
-  .is-mobile &
-    font-family: var(--mobile-section-text-styles-chapter-font-family) !important
-    font-size: var(--mobile-section-text-styles-chapter-font-size) !important
-    color: var(--mobile-section-text-styles-chapter-color) !important
-  @media only screen and (max-width: 768px)
-    &
-     font-family: var(--mobile-section-text-styles-chapter-font-family) !important
-     font-size: var(--mobile-section-text-styles-chapter-font-size) !important
-     color: var(--mobile-section-text-styles-chapter-color) !important
-
-.b-gallery-one-stage__bio
-  .is-mobile &
-    font-family: var(--mobile-section-text-styles-text-font-family) !important
-    font-size: var(--mobile-section-text-styles-text-font-size) !important
-    color: var(--mobile-section-text-styles-text-color) !important
-  @media only screen and (max-width: 768px)
-    &
-     font-family: var(--mobile-section-text-styles-text-font-family) !important
-     font-size: var(--mobile-section-text-styles-text-font-size) !important
-     color: var(--mobile-section-text-styles-text-color) !important
-
-.b-gallery-one-stage__img
-  position: relative
-
-  width: 40rem
-  height: 30rem
-  margin: 0 auto
-
-  display: flex
-  align-items: center
-  justify-content: center
-
-  .is-tablet &,
-  .is-mobile &
-    width: 30rem
-    height: 30rem
-  @media only screen and (max-width: 768px)
-    &
-      width: 30rem
-      height: 30rem
 
 </style>

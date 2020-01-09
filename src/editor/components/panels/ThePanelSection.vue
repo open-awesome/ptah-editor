@@ -29,7 +29,7 @@
         <div class="b-panel__control mailchimp" v-if="settingObjectSection.group === 'Forms' && !isMobile">
           <div v-if="user.mailchimpIntegration && currentLanding.settings.mailchimpList">
             <div class="mailchimp_complete">
-              <img src="https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png" alt="">
+              <img src="https://s3.protocol.one/src/o_CaMZ6.png" alt="">
               <icon-base name="checkMark" width="40" height="40"></icon-base>
             </div>
             <p>Now emails from this form will be sent to the list:
@@ -40,7 +40,7 @@
 
           <div v-if="!user.mailchimpIntegration || !currentLanding.settings.mailchimpList">
             <div class="mailchimp_none">
-              <img src="https://gn831.cdn.stg.gamenet.ru/0/7m0JQ/o_CaMZ6.png" alt="">
+              <img src="https://s3.protocol.one/src/o_CaMZ6.png" alt="">
               <icon-base name="close" width="40" height="40"></icon-base>
             </div>
             <p>Change this in <b><router-link :to="mailchimpLink">Integrations Settings</router-link></b></p>

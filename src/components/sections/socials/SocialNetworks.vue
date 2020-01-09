@@ -56,7 +56,7 @@ const C_CUSTOM = [
 
 const GROUP_NAME = 'SocialNetworks'
 const NAME = 'SocialNetworks'
-const BG_SECTION = 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)'
+const BG_SECTION = 'url(https://s3.protocol.one/src/o_cm1BL.jpg)'
 
 const SCHEMA_CUSTOM = {
   mainStyle: {

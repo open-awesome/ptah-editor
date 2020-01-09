@@ -376,7 +376,7 @@ export default {
             display: none
 
       &-imageholder
-        background: url("https://gn790.cdn.stg.gamenet.ru/0/7k3Ee/o_jGfAw.png") no-repeat
+        background: url("https://s3.protocol.one/src/o_jGfAw.png") no-repeat
         width: 24rem
         min-height: 18.6rem
         padding: 1.2rem .2rem 0
@@ -428,7 +428,7 @@ export default {
         /deep/
           & input
               padding-left: 3.6rem
-              background: url("https://gn118.cdn.stg.gamenet.ru/0/7k6JU/o_ItVIs.png") no-repeat left center
+              background: url("https://s3.protocol.one/src/o_ItVIs.png") no-repeat left center
 
   &-footer
     position: absolute

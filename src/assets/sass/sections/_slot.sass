@@ -1,0 +1,122 @@
+.b-slot
+  $this: &
+  display: flex
+  flex-wrap: wrap
+
+  position: relative
+  width: 100%
+  padding: 0
+  min-height: $size-step
+
+  transition: border 0.25s
+  .is-editable &
+    height: 100%
+
+  &__settings
+    position: absolute
+    top: 0
+    left: 0
+    z-index: 1000
+
+    width: $size-step/1.5
+    padding: 0
+    margin: 0
+    border: none
+    border-radius: 0
+
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    flex-direction: column
+
+    opacity: 0
+    transition: opacity 0.25s
+    &-item
+      display: flex
+      align-items: center
+      justify-content: center
+
+      width: $size-step/1.5
+      height: $size-step/1.5
+
+      background: $dark-blue-krayola
+      box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+
+      cursor: pointer
+      transition: all .3s cubic-bezier(.2,.85,.4,1.275)
+      & svg
+        fill: $white
+        width: 14px
+        height: 14px
+
+      &:hover,
+      .active
+        background: $white
+        svg
+          fill: $dark-blue-krayola
+
+  .is-editable &:hover
+    #{$this}__settings
+      opacity: 1
+    .b-draggable-slot
+      border: 1px dashed $dark-blue-krayola
+
+  .is-mobile & .b-draggable-slot
+    flex-direction: var(--mobile-slot-flex-direction) !important
+    align-items: var(--mobile-slot-align-items) !important
+    justify-content: var(--mobile-slot-justify-content) !important
+    background-color: var(--mobile-slot-background-color) !important
+    background-image: var(--mobile-slot-background-image) !important
+    background-position: var(--mobile-slot-background-position) !important
+    background-repeat: var(--mobile-slot-background-repeat) !important
+    background-size: var(--mobile-slot-background-size) !important
+    background-attachment: var(--mobile-slot-background-attachment) !important
+    margin-top: var(--mobile-slot-margin-top) !important
+    margin-right: var(--mobile-slot-margin-right) !important
+    margin-bottom: var(--mobile-slot-margin-bottom) !important
+    margin-left: var(--mobile-slot-margin-left) !important
+    padding-top: var(--mobile-slot-padding-top) !important
+    padding-right: var(--mobile-slot-padding-right) !important
+    padding-bottom: var(--mobile-slot-padding-bottom) !important
+    padding-left: var(--mobile-slot-padding-left) !important
+
+  @media only screen and (max-width: 768px)
+    & .b-draggable-slot
+      flex-direction: var(--mobile-slot-flex-direction) !important
+      align-items: var(--mobile-slot-align-items) !important
+      justify-content: var(--mobile-slot-justify-content) !important
+      background-color: var(--mobile-slot-background-color) !important
+      background-image: var(--mobile-slot-background-image) !important
+      background-position: var(--mobile-slot-background-position) !important
+      background-repeat: var(--mobile-slot-background-repeat) !important
+      background-size: var(--mobile-slot-background-size) !important
+      background-attachment: var(--mobile-slot-background-attachment) !important
+      margin-top: var(--mobile-slot-margin-top) !important
+      margin-right: var(--mobile-slot-margin-right) !important
+      margin-bottom: var(--mobile-slot-margin-bottom) !important
+      margin-left: var(--mobile-slot-margin-left) !important
+      padding-top: var(--mobile-slot-padding-top) !important
+      padding-right: var(--mobile-slot-padding-right) !important
+      padding-bottom: var(--mobile-slot-padding-bottom) !important
+      padding-left: var(--mobile-slot-padding-left) !important
+
+  /deep/
+    .b-draggable-slot
+      display: flex
+      flex-wrap: wrap
+      // flex-direction: column
+      // justify-content: center
+      // align-items: center
+      color: inherit
+
+      width: 100%
+      margin: 0 auto
+
+      border: 1px dashed transparent
+      padding: .8rem
+      &
+        > div
+          max-width: 100%
+      &_horizont
+        > div
+          width: auto

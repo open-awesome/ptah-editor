@@ -1,6 +1,6 @@
 <template>
   <section
-    class="b-top"
+    class="b-top b-section-slider"
     :class="[$sectionData.mainStyle.classes, device.type]"
     :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
@@ -119,7 +119,6 @@ import { mapActions } from 'vuex'
 
 import Swiper from 'swiper'
 import swiperOptions from '@editor/swiper'
-import 'swiper/dist/css/swiper.min.css'
 import { randomPoneId } from '../../../editor/util'
 
 let [
@@ -388,91 +387,14 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
+.slide-number
+  display: block
+  position: absolute
+  top: 2rem
+  right: 4rem
+  z-index: 3
 
-.b-top
-  width: 100%
-  max-width: 100vw
-  margin: 0
-  padding: 0
-  overflow: hidden
-
-  &__slide
-    width: 100%
-    height: 100%
-    position: relative
-
-  .slide-number
-    display: none
-
-.swiper-container
-  border: none !important
-  .b-draggable-slot
-    border: none !important
-    width: 100% !important
-  &.is-editable
-    .slide-number
-      display: block
-      position: absolute
-      top: 2rem
-      right: 4rem
-      z-index: 3
-
-      font-size: 5rem
-      font-weight: bold
-      color: rgba($white, .5)
-
-.swiper-container, .b-sandbox, .swiper-slide
-  height: 100% !important
-
-.swiper-slide-image
-  max-width: 100%
-.swiper-slide-item
-  width: 100%
-  height: 100%
-
-  background-size: contain
-  background-position: center
-  background-repeat: no-repeat
-
-.swiper-pagination
-  width: 100%
-  bottom: 2.5rem
-  &-bullet
-    margin: 0 .4rem
-
-.swiper-pagination-bullet
-  opacity: 1
-  &-inactive
-    opacity: .35 !important
-    background: black !important
-
-.swiper-button-next,
-.swiper-button-prev
-  background-image: none
-
-  svg
-    width: 100%
-    height: 100%
-
-.swiper-button-next
-  right: 20px
-  .is-mobile &,
-  .is-tablet &
-    right: 0
-    transform: scale(.7)
-  @media only screen and (max-width: 768px)
-    &
-      right: 0
-      transform: scale(.7)
-.swiper-button-prev
-  left: 20px
-  .is-mobile &,
-  .is-tablet &
-    left: 0
-    transform: scale(.7)
-  @media only screen and (max-width: 768px)
-    &
-      left: 0
-      transform: scale(.7)
+  font-size: 5rem
+  font-weight: bold
+  color: rgba($white, .5)
 </style>

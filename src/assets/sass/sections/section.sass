@@ -1,0 +1,304 @@
+section
+  position: relative
+  width: 100%
+
+  text-align: center
+
+  display: flex
+  justify-content: flex-start
+  flex-direction: column
+
+  transition: background 200ms
+  z-index: 1
+  .is-tablet &,
+  .is-mobile &
+    height: auto !important
+  @media only screen and (max-width: 840px)
+    &
+      height: auto !important
+  @media only screen and (max-height: 668px)
+    &
+      height: auto !important
+      min-height: 100% !important
+
+.main
+  &_showPopup
+    & > section:not(.b-gallery-popup)
+      z-index: 0 !important
+
+header,
+footer
+  z-index: 1
+
+/* video background styles */
+.video-background
+  position: relative !important
+  background: none !important
+  overflow: hidden !important
+  video
+    position: absolute
+    top: 0
+    left: 0
+    min-width: 100%
+    min-height: 100%
+    + .b-footer
+      background: none !important
+
+/* overlay background */
+
+.b-overlay
+  position: absolute
+  top: 0
+  left: 0
+  right: 0
+  bottom: 0
+
+// HERO HUNT
+.b-hunt
+  .b-grid,
+  .b-grid__row
+    height: 80vh
+  .b-hunt-sandbox
+    height: 80vh
+    /deep/
+    .b-draggable-slot
+      justify-content: flex-end
+
+// FIRST SCREEN FANTASY
+.b-first-screen-fantasy-01
+  @media only screen and (width: 1024px) and (height: 1366px)
+    &
+      background-position: 45% bottom
+  .b-button-fs
+    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
+    transition: background-color 200ms
+
+.b-first-screen-fantasy-02
+  @media only screen and (width: 1024px) and (height: 1366px)
+    &
+      background-position: 75% bottom
+  .is-mobile &
+    background-position: 75% bottom
+  @media only screen and (max-width: 500px) and (max-height: 1000px)
+    &
+      background-position: 75% bottom
+  .b-logo-fs
+    @media only screen and (max-width: 900px) and (max-height: 450px)
+      &
+        margin: 1.6rem 0
+  .b-text-fs
+    letter-spacing: -0.02em
+    .is-mobile &,
+    .is-tablet &
+      font-size: 2.4rem
+      margin: 0 auto 8px
+      text-align: center
+    @media only screen and (width: 768px) and (height: 1024px)
+      &
+        padding: 0px 0px 0px 40px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+    @media only screen and (max-width: 500px)
+      &
+        text-align: center
+    @media only screen and (max-width: 900px) and (max-height: 450px)
+      &
+        text-align: left
+  .b-button-fs
+    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
+    transition: background-color 200ms
+    @media only screen and (max-width: 900px) and (max-height: 450px)
+      &
+        margin: 1.6rem
+  .b-timer-fs
+    @media only screen and (max-width: 768px) and (min-height: 700px)
+      &
+        width: 90
+    @media only screen and (max-width: 900px) and (max-height: 450px)
+      &
+        width: auto
+        margin: 1.6rem 0
+  .b-delimiter-fs
+    @media only screen and (max-width: 980px) and (max-height: 700px)
+      &
+        display: none
+// FIRST SCREEN FANTASY VIDEO
+.b-first-screen-space-video-back
+  .b-text-fs
+    letter-spacing: -0.02em
+    .is-mobile &,
+    .is-tablet &
+      font-size: 2.4rem
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+  .b-button-fs
+    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
+    transition: background-color 200ms
+  .b-timer-fs
+    .is-mobile &,
+    .is-tablet &
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+
+//FIRST SCREEN SPACE 1
+.b-first-screen-space-01
+  .b-text-fs
+    letter-spacing: -0.02em
+    .is-mobile &,
+    .is-tablet &
+      font-size: 2.4rem
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+  .b-button-fs
+    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
+    transition: background-color 200ms
+  .b-timer-fs
+    .is-mobile &,
+    .is-tablet &
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+
+// FIRST SCREEN SPACE 2
+.b-first-screen-space-02
+  .b-text-fs
+    letter-spacing: -0.02em
+    .is-mobile &,
+    .is-tablet &
+      font-size: 2.4rem
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+  .b-button-fs
+    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
+    transition: background-color 200ms
+  .b-timer-fs
+    .is-mobile &,
+    .is-tablet &
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+// FIRST SCREEN SPACE VIDEO BACK
+.b-first-screen-space-video-back
+  .b-text-fs
+    letter-spacing: -0.02em
+    .is-mobile &,
+    .is-tablet &
+      font-size: 2.4rem
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+  .b-button-fs
+    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
+    transition: background-color 200ms
+  .b-timer-fs
+    .is-mobile &,
+    .is-tablet &
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+// FIRST SCREEN SPACE VIDEO PLAYER
+.b-first-screen-space-video-player
+  .b-text-fs
+    letter-spacing: -0.02em
+    .is-mobile &,
+    .is-tablet &
+      font-size: 2.4rem
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+  .b-button-fs
+    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
+    transition: background-color 200ms
+  .b-timer-fs
+    .is-mobile &,
+    .is-tablet &
+      margin: 0 auto 8px
+    @media only screen and (max-width: 840px)
+      &
+        font-size: 2.4rem
+        margin: 0 auto 8px
+
+// FOOTER
+.b-section-footer
+  position: relative
+  width: 100%
+  margin: 0
+  display: flex
+  text-align: center
+  justify-content: center
+  align-items: center
+  flex-direction: column
+  transition: background 200ms
+  .is-mobile &,
+  .is-tablet &
+    position: relative
+    padding: 2rem 0 1rem
+  @media only screen and (max-width: 768px)
+    &
+      position: relative
+      padding: 2rem 0 1rem
+
+.b-footer
+  width: 100%
+  &__row
+    align-items: center
+  &__col
+    min-height: auto
+  &-logo,
+  &-game-logo
+  &-copyright
+  .is-mobile &,
+  .is-tablet &
+    position: relative
+    height: auto
+  @media only screen and (max-width: 768px)
+    &
+      position: relative
+      height: auto
+  &-link
+  .is-mobile &
+    font-size: 1.6rem
+    @media (max-width: 800px)
+      font-size: 1.6rem
+
+  &-component
+    margin: 0.8rem
+    .is-mobile &,
+    .is-tablet &
+      margin: 0.8rem auto
+    @media only screen and (max-width: 768px)
+      &
+        margin: 0.8rem auto
+
+.two-segment-hero
+  .b-grid__col-8
+    .is-mobile &,
+    .is-tablet &
+      padding-top: 0
+    @media only screen and (max-width: 768px)
+      padding-top: 0
+

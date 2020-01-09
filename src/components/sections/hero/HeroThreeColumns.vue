@@ -75,7 +75,7 @@ const defaultColumnComponents1 = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn215.cdn.stg.gamenet.ru/0/7a2Pg/o_20SELE.png)',
+        'background-image': 'url(https://s3.protocol.one/src/o_20SELE.png)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -136,7 +136,7 @@ const defaultColumnComponents3 = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn673.cdn.stg.gamenet.ru/0/7a2Oy/o_ZmvP7.png)',
+        'background-image': 'url(https://s3.protocol.one/src/o_ZmvP7.png)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -149,7 +149,7 @@ const defaultColumnComponents3 = [
 const defaultSchema = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn565.cdn.stg.gamenet.ru/0/7a2gZ/o_1hCEY8.png)',
+      'background-image': 'url(https://s3.protocol.one/src/o_1hCEY8.png)',
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
       'background-position': '75% 50%'
@@ -225,5 +225,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
- @import '../../../assets/sass/section-media.sass'
 </style>

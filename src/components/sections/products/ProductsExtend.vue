@@ -7,10 +7,10 @@ import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
 let prev = [
-  'https://gn257.cdn.stg.gamenet.ru/0/8dAso/o_1O03Wg.png',
-  'https://gn292.cdn.stg.gamenet.ru/0/8dAtJ/o_1FdGcD.png',
-  'https://gn546.cdn.stg.gamenet.ru/0/8dAtZ/o_2FiQhB.png',
-  'https://gn452.cdn.stg.gamenet.ru/0/8dAtj/o_1ZxHzN.png'
+  'https://s3.protocol.one/src/o_1O03Wg.png',
+  'https://s3.protocol.one/src/o_1FdGcD.png',
+  'https://s3.protocol.one/src/o_2FiQhB.png',
+  'https://s3.protocol.one/src/o_1ZxHzN.png'
 ]
 
 let label = [
@@ -421,7 +421,7 @@ const C_CUSTOM_CONTAINER_D = {
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_u02v0.jpg)',
       'background-color': 'rgba(21,28,68,1)',
       'padding-top': '30px',
       'padding-bottom': '30px'
@@ -544,7 +544,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn199.cdn.stg.gamenet.ru/0/8iE9h/o_2BSWcG.jpg',
+  cover: 'https://s3.protocol.one/src/o_2BSWcG.jpg',
 
   $schema: {
     mainStyle: types.ProductSection,
@@ -779,99 +779,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-@import '../../../assets/sass/section-menu.sass'
-@import '../../../assets/sass/_variables.sass'
-@import '../../../assets/sass/_flex.sass'
-
-.b-products-columns-extend
-  $this: &
-  &__row
-    justify-content: center
-    align-items: center
-    flex-wrap: wrap
-  &__icon-with-text
-    color: inherit
-    font-family: inherit
-
-  &__left
-    flex-wrap: wrap
-    &-item
-      &:hover,
-      &_active
-        color: var(--color-active) !important
-        & .b-slot
-          cursor: pointer
-  &__right
-    position: relative
-    min-height: $size-step*15
-
-    display: flex
-    text-align: center
-    justify-content: center
-    .is-mobile &
-      width: 100%
-      height: auto !important
-      min-height: auto !important
-    .is-tablet &
-      height: auto !important
-      min-height: auto !important
-    @media only screen and (max-width: 768px)
-      &
-        height: auto !important
-        min-height: auto !important
-    &-stage
-      height: 100%
-      display: flex
-      width: 100%
-      flex-direction: column
-      align-items: center
-      justify-content: center
-    &-item
-      position: absolute
-      top: 0
-      right: 0
-      left: 0
-
-      width: 100%
-      min-height: 100%
-      padding: 0
-
-      visibility: hidden
-
-      display: flex
-      justify-content: center
-      align-items: center
-      flex-direction: column
-
-      opacity: 0
-      &_active
-        visibility: visible
-        opacity: 1
-      .is-mobile &,
-      .is-tablet &
-        width: 100%
-        height: auto
-        position: relative
-        visibility: visible
-        margin: 1.6rem 0
-        display: flex !important
-        opacity: 1 !important
-      @media only screen and (max-width: 768px)
-        &
-          width: 100%
-          height: auto
-          position: relative
-          visibility: visible
-          margin: 1.6rem 0
-          display: flex !important
-          opacity: 1 !important
-
-.b-draggable-slot_row
-  flex-direction: row !important
-  & > div
-    margin: $size-step/8
-
-.b-slot
-  height: auto !important
 </style>

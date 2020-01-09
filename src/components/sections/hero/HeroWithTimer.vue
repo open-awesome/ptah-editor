@@ -7,7 +7,7 @@ import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'HeroWithTimer'
-const BG_SECTION = 'url(https://gn269.cdn.stg.gamenet.ru/0/7o9OH/o_l6SvX.jpg)'
+const BG_SECTION = 'url(https://s3.protocol.one/src/o_l6SvX.jpg)'
 
 const COMPONENTS = [
   {
@@ -51,7 +51,7 @@ const C_CUSTOM = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn860.cdn.stg.gamenet.ru/0/7o9P9/o_KucA7.png")',
+        'background-image': 'url("https://s3.protocol.one/src/o_KucA7.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -220,7 +220,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
 </style>

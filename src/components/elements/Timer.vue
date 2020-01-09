@@ -176,7 +176,7 @@ export default {
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
-@import '../../assets/sass/element.sass'
+@import '../../assets/sass/sections/element'
 
 $main-font-size: 6rem
 

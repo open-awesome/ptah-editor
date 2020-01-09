@@ -25,15 +25,15 @@ const GALLERY_ITEM = [
 ]
 
 let thumbs = [
-  'https://gn285.cdn.stg.gamenet.ru/0/8eFwh/o_YYKWx.jpg',
-  'https://gn362.cdn.stg.gamenet.ru/0/8eFx7/o_hJ0YE.jpg',
-  'https://gn191.cdn.stg.gamenet.ru/0/8eFxH/o_7IKPH.jpg'
+  'https://s3.protocol.one/src/o_YYKWx.jpg',
+  'https://s3.protocol.one/src/o_hJ0YE.jpg',
+  'https://s3.protocol.one/src/o_7IKPH.jpg'
 ]
 
 let prev = [
-  'https://gn171.cdn.stg.gamenet.ru/0/8eFyT/o_1guior.jpg',
-  'https://gn645.cdn.stg.gamenet.ru/0/8eFyc/o_UJvfQ.jpg',
-  'https://gn375.cdn.stg.gamenet.ru/0/8eFyk/o_1LsLbz.jpg'
+  'https://s3.protocol.one/src/o_1guior.jpg',
+  'https://s3.protocol.one/src/o_UJvfQ.jpg',
+  'https://s3.protocol.one/src/o_1LsLbz.jpg'
 ]
 
 const [
@@ -112,7 +112,7 @@ const NAME = 'GalleryPopup'
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)'
+      'background-image': 'url(https://s3.protocol.one/src/o_u02v0.jpg)'
     },
     isTextStyle: true,
     isLabel: true,
@@ -143,7 +143,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn128.cdn.stg.gamenet.ru/0/8iEAd/o_1SRy55.jpg',
+  cover: 'https://s3.protocol.one/src/o_1SRy55.jpg',
 
   $schema: {
     mainStyle: types.Gallery,
@@ -301,122 +301,4 @@ export default {
 </template>
 
 <style lang="sass" scoped="scoped">
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-@import '../../../assets/sass/section-media.sass'
-@import '../../../assets/sass/section-menu.sass'
-
-.b-gallery-popup
-  $this: &
-
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-wrap: wrap
-
-  /deep/
-    .b-uploader__input
-      bottom: auto
-      height: 0
-
-.b-gallery-popup__item
-  width: 32%
-  min-width: 10rem
-  height: 26rem
-  min-height: 5rem
-  margin: $size-step/8
-
-  cursor: pointer
-  position: relative
-
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-direction: column
-
-.b-gallery-popup__preview
-  $this: &
-
-  display: flex
-  justify-content: center
-  align-items: center
-
-  width: 100%
-  height: 100%
-
-  transition: all 200ms
-  position: relative
-  &:hover
-    #{$this}-video
-      transition: all 200ms
-      transform: rotate(360deg)
-  &-count
-    position: absolute
-    top: $size-step/3
-    left: $size-step/3
-
-    width: $size-step/2
-    height: $size-step/2
-
-    background-color: rgba($white, 1)
-    border-radius: 100%
-    color: $dark-grey
-    font-size: 1.2rem
-
-    display: none
-  .is-editable &-count
-    display: flex
-    justify-content: center
-    align-items: center
-  &-title
-    .is-mobile &
-      font-family: var(--mobile-section-text-styles-text-font-family) !important
-      font-size: var(--mobile-section-text-styles-text-font-size) !important
-      color: var(--mobile-section-text-styles-text-color) !important
-    @media only screen and (max-width: 768px)
-      &
-       font-family: var(--mobile-section-text-styles-text-font-family) !important
-       font-size: var(--mobile-section-text-styles-text-font-size) !important
-       color: var(--mobile-section-text-styles-text-color) !important
-
-.b-gallery-popup__text
-  position: absolute
-  bottom: 1.5rem
-
-  opacity: 0
-  width: 100%
-  text-align: center
-
-  transition: 200ms opacity
-  color: #000
-  z-index: 100
-
-.b-gallery-popup__img
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  -o-object-fit: cover
-  object-fit: cover
-  height: 100%
-  z-index: 50
-
-.is-tablet,
-.is-mobile
-  .b-gallery-popup__item
-    width: 40%
-.is-mobile
-  .b-gallery-popup
-    margin-right: 0
-  .b-gallery-popup__item
-    width: 100%
-    padding: 0 0 2rem 0
-
-@media only screen and (max-width: 460px)
-  .b-gallery-popup
-    margin-right: 0
-  .b-gallery-popup__item
-    width: 100%
-    padding: 0 0 2rem 0
-
 </style>

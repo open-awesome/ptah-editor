@@ -57,11 +57,16 @@ import FirstScreenSpaceVideoPlayer from '@components/sections/first-screen/First
 import FirstScreenFantasy01 from '@components/sections/first-screen/FirstScreenFantasy01'
 import FirstScreenFantasy02 from '@components/sections/first-screen/FirstScreenFantasy02'
 import FirstScreenFantasyVideoBack from '@components/sections/first-screen/FirstScreenFantasyVideoBack'
+import FirstScreenWestern01 from '@components/sections/first-screen/FirstScreenWestern01'
+import FirstScreenWesternVideoPlayer01 from '@components/sections/first-screen/FirstScreenWesternVideoPlayer01'
+import FirstScreenWesternVideoPlayer02 from '@components/sections/first-screen/FirstScreenWesternVideoPlayer02'
+import FirstScreenWesternVideoBack from '@components/sections/first-screen/FirstScreenWesternVideoBack'
 // --- gallery
 import GallerySwitch from '@components/sections/galleries/GallerySwitch'
 import GallerySwitchFantasy from '@components/sections/galleries/GallerySwitchFantasy'
 import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 import GalleryPopupFantasy from '@components/sections/galleries/GalleryPopupFantasy'
+import GalleryPopupWestern from '@components/sections/galleries/GalleryPopupWestern'
 // --- products
 import Products from '@components/sections/products/Products'
 import ProductsFantasy from '@components/sections/products/ProductsFantasy'
@@ -89,6 +94,7 @@ import FooterFantasy from '@components/sections/footers/FooterFantasy'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
 import Slider from '@components/sections/slider/Slider'
 import SliderFantasy from '@components/sections/slider/SliderFantasy'
+import SliderWestern from '@components/sections/slider/SliderWestern'
 
 import store from '@store'
 
@@ -124,6 +130,11 @@ const COMPONENTS = {
   FirstScreenFantasy01,
   FirstScreenFantasy02,
   FirstScreenFantasyVideoBack,
+  FirstScreenWestern01,
+  FirstScreenWesternVideoPlayer01,
+  FirstScreenWesternVideoPlayer02,
+  FirstScreenWesternVideoBack,
+
   TwoSegmentHeroScreen,
   ThreeSegmentHeroScreen,
   VideoHeroSplitScreen,
@@ -140,6 +151,7 @@ const COMPONENTS = {
 
   Slider,
   SliderFantasy,
+  SliderWestern,
 
   Columns,
   ColumnsFantasy,
@@ -150,6 +162,7 @@ const COMPONENTS = {
   Carousel,
   GalleryPopupFantasy,
   GallerySwitchFantasy,
+  GalleryPopupWestern,
 
   Products,
   ProductsExtend,
@@ -209,6 +222,7 @@ export default {
 
     Vue.use(Vuse, {
       js: './../js/cjs.js',
+      css: './../ptah_sections.css',
       themes: themes
     })
   },
