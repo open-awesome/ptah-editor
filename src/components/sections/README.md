@@ -1,15 +1,14 @@
-# Как сделать секцию
-Секция - основной строительный блок  в редкторе. Элементы (текст, картинки, кнопки, etc.) внутри каждой секции сгруппированы в слотах.
-Количество слотов и их относительное расположение внутри секции задано изначально. Элементы по дефолту добавленные в секцию могут быть полностью удалены или заменены на другие. Количество элементов внутри слота не ограничено.
+# How to make a section
+A section - is the main building block in the editor. Elements (text, picture, buttons, etc.) are grouped into slots inside of each section.
+The number of slots and their relative positions inside of the section is defined from the start. The default elements in each section can be removed or replaced. The number of elements in the slot is indefinite. 
 
 ![Section](https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/279d9b71-a6e4-4711-9b7d-f8e7ba4800ab.jpg)
 
-Все компоненты секций поделены на группы и находятся тут 
+All section components are split into groups and can be found here 
 ```
 src/components/sections/
 ```
-Вы можете создать новую группу или добавить ваш компонент в уже существующую. Перед тем как создать новую секцию обязательно посмотрите 
-[пример с комментариями](https://github.com/ProtocolONE/ptah-editor/tree/develop/src/components/sections/sample.vue) - тут описан весь процесс создания.
-После того как компонент секции создан подключите его в [редактор](https://github.com/ProtocolONE/ptah-editor/blob/develop/src/components/pages/VuseEditor.vue).
+You can make a new group or add your component to an existing one. It may be useful to take a look at [this well-commented example](https://github.com/ProtocolONE/ptah-editor/tree/develop/src/components/sections/sample.vue) before you create a new section as it explains the whole process well.
+You need to turn on the component [in the editor](https://github.com/ProtocolONE/ptah-editor/blob/develop/src/components/pages/VuseEditor.vue) after you have created it.
 
-Теперь ваша секция будет доступна для добавления на лендинг в левой панели редктора. 
+Done. Now your section can be found in the left panel of Ptah editor.

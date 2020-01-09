@@ -7,10 +7,10 @@ import sectionMedia from '../../mixins/sectionMedia'
 import { mapActions } from 'vuex'
 
 let prev = [
-  'https://gn257.cdn.stg.gamenet.ru/0/8dAso/o_1O03Wg.png',
-  'https://gn292.cdn.stg.gamenet.ru/0/8dAtJ/o_1FdGcD.png',
-  'https://gn546.cdn.stg.gamenet.ru/0/8dAtZ/o_2FiQhB.png',
-  'https://gn452.cdn.stg.gamenet.ru/0/8dAtj/o_1ZxHzN.png'
+  'https://s3.protocol.one/src/o_1O03Wg.png',
+  'https://s3.protocol.one/src/o_1FdGcD.png',
+  'https://s3.protocol.one/src/o_2FiQhB.png',
+  'https://s3.protocol.one/src/o_1ZxHzN.png'
 ]
 
 let label = [
@@ -371,7 +371,7 @@ const C_CUSTOM = [
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_u02v0.jpg)',
       'background-color': 'rgba(21,28,68,1)',
       'background-size': 'cover',
       'padding-top': '50px',
@@ -475,7 +475,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn709.cdn.stg.gamenet.ru/0/8iEAD/o_1uYktu.jpg',
+  cover: 'https://s3.protocol.one/src/o_1uYktu.jpg',
 
   $schema: {
     mainStyle: types.ProductSection,
@@ -638,22 +638,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-@import '../../../assets/sass/section-menu.sass'
-@import '../../../assets/sass/_variables.sass'
-@import '../../../assets/sass/_flex.sass'
-
-.b-products-colums
-  $this: &
-  &__row
-    justify-content: center
-    align-items: flex-start
-
-  &__icon-with-text
-    color: inherit
-    font-family: inherit
-
-  .b-grid__col-3
-    padding: .8rem
-
 </style>

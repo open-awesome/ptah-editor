@@ -90,7 +90,7 @@ const defaultColumnComponents = [
   {
     element: {
       styles: {
-        'background-image': 'url(https://gn120.cdn.stg.gamenet.ru/0/7aITH/o_1vTdxd.png)',
+        'background-image': 'url(https://s3.protocol.one/src/o_1vTdxd.png)',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -103,7 +103,7 @@ const defaultColumnComponents = [
   },
   {
     element: {
-      src: 'https://gn553.cdn.stg.gamenet.ru/0/7aJD3/o_1Od7Vf.mp4'
+      src: 'https://s3.protocol.one/src/o_1Od7Vf.mp4'
     },
     key: 6
   },
@@ -153,7 +153,7 @@ const defaultColumnComponents = [
 const defaultSchema = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn851.cdn.stg.gamenet.ru/0/7aKEG/o_hRVwx.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_hRVwx.jpg)',
       'background-size': 'cover',
       'background-repeat': 'no-repeat',
       'background-position': '75% 50%'
@@ -196,5 +196,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
 </style>

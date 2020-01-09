@@ -34,6 +34,7 @@ import ActionButtonFantasyHeader from '@components/sections/header/ActionButtonF
 import SmmHeader from '@components/sections/header/SmmHeader'
 import SmmFantasyHeader from '@components/sections/header/SmmFantasyHeader'
 import CenteredLogoHeader from '@components/sections/header/CenteredLogoHeader'
+import ActionButtonWesternHeader from '@components/sections/header/ActionButtonWesternHeader'
 
 // --- hero
 import GenericMainScreen from '@components/sections/hero/HeroUnit'
@@ -57,11 +58,16 @@ import FirstScreenSpaceVideoPlayer from '@components/sections/first-screen/First
 import FirstScreenFantasy01 from '@components/sections/first-screen/FirstScreenFantasy01'
 import FirstScreenFantasy02 from '@components/sections/first-screen/FirstScreenFantasy02'
 import FirstScreenFantasyVideoBack from '@components/sections/first-screen/FirstScreenFantasyVideoBack'
+import FirstScreenWestern01 from '@components/sections/first-screen/FirstScreenWestern01'
+import FirstScreenWesternVideoPlayer01 from '@components/sections/first-screen/FirstScreenWesternVideoPlayer01'
+import FirstScreenWesternVideoPlayer02 from '@components/sections/first-screen/FirstScreenWesternVideoPlayer02'
+import FirstScreenWesternVideoBack from '@components/sections/first-screen/FirstScreenWesternVideoBack'
 // --- gallery
 import GallerySwitch from '@components/sections/galleries/GallerySwitch'
 import GallerySwitchFantasy from '@components/sections/galleries/GallerySwitchFantasy'
 import GalleryPopup from '@components/sections/galleries/GalleryPopup'
 import GalleryPopupFantasy from '@components/sections/galleries/GalleryPopupFantasy'
+import GalleryPopupWestern from '@components/sections/galleries/GalleryPopupWestern'
 // --- products
 import Products from '@components/sections/products/Products'
 import ProductsFantasy from '@components/sections/products/ProductsFantasy'
@@ -70,6 +76,7 @@ import ProductsExtendFantasy from '@components/sections/products/ProductsExtendF
 // --- columns
 import Columns from '@components/sections/columns/Columns'
 import ColumnsFantasy from '@components/sections/columns/ColumnsFantasy'
+import ColumnsWestern from '@components/sections/columns/ColumnsWestern'
 // --- carousel
 import Carousel from '@components/sections/carousel/Carousel'
 // --- forms
@@ -86,10 +93,12 @@ import SystemRequirementsFantasy from '@components/sections/elements/SystemRequi
 import SystemRequirementsWestern from '@components/sections/elements/SystemRequirementsWestern'
 import FooterSpace from '@components/sections/footers/FooterSpace'
 import FooterFantasy from '@components/sections/footers/FooterFantasy'
+import FooterWestern from '@components/sections/footers/FooterWestern'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
 import FrequentlyAskedQuestionsWestern from '@components/sections/elements/FrequentlyAskedQuestionsWestern'
 import Slider from '@components/sections/slider/Slider'
 import SliderFantasy from '@components/sections/slider/SliderFantasy'
+import SliderWestern from '@components/sections/slider/SliderWestern'
 
 import store from '@store'
 
@@ -117,6 +126,7 @@ const COMPONENTS = {
   CenteredLogoHeader,
   ActionButtonFantasyHeader,
   SmmFantasyHeader,
+  ActionButtonWesternHeader,
 
   FirstScreenSpace01,
   FirstScreenSpace02,
@@ -125,6 +135,11 @@ const COMPONENTS = {
   FirstScreenFantasy01,
   FirstScreenFantasy02,
   FirstScreenFantasyVideoBack,
+  FirstScreenWestern01,
+  FirstScreenWesternVideoPlayer01,
+  FirstScreenWesternVideoPlayer02,
+  FirstScreenWesternVideoBack,
+
   TwoSegmentHeroScreen,
   ThreeSegmentHeroScreen,
   VideoHeroSplitScreen,
@@ -141,15 +156,18 @@ const COMPONENTS = {
 
   Slider,
   SliderFantasy,
+  SliderWestern,
 
   Columns,
   ColumnsFantasy,
+  ColumnsWestern,
 
   GallerySwitch,
   GalleryPopup,
   Carousel,
   GalleryPopupFantasy,
   GallerySwitchFantasy,
+  GalleryPopupWestern,
 
   Products,
   ProductsExtend,
@@ -170,7 +188,8 @@ const COMPONENTS = {
   FrequentlyAskedQuestionsWestern,
 
   FooterSpace,
-  FooterFantasy
+  FooterFantasy,
+  FooterWestern
 }
 
 Vuse.mix({ components: ELEMENTS })
@@ -211,6 +230,7 @@ export default {
 
     Vue.use(Vuse, {
       js: './../js/cjs.js',
+      css: './../ptah_sections.css',
       themes: themes
     })
   },

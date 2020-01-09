@@ -66,7 +66,7 @@ const C_CUSTOM = [
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_u02v0.jpg)',
       'background-position': '50% 50%',
       'background-color': '#000',
       'background-size': 'cover',
@@ -96,7 +96,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn133.cdn.stg.gamenet.ru/0/8iE90/o_1LlVoh.jpg',
+  cover: 'https://s3.protocol.one/src/o_1LlVoh.jpg',
 
   group: GROUP_NAME,
 
@@ -155,5 +155,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
 </style>

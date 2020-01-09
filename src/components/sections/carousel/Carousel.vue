@@ -150,18 +150,18 @@ const C_CUSTOM = [
 const C_IMAGES = [
   {
     name: '1.jpg',
-    path: 'https://gn913.cdn.stg.gamenet.ru/0/8dWmn/o_hDJWI.jpg'
+    path: 'https://s3.protocol.one/src/o_hDJWI.jpg'
   },
   {
     name: '2.jpg',
-    path: 'https://gn285.cdn.stg.gamenet.ru/0/8dWne/o_1hyDuA.jpg'
+    path: 'https://s3.protocol.one/src/o_1hyDuA.jpg'
   }
 ]
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_u02v0.jpg)',
       'background-position': '50% 50%',
       'background-size': 'cover'
     },
@@ -191,7 +191,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://gn659.cdn.stg.gamenet.ru/0/8iyZR/o_1jkJaZ.jpg',
+  cover: 'https://s3.protocol.one/src/o_1jkJaZ.jpg',
 
   $schema: {
     mainStyle: types.GallerySlider,
@@ -235,45 +235,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-
-.swiper-slide-image
-  max-width: 100%
-.swiper-slide-item
-  width: 100%
-  height: 100%
-
-  background-size: contain
-  background-position: center
-  background-repeat: no-repeat
-
-.swiper-pagination
-  width: 100%
-  bottom: 2.5rem
-  padding-left: 2.5rem
-  &-bullet
-    margin: 0 .4rem
-
 .swiper-pagination-bullet
   opacity: 1
   &-inactive
     opacity: .35 !important
     background: black !important
-
-.swiper-button-next,
-.swiper-button-prev
-  background-image: none
-
-  svg
-    width: 100%
-    height: 100%
-
-.b-empty-carousel
-  border: 5px dashed rgba(0,0,0, .35)
-  color: rgba(0,0,0, .35)
-  font-size: 4.8rem
-  font-weight: bold
-  padding: 5rem 10rem
-  width: 60vw
-  background: rgba(255,255,255, .2)
 </style>

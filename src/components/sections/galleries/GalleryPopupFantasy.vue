@@ -163,7 +163,7 @@ export default {
     index: 0,
     isShowPopup: false,
     popupStyles: { width: 'auto', margin: '0' },
-    url: 'https://gn652.cdn.gamenet.ru/TY0Xv2riHu/772iV/o_cDot3.png',
+    url: 'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/a07b04e0-45c6-437c-b005-ea9fc9c5b019.png',
     content: '',
     typeContent: 'default'
   },
@@ -195,7 +195,7 @@ export default {
   <section class="b-gallery-popup"
    v-styler:section="$sectionData.mainStyle"
    :class="$sectionData.mainStyle.classes"
-   :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '1' }, $sectionData.objVarsMedia], $sectionData.objVarsTypo"
+   :style="[$sectionData.mainStyle.styles, $sectionData.isShowPopup ? { 'z-index': '10' } : { 'z-index': '2' }, $sectionData.objVarsMedia, $sectionData.objVarsTypo]"
   >
     <slot name="menu"/>
     <slot name="video"/>
@@ -302,121 +302,4 @@ export default {
 </template>
 
 <style lang="sass" scoped="scoped">
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-@import '../../../assets/sass/section-media.sass'
-@import '../../../assets/sass/section-menu.sass'
-
-.b-gallery-popup
-  $this: &
-
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-wrap: wrap
-
-  /deep/
-  .b-uploader__input
-    bottom: auto
-    height: 0
-
-.b-gallery-popup__item
-  width: 32%
-  min-width: 10rem
-  height: 26rem
-  min-height: 5rem
-  margin: $size-step/8
-
-  cursor: pointer
-  position: relative
-
-  display: flex
-  align-items: center
-  justify-content: center
-  flex-direction: column
-
-.b-gallery-popup__preview
-  $this: &
-
-  display: flex
-  justify-content: center
-  align-items: center
-
-  width: 100%
-  height: 100%
-
-  transition: all 200ms
-  position: relative
-  &:hover
-    #{$this}-video
-      transition: all 200ms
-      transform: rotate(360deg)
-  &-count
-    position: absolute
-    top: $size-step/3
-    left: $size-step/3
-
-    width: $size-step/2
-    height: $size-step/2
-
-    background-color: rgba($white, 1)
-    border-radius: 100%
-    color: $dark-grey
-    font-size: 1.2rem
-
-    display: none
-  .is-editable &-count
-    display: flex
-    justify-content: center
-    align-items: center
-  &-title
-    .is-mobile &
-      font-family: var(--mobile-section-text-styles-text-font-family) !important
-      font-size: var(--mobile-section-text-styles-text-font-size) !important
-      color: var(--mobile-section-text-styles-text-color) !important
-    @media only screen and (max-width: 768px)
-      &
-       font-family: var(--mobile-section-text-styles-text-font-family) !important
-       font-size: var(--mobile-section-text-styles-text-font-size) !important
-       color: var(--mobile-section-text-styles-text-color) !important
-
-.b-gallery-popup__text
-  position: absolute
-  bottom: 1.5rem
-
-  opacity: 0
-  width: 100%
-  text-align: center
-
-  transition: 200ms opacity
-  color: #000
-  z-index: 100
-
-.b-gallery-popup__img
-  position: absolute
-  top: 0
-  left: 0
-  width: 100%
-  -o-object-fit: cover
-  object-fit: cover
-  height: 100%
-  z-index: 50
-
-.is-tablet,
-.is-mobile
-  .b-gallery-popup__item
-    width: 40%
-.is-mobile
-  .b-gallery-popup
-    margin-right: 0
-  .b-gallery-popup__item
-    width: 100%
-    padding: 0 0 2rem 0
-
-@media only screen and (max-width: 460px)
-  .b-gallery-popup
-    margin-right: 0
-  .b-gallery-popup__item
-    width: 100%
-    padding: 0 0 2rem 0
 </style>

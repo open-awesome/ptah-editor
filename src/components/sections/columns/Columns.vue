@@ -10,7 +10,7 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn436.cdn.stg.gamenet.ru/0/8colJ/o_GfDXg.png")',
+        'background-image': 'url("https://s3.protocol.one/src/o_GfDXg.png")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -82,10 +82,10 @@ const C_CUSTOM_COLUMN = [
 ]
 
 const C_CUSTOM_COLUMN2 = _.cloneDeep(C_CUSTOM_COLUMN)
-C_CUSTOM_COLUMN2[0].element.styles['background-image'] = 'url("https://gn908.cdn.stg.gamenet.ru/0/8conm/o_1qkwy5.png")'
+C_CUSTOM_COLUMN2[0].element.styles['background-image'] = 'url("https://s3.protocol.one/src/o_1qkwy5.png")'
 
 const C_CUSTOM_COLUMN3 = _.cloneDeep(C_CUSTOM_COLUMN)
-C_CUSTOM_COLUMN3[0].element.styles['background-image'] = 'url("https://gn681.cdn.stg.gamenet.ru/0/8cooT/o_1AhevN.png")'
+C_CUSTOM_COLUMN3[0].element.styles['background-image'] = 'url("https://s3.protocol.one/src/o_1AhevN.png")'
 
 const C_CUSTOM = [{
   element: {
@@ -105,7 +105,7 @@ const C_CUSTOM_CONTAINER = {
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://gn870.cdn.stg.gamenet.ru/0/8coGJ/o_u02v0.jpg)',
+      'background-image': 'url(https://s3.protocol.one/src/o_u02v0.jpg)',
       'background-color': '#151C44',
       'background-position': '50% 50%',
       'background-size': 'cover',
@@ -312,8 +312,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-@import '../../../assets/sass/section-menu.sass'
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
 </style>

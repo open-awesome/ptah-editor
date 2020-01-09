@@ -59,40 +59,4 @@ export default {
 </script>
 
 <style lang="sass" scoped="scoped">
-@import '../../assets/sass/element.sass'
-
-.b-available-platforms
-  width: auto
-  margin: 1.6rem
-  min-height: 5rem
-  min-width: 5rem
-  display: flex
-  justify-content: center
-  align-items: center
-  &.styler-active
-    border: 0.2rem $white dotted
-    border-radius: 0.5rem
-  .is-tablet &, .is-mobile &
-    flex-wrap: wrap
-    height: auto !important
-  @media only screen and (max-width: 768px)
-    &
-      flex-wrap: wrap
-      height: auto !important
-  &__item
-    position: relative
-    margin: 1.6rem
-    &-button
-      border: none
-      position: relative
-      .is-mobile &
-        width: var(--mobile-width) !important
-      @media only screen and (max-width: 768px)
-        &
-          width: var(--mobile-width) !important
-      .vuse-icon
-        width: inherit
-        height: auto
-        fill: inherit
-
 </style>
