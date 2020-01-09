@@ -178,7 +178,6 @@ const C_CUSTOM = [
 
 const GROUP_NAME = 'Footer'
 const NAME = 'FooterWestern'
-const BG_SECTION = 'url(https://gn736.cdn.stg.gamenet.ru/0/8dI9p/o_cm1BL.jpg)'
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
@@ -192,7 +191,7 @@ const SCHEMA_CUSTOM = {
     width: 12,
     styles: {
       'flex-direction': 'row',
-      'justify-content': 'space-between',
+      'justify-content': 'space-between'
     },
     media: {
       'is-mobile': {
@@ -273,57 +272,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-
-.b-section-footer
-  position: relative
-  width: 100%
-  margin: 0
-  display: flex
-  text-align: center
-  justify-content: center
-  align-items: center
-  flex-direction: column
-  transition: background 200ms
-  .is-mobile &,
-  .is-tablet &
-    position: relative
-    padding: 2rem 0 1rem
-  @media only screen and (max-width: 768px)
-    &
-      position: relative
-      padding: 2rem 0 1rem
-
-.b-footer
-  width: 100%
-  &__row
-    align-items: center
-  &__col
-    min-height: auto
-  &-logo,
-  &-game-logo
-  &-copyright
-  .is-mobile &,
-  .is-tablet &
-    position: relative
-    height: auto
-  @media only screen and (max-width: 768px)
-    &
-      position: relative
-      height: auto
-  &-link
-    .is-mobile &
-      font-size: 1.6rem
-    @media (max-width: 800px)
-      font-size: 1.6rem
-
-  &-component
-    margin: 0.8rem
-    .is-mobile &,
-    .is-tablet &
-      margin: 0.8rem auto
-    @media only screen and (max-width: 768px)
-      &
-        margin: 0.8rem auto
-
 </style>
