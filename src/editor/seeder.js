@@ -120,7 +120,7 @@ const data = new Map([
     },
     background: true,
     styles: {
-      'background-image': 'url(https://gn680.cdn.stg.gamenet.ru/0/8qGME/o_OIgnu.png)',
+      'background-image': 'url(https://s3.protocol.one/src/o_OIgnu.png)',
       'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'contain',
@@ -150,7 +150,7 @@ const data = new Map([
     },
     background: true,
     styles: {
-      'background-image': 'url(https://gn680.cdn.stg.gamenet.ru/0/8qGME/o_OIgnu.png)',
+      'background-image': 'url(https://s3.protocol.one/src/o_OIgnu.png)',
       'background-position': '50% 50%',
       'background-repeat': 'no-repeat',
       'background-size': 'cover',
@@ -680,51 +680,51 @@ const data = new Map([
         'age': {
           name: 'Age',
           visible: true,
-          selected: { name: '0+', img: 'https://gn215.cdn.stg.gamenet.ru/0/759Ga/o_20S5qo.svg' },
+          selected: { name: '0+', img: 'https://s3.protocol.one/src/o_20S5qo.svg' },
           options: [
-            { name: '0+', img: 'https://gn215.cdn.stg.gamenet.ru/0/759Ga/o_20S5qo.svg' },
-            { name: '6+', img: 'https://gn215.cdn.stg.gamenet.ru/0/759H0/o_1KX2IR.svg' },
-            { name: '12+', img: 'https://gn695.cdn.stg.gamenet.ru/0/759HF/o_DNNg8.svg' },
-            { name: '18+', img: 'https://gn24.cdn.stg.gamenet.ru/0/759HU/o_1AgXj1.svg' },
-            { name: '21+', img: 'https://gn822.cdn.stg.gamenet.ru/0/759Hf/o_299afp.svg' }
+            { name: '0+', img: 'https://s3.protocol.one/src/o_20S5qo.svg' },
+            { name: '6+', img: 'https://s3.protocol.one/src/o_1KX2IR.svg' },
+            { name: '12+', img: 'https://s3.protocol.one/src/o_DNNg8.svg' },
+            { name: '18+', img: 'https://s3.protocol.one/src/o_1AgXj1.svg' },
+            { name: '21+', img: 'https://s3.protocol.one/src/o_299afp.svg' }
           ]
         },
         'pegi': {
           name: 'Pegi',
           visible: false,
-          selected: { name: '3', img: 'https://gn875.cdn.stg.gamenet.ru/0/759I0/o_13iwpA.svg' },
+          selected: { name: '3', img: 'https://s3.protocol.one/src/o_13iwpA.svg' },
           options: [
-            { name: '3', img: 'https://gn875.cdn.stg.gamenet.ru/0/759I0/o_13iwpA.svg' },
-            { name: '7', img: 'https://gn414.cdn.stg.gamenet.ru/0/759ID/o_vuop.svg' },
-            { name: '12', img: 'https://gn793.cdn.stg.gamenet.ru/0/759IR/o_1S1h6M.svg' },
-            { name: '16', img: 'https://gn800.cdn.stg.gamenet.ru/0/759Il/o_ANYUX.svg' },
-            { name: '18', img: 'https://gn653.cdn.stg.gamenet.ru/0/759Ix/o_Xqb9n.svg' }
+            { name: '3', img: 'https://s3.protocol.one/src/o_13iwpA.svg' },
+            { name: '7', img: 'https://s3.protocol.one/src/o_vuop.svg' },
+            { name: '12', img: 'https://s3.protocol.one/src/o_1S1h6M.svg' },
+            { name: '16', img: 'https://s3.protocol.one/src/o_ANYUX.svg' },
+            { name: '18', img: 'https://s3.protocol.one/src/o_Xqb9n.svg' }
           ]
         },
         'usk': {
           name: 'USK',
           visible: false,
-          selected: { name: '0', img: 'https://gn191.cdn.stg.gamenet.ru/0/759JH/o_1g38pS.svg' },
+          selected: { name: '0', img: 'https://s3.protocol.one/src/o_1g38pS.svg' },
           options: [
-            { name: '0', img: 'https://gn191.cdn.stg.gamenet.ru/0/759JH/o_1g38pS.svg' },
-            { name: '6', img: 'https://gn182.cdn.stg.gamenet.ru/0/759JS/o_25hRrV.svg' },
-            { name: '12', img: 'https://gn972.cdn.stg.gamenet.ru/0/759Jf/o_amDyU.svg' },
-            { name: '16', img: 'https://gn972.cdn.stg.gamenet.ru/0/759Jf/o_amDyU.svg' },
-            { name: '18', img: 'https://gn320.cdn.stg.gamenet.ru/0/759K2/o_x4V42.svg' }
+            { name: '0', img: 'https://s3.protocol.one/src/o_1g38pS.svg' },
+            { name: '6', img: 'https://s3.protocol.one/src/o_25hRrV.svg' },
+            { name: '12', img: 'https://s3.protocol.one/src/o_amDyU.svg' },
+            { name: '16', img: 'https://s3.protocol.one/src/o_amDyU.svg' },
+            { name: '18', img: 'https://s3.protocol.one/src/o_x4V42.svg' }
           ]
         },
         'cero': {
           name: 'CERO',
           visible: false,
-          selected: { name: 'All ages', img: 'https://gn773.cdn.stg.gamenet.ru/0/759KN/o_sazoN.svg' },
+          selected: { name: 'All ages', img: 'https://s3.protocol.one/src/o_sazoN.svg' },
           options: [
-            { name: 'All ages', img: 'https://gn773.cdn.stg.gamenet.ru/0/759KN/o_sazoN.svg' },
-            { name: 'Ages 12 and up only', img: 'https://gn925.cdn.stg.gamenet.ru/0/759LL/o_zwWo0.svg' },
-            { name: 'Ages 15 and up only', img: 'https://gn572.cdn.stg.gamenet.ru/0/759LZ/o_qfcL4.svg' },
-            { name: 'Ages 17 and up only', img: 'https://gn959.cdn.stg.gamenet.ru/0/759Lq/o_FHJmm.svg' },
-            { name: 'Ages 18 and up only', img: 'https://gn640.cdn.stg.gamenet.ru/0/759MA/o_4FtnT.svg' },
-            { name: 'Education/Database', img: 'https://gn119.cdn.stg.gamenet.ru/0/759MN/o_18ADS5.svg' },
-            { name: 'Rating pending', img: 'https://gn801.cdn.stg.gamenet.ru/0/759MZ/o_1b7UOI.svg' }
+            { name: 'All ages', img: 'https://s3.protocol.one/src/o_sazoN.svg' },
+            { name: 'Ages 12 and up only', img: 'https://s3.protocol.one/src/o_zwWo0.svg' },
+            { name: 'Ages 15 and up only', img: 'https://s3.protocol.one/src/o_qfcL4.svg' },
+            { name: 'Ages 17 and up only', img: 'https://s3.protocol.one/src/o_FHJmm.svg' },
+            { name: 'Ages 18 and up only', img: 'https://s3.protocol.one/src/o_4FtnT.svg' },
+            { name: 'Education/Database', img: 'https://s3.protocol.one/src/o_18ADS5.svg' },
+            { name: 'Rating pending', img: 'https://s3.protocol.one/src/o_1b7UOI.svg' }
           ]
         }
       },
@@ -845,7 +845,7 @@ const data = new Map([
         'text-decoration': 'none',
         'text-align': 'center',
         'color': '#fff',
-        'background-image': 'url(https://gn793.cdn.stg.gamenet.ru/0/79yeF/o_1PRuEc.png)',
+        'background-image': 'url(https://s3.protocol.one/src/o_1PRuEc.png)',
         'background-position': '50% 50%',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',

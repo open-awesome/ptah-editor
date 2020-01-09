@@ -42,38 +42,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../assets/sass/_colors.sass'
-@import '../../assets/sass/_variables.sass'
-@import '../../assets/sass/element.sass'
-@import '../../assets/sass/element-resize.sass'
-
-.b-delimiter
-  width: 4rem
-  height: 4rem
-
-  padding: 0
-
-  position: relative
-
-  display: flex
-  align-items: center
-  justify-content: center
-  &.is-editable
-    border: .1rem dashed rgba($dark-blue-krayola, 0.5) !important
-  & span
-    display: block
-  &:hover
-    filter: brightness(120%)
-  &:active
-    filter: brightness(50%)
-  .is-mobile &,
-  .is-tablet &
-    margin: $size-step/2 auto
-  @media only screen and (max-width: 768px)
-    &
-      margin: $size-step/2 auto
-  @media only screen and (max-width: 768px) and (min-height: 700px)
-    &
-      margin: $size-step/2 auto
-
 </style>

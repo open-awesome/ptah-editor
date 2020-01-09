@@ -1,6 +1,6 @@
 <template>
   <section
-    class="b-top"
+    class="b-top b-section-slider"
     :class="[$sectionData.mainStyle.classes, device.type]"
     :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
@@ -19,7 +19,7 @@
           v-if="key.indexOf('components') !== -1 && key.split('components')[1] && parseFloat(key.split('components')[1]) <= $sectionData.mainStyle.count"
           :key="`slide-${key}-${_uid}`"
           :class="{ 'swiper-slide-active': key === 'components1' }"
-          class="swiper-slide b-gallery-carousel-body-item">
+          class="swiper-slide">
 
           <div class="slide-number">{{ key.slice(-1) }}</div>
 
@@ -119,7 +119,6 @@ import { mapActions } from 'vuex'
 
 import Swiper from 'swiper'
 import swiperOptions from '@editor/swiper'
-import 'swiper/dist/css/swiper.min.css'
 import { randomPoneId } from '../../../editor/util'
 
 let [
@@ -185,7 +184,7 @@ let [
 const C_CUSTOM_CONTAINER = {
   styles: {
     'background-color': '#000000',
-    'background-image': 'url(https://gn147.cdn.stg.gamenet.ru/0/8dWma/o_os2RO.jpg)',
+    'background-image': 'url(https://s3.protocol.one/src/o_os2RO.jpg)',
     'background-size': 'cover'
   },
   media: {
@@ -199,7 +198,7 @@ const C_CUSTOM_CONTAINER = {
 const C_CUSTOM_CONTAINER2 = {
   styles: {
     'background-color': '#000000',
-    'background-image': 'url(https://gn913.cdn.stg.gamenet.ru/0/8dWmn/o_hDJWI.jpg)',
+    'background-image': 'url(https://s3.protocol.one/src/o_hDJWI.jpg)',
     'background-size': 'cover'
   },
   media: {
@@ -213,7 +212,7 @@ const C_CUSTOM_CONTAINER2 = {
 const C_CUSTOM_CONTAINER3 = {
   styles: {
     'background-color': '#000000',
-    'background-image': 'url(https://gn285.cdn.stg.gamenet.ru/0/8dWne/o_1hyDuA.jpg)',
+    'background-image': 'url(https://s3.protocol.one/src/o_1hyDuA.jpg)',
     'background-size': 'cover'
   },
   media: {
@@ -303,7 +302,7 @@ export default {
 
   inject: ['device'],
 
-  cover: 'https://gn738.cdn.stg.gamenet.ru/0/8iECW/o_1bOZmd.jpg',
+  cover: 'https://s3.protocol.one/src/o_1bOZmd.jpg',
 
   data () {
     return {
@@ -388,91 +387,14 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
+.slide-number
+  display: block
+  position: absolute
+  top: 2rem
+  right: 4rem
+  z-index: 3
 
-.b-top
-  width: 100%
-  max-width: 100vw
-  margin: 0
-  padding: 0
-  overflow: hidden
-
-  &__slide
-    width: 100%
-    height: 100%
-    position: relative
-
-  .slide-number
-    display: none
-
-.swiper-container
-  border: none !important
-  .b-draggable-slot
-    border: none !important
-    width: 100% !important
-  &.is-editable
-    .slide-number
-      display: block
-      position: absolute
-      top: 2rem
-      right: 4rem
-      z-index: 3
-
-      font-size: 5rem
-      font-weight: bold
-      color: rgba($white, .5)
-
-.swiper-container, .b-sandbox, .swiper-slide
-  height: 100% !important
-
-.swiper-slide-image
-  max-width: 100%
-.swiper-slide-item
-  width: 100%
-  height: 100%
-
-  background-size: contain
-  background-position: center
-  background-repeat: no-repeat
-
-.swiper-pagination
-  width: 100%
-  bottom: 2.5rem
-  &-bullet
-    margin: 0 .4rem
-
-.swiper-pagination-bullet
-  opacity: 1
-  &-inactive
-    opacity: .35 !important
-    background: black !important
-
-.swiper-button-next,
-.swiper-button-prev
-  background-image: none
-
-  svg
-    width: 100%
-    height: 100%
-
-.swiper-button-next
-  right: 20px
-  .is-mobile &,
-  .is-tablet &
-    right: 0
-    transform: scale(.7)
-  @media only screen and (max-width: 768px)
-    &
-      right: 0
-      transform: scale(.7)
-.swiper-button-prev
-  left: 20px
-  .is-mobile &,
-  .is-tablet &
-    left: 0
-    transform: scale(.7)
-  @media only screen and (max-width: 768px)
-    &
-      left: 0
-      transform: scale(.7)
+  font-size: 5rem
+  font-weight: bold
+  color: rgba($white, .5)
 </style>

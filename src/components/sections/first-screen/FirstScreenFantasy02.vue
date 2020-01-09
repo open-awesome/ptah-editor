@@ -7,7 +7,7 @@ import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenFantasy02'
-const BG_SECTION = 'url(https://gn904.cdn.stg.gamenet.ru/0/8igWN/o_1jz4qB.jpg)'
+const BG_SECTION = 'url(https://s3.protocol.one/src/o_1jz4qB.jpg)'
 const date = Date.parse(new Date()) + 15 * 24 * 60 * 60 * 1000
 
 const COMPONENTS_1 = [
@@ -45,7 +45,7 @@ const C_CUSTOM_1 = [
   {
     element: {
       styles: {
-        'background-image': 'url("https://gn543.cdn.stg.gamenet.ru/0/8iMxM/o_18R5TC.svg")',
+        'background-image': 'url("https://s3.protocol.one/src/o_18R5TC.svg")',
         'background-color': 'rgba(0, 0, 0, 0)',
         'background-repeat': 'no-repeat',
         'background-size': 'contain',
@@ -398,58 +398,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-
-.b-first-screen-fantasy-02
-  @media only screen and (width: 1024px) and (height: 1366px)
-    &
-      background-position: 75% bottom
-  .is-mobile &,
-    background-position: 75% bottom
-  @media only screen and (max-width: 500px) and (max-height: 1000px)
-    &
-      background-position: 75% bottom
-  .b-logo-fs
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        margin: 1.6rem 0
-  .b-text-fs
-    letter-spacing: -0.02em
-    .is-mobile &,
-    .is-tablet &
-      font-size: 2.4rem
-      margin: 0 auto 8px
-      text-align: center
-    @media only screen and (width: 768px) and (height: 1024px)
-      &
-        padding: 0px 0px 0px 40px
-    @media only screen and (max-width: 840px)
-      &
-        font-size: 2.4rem
-        margin: 0 auto 8px
-    @media only screen and (max-width: 500px)
-      &
-        text-align: center
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        text-align: left
-  .b-button-fs
-    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
-    transition: background-color 200ms
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        margin: 1.6rem
-  .b-timer-fs
-    @media only screen and (max-width: 768px) and (min-height: 700px)
-      &
-        width: 90
-    @media only screen and (max-width: 900px) and (max-height: 450px)
-      &
-        width: auto
-        margin: 1.6rem 0
-  .b-delimiter-fs
-    @media only screen and (max-width: 980px) and (max-height: 700px)
-      &
-        display: none
-
 </style>
