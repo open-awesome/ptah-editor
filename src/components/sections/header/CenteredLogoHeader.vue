@@ -3,7 +3,7 @@
     v-styler:section="$sectionData.mainStyle"
     :class="[$sectionData.mainStyle.classes, {'_sticky' : $sectionData.mainStyle.sticky }]"
     :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }, $sectionData.objVarsMedia]"
-    class="b-section-header">
+    class="b-smm-header b-header-logo">
 
   <slot name="menu"/>
   <slot name="video"/>
@@ -299,48 +299,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-
-.b-section-header
-  z-index: 2
-
-  .mobile-menu
-    transition: all 200ms
-    .is-mobile &
-      &_hide
-        display: none
-    .is-mobile &
-      &_drop
-        background-color: var(--bg-color) !important
-    @media (max-width: 800px)
-      &_drop
-        background-color: var(--bg-color) !important
-
-  &__col
-    padding: 0 1.6rem !important
-
-  .b-grid__row
-    .is-mobile &
-      padding: 0 !important
-    @media (max-width: 800px)
-      &
-        padding: 0 !important
-
-.mobile-header
-  padding: 0
-  display: none
-  .is-mobile &
-    display: block
-  @media (max-width: 800px)
-    display: block
-
-.b-logo-one
-  .is-mobile &
-    order: 1
-  @media (max-width: 800px)
-    order: 1
-
-@media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
-  .b-slot .b-draggable-slot > div
-    width: 50% !important
 </style>

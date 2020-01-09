@@ -99,7 +99,8 @@ const actions = {
             pdf: 'https://s3.protocol.one/src/o_1ohKcv.pdf'
           },
           mailchimpUrl: false,
-          mailchimpList: false
+          mailchimpList: false,
+          name: data.name
         })
         commit('isSaved', false)
         commit('updateCurrentLanding', landing)

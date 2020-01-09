@@ -345,15 +345,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-
-.b-first-screen-fantasy-01
-  @media only screen and (width: 1024px) and (height: 1366px)
-    &
-      background-position: 45% bottom
-
-  .b-button-fs
-    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
-    transition: background-color 200ms
-
 </style>

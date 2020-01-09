@@ -210,11 +210,4 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-.b-grid__col-8
-  .is-mobile &,
-  .is-tablet &
-    padding-top: 0
-  @media only screen and (max-width: 768px)
-    padding-top: 0
 </style>

@@ -262,29 +262,4 @@ export default {
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/section-media.sass'
-
-.b-first-screen-space-video-back
-  .b-text-fs
-    letter-spacing: -0.02em
-    .is-mobile &,
-    .is-tablet &
-      font-size: 2.4rem
-      margin: 0 auto 8px
-    @media only screen and (max-width: 840px)
-      &
-        font-size: 2.4rem
-        margin: 0 auto 8px
-  .b-button-fs
-    box-shadow: 0px 8px 70px rgba(0, 0, 0, 0.2)
-    transition: background-color 200ms
-  .b-timer-fs
-    .is-mobile &,
-    .is-tablet &
-      margin: 0 auto 8px
-    @media only screen and (max-width: 840px)
-      &
-        font-size: 2.4rem
-        margin: 0 auto 8px
-
 </style>
