@@ -90,10 +90,12 @@ import FormLeft2 from '@components/sections/forms/FormLeftSideVariant2'
 // --- other
 import SystemRequirements from '@components/sections/elements/SystemRequirements'
 import SystemRequirementsFantasy from '@components/sections/elements/SystemRequirementsFantasy'
+import SystemRequirementsWestern from '@components/sections/elements/SystemRequirementsWestern'
 import FooterSpace from '@components/sections/footers/FooterSpace'
 import FooterFantasy from '@components/sections/footers/FooterFantasy'
 import FooterWestern from '@components/sections/footers/FooterWestern'
 import FrequentlyAskedQuestions from '@components/sections/elements/FrequentlyAskedQuestions'
+import FrequentlyAskedQuestionsWestern from '@components/sections/elements/FrequentlyAskedQuestionsWestern'
 import Slider from '@components/sections/slider/Slider'
 import SliderFantasy from '@components/sections/slider/SliderFantasy'
 import SliderWestern from '@components/sections/slider/SliderWestern'
@@ -181,7 +183,9 @@ const COMPONENTS = {
 
   SystemRequirements,
   SystemRequirementsFantasy,
+  SystemRequirementsWestern,
   FrequentlyAskedQuestions,
+  FrequentlyAskedQuestionsWestern,
 
   FooterSpace,
   FooterFantasy,

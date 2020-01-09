@@ -444,13 +444,15 @@ const C_CUSTOM = [
     element: {
       text: '<b>System requirements</b>',
       styles: {
-        'font-family': 'Cinzel',
+        'font-family': 'Montserrat',
         'font-size': '4rem',
-        'color': '#fff'
+        'color': '#fff',
+        'padding-top': '60px'
       },
       media: {
         'is-mobile': {
-          'font-size': '3rem'
+          'font-size': '3rem',
+          'padding-top': '10px'
         }
       }
     }
@@ -460,8 +462,8 @@ const C_CUSTOM = [
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://s3.protocol.one/images/ash_prod_bg_2.jpg)',
-      'background-color': '#000',
+      'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/414bef4e-46a9-492d-8ca7-761ee4b80994.png)',
+      'background-color': '#000000',
       'background-position': '50% 50%',
       'background-size': 'cover',
       'font-family': 'Lato',
@@ -470,13 +472,14 @@ const SCHEMA_CUSTOM = {
       'font-style': false,
       'text-decoration': false,
       'text-align': 'center',
-      'color': '#fff'
+      'color': '#fff',
+      'height': '100vh'
     },
     sizeIcons: {
       width: 39
     },
     colorIcons: {
-      default: '#AF2E11',
+      default: '#1A83FF',
       active: '#ffffff'
     },
     table: {
@@ -512,7 +515,7 @@ const HEADER = [
 ]
 
 const GROUP_NAME = 'Elements'
-const NAME = 'SystemRequirementsFantasy'
+const NAME = 'SystemRequirementsWestern'
 
 export default {
   name: NAME,
@@ -523,7 +526,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  cover: 'https://s3.protocol.one/images/CQbIwraB_cover_sr.jpg',
+  cover: '/img/covers/system-western.jpg',
 
   components: {
     VuseIcon
@@ -567,7 +570,7 @@ export default {
   },
 
   mounted () {
-    this.selectPlatform('apple')
+    this.selectPlatform('windows')
   }
 }
 </script>
@@ -583,29 +586,29 @@ export default {
     <slot name="overlay"/>
     <div class="b-grid">
       <div class="b-grid__row">
-        <div class="b-grid__col-12">
-          <sandbox
-            class="b-sandbox"
-            container-path="$sectionData.container"
-            components-path="$sectionData.components"
-            :style="$sectionData.container.styles"
-          >
-            <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="$_drag('components')" @change="$_dragStop">
-              <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
-                <component
-                  v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
-                  :is="component.name"
-                  :href="$sectionData.components[index].element.link.href"
-                  :target="$sectionData.components[index].element.link.target"
-                  :path="`components[${index}].element`"
-                  :style="$sectionData.components[index].element.styles"
-                  :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
-                >
-                  <div v-html="$sectionData.components[index].element.text"></div>
-                </component>
-              </div>
-            </draggable>
-          </sandbox>
+          <div class="b-grid__col-12">
+            <sandbox
+              class="b-sandbox"
+              container-path="$sectionData.container"
+              components-path="$sectionData.components"
+              :style="$sectionData.container.styles"
+            >
+              <draggable v-model="$sectionData.components" class="b-draggable-slot" :style="$sectionData.container.styles" @start="$_drag('components')" @change="$_dragStop">
+                <div :class="`b-draggable-slot__${component.type}`" v-for="(component, index) in $sectionData.components" v-if="$sectionData.components.length !== 0" :key="index">
+                  <component
+                     v-styler:for="{ el: $sectionData.components[index].element, path: `$sectionData.components[${index}].element`, type: $sectionData.components[index].type, label: $sectionData.components[index].label }"
+                     :is="component.name"
+                     :href="$sectionData.components[index].element.link.href"
+                     :target="$sectionData.components[index].element.link.target"
+                     :path="`components[${index}].element`"
+                     :style="$sectionData.components[index].element.styles"
+                     :class="[$sectionData.components[index].element.classes, $sectionData.components[index].class]"
+                  >
+                    <div v-html="$sectionData.components[index].element.text"></div>
+                  </component>
+                </div>
+              </draggable>
+            </sandbox>
         </div>
       </div>
       <div class="b-grid__row">
@@ -641,20 +644,20 @@ export default {
                       class="b-system-platforms__item__tab"
                       @click.stop="selectPlatform(key)"
                       :class="{ 'b-system-platforms__item__tab_active': key === $sectionData.mainStyle.selectPlatform.name }"
-                    >
+                      >
                       <span class="b-system-platforms__item__tab-corner">
                         <svg width="32" height="9" viewBox="0 0 32 9" fill="none" xmlns="http://www.w3.org/2000/svg">
                           <path d="M31.5885 8.5L16 1L0.41156 8.5" :stroke="$sectionData.mainStyle.colorIcons.active"/>
                         </svg>
                       </span>
                       <span class="b-system-platforms__item__tab-icon b-size-icons"
-                         :style="{
+                        :style="{
                           width: $sectionData.mainStyle.sizeIcons.width + 'px',
                           height: $sectionData.mainStyle.sizeIcons.width + 'px',
                           '--color-default': $sectionData.mainStyle.colorIcons.default,
                           '--color-active': $sectionData.mainStyle.colorIcons.active
                          }"
-                      >
+                         >
                         <VuseIcon :name="key"></VuseIcon>
                       </span>
                     </div>
@@ -663,9 +666,9 @@ export default {
                 <div class="b-system-requirements">
                   <div class="b-system-requirements__table">
                     <div tabs-content="tabs-content" v-for="(value, key) in $sectionData.mainStyle.systemRequirements" :key="key"
-                         v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
+                        v-show="$sectionData.mainStyle.systemRequirements[key].visible && $sectionData.mainStyle.selectPlatform.name === key">
                       <div>
-                        <div class="b-system-requirements__table b-table-media-head flex"
+                        <div class="b-system-requirements__table-row b-table-media-head flex"
                           :style="{
                             'color' : $sectionData.mainStyle.table.head['color'],
                             'font-family' : $sectionData.mainStyle.table.head['font-family'],
@@ -676,7 +679,7 @@ export default {
                             'text-decoration' : $sectionData.mainStyle.table.head['text-decoration'],
                             'background-color' : $sectionData.mainStyle.table.head['background-color']
                           }"
-                        >
+                          >
                           <div class="b-system-requirements__table-col">
                             <span class="b-system-requirements__table-chapter">
                               Component
@@ -693,10 +696,10 @@ export default {
                             </span>
                           </div>
                         </div><!--/.b-system-requirements__table-row-->
-                        <div class="b-system-requirements__table-row flex"
-                             v-for="(row, i) in $sectionData.mainStyle.rowsRequirements" :key="i"
-                             v-show="$sectionData.mainStyle.rowsRequirements[i].visible"
-                             :style="{
+                        <div class="b-system-requirements__table-row b-table-media-body flex"
+                          v-for="(row, i) in $sectionData.mainStyle.rowsRequirements" :key="i"
+                          v-show="$sectionData.mainStyle.rowsRequirements[i].visible"
+                          :style="{
                             'color' : $sectionData.mainStyle.table.body['color'],
                             'font-family' : $sectionData.mainStyle.table.body['font-family'],
                             'font-size' : $sectionData.mainStyle.table.body['font-size'],
@@ -706,11 +709,11 @@ export default {
                             'text-decoration' : $sectionData.mainStyle.table.body['text-decoration'],
                             'background-color' : $sectionData.mainStyle.table.body['background-color']
                           }"
-                        >
+                          >
                           <div class="b-system-requirements__table-col"
-                            v-for="(col, index) in $sectionData[`componentsRequirements${key}`]"
-                            :key="index"
-                            v-if="col.prop === i"
+                             v-for="(col, index) in $sectionData[`componentsRequirements${key}`]"
+                             :key="index"
+                             v-if="col.prop === i"
                             >
                             <div class="b-system-requirements__table-col_name b-table-media-body"
                               v-if="$sectionData[`componentsRequirements${key}`][index].nameCol.indexOf('-text') !== -1"
@@ -725,19 +728,19 @@ export default {
                                 :path="`componentsRequirements${key}[${index}].element`"
                                 :is="$sectionData[`componentsRequirements${key}`][index].name"
                                 :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class, 'b-table-media-body']"
-                              >
+                                >
                                 <div v-html="$sectionData[`componentsRequirements${key}`][index].element.text"></div>
                               </component><!--/.-->
                             </div>
                             <div class=""
-                                 v-if="$sectionData[`componentsRequirements${key}`][index].nameCol.indexOf('-max') !== -1"
-                            >
+                              v-if="$sectionData[`componentsRequirements${key}`][index].nameCol.indexOf('-max') !== -1"
+                              >
                               <component
                                 v-styler:for="{ el: $sectionData[`componentsRequirements${key}`][index].element, path: `$sectionData.componentsRequirements${key}[${index}].element`, type: $sectionData[`componentsRequirements${key}`][index].type, label: $sectionData[`componentsRequirements${key}`][index].label }"
                                 :path="`componentsRequirements${key}[${index}].element`"
                                 :is="$sectionData[`componentsRequirements${key}`][index].name"
                                 :class="[$sectionData[`componentsRequirements${key}`][index].element.classes, $sectionData[`componentsRequirements${key}`][index].class, 'b-table-media-body']"
-                              >
+                                >
                                 <div v-html="$sectionData[`componentsRequirements${key}`][index].element.text"></div>
                               </component><!--/.-->
                             </div>
