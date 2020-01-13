@@ -231,7 +231,7 @@ const C_CUSTOM_CONTAINER_1 = {
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/414bef4e-46a9-492d-8ca7-761ee4b80994.png)',
+      'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/92242961-9cc0-4545-8b63-2d707be38e17.jpg)',
       'background-color': '#000000',
       'background-position': '50% 50%',
       'background-size': 'cover',

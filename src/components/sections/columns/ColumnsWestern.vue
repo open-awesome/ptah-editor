@@ -112,13 +112,18 @@ const C_CUSTOM_CONTAINER_2 = {
   styles: {
     'flex-direction': 'column',
     'align-items': 'flex-start'
+  },
+  media: {
+    'is-mobile': {
+      'align-items': 'center'
+    }
   }
 }
 
 const SCHEMA_CUSTOM = {
   mainStyle: {
     styles: {
-      'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/a875268d-0a13-4838-9f7b-87ba64630eb1.png)',
+      'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/10785cad-50b2-4d3e-84a0-5c5ea3682055.jpg)',
       'background-color': '#000000',
       'background-position': '50% 50%',
       'background-size': 'cover',

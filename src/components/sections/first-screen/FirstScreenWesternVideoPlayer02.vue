@@ -7,7 +7,7 @@ import sectionMedia from '../../mixins/sectionMedia'
 
 const GROUP_NAME = 'FirstScreen'
 const NAME = 'FirstScreenWesternVideoPlayer02'
-const BG_SECTION = 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/5fd9c812-bd2a-48f4-a55b-795e7fa8fd6e.jpg)'
+const BG_SECTION = 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/bdc5f809-043c-4094-90e3-31c95e77565e.jpg)'
 
 const COMPONENTS = [
   {

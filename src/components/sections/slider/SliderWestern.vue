@@ -186,7 +186,7 @@ let [
 const C_CUSTOM_CONTAINER = {
   styles: {
     'background-color': '#000000',
-    'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/2b2e728b-4c10-4c9b-bece-0ad7a14c0d3f.jpg)',
+    'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/9db78dd4-6816-42fd-b343-8785e3ac06d2.jpg)',
     'background-size': 'cover',
     'justify-content': 'flex-start',
     'align-items': 'flex-start',
@@ -205,7 +205,7 @@ const C_CUSTOM_CONTAINER = {
 const C_CUSTOM_CONTAINER2 = {
   styles: {
     'background-color': '#000000',
-    'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/d8ad22b8-02a9-4bb3-9cce-56cd26fff717.jpg)',
+    'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/9dabb623-0b86-45c6-ab63-438818bc2d06.jpg)',
     'background-size': 'cover',
     'justify-content': 'flex-start',
     'align-items': 'flex-start',
@@ -224,7 +224,7 @@ const C_CUSTOM_CONTAINER2 = {
 const C_CUSTOM_CONTAINER3 = {
   styles: {
     'background-color': '#000000',
-    'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/51ba3abc-208a-42fc-8d69-9ec38a2713c4.jpg)',
+    'background-image': 'url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/d5555379-790b-4c1e-80ae-90d9bf26e825.jpg)',
     'background-size': 'cover',
     'justify-content': 'flex-start',
     'align-items': 'flex-start',
