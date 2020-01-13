@@ -651,14 +651,11 @@ $main-font-size: 6rem
           @media only screen and (max-width: 768px)
             &
               text-align: var(--mobile-text-align) !important
-        &_hide-text
           /deep/
-          table,
-          table th,
-          table td
-            width: 100%
-            table > tbody > tr:last-child
-              display: none
+            table,
+            table th,
+            table td
+              width: 100%
             table > tbody > tr
               display: flex
               justify-content: var(--justify-content) !important
@@ -682,6 +679,10 @@ $main-font-size: 6rem
                   font-size: var(--mobile-font-size) !important
                   line-height: var(--mobile-line-height) !important
                   font-family: var(--mobile-font-family) !important
+        &_hide-text
+          /deep/
+            table > tbody > tr:last-child
+              display: none
   &_hide
     padding: 0 1.6rem
   &__icon
