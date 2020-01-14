@@ -85,7 +85,7 @@ export default {
     },
 
     changeColor (prop, color) {
-      const c = color ? `rgba(${Object.values(color.rgba).toString()}` : color
+      const c = color ? `rgba(${Object.values(color.rgba).toString()})` : color
       this.colorIcons[prop] = c
 
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { colorIcons: this.colorIcons }))
