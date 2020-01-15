@@ -3,7 +3,7 @@
     v-styler:section="$sectionData.mainStyle"
     :class="[$sectionData.mainStyle.classes, {'_sticky' : $sectionData.mainStyle.sticky }]"
     :style="[$sectionData.mainStyle.styles, { '--bg-color': $sectionData.mainStyle.styles['background-color'] }, $sectionData.objVarsMedia]"
-    class="b-smm-header">
+    class="b-smm-header b-section-header">
 
     <slot name="menu"/>
     <slot name="video"/>
