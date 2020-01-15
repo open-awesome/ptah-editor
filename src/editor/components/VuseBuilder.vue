@@ -68,20 +68,8 @@
 
       </component>
 
-      <div class="builder-last"></div>
-
-      <div v-show="emptySections" class="controller-intro">
+      <div v-if="emptySections" class="controller-intro">
         <h3>&larr; Choose layout from the menu</h3>
-      </div>
-
-      <div v-show="showIntro && !builder.sections.length" class="controller-intro">
-        <label for="projectName">Hello, start your project</label>
-        <input class="controller-input" id="projectName" placeholder="project name" v-model="title"/>
-        <template v-if="themes">
-          <div class="controller-themes">
-            <button class="controller-theme" v-for="(theme, index) in themes" :key="index" @click="addTheme(theme)">{{ theme.name }}</button>
-          </div>
-        </template>
       </div>
 
       <v-style>
@@ -537,6 +525,9 @@ export default {
   margin: 0 auto
   transition: 0.2s
   position: relative
+
+  display: flex
+  flex-direction: column
   &.is-editable div.is-editable,
   &.is-editable a.is-editable,
   &.is-editable table.is-editable
@@ -681,8 +672,4 @@ export default {
     padding: 1rem 0.5rem
     background: lighten(#18d88b, 40%)
 
-// --- dirty hack. normalize artboard size
-.builder-last
-  height: 1px
-  margin-top: -1px
 </style>
