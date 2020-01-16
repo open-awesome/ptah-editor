@@ -155,7 +155,7 @@ const defaultComponents = [
         'is-mobile': {
           width: '190px',
           height: '60px',
-          'margin-top': '0',
+          'margin-top': '16px',
           'margin-right': '0',
           'margin-bottom': '0',
           'margin-left': '0'
