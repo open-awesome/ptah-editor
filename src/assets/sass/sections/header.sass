@@ -1,27 +1,9 @@
-.header
-  width: 100%
-  padding: 50px
-  color: #fff
-  &-title
-    font-size: 50px
-    line-height: 1em
-    margin: 20px 0
-    font-weight: lighter
-  &-content
-    font-size: 16px
-    margin-bottom: 50px
-    font-weight: lighter
-  &-image
-    >img
-      width: 100%
-
-// SMM HEADER
-.b-smm-header
+// GENERAL STYLES
+.b-section-header
   z-index: 2
   .is-tablet &,
   .is-mobile &
     text-align: left
-
   @media (max-width: 800px)
     text-align: left
 
@@ -37,6 +19,24 @@
       &_drop
         background-color: var(--bg-color) !important
 
+  &._sticky
+    position: sticky
+    z-index: 9999
+    top: 0
+
+  ~ section[class^="b-"]
+    z-index: 1
+
+  .b-sandbox
+    min-height: 5rem !important
+
+  .b-draggable-slot
+    width: 100%
+
+  @media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
+    .b-slot .b-draggable-slot > div
+      width: 50% !important
+
   &__col
     padding: 0 1.6rem !important
 
@@ -47,6 +47,8 @@
       &
         padding: 0 !important
 
+// SMM HEADER
+.b-smm-header
   .b-one
     .is-mobile &
       margin-top: auto
@@ -66,19 +68,6 @@
     @media (max-width: 800px)
       font-size: 1.6rem
 
-  .b-logo
-    display: block
-    .is-tablet &,
-    .is-mobile &
-      margin: 0.4rem auto
-
-    @media (max-width: 800px)
-      margin: 0.4rem auto
-
-  @media (max-height: 420px) and (max-width: 800px) and (min-width: 480px)
-    .b-slot .b-draggable-slot > div
-      width: 50% !important
-
 // HEADER CENTRED LOGO
 .b-header-logo
   .b-logo-one
@@ -86,14 +75,6 @@
       order: 1
     @media (max-width: 800px)
       order: 1
-
-  .mobile-header
-    padding: 0
-    display: none
-    .is-mobile &
-      display: block
-    @media (max-width: 800px)
-      display: block
 
 // BUTTON HEADER
 .b-button-header
@@ -108,3 +89,4 @@
       order: 1
     @media (max-width: 800px)
       order: 1
+
