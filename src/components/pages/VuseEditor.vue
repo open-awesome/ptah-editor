@@ -226,12 +226,9 @@ export default {
   },
 
   created () {
-    let themes = []
-
     Vue.use(Vuse, {
       js: './../js/cjs.js',
-      css: './../ptah_sections.css',
-      themes: themes
+      css: './../ptah_sections.css'
     })
   },
 
