@@ -58,11 +58,22 @@
     background-image: none
 
     svg
-      width: 100%
+      width: 25%
       height: 100%
 
   .swiper-button-next
-    right: 20px
+    right: 0
+    top: 0
+    bottom: 0
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    height: 100%
+    margin: 0
+    width: 10%
+
     .is-mobile &,
     .is-tablet &
       right: 0
@@ -72,7 +83,18 @@
         right: 0
         transform: scale(.7)
   .swiper-button-prev
-    left: 20px
+    left: 0
+    top: 0
+    bottom: 0
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    height: 100%
+    margin: 0
+    width: 10%
+
     .is-mobile &,
     .is-tablet &
       left: 0
