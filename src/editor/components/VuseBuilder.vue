@@ -31,7 +31,11 @@
           v-if="headerSection.data.mainStyle.overlay"
           :id="`bg-overlay-${ headerSection.id }`"
           slot="overlay"
-          :style="{ 'background-color' : headerSection.data.mainStyle.overlay.color, 'opacity' : headerSection.data.mainStyle.overlay.opacity }"
+          :style="{
+              'background-color' : headerSection.data.mainStyle.overlay.color,
+              'opacity' : headerSection.data.mainStyle.overlay.opacity
+          }"
+          :class="[ isActiveSection(headerSection.id) ? '_section-active' : '' ]"
         >
         </div>
 
@@ -42,7 +46,11 @@
         :key="section.id"
         :is="section.name"
         :id="section.id"
-        :class="[{ 'video-background': section.data.mainStyle.backgroundType === 'video' }, $builder.isEditing ? device: '']"
+        :class="[
+          { 'video-background': section.data.mainStyle.backgroundType === 'video' },
+          $builder.isEditing ? device: '',
+          isActiveSection(section.id) ? '_section-active' : ''
+        ]"
         @click.native="selectSidebarSection(section)">
 
         <menu-settings slot="menu" :section="section"/>
@@ -131,7 +139,8 @@ export default {
     ...mapState(['currentLanding']),
     ...mapState('Sidebar', [
       'isExpanded',
-      'device'
+      'device',
+      'settingObjectSection'
     ]),
 
     builder () {
@@ -511,7 +520,11 @@ export default {
         node.classList.remove('ptah-g-main')
         node.classList.remove('ptah-g-child')
       })
-    }
+    },
+
+    isActiveSection (id) {
+      return this.settingObjectSection.id === id
+    }  
   }
 }
 </script>
