@@ -1,7 +1,13 @@
 <template>
   <div class="b-confirm-overlay">
     <div class="b-confirm">
-      <a tabindex="0" href="#" @click.prevent="$emit('close')" class="b-confirm__close">&times;</a>
+      <a
+        href="#"
+        @click.prevent="$emit('close')"
+        class="b-confirm__close"
+      >
+        &times;
+      </a>
       <h3>{{title}}</h3>
 
       <div class="b-confirm__content">
@@ -10,8 +16,21 @@
       </div>
 
       <div class="b-confirm__footer">
-        <base-button size="middle" @click.prevent="$emit('close')">{{ $t('nav.cancel') }}</base-button>
-        <base-button size="middle" color="orange" @click.prevent="$emit('confirm'), $emit('close')">{{button}}</base-button>
+        <base-button
+          tabindex="0"
+          ref="cancel"
+          size="middle"
+          @click.prevent="$emit('close')"
+        >
+          {{ $t('nav.cancel') }}
+        </base-button>
+        <base-button
+          size="middle"
+          color="orange"
+          @click.prevent="$emit('confirm'), $emit('close')"
+        >
+          {{button}}
+        </base-button>
       </div>
     </div>
   </div>
@@ -20,6 +39,11 @@
 <script>
 export default {
   name: 'BaseConfirm',
+  data () {
+    return {
+      inputIsVisible: false
+    }
+  },
   props: {
     title: {
       type: String,
@@ -29,6 +53,20 @@ export default {
     button: {
       type: String,
       default: 'OK'
+    }
+  },
+  mounted () {
+    this.showInput()
+  },
+
+  methods: {
+    showInput () {
+      this.inputIsVisible = true
+
+      this.$nextTick(() => this.focusInput())
+    },
+    focusInput () {
+      this.$refs.cancel.$el.focus()
     }
   }
 }

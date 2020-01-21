@@ -4,7 +4,8 @@
     :builder="builder"
     @export="submit"
     @preview="preview"
-    @save="save">
+    @save="save"
+>
 
   <div>
     <div
@@ -85,6 +86,19 @@
       </v-style>
 
     </div>
+
+    <!-- confirm delete element windows -->
+    <base-confirm
+      class="b-modal-delete-element"
+      :class="{'is-expanded': isExpanded }"
+      title="Delete element"
+      @confirm="removeElement(selectedElement.name)"
+      @close="closeDeleteElement"
+      v-if="showConfirmElementDelete"
+      button="Delete"
+    >
+      You are going to delete <b class="b-modal-delete-element__name">{{ settingObjectLabel }}</b>, this cannot be undone. Confirm deleting?
+    </base-confirm>
   </div>
 </builder-layout>
 </template>
@@ -131,7 +145,9 @@ export default {
         array: [],
         prop: '.artboard',
         content: ''
-      }
+      },
+      showConfirmElementDelete: false,
+      selectedElement: null
     }
   },
 
@@ -140,7 +156,10 @@ export default {
     ...mapState('Sidebar', [
       'isExpanded',
       'device',
-      'settingObjectSection'
+      'settingObjectSection',
+      'settingObjectOptions',
+      'settingObjectLabel',
+      'isShowModal'
     ]),
 
     builder () {
@@ -184,6 +203,10 @@ export default {
         this.parsing(value)
       },
       deep: true
+    },
+
+    showConfirmElementDelete (value) {
+      this.toggleModal(value)
     }
   },
 
@@ -207,6 +230,9 @@ export default {
     if (localStorage.getItem('guest') === null) {
       this.getUser()
     }
+
+    // listener keyUp press
+    document.addEventListener('keyup', this.keyUp)
   },
 
   mounted () {
@@ -246,7 +272,9 @@ export default {
       'toggleSidebar',
       'setControlPanel',
       'toggleSidebar',
-      'toggleAddSectionMenu'
+      'toggleAddSectionMenu',
+      'clearSettingObjectLight',
+      'toggleModal'
     ]),
     ...mapActions('Landing', [
       'saveState'
@@ -524,7 +552,53 @@ export default {
 
     isActiveSection (id) {
       return this.settingObjectSection.id === id
-    }  
+    },
+
+    keyUp (event) {
+      if (event.key === 'Delete' && this.settingObjectOptions && this.settingObjectOptions.name) {
+        if (this.settingObjectOptions.removable && this.settingObjectOptions.name.indexOf('.element') !== -1) {
+          this.selectedElement = this.settingObjectOptions
+          this.deleteElement(this.selectedElement.name)
+        } else {
+          this.selectedElement = null
+        }
+      }
+    },
+
+    deleteElement (name) {
+      if (this.selectedElement !== null) {
+        this.showConfirmElementDelete = true
+      }
+    },
+
+    /**
+     * Get path
+    */
+    path (name) {
+      let path = _.split(name, '.')[1]
+      return _.toPath(path)
+    },
+
+    /**
+     * Remove element
+     * @param index
+     */
+    removeElement (name) {
+      let p = this.path(name)
+      this.settingObjectSection.data[p[0]].splice(p[1], 1)
+      this.settingObjectSection.schema[p[0]].splice(p[1], 1)
+      this.selectedElement = null
+      this.clearSettingObjectLight()
+
+      const styler = document.querySelector(`.b-styler[path="${name}-${this.settingObjectSection.id}"]`)
+
+      if (styler) styler.remove()
+    },
+
+    closeDeleteElement () {
+      this.showConfirmElementDelete = false
+      this.selectedElement = null
+    }
   }
 }
 </script>
@@ -685,4 +759,9 @@ export default {
     padding: 1rem 0.5rem
     background: lighten(#18d88b, 40%)
 
+.b-modal-delete-element
+  &.is-expanded
+    margin-left: $size-step * 9
+  &__name
+    text-transform: capitalize
 </style>

@@ -3,8 +3,12 @@
     ref="styler"
     id="styler"
     v-if="$builder.isEditing"
-    :class="{ 'is-visible': isVisible && !editText }"
+    :class="[
+      { 'is-visible': isVisible && !editText },
+      { 'is-show-modal': isShowModal }
+    ]"
     @click.stop=""
+    :path="`${name}-${section.id}`"
   >
 
     <div class="b-styler__controls">
@@ -312,7 +316,7 @@ export default {
     prevent: false
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isResizeStop', 'isDragStop', 'stylesBuffer']),
+    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isResizeStop', 'isDragStop', 'stylesBuffer', 'isShowModal']),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -448,8 +452,8 @@ export default {
       'toggleResizeStop',
       'toggleDragStop',
       'updateSettingOptions',
-      'updateStylesBuffer']
-    ),
+      'updateStylesBuffer'
+    ]),
 
     setPanels (panel, isEditText) {
       this.setControlPanel(panel)
@@ -867,6 +871,9 @@ export default {
   height: 2.6rem
   z-index: 20
   margin: 0 0 0 -0.2rem
+
+  &.is-show-modal
+    z-index: 0
 
   &.is-visible
     display: flex
