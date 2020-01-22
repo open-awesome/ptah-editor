@@ -259,6 +259,20 @@ const actions = {
     commit('isSaved', false)
   },
 
+  /**
+   * Stores settings data
+   *
+   * @param {Object} settingsPart some fields of settings data
+   */
+  storeSaveSettings ({ state, commit }, settingsPart) {
+    const landingData = _.merge({}, state.currentLanding.settings, {
+      settings: settingsPart
+    })
+
+    commit('updateCurrentLandingSettings', landingData)
+    commit('isSaved', false)
+  },
+
   clearSlug ({ commit }) {
     commit('slug', '')
   }
@@ -275,6 +289,10 @@ const mutations = {
 
   updateCurrentLanding (state, data) {
     state.currentLanding = data
+  },
+
+  updateCurrentLandingSettings (state, settings ) {
+    state.currentLanding.settings = settings
   },
 
   isSaved (state, value) {
