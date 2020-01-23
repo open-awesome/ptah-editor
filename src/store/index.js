@@ -19,7 +19,14 @@ const state = {
   storefrontPreview: false,
   landings: [],
   currentLanding: {
-    settings: {}
+    settings: {
+      fonts: {
+        'Lato': {
+          variants: ['regular'],
+          subsets: ['latin', 'cyrillic']
+        }
+      }
+    }
   },
   isSaved: false,
   slug: '', // landing ID
@@ -260,13 +267,13 @@ const actions = {
   },
 
   /**
-   * Stores settings data
+   * Stores settings fonts
    *
    * @param {Object} settingsPart some fields of settings data
    */
-  storeSaveSettings ({ state, commit }, settingsPart) {
+  storeSaveSettings ({ state, commit }, fontsList) {
     const landingData = _.merge({}, state.currentLanding.settings, {
-      settings: settingsPart
+      fonts: fontsList
     })
 
     commit('updateCurrentLandingSettings', landingData)
@@ -291,7 +298,7 @@ const mutations = {
     state.currentLanding = data
   },
 
-  updateCurrentLandingSettings (state, settings ) {
+  updateCurrentLandingSettings (state, settings) {
     state.currentLanding.settings = settings
   },
 

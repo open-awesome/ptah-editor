@@ -24,6 +24,12 @@
               :label="`Show only added  `"
             />
           </div>
+          <div class="b-font-filter__sw">
+            <base-text-field
+              class="b-font-filter__text"
+              v-model="defText"
+            />
+          </div>
         </div>
 
         <div class="b-fonts-block" v-if="fontsLoaded">
@@ -35,6 +41,7 @@
               <div class="b-scrolled-content__inner">
                 <ul class="b-fonts-list">
                   <li class="b-fonts-list__item"
+                      :class="{ '_selected' : containsFont(font.family) }"
                       v-for="font in filteredFonts"
                       :key="font.family"
                   >
@@ -49,6 +56,13 @@
                       <span class="b-fonts-list__item-category">
                         {{ font.category  }}
                       </span>
+                    </div>
+                    <div v-if="containsFont(font.family)" :style="{
+                      'font-family': font.family,
+                      'font-size': '23px',
+                      'font-weight': '400',
+                    }">
+                      {{ defText }}
                     </div>
                     <div class="b-fonts-list__item-button">
                       <base-button
@@ -146,7 +160,7 @@ import axios from 'axios'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 import { mapState, mapActions } from 'vuex'
 
-const FONT_URL = 'https://fonts.googleapis.com/css?family='
+// const FONT_URL = 'https://fonts.googleapis.com/css?family='
 
 export default {
   name: 'BuilderSiteSettingsFonts',
@@ -158,14 +172,17 @@ export default {
       list: [],
       search: '', // filter fonts
       editFont: null,
-      isFilterSelected: true
+      isFilterSelected: false,
+      defText: 'Load any font from Google font library.'
     }
   },
 
   computed: {
-    ...mapState({
-      fonts: ({ currentLanding: { settings } }) => settings.fonts ? settings.fonts : {}
-    }),
+    ...mapState(['currentLanding']),
+
+    fonts () {
+      return this.currentLanding.settings.fonts || {}
+    },
 
     fontsLoaded () {
       return true
@@ -210,13 +227,11 @@ export default {
         fonts: this.selectFonts
       })
 
-      this.close();
+      this.close()
     },
 
     storeFonts () {
-      this.storeSaveSettings({
-        fonts: this.selectFonts
-      })
+      this.storeSaveSettings(this.selectFonts)
     },
 
     close () {
@@ -265,7 +280,7 @@ export default {
         ]
       }
 
-       this.storeFonts()
+      this.storeFonts()
     },
 
     removeFont (family) {
@@ -311,6 +326,8 @@ export default {
   &__sw
     width: $size-step * 5.5
     margin-left: $size-step
+  &__text
+    width: 300px
 
 .b-fonts-list
   padding: 0
@@ -330,6 +347,13 @@ export default {
     align-items: center
 
     position: relative
+    &._selected
+      flex-direction: column
+      align-items: flex-start
+
+      padding: $size-step/8 $size-step/2 $size-step/8 $size-step
+      #{$this}-check
+        top: 5px
     &-category
       color: $gray300
     &:last-child
