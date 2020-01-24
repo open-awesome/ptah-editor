@@ -308,7 +308,7 @@ export default {
 .b-fonts-block
   display: flex
   justify-content: stretch
-  height: 45rem
+  height: 41rem
 
   border: 1px solid #C4C4C4
   &__list

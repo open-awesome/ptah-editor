@@ -462,14 +462,3 @@ export const LINES_HEIGHT_LIST = [
   { name: '3', value: '3' }
 ]
 
-export const FONTS_LIST = [
-  'Lato',
-  'Montserrat',
-  'Heebo',
-  'PT Serif',
-  'Roboto',
-  'Cinzel',
-  'IBM Plex Sans',
-  'IBM Plex Mono'
-]
-

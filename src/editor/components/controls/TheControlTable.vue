@@ -1,7 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
-import { FONT_SIZES_LIST, LINES_HEIGHT_LIST, FONTS_LIST } from '../../util'
+import { FONT_SIZES_LIST, LINES_HEIGHT_LIST } from '../../util'
 
 export default {
 
@@ -48,6 +48,11 @@ export default {
       'settingObjectOptions',
       'isMobile'
     ]),
+    ...mapState(['currentLanding']),
+
+    fontsList () {
+      return this.currentLanding.settings.fonts || {}
+    },
 
     table () {
       return this.settingObjectOptions.table
@@ -84,9 +89,12 @@ export default {
     },
 
     fonts () {
-      const options = FONTS_LIST.map((font) => {
-        return { name: font, value: font }
-      })
+      let options = []
+
+      for (let key in this.fontsList) {
+        options.push({ name: key, value: key })
+      }
+
       return {
         options
       }

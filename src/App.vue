@@ -87,10 +87,6 @@ export default {
 
   methods: {
     ...mapActions('User', ['refreshToken'])
-  },
-
-  updated () {
-    console.log(this.fonts)
   }
 }
 </script>

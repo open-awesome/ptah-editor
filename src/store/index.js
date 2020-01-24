@@ -19,14 +19,7 @@ const state = {
   storefrontPreview: false,
   landings: [],
   currentLanding: {
-    settings: {
-      fonts: {
-        'Lato': {
-          variants: ['regular'],
-          subsets: ['latin', 'cyrillic']
-        }
-      }
-    }
+    settings: {}
   },
   isSaved: false,
   slug: '', // landing ID
@@ -107,7 +100,13 @@ const actions = {
           },
           mailchimpUrl: false,
           mailchimpList: false,
-          name: data.name
+          name: data.name,
+          fonts: {
+            'Lato': {
+              variants: ['regular'],
+              subsets: ['latin', 'cyrillic']
+            }
+          }
         })
         commit('isSaved', false)
         commit('updateCurrentLanding', landing)
