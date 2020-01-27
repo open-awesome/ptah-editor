@@ -425,6 +425,41 @@ export function elemtentList () {
   }
 }
 
+export function getFontsNameStr (fonts) {
+  let str = ''
+
+  if (!fonts) {
+    return ''
+  }
+
+  for (let key in fonts) {
+    str += `${key}:400,600|`
+  }
+
+  return str
+}
+
+export function getFontsLanguages (fonts) {
+  let langs = []
+
+  if (!fonts) {
+    return ''
+  }
+
+  for (let key in fonts) {
+    if (fonts[key].subsets.length) {
+      fonts[key].subsets.forEach(item => {
+        langs = [
+          ...langs,
+          item
+        ]
+      })
+    }
+  }
+
+  return langs.join(',')
+}
+
 export const FONT_SIZES_LIST = [
   { name: '12px', value: '1.2rem' },
   { name: '14px', value: '1.4rem' },
