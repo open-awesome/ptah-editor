@@ -268,7 +268,7 @@ const actions = {
   /**
    * Stores settings fonts
    *
-   * @param {Object} settingsPart some fields of settings data
+   * @param {Object} fonts of settings data
    */
   storeSaveSettings ({ state, commit }, fontsList) {
     const landingData = _.merge({}, state.currentLanding.settings, {

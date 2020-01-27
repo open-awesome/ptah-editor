@@ -160,8 +160,6 @@ import axios from 'axios'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 import { mapState, mapActions } from 'vuex'
 
-// const FONT_URL = 'https://fonts.googleapis.com/css?family='
-
 export default {
   name: 'BuilderSiteSettingsFonts',
 
