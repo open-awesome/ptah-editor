@@ -457,7 +457,7 @@ export function getFontsLanguages (fonts) {
     }
   }
 
-  return langs.join(',')
+  return _.uniq(langs).join(',')
 }
 
 export const FONT_SIZES_LIST = [

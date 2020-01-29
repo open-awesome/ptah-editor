@@ -132,7 +132,7 @@ function download (assets) {
             <link rel="shortcut icon" href="${icon}"/>
             <link rel="manifest" href="/manifest.json">
             <link rel="stylesheet" href="css/styles.css"> 
-            <link href="https://fonts.googleapis.com/css?family=family=${fontsNameStr}&display=swap&subset=${fontsLanguages}" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=${fontsNameStr}&display=swap&subset=${fontsLanguages}" rel="stylesheet">
             ${scrollSetup.style}
             ${og}
             <style>

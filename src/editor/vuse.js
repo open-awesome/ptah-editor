@@ -294,7 +294,7 @@ class Vuse {
             <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
             <meta name="viewport" content="width=device-width, initial-scale=1">
             <link rel="stylesheet" href="${window.location.origin}/ptah_sections.css">
-            <link href="https://fonts.googleapis.com/css?family=family=${fontsNameStr}&display=swap&subset=${fontsLanguages}" rel="stylesheet">
+            <link href="https://fonts.googleapis.com/css?family=${fontsNameStr}&display=swap&subset=${fontsLanguages}" rel="stylesheet">
             ${scrollSetup.style}
             <style>
               ${customCss}
