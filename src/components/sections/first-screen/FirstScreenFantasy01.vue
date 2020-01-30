@@ -63,7 +63,6 @@ const C_CUSTOM_2 = [
     element: {
       text: '<p>HERE SHOULD BE A LITTLE TEXT ABOUT YOURE GAME</b></p>',
       styles: {
-        'font-family': 'Cinzel',
         'font-size': '5.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
@@ -93,7 +92,6 @@ const C_CUSTOM_2 = [
       styles: {
         'background-color': '#AF2E12',
         'color': '#ffffff',
-        'font-family': 'Cinzel',
         'font-size': '2rem',
         'text-align': 'center',
         'width': '240px',

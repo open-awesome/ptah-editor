@@ -29,7 +29,6 @@ const C_CUSTOM_COLUMN = [
     element: {
       text: '<p><strong>This is a header</strong></p>',
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '3.2rem',
         'color': '#ffffff'
       },
@@ -47,7 +46,6 @@ const C_CUSTOM_COLUMN = [
       '<div>Mrs all projecting favourable now unpleasing.</div>',
       styles: {
         'text-align': 'left',
-        'font-family': 'Lato',
         'font-size': '1.6rem',
         'color': '#ffffff'
       },
@@ -65,7 +63,6 @@ const C_CUSTOM_COLUMN = [
       styles: {
         'background-color': 'transparent',
         'color': '#1A83FF',
-        'font-family': 'Montserrat',
         'font-size:': '1.6rem',
         'text-align': 'center',
         'width': '280px',

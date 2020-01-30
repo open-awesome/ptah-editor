@@ -46,7 +46,6 @@ const [
       element: {
         text: `<p><strong>${label[i]} edition</strong></p>`,
         styles: {
-          'font-family': 'Montserrat',
           'font-size': '2.8rem',
           'color': '#ffffff'
         },
@@ -63,7 +62,6 @@ const [
         styles: {
           'background-color': 'transparent',
           'color': '#F4BC64',
-          'font-family': 'Montserrat',
           'font-size:': '1.6rem',
           'text-align': 'center',
           'width': '190px',

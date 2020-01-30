@@ -56,7 +56,8 @@
         "openGraph":                    "Open Graph",
         "integrations":                 "Integrations",
         "sectionOfGroup":               "The section in the group",
-        "loadFontsText":                "Load any font from Google font library. Don’t add more then 3-4 fonts, to save resources"
+        "loadFontsText":                "Load any font from Google font library. Don’t add more then 3-4 fonts, to save resources",
+        "setupFonts":                   "Setup fonts"
     },
     "c": {
         "elementsLibrary":              "Elements library",

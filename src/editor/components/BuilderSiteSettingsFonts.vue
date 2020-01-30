@@ -1,7 +1,37 @@
 <template>
   <builder-modal-content-layout id="settings-fonts" :noScroll="true">
     <form id="fonts-form" @submit.prevent="saveFonts">
-      <base-fieldset>
+      <base-fieldset class="b-setup-fonts" v-if="!isChange">
+        <div class="b-setup-fonts-header">
+          <base-heading level="2">
+            {{ $t('s.setupFonts') }}
+          </base-heading>
+          <span>
+            Load time:
+            <span :style="{ color: status.color }">
+              {{ status.text }}
+            </span>
+          </span>
+        </div>
+        <ul class="b-setup-fonts-list">
+          <li v-for="(el, key) in setupFonts" :key="key" class="b-setup-fonts-list__item">
+            <span class="b-setup-fonts-list__item-names" :style="{
+              'font-family': `${setupFonts[key]}`
+            }">
+              {{ textFonts[key] }}: {{ setupFonts[key] }}
+            </span>
+            <span class="b-setup-fonts-list__item-buttons">
+              <base-button
+                size="small"
+                color="blue"
+                v-text="'Change'"
+                @click="changeFont(el, key)"
+              />
+            </span>
+          </li>
+        </ul>
+      </base-fieldset>
+      <base-fieldset v-if="isChange">
         <div class="b-header-fonts-block">
           <div class="b-header-fonts-block__logo">
             <img src="https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/dde0bbef-6a92-46e5-b8c4-437524f99a85.png" />
@@ -41,7 +71,10 @@
               <div class="b-scrolled-content__inner">
                 <ul class="b-fonts-list">
                   <li class="b-fonts-list__item"
-                      :class="{ '_selected' : containsFont(font.family) }"
+                      :class="[
+                        { '_selected' : containsFont(font.family) },
+                        { '_applied' : selectedEl === font.family }
+                      ]"
                       v-for="font in filteredFonts"
                       :key="font.family"
                   >
@@ -66,32 +99,19 @@
                     </div>
                     <div class="b-fonts-list__item-button">
                       <base-button
-                        v-if="selectFonts[checkSpace(font.family)] === undefined"
+                        v-if="selectedEl !== font.family"
+                        class="b-fonts-list__item-button-apply"
                         size="small"
                         color="blue"
-                        v-text="'Add to site'"
-                        type="submit"
-                        form="cookies-form"
-                        @click="addFont(font)"
+                        v-text="`Apply to ${textFonts[selectedKey]}`"
+                        @click="applyFont(font)"
                       />
                       <base-button
                         v-if="selectFonts[checkSpace(font.family)] !== undefined"
                         size="small"
                         color="gray"
                         v-text="'Edit'"
-                        type="submit"
-                        form="cookies-form"
                         @click="editFont = font"
-                      />
-                      <base-button
-                        class="b-remove-btn"
-                        v-if="selectFonts[checkSpace(font.family)] !== undefined"
-                        size="small"
-                        color="black"
-                        v-text="'Remove from site'"
-                        type="submit"
-                        form="cookies-form"
-                        @click="removeFont(font.family)"
                       />
                     </div>
                   </li>
@@ -144,6 +164,23 @@
               </div>
             </div>
           </div>
+        </div><!-- /.b-fonts-block -->
+
+        <div class="b-fonts-block__controls">
+          <base-button
+            size="small"
+            v-text="$t('nav.cancel')"
+            :transparent="true"
+            @click="isChange = false"
+            color="gray"
+          />
+          <base-button
+            size="small"
+            v-text="$t('nav.save')"
+            :transparent="true"
+            @click="isChange = false"
+            color="gray"
+          />
         </div>
       </base-fieldset>
     </form>
@@ -171,7 +208,23 @@ export default {
       search: '', // filter fonts
       editFont: null,
       isFilterSelected: false,
-      defText: 'Load any font from Google font library.'
+      defText: 'Load any font from Google font library.',
+      statusList: [
+        { text: 'fast', color: 'green' },
+        { text: 'medium', color: 'orange' },
+        { text: 'slow', color: 'red' },
+        { text: 'slow', color: 'red' }
+      ],
+      textFonts: {
+        'h1': 'Header level 1',
+        'h2': 'Header level 2',
+        'h3': 'Header level 2',
+        'p': 'Plain text',
+        'btn': 'Buttons'
+      },
+      isChange: false,
+      selectedEl: null,
+      selectedKey: null
     }
   },
 
@@ -203,11 +256,20 @@ export default {
 
     selectFontsLength () {
       return Object.keys(this.selectFonts).length
+    },
+
+    setupFonts () {
+      return this.currentLanding.settings.setupFonts || {}
+    },
+
+    status () {
+      const length = Object.keys(this.selectFonts).length - 1
+      return this.statusList[length] || this.statusList[0]
     }
   },
 
   methods: {
-    ...mapActions(['storeSettings', 'storeSaveSettings']),
+    ...mapActions(['storeSettings', 'storeSaveSettingsFonts', 'storeSaveSettingsSetupFonts']),
 
     getFontsData () {
       axios('https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDKi8oKqvLuCASo7XZg4wY_D3CMib_Sg9U&sort=popularity')
@@ -228,22 +290,37 @@ export default {
       this.close()
     },
 
-    storeFonts () {
-      this.storeSaveSettings(this.selectFonts)
-    },
-
     close () {
       this.$router.push(`/editor/${this.$route.params.slug}`)
     },
 
-    addFont (font) {
+    storeFonts () {
+      this.storeSaveSettingsFonts(this.selectFonts)
+    },
+
+    storeSetupFonts (font) {
+      let setupFonts = {}
+
+      setupFonts[this.selectedKey] = font.family
+
+      this.storeSaveSettingsSetupFonts(setupFonts)
+    },
+
+    applyFont (font) {
       const name = this.checkSpace(font.family)
+
+      this.editFont = font
       this.selectFonts[name] = {
         variants: ['regular'],
         subsets: ['latin', 'cyrillic']
       }
-      this.editFont = font
       this.storeFonts()
+
+      this.storeSetupFonts(font)
+      this.removeFont(this.selectedEl)
+
+      this.$nextTick()
+      this.selectedEl = font.family
     },
 
     checkSpace (family) {
@@ -285,8 +362,27 @@ export default {
       if (this.editFont !== null && this.editFont.family === family) {
         this.editFont = null
       }
-      delete this.selectFonts[this.checkSpace(family)]
+
+      let isFind = false
+
+      for (let key in this.setupFonts) {
+        const fontName = this.setupFonts[key]
+        if (fontName === family) {
+          isFind = true
+        }
+      }
+
+      if (!isFind) {
+        delete this.selectFonts[this.checkSpace(family)]
+      }
+
       this.storeFonts()
+    },
+
+    changeFont (el, key) {
+      this.selectedEl = el
+      this.selectedKey = key
+      this.isChange = !this.isChange
     }
   },
 
@@ -311,6 +407,9 @@ export default {
   border: 1px solid #C4C4C4
   &__list
     width: 100%
+  &__controls
+    display: flex
+    justify-content: flex-end
 
 .b-font-filter
   display: flex
@@ -352,6 +451,12 @@ export default {
       padding: $size-step/8 $size-step/2 $size-step/8 $size-step
       #{$this}-check
         top: 5px
+
+    &._applied
+      color: #fff
+      background-color: $dark-blue-krayola
+      #{$this}-category
+        color: #fff
     &-category
       color: $gray300
     &:last-child
@@ -361,6 +466,8 @@ export default {
       position: absolute
       top: 5px
       right: 20px
+      &-apply
+        width: auto
     &:hover
       #{$this}-button
         display: block
@@ -438,4 +545,42 @@ export default {
     color: #333333
     margin-left: 36px
     text-align: center
+
+.b-setup-fonts
+  &-header
+    display: flex
+    justify-content: space-between
+    align-items: center
+  &-list
+    padding: 0
+    margin: 0
+    &__item
+      $this: &
+      display: flex
+      align-items: center
+      list-style: none
+      height: $size-step * 1.5
+      line-height: 1
+      margin: $size-step/4 0
+      &-names
+      &:nth-child(4)
+        #{$this}-names
+          font-size: 16px
+      &:nth-child(3)
+        #{$this}-names
+          font-size: 24px
+      &:nth-child(2)
+        #{$this}-names
+          font-size: 32px
+      &:nth-child(1)
+        #{$this}-names
+          font-size: 48px
+      & > *
+        display: block
+        position: relative
+      &-buttons
+        display: none
+      &:hover
+        #{$this}-buttons
+          display: block
 </style>

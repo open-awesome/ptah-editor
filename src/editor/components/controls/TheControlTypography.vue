@@ -57,10 +57,6 @@ export default {
     ]),
     ...mapState(['currentLanding']),
 
-    fontsList () {
-      return this.currentLanding.settings.fonts || {}
-    },
-
     styles () {
       return this.settingObjectOptions.styles
     },
@@ -91,36 +87,6 @@ export default {
 
     pseudo () {
       return this.settingObjectOptions.pseudo
-    },
-
-    fonts () {
-      let options = []
-
-      for (let key in this.fontsList) {
-        options.push({ name: key, value: key })
-      }
-
-      return {
-        options
-      }
-    },
-
-    fontName: {
-      get () {
-        let props = 'styles'
-        let name = ''
-
-        if (this.isMobile) props = `media['is-mobile']`
-
-        name = _.get(this.settingObjectOptions, `${props}['font-family']`)
-
-        if (name === undefined) name = _.get(this.settingObjectOptions, `styles['font-family']`)
-
-        return { name: name, value: name }
-      },
-      set (value) {
-        this.update('font-family', value.value)
-      }
     },
 
     size: {
@@ -268,9 +234,6 @@ export default {
 <template>
   <div class="b-typography-controls">
     <div class="b-typography-controls__control">
-      <div class="b-typography-controls__control-col b-typography-controls__control-col-font-name">
-        <base-select :label="$t('c.font')" :options="fonts.options" v-model="fontName" height="14" @input="updateProps"></base-select>
-      </div>
       <div class="b-typography-controls__control-col">
         <base-select :label="$t('c.size')" :options="sizes" v-model="size" height="23" @input="updateProps"></base-select>
       </div>

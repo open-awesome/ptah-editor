@@ -9,7 +9,6 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
@@ -53,7 +52,6 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
@@ -98,7 +96,6 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
@@ -143,7 +140,6 @@ const C_CUSTOM_COLUMN = [
   {
     element: {
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '2rem',
         'line-height': '1.2',
         'color': '#ffffff'
@@ -192,7 +188,6 @@ const C_CUSTOM = [
     element: {
       text: '<b>Frequently Asked Questions</b>',
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '4rem',
         'line-height': '1.2',
         'color': '#ffffff'

@@ -44,12 +44,10 @@ $main-font-size: 6rem
 .b-timer,
 .b-toggle-element
   .is-mobile &
-    font-family: var(--mobile-font-family) !important
     font-size: var(--mobile-font-size) !important
     line-height: var(--mobile-line-height) !important
   @media only screen and (max-width: 768px)
     &
-      font-family: var(--mobile-font-family) !important
       font-size: var(--mobile-font-size) !important
       line-height: var(--mobile-line-height) !important
 
@@ -69,7 +67,6 @@ $main-font-size: 6rem
   .is-mobile &
     .b-form-element-button,
     .b-form-element-input
-      font-family: var(--mobile-font-family) !important
       font-size: var(--mobile-font-size) !important
       line-height: var(--mobile-line-height) !important
 
@@ -78,7 +75,6 @@ $main-font-size: 6rem
     &
       .b-form-element-button,
       .b-form-element-input
-        font-family: var(--mobile-font-family) !important
         font-size: var(--mobile-font-size) !important
         line-height: var(--mobile-line-height) !important
 
@@ -153,7 +149,7 @@ $main-font-size: 6rem
   position: relative
 
   font-size: 3rem
-  font-family: 'Lato'
+  font-family: var(--global-font-btn)
   line-height: 1.4
   text-decoration: none
   color: $black
@@ -250,6 +246,7 @@ $main-font-size: 6rem
     margin: 0.2rem
 
     font-size: 1.6rem
+    font-family: var(--global-font-btn)
     word-break: keep-all
     overflow: hidden
 
@@ -304,7 +301,6 @@ $main-font-size: 6rem
 
 .b-text-icon
   color: #000
-  font-family: 'Lato'
   position: relative
   font-size: 1.4rem
   line-height: 1.4
@@ -314,7 +310,7 @@ $main-font-size: 6rem
   align-items: flex-start
 
   color: inherit
-  font-family: inherit
+  font-family: var(--global-font-p)
   &::selection,
   & ::selection
     color: #ff0
@@ -510,7 +506,6 @@ $main-font-size: 6rem
 .b-text
   color: #000
 
-  font-family: 'Lato'
   font-size: 1.4rem
   line-height: 1.4
 
@@ -536,7 +531,14 @@ $main-font-size: 6rem
   ol
     margin: 0
     padding: 0 1em
-
+  & p
+    font-family: var(--global-font-p) !important
+  & h1
+    font-family: var(--global-font-h1) !important
+  & h2
+    font-family: var(--global-font-h2) !important
+  & h3
+    font-family: var(--global-font-h3) !important
 
 // Timer
 
@@ -562,6 +564,7 @@ $main-font-size: 6rem
 .b-timer
   color: #fff
   font-size: $main-font-size
+  font-family: var(--global-font-p)
   text-align: center
   padding: 0.8rem
   &.is-editable:hover
@@ -665,19 +668,17 @@ $main-font-size: 6rem
             text-align: var(--text-align) !important
             font-size: var(--font-size) !important
             line-height: var(--line-height) !important
-            font-family: var(--font-family) !important
+            font-family: var(--global-font-p) !important
             color: var(--color) !important
             .is-mobile &
               text-align: var(--mobile-text-align) !important
               font-size: var(--mobile-font-size) !important
               line-height: var(--mobile-line-height) !important
-              font-family: var(--mobile-font-family) !important
             @media only screen and (max-width: 768px)
               &
                 text-align: var(--mobile-text-align) !important
                 font-size: var(--mobile-font-size) !important
                 line-height: var(--mobile-line-height) !important
-                font-family: var(--mobile-font-family) !important
         &_hide-text
           table > tbody > tr:last-child
             display: none

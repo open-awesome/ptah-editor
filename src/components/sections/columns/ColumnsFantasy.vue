@@ -11,7 +11,6 @@ const C_CUSTOM_COLUMN = [
     element: {
       text: '<p><strong>This is a header</strong></p>',
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '3.2rem',
         'color': '#ffffff'
       },
@@ -26,7 +25,6 @@ const C_CUSTOM_COLUMN = [
     element: {
       text: 'You can add text for each of your game feature here.. Change the button bellow to open full description of game feature or just delete it</div>',
       styles: {
-        'font-family': 'Lato',
         'font-size': '1.6rem',
         'line-height': '25px',
         'color': '#ffffff'
@@ -40,7 +38,6 @@ const C_CUSTOM_COLUMN = [
       styles: {
         'background-color': '#333333',
         'color': '#FFFFFF',
-        'font-family': 'Cinzel',
         'font-size:': '1.6rem',
         'text-align': 'center',
         'width': '280px',

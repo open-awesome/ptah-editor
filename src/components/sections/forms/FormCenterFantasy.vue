@@ -27,7 +27,6 @@ const C_CUSTOM = [
     element: {
       text: '<p><b>Header about form</b></p>',
       styles: {
-        'font-family': 'Cinzel',
         'font-size': '4.0rem',
         'color': '#ffffff',
         'padding-bottom': '67px'
@@ -47,7 +46,6 @@ const C_CUSTOM = [
       styles: {
         'color': '#000000',
         'border-radius': '2px',
-        'font-family': 'Cinzel',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-size': '1.6rem',

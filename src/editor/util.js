@@ -460,6 +460,25 @@ export function getFontsLanguages (fonts) {
   return _.uniq(langs).join(',')
 }
 
+export function getFontsSetup (setupFonts) {
+  let arr = []
+
+  if (!setupFonts) {
+    return ''
+  }
+
+  for (let key in setupFonts) {
+    if (setupFonts[key]) {
+      arr = [
+        ...arr,
+        `--global-font-${key}: ${setupFonts[key]}`
+      ]
+    }
+  }
+
+  return arr.join(';')
+}
+
 export const FONT_SIZES_LIST = [
   { name: '12px', value: '1.2rem' },
   { name: '14px', value: '1.4rem' },

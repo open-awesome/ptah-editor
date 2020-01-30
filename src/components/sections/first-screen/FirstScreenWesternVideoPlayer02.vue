@@ -89,7 +89,6 @@ const C_CUSTOM = [
       styles: {
         'background-color': '#1A83FF',
         'color': '#ffffff',
-        'font-family': 'Montserrat',
         'font-size': '2rem',
         'text-align': 'center',
         'width': '240px',
@@ -112,7 +111,6 @@ const C_CUSTOM_2 = [
     element: {
       text: '<p><b>Here should be a little text describing your beautiful game</b></p>',
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '3.6rem',
         'line-height': '1.4',
         'color': '#000000',

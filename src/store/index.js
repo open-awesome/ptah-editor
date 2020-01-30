@@ -69,9 +69,34 @@ const actions = {
     })
       .then((data) => {
         let landing = data.landing
+        let fonts = {}
+        let setupFonts = {}
 
         if (typeof landing === 'string') {
           landing = JSON.parse(landing)
+        }
+
+        if (!landing.settings.fonts) {
+          fonts = {
+            'Lato': {
+              variants: ['regular'],
+              subsets: ['latin', 'cyrillic']
+            },
+            'Montserrat': {
+              variants: ['regular'],
+              subsets: ['latin', 'cyrillic']
+            }
+          }
+        }
+
+        if (!landing.settings.setupFonts) {
+          setupFonts = {
+            'h1': 'Montserrat',
+            'h2': 'Montserrat',
+            'h3': 'Lato',
+            'p': 'Lato',
+            'btn': 'Montserrat'
+          }
         }
 
         landing.settings = _.defaultsDeep(landing.settings, {
@@ -101,12 +126,8 @@ const actions = {
           mailchimpUrl: false,
           mailchimpList: false,
           name: data.name,
-          fonts: {
-            'Lato': {
-              variants: ['regular'],
-              subsets: ['latin', 'cyrillic']
-            }
-          }
+          fonts: fonts,
+          setupFonts: setupFonts
         })
         commit('isSaved', false)
         commit('updateCurrentLanding', landing)
@@ -270,9 +291,23 @@ const actions = {
    *
    * @param {Object} fonts of settings data
    */
-  storeSaveSettings ({ state, commit }, fontsList) {
+  storeSaveSettingsFonts ({ state, commit }, fontsList) {
     const landingData = _.merge({}, state.currentLanding.settings, {
       fonts: fontsList
+    })
+
+    commit('updateCurrentLandingSettings', landingData)
+    commit('isSaved', false)
+  },
+
+  /**
+   * Stores settings setup fonts
+   *
+   * @param {Object} setup fonts of settings data
+   */
+  storeSaveSettingsSetupFonts ({ state, commit }, setupFonts) {
+    const landingData = _.merge({}, state.currentLanding.settings, {
+      setupFonts: setupFonts
     })
 
     commit('updateCurrentLandingSettings', landingData)

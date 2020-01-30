@@ -93,7 +93,6 @@ const C_CUSTOM = [
     element: {
       text: '<strong>Gallery Header</strong>',
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '4rem',
         'color': '#ffffff'
       },
@@ -281,7 +280,6 @@ export default {
                        :is="$sectionData[key][1].name"
                        :style="{
                           'color' : $sectionData.mainStyle.textStyles.text['color'],
-                          'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
                           'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
                           'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
                           'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],

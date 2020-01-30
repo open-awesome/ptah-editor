@@ -444,7 +444,6 @@ const C_CUSTOM = [
     element: {
       text: '<b>System requirements</b>',
       styles: {
-        'font-family': 'Cinzel',
         'font-size': '4rem',
         'color': '#fff'
       },
@@ -464,7 +463,6 @@ const SCHEMA_CUSTOM = {
       'background-color': '#000',
       'background-position': '50% 50%',
       'background-size': 'cover',
-      'font-family': 'Lato',
       'font-size': 1.4,
       'font-weight': false,
       'font-style': false,
@@ -481,13 +479,11 @@ const SCHEMA_CUSTOM = {
     },
     table: {
       head: {
-        'font-family': 'Lato',
         'font-size': '1.6rem',
         'color': '#ffffff',
         'background-color': 'rgba(0,0,0,0)'
       },
       body: {
-        'font-family': 'Lato',
         'font-size': '1.6rem',
         'color': '#ffffff',
         'background-color': 'rgba(0,0,0,0)'
@@ -668,7 +664,6 @@ export default {
                         <div class="b-system-requirements__table b-table-media-head flex"
                           :style="{
                             'color' : $sectionData.mainStyle.table.head['color'],
-                            'font-family' : $sectionData.mainStyle.table.head['font-family'],
                             'font-size' : $sectionData.mainStyle.table.head['font-size'],
                             'line-height' : $sectionData.mainStyle.table.head['line-height'],
                             'font-weight' : $sectionData.mainStyle.table.head['font-weight'],
@@ -698,7 +693,6 @@ export default {
                              v-show="$sectionData.mainStyle.rowsRequirements[i].visible"
                              :style="{
                             'color' : $sectionData.mainStyle.table.body['color'],
-                            'font-family' : $sectionData.mainStyle.table.body['font-family'],
                             'font-size' : $sectionData.mainStyle.table.body['font-size'],
                             'line-height' : $sectionData.mainStyle.table.body['line-height'],
                             'font-weight' : $sectionData.mainStyle.table.body['font-weight'],
