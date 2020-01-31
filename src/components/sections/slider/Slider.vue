@@ -132,7 +132,7 @@ let [
   return [
     {
       element: {
-        text: `<strong>${i + 1} feature title<strong>`,
+        text: `<h1>${i + 1} feature title<h1>`,
         styles: {
           'font-size': '3.6rem',
           'color': '#FFFFFF'
