@@ -130,7 +130,7 @@ const COMPONENTS = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<b>Header</b>',
+      text: '<h1>Header</h1>',
       styles: {
         'font-size': '4.2rem',
         'color': '#ffffff',

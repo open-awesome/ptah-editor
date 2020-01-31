@@ -65,7 +65,7 @@ const C_CUSTOM_1 = [
 const C_CUSTOM_2 = [
   {
     element: {
-      text: 'This is a short header',
+      text: '<h2>This is a short header</h2>',
       styles: {
         'font-size': '5.6rem',
         'color': '#ffffff'

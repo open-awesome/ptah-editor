@@ -460,6 +460,10 @@ export function getFontsLanguages (fonts) {
   return _.uniq(langs).join(',')
 }
 
+/**
+ * Set css global variables for default fonts
+ * @param {Object}
+ */
 export function getFontsSetup (setupFonts) {
   let arr = []
 
@@ -469,10 +473,7 @@ export function getFontsSetup (setupFonts) {
 
   for (let key in setupFonts) {
     if (setupFonts[key]) {
-      arr = [
-        ...arr,
-        `--global-font-${key}: ${setupFonts[key]}`
-      ]
+      arr.push(`--global-font-${key}: ${setupFonts[key]}`)
     }
   }
 

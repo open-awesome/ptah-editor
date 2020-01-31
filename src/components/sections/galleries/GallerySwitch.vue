@@ -265,6 +265,7 @@ const [
     },
     {
       element: {
+        text: '<h2>Chapter for image</h2>',
         removable: false,
         styles: {
           'background-image': `url(${prev[i]})`,
@@ -307,7 +308,7 @@ const HEADER = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<p>Gallery Header<p>',
+      text: '<h1>Gallery Header<h1>',
       styles: {
         'font-size': '3.6rem',
         'color': '#fff'

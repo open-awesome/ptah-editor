@@ -27,7 +27,7 @@ const C_CUSTOM_COLUMN = [
   },
   {
     element: {
-      text: '<p><strong>This is a header</strong></p>',
+      text: '<h2><strong>This is a header</strong></h2>',
       styles: {
         'font-size': '3.2rem',
         'color': '#ffffff'
@@ -53,7 +53,7 @@ const C_CUSTOM_COLUMN = [
   {},
   {
     element: {
-      text: '<p><strong>SECONDARY BUTTON</strong></p>',
+      text: '<strong>SECONDARY BUTTON</strong>',
       styles: {
         'background-color': 'transparent',
         'color': '#F4BC64',

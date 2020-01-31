@@ -186,7 +186,7 @@ const C_CUSTOM_COLUMN = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<b>Frequently Asked Questions</b>',
+      text: '<h1>Frequently Asked Questions</h1>',
       styles: {
         'font-size': '4rem',
         'line-height': '1.2',

@@ -258,7 +258,7 @@ const [
           tags: false,
           link: false
         },
-        text: 'You can add text describing each screenshot or concept art'
+        text: '<h2>You can add text describing each screenshot or concept art</h2>'
       }
     },
     {
@@ -287,7 +287,7 @@ const [
           tags: false,
           link: false
         },
-        text: 'Description for big image'
+        text: '<p>Description for big image</p>'
       }
     }
   ]
@@ -306,7 +306,7 @@ const HEADER = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<strong>Gallery Header</strong>',
+      text: '<h1>Gallery Header</h1>',
       styles: {
         'font-size': '4.0rem',
         'color': '#fff'

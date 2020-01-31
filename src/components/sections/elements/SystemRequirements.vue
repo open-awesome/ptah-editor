@@ -442,7 +442,7 @@ const REQUIREMENTS_LINUX = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<b>System requirements</b>',
+      text: '<h1><b>System requirements</b></h1>',
       styles: {
         'font-size': '4rem',
         'color': '#fff'

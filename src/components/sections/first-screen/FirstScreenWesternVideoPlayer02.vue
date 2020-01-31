@@ -109,7 +109,7 @@ const C_CUSTOM = [
 const C_CUSTOM_2 = [
   {
     element: {
-      text: '<p><b>Here should be a little text describing your beautiful game</b></p>',
+      text: '<h2><b>Here should be a little text describing your beautiful game</b></h2>',
       styles: {
         'font-size': '3.6rem',
         'line-height': '1.4',

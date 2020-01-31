@@ -70,7 +70,7 @@ const C_CUSTOM_1 = [
   },
   {
     element: {
-      text: '<p>HERE SHOULD BE A LITTLE TEXT ABOUT YOURE GAME</b></p>',
+      text: '<h1>HERE SHOULD BE A LITTLE TEXT ABOUT YOURE GAME</h1>',
       styles: {
         'font-size': '5.6rem',
         'line-height': '1.2',

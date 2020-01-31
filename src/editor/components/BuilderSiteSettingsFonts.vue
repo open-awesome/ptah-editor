@@ -208,7 +208,7 @@ export default {
       search: '', // filter fonts
       editFont: null,
       isFilterSelected: false,
-      defText: 'Load any font from Google font library.',
+      defText: this.$i18n.t('font.defTExt'),
       statusList: [
         { text: 'fast', color: 'green' },
         { text: 'medium', color: 'orange' },
@@ -216,11 +216,11 @@ export default {
         { text: 'slow', color: 'red' }
       ],
       textFonts: {
-        'h1': 'Header level 1',
-        'h2': 'Header level 2',
-        'h3': 'Header level 2',
-        'p': 'Plain text',
-        'btn': 'Buttons'
+        'h1': this.$i18n.t('font.h1'),
+        'h2': this.$i18n.t('font.h2'),
+        'h3': this.$i18n.t('font.h3'),
+        'p': this.$i18n.t('font.p'),
+        'btn': this.$i18n.t('font.btn')
       },
       isChange: false,
       selectedEl: null,
