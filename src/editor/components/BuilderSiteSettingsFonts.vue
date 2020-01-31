@@ -208,7 +208,7 @@ export default {
       search: '', // filter fonts
       editFont: null,
       isFilterSelected: false,
-      defText: this.$i18n.t('font.defTExt'),
+      defText: this.$i18n.t('font.defText'),
       statusList: [
         { text: 'fast', color: 'green' },
         { text: 'medium', color: 'orange' },
