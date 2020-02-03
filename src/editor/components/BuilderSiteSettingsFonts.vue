@@ -185,10 +185,12 @@
       </base-fieldset>
     </form>
 
-    <div slot="controls">
-      <base-button size="middle" v-text="$t('nav.cancel')" :transparent="true" @click="close()" color="gray"/>
-      <base-button size="middle" color="blue" v-text="$t('nav.save')" type="submit" form="fonts-form"/>
-    </div>
+    <template v-if="!isChange">
+      <div slot="controls">
+        <base-button size="middle" v-text="$t('nav.cancel')" :transparent="true" @click="close()" color="gray"/>
+        <base-button size="middle" color="blue" v-text="$t('nav.save')" type="submit" form="fonts-form"/>
+      </div>
+    </template>
   </builder-modal-content-layout>
 </template>
 
