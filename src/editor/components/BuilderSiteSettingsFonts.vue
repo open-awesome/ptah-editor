@@ -63,7 +63,7 @@
         </div>
 
         <div class="b-fonts-block" v-if="fontsLoaded">
-          <div class="b-fonts-block__list" v-if="fontsLoaded">
+          <div class="b-fonts-block__list">
             <base-scroll-container
               class="b-scrolled-content"
               backgroundBar="#999"
@@ -480,7 +480,6 @@ export default {
 
 .b-scrolled-content
   margin: 0
-  flex-grow: 1
   &__inner
     height: 100%
     margin: 0

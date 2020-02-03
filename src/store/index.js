@@ -13,7 +13,7 @@ Vue.use(Vuex)
 Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
-const demoLanding = 'https://s3.protocol.one/files/Demo-page-12.json'
+const demoLanding = 'https://s3.protocol.one/files/Demo-page-2020.json'
 
 const state = {
   storefrontPreview: false,
@@ -31,6 +31,25 @@ const getters = {
   storefrontPreview: (state) => {
     return state.storefrontPreview
   }
+}
+
+const FONTS = {
+  'Lato': {
+    variants: ['regular'],
+    subsets: ['latin', 'cyrillic']
+  },
+  'Montserrat': {
+    variants: ['regular'],
+    subsets: ['latin', 'cyrillic']
+  }
+}
+
+const SETUP_FONTS = {
+  'h1': 'Montserrat',
+  'h2': 'Montserrat',
+  'h3': 'Lato',
+  'p': 'Lato',
+  'btn': 'Montserrat'
 }
 
 const actions = {
@@ -77,26 +96,11 @@ const actions = {
         }
 
         if (!landing.settings.fonts) {
-          fonts = {
-            'Lato': {
-              variants: ['regular'],
-              subsets: ['latin', 'cyrillic']
-            },
-            'Montserrat': {
-              variants: ['regular'],
-              subsets: ['latin', 'cyrillic']
-            }
-          }
+          fonts = FONTS
         }
 
         if (!landing.settings.setupFonts) {
-          setupFonts = {
-            'h1': 'Montserrat',
-            'h2': 'Montserrat',
-            'h3': 'Lato',
-            'p': 'Lato',
-            'btn': 'Montserrat'
-          }
+          setupFonts = SETUP_FONTS
         }
 
         landing.settings = _.defaultsDeep(landing.settings, {
@@ -168,6 +172,14 @@ const actions = {
 
         if (state.name === '' && data.title !== '') {
           commit('name', data.title)
+        }
+
+        if (!data.settings.fonts) {
+          data.settings['fonts'] = FONTS
+        }
+
+        if (!data.settings.setupFonts) {
+          data.settings['setupFonts'] = SETUP_FONTS
         }
 
         commit('slug', slug)

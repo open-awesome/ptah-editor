@@ -1,6 +1,5 @@
 import Draggable from 'vuedraggable'
 import { mapActions } from 'vuex'
-import { uniq } from 'lodash'
 
 export default {
   components: {
@@ -33,7 +32,6 @@ export default {
   methods: {
     ...mapActions('Landing', ['saveState']),
     ...mapActions('Sidebar', ['toggleDragStop']),
-    ...mapActions(['storeSettings', 'storeSaveSettings']),
 
     $_dragStop (event) {
       this.selectElement(event.moved.newIndex)
@@ -63,49 +61,6 @@ export default {
     clickOnElement (el) {
       let machineEvent = new Event('mousedown', { bubbles: true })
       el.dispatchEvent(machineEvent)
-    },
-
-    storeFonts (fontsArr) {
-      let objFonts = {}
-
-      fontsArr.forEach(font => {
-        if (!objFonts[font]) {
-          objFonts[font] = {
-            variants: ['regular'],
-            subsets: ['latin']
-          }
-        }
-      })
-
-      this.storeSaveSettings(objFonts)
-    },
-
-    setFontFromSectiontoStore () {
-      let fontsArr = []
-
-      for (let key in this.$sectionData) {
-        let obj = this.$sectionData[key]
-
-        if (key.indexOf('components') !== -1) {
-          obj.forEach(el => {
-            if (el.element.styles['font-family'] !== undefined) {
-              const fontFamily = el.element.styles['font-family']
-              fontsArr = [
-                ...fontsArr,
-                fontFamily
-              ]
-            }
-          })
-        }
-      }
-
-      if (fontsArr.length > 0) {
-        this.storeFonts(uniq(fontsArr))
-      }
     }
-  },
-
-  mounted () {
-    this.setFontFromSectiontoStore()
   }
 }
