@@ -321,7 +321,6 @@ export default {
       this.storeSetupFonts(font)
       this.removeFont(this.selectedEl)
 
-      this.$nextTick()
       this.selectedEl = font.family
     },
 
