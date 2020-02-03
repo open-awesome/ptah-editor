@@ -367,8 +367,7 @@ export default {
       let isFind = false
 
       for (let key in this.setupFonts) {
-        const fontName = this.setupFonts[key]
-        if (fontName === family) {
+        if (this.setupFonts[key] === family) {
           isFind = true
         }
       }
