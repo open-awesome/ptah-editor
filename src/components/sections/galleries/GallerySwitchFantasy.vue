@@ -73,7 +73,6 @@
                        :is="$sectionData[key][1].name"
                        :style="{
                           'color' : $sectionData.mainStyle.textStyles.text['color'],
-                          'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
                           'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
                           'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
                           'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
@@ -121,7 +120,6 @@
                        :is="$sectionData[key][2].name"
                        :style="{
                          'color' : $sectionData.mainStyle.textStyles.chapter['color'],
-                         'font-family' : $sectionData.mainStyle.textStyles.chapter['font-family'],
                          'font-size' : $sectionData.mainStyle.textStyles.chapter['font-size'],
                          'font-weight' : $sectionData.mainStyle.textStyles.chapter['font-weight'],
                          'font-style' : $sectionData.mainStyle.textStyles.chapter['font-style'],
@@ -260,7 +258,7 @@ const [
           tags: false,
           link: false
         },
-        text: 'You can add text describing each screenshot or concept art'
+        text: '<h2>You can add text describing each screenshot or concept art</h2>'
       }
     },
     {
@@ -289,7 +287,7 @@ const [
           tags: false,
           link: false
         },
-        text: 'Description for big image'
+        text: '<p>Description for big image</p>'
       }
     }
   ]
@@ -308,9 +306,8 @@ const HEADER = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<strong>Gallery Header</strong>',
+      text: '<h1>Gallery Header</h1>',
       styles: {
-        'font-family': 'Cinzel',
         'font-size': '4.0rem',
         'color': '#fff'
       },
@@ -339,7 +336,6 @@ const SCHEMA_CUSTOM = {
     maxCount: 3,
     textStyles: {
       chapter: {
-        'font-family': 'Lato',
         'font-size': '1.6rem',
         'line-height': '1.4',
         'font-weight': 'normal',
@@ -348,7 +344,6 @@ const SCHEMA_CUSTOM = {
         'color': 'rgba(255, 255, 255, 1)'
       },
       text: {
-        'font-family': 'Lato',
         'font-size': '1.6rem',
         'line-height': '1.4',
         'font-weight': 'normal',

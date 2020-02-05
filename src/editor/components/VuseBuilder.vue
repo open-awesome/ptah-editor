@@ -1,13 +1,14 @@
 <template>
 
 <builder-layout
-    :builder="builder"
-    @export="submit"
-    @preview="preview"
-    @save="save"
->
+  :builder="builder"
+  @export="submit"
+  @preview="preview"
+  @save="save">
 
-  <div>
+  <div
+    :style="`${fontsSetup}`"
+  >
     <div
       :class="{
         'is-editable': $builder.isEditing,
@@ -109,6 +110,7 @@ import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import MenuSettings from '@components/slots/MenuSettings'
+import { getFontsSetup } from '../util'
 
 import { sectionsGroups } from '@cscripts/sectionsGroups'
 
@@ -176,6 +178,14 @@ export default {
 
     builderSections () {
       return this.builder.sections.filter(section => !section.isHeader)
+    },
+
+    setupFonts () {
+      return this.currentLanding.settings.setupFonts || {}
+    },
+
+    fontsSetup () {
+      return getFontsSetup(this.setupFonts)
     }
   },
 

@@ -64,7 +64,6 @@ const C_CUSTOM = [
     element: {
       styles: {
         'color': '#fff',
-        'font-family': 'Lato',
         'text-align': 'center',
         'font-size': '4.8rem',
         'font-weight': 'bold'
@@ -86,7 +85,6 @@ const C_CUSTOM = [
         'background-image': 'url(https://s3.protocol.one/src/o_1KjCvL.png)',
         'background-size': 'contain',
         'color': '#000',
-        'font-family': 'Heebo',
         'text-align': 'center',
         'font-size': '3.6rem',
         'width': '384px',

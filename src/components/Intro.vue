@@ -95,7 +95,7 @@
                               <div data-v-1568b601=""><a data-v-f1b986ec="" data-v-1568b601=""
                                                          path="components[2].element"
                                                          class="b-button js-element-link ptah-a-fade b-button-fs"
-                                                         href="https://storefront.tst.protocol.one/editor/demo"
+                                                         href="/editor/demo"
                                                          target="_blank"
                                                          style="--mobile-margin-top:0px; --mobile-margin-bottom:16px; --mobile-margin-left:16px; --mobile-width:234px; --mobile-height:58px; --mobile-font-family:IBM Plex Mono; --mobile-font-size:2rem; --mobile-line-height:1.3; --mobile-text-align:center; --mobile-justify-content:center; background-image: none; background-position: center center; background-repeat: no-repeat; background-size: cover; background-color: rgb(0, 0, 0); color: rgb(255, 255, 255); border: 1px solid rgb(0, 0, 0); font-size: 2rem; line-height: 1.3; border-radius: 100px; font-weight: normal; font-style: normal; font-family: &quot;IBM Plex Mono&quot;; text-decoration: none; justify-content: center; align-items: center; text-align: center; width: 234px; height: 58px; margin-left: 48px; margin-top: 0px; margin-bottom: 0px;"
                                                          data-behavior="auto" data-pone="pone33356">
@@ -703,7 +703,6 @@
 </template>
 
 <script>
-import Vue from 'vue'
 import { mapMutations } from 'vuex'
 import { initMobileMenu } from '@cscripts/mobile-menu'
 import { initScrollIntoSection } from '@cscripts/scroll-into-section'
@@ -711,22 +710,11 @@ import { initElementLink } from '@cscripts/element-link'
 import { fixEmptyHref } from '@cscripts/fix-empty-href'
 import { formsSender } from '@cscripts/forms'
 
-Vue.component('v-style', {
-  render: function (createElement) {
-    return createElement('style', this.$slots.default)
-  }
-})
-
 export default {
   name: 'Intro',
 
   methods: {
-    ...mapMutations('User', ['setGuestUser']),
-
-    goDemo () {
-      this.setGuestUser(true)
-      this.$router.push({ path: `/editor/demo` })
-    }
+    ...mapMutations('User', ['setGuestUser'])
   },
 
   mounted () {
@@ -740,6 +728,7 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import url('https://fonts.googleapis.com/css?family=IBM+Plex+Mono|IBM+Plex+Sans|IBM+Plex+Sans+Condensed&display=swap')
 .main
   width: 100%
 .intro

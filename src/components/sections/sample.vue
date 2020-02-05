@@ -62,8 +62,7 @@ export default {
           element: {
             text: '<p><b>Section title</b></p>',
             styles: {
-              'font-family': 'Montserrat',
-              'font-size': '4rem',
+               'font-size': '4rem',
               'color': 'white'
             },
             media: {

@@ -48,9 +48,8 @@ const [
     },
     {
       element: {
-        text: `<p><strong>${label[i]} edition</strong></p>`,
+        text: `<h1><strong>${label[i]} edition</strong></h1>`,
         styles: {
-          'font-family': 'Cinzel',
           'font-size': '2.8rem',
           'color': '#ffffff'
         },
@@ -66,7 +65,6 @@ const [
         text: `<b>${price[i]}$</b>`,
         styles: {
           'color': '#fff',
-          'font-family': 'Cinzel',
           'font-size': '3rem'
         },
         media: {
@@ -78,11 +76,10 @@ const [
     },
     {
       element: {
-        text: '<p><strong>BUY NOW</strong></p>',
+        text: '<strong>BUY NOW</strong>',
         styles: {
           'background-color': '#333333',
           'color': '#FFFFFF',
-          'font-family': 'Cinzel',
           'font-size:': '1.6rem',
           'text-align': 'center',
           'width': '161px',
@@ -125,7 +122,6 @@ const [
         text: `<b>${label[i]} Edition</b>`,
         styles: {
           'color': '#fff',
-          'font-family': 'Cinzel',
           'font-size': '24px',
           'line-height': '29px'
         }

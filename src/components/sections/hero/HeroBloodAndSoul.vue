@@ -30,7 +30,6 @@ const C_CUSTOM = [
     element: {
       text: 'Chronicles of your ascent',
       styles: {
-        'font-family': 'PT Serif',
         'font-size': '2.8rem',
         'color': '#000000',
         'margin-bottom': '200px'
@@ -50,7 +49,6 @@ const C_CUSTOM2 = [
     element: {
       text: 'Play game',
       styles: {
-        'font-family': 'PT Serif',
         'font-size': '3.6rem',
         'color': '#000000',
         'background-color': '#ffa800',

@@ -64,7 +64,6 @@ const C_CUSTOM = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Lato',
         'font-size': '4.8rem',
         'color': '#ffffff',
         'margin-bottom': '32px'
@@ -83,7 +82,6 @@ const C_CUSTOM = [
       '<p>Mrs all projecting favourable now unpleasing. Son law garden chatty temper</p>' +
       '<p>Oh children provided to mr elegance marriage strongly.</p>',
       styles: {
-        'font-family': 'Lato',
         'font-size': '2rem',
         'color': 'rgba(255, 255, 255, 0.3)'
       }
@@ -95,7 +93,6 @@ const C_CUSTOM = [
       styles: {
         'background-color': '#FF6D64',
         'color': '#ffffff',
-        'font-family': 'Lato',
         'text-align': 'center',
         'width': '352px',
         'height': '64px',

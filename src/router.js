@@ -35,7 +35,8 @@ router.beforeEach(
       '/editor/demo/settings/integrations',
       '/editor/demo/settings/integrations/googleTag',
       '/editor/demo/settings/integrations/googleAnalitycs',
-      '/editor/demo/settings/integrations/mailchimp'
+      '/editor/demo/settings/integrations/mailchimp',
+      '/editor/demo/settings/fonts'
     ]
 
     if (!allowedPaths.includes(to.path) && (localStorage.getItem('token') === null)) {
