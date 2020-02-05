@@ -14,12 +14,32 @@ Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
 const demoLanding = 'https://s3.protocol.one/files/Demo-page-2020.json'
+const FONTS = {
+  'Lato': {
+    variants: ['regular'],
+    subsets: ['latin', 'cyrillic']
+  },
+  'Montserrat': {
+    variants: ['regular'],
+    subsets: ['latin', 'cyrillic']
+  }
+}
+const SETUP_FONTS = {
+  'h1': 'Montserrat',
+  'h2': 'Montserrat',
+  'h3': 'Lato',
+  'p': 'Lato',
+  'btn': 'Montserrat'
+}
 
 const state = {
   storefrontPreview: false,
   landings: [],
   currentLanding: {
-    settings: {}
+    settings: {
+      fonts: FONTS,
+      setupFonts: SETUP_FONTS
+    }
   },
   isSaved: false,
   slug: '', // landing ID
@@ -31,25 +51,6 @@ const getters = {
   storefrontPreview: (state) => {
     return state.storefrontPreview
   }
-}
-
-const FONTS = {
-  'Lato': {
-    variants: ['regular'],
-    subsets: ['latin', 'cyrillic']
-  },
-  'Montserrat': {
-    variants: ['regular'],
-    subsets: ['latin', 'cyrillic']
-  }
-}
-
-const SETUP_FONTS = {
-  'h1': 'Montserrat',
-  'h2': 'Montserrat',
-  'h3': 'Lato',
-  'p': 'Lato',
-  'btn': 'Montserrat'
 }
 
 const actions = {
