@@ -7,6 +7,7 @@ export default {
       expanded: false,
       name: ''
     },
+    isShowModal: false,
     isAddSectionExpanded: false, // add section menu
     isResizeStop: false,
     isDragStop: false,
@@ -70,6 +71,7 @@ export default {
     isExpanded (state, value) {
       state.isExpanded = value
     },
+
     isAddSectionExpanded (state, value) {
       state.isAddSectionExpanded = value
     },
@@ -120,6 +122,9 @@ export default {
     },
     isMobile (state, value) {
       state.isMobile = value
+    },
+    isShowModal (state, value) {
+      state.isShowModal = value
     }
   },
 
@@ -297,6 +302,10 @@ export default {
       } else {
         commit('isMobile', false)
       }
+    },
+
+    toggleModal ({ state, commit }, value) {
+      commit('isShowModal', (typeof value !== 'undefined') ? value : !state.isShowModal)
     }
   },
 

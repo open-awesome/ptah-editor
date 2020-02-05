@@ -7,10 +7,9 @@
         "cookie":                       "Cookie",
         "addJs":                        "Добавить JS",
         "integrations":                 "Интеграции",
-        "":                             "Open Graph",
+        "openGraph":                    "Open Graph",
         "addCss":                       "Добавить CSS",
-        "fonts":                        "Шрифты",
-        "openGraph":                    "Open Graph"
+        "fonts":                        "Шрифты"
     },
     "nav": {
         "backToDashbord":               "Назад к лендингам",

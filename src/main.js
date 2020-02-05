@@ -18,6 +18,7 @@ import router from './router'
 import store from './store'
 import { sync } from 'vuex-router-sync'
 import AppView from './App.vue'
+import VueGtag from 'vue-gtag'
 
 import en from '@assets/lang/en.json'
 import ru from '@assets/lang/ru.json'
@@ -46,6 +47,12 @@ Vue.use(VueScrollTo, {
   x: false,
   y: true
 })
+
+if (process.env.VUE_GTAG !== undefined) {
+  Vue.use(VueGtag, {
+    config: { id: process.env.VUE_GTAG }
+  })
+}
 
 sync(store, router)
 

@@ -209,13 +209,15 @@ export default {
                  :class="{ 'b-add-section-bar__menu-element_selected': section === selectedSection }"
                  v-bind:key="index"
                  @click="selectSection(section)">
-              <div class="b-add-section-bar__menu-imageholder">
+              <div class="b-add-section-bar__menu-image-holder">
                 <img class="b-add-section-bar__menu-image" v-if="section.cover" :src="section.cover"/>
-                <div class="b-add-section-bar__menu-title">
-                  {{ section.title }}
-                </div>
-                <div class="b-add-section-bar__menu-descr">
-                  {{ section.description }}
+                <div>
+                  <div class="b-add-section-bar__menu-title">
+                    {{ section.title }}
+                  </div>
+                  <div class="b-add-section-bar__menu-descr">
+                    {{ section.description }}
+                  </div>
                 </div>
               </div>
             </div>
@@ -375,13 +377,17 @@ export default {
           & img
             display: none
 
-      &-imageholder
+      &-image-holder
         background: url("https://s3.protocol.one/src/o_jGfAw.png") no-repeat
         width: 24rem
         min-height: 18.6rem
         padding: 1.2rem .2rem 0
         margin: 2.1rem 2.1rem 1.1rem
         position: relative
+
+        display: flex
+        flex-direction: column
+        justify-content: space-between
       &-image
         max-width: 100%
       &-title
