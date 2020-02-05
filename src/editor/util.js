@@ -155,6 +155,10 @@ export function randomPoneId() {
   return `pone${Math.random().toString().substring(2, 7)}`
 }
 
+export function randomSectionId() {
+  return _.random(10000)
+}
+
 /**
  * Return template of scoped style for el
  * @param poneId

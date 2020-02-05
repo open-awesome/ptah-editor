@@ -1,5 +1,10 @@
 <template>
-    <VuseBuilder v-bind:show-intro="showIntro" @saved="onDownload" @preview="onPreview" @save="onSave" />
+    <VuseBuilder
+      v-bind:show-intro="showIntro"
+      @saved="onDownload"
+      @preview="onPreview"
+      @save="onSave"
+    />
 </template>
 
 <script>

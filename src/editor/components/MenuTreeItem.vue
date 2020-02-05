@@ -6,8 +6,13 @@
     <div class="menu-tree-item__drag">
       <icon-base name="dragNew"></icon-base>
     </div>
-    <div class="menu-tree-item__name">
-      {{section.name}}
+    <div class="menu-tree-item__name"
+      :tooltip="section.name"
+      tooltip-position="bottom"
+    >
+      <span>
+        {{section.name}}
+      </span>
     </div>
     <div class="menu-tree-item__controls">
       <span
@@ -143,9 +148,11 @@ export default {
       width: 1.5rem
 
     &__name
-      max-width: 15rem
-      overflow: hidden
-      text-overflow: ellipsis
+      > span
+        display: block
+        max-width: 15rem
+        overflow: hidden
+        text-overflow: ellipsis
 
     &:hover
       background: rgba(116, 169, 230, 0.25)

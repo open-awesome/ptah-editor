@@ -1,18 +1,17 @@
 import getPath from 'lodash-es/get'
 import toPath from 'lodash-es/toPath'
 import Seeder from './seeder'
+import {randomSectionId} from './util'
 
 const SECTION_OPTIONS = {
   name: null,
   schema: {}
 }
 
-let counter = 0
-
 export default class Section {
   constructor (options) {
-    this.id = counter++
     options = Object.assign({}, SECTION_OPTIONS, options)
+    this.id = options.id || randomSectionId()
     this.name = options.name
     this.description = options.description
     this.group = options.group

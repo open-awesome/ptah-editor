@@ -1,6 +1,11 @@
 <template>
     <div class="artboard" id="artboard">
-        <component v-for="section in $builder.sections" :is="section.name" :key="section.id" :id="section.id"></component>
+        <component
+          v-for="section in $builder.sections"
+          :is="section.name"
+          :key="section.id"
+          :id="section.id"
+        />
     </div>
 </template>
 

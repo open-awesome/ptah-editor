@@ -60,6 +60,7 @@ class Vuse {
       this.sections.splice(position, 0, new Section(options))
       return
     }
+
     this.sections.push(new Section(options))
   }
 
@@ -218,6 +219,7 @@ class Vuse {
         if (typeof section === 'string') {
           component = this.components[section].options
           sectionData = {
+            id: section.id,
             name: component.name,
             group: component.group,
             schema: component.schema
@@ -229,6 +231,7 @@ class Vuse {
           // restore saved data
           component = this.components[section.name].options
           sectionData = {
+            id: section.id,
             name: component.name,
             group: component.group,
             schema: component.schema,
@@ -253,8 +256,9 @@ class Vuse {
       slug: this.landing,
       title: this.title,
       settings: this.settings,
-      sections: this.sections.map(({ name, data }) => ({
+      sections: this.sections.map(({ name, id, data }) => ({
         name,
+        id,
         data: _.mapValues(data, (value, key) => {
           // --- coz html element in component's array has circular structure
           if (key.match(/^components/)) {
