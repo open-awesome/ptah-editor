@@ -4,7 +4,12 @@ import VuseBuilder from './components/VuseBuilder.vue'
 import VuseRenderer from './components/VuseRenderer.vue'
 import styler from './styler'
 import mixin from './mixin'
-import { cleanDOM, getFontsNameStr, getFontsLanguages } from './util'
+import {
+  cleanDOM,
+  getFontsNameStr,
+  getFontsLanguages,
+  getFontsSetup
+} from './util'
 import * as _ from 'lodash-es'
 
 let PLUGINS = []
@@ -284,6 +289,7 @@ class Vuse {
     let scrollSetup = this.getScrollSetup()
     let fontsNameStr = getFontsNameStr(this.settings.fonts)
     let fontsLanguages = getFontsLanguages(this.settings.fonts)
+    let fontsSetup = getFontsSetup(this.settings.setupFonts)
 
     printDocument.open()
     printDocument.write(
@@ -302,7 +308,7 @@ class Vuse {
           </head>
           <body class="b-body_preview" style="${bodyStyles}">
             ${(video) ? this.getVideoBg(video) : ''}
-            <div id="main" class="main">
+            <div id="main" class="main" style="${fontsSetup}">
               ${artboard.innerHTML}
             </div>
             ${this.getCookiesPreview()}

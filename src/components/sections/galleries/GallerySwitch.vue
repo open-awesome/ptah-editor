@@ -93,7 +93,6 @@
                             :is="$sectionData[key][1].name"
                             :style="{
                               'color' : $sectionData.mainStyle.textStyles.text['color'],
-                              'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
                               'font-size' : $sectionData.mainStyle.textStyles.text['font-size']
                             }"
                             :class="[$sectionData[key][1].element.classes, $sectionData[key][1].class]"
@@ -116,7 +115,6 @@
                            :is="$sectionData[key][2].name"
                            :style="{
                              'color' : $sectionData.mainStyle.textStyles.chapter['color'],
-                             'font-family' : $sectionData.mainStyle.textStyles.chapter['font-family'],
                              'font-size' : $sectionData.mainStyle.textStyles.chapter['font-size']
                            }"
                            :class="[$sectionData[key][2].element.classes, $sectionData[key][2].class]"
@@ -146,7 +144,6 @@
                            :is="$sectionData[key][4].name"
                            :style="{
                              'color' : $sectionData.mainStyle.textStyles.text['color'],
-                             'font-family' : $sectionData.mainStyle.textStyles.text['font-family'],
                              'font-size' : $sectionData.mainStyle.textStyles.text['font-size']
                            }"
                            :class="[$sectionData[key][4].element.classes, $sectionData[key][4].class]"
@@ -268,6 +265,7 @@ const [
     },
     {
       element: {
+        text: '<h2>Chapter for image</h2>',
         removable: false,
         styles: {
           'background-image': `url(${prev[i]})`,
@@ -310,9 +308,8 @@ const HEADER = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<p>Gallery Header<p>',
+      text: '<h1>Gallery Header<h1>',
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '3.6rem',
         'color': '#fff'
       },

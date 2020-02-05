@@ -1,6 +1,13 @@
 import JSZip from 'jszip'
 import saveAs from 'save-as'
-import { getImageBlob, cleanDOM, gtagSetup, getFontsNameStr, getFontsLanguages } from '../util'
+import {
+  getImageBlob,
+  cleanDOM,
+  gtagSetup,
+  getFontsNameStr,
+  getFontsLanguages,
+  getFontsSetup
+} from '../util'
 
 /**
  * Adds a service worker that caches the static assets.
@@ -120,6 +127,7 @@ function download (assets) {
       let script = this.settings.script ? this.settings.script : ''
       let fontsNameStr = getFontsNameStr(this.settings.fonts)
       let fontsLanguages = getFontsLanguages(this.settings.fonts)
+      let fontsSetup = getFontsSetup(this.settings.setupFonts)
 
       output.file('index.html',
         `<html>
@@ -141,7 +149,7 @@ function download (assets) {
           </head>
           <body class="b-body_export" style="${bodyStyles}">
             ${gtm.body}
-            <div id="main" class="main">
+            <div id="main" class="main" style="${fontsSetup}">
               ${artboard.innerHTML}
             </div>
             ${video}

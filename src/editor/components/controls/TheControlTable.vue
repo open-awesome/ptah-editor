@@ -50,10 +50,6 @@ export default {
     ]),
     ...mapState(['currentLanding']),
 
-    fontsList () {
-      return this.currentLanding.settings.fonts || {}
-    },
-
     table () {
       return this.settingObjectOptions.table
     },
@@ -86,36 +82,6 @@ export default {
       }))
 
       return this.settingObjectOptions.media
-    },
-
-    fonts () {
-      let options = []
-
-      for (let key in this.fontsList) {
-        options.push({ name: key, value: key })
-      }
-
-      return {
-        options
-      }
-    },
-
-    fontName: {
-      get () {
-        let props = `table['head']`
-        let name = ''
-
-        if (this.isMobile) props = `media['is-mobile']['table']['head']`
-
-        name = _.get(this.settingObjectOptions, `${props}['font-family']`)
-
-        if (name === undefined) name = _.get(this.settingObjectOptions, `table['head']['font-family']`)
-
-        return { name: name, value: name }
-      },
-      set (value) {
-        this.update('font-family', value.value)
-      }
     },
 
     size: {
@@ -232,9 +198,6 @@ export default {
       Table header style
     </div>
     <div class="b-table-controls__control">
-      <div class="b-table-controls__control-col b-table-controls__control-col-font-name">
-        <base-select :label="$t('c.font')" :options="fonts.options" v-model="fontName"></base-select>
-      </div>
       <div class="b-table-controls__control-col">
         <base-select :label="$t('c.size')" :options="sizes" v-model="size"></base-select>
       </div>

@@ -92,7 +92,7 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-pth-base-button
-  font-family: 'Roboto', Helvetica, Arial, sans-serif
+  font-family: 'Lato', Helvetica, Arial, sans-serif
   font-size: 1.6rem
   line-height: 2.2
 

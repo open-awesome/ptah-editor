@@ -56,7 +56,8 @@
         "openGraph":                    "Open Graph",
         "integrations":                 "Integrations",
         "sectionOfGroup":               "The section in the group",
-        "loadFontsText":                "Load any font from Google font library. Don’t add more then 3-4 fonts, to save resources"
+        "loadFontsText":                "Load any font from Google font library. Don’t add more then 3-4 fonts, to save resources",
+        "setupFonts":                   "Setup fonts"
     },
     "c": {
         "elementsLibrary":              "Elements library",
@@ -152,5 +153,13 @@
         "video":                        "Upload a video or add a link to a Youtube video",
         "form":                         "Change form settings and content by double clicking",
         "toggle":                       "Change text and icons by double clicking"
+    },
+    "font": {
+        "h1":                           "Header H1",
+        "h2":                           "Header H2",
+        "h3":                           "Header H3",
+        "p":                            "Plain text",
+        "btn":                          "Text for buttons",
+        "defText":                      "Sample text of this font"
     }
 }
