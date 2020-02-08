@@ -65,8 +65,9 @@ const C_CUSTOM_1 = [
 const C_CUSTOM_2 = [
   {
     element: {
-      text: '<h2>This is a short header</h2>',
+      text: 'This is a short header',
       styles: {
+        'font-family': 'Lato',
         'font-size': '5.6rem',
         'color': '#ffffff'
       },
@@ -82,6 +83,7 @@ const C_CUSTOM_2 = [
     element: {
       text: 'An sincerity so extremity he additions. Her yet there truth merit.',
       styles: {
+        'font-family': 'Lato',
         'font-size': '1.6rem',
         'color': 'rgba(255, 255, 255, 0.5)'
       }
@@ -95,6 +97,7 @@ const C_CUSTOM_2 = [
       styles: {
         'color': '#000000',
         'border-radius': '2px',
+        'font-family': 'Lato',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-size': '1.6rem',

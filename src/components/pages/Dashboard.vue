@@ -20,13 +20,14 @@ export default {
             'FirstScreenSpace01',
             'FooterSpace'
           ],
+          url: 'https://s3.protocol.one/files/Simple-page-12.json',
           image: 'https://s3.protocol.one/images/1_r.jpg',
           description: 'Simple Sci-fi template width video background. Sections: First Screen, Footer'
         },
         {
           type: 'Ptah page',
           sections: [],
-          url: 'https://s3.protocol.one/files/Ptah-page-2020.json',
+          url: 'https://s3.protocol.one/files/Ptah-page-2019-12.json',
           image: 'https://s3.protocol.one/images/2ptah_r1.jpg',
           description: 'Look at how the landing page was created which stands on the main page of the Ptah page builder'
         },
@@ -39,6 +40,7 @@ export default {
             'FormCenter',
             'FooterSpace'
           ],
+          url: 'https://s3.protocol.one/files/SpaceWithSubscriptionForm-page-12.json',
           image: 'https://s3.protocol.one/images/3_r.jpg',
           description: 'Sci-fi template width video background and subscription form. Sections: First screen, columns, gallery, form, footer'
         },
@@ -54,6 +56,7 @@ export default {
             'FrequentlyAskedQuestions',
             'FooterSpace'
           ],
+          url: 'https://s3.protocol.one/files/Space-page-12.json',
           image: 'https://s3.protocol.one/images/4_r.jpg',
           description: 'Sci-fi styled template with: Menu, First screen, columns, slider, products, system requirments, FAQ and footer'
         },

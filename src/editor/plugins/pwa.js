@@ -1,13 +1,6 @@
 import JSZip from 'jszip'
 import saveAs from 'save-as'
-import {
-  getImageBlob,
-  cleanDOM,
-  gtagSetup,
-  getFontsNameStr,
-  getFontsLanguages,
-  getFontsSetup
-} from '../util'
+import { getImageBlob, cleanDOM, gtagSetup } from '../util'
 
 /**
  * Adds a service worker that caches the static assets.
@@ -125,9 +118,6 @@ function download (assets) {
       let gtm = this.gtmSetup(this.settings.gtmId)
       let gtag = gtagSetup(this.settings.gtag)
       let script = this.settings.script ? this.settings.script : ''
-      let fontsNameStr = getFontsNameStr(this.settings.fonts)
-      let fontsLanguages = getFontsLanguages(this.settings.fonts)
-      let fontsSetup = getFontsSetup(this.settings.setupFonts)
 
       output.file('index.html',
         `<html>
@@ -140,7 +130,6 @@ function download (assets) {
             <link rel="shortcut icon" href="${icon}"/>
             <link rel="manifest" href="/manifest.json">
             <link rel="stylesheet" href="css/styles.css"> 
-            <link href="https://fonts.googleapis.com/css?family=${fontsNameStr}&display=swap&subset=${fontsLanguages}" rel="stylesheet">
             ${scrollSetup.style}
             ${og}
             <style>
@@ -149,7 +138,7 @@ function download (assets) {
           </head>
           <body class="b-body_export" style="${bodyStyles}">
             ${gtm.body}
-            <div id="main" class="main" style="${fontsSetup}">
+            <div id="main" class="main">
               ${artboard.innerHTML}
             </div>
             ${video}

@@ -90,6 +90,7 @@ const defaultColumnComponents2 = [
     element: {
       text: 'This is a short header',
       styles: {
+        'font-family': 'Lato',
         'font-size': '4.8rem',
         'color': '#ffffff'
       },
@@ -107,6 +108,7 @@ const defaultColumnComponents2 = [
         <span>Oh children provided to mr elegance marriage strongly.</span>
       `,
       styles: {
+        'font-family': 'Lato',
         'font-size': '2rem',
         'line-height': '1.5',
         'color': '#FFF'
@@ -120,6 +122,7 @@ const defaultColumnComponents2 = [
       styles: {
         'background-color': '#FF6D64',
         'color': '#ffffff',
+        'font-family': 'Lato',
         'text-align': 'center',
         'width': '300px',
         'max-width': '100%',

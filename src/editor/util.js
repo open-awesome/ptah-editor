@@ -429,61 +429,6 @@ export function elemtentList () {
   }
 }
 
-export function getFontsNameStr (fonts) {
-  let str = ''
-
-  if (!fonts) {
-    return ''
-  }
-
-  for (let key in fonts) {
-    str += `${key}:400,600|`
-  }
-
-  return str
-}
-
-export function getFontsLanguages (fonts) {
-  let langs = []
-
-  if (!fonts) {
-    return ''
-  }
-
-  for (let key in fonts) {
-    if (fonts[key].subsets.length) {
-      fonts[key].subsets.forEach(item => {
-        langs = [
-          ...langs,
-          item
-        ]
-      })
-    }
-  }
-
-  return _.uniq(langs).join(',')
-}
-
-/**
- * Set css global variables for default fonts
- * @param {Object}
- */
-export function getFontsSetup (setupFonts) {
-  let arr = []
-
-  if (!setupFonts) {
-    return ''
-  }
-
-  for (let key in setupFonts) {
-    if (setupFonts[key]) {
-      arr.push(`--global-font-${key}: ${setupFonts[key]}`)
-    }
-  }
-
-  return arr.join(';')
-}
-
 export const FONT_SIZES_LIST = [
   { name: '12px', value: '1.2rem' },
   { name: '14px', value: '1.4rem' },
@@ -519,5 +464,16 @@ export const LINES_HEIGHT_LIST = [
   { name: '2.4', value: '2.4' },
   { name: '2.8', value: '2.8' },
   { name: '3', value: '3' }
+]
+
+export const FONTS_LIST = [
+  'Lato',
+  'Montserrat',
+  'Heebo',
+  'PT Serif',
+  'Roboto',
+  'Cinzel',
+  'IBM Plex Sans',
+  'IBM Plex Mono'
 ]
 

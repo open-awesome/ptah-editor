@@ -46,10 +46,6 @@ export default {
       {
         id: 'openGraph',
         name: 'menu.openGraph'
-      },
-      {
-        id: 'fonts',
-        name: 'menu.fonts'
       }
       // {
       //   id: 'versionHistory',

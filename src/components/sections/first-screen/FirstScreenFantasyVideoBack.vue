@@ -77,8 +77,9 @@ const C_CUSTOM = [
   },
   {
     element: {
-      text: '<h1>HERE SHOULD BE A LITTLE TEXT ABOUT YOURE GAME</h1>',
+      text: '<p>HERE SHOULD BE A LITTLE TEXT ABOUT YOURE GAME</b></p>',
       styles: {
+        'font-family': 'Cinzel',
         'font-size': '5.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
@@ -104,6 +105,7 @@ const C_CUSTOM = [
     element: {
       text: '<p><b>Time left</b></p>',
       styles: {
+        'font-family': 'Cinzel',
         'font-size': '3.6rem',
         'line-height': '1.2',
         'color': '#ffffff',
@@ -126,6 +128,7 @@ const C_CUSTOM = [
       },
       styles: {
         'background-color': 'rgba(0,0,0,0)',
+        'font-family': 'Cinzel',
         'font-size': '4rem',
         'font-weight': 'normal',
         'line-height': '1',
@@ -143,6 +146,7 @@ const C_CUSTOM = [
       styles: {
         'background-color': '#AF2E12',
         'color': '#ffffff',
+        'font-family': 'Cinzel',
         'font-size': '2rem',
         'text-align': 'center',
         'width': '240px',

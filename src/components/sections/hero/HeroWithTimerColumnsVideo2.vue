@@ -76,6 +76,7 @@ const C_CUSTOM = [
     element: {
       text: 'Excellent title',
       styles: {
+        'font-family': 'PT Serif',
         'font-size': '5.6rem',
         'color': '#ffffff'
       },
@@ -91,6 +92,7 @@ const C_CUSTOM = [
     element: {
       text: 'This is a short description',
       styles: {
+        'font-family': 'PT Serif',
         'font-size': '2rem',
         'color': 'rgba(255, 255, 255, 0.3)'
       }
@@ -110,6 +112,7 @@ const C_CUSTOM = [
       styles: {
         'background-color': 'rgba(159,104,5,1)',
         'color': '#ffffff',
+        'font-family': 'PT Serif',
         'text-align': 'center',
         'font-size': '2rem',
         'width': '352px',

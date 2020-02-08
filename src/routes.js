@@ -9,7 +9,6 @@ import BuilderSiteSettingsOpenGraph from '@editor/components/BuilderSiteSettings
 import BuilderSiteSettingsIntegrationsGoogleTag from '@editor/components/BuilderSiteSettingsIntegrationsGoogleTag'
 import BuilderSiteSettingsIntegrationsGoogleAnalitycs from '@editor/components/BuilderSiteSettingsIntegrationsGoogleAnalitycs'
 import BuilderSiteSettingsIntegrationsMailchimp from '@editor/components/BuilderSiteSettingsIntegrationsMailchimp'
-import BuilderSiteSettingsFonts from '@editor/components/BuilderSiteSettingsFonts'
 
 const routes = [
   {
@@ -87,10 +86,6 @@ const routes = [
           {
             path: 'openGraph',
             component: BuilderSiteSettingsOpenGraph
-          },
-          {
-            path: 'fonts',
-            component: BuilderSiteSettingsFonts
           }
         ]
       }

@@ -185,6 +185,7 @@ export default {
     this.selectPlatform = this.settingObjectOptions.selectPlatform || {}
 
     /* Get font settings */
+    this.fontFamily = styles['font-family'] || ''
     this.fontSize = styles['font-size'] || 1.6
     this.fontColor = styles['color'] || '#000000'
 

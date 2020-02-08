@@ -66,6 +66,7 @@ const data = new Map([
     aligned: true,
     typography: true,
     styles: {
+      'font-family': 'Lato',
       'font-size': '1.6rem',
       'line-height': '1.4',
       'font-weight': 'normal',
@@ -249,6 +250,7 @@ const data = new Map([
         'border-style': 'solid',
         'font-weight': 'normal',
         'font-style': 'normal',
+        'font-family': 'Lato',
         'text-decoration': 'none',
         'justify-content': 'center',
         'align-items': 'center',
@@ -286,6 +288,7 @@ const data = new Map([
         'line-height': '1.4',
         'font-weight': 'normal',
         'font-style': 'normal',
+        'font-family': 'Lato',
         'color': '#fff'
       },
       isIconWithText: true,
@@ -327,6 +330,7 @@ const data = new Map([
       styles: {
         'font-size': '1.2rem',
         'line-height': '1.4',
+        'font-family': 'Lato',
         'justify-content': 'flex-start',
         'margin-bottom': '16px',
         'text-align': 'left'
@@ -389,10 +393,12 @@ const data = new Map([
     },
     textStyles: {
       chapter: {
+        'font-family': 'Montserrat',
         'font-size': '3.6rem',
         'color': 'rgba(255, 255, 255, 1)'
       },
       text: {
+        'font-family': 'Lato',
         'font-size': '1.6rem',
         'color': 'rgba(255, 255, 255, 1)'
       }
@@ -491,6 +497,7 @@ const data = new Map([
       styles: {
         'color': '#000',
         'border-radius': '2px',
+        'font-family': 'Lato',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-size': '1.6rem',
@@ -830,6 +837,7 @@ const data = new Map([
       aligned: true,
       typography: true,
       styles: {
+        'font-family': 'Lato',
         'font-size':  '4.8rem',
         'line-height': '1.4',
         'font-weight': 'normal',
@@ -890,6 +898,7 @@ const data = new Map([
       },
       table: {
         head: {
+          'font-family': 'Lato',
           'font-size': '1.4rem',
           'line-height': '1.4',
           'font-weight': 'normal',
@@ -899,6 +908,7 @@ const data = new Map([
           'background-color': '#C4EDCD'
         },
         body: {
+          'font-family': 'Lato',
           'font-size': '1.4rem',
           'line-height': '1.4',
           'font-weight': 'normal',
@@ -915,6 +925,7 @@ const data = new Map([
         'background-repeat': 'no-repeat',
         'background-size': 'cover',
         'background-color':'',
+        'font-family': 'Lato',
         'font-size':  '1.6rem',
         'line-height': '1.4',
         'font-weight': 'normal',
@@ -965,6 +976,7 @@ const data = new Map([
     typography: true,
     styles: {
       'background-color':'rgba(0, 0, 0, 0)',
+      'font-family': 'Lato',
       'font-size':  '3.2rem',
       'line-height': '1.4',
       'font-weight': 'normal',

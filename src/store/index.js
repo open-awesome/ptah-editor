@@ -13,33 +13,13 @@ Vue.use(Vuex)
 Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
-const demoLanding = 'https://s3.protocol.one/files/Demo-page-2020.json'
-const FONTS = {
-  'Lato': {
-    variants: ['regular'],
-    subsets: ['latin', 'cyrillic']
-  },
-  'Montserrat': {
-    variants: ['regular'],
-    subsets: ['latin', 'cyrillic']
-  }
-}
-const SETUP_FONTS = {
-  'h1': 'Montserrat',
-  'h2': 'Montserrat',
-  'h3': 'Lato',
-  'p': 'Lato',
-  'btn': 'Montserrat'
-}
+const demoLanding = 'https://s3.protocol.one/files/Demo-page-12.json'
 
 const state = {
   storefrontPreview: false,
   landings: [],
   currentLanding: {
-    settings: {
-      fonts: FONTS,
-      setupFonts: SETUP_FONTS
-    }
+    settings: {}
   },
   isSaved: false,
   slug: '', // landing ID
@@ -89,19 +69,9 @@ const actions = {
     })
       .then((data) => {
         let landing = data.landing
-        let fonts = {}
-        let setupFonts = {}
 
         if (typeof landing === 'string') {
           landing = JSON.parse(landing)
-        }
-
-        if (!landing.settings.fonts) {
-          fonts = FONTS
-        }
-
-        if (!landing.settings.setupFonts) {
-          setupFonts = SETUP_FONTS
         }
 
         landing.settings = _.defaultsDeep(landing.settings, {
@@ -130,9 +100,7 @@ const actions = {
           },
           mailchimpUrl: false,
           mailchimpList: false,
-          name: data.name,
-          fonts: fonts,
-          setupFonts: setupFonts
+          name: data.name
         })
         commit('isSaved', false)
         commit('updateCurrentLanding', landing)
@@ -173,14 +141,6 @@ const actions = {
 
         if (state.name === '' && data.title !== '') {
           commit('name', data.title)
-        }
-
-        if (!data.settings.fonts) {
-          data.settings['fonts'] = FONTS
-        }
-
-        if (!data.settings.setupFonts) {
-          data.settings['setupFonts'] = SETUP_FONTS
         }
 
         commit('slug', slug)
@@ -299,34 +259,6 @@ const actions = {
     commit('isSaved', false)
   },
 
-  /**
-   * Stores settings fonts
-   *
-   * @param {Object} fonts of settings data
-   */
-  storeSaveSettingsFonts ({ state, commit }, fontsList) {
-    const landingData = _.merge({}, state.currentLanding.settings, {
-      fonts: fontsList
-    })
-
-    commit('updateCurrentLandingSettings', landingData)
-    commit('isSaved', false)
-  },
-
-  /**
-   * Stores settings setup fonts
-   *
-   * @param {Object} setup fonts of settings data
-   */
-  storeSaveSettingsSetupFonts ({ state, commit }, setupFonts) {
-    const landingData = _.merge({}, state.currentLanding.settings, {
-      setupFonts: setupFonts
-    })
-
-    commit('updateCurrentLandingSettings', landingData)
-    commit('isSaved', false)
-  },
-
   clearSlug ({ commit }) {
     commit('slug', '')
   }
@@ -343,10 +275,6 @@ const mutations = {
 
   updateCurrentLanding (state, data) {
     state.currentLanding = data
-  },
-
-  updateCurrentLandingSettings (state, settings) {
-    state.currentLanding.settings = settings
   },
 
   isSaved (state, value) {

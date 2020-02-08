@@ -132,8 +132,9 @@ let [
   return [
     {
       element: {
-        text: `<h1>${i + 1} feature title<h1>`,
+        text: `<strong>${i + 1} feature title<strong>`,
         styles: {
+          'font-family': 'Cinzel',
           'font-size': '3.6rem',
           'color': '#FFFFFF'
         },
@@ -148,6 +149,7 @@ let [
       element: {
         text: '<p>Here can be the text describing the first amazing feature of your terrific game.</p>',
         styles: {
+          'font-family': 'Montserrat',
           'font-size': '2.4rem',
           'line-height': '29px',
           'color': '#FFFFFF'
@@ -161,6 +163,7 @@ let [
         styles: {
           'background-color': '#AF2E12',
           'color': '#ffffff',
+          'font-family': 'Cinzel',
           'font-size': '2rem',
           'text-align': 'center',
           'width': '240px',

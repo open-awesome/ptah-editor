@@ -119,6 +119,7 @@ const defaultColumnComponents = [
       styles: {
         'background-color': '#FF6D64',
         'color': '#ffffff',
+        'font-family': 'Lato',
         'text-align': 'center',
         'width': '30rem',
         'height': '6.4rem',
@@ -136,6 +137,7 @@ const defaultColumnComponents = [
         'align-items': 'center',
         'justify-content': 'center',
         'color': '#ffffff',
+        'font-family': 'Lato',
         'text-align': 'center',
         'width': '30rem',
         'height': '6.4rem',

@@ -17,6 +17,7 @@ const LIST_PROPS_STYLES = [
   'background-attachment'
 ]
 let LIST_PROPS_TYPO = [
+  'font-family',
   'font-size',
   'color',
   'line-height'

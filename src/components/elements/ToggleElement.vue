@@ -28,6 +28,7 @@
         :class="{ 'b-toggle-element__item-col-content_hide-text': !el.isTextVisible }"
         :style="{
           '--text-align': styles['text-align'],
+          '--font-family': styles['font-family'],
           '--font-size': styles['font-size'],
           '--font-style': styles['font-style'],
           '--line-height': styles['line-height'],

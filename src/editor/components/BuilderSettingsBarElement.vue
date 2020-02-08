@@ -207,6 +207,7 @@ export default {
     const styles = this.settingObjectOptions.styles
 
     /* Get font settings */
+    this.fontFamily = styles['font-family'] || 'lato'
     this.fontSize = styles['font-size'] || '1.6rem'
     this.fontColor = styles['color'] || '#000'
 

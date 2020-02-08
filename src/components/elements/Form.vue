@@ -22,6 +22,7 @@
         required
         :style="{
           'color' : styles['color'],
+          'font-family' : styles['font-family'],
           'font-size' : styles['font-size'],
           'font-weight' : styles['font-weight'],
           'font-style' : styles['font-style'],
@@ -41,6 +42,7 @@
         'color': `${formStyles.buttonTextColor}`,
         'background-color': formStyles['button-color'],
         'border-radius': `${formStyles['border-radius']}px`,
+        'font-family' : styles['font-family'],
         'font-size' : styles['font-size'],
         'font-weight' : styles['font-weight'],
         'font-style' : styles['font-style'],

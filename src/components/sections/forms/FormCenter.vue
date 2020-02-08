@@ -25,8 +25,9 @@ const COMPONENTS = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<h2><b>Header about form</b></h2>',
+      text: '<p><b>Header about form</b></p>',
       styles: {
+        'font-family': 'Montserrat',
         'font-size': '4rem',
         'color': '#ffffff',
         'padding-bottom': '67px'
@@ -46,6 +47,7 @@ const C_CUSTOM = [
       styles: {
         'color': '#000000',
         'border-radius': '2px',
+        'font-family': 'Montserrat',
         'font-weight': 'normal',
         'font-style': 'normal',
         'font-size': '1.6rem',
