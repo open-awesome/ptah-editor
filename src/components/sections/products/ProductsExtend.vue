@@ -685,7 +685,7 @@ export default {
                             v-if="$sectionData[`components${key}M`].length !== 0"
                             :key="index"
                             >
-                            <component class="b-products-colums-component"
+                            <component class="b-products-columns-component"
                               v-styler:for="{ el: $sectionData[`components${key}M`][index].element, path: `$sectionData.components${key}M[${index}].element`, type: $sectionData[`components${key}M`][index].type, label: $sectionData[`components${key}M`][index].label }"
                               :is="component.name"
                               :href="$sectionData[`components${key}M`][index].element.link.href"
@@ -725,7 +725,7 @@ export default {
                         v-if="$sectionData[`components${key}`].length !== 0"
                         :key="index"
                         >
-                        <component class="b-products-colums-component"
+                        <component class="b-products-columns-component"
                           v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
                           :is="component.name"
                           :href="$sectionData[`components${key}`][index].element.link.href"
@@ -750,7 +750,7 @@ export default {
                           v-if="$sectionData[`components${key}D`].length !== 0"
                           :key="index"
                           >
-                          <component class="b-products-colums-component"
+                          <component class="b-products-columns-component"
                             v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
                             :is="component.name"
                             :href="$sectionData[`components${key}D`][index].element.link.href"

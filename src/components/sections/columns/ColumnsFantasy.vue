@@ -71,8 +71,10 @@ const C_CUSTOM_CONTAINER = {
   },
   media: {
     'is-mobile': {
-      'margin-bottom': '64px',
-      'padding-bottom': '300px'
+      'margin-left': '10px',
+      'margin-right': '10px',
+      'margin-bottom': '32px',
+      'padding-bottom': '332px'
     }
   }
 }

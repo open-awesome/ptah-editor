@@ -13,6 +13,7 @@ section
   .is-tablet &,
   .is-mobile &
     height: auto !important
+    min-width: 320px !important
   @media only screen and (max-width: 840px)
     &
       height: auto !important
@@ -24,6 +25,7 @@ section
 .main
   display: flex
   flex-direction: column
+  min-width: 320px
   &_showPopup
     & > section:not(.b-gallery-popup)
       z-index: 0 !important
@@ -310,4 +312,8 @@ footer
     height: auto
     &__row
       height: auto
+
+// COLUMNS
+.b-columns
+  overflow: hidden
 
