@@ -44,9 +44,8 @@ const [
     },
     {
       element: {
-        text: `<p><strong>${label[i]} edition</strong></p>`,
+        text: `<h1><strong>${label[i]} edition</strong></h1>`,
         styles: {
-          'font-family': 'Montserrat',
           'font-size': '2.8rem',
           'color': '#ffffff'
         },
@@ -59,11 +58,10 @@ const [
     },
     {
       element: {
-        text: '<p><strong>BUY NOW</strong></p>',
+        text: '><strong>BUY NOW</strong>',
         styles: {
           'background-color': 'transparent',
           'color': '#F4BC64',
-          'font-family': 'Montserrat',
           'font-size:': '1.6rem',
           'text-align': 'center',
           'width': '190px',
@@ -523,7 +521,7 @@ export default {
 
 <template>
   <section
-    class="b-products-columns"
+    class="b-products-colums"
     :class="$sectionData.mainStyle.classes"
     :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"
@@ -572,7 +570,7 @@ export default {
                   </div>
                 </div>
 
-              <div class="b-grid__row b-products-columns__row"
+              <div class="b-grid__row b-products-colums__row"
                    :style="{ 'align-items' : $sectionData.mainStyle.styles['align-items']}">
                 <div class="b-grid__col-3 b-grid__col-m-12 "
                   v-for="(product, key) in $sectionData.mainStyle.products"
@@ -590,7 +588,7 @@ export default {
                         v-if="$sectionData[`components${key}`].length !== 0"
                         :key="index"
                         >
-                        <component class="b-products-columns-component"
+                        <component class="b-products-colums-component"
                           v-styler:for="{ el: $sectionData[`components${key}`][index].element, path: `$sectionData.components${key}[${index}].element`, type: $sectionData[`components${key}`][index].type, label: $sectionData[`components${key}`][index].label }"
                           :is="$sectionData[`components${key}`][index].name"
                           :href="$sectionData[`components${key}`][index].element.link.href"
@@ -615,7 +613,7 @@ export default {
                         v-if="$sectionData[`components${key}D`].length !== 0"
                         :key="index"
                         >
-                        <component class="b-products-columns-component"
+                        <component class="b-products-colums-component"
                           v-styler:for="{ el: $sectionData[`components${key}D`][index].element, path: `$sectionData.components${key}D[${index}].element`, type: $sectionData[`components${key}D`][index].type, label: $sectionData[`components${key}D`][index].label }"
                           :is="$sectionData[`components${key}D`][index].name"
                           :href="$sectionData[`components${key}D`][index].element.link.href"
@@ -631,8 +629,8 @@ export default {
                   </sandbox>
                 </div>
               </div>
-            </div><!--/.b-products-columns__padd-border-->
-          </div><!--/.b-products-columns__padd-->
+            </div><!--/.b-products-colums__padd-border-->
+          </div><!--/.b-products-colums__padd-->
         </div>
   </section>
 </template>

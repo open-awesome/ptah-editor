@@ -33,7 +33,6 @@ const C_CUSTOM = [
     element: {
       text: 'This is a short header',
       styles: {
-        'font-family': 'Heebo',
         'font-size': '5.6rem',
         'color': '#ffffff'
       }

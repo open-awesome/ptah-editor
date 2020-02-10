@@ -35,7 +35,6 @@ const C_CUSTOM = [
     element: {
       text: 'Early Access Available Now',
       styles: {
-        'font-family': 'PT Serif',
         'font-size': '3.2rem',
         'color': '#ffffff'
       }
@@ -51,7 +50,6 @@ const C_CUSTOM = [
         'background-image': 'url(https://s3.protocol.one/src/o_KcVd3.png)',
         'background-size': 'cover',
         'color': '#ffffff',
-        'font-family': 'PT Serif',
         'text-align': 'center',
         'width': '352px',
         'height': '102px'
@@ -70,7 +68,6 @@ const C_CUSTOM = [
         'background-image': 'url(https://s3.protocol.one/src/o_1j8P9r.png)',
         'background-size': 'cover',
         'color': 'transparent',
-        'font-family': 'PT Serif',
         'text-align': 'center',
         'width': '352px',
         'height': '54px'

@@ -67,7 +67,6 @@ const C_CUSTOM = [
     element: {
       text: '2018—2019. Some text for footer',
       styles: {
-        'font-family': 'Lato',
         'font-size': '1.4rem',
         'color': '#fff',
         'padding-right': '16px',
@@ -118,7 +117,6 @@ const C_CUSTOM = [
         'background-color': 'rgba(0,0,0,0)',
         'background-image': 'none',
         'color': '#1A83FF',
-        'font-family': 'Lato',
         'text-align': 'center',
         'width': '130px',
         'height': '32px',
@@ -139,7 +137,6 @@ const C_CUSTOM = [
         'background-color': 'rgba(0,0,0,0)',
         'background-image': 'none',
         'color': '#1A83FF',
-        'font-family': 'Lato',
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
@@ -160,7 +157,6 @@ const C_CUSTOM = [
         'background-color': 'rgba(0,0,0,0)',
         'background-image': 'none',
         'color': '#1A83FF',
-        'font-family': 'Lato',
         'text-align': 'center',
         'width': '80px',
         'height': '32px',
