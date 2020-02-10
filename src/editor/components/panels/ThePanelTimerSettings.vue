@@ -34,7 +34,7 @@
         </div>
 
         <div class="b-panel__control" v-if="!isMobile">
-          <base-switcher v-model="labels.show" :label="$t('c.timeZone')"/>
+          <base-switcher v-model="labels.show" :label="$t('c.labels')"/>
         </div>
 
         <div class="b-panel__control" v-if="labels.show && !isMobile">

@@ -130,9 +130,8 @@ const COMPONENTS = [
 const C_CUSTOM = [
   {
     element: {
-      text: '<b>Header</b>',
+      text: '<h1>Header</h1>',
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '4.2rem',
         'color': '#ffffff',
         'padding-top': '32px',

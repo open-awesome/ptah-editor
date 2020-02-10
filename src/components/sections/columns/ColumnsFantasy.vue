@@ -9,9 +9,8 @@ import { mapActions } from 'vuex'
 const C_CUSTOM_COLUMN = [
   {
     element: {
-      text: '<p><strong>This is a header</strong></p>',
+      text: '<h2><strong>This is a header</strong></h2>',
       styles: {
-        'font-family': 'Montserrat',
         'font-size': '3.2rem',
         'color': '#ffffff'
       },
@@ -26,7 +25,6 @@ const C_CUSTOM_COLUMN = [
     element: {
       text: 'You can add text for each of your game feature here.. Change the button bellow to open full description of game feature or just delete it</div>',
       styles: {
-        'font-family': 'Lato',
         'font-size': '1.6rem',
         'line-height': '25px',
         'color': '#ffffff'
@@ -40,7 +38,6 @@ const C_CUSTOM_COLUMN = [
       styles: {
         'background-color': '#333333',
         'color': '#FFFFFF',
-        'font-family': 'Cinzel',
         'font-size:': '1.6rem',
         'text-align': 'center',
         'width': '280px',
@@ -74,10 +71,8 @@ const C_CUSTOM_CONTAINER = {
   },
   media: {
     'is-mobile': {
-      'margin-left': '10px',
-      'margin-right': '10px',
-      'margin-bottom': '32px',
-      'padding-bottom': '332px'
+      'margin-bottom': '64px',
+      'padding-bottom': '300px'
     }
   }
 }
