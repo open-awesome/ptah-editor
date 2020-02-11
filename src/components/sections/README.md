@@ -2,7 +2,7 @@
 A section - is the main building block in the editor. Elements (text, picture, buttons, etc.) are grouped into slots inside of each section.
 The number of slots and their relative positions inside of the section is defined from the start. The default elements in each section can be removed or replaced. The number of elements in the slot is indefinite. 
 
-![Section](https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/279d9b71-a6e4-4711-9b7d-f8e7ba4800ab.jpg)
+![Section](https://gn180.cdn.stg.gamenet.ru/0/9rNF5/o_DObiW.jpg)
 
 All section components are split into groups and can be found here 
 ```
