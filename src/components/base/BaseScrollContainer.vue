@@ -88,7 +88,10 @@ export default {
   margin: 5px 5px 5px 0
   border-radius: 20px
   height: calc(100% - 10px)
+  min-height: 2px
   display: block
+.vb-invisible > .vb-dragger > .vb-dragger-styler
+  display: none
 
 .vb.vb-scrolling-phantom > .vb-dragger > .vb-dragger-styler
   background-color: var(--bg-color)

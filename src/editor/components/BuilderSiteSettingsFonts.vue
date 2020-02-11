@@ -1,5 +1,10 @@
 <template>
   <builder-modal-content-layout id="settings-fonts" :noScroll="true">
+    <v-style>
+      <template v-for="font in visibleFonts">
+        {{ `@import url("https://fonts.googleapis.com/css?family=${font.family}:${font.variant}");` }}
+      </template>
+    </v-style>
     <form id="fonts-form" @submit.prevent="saveFonts">
       <base-fieldset class="b-setup-fonts" v-if="!isChange">
         <div class="b-setup-fonts-header">
@@ -49,12 +54,6 @@
             />
           </div>
           <div class="b-font-filter__sw">
-            <BaseSwitcher
-              v-model="isFilterSelected"
-              :label="`Show only added  `"
-            />
-          </div>
-          <div class="b-font-filter__sw">
             <base-text-field
               class="b-font-filter__text"
               v-model="defText"
@@ -63,20 +62,22 @@
         </div>
 
         <div class="b-fonts-block" v-if="fontsLoaded">
-          <div class="b-fonts-block__list">
+          <div class="b-fonts-block__list"
+            ref="blockFonts"
+            :class="{ '_m': editFont !== null }"
+          >
             <base-scroll-container
               class="b-scrolled-content"
               backgroundBar="#999"
+              v-if="isLoaded"
             >
-              <div class="b-scrolled-content__inner">
                 <ul class="b-fonts-list">
-                  <li class="b-fonts-list__item"
+                  <li class="b-fonts-list__item _selected"
                       :class="[
-                        { '_selected' : containsFont(font.family) },
                         { '_applied' : selectedEl === font.family }
                       ]"
-                      v-for="font in filteredFonts"
-                      :key="font.family"
+                      v-for="(font, index) in visibleFonts"
+                      :key="index"
                   >
                     <span
                       class="b-fonts-list__item-check"
@@ -90,11 +91,9 @@
                         {{ font.category  }}
                       </span>
                     </div>
-                    <div v-if="containsFont(font.family)" :style="{
-                      'font-family': font.family,
-                      'font-size': '23px',
-                      'font-weight': '400',
-                    }">
+                    <div class="b-simple-text" :style="{
+                        'font-family': font.family
+                      }">
                       {{ defText }}
                     </div>
                     <div class="b-fonts-list__item-button">
@@ -116,7 +115,6 @@
                     </div>
                   </li>
                 </ul>
-              </div>
             </base-scroll-container>
           </div>
           <div class="b-font-edit"
@@ -169,13 +167,6 @@
         <div class="b-fonts-block__controls">
           <base-button
             size="small"
-            v-text="$t('nav.cancel')"
-            :transparent="true"
-            @click="isChange = false"
-            color="gray"
-          />
-          <base-button
-            size="small"
             v-text="$t('nav.save')"
             :transparent="true"
             @click="isChange = false"
@@ -198,6 +189,14 @@
 import axios from 'axios'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 import { mapState, mapActions } from 'vuex'
+import { throttle } from 'lodash-es'
+
+import Vue from 'vue'
+Vue.component('v-style', {
+  render: function (createElement) {
+    return createElement('style', this.$slots.default)
+  }
+})
 
 export default {
   name: 'BuilderSiteSettingsFonts',
@@ -209,11 +208,11 @@ export default {
       list: [],
       search: '', // filter fonts
       editFont: null,
-      isFilterSelected: false,
       defText: this.$i18n.t('font.defText'),
       statusList: [
         { text: 'fast', color: 'green' },
         { text: 'medium', color: 'orange' },
+        { text: 'slow', color: 'red' },
         { text: 'slow', color: 'red' },
         { text: 'slow', color: 'red' }
       ],
@@ -226,7 +225,15 @@ export default {
       },
       isChange: false,
       selectedEl: null,
-      selectedKey: null
+      selectedKey: null,
+      isLoaded: false,
+      topEl: null,
+      bottomEl: null,
+      topList: null,
+      visibleFonts: [],
+      filteredFonts: [],
+      tempFonts: [],
+      isLoadingFonts: false
     }
   },
 
@@ -239,17 +246,6 @@ export default {
 
     fontsLoaded () {
       return true
-    },
-
-    filteredFonts () {
-      let defFonts = this.list
-
-      if (this.isFilterSelected) {
-        defFonts = defFonts.filter((font) => {
-          return this.selectFonts[this.checkSpace(font.family)]
-        })
-      }
-      return defFonts.filter((font) => ~font.family.toLowerCase().indexOf(this.search.toLowerCase()))
     },
 
     selectFonts () {
@@ -270,24 +266,73 @@ export default {
     }
   },
 
+  watch: {
+    isChange (value) {
+      const delay = 250
+      this.filterFonts()
+      value
+        ? window.addEventListener('wheel', throttle(this.renderFonts, delay))
+        : window.removeEventListener('wheel', throttle(this.renderFonts, delay))
+      this.search = ''
+    },
+
+    search () {
+      this.searchFonts()
+    }
+  },
+
   methods: {
     ...mapActions(['storeSettings', 'storeSaveSettingsFonts', 'storeSaveSettingsSetupFonts']),
 
     getFontsData () {
+      this.isLoaded = false
       axios('https://www.googleapis.com/webfonts/v1/webfonts?key=AIzaSyDKi8oKqvLuCASo7XZg4wY_D3CMib_Sg9U&sort=popularity')
         .then(response => {
           this.list = response.data.items
+          this.isLoaded = true
         })
         .catch(err => {
           this.list = this.fonts
+          this.isLoaded = true
           console.warn(err)
         })
+    },
+
+    filterFonts () {
+      let defFonts = this.list
+
+      defFonts.forEach((font, index) => {
+        if (this.selectFonts[this.checkSpace(font.family)]) {
+          defFonts.unshift(...defFonts.splice(index, 1))
+        }
+      })
+
+      this.filteredFonts = defFonts.filter((font) => ~font.family.toLowerCase().indexOf(this.search.toLowerCase()))
+      this.filterVisibledFonts()
+    },
+
+    searchFonts () {
+      this.visibleFonts = this.tempFonts.filter((font) => ~font.family.toLowerCase().indexOf(this.search.toLowerCase()))
+    },
+
+    filterVisibledFonts () {
+      let defFonts = this.visibleFonts
+
+      defFonts.forEach((font, index) => {
+        if (this.selectFonts[this.checkSpace(font.family)]) {
+          defFonts.unshift(...defFonts.splice(index, 1))
+        }
+      })
+
+      this.visibleFonts = defFonts
     },
 
     saveFonts () {
       this.storeSettings({
         fonts: this.selectFonts
       })
+
+      this.isLoaded = false
 
       this.close()
     },
@@ -310,18 +355,21 @@ export default {
 
     applyFont (font) {
       const name = this.checkSpace(font.family)
+      const variant = font.variant
 
       this.editFont = font
       this.selectFonts[name] = {
-        variants: ['regular'],
-        subsets: ['latin', 'cyrillic']
+        variants: [variant],
+        subsets: ['latin']
       }
       this.storeFonts()
-
       this.storeSetupFonts(font)
+
       this.removeFont(this.selectedEl)
 
       this.selectedEl = font.family
+      this.editFont = null
+      this.isChange = false
     },
 
     checkSpace (family) {
@@ -334,6 +382,10 @@ export default {
 
     containsFont (family) {
       return this.selectFonts[this.checkSpace(family)] !== undefined
+    },
+
+    loadedFont (font) {
+      return this.visibleFonts.find(f => f.family === this.checkSpace(font))
     },
 
     containsFontSubset (subset) {
@@ -379,14 +431,50 @@ export default {
       this.storeFonts()
     },
 
+    renderFonts (e) {
+      let elements = []
+      const length = this.visibleFonts.length ? this.visibleFonts.length : 0
+
+      if (!this.isChange || this.isLoadingFonts || (e && e.deltaY < 0)) {
+        return
+      }
+
+      this.isLoadingFonts = true
+
+      elements = this.filteredFonts.slice(length, length + 6)
+
+      elements.forEach(el => {
+        if (this.loadedFont(el.family) !== undefined) {
+          return
+        }
+
+        this.visibleFonts.push({
+          family: el.family,
+          variant: el.variants[0],
+          category: el.category,
+          subsets: el.subsets
+        })
+
+        this.tempFonts = this.visibleFonts
+      })
+
+      setTimeout(() => {
+        this.isLoadingFonts = false
+      }, 600)
+    },
+
     changeFont (el, key) {
       this.selectedEl = el
       this.selectedKey = key
       this.isChange = !this.isChange
+
+      this.$nextTick(() => {
+        this.renderFonts()
+      })
     }
   },
 
-  mounted () {
+  created () {
     this.getFontsData()
   }
 }
@@ -407,6 +495,8 @@ export default {
   border: 1px solid #C4C4C4
   &__list
     width: 100%
+    &._m
+      width: 70%
   &__controls
     display: flex
     justify-content: flex-end
@@ -432,7 +522,7 @@ export default {
   &__item
     $this: &
     width: 100%
-    height: $size-step * 1.5
+    height: $size-step * 3
     padding: $size-step/2 $size-step/2 $size-step/2 $size-step
     margin: 0
 
@@ -465,7 +555,7 @@ export default {
       display: none
       position: absolute
       top: 5px
-      right: 20px
+      right: 32px
       &-apply
         width: auto
     &:hover
@@ -582,4 +672,12 @@ export default {
       &:hover
         #{$this}-buttons
           display: block
+.b-simple-text
+  width: 95%
+  font-size: 44px
+  display: block
+  overflow: hidden
+  white-space: nowrap
+  text-overflow: ellipsis
+  transition: all 0.6s
 </style>
