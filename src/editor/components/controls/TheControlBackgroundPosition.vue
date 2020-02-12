@@ -22,7 +22,6 @@ export default {
       left: 0,
       top: 0,
       bgAttachment: '',
-      isParallax: false,
       backgroundFillTypes: [
         {
           text: 'Normal',
@@ -68,10 +67,6 @@ export default {
 
     options () {
       return this.settingObjectSection.get(this.sandbox.container)
-    },
-
-    isHeader () {
-      return this.settingObjectSection.isHeader
     },
 
     styles () {
@@ -184,17 +179,6 @@ export default {
       }
       if (this.bgSize === 'contain') {
         this.backgroundFill = 'stretch'
-      }
-      if (this.bgAttachment === 'fixed') {
-        this.isParallax = true
-      }
-    },
-
-    setParallax () {
-      if (this.isParallax) {
-        this.update('background-attachment', 'fixed')
-      } else {
-        this.update('background-attachment', 'scroll')
       }
     },
 
@@ -330,9 +314,6 @@ export default {
     </div>
     <div class="b-section-settings__control b-bg-controls__control_parallax">
       <BaseRadioCheck :list="backgroundFillTypes" v-model="backgroundFill" @change="changeSize"/>
-    </div>
-    <div class="b-bg-controls__control" v-if="!isHeader">
-      <BaseSwitcher v-model="isParallax" label="Parallax on background" @change="setParallax" />
     </div>
   </div>
 </template>

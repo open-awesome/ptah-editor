@@ -6,7 +6,10 @@ import {
   gtagSetup,
   getFontsNameStr,
   getFontsLanguages,
-  getFontsSetup
+  getFontsSetup,
+  getScrollSetup,
+  getParallaxSetup,
+  getJquerySetup,
 } from '../util'
 
 /**
@@ -120,7 +123,7 @@ function download (assets) {
       let video = this.settings.video ? this.getVideoBg(this.settings.video) : ''
       let og = this.settings.ogTags ? this.getOgMetaTags(this.settings.ogTags) : ''
       let icon = this.settings.favicon
-      let scrollSetup = this.getScrollSetup()
+      let scrollSetup = getScrollSetup(this.settings.fullPageScroll)
       let customCss = this.getCustomCss()
       let gtm = this.gtmSetup(this.settings.gtmId)
       let gtag = gtagSetup(this.settings.gtag)
@@ -128,6 +131,8 @@ function download (assets) {
       let fontsNameStr = getFontsNameStr(this.settings.fonts)
       let fontsLanguages = getFontsLanguages(this.settings.fonts)
       let fontsSetup = getFontsSetup(this.settings.setupFonts)
+      let parallaxSetup = getParallaxSetup(this.sections)
+      let getJquery = getJquerySetup(parallaxSetup, this.settings.fullPageScroll)
 
       output.file('index.html',
         `<html>
@@ -154,7 +159,9 @@ function download (assets) {
             </div>
             ${video}
             ${this.getCookiesPreview()}
+          ${getJquery}
           ${scrollSetup.setup}
+          ${parallaxSetup}
           <script>
             ${script}
           </script>

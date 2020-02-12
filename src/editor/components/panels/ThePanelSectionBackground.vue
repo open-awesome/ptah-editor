@@ -63,6 +63,9 @@
               <div class="b-panel__control">
                 <control-background-position/>
               </div>
+              <div class="b-panel__control" v-if="!isHeader">
+                <BaseSwitcher v-model="isParallax" label="Parallax on background" @change="setParallax" />
+              </div>
             </template>
           </div>
 
@@ -129,8 +132,8 @@ export default {
         { text: 'Tile', value: 'cover' },
         { text: 'Fill', value: 'contain' }
       ],
-
-      backgroundPickers: []
+      backgroundPickers: [],
+      isParallax: false
     }
   },
 
@@ -190,6 +193,10 @@ export default {
 
     overlay () {
       return this.settingObjectOptions.overlay
+    },
+
+    parallax () {
+      return this.settingObjectOptions.parallax
     }
   },
 
@@ -201,6 +208,7 @@ export default {
 
   created () {
     this.updateProps()
+    this.isParallax = this.parallax
   },
 
   methods: {
@@ -316,6 +324,12 @@ export default {
 
     changeOverlayOpacity () {
       this.overlay['opacity'] = this.sectionOverlayOpacity / 100
+    },
+
+    setParallax () {
+      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+        parallax: this.isParallax
+      }))
     }
   }
 }
