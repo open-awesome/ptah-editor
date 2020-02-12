@@ -509,10 +509,10 @@ export function getScrollSetup (fullPageScroll) {
 
   if (fullPageScroll === 'yes') {
     scroll.style = `
-        <script src="${window.location.origin + '/js/onepage-scroll.min.js'}"></script>
         <link href="${window.location.origin + '/css/onepage-scroll.css'}" rel="stylesheet">
       `
     scroll.setup = `
+        <script src="${window.location.origin + '/js/onepage-scroll.min.js'}"></script>
         <script>
           function detectMobile () {
             return $(window).width() < 500 ? true : false;

@@ -294,6 +294,9 @@ class Vuse {
     let script = this.getJsScript()
     let bodyStyles = this.getBodyStyles()
     let scrollSetup = getScrollSetup(this.settings.fullPageScroll)
+
+    console.log(scrollSetup.setup)
+
     let fontsNameStr = getFontsNameStr(this.settings.fonts)
     let fontsLanguages = getFontsLanguages(this.settings.fonts)
     let fontsSetup = getFontsSetup(this.settings.setupFonts)
