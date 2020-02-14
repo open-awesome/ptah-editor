@@ -51,8 +51,11 @@
         :class="[
           { 'video-background': section.data.mainStyle.backgroundType === 'video' },
           $builder.isEditing ? device: '',
-          isActiveSection(section.id) ? '_section-active' : ''
+          isActiveSection(section.id) ? '_section-active' : '',
+          section.data.mainStyle.parallax ? '_parallax' : ''
         ]"
+        :data-parallax="section.data.mainStyle.parallax ? 'scroll' : ''"
+        :data-image-src="getImageFromBgStyles(section.data.mainStyle.styles['background-image'])"
         @click.native="selectSidebarSection(section)">
 
         <menu-settings slot="menu" :section="section"/>
@@ -626,6 +629,13 @@ export default {
     closeDeleteElement () {
       this.showConfirmElementDelete = false
       this.selectedElement = null
+    },
+
+    getImageFromBgStyles (bg) {
+      if (!bg) {
+        return
+      }
+      return bg.replace(/^url[(]/, '').replace(/[)]$/, '')
     }
   }
 }

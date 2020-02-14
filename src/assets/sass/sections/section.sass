@@ -21,6 +21,10 @@ section
     &
       height: auto !important
       min-height: 100% !important
+  &._parallax:not(.is-editable)
+    min-height: 400px
+    background-color: transparent !important
+    background-image: none !important
 
 .main
   display: flex
@@ -119,7 +123,7 @@ footer
   .b-timer-fs
     @media only screen and (max-width: 768px) and (min-height: 700px)
       &
-        width: 90
+        width: 90%
     @media only screen and (max-width: 900px) and (max-height: 450px)
       &
         width: auto

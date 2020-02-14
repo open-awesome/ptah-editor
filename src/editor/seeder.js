@@ -197,7 +197,8 @@ const data = new Map([
         'is-mobile': {
           'flex-direction': 'column'
         }
-      }
+      },
+      parallax: false
     })
   )],
   [types.Button, () => (_.merge({}, DEFAULT_OPTIONS,

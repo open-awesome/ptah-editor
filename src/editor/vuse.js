@@ -8,7 +8,10 @@ import {
   cleanDOM,
   getFontsNameStr,
   getFontsLanguages,
-  getFontsSetup
+  getFontsSetup,
+  getScrollSetup,
+  getParallaxSetup,
+  getJquerySetup,
 } from './util'
 import * as _ from 'lodash-es'
 
@@ -290,10 +293,13 @@ class Vuse {
     let customCss = this.getCustomCss()
     let script = this.getJsScript()
     let bodyStyles = this.getBodyStyles()
-    let scrollSetup = this.getScrollSetup()
+    let scrollSetup = getScrollSetup(this.settings.fullPageScroll)
+
     let fontsNameStr = getFontsNameStr(this.settings.fonts)
     let fontsLanguages = getFontsLanguages(this.settings.fonts)
     let fontsSetup = getFontsSetup(this.settings.setupFonts)
+    let getJquery = getJquerySetup(getParallaxSetup(this.sections), this.settings.fullPageScroll)
+    let parallaxSetup = getParallaxSetup(this.sections)
 
     printDocument.open()
     printDocument.write(
@@ -316,10 +322,9 @@ class Vuse {
               ${artboard.innerHTML}
             </div>
             ${this.getCookiesPreview()}
+            ${getJquery}
             ${scrollSetup.setup}
-            <script>
-              ${script}
-            </script>
+            ${parallaxSetup}
             <script src="${window.location.origin + '/js/cjs.js'}"></script>
           <body>
         </html>`
@@ -386,58 +391,6 @@ class Vuse {
     return `<video id="video_bg" class="${this.settings.videoPosition}" autoplay="true" loop="loop" muted="muted">
               <source src="${video}" type="video/mp4"></source>
             </video>`
-  }
-
-  getScrollSetup () {
-    let scroll = {
-      style: '',
-      setup: ''
-    }
-
-    if (this.settings.fullPageScroll === 'yes') {
-      scroll.style = `
-        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-        <script src="${window.location.origin + '/js/onepage-scroll.min.js'}"></script>
-        <link href="${window.location.origin + '/css/onepage-scroll.css'}" rel="stylesheet">
-      `
-      scroll.setup = `
-        <script>
-          function detectMobile () {
-            return $(window).width() < 500 ? true : false;
-          }
-
-          if (!detectMobile()) {
-            $(".main").onepage_scroll();
-          }
-
-          $(window).resize(function() {
-            let className = 'disabled-onepage-scroll';
-            let classWrapName = 'onepage-wrapper';
-
-            if (detectMobile()) {
-              if ($(".main").data("onepage_scroll")){
-                $(".main").disable();
-                $(".main").data("onepage_scroll").destroy();
-
-                if ($(".main").hasClass(classWrapName)) $(".main").removeClass(classWrapName);
-              }
-              $("body").addClass(className);
-              $("body").css('overflow', '')
-
-            } else {
-              if (!$(".main").data("onepage_scroll")){
-                $(".main").onepage_scroll();
-              }
-
-              $("body").css('overflow', 'hidden');
-
-              if ($("body").hasClass(className)) $("body").removeClass(className);
-            }
-          });
-      </script>`
-    }
-
-    return scroll
   }
 
   gtmSetup () {
