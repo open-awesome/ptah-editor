@@ -400,6 +400,7 @@ export default {
   bottom: 0
   left: 0
   background-color: rgba($dark-blue, 0.2)
+  z-index: 15
 
   display: flex
   justify-content: center
@@ -407,7 +408,7 @@ export default {
 
   &__inner
     width: 66rem
-    height: 85vh
+    height: 90vh
     z-index: 10
 
     background: $white
@@ -479,6 +480,7 @@ export default {
         width: 2.4rem
         height: 2.4rem
         background: url('https://s3.protocol.one/images/checked.png') no-repeat
+        background-size: contain
 
     &.first
       border: 1px solid #E6E6E6
