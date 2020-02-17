@@ -134,7 +134,8 @@
         "icontextDescr":                "Check marked feature list",
         "videoDescr":                   "Embedded window for a Youtube video",
         "timerDescr":                   "Countdown to release setup",
-        "textDescr":                    "Editable text block"
+        "textDescr":                    "Editable text block",
+        "iframeDescr":                  "Accessing content from another domain"
     },
     "с": {
         "shVhLabel":                    "1 vh is equivalent To 1% of the height of the browser window"

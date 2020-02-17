@@ -64,6 +64,7 @@ export function getTypeFromSchema(target, schema) {
   if (value === types.TextInherit) return 'inline'
   if (value === types.IconWithText) return 'iconWithText'
   if (value === types.VideoElement) return 'video'
+  if (value === types.IframeElement) return 'iframe'
 
   return null
 }
@@ -133,6 +134,7 @@ export function cleanDOM(artboard) {
     .b-button__resize,
     .b-delimiter__resize,
     .b-video__resize,
+    .b-iframe__resize,
     .b-slot__settings,
     .b-section-menu__controls
   `
@@ -425,6 +427,12 @@ export function elemtentList () {
       element: types.Timer,
       type: 'timer',
       label: 'timer'
+    },
+    iframe: {
+      name: 'IframeElement',
+      element: types.IframeElement,
+      type: 'iframe',
+      label: 'iframe'
     }
   }
 }

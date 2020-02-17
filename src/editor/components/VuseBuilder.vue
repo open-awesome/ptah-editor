@@ -164,7 +164,8 @@ export default {
       'settingObjectSection',
       'settingObjectOptions',
       'settingObjectLabel',
-      'isShowModal'
+      'isShowModal',
+      'controlPanel'
     ]),
     ...mapState('Landing', ['currentStateNumber']),
 
@@ -573,7 +574,8 @@ export default {
     },
 
     keyUp (event) {
-      if (event.key === 'Delete' && this.settingObjectOptions && this.settingObjectOptions.name) {
+      if (event.key === 'Delete' && this.settingObjectOptions && this.settingObjectOptions.name && !this.controlPanel.expanded) {
+        console.log(this.controlPanel.expanded)
         if (this.settingObjectOptions.removable && this.settingObjectOptions.name.indexOf('.element') !== -1) {
           this.selectedElement = this.settingObjectOptions
           this.deleteElement(this.selectedElement.name)

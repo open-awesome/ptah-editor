@@ -99,6 +99,12 @@ export default {
           descr: this.$t('el.timerDescr'),
           ico: 'elTimer',
           width: 16
+        },
+        iframe: {
+          name: 'Iframe',
+          descr: this.$t('el.iframeDescr'),
+          ico: 'frame',
+          width: 18
         }
       }
     }

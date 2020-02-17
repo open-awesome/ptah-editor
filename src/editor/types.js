@@ -10,6 +10,7 @@ export class VideoElement { }
 export class Timer { }
 export class ProductSection { }
 export class Form { }
+export class IframeElement { }
 
 export class GallerySlider { }
 export class BannerSection { }

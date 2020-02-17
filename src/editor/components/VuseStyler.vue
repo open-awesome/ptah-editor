@@ -116,6 +116,15 @@
         <icon-base name="edit" width="14" height="16" />
       </a>
 
+      <!-- Iframe -->
+      <a href="#" class="b-styler__control"
+         tooltip="Iframe settings"
+         tooltip-position="bottom"
+         @click.stop="setControlPanel('Iframe')"
+         v-if="type === 'iframe'">
+        <icon-base name="edit" width="14" height="16" />
+      </a>
+
       <!-- Icon with text -->
       <template v-if="type === 'iconWithText'">
         <a href="#" class="b-styler__control"

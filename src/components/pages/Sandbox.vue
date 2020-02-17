@@ -81,6 +81,7 @@
       <icon-base name="download"></icon-base>
       <icon-base name="loadTo"></icon-base>
       <icon-base name="video"></icon-base>
+      <icon-base name="frame"></icon-base>
     </div>
 
     <hr>
@@ -259,6 +260,9 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_colors.sass'
+@import '../../assets/sass/_variables.sass'
+@import "../../assets/sass/app.sass"
 .b-sandbox-page
   background: #fff
   padding: 2.5rem

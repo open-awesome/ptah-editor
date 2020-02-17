@@ -142,9 +142,7 @@ export default {
       styles: [],
       products: {},
       selectProduct: {},
-      expandedProducts: true,
-
-      isComplexText: false
+      expandedProducts: true
     }
   },
 
@@ -195,7 +193,6 @@ export default {
     /* Products */
     this.products = this.settingObjectOptions.products || {}
     this.selectProduct = this.settingObjectOptions.selectProduct || {}
-    this.isComplexText = this.settingObjectOptions.hasProducts || false
   },
 
   beforeDestroy () {

@@ -37,7 +37,6 @@ const DEFAULT_OPTIONS = {
   shape: false, // border-radius prop
   pseudo: false, // can have a pseudo-class
   isHoverAnim: false, // hover anim for button/link
-  isComplex: false, // TODO: deprecated
   video: false,
   copyStyles: true,
 
@@ -79,7 +78,6 @@ const data = new Map([
       'margin-left': '0',
       'margin-right': '0'
     },
-    isComplex: true,
     editor: {
       tags: true,
       styles: true,
@@ -262,7 +260,6 @@ const data = new Map([
         styles: true,
         link: false
       },
-      isComplex: true,
       media: {
         'is-mobile': {
           'font-size': '1.6rem',
@@ -307,7 +304,6 @@ const data = new Map([
         styles: true,
         link: false
       },
-      isComplex: true,
       media: {
         'is-mobile': {
           'font-size': '1.4rem',
@@ -361,7 +357,6 @@ const data = new Map([
           </table>
          `
       },
-      isComplex: true,
       media: {
         'is-mobile': {
           'font-size': '1.2rem',
@@ -472,7 +467,25 @@ const data = new Map([
         'width': '',
         'height': ''
       },
-      isComplex: true,
+      media: {
+        'is-mobile': {
+          'width': '278px',
+          'height': '152px'
+        }
+      }
+    })
+  )],
+  [types.IframeElement, () => (_.merge({}, DEFAULT_OPTIONS,
+    {
+      removable: true,
+      resizable: true,
+      settings: {
+        url: 'https://ptah.super.com/'
+      },
+      styles: {
+        'width': '',
+        'height': ''
+      },
       media: {
         'is-mobile': {
           'width': '278px',
@@ -486,7 +499,6 @@ const data = new Map([
       resizable: false,
       removable: false,
       form: true,
-      isComplex: true,
       placeholder: 'Placeholder',
       buttonText: 'Submit',
       styles: {
@@ -945,7 +957,6 @@ const data = new Map([
     text: 'Enter your text'
   }))],
   [types.Timer, () => (_.merge({}, DEFAULT_OPTIONS, {
-    isComplex: true,
     removable: true,
     timer: {
       // --- timer timestamp
