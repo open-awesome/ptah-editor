@@ -21,10 +21,6 @@ section
     &
       height: auto !important
       min-height: 100% !important
-  &._parallax:not(.is-editable)
-    min-height: 400px
-    background-color: transparent !important
-    background-image: none !important
 
 .main
   display: flex
@@ -33,6 +29,10 @@ section
   &_showPopup
     & > section:not(.b-gallery-popup)
       z-index: 0 !important
+  &:not(.is-editable) > section._parallax
+    min-height: 400px
+    background-color: transparent !important
+    background-image: none !important
 
 header,
 footer

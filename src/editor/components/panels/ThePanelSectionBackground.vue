@@ -208,7 +208,6 @@ export default {
 
   created () {
     this.updateProps()
-    this.isParallax = this.parallax
   },
 
   methods: {
@@ -254,7 +253,8 @@ export default {
 
       this.bgRepeat = styles['background-repeat'] || 'no-repeat'
       this.bgSize = styles['background-size'] || 'cover'
-      this.bgAttachment = styles['background-attachment'] === 'fixed'
+
+      this.isParallax = this.parallax
     },
 
     updateBgColor (value) {
@@ -304,6 +304,13 @@ export default {
       )
     },
 
+    toggleBackgroundAttachment (value) {
+      let backgroundAttachment = (value) ? 'fixed' : 'scroll'
+      this.updateSettingOptions(
+        _.merge({}, this.settingObjectOptions, { styles: { 'background-attachment': backgroundAttachment } })
+      )
+    },
+
     uploadVideo (url) {
       this.updateSettingOptions(
         _.merge({}, this.settingObjectOptions, { backgroundVideo: url || null })
@@ -327,6 +334,7 @@ export default {
     },
 
     setParallax () {
+      this.toggleBackgroundAttachment(this.isParallax)
       this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
         parallax: this.isParallax
       }))
