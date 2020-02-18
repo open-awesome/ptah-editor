@@ -109,7 +109,6 @@ export default {
         method: 'get'
       })
         .then((lists) => {
-          console.log('lists', lists)
           commit('setLists', lists)
           return lists
         })

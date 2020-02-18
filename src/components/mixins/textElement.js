@@ -16,7 +16,7 @@ import {
   TableCell,
   TableRow
 } from 'tiptap-extensions'
-import { merge, set } from 'lodash-es'
+import { merge, set, throttle } from 'lodash-es'
 
 export default {
   data () {
@@ -82,8 +82,10 @@ export default {
       }
     },
 
-    text () {
-      this.save()
+    text (value, oldValue) {
+      if (value !== oldValue) {
+        this.save()
+      }
     }
   },
 
@@ -103,9 +105,9 @@ export default {
     ...mapActions('Sidebar', ['updateSettingOptions']),
     ...mapMutations('Landing', ['textEditor']),
 
-    save () {
+    save: throttle(function () {
       this.updateSettingOptions(merge({}, this.settingObjectOptions, set({}, this.savePath, this.text)))
-    },
+    }, 100),
 
     close () {
       this.textEditor(false)

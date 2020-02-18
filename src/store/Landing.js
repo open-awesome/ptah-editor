@@ -89,7 +89,6 @@ export default {
       if (state.savedStates[number]) {
         commit('currentStateNumber', number)
         commit('updateCurrentLanding', JSON.parse(state.savedStates[number]), { root: true })
-        commit('undoFlag', true)
       } else {
         console.warn('Cannot load the specified state.', ` -- state: ${number}`)
       }

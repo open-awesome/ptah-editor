@@ -9,6 +9,7 @@
   <div
     :style="`${fontsSetup}`"
   >
+    <base-loading v-if="loading" class="preloader"></base-loading>
     <div
       :class="{
         'is-editable': $builder.isEditing,
@@ -116,11 +117,13 @@ import MenuSettings from '@components/slots/MenuSettings'
 import { getFontsSetup } from '../util'
 
 import { sectionsGroups } from '@cscripts/sectionsGroups'
+import BaseLoading from '../../components/base/BaseLoading'
 
 export default {
   name: 'VuseBuilder',
 
   components: {
+    BaseLoading,
     VuseIcon,
     BuilderLayout,
     MenuSettings
@@ -152,7 +155,8 @@ export default {
         content: ''
       },
       showConfirmElementDelete: false,
-      selectedElement: null
+      selectedElement: null,
+      loading: false
     }
   },
 
@@ -291,6 +295,7 @@ export default {
     document.removeEventListener('keyup', this.keyUp)
   },
   methods: {
+    ...mapActions(['clearLandingData']),
     ...mapActions('Sidebar', [
       'updateBuilderSections',
       'updateBuilderGroups',
@@ -300,6 +305,7 @@ export default {
       'setControlPanel',
       'toggleSidebar',
       'toggleAddSectionMenu',
+      'clearSettingObject',
       'clearSettingObjectLight',
       'toggleModal'
     ]),
@@ -310,7 +316,7 @@ export default {
     ...mapActions('User', [
       'getUser'
     ]),
-    ...mapMutations('Landing', ['clearStateStack']),
+    ...mapMutations('Landing', ['clearStateStack', 'undoFlag']),
 
     parsing (textCss) {
       let self = this
@@ -592,16 +598,23 @@ export default {
       }
 
       if (event.code === 'KeyZ' && event.ctrlKey) {
+        this.undoFlag(false)
+        this.loading = true
+        let frame = document.getElementById('artboard')
         let stateNumber = this.currentStateNumber > 0 ? this.currentStateNumber - 1 : 0
-        this.setState(stateNumber)
+        this.clearLandingData()
+        this.clearSettingObject()
         this.$builder.clear()
-        this.$nextTick(() => {
+
+        setTimeout(() => {
+          this.setState(stateNumber)
           this.$builder.set(this.currentLanding)
-          this.$message.success('Undo changes', {
-            duration: 700,
-            dismissible: false
+          this.$nextTick(function () {
+            this.loading = false
           })
-        })
+        }, 0)
+
+        frame.normalize()
       }
     },
 
@@ -807,4 +820,9 @@ export default {
     margin-left: $size-step * 9
   &__name
     text-transform: capitalize
+
+.preloader
+  z-index: 1000
+  position: absolute
+  background: #fff
 </style>

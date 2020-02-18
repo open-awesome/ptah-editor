@@ -29,6 +29,10 @@ export default {
     }
   },
 
+  beforeDestroy () {
+    this.$section.set(`$sectionData.components`, [])
+  },
+
   methods: {
     ...mapActions('Landing', ['saveState']),
     ...mapActions('Sidebar', ['toggleDragStop']),

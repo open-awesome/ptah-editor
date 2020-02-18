@@ -329,6 +329,16 @@ const actions = {
 
   clearSlug ({ commit }) {
     commit('slug', '')
+  },
+
+  clearLandingData ({ commit, state }) {
+    let lnd = state.currentLanding
+    commit('updateCurrentLanding', {
+      slug: lnd.slug,
+      title: lnd.title,
+      settings: lnd.settings,
+      sections: []
+    })
   }
 }
 

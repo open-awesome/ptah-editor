@@ -142,10 +142,13 @@ export default {
      * @param commit
      * @param data
      */
-    setSettingObject ({ commit }, data) {
-      commit('setSettingObjectLabel', data.label)
-      commit('setSettingObjectType', data.type)
-      commit('setSettingObjectOptions', data.options)
+    setSettingObject ({ commit, state }, data) {
+      if (data.options.sectionId !== state.settingObjectOptions.sectionId ||
+          data.options.name !== state.settingObjectOptions.name) {
+        commit('setSettingObjectLabel', data.label)
+        commit('setSettingObjectType', data.type)
+        commit('setSettingObjectOptions', data.options)
+      }
     },
 
     /**

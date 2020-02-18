@@ -68,18 +68,18 @@ class Vuse {
   }
 
   /**
-     * Finds a section with the specified id.
-     *
-     * @param {String|Number} id
-     */
+   * Finds a section with the specified id.
+   *
+   * @param {String|Number} id
+   */
   find (id) {
     return this.sections.find(s => s.id === id)
   }
 
   /**
-     * Removes a section with the specified id.
-     * @param {String|Number} id
-     */
+   * Removes a section with the specified id.
+   * @param {String|Number} id
+   */
   remove (section) {
     const id = this.sections.findIndex(s => s.id === section.id)
     this.sections.splice(id, 1)
@@ -87,10 +87,10 @@ class Vuse {
   }
 
   /**
-     * Removes a section with the specified id.
-     * @param {String|Number} oldIndex
-     * @param {String|Number} newIndex
-     */
+   * Removes a section with the specified id.
+   * @param {String|Number} oldIndex
+   * @param {String|Number} newIndex
+   */
   sort (oldIndex, newIndex) {
     const section = this.sections[oldIndex]
     this.sections.splice(oldIndex, 1)
@@ -98,8 +98,8 @@ class Vuse {
   }
 
   /**
-     * Constructs a document fragment.
-     */
+   * Constructs a document fragment.
+   */
   outputFragment () {
     const frag = document.createDocumentFragment()
     frag.appendChild(document.head.cloneNode(true))
@@ -109,8 +109,8 @@ class Vuse {
   }
 
   /**
-     * clears the builder sections.
-     */
+   * clears the builder sections.
+   */
   clear () {
     const tempSections = this.sections
     this.sections.forEach(section => section.destroy())
@@ -119,11 +119,11 @@ class Vuse {
   }
 
   /**
-     * Static helper for components registration pre-installation.
-     *
-     * @param {String} name
-     * @param {Object} definition
-     */
+   * Static helper for components registration pre-installation.
+   *
+   * @param {String} name
+   * @param {Object} definition
+   */
   static component (name, definition) {
     // Just make a plugin that installs a component.
     Vuse.use((ctx) => {
@@ -140,10 +140,10 @@ class Vuse {
   }
 
   /**
-     * Adds a component section to the builder and augments it with the styler.
-     * @param {*} name
-     * @param {*} definition
-     */
+   * Adds a component section to the builder and augments it with the styler.
+   * @param {*} name
+   * @param {*} definition
+   */
   component (name, definition) {
     // reoslve the component name automatically.
     if (typeof name === 'object') {
