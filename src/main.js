@@ -68,7 +68,9 @@ Vue.use(VueProgressBar, {
 
 Vue.use(VueYandexMetrika, {
   id: 57604036,
-  env: process.env.NODE_ENV
+  env: process.env.NODE_ENV,
+  webvisor: true,
+  triggerEvent: true
 })
 
 // request interceptor
