@@ -56,6 +56,7 @@
     "vue-scrollto": "^2.15.0",
     "vue-slide-up-down": "^2.0.0",
     "vue-update-message": "^1.0.7",
+    "vue-yandex-metrika": "^1.8.3",
     "vue2-datepicker": "^2.12.0",
     "vuebar": "0.0.20",
     "vuedraggable": "^2.23.0",
