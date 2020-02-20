@@ -9,7 +9,6 @@ import VueScrollTo from 'vue-scrollto'
 import VueProgressBar from 'vue-progressbar'
 import vClickOutside from 'v-click-outside'
 import messageService from 'vue-update-message'
-import VueYandexMetrika from 'vue-yandex-metrika'
 
 import axios from 'axios'
 
@@ -64,13 +63,6 @@ Vue.use(VueProgressBar, {
   color: 'rgb(34, 117, 215, .86)',
   failedColor: 'red',
   height: '3px'
-})
-
-Vue.use(VueYandexMetrika, {
-  id: 57604036,
-  env: process.env.NODE_ENV,
-  webvisor: true,
-  triggerEvent: true
 })
 
 // request interceptor
