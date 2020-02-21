@@ -16,6 +16,14 @@ const LIST_PROPS_STYLES = [
   'background-size',
   'background-attachment'
 ]
+
+const LIST_PROPS_STYLES_MARGIN_PADDING = [
+  'top',
+  'right',
+  'bottom',
+  'left'
+]
+
 let LIST_PROPS_TYPO = [
   'font-size',
   'color',
@@ -77,12 +85,28 @@ export default {
       let mediaStyles = {}
       let styles = this.$sectionData.mainStyle.styles
       let customMedia = { 'is-mobile': styles }
+      const prop = ['margin', 'padding']
 
       if (this.$sectionData.mainStyle.media === undefined) {
         this.$section.set(`$sectionData.mainStyle.media`, customMedia)
       }
 
       mediaStyles = this.$sectionData.mainStyle.media
+
+      prop.forEach((p) => {
+        LIST_PROPS_STYLES_MARGIN_PADDING.forEach((e) => {
+          let propM = mediaStyles['is-mobile'][p + e]
+          let propS = styles[p + e]
+
+          if (propM && propM !== '') {
+            obj[`--mobile-section-${p}`] += `${propM} `
+          } else {
+            obj[`--mobile-section-${p}`] += `${propS} `
+
+            this.$section.set(`$sectionData.mainStyle.media['is-mobile'][${p}]`, propS)
+          }
+        })
+      })
 
       LIST_PROPS_STYLES.forEach((e) => {
         let propM = mediaStyles['is-mobile'][e]
