@@ -94,7 +94,8 @@ export default {
 .b-pth-base-button
   font-family: 'Lato', Helvetica, Arial, sans-serif
   font-size: 1.6rem
-  line-height: 2.2
+  line-height: 0
+  padding: 1.8rem 0
 
   margin: 0.4rem
   border-radius: 1000px
@@ -121,10 +122,10 @@ export default {
   &_middle
     width: 11rem
     font-size: 1.4rem
-    line-height: 2.4
+    padding: 1.4rem 0
   &_small
     font-size: 1.2rem
-    line-height: 2
+    padding: 1rem 0
     width: 8rem
     height: auto
   &_circle
