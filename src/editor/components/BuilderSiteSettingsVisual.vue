@@ -2,6 +2,7 @@
 import _ from 'lodash-es'
 import { mapState, mapActions } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
+import ColorThief from 'colorthief/dist/color-thief.umd.js'
 
 export default {
   name: 'BuilderSiteSettingsVisual',
@@ -32,7 +33,8 @@ export default {
       bgRepeat: '',
       bgVideo: '',
       bgVideoPosition: '',
-      fullPageScroll: ''
+      fullPageScroll: '',
+      imageForColorThief: null
     }
   },
 
@@ -84,12 +86,43 @@ export default {
       get () {
         return this.fullPageScroll === 'yes'
       }
+    },
+
+    palette () {
+      return this.currentLanding.settings.palette
+    },
+
+    imageForPalette () {
+      return this.currentLanding.settings.imageForPalette
     }
   },
 
   watch: {
     currentLanding () {
       this.updateSettings()
+    },
+
+    imageForColorThief (images) {
+      const image = images[0] || images
+      const reader = new FileReader()
+      const preview = document.createElement('img')
+      const colorThief = new ColorThief()
+
+      preview.crossOrigin = 'Anonymous'
+      preview.setAttribute('width', '100')
+      preview.setAttribute('height', '200')
+
+      reader.readAsDataURL(image)
+      reader.onloadend = function () {
+        preview.src = reader.result
+      }
+
+      setTimeout(() => {
+        const palette = colorThief.getPalette(preview).map(c => {
+          return this.getHexColor(c)
+        })
+        this.storeSaveSettingsPalette({ palette: _.uniqBy(palette), image: this.imagePalette })
+      }, 1000)
     }
   },
 
@@ -99,7 +132,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'storeSettings'
+      'storeSettings',
+      'storeSaveSettingsPalette'
     ]),
     updateSettings () {
       const settings = this.currentLanding.settings
@@ -114,6 +148,7 @@ export default {
       this.bgVideo = settings.video
       this.bgVideoPosition = settings.videoPosition
       this.fullPageScroll = settings.fullPageScroll
+      this.imagePalette = this.imageForPalette
     },
     applySettings () {
       let backgroundColor
@@ -143,6 +178,25 @@ export default {
 
     close () {
       this.$router.push(`/editor/${this.$route.params.slug}`)
+    },
+
+    getInputSrcFiles (value) {
+      this.imageForColorThief = value
+    },
+
+    getHexColor (color) {
+      const rgbToHex = color.map(x => {
+        const hex = x.toString(16)
+        return hex.length === 1 ? '0' + hex : hex
+      }).join('')
+
+      return `#${rgbToHex}`
+    },
+
+    changeImagePalette (value) {
+      if (value === null) {
+        this.storeSaveSettingsPalette({ palette: null, image: null })
+      }
     }
   }
 }
@@ -156,7 +210,10 @@ export default {
           <BaseColorPicker :label="$t('s.backgroundColor')" v-model="pageBackgroundColor" />
         </div>
         <div class="b-builder-site-settings-visual__col">
-          <base-uploader v-model="pageBackgroundUrl" :label="$t('s.backgroundImage')"/>
+          <base-uploader
+            v-model="pageBackgroundUrl"
+            :label="$t('s.backgroundImage')"
+          />
         </div>
         <div class="b-builder-site-settings-visual__col">
           <BaseTextField
@@ -195,6 +252,33 @@ export default {
             <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
         </div>
       </div>
+      <div class="b-builder-site-settings-visual__row">
+        <div class="b-builder-site-settings-visual__col">
+          <base-uploader
+            v-model="imagePalette"
+            @change="changeImagePalette"
+            :label="'Image for palette'"
+            :tooltipText="'Load image for generate palette of page'"
+            @getInputSrcFiles="getInputSrcFiles"
+          >
+          </base-uploader>
+        </div>
+        <div class="b-builder-site-settings-visual__col" v-if="palette">
+          <div class="b-palette">
+            <div class="b-palette__title">
+
+            </div>
+            <ul class="b-palette__list">
+              <li
+                v-for="(color, index) in palette"
+                :key="color + index"
+                :style="{'background-color' : color}"
+                class="b-palette__list-item"
+              />
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
 
     <div slot="controls">
@@ -222,4 +306,15 @@ export default {
   /deep/
     .b-base-switcher__label
       margin-right: $size-step/2
+.b-palette
+  &__list
+    display: flex
+    margin: 0 0 $size-step / 4 0
+    padding: 0
+    &-item
+      list-style: none
+      width: $size-step
+      height: $size-step
+      border-radius: 100%
+      margin: $size-step / 8
 </style>

@@ -8,9 +8,11 @@
           :item="item"
           :type="type"
           :label="labelUploader"
+          :tooltipText="tooltipText"
           @replace="replaceFile($event, index)"
           @remove="removeFile(index)"
           @labelProgress="labelChange"
+          @getInputSrcFiles="getInputSrcFiles"
           />
       </draggable>
     </div>
@@ -21,17 +23,21 @@
           :src="src"
           :type="type"
           :label="labelUploader"
+          :tooltipText="tooltipText"
           @replace="replaceSrc"
           @remove="removeSrc"
           @labelProgress="labelChange"
+          @getInputSrcFiles="getInputSrcFiles"
          />
         <base-uploader-item-new
           v-if="hasAddMore"
           :multiple="multiple"
           :type="type"
           :label="labelUploader"
+          :tooltipText="tooltipText"
           @add="addFile"
           @labelProgress="labelChange"
+          @getInputSrcFiles="getInputSrcFiles"
         />
       </div>
     </div>
@@ -42,17 +48,21 @@
           :src="src"
           :type="type"
           :label="labelUploader"
+          :tooltipText="tooltipText"
           @replace="replaceSrc"
           @remove="removeSrc"
           @labelProgress="labelChange"
+          @getInputSrcFiles="getInputSrcFiles"
           />
         <base-uploader-item-new
           v-if="hasAddMore"
           :multiple="multiple"
           :type="type"
           :label="labelUploader"
+          :tooltipText="tooltipText"
           @add="addFile"
           @labelProgress="labelChange"
+          @getInputSrcFiles="getInputSrcFiles"
           />
       </div>
     </div>
@@ -73,6 +83,7 @@ export default {
   props: {
     value: [Array, String],
     label: String,
+    tooltipText: String,
     multiple: Boolean,
     type: {
       type: String,
@@ -148,6 +159,10 @@ export default {
 
     labelChange (newLabel) {
       newLabel !== '' ? this.labelUploader = newLabel : this.labelUploader = this.label
+    },
+
+    getInputSrcFiles (value) {
+      this.$emit('getInputSrcFiles', value)
     }
   }
 }

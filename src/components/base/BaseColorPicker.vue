@@ -1,6 +1,9 @@
 <script>
 import { Sketch } from 'vue-color'
+import { mapState } from 'vuex'
+
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
+
 export default {
   name: 'BaseColorPicker',
   model: {
@@ -16,6 +19,13 @@ export default {
     },
     label: {
       type: String
+    }
+  },
+  computed: {
+    ...mapState(['currentLanding']),
+
+    palette () {
+      return this.currentLanding.settings.palette
     }
   },
   watch: {
@@ -58,7 +68,11 @@ export default {
           >
         </div>
         <div slot="list">
-          <Sketch :value="pickerValue" @input="changeColor"></Sketch>
+          <Sketch
+            :value="pickerValue"
+            @input="changeColor"
+            :presetColors="palette"
+          />
         </div>
       </BaseDropdownMenu>
       <div

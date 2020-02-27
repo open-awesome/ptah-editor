@@ -62,7 +62,7 @@
           <span
             class="b-uploader-item__label-help"
             v-if="type === 'image'"
-            tooltip="Upload image or enter url"
+            :tooltip="tooltipText || 'Upload image or enter url'"
             tooltip-position="leftbottom"
             >
             <IconBase
@@ -75,7 +75,7 @@
           <span
             class="b-uploader-item__label-help"
             v-if="type === 'video'"
-            tooltip="Upload video or enter url"
+            :tooltip="tooltipText || 'Upload video or enter url'"
             tooltip-position="leftbottom"
             >
             <IconBase
@@ -131,7 +131,8 @@ export default {
     multiple: Boolean,
     src: String,
     type: String,
-    label: String
+    label: String,
+    tooltipText: String
   },
 
   data () {
@@ -220,6 +221,7 @@ export default {
       for (let file of files) {
         this.$emit('add', await this.getFileData(file))
       }
+      this.$emit('getInputSrcFiles', files)
     },
 
     async uploadFile (file) {
@@ -227,6 +229,7 @@ export default {
         return
       }
       this.$emit('replace', await this.getFileData(file))
+      this.$emit('getInputSrcFiles', file)
     },
 
     onDrop (e) {

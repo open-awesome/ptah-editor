@@ -38,7 +38,9 @@ const state = {
   currentLanding: {
     settings: {
       fonts: FONTS,
-      setupFonts: SETUP_FONTS
+      setupFonts: SETUP_FONTS,
+      imageForPalette: null,
+      palette: []
     }
   },
   isSaved: false,
@@ -322,6 +324,22 @@ const actions = {
     const landingData = _.merge({}, state.currentLanding.settings, {
       setupFonts: setupFonts
     })
+
+    commit('updateCurrentLandingSettings', landingData)
+    commit('isSaved', false)
+  },
+
+  /**
+   * Stores settings palette for page
+   *
+   * @param {Array} colors
+   */
+  storeSaveSettingsPalette ({ state, commit }, { palette, image }) {
+    const landingData = _.merge({}, state.currentLanding.settings, {
+      imageForPalette: image
+    })
+
+    landingData.palette = palette
 
     commit('updateCurrentLandingSettings', landingData)
     commit('isSaved', false)
