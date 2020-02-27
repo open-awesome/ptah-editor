@@ -95,8 +95,12 @@ export default {
 
       prop.forEach((p) => {
         LIST_PROPS_STYLES_MARGIN_PADDING.forEach((e) => {
-          let propM = mediaStyles['is-mobile'][p + e]
-          let propS = styles[p + e]
+          let propM = mediaStyles['is-mobile'][p + '-' + e]
+          let propS = styles[p + '-' + e]
+
+          if (obj[`--mobile-section-${p}`] === undefined) {
+            obj[`--mobile-section-${p}`] = ''
+          }
 
           if (propM && propM !== '') {
             obj[`--mobile-section-${p}`] += `${propM} `
