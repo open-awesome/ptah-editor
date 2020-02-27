@@ -24,20 +24,20 @@ export default {
     objVarsMedia () {
       return {
         '--mobile-margin': `
-          ${this.mediaStyles['is-mobile']['margin-top']}
-          ${this.mediaStyles['is-mobile']['margin-right']}
-          ${this.mediaStyles['is-mobile']['margin-bottom']}
-          ${this.mediaStyles['is-mobile']['margin-left']}
+          ${this.mediaStyles['is-mobile']['margin-top'] || 0}
+          ${this.mediaStyles['is-mobile']['margin-right'] || 0}
+          ${this.mediaStyles['is-mobile']['margin-bottom'] || 0}
+          ${this.mediaStyles['is-mobile']['margin-left'] || 0}
         `,
         '--mobile-margin-top': this.mediaStyles['is-mobile']['margin-top'],
         '--mobile-margin-right': this.mediaStyles['is-mobile']['margin-right'],
         '--mobile-margin-bottom': this.mediaStyles['is-mobile']['margin-bottom'],
         '--mobile-margin-left': this.mediaStyles['is-mobile']['margin-left'],
         '--mobile-padding': `
-          ${this.mediaStyles['is-mobile']['padding-top']}
-          ${this.mediaStyles['is-mobile']['padding-right']}
-          ${this.mediaStyles['is-mobile']['padding-bottom']}
-          ${this.mediaStyles['is-mobile']['padding-left']}
+          ${this.mediaStyles['is-mobile']['padding-top'] || 0}
+          ${this.mediaStyles['is-mobile']['padding-right'] || 0}
+          ${this.mediaStyles['is-mobile']['padding-bottom'] || 0}
+          ${this.mediaStyles['is-mobile']['padding-left'] || 0}
         `,
         '--mobile-padding-top': this.mediaStyles['is-mobile']['padding-top'],
         '--mobile-padding-right': this.mediaStyles['is-mobile']['padding-right'],
