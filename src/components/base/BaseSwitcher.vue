@@ -100,7 +100,9 @@ export default {
   display: inline-block
   margin: 0
   height: 2.4rem
+  min-height: 2.4rem
   width: 4.4rem
+  min-width: 4.4rem
   box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.12)
   border-radius: 100px
   background: linear-gradient(180deg, $grey 0%, rgba($grey-middle, 0) 100%), #ECECEC
