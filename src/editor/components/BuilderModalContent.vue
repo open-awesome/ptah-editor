@@ -116,27 +116,46 @@ export default {
   bottom: 0
   left: 0
   z-index: 999
+  overflow: auto
+
+  display: flex
+  justify-content: center
+  align-items: center
+
+  @media only screen and (max-height: 600px)
+    &
+      display: block
   &-content
-    position: absolute
-    left: 50%
-    top: 50%
-    margin-left: -$size-step*29/2
-    margin-top: -40vh
-    width: $size-step*29
-    height: 80vh
+    width: 90%
+    min-height: 90%
+    min-width: 750px
     z-index: 10
+    position: relative
 
     background: $white
 
     display: flex
     flex-direction: column
     justify-content: stretch
+
+    @media only screen and (max-height: 600px)
+      &
+        width: 100%
+        min-height: 100%
     &__padd
       display: flex
       flex-direction: column
       justify-content: stretch
 
       height: 100%
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      @media only screen and (max-height: 600px)
+        &
+          position: relative
     &__chapter
       font-size: 2rem
       line-height: $size-step*2
@@ -154,16 +173,14 @@ export default {
       border-bottom: 1px solid $ligth-grey
 
     &__layout
-      position: absolute
-      top: 11rem
-      bottom: 0
-      right: 0
-      left: 0
+      position: relative
+      height: 100%
     &__close
       position: absolute
       top: $size-step
       right: $size-step
       cursor: pointer
+      z-index: 10
       &:hover svg
         fill: $dark-blue-krayola
 

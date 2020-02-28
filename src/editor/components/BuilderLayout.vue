@@ -107,10 +107,11 @@ $topBarHeight: 6rem
 
 .b-builder-layout
   position: relative
+  min-width: 800px
+  min-height: 600px
 
   &__top-bar
     height: $topBarHeight
-    max-width: 100vw
     background-color: $white
     position: fixed
     top: 0

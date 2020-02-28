@@ -18,6 +18,11 @@
             </span>
           </span>
         </div>
+        <base-scroll-container
+          class="b-scrolled-content"
+          backgroundBar="#999"
+          v-if="isLoaded"
+        >
         <ul class="b-setup-fonts-list">
           <li v-for="(el, key) in setupFonts" :key="key" class="b-setup-fonts-list__item">
             <span class="b-setup-fonts-list__item-names" :style="{
@@ -35,6 +40,7 @@
             </span>
           </li>
         </ul>
+        </base-scroll-container>
       </base-fieldset>
       <base-fieldset v-if="isChange">
         <div class="b-header-fonts-block">
@@ -490,7 +496,7 @@ export default {
 .b-fonts-block
   display: flex
   justify-content: stretch
-  height: 41rem
+  height: 29rem
 
   border: 1px solid #C4C4C4
   &__list
@@ -633,9 +639,10 @@ export default {
     line-height: 19px
     color: #333333
     margin-left: 36px
-    text-align: center
+    text-align: left
 
 .b-setup-fonts
+  margin: 0
   &-header
     display: flex
     justify-content: space-between
@@ -643,6 +650,7 @@ export default {
   &-list
     padding: 0
     margin: 0
+    height: 30rem
     &__item
       $this: &
       display: flex

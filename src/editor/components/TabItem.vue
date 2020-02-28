@@ -77,6 +77,7 @@ export default {
 
   color: $dark-grey
   font-size: 1.6rem
+  white-space: nowrap
   &:hover:not(.b-tab-item_selected)
     color: $dark-blue-krayola
   &:first-child
