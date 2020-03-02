@@ -724,6 +724,7 @@ export default {
     removeElement () {
       let index = this.path[1]
       const components = [...this.components]
+      this.clearSettingObjectLight()
 
       this.hideStyler()
 

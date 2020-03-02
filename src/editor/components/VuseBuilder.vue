@@ -594,6 +594,8 @@ export default {
         if (this.settingObjectOptions.removable && this.settingObjectOptions.name.indexOf('.element') !== -1) {
           this.selectedElement = this.settingObjectOptions
           this.deleteElement(this.selectedElement.name)
+        } else {
+          this.selectedElement = null
         }
       }
 
@@ -638,6 +640,9 @@ export default {
      */
     removeElement (name) {
       let p = this.path(name)
+      this.selectedElement = null
+      this.clearSettingObjectLight()
+
       const components = [...this.components]
 
       components.splice(parseInt(p[1]), 1)
