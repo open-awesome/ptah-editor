@@ -135,7 +135,7 @@
       @resizing="$_onResize"
       @resizestop="$_onResizeStop"
       :draggable="false"
-      :z="999"
+      :z="99"
       />
     <!-- Keep aspect ratio using :lock-aspect-ratio="true" prop. -->
   </a>
