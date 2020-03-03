@@ -20,14 +20,14 @@ export default {
             'FirstScreenSpace01',
             'FooterSpace'
           ],
-          url: 'https://s3.protocol.one/files/Simple-page-2020-v1.json',
+          url: 'https://s3.protocol.one/files/Simple-page-2020-v3.json',
           image: 'https://s3.protocol.one/images/1_r.jpg',
           description: 'Simple Sci-fi template width video background. Sections: First Screen, Footer'
         },
         {
           type: 'Ptah page',
           sections: [],
-          url: 'https://s3.protocol.one/files/Ptah-page-2020.json',
+          url: 'https://s3.protocol.one/files/Ptah-page-2020-v3.json',
           image: 'https://s3.protocol.one/images/2ptah_r1.jpg',
           description: 'Look at how the landing page was created which stands on the main page of the Ptah page builder'
         },
@@ -55,7 +55,7 @@ export default {
             'FrequentlyAskedQuestions',
             'FooterSpace'
           ],
-          url: 'https://s3.protocol.one/files/Space-page-2020.json?v=2020',
+          url: 'https://s3.protocol.one/files/Space-page-2020-v3.json',
           image: 'https://s3.protocol.one/images/4_r.jpg',
           description: 'Sci-fi styled template with: Menu, First screen, columns, slider, products, system requirments, FAQ and footer'
         },
@@ -143,7 +143,7 @@ export default {
 
               return Promise.resolve(response)
             } else {
-              return this.fetchLandingFromFile({ slug: response._id, url: url })
+              return this.fetchLandingFromFile({ slug: response._id, url: url, name: this.newPageTitle })
             }
           })
           .then((data) => {
