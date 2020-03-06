@@ -319,7 +319,7 @@ export default {
 
       cursor: pointer
       &:hover
-        border-color: $dark-blue-krayola
+        border-color: $main-green
 
     &--img
       width: 100%

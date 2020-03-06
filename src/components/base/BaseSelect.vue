@@ -125,7 +125,7 @@ export default {
   & *
     user-select: none
   &:hover
-    border-color: $dark-blue-krayola
+    border-color: $main-green
   &__container
     display: flex
     justify-content: space-between

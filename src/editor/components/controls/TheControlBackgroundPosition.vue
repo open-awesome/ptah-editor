@@ -375,9 +375,9 @@ export default {
     &:hover,
     &.selected
       transform: scale(1.4)
-      border-color: $dark-blue-krayola
+      border-color: $main-green
       &:before
-        background-color: $dark-blue-krayola
+        background-color: $main-green
     &_center
       left: 50%
       top: 50%

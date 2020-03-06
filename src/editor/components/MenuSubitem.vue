@@ -168,6 +168,6 @@ export default {
         display: inline-block
         color: rgba(0, 0, 0, 0.2)
         &:hover
-          color: $dark-blue-krayola
+          color: $main-green
 
 </style>

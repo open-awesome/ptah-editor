@@ -153,10 +153,10 @@ export default {
       height: $size-step
       width: $size-step
       margin: 0 auto
-      background: $dark-blue-krayola
+      background: $main-green
       border-radius: 100%
       &:hover
-        border-color: $dark-blue-krayola
+        border-color: $main-green
 
       svg
         margin-bottom: 0.2rem

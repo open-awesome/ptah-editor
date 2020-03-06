@@ -204,34 +204,34 @@ export default {
 
 /deep/
   .mx-input
-    border: 0.2ren solid $dark-blue-krayola
+    border: 0.2ren solid $main-green
     border-radius: 0.2rem
     padding: $size-step/2 $size-step $size-step/2 size-step/2
     font-size: 1.4rem
     font-weight: bold
     color: $dark-grey
   .mx-input:hover
-    border-color: $dark-blue-krayola
+    border-color: $main-green
     cursor: pointer
   .mx-calendar-icon
-    color: $dark-blue-krayola
+    color: $main-green
   .mx-calendar
     color: $dark-grey
   .mx-calendar-content .cell.cur-month.actived
     color: $white
-    background-color: $dark-blue-krayola
+    background-color: $main-green
     border-radius: 100%
   .mx-icon-next-month,
   .mx-icon-next-year,
   .mx-icon-last-month,
   .mx-icon-last-year
-    color: $dark-blue-krayola
+    color: $main-green
   .mx-calendar-content .cell.cur-month:first-child,
   .mx-calendar-content .cell.cur-month:last-child
     color: $orange
   .mx-datepicker-btn-confirm
     color: $white
-    background-color: $dark-blue-krayola
+    background-color: $main-green
     border-radius: 100px
     width: $size-step*3
     margin: 0

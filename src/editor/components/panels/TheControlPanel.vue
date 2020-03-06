@@ -128,7 +128,7 @@ export default {
     font-size: 1.2rem
 
     padding: $size-step/8 0
-    color: $dark-blue-krayola
+    color: $main-green
   &__title
     color: $black
     font-size: 2rem
@@ -147,5 +147,5 @@ export default {
     right: 17px
     cursor: pointer
     &:hover
-      color: $dark-blue-krayola
+      color: $main-green
 </style>

@@ -114,7 +114,7 @@ export default {
       width: $size-step/1.5
       height: $size-step/1.5
 
-      background: $dark-blue-krayola
+      background: $main-green
       box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
 
       cursor: pointer
@@ -126,7 +126,7 @@ export default {
       &:hover, .active
         background: $white
         svg
-          fill: $dark-blue-krayola
+          fill: $main-green
 
 #artboard section:hover,
 #artboard header:hover,

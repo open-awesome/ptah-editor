@@ -684,7 +684,7 @@ export default {
     border: .2rem dotted transparent
     &:hover
       cursor: pointer
-      border-color: $dark-blue-krayola !important
+      border-color: $main-green !important
     &.styler-active
       border-color: transparent !important
       &:hover
@@ -693,9 +693,9 @@ export default {
       .is-mobile &.b-logo,
       .is-tablet &.b-image,
       .is-tablet &.b-logo,
-        border-color: $dark-blue-krayola !important
+        border-color: $main-green !important
         &:hover
-          border-color: $dark-blue-krayola !important
+          border-color: $main-green !important
   &.is-editable div.b-border,
   &.is-editable table.b-border
     outline: none
@@ -703,11 +703,11 @@ export default {
     border: .2rem dotted transparent
     &:hover
       cursor: pointer
-      border-color: $dark-blue-krayola !important
+      border-color: $main-green !important
     &.styler-active
-      border-color: $dark-blue-krayola !important
+      border-color: $main-green !important
       &:hover
-        border-color: $dark-blue-krayola !important
+        border-color: $main-green !important
       &.b-text
         cursor: text
   &.fp-scroll section:not(.b-section-header):not(.b-section-footer):not(.is-mobile)

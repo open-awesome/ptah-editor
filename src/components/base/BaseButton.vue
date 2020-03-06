@@ -104,8 +104,8 @@ export default {
   transition: all .3s cubic-bezier(.2,.85,.4,1.275)
   outline: none
   =active
-    background-color: $dark-blue-krayola
-    border-color: $dark-blue-krayola
+    background-color: $main-green
+    border-color: $main-green
     color: $white
   &[disabled]
     cursor: not-allowed
@@ -141,7 +141,7 @@ export default {
    +active
   &_gray
     background: $white
-    color: $dark-blue-krayola
+    color: $main-green
     border: 0.2rem rgba($black, 0.1) solid
     border: 0.2rem rgba($black, 0.1) solid
   &_gray-full
@@ -151,10 +151,10 @@ export default {
       fill: rgba($black, 0.1) !important
     &:hover,
     &:active
-      color: $dark-blue-krayola
-      border: 0.2rem $dark-blue-krayola solid
+      color: $main-green
+      border: 0.2rem $main-green solid
       & svg
-        fill: $dark-blue-krayola !important
+        fill: $main-green !important
   &_light-gray
     color: $white
     background-color: rgba($white, 0.1)
@@ -171,9 +171,9 @@ export default {
     background-color: transparent
   &_white
     border: 0.2rem white solid
-    color: $dark-blue-krayola
+    color: $main-green
     background: $white
     box-shadow: 0px 4px 16px rgba($black, 0.25)
     &:hover
-      border: 0.2rem $dark-blue-krayola solid
+      border: 0.2rem $main-green solid
 </style>

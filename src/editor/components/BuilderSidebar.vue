@@ -1,57 +1,35 @@
 <template>
   <div class="b-builder-sidebar" :class="{'b-builder-sidebar_expanded': isExpanded}">
-    <div class="b-builder-sidebar__content" id="sections_contents">
-      <!-- Sections -->
-      <div class="b-builder-sidebar__header">
-        <span>
-          {{ $t('menu.sections') }}
-        </span>
-
-        <span class="b-builder-sidebar__icon-add"
-          slot="icon"
-          :tooltip="$t('nav.addSection')"
-          tooltip-position="bottom"
-          @click.stop="showAddSectionBar">
-           <IconBase
-             name="plus"
-             strokeColor="transparent"
-           />
-        </span>
-
-        <span class="b-builder-sidebar__icon-close" @click="toggleSidebarSection">
-          <icon-base
-            name="close"
-            width="14"
-            height="14"
-          />
-        </span>
-      </div>
-      <div class="b-builder-sidebar__content-outer">
-      <menu-tree
-        v-if="!controlPanel.expanded && isExpanded"
-        :sections="this.builder.sections"
-        :builder="builder"
-        :inc="increment"/>
-      </div>
+    <!-- Show Sections panel -->
+    <div class="b-builder-sidebar__content">
+       <PanelSectionsTree
+         v-if="isExpanded && isSectionsTreeExpanded"
+         :builder="builder"
+       />
     </div>
 
-    <transition name="slide-fade">
-      <div v-if="controlPanel.expanded" class="b-builder-sidebar-settings">
-        <control-panel
-          :builder="builder" />
-      </div>
-    </transition>
+    <!-- Shows Control panel -->
+    <div
+      v-if="controlPanel.expanded"
+      class="b-builder-sidebar-settings"
+    >
+      <ControlPanel
+        :builder="builder"
+      />
+    </div>
 
-    <transition name="slide-fade">
-      <div class="b-builder-sidebar-add-section" v-if="isExpanded && isAddSectionExpanded">
-        <BuilderAddSectionBar
-          :builder="builder"
-          :title="$t('nav.addSection')"
-          @add="onAddSection"
-          @requestClose="closeAddSectionBar">
-        </BuilderAddSectionBar>
-      </div>
-    </transition>
+    <!-- Showed Add Section panel -->
+    <div
+      v-if="isExpanded && isAddSectionExpanded"
+      class="b-builder-sidebar-add-section"
+    >
+      <BuilderAddSectionBar
+        :builder="builder"
+        :title="$t('nav.addSection')"
+        @add="onAddSection"
+        @requestClose="closeAddSectionBar">
+      </BuilderAddSectionBar>
+    </div>
 
   </div>
 </template>
@@ -65,6 +43,7 @@ import BuilderAddSectionBar from './BuilderAddSectionBar'
 import { mapActions, mapState } from 'vuex'
 import ControlPanel from './panels/TheControlPanel'
 import MenuTree from './MenuTree'
+import PanelSectionsTree from './panels/ThePanelSectionsTree.vue'
 
 export default {
   name: 'BuilderSidebar',
@@ -76,7 +55,8 @@ export default {
     MenuSubitem,
     BuilderSettingsBar,
     BuilderSettingsSlots,
-    BuilderAddSectionBar
+    BuilderAddSectionBar,
+    PanelSectionsTree
   },
 
   props: {
@@ -93,8 +73,8 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection',
-      'siteSettingsMenu',
       'isAddSectionExpanded',
+      'isSectionsTreeExpanded',
       'settingObjectType',
       'sectionsGroups',
       'sandbox',
@@ -118,13 +98,6 @@ export default {
     }
   },
 
-  data () {
-    return {
-      isSettingsOpenedisSettingsOpened: false,
-      increment: 0
-    }
-  },
-
   updated () {
     // hack for update dropdown component
     window.dispatchEvent(new Event('resize'))
@@ -145,13 +118,13 @@ export default {
   },
 
   methods: {
-
     ...mapActions('Sidebar', [
       'setSettingSection',
       'clearSettingObject',
       'clearSettingObjectLight',
       'toggleSidebar',
       'toggleAddSectionMenu',
+      'toggleSectionsTreeMenu',
       'setControlPanel',
       'setElement'
     ]),
@@ -162,6 +135,10 @@ export default {
 
     showAddSectionBar () {
       this.toggleAddSectionMenu()
+    },
+
+    showSectionsTreeBar () {
+      this.toggleSectionsTreeMenu()
     },
 
     async onAddSection (section) {
@@ -202,34 +179,22 @@ export default {
 $top-panel-height: 7.2rem
 
 .b-builder-sidebar
-  width: $size-step*9
-  background: $white
-  position: fixed
-  top: 0
-  left: 0
+  position: relative
   opacity: 0
-  box-shadow: 0 4px 32px rgba(0, 0, 0, 0.25)
-  color: $black
-  transition: left 0.3s ease-in-out
-  height: 100vh
+
   display: flex
   flex-direction: column
+  opacity: 0
 
+  height: auto
+  width: $size-step * 9
+
+  background: $white
+  color: $black
+  transition: 1s ease-in-out
   &_expanded
     opacity: 1
 
-  &__header
-    position: relative
-
-    display: flex
-    align-items: center
-    justify-content: flex-start
-
-    width: 100%
-    padding: 1.7rem 3.1rem
-    font-size: 2rem
-    line-height: 1.2
-    letter-spacing: -0.02em
   &__content
     height: 100%
 
@@ -249,8 +214,8 @@ $top-panel-height: 7.2rem
         padding-right: 0 !important
         width: calc(100% + 17px) !important
     &-outer
-      height: 90vh
-      padding: 0 0 0 0
+      height: 100%
+      padding: 0
 
   &-settings
     position: absolute
@@ -265,30 +230,6 @@ $top-panel-height: 7.2rem
       flex-direction: row
       .slots-settings__list
         margin-right: .8rem
-
-  &__icon-add
-    width: $size-step/2
-    height: $size-step/2
-    color: $grey
-
-    display: flex
-    align-items: center
-    justify-content: center
-
-    border-radius: 100%
-    cursor: pointer
-    margin: 1px 0 0 11px
-    &:hover
-      color: $dark-blue-krayola
-
-  &__icon-close
-    color: $grey
-    position: absolute
-    top: 18px
-    right: 17px
-    cursor: pointer
-    &:hover
-      color: $dark-blue-krayola
 
   &-settings,
   &-add-section

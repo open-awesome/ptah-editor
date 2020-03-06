@@ -161,7 +161,7 @@ export default {
         {{ title }}
       </span>
       <span class="b-add-section__header-close-bt" @click="closeAddSectionBar">
-        <icon-base
+        <IconBase
           name="close"
           width="14"
           height="14"
@@ -265,7 +265,7 @@ export default {
       right: 17px
       cursor: pointer
       &:hover
-        color: $dark-blue-krayola
+        color: $main-green
   &__padd
     padding: 0 0 8rem
     height: calc(100% - 8rem)
@@ -410,7 +410,7 @@ export default {
         justify-content: center
         align-items: center
         span
-          background: $dark-blue-krayola
+          background: $main-green
           height: 4rem
           line-height: 4rem
           border-radius: 20px

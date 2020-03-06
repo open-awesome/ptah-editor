@@ -292,11 +292,11 @@ export default {
         & svg
           fill: $orange
       &.plus svg
-        fill: $dark-blue-krayola
+        fill: $main-green
       &.plus:hover
-        border: 0.2rem solid $dark-blue-krayola
+        border: 0.2rem solid $main-green
         & svg
-          fill: $dark-blue-krayola
+          fill: $main-green
     &__description
       font-size: 1.4rem
       line-height: 1.7rem

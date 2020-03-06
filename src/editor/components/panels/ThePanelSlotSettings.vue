@@ -301,7 +301,7 @@ export default {
         transition: all .3s cubic-bezier(.2,.85,.4,1.275)
         &:hover,
         &.active
-          background: $dark-blue-krayola
+          background: $main-green
         &:hover
           color: #ffffff
         &.active

@@ -289,7 +289,7 @@ export default {
 
       background-size: contain !important
   &:hover
-    border-color: $dark-blue-krayola
+    border-color: $main-green
   &:not(:last-child)
     margin-right: 0
     margin-bottom: 0

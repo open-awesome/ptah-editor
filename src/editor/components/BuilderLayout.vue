@@ -1,28 +1,33 @@
 <template>
   <div class="b-builder-layout">
-    <div class="b-builder-layout__top-bar" :class="{
-      'b-builder-layout__top-bar_down' : isContentVisible,
-      'b-builder-layout__top-bar_sidebar-expanded' : isExpanded
-      }">
-      <BuilderTopBar
-        @backToLandings="backToLandings"
-        @preview="$emit('preview', $event)"
-        @export="$emit('export', $event)"
-        @save="$emit('save', $event)"
-        :landingName="$store.state.name"
-        ></BuilderTopBar>
-    </div>
+    <BuilderTopBar
+      class="b-builder-layout__top-bar"
+      :class="{
+          'b-builder-layout__top-bar_down' : isContentVisible
+        }"
+      @backToLandings="backToLandings"
+      @preview="$emit('preview', $event)"
+      @export="$emit('export', $event)"
+      @save="$emit('save', $event)"
+      :landingName="$store.state.name"
+    />
     <div class="b-builder-layout-content">
-
+      <div class="b-builder-layout-content__main-left-menu"
+        :class="{'_expanded': isExpanded}"
+      >
+        <BuilderMainLeftMenu
+          :builder="builder"
+        />
+      </div>
       <aside
         id="sidebar"
         class="b-builder-layout-content__sidebar"
-        :class="{'b-builder-layout-content__sidebar_expanded': isExpanded}">
-
+        :class="{'b-builder-layout-content__sidebar_expanded': isExpanded}"
+      >
         <BuilderSidebar
           :builder="builder"
           :isExpanded="isExpanded"
-          ></BuilderSidebar>
+        />
       </aside>
 
       <main class="b-builder-layout-content__main">
@@ -32,8 +37,8 @@
             <slot></slot>
           </div>
         </base-scroll-container>
-        <!--<BuilderModalContent :builder="builder" />-->
-        <router-view :builder="builder"></router-view>
+
+        <router-view :builder="builder"/>
       </main>
     </div>
   </div>
@@ -41,6 +46,7 @@
 
 <script>
 import { mapState } from 'vuex'
+import BuilderMainLeftMenu from './BuilderMainLeftMenu'
 import BuilderSidebar from './BuilderSidebar.vue'
 import BuilderTopBar from './BuilderTopBar.vue'
 import BuilderModalContent from './BuilderModalContent.vue'
@@ -65,7 +71,8 @@ export default {
   components: {
     BuilderSidebar,
     BuilderTopBar,
-    BuilderModalContent
+    BuilderModalContent,
+    BuilderMainLeftMenu
   },
 
   computed: {
@@ -113,36 +120,42 @@ $topBarHeight: 6rem
   &__top-bar
     height: $topBarHeight
     background-color: $white
-    position: fixed
+
+    position: absolute
     top: 0
     right: 0
     left: 0
-    z-index: 999
+    z-index: 1000
+
     transition: all .2s ease-out
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15)
     &_down
       z-index: 0
-    &_sidebar-expanded
-      padding-left: $size-step*9
 
 .b-builder-layout-content
   display: flex
-  flex-wrap: wrap
   align-items: stretch
+
   width: 100%
-
-  &__sidebar
-    order: 1
-    width: $size-step*9
-    flex-shrink: 0
-    position: relative
-    z-index: 1000
-    display: none
+  position: relative
+  z-index: 0
+  &__main-left-menu
+    width: 5rem
+    overflow: hidden
     transition: width 0.3s ease-in-out
+    &:hover,
+    &._expanded
+      width: 9rem
+  &__sidebar
+    display: none
+    position: relative
+    padding: 6rem 0 0
 
+    order: 1
+    flex-shrink: 0
+    transition: width 0.3s ease-in-out
     &_expanded
       display: flex
-      + .b-builder-layout-content__main
-        width: calc(100vw - #{$size-step*10})
 
   &__main
     order: 2

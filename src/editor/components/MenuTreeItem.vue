@@ -190,5 +190,5 @@ export default {
         height: 1.5rem
 
       &:hover
-        color: $dark-blue-krayola
+        color: $main-green
 </style>

@@ -274,7 +274,7 @@ export default {
           color: $dark-grey
           margin: 0 0 $size-step/2 0
       &_color *
-        fill: $dark-blue-krayola
+        fill: $main-green
       &_color *
         fill: #4D7DD8
 </style>

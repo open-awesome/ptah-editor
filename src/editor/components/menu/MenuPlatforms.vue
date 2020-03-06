@@ -3,7 +3,6 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   data: () => ({
-    activeColor: '#2275D7',
     inactiveColor: 'rgba(51, 51, 51, 0.3)',
     items: [
       {
@@ -35,7 +34,8 @@ export default {
 
   computed: {
     ...mapState('Sidebar', [
-      'device'
+      'device',
+      'mainGreenColor'
     ])
   },
 
@@ -50,7 +50,6 @@ export default {
       this.setDevice(type)
     }
   }
-
 }
 </script>
 
@@ -71,7 +70,7 @@ export default {
         :name="item.icon.name"
         :width="item.icon.width"
         :height="item.icon.height"
-        :color="device === item.name ? activeColor : inactiveColor">
+        :color="device === item.name ? mainGreenColor : inactiveColor">
       </icon-base>
     </button>
   </div>
@@ -102,9 +101,9 @@ export default {
     cursor: pointer
     &:hover
       svg
-        fill: $dark-blue-krayola
+        fill: $main-green
     &_active
-      color: $dark-blue-krayola
+      color: $main-green
       opacity: 1
     &_mobile
       border-right: none

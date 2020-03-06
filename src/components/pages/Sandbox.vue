@@ -44,45 +44,22 @@
     <hr>
     <h2>Icons</h2>
     <div class="b-icons">
-      <icon-base name="alignLeft" color="red"></icon-base>
-      <icon-base name="alignRight" color="green"></icon-base>
-      <icon-base name="alignCenter" color="magenta"></icon-base>
-      <icon-base name="arrowDropDown" width="6" color="black"></icon-base>
-      <icon-base name="close"></icon-base>
-      <icon-base name="colorFill"></icon-base>
-      <icon-base name="drag"></icon-base>
-      <icon-base name="equalizer"></icon-base>
-      <icon-base name="fontBold"></icon-base>
-      <icon-base name="fontFamily"></icon-base>
-      <icon-base name="fontItalic"></icon-base>
-      <icon-base name="fontSize"></icon-base>
-      <icon-base name="fontUnderline"></icon-base>
-      <icon-base name="menu"></icon-base>
-      <icon-base name="platformDesktop"></icon-base>
-      <icon-base name="platformLaptop"></icon-base>
-      <icon-base name="platformMobile"></icon-base>
-      <icon-base name="plus"></icon-base>
-      <icon-base name="groupBottom"></icon-base>
-      <icon-base name="groupTop"></icon-base>
-      <icon-base name="groupCenterVertical"></icon-base>
-      <icon-base name="groupCenterHorizontal"></icon-base>
-      <icon-base name="groupLeft"></icon-base>
-      <icon-base name="groupRight"></icon-base>
-      <icon-base name="groupRow"></icon-base>
-      <icon-base name="groupColumn"></icon-base>
-      <icon-base name="style"></icon-base>
-      <icon-base name="link"></icon-base>
-      <icon-base name="timer"></icon-base>
-      <icon-base name="bulletList"></icon-base>
-      <icon-base name="orderedList"></icon-base>
-      <icon-base name="background"></icon-base>
-      <icon-base name="layouts"></icon-base>
-      <icon-base name="lock"></icon-base>
-      <icon-base name="download"></icon-base>
-      <icon-base name="loadTo"></icon-base>
-      <icon-base name="video"></icon-base>
-      <icon-base name="frame"></icon-base>
-    </div>
+      <span
+        class="b-icons__item"
+        v-for="icon in iconComponentsList"
+        :key="icon"
+      >
+        <span class="b-icons__item-icon">
+          <component
+            :is="icon"
+            color="#000"
+          />
+        </span>
+        <span class="b-icons__item-text">
+          {{ icon }}
+        </span>
+      </span>
+     </div>
 
     <hr>
     <h2>BaseSelect</h2>
@@ -158,6 +135,7 @@
 
 <script>
 import { Sketch } from 'vue-color'
+import { keysIn } from 'lodash'
 
 export default {
   name: 'Sandbox',
@@ -255,6 +233,14 @@ export default {
         selected: { name: 'Default', value: 0 }
       }
     }
+  },
+
+  computed: {
+    iconComponentsList () {
+      const iconComponentNames = keysIn(this.$options.components)
+        .filter(name => /^Icon[A-Z]/.test(name))
+      return iconComponentNames
+    }
   }
 }
 </script>
@@ -269,8 +255,27 @@ export default {
 
 .b-icons
   width: 70rem
+  margin: 1rem
+
   display: flex
   align-items: center
-  justify-content: space-between
-  margin: 1rem
+  flex-wrap: wrap
+  &__item
+    width: 200px
+    margin: 10px
+
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
+    &-icon
+      width: 32px
+      height: 32px
+      margin: 16px
+      & svg
+        color: #000
+        width: 32px
+        height: 32px
+    &-text
+      padding: 5px
 </style>

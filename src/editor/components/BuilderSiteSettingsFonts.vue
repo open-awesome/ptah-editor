@@ -550,7 +550,7 @@ export default {
 
     &._applied
       color: #fff
-      background-color: $dark-blue-krayola
+      background-color: $main-green
       #{$this}-category
         color: #fff
     &-category
@@ -593,7 +593,7 @@ export default {
     right: $size-step / 2
     cursor: pointer
     &:hover svg
-      fill: $dark-blue-krayola
+      fill: $main-green
   &__list
     position: relative
     z-index: 0

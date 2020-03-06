@@ -107,7 +107,7 @@ export default {
     &_transparent
       background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAL0lEQVQ4T2N89uzZfwY8QFJSEp80A+OoAcMiDP4DAb6Ifv78Of50MGoAA+PQDwMAuX5VedFT3cEAAAAASUVORK5CYII=")
     &:hover
-      border-color: $dark-blue-krayola
+      border-color: $main-green
   &__label
     color: $dark-grey
     margin-left: $size-step/2

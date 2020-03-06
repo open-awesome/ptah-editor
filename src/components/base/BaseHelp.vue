@@ -51,7 +51,7 @@ export default {
   & svg
     fill: $grey
   &:hover svg
-    fill: $dark-blue-krayola
+    fill: $main-green
   &__content
     display: none
     position: absolute
@@ -100,7 +100,7 @@ export default {
   &:hover &__content,
     display: block
   &__link
-    color: $dark-blue-krayola
+    color: $main-green
     text-decoration: none
 
     display: block

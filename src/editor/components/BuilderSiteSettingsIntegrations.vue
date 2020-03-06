@@ -167,7 +167,7 @@ export default {
       .b-integrations__item-settings
         display: block
       .b-integrations__item-label
-        color: $dark-blue-krayola
+        color: $main-green
   &__textarea
     width: 100%
     height: 100%
@@ -179,5 +179,5 @@ export default {
       fill: $grey
     &:hover
       & svg
-        fill: $dark-blue-krayola
+        fill: $main-green
 </style>

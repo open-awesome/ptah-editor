@@ -38,7 +38,7 @@
       width: $size-step/1.5
       height: $size-step/1.5
 
-      background: $dark-blue-krayola
+      background: $main-green
       box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
 
       cursor: pointer
@@ -52,13 +52,13 @@
       .active
         background: $white
         svg
-          fill: $dark-blue-krayola
+          fill: $main-green
 
   .is-editable &:hover
     #{$this}__settings
       opacity: 1
     .b-draggable-slot
-      border: 1px dashed $dark-blue-krayola
+      border: 1px dashed $main-green
 
   .is-mobile & .b-draggable-slot
     flex-direction: var(--mobile-slot-flex-direction) !important

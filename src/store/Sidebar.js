@@ -2,15 +2,28 @@ import * as _ from 'lodash-es'
 
 export default {
   state: {
-    isExpanded: true,
-    controlPanel: { // control panels for sections & elements
-      expanded: false,
+    isExpanded: false, // show/hide sidebar
+    mainLeftMenu: { // left menu of all settings
+      list: [
+        { name: 'Sections', icon: 'hamburgerDot', panel: 'sectionsTree' },
+        { name: 'Style', icon: 'editStyle', panel: 'visualSettings' },
+        { name: 'Fonts', icon: 'fonts', panel: 'fonts' },
+        { name: 'Code', icon: 'code', panel: 'addJsScrips' },
+        { name: 'Seo', icon: 'seo', panel: 'seoSettings' },
+        { name: 'Integration', icon: 'integration', panel: 'integrations' }
+      ],
+      expanded: false, // small/middle it
       name: ''
     },
-    isShowModal: false,
-    isAddSectionExpanded: false, // add section menu
-    isResizeStop: false,
-    isDragStop: false,
+    controlPanel: { // settings panels for sections & elements
+      expanded: false, // show/hide it
+      name: ''
+    },
+    isShowModal: false, // show/hide modal of elemets settings
+    isAddSectionExpanded: false, // show/hide add section panel
+    isSectionsTreeExpanded: false, // show/hide panel of sections tree
+    isResizeStop: false, // resize elements
+    isDragStop: false, // drag elements in slots
     isGrouping: false, // section grouping interface
     settingObjectType: '', // (Styler prop) section, button, text etc.
     settingObjectLabel: '', // Styler slot label
@@ -64,7 +77,8 @@ export default {
       styles: {} // sandbox current section's styles
     },
     device: 'is-desktop', // selected platform in platforms menu
-    isMobile: false // detect mobile mode
+    isMobile: false, // detect mobile mode
+    mainGreenColor: '#00ADB6'
   },
 
   mutations: {
@@ -74,6 +88,9 @@ export default {
 
     isAddSectionExpanded (state, value) {
       state.isAddSectionExpanded = value
+    },
+    isSectionsTreeExpanded (state, value) {
+      state.isSectionsTreeExpanded = value
     },
     setSettingObjectType (state, value) {
       state.settingObjectType = value
@@ -135,6 +152,10 @@ export default {
 
     toggleAddSectionMenu ({ state, commit }, value) {
       commit('isAddSectionExpanded', (typeof value !== 'undefined') ? value : !state.isAddSectionExpanded)
+    },
+
+    toggleSectionsTreeMenu ({ state, commit }, value) {
+      commit('isSectionsTreeExpanded', (typeof value !== 'undefined') ? value : !state.isSectionsTreeExpanded)
     },
 
     /**
@@ -269,6 +290,7 @@ export default {
 
         // close 'add section bar'
         commit('isAddSectionExpanded', false)
+        commit('isSectionsTreeExpanded', false)
       } else {
         commit('controlPanel', {
           expanded: false,

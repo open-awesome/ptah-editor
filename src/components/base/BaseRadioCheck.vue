@@ -84,11 +84,11 @@ export default {
     &:hover
       opacity: 1
       .b-base-radio-check__icon
-        border: 0.2rem solid $dark-blue-krayola
+        border: 0.2rem solid $main-green
     &_selected
       opacity: 1
       .b-base-radio-check__icon
-        border: 0.2rem solid $dark-blue-krayola
+        border: 0.2rem solid $main-green
 
         display: flex
         justify-content: center
@@ -98,7 +98,7 @@ export default {
           width: 1rem
           height: 1rem
 
-          background-color: $dark-blue-krayola
+          background-color: $main-green
           border-radius: 100%
   &__icon
     width: 2rem

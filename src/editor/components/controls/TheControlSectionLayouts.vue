@@ -64,7 +64,7 @@ export default {
       await this.$nextTick()
 
       let target = document
-        .getElementById('sections_contents')
+        .getElementById('sectionsContents')
         .querySelectorAll('.b-menu-subitem:not(.b-menu-subitem--header)')[index]
 
       if (section.schema.isHeader) {
@@ -157,7 +157,7 @@ export default {
   display: none
   width: 2.4rem
   height: 2.4rem
-  background: $dark-blue-krayola
+  background: $main-green
   border-radius: 50%
   margin: .9rem .5rem 0 0
 

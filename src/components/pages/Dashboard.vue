@@ -356,7 +356,7 @@ export default {
       figcaption
         margin-top: 4.6rem
         font-size: 1.6rem
-        color: $dark-blue-krayola
+        color: $main-green
         letter-spacing: -0.02em
 
     &--name

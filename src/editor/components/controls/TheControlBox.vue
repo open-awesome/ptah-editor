@@ -287,9 +287,9 @@ export default {
   font-size: 1.4rem
   transition: border-color 0.1s ease
   &:hover
-    border-color: $dark-blue-krayola
+    border-color: $main-green
     #{$this}__element-edge
-      border-color: $dark-blue-krayola
+      border-color: $main-green
 
   &__element-edge
     width: 153px
@@ -322,10 +322,10 @@ export default {
     text-decoration: none
     transition: color 0.1s ease
     &.active
-      color: $dark-blue-krayola
+      color: $main-green
 
     &:hover
-      color: rgba($dark-blue-krayola, 0.8)
+      color: rgba($main-green, 0.8)
 
     &--margin
       right: 8px

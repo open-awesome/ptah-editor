@@ -138,9 +138,9 @@ $border-color: rgba(#888888, 0.25)
   &:hover,
   &_selected,
   &_selected:hover
-    color: $dark-blue-krayola
-    fill: $dark-blue-krayola
-    border: 1px solid $dark-blue-krayola
+    color: $main-green
+    fill: $main-green
+    border: 1px solid $main-green
 
   &__icon + &__text
     margin-left: 0.6rem

@@ -60,7 +60,10 @@ export default {
   },
 
   computed: {
-    ...mapState('Sidebar', ['isAddSectionExpanded', 'siteSettingsMenu']),
+    ...mapState('Sidebar', [
+      'isAddSectionExpanded',
+      'siteSettingsMenu'
+    ]),
 
     contentID () {
       return this.$route.path.split('/')[4] || ''
@@ -71,13 +74,21 @@ export default {
     if (_.last(this.$route.path.split('/')) === 'settings') {
       this.toggleSiteSettings('visualSettings')
     }
-    this.toggleSidebar(false)
+    // this.toggleSidebar(false)
+    this.toggleSectionsTreeMenu(false)
     this.setScrollbarVisible(false)
   },
 
   methods: {
-    ...mapActions('PageTweaks', ['setScrollbarVisible']),
-    ...mapActions('Sidebar', ['toggleAddSectionMenu', 'clearSettingObjectLight', 'toggleSidebar']),
+    ...mapActions('PageTweaks', [
+      'setScrollbarVisible'
+    ]),
+    ...mapActions('Sidebar', [
+      'toggleAddSectionMenu',
+      'clearSettingObjectLight',
+      'toggleSidebar',
+      'toggleSectionsTreeMenu'
+    ]),
 
     closeContent () {
       this.$router.push(`/editor/${this.$route.params.slug}`)
@@ -182,7 +193,7 @@ export default {
       cursor: pointer
       z-index: 10
       &:hover svg
-        fill: $dark-blue-krayola
+        fill: $main-green
 
 // Animations
 .slide-fade

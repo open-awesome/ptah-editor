@@ -42,9 +42,7 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'clearSettingObject',
-      'clearSettingObjectLight',
-      'toggleSidebar'
+      'clearSettingObject'
     ]),
 
     setDevice (type) {
@@ -56,32 +54,8 @@ export default {
       this.$emit('backToLandings', $event)
     },
 
-    toggleMenuItem () {
-      this.toggleSiteSettings('visualSettings')
-    },
-
-    closeSettingsBar () {
-      this.clearSettingObjectLight()
-    },
-
     closeSiteSettings () {
       this.$router.push(`/editor/${this.$route.params.slug}`)
-    },
-
-    toggleSiteSettings (contentID) {
-      this.toggleSidebar(false)
-      if (this.isAddSectionExpanded) {
-        this.toggleAddSectionMenu()
-      }
-      if (this.modalContentID === contentID) {
-        this.closeSiteSettings()
-      } else {
-        this.$router.push(`/editor/${this.$route.params.slug}/settings`)
-      }
-    },
-
-    toggleSidebarSection () {
-      this.toggleSidebar()
     },
 
     async itemClick (item, event) {
@@ -99,20 +73,19 @@ export default {
   <div class="b-top-bar__padd">
     <div class="b-top-bar-menu">
       <div class="b-top-bar-menu__left">
-        <div class="b-top-bar-menu__ham"
-          :tooltip="$t('menu.sections')"
-          tooltip-position="bottom"
-          @click="toggleSidebarSection" v-if="!isExpanded"
-          >
-          <icon-base name="hamburgerDot"/>
-        </div>
         <div class="b-top-bar-menu__crumbs">
           <span class="b-top-bar-menu__crumbs-home b-top-bar-menu__crumbs-link"
             :tooltip="homeTooltipText"
             tooltip-position="bottom"
             @click="backToLandings"
             >
-            <icon-base name="home" width="20" height="17" color="rgba(51, 51, 51, 0.45)"/>
+            <IconBase
+              name="home"
+              width="20"
+              height="17"
+              color="rgba(51, 51, 51, 0.45)"
+            />
+            <span>Home</span>
           </span>
           <span class="b-top-bar-menu__crumbs-arrow">
             →
@@ -127,14 +100,9 @@ export default {
         >
         <MenuPlatforms
           @setDevice="setDevice"
-          ></MenuPlatforms>
+        />
       </div>
       <div class="b-top-bar-menu__right">
-        <span :tooltip="$t('menu.siteSettings')" tooltip-position="bottom"
-              @click="toggleMenuItem('siteSettings')">
-          <icon-base name="cog"></icon-base>
-        </span>
-
         <span :tooltip="$t('nav.preview')" tooltip-position="bottom"
               @click="$emit('preview', $event)">
           <icon-base name="preview">
@@ -159,7 +127,7 @@ export default {
 .b-top-bar
   width: 100%
   height: 100%
-  padding: 2.4rem 3.2rem
+  padding: 0 2.4rem
 
   display: flex
   align-items: center
@@ -180,40 +148,46 @@ export default {
       order: 2
       width: 14rem
       &-margin
-        // margin: 0 0 0 $size-step*9
+        margin: 0 0 0 $size-step*9
     &__right
       order: 3
       width: 45%
       text-align: right
       .active
         svg
-          color: $dark-blue-krayola
+          color: $main-green
       span
         margin-left: 1.6rem
       svg
         color: $grey
         cursor: pointer
         &:hover
-          color: $dark-blue-krayola
+          color: $main-green
 
     &__ham
       cursor: pointer
       color: $grey
       &:hover
-        color: $dark-blue-krayola
+        color: $main-green
     &__crumbs
       display: flex
 
       color: $dark-grey
-      padding: 0 $size-step
+      padding: 0
       white-space: nowrap
       &-home
         padding: 0 $size-step/4
+        transition: color .2s ease-out
+        & span
+          padding-left: 9px
         &:hover
-          color: $dark-blue-krayola
+          color: $main-green
+          & svg
+            fill: $main-green
       &-arrow
         padding: 0 1rem
       &-link
+        display: flex
         opacity: 0.5
         &:hover
           opacity: 1 !important
