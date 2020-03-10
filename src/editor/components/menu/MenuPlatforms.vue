@@ -45,13 +45,15 @@ export default {
     ...mapActions('Sidebar', [
       'setControlPanel',
       'setDevice',
-      'toggleSidebar'
+      'toggleSidebar',
+      'toggleSectionsTreeMenu'
     ]),
 
     selectDevice (type) {
       this.$router.push(`/editor/${this.$route.params.slug}`)
       this.setControlPanel(false)
-      this.toggleSidebar(false)
+      this.toggleSidebar(true)
+      this.toggleSectionsTreeMenu(true)
       this.setDevice(type)
     }
   }
