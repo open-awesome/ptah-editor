@@ -1,7 +1,10 @@
 <template>
   <div class="b-main-left-menu"
     id="sectionsContents"
-    :class="{'_expanded': isExpanded}"
+    :class="[
+      { '_expanded': isExpanded },
+      { '_selected-item': isSectionsTreeExpanded || activePanel !== '' }
+    ]"
   >
     <div class="b-main-left-menu-list">
       <div
@@ -60,7 +63,7 @@ export default {
 
   data () {
     return {
-
+      activePanel: ''
     }
   },
 
@@ -91,6 +94,7 @@ export default {
     },
 
     openPanels (panel) {
+      this.activePanel = panel
       this.toggleSidebar(true)
 
       if (panel === 'sectionsTree') {
@@ -107,6 +111,7 @@ export default {
 
         if (this.modalContentID === panel) {
           this.toggleSidebar(false)
+          this.activePanel = ''
         } else {
           this.$router.push(`/editor/${this.$route.params.slug}/settings/${panel}`)
         }
@@ -132,6 +137,8 @@ export default {
 
   background-color: #f3f6f6
   transition: width 0.3s ease-in-out
+  &._selected-item
+    box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.15)
   &-list
     height: 100%
     &__item,
@@ -146,10 +153,10 @@ export default {
 
       cursor: pointer
       transition: background 0.1s ease-in-out
-      border-left: transparent 5px solid
+      border-left: transparent 0 solid
       user-select: none
       &:hover
-        background: rgba(36, 206, 215, 0.1)
+        background: #def2f2
       &-icon
         display: flex
         justify-content: center
@@ -195,4 +202,60 @@ export default {
         & .b-main-left-menu-list__item-text
           opacity: 0
 
+.b-main-left-menu-list__item._open
+  position: relative
+  &:before
+    content: ''
+    position: absolute
+    top: -15px
+    right: 0
+    left: -5px
+    z-index: 1
+    height: 15px
+    background-color: #f3f6f6
+    border-radius: 0 0 15px 0
+    box-shadow: inset 0 -2px -2px rgba(0, 0, 0, 0.15)
+  &:after
+    content: ''
+    position: absolute
+    top: -15px
+    right: 0
+    left: -5px
+    z-index: 0
+    height: 15px
+    background-color: #fff
+
+  & + .b-main-left-menu-list__item
+    position: relative
+    &:before
+      content: ''
+      position: absolute
+      top: 0
+      right: 0
+      left: -5px
+      z-index: 1
+      height: 15px
+      background-color: #f3f6f6
+      border-radius: 0 15px 0 0
+      box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.15)
+    &:after
+      content: ''
+      position: absolute
+      top: 0
+      right: 0
+      left: -5px
+      z-index: 0
+      height: 15px
+      background-color: #fff
+    &:hover
+      &:before
+        background: #def2f2
+      &:after
+        background: #fff
+
+.b-main-left-menu-list__item:hover ~ .b-main-left-menu-list__item._open
+  &:before
+    background: #def2f2
+  &:after
+    background: #fff
 </style>

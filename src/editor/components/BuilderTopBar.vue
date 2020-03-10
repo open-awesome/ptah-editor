@@ -83,12 +83,17 @@ export default {
               name="home"
               width="20"
               height="17"
-              color="rgba(51, 51, 51, 0.45)"
+              color="#575A5F"
             />
-            <span>Home</span>
+            <span>My board</span>
           </span>
           <span class="b-top-bar-menu__crumbs-arrow">
-            →
+            <IconBase
+              name="arrowToRight"
+              width="16"
+              height="8"
+              color="#575A5F"
+            />
           </span>
           <span :title="landingName">
             {{ landingName | truncate(35, '...') }}
@@ -103,17 +108,18 @@ export default {
         />
       </div>
       <div class="b-top-bar-menu__right">
-        <span :tooltip="$t('nav.preview')" tooltip-position="bottom"
-              @click="$emit('preview', $event)">
-          <icon-base name="preview">
-          </icon-base>
-        </span>
-
-        <span :tooltip="$t('nav.export')" tooltip-position="bottom"
-              @click="$emit('export', $event)">
-          <icon-base name="export">
-          </icon-base>
-        </span>
+        <BaseButton
+          @click="$emit('preview', $event)"
+          size="middle"
+        >
+          {{ $t('nav.preview') }}
+        </BaseButton>
+        <BaseButton
+           @click="$emit('export', $event)"
+           size="middle"
+        >
+          {{ $t('nav.export') }}
+        </BaseButton>
       </div>
     </div>
   </div>
@@ -148,7 +154,7 @@ export default {
       order: 2
       width: 14rem
       &-margin
-        margin: 0 0 0 $size-step*9
+        margin: 0 0 0 33rem
     &__right
       order: 3
       width: 45%
@@ -164,32 +170,21 @@ export default {
         &:hover
           color: $main-green
 
-    &__ham
-      cursor: pointer
-      color: $grey
-      &:hover
-        color: $main-green
     &__crumbs
       display: flex
 
       color: $dark-grey
+      font-weight: 600
       padding: 0
       white-space: nowrap
       &-home
         padding: 0 $size-step/4
-        transition: color .2s ease-out
-        & span
-          padding-left: 9px
-        &:hover
-          color: $main-green
-          & svg
-            fill: $main-green
+        & svg
+          margin-right: 20px
       &-arrow
         padding: 0 1rem
       &-link
         display: flex
-        opacity: 0.5
         &:hover
-          opacity: 1 !important
           cursor: pointer
 </style>

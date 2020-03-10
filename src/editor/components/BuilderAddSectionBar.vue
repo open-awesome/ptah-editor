@@ -234,7 +234,7 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-add-section
-  width: $size-step*9
+  width: 29.5rem
   background: $white
   position: relative
   z-index: 1

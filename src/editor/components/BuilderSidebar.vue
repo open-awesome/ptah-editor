@@ -11,7 +11,7 @@
 
     <!-- Shows Control panel -->
     <div
-      v-if="controlPanel.expanded"
+      v-show="controlPanel.expanded"
       class="b-builder-sidebar-settings"
     >
       <ControlPanel
@@ -22,7 +22,7 @@
     <!-- Showed Add Section panel -->
     <transition name="slide-fade">
       <div
-        v-if="isExpanded && isAddSectionExpanded"
+        v-show="isExpanded && isAddSectionExpanded"
         class="b-builder-sidebar-add-section"
       >
         <BuilderAddSectionBar

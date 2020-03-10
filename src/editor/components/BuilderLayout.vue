@@ -143,14 +143,17 @@ $topBarHeight: 6rem
     &._expanded
       width: 9rem
   &__sidebar
-    display: none
+    width: 0
     position: relative
     padding: 6rem 0 0
+    opacity: 0
 
     order: 1
     flex-shrink: 0
-    transition: width 0.3s ease-in-out
+    transition: width, opacity 0.3s ease-in-out
     &_expanded
+      opacity: 1
+      width: 29.5rem
       display: flex
 
   &__main

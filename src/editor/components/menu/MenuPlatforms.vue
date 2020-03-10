@@ -3,16 +3,17 @@ import { mapState, mapActions } from 'vuex'
 
 export default {
   data: () => ({
-    inactiveColor: 'rgba(51, 51, 51, 0.3)',
+    inactiveColor: '#A2A5A5',
     items: [
       {
         name: 'is-mobile',
         icon: {
           name: 'platformMobile',
-          width: 10,
-          height: 17
+          width: 25,
+          height: 25
         }
       },
+      /*
       {
         name: 'is-laptop',
         icon: {
@@ -21,12 +22,13 @@ export default {
           height: 13.7
         }
       },
+      */
       {
         name: 'is-desktop',
         icon: {
           name: 'platformDesktop',
-          width: 16,
-          height: 12.5
+          width: 28,
+          height: 25
         }
       }
     ]
@@ -99,12 +101,13 @@ export default {
 
     outline: none
     cursor: pointer
+    & svg
+      transition: 0.3s ease-in-out
     &:hover
       svg
         fill: $main-green
     &_active
       color: $main-green
-      opacity: 1
     &_mobile
       border-right: none
     &_laptop
