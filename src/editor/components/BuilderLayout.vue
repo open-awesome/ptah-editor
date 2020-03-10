@@ -49,7 +49,6 @@ import { mapState } from 'vuex'
 import BuilderMainLeftMenu from './BuilderMainLeftMenu'
 import BuilderSidebar from './BuilderSidebar.vue'
 import BuilderTopBar from './BuilderTopBar.vue'
-import BuilderModalContent from './BuilderModalContent.vue'
 import { sectionsGroups } from '@cscripts/sectionsGroups'
 
 export default {
@@ -71,7 +70,6 @@ export default {
   components: {
     BuilderSidebar,
     BuilderTopBar,
-    BuilderModalContent,
     BuilderMainLeftMenu
   },
 
@@ -129,8 +127,6 @@ $topBarHeight: 6rem
 
     transition: all .2s ease-out
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15)
-    &_down
-      z-index: 0
 
 .b-builder-layout-content
   display: flex

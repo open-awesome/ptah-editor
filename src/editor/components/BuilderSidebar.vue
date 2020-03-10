@@ -3,8 +3,9 @@
     <!-- Show Sections panel -->
     <div class="b-builder-sidebar__content">
        <PanelSectionsTree
-         v-if="isExpanded && isSectionsTreeExpanded"
+         v-show="isExpanded && isSectionsTreeExpanded"
          :builder="builder"
+         :increment="increment"
        />
     </div>
 
@@ -19,17 +20,19 @@
     </div>
 
     <!-- Showed Add Section panel -->
-    <div
-      v-if="isExpanded && isAddSectionExpanded"
-      class="b-builder-sidebar-add-section"
-    >
-      <BuilderAddSectionBar
-        :builder="builder"
-        :title="$t('nav.addSection')"
-        @add="onAddSection"
-        @requestClose="closeAddSectionBar">
-      </BuilderAddSectionBar>
-    </div>
+    <transition name="slide-fade">
+      <div
+        v-if="isExpanded && isAddSectionExpanded"
+        class="b-builder-sidebar-add-section"
+      >
+        <BuilderAddSectionBar
+          :builder="builder"
+          :title="$t('nav.addSection')"
+          @add="onAddSection"
+          @requestClose="closeAddSectionBar">
+        </BuilderAddSectionBar>
+      </div>
+    </transition>
 
   </div>
 </template>
@@ -66,6 +69,12 @@ export default {
     isExpanded: {
       required: true,
       type: Boolean
+    }
+  },
+
+  data () {
+    return {
+      increment: 0
     }
   },
 
@@ -167,6 +176,7 @@ export default {
 
     closeAddSectionBar () {
       this.toggleAddSectionMenu(false)
+      this.toggleSectionsTreeMenu(true)
     }
   }
 }
@@ -233,11 +243,13 @@ $top-panel-height: 7.2rem
 
   &-settings,
   &-add-section
-    width: $size-step*9
+    width: 100%
     position: absolute
     left: 0
     top: 0
     bottom: 0
+    z-index: 20
+
     display: flex
 
 // Animations down here

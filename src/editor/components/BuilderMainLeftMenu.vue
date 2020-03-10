@@ -82,26 +82,34 @@ export default {
       'toggleSectionsTreeMenu'
     ]),
 
-    showSectionsTreeBar () {
-      this.toggleSectionsTreeMenu()
-    },
-
     closeSiteSettings () {
+      if (this.$route.fullPath === `/editor/${this.$route.params.slug}`) {
+        return
+      }
+
       this.$router.push(`/editor/${this.$route.params.slug}`)
     },
 
     openPanels (panel) {
-      this.toggleSidebar()
+      this.toggleSidebar(true)
 
       if (panel === 'sectionsTree') {
-        this.showSectionsTreeBar()
-        return
-      }
-
-      if (this.modalContentID === panel) {
         this.closeSiteSettings()
+
+        if (this.isSectionsTreeExpanded === true) {
+          this.toggleSidebar(false)
+          this.toggleSectionsTreeMenu(false)
+        } else {
+          this.toggleSectionsTreeMenu(true)
+        }
       } else {
-        this.$router.push(`/editor/${this.$route.params.slug}/settings/${panel}`)
+        this.toggleSectionsTreeMenu(false)
+
+        if (this.modalContentID === panel) {
+          this.toggleSidebar(false)
+        } else {
+          this.$router.push(`/editor/${this.$route.params.slug}/settings/${panel}`)
+        }
       }
     }
   }
@@ -138,7 +146,7 @@ export default {
 
       cursor: pointer
       transition: background 0.1s ease-in-out
-      border-left: transparent 2px solid
+      border-left: transparent 5px solid
       user-select: none
       &:hover
         background: rgba(36, 206, 215, 0.1)
@@ -173,7 +181,7 @@ export default {
          opacity: 1
       &._open
         background-color: #fff
-        border-left: $main-green 2px solid
+        border-left: $main-green 5px solid
         & .b-main-left-menu-list__item-icon
           width: 36px
           height: 36px

@@ -95,10 +95,12 @@ export default {
       if (this.isAddSectionExpanded) {
         this.toggleAddSectionMenu(false)
       }
+      this.toggleSidebar(false)
     },
 
     closeSettingsBar () {
       this.clearSettingObjectLight()
+      this.toggleSidebar(false)
     },
 
     toggleSiteSettings (contentID) {
@@ -122,10 +124,10 @@ export default {
   background-color: rgba($dark-blue, 0.2)
 
   position: fixed
-  top: 0
+  top: 6rem
   right: 0
   bottom: 0
-  left: 0
+  left: 9rem
   z-index: 999
   overflow: auto
 
@@ -137,9 +139,8 @@ export default {
     &
       display: block
   &-content
-    width: 90%
-    min-height: 90%
-    min-width: 750px
+    width: 100%
+    min-height: 100%
     z-index: 10
     position: relative
 
@@ -148,7 +149,6 @@ export default {
     display: flex
     flex-direction: column
     justify-content: stretch
-
     @media only screen and (max-height: 600px)
       &
         width: 100%

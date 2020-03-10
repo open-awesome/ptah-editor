@@ -37,12 +37,29 @@ export default {
         name: 'menu.visualSettings'
       },
       {
+        id: 'fonts',
+        name: 'menu.fonts'
+      },
+      {
+        id: 'addJsScrips',
+        name: 'menu.addJs'
+      },
+      {
         id: 'seoSettings',
         name: 'menu.seo'
       },
       {
+        id: 'integrations',
+        name: 'menu.integrations'
+      }
+      /*
+      {
         id: 'cookiesSettings',
         name: 'menu.cookie'
+      },
+      {
+        id: 'openGraph',
+        name: 'menu.openGraph'
       },
       {
         id: 'addJsScrips',
@@ -51,23 +68,8 @@ export default {
       {
         id: 'addCss',
         name: 'menu.addCss'
-      },
-      {
-        id: 'integrations',
-        name: 'menu.integrations'
-      },
-      {
-        id: 'openGraph',
-        name: 'menu.openGraph'
-      },
-      {
-        id: 'fonts',
-        name: 'menu.fonts'
       }
-      // {
-      //   id: 'versionHistory',
-      //   name: 'Version history'
-      // }
+      */
     ],
     builderSections: [],
     builderGroups: [], // section layouts

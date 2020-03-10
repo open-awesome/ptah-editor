@@ -2,6 +2,7 @@
   <div class="b-menu-tree">
     <base-scroll-container backgroundBar="#999">
       <!-- header section -->
+
       <menu-tree-item
         v-if="headerSection()"
         :section="headerSection()"
@@ -94,7 +95,9 @@ import { resetIndents } from '@editor/util'
 
 export default {
   name: 'menuTree',
-  components: { MenuTreeItem },
+  components: {
+    MenuTreeItem
+  },
   props: {
     sections: {
       required: true
@@ -531,7 +534,7 @@ export default {
   height: 100%
 
   &__group
-    background: rgba($grey-middle, .1)
+    // background: rgba($grey-middle, .1)
 
     .tree-node
       padding-left: 3.2rem

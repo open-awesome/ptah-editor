@@ -1,10 +1,10 @@
 <template>
-  <div class="b-panel">
+  <div class="b-panel" id="sections_contents">
     <h6 class="b-panel__title">
       <span>
         {{ $t('menu.sections') }}
       </span>
-      <span class="b-builder-sidebar__icon-add"
+      <span class="b-panel__icon-add"
         slot="icon"
         :tooltip="$t('nav.addSection')"
         tooltip-position="bottom"
@@ -14,7 +14,10 @@
            strokeColor="transparent"
          />
       </span>
-      <span class="b-builder-sidebar__icon-close" @click="toggleSidebarSection">
+      <span
+        class="b-panel__icon-close"
+       @click="closeSidebarSection"
+      >
         <IconBase
           name="close"
           width="14"
@@ -23,12 +26,11 @@
       </span>
     </h6>
 
-    <div class="b-panel__control">
+    <div class="b-panel__content">
       <!-- Show added sections -->
-      <div class="b-builder-sidebar__content-outer">
+      <div class="b-panel__content-outer">
         <MenuTree
-          v-if="!controlPanel.expanded && isExpanded"
-          :sections="this.builder.sections"
+          :sections="builder.sections"
           :builder="builder"
           :inc="increment"
         />
@@ -45,12 +47,6 @@ import ControlSectionLayouts from './../controls/TheControlSectionLayouts.vue'
 export default {
   name: 'ThePanelSectionsTree',
 
-  data () {
-    return {
-      increment: 0
-    }
-  },
-
   components: {
     ControlSectionLayouts,
     MenuTree
@@ -59,6 +55,10 @@ export default {
   props: {
     builder: {
       type: Object,
+      required: true
+    },
+    increment: {
+      type: Number,
       required: true
     }
   },
@@ -73,7 +73,8 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'toggleSidebar',
-      'toggleAddSectionMenu'
+      'toggleAddSectionMenu',
+      'toggleSectionsTreeMenu'
     ]),
 
     ...mapActions('Landing', [
@@ -104,9 +105,68 @@ export default {
       }
     },
 
-    toggleSidebarSection () {
-      this.toggleSidebar()
+    closeSidebarSection () {
+      this.toggleSidebar(false)
+      this.toggleSectionsTreeMenu(false)
     }
   }
 }
 </script>
+
+<style lang="sass" scoped>
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
+.b-panel
+  &__title
+    position: relative
+    display: flex
+    align-items: center
+    justify-content: flex-start
+    width: 100%
+    padding: 1.7rem 3.1rem
+    font-size: 2rem
+    line-height: 1.2
+    letter-spacing: -0.02em
+  &__icon-add
+    width: $size-step/2
+    height: $size-step/2
+    color: $grey
+    display: flex
+    align-items: center
+    justify-content: center
+    border-radius: 100%
+    cursor: pointer
+    margin: 1px 0 0 11px
+    &:hover
+      color: $main-green
+  &__icon-close
+    color: $grey
+    position: absolute
+    top: 18px
+    right: 17px
+    cursor: pointer
+    &:hover
+      color: $main-green
+  &__content
+    height: 100%
+
+    display: flex
+    flex-direction: column
+
+    min-height: 0
+    overflow: auto
+    &-inner
+      padding: 0
+    /deep/
+      .vb.vb-invisible .vb-content
+        padding-right: 0 !important
+        overflow: hidden !important
+        width: 100% !important
+      .vb.vb-visible .vb-content
+        padding-right: 0 !important
+        width: calc(100% + 17px) !important
+    &-outer
+      height: 100%
+      padding: 0
+</style>
