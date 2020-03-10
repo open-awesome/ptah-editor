@@ -24,6 +24,8 @@ import en from '@assets/lang/en.json'
 import ru from '@assets/lang/ru.json'
 
 import { truncate } from '@src/filters/truncate'
+import Raven from 'raven-js'
+import RavenVue from 'raven-js/plugins/vue'
 
 Vue.use(VueRouter)
 Vue.use(Vuex)
@@ -48,10 +50,19 @@ Vue.use(VueScrollTo, {
   y: true
 })
 
-if (process.env.VUE_GTAG !== undefined) {
+if (process.env.VUE_APP_GTAG !== undefined) {
   Vue.use(VueGtag, {
-    config: { id: process.env.VUE_GTAG }
+    config: { id: process.env.VUE_APP_GTAG }
   })
+}
+if (process.env.NODE_ENV === 'production') {
+  Raven
+    .config(process.env.PUBLIC_HOST === 'http://ptah.super.com/' ? process.env.VUE_APP_SENTRY : process.env.VUE_APP_SENTRYTST,
+      {
+        debug: true
+      })
+    .addPlugin(RavenVue, Vue)
+    .install()
 }
 
 sync(store, router)
