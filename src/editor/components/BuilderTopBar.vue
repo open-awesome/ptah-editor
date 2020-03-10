@@ -152,7 +152,7 @@ export default {
       justify-content: flex-start
     &__middle
       order: 2
-      width: 14rem
+      width: 8rem
       &-margin
         margin: 0 0 0 33rem
     &__right
