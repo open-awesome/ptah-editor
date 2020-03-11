@@ -11,7 +11,7 @@
 
     <!-- Shows Control panel -->
     <div
-      v-show="controlPanel.expanded"
+      v-if="controlPanel.expanded"
       class="b-builder-sidebar-settings"
     >
       <ControlPanel
