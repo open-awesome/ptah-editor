@@ -31,20 +31,20 @@
           {{ item.name }}
         </span>
       </div>
+      <div class="b-main-left-menu-list__item" />
     </div>
-    <div class="b-main-left-menu-list__progress">
-      <span
-        class="b-main-left-menu-list__progress-icon"
-      >
-        <IconBase
-          name="progress"
-        />
+    <div class="b-main-left-menu-list__progress"
+     @click="openPanels('progress')"
+     :class="[
+       { '_open' : isProgressPanelExpanded },
+     ]"
+    >
+      <span class="b-main-left-menu-list__progress-icon">
+        <IconBase name="progress" />
       </span>
-      <span
-        class="b-main-left-menu-list__progress-text"
-      >
-          Progress
-        </span>
+      <span class="b-main-left-menu-list__progress-text" >
+        Progress
+      </span>
     </div>
   </div>
 </template>
@@ -71,7 +71,8 @@ export default {
     ...mapState('Sidebar', [
       'mainLeftMenu',
       'isExpanded',
-      'isSectionsTreeExpanded'
+      'isSectionsTreeExpanded',
+      'isProgressPanelExpanded'
     ]),
 
     modalContentID () {
@@ -82,7 +83,8 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'toggleSidebar',
-      'toggleSectionsTreeMenu'
+      'toggleSectionsTreeMenu',
+      'toggleProgressPanelExpanded'
     ]),
 
     closeSiteSettings () {
@@ -97,8 +99,22 @@ export default {
       this.activePanel = panel
       this.toggleSidebar(true)
 
+      if (panel === 'progress') {
+        this.closeSiteSettings()
+        this.toggleSectionsTreeMenu(false)
+
+        if (this.isProgressPanelExpanded === true) {
+          this.toggleSidebar(false)
+          this.toggleProgressPanelExpanded(false)
+        } else {
+          this.toggleProgressPanelExpanded(true)
+        }
+        return
+      }
+
       if (panel === 'sectionsTree') {
         this.closeSiteSettings()
+        this.toggleProgressPanelExpanded(false)
 
         if (this.isSectionsTreeExpanded === true) {
           this.toggleSidebar(false)
@@ -106,15 +122,16 @@ export default {
         } else {
           this.toggleSectionsTreeMenu(true)
         }
+        return
+      }
+
+      if (this.modalContentID === panel) {
+        this.toggleSidebar(false)
+        this.activePanel = ''
       } else {
         this.toggleSectionsTreeMenu(false)
-
-        if (this.modalContentID === panel) {
-          this.toggleSidebar(false)
-          this.activePanel = ''
-        } else {
-          this.$router.push(`/editor/${this.$route.params.slug}/settings/${panel}`)
-        }
+        this.toggleProgressPanelExpanded(false)
+        this.$router.push(`/editor/${this.$route.params.slug}/settings/${panel}`)
       }
     }
   }
@@ -202,6 +219,7 @@ export default {
         & .b-main-left-menu-list__item-text
           opacity: 0
 
+.b-main-left-menu-list__progress._open,
 .b-main-left-menu-list__item._open
   position: relative
   &:before

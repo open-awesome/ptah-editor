@@ -22,6 +22,7 @@ export default {
     isShowModal: false, // show/hide modal of elemets settings
     isAddSectionExpanded: false, // show/hide add section panel
     isSectionsTreeExpanded: false, // show/hide panel of sections tree
+    isProgressPanelExpanded: false, // show/hide progress panel
     isResizeStop: false, // resize elements
     isDragStop: false, // drag elements in slots
     isGrouping: false, // section grouping interface
@@ -94,6 +95,9 @@ export default {
     isSectionsTreeExpanded (state, value) {
       state.isSectionsTreeExpanded = value
     },
+    isProgressPanelExpanded (state, value) {
+      state.isProgressPanelExpanded = value
+    },
     setSettingObjectType (state, value) {
       state.settingObjectType = value
     },
@@ -158,6 +162,10 @@ export default {
 
     toggleSectionsTreeMenu ({ state, commit }, value) {
       commit('isSectionsTreeExpanded', (typeof value !== 'undefined') ? value : !state.isSectionsTreeExpanded)
+    },
+
+    toggleProgressPanelExpanded ({ state, commit }, value) {
+      commit('isProgressPanelExpanded', (typeof value !== 'undefined') ? value : !state.isProgressPanelExpanded)
     },
 
     /**

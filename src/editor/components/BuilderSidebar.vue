@@ -1,13 +1,11 @@
 <template>
   <div class="b-builder-sidebar" :class="{'b-builder-sidebar_expanded': isExpanded}">
     <!-- Show Sections panel -->
-    <div class="b-builder-sidebar__content">
-       <PanelSectionsTree
-         v-show="isExpanded && isSectionsTreeExpanded"
-         :builder="builder"
-         :increment="increment"
-       />
-    </div>
+    <PanelSectionsTree
+      v-show="isExpanded && isSectionsTreeExpanded"
+      :builder="builder"
+      :increment="increment"
+    />
 
     <!-- Shows Control panel -->
     <div
@@ -34,6 +32,13 @@
       </div>
     </transition>
 
+    <!-- Show Progress panel -->
+    <div class="b-builder-sidebar__content">
+      <PanelProgress
+        v-if="isExpanded && isProgressPanelExpanded"
+      />
+    </div>
+
   </div>
 </template>
 
@@ -47,6 +52,7 @@ import { mapActions, mapState } from 'vuex'
 import ControlPanel from './panels/TheControlPanel'
 import MenuTree from './MenuTree'
 import PanelSectionsTree from './panels/ThePanelSectionsTree.vue'
+import PanelProgress from './panels/ThePanelProgress.vue'
 
 export default {
   name: 'BuilderSidebar',
@@ -59,7 +65,8 @@ export default {
     BuilderSettingsBar,
     BuilderSettingsSlots,
     BuilderAddSectionBar,
-    PanelSectionsTree
+    PanelSectionsTree,
+    PanelProgress
   },
 
   props: {
@@ -84,6 +91,7 @@ export default {
       'settingObjectSection',
       'isAddSectionExpanded',
       'isSectionsTreeExpanded',
+      'isProgressPanelExpanded',
       'settingObjectType',
       'sectionsGroups',
       'sandbox',
@@ -134,6 +142,7 @@ export default {
       'toggleSidebar',
       'toggleAddSectionMenu',
       'toggleSectionsTreeMenu',
+      'toggleProgressPanelExpanded',
       'setControlPanel',
       'setElement'
     ]),
