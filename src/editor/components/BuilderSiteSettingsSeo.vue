@@ -5,9 +5,7 @@
 
         <!-- Title & Favicon -->
         <base-fieldset>
-          <base-heading level="2">{{ $t('s.title') }}</base-heading>
-
-          <base-fieldset-row width="wide">
+          <base-fieldset-row width="auto">
             <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
           </base-fieldset-row>
 

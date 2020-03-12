@@ -3,10 +3,10 @@
     :class="{'b-base-text-field_error': hasError}">
     <label class="b-base-text-field__label">
 
-      <base-label v-if="label || $slots.label" :hasError="hasError" :hasFocus="hasFocus">
+      <div class="b-base-text-field__title" v-if="label || $slots.label" :hasError="hasError" :hasFocus="hasFocus">
         {{label}}
         <slot name="label"></slot>
-      </base-label>
+      </div>
 
       <input class="b-base-text-field__input" type="text"
         ref="inputText"
@@ -75,7 +75,7 @@ export default {
 .b-base-text-field
   $this: &
 
-  font-size: 1.4rem
+  font-size: 1.3rem
   line-height: 1.7rem
   width: 100%
 
@@ -85,14 +85,23 @@ export default {
   &__label
     display: block
 
+  &__title
+    font-size: 1.3rem
+    font-weight: bold
+    line-height: 1.8rem
+    text-transform: uppercase
+    color: $main-green
+    margin-bottom: 1.8rem
+
   &__input
     background: transparent
     width: 100%
-    height: 2.6rem
-    color: #272727
-    font-size: 1.6rem
-    border: 0
-    border-bottom: 1px solid #e2e2e2
+    height: 3.5rem
+    padding: 0 1.28rem
+    color: #A2A5A5
+    font-size: 1.2rem
+    border: 2px solid $main-green
+    border-radius: 5px
     transition: border-color 0.1s ease
 
     &::placeholder

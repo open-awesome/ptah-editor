@@ -45,6 +45,7 @@ const routes = [
       {
         path: 'settings',
         component: BuilderModalContent,
+        redirect: { name: BuilderSiteSettingsVisual },
         children: [
           {
             path: 'visualSettings',
