@@ -206,13 +206,14 @@ $top-panel-height: 7.2rem
   opacity: 0
 
   height: auto
-  width: $size-step * 9
+  width: 0
 
   background: $white
   color: $black
-  transition: 1s ease-in-out
+  transition: width, opacity 0.3s cubic-bezier(.2,.85,.4,1.275)
   &_expanded
     opacity: 1
+    width: $size-step * 9
 
   &__content
     height: 100%

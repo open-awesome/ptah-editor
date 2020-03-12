@@ -4,27 +4,28 @@
       <span>
         {{ $t('menu.sections') }}
       </span>
-      <span class="b-panel__icon-add"
-        slot="icon"
-        :tooltip="$t('nav.addSection')"
-        tooltip-position="bottom"
-        @click.stop="showAddSectionBar">
-         <IconBase
-           name="plus"
-           strokeColor="transparent"
-         />
-      </span>
       <span
         class="b-panel__icon-close"
        @click="closeSidebarSection"
       >
         <IconBase
-          name="close"
-          width="14"
-          height="14"
+          name="firstPage"
+          width="13"
+          height="12"
+          color="#a2a5a5"
         />
       </span>
     </h6>
+
+    <div class="b-panel__add">
+      <BaseButton
+        @click="showAddSectionBar"
+        color="main-green"
+        size="middle"
+      >
+        Add section
+      </BaseButton>
+    </div>
 
     <div class="b-panel__content">
       <!-- Show added sections -->
@@ -118,36 +119,35 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-panel
+  transition: all .3s cubic-bezier(.2,.85,.4,1.275)
   &__title
     position: relative
-    display: flex
-    align-items: center
-    justify-content: flex-start
     width: 100%
-    padding: 1.7rem 3.1rem
-    font-size: 2rem
-    line-height: 1.2
-    letter-spacing: -0.02em
-  &__icon-add
-    width: $size-step/2
-    height: $size-step/2
-    color: $grey
+
+    padding: 2.2rem 3.1rem
+    font-size: 1.8rem
+    line-height: 1.8
+    letter-spacing: 0.065em
+    text-transform: uppercase
+    font-family: 'Open Sans', Arial
+    color: #575A5F
+    font-weight: 600
+    text-align: center
+  &__add
+    width: 100%
+
     display: flex
-    align-items: center
     justify-content: center
-    border-radius: 100%
-    cursor: pointer
-    margin: 1px 0 0 11px
-    &:hover
-      color: $main-green
+
+    margin-bottom: 2.6rem
   &__icon-close
-    color: $grey
     position: absolute
-    top: 18px
+    top: 22px
     right: 17px
     cursor: pointer
     &:hover
-      color: $main-green
+      & svg
+        fill: $main-green
   &__content
     height: 100%
 

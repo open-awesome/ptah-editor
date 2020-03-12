@@ -131,7 +131,7 @@ export default {
     width: 100%
     display: flex
     justify-content: flex-start
-    padding: 1.6rem 2.5rem 1.6rem 1.6rem
+    padding: 1.6rem 1.3rem 1.6rem 1.6rem
     cursor: pointer
 
     &__drag
@@ -155,18 +155,18 @@ export default {
         text-overflow: ellipsis
 
     &:hover
-      background: rgba(116, 169, 230, 0.25)
+      background: rgba(0, 173, 182, 0.1)
       .menu-tree-item__name
-        color: #000
+        color: #575A5F
       .menu-tree-item__drag
         visibility: visible
       .menu-tree-item__controls
         visibility: visible
 
     &.selected
-      background: rgba(116, 169, 230, 0.25)
+      background: rgba(0, 173, 182, 0.1)
       .menu-tree-item__name
-        color: #000
+        color: #575A5F
       .menu-tree-item__controls
         visibility: visible
 

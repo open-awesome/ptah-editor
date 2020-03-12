@@ -21,7 +21,9 @@
         "apply":                        "Apply",
         "back":                         "Back",
         "create":                       "Create",
-        "addSection":                   "Add section"
+        "addSection":                   "Add section",
+        "publish":                      "Publish",
+        "help":                         "Help"
     },
     "s": {
         "background":                   "Background",

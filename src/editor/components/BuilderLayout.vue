@@ -10,6 +10,7 @@
       @export="$emit('export', $event)"
       @save="$emit('save', $event)"
       :landingName="$store.state.name"
+      :builder="builder"
     />
     <div class="b-builder-layout-content">
       <div class="b-builder-layout-content__main-left-menu"
