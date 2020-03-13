@@ -9,7 +9,7 @@
         :total-steps="totalSteps"
         :strokeWidth="2"
         :startColor="`#55D287`"
-        :stopColor="`#2275D7`"
+        :stopColor="`#00ADB6`"
         :innerStrokeColor="`#E4E4E4`"
       >
       </radial-progress-bar>
@@ -38,7 +38,7 @@
              @drop="onDrop"
              :style="style"
              v-else>
-          <IconBase name="plus" width="16" height="16" color="#2275D7" />
+          <IconBase name="plus" width="16" height="16" color="#00ADB6" />
 
           <input
             :multiple="multiple"
