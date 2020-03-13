@@ -14,6 +14,7 @@
         @click="openPanels(item.panel)"
         :class="[
           { '_open' : isSectionsTreeExpanded && item.name === 'Sections' },
+          { '_open' : controlPanel.expanded && item.name === 'Sections' &&  modalContentID !== item.panel && !isSectionsTreeExpanded},
           { '_open' : modalContentID === item.panel }
         ]"
       >
@@ -71,6 +72,7 @@ export default {
     ...mapState('Sidebar', [
       'mainLeftMenu',
       'isExpanded',
+      'controlPanel',
       'isSectionsTreeExpanded',
       'isProgressPanelExpanded'
     ]),
@@ -84,6 +86,7 @@ export default {
     ...mapActions('Sidebar', [
       'toggleSidebar',
       'toggleSectionsTreeMenu',
+      'toggleAddSectionMenu',
       'toggleProgressPanelExpanded'
     ]),
 
@@ -98,6 +101,7 @@ export default {
     openPanels (panel) {
       this.activePanel = panel
       this.toggleSidebar(true)
+      this.toggleAddSectionMenu(false)
 
       if (panel === 'progress') {
         this.closeSiteSettings()
@@ -126,6 +130,7 @@ export default {
       }
 
       if (this.modalContentID === panel) {
+        this.closeSiteSettings()
         this.toggleSidebar(false)
         this.activePanel = ''
       } else {

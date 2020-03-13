@@ -131,6 +131,7 @@ export default {
       this.isVisibleBar = false
       this.selectedSection = null
       this.selectedGroup = null
+      this.processing = false
     },
     toggleView () {
       this.fullScreenView = !this.fullScreenView
@@ -234,14 +235,12 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-add-section
-  width: 29.5rem
+  width: $size-step * 9
   background: $white
   position: relative
   z-index: 1
 
   background: $white
-  box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
-
   &__toggle-bar
     position: absolute
     top: 1.5rem

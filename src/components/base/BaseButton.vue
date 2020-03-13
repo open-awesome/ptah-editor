@@ -17,6 +17,7 @@ export default {
           'transparent',
           'white',
           'main-green',
+          'main-green-transparent',
           'yellow-transparent'
         ]
         return values.indexOf(value) !== -1
@@ -96,6 +97,8 @@ export default {
 .b-pth-base-button
   font-family: 'Open Sans', Helvetica, Arial, sans-serif
   font-size: 1.6rem
+  text-transform: uppercase
+  font-weight: 800
   line-height: 1
   padding: .8rem 0
   letter-spacing: 0.1em

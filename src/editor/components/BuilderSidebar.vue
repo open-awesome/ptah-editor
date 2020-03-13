@@ -245,7 +245,6 @@ $top-panel-height: 7.2rem
     display: flex
     flex-direction: column
     flex-grow: 1
-    box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
     &.slots-settings
       flex-direction: row
       .slots-settings__list
