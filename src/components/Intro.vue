@@ -12722,6 +12722,7 @@ export default {
     ...mapMutations('User', ['setGuestUser']),
 
     goDemo () {
+      window.fbq('track', 'openDemo')
       this.setGuestUser(true)
       this.$router.push({ path: `/editor/demo` })
     }
