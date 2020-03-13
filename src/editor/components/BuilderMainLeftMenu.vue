@@ -15,6 +15,7 @@
         :class="[
           { '_open' : isSectionsTreeExpanded && item.name === 'Sections' },
           { '_open' : controlPanel.expanded && item.name === 'Sections' &&  modalContentID !== item.panel && !isSectionsTreeExpanded},
+          { '_open' : isAddSectionExpanded && item.name === 'Sections' &&  modalContentID !== item.panel && isSectionsTreeExpanded},
           { '_open' : modalContentID === item.panel }
         ]"
       >
@@ -74,7 +75,8 @@ export default {
       'isExpanded',
       'controlPanel',
       'isSectionsTreeExpanded',
-      'isProgressPanelExpanded'
+      'isProgressPanelExpanded',
+      'isAddSectionExpanded'
     ]),
 
     modalContentID () {

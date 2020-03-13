@@ -11,7 +11,8 @@
         :class="{ 'selected' : itemSelected(headerSection())}"
         class="isHeader"
         @click="setActive(headerSection(), $event)"
-        v-scroll-to="`#section_${headerSection().id}`" />
+        v-scroll-to="`#section_${headerSection().id}`"
+      />
 
       <!-- tree menu -->
       <div class="node-sortable tree-root" ref="tree">
@@ -27,7 +28,8 @@
             v-on:select="onSelect"
             v-on:delete="onDelete"
             v-scroll-to="`#section_${item.id}`"
-            class="tree-node draggable" />
+            class="tree-node draggable"
+          />
           <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
             <div class="b-menu-tree__group-name">
               <span>Group</span>

@@ -1,17 +1,17 @@
 <template>
   <div class="menu-tree-item" @click="$emit('click', $event)" @click.ctrl="onClickCtrl">
     <div class="menu-tree-item__header-sign">
-      #
+      <IconBase name="lock" />
     </div>
     <div class="menu-tree-item__drag">
-      <icon-base name="dragNew"></icon-base>
+      <IconBase name="dragNew"/>
     </div>
     <div class="menu-tree-item__name"
       :tooltip="section.name"
       tooltip-position="bottom"
     >
       <span>
-        {{section.name}}
+        {{ section.name }}
       </span>
     </div>
     <div class="menu-tree-item__controls">
@@ -29,13 +29,13 @@
         @click.stop="showBackgroundPanel(section)">
         <icon-base name="background"></icon-base>
       </span>
-      <span
+      <!--span
         class="menu-tree-item__control"
         tooltip="Delete"
         tooltip-position="bottom"
         @click.stop="deleteSection(section)">
         <icon-base name="remove"></icon-base>
-      </span>
+      </span-->
     </div>
   </div>
 </template>
@@ -131,7 +131,7 @@ export default {
     width: 100%
     display: flex
     justify-content: flex-start
-    padding: 1.6rem 1.3rem 1.6rem 1.6rem
+    padding: 1.3rem 1.3rem 1.3rem 1.6rem
     cursor: pointer
 
     &__drag
@@ -145,7 +145,7 @@ export default {
 
     &__header-sign
       display: none
-      width: 1.5rem
+      width: 3rem
 
     &__name
       > span
