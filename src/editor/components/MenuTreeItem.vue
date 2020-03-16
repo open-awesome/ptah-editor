@@ -6,10 +6,7 @@
     <div class="menu-tree-item__drag">
       <IconBase name="dragNew"/>
     </div>
-    <div class="menu-tree-item__name"
-      :tooltip="section.name"
-      tooltip-position="bottom"
-    >
+    <div class="menu-tree-item__name">
       <span>
         {{ section.name }}
       </span>
@@ -17,25 +14,20 @@
     <div class="menu-tree-item__controls">
       <span
         class="menu-tree-item__control"
-        tooltip="Section settings"
-        tooltip-position="bottom"
         @click.stop="showSettingsBar(section)">
-        <icon-base name="cog"></icon-base>
+        <IconBase
+          width="24"
+          height="18"
+          name="overscan"
+        />
       </span>
       <span
         class="menu-tree-item__control"
-        tooltip="Section background"
-        tooltip-position="bottom"
         @click.stop="showBackgroundPanel(section)">
-        <icon-base name="background"></icon-base>
+        <IconBase
+          name="backgroundGrey"
+        />
       </span>
-      <!--span
-        class="menu-tree-item__control"
-        tooltip="Delete"
-        tooltip-position="bottom"
-        @click.stop="deleteSection(section)">
-        <icon-base name="remove"></icon-base>
-      </span-->
     </div>
   </div>
 </template>
@@ -125,19 +117,22 @@ export default {
 
 <style lang="sass" scoped>
   .menu-tree-item
-    color: $gray300
+    color: #A2A5A5
     font-size: 1.6rem
     line-height: 1.9rem
-    width: 100%
+
     display: flex
     justify-content: flex-start
-    padding: 1.3rem 1.3rem 1.3rem 1.6rem
+
+    padding: 1.3rem 1.1rem 1.3rem 1.6rem
+    margin: 0 1.6rem 0 1.3rem
     cursor: pointer
 
     &__drag
       visibility: hidden
       margin-right: 1.2rem
-      width: .3rem
+      width: 1.6rem
+      text-align: center
       svg
         width: .3rem
         height: 1.4rem
@@ -156,6 +151,8 @@ export default {
 
     &:hover
       background: rgba(0, 173, 182, 0.1)
+      & svg
+        fill: #575A5F
       .menu-tree-item__name
         color: #575A5F
       .menu-tree-item__drag
@@ -184,10 +181,10 @@ export default {
       opacity: .8
 
     &__control
-      margin-left: 1rem
+      margin-left: 1.6rem
       svg
-        width: 1.5rem
-        height: 1.5rem
+        // width: 1.5rem
+        // height: 1.5rem
 
       &:hover
         color: $main-green

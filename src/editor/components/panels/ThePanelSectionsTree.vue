@@ -22,6 +22,7 @@
         @click="showAddSectionBar"
         color="main-green"
         size="middle"
+        :disabled="isAddSectionExpanded"
       >
         Add section
       </BaseButton>
@@ -67,7 +68,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'controlPanel',
-      'isExpanded'
+      'isExpanded',
+      'isAddSectionExpanded'
     ])
   },
 

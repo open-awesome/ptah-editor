@@ -46,9 +46,9 @@ export default {
 }
 </script>
 
-<style scoped>
-svg {
-  display: inline-block;
-  vertical-align: baseline;
-}
+<style lang="sass" scoped>
+svg
+  display: inline-block
+  vertical-align: baseline
+  transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
 </style>

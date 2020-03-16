@@ -213,7 +213,7 @@ $top-panel-height: 7.2rem
   transition: width, opacity 0.3s cubic-bezier(.2,.85,.4,1.275)
   &_expanded
     opacity: 1
-    width: $size-step * 9
+    width: 305px
 
   &__content
     height: 100%
@@ -239,7 +239,7 @@ $top-panel-height: 7.2rem
 
   &-settings
     position: absolute
-    right: -24.8rem
+    left: 0
     top: 0.8rem
     bottom: 0.8rem
     display: flex
@@ -250,11 +250,10 @@ $top-panel-height: 7.2rem
       .slots-settings__list
         margin-right: .8rem
 
-  &-settings,
   &-add-section
     width: 100%
     position: absolute
-    left: 0
+    left: 305px
     top: 0
     bottom: 0
     z-index: 20
