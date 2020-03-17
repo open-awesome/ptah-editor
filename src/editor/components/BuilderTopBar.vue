@@ -143,7 +143,7 @@ export default {
     },
 
     openHelpPage () {
-      window.open('https://docs.stg.ptah.super.com/')
+      window.open(process.env.VUE_APP_HELP)
     }
   }
 }
