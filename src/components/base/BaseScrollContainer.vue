@@ -10,7 +10,8 @@ export default {
       type: Object
     },
     backgroundBar: {
-      type: String
+      type: String,
+      default: '#00ADB6'
     }
   },
   computed: {
@@ -99,13 +100,13 @@ export default {
 
 .vb > .vb-dragger:hover > .vb-dragger-styler
   background-color: var(--bg-color)
-  margin: 0px
+  margin: 0
   height: 100%
   opacity: 0.5
 
 .vb.vb-dragging > .vb-dragger > .vb-dragger-styler
   background-color: var(--bg-color)
-  margin: 0px
+  margin: 0
   height: 100%
   opacity: 0.5
 

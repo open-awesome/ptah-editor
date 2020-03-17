@@ -40,75 +40,77 @@
     <!-- Open Graph -->
     <div class="layout" v-if="activeTab === 'og'">
       <base-scroll-container>
-        <div class="b-builder-site-settings-og__item"
-             v-for="ogField in ogFields"
-             :key="ogField.id">
-          <base-text-field
-            v-if="(ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 || ogField.id.indexOf('type') !== -1) && ogField.id.indexOf('locale') === -1"
-            v-model="ogField.value"
-            :placeholder="ogField.placeholder"
-            :label="ogField.label">
-          </base-text-field>
+        <div class="layout-padding">
+          <div class="b-builder-site-settings-og__item"
+               v-for="ogField in ogFields"
+               :key="ogField.id">
+            <base-text-field
+              v-if="(ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 || ogField.id.indexOf('type') !== -1) && ogField.id.indexOf('locale') === -1"
+              v-model="ogField.value"
+              :placeholder="ogField.placeholder"
+              :label="ogField.label">
+            </base-text-field>
 
-          <base-uploader
-            v-if="ogField.id.indexOf('image') !== -1"
-            v-model="ogField.value"
-            label="Image"
-          />
+            <base-uploader
+              v-if="ogField.id.indexOf('image') !== -1"
+              v-model="ogField.value"
+              label="Image"
+            />
 
-          <base-text-field
-            v-if="ogField.id.indexOf('url') !== -1"
-            v-model="ogField.value"
-            :label="ogField.label"
-            :hasError="error.url"
-            @input="validUrl(ogField.value)"
-          >
-            <span slot="error">
-              Please enter a valid URL
-            </span>
-          </base-text-field>
+            <base-text-field
+              v-if="ogField.id.indexOf('url') !== -1"
+              v-model="ogField.value"
+              :label="ogField.label"
+              :hasError="error.url"
+              @input="validUrl(ogField.value)"
+            >
+              <span slot="error">
+                Please enter a valid URL
+              </span>
+            </base-text-field>
 
-          <div class="b-open-graph__width"
-               v-if="ogField.id.indexOf('locale') !== -1"
-          >
-            <base-label>
-              {{ ogField.label }}
-            </base-label>
-            <div class="b-open-graph__row">
-              <div class="b-open-graph__col">
-                <BaseSelect
-                  class="b-open-graph__select"
-                  :options="locale[`${ogField.id}`].language.options"
-                  v-model="locale[`${ogField.id}`].language.selected"
-                  :search="true"
-                >
-                </BaseSelect>
+            <div class="b-open-graph__width"
+                 v-if="ogField.id.indexOf('locale') !== -1"
+            >
+              <base-label>
+                {{ ogField.label }}
+              </base-label>
+              <div class="b-open-graph__row">
+                <div class="b-open-graph__col">
+                  <BaseSelect
+                    class="b-open-graph__select"
+                    :options="locale[`${ogField.id}`].language.options"
+                    v-model="locale[`${ogField.id}`].language.selected"
+                    :search="true"
+                  >
+                  </BaseSelect>
+                </div>
+                <div class="b-open-graph__col b-open-graph__select">
+                  <BaseSelect
+                    :options="locale[`${ogField.id}`].territory.options"
+                    v-model="locale[`${ogField.id}`].territory.selected"
+                    :search="true"
+                  >
+                  </BaseSelect>
+                </div>
+                <div class="b-open-graph__col"
+                     v-text="localeSelected[`${ogField.id}`]"
+                />
               </div>
-              <div class="b-open-graph__col b-open-graph__select">
-                <BaseSelect
-                  :options="locale[`${ogField.id}`].territory.options"
-                  v-model="locale[`${ogField.id}`].territory.selected"
-                  :search="true"
-                >
-                </BaseSelect>
-              </div>
-              <div class="b-open-graph__col"
-                   v-text="localeSelected[`${ogField.id}`]"
-              />
             </div>
+
+            <base-uploader
+              v-if="ogField.id.indexOf('video') !== -1"
+              v-model="ogField.value"
+              label="Video"
+              type="video"
+            />
           </div>
 
-          <base-uploader
-            v-if="ogField.id.indexOf('video') !== -1"
-            v-model="ogField.value"
-            label="Video"
-            type="video"
-          />
-        </div>
-
-        <div>
-          <BaseButton size="middle" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
-          <BaseButton size="middle" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
+          <div>
+            <BaseButton size="middle" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
+            <BaseButton size="middle" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
+          </div>
         </div>
       </base-scroll-container>
     </div>
@@ -355,17 +357,23 @@ export default {
 @import '../../assets/sass/_variables.sass'
 .seo-panel
   height: 100%
-  display: flex
-  flex-direction: column
+  position: relative
 
 .seo-tabs
   margin-bottom: $size-step
 
 .layout
-  height: calc(100% - 7rem)
-  max-height: calc(100% - 7rem)
+  position: absolute
+  top: 6.4rem
+  right: 0
+  bottom: 1rem
+  left: 0
+
   box-sizing: border-box
-  padding: 0rem 3.8rem 4rem
+  padding: 0 0 3.8rem 4rem
+  &-padding
+    width: 100%
+    padding: 0 4rem 0 0
 
 .b-builder-site-settings-seo,
 .b-builder-site-settings-og
