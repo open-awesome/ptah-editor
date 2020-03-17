@@ -206,13 +206,14 @@ $top-panel-height: 7.2rem
   opacity: 0
 
   height: auto
-  width: $size-step * 9
+  width: 0
 
   background: $white
   color: $black
-  transition: 1s ease-in-out
+  transition: width, opacity 0.3s cubic-bezier(.2,.85,.4,1.275)
   &_expanded
     opacity: 1
+    width: 305px
 
   &__content
     height: 100%
@@ -238,23 +239,21 @@ $top-panel-height: 7.2rem
 
   &-settings
     position: absolute
-    right: -24.8rem
+    left: 0
     top: 0.8rem
     bottom: 0.8rem
     display: flex
     flex-direction: column
     flex-grow: 1
-    box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
     &.slots-settings
       flex-direction: row
       .slots-settings__list
         margin-right: .8rem
 
-  &-settings,
   &-add-section
     width: 100%
     position: absolute
-    left: 0
+    left: 305px
     top: 0
     bottom: 0
     z-index: 20

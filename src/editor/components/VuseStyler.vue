@@ -325,7 +325,14 @@ export default {
     prevent: false
   }),
   computed: {
-    ...mapState('Sidebar', ['sandbox', 'settingObjectOptions', 'isResizeStop', 'isDragStop', 'stylesBuffer', 'isShowModal']),
+    ...mapState('Sidebar', [
+      'sandbox',
+      'settingObjectOptions',
+      'isResizeStop',
+      'isDragStop',
+      'stylesBuffer',
+      'isShowModal'
+    ]),
     ...mapState('Landing', ['textEditorActive']),
 
     // find path to element
@@ -461,7 +468,8 @@ export default {
       'toggleResizeStop',
       'toggleDragStop',
       'updateSettingOptions',
-      'updateStylesBuffer'
+      'updateStylesBuffer',
+      'toggleSectionsTreeMenu'
     ]),
 
     setPanels (panel, isEditText) {
@@ -673,6 +681,7 @@ export default {
 
       // hide panel
       this.setControlPanel(false)
+      this.toggleSectionsTreeMenu(true)
 
       this.el.contentEditable = 'false'
       this.el.classList.remove('styler-active')

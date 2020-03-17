@@ -103,7 +103,7 @@ export default {
   height: 2.5rem
 
   background-color: transparent
-  font-family: Lato, Helvetica, Arial, sans-serif
+  font-family: 'Lato', Helvetica, Arial, sans-serif
   cursor: pointer
   & *
     user-select: none

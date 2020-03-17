@@ -303,7 +303,6 @@ export default {
       'setSettingSection',
       'toggleSidebar',
       'setControlPanel',
-      'toggleSidebar',
       'toggleAddSectionMenu',
       'clearSettingObject',
       'clearSettingObjectLight',

@@ -1,3 +1,77 @@
+<template>
+  <div class="b-top-bar" id="topbar">
+    <div class="b-top-bar__padd">
+      <div class="b-top-bar-menu">
+        <div class="b-top-bar-menu__left">
+          <div class="b-top-bar-menu__crumbs">
+            <span class="b-top-bar-menu__crumbs-home b-top-bar-menu__crumbs-link"
+              :tooltip="homeTooltipText"
+              tooltip-position="bottom"
+              @click="backToLandings"
+              >
+              <IconBase
+                name="home"
+                width="20"
+                height="17"
+                color="#575A5F"
+              />
+              <span>My board</span>
+            </span>
+            <span class="b-top-bar-menu__crumbs-arrow">
+              <IconBase
+                name="arrowToRight"
+                width="16"
+                height="8"
+                color="#575A5F"
+              />
+            </span>
+            <span :title="landingName">
+              {{ landingName | truncate(35, '...') }}
+            </span>
+          </div>
+        </div>
+        <div class="b-top-bar-menu__middle"
+          :class="{'b-top-bar-menu__middle-margin' : isExpanded }"
+          >
+          <MenuPlatforms
+            @setDevice="setDevice"
+          />
+        </div>
+        <div class="b-top-bar-menu__right">
+          <BaseButton
+            @click="openHelpPage"
+            color="yellow-transparent"
+            size="small"
+          >
+            {{ $t('nav.help') }}
+            <IconBase
+              name="help"
+              width="12"
+              height="12"
+            />
+          </BaseButton>
+          <BaseButton
+            @click="$emit('preview', $event)"
+            color="main-green-transparent"
+            size="small"
+            :disabled="builder.sections.length === 0"
+          >
+            {{ $t('nav.preview') }}
+          </BaseButton>
+          <BaseButton
+             @click="$emit('export', $event)"
+             color="main-green"
+             size="small"
+             :disabled="builder.sections.length === 0"
+          >
+            {{ $t('nav.publish') }}
+          </BaseButton>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script>
 import MenuPlatforms from './menu/MenuPlatforms.vue'
 import { mapState, mapActions } from 'vuex'
@@ -9,6 +83,10 @@ export default {
 
   props: {
     landingName: {
+      required: true
+    },
+    builder: {
+      type: Object,
       required: true
     }
   },
@@ -62,69 +140,14 @@ export default {
       await this.$nextTick()
 
       this.$emit(item, event)
+    },
+
+    openHelpPage () {
+      window.open(process.env.VUE_APP_HELP)
     }
   }
 }
 </script>
-
-<template>
-<div class="b-top-bar" id="topbar">
-
-  <div class="b-top-bar__padd">
-    <div class="b-top-bar-menu">
-      <div class="b-top-bar-menu__left">
-        <div class="b-top-bar-menu__crumbs">
-          <span class="b-top-bar-menu__crumbs-home b-top-bar-menu__crumbs-link"
-            :tooltip="homeTooltipText"
-            tooltip-position="bottom"
-            @click="backToLandings"
-            >
-            <IconBase
-              name="home"
-              width="20"
-              height="17"
-              color="#575A5F"
-            />
-            <span>My board</span>
-          </span>
-          <span class="b-top-bar-menu__crumbs-arrow">
-            <IconBase
-              name="arrowToRight"
-              width="16"
-              height="8"
-              color="#575A5F"
-            />
-          </span>
-          <span :title="landingName">
-            {{ landingName | truncate(35, '...') }}
-          </span>
-        </div>
-      </div>
-      <div class="b-top-bar-menu__middle"
-        :class="{'b-top-bar-menu__middle-margin' : isExpanded }"
-        >
-        <MenuPlatforms
-          @setDevice="setDevice"
-        />
-      </div>
-      <div class="b-top-bar-menu__right">
-        <BaseButton
-          @click="$emit('preview', $event)"
-          size="middle"
-        >
-          {{ $t('nav.preview') }}
-        </BaseButton>
-        <BaseButton
-           @click="$emit('export', $event)"
-           size="middle"
-        >
-          {{ $t('nav.export') }}
-        </BaseButton>
-      </div>
-    </div>
-  </div>
-</div>
-</template>
 
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
@@ -159,16 +182,9 @@ export default {
       order: 3
       width: 45%
       text-align: right
-      .active
-        svg
-          color: $main-green
-      span
-        margin-left: 1.6rem
-      svg
-        color: $grey
-        cursor: pointer
-        &:hover
-          color: $main-green
+      padding-right: 5px
+      button
+        margin: 0 10px
 
     &__crumbs
       display: flex
