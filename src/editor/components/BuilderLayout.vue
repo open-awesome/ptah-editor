@@ -10,6 +10,7 @@
       @export="$emit('export', $event)"
       @save="$emit('save', $event)"
       :landingName="$store.state.name"
+      :builder="builder"
     />
     <div class="b-builder-layout-content">
       <div class="b-builder-layout-content__main-left-menu"
@@ -127,7 +128,6 @@ $topBarHeight: 6rem
 
     transition: all .2s ease-out
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15)
-
 .b-builder-layout-content
   display: flex
   align-items: stretch
@@ -137,7 +137,6 @@ $topBarHeight: 6rem
   z-index: 0
   &__main-left-menu
     width: 5rem
-    overflow: hidden
     transition: width 0.3s ease-in-out
     &:hover,
     &._expanded
@@ -153,7 +152,7 @@ $topBarHeight: 6rem
     transition: width, opacity 0.3s ease-in-out
     &_expanded
       opacity: 1
-      width: 29.5rem
+      width: 30.5rem
       display: flex
 
   &__main

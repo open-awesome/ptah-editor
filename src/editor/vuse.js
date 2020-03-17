@@ -80,10 +80,9 @@ class Vuse {
    * Removes a section with the specified id.
    * @param {String|Number} id
    */
-  remove (section) {
-    const id = this.sections.findIndex(s => s.id === section.id)
-    this.sections.splice(id, 1)
-    section.destroy()
+  remove (sectionId) {
+    const index = this.sections.findIndex(s => s.id === sectionId)
+    this.sections.splice(index, 1)
   }
 
   /**

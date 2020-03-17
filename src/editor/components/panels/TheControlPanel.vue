@@ -65,9 +65,13 @@ export default {
   },
 
   methods: {
-    ...mapActions('Sidebar', ['setControlPanel']),
+    ...mapActions('Sidebar', [
+      'toggleSidebar',
+      'setControlPanel'
+    ]),
 
     close () {
+      this.toggleSidebar(false)
       this.setControlPanel(false)
     }
   },
@@ -118,7 +122,6 @@ export default {
   flex-direction: column
 
   background: $white
-  box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
 
   color: $dark-grey
   font-size: 1.4rem
