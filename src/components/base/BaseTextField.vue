@@ -78,6 +78,7 @@ export default {
   font-size: 1.3rem
   line-height: 1.7rem
   width: 100%
+  color: $main-green
 
   &_error
     color: #FF3737
@@ -86,12 +87,10 @@ export default {
     display: block
 
   &__title
-    font-size: 1.3rem
+    font-size: .9rem
     font-weight: bold
-    line-height: 1.8rem
-    text-transform: uppercase
-    color: $main-green
-    margin-bottom: 1.8rem
+    line-height: 1rem
+    margin: 0 0 .5rem 1.28rem
 
   &__input
     background: transparent
