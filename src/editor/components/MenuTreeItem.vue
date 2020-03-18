@@ -129,7 +129,6 @@ export default {
     cursor: pointer
 
     &__drag
-      visibility: hidden
       margin-right: 1.2rem
       width: 1.6rem
       text-align: center
@@ -155,17 +154,11 @@ export default {
         fill: #575A5F
       .menu-tree-item__name
         color: #575A5F
-      .menu-tree-item__drag
-        visibility: visible
-      .menu-tree-item__controls
-        visibility: visible
 
     &.selected
       background: rgba(0, 173, 182, 0.1)
       .menu-tree-item__name
         color: #575A5F
-      .menu-tree-item__controls
-        visibility: visible
 
     &.isHeader
       .menu-tree-item__drag
@@ -174,7 +167,6 @@ export default {
         display: inline-block
 
     &__controls
-      visibility: hidden
       display: flex
       justify-content: flex-end
       flex-grow: 1
@@ -182,9 +174,6 @@ export default {
 
     &__control
       margin-left: 1.6rem
-      svg
-        // width: 1.5rem
-        // height: 1.5rem
 
       &:hover
         color: $main-green
