@@ -7,7 +7,7 @@
           <!-- Title & Favicon -->
           <div class="b-builder-site-settings-seo__item">
             <base-caption>Page title </base-caption>
-            <BaseTextField :placeholder="$t('s.pageTitle')" v-model="pageTitle" />
+            <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
           </div>
 
           <div class="b-builder-site-settings-seo__item">
@@ -30,15 +30,10 @@
               placeholder="Paste pdf file"/>
           </div>
         </form>
-
-      <div>
-        <BaseButton size="middle" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
-        <BaseButton size="middle" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
-      </div>
     </div>
 
     <!-- Open Graph -->
-    <div class="layout" v-if="activeTab === 'og'">
+    <div class="layout layout__og" v-if="activeTab === 'og'">
       <base-scroll-container>
         <div class="layout-padding">
           <div class="b-builder-site-settings-og__item"
@@ -106,13 +101,13 @@
               type="video"
             />
           </div>
-
-          <div>
-            <BaseButton size="middle" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
-            <BaseButton size="middle" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
-          </div>
         </div>
       </base-scroll-container>
+    </div>
+
+    <div class="seo-panel__controls">
+      <BaseButton size="small" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton size="small" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </div>
 </template>
@@ -359,6 +354,18 @@ export default {
   height: 100%
   position: relative
 
+  &__controls
+    position: absolute
+    bottom: 0
+    left: 0
+    right: 0
+    height: 9rem
+    padding: 0 2.2rem
+    border-top: 1px solid rgba(162, 165, 165, 0.1)
+    display: flex
+    align-items: center
+    justify-content: flex-end
+
 .seo-tabs
   margin-bottom: $size-step
 
@@ -366,14 +373,16 @@ export default {
   position: absolute
   top: 6.4rem
   right: 0
-  bottom: 1rem
+  bottom: 9rem
   left: 0
 
   box-sizing: border-box
-  padding: 0 0 3.8rem 4rem
+  padding: 0 3.7rem 2rem
+  &__og
+    padding-right: 0
   &-padding
     width: 100%
-    padding: 0 4rem 0 0
+    padding: 0 5rem 0 0
 
 .b-builder-site-settings-seo,
 .b-builder-site-settings-og

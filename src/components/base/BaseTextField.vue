@@ -1,28 +1,28 @@
 <template>
   <div class="b-base-text-field"
-    :class="{'b-base-text-field_error': hasError}">
-    <label class="b-base-text-field__label">
-
-      <div class="b-base-text-field__title" v-if="label || $slots.label" :hasError="hasError" :hasFocus="hasFocus">
-        {{label}}
-        <slot name="label"></slot>
-      </div>
-
-      <input class="b-base-text-field__input" type="text"
-        ref="inputText"
-        v-bind="$attrs"
-        v-model="innerValue"
-        :placeholder="placeholder"
-        @input="$emit('input', innerValue)"
-        @focus="$emit('focus', $event), hasFocus = true"
-        @blur="$emit('blur', $event), hasFocus = false" />
-
-      <base-error-text v-if="hasError">
-        {{errorText}}
-        <slot name="error"></slot>
-      </base-error-text>
-
+    :class="{
+    'b-base-text-field_error': hasError,
+    'b-base-text-field_focus': hasFocus,
+    'b-base-text-field_filled': innerValue.length > 0
+    }">
+    <label class="b-base-text-field__label" v-if="label || $slots.label" :hasError="hasError" :hasFocus="hasFocus">
+      {{label}}
+      <slot name="label"></slot>
     </label>
+
+    <input class="b-base-text-field__input" type="text"
+       ref="inputText"
+       v-bind="$attrs"
+       v-model="innerValue"
+       :placeholder="placeholder"
+       @input="$emit('input', innerValue)"
+       @focus="$emit('focus', $event), hasFocus = true"
+       @blur="$emit('blur', $event), hasFocus = false" />
+
+    <base-error-text v-if="hasError">
+      {{errorText}}
+      <slot name="error"></slot>
+    </base-error-text>
   </div>
 </template>
 
@@ -72,52 +72,53 @@ export default {
 </script>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_variables.sass'
 .b-base-text-field
   $this: &
 
   font-size: 1.3rem
   line-height: 1.7rem
   width: 100%
-  color: $main-green
+  color: $dark-grey
+  position: relative
 
   &_error
-    color: #FF3737
+    color: $red-violet
+    #{$this}__input
+      border-color: $red-violet
+
+  &_focus
+    color: $main-green
+    #{$this}__input
+      border: 2px solid $main-green
 
   &__label
+    color: $dark-grey
+    font-size: 1.2rem
+    line-height: 1.6rem
+    margin-bottom: .82rem
     display: block
 
-  &__title
-    font-size: .9rem
-    font-weight: bold
-    line-height: 1rem
-    margin: 0 0 .5rem 1.28rem
-
   &__input
-    background: transparent
     width: 100%
     height: 3.5rem
-    padding: 0 1.28rem
-    color: #A2A5A5
-    font-size: 1.2rem
-    border: 2px solid $main-green
-    border-radius: 5px
-    transition: border-color 0.1s ease
+    padding: 0 1.2rem
+    color: $dark-grey
+    border: 1px solid rgba(162, 165, 165, 0.7)
+    font-size: 1.6rem
+    border-radius: 4px
+    transition: all .4s cubic-bezier(.25,.8,.25,1)
 
     &::placeholder
-      color: #CDCDCD;
-
-    .b-base-text-field_error &
-      border-color: #FF3737
-
-    &:hover
-      border-color: rgba(#0B99FF, 0.8)
+      font-size: 1.2rem
+      color: rgba(162, 165, 165, 0.7)
 
     &:focus
       outline: none
-      border-color: #0B99FF
 
     &:disabled
       border-color: transparent
       color: #888888
+      cursor: pointer
 
 </style>
