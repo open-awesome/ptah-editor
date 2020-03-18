@@ -4,7 +4,7 @@
       class="b-builder-layout__top-bar"
       :class="{
           'b-builder-layout__top-bar_down' : isContentVisible
-        }"
+      }"
       @backToLandings="backToLandings"
       @preview="$emit('preview', $event)"
       @export="$emit('export', $event)"
@@ -31,7 +31,9 @@
         />
       </aside>
 
-      <main class="b-builder-layout-content__main">
+      <main class="b-builder-layout-content__main"
+        :class="{'b-builder-layout-content__main_expanded': isExpanded}"
+      >
         <base-scroll-container
           backgroundBar="#fff">
           <div class="b-builder-layout-content__main-layout" :class="device">
@@ -114,6 +116,7 @@ $topBarHeight: 6rem
 .b-builder-layout
   position: relative
   min-width: 800px
+  height: 100vh
   min-height: 600px
 
   &__top-bar
@@ -128,42 +131,56 @@ $topBarHeight: 6rem
 
     transition: all .2s ease-out
     box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15)
+
 .b-builder-layout-content
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+
   display: flex
   align-items: stretch
+  justify-content: stretch
 
   width: 100%
-  position: relative
   z-index: 0
+
   &__main-left-menu
+    order: 1
     width: 5rem
     transition: width 0.3s ease-in-out
     &:hover,
     &._expanded
       width: 9rem
+
   &__sidebar
     width: 0
     position: relative
     padding: 6rem 0 0
     opacity: 0
 
-    order: 1
+    order: 2
     flex-shrink: 0
-    transition: width, opacity 0.3s ease-in-out
+    transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out
     &_expanded
       opacity: 1
       width: 30.5rem
       display: flex
-
   &__main
-    order: 2
-    flex-grow: 1
-    min-height: 5rem
-    margin: $topBarHeight 0 0
-    position: relative
+    position: absolute
+    top: $topBarHeight
+    right: 0
+    bottom: 0
+    left: 5rem
     z-index: 10
-    transition: width 0.3s ease-in-out
+
+    min-height: 5rem
+    transition: left 0.3s ease-in-out, width 0.3s ease-in-out
     background-color: $ligth-grey
+
+    &_expanded
+      left: 40.5rem
 
     &-layout
       transition: width 0.2s
@@ -180,4 +197,7 @@ $topBarHeight: 6rem
       &.is-mobile
         width: 37rem
         max-width: 100%
+
+.b-builder-layout-content__main-left-menu:not(._expanded):hover ~ .b-builder-layout-content__main
+  left: 9rem
 </style>
