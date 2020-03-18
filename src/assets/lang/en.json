@@ -2,7 +2,7 @@
     "menu": {
         "siteSettings":                 "Settings",
         "sections":                     "Sections",
-        "visualSettings":               "Visual",
+        "visualSettings":               "Style settings",
         "seo":                          "SEO",
         "cookie":                       "Cookies",
         "addJs":                        "Add JS ",

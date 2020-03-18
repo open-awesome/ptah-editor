@@ -32,20 +32,25 @@
           />
           <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
             <div class="b-menu-tree__group-name">
-              <span>Group</span>
-              <div class="b-menu-tree__group-controls">
-              <span
-                @click="showBackgroundPanel(item[0])"
-                tooltip="Group background"
-                tooltip-position="bottom">
-                <icon-base name="background"></icon-base>
+              <span>
+                Group
               </span>
+              <div class="b-menu-tree__group-controls">
                 <span
+                  class="b-menu-tree__group-controls-ungroup"
                   @click="ungroup(item[0])"
                   tooltip="Ungroup"
-                  tooltip-position="bottom">
-                <icon-base name="remove"></icon-base>
-              </span>
+                  tooltip-position="bottom"
+                >
+                  <IconBase name="delete" />
+                </span>
+                <span
+                  @click="showBackgroundPanel(item[0])"
+                  tooltip="Group background"
+                  tooltip-position="bottom"
+                >
+                  <IconBase name="backgroundGrey" />
+                </span>
               </div>
             </div>
             <menu-tree-item
@@ -65,17 +70,13 @@
       </div>
     </base-scroll-container>
 
-    <div class="b-menu-tree__group-control">
-      <div class="b-menu-tree__group-control--description" v-show="selectedSections.length <= 1">
+    <div class="b-menu-tree__bottom">
+      <div class="b-menu-tree__bottom-description">
         <IconBase name="pling" />
         <div>
           To group sections select them both holding “Ctrl” key
         </div>
       </div>
-
-      <base-confirm title="Group selected" @confirm="groupSections" @close="showConfirm = false" v-if="showConfirm">
-        After grouping, the background of all child sections will be deleted
-      </base-confirm>
 
       <base-button
         v-show="selectedSections.length > 1"
@@ -84,12 +85,12 @@
         color="main-green"
         class="b-menu-tree__group-together"
       >
-        Group selected
+        Group
       </base-button>
 
       <div
         class="b-delete-section"
-        v-show="menuTree.length > 0 && settingObjectSection.id"
+        v-show="menuTree.length > 0 && settingObjectSection.id && selectedSections.length === 1"
       >
         <span @click.stop="deleteSection">
           <IconBase
@@ -99,6 +100,10 @@
         </span>
       </div>
     </div>
+
+    <base-confirm title="Group selected" @confirm="groupSections" @close="showConfirm = false" v-if="showConfirm">
+      After grouping, the background of all child sections will be deleted
+    </base-confirm>
   </div>
 </template>
 
@@ -574,10 +579,9 @@ export default {
   height: 100%
 
   &__group
-    // background: rgba($grey-middle, .1)
-
     .tree-node
-      padding-left: 3.2rem
+      background: rgba($yellow, .1)
+      padding-left: 2.6rem
 
   &__group-name
     color: $gray300
@@ -588,41 +592,45 @@ export default {
 
     display: flex
     justify-content: space-between
-    padding: 1.6rem 1.6rem 1.6rem 3.1rem
+    padding: 1.3rem 1.1rem 1.3rem 1.6rem
+    margin: 0 1.6rem 0 1.3rem
 
   &__group-controls
     opacity: .7
     svg
-      width: 1.5rem
-      height: 1.5rem
       margin-left: 1.5rem
       cursor: pointer
+    &-ungroup
+      margin-right: 0.3rem
 
-  &__group-control
+  &__bottom
     position: absolute
     bottom: 0
     width: 100%
-    padding: 0 4.4rem 1.8rem 2.1rem
+    padding: 0 1rem
+    height: 9rem
 
-    &--description
+    display: flex
+    justify-content: stretch
+    align-items: center
+
+    &-description
       color: $grey-middle
-      font-size: 1.4rem
-      line-height: 1.7rem
+      font-size: 1.2rem
+      line-height: 1.6rem
       display: flex
       justify-content: flex-start
       align-items: center
+
+      padding: 0 .8rem 0 1.6rem
 
       svg
         width: 2.4rem
         height: 2.4rem
         margin-right: 1.1rem
 
-  &__group-together
-    width: 100% !important
-    background: transparent !important
-
 .b-delete-section
-  width: 100%
+  width: 10rem
   text-align: center
   padding: 1.6rem 0 .9rem
 

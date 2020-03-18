@@ -295,6 +295,7 @@ export default {
 .b-builder-site-settings-visual
   &__row
     display: flex
+    flex-direction: column
     align-items: center
 
     margin: $size-step/4 0

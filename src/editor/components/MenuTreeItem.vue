@@ -130,7 +130,6 @@ export default {
 
     &__drag
       margin-right: 1.2rem
-      width: 1.6rem
       text-align: center
       svg
         width: .3rem

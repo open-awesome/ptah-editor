@@ -178,7 +178,15 @@ $topBarHeight: 6rem
     min-height: 5rem
     transition: left 0.3s ease-in-out, width 0.3s ease-in-out
     background-color: $ligth-grey
-
+    &:after
+      content: ""
+      position: absolute
+      top: 0
+      left: 0
+      bottom: 0
+      width: 0.8rem
+      box-shadow: inset 2px 0 5px 0  rgba(0, 0, 0, 0.05)
+      z-index: 20
     &_expanded
       left: 40.5rem
 

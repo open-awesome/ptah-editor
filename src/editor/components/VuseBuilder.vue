@@ -271,6 +271,12 @@ export default {
 
     // listener keyUp press
     document.addEventListener('keyup', this.keyUp)
+
+    // hide all panels
+    this.toggleSidebar(false)
+    this.toggleSectionsTreeMenu(false)
+    this.toggleAddSectionMenu(false)
+    this.toggleProgressPanelExpanded(false)
   },
 
   updated () {
@@ -294,6 +300,7 @@ export default {
     this.clearStateStack()
     document.removeEventListener('keyup', this.keyUp)
   },
+
   methods: {
     ...mapActions(['clearLandingData']),
     ...mapActions('Sidebar', [
@@ -306,7 +313,10 @@ export default {
       'toggleAddSectionMenu',
       'clearSettingObject',
       'clearSettingObjectLight',
-      'toggleModal'
+      'toggleModal',
+      'toggleSectionsTreeMenu',
+      'toggleAddSectionMenu',
+      'toggleProgressPanelExpanded'
     ]),
     ...mapActions('Landing', [
       'saveState',

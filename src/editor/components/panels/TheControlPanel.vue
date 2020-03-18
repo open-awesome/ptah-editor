@@ -1,8 +1,13 @@
 <template>
   <!-- @click.stop was here. this breaks down the color picker -->
   <div class="b-control-panel">
-    <span class="b-control-panel__close" @click="close()">
-      <icon-base width="14" height="14" name="close"/>
+    <span class="b-control-panel__close" @click="close">
+      <IconBase
+        name="firstPage"
+        width="13"
+        height="12"
+        color="#a2a5a5"
+      />
     </span>
     <div class="b-control-panel__mobile" v-if="isMobile">
       Settings for mobile devices
@@ -67,12 +72,13 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'toggleSidebar',
-      'setControlPanel'
+      'setControlPanel',
+      'toggleSectionsTreeMenu'
     ]),
 
     close () {
-      this.toggleSidebar(false)
       this.setControlPanel(false)
+      this.toggleSectionsTreeMenu(true)
     }
   },
 
@@ -114,7 +120,7 @@ export default {
 
 .b-control-panel
   position: relative
-  width: $size-step*9
+  width: 305px
   height: 100%
   padding: 1.7rem 1rem 1.7rem 1.6rem
 

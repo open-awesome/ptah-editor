@@ -158,19 +158,26 @@ export default {
         &
           position: relative
     &__chapter
-      font-size: 2rem
-      line-height: $size-step*2
+      font-size: 1.8rem
+      font-weight: bold
+      line-height: 1
+      text-transform: uppercase
       text-align: center
+      letter-spacing: 0.065em
 
-      height: 7.5rem
-      padding: 0 2rem
+      display: flex
+      align-items: center
+      justify-content: center
+
+      height: 7rem
+      padding: 0.5rem 2rem 0
     &__layout
       position: relative
       height: 100%
     &__close
       position: absolute
-      top: 2.1rem
-      right: 2rem
+      top: 2.4rem
+      right: 2.1rem
       cursor: pointer
       z-index: 10
       &:hover svg

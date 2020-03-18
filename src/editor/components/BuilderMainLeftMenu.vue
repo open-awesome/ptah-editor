@@ -213,7 +213,8 @@ export default {
       &._open
         background-color: #fff
         border-left: $main-green 5px solid
-        & .b-main-left-menu-list__item-icon
+        & .b-main-left-menu-list__item-icon,
+        & .b-main-left-menu-list__progress-icon
           width: 36px
           height: 36px
 
@@ -223,8 +224,16 @@ export default {
               width: 28px
               height: 28px
               fill: #575A5F
-        & .b-main-left-menu-list__item-text
+        & .b-main-left-menu-list__progress-icon
+          margin-top: 2.5rem
+        & .b-main-left-menu-list__item-text,
+        & .b-main-left-menu-list__progress-text
           opacity: 0
+
+.b-main-left-menu-list__progress
+  padding-bottom: 2.2rem
+.b-main-left-menu-list__progress-text
+  padding-top: .2rem
 
 .b-main-left-menu-list__progress._open,
 .b-main-left-menu-list__item._open

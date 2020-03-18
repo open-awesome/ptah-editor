@@ -131,9 +131,8 @@ export default {
     line-height: 1.8
     letter-spacing: 0.065em
     text-transform: uppercase
-    font-family: 'Open Sans', Arial
     color: #575A5F
-    font-weight: 600
+    font-weight: 800
     text-align: center
   &__add
     width: 100%
@@ -151,24 +150,17 @@ export default {
       & svg
         fill: $main-green
   &__content
+    width: calc(100% + 1.5rem)
     height: 100%
+    min-height: 0
+    padding: 0
 
     display: flex
     flex-direction: column
-
-    min-height: 0
     overflow: auto
     &-inner
       padding: 0
-    /deep/
-      .vb.vb-invisible .vb-content
-        padding-right: 0 !important
-        overflow: hidden !important
-        width: 100% !important
-      .vb.vb-visible .vb-content
-        padding-right: 0 !important
-        width: calc(100% + 17px) !important
     &-outer
       height: 100%
-      padding: 0
+      padding: 0 1.6rem 0 0
 </style>
