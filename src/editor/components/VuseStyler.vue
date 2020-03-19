@@ -473,7 +473,7 @@ export default {
     },
 
     elClick (event) {
-      if (!event.target.classList.contains('b-button__resize')) {
+      if (!event.target.classList.contains('b-button__resize') && !this.editText) {
         return
       }
 
