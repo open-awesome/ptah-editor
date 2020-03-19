@@ -1,9 +1,10 @@
 <template>
-  <div class="b-menu-tree">
+  <div class="b-menu-tree" ref="tree">
     <base-scroll-container backgroundBar="#999">
       <!-- header section -->
 
       <menu-tree-item
+        ref="header"
         v-if="headerSection()"
         :section="headerSection()"
         :builder="builder"
@@ -11,10 +12,11 @@
         :class="{ 'selected' : itemSelected(headerSection())}"
         class="isHeader"
         @click="setActive(headerSection(), $event)"
-        v-scroll-to="`#section_${headerSection().id}`" />
+        v-scroll-to="`#section_${headerSection().id}`"
+      />
 
       <!-- tree menu -->
-      <div class="node-sortable tree-root" ref="tree">
+      <div class="node-sortable tree-root">
         <template v-for="(item, index) in menuTree">
           <menu-tree-item
             v-if="!isGroup(item)"
@@ -24,10 +26,10 @@
             :data-id="item.id"
             :class="{ 'selected' : itemSelected(item) }"
             @click="setActive(item, $event)"
-            v-on:select="onSelect"
-            v-on:delete="onDelete"
+            @select="onSelect"
             v-scroll-to="`#section_${item.id}`"
-            class="tree-node draggable" />
+            class="tree-node draggable"
+          />
           <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
             <div class="b-menu-tree__group-name">
               <span>Group</span>
@@ -54,8 +56,7 @@
               :data-id="section.id"
               :class="{ 'selected' : itemSelected(section) }"
               is-group-item="true"
-              v-on:select="onSelect"
-              v-on:delete="onDelete"
+              @select="onSelect"
               v-scroll-to="`#section_${section.id}`"
               @click="setActive(section, $event)"
               class="tree-node group-node draggable" />
@@ -66,7 +67,7 @@
 
     <div class="b-menu-tree__group-control">
       <div class="b-menu-tree__group-control--description" v-show="selectedSections.length <= 1">
-        <icon-base name="pling"></icon-base>
+        <IconBase name="pling" />
         <div>
           To group sections select them both holding “Ctrl” key
         </div>
@@ -79,9 +80,24 @@
       <base-button
         v-show="selectedSections.length > 1"
         @click="showConfirm = true"
-        size="middle"
-        color="gray"
-        class="b-menu-tree__group-together">Group selected</base-button>
+        size="small"
+        color="main-green"
+        class="b-menu-tree__group-together"
+      >
+        Group selected
+      </base-button>
+
+      <div
+        class="b-delete-section"
+        v-show="menuTree.length > 0 && settingObjectSection.id"
+      >
+        <span @click.stop="deleteSection">
+          <IconBase
+            color="#575A5F"
+            name="delete"
+          />
+        </span>
+      </div>
     </div>
   </div>
 </template>
@@ -519,6 +535,30 @@ export default {
 
     autoHeightToMain (mainSection) {
       mainSection.set(`$sectionData.mainStyle.styles['height']`, 'auto')
+    },
+
+    deleteSection () {
+      const sectionId = this.selectedSections[0]
+
+      // update group
+      if (this.isSlaveSection(sectionId)) {
+        let master = _.find(this.sectionsGroups, o => o.children.indexOf(sectionId) > -1).main
+        let absorb = master.data.mainStyle.absorb
+        master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
+      }
+
+      this.builder.remove(sectionId)
+      this.clearSettingObject()
+
+      resetIndents()
+
+      this.onDelete()
+
+      this.saveState(this.builder.export('JSON'))
+    },
+
+    isSlaveSection (sectionId) {
+      return !!_.find(this.sectionsGroups, o => o.children.indexOf(sectionId) > -1)
     }
   }
 }
@@ -580,4 +620,15 @@ export default {
   &__group-together
     width: 100% !important
     background: transparent !important
+
+.b-delete-section
+  width: 100%
+  text-align: center
+  padding: 1.6rem 0 .9rem
+
+  & svg
+    transition: fill 0.3s cubic-bezier(.2,.85,.4,1.275)
+    cursor: pointer
+    &:hover
+      fill: #FFCF0D
 </style>

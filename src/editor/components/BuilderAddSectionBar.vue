@@ -95,7 +95,7 @@ export default {
       return this.fullScreenView ? '100%' : '28.8rem'
     },
 
-    filteredSeciton () {
+    filteredSection () {
       return this.fullScreenView ?
         this.selectedGroup.filter((section) => ~section.name.toLowerCase().indexOf(this.search.toLowerCase())) :
         this.selectedGroup
@@ -115,6 +115,7 @@ export default {
 
       this.processing = true
       this.selectedSection = section
+      this.selectedGroup = []
       this.addSection(this.selectedSection)
     },
     addSection (section) {
@@ -123,6 +124,12 @@ export default {
       this.$emit('add', this.builder.sections[this.builder.sections.length - 1])
     },
     showSelectSection (group) {
+      if (this.selectedGroup === group) {
+        this.isVisibleBar = !this.isVisibleBar
+        this.selectedGroup = []
+        return
+      }
+
       this.selectedGroup = group
       this.isVisibleBar = true
     },
@@ -131,6 +138,7 @@ export default {
       this.isVisibleBar = false
       this.selectedSection = null
       this.selectedGroup = null
+      this.processing = false
     },
     toggleView () {
       this.fullScreenView = !this.fullScreenView
@@ -144,7 +152,6 @@ export default {
 
 <template>
   <div class="b-add-section">
-
     <base-button
       v-if="isVisibleBar"
       color="white"
@@ -156,75 +163,78 @@ export default {
       <template v-if="!fullScreenView">{{ $t('s.fullScreenView') }}</template>
     </base-button>
 
-    <div class="b-add-section__header">
-      <span class="b-add-section__title">
-        {{ title }}
-      </span>
-      <span class="b-add-section__header-close-bt" @click="closeAddSectionBar">
-        <IconBase
-          name="close"
-          width="14"
-          height="14"
-        />
-      </span>
-    </div>
+    <span
+      class="b-add-section__close-bt"
+      @click="closeAddSectionBar"
+    >
+      <IconBase
+        name="close"
+        width="14"
+        height="14"
+      />
+    </span>
     <div class="b-add-section__padd">
       <BaseScrollContainer
         :styling="{ width: barWidth, height: '100%' }"
-        backgroundBar="#fff"
+        backgroundBar="#00ADB6"
       >
         <ul class="b-add-section__menu is-visiable" ref="menu">
           <li class="b-add-section__menu-group"
-              :class="[{ 'b-add-section__menu-group_selected': group === selectedGroup}, `g_${name}`]"
-              v-for="(group, name) in groups"
-              :key="name"
-              v-if="group.length"
-              @click="showSelectSection(group)">
-            <div class="b-add-section__menu-ico">
-              <icon-base :name="groupSrc[name].ico" :width="groupSrc[name].width" />
+            :class="[{ 'b-add-section__menu-group_selected': group === selectedGroup}, `g_${name}`]"
+            v-for="(group, name) in groups"
+            :key="name"
+            v-if="group.length"
+            @click="showSelectSection(group)"
+          >
+            <div class="b-add-section__menu-group-item">
+              <div class="b-add-section__menu-ico">
+                <IconBase
+                  :name="groupSrc[name].ico"
+                  :width="groupSrc[name].width"
+                />
+              </div>
+              <div class="b-add-section__menu-header">
+                <span class="b-add-section__menu-title">
+                  {{ name }}
+                </span>
+                <!--span class="b-add-section__menu-descr">
+                  {{ groupSrc[name].descr }}
+                </span-->
+              </div>
+              <div class="b-add-section__menu-arrow">
+                <IconBase width="12" name="arrowDown"/>
+              </div>
             </div>
-            <div class="b-add-section__menu-header">
-              <span class="b-add-section__menu-title">{{ name }}</span>
-              <span class="b-add-section__menu-descr">{{ groupSrc[name].descr }}</span>
+            <div class="b-add-section-bar" v-show="isVisibleBar && selectedGroup === group">
+              <template
+                v-for="(section, index) in filteredSection"
+              >
+                <div class="b-add-section-bar__menu-element"
+                  :class="{ 'b-add-section-bar__menu-element_selected': section === selectedSection }"
+                  v-bind:key="index"
+                  @click="selectSection(section)"
+                >
+                  <div class="b-add-section-bar__menu-image-holder">
+                    <img
+                      class="b-add-section-bar__menu-image"
+                      v-if="section.cover"
+                      :src="section.cover"
+                    />
+                    <div>
+                      <div class="b-add-section-bar__menu-title">
+                        {{ section.title }}
+                      </div>
+                      <div class="b-add-section-bar__menu-descr">
+                        {{ section.description }}
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </template>
             </div>
           </li>
         </ul>
       </BaseScrollContainer>
-
-      <div class="b-add-section-bar" v-if="isVisibleBar" :class="{'full-screen': fullScreenView}">
-        <div class="b-add-section-bar__header" v-if="fullScreenView">
-          <div class="b-add-section-bar__header--title">{{ selectedGroup[0].group }}</div>
-          <base-text-field
-            class="b-add-section-bar__header--search"
-            placeholder="Search ..."
-            v-model="search"></base-text-field>
-        </div>
-
-        <BaseScrollContainer classes="b-add-section-bar__scrollbar"
-          :styling="{ width: barWidth, height: '100%' }" backgroundBar="#333"
-          >
-        <div class="b-add-section-bar__menu">
-          <template v-for="(section, index) in filteredSeciton">
-            <div class="b-add-section-bar__menu-element"
-                 :class="{ 'b-add-section-bar__menu-element_selected': section === selectedSection }"
-                 v-bind:key="index"
-                 @click="selectSection(section)">
-              <div class="b-add-section-bar__menu-image-holder">
-                <img class="b-add-section-bar__menu-image" v-if="section.cover" :src="section.cover"/>
-                <div>
-                  <div class="b-add-section-bar__menu-title">
-                    {{ section.title }}
-                  </div>
-                  <div class="b-add-section-bar__menu-descr">
-                    {{ section.description }}
-                  </div>
-                </div>
-              </div>
-            </div>
-          </template>
-        </div>
-        </BaseScrollContainer>
-      </div>
     </div>
   </div>
 </template>
@@ -234,50 +244,36 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-add-section
-  width: 29.5rem
+  width: 290px
+
   background: $white
   position: relative
   z-index: 1
 
   background: $white
-  box-shadow: 0px 0.4rem 1rem rgba($black, 0.35)
-
+  border-radius: 0 10px 10px 0
+  box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
   &__toggle-bar
     position: absolute
     top: 1.5rem
-    left: 61rem
+    left: 90rem
     z-index: 20
     width: 17rem
 
-  &__header
-    position: relative
-
-    display: flex
-    align-items: center
-    justify-content: flex-start
-
-    width: 100%
-    padding: 1.7rem 3.1rem
-    &-close-bt
-      color: $grey
-      position: absolute
-      top: 24px
-      right: 17px
-      cursor: pointer
-      &:hover
-        color: $main-green
+  &__close-bt
+    color: $grey
+    position: absolute
+    top: 32px
+    right: 17px
+    cursor: pointer
+    &:hover
+      color: $main-green
   &__padd
-    padding: 0 0 8rem
-    height: calc(100% - 8rem)
+    padding: 8rem 0 0
+    height: 100%
 
     display: flex
     flex-direction: column
-
-  &__title
-    color: $black
-    font-size: 2rem
-    line-height: 1.2
-    letter-spacing: -0.02em
 
   &__closer
     position: absolute
@@ -292,65 +288,73 @@ export default {
     padding: 0
     margin: 0
     &-group
-      display: flex
-      justify-content: flex-start
-      align-items: flex-start
+      &-item
+        display: flex
+        justify-content: space-between
+        align-items: center
 
-      padding: $size-step/8 $size-step 0 1rem
+      margin: 0 11px
+      padding: 0 22px
       list-style: none
-      height: 6.6rem
-      font-size: 1.4rem
-      color: $gray300
+      height: 5rem
+      color: #A2A5A5
       cursor: pointer
 
       svg
-        fill: $grey-middle
+        fill: #A2A5A5
 
-      &_selected,
       &:hover
-        color: $dark-grey
-        background-color: rgba(116, 169, 230, 0.25)
+        cursor: pointer
+        background: rgba(0, 173, 182, 0.2)
+      &_selected
+        height: auto
+        color: $main-green
         svg
-          fill: $dark-grey
+          fill: $main-green
+        &:hover
+          background: transparent
+        & .b-add-section__menu-arrow
+          transform: rotate(180deg)
+    &-header
+      flex-grow: 1
     &-title
-      font-size: 1.6rem
-      line-height: 1.9rem
-      margin-bottom: .2rem
-      color: #4F4F4F
       display: block
-      text-transform: capitalize
 
-    &-descr
-      font-size: 1.4rem
-      line-height: 1.7rem
-      color: $grey-middle
-
+      font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif
+      font-size: 1.2rem
+      line-height: 5rem
+      font-weight: 600
+      text-align:  left
+      text-transform: uppercase
+      transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
     &-ico
-      width: 4.6rem
+      width: 5rem
       display: flex
       justify-content: center
       flex-shrink: 0
-      padding-top: .5rem
+      transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
+    &-arrow
+      width: 2.4rem
+      display: flex
+      justify-content: center
+      align-items: center
+
+      flex-shrink: 0
+      transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
 
   &-bar
-    position: absolute
-    top: 0
-    bottom: 0
-    left: 100%
-    width: calc(100vw - #{$size-step*9})
-    background-color: rgba($dark-blue, 0.45)
-    transition: left 0.3s ease-in-out
+    width: 100%
+    background-color: $white
+    transition: height 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
 
-    &>div
+    & > div
       background: $white
       transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
-      box-shadow: inset -1px 0px 8px rgba(0, 0, 0, 0.15)
     &__menu
       padding: 3.2rem 0 8rem
       &-element
         overflow: hidden
         box-sizing: border-box
-        margin: 0
         cursor: pointer
         display: flex
         align-items: center
@@ -358,6 +362,7 @@ export default {
         border: 0.2rem solid transparent
         transition: all 0.1s ease-in-out
         position: relative
+        margin: 0 -1.6rem
         &:hover::after
           content: ''
           display: block
@@ -366,7 +371,7 @@ export default {
           right: 0
           bottom: 0
           position: absolute
-          background: rgba(47, 110, 205, 0.2)
+          background: rgba(0, 173, 182, 0.1)
 
         &_selected
           background-color: #436FEE
@@ -382,7 +387,7 @@ export default {
         width: 24rem
         min-height: 18.6rem
         padding: 1.2rem .2rem 0
-        margin: 2.1rem 2.1rem 1.1rem
+        margin: 1.1rem
         position: relative
 
         display: flex
@@ -392,12 +397,13 @@ export default {
         max-width: 100%
       &-title
         font-size: 1.6rem
-        color: $dark-grey
+        font-weight: 600
+        color: #333333
         margin-bottom: .6rem
       &-descr
         font-size: 1.2rem
         line-height: 1.4rem
-        color: $grey-middle
+        color: #B1B1B1
 
       &-button
         display: none
@@ -450,19 +456,4 @@ export default {
     &__bt
       width: 21.6rem
       margin: 0 auto
-.full-screen
-  .b-add-section-bar__menu
-    display: flex
-    flex-wrap: wrap
-    padding: 0
-    &-element
-      flex-basis: 20%
-      border-bottom: 1px solid rgba(0, 0, 0, 0.15)
-      border-right: 1px solid rgba(0, 0, 0, 0.15)
-      @media only screen and (max-width: 1900px)
-        &
-          flex-basis: 25%
-      @media only screen and (max-width: 1600px)
-        &
-          flex-basis: 33.3%
 </style>

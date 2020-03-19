@@ -10,7 +10,7 @@
         :total-steps="totalSteps"
         :strokeWidth="3"
         :startColor="`#55D287`"
-        :stopColor="`#2275D7`"
+        :stopColor="`#00ADB6`"
         :innerStrokeColor="`#E4E4E4`"
       >
         <span class="b-uploader__progress">{{progress}}%</span>

@@ -198,7 +198,7 @@ export default {
       <!-- create new -->
       <figure class="b-dashboard__item create" @click="openWindow()">
         <div class="b-dashboard__item-cell b-dashboard__item--create">
-          <icon-base name="plus" width="40" height="40" color="#2275D7"></icon-base>
+          <icon-base name="plus" width="40" height="40" color="#00ADB6"></icon-base>
           <figcaption>{{ $t('d.createNew') }}</figcaption>
         </div>
       </figure>
@@ -208,13 +208,13 @@ export default {
         <div class="b-dashboard__item-cell">
           <div class="b-dashboard__item-icons">
             <a @click.stop="openSettigs(item)" class="b-dashboard__icon" tooltip="Settings">
-              <icon-base name="cog" color="#2275D7" width="18" hight="18"></icon-base>
+              <icon-base name="cog" color="#00ADB6" width="18" hight="18"></icon-base>
             </a>
             <div class="b-dashboard__icon" @click.stop="cloneItem(item)" tooltip="Duplicate landing">
-              <icon-base name="duplicate" color="#2275D7" width="18" hight="18"></icon-base>
+              <icon-base name="duplicate" color="#00ADB6" width="18" hight="18"></icon-base>
             </div>
             <div class="b-dashboard__icon" @click.stop="deleteItem(item)" tooltip="Delete">
-              <icon-base name="remove" color="#2275D7" width="18" hight="18"></icon-base>
+              <icon-base name="remove" color="#00ADB6" width="18" hight="18"></icon-base>
             </div>
           </div>
           <div class="b-dashboard__item-cell-top" :style="{ 'background-image': `url(${getItemCover(item)})` }"></div>

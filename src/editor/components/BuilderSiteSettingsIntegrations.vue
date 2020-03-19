@@ -15,7 +15,7 @@
           {{ integration.label }}
         </div>
         <span class="b-integrations__item-settings">
-          <icon-base name="settings" color="#2275D7"></icon-base>
+          <icon-base name="settings" color="#00ADB6"></icon-base>
         </span>
       </div>
 
