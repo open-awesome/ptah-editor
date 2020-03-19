@@ -240,8 +240,9 @@ $top-panel-height: 7.2rem
   &-settings
     position: absolute
     left: 0
-    top: 0.8rem
-    bottom: 0.8rem
+    top: 0
+    bottom: 0
+
     display: flex
     flex-direction: column
     flex-grow: 1

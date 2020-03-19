@@ -140,7 +140,7 @@ export default {
     display: flex
     justify-content: center
 
-    margin-bottom: 2.6rem
+    margin: 2rem 0 2.6rem
   &__icon-close
     position: absolute
     top: 22px

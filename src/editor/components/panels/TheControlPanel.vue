@@ -3,15 +3,12 @@
   <div class="b-control-panel">
     <span class="b-control-panel__close" @click="close">
       <IconBase
-        name="firstPage"
+        name="close"
         width="13"
         height="12"
         color="#a2a5a5"
       />
     </span>
-    <div class="b-control-panel__mobile" v-if="isMobile">
-      Settings for mobile devices
-    </div>
     <component :is="panelName" :builder="builder"/>
   </div>
 </template>
@@ -60,8 +57,7 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'settingObjectType',
-      'controlPanel',
-      'isMobile'
+      'controlPanel'
     ]),
 
     panelName () {
@@ -122,7 +118,7 @@ export default {
   position: relative
   width: 305px
   height: 100%
-  padding: 1.7rem 1rem 1.7rem 1.6rem
+  // padding: 1.7rem 1rem 1.7rem 1.6rem
 
   display: flex
   flex-direction: column
@@ -133,11 +129,6 @@ export default {
   font-size: 1.4rem
   letter-spacing: -0.01em
 
-  &__mobile
-    font-size: 1.2rem
-
-    padding: $size-step/8 0
-    color: $main-green
   &__title
     color: $black
     font-size: 2rem
@@ -152,9 +143,9 @@ export default {
   &__close
     color: $grey
     position: absolute
-    top: 24px
+    top: 29px
     right: 17px
     cursor: pointer
-    &:hover
-      color: $main-green
+    &:hover svg
+      fill: $main-green
 </style>

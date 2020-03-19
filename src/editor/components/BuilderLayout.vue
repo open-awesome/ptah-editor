@@ -165,7 +165,7 @@ $topBarHeight: 6rem
     transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out
     &_expanded
       opacity: 1
-      width: 30.5rem
+      width: 31.5rem
       display: flex
   &__main
     position: absolute

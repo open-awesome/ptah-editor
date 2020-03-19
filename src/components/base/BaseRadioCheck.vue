@@ -87,6 +87,7 @@ export default {
         border: 0.2rem solid $main-green
     &_selected
       opacity: 1
+      color: $main-green
       .b-base-radio-check__icon
         border: 0.2rem solid $main-green
 
@@ -107,9 +108,9 @@ export default {
     border-radius: 100%
     border: 1px solid $grey-middle
   &__text
-    font-size: 1.4rem
+    font-size: 1.3rem
+    font-weight: 400
     white-space: nowrap
     letter-spacing: -0.02em
-
-    padding-left: 2.6rem
+    padding-left: 1.4rem
 </style>

@@ -117,46 +117,52 @@ export default {
 </script>
 
 <template>
-  <div class="control-height">
+  <div class="b-control-height">
    <base-label>
      Section height
    </base-label>
-    <BaseRadioCheck :list="heightValueTypesList" v-model="heigthValueType" @change="onTypeChange"/>
 
-    <div class="control-height__input" v-if="heigthValueType === 'vh'">
+    <BaseRadioCheck
+      :list="heightValueTypesList"
+      v-model="heigthValueType"
+      @change="onTypeChange"
+    />
+
+    <div
+      class="control-height__input"
+      v-if="heigthValueType === 'vh'"
+    >
       <!-- slider -->
-      <p>{{ $t('с.shVhLabel') }}</p>
       <base-range-slider
         v-model="vhValue"
          step="1" min="1" max="100">
         {{vhValue}} vh
       </base-range-slider>
+      <p>
+        {{ $t('с.shVhLabel') }}
+      </p>
     </div>
 
-    <div class="control-height__input" v-if="heigthValueType === 'px'">
+    <div
+      class="control-height__input"
+      v-if="heigthValueType === 'px'"
+    >
       <!-- text field -->
-      <base-text-field v-model="pxValue" label="Height in pixels"></base-text-field>
+      <base-text-field
+        v-model="pxValue"
+        label="Height in pixels"
+      />
     </div>
   </div>
 </template>
 
 <style lang="sass" scoped>
-.control-height
-  padding: 0 0 1rem
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
 
+.b-control-height
   &__input
     margin: 2rem 0 0
-
     p
       color: $grey-middle
-
-  h6
-    min-width: 28rem
-    margin: 0 0 2.8rem 0
-    padding: 0
-    color: #272727
-    font-size: 1.6rem
-    font-weight: bold
-    &:first-letter
-      text-transform: uppercase
 </style>
