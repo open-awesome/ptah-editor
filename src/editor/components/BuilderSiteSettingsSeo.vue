@@ -1,115 +1,117 @@
 <template>
-  <div class="seo-panel">
-    <base-button-tabs :list="tabs" v-model="activeTab" class="seo-tabs"></base-button-tabs>
-    <div class="layout" :noScroll="true" v-if="activeTab === 'seo'">
-        <form @submit.prevent="applySettings" class="layout__content">
+  <builder-modal-content-layout>
+    <div class="seo-panel">
+      <base-button-tabs :list="tabs" v-model="activeTab" class="seo-tabs"></base-button-tabs>
+      <div class="layout" :noScroll="true" v-if="activeTab === 'seo'">
+          <form @submit.prevent="applySettings" class="layout__content">
 
-          <!-- Title & Favicon -->
-          <div class="b-builder-site-settings-seo__item">
-            <base-caption>Page title </base-caption>
-            <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
-          </div>
-
-          <div class="b-builder-site-settings-seo__item">
-            <base-caption>Favicon </base-caption>
-            <BaseImageUpload
-              v-model="favicon"
-              :label="$t('s.favicon')"
-              description="32 x 32 px, .ico or .png" />
-          </div>
-
-          <div class="b-builder-site-settings-seo__item">
-            <base-caption>Cookie policy </base-caption>
-            <base-switcher
-              v-model="useCookie"
-              :label="$t('s.useCookie')"/>
-
-            <base-upload-input
-              v-model="pdfFile"
-              :label="$t('s.policyFile')"
-              placeholder="Paste pdf file"/>
-          </div>
-        </form>
-    </div>
-
-    <!-- Open Graph -->
-    <div class="layout layout__og" v-if="activeTab === 'og'">
-      <base-scroll-container>
-        <div class="layout-padding">
-          <div class="b-builder-site-settings-og__item"
-               v-for="ogField in ogFields"
-               :key="ogField.id">
-            <base-text-field
-              v-if="(ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 || ogField.id.indexOf('type') !== -1) && ogField.id.indexOf('locale') === -1"
-              v-model="ogField.value"
-              :placeholder="ogField.placeholder"
-              :label="ogField.label">
-            </base-text-field>
-
-            <base-uploader
-              v-if="ogField.id.indexOf('image') !== -1"
-              v-model="ogField.value"
-              label="Image"
-            />
-
-            <base-text-field
-              v-if="ogField.id.indexOf('url') !== -1"
-              v-model="ogField.value"
-              :label="ogField.label"
-              :hasError="error.url"
-              @input="validUrl(ogField.value)"
-            >
-              <span slot="error">
-                Please enter a valid URL
-              </span>
-            </base-text-field>
-
-            <div class="b-open-graph__width"
-                 v-if="ogField.id.indexOf('locale') !== -1"
-            >
-              <base-label>
-                {{ ogField.label }}
-              </base-label>
-              <div class="b-open-graph__row">
-                <div class="b-open-graph__col">
-                  <BaseSelect
-                    class="b-open-graph__select"
-                    :options="locale[`${ogField.id}`].language.options"
-                    v-model="locale[`${ogField.id}`].language.selected"
-                    :search="true"
-                  >
-                  </BaseSelect>
-                </div>
-                <div class="b-open-graph__col b-open-graph__select">
-                  <BaseSelect
-                    :options="locale[`${ogField.id}`].territory.options"
-                    v-model="locale[`${ogField.id}`].territory.selected"
-                    :search="true"
-                  >
-                  </BaseSelect>
-                </div>
-                <div class="b-open-graph__col"
-                     v-text="localeSelected[`${ogField.id}`]"
-                />
-              </div>
+            <!-- Title & Favicon -->
+            <div class="b-builder-site-settings-seo__item">
+              <base-caption>Page title </base-caption>
+              <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
             </div>
 
-            <base-uploader
-              v-if="ogField.id.indexOf('video') !== -1"
-              v-model="ogField.value"
-              label="Video"
-              type="video"
-            />
+            <div class="b-builder-site-settings-seo__item">
+              <base-caption>Favicon </base-caption>
+              <BaseImageUpload
+                v-model="favicon"
+                :label="$t('s.favicon')"
+                description="32 x 32 px, .ico or .png" />
+            </div>
+
+            <div class="b-builder-site-settings-seo__item">
+              <base-caption>Cookie policy </base-caption>
+              <base-switcher
+                v-model="useCookie"
+                :label="$t('s.useCookie')"/>
+
+              <base-upload-input
+                v-model="pdfFile"
+                :label="$t('s.policyFile')"
+                placeholder="Paste pdf file"/>
+            </div>
+          </form>
+      </div>
+
+      <!-- Open Graph -->
+      <div class="layout layout__og" v-if="activeTab === 'og'">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <div class="b-builder-site-settings-og__item"
+                 v-for="ogField in ogFields"
+                 :key="ogField.id">
+              <base-text-field
+                v-if="(ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 || ogField.id.indexOf('type') !== -1) && ogField.id.indexOf('locale') === -1"
+                v-model="ogField.value"
+                :placeholder="ogField.placeholder"
+                :label="ogField.label">
+              </base-text-field>
+
+              <base-uploader
+                v-if="ogField.id.indexOf('image') !== -1"
+                v-model="ogField.value"
+                label="Image"
+              />
+
+              <base-text-field
+                v-if="ogField.id.indexOf('url') !== -1"
+                v-model="ogField.value"
+                :label="ogField.label"
+                :hasError="error.url"
+                @input="validUrl(ogField.value)"
+              >
+                <span slot="error">
+                  Please enter a valid URL
+                </span>
+              </base-text-field>
+
+              <div class="b-open-graph__width"
+                   v-if="ogField.id.indexOf('locale') !== -1"
+              >
+                <base-label>
+                  {{ ogField.label }}
+                </base-label>
+                <div class="b-open-graph__row">
+                  <div class="b-open-graph__col">
+                    <BaseSelect
+                      class="b-open-graph__select"
+                      :options="locale[`${ogField.id}`].language.options"
+                      v-model="locale[`${ogField.id}`].language.selected"
+                      :search="true"
+                    >
+                    </BaseSelect>
+                  </div>
+                  <div class="b-open-graph__col b-open-graph__select">
+                    <BaseSelect
+                      :options="locale[`${ogField.id}`].territory.options"
+                      v-model="locale[`${ogField.id}`].territory.selected"
+                      :search="true"
+                    >
+                    </BaseSelect>
+                  </div>
+                  <div class="b-open-graph__col"
+                       v-text="localeSelected[`${ogField.id}`]"
+                  />
+                </div>
+              </div>
+
+              <base-uploader
+                v-if="ogField.id.indexOf('video') !== -1"
+                v-model="ogField.value"
+                label="Video"
+                type="video"
+              />
+            </div>
           </div>
-        </div>
-      </base-scroll-container>
+        </base-scroll-container>
+      </div>
     </div>
 
     <div slot="controls">
       <BaseButton size="small" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
       <BaseButton size="small" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
-  </div>
+  </builder-modal-content-layout>
 </template>
 
 <script>
@@ -361,7 +363,7 @@ export default {
   position: absolute
   top: 6.4rem
   right: 0
-  bottom: 9rem
+  bottom: 0
   left: 0
 
   box-sizing: border-box
