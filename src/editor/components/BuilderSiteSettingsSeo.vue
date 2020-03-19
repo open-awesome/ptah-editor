@@ -67,16 +67,16 @@
             <div class="b-open-graph__width"
                  v-if="ogField.id.indexOf('locale') !== -1"
             >
-              <base-label>
+              <base-caption>
                 {{ ogField.label }}
-              </base-label>
+              </base-caption>
               <div class="b-open-graph__row">
                 <div class="b-open-graph__col">
                   <BaseSelect
                     class="b-open-graph__select"
                     :options="locale[`${ogField.id}`].language.options"
                     v-model="locale[`${ogField.id}`].language.selected"
-                    :search="true"
+                    height="16"
                   >
                   </BaseSelect>
                 </div>
@@ -84,7 +84,7 @@
                   <BaseSelect
                     :options="locale[`${ogField.id}`].territory.options"
                     v-model="locale[`${ogField.id}`].territory.selected"
-                    :search="true"
+                    height="16"
                   >
                   </BaseSelect>
                 </div>
@@ -117,7 +117,6 @@ import { mapState, mapActions } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 import _ from 'lodash-es'
 import { isValidUrl } from '../util'
-import BaseScrollContainer from '../../components/base/BaseScrollContainer'
 
 const LIST_LANG = [
   { name: 'English', value: 'en' },
@@ -137,7 +136,6 @@ export default {
   name: 'BuilderSiteSettingsSeo',
 
   components: {
-    BaseScrollContainer,
     BuilderModalContentLayout
   },
 

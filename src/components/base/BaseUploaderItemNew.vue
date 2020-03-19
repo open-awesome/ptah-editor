@@ -38,7 +38,9 @@
              @drop="onDrop"
              :style="style"
              v-else>
-          <IconBase name="plus" width="16" height="16" color="#00ADB6" />
+          <IconBase name="downloadCloud" width="32" height="22" color="#00ADB6" />
+
+          <div>Upload file</div>
 
           <input
             :multiple="multiple"
@@ -98,6 +100,7 @@
           @input="onInput"
         />
       </div>
+
       <div class="b-uploader-item__remove"
            tooltip="Remove"
            @click="$emit('remove')"
@@ -305,10 +308,11 @@ export default {
     display: flex
     align-items: center
     justify-content: center
+    flex-shrink: 0
 
-    width: $size-step*1.5
-    height: $size-step
-    margin: 0 $size-step/2 0 0
+    width: $size-step*3.5
+    height: 8rem
+    margin: 0 1.1rem 0 0
 
     position: relative
 
@@ -330,42 +334,53 @@ export default {
       background-size: contain !important
       background-position: center center !important
       background-repeat: no-repeat !important
+      position: relative
 
     &--plus
       display: flex
       align-items: center
       justify-content: center
-      width: 3rem
-      height: 3rem
+      flex-direction: column
+      width: 100%
+      height: 100%
 
-      border: 0.2rem solid $ligth-grey
-      border-radius: 50%
+      color: $main-green
+
+      background: rgba(88, 199, 205, 0.1)
+      border: 1px dashed $main-green
+      border-radius: 5px
+
+      &> div
+        font-size: 1rem
+        line-height: 1.4rem
+        margin-top: .5rem
 
   &__controls
     position: relative
     flex-grow: 1
-
-    margin-top: .5rem
 
     font-size: 1.4rem
     line-height: 1.7rem
     letter-spacing: -0.01em
 
   &__label
-    color: $black
+    color: $dark-grey
     text-transform: capitalize
     &-help
       position: absolute
       right: 0rem
       text-transform: none
       cursor: pointer
+      svg
+        fill: $yellow
     &--empty
-      color: #999
+      // color: #999
 
   &__text
     margin-top: .5rem
     /deep/
       .b-base-text-field__input
+        margin-top: 1rem
         font-size: 1.4rem
 
   &__remove
