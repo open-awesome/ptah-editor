@@ -282,8 +282,8 @@ export default {
     </div>
 
     <div slot="controls">
-      <BaseButton size="middle" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
-      <BaseButton size="middle" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
+      <BaseButton size="small" color="main-green-transparent" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton size="small" color="main-green" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>

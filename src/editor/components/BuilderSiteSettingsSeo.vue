@@ -105,7 +105,7 @@
       </base-scroll-container>
     </div>
 
-    <div class="seo-panel__controls">
+    <div slot="controls">
       <BaseButton size="small" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
       <BaseButton size="small" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
@@ -353,18 +353,6 @@ export default {
 .seo-panel
   height: 100%
   position: relative
-
-  &__controls
-    position: absolute
-    bottom: 0
-    left: 0
-    right: 0
-    height: 9rem
-    padding: 0 2.2rem
-    border-top: 1px solid rgba(162, 165, 165, 0.1)
-    display: flex
-    align-items: center
-    justify-content: flex-end
 
 .seo-tabs
   margin-bottom: $size-step

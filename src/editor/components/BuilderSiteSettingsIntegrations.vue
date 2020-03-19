@@ -124,9 +124,9 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-integrations
-  height: $size-step*5
-
   display: flex
+  flex-direction: column
+  align-items: center
   &__item
     width: $size-step*6
     height: $size-step*5
@@ -134,7 +134,7 @@ export default {
     background-color: $ligth-grey
     background-position: center center
     border-radius: 0.4rem
-    margin: $size-step/2
+    margin: $size-step/2 0
 
     display: flex
     flex-direction: column
@@ -147,10 +147,6 @@ export default {
     &:hover
       background-color: $grey
       transition: all .3s cubic-bezier(.2,.85,.4,1.275)
-    &:first-child
-      margin-left: 0
-    &-last-child
-      margin-right: 0
     &-icon
       display: inline-block
       width: $size-step*2
