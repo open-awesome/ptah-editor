@@ -20,10 +20,17 @@
     position: relative
 
   .swiper-wrapper
+    position: absolute
     top: 0
     left: 0
     bottom: 0
     right: 0
+    height: auto !important
+    .is-mobile &
+      position: relative
+    @media only screen and (max-width: 840px)
+      &
+        position: relative
 
   .swiper-container
     border: none !important

@@ -39,8 +39,7 @@ export function sectionsGroups () {
         let style = el.style
         offset = offset + height
         style.position = 'relative'
-        style.top = `-${offset}px`
-        style.marginBottom = `-${height}px`
+        style.marginTop = `-${height}px`
       })
     })
   }

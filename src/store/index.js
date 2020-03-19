@@ -13,7 +13,7 @@ Vue.use(Vuex)
 Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
-const demoLanding = 'https://s3.protocol.one/files/Demo-page-2020-v1.json?v=1'
+const demoLanding = 'https://s3.protocol.one/files/Demo-page-2020-v5.json'
 const FONTS = {
   'Lato': {
     variants: ['regular'],
@@ -165,7 +165,9 @@ const actions = {
    * @param slug
    * @returns {Promise<Response>}
    */
-  fetchLandingFromFile ({ commit }, { slug, url }) {
+  fetchLandingFromFile ({ state, commit }, { slug, url, name }) {
+    let nameLanding = name || state.name
+
     return fetch(url)
       .then((response) => {
         return response.json()
@@ -173,9 +175,12 @@ const actions = {
       .then((data) => {
         data['slug'] = slug
 
-        if (state.name === '' && data.title !== '') {
-          commit('name', data.title)
+        if (nameLanding === '') {
+          nameLanding = data.name
         }
+
+        commit('name', nameLanding)
+        data.settings['name'] = nameLanding
 
         if (!data.settings.fonts) {
           data.settings['fonts'] = FONTS

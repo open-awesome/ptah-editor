@@ -718,7 +718,7 @@ export default {
       &:hover
         border-color: $main-green !important
       &.b-text
-        cursor: text
+        cursor: pointer
   &.fp-scroll section:not(.b-section-header):not(.b-section-footer):not(.is-mobile)
     height: 100vh !important
   &.fp-scroll section.is-editable:not(.b-section-header):not(.b-section-footer):not(.is-mobile)
