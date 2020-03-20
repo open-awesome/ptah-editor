@@ -1,6 +1,6 @@
 <template>
   <!-- @click.stop was here. this breaks down the color picker -->
-  <div class="b-control-panel">
+  <div class="b-control-panel" v-if="controlPanel.name">
     <span class="b-control-panel__close" @click="close">
       <IconBase
         name="close"
@@ -9,7 +9,11 @@
         color="#a2a5a5"
       />
     </span>
-    <component :is="panelName" :builder="builder"/>
+
+    <component
+      :is="panelName"
+      :builder="builder"
+    />
   </div>
 </template>
 
@@ -116,9 +120,8 @@ export default {
 
 .b-control-panel
   position: relative
-  width: 305px
+  width: 30.5rem
   height: 100%
-  // padding: 1.7rem 1rem 1.7rem 1.6rem
 
   display: flex
   flex-direction: column

@@ -61,6 +61,10 @@ export default {
   },
 
   watch: {
+    value (value) {
+      this.sliderValue = value
+    },
+
     sliderValue (value) {
       this.$emit('change', parseInt(value))
     }
@@ -72,7 +76,7 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 
-$rail-height: 1px
+$rail-height: 2px
 $rail-color: rgba($black, 0.15)
 $rail-fill-color: $main-green
 
@@ -95,7 +99,7 @@ $knob-shadow: 0px 2px 8px rgba($main-green, 0.2)
     .range-slider
       box-sizing: border-box
       padding: 0 0.6rem
-      width: $size-step*5.5
+      width: 15rem
       height: $size-step
       display: block
 
@@ -151,18 +155,7 @@ $knob-shadow: 0px 2px 8px rgba($main-green, 0.2)
         transition: all 0.1s ease
       &:hover:before
         content: ''
-        height: $knob-size*1.4
-        width: $knob-size*1.4
-      &:after
-        content: ''
-        height: $knob-size/3
-        width: $knob-size/3
-        border-radius: 50%
-
-        background-color: $white
-
-        position: absolute
-        z-index: 0
+        background-color: $yellow
     .range-slider-hidden
       display: none
 </style>

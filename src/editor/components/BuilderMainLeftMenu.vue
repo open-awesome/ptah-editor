@@ -89,7 +89,8 @@ export default {
       'toggleSidebar',
       'toggleSectionsTreeMenu',
       'toggleAddSectionMenu',
-      'toggleProgressPanelExpanded'
+      'toggleProgressPanelExpanded',
+      'setControlPanel'
     ]),
 
     closeSiteSettings () {
@@ -104,6 +105,7 @@ export default {
       this.activePanel = panel
       this.toggleSidebar(true)
       this.toggleAddSectionMenu(false)
+      this.setControlPanel(false)
 
       if (panel === 'progress') {
         this.closeSiteSettings()

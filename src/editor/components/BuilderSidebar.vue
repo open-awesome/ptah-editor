@@ -9,7 +9,7 @@
 
     <!-- Shows Control panel -->
     <div
-      v-if="controlPanel.expanded"
+      v-show="controlPanel.expanded"
       class="b-builder-sidebar-settings"
     >
       <ControlPanel
@@ -246,6 +246,8 @@ $top-panel-height: 7.2rem
     display: flex
     flex-direction: column
     flex-grow: 1
+
+    transition: all 0.1s ease
     &.slots-settings
       flex-direction: row
       .slots-settings__list

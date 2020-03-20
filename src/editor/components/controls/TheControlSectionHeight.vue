@@ -19,7 +19,10 @@ export default {
           value: 'px'
         }
       ],
-      heigthValueType: ''
+      heigthValueType: '',
+      min: 1,
+      max: 100,
+      numVhValue: 100
     }
   },
 
@@ -111,6 +114,14 @@ export default {
     sectionHeight () {
       let node = document.getElementById(`section_${this.settingObjectSection.id}`)
       return node.offsetHeight
+    },
+
+    setVh (value) {
+      this.numVhValue = value
+    },
+
+    setVhValue (value) {
+      this.vhValue = value
     }
   }
 }
@@ -118,9 +129,9 @@ export default {
 
 <template>
   <div class="b-control-height">
-   <base-label>
+   <base-caption>
      Section height
-   </base-label>
+   </base-caption>
 
     <BaseRadioCheck
       :list="heightValueTypesList"
@@ -129,29 +140,42 @@ export default {
     />
 
     <div
-      class="control-height__input"
+      class="b-control-height__row"
       v-if="heigthValueType === 'vh'"
     >
-      <!-- slider -->
       <base-range-slider
-        v-model="vhValue"
-         step="1" min="1" max="100">
-        {{vhValue}} vh
+        :value="vhValue"
+        step="1" :min="min" :max="max"
+        @change="setVh"
+      >
+        <base-number-input
+          class="b-control-height__number-input"
+          :value="numVhValue"
+          unit="vh"
+          :maximum="max"
+          @input="setVhValue"
+        />
       </base-range-slider>
-      <p>
+    </div>
+    <div
+      class="b-control-height__row"
+      v-if="heigthValueType === 'vh'"
+    >
+      <span class="b-control-height__vhLabel">
         {{ $t('с.shVhLabel') }}
-      </p>
+      </span>
     </div>
 
     <div
-      class="control-height__input"
+      class="b-control-height__row"
       v-if="heigthValueType === 'px'"
     >
-      <!-- text field -->
-      <base-text-field
-        v-model="pxValue"
-        label="Height in pixels"
-      />
+      <div class="b-control-height__pxFileld">
+        <base-text-field
+          v-model="pxValue"
+          label="Height in pixels"
+        />
+      </div>
     </div>
   </div>
 </template>
@@ -161,8 +185,24 @@ export default {
 @import '../../../assets/sass/_variables.sass'
 
 .b-control-height
-  &__input
-    margin: 2rem 0 0
-    p
-      color: $grey-middle
+  &__row
+    margin: 2rem 0 2rem 1rem
+  &__number-input
+    margin-left: 2rem
+  &__vhLabel
+    font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif
+    font-style: italic
+    font-weight: 500
+    font-size: 10px
+    line-height: 12px
+    color: #A2A5A5
+    letter-spacing: 0.065em
+
+    padding-right: 3rem
+
+    display: flex
+    align-items: center
+  &__pxFileld
+    width: 15rem
+    margin-left: 1rem
 </style>
