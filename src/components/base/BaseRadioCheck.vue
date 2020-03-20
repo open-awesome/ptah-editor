@@ -72,7 +72,7 @@ export default {
   margin: 0 0 0 $size-step/2
   &__row
     cursor: pointer
-    transition: background-color 0.1s ease, color 0.1s ease, opacity 0.1s ease
+    transition: all .3s ease
 
     display: flex
     align-items: center
@@ -107,10 +107,12 @@ export default {
 
     border-radius: 100%
     border: 1px solid $grey-middle
+    transition: all .3s ease
   &__text
     font-size: 1.3rem
     font-weight: 400
     white-space: nowrap
     letter-spacing: -0.02em
     padding-left: 1.4rem
+    transition: all .3s ease
 </style>
