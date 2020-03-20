@@ -275,6 +275,7 @@ export default {
     ...mapActions([
       'storeSettings'
     ]),
+    ...mapActions('Sidebar', ['toggleSidebar']),
 
     updateSettings () {
       const settings = this.currentLanding.settings
@@ -344,6 +345,7 @@ export default {
     },
 
     close () {
+      this.toggleSidebar(false)
       this.$router.push(`/editor/${this.$route.params.slug}`)
     }
   }
