@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import * as _ from 'lodash-es'
+import { camelCase, merge } from 'lodash-es'
 
 export default {
   name: 'ControlBox',
@@ -176,7 +176,7 @@ export default {
       if (s === undefined || this.isMain || this.isChild) {
         // get values from node
         let style = window.getComputedStyle(this.settingObjectElement)
-        s = style[_.camelCase(prop)]
+        s = style[camelCase(prop)]
       }
       return parseInt(s)
     },
@@ -199,7 +199,7 @@ export default {
 
       this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
 
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, props))
     }
   }
 }
@@ -215,10 +215,15 @@ export default {
     <!-- preview -->
     <div class="control-box__element-edge">
       <div class="control-box__content-edge">
+        <IconBase name="backgroundGrey" />
       </div>
     </div>
-    <div class="control-box__title-m" v-if="!hideMargin">{{ $t('c.margin') }}</div>
-    <div class="control-box__title-p" v-if="!hidePadding">{{ $t('c.padding') }}</div>
+    <div class="control-box__title-m" v-if="!hideMargin">
+      {{ $t('c.margin') }}
+    </div>
+    <div class="control-box__title-p" v-if="!hidePadding">
+      {{ $t('c.padding') }}
+    </div>
     <!-- CONTROLS -->
     <!-- margin -->
     <template v-if="!hideMargin">
@@ -250,7 +255,7 @@ export default {
        @click.prevent="lockMargins = !lockMargins"
        v-if="!hideMargin"
       >
-      <icon-base name="lock"></icon-base>
+      <IconBase name="chain" />
     </a>
     <a href="#"
        class="control-box__lock control-box__lock--padding"
@@ -258,7 +263,7 @@ export default {
        @click.prevent="lockPaddings = !lockPaddings"
        v-if="!hidePadding"
       >
-      <icon-base name="lock"></icon-base>
+      <IconBase name="chain" />
     </a>
   </div>
 </div>
@@ -271,12 +276,14 @@ export default {
 .control-box
   $this: &
 
-  width: 100%
-  max-width: 24rem
-  height: 21rem
+  width: 24rem
+  height: 22rem
+  margin: 0 0 0 0.3rem
 
   box-sizing: border-box
-  border: 2px dotted #999999
+  border: 1px dashed #00ADB6
+  border-radius: 5px
+  background: rgba(88, 199, 205, 0.1)
 
   position: relative
 
@@ -284,7 +291,7 @@ export default {
   justify-content: center
   align-items: center
 
-  font-size: 1.4rem
+  font-size: 1rem
   transition: border-color 0.1s ease
   &:hover
     border-color: $main-green
@@ -292,9 +299,11 @@ export default {
       border-color: $main-green
 
   &__element-edge
-    width: 153px
-    height: 126px
-    border: 2px solid #6D6D6D
+    width: 174px
+    height: 136px
+    background: #FFFFFF
+    border-radius: 5px
+    border: 2px solid #00ADB6
 
     display: flex
     justify-content: center
@@ -302,19 +311,27 @@ export default {
     transition: border-color 0.1s ease
 
   &__content-edge
-    width: 68px
-    height: 38px
-    border: 2px dotted #999999
+    width: 94px
+    height: 40px
+    background: rgba(88, 199, 205, 0.3)
+    border: 1px dashed #00ADB6
+    border-radius: 5px
+
+    display: flex
+    justify-content: center
+    align-items: center
+    & svg
+      fill: $main-green
 
   &__title-m
     position: absolute
-    top: 4px
-    left: 5px
+    top: 7px
+    left: 15px
 
   &__title-p
     position: absolute
-    top: 45px
-    left: 45px
+    top: 52px
+    left: 60px
 
   &__lock
     position: absolute
@@ -339,35 +356,40 @@ export default {
   position: absolute
   width: 2.6rem
 
+  /deep/
+    input
+      font-size: 1.2rem
+      text-align: center
+
   &__m-left
-    left: 7px
+    left: 5px
     top: calc(50% - 13px)
 
   &__m-right
-    right: 7px
+    right: 5px
     top: calc(50% - 13px)
 
   &__m-top
     right: calc(50% - 13px)
-    top: 4px
+    top: 11px
 
   &__m-bottom
     right: calc(50% - 13px)
-    bottom: 4px
+    bottom: 16px
 
   &__p-left
     top: calc(50% - 13px)
-    left: 49px
+    left: 40px
 
   &__p-right
     top: calc(50% - 13px)
-    right: 47px
+    right: 40px
 
   &__p-top
     right: calc(50% - 13px)
-    top: 51px
+    top: 58px
 
   &__p-bottom
     right: calc(50% - 13px)
-    bottom: 52px
+    bottom: 63px
 </style>

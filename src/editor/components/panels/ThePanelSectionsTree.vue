@@ -143,7 +143,7 @@ export default {
     margin: 2rem 0 2.6rem
   &__icon-close
     position: absolute
-    top: 22px
+    top: 19px
     right: 17px
     cursor: pointer
     &:hover

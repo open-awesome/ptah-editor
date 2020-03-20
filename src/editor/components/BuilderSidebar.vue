@@ -203,7 +203,6 @@ $top-panel-height: 7.2rem
 
   display: flex
   flex-direction: column
-  opacity: 0
 
   height: auto
   width: 0
@@ -213,7 +212,7 @@ $top-panel-height: 7.2rem
   transition: width, opacity 0.3s cubic-bezier(.2,.85,.4,1.275)
   &_expanded
     opacity: 1
-    width: 305px
+    width: 30.5rem
 
   &__content
     height: 100%

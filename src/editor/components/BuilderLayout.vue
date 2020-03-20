@@ -165,7 +165,7 @@ $topBarHeight: 6rem
     transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out
     &_expanded
       opacity: 1
-      width: 31.5rem
+      width: 30.5rem
       display: flex
   &__main
     position: absolute
@@ -188,7 +188,7 @@ $topBarHeight: 6rem
       box-shadow: inset 2px 0 5px 0  rgba(0, 0, 0, 0.05)
       z-index: 20
     &_expanded
-      left: 40.5rem
+      left: 39.5rem
 
     &-layout
       transition: width 0.2s

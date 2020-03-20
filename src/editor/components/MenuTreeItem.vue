@@ -132,6 +132,7 @@ export default {
       margin-right: 1.2rem
       text-align: center
       svg
+        fill: #A2A5A5
         width: .3rem
         height: 1.4rem
         margin-bottom: -1px !important
