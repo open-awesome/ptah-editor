@@ -207,9 +207,9 @@ export default {
 
 <template>
 <div>
-  <base-label>
+  <base-caption>
     {{ $t('c.editIndents') }}
-  </base-label>
+  </base-caption>
   <div class="control-box">
 
     <!-- preview -->

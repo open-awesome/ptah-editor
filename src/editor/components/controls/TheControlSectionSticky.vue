@@ -1,14 +1,8 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import * as _ from 'lodash-es'
+import { get, set, merge }from 'lodash-es'
 
 export default {
-  data () {
-    return {
-
-    }
-  },
-
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
@@ -17,7 +11,7 @@ export default {
 
     sticky: {
       get: function () {
-        return _.get(this.settingObjectOptions, 'sticky') || false
+        return get(this.settingObjectOptions, 'sticky') || false
       },
       set: function (newValue) {
         this.setPosition('sticky', newValue)
@@ -26,7 +20,7 @@ export default {
 
     hamPosition: {
       get: function () {
-        return _.get(this.settingObjectOptions, 'hamPosition') || 12
+        return get(this.settingObjectOptions, 'hamPosition') || 12
       },
       set: function (newValue) {
         this.setPosition('hamPosition', newValue)
@@ -40,8 +34,8 @@ export default {
     ]),
 
     setPosition (path, value) {
-      let obj = _.set({}, path, value)
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, obj))
+      let obj = set({}, path, value)
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, obj))
     },
 
     toggleSticky () {
@@ -54,6 +48,9 @@ export default {
 
 <template>
   <div class="b-control-sticky">
+    <BaseCaption>
+      Header position
+    </BaseCaption>
     <div class="b-control-sticky__control" v-if="!isMobile">
       <base-switcher
         :value="sticky"
@@ -74,5 +71,5 @@ export default {
 
 .b-control-sticky
   &__control
-    margin-top: $size-step/2
+    margin: 0 0 2.1rem 2.2rem
 </style>

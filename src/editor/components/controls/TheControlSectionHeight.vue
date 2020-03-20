@@ -89,6 +89,7 @@ export default {
     } else {
       this.heigthValueType = 'auto'
     }
+    this.numVhValue = this.vhValue
   },
 
   methods: {
