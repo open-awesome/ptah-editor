@@ -39,15 +39,11 @@
                 <span
                   class="b-menu-tree__group-controls-ungroup"
                   @click="ungroup(item[0])"
-                  tooltip="Ungroup"
-                  tooltip-position="bottom"
                 >
                   <IconBase name="delete" />
                 </span>
                 <span
                   @click="showBackgroundPanel(item[0])"
-                  tooltip="Group background"
-                  tooltip-position="bottom"
                 >
                   <IconBase name="backgroundGrey" />
                 </span>

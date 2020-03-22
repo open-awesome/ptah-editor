@@ -169,11 +169,18 @@ export default {
       align-items: center
       justify-content: center
 
+      position: absolute
+      top: 0
+      right: 0
+      left: 0
       height: 7rem
       padding: 0.5rem 2rem 0
     &__layout
-      position: relative
-      height: 100%
+      position: absolute
+      top: 7rem
+      right: 0
+      bottom: 0
+      left: 0
     &__close
       position: absolute
       top: 2.4rem

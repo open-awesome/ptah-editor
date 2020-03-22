@@ -119,32 +119,42 @@ export default {
   .menu-tree-item
     color: #A2A5A5
     font-size: 1.6rem
-    line-height: 1.9rem
+    line-height: 1.6rem
 
     display: flex
     justify-content: flex-start
+    align-items: center
 
+    height: 5rem
     padding: 1.3rem 1.1rem 1.3rem 1.6rem
     margin: 0 1.6rem 0 1.3rem
     cursor: pointer
-
     &__drag
+      width: 3rem
       margin-right: 1.2rem
       text-align: center
       svg
         fill: #A2A5A5
-        width: .3rem
-        height: 1.4rem
+        width: .4rem
+        height: 1.6rem
         margin-bottom: -1px !important
 
     &__header-sign
       display: none
       width: 3rem
+      margin-right: 1.2rem
+      text-align: center
+      svg
+        fill: #A2A5A5
+        width: 1.6rem
+        height: 2.1rem
+        margin-bottom: -1px !important
 
     &__name
+      width: 14rem
       > span
         display: block
-        max-width: 15rem
+        width: 14rem
         overflow: hidden
         text-overflow: ellipsis
 
@@ -164,7 +174,7 @@ export default {
       .menu-tree-item__drag
         display: none
       .menu-tree-item__header-sign
-        display: inline-block
+        display: block
 
     &__controls
       display: flex
