@@ -217,5 +217,8 @@ export default {
     & svg
       fill: $yellow
       vertical-align: middle !important
+  @media only screen and (max-width: 1100px)
+    width: auto
+    padding: 1rem 1.4rem
 
 </style>

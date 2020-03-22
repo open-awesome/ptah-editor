@@ -115,9 +115,9 @@ $topBarHeight: 6rem
 
 .b-builder-layout
   position: relative
-  min-width: 800px
+  min-width: 98rem
   height: 100vh
-  min-height: 600px
+  min-height: 60rem
 
   &__top-bar
     height: $topBarHeight
@@ -130,7 +130,7 @@ $topBarHeight: 6rem
     z-index: 1000
 
     transition: all .2s ease-out
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15)
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
 
 .b-builder-layout-content
   position: absolute
