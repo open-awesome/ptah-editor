@@ -139,6 +139,7 @@ export default {
 
     display: flex
     justify-content: center
+    align-items: center
 
     margin: 2rem 0 2.6rem
   &__icon-close

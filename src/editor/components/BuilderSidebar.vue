@@ -33,10 +33,8 @@
     </transition>
 
     <!-- Show Progress panel -->
-    <div class="b-builder-sidebar__content">
-      <PanelProgress
-        v-if="isExpanded && isProgressPanelExpanded"
-      />
+    <div class="b-builder-sidebar__content" v-if="isExpanded && isProgressPanelExpanded">
+      <PanelProgress />
     </div>
 
   </div>

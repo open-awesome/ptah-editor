@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import { get, set, merge }from 'lodash-es'
+import { get, set, merge } from 'lodash-es'
 
 export default {
   computed: {

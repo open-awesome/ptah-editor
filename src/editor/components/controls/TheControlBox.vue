@@ -299,11 +299,11 @@ export default {
       border-color: $main-green
 
   &__element-edge
-    width: 174px
-    height: 136px
+    width: 17.4rem
+    height: 13.6rem
     background: #FFFFFF
-    border-radius: 5px
-    border: 2px solid #00ADB6
+    border-radius: .5rem
+    border: .2rem solid #00ADB6
 
     display: flex
     justify-content: center
@@ -311,11 +311,11 @@ export default {
     transition: border-color 0.1s ease
 
   &__content-edge
-    width: 94px
-    height: 40px
+    width: 9.4rem
+    height: 4.0rem
     background: rgba(88, 199, 205, 0.3)
-    border: 1px dashed #00ADB6
-    border-radius: 5px
+    border: .1rem dashed #00ADB6
+    border-radius: .5rem
 
     display: flex
     justify-content: center
@@ -325,13 +325,13 @@ export default {
 
   &__title-m
     position: absolute
-    top: 7px
-    left: 15px
+    top: .7rem
+    left: 1.5rem
 
   &__title-p
     position: absolute
-    top: 52px
-    left: 60px
+    top: 5.2rem
+    left: 6rem
 
   &__lock
     position: absolute
@@ -345,12 +345,12 @@ export default {
       color: rgba($main-green, 0.8)
 
     &--margin
-      right: 8px
-      bottom: 8px
+      right: .8rem
+      bottom: .8rem
 
     &--padding
-      right: 49px
-      bottom: 52px
+      right: 4.9rem
+      bottom: 5.2rem
 
 .ctrl
   position: absolute
@@ -362,34 +362,34 @@ export default {
       text-align: center
 
   &__m-left
-    left: 5px
-    top: calc(50% - 13px)
+    left: .5rem
+    top: calc(50% - 1.3rem)
 
   &__m-right
-    right: 5px
-    top: calc(50% - 13px)
+    right: .5rem
+    top: calc(50% - 1.3rem)
 
   &__m-top
-    right: calc(50% - 13px)
-    top: 11px
+    right: calc(50% - 1.3rem)
+    top: 1.1rem
 
   &__m-bottom
-    right: calc(50% - 13px)
-    bottom: 16px
+    right: calc(50% - 1.3rem)
+    bottom: 1.6rem
 
   &__p-left
-    top: calc(50% - 13px)
-    left: 40px
+    top: calc(50% - 1.3rem)
+    left: 4rem
 
   &__p-right
-    top: calc(50% - 13px)
-    right: 40px
+    top: calc(50% - 1.3rem)
+    right: 4rem
 
   &__p-top
-    right: calc(50% - 13px)
-    top: 58px
+    right: calc(50% - 1.3rem)
+    top: 5.8rem
 
   &__p-bottom
-    right: calc(50% - 13px)
-    bottom: 63px
+    right: calc(50% - 1.3rem)
+    bottom: 6.3rem
 </style>

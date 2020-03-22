@@ -188,23 +188,23 @@ export default {
         justify-content: center
         align-items: center
 
-        width: 32px
-        height: 32px
+        width: 3.2rem
+        height: 3.2rem
         transition: 0.2s ease-in-out
         svg
-          width: 24px
-          height: 24px
+          width: 2.4rem
+          height: 2.4rem
           transition: 0.2s ease-in-out
       &-text
         font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif
-        font-size: 9px
+        font-size: .9rem
         font-weight: bold
         letter-spacing: 0.065em
         text-align: center
         text-transform: uppercase
         color: #A2A5A5
 
-        padding-top: 2px
+        padding-top: .2rem
         width: 100%
         opacity: 0
 
@@ -217,14 +217,14 @@ export default {
         border-left: $main-green 5px solid
         & .b-main-left-menu-list__item-icon,
         & .b-main-left-menu-list__progress-icon
-          width: 36px
-          height: 36px
+          width: 3.6rem
+          height: 3.6rem
 
           align-items: flex-end
           &
             svg
-              width: 28px
-              height: 28px
+              width: 2.8rem
+              height: 2.8rem
               fill: #575A5F
         & .b-main-left-menu-list__progress-icon
           margin-top: 2.5rem
@@ -243,22 +243,22 @@ export default {
   &:before
     content: ''
     position: absolute
-    top: -15px
+    top: -1.5rem
     right: 0
-    left: -5px
+    left: -.5rem
     z-index: 1
-    height: 15px
+    height: 1.5rem
     background-color: #f3f6f6
     border-radius: 0 0 15px 0
     box-shadow: inset 0 -2px -2px rgba(0, 0, 0, 0.15)
   &:after
     content: ''
     position: absolute
-    top: -15px
+    top: -1.5rem
     right: 0
-    left: -5px
+    left: -.5rem
     z-index: 0
-    height: 15px
+    height: 1.5rem
     background-color: #fff
 
   & + .b-main-left-menu-list__item
@@ -268,20 +268,20 @@ export default {
       position: absolute
       top: 0
       right: 0
-      left: -5px
+      left: -.5rem
       z-index: 1
-      height: 15px
+      height: 1.5rem
       background-color: #f3f6f6
-      border-radius: 0 15px 0 0
-      box-shadow: inset 0 2px 2px rgba(0, 0, 0, 0.15)
+      border-radius: 0 1.5rem 0 0
+      box-shadow: inset 0 .2rem .2rem rgba(0, 0, 0, 0.15)
     &:after
       content: ''
       position: absolute
       top: 0
       right: 0
-      left: -5px
+      left: -.5rem
       z-index: 0
-      height: 15px
+      height: 1.5rem
       background-color: #fff
     &:hover
       &:before
