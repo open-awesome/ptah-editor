@@ -103,9 +103,9 @@ export default {
 
 <template>
   <div class="b-size">
-    <base-label>
+    <base-caption>
       {{ $t('c.size') }}
-    </base-label>
+    </base-caption>
     <div class="b-size-controls">
       <div class="b-size-controls__control">
         <base-number-field :maximum="maxProps['width']" v-model="width" :label="$t('c.width')" class=""></base-number-field>

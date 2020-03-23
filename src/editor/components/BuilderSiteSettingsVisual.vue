@@ -282,8 +282,8 @@ export default {
     </div>
 
     <div slot="controls">
-      <BaseButton size="middle" color="gray" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
-      <BaseButton size="middle" color="blue" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
+      <BaseButton size="small" color="main-green-transparent" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton size="small" color="main-green" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>
@@ -295,17 +295,19 @@ export default {
 .b-builder-site-settings-visual
   &__row
     display: flex
-    align-items: center
+    flex-direction: column
+    align-items: flex-start
 
     margin: $size-step/4 0
-    padding: $size-step/4
+    padding: 0 2.9rem
     &:nth-child(2)
       background-color: rgba($ligth-grey, 0.3)
   &__col
-    margin: $size-step/2 $size-step*2 $size-step/2 0
+    margin: $size-step/2 0
   /deep/
     .b-base-switcher__label
       margin-right: $size-step/2
+
 .b-palette
   &__list
     display: flex

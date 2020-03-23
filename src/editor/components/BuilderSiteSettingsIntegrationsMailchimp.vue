@@ -2,8 +2,10 @@
   <div
     class="b-integrations-mailchimp"
     >
-    <div>
-      <base-heading level="2">Mailchimp</base-heading>
+    <div class="b-integrations-mailchimp__inner">
+      <img
+        class="b-integrations-mailchimp__logo"
+        src="https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/64004e89-19d2-4ce4-84d6-6d0df226d8af.png">
       <template v-if="integrationComplete">
         <base-select
           :options="lists"
@@ -12,7 +14,7 @@
           label="Select a list to collect leads"/>
 
         <br>
-        <p>E-mail addresses from the "Form" section will now be sent to this list</p>
+        <p class="b-integrations-mailchimp__descr">E-mail addresses from the "Form" section will now be sent to this list</p>
       </template>
 
       <template v-if="!integrationComplete">
@@ -128,6 +130,18 @@ export default {
 .b-integrations-mailchimp
   height: 100%
   min-height: 60rem
+
+  &__inner
+    padding: 0 2.5rem
+
+  &__logo
+    max-width: 100%
+    margin: 2rem 0 4rem
+
+  &__descr
+    font-size: 1.6rem
+    line-height: 2rem
+
   &__controls
     justify-content: flex-start !important
     border-top: none !important

@@ -13,7 +13,7 @@
         ref="uploadInput"
         @change="onUploadClick"/>
       <a class="b-base-upload__button" @click.prevent="upload">
-        <icon-base name="download" width="16" color="#436FEE" title="Upload"></icon-base>
+        <icon-base name="downloadCloud" width="16" color="#436FEE" title="Upload"></icon-base>
       </a>
     </form>
   </div>

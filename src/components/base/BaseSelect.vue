@@ -76,10 +76,9 @@ export default {
         <span class="b-pth-base-select__arrow">
           <icon-base class="b-pth-base-select__icon"
             :class="{ 'b-pth-base-select__icon_up': showOptions }"
-            name="arrowDropDown"
-            width="6"
-            height="4"
-            :color="colorFill">
+            name="arrowDown"
+            width="12"
+            height="8">
           </icon-base>
         </span>
       </div>
@@ -106,21 +105,21 @@ export default {
 </template>
 
 <style lang="sass" scoped>
+@import '../../assets/sass/_variables.sass'
 .b-pth-base-select
-  font-family: Lato, Helvetica, Arial, sans-serif
-  letter-spacing: -0.02em
-
   width: 100%
-  height: 2.6rem
+  height: 3.4rem
   max-width: 50rem
+  margin-bottom: 1.5rem
 
   position: relative
   display: flex
 
-  background-color: transparent
-  border-bottom: 1px solid rgba($black, 0.15)
+  background-color: white
+  border: 1px solid rgba(162, 165, 165, 0.7)
+  border-radius: 5px
 
-  transition: border-color 0.1s ease
+  transition: border-color 0.2s ease
   cursor: pointer
   & *
     user-select: none
@@ -132,12 +131,11 @@ export default {
     align-items: center
 
     width: 100%
+    padding: .5rem 1.5rem
   &__name
     font-size: 1.6rem
     line-height: 1.8rem
     color: $dark-grey
-
-    padding: 0 0.6rem 0.9rem 0
     cursor: pointer
     & input
       border: transparent solid 1px
@@ -150,6 +148,7 @@ export default {
     &_up
       transform: rotate(-180deg)
       transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
+      fill: $main-green
   &__dropdown
     transition: all .2s cubic-bezier(1.0, 0.5, 0.8, 1.0)
     border-top: none
@@ -159,20 +158,21 @@ export default {
 
     position: absolute
     top: 100%
-    left: -1.2rem
-    right: -0.4rem
+    left: 0
+    right: 0
     z-index: 999
 
-    margin: 0
+    margin: .2rem .1rem
     padding: 0
-    box-shadow: 0 0.6rem 2.4rem 0 rgba(0, 0, 0, 0.15)
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
+    border-radius: 5px
   &__options
     margin: 0
     padding: 0
     min-height: 6rem
     &-item
-      padding: 0.8rem 1.6rem
-      line-height: 1.8rem
+      padding: 1.2rem $size-step
+      line-height: 1.6rem
       font-size: 1.4rem
       list-style: none
       color: #272727
@@ -180,7 +180,7 @@ export default {
       &:last-child
         border-bottom: none
       &:hover, &.selected
-        background-color: rgba(11, 153, 255, 0.25)
+        background-color: rgba(0, 173, 182, 0.05)
 
 .vue-scrollbar__scrollbar-vertical
   width: 0.4rem

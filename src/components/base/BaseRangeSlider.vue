@@ -4,9 +4,6 @@
       {{ label }}
     </base-label>
     <div class="b-range-slider__row">
-      <div class="b-range-slider__text">
-        <slot></slot>
-      </div>
       <range-slider
         class=""
         :min="min"
@@ -14,6 +11,9 @@
         :step="step"
         v-model="sliderValue">
       </range-slider>
+      <div class="b-range-slider__text">
+        <slot></slot>
+      </div>
     </div>
   </div>
 </template>
@@ -61,6 +61,10 @@ export default {
   },
 
   watch: {
+    value (value) {
+      this.sliderValue = value
+    },
+
     sliderValue (value) {
       this.$emit('change', parseInt(value))
     }
@@ -72,13 +76,13 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 
-$rail-height: 1px
+$rail-height: 2px
 $rail-color: rgba($black, 0.15)
-$rail-fill-color: $blue
+$rail-fill-color: $main-green
 
-$knob-color: $blue
+$knob-color: $main-green
 $knob-size: 1.2rem
-$knob-shadow: 0px 2px 8px rgba($cornflower-blue, 0.2)
+$knob-shadow: 0px 2px 8px rgba($main-green, 0.2)
 
 .b-range-slider
   &__row
@@ -95,7 +99,7 @@ $knob-shadow: 0px 2px 8px rgba($cornflower-blue, 0.2)
     .range-slider
       box-sizing: border-box
       padding: 0 0.6rem
-      width: $size-step*5.5
+      width: 15rem
       height: $size-step
       display: block
 
@@ -132,8 +136,8 @@ $knob-shadow: 0px 2px 8px rgba($cornflower-blue, 0.2)
       top: 50%
       left: 0
       box-sizing: border-box
-      width: 2.5rem
-      height: 2.5rem
+      width: 1.2rem
+      height: 1.2rem
       transform: translate(-50%, -50%)
       cursor: pointer
 
@@ -151,18 +155,7 @@ $knob-shadow: 0px 2px 8px rgba($cornflower-blue, 0.2)
         transition: all 0.1s ease
       &:hover:before
         content: ''
-        height: $knob-size*1.4
-        width: $knob-size*1.4
-      &:after
-        content: ''
-        height: $knob-size/3
-        width: $knob-size/3
-        border-radius: 50%
-
-        background-color: $white
-
-        position: absolute
-        z-index: 0
+        background-color: $yellow
     .range-slider-hidden
       display: none
 </style>

@@ -45,12 +45,17 @@
       position: relative
 
     &__items
-      // position: absolute
+      position: absolute
       top: 0
       left: 0
       bottom: 0
       right: 0
-      // display: flex
+      height: auto !important
+      .is-mobile &
+        position: relative
+      @media only screen and (max-width: 840px)
+        &
+          position: relative
 
   .b-gallery-carousel-body-item
     height: 100%

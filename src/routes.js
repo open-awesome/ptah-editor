@@ -1,11 +1,8 @@
 import BuilderModalContent from '@editor/components/BuilderModalContent'
 import BuilderSiteSettingsSeo from '@editor/components/BuilderSiteSettingsSeo'
-import BuilderSiteSettingsCookies from '@editor/components/BuilderSiteSettingsCookies'
 import BuilderSiteSettingsVisual from '@editor/components/BuilderSiteSettingsVisual'
 import BuilderSiteSettingsAddJsScripts from '@editor/components/BuilderSiteSettingsAddJsScripts'
-import BuilderSiteSettingsAddCss from '@editor/components/BuilderSiteSettingsAddCss'
 import BuilderSiteSettingsIntegrations from '@editor/components/BuilderSiteSettingsIntegrations'
-import BuilderSiteSettingsOpenGraph from '@editor/components/BuilderSiteSettingsOpenGraph'
 import BuilderSiteSettingsIntegrationsGoogleTag from '@editor/components/BuilderSiteSettingsIntegrationsGoogleTag'
 import BuilderSiteSettingsIntegrationsGoogleAnalitycs from '@editor/components/BuilderSiteSettingsIntegrationsGoogleAnalitycs'
 import BuilderSiteSettingsIntegrationsMailchimp from '@editor/components/BuilderSiteSettingsIntegrationsMailchimp'
@@ -45,6 +42,7 @@ const routes = [
       {
         path: 'settings',
         component: BuilderModalContent,
+        redirect: { name: BuilderSiteSettingsVisual },
         children: [
           {
             path: 'visualSettings',
@@ -55,16 +53,8 @@ const routes = [
             component: BuilderSiteSettingsSeo
           },
           {
-            path: 'cookiesSettings',
-            component: BuilderSiteSettingsCookies
-          },
-          {
             path: 'addJsScrips',
             component: BuilderSiteSettingsAddJsScripts
-          },
-          {
-            path: 'addCss',
-            component: BuilderSiteSettingsAddCss
           },
           {
             path: 'integrations',
@@ -83,10 +73,6 @@ const routes = [
                 component: BuilderSiteSettingsIntegrationsMailchimp
               }
             ]
-          },
-          {
-            path: 'openGraph',
-            component: BuilderSiteSettingsOpenGraph
           },
           {
             path: 'fonts',

@@ -156,11 +156,13 @@ export default {
 .b-top-bar
   width: 100%
   height: 100%
-  padding: 0 2.4rem
+  padding: 0 0 0 2.4rem
 
   display: flex
   align-items: center
   justify-content: center
+
+  min-width: 98rem
   &__padd
     width: 100%
   &-menu
@@ -182,9 +184,16 @@ export default {
       order: 3
       width: 45%
       text-align: right
-      padding-right: 5px
+      padding-right: .5rem
+
+      display: flex
+      justify-content: flex-end
       button
-        margin: 0 10px
+        margin: 0 1rem
+        @media only screen and (max-width: 1100px)
+          &
+            margin: 0.5rem
+            padding: 0.5rem
 
     &__crumbs
       display: flex
@@ -196,7 +205,7 @@ export default {
       &-home
         padding: 0 $size-step/4
         & svg
-          margin-right: 20px
+          margin-right: 2rem
       &-arrow
         padding: 0 1rem
       &-link

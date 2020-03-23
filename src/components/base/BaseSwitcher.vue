@@ -48,7 +48,9 @@ export default {
         :checked="value"
         @change="emitChange">
 
-      <span class="b-base-switcher-core__body"></span>
+      <span class="b-base-switcher-core__body">
+        <span class="b-base-switcher-core__thumb"></span>
+      </span>
     </div>
   </div>
 </template>
@@ -63,6 +65,8 @@ export default {
   justify-content: space-between
   align-items: center
 
+  $this: &
+
   &__label
     color: $dark-grey
     font-size: 1.6rem
@@ -71,13 +75,22 @@ export default {
 
   &_checked
     .b-base-switcher-core
-      background: $emerald-green
-    .b-base-switcher-core__body:after
-      transform: translateX(2rem)
+      background: adjust_color($main-green, $alpha: -0.5)
+    #{$this}-core__thumb
+      transform: translateX(1.6rem)
+      &:after
+        background: $main-green
+      &:before
+        content: ''
+        height: 2rem
+        width: 2rem
+        position: absolute
+        border-radius: 100%
+        animation: ripples .8s ease-in-out
 
   &:hover
     .b-base-switcher-core
-      box-shadow: 0px 0px 4px rgba($emerald-green, 0.8)
+      //box-shadow: 0px 0px 4px rgba($emerald-green, 0.8)
 
   &_disabled
     background: #fff
@@ -99,13 +112,13 @@ export default {
   position: relative
   display: inline-block
   margin: 0
-  height: 2.4rem
-  min-height: 2.4rem
-  width: 4.4rem
-  min-width: 4.4rem
-  box-shadow: inset 0px 2px 4px rgba(0, 0, 0, 0.12)
-  border-radius: 100px
-  background: linear-gradient(180deg, $grey 0%, rgba($grey-middle, 0) 100%), #ECECEC
+  height: 1.4rem
+  min-height: 1.4rem
+  width: 3.4rem
+  min-width: 3.4rem
+  border-radius: 1.4rem
+  background: rgba(162, 165, 165, 0.58)
+  transition: .4s cubic-bezier(.25,.8,.25,1)
 
   &__checkbox
     opacity: 0
@@ -126,15 +139,31 @@ export default {
     height: 100%
     width: 100%
 
+  &__thumb
+    position: relative
+    height: 4.8rem
+    width: 4.8rem
+    display: flex
+    align-items: center
+    justify-content: center
+    margin-left: -1rem
+    transition: transform 0.2s ease, background-color 0.2s ease-in
     &:after
       content: ''
-      height: 1.6rem
-      width: 1.6rem
+      height: 2rem
+      width: 2rem
       border-radius: 100px
       display: block
       cursor: pointer
-      background: linear-gradient(180deg, $white 0%, rgba(255, 255, 255, 0) 100%), #ECECEC
-      box-shadow: 0px 2px 4px rgba($black, 0.15)
-      transition: transform 0.2s ease, background-color 0.2s ease-in
-      margin: 0 0 0 $size-step/8
+      background: #FAFAFA
+      box-shadow: 0px 1px 3px rgba(0, 0, 0, 0.2), 0px 2px 2px rgba(0, 0, 0, 0.12), 0px 0px 2px rgba(0, 0, 0, 0.14)
+      margin: 0
+
+@keyframes ripples
+  0%
+    background: adjust_color($main-green, $alpha: -0.5)
+  100%
+    width: 4.8rem
+    height: 4.8rem
+    opacity: 0
 </style>

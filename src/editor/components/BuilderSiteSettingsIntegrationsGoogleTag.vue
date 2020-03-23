@@ -1,28 +1,30 @@
-<template>
+ <template>
   <builder-modal-content-layout
+    :noScroll="true"
     class="b-integrations-google-analitycs"
     >
     <div>
-      <base-heading level="2">Google Tag Manager</base-heading>
-        <base-fieldset-row width="short">
-          <base-text-field
-            v-model="gtmId"
-            placeholder="GTM-XXXXXX">
-            <template slot="label">
-              GTM container ID
-              <base-help
-                :hasLink="true"
-                link="https://developers.google.com/tag-manager/quickstart"
-                >
-              </base-help>
-            </template>
-          </base-text-field>
-       </base-fieldset-row>
+      <div class="b-integrations-google-analitycs__inner">
+        <base-caption>Google Tag Manager</base-caption>
+        <base-text-field
+          v-model="gtmId"
+          placeholder="GTM-XXXXXX">
+          <template slot="label">
+            GTM container ID
+            <base-help
+              class="help"
+              :hasLink="true"
+              link="https://developers.google.com/tag-manager/quickstart"
+            >
+            </base-help>
+          </template>
+        </base-text-field>
+      </div>
     </div>
 
     <div slot="controls" class="b-integrations-google-analitycs__controls">
       <BaseButton size="middle" color="gray" :transparent="true" @click="back()">{{ $t('nav.back') }}</BaseButton>
-      <BaseButton size="middle" color="gray" @click="applySettings">{{ $t('nav.apply') }}</BaseButton>
+      <BaseButton size="middle" color="blue" @click="applySettings">{{ $t('nav.apply') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>
@@ -30,11 +32,13 @@
 <script>
 import { mapState, mapActions } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
+import BaseCaption from '../../components/base/BaseCaption'
 
 export default {
   name: 'BuilderSiteSettingsIntegrationsGoogleTag',
 
   components: {
+    BaseCaption,
     BuilderModalContentLayout
   },
 
@@ -88,8 +92,16 @@ export default {
 <style lang="sass" scoped>
 .b-integrations-google-analitycs
   height: auto
+
+  &__inner
+    padding: 0 1.5rem 0 2.5rem
+
   &__controls
     justify-content: flex-start !important
     border-top: none !important
 
+  .help
+    position: absolute
+    right: 0
+    top: 0
 </style>

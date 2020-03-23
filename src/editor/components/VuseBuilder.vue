@@ -271,6 +271,12 @@ export default {
 
     // listener keyUp press
     document.addEventListener('keyup', this.keyUp)
+
+    // hide all panels
+    this.toggleSidebar(false)
+    this.toggleSectionsTreeMenu(false)
+    this.toggleAddSectionMenu(false)
+    this.toggleProgressPanelExpanded(false)
   },
 
   updated () {
@@ -294,6 +300,7 @@ export default {
     this.clearStateStack()
     document.removeEventListener('keyup', this.keyUp)
   },
+
   methods: {
     ...mapActions(['clearLandingData']),
     ...mapActions('Sidebar', [
@@ -306,7 +313,10 @@ export default {
       'toggleAddSectionMenu',
       'clearSettingObject',
       'clearSettingObjectLight',
-      'toggleModal'
+      'toggleModal',
+      'toggleSectionsTreeMenu',
+      'toggleAddSectionMenu',
+      'toggleProgressPanelExpanded'
     ]),
     ...mapActions('Landing', [
       'saveState',
@@ -708,7 +718,7 @@ export default {
       &:hover
         border-color: $main-green !important
       &.b-text
-        cursor: text
+        cursor: pointer
   &.fp-scroll section:not(.b-section-header):not(.b-section-footer):not(.is-mobile)
     height: 100vh !important
   &.fp-scroll section.is-editable:not(.b-section-header):not(.b-section-footer):not(.is-mobile)

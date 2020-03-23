@@ -91,10 +91,6 @@ export default {
       return this.builderSections
     },
 
-    barWidth () {
-      return this.fullScreenView ? '100%' : '28.8rem'
-    },
-
     filteredSection () {
       return this.fullScreenView ?
         this.selectedGroup.filter((section) => ~section.name.toLowerCase().indexOf(this.search.toLowerCase())) :
@@ -139,12 +135,6 @@ export default {
       this.selectedSection = null
       this.selectedGroup = null
       this.processing = false
-    },
-    toggleView () {
-      this.fullScreenView = !this.fullScreenView
-      if (!this.fullScreenView) {
-        this.search = ''
-      }
     }
   }
 }
@@ -152,17 +142,6 @@ export default {
 
 <template>
   <div class="b-add-section">
-    <base-button
-      v-if="isVisibleBar"
-      color="white"
-      :transparent="true"
-      size="middle"
-      class="b-add-section__toggle-bar"
-      @click="toggleView()">
-      <template v-if="fullScreenView">{{ $t('s.minimize') }}</template>
-      <template v-if="!fullScreenView">{{ $t('s.fullScreenView') }}</template>
-    </base-button>
-
     <span
       class="b-add-section__close-bt"
       @click="closeAddSectionBar"
@@ -175,7 +154,6 @@ export default {
     </span>
     <div class="b-add-section__padd">
       <BaseScrollContainer
-        :styling="{ width: barWidth, height: '100%' }"
         backgroundBar="#00ADB6"
       >
         <ul class="b-add-section__menu is-visiable" ref="menu">
@@ -253,12 +231,6 @@ export default {
   background: $white
   border-radius: 0 10px 10px 0
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
-  &__toggle-bar
-    position: absolute
-    top: 1.5rem
-    left: 90rem
-    z-index: 20
-    width: 17rem
 
   &__close-bt
     color: $grey
@@ -270,6 +242,7 @@ export default {
       color: $main-green
   &__padd
     padding: 8rem 0 0
+    width: calc(100% + .5rem)
     height: 100%
 
     display: flex

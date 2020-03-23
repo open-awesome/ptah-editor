@@ -50,7 +50,6 @@ export default {
     ]),
 
     selectDevice (type) {
-      this.setControlPanel(false)
       this.setDevice(type)
     }
   }
