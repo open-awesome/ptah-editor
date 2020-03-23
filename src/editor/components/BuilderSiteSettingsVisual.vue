@@ -296,17 +296,18 @@ export default {
   &__row
     display: flex
     flex-direction: column
-    align-items: center
+    align-items: flex-start
 
     margin: $size-step/4 0
-    padding: $size-step/4
+    padding: 0 2.9rem
     &:nth-child(2)
       background-color: rgba($ligth-grey, 0.3)
   &__col
-    margin: $size-step/2 $size-step*2 $size-step/2 0
+    margin: $size-step/2 0
   /deep/
     .b-base-switcher__label
       margin-right: $size-step/2
+
 .b-palette
   &__list
     display: flex

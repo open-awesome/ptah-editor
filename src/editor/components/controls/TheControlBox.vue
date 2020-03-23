@@ -1,6 +1,6 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import * as _ from 'lodash-es'
+import { camelCase, merge } from 'lodash-es'
 
 export default {
   name: 'ControlBox',
@@ -176,7 +176,7 @@ export default {
       if (s === undefined || this.isMain || this.isChild) {
         // get values from node
         let style = window.getComputedStyle(this.settingObjectElement)
-        s = style[_.camelCase(prop)]
+        s = style[camelCase(prop)]
       }
       return parseInt(s)
     },
@@ -199,7 +199,7 @@ export default {
 
       this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
 
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, props))
     }
   }
 }
@@ -207,18 +207,23 @@ export default {
 
 <template>
 <div>
-  <base-label>
+  <base-caption>
     {{ $t('c.editIndents') }}
-  </base-label>
+  </base-caption>
   <div class="control-box">
 
     <!-- preview -->
     <div class="control-box__element-edge">
       <div class="control-box__content-edge">
+        <IconBase name="backgroundGrey" />
       </div>
     </div>
-    <div class="control-box__title-m" v-if="!hideMargin">{{ $t('c.margin') }}</div>
-    <div class="control-box__title-p" v-if="!hidePadding">{{ $t('c.padding') }}</div>
+    <div class="control-box__title-m" v-if="!hideMargin">
+      {{ $t('c.margin') }}
+    </div>
+    <div class="control-box__title-p" v-if="!hidePadding">
+      {{ $t('c.padding') }}
+    </div>
     <!-- CONTROLS -->
     <!-- margin -->
     <template v-if="!hideMargin">
@@ -250,7 +255,7 @@ export default {
        @click.prevent="lockMargins = !lockMargins"
        v-if="!hideMargin"
       >
-      <icon-base name="lock"></icon-base>
+      <IconBase name="chain" />
     </a>
     <a href="#"
        class="control-box__lock control-box__lock--padding"
@@ -258,7 +263,7 @@ export default {
        @click.prevent="lockPaddings = !lockPaddings"
        v-if="!hidePadding"
       >
-      <icon-base name="lock"></icon-base>
+      <IconBase name="chain" />
     </a>
   </div>
 </div>
@@ -271,12 +276,14 @@ export default {
 .control-box
   $this: &
 
-  width: 100%
-  max-width: 24rem
-  height: 21rem
+  width: 24rem
+  height: 22rem
+  margin: 0 0 0 0.3rem
 
   box-sizing: border-box
-  border: 2px dotted #999999
+  border: 1px dashed #00ADB6
+  border-radius: 5px
+  background: rgba(88, 199, 205, 0.1)
 
   position: relative
 
@@ -284,7 +291,7 @@ export default {
   justify-content: center
   align-items: center
 
-  font-size: 1.4rem
+  font-size: 1rem
   transition: border-color 0.1s ease
   &:hover
     border-color: $main-green
@@ -292,9 +299,11 @@ export default {
       border-color: $main-green
 
   &__element-edge
-    width: 153px
-    height: 126px
-    border: 2px solid #6D6D6D
+    width: 17.4rem
+    height: 13.6rem
+    background: #FFFFFF
+    border-radius: .5rem
+    border: .2rem solid #00ADB6
 
     display: flex
     justify-content: center
@@ -302,19 +311,27 @@ export default {
     transition: border-color 0.1s ease
 
   &__content-edge
-    width: 68px
-    height: 38px
-    border: 2px dotted #999999
+    width: 9.4rem
+    height: 4.0rem
+    background: rgba(88, 199, 205, 0.3)
+    border: .1rem dashed #00ADB6
+    border-radius: .5rem
+
+    display: flex
+    justify-content: center
+    align-items: center
+    & svg
+      fill: $main-green
 
   &__title-m
     position: absolute
-    top: 4px
-    left: 5px
+    top: .7rem
+    left: 1.5rem
 
   &__title-p
     position: absolute
-    top: 45px
-    left: 45px
+    top: 5.2rem
+    left: 6rem
 
   &__lock
     position: absolute
@@ -328,46 +345,51 @@ export default {
       color: rgba($main-green, 0.8)
 
     &--margin
-      right: 8px
-      bottom: 8px
+      right: .8rem
+      bottom: .8rem
 
     &--padding
-      right: 49px
-      bottom: 52px
+      right: 4.9rem
+      bottom: 5.2rem
 
 .ctrl
   position: absolute
   width: 2.6rem
 
+  /deep/
+    input
+      font-size: 1.2rem
+      text-align: center
+
   &__m-left
-    left: 7px
-    top: calc(50% - 13px)
+    left: .5rem
+    top: calc(50% - 1.3rem)
 
   &__m-right
-    right: 7px
-    top: calc(50% - 13px)
+    right: .5rem
+    top: calc(50% - 1.3rem)
 
   &__m-top
-    right: calc(50% - 13px)
-    top: 4px
+    right: calc(50% - 1.3rem)
+    top: 1.1rem
 
   &__m-bottom
-    right: calc(50% - 13px)
-    bottom: 4px
+    right: calc(50% - 1.3rem)
+    bottom: 1.6rem
 
   &__p-left
-    top: calc(50% - 13px)
-    left: 49px
+    top: calc(50% - 1.3rem)
+    left: 4rem
 
   &__p-right
-    top: calc(50% - 13px)
-    right: 47px
+    top: calc(50% - 1.3rem)
+    right: 4rem
 
   &__p-top
-    right: calc(50% - 13px)
-    top: 51px
+    right: calc(50% - 1.3rem)
+    top: 5.8rem
 
   &__p-bottom
-    right: calc(50% - 13px)
-    bottom: 52px
+    right: calc(50% - 1.3rem)
+    bottom: 6.3rem
 </style>

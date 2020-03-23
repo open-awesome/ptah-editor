@@ -115,9 +115,9 @@ $topBarHeight: 6rem
 
 .b-builder-layout
   position: relative
-  min-width: 800px
+  min-width: 98rem
   height: 100vh
-  min-height: 600px
+  min-height: 60rem
 
   &__top-bar
     height: $topBarHeight
@@ -130,7 +130,7 @@ $topBarHeight: 6rem
     z-index: 1000
 
     transition: all .2s ease-out
-    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15)
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15)
 
 .b-builder-layout-content
   position: absolute
@@ -165,7 +165,7 @@ $topBarHeight: 6rem
     transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out
     &_expanded
       opacity: 1
-      width: 31.5rem
+      width: 30.5rem
       display: flex
   &__main
     position: absolute
@@ -188,7 +188,7 @@ $topBarHeight: 6rem
       box-shadow: inset 2px 0 5px 0  rgba(0, 0, 0, 0.05)
       z-index: 20
     &_expanded
-      left: 40.5rem
+      left: 39.5rem
 
     &-layout
       transition: width 0.2s

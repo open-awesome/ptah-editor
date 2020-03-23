@@ -9,7 +9,7 @@
 
     <!-- Shows Control panel -->
     <div
-      v-if="controlPanel.expanded"
+      v-show="controlPanel.expanded"
       class="b-builder-sidebar-settings"
     >
       <ControlPanel
@@ -33,10 +33,8 @@
     </transition>
 
     <!-- Show Progress panel -->
-    <div class="b-builder-sidebar__content">
-      <PanelProgress
-        v-if="isExpanded && isProgressPanelExpanded"
-      />
+    <div class="b-builder-sidebar__content" v-if="isExpanded && isProgressPanelExpanded">
+      <PanelProgress />
     </div>
 
   </div>
@@ -203,7 +201,6 @@ $top-panel-height: 7.2rem
 
   display: flex
   flex-direction: column
-  opacity: 0
 
   height: auto
   width: 0
@@ -213,7 +210,7 @@ $top-panel-height: 7.2rem
   transition: width, opacity 0.3s cubic-bezier(.2,.85,.4,1.275)
   &_expanded
     opacity: 1
-    width: 305px
+    width: 30.5rem
 
   &__content
     height: 100%
@@ -246,6 +243,8 @@ $top-panel-height: 7.2rem
     display: flex
     flex-direction: column
     flex-grow: 1
+
+    transition: all 0.1s ease
     &.slots-settings
       flex-direction: row
       .slots-settings__list
