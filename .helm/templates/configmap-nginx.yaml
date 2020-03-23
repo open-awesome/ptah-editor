@@ -14,7 +14,7 @@ metadata:
 data:
   {{ .Values.ingress.hostname }}.conf: |
       server {
-        server_name {{ .Values.ingress.hostname }};
+        server_name {{printf "%s%s" .Values.ingress.hostnamePrefix .Values.ingress.hostname }};
         listen {{ .Values.frontend.port }} default_server;
 
         charset utf-8;
