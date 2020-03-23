@@ -64,9 +64,11 @@ export default {
     if (_.last(this.$route.path.split('/')) === 'settings') {
       this.toggleSiteSettings('visualSettings')
     }
-    this.toggleSidebar(true)
     this.toggleSectionsTreeMenu(false)
     this.setScrollbarVisible(false)
+    this.$nextTick(function () {
+      this.toggleSidebar(true)
+    })
   },
 
   methods: {
