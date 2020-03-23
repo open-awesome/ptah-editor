@@ -1,5 +1,5 @@
 <template>
-  <builder-modal-content-layout :noScroll="true">
+  <div>
     <div class="b-integrations">
       <div class="b-integrations__item"
         v-if="!isIntegrationVisible"
@@ -25,11 +25,11 @@
         <router-view></router-view>
       </div>
     </div>
-    <div slot="controls">
+    <!--<div slot="controls">
       <BaseButton color="gray" size="middle" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
       <BaseButton color="blue" size="middle" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
-    </div>
-  </builder-modal-content-layout>
+    </div>-->
+  </div>
 </template>
 
 <script>
@@ -128,12 +128,12 @@ export default {
   flex-direction: column
   align-items: center
   &__item
-    width: $size-step*6
+    width: 28rem
     height: $size-step*5
-
-    background-color: $ligth-grey
     background-position: center center
-    border-radius: 0.4rem
+    border: 2px solid #A2A5A5
+    box-sizing: border-box
+    border-radius: 10px
     margin: $size-step/2 0
 
     display: flex
@@ -145,7 +145,8 @@ export default {
 
     cursor: pointer
     &:hover
-      background-color: $grey
+      // background-color: $grey
+      border: 2px solid $main-green
       transition: all .3s cubic-bezier(.2,.85,.4,1.275)
     &-icon
       display: inline-block

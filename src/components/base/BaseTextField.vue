@@ -98,6 +98,7 @@ export default {
     line-height: 1.6rem
     margin-bottom: .82rem
     display: block
+    position: relative
 
   &__input
     width: 100%

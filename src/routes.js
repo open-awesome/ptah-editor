@@ -3,7 +3,6 @@ import BuilderSiteSettingsSeo from '@editor/components/BuilderSiteSettingsSeo'
 import BuilderSiteSettingsVisual from '@editor/components/BuilderSiteSettingsVisual'
 import BuilderSiteSettingsAddJsScripts from '@editor/components/BuilderSiteSettingsAddJsScripts'
 import BuilderSiteSettingsIntegrations from '@editor/components/BuilderSiteSettingsIntegrations'
-import BuilderSiteSettingsOpenGraph from '@editor/components/BuilderSiteSettingsOpenGraph'
 import BuilderSiteSettingsIntegrationsGoogleTag from '@editor/components/BuilderSiteSettingsIntegrationsGoogleTag'
 import BuilderSiteSettingsIntegrationsGoogleAnalitycs from '@editor/components/BuilderSiteSettingsIntegrationsGoogleAnalitycs'
 import BuilderSiteSettingsIntegrationsMailchimp from '@editor/components/BuilderSiteSettingsIntegrationsMailchimp'
@@ -74,10 +73,6 @@ const routes = [
                 component: BuilderSiteSettingsIntegrationsMailchimp
               }
             ]
-          },
-          {
-            path: 'openGraph',
-            component: BuilderSiteSettingsOpenGraph
           },
           {
             path: 'fonts',
