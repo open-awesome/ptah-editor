@@ -128,8 +128,8 @@ export default {
     padding: 1.4rem 0
   &_small
     font-size: 1.2rem
-    padding: 1.2rem 0
-    width: 8.8rem
+    padding: 1.2rem
+    min-width: 8.8rem
     height: auto
   &_circle
     width: 4rem

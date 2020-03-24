@@ -65,11 +65,15 @@ export default {
   justify-content: space-between
   align-items: center
 
+  max-width: 24rem
+
   $this: &
 
   &__label
-    color: $dark-grey
-    font-size: 1.6rem
+    color: #575A5F
+    font-size: 1.4rem
+    letter-spacing: 0.065em
+    font-weight: 600
     &:first-letter
       text-transform: uppercase
 

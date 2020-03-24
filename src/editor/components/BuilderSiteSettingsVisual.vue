@@ -1,3 +1,94 @@
+<template>
+  <builder-modal-content-layout>
+    <div class="b-builder-site-settings-visual">
+      <base-button-tabs
+        :list="tabs"
+        v-model="activeTab"
+        class="b-visial-tabs"
+      />
+      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
+        <div class="b-builder-site-settings-visual__col">
+          <base-uploader
+            v-model="pageBackgroundUrl"
+            :label="$t('s.backgroundImage')"
+          />
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+          <BaseTextField
+            :label="$t('s.posX')"
+            v-model="pageBackgroundPositionX"
+            placeholder="0px"
+            />
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+          <BaseTextField
+            :label="$t('s.poxY')"
+            v-model="pageBackgroundPositionY"
+            placeholder="0px"
+            />
+        </div>
+      </div>
+      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
+        <div class="b-builder-site-settings-visual__col">
+          <BaseSwitcher v-model="fullPageScrollCheckbox" :label="$t('s.fpScroll')" />
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+          <BaseSwitcher v-model="backgroundFillValue" label="Background fill" />
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+          <BaseSwitcher v-model="bgAttachmentCheckbox" :label="$t('s.fixedScrolling')" />
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+          <BaseColorPicker :label="$t('s.backgroundColor')" v-model="pageBackgroundColor" />
+        </div>
+      </div>
+      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
+        <div class="b-builder-site-settings-visual__col">
+            <base-uploader
+                v-model="bgVideo"
+                :label="$t('s.backgroundVideo')"
+                type="video"/>
+        </div>
+        <div class="b-builder-site-settings-visual__col" v-if="activeTab === 'bg'">
+            <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
+        </div>
+      </div>
+      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'colors'">
+        <div class="b-builder-site-settings-visual__col">
+          <base-uploader
+            v-model="imagePalette"
+            @change="changeImagePalette"
+            :label="'Image for palette'"
+            :tooltipText="'Load image for generate palette of page'"
+            @getInputSrcFiles="getInputSrcFiles"
+          >
+          </base-uploader>
+        </div>
+        <div class="b-builder-site-settings-visual__col" v-if="palette">
+          <div class="b-palette">
+            <div class="b-palette__title">
+
+            </div>
+            <ul class="b-palette__list">
+              <li
+                v-for="(color, index) in palette"
+                :key="color + index"
+                :style="{'background-color' : color}"
+                class="b-palette__list-item"
+              />
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div slot="controls">
+      <BaseButton size="small" color="main-green-transparent" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton size="small" color="main-green" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
+    </div>
+  </builder-modal-content-layout>
+</template>
+
 <script>
 import _ from 'lodash-es'
 import { mapState, mapActions } from 'vuex'
@@ -34,7 +125,12 @@ export default {
       bgVideo: '',
       bgVideoPosition: '',
       fullPageScroll: '',
-      imageForColorThief: null
+      imageForColorThief: null,
+      tabs: [
+        { value: 'colors', text: 'Colors' },
+        { value: 'bg', text: 'Background' }
+      ],
+      activeTab: 'bg'
     }
   },
 
@@ -202,92 +298,6 @@ export default {
 }
 </script>
 
-<template>
-  <builder-modal-content-layout>
-    <div class="b-builder-site-settings-visual">
-      <div class="b-builder-site-settings-visual__row">
-        <div class="b-builder-site-settings-visual__col">
-          <BaseColorPicker :label="$t('s.backgroundColor')" v-model="pageBackgroundColor" />
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-          <base-uploader
-            v-model="pageBackgroundUrl"
-            :label="$t('s.backgroundImage')"
-          />
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseTextField
-            :label="$t('s.posX')"
-            v-model="pageBackgroundPositionX"
-            placeholder="0px"
-            />
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseTextField
-            :label="$t('s.poxY')"
-            v-model="pageBackgroundPositionY"
-            placeholder="0px"
-            />
-        </div>
-      </div>
-      <div class="b-builder-site-settings-visual__row">
-        <div class="b-builder-site-settings-visual__col">
-          <BaseSwitcher v-model="fullPageScrollCheckbox" :label="$t('s.fpScroll')" />
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseSwitcher v-model="backgroundFillValue" label="Background fill" />
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseSwitcher v-model="bgAttachmentCheckbox" :label="$t('s.fixedScrolling')" />
-        </div>
-      </div>
-      <div class="b-builder-site-settings-visual__row">
-        <div class="b-builder-site-settings-visual__col">
-            <base-uploader
-                v-model="bgVideo"
-                :label="$t('s.backgroundVideo')"
-                type="video"/>
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-            <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
-        </div>
-      </div>
-      <div class="b-builder-site-settings-visual__row">
-        <div class="b-builder-site-settings-visual__col">
-          <base-uploader
-            v-model="imagePalette"
-            @change="changeImagePalette"
-            :label="'Image for palette'"
-            :tooltipText="'Load image for generate palette of page'"
-            @getInputSrcFiles="getInputSrcFiles"
-          >
-          </base-uploader>
-        </div>
-        <div class="b-builder-site-settings-visual__col" v-if="palette">
-          <div class="b-palette">
-            <div class="b-palette__title">
-
-            </div>
-            <ul class="b-palette__list">
-              <li
-                v-for="(color, index) in palette"
-                :key="color + index"
-                :style="{'background-color' : color}"
-                class="b-palette__list-item"
-              />
-            </ul>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <div slot="controls">
-      <BaseButton size="small" color="main-green-transparent" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
-      <BaseButton size="small" color="main-green" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
-    </div>
-  </builder-modal-content-layout>
-</template>
-
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
@@ -300,9 +310,8 @@ export default {
 
     margin: $size-step/4 0
     padding: 0 2.9rem
-    &:nth-child(2)
-      background-color: rgba($ligth-grey, 0.3)
   &__col
+    width: 100%
     margin: $size-step/2 0
   /deep/
     .b-base-switcher__label

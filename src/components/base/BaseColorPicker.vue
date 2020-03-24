@@ -57,9 +57,15 @@ export default {
 <template>
   <div class="b-picker">
     <div class="b-picker__row">
+      <div
+        class="b-picker__label"
+        v-if="label !== ''"
+      >
+        {{ label }}
+      </div>
       <BaseDropdownMenu
         class="b-picker__palette"
-        positionDropdown="left"
+        positionDropdown="right"
         >
         <div class="b-picker__preview"
           :style="{ 'background-color': pickerValue.rgba || pickerValue }"
@@ -75,12 +81,6 @@ export default {
           />
         </div>
       </BaseDropdownMenu>
-      <div
-        class="b-picker__label"
-        v-if="label !== ''"
-       >
-        {{ label }}
-      </div>
     </div>
   </div>
 </template>
@@ -92,16 +92,18 @@ export default {
 .b-picker
   position: relative
   width: 100%
+  max-width: 24rem
   &__row
     display: flex
     align-items: center
+    justify-content: space-between
 
     width: 100%
   &__preview
-    width: $size-step*1.5
-    height: $size-step
+    width: 2rem
+    height: 2rem
 
-    border-radius: 0.2rem
+    border-radius: 1rem
     background-color: $white
     border: 2px solid $ligth-grey
     &_transparent
@@ -109,12 +111,16 @@ export default {
     &:hover
       border-color: $main-green
   &__label
+    font-size: 1.4rem
+    font-weight: 600
     color: $dark-grey
-    margin-left: $size-step/2
+    letter-spacing: 0.065em
+
+    margin-right: $size-step/2
     &:first-letter
       text-transform: uppercase
   &__palette
-    margin-top: .5rem
+    margin-top: 0
   &_color-hover
     /deep/
       .b-pth-base-dropdown-menu__list
@@ -131,8 +137,8 @@ export default {
     width: $size-step*7.5 !important
     max-height: none !important
     box-shadow: 0px 0 8rem rgba($black, 0.15) !important
-    &_left
-      left: -1.5rem !important
+    &_right
+      right: -2.2rem !important
       padding: 0 0 1rem 0 !important
 
   .vc-sketch

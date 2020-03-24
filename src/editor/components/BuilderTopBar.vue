@@ -184,7 +184,7 @@ export default {
       order: 3
       width: 45%
       text-align: right
-      padding-right: .5rem
+      padding-right: 2.1rem
 
       display: flex
       justify-content: flex-end

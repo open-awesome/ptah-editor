@@ -13,7 +13,7 @@
   height: 0
   border-style: solid
   border-width: 7px 7px 0 7px
-  border-color: $main-green transparent transparent transparent
+  border-color: $yellow transparent transparent transparent
 
 [tooltip]:after,
 [tooltip]:before
@@ -31,18 +31,21 @@
 [tooltip]:after
   content: attr(tooltip)
   top: -44px
-  background-color: $main-green
+  background-color: $yellow
   padding: 10px
   white-space: nowrap
   border-radius: 6px
   font-size: 12px
   line-height: 12px
+  text-transform: none
+  font-weight: normal
+  color: $dark-grey
 
 [tooltip-position=bottom]:before
   top: auto
   bottom: -13px
   border-width: 0 7px 7px 7px
-  border-color: transparent transparent $main-green transparent
+  border-color: transparent transparent $yellow transparent
 
 [tooltip-position=bottom]:after
   top: auto
@@ -54,7 +57,7 @@
   -webkit-transform: translateY(-50%)
   transform: translateY(-50%)
   border-width: 7px 0 7px 7px
-  border-color: transparent transparent transparent $main-green
+  border-color: transparent transparent transparent $yellow
 
 [tooltip-position=left]:after
   top: 50%
@@ -69,7 +72,7 @@
   -webkit-transform: translateY(-50%)
   transform: translateY(-50%)
   border-width: 7px 7px 7px 0
-  border-color: transparent $main-green transparent transparent
+  border-color: transparent $yellow transparent transparent
 
 [tooltip-position=right]:after
   top: 50%
@@ -82,7 +85,7 @@
   top: auto
   bottom: -13px
   border-width: 0 7px 7px 7px
-  border-color: transparent transparent $main-green transparent
+  border-color: transparent transparent $yellow transparent
 
 [tooltip-position=leftbottom]:after
   top: auto

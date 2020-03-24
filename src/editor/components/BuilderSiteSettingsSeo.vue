@@ -7,12 +7,20 @@
 
             <!-- Title & Favicon -->
             <div class="b-builder-site-settings-seo__item">
-              <base-caption>Page title </base-caption>
+              <base-caption
+                help="Page title"
+              >
+                Page title
+              </base-caption>
               <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
             </div>
 
             <div class="b-builder-site-settings-seo__item">
-              <base-caption>Favicon </base-caption>
+              <base-caption
+                help="Favicon"
+              >
+                Favicon
+              </base-caption>
               <BaseImageUpload
                 v-model="favicon"
                 :label="$t('s.favicon')"
@@ -20,7 +28,11 @@
             </div>
 
             <div class="b-builder-site-settings-seo__item">
-              <base-caption>Cookie policy </base-caption>
+              <base-caption
+                help="Cookie policy"
+              >
+                Cookie policy
+              </base-caption>
               <base-switcher
                 v-model="useCookie"
                 :label="$t('s.useCookie')"/>
