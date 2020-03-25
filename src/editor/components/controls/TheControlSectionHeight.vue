@@ -22,7 +22,7 @@ export default {
       heigthValueType: '',
       min: 1,
       max: 100,
-      numVhValue: 100
+      numVhValue: 70
     }
   },
 

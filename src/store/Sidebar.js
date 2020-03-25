@@ -35,7 +35,7 @@ export default {
     siteSettingsMenu: [
       {
         id: 'visualSettings',
-        name: 'menu.visualSettings'
+        name: 'menu.pageStyle'
       },
       {
         id: 'fonts',

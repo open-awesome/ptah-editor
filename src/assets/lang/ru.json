@@ -9,7 +9,8 @@
         "integrations":                 "Интеграции",
         "openGraph":                    "Open Graph",
         "addCss":                       "Добавить CSS",
-        "fonts":                        "Шрифты"
+        "fonts":                        "Шрифты",
+        "pageStyle":                    "Стиль страницы"
     },
     "nav": {
         "backToDashbord":               "Назад к лендингам",
@@ -34,8 +35,8 @@
         "fill":                         "Заполнить",
         "fixedScrolling":               "Зафиксировать при прокрутке",
         "fpScroll":                     "Полностраничный скролл",
-        "posX":                         "смещение X",
-        "poxY":                         "смещение Y",
+        "posX":                         "Слева",
+        "poxY":                         "Сверху",
         "tile":                         "Замостить",
         "addImage":                     "Добавить изображение",
         "addVideo":                     "Добавить видео",

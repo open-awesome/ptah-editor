@@ -37,7 +37,7 @@ export default {
 
 .b-builder-modal-content-layout
   height: 100%
-   position: relative
+  position: relative
   &__content
     position: absolute
     top: 0

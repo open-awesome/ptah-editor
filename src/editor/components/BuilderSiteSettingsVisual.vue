@@ -7,53 +7,97 @@
         class="b-visial-tabs"
       />
       <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
+        <BaseCaption help="Image for page background" >
+          Background image
+        </BaseCaption>
         <div class="b-builder-site-settings-visual__col">
           <base-uploader
             v-model="pageBackgroundUrl"
             :label="$t('s.backgroundImage')"
           />
         </div>
+        <template v-if="pageBackgroundUrl !== ''">
+          <div class="b-builder-site-settings-visual__col">
+            <BaseRangeSlider
+              :label="$t('s.posX')"
+              position="left"
+              :value="pageBackgroundPositionX"
+              step="1" :min="0" :max="980"
+              @change="setLeft"
+            >
+              <base-number-input
+                class="b-builder-site-settings-visual__number-input"
+                :value="numLeftValue"
+                unit="px"
+                :maximum="980"
+                @input="setLeftValue"
+              />
+            </BaseRangeSlider>
+          </div>
+          <div class="b-builder-site-settings-visual__col">
+            <BaseRangeSlider
+              position="left"
+              :label="$t('s.poxY')"
+              v-model="pageBackgroundPositionY"
+              step="1" :min="0" :max="980"
+              @change="setTop"
+            >
+              <base-number-input
+                class="b-builder-site-settings-visual__number-input"
+                :value="numTopValue"
+                unit="px"
+                :maximum="980"
+                @input="setTopValue"
+              />
+            </BaseRangeSlider>
+          </div>
+        </template>
         <div class="b-builder-site-settings-visual__col">
-          <BaseTextField
-            :label="$t('s.posX')"
-            v-model="pageBackgroundPositionX"
-            placeholder="0px"
-            />
+          <BaseColorPicker
+            :label="$t('s.backgroundColor')"
+            v-model="pageBackgroundColor"
+          />
         </div>
         <div class="b-builder-site-settings-visual__col">
-          <BaseTextField
-            :label="$t('s.poxY')"
-            v-model="pageBackgroundPositionY"
-            placeholder="0px"
-            />
+          <BaseSwitcher
+            v-model="backgroundFillValue"
+            label="Background fill"
+          />
+        </div>
+        <div class="b-builder-site-settings-visual__col">
+          <BaseSwitcher
+            v-model="bgAttachmentCheckbox"
+            :label="$t('s.fixedScrolling')"
+          />
         </div>
       </div>
       <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
+        <BaseCaption help="Video for page background" >
+          Background video
+        </BaseCaption>
+        <div class="b-builder-site-settings-visual__col">
+          <base-uploader
+            v-model="bgVideo"
+            :label="$t('s.backgroundVideo')"
+            type="video"
+          />
+        </div>
+        <div class="b-builder-site-settings-visual__col" v-if="activeTab === 'bg'">
+          <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
+        </div>
+      </div>
+      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
+        <BaseCaption help="Create a smooth fullpage scrolling effect" >
+          Full page scroll
+        </BaseCaption>
         <div class="b-builder-site-settings-visual__col">
           <BaseSwitcher v-model="fullPageScrollCheckbox" :label="$t('s.fpScroll')" />
         </div>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseSwitcher v-model="backgroundFillValue" label="Background fill" />
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseSwitcher v-model="bgAttachmentCheckbox" :label="$t('s.fixedScrolling')" />
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseColorPicker :label="$t('s.backgroundColor')" v-model="pageBackgroundColor" />
-        </div>
-      </div>
-      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
-        <div class="b-builder-site-settings-visual__col">
-            <base-uploader
-                v-model="bgVideo"
-                :label="$t('s.backgroundVideo')"
-                type="video"/>
-        </div>
-        <div class="b-builder-site-settings-visual__col" v-if="activeTab === 'bg'">
-            <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
-        </div>
       </div>
       <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'colors'">
+        <BaseCaption help="Color palette for color pickers" >
+          Color palette
+        </BaseCaption>
         <div class="b-builder-site-settings-visual__col">
           <base-uploader
             v-model="imagePalette"
@@ -117,8 +161,10 @@ export default {
 
       pageBackgroundUrl: '',
       pageBackgroundColor: '',
-      pageBackgroundPositionX: '',
-      pageBackgroundPositionY: '',
+      pageBackgroundPositionX: 0,
+      pageBackgroundPositionY: 0,
+      numLeftValue: 0,
+      numTopValue: 0,
       bgAttachment: '',
       bgSize: '',
       bgRepeat: '',
@@ -236,8 +282,12 @@ export default {
 
       this.pageBackgroundUrl = settings.styles.backgroundImage
       this.pageBackgroundColor = settings.styles.backgroundColor
-      this.pageBackgroundPositionX = settings.styles.backgroundPositionX
-      this.pageBackgroundPositionY = settings.styles.backgroundPositionY
+      this.pageBackgroundPositionX = settings.styles.backgroundPositionX !== ''
+        ? settings.styles.backgroundPositionX
+        : 0
+      this.pageBackgroundPositionY = settings.styles.backgroundPositionY !== ''
+        ? settings.styles.backgroundPositionY
+        : 0
       this.bgAttachment = settings.styles.backgroundAttachment
       this.bgRepeat = settings.styles.backgroundRepeat
       this.bgSize = settings.styles.backgroundSize
@@ -293,6 +343,22 @@ export default {
       if (value === null) {
         this.storeSaveSettingsPalette({ palette: null, image: null })
       }
+    },
+
+    setLeft (value) {
+      this.numLeftValue = value
+    },
+
+    setLeftValue (value) {
+      this.pageBackgroundPositionX = value
+    },
+
+    setTop (value) {
+      this.numTopValue = value
+    },
+
+    setTopValue (value) {
+      this.pageBackgroundPositionY = value
     }
   }
 }
@@ -308,11 +374,14 @@ export default {
     flex-direction: column
     align-items: flex-start
 
-    margin: $size-step/4 0
+    margin: 3rem 0 0
     padding: 0 2.9rem
   &__col
     width: 100%
-    margin: $size-step/2 0
+    max-width: 24rem
+    margin: 1.4rem 0 1rem 1.8rem
+  &__number-input
+    margin-left: 0.8rem
   /deep/
     .b-base-switcher__label
       margin-right: $size-step/2

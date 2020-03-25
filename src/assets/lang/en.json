@@ -9,7 +9,8 @@
         "integrations":                 "Integrations",
         "openGraph":                    "Open Graph",
         "addCss":                       "Add custom CSS",
-        "fonts":                        "Fonts"
+        "fonts":                        "Fonts",
+        "pageStyle":                    "Page style"
     },
     "nav": {
         "backToDashbord":               "Back to landings",
@@ -34,8 +35,8 @@
         "fill":                         "Fill",
         "fixedScrolling":               "Fixed while scrolling",
         "fpScroll":                     "Full page scroll",
-        "posX":                         "X position",
-        "poxY":                         "Y position",
+        "posX":                         "Left",
+        "poxY":                         "Top",
         "tile":                         "Tile",
         "addImage":                     "Add image",
         "addVideo":                     "Add Video",
