@@ -278,7 +278,9 @@ export default {
 
       &:hover
         cursor: pointer
-        background: rgba(0, 173, 182, 0.2)
+        background: rgba(0, 0, 0, 0.05)
+      &:active
+        box-shadow: 0 4px 16px rgba($black, 0.25)
       &_selected
         height: auto
         color: $main-green

@@ -645,6 +645,8 @@ export default {
     margin: 0 1.6rem 0 1.3rem
 
     cursor: pointer
+    &:active
+      box-shadow: 0 4px 16px rgba($black, 0.25)
     &.selected
       background: rgba(0, 173, 182, 0.1)
       & *

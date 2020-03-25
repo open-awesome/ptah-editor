@@ -159,11 +159,14 @@ export default {
         text-overflow: ellipsis
 
     &:hover
-      background: rgba(0, 173, 182, 0.1)
+      background: rgba(0, 0, 0, 0.05)
       & svg
         fill: #575A5F
       .menu-tree-item__name
         color: #575A5F
+
+    &:active
+      box-shadow: 0 4px 16px rgba($black, 0.25)
 
     &.selected
       background: rgba(0, 173, 182, 0.1)
