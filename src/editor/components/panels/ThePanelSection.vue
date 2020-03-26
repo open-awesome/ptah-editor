@@ -1,13 +1,20 @@
 <template>
   <div class="b-panel">
-    <h6 class="b-panel__title">
+    <h6 class="b-panel__title b-panel__title_name-section">
       {{ settingObjectSection.name }}
     </h6>
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-panel__inner">
 
+        <div class="b-panel__platform" v-if="isMobile">
+          <IconBase name="platformMobile" />
+        </div>
+        <div class="b-panel__platform" v-if="!isMobile">
+          <IconBase name="platformDesktop" />
+        </div>
+
         <!-- Carousel Images Multiple Upload -->
-        <div class="b-panel__control" v-if="settingObjectOptions.hasMultipleImages && !isMobile">
+        <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages && !isMobile">
           <base-uploader
             :value="galleryImages"
             @change="updateGalleryImages"
@@ -26,7 +33,7 @@
         </div>
 
         <!-- Form -->
-        <div class="b-panel__control mailchimp" v-if="settingObjectSection.group === 'Forms' && !isMobile">
+        <div class="b-section-settings__control mailchimp" v-if="settingObjectSection.group === 'Forms' && !isMobile">
           <div v-if="user.mailchimpIntegration && currentLanding.settings.mailchimpList">
             <div class="mailchimp_complete">
               <img src="https://s3.protocol.one/src/o_CaMZ6.png" alt="">
@@ -39,7 +46,7 @@
           </div>
 
           <div v-if="!user.mailchimpIntegration || !currentLanding.settings.mailchimpList">
-            <div class="mailchimp_none">
+            <div class="b-mailchimp_none">
               <img src="https://s3.protocol.one/src/o_CaMZ6.png" alt="">
               <icon-base name="close" width="40" height="40"></icon-base>
             </div>
@@ -47,11 +54,11 @@
           </div>
         </div>
 
-        <div class="b-panel__control" v-if="!isHeader && !isMobile">
+        <div class="b-section-settings__control" v-if="!isHeader && !isMobile">
           <control-section-height></control-section-height>
         </div>
 
-        <div class="b-panel__control" v-if="isHeader">
+        <div class="b-section-settings__control" v-if="isHeader">
           <control-section-sticky></control-section-sticky>
         </div>
 
@@ -69,7 +76,8 @@
         :builder="builder"
         :master="isMasterSection()"
         :slave="isSlaveSection()"
-        v-if="isGrouping"></builder-settings-bar-group>
+        v-if="isGrouping"
+      />
 
       <BaseButton
         :color="'gray'"
@@ -80,9 +88,11 @@
       </BaseButton>
     </div>
 
-    <div class="b-panel__buttons">
-      <base-button :color="'gray'" :transparent="true" @click="deleteSection()">Delete</base-button>
-    </div>
+    <!--div class="b-panel__buttons">
+      <base-button :color="'gray'" :transparent="true" @click="deleteSection()">
+        Delete
+      </base-button>
+    </div-->
   </div>
 </template>
 
@@ -233,7 +243,7 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-panel
+.b-section-settings
   /deep/
     .vb.vb-visible
       padding-right: 0 !important
@@ -251,7 +261,7 @@ export default {
       max-width: 100%
       display: block
   &__control
-    margin-bottom: 2rem
+    margin: 0 0 2.1rem 2.2rem
 
   &__description
     font-size: 1.4rem
@@ -316,7 +326,7 @@ export default {
       ~ .picker__item
         margin-top: .4rem
 
-.mailchimp
+.b-mailchimp
   p
     padding: 1rem 0
   &_complete

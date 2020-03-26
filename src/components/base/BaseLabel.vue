@@ -26,12 +26,11 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-base-label
-  font-size: 1.4rem
-  line-height: 1.8rem
-  color: $grey-middle
-  letter-spacing: -0.01em
+  font-size: 1.2rem
+  line-height: 1.2rem
+  color: rgba(#575A5F, 0.87)
 
-  padding: 0 0 0.5rem 0
+  padding: 0 0 .9rem 0
   display: inline-block
 
   transition: color 0.1s ease
@@ -39,6 +38,4 @@ export default {
     color: rgba(#747474, 0.5)
   &_error
     color: #FF3737
-  &::first-letter
-    text-transform: uppercase
 </style>

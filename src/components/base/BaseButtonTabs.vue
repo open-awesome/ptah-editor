@@ -95,7 +95,7 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 
-$border-color: rgba(#888888, 0.25)
+$tabs-bg: #EEF9FA
 
 @mixin button-style-reset()
   border: 0
@@ -111,36 +111,60 @@ $border-color: rgba(#888888, 0.25)
   width: 100%
   &__row
     display: flex
+    box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1)
+    background-color: $tabs-bg
 
 .b-base-button-tabs-button
   @include button-style-reset
   cursor: pointer
-  transition: background-color 0.1s ease, color 0.1s ease
+  transition: all .2s ease-out
 
   display: flex
-  flex-basis: 0rem
+  flex-basis: 0
   flex-grow: 1
   flex-shrink: 0
   justify-content: center
   align-items: center
+  position: relative
+  height: 3.7rem
 
-  background-color: $white
-  color: #888888
-  border: 1px solid $border-color
-  border-radius: 0.2rem
+  background-color: transparent
+  color: #A2A5A5
 
-  padding: $size-step/2.5
-  margin: 0.2rem
-  font-size: 1.4rem
+  padding: $size-step/4 $size-step/2
+  margin: 0
+  font-size: 1.3rem
   white-space: nowrap
+  text-transform: uppercase
 
   outline: none
-  &:hover,
+  &:hover
+    color: $main-green
   &_selected,
   &_selected:hover
-    color: $main-green
-    fill: $main-green
-    border: 1px solid $main-green
+    color: #575A5F
+    fill: #575A5F
+    background: #FFFFFF
+  &_selected:after,
+  &_selected:before
+    content: ''
+    position: absolute
+    width: .5rem
+    height: 3.7rem
+    z-index: 1
+    top: 0
+    background-color: $tabs-bg
+    display: none
+  &_selected:not(:last-child):after
+    right: 0
+    display: block
+    border-radius: 0 0 0 5px
+    box-shadow: inset 2px 1px 2px rgba(186, 186, 186, 0.34)
+  &_selected:not(:first-child):before
+    left: 0
+    display: block
+    border-radius: 0 0 5px 0
+    box-shadow: inset -2px 1px 2px rgba(186, 186, 186, 0.34)
 
   &__icon + &__text
     margin-left: 0.6rem

@@ -2,7 +2,7 @@
     "menu": {
         "siteSettings":                 "Settings",
         "sections":                     "Sections",
-        "visualSettings":               "Visual",
+        "visualSettings":               "Style settings",
         "seo":                          "SEO",
         "cookie":                       "Cookies",
         "addJs":                        "Add JS ",
@@ -65,7 +65,7 @@
         "elementsLibrary":              "Elements library",
         "margin":                       "Margin",
         "padding":                      "Padding",
-        "editIndents":                  "Edit indents",
+        "editIndents":                  "Indents setting",
         "stretch":                      "Stretch to fit",
         "width":                        "Width",
         "height":                       "Height",

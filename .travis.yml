@@ -2,7 +2,7 @@ language: node_js
 stages:
 - test
 - name: deploy
-  if: branch IN (master, develop)
+  if: branch IN (master, develop, feature/195538)
 jobs:
   include:
   - stage: test

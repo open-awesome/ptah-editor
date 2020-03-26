@@ -8,26 +8,11 @@
         >
         <div class="b-builder-modal-content__close"
           @click="closeContent">
-          <icon-base
-            name="close"
-            color="#c4c4c4"
-            width="14"
-            height="14"
-            />
+          <icon-minimize />
         </div>
         <div class="b-builder-modal-content__padd">
           <div class="b-builder-modal-content__chapter">
-            {{ $t('menu.siteSettings') }}
-          </div>
-          <div class="b-builder-modal-content__menu">
-            <!-- Site settings CONTENTS -->
-            <TabItem
-              v-for="siteSetting in siteSettingsMenu"
-              :key="siteSetting.id"
-              :isSelected="contentID === siteSetting.id"
-              @click="toggleSiteSettings(siteSetting.id)">
-              {{ $t(siteSetting.name) }}
-            </TabItem>
+            {{ title }}
           </div>
 
           <div class="b-builder-modal-content__layout">
@@ -67,6 +52,11 @@ export default {
 
     contentID () {
       return this.$route.path.split('/')[4] || ''
+    },
+
+    title () {
+      let title = this.siteSettingsMenu.find(item => item.id === this.contentID).name
+      return this.$t(title)
     }
   },
 
@@ -74,9 +64,11 @@ export default {
     if (_.last(this.$route.path.split('/')) === 'settings') {
       this.toggleSiteSettings('visualSettings')
     }
-    this.toggleSidebar(true)
     this.toggleSectionsTreeMenu(false)
     this.setScrollbarVisible(false)
+    this.$nextTick(function () {
+      this.toggleSidebar(true)
+    })
   },
 
   methods: {
@@ -132,14 +124,14 @@ export default {
   overflow: auto
 
   display: flex
-  justify-content: center
+  justify-content: flex-start
   align-items: center
 
   @media only screen and (max-height: 600px)
     &
       display: block
   &-content
-    width: 100%
+    width: 33rem
     min-height: 100%
     z-index: 10
     position: relative
@@ -151,7 +143,7 @@ export default {
     justify-content: stretch
     @media only screen and (max-height: 600px)
       &
-        width: 100%
+        width: 29.5rem
         min-height: 100%
     &__padd
       display: flex
@@ -168,28 +160,33 @@ export default {
         &
           position: relative
     &__chapter
-      font-size: 2rem
-      line-height: $size-step*2
-
-      height: $size-step*2
-      padding: 0 $size-step
-    &__menu
-      width: 100%
-      height: $size-step
-      padding: 0 $size-step
+      font-size: 1.8rem
+      font-weight: bold
+      line-height: 1
+      text-transform: uppercase
+      text-align: center
+      letter-spacing: 0.065em
 
       display: flex
-      justify-content: stretch
+      align-items: center
+      justify-content: center
 
-      border-bottom: 1px solid $ligth-grey
-
+      position: absolute
+      top: 0
+      right: 0
+      left: 0
+      height: 7rem
+      padding: 0.5rem 2rem 0
     &__layout
-      position: relative
-      height: 100%
+      position: absolute
+      top: 7rem
+      right: 0
+      bottom: 0
+      left: 0
     &__close
       position: absolute
-      top: $size-step
-      right: $size-step
+      top: 2.4rem
+      right: 2.1rem
       cursor: pointer
       z-index: 10
       &:hover svg
