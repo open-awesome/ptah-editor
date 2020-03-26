@@ -1,133 +1,145 @@
 <template>
   <builder-modal-content-layout>
-    <div class="b-builder-site-settings-visual">
+    <div class="b-page-style">
       <base-button-tabs
         :list="tabs"
         v-model="activeTab"
-        class="b-visial-tabs"
+        class="b-visual-tabs"
       />
-      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
-        <BaseCaption help="Image for page background" >
-          Background image
-        </BaseCaption>
-        <div class="b-builder-site-settings-visual__col">
-          <base-uploader
-            v-model="pageBackgroundUrl"
-            :label="$t('s.backgroundImage')"
-          />
-        </div>
-        <template v-if="pageBackgroundUrl !== ''">
-          <div class="b-builder-site-settings-visual__col">
-            <BaseRangeSlider
-              :label="$t('s.posX')"
-              position="left"
-              :value="pageBackgroundPositionX"
-              step="1" :min="0" :max="980"
-              @change="setLeft"
-            >
-              <base-number-input
-                class="b-builder-site-settings-visual__number-input"
-                :value="numLeftValue"
-                unit="px"
-                :maximum="980"
-                @input="setLeftValue"
-              />
-            </BaseRangeSlider>
-          </div>
-          <div class="b-builder-site-settings-visual__col">
-            <BaseRangeSlider
-              position="left"
-              :label="$t('s.poxY')"
-              v-model="pageBackgroundPositionY"
-              step="1" :min="0" :max="980"
-              @change="setTop"
-            >
-              <base-number-input
-                class="b-builder-site-settings-visual__number-input"
-                :value="numTopValue"
-                unit="px"
-                :maximum="980"
-                @input="setTopValue"
-              />
-            </BaseRangeSlider>
-          </div>
-        </template>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseColorPicker
-            :label="$t('s.backgroundColor')"
-            v-model="pageBackgroundColor"
-          />
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseSwitcher
-            v-model="backgroundFillValue"
-            label="Background fill"
-          />
-        </div>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseSwitcher
-            v-model="bgAttachmentCheckbox"
-            :label="$t('s.fixedScrolling')"
-          />
-        </div>
-      </div>
-      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
-        <BaseCaption help="Video for page background" >
-          Background video
-        </BaseCaption>
-        <div class="b-builder-site-settings-visual__col">
-          <base-uploader
-            v-model="bgVideo"
-            :label="$t('s.backgroundVideo')"
-            type="video"
-          />
-        </div>
-        <div class="b-builder-site-settings-visual__col" v-if="activeTab === 'bg'">
-          <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
-        </div>
-      </div>
-      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'bg'">
-        <BaseCaption help="Create a smooth fullpage scrolling effect" >
-          Full page scroll
-        </BaseCaption>
-        <div class="b-builder-site-settings-visual__col">
-          <BaseSwitcher v-model="fullPageScrollCheckbox" :label="$t('s.fpScroll')" />
-        </div>
-      </div>
-      <div class="b-builder-site-settings-visual__row" v-if="activeTab === 'colors'">
-        <BaseCaption help="Color palette for color pickers" >
-          Color palette
-        </BaseCaption>
-        <div class="b-builder-site-settings-visual__col">
-          <base-uploader
-            v-model="imagePalette"
-            @change="changeImagePalette"
-            :label="'Image for palette'"
-            :tooltipText="'Load image for generate palette of page'"
-            @getInputSrcFiles="getInputSrcFiles"
-          >
-          </base-uploader>
-        </div>
-        <div class="b-builder-site-settings-visual__col" v-if="palette">
-          <div class="b-palette">
-            <ul class="b-palette__list">
-              <li class="b-palette__list-item b-palette__list-item_palette">
-                <IconBase
-                  width="24"
-                  height="24"
-                  name="palette"
-                  color="#A2A5A5"
+      <div class="layout layout__bg"  v-if="activeTab === 'bg'">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <div class="b-page-style__row">
+              <BaseCaption help="Image for page background">
+                Background image
+              </BaseCaption>
+              <div class="b-page-style__col">
+                <base-uploader
+                  v-model="pageBackgroundUrl"
+                  :label="$t('s.backgroundImage')"
                 />
-              </li>
-              <li
-                v-for="(color, index) in palette"
-                :key="color + index"
-                :style="{'background-color' : color}"
-                class="b-palette__list-item"
-              />
-            </ul>
+              </div>
+              <template v-if="pageBackgroundUrl !== ''">
+                <div class="b-page-style__col">
+                  <BaseRangeSlider
+                    :label="$t('s.posX')"
+                    position="left"
+                    :value="pageBackgroundPositionX"
+                    step="1" :min="0" :max="980"
+                    @change="setLeft"
+                  >
+                    <base-number-input
+                      class="b-page-style__number-input"
+                      :value="numLeftValue"
+                      unit="px"
+                      :maximum="980"
+                      @input="setLeftValue"
+                    />
+                  </BaseRangeSlider>
+                </div>
+                <div class="b-page-style__col">
+                  <BaseRangeSlider
+                    position="left"
+                    :label="$t('s.poxY')"
+                    v-model="pageBackgroundPositionY"
+                    step="1" :min="0" :max="980"
+                    @change="setTop"
+                  >
+                    <base-number-input
+                      class="b-page-style__number-input"
+                      :value="numTopValue"
+                      unit="px"
+                      :maximum="980"
+                      @input="setTopValue"
+                    />
+                  </BaseRangeSlider>
+                </div>
+              </template>
+              <div class="b-page-style__col">
+                <BaseColorPicker
+                  :label="$t('s.backgroundColor')"
+                  v-model="pageBackgroundColor"
+                />
+              </div>
+              <div class="b-page-style__col">
+                <BaseSwitcher
+                  v-model="backgroundFillValue"
+                  label="Background fill"
+                />
+              </div>
+              <div class="b-page-style__col">
+                <BaseSwitcher
+                  v-model="bgAttachmentCheckbox"
+                  :label="$t('s.fixedScrolling')"
+                />
+              </div>
+            </div>
+            <div class="b-page-style__row">
+              <BaseCaption help="Video for page background">
+                Background video
+              </BaseCaption>
+              <div class="b-page-style__col">
+                <base-uploader
+                  v-model="bgVideo"
+                  :label="$t('s.backgroundVideo')"
+                  type="video"
+                />
+              </div>
+              <div class="b-page-style__col">
+                <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
+              </div>
+            </div>
+            <div class="b-page-style__row">
+              <BaseCaption help="Create a smooth fullpage scrolling effect" >
+                Full page scroll
+              </BaseCaption>
+              <div class="b-page-style__col">
+                <BaseSwitcher v-model="fullPageScrollCheckbox" :label="$t('s.fpScroll')" />
+              </div>
+            </div>
           </div>
-        </div>
+        </base-scroll-container>
+      </div>
+      <div class="layout"  v-if="activeTab === 'colors'">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <div class="b-page-style__row" v-if="activeTab === 'colors'">
+              <BaseCaption help="Color palette for color pickers" >
+                Color palette
+              </BaseCaption>
+              <div class="b-page-style__col">
+                <base-uploader
+                  v-model="imagePalette"
+                  @change="changeImagePalette"
+                  :label="'Image for palette'"
+                  :tooltipText="'Load image for generate palette of page'"
+                  @getInputSrcFiles="getInputSrcFiles"
+                >
+                </base-uploader>
+              </div>
+              <div class="b-page-style__col" v-if="palette">
+                <div class="b-palette">
+                  <ul class="b-palette__list">
+                    <li class="b-palette__list-item b-palette__list-item_palette">
+                      <IconBase
+                        width="24"
+                        height="24"
+                        name="palette"
+                        color="#A2A5A5"
+                      />
+                    </li>
+                    <li
+                      v-for="(color, index) in palette"
+                      :key="color + index"
+                      :style="{'background-color' : color}"
+                      class="b-palette__list-item"
+                    />
+                  </ul>
+                </div>
+              </div>
+            </div>
+          </div>
+        </base-scroll-container>
       </div>
     </div>
 
@@ -375,15 +387,17 @@ export default {
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
 
-.b-builder-site-settings-visual
-  padding: 0 0 4rem
+.b-page-style
+  height: 100%
+  position: relative
+
   &__row
     display: flex
     flex-direction: column
     align-items: flex-start
 
-    margin: 3rem 0 0
-    padding: 0 2.9rem
+    margin: 0 0 3rem
+    padding: 0
   &__col
     width: 100%
     max-width: 24rem
@@ -394,11 +408,29 @@ export default {
     .b-base-switcher__label
       margin-right: $size-step/2
 
+.b-visual-tabs
+  margin-bottom: $size-step
+
+.layout
+  position: absolute
+  top: 6.4rem
+  right: 0
+  bottom: 0
+  left: 0
+
+  box-sizing: border-box
+  padding: 0 3.7rem 2rem
+  &__bg
+    padding-right: 0
+  &-padding
+    width: 100%
+    padding: 0 5rem 0 0
+
 .b-palette
   &__list
     display: flex
     justify-content: center
-    flex-wrap: wrap
+    
     margin: 0 0 $size-step / 4 0
     padding: 0
     &-item

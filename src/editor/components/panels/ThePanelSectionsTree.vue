@@ -150,10 +150,14 @@ export default {
 
     transition: color .3s cubic-bezier(.2,.85,.4,1.275)
     &-text
+      position: relative
       & svg
+        position: absolute
+        top: .7rem
+        right: -2rem
+
         opacity: 0
         transition: opacity .3s cubic-bezier(.2,.85,.4,1.275)
-        margin-left: 1rem
       &:hover
         cursor: pointer
         color: $main-green

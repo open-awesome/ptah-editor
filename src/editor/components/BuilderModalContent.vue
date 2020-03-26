@@ -6,15 +6,14 @@
       <div
         class="b-builder-modal-content"
         >
-        <div class="b-builder-modal-content__close"
-          @click="closeContent">
-          <icon-minimize />
-        </div>
         <div class="b-builder-modal-content__padd">
           <div class="b-builder-modal-content__chapter">
             {{ title }}
+            <div class="b-builder-modal-content__close"
+              @click="closeContent">
+              <icon-minimize />
+            </div>
           </div>
-
           <div class="b-builder-modal-content__layout">
             <router-view></router-view>
           </div>
@@ -160,8 +159,9 @@ export default {
         &
           position: relative
     &__chapter
+      font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif
       font-size: 1.8rem
-      font-weight: bold
+      font-weight: 600
       line-height: 1
       text-transform: uppercase
       text-align: center
@@ -185,12 +185,29 @@ export default {
       left: 0
     &__close
       position: absolute
-      top: 2.4rem
-      right: 2.1rem
+      top: 1.9rem
+      right: 1.7rem
       cursor: pointer
-      z-index: 10
-      &:hover svg
-        fill: $main-green
+
+      width: 3.6rem
+      height: 3.6rem
+
+      display: flex
+      justify-content: center
+      align-items: center
+
+      border-radius: 100%
+      transition: background .3s cubic-bezier(.2,.85,.4,1.275)
+      & svg
+        transition: fill .3s cubic-bezier(.2,.85,.4,1.275)
+      &:hover
+        cursor: pointer
+        background: rgba(#000000, 0.05)
+      &:active
+        cursor: pointer
+        background: rgba(#00ADB6, 0.05)
+        & svg
+          fill: $main-green
 
 // Animations
 .slide-fade

@@ -4,7 +4,7 @@
     <span
       class="b-caption__help"
       :tooltip="help"
-      tooltip-position="top"
+      tooltip-position="bottom"
     >
     <IconBase
       v-show="help !== ''"

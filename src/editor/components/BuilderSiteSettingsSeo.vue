@@ -1,8 +1,12 @@
 <template>
   <builder-modal-content-layout>
     <div class="seo-panel">
-      <base-button-tabs :list="tabs" v-model="activeTab" class="seo-tabs"></base-button-tabs>
-      <div class="layout" :noScroll="true" v-if="activeTab === 'seo'">
+      <base-button-tabs
+        :list="tabs"
+        v-model="activeTab"
+        class="seo-tabs"
+      />
+      <div class="layout" v-if="activeTab === 'seo'">
           <form @submit.prevent="applySettings" class="layout__content">
 
             <!-- Title & Favicon -->
