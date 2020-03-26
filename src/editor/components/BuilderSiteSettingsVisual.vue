@@ -6,7 +6,7 @@
         v-model="activeTab"
         class="b-visual-tabs"
       />
-      <div class="layout layout__bg"  v-if="activeTab === 'bg'">
+      <div class="layout layout__bg" v-if="activeTab === 'bg'">
         <base-scroll-container>
           <div class="layout-padding">
             <div class="b-page-style__row">
@@ -15,6 +15,7 @@
               </BaseCaption>
               <div class="b-page-style__col">
                 <base-uploader
+                  key="0"
                   v-model="pageBackgroundUrl"
                   :label="$t('s.backgroundImage')"
                 />
@@ -100,15 +101,16 @@
           </div>
         </base-scroll-container>
       </div>
-      <div class="layout"  v-if="activeTab === 'colors'">
+      <div class="layout" v-if="activeTab === 'colors'">
         <base-scroll-container>
           <div class="layout-padding">
-            <div class="b-page-style__row" v-if="activeTab === 'colors'">
+            <div class="b-page-style__row">
               <BaseCaption help="Color palette for color pickers" >
                 Color palette
               </BaseCaption>
               <div class="b-page-style__col">
                 <base-uploader
+                  key="1"
                   v-model="imagePalette"
                   @change="changeImagePalette"
                   :label="'Image for palette'"
@@ -141,11 +143,6 @@
           </div>
         </base-scroll-container>
       </div>
-    </div>
-
-    <div slot="controls">
-      <BaseButton size="small" color="main-green-transparent" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
-      <BaseButton size="small" color="main-green" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>
@@ -282,6 +279,50 @@ export default {
         })
         this.storeSaveSettingsPalette({ palette: _.uniqBy(palette), image: this.imagePalette })
       }, 1000)
+    },
+
+    pageBackgroundUrl  () {
+      this.applySettings()
+    },
+
+    pageBackgroundColor () {
+      this.applySettings()
+    },
+
+    pageBackgroundPositionX () {
+      this.applySettings()
+    },
+
+    pageBackgroundPositionY () {
+      this.applySettings()
+    },
+
+    bgAttachment () {
+      this.applySettings()
+    },
+
+    bgRepeat () {
+      this.applySettings()
+    },
+
+    bgSize () {
+      this.applySettings()
+    },
+
+    bgVideo () {
+      this.applySettings()
+    },
+
+    bgVideoPosition () {
+      this.applySettings()
+    },
+
+    fullPageScroll () {
+      this.applySettings()
+    },
+
+    imagePalette () {
+      this.applySettings()
     }
   },
 
@@ -337,7 +378,6 @@ export default {
       }
 
       this.storeSettings(data)
-      this.close()
     },
 
     close () {
@@ -430,7 +470,7 @@ export default {
   &__list
     display: flex
     justify-content: center
-    
+
     margin: 0 0 $size-step / 4 0
     padding: 0
     &-item
