@@ -125,6 +125,7 @@ export default {
     justify-content: flex-start
     align-items: center
 
+    max-width: 28rem
     height: 5rem
     padding: 1.3rem 1.1rem 1.3rem 1.6rem
     margin: 0 1.6rem 0 1.3rem

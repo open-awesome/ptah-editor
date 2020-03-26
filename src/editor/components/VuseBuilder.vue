@@ -83,7 +83,7 @@
       </component>
 
       <div v-if="emptySections" class="controller-intro">
-        <h3>&larr; Choose layout from the menu</h3>
+        <h3>&larr; Choose section from the menu</h3>
       </div>
 
       <v-style>
@@ -271,12 +271,6 @@ export default {
 
     // listener keyUp press
     document.addEventListener('keyup', this.keyUp)
-
-    // hide all panels
-    this.toggleSidebar(false)
-    this.toggleSectionsTreeMenu(false)
-    this.toggleAddSectionMenu(false)
-    this.toggleProgressPanelExpanded(false)
   },
 
   updated () {
@@ -422,7 +416,13 @@ export default {
 
       if (this.emptySections) {
         this.toggleSidebar(true)
+        this.toggleSectionsTreeMenu(true)
         this.toggleAddSectionMenu(true)
+      } else {
+        this.toggleSidebar(true)
+        this.toggleSectionsTreeMenu(true)
+        this.toggleAddSectionMenu(false)
+        this.toggleProgressPanelExpanded(false)
       }
     },
     addTheme (theme) {

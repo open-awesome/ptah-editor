@@ -641,6 +641,7 @@ export default {
 
     display: flex
     justify-content: space-between
+    max-width: 28rem
     padding: 1.3rem 1.1rem 1.3rem 1.6rem
     margin: 0 1.6rem 0 1.3rem
 
