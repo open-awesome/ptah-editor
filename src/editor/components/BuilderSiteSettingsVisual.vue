@@ -110,10 +110,15 @@
         </div>
         <div class="b-builder-site-settings-visual__col" v-if="palette">
           <div class="b-palette">
-            <div class="b-palette__title">
-
-            </div>
             <ul class="b-palette__list">
+              <li class="b-palette__list-item b-palette__list-item_palette">
+                <IconBase
+                  width="24"
+                  height="24"
+                  name="palette"
+                  color="#A2A5A5"
+                />
+              </li>
               <li
                 v-for="(color, index) in palette"
                 :key="color + index"
@@ -260,7 +265,7 @@ export default {
       }
 
       setTimeout(() => {
-        const palette = colorThief.getPalette(preview).map(c => {
+        const palette = colorThief.getPalette(preview, 6).map(c => {
           return this.getHexColor(c)
         })
         this.storeSaveSettingsPalette({ palette: _.uniqBy(palette), image: this.imagePalette })
@@ -277,17 +282,18 @@ export default {
       'storeSettings',
       'storeSaveSettingsPalette'
     ]),
+    ...mapActions('Sidebar', [
+      'toggleSidebar'
+    ]),
     updateSettings () {
       const settings = this.currentLanding.settings
 
       this.pageBackgroundUrl = settings.styles.backgroundImage
       this.pageBackgroundColor = settings.styles.backgroundColor
-      this.pageBackgroundPositionX = settings.styles.backgroundPositionX !== ''
-        ? settings.styles.backgroundPositionX
-        : 0
-      this.pageBackgroundPositionY = settings.styles.backgroundPositionY !== ''
-        ? settings.styles.backgroundPositionY
-        : 0
+      this.pageBackgroundPositionX = settings.styles.backgroundPositionX
+      this.numLeftValue = this.pageBackgroundPositionX
+      this.pageBackgroundPositionY = settings.styles.backgroundPositionY
+      this.numTopValue = this.pageBackgroundPositionY
       this.bgAttachment = settings.styles.backgroundAttachment
       this.bgRepeat = settings.styles.backgroundRepeat
       this.bgSize = settings.styles.backgroundSize
@@ -323,6 +329,7 @@ export default {
     },
 
     close () {
+      this.toggleSidebar(false)
       this.$router.push(`/editor/${this.$route.params.slug}`)
     },
 
@@ -369,6 +376,7 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-builder-site-settings-visual
+  padding: 0 0 4rem
   &__row
     display: flex
     flex-direction: column
@@ -379,7 +387,7 @@ export default {
   &__col
     width: 100%
     max-width: 24rem
-    margin: 1.4rem 0 1rem 1.8rem
+    margin: 1rem 0 1rem 1.8rem
   &__number-input
     margin-left: 0.8rem
   /deep/
@@ -389,12 +397,17 @@ export default {
 .b-palette
   &__list
     display: flex
+    justify-content: center
+    flex-wrap: wrap
     margin: 0 0 $size-step / 4 0
     padding: 0
     &-item
       list-style: none
-      width: $size-step
-      height: $size-step
+      width: 2rem
+      height: 2rem
       border-radius: 100%
-      margin: $size-step / 8
+      margin: 4px
+      &_palette
+        margin: 2px 14px 4px 4px
+
 </style>

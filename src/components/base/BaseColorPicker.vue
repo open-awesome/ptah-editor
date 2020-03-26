@@ -26,6 +26,20 @@ export default {
 
     palette () {
       return this.currentLanding.settings.palette
+    },
+
+    isTransparent () {
+      let isOpacity = false
+
+      if (this.pickerValue && this.pickerValue.indexOf('0)') !== -1) {
+        isOpacity = true
+      }
+
+      if (this.pickerValue.rgba && this.pickerValue.rgba.indexOf('0)') !== -1) {
+        isOpacity = true
+      }
+
+      return isOpacity
     }
   },
   watch: {
@@ -69,7 +83,7 @@ export default {
         >
         <div class="b-picker__preview"
           :style="{ 'background-color': pickerValue.rgba || pickerValue }"
-          :class="{ 'b-picker__preview_transparent': pickerValue.rgba === 'rgba(0,0,0,0)' || pickerValue === 'rgba(0,0,0,0)' }"
+          :class="{ 'b-picker__preview_transparent': isTransparent }"
           :title="pickerValue.rgba || pickerValue || 'Choose color'"
           >
         </div>
@@ -107,7 +121,11 @@ export default {
     background-color: $white
     border: 2px solid $ligth-grey
     &_transparent
-      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAL0lEQVQ4T2N89uzZfwY8QFJSEp80A+OoAcMiDP4DAb6Ifv78Of50MGoAA+PQDwMAuX5VedFT3cEAAAAASUVORK5CYII=")
+      background-image: url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/a896a84e-6025-4d3e-ad17-d2418d6bd805.png)
+      border: 0 solid transparent
+      width: 2rem
+      height: 2rem
+      background-size: 100%
     &:hover
       border-color: $main-green
   &__label

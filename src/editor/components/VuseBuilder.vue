@@ -460,7 +460,7 @@ export default {
             !isNaN(Number(value)) &&
             value
         ) {
-          value = `${value}rem`
+          value = `${value}px`
         }
         this.$refs.artboard.style[styleName] = value
       })
