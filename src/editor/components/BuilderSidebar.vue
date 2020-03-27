@@ -31,7 +31,7 @@
         </BuilderAddSectionBar>
       </div>
     </transition>
-    
+
     <!-- Show Progress panel -->
     <div class="b-builder-sidebar__content" v-if="isExpanded && isProgressPanelExpanded">
       <PanelProgress />

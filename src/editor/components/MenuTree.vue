@@ -123,6 +123,7 @@
       @confirm="groupSections"
       @close="showConfirm = false"
       v-if="showConfirm"
+      button="Group"
     >
       After grouping, the background of all child sections will be deleted
     </base-confirm>
@@ -132,8 +133,9 @@
       @confirm="deleteSection"
       @close="showConfirmDelete = false"
       v-if="showConfirmDelete"
+      button="Delete"
     >
-      You are going to delete <b>{{ settingObjectSection.name }}</b>, this cannot be undone. Confirm deleting?
+      You are going to delete <span class="b-menu-tree__modal-name-section">{{ settingObjectSection.name }}</span>, this cannot be undone. Confirm deleting?
     </base-confirm>
   </div>
 </template>
@@ -686,6 +688,8 @@ export default {
         width: 2.4rem
         height: 2.4rem
         margin-right: 1.1rem
+  &__modal-name-section
+    font-weight: 600
 
 .b-delete-section
   width: 100%

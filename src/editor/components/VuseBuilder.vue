@@ -102,7 +102,7 @@
       v-if="showConfirmElementDelete"
       button="Delete"
     >
-      You are going to delete <b class="b-modal-delete-element__name">{{ settingObjectLabel }}</b>, this cannot be undone. Confirm deleting?
+      You are going to delete <span class="b-modal-delete-element__name">{{ settingObjectLabel }}</span>, this cannot be undone. Confirm deleting?
     </base-confirm>
   </div>
 </builder-layout>
@@ -830,9 +830,8 @@ export default {
     background: lighten(#18d88b, 40%)
 
 .b-modal-delete-element
-  &.is-expanded
-    margin-left: $size-step * 9
   &__name
+    font-weight: 600
     text-transform: capitalize
 
 .preloader

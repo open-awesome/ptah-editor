@@ -18,6 +18,7 @@ export default {
           'white',
           'main-green',
           'main-green-transparent',
+          'main-red',
           'yellow-transparent'
         ]
         return values.indexOf(value) !== -1
@@ -165,6 +166,8 @@ export default {
       background-color: $orange-down200 !important
       opacity: .8
   &_transparent
+    color: #A2A5A5
+    font-weight: 600
     background-color: transparent
   &_white
     color: $main-green
@@ -175,6 +178,21 @@ export default {
   &_main-green
     color: $white
     background: $main-green
+    text-transform: uppercase
+    font-weight: 800
+    &:hover
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 3px 4px rgba(0, 0, 0, 0.12)
+    &:active
+      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2), 0 3px 14px rgba(0, 0, 0, 0.12), 0 8px 10px rgba(0, 0, 0, 0.14)
+    &[disabled]
+      cursor: not-allowed
+      background-color: rgba($black, 0.12)
+      color: $white
+
+  /* new color main red */
+  &_main-red
+    color: $white
+    background: $main-red
     text-transform: uppercase
     font-weight: 800
     &:hover
