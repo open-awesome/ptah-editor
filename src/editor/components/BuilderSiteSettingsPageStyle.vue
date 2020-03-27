@@ -154,7 +154,7 @@ import BuilderModalContentLayout from './BuilderModalContentLayout'
 import ColorThief from 'colorthief/dist/color-thief.umd.js'
 
 export default {
-  name: 'BuilderSiteSettingsVisual',
+  name: 'BuilderSiteSettingsPageStyle',
 
   components: {
     BuilderModalContentLayout
