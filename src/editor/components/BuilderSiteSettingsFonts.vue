@@ -1,5 +1,5 @@
 <template>
-  <builder-modal-content-layout id="settings-fonts" :noScroll="true">
+  <div id="settings-fonts" :noScroll="true">
     <v-style>
       <template v-for="font in visibleFonts">
         {{ `@import url("https://fonts.googleapis.com/css?family=${font.family}:${font.variant}");` }}
@@ -8,9 +8,6 @@
     <form id="fonts-form" @submit.prevent="saveFonts">
       <base-fieldset class="b-setup-fonts" v-if="!isChange">
         <div class="b-setup-fonts-header">
-          <base-heading level="2">
-            {{ $t('s.setupFonts') }}
-          </base-heading>
           <span>
             Load time:
             <span :style="{ color: status.color }">
@@ -23,46 +20,49 @@
           backgroundBar="#999"
           v-if="isLoaded"
         >
-        <ul class="b-setup-fonts-list">
-          <li v-for="(el, key) in setupFonts" :key="key" class="b-setup-fonts-list__item">
-            <span class="b-setup-fonts-list__item-names" :style="{
+        <div class="b-setup-fonts-list">
+          <div v-for="(el, key) in setupFonts" :key="key" class="b-setup-fonts-list__item">
+            <div class="b-setup-fonts-list__sample" :style="{
               'font-family': `${setupFonts[key]}`
             }">
-              {{ textFonts[key] }}: {{ setupFonts[key] }}
-            </span>
-            <span class="b-setup-fonts-list__item-buttons">
-              <base-button
-                size="small"
-                color="blue"
-                v-text="'Change'"
-                @click="changeFont(el, key)"
-              />
-            </span>
-          </li>
-        </ul>
-        </base-scroll-container>
-      </base-fieldset>
-      <base-fieldset v-if="isChange">
-        <div class="b-header-fonts-block">
-          <div class="b-header-fonts-block__logo">
-            <img src="https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/dde0bbef-6a92-46e5-b8c4-437524f99a85.png" />
-          </div>
-          <div class="b-header-fonts-block__text">
-            {{ $t('s.loadFontsText') }}
+              Lorem ipsum dolor amet, consectetur adipisicing elit.
+            </div>
+            <div class="b-setup-fonts-list__font">
+              <div class="b-setup-fonts-list__font-row">
+                <div class="b-setup-fonts-list__font-usage">{{ textFonts[key] }}</div>
+                <div class="b-setup-fonts-list__font-name">{{ setupFonts[key] }}</div>
+              </div>
+              <span class="b-setup-fonts-list__item-buttons">
+                <div class="b-setup-fonts-list__font-check">
+                  <icon-base
+                    name="check-mark"
+                    color="#fff"
+                    width="15"
+                    height="15"
+                  />
+                </div>
+                <div class="change-font" @click="changeFont(el, key)">
+                  <icon-base
+                    name="recycle"
+                    color="#fff"
+                    width="20"
+                    height="20"
+                  />
+                  <span>change my font</span>
+                </div>
+              </span>
+            </div>
           </div>
         </div>
+        </base-scroll-container>
+      </base-fieldset>
+      <base-fieldset class="library" v-if="isChange">
         <div class="b-font-filter">
           <div>
             <base-text-field
               class="b-font-filter__search"
               placeholder="Search ..."
               v-model="search"
-            />
-          </div>
-          <div class="b-font-filter__sw">
-            <base-text-field
-              class="b-font-filter__text"
-              v-model="defText"
             />
           </div>
         </div>
@@ -89,13 +89,18 @@
                       class="b-fonts-list__item-check"
                       v-if="containsFont(font.family)"
                     >
-                      <icon-base name="checkMark" width="12" height="15" />
+                      <icon-base
+                        name="check-mark"
+                        color="#fff"
+                        width="15"
+                        height="15"
+                      />
                     </span>
-                    <div>
+                    <div class="b-fonts-list__item-family">
                       {{ font.family  }}
-                      <span class="b-fonts-list__item-category">
+                      <!--<span class="b-fonts-list__item-category">
                         {{ font.category  }}
-                      </span>
+                      </span>-->
                     </div>
                     <div class="b-simple-text" :style="{
                         'font-family': font.family
@@ -104,20 +109,26 @@
                     </div>
                     <div class="b-fonts-list__item-button">
                       <base-button
-                        v-if="selectedEl !== font.family"
-                        class="b-fonts-list__item-button-apply"
-                        size="small"
-                        color="blue"
-                        v-text="`Apply to ${textFonts[selectedKey]}`"
-                        @click="applyFont(font)"
-                      />
-                      <base-button
                         v-if="selectFonts[checkSpace(font.family)] !== undefined"
                         size="small"
                         color="gray"
                         v-text="'Edit'"
                         @click="editFont = font"
                       />
+                    </div>
+
+                    <div
+                      v-if="selectedEl !== font.family"
+                      class="add-font"
+                      @click="applyFont(font)"
+                    >
+                      <icon-base
+                        name="plus"
+                        color="#fff"
+                        width="20"
+                        height="20"
+                      />
+                      <span>Apply to {{textFonts[selectedKey]}}</span>
                     </div>
                   </li>
                 </ul>
@@ -142,35 +153,30 @@
                   Set Font Subsets
                 </div>
                 <div class="b-font-edit-variants__content">
-                  <base-scroll-container
-                    class="b-scrolled-content"
-                    backgroundBar="#999"
-                  >
-                    <div class="b-scrolled-content__inner">
-                      <ul class="b-font-edit__list">
-                        <li class="b-font-edit__list-item"
+                  <div class="b-scrolled-content__inner">
+                    <ul class="b-font-edit__list">
+                      <li class="b-font-edit__list-item"
                           v-for="subset in editFont.subsets"
                           :key="subset"
                           @click="toggleFontSubset(subset)"
-                        >
+                      >
                           <span
                             class="b-fonts-list__item-check"
                             v-if="containsFontSubset(subset)"
                           >
                             <icon-base name="checkMark" width="12" height="15" />
                           </span>
-                          {{ subset }}
-                        </li>
-                      </ul>
-                    </div>
-                  </base-scroll-container>
+                        {{ subset }}
+                      </li>
+                    </ul>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </div><!-- /.b-fonts-block -->
 
-        <div class="b-fonts-block__controls">
+        <!--<div class="b-fonts-block__controls">
           <base-button
             size="small"
             v-text="$t('nav.save')"
@@ -178,17 +184,10 @@
             @click="isChange = false"
             color="gray"
           />
-        </div>
+        </div>-->
       </base-fieldset>
     </form>
-
-    <template v-if="!isChange">
-      <div slot="controls">
-        <base-button size="middle" v-text="$t('nav.cancel')" :transparent="true" @click="close()" color="gray"/>
-        <base-button size="middle" color="blue" v-text="$t('nav.save')" type="submit" form="fonts-form"/>
-      </div>
-    </template>
-  </builder-modal-content-layout>
+  </div>
 </template>
 
 <script>
@@ -214,7 +213,7 @@ export default {
       list: [],
       search: '', // filter fonts
       editFont: null,
-      defText: this.$i18n.t('font.defText'),
+      defText: 'Lorem ipsum dolor amet, consectetur adipisicing elit.',
       statusList: [
         { text: 'fast', color: 'green' },
         { text: 'medium', color: 'orange' },
@@ -224,8 +223,8 @@ export default {
       ],
       textFonts: {
         'h1': this.$i18n.t('font.h1'),
-        'h2': this.$i18n.t('font.h2'),
-        'h3': this.$i18n.t('font.h3'),
+        // 'h2': this.$i18n.t('font.h2'),
+        // 'h3': this.$i18n.t('font.h3'),
         'p': this.$i18n.t('font.p'),
         'btn': this.$i18n.t('font.btn')
       },
@@ -489,18 +488,73 @@ export default {
 <style lang="sass" scoped>
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
-.b-header-fonts-block
+
+@mixin checkMark
+  position: absolute
+  bottom: 0
+  right: 0
+  width: 3.5rem
+  height: 3.5rem
+
   display: flex
-  justify-content: stretch
+  align-items: center
+  justify-content: center
+
+  background: $main-green
+  border-radius: 10px 0 7px 0
+
+@mixin control
+  position: absolute
+  bottom: 0
+  right: 0
+  width: 3.5rem
+  height: 3.5rem
+
+  display: flex
+  align-items: center
+  justify-content: center
+
+  transition: width 0.3s ease-in-out
+
+  cursor: pointer
+
+  span
+    display: block
+    font-size: 1.8rem
+    text-transform: uppercase
+    color: #fff
+    opacity: 0
+    width: 0
+    transition: opacity 0.5s
+    white-space: nowrap
+
+  &:hover
+    width: 21rem
+    padding: 0 1rem
+    span
+      opacity: 1
+      width: auto
+      margin-left: .7rem
+
+#settings-fonts, #fonts-form
+  height: 100%
+
+.library
+  height: calc(100% - 1.5rem)
+  margin-bottom: 0
 
 .b-fonts-block
   display: flex
   justify-content: stretch
-  height: 29rem
+  height: 100%
+  position: relative
 
-  border: 1px solid #C4C4C4
   &__list
     width: 100%
+    position: absolute
+    top: 0
+    bottom: 0
+    left: 0
     &._m
       width: 70%
   &__controls
@@ -523,34 +577,44 @@ export default {
     width: 300px
 
 .b-fonts-list
-  padding: 0
+  padding: 0 0 0 1.5rem
   margin: 0
   &__item
     $this: &
-    width: 100%
-    height: $size-step * 3
-    padding: $size-step/2 $size-step/2 $size-step/2 $size-step
-    margin: 0
-
-    border-bottom: 1px solid #C4C4C4
+    width: 35rem
+    height: 17rem
+    padding: 0
+    margin: 0 0 1.5rem
     list-style: none
 
     display: flex
     justify-content: left
     align-items: center
 
+    border: 2px solid $main-green
+    border-radius: 10px
+
     position: relative
+
+    .add-font
+      display: none
+
     &._selected
       flex-direction: column
       align-items: flex-start
 
-      padding: $size-step/8 $size-step/2 $size-step/8 $size-step
-      #{$this}-check
-        top: 5px
+    &-family
+      height: 5.8rem
+      font-size: 1.6rem
+      line-height: 2.2rem
+      letter-spacing: 0.065em
+      display: flex
+      align-items: center
+      padding: 0 1.8rem
 
     &._applied
-      color: #fff
-      background-color: $main-green
+      //color: #fff
+      background-color: rgba($main-green, .1)
       #{$this}-category
         color: #fff
     &-category
@@ -560,19 +624,17 @@ export default {
     &-button
       display: none
       position: absolute
-      top: 5px
-      right: 32px
+      bottom: 0
+      left: 0
       &-apply
         width: auto
     &:hover
+      .add-font
+        display: flex
       #{$this}-button
         display: block
     &-check
-      position: absolute
-      top: 15px
-      left: 13px
-      & svg
-        fill: #00FF0A
+      @include checkMark
 
 .b-scrolled-content
   margin: 0
@@ -643,6 +705,7 @@ export default {
 
 .b-setup-fonts
   margin: 0
+  height: 100%
   &-header
     display: flex
     justify-content: space-between
@@ -650,42 +713,76 @@ export default {
   &-list
     padding: 0
     margin: 0
-    height: 30rem
+    width: 100%
+    padding-left: 1.5rem
     &__item
       $this: &
+      border: 2px solid $main-green
+      box-sizing: border-box
+      border-radius: 10px
+      margin-bottom: 1.5rem
+      width: 35rem
+
+      .change-font
+        display: none
+
+      &:hover
+        .b-setup-fonts-list__font-check
+          display: none
+        .change-font
+          display: flex
+
+    &__sample
+      height: 10rem
       display: flex
       align-items: center
-      list-style: none
-      height: $size-step * 1.5
-      line-height: 1
-      margin: $size-step/4 0
-      &-names
-      &:nth-child(4)
-        #{$this}-names
-          font-size: 16px
-      &:nth-child(3)
-        #{$this}-names
-          font-size: 24px
-      &:nth-child(2)
-        #{$this}-names
-          font-size: 32px
-      &:nth-child(1)
-        #{$this}-names
-          font-size: 48px
-      & > *
-        display: block
-        position: relative
-      &-buttons
-        display: none
-      &:hover
-        #{$this}-buttons
-          display: block
+      padding: 1.3rem
+      font-size: 2.1rem
+      line-height: 2.5rem
+      letter-spacing: 0.065em
+      box-sizing: border-box
+    &__font
+      height: 10rem
+      position: relative
+      padding: 2rem 4.4rem
+      background: rgba($main-green, 0.1)
+      border-top: 2px solid $main-green
+      box-sizing: border-box
+      &-row
+        display: flex
+        align-items: center
+        justify-content: space-between
+        width: 100%
+      &-usage
+        font-weight: 800
+        font-size: 1.6rem
+        line-height: 2.2rem
+        letter-spacing: 0.065em
+        text-transform: uppercase
+        color: $main-green
+        text-align: left
+      &-name
+        font-size: 1.6rem
+        line-height: 2.2rem
+      &-check
+        @include checkMark
+
 .b-simple-text
-  width: 95%
-  font-size: 44px
-  display: block
-  overflow: hidden
-  white-space: nowrap
-  text-overflow: ellipsis
-  transition: all 0.6s
+  height: 11.5rem
+  box-sizing: border-box
+  padding: .8rem 1.8rem
+  font-size: 2.1rem
+  line-height: 2.5rem
+  letter-spacing: 0.065em
+  border-top: 1px solid #F4F4F4
+
+.change-font
+  @include control
+  background: $red-violet
+  border-radius: 10px 0 7px 0
+
+.add-font
+  @include control
+  background: $yellow
+  border-radius: 10px 0 7px 0
 </style>

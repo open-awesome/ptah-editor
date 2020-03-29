@@ -5,6 +5,7 @@
       >
       <div
         class="b-builder-modal-content"
+        :class="{ 'b-builder-modal-content--wide': isWide }"
         >
         <div class="b-builder-modal-content__close"
           @click="closeContent">
@@ -57,6 +58,10 @@ export default {
     title () {
       let title = this.siteSettingsMenu.find(item => item.id === this.contentID).name
       return this.$t(title)
+    },
+
+    isWide () {
+      return this.$route.meta.wide
     }
   },
 
@@ -141,6 +146,10 @@ export default {
     display: flex
     flex-direction: column
     justify-content: stretch
+
+    &--wide
+      width: 38rem
+
     @media only screen and (max-height: 600px)
       &
         width: 29.5rem

@@ -26,8 +26,8 @@ const FONTS = {
 }
 const SETUP_FONTS = {
   'h1': 'Montserrat',
-  'h2': 'Montserrat',
-  'h3': 'Lato',
+  // 'h2': 'Montserrat',
+  // 'h3': 'Lato',
   'p': 'Lato',
   'btn': 'Montserrat'
 }
