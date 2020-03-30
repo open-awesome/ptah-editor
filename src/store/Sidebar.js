@@ -43,7 +43,7 @@ export default {
       },
       {
         id: 'addJsScrips',
-        name: 'menu.addJs'
+        name: 'menu.code'
       },
       {
         id: 'seoSettings',

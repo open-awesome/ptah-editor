@@ -1,16 +1,50 @@
 <template>
-  <builder-modal-content-layout :noScroll="true">
+  <builder-modal-content-layout>
     <div class="b-add-js-scripts">
-      <base-caption>Add JS Scripts</base-caption>
-      <textarea class="b-add-js-scripts__textarea" placeholder="Add Js Scripts" v-model="script"/>
+      <base-button-tabs
+        :list="tabs"
+        v-model="activeTab"
+        class="b-add-js-scripts-tabs"
+      />
+      <div class="layout" v-if="activeTab === 'js'">
+          <div class="layout-padding">
+            <div class="b-panel__control">
+              <base-caption>
+                Add JS Scripts
+              </base-caption>
+              <div class="b-panel__col">
+                <textarea
+                  id="js"
+                  class="b-textarea"
+                  placeholder="Add Js Scripts"
+                  v-model="script"
+                />
+              </div>
+            </div>
+          </div>
+      </div>
+      <div class="layout" v-if="activeTab === 'css'">
+        <div class="layout-padding">
+          <div class="b-panel__control">
+            <base-caption>
+              Add custom CSS
+            </base-caption>
+            <div class="b-panel__col">
+                <textarea
+                  id="css"
+                  class="b-textarea"
+                  placeholder="Add CSS styles"
+                  v-model="css"
+                />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="b-add-js-scripts">
-      <base-caption>Add custom CSS</base-caption>
-      <textarea class="b-add-js-scripts__textarea" placeholder="Add custom CSS" v-model="css"/>
-    </div>
+
     <div slot="controls">
-      <BaseButton color="gray" size="middle" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
-      <BaseButton color="blue" size="middle" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
+      <BaseButton color="gray" size="small" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
+      <BaseButton color="blue" size="small" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
     </div>
   </builder-modal-content-layout>
 </template>
@@ -31,7 +65,12 @@ export default {
   data () {
     return {
       script: '',
-      css: ''
+      css: '',
+      tabs: [
+        { value: 'js', text: 'JS' },
+        { value: 'css', text: 'CSS' }
+      ],
+      activeTab: 'js'
     }
   },
 
@@ -70,19 +109,35 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-add-js-scripts
-  height: 80%
-  padding: 0 .5rem 0 1.5rem
+  height: 100%
+  position: relative
 
-  & + &
-    margin-top: 2.5rem
-  &__textarea
-    border: 1px solid rgba(162, 165, 165, 0.5)
-    box-sizing: border-box
-    border-radius: 5px
+.b-textarea
+  border: 1px solid rgba(162, 165, 165, 0.5)
+  box-sizing: border-box
+  border-radius: 5px
+
+  width: 100%
+  height: 100%
+  padding: 2rem 2.2rem
+
+  resize: none
+  &:focus
+    border: 2px solid $main-green
+    outline: none
+
+.layout
+  &-padding
+    display: flex
     width: 100%
-    height: 24rem
-    padding: 2rem 2.2rem
-    &:focus
-      border: 2px solid $main-green
-      outline: none
+    height: 95%
+    padding: 0
+    .b-panel__control
+      width: 100%
+      height: 100%
+      display: flex
+      flex-direction: column
+      align-items: stretch
+    .b-panel__col
+      height: 100%
 </style>
