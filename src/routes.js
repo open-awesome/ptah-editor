@@ -76,7 +76,10 @@ const routes = [
           },
           {
             path: 'fonts',
-            component: BuilderSiteSettingsFonts
+            component: BuilderSiteSettingsFonts,
+            meta: {
+              wide: true
+            }
           }
         ]
       }
