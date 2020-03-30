@@ -87,7 +87,7 @@
       >
         <BaseButton
           @click.stop="showConfirmDelete = true"
-          color="yellow-transparent"
+          color="main-red-transparent"
           size="small"
         >
           Delete section
@@ -99,7 +99,7 @@
       >
         <BaseButton
           @click.stop="ungroup"
-          color="yellow-transparent"
+          color="main-red-transparent"
           size="small"
         >
           Delete group
@@ -619,10 +619,10 @@ export default {
 
 <style lang="sass" scoped>
 .tree-root
-  padding-bottom: 5rem
+  padding-bottom: 0
 
 .b-menu-tree
-  padding: 0 0 5rem
+  padding: 0 0 12rem
   margin: 0
   height: 100%
 

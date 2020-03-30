@@ -242,6 +242,7 @@ export default {
   margin-top: 1.5rem
 
 .b-warning
+  max-width: 24rem
   margin: 1rem 0 2rem
   font-size: 1.35rem
   color: $gray300

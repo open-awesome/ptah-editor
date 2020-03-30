@@ -87,12 +87,6 @@
         Close
       </BaseButton>
     </div>
-
-    <!--div class="b-panel__buttons">
-      <base-button :color="'gray'" :transparent="true" @click="deleteSection()">
-        Delete
-      </base-button>
-    </div-->
   </div>
 </template>
 

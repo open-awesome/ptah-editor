@@ -207,7 +207,7 @@ export default {
 
 <template>
 <div>
-  <base-caption>
+  <base-caption help="Set margins and paddings">
     {{ $t('c.editIndents') }}
   </base-caption>
   <div class="control-box">

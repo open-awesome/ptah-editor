@@ -130,7 +130,7 @@ export default {
 
 <template>
   <div class="b-control-height">
-   <base-caption>
+   <base-caption help="Set section height">
      Section height
    </base-caption>
 
@@ -187,9 +187,10 @@ export default {
 
 .b-control-height
   &__row
+    max-width: 24rem
     margin: 2rem 0 2rem 1rem
   &__number-input
-    margin-left: 2rem
+    margin-left: 0
   &__vhLabel
     font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif
     font-style: italic

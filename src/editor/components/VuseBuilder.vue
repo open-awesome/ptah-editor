@@ -537,6 +537,7 @@ export default {
       menuItem.scrollIntoView()
 
       this.setControlPanel(false)
+      this.toggleSectionsTreeMenu(true)
     },
 
     showSettingsBar (event, section) {

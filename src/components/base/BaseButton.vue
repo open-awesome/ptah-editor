@@ -19,7 +19,8 @@ export default {
           'main-green',
           'main-green-transparent',
           'main-red',
-          'yellow-transparent'
+          'yellow-transparent',
+          'main-red-transparent'
         ]
         return values.indexOf(value) !== -1
       }
@@ -203,7 +204,20 @@ export default {
       cursor: not-allowed
       background-color: rgba($black, 0.12)
       color: $white
-
+  /* new color main red transparent */
+  &_main-red-transparent
+    color: $main-red
+    background: transparent
+    text-transform: uppercase
+    font-weight: 600
+    &:hover
+      background: rgba($main-red, 0.12)
+    &:active
+      background: rgba($main-red, 0.4)
+    &[disabled]
+      cursor: not-allowed
+      background-color: transparent
+      color: #A2A5A5
   /* new color main green transparent */
   &_main-green-transparent
     color: $main-green
