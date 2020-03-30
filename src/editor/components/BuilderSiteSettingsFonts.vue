@@ -57,6 +57,12 @@
         </base-scroll-container>
       </base-fieldset>
       <base-fieldset class="library" v-if="isChange">
+
+        <!-- dirty hack -->
+        <div class="library__close" @click="isChange = false">
+          <icon-base name="arrowDown" width="12" height="15" />
+        </div>
+
         <div class="b-font-filter">
           <div>
             <base-text-field
@@ -136,16 +142,6 @@
           </div>
 
         </div><!-- /.b-fonts-block -->
-
-        <!--<div class="b-fonts-block__controls">
-          <base-button
-            size="small"
-            v-text="$t('nav.save')"
-            :transparent="true"
-            @click="isChange = false"
-            color="gray"
-          />
-        </div>-->
       </base-fieldset>
     </form>
   </div>
@@ -476,7 +472,8 @@ export default {
 
   span
     display: block
-    font-size: 1.8rem
+    font-size: 1rem
+    font-weight: bold
     text-transform: uppercase
     color: #fff
     opacity: 0
@@ -485,7 +482,7 @@ export default {
     white-space: nowrap
 
   &:hover
-    width: 21rem
+    width: 16rem
     padding: 0 1rem
     span
       opacity: 1
@@ -744,4 +741,21 @@ export default {
   @include control
   background: $yellow
   border-radius: 10px 0 7px 0
+
+.library__close
+  position: absolute
+  right: 2rem
+  top: -4.4rem
+  background: #fff
+  width: 2rem
+  height: 2rem
+  display: flex
+  justify-content: center
+  align-items: center
+  z-index: 10
+  cursor: pointer
+
+  svg
+    fill: #A2A5A5
+    transform: rotate(90deg)
 </style>

@@ -130,5 +130,5 @@ $h: 5.5rem
 
     svg
       fill: $main-green
-      margin-left: - 17px
+      margin: 2px 0 0 -17px
 </style>
