@@ -108,13 +108,20 @@
                       {{ defText }}
                     </div>
                     <div class="b-fonts-list__item-button">
-                      <base-button
+                      <font-subsets
+                        v-if="selectFonts[checkSpace(font.family)] !== undefined"
+                        :font="font"
+                        :subsets="getSubsets(font)"
+                        @input="toggleFontSubset($event)"
+                      >
+                      </font-subsets>
+                      <!--<base-button
                         v-if="selectFonts[checkSpace(font.family)] !== undefined"
                         size="small"
                         color="gray"
                         v-text="'Edit'"
                         @click="editFont = font"
-                      />
+                      />-->
                     </div>
 
                     <div
@@ -134,7 +141,7 @@
                 </ul>
             </base-scroll-container>
           </div>
-          <div class="b-font-edit"
+          <!--<div class="b-font-edit"
             v-if="editFont !== null"
           >
             <div class="b-font-edit__close"
@@ -173,7 +180,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div>-->
         </div><!-- /.b-fonts-block -->
 
         <!--<div class="b-fonts-block__controls">
@@ -197,6 +204,7 @@ import { mapState, mapActions } from 'vuex'
 import { throttle } from 'lodash-es'
 
 import Vue from 'vue'
+import FontSubsets from './FontSubsets'
 Vue.component('v-style', {
   render: function (createElement) {
     return createElement('style', this.$slots.default)
@@ -206,7 +214,7 @@ Vue.component('v-style', {
 export default {
   name: 'BuilderSiteSettingsFonts',
 
-  components: { BuilderModalContentLayout },
+  components: { FontSubsets, BuilderModalContentLayout },
 
   data () {
     return {
@@ -393,26 +401,20 @@ export default {
       return this.visibleFonts.find(f => f.family === this.checkSpace(font))
     },
 
-    containsFontSubset (subset) {
-      const name = this.checkSpace(this.editFont.family)
+    getSubsets (font) {
+      const name = this.checkSpace(font.family)
 
-      return this.selectFonts[name].subsets.filter(sub => sub === subset).length > 0
+      return font.subsets.map((subset) => {
+        return {
+          name: subset,
+          status: this.selectFonts[name].subsets.indexOf(subset) > -1
+        }
+      })
     },
 
-    toggleFontSubset (subset) {
-      const name = this.checkSpace(this.editFont.family)
-      const isSubset = this.selectFonts[name].subsets.filter(sub => sub === subset).length > 0
-      const subsets = this.selectFonts[name].subsets.filter(sub => sub !== subset)
-
-      if (isSubset) {
-        this.selectFonts[name].subsets = subsets
-      } else {
-        this.selectFonts[name].subsets = [
-          ...subsets,
-          subset
-        ]
-      }
-
+    toggleFontSubset ({ font, subsets }) {
+      const name = this.checkSpace(font.family)
+      this.selectFonts[name].subsets = subsets
       this.storeFonts()
     },
 
@@ -564,12 +566,12 @@ export default {
 .b-font-filter
   display: flex
   &__search
-    width: 100%
-    margin: 0 3.2rem 1rem 1rem
+    width: 35rem
+    margin: 0 3.2rem 1rem 1.5rem
     /deep/
       & input
         padding-left: 3.6rem
-        background: url("https://s3.protocol.one/src/o_ItVIs.png") no-repeat left center
+        background: url("https://s3.protocol.one/src/o_ItVIs.png") no-repeat 1rem center
   &__sw
     width: $size-step * 5.5
     margin-left: $size-step
@@ -622,10 +624,10 @@ export default {
     &:last-child
       border-bottom: none
     &-button
-      display: none
+      display: block
       position: absolute
-      bottom: 0
-      left: 0
+      top: 0
+      right: 0
       &-apply
         width: auto
     &:hover
@@ -708,8 +710,11 @@ export default {
   height: 100%
   &-header
     display: flex
-    justify-content: space-between
+    justify-content: center
     align-items: center
+    padding: 1rem
+    font-size: 1.8rem
+    line-height: 2.2rem
   &-list
     padding: 0
     margin: 0
