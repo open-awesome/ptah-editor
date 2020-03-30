@@ -1,7 +1,9 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title b-panel__title_name-section">
-      {{ settingObjectSection.name }}
+      <span>
+        {{ settingObjectSection.name }}
+      </span>
     </h6>
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-panel__inner">

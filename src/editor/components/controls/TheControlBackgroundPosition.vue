@@ -1,3 +1,75 @@
+
+<template>
+  <div class="b-bg-controls">
+    <div class="b-section-settings__control">
+      <div class="b-background-position" :style="{
+        '--mobile-background-color': mediaStyles['is-mobile']['background-color'],
+        '--mobile-background-image': mediaStyles['is-mobile']['background-image'],
+        '--mobile-background-position': mediaStyles['is-mobile']['background-position'],
+        '--mobile-background-repeat': mediaStyles['is-mobile']['background-repeat'],
+        '--mobile-background-size': mediaStyles['is-mobile']['background-size'],
+        '--mobile-background-attachment': mediaStyles['is-mobile']['background-attachment']
+      }">
+        <div class="b-background-position__content"
+             :style="[
+            isMobile ? { 'background-image': mediaStyles['is-mobile']['background-image'] } : { 'background-image': `url(${bgImage})` },
+            isMobile ? { 'background-size': mediaStyles['is-mobile']['background-size'] } : { 'background-size': styles['background-size'] },
+            isMobile ? { 'background-position': mediaStyles['is-mobile']['background-position'] } : { 'background-position': styles['background-position'] }
+          ]"
+        >
+          <span class="b-background-position__btn b-background-position__btn_center"
+                :class="{ 'selected' : bgPosition === '50% 50%' }"
+                @click="setPosition('50%', '50%')"/>
+          <span class="b-background-position__btn b-background-position__btn_lt"
+                :class="{ 'selected' : bgPosition === '0% 0%' }"
+                @click="setPosition('0%', '0%')" />
+          <span class="b-background-position__btn b-background-position__btn_lb"
+                :class="{ 'selected' : bgPosition === '0% 100%' }"
+                @click="setPosition('0%', '100%')"/>
+          <span class="b-background-position__btn b-background-position__btn_rt"
+                :class="{ 'selected' : bgPosition === '100% 0%' }"
+                @click="setPosition('100%', '0%')"/>
+          <span class="b-background-position__btn b-background-position__btn_rb"
+                :class="{ 'selected' : bgPosition === '100% 100%' }"
+                @click="setPosition('100%', '100%')"/>
+
+          <span class="b-background-position__btn b-background-position__btn_tc"
+                :class="{ 'selected' : bgPosition === '50% 0%' }"
+                @click="setPosition('50%', '0%')"></span>
+          <span class="b-background-position__btn b-background-position__btn_rc"
+                :class="{ 'selected' : bgPosition === 'right center' }"
+                @click="setPosition('100%', '50%')"></span>
+          <span class="b-background-position__btn b-background-position__btn_bc"
+                :class="{ 'selected' : bgPosition === '50% 100%' }"
+                @click="setPosition('50%', '100%%')"></span>
+          <span class="b-background-position__btn b-background-position__btn_lc"
+                :class="{ 'selected' : bgPosition === '0% 50%' }"
+                @click="setPosition('0%', '50%')"></span>
+        </div>
+      </div>
+      <div class="b-types">
+        <BaseRadioCheck
+          :list="backgroundFillTypes"
+          v-model="backgroundFill"
+          @change="changeSize"
+        />
+      </div>
+      <div class="b-size-controls">
+        <div class="b-size-controls__control">
+          <base-range-slider v-model="left" :label="`Left`" step="1" min="-100" max="100" @change="setLeftTopPosition">
+            {{ left }} <span class="b-size-controls__px">%</span>
+          </base-range-slider>
+        </div>
+        <div class="b-size-controls__control">
+          <base-range-slider v-model="top" :label="`Top`" step="1" min="-100" max="100" @change="setLeftTopPosition">
+            {{ top }} <span class="b-size-controls__px">%</span>
+          </base-range-slider>
+        </div>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script>
 import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
@@ -251,73 +323,6 @@ export default {
 }
 </script>
 
-<template>
-  <div class="b-bg-controls">
-    <div class="b-section-settings__control">
-      <div class="b-background-position" :style="{
-        '--mobile-background-color': mediaStyles['is-mobile']['background-color'],
-        '--mobile-background-image': mediaStyles['is-mobile']['background-image'],
-        '--mobile-background-position': mediaStyles['is-mobile']['background-position'],
-        '--mobile-background-repeat': mediaStyles['is-mobile']['background-repeat'],
-        '--mobile-background-size': mediaStyles['is-mobile']['background-size'],
-        '--mobile-background-attachment': mediaStyles['is-mobile']['background-attachment']
-      }">
-        <div class="b-background-position__content"
-          :style="[
-            isMobile ? { 'background-image': mediaStyles['is-mobile']['background-image'] } : { 'background-image': `url(${bgImage})` },
-            isMobile ? { 'background-size': mediaStyles['is-mobile']['background-size'] } : { 'background-size': styles['background-size'] },
-            isMobile ? { 'background-position': mediaStyles['is-mobile']['background-position'] } : { 'background-position': styles['background-position'] }
-          ]"
-          >
-          <span class="b-background-position__btn b-background-position__btn_center"
-                :class="{ 'selected' : bgPosition === '50% 50%' }"
-                @click="setPosition('50%', '50%')"/>
-          <span class="b-background-position__btn b-background-position__btn_lt"
-                :class="{ 'selected' : bgPosition === '0% 0%' }"
-                @click="setPosition('0%', '0%')" />
-          <span class="b-background-position__btn b-background-position__btn_lb"
-                :class="{ 'selected' : bgPosition === '0% 100%' }"
-                @click="setPosition('0%', '100%')"/>
-          <span class="b-background-position__btn b-background-position__btn_rt"
-                :class="{ 'selected' : bgPosition === '100% 0%' }"
-                @click="setPosition('100%', '0%')"/>
-          <span class="b-background-position__btn b-background-position__btn_rb"
-                :class="{ 'selected' : bgPosition === '100% 100%' }"
-                @click="setPosition('100%', '100%')"/>
-
-          <span class="b-background-position__btn b-background-position__btn_tc"
-                :class="{ 'selected' : bgPosition === '50% 0%' }"
-                @click="setPosition('50%', '0%')"></span>
-          <span class="b-background-position__btn b-background-position__btn_rc"
-                :class="{ 'selected' : bgPosition === 'right center' }"
-                @click="setPosition('100%', '50%')"></span>
-          <span class="b-background-position__btn b-background-position__btn_bc"
-                :class="{ 'selected' : bgPosition === '50% 100%' }"
-                @click="setPosition('50%', '100%%')"></span>
-          <span class="b-background-position__btn b-background-position__btn_lc"
-                :class="{ 'selected' : bgPosition === '0% 50%' }"
-                @click="setPosition('0%', '50%')"></span>
-        </div>
-      </div>
-      <div class="b-size-controls">
-        <div class="b-size-controls__control">
-          <base-range-slider v-model="left" :label="`Left`" step="1" min="-100" max="100" @change="setLeftTopPosition">
-            {{ left }} <span class="b-size-controls__px">%</span>
-          </base-range-slider>
-        </div>
-        <div class="b-size-controls__control">
-          <base-range-slider v-model="top" :label="`Top`" step="1" min="-100" max="100" @change="setLeftTopPosition">
-            {{ top }} <span class="b-size-controls__px">%</span>
-          </base-range-slider>
-        </div>
-      </div>
-    </div>
-    <div class="b-section-settings__control b-bg-controls__control_parallax">
-      <BaseRadioCheck :list="backgroundFillTypes" v-model="backgroundFill" @change="changeSize"/>
-    </div>
-  </div>
-</template>
-
 <style lang="sass" scoped>
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
@@ -326,24 +331,28 @@ export default {
   padding: 0 0 $size-step/2
   &__control
     margin-bottom: $size-step/2
-    &_parallax
-      padding: 0 0 $size-step
-    &:lastt-child
+    &:last-child
       margin-bottom: 0
+.b-types
+  margin: 0 0 1.6rem
+  /deep/
+  .b-base-radio-check
+    margin: 0
 
 .b-background-position
   width: 24rem
-  height: 16rem
+  height: 13rem
 
-  background-color: #EFEFEF
-  padding: $size-step/4
+  padding: 0
   margin: 0 0 $size-step/2 0
+  border-radius: 5px
   &__content
     width: 100%
     height: 100%
 
     background-color: #DADADA
     background-repeat: no-repeat
+    border-radius: 5px
 
     position: relative
   .is-mobile &__content

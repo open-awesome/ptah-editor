@@ -10,41 +10,46 @@
           <form @submit.prevent="applySettings" class="layout__content">
 
             <!-- Title & Favicon -->
-            <div class="b-builder-site-settings-seo__item">
-              <base-caption
-                help="Page title"
-              >
+            <div class="b-panel__control">
+              <base-caption help="Page title">
                 Page title
               </base-caption>
-              <BaseTextField :label="$t('s.pageTitle')" v-model="pageTitle" />
+              <div class="b-panel__col">
+                <BaseTextField
+                  :label="$t('s.pageTitle')"
+                  v-model="pageTitle"
+                />
+              </div>
             </div>
 
-            <div class="b-builder-site-settings-seo__item">
-              <base-caption
-                help="Favicon"
-              >
+            <div class="b-panel__control">
+              <base-caption help="Favicon">
                 Favicon
               </base-caption>
-              <BaseImageUpload
-                v-model="favicon"
-                :label="$t('s.favicon')"
-                description="32 x 32 px, .ico or .png" />
+              <div class="b-panel__col">
+                <BaseImageUpload
+                  v-model="favicon"
+                  :label="$t('s.favicon')"
+                  description="32 x 32 px, .ico or .png"
+                />
+              </div>
             </div>
 
-            <div class="b-builder-site-settings-seo__item">
-              <base-caption
-                help="Cookie policy"
-              >
+            <div class="b-panel__control">
+              <base-caption help="Cookie policy">
                 Cookie policy
               </base-caption>
-              <base-switcher
-                v-model="useCookie"
-                :label="$t('s.useCookie')"/>
-
-              <base-upload-input
-                v-model="pdfFile"
-                :label="$t('s.policyFile')"
-                placeholder="Paste pdf file"/>
+              <div class="b-panel__col">
+                <base-switcher
+                  v-model="useCookie"
+                  :label="$t('s.useCookie')"
+                />
+                <base-upload-input
+                  v-model="pdfFile"
+                  :label="$t('s.policyFile')"
+                  placeholder="Paste pdf file"
+                />
+              </div>
             </div>
           </form>
       </div>
@@ -53,70 +58,71 @@
       <div class="layout layout__og" v-if="activeTab === 'og'">
         <base-scroll-container>
           <div class="layout-padding">
-            <div class="b-builder-site-settings-og__item"
-                 v-for="ogField in ogFields"
-                 :key="ogField.id">
-              <base-text-field
-                v-if="(ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 || ogField.id.indexOf('type') !== -1) && ogField.id.indexOf('locale') === -1"
-                v-model="ogField.value"
-                :placeholder="ogField.placeholder"
-                :label="ogField.label">
-              </base-text-field>
-
-              <base-uploader
-                v-if="ogField.id.indexOf('image') !== -1"
-                v-model="ogField.value"
-                label="Image"
-              />
-
-              <base-text-field
-                v-if="ogField.id.indexOf('url') !== -1"
-                v-model="ogField.value"
-                :label="ogField.label"
-                :hasError="error.url"
-                @input="validUrl(ogField.value)"
-              >
-                <span slot="error">
-                  Please enter a valid URL
-                </span>
-              </base-text-field>
-
-              <div class="b-open-graph__width"
-                   v-if="ogField.id.indexOf('locale') !== -1"
-              >
-                <base-label>
+            <div
+              v-for="ogField in ogFields"
+              :key="ogField.id"
+            >
+              <div class="b-panel__control">
+                <BaseCaption :help="ogField.label">
                   {{ ogField.label }}
-                </base-label>
-                <div class="b-open-graph__row">
-                  <div class="b-open-graph__col">
-                    <BaseSelect
-                      class="b-open-graph__select"
-                      :options="locale[`${ogField.id}`].language.options"
-                      v-model="locale[`${ogField.id}`].language.selected"
-                      :search="true"
-                    >
-                    </BaseSelect>
+                </BaseCaption>
+                <div class="b-panel__col">
+                  <base-text-field
+                    v-if="(ogField.id.indexOf('title') !== -1 || ogField.id.indexOf('description') !== -1 || ogField.id.indexOf('type') !== -1) && ogField.id.indexOf('locale') === -1"
+                    v-model="ogField.value"
+                    :placeholder="ogField.placeholder"
+                  />
+
+                  <base-uploader
+                    v-if="ogField.id.indexOf('image') !== -1"
+                    v-model="ogField.value"
+                  />
+
+                  <base-text-field
+                    v-if="ogField.id.indexOf('url') !== -1"
+                    v-model="ogField.value"
+                    :hasError="error.url"
+                    @input="validUrl(ogField.value)"
+                  >
+                    <span slot="error">
+                      Please enter a valid URL
+                    </span>
+                  </base-text-field>
+
+                  <div class="b-open-graph__width"
+                    v-if="ogField.id.indexOf('locale') !== -1"
+                  >
+                    <div class="b-open-graph__row">
+                      <div class="b-open-graph__col">
+                        <BaseSelect
+                          class="b-open-graph__select"
+                          :options="locale[`${ogField.id}`].language.options"
+                          v-model="locale[`${ogField.id}`].language.selected"
+                          :search="true"
+                        />
+                      </div>
+                      <div class="b-open-graph__col b-open-graph__select">
+                        <BaseSelect
+                          :options="locale[`${ogField.id}`].territory.options"
+                          v-model="locale[`${ogField.id}`].territory.selected"
+                          :search="true"
+                        >
+                        </BaseSelect>
+                      </div>
+                      <div class="b-open-graph__col"
+                        v-text="localeSelected[`${ogField.id}`]"
+                      />
+                    </div>
                   </div>
-                  <div class="b-open-graph__col b-open-graph__select">
-                    <BaseSelect
-                      :options="locale[`${ogField.id}`].territory.options"
-                      v-model="locale[`${ogField.id}`].territory.selected"
-                      :search="true"
-                    >
-                    </BaseSelect>
-                  </div>
-                  <div class="b-open-graph__col"
-                       v-text="localeSelected[`${ogField.id}`]"
+
+                  <base-uploader
+                    v-if="ogField.id.indexOf('video') !== -1"
+                    v-model="ogField.value"
+                    label="Video"
+                    type="video"
                   />
                 </div>
               </div>
-
-              <base-uploader
-                v-if="ogField.id.indexOf('video') !== -1"
-                v-model="ogField.value"
-                label="Video"
-                type="video"
-              />
             </div>
           </div>
         </base-scroll-container>
@@ -378,24 +384,6 @@ export default {
   margin-bottom: $size-step
 
 .layout
-  position: absolute
-  top: 6.4rem
-  right: 0
-  bottom: 0
-  left: 0
-
-  box-sizing: border-box
-  padding: 0 3.7rem 2rem
   &__og
     padding-right: 0
-  &-padding
-    width: 100%
-    padding: 0 5rem 0 0
-
-.b-builder-site-settings-seo,
-.b-builder-site-settings-og
-  &__item
-    margin-bottom: 3rem
-  &__help
-    margin-left: 1rem
 </style>

@@ -627,6 +627,10 @@ export default {
   height: 100%
 
   &__group
+    .menu-tree-item:nth-child(2)
+      /deep/
+        .menu-tree-item__controls > span:nth-child(2)
+          visibility: hidden
     & .tree-node
       padding-left: 6.4rem
       /deep/

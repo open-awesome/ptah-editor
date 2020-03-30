@@ -4,7 +4,7 @@
       <base-button-tabs
         :list="tabs"
         v-model="activeTab"
-        class="b-visual-tabs"
+        class="b-tabs"
       />
       <div class="layout layout__bg" v-if="activeTab === 'bg'">
         <base-scroll-container>
@@ -447,24 +447,6 @@ export default {
   /deep/
     .b-base-switcher__label
       margin-right: $size-step/2
-
-.b-visual-tabs
-  margin-bottom: $size-step
-
-.layout
-  position: absolute
-  top: 6.4rem
-  right: 0
-  bottom: 0
-  left: 0
-
-  box-sizing: border-box
-  padding: 0 3.7rem 2rem
-  &__bg
-    padding-right: 0
-  &-padding
-    width: 100%
-    padding: 0 5rem 0 0
 
 .b-palette
   &__list

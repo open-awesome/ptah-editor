@@ -1,3 +1,37 @@
+<template>
+  <div class="b-picker">
+    <div class="b-picker__row">
+      <div
+        class="b-picker__label"
+        v-if="label !== ''"
+      >
+        {{ label }}
+      </div>
+
+      <slot />
+      <slot name="buttons" />
+
+      <BaseDropdownMenu
+        class="b-picker__palette"
+        positionDropdown="right"
+      >
+        <div class="b-picker__preview"
+          :style="{ 'background-color': pickerValue.rgba || pickerValue }"
+          :class="{ 'b-picker__preview_transparent': isTransparent }"
+          :title="pickerValue.rgba || pickerValue || 'Choose color'"
+        />
+        <div slot="list">
+          <Sketch
+            :value="pickerValue"
+            @input="changeColor"
+            :presetColors="palette"
+          />
+        </div>
+      </BaseDropdownMenu>
+    </div>
+  </div>
+</template>
+
 <script>
 import { Sketch } from 'vue-color'
 import { mapState } from 'vuex'
@@ -68,37 +102,6 @@ export default {
 }
 </script>
 
-<template>
-  <div class="b-picker">
-    <div class="b-picker__row">
-      <div
-        class="b-picker__label"
-        v-if="label !== ''"
-      >
-        {{ label }}
-      </div>
-      <BaseDropdownMenu
-        class="b-picker__palette"
-        positionDropdown="right"
-        >
-        <div class="b-picker__preview"
-          :style="{ 'background-color': pickerValue.rgba || pickerValue }"
-          :class="{ 'b-picker__preview_transparent': isTransparent }"
-          :title="pickerValue.rgba || pickerValue || 'Choose color'"
-          >
-        </div>
-        <div slot="list">
-          <Sketch
-            :value="pickerValue"
-            @input="changeColor"
-            :presetColors="palette"
-          />
-        </div>
-      </BaseDropdownMenu>
-    </div>
-  </div>
-</template>
-
 <style lang="sass" scoped="">
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
@@ -110,7 +113,6 @@ export default {
   &__row
     display: flex
     align-items: center
-    justify-content: space-between
 
     width: 100%
   &__preview
@@ -120,6 +122,8 @@ export default {
     border-radius: 1rem
     background-color: $white
     border: 2px solid $ligth-grey
+
+    margin: 0 0 0 1.6rem
     &_transparent
       background-image: url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/a896a84e-6025-4d3e-ad17-d2418d6bd805.png)
       border: 0 solid transparent
@@ -134,7 +138,10 @@ export default {
     color: $dark-grey
     letter-spacing: 0.065em
 
+    width: 18rem
     margin-right: $size-step/2
+    overflow: hidden
+    text-overflow: ellipsis
     &:first-letter
       text-transform: uppercase
   &__palette

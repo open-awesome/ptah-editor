@@ -26,8 +26,10 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-base-label
-  font-size: 1.2rem
-  line-height: 1.2rem
+  font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif
+  font-size: 1.4rem
+  line-height: 1.4rem
+  font-weight: 600
   color: rgba(#575A5F, 0.87)
 
   padding: 0 0 .9rem 0
