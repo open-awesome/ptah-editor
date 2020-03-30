@@ -114,6 +114,9 @@ export default {
   =active
     background-color: $main-green
     color: $white
+  > svg
+    position: relative
+    top: .15rem
   &[disabled]
     cursor: not-allowed
     background-color: rgba($black, 0.2)
@@ -248,7 +251,6 @@ export default {
       color: $yellow
     & svg
       fill: $yellow
-      vertical-align: middle !important
   @media only screen and (max-width: 1100px)
     width: auto
     padding: 1rem 1.4rem

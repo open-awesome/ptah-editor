@@ -261,7 +261,6 @@ export default {
     z-index: 0
     height: 1.5rem
     background-color: #fff
-
   & + .b-main-left-menu-list__item
     position: relative
     &:before
@@ -290,7 +289,7 @@ export default {
       &:after
         background: #fff
 
-.b-main-left-menu-list__item:hover ~ .b-main-left-menu-list__item._open
+.b-main-left-menu-list__item:hover + .b-main-left-menu-list__item._open
   &:before
     background: #def2f2
   &:after

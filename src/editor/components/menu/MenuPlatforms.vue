@@ -111,8 +111,12 @@ export default {
       color: $main-green
     &_mobile
       border-right: none
-    &_laptop
+    &_laptop,
     &_desktop
       border-left: none
+    @media only screen and (max-width: 1280px)
+      &
+        width: 2rem
+        height: 2rem
 
 </style>
