@@ -4,8 +4,13 @@
       {{label}}
     </base-label>
 
-    <form class="b-base-upload__inner">
-      <input type="text" v-model="url" :placeholder="placeholder">
+    <form class="b-base-upload__inner" :class="{ 'b-base-upload__inner--focus': focus }">
+      <input
+        type="text"
+        v-model="url"
+        @focus="$emit('focus', $event), focus = true"
+        @blur="$emit('blur', $event), focus = false"
+        :placeholder="placeholder">
       <input
         style="display: none;"
         type="file"
@@ -13,7 +18,7 @@
         ref="uploadInput"
         @change="onUploadClick"/>
       <a class="b-base-upload__button" @click.prevent="upload">
-        <icon-base name="downloadCloud" width="16" color="#436FEE" title="Upload"></icon-base>
+        <icon-base name="downloadCloud" width="24" color="#436FEE" title="Upload"></icon-base>
       </a>
     </form>
   </div>
@@ -54,7 +59,8 @@ export default {
 
   data () {
     return {
-      url: this.value
+      url: this.value,
+      focus: false
     }
   },
 
@@ -80,25 +86,43 @@ export default {
 </script>
 
 <style lang="sass" scoped>
-  .b-base-upload
-    width: 100%
+@import '../../assets/sass/_variables.sass'
+.b-base-upload
+  width: 100%
 
-    &__inner
-      display: flex
-      justify-content: space-between
-      align-items: center
-      border-bottom: 1px solid rgba(136, 136, 136, .25)
-      padding: 0 0 .5rem
-    input[type="text"]
-      background: transparent
-      border: none
-      color: #272727
-      font-size: 1.6rem
-      width: 90%
-      &::placeholder
-        color: #CDCDCD;
-    &__button
-      height: 16px
-      cursor: pointer
-      text-decoration: none
+  &__inner
+    display: flex
+    justify-content: space-between
+    align-items: center
+    border: 1px solid #A2A5A5
+    box-sizing: border-box
+    border-radius: 5px
+    height: 3.4rem
+    padding: .5rem .9rem .5rem 1.3rem
+
+    svg
+      fill: #A2A5A5
+
+    &--focus
+      border: 2px solid $main-green
+      padding: .5rem .8rem .5rem 1.2rem
+
+      input
+        outline: none
+
+      svg
+        fill: $main-green
+
+  input[type="text"]
+    background: transparent
+    border: none
+    color: #272727
+    font-size: 1.2rem
+    width: 90%
+    &::placeholder
+      color: #CDCDCD
+  &__button
+    height: 16px
+    cursor: pointer
+    text-decoration: none
 </style>

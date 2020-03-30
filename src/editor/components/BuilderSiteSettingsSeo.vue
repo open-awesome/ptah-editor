@@ -47,7 +47,7 @@
                 <base-upload-input
                   v-model="pdfFile"
                   :label="$t('s.policyFile')"
-                  placeholder="Paste pdf file"
+                  placeholder="Paste URL or upload pdf file"
                 />
               </div>
             </div>
@@ -386,4 +386,17 @@ export default {
 .layout
   &__og
     padding-right: 0
+  &-padding
+    width: 100%
+    padding: 0 5rem 0 0
+
+.b-builder-site-settings-seo,
+.b-builder-site-settings-og
+  &__item
+    margin-bottom: 3rem
+  &__help
+    margin-left: 1rem
+
+.upload-pdf
+  margin-top: 2rem
 </style>
