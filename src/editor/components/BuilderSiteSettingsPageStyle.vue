@@ -11,13 +11,13 @@
           <div class="layout-padding">
             <div class="b-page-style__row">
               <BaseCaption help="Image for page background">
-                Background image
+                {{ $t('s.backgroundImage') }}
               </BaseCaption>
               <div class="b-page-style__col">
                 <base-uploader
                   key="0"
                   v-model="pageBackgroundUrl"
-                  :label="$t('s.backgroundImage')"
+                  label="Image"
                 />
               </div>
               <template v-if="pageBackgroundUrl !== ''">
@@ -77,12 +77,12 @@
             </div>
             <div class="b-page-style__row">
               <BaseCaption help="Video for page background">
-                Background video
+                {{ $t('s.backgroundVideo') }}
               </BaseCaption>
               <div class="b-page-style__col">
                 <base-uploader
                   v-model="bgVideo"
-                  :label="$t('s.backgroundVideo')"
+                  label="Video"
                   type="video"
                 />
               </div>
@@ -113,7 +113,7 @@
                   key="1"
                   v-model="imagePalette"
                   @change="changeImagePalette"
-                  :label="'Image for palette'"
+                  label="Image"
                   :tooltipText="'Load image for generate palette of page'"
                   @getInputSrcFiles="getInputSrcFiles"
                 >
