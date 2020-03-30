@@ -134,6 +134,7 @@ export default {
       border-color: $main-green
   &__label
     font-size: 1.4rem
+    line-height: 1.2
     font-weight: 600
     color: $dark-grey
     letter-spacing: 0.065em

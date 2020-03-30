@@ -1,5 +1,13 @@
 <template>
-  <div class="b-menu-tree" ref="tree">
+  <div
+    class="b-menu-tree"
+    ref="tree"
+    :class="[
+      { '_short': menuTree.length > 0 && settingObjectSection.id && selectedSections.length === 1 },
+      { '_short': selectedGroup.length > 0 },
+      { '_long': selectedSections.length > 1 }
+    ]"
+  >
     <base-scroll-container backgroundBar="#999">
       <!-- header section -->
 
@@ -622,9 +630,23 @@ export default {
   padding-bottom: 0
 
 .b-menu-tree
-  padding: 0 0 12rem
+  padding: 0 0 9rem
   margin: 0
   height: 100%
+
+  width: calc(100% + .5rem)
+  &._short
+    padding: 0 0 12rem
+    .b-menu-tree__bottom
+      height: 12rem
+  &._long
+    padding: 0 0 9rem
+    .b-menu-tree__bottom
+      height: 9rem
+  &._short,
+  &._long
+    .b-menu-tree__bottom
+      box-shadow: 11px 2px 16px rgba($black, 0.1)
 
   &__group
     .menu-tree-item:nth-child(2)

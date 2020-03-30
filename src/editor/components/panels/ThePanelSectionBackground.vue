@@ -458,7 +458,7 @@ export default {
        .b-range-slider
          padding-left: 1rem
          .range-slider
-           width: 10.9rem
+           width: 12.2rem
 
   .vue-scrollbar__wrapper
     margin: 0
