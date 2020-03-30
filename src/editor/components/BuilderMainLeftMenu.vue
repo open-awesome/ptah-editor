@@ -13,10 +13,10 @@
         :key="item.name"
         @click="openPanels(item.panel)"
         :class="[
-          { '_open' : isSectionsTreeExpanded && item.name === 'Sections' },
-          { '_open' : controlPanel.expanded && item.name === 'Sections' &&  modalContentID !== item.panel && !isSectionsTreeExpanded},
-          { '_open' : isAddSectionExpanded && item.name === 'Sections' &&  modalContentID !== item.panel && isSectionsTreeExpanded},
-          { '_open' : modalContentID === item.panel }
+          { '_open' : isExpanded && isSectionsTreeExpanded && item.name === 'Sections' &&  modalContentID === '' },
+          { '_open' : isExpanded &&  controlPanel.expanded && item.name === 'Sections' &&  modalContentID === '' && !isSectionsTreeExpanded },
+          { '_open' : isExpanded &&  isAddSectionExpanded && item.name === 'Sections' &&  modalContentID === '' && isSectionsTreeExpanded },
+          { '_open' : isExpanded && modalContentID === item.panel }
         ]"
       >
         <span
@@ -128,6 +128,7 @@ export default {
           this.toggleSidebar(false)
           this.toggleSectionsTreeMenu(false)
         } else {
+          this.toggleSidebar(true)
           this.toggleSectionsTreeMenu(true)
         }
         return
@@ -260,7 +261,6 @@ export default {
     z-index: 0
     height: 1.5rem
     background-color: #fff
-
   & + .b-main-left-menu-list__item
     position: relative
     &:before
@@ -289,7 +289,7 @@ export default {
       &:after
         background: #fff
 
-.b-main-left-menu-list__item:hover ~ .b-main-left-menu-list__item._open
+.b-main-left-menu-list__item:hover + .b-main-left-menu-list__item._open
   &:before
     background: #def2f2
   &:after

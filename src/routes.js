@@ -1,6 +1,6 @@
 import BuilderModalContent from '@editor/components/BuilderModalContent'
 import BuilderSiteSettingsSeo from '@editor/components/BuilderSiteSettingsSeo'
-import BuilderSiteSettingsVisual from '@editor/components/BuilderSiteSettingsVisual'
+import BuilderSiteSettingsPageStyle from '@editor/components/BuilderSiteSettingsPageStyle'
 import BuilderSiteSettingsAddJsScripts from '@editor/components/BuilderSiteSettingsAddJsScripts'
 import BuilderSiteSettingsIntegrations from '@editor/components/BuilderSiteSettingsIntegrations'
 import BuilderSiteSettingsIntegrationsGoogleTag from '@editor/components/BuilderSiteSettingsIntegrationsGoogleTag'
@@ -42,11 +42,11 @@ const routes = [
       {
         path: 'settings',
         component: BuilderModalContent,
-        redirect: { name: BuilderSiteSettingsVisual },
+        redirect: { name: BuilderSiteSettingsPageStyle },
         children: [
           {
-            path: 'visualSettings',
-            component: BuilderSiteSettingsVisual
+            path: 'pageStyle',
+            component: BuilderSiteSettingsPageStyle
           },
           {
             path: 'seoSettings',

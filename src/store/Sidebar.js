@@ -6,7 +6,7 @@ export default {
     mainLeftMenu: { // left menu of all settings
       list: [
         { name: 'Sections', icon: 'hamburgerDot', panel: 'sectionsTree' },
-        { name: 'Style', icon: 'editStyle', panel: 'visualSettings' },
+        { name: 'Style', icon: 'editStyle', panel: 'pageStyle' },
         { name: 'Fonts', icon: 'fonts', panel: 'fonts' },
         { name: 'Code', icon: 'code', panel: 'addJsScrips' },
         { name: 'Seo', icon: 'seo', panel: 'seoSettings' },
@@ -34,8 +34,8 @@ export default {
     settingObjectSection: {},
     siteSettingsMenu: [
       {
-        id: 'visualSettings',
-        name: 'menu.visualSettings'
+        id: 'pageStyle',
+        name: 'menu.pageStyle'
       },
       {
         id: 'fonts',

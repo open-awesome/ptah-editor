@@ -71,5 +71,5 @@ export default {
 
 .b-control-sticky
   &__control
-    margin: 0 0 2.1rem 2.2rem
+    margin: 0 0 2.1rem 1rem
 </style>

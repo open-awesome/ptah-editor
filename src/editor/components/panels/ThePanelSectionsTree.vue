@@ -1,8 +1,17 @@
 <template>
   <div class="b-panel" id="sections_contents">
     <h6 class="b-panel__title">
-      <span>
-        {{ $t('menu.sections') }}
+      <span
+        class="b-panel__title-text"
+        @click="openHelpPage"
+      >
+        Section menu
+        <IconBase
+          name="questionBalloon"
+          color="#00ADB6"
+          width="16"
+          height="16"
+        />
       </span>
       <span
         class="b-panel__icon-close"
@@ -111,6 +120,10 @@ export default {
     closeSidebarSection () {
       this.toggleSidebar(false)
       this.toggleSectionsTreeMenu(false)
+    },
+
+    openHelpPage () {
+      window.open(process.env.VUE_APP_HELP)
     }
   }
 }
@@ -132,8 +145,24 @@ export default {
     letter-spacing: 0.065em
     text-transform: uppercase
     color: #575A5F
-    font-weight: 800
+    font-weight: 600
     text-align: center
+
+    transition: color .3s cubic-bezier(.2,.85,.4,1.275)
+    &-text
+      position: relative
+      & svg
+        position: absolute
+        top: .7rem
+        right: -2rem
+
+        opacity: 0
+        transition: opacity .3s cubic-bezier(.2,.85,.4,1.275)
+      &:hover
+        cursor: pointer
+        color: $main-green
+        & svg
+          opacity: 1
   &__add
     width: 100%
 
@@ -144,10 +173,23 @@ export default {
     margin: 2rem 0 2.6rem
   &__icon-close
     position: absolute
-    top: 19px
-    right: 17px
+    top: 1.9rem
+    right: 1.7rem
     cursor: pointer
+
+    width: 3.6rem
+    height: 3.6rem
+
+    border-radius: 100%
+    transition: background .3s cubic-bezier(.2,.85,.4,1.275)
+    & svg
+      transition: fill .3s cubic-bezier(.2,.85,.4,1.275)
     &:hover
+      cursor: pointer
+      background: rgba(#000000, 0.05)
+    &:active
+      cursor: pointer
+      background: rgba(#00ADB6, 0.05)
       & svg
         fill: $main-green
   &__content

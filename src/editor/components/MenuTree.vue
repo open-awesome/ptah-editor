@@ -30,18 +30,22 @@
             v-scroll-to="`#section_${item.id}`"
             class="tree-node draggable"
           />
-          <div class="b-menu-tree__group node-sortable tree-branch draggable" :key="index" v-if="isGroup(item)">
-            <div class="b-menu-tree__group-name">
+          <div
+            class="b-menu-tree__group node-sortable tree-branch draggable"
+            :key="index"
+            v-if="isGroup(item)"
+          >
+            <div
+              class="b-menu-tree__group-name"
+              @click="onSelectGroup(item)"
+              :class="[
+                { 'selected' : selectedGroup.length > 0 && selectedGroup[0].id === item[0].id }
+              ]"
+            >
               <span>
                 Group
               </span>
               <div class="b-menu-tree__group-controls">
-                <span
-                  class="b-menu-tree__group-controls-ungroup"
-                  @click="ungroup(item[0])"
-                >
-                  <IconBase name="delete" />
-                </span>
                 <span
                   @click="showBackgroundPanel(item[0])"
                 >
@@ -67,38 +71,71 @@
     </base-scroll-container>
 
     <div class="b-menu-tree__bottom">
-      <div class="b-menu-tree__bottom-description">
-        <IconBase name="pling" />
-        <div>
-          To group sections select them both holding “Ctrl” key
-        </div>
-      </div>
-
       <base-button
-        v-show="selectedSections.length > 1"
+        v-if="selectedSections.length > 1"
         @click="showConfirm = true"
         size="small"
-        color="main-green"
+        color="main-green-transparent"
         class="b-menu-tree__group-together"
       >
-        Group
+        Create group
       </base-button>
 
       <div
         class="b-delete-section"
-        v-show="menuTree.length > 0 && settingObjectSection.id && selectedSections.length === 1"
+        v-if="menuTree.length > 0 && settingObjectSection.id && selectedSections.length === 1"
       >
-        <span @click.stop="deleteSection">
-          <IconBase
-            color="#575A5F"
-            name="delete"
-          />
-        </span>
+        <BaseButton
+          @click.stop="showConfirmDelete = true"
+          color="main-red-transparent"
+          size="small"
+        >
+          Delete section
+        </BaseButton>
+      </div>
+      <div
+        class="b-delete-section"
+        v-if="selectedGroup.length > 0"
+      >
+        <BaseButton
+          @click.stop="ungroup"
+          color="main-red-transparent"
+          size="small"
+        >
+          Delete group
+        </BaseButton>
+      </div>
+      <div class="b-menu-tree__bottom-description" v-if="selectedSections.length < 2">
+        <IconBase
+          width="12"
+          height="12"
+          name="info"
+          color="#A2A5A5"
+        />
+        <div>
+          To create group select both section holding “Ctrl” key
+        </div>
       </div>
     </div>
 
-    <base-confirm title="Group selected" @confirm="groupSections" @close="showConfirm = false" v-if="showConfirm">
+    <base-confirm
+      title="Group selected"
+      @confirm="groupSections"
+      @close="showConfirm = false"
+      v-if="showConfirm"
+      button="Group"
+    >
       After grouping, the background of all child sections will be deleted
+    </base-confirm>
+
+    <base-confirm
+      title="Delete section"
+      @confirm="deleteSection"
+      @close="showConfirmDelete = false"
+      v-if="showConfirmDelete"
+      button="Delete"
+    >
+      You are going to delete <span class="b-menu-tree__modal-name-section">{{ settingObjectSection.name }}</span>, this cannot be undone. Confirm deleting?
     </base-confirm>
   </div>
 </template>
@@ -133,10 +170,12 @@ export default {
       menuTree: [],
       lastIndexes: [],
       selectedSections: [],
+      selectedGroup: [],
       absorbed: [],
       init: false,
       nested: [],
-      showConfirm: false
+      showConfirm: false,
+      showConfirmDelete: false
     }
   },
 
@@ -179,7 +218,8 @@ export default {
       'clearSettingObject',
       'clearSettingObjectLight',
       'setControlPanel',
-      'setElement'
+      'setElement',
+      'toggleAddSectionMenu'
     ]),
 
     ...mapActions('Landing', [
@@ -367,11 +407,18 @@ export default {
 
     onSelect (section) {
       let i = this.selectedSections.indexOf(section.id)
+      this.selectedGroup = []
+
       if (i > -1) {
         this.selectedSections.splice(i, 1)
       } else {
         this.selectedSections.push(section.id)
       }
+    },
+
+    onSelectGroup (group) {
+      this.selectedGroup = group
+      this.selectedSections = []
     },
 
     onDelete () {
@@ -381,6 +428,9 @@ export default {
     },
 
     itemSelected (section) {
+      if (this.selectedGroup.length !== 0) {
+        return false
+      }
       return this.selectedSections.indexOf(section.id) > -1 || this.isActiveSection(section.id)
     },
 
@@ -389,13 +439,17 @@ export default {
       this.setSettingSection(section)
     },
 
-    ungroup (section) {
+    ungroup () {
+      const section = this.selectedGroup[0]
+
       this.setSectionData(section, 'absorb', 0)
       resetIndents()
+
       setTimeout(() => {
         this.destroySortable()
         this.buildTree(true)
         this.initSortable()
+        this.selectedGroup = []
       }, 300)
     },
 
@@ -415,10 +469,6 @@ export default {
       this.destroySortable()
       this.buildTree(true)
       this.initSortable()
-
-      setTimeout(() => {
-        this.showBackgroundPanel(newMain)
-      }, 600)
     },
 
     applyGroup (newMain) {
@@ -486,9 +536,11 @@ export default {
 
     setActive (section, event) {
       this.setSettingSection(section)
-      if (!event.ctrlKey) {
+      if (!event.ctrlKey || this.headerSection().id === section.id) {
         this.selectedSections = [section.id]
       }
+      this.selectedGroup = []
+      this.toggleAddSectionMenu(false)
     },
 
     isActiveSection (id) {
@@ -567,17 +619,24 @@ export default {
 
 <style lang="sass" scoped>
 .tree-root
-  padding-bottom: 5rem
+  padding-bottom: 0
 
 .b-menu-tree
-  padding: 0 0 5rem
+  padding: 0 0 12rem
   margin: 0
   height: 100%
 
   &__group
-    .tree-node
-      background: rgba($yellow, .1)
-      padding-left: 2.6rem
+    .menu-tree-item:nth-child(2)
+      /deep/
+        .menu-tree-item__controls > span:nth-child(2)
+          visibility: hidden
+    & .tree-node
+      padding-left: 6.4rem
+      /deep/
+        .menu-tree-item__name,
+        .menu-tree-item__name > span
+          width: 11rem !important
 
   &__group-name
     color: $gray300
@@ -588,9 +647,17 @@ export default {
 
     display: flex
     justify-content: space-between
+    max-width: 28rem
     padding: 1.3rem 1.1rem 1.3rem 1.6rem
     margin: 0 1.6rem 0 1.3rem
 
+    cursor: pointer
+    &:active
+      box-shadow: 0 4px 16px rgba($black, 0.25)
+    &.selected
+      background: rgba(0, 173, 182, 0.1)
+      & *
+        color: #575A5F
   &__group-controls
     opacity: .7
     svg
@@ -603,15 +670,16 @@ export default {
     position: absolute
     bottom: 0
     width: 100%
-    padding: 0 1rem
-    height: 9rem
+    padding: 0 1rem 2.4rem
+    height: 12rem
 
     display: flex
-    justify-content: stretch
+    flex-direction: column
+    justify-content: flex-end
     align-items: center
 
     &-description
-      color: $grey-middle
+      color: #A2A5A5
       font-size: 1.2rem
       line-height: 1.6rem
       display: flex
@@ -624,11 +692,13 @@ export default {
         width: 2.4rem
         height: 2.4rem
         margin-right: 1.1rem
+  &__modal-name-section
+    font-weight: 600
 
 .b-delete-section
-  width: 10rem
+  width: 100%
   text-align: center
-  padding: 1.6rem 0 .9rem
+  padding: 0 0 .9rem
 
   & svg
     transition: fill 0.3s cubic-bezier(.2,.85,.4,1.275)

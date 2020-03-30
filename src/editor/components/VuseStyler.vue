@@ -469,7 +469,8 @@ export default {
       'toggleDragStop',
       'updateSettingOptions',
       'updateStylesBuffer',
-      'toggleSectionsTreeMenu'
+      'toggleSectionsTreeMenu',
+      'toggleSidebar'
     ]),
 
     setPanels (panel, isEditText) {
@@ -525,7 +526,7 @@ export default {
       setTimeout(() => {
         if (this.$props.type === 'section') {
           // Do not show section settings on click
-          // this.setSettingSection(this.section)
+          this.toggleSectionsTreeMenu(true)
         } else {
           // --- if section has components or slots
           let keys = Object.keys(this.section.data)
@@ -680,7 +681,8 @@ export default {
       this.closeModal()
 
       // hide panel
-      this.setControlPanel(false)
+      // this.setControlPanel(false)
+      this.toggleSidebar(true)
       this.toggleSectionsTreeMenu(true)
 
       this.el.contentEditable = 'false'

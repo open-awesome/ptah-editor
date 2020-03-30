@@ -140,6 +140,8 @@ $tabs-bg: #EEF9FA
   outline: none
   &:hover
     color: $main-green
+  &_selected
+    box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.05)
   &_selected,
   &_selected:hover
     color: #575A5F

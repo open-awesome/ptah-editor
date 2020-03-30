@@ -144,11 +144,28 @@ export default {
       text-transform: uppercase
 
   &__close
-    color: $grey
     position: absolute
-    top: 29px
-    right: 17px
+    top: 1.9rem
+    right: 1.7rem
     cursor: pointer
-    &:hover svg
-      fill: $main-green
+
+    width: 3.6rem
+    height: 3.6rem
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    border-radius: 100%
+    transition: background .3s cubic-bezier(.2,.85,.4,1.275)
+    & svg
+      transition: fill .3s cubic-bezier(.2,.85,.4,1.275)
+    &:hover
+      cursor: pointer
+      background: rgba(#000000, 0.05)
+    &:active
+      cursor: pointer
+      background: rgba(#00ADB6, 0.05)
+      & svg
+        fill: $main-green
 </style>

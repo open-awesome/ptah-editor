@@ -1,9 +1,12 @@
 <template>
   <div class="b-range-slider">
-    <base-label v-if="label != ''">
+    <base-label v-if="label != '' && position === 'top'">
       {{ label }}
     </base-label>
     <div class="b-range-slider__row">
+      <base-label v-if="label != '' && position !== 'top'">
+        {{ label }}
+      </base-label>
       <range-slider
         class=""
         :min="min"
@@ -11,7 +14,7 @@
         :step="step"
         v-model="sliderValue">
       </range-slider>
-      <div class="b-range-slider__text">
+      <div class="b-range-slider__text-input">
         <slot></slot>
       </div>
     </div>
@@ -39,6 +42,10 @@ export default {
     label: {
       type: String,
       default: ''
+    },
+    position: {
+      type: String,
+      default: 'top'
     },
     step: {
       type: [String, Number],
@@ -85,12 +92,22 @@ $knob-size: 1.2rem
 $knob-shadow: 0px 2px 8px rgba($main-green, 0.2)
 
 .b-range-slider
+  max-width: 24rem
   &__row
     display: flex
-  &__text
+    justify-content: space-between
+    align-items: center
+    /deep/
+    .b-base-label
+      font-family: 'Open Sans', Helvetica, Arial, sans-serif
+      font-size: 1.4rem
+      font-weight: 600
+      padding: 0
+      width: 6.8rem
+  &__text-input
     width: $size-step*2
 
-    font-size: 1.6rem
+    font-size: 1.4rem
     line-height: $size-step
     color: $dark-grey
 

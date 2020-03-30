@@ -1,13 +1,6 @@
 <template>
   <div class="b-confirm-overlay">
     <div class="b-confirm">
-      <a
-        href="#"
-        @click.prevent="$emit('close')"
-        class="b-confirm__close"
-      >
-        &times;
-      </a>
       <h3>{{title}}</h3>
 
       <div class="b-confirm__content">
@@ -20,13 +13,15 @@
           tabindex="0"
           ref="cancel"
           size="middle"
+          color="transparent"
           @click.prevent="$emit('close')"
         >
           {{ $t('nav.cancel') }}
         </base-button>
         <base-button
+          tabindex="1"
           size="middle"
-          color="orange"
+          color="main-red"
           @click.prevent="$emit('confirm'), $emit('close')"
         >
           {{button}}
@@ -83,47 +78,39 @@ export default {
   align-items: center
   justify-content: center
 
-  background: rgba(32, 60, 95, 0.35)
+  background: rgba(#575A5F, 0.4)
 
-  z-index: 900
+  z-index: 1001
 
 .b-confirm
-  width: 45rem
-  min-height: 20rem
-  border-radius: 2px
-  padding: 2.4rem
+  width: 37rem
+  padding: 3.6rem 3.6rem 2.3rem
   position: relative
 
-  font-family: Lato, sans-serif
-  background: #FFFFFF
+  margin-top: -9rem
+
+  background: #ffffff
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.12), 0 3px 4px rgba(0, 0, 0, 0.12), 0 1px 5px rgba(0, 0, 0, 0.2)
+  border-radius: 10px
+
+  text-align: center
 
   h3
     font-style: normal
-    font-weight: bold
-    font-size: 1.6rem
-    line-height: 1.9rem
-    letter-spacing: -0.02em
-    color: $dark-grey
-    margin-bottom: 1.7rem
+    font-weight: 600
+    font-size: 1.8rem
+    line-height: 2.6rem
+    letter-spacing: -0.06em
+    color: #575A5F
+    margin-bottom: 3.3rem
 
   &__content
-    font-size: 1.4rem
-    line-height: 2.4rem
-    letter-spacing: -0.02em
+    font-size: 1.2rem
+    line-height: 2rem
+    color: #A2A5A5
 
   &__footer
     margin-top: 3rem
     display: flex
     justify-content: flex-end
-
-    button
-      border-radius: 1000px !important
-
-  &__close
-    position: absolute
-    top: 2rem
-    right: 2.4rem
-    color: #E1E1E1
-    font-size: 2.4rem
-    text-decoration: none
 </style>

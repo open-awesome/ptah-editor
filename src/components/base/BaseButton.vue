@@ -18,7 +18,9 @@ export default {
           'white',
           'main-green',
           'main-green-transparent',
-          'yellow-transparent'
+          'main-red',
+          'yellow-transparent',
+          'main-red-transparent'
         ]
         return values.indexOf(value) !== -1
       }
@@ -112,6 +114,9 @@ export default {
   =active
     background-color: $main-green
     color: $white
+  > svg
+    position: relative
+    top: .15rem
   &[disabled]
     cursor: not-allowed
     background-color: rgba($black, 0.2)
@@ -128,8 +133,8 @@ export default {
     padding: 1.4rem 0
   &_small
     font-size: 1.2rem
-    padding: 1.2rem 0
-    width: 8.8rem
+    padding: 1.2rem
+    min-width: 8.8rem
     height: auto
   &_circle
     width: 4rem
@@ -165,6 +170,8 @@ export default {
       background-color: $orange-down200 !important
       opacity: .8
   &_transparent
+    color: #A2A5A5
+    font-weight: 600
     background-color: transparent
   &_white
     color: $main-green
@@ -186,6 +193,34 @@ export default {
       background-color: rgba($black, 0.12)
       color: $white
 
+  /* new color main red */
+  &_main-red
+    color: $white
+    background: $main-red
+    text-transform: uppercase
+    font-weight: 800
+    &:hover
+      box-shadow: 0 1px 5px rgba(0, 0, 0, 0.2), 0 3px 4px rgba(0, 0, 0, 0.12)
+    &:active
+      box-shadow: 0 4px 5px rgba(0, 0, 0, 0.2), 0 3px 14px rgba(0, 0, 0, 0.12), 0 8px 10px rgba(0, 0, 0, 0.14)
+    &[disabled]
+      cursor: not-allowed
+      background-color: rgba($black, 0.12)
+      color: $white
+  /* new color main red transparent */
+  &_main-red-transparent
+    color: $main-red
+    background: transparent
+    text-transform: uppercase
+    font-weight: 600
+    &:hover
+      background: rgba($main-red, 0.12)
+    &:active
+      background: rgba($main-red, 0.4)
+    &[disabled]
+      cursor: not-allowed
+      background-color: transparent
+      color: #A2A5A5
   /* new color main green transparent */
   &_main-green-transparent
     color: $main-green
@@ -216,7 +251,6 @@ export default {
       color: $yellow
     & svg
       fill: $yellow
-      vertical-align: middle !important
   @media only screen and (max-width: 1100px)
     width: auto
     padding: 1rem 1.4rem

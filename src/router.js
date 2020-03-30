@@ -26,7 +26,7 @@ router.beforeEach(
       '/404',
       '/editor/demo',
       '/editor/demo/settings',
-      '/editor/demo/settings/visualSettings',
+      '/editor/demo/settings/pageStyle',
       '/editor/demo/settings/seoSettings',
       '/editor/demo/settings/cookiesSettings',
       '/editor/demo/settings/addJsScrips',

@@ -1,6 +1,8 @@
 <template>
   <div class="b-builder-modal-content-layout">
-    <div class="b-builder-modal-content-layout__content">
+    <div class="b-builder-modal-content-layout__content"
+      :class="{ 'no-controls': !$slots.controls }"
+    >
         <base-scroll-container class="b-scrolled-content" backgroundBar="#999" v-if="!noScroll">
           <div class="b-scrolled-content__inner">
             <slot></slot>
@@ -37,13 +39,15 @@ export default {
 
 .b-builder-modal-content-layout
   height: 100%
-   position: relative
+  position: relative
   &__content
     position: absolute
     top: 0
     bottom: 9rem
     right: 0
     left: 0
+    &.no-controls
+      bottom: 2rem
   &__controls
     position: absolute
     bottom: 0

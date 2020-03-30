@@ -1,86 +1,172 @@
 <template>
   <div class="b-panel">
     <span class="b-panel__title">
-      Section Background
+      <span>
+        {{ settingObjectSection.name }}
+      </span>
     </span>
-
-    <base-scroll-container backgroundBar="#999">
-      <div class="b-panel__inner">
-        <template v-if="settingObjectOptions.background">
-
-          <div class="b-panel__control">
-            <div class="b-panel__picker" v-for="(picker, index) in backgroundPickers" :key="`picker-item-${ _uid }-${ index }`">
-              <base-color-picker v-model="backgroundPickers[index]" :label="`Color ${ index > 0 ? index : '' }`" @change="updateBgColor"/>
-              <div class="b-panel__picker-buttons">
-                <span class="del"
-                      tooltip="Remove color"
-                      tooltip-position="left"
-                      v-show="backgroundPickers.length > 1 && index > 0"
-                      @click="removeBackgroundPicker(index)">
-                  <icon-base name="close" color="#B1B1B1" width="10" height="10"></icon-base>
-                </span>
-                <span class="plus"
-                      tooltip="Add gradient"
-                      tooltip-position="left"
-                      v-show="index === 0 && backgroundPickers.length < 4"
-                      @click="addBackgroundPicker">
-                  <icon-base name="plus" color="#B1B1B1" width="14" height="14"></icon-base>
-                </span>
-              </div>
-            </div>
-          </div>
-
-          <div class="b-panel__control" v-if="!isMobile">
-            <div class="b-panel__overlay">
-              <div class="b-panel__overlay-col">
-                <base-color-picker v-model="sectionOverlayColor" @change="updateOverlayColor" label="Overlay"></base-color-picker>
-              </div>
-              <div class="b-panel__overlay-col">
-                <base-range-slider v-model="sectionOverlayOpacity" label="" step="1" min="0" max="100" @change="changeOverlayOpacity">
-                  {{ sectionOverlayOpacity }} <span class="b-border-radius-control__px">%</span>
-                </base-range-slider>
-              </div>
-            </div>
-          </div>
-
-          <div class="b-panel__control b-panel__control_select-type" v-if="!isMobile">
-            <base-switcher
-              :value="backgroundType === 'video'"
-              label="Use video as background"
-              @change="toggleBackgroundType"/>
-          </div>
-
-          <div v-show="backgroundType !== 'video'">
+    <div class="b-panel-section-background" v-if="settingObjectOptions.background">
+      <base-button-tabs
+        :list="tabs"
+        v-model="activeTab"
+        class="b-tabs"
+      />
+      <div class="layout layout__bg" v-if="activeTab === 'image'">
+        <base-scroll-container>
+          <div class="layout-padding">
             <div class="b-panel__control">
-              <base-uploader
-                v-model="sectionBgUrl"
-                @change="updateBgUrl"
-                label="Image"
-                type="image"
-              />
-            </div>
-            <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
-              <div class="b-panel__control">
-                <control-background-position/>
+              <base-caption help="Section's background image">
+                  Background image
+              </base-caption>
+              <div class="b-panel__col">
+                <base-uploader
+                  v-model="sectionBgUrl"
+                  @change="updateBgUrl"
+                  label="Image"
+                  type="image"
+                />
+                <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
+                  <control-background-position/>
+                </template>
+
+                <div class="b-panel__picker"
+                  v-for="(picker, index) in backgroundPickers"
+                  :key="`picker-item-${ _uid }-${ index }`"
+                >
+                  <base-color-picker
+                    v-model="backgroundPickers[index]"
+                    :label="`Background color ${ index > 0 ? index + 1: '' }`"
+                    @change="updateBgColor"
+                  >
+                    <div class="b-panel__picker-buttons" slot="buttons">
+                      <span class="del"
+                        tooltip="Remove color"
+                        tooltip-position="top"
+                        v-show="backgroundPickers.length > 1 && index > 0"
+                        @click="removeBackgroundPicker(index)"
+                      >
+                        <icon-base
+                          name="close"
+                          color="#B1B1B1"
+                          width="10" height="10"
+                        />
+                      </span>
+                      <span class="plus"
+                        tooltip="Create gradient"
+                        tooltip-position="top"
+                        v-show="index === 0 && backgroundPickers.length < 4"
+                        @click="addBackgroundPicker"
+                      >
+                        <icon-base
+                          name="plus"
+                          color="#B1B1B1"
+                          width="10" height="10"
+                        />
+                      </span>
+                    </div>
+                  </base-color-picker>
+                </div>
               </div>
+            </div>
+            <div class="b-panel__control">
+              <base-caption help="Layer overlaps background ">
+                Overlay layer
+              </base-caption>
+              <div class="b-panel__col">
+                <div class="b-panel__overlay">
+                  <div class="b-panel__overlay-col">
+                    <base-color-picker
+                      v-model="sectionOverlayColor"
+                      @change="updateOverlayColor"
+                      label=""
+                    >
+                      <base-range-slider
+                        v-model="sectionOverlayOpacity"
+                        step="1"
+                        min="0"
+                        max="100"
+                        @change="changeOverlayOpacity"
+                      >
+                        <base-number-input
+                          :value="numOverlayValue"
+                          unit="%"
+                          :maximum="100"
+                          @input="setOverlayValue"
+                        />
+                      </base-range-slider>
+                    </base-color-picker>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
               <div class="b-panel__control" v-if="!isHeader">
-                <BaseSwitcher v-model="isParallax" label="Parallax on background" @change="setParallax" />
+                <div class="b-panel__row">
+                  <base-caption help="Parallax on background">
+                    Parallax
+                  </base-caption>
+                  <div class="b-panel__col">
+                    <BaseSwitcher
+                      v-model="isParallax"
+                      @change="setParallax"
+                    />
+                  </div>
+                </div>
               </div>
             </template>
           </div>
-
-          <div v-show="backgroundType === 'video' && !isMobile" class="b-panel__control b-panel__control--video">
-            <base-uploader
-              v-model="settingObjectOptions.backgroundVideo"
-              @upload="uploadVideo"
-              label="Video"
-              type="video"
-            />
-          </div>
-
-        </template>
+        </base-scroll-container>
       </div>
-    </base-scroll-container>
+      <div class="layout layout__bg" v-if="activeTab === 'video'">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <div v-show="!isMobile" class="b-panel__control b-panel__control--video">
+              <base-caption help="Section's background video">
+                Background video
+              </base-caption>
+              <base-uploader
+                v-model="settingObjectOptions.backgroundVideo"
+                @upload="uploadVideo"
+                label="Video"
+                type="video"
+              />
+            </div>
+            <div class="b-panel__control">
+              <base-caption help="Layer overlaps background ">
+                Overlay layer
+              </base-caption>
+              <div class="b-panel__col">
+                <div class="b-panel__overlay">
+                  <div class="b-panel__overlay-col">
+                    <base-color-picker
+                      v-model="sectionOverlayColor"
+                      @change="updateOverlayColor"
+                      label=""
+                    >
+                      <base-range-slider
+                        v-model="sectionOverlayOpacity"
+                        step="1"
+                        min="0"
+                        max="100"
+                        @change="changeOverlayOpacity"
+                      >
+                        <base-number-input
+                          :value="numOverlayValue"
+                          unit="%"
+                          :maximum="100"
+                          @input="setOverlayValue"
+                        />
+                      </base-range-slider>
+                    </base-color-picker>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </base-scroll-container>
+      </div>
+    </div>
   </div>
 </template>
 
@@ -133,7 +219,13 @@ export default {
         { text: 'Fill', value: 'contain' }
       ],
       backgroundPickers: [],
-      isParallax: false
+      isParallax: false,
+      tabs: [
+        { value: 'image', text: 'Image' },
+        { value: 'video', text: 'Video' }
+      ],
+      activeTab: 'image',
+      numOverlayValue: 0
     }
   },
 
@@ -331,6 +423,12 @@ export default {
 
     changeOverlayOpacity () {
       this.overlay['opacity'] = this.sectionOverlayOpacity / 100
+      this.numOverlayValue = this.sectionOverlayOpacity
+    },
+
+    setOverlayValue (value) {
+      this.sectionOverlayOpacity = value
+      this.overlay['opacity'] = value / 100
     },
 
     setParallax () {
@@ -347,54 +445,36 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
+.b-panel-section-background
+  height: 100%
+  position: relative
 .b-panel
-  &__control
-    margin-top: $size-step/2
-    &_select-type
-      margin: $size-step 0 $size-step/2
   &__overlay
    display: flex
    &-col
      /deep/
-       .b-range-slider__row
-         flex-direction: row-reverse
        .b-range-slider__text
          padding-left: 0.5rem
        .b-range-slider
          padding-left: 1rem
          .range-slider
-           width: $size-step * 2
-  &__buttons
-    position: absolute
-    bottom: 1rem
-    left: 1rem
-    right: 1rem
-    button
-      margin: 0 auto
-      max-width: 100%
-      display: block
+           width: 10.9rem
 
-  &__description
-    font-size: 1.4rem
-    line-height: 1.7rem
-    color: #747474
-    margin-bottom: 2rem
-    margin-top: -1rem
   .vue-scrollbar__wrapper
     margin: 0
   &__picker
     display: flex
     align-items: center
-    margin: $size-step/2 0
+    margin: 0 0 $size-step/2
     &-buttons
-      width: $size-step
+      width: 1.9rem
     & span
       display: flex
       align-items: center
       justify-content: center
 
-      width: $size-step
-      height: $size-step
+      width: 2rem
+      height: 2rem
 
       border-radius: 100%
       border: 0.2rem solid $ligth-grey
@@ -415,21 +495,4 @@ export default {
         border: 0.2rem solid $main-green
         & svg
           fill: $main-green
-    &__description
-      font-size: 1.4rem
-      line-height: 1.7rem
-      color: #747474
-      margin-bottom: 2rem
-      margin-top: -1rem
-      justify-content: space-between
-
-    &__button
-      width: 3rem
-      padding: .4rem
-      line-height: 1
-
-    &__item
-      display: flex
-      align-items: baseline
-      justify-content: space-between
 </style>

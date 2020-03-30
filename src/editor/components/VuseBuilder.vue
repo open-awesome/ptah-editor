@@ -83,7 +83,7 @@
       </component>
 
       <div v-if="emptySections" class="controller-intro">
-        <h3>&larr; Choose layout from the menu</h3>
+        <h3>&larr; Choose section from the menu</h3>
       </div>
 
       <v-style>
@@ -102,7 +102,7 @@
       v-if="showConfirmElementDelete"
       button="Delete"
     >
-      You are going to delete <b class="b-modal-delete-element__name">{{ settingObjectLabel }}</b>, this cannot be undone. Confirm deleting?
+      You are going to delete <span class="b-modal-delete-element__name">{{ settingObjectLabel }}</span>, this cannot be undone. Confirm deleting?
     </base-confirm>
   </div>
 </builder-layout>
@@ -271,12 +271,6 @@ export default {
 
     // listener keyUp press
     document.addEventListener('keyup', this.keyUp)
-
-    // hide all panels
-    this.toggleSidebar(false)
-    this.toggleSectionsTreeMenu(false)
-    this.toggleAddSectionMenu(false)
-    this.toggleProgressPanelExpanded(false)
   },
 
   updated () {
@@ -422,7 +416,13 @@ export default {
 
       if (this.emptySections) {
         this.toggleSidebar(true)
+        this.toggleSectionsTreeMenu(true)
         this.toggleAddSectionMenu(true)
+      } else {
+        this.toggleSidebar(true)
+        this.toggleSectionsTreeMenu(true)
+        this.toggleAddSectionMenu(false)
+        this.toggleProgressPanelExpanded(false)
       }
     },
     addTheme (theme) {
@@ -460,7 +460,7 @@ export default {
             !isNaN(Number(value)) &&
             value
         ) {
-          value = `${value}rem`
+          value = `${value}px`
         }
         this.$refs.artboard.style[styleName] = value
       })
@@ -537,6 +537,7 @@ export default {
       menuItem.scrollIntoView()
 
       this.setControlPanel(false)
+      this.toggleSectionsTreeMenu(true)
     },
 
     showSettingsBar (event, section) {
@@ -830,9 +831,8 @@ export default {
     background: lighten(#18d88b, 40%)
 
 .b-modal-delete-element
-  &.is-expanded
-    margin-left: $size-step * 9
   &__name
+    font-weight: 600
     text-transform: capitalize
 
 .preloader

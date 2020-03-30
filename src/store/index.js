@@ -118,8 +118,8 @@ const actions = {
           styles: {
             backgroundImage: '',
             backgroundColor: '',
-            backgroundPositionX: '',
-            backgroundPositionY: '',
+            backgroundPositionX: 0,
+            backgroundPositionY: 0,
             backgroundAttachment: 'fixed',
             backgroundRepeat: 'no-repeat',
             backgroundSize: 'cover'

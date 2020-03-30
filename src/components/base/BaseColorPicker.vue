@@ -1,3 +1,37 @@
+<template>
+  <div class="b-picker">
+    <div class="b-picker__row">
+      <div
+        class="b-picker__label"
+        v-if="label !== ''"
+      >
+        {{ label }}
+      </div>
+
+      <slot />
+      <slot name="buttons" />
+
+      <BaseDropdownMenu
+        class="b-picker__palette"
+        positionDropdown="right"
+      >
+        <div class="b-picker__preview"
+          :style="{ 'background-color': pickerValue.rgba || pickerValue }"
+          :class="{ 'b-picker__preview_transparent': isTransparent }"
+          :title="pickerValue.rgba || pickerValue || 'Choose color'"
+        />
+        <div slot="list">
+          <Sketch
+            :value="pickerValue"
+            @input="changeColor"
+            :presetColors="palette"
+          />
+        </div>
+      </BaseDropdownMenu>
+    </div>
+  </div>
+</template>
+
 <script>
 import { Sketch } from 'vue-color'
 import { mapState } from 'vuex'
@@ -26,6 +60,20 @@ export default {
 
     palette () {
       return this.currentLanding.settings.palette
+    },
+
+    isTransparent () {
+      let isOpacity = false
+
+      if (this.pickerValue && this.pickerValue.indexOf('0)') !== -1) {
+        isOpacity = true
+      }
+
+      if (this.pickerValue.rgba && this.pickerValue.rgba.indexOf('0)') !== -1) {
+        isOpacity = true
+      }
+
+      return isOpacity
     }
   },
   watch: {
@@ -54,37 +102,6 @@ export default {
 }
 </script>
 
-<template>
-  <div class="b-picker">
-    <div class="b-picker__row">
-      <BaseDropdownMenu
-        class="b-picker__palette"
-        positionDropdown="left"
-        >
-        <div class="b-picker__preview"
-          :style="{ 'background-color': pickerValue.rgba || pickerValue }"
-          :class="{ 'b-picker__preview_transparent': pickerValue.rgba === 'rgba(0,0,0,0)' || pickerValue === 'rgba(0,0,0,0)' }"
-          :title="pickerValue.rgba || pickerValue || 'Choose color'"
-          >
-        </div>
-        <div slot="list">
-          <Sketch
-            :value="pickerValue"
-            @input="changeColor"
-            :presetColors="palette"
-          />
-        </div>
-      </BaseDropdownMenu>
-      <div
-        class="b-picker__label"
-        v-if="label !== ''"
-       >
-        {{ label }}
-      </div>
-    </div>
-  </div>
-</template>
-
 <style lang="sass" scoped="">
 @import '../../assets/sass/_colors.sass'
 @import '../../assets/sass/_variables.sass'
@@ -92,29 +109,43 @@ export default {
 .b-picker
   position: relative
   width: 100%
+  max-width: 24rem
   &__row
     display: flex
     align-items: center
 
     width: 100%
   &__preview
-    width: $size-step*1.5
-    height: $size-step
+    width: 2rem
+    height: 2rem
 
-    border-radius: 0.2rem
+    border-radius: 1rem
     background-color: $white
     border: 2px solid $ligth-grey
+
+    margin: 0 0 0 1.6rem
     &_transparent
-      background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABAAAAAQCAYAAAAf8/9hAAAAL0lEQVQ4T2N89uzZfwY8QFJSEp80A+OoAcMiDP4DAb6Ifv78Of50MGoAA+PQDwMAuX5VedFT3cEAAAAASUVORK5CYII=")
+      background-image: url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/a896a84e-6025-4d3e-ad17-d2418d6bd805.png)
+      border: 0 solid transparent
+      width: 2rem
+      height: 2rem
+      background-size: 100%
     &:hover
       border-color: $main-green
   &__label
+    font-size: 1.4rem
+    font-weight: 600
     color: $dark-grey
-    margin-left: $size-step/2
+    letter-spacing: 0.065em
+
+    width: 18rem
+    margin-right: $size-step/2
+    overflow: hidden
+    text-overflow: ellipsis
     &:first-letter
       text-transform: uppercase
   &__palette
-    margin-top: .5rem
+    margin-top: 0
   &_color-hover
     /deep/
       .b-pth-base-dropdown-menu__list
@@ -131,8 +162,8 @@ export default {
     width: $size-step*7.5 !important
     max-height: none !important
     box-shadow: 0px 0 8rem rgba($black, 0.15) !important
-    &_left
-      left: -1.5rem !important
+    &_right
+      right: -2.2rem !important
       padding: 0 0 1rem 0 !important
 
   .vc-sketch
