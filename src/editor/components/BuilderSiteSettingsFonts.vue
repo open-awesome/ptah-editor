@@ -115,13 +115,6 @@
                         @input="toggleFontSubset($event)"
                       >
                       </font-subsets>
-                      <!--<base-button
-                        v-if="selectFonts[checkSpace(font.family)] !== undefined"
-                        size="small"
-                        color="gray"
-                        v-text="'Edit'"
-                        @click="editFont = font"
-                      />-->
                     </div>
 
                     <div
@@ -141,46 +134,7 @@
                 </ul>
             </base-scroll-container>
           </div>
-          <!--<div class="b-font-edit"
-            v-if="editFont !== null"
-          >
-            <div class="b-font-edit__close"
-              @click="editFont = null"
-            >
-              <icon-base
-                name="close"
-                color="#c4c4c4"
-                width="14"
-                height="14"
-              />
-            </div>
-            <div class="b-font-edit__padd">
-              <div class="b-font-edit-variants">
-                <div class="b-font-edit-variants__header">
-                  Set Font Subsets
-                </div>
-                <div class="b-font-edit-variants__content">
-                  <div class="b-scrolled-content__inner">
-                    <ul class="b-font-edit__list">
-                      <li class="b-font-edit__list-item"
-                          v-for="subset in editFont.subsets"
-                          :key="subset"
-                          @click="toggleFontSubset(subset)"
-                      >
-                          <span
-                            class="b-fonts-list__item-check"
-                            v-if="containsFontSubset(subset)"
-                          >
-                            <icon-base name="checkMark" width="12" height="15" />
-                          </span>
-                        {{ subset }}
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>-->
+
         </div><!-- /.b-fonts-block -->
 
         <!--<div class="b-fonts-block__controls">
