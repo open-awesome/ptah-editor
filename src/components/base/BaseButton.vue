@@ -172,7 +172,11 @@ export default {
   &_transparent
     color: #A2A5A5
     font-weight: 600
-    background-color: transparent
+    background: none transparent
+    &:hover
+      background: rgba(#A2A5A5, 0.12)
+    &:active
+      background: rgba(#A2A5A5, 0.4)
   &_white
     color: $main-green
     background: $white

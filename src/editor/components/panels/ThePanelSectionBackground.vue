@@ -2,7 +2,7 @@
   <div class="b-panel">
     <span class="b-panel__title">
       <span>
-        {{ settingObjectSection.name }}
+        <span>{{ settingObjectSection.name }}</span>
       </span>
     </span>
     <div class="b-panel-section-background" v-if="settingObjectOptions.background">
