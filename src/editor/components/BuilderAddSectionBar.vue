@@ -99,11 +99,6 @@ export default {
   },
 
   methods: {
-    selectGroup (group) {
-      this.selectedGroup = group
-      this.selectedSection = group[0]
-      this.addSection(this.selectedSection)
-    },
     selectSection (section) {
       if (this.processing) {
         return
@@ -111,10 +106,10 @@ export default {
 
       this.processing = true
       this.selectedSection = section
-      this.selectedGroup = []
+      this.selectedGroup = null
       this.addSection(this.selectedSection)
     },
-    addSection (section) {
+    addSection () {
       this.builder.add(this.selectedSection, this.builder.sections.length + 1)
       this.closeAddSectionBar()
       this.$emit('add', this.builder.sections[this.builder.sections.length - 1])
@@ -148,8 +143,9 @@ export default {
     >
       <IconBase
         name="close"
-        width="14"
-        height="14"
+        width="13"
+        height="12"
+        color="#a2a5a5"
       />
     </span>
     <div class="b-add-section__padd">
@@ -233,13 +229,30 @@ export default {
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
 
   &__close-bt
-    color: $grey
     position: absolute
-    top: 32px
-    right: 17px
+    top: 1.9rem
+    right: 1.7rem
     cursor: pointer
+
+    width: 3.6rem
+    height: 3.6rem
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    border-radius: 100%
+    transition: background .3s cubic-bezier(.2,.85,.4,1.275)
+    & svg
+      transition: fill .3s cubic-bezier(.2,.85,.4,1.275)
     &:hover
-      color: $main-green
+      cursor: pointer
+      background: rgba(#000000, 0.05)
+    &:active
+      cursor: pointer
+      background: rgba(#00ADB6, 0.05)
+      & svg
+        fill: $main-green
   &__padd
     padding: 8rem 0 0
     width: calc(100% + .5rem)
@@ -266,8 +279,8 @@ export default {
         justify-content: space-between
         align-items: center
 
-      margin: 0 11px
-      padding: 0 22px
+      margin: 0 18px 0 11px
+      padding: 0
       list-style: none
       height: 5rem
       color: #A2A5A5
@@ -278,12 +291,20 @@ export default {
 
       &:hover
         cursor: pointer
-        background: rgba(0, 0, 0, 0.05)
+        .b-add-section__menu-group-item
+          background: rgba(0, 0, 0, 0.05)
       &:active
         box-shadow: 0 4px 16px rgba($black, 0.25)
       &_selected
         height: auto
         color: $main-green
+        &:hover
+          .b-add-section__menu-group-item
+            background: rgba(0, 173, 182, 0.1)
+        &:active
+          box-shadow: none
+        .b-add-section__menu-group-item
+          background: rgba(0, 173, 182, 0.1)
         svg
           fill: $main-green
         &:hover
@@ -304,12 +325,13 @@ export default {
       transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
     &-ico
       width: 5rem
+      margin: 0 1.6rem 0 0
       display: flex
       justify-content: center
       flex-shrink: 0
       transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
     &-arrow
-      width: 2.4rem
+      width: 4rem
       display: flex
       justify-content: center
       align-items: center
@@ -319,11 +341,9 @@ export default {
 
   &-bar
     width: 100%
-    background-color: $white
     transition: height 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
 
     & > div
-      background: $white
       transition: all 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
     &__menu
       padding: 3.2rem 0 8rem
@@ -334,10 +354,9 @@ export default {
         display: flex
         align-items: center
         justify-content: center
-        border: 0.2rem solid transparent
         transition: all 0.1s ease-in-out
         position: relative
-        margin: 0 -1.6rem
+        margin: 0
         &:hover::after
           content: ''
           display: block
