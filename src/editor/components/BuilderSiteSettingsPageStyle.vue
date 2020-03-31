@@ -105,19 +105,21 @@
         <base-scroll-container>
           <div class="layout-padding">
             <div class="b-page-style__row">
-              <BaseCaption help="Color palette for color pickers" >
-                Color palette
+              <BaseCaption>
+                Color palette generator
               </BaseCaption>
               <div class="b-page-style__col">
-                <base-uploader
-                  key="1"
+                <p class="b-page-style__generator-text">
+                  Simply upload an image, and we’ll use the hues in the image to create your palette.
+                </p>
+                <base-upload-button
                   v-model="imagePalette"
                   @change="changeImagePalette"
-                  label="Image"
-                  :tooltipText="'Load image for generate palette of page'"
-                  @getInputSrcFiles="getInputSrcFiles"
+                  @upload="getInputSrcFiles"
+                  :progress="progress"
+                  @startProgress="startProgress"
                 >
-                </base-uploader>
+                </base-upload-button>
               </div>
               <div class="b-page-style__col" v-if="palette">
                 <div class="b-palette">
@@ -152,11 +154,13 @@ import _ from 'lodash-es'
 import { mapState, mapActions } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
 import ColorThief from 'colorthief/dist/color-thief.umd.js'
+import BaseUploadButton from '../../components/base/BaseUploadButton'
 
 export default {
   name: 'BuilderSiteSettingsPageStyle',
 
   components: {
+    BaseUploadButton,
     BuilderModalContentLayout
   },
 
@@ -190,7 +194,8 @@ export default {
         { value: 'colors', text: 'Colors' },
         { value: 'bg', text: 'Background' }
       ],
-      activeTab: 'bg'
+      activeTab: 'bg',
+      progress: false
     }
   },
 
@@ -278,6 +283,7 @@ export default {
           return this.getHexColor(c)
         })
         this.storeSaveSettingsPalette({ palette: _.uniqBy(palette), image: this.imagePalette })
+        this.progress = false
       }, 1000)
     },
 
@@ -386,6 +392,7 @@ export default {
     },
 
     getInputSrcFiles (value) {
+      this.progress = true
       this.imageForColorThief = value
     },
 
@@ -418,6 +425,10 @@ export default {
 
     setTopValue (value) {
       this.pageBackgroundPositionY = value
+    },
+
+    startProgress (value) {
+      this.progress = value
     }
   }
 }
@@ -447,7 +458,11 @@ export default {
   /deep/
     .b-base-switcher__label
       margin-right: $size-step/2
-
+  &__generator-text
+    font-size: 1rem
+    line-height: 1.4
+    color: #575A5F
+    font-weight: 600
 .b-palette
   &__list
     display: flex

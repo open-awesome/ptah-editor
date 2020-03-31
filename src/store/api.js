@@ -49,6 +49,21 @@ export default {
     return this.uploadFile(request)
   },
 
+  /**
+   * Uploads a file after click button
+   *
+   * @param {Event} event native dom-event
+   */
+  uploadFileAfterClickButton (event) {
+    let file = event.target.files || event.dataTransfer.files
+
+    if (!file.length) {
+      return
+    }
+
+    return file[0]
+  },
+
   uploadFileByFile (file) {
     let request = new FormData()
 
