@@ -125,8 +125,7 @@ export default {
 
     margin: 0 0 0 1.6rem
     &_transparent
-      background-image: url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/a896a84e-6025-4d3e-ad17-d2418d6bd805.png)
-      border: 0 solid transparent
+      background-image: url(https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/9503b817-0d0d-4510-a3ae-b2c67ed8a860.png)
       width: 2rem
       height: 2rem
       background-size: 100%
