@@ -69,34 +69,33 @@
               </div>
             </div>
             <div class="b-panel__control">
-              <base-caption help="Layer overlaps background ">
-                Overlay layer
-              </base-caption>
-              <div class="b-panel__col">
-                <div class="b-panel__overlay">
-                  <div class="b-panel__overlay-col">
-                    <base-color-picker
-                      v-model="sectionOverlayColor"
-                      @change="updateOverlayColor"
-                      label=""
-                    >
-                      <base-range-slider
-                        v-model="sectionOverlayOpacity"
-                        step="1"
-                        min="0"
-                        max="100"
-                        @change="changeOverlayOpacity"
-                      >
-                        <base-number-input
-                          :value="numOverlayValue"
-                          unit="%"
-                          :maximum="100"
-                          @input="setOverlayValue"
-                        />
-                      </base-range-slider>
-                    </base-color-picker>
-                  </div>
+              <div class="b-panel__row">
+                <base-caption help="Layer overlaps background ">
+                  Overlay layer
+                </base-caption>
+                <div class="b-panel__col b-panel__col_overlay-color">
+                  <base-color-picker
+                    v-model="sectionOverlayColor"
+                    @change="updateOverlayColor"
+                    label=""
+                  />
                 </div>
+              </div>
+              <div class="b-panel__col">
+                <base-range-slider
+                  v-model="sectionOverlayOpacity"
+                  step="1"
+                  min="0"
+                  max="100"
+                  @change="changeOverlayOpacity"
+                >
+                  <base-number-input
+                    :value="numOverlayValue"
+                    unit="%"
+                    :maximum="100"
+                    @input="setOverlayValue"
+                  />
+                </base-range-slider>
               </div>
             </div>
 
@@ -133,34 +132,33 @@
               />
             </div>
             <div class="b-panel__control">
-              <base-caption help="Layer overlaps background ">
-                Overlay layer
-              </base-caption>
-              <div class="b-panel__col">
-                <div class="b-panel__overlay">
-                  <div class="b-panel__overlay-col">
-                    <base-color-picker
-                      v-model="sectionOverlayColor"
-                      @change="updateOverlayColor"
-                      label=""
-                    >
-                      <base-range-slider
-                        v-model="sectionOverlayOpacity"
-                        step="1"
-                        min="0"
-                        max="100"
-                        @change="changeOverlayOpacity"
-                      >
-                        <base-number-input
-                          :value="numOverlayValue"
-                          unit="%"
-                          :maximum="100"
-                          @input="setOverlayValue"
-                        />
-                      </base-range-slider>
-                    </base-color-picker>
-                  </div>
+              <div class="b-panel__row">
+                <base-caption help="Layer overlaps background ">
+                  Overlay layer
+                </base-caption>
+                <div class="b-panel__col b-panel__col_overlay-color">
+                  <base-color-picker
+                    v-model="sectionOverlayColor"
+                    @change="updateOverlayColor"
+                    label=""
+                  />
                 </div>
+              </div>
+              <div class="b-panel__col">
+                <base-range-slider
+                  v-model="sectionOverlayOpacity"
+                  step="1"
+                  min="0"
+                  max="100"
+                  @change="changeOverlayOpacity"
+                >
+                  <base-number-input
+                    :value="numOverlayValue"
+                    unit="%"
+                    :maximum="100"
+                    @input="setOverlayValue"
+                  />
+                </base-range-slider>
               </div>
             </div>
           </div>
@@ -495,4 +493,6 @@ export default {
           border: 0.2rem solid $main-green
           & svg
             fill: $main-green
+    &__col_overlay-color
+      margin: 0 0 1.8rem 0
 </style>
