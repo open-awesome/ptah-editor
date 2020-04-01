@@ -147,6 +147,8 @@ export default {
     position: absolute
     top: 1.9rem
     right: 1.7rem
+    z-index: 1
+
     cursor: pointer
 
     width: 3.6rem

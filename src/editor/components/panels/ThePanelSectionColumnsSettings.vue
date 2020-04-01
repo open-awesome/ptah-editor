@@ -1,18 +1,31 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Columns settings
+      Columns
     </h6>
 
-    <div class="b-panel__inner">
-      <!-- Columns settings -->
-      <div class="b-panel__control">
-        <control-section-columns/>
-      </div>
-
-      <!-- Vertical align -->
-      <div class="b-panel__control">
-        <control-vertical-align/>
+    <div class="b-panel__layout">
+      <div class="layout _top-2">
+        <base-scroll-container>
+          <div class="layout-padding _pr-1">
+            <!-- Columns settings -->
+            <div class="b-panel__control">
+              <base-caption>
+                Columns settings
+              </base-caption>
+              <div class="b-panel__control">
+                <div class="b-panel__col">
+                  <control-section-columns/>
+                </div>
+              </div>
+              <div class="b-panel__control">
+                <div class="b-panel__col">
+                  <control-vertical-align/>
+                </div>
+              </div>
+            </div>
+          </div>
+        </base-scroll-container>
       </div>
     </div>
   </div>

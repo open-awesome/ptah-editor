@@ -7,7 +7,10 @@ export default {
 
   data () {
     return {
-      vCount: 0
+      vCount: 0,
+      vCountValue: 0,
+      min: 1,
+      max: 4
     }
   },
 
@@ -33,17 +36,35 @@ export default {
 
     countChange () {
       this.count = this.vCount
+      this.vCountValue = this.vCount
+    },
+
+    setCountValue () {
+      this.vCount = this.vCountValue
     }
   },
 
   created () {
     this.vCount = this.count
+    this.vCountValue = this.vCount
   }
 }
 </script>
 
 <template>
-  <base-range-slider v-model="vCount" label="Count" @change="countChange" step="1" min="1" max="4">
-    {{ vCount }}
+  <base-range-slider
+    v-model="vCount"
+    label="Number of slides"
+    @change="countChange"
+    step="1"
+    :min="min"
+    :max="max"
+  >
+    <base-number-input
+      class="b-control-height__number-input"
+      :value="vCountValue"
+      :maximum="max"
+      @input="setCountValue"
+    />
   </base-range-slider>
 </template>

@@ -8,7 +8,10 @@
         <slot name="label"></slot>
       </base-label>
 
-      <input class="b-base-number-input__input" type="number"
+      <input
+        class="b-base-number-input__input"
+        :class="{'_no-unit': unit === ''}"
+        type="number"
         v-bind="$attrs"
         v-model="innerValue"
         :placeholder="placeholder"
@@ -146,6 +149,9 @@ export default {
     background: transparent
 
     -moz-appearance: textfield
+
+    &._no-unit
+      padding: 0 1rem 0 1rem
 
     &::-webkit-outer-spin-button,
     &::-webkit-inner-spin-button

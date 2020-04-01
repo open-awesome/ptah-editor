@@ -6,15 +6,29 @@
     <div class="menu-tree-item__drag">
       <IconBase name="dragNew"/>
     </div>
-    <div class="menu-tree-item__name">
+    <div
+      class="menu-tree-item__name"
+      :class="{ '_short' : areAdditionSettings }"
+    >
       <span>
         {{ section.name }}
       </span>
     </div>
     <div class="menu-tree-item__controls">
       <span
+        v-if="areAdditionSettings"
         class="menu-tree-item__control"
-        @click.stop="showSettingsBar(section)">
+        @click="showAdditionSettings(panels[section.group], section)">
+        <IconBase
+          width="20"
+          height="20"
+          name="settingsFill"
+          color="#A2A5A5"
+        />
+      </span>
+      <span
+        class="menu-tree-item__control"
+        @click="showSettingsBar(section)">
         <IconBase
           width="24"
           height="18"
@@ -23,7 +37,7 @@
       </span>
       <span
         class="menu-tree-item__control"
-        @click.stop="showBackgroundPanel(section)">
+        @click="showBackgroundPanel(section)">
         <IconBase
           name="backgroundGrey"
         />
@@ -33,9 +47,27 @@
 </template>
 
 <script>
-import * as _ from 'lodash-es'
+import { find, merge } from 'lodash-es'
 import { mapActions, mapState } from 'vuex'
 import { resetIndents } from '@editor/util'
+
+const GROUPS = [
+  'Slider',
+  'Columns',
+  'Galleries',
+  'Products',
+  'Forms',
+  'Elements'
+]
+
+const PANELS = {
+  'Slider': 'Section',
+  'Columns': 'SectionColumnsSettings',
+  'Galleries': 'SectionGalleryStyle',
+  'Products': 'SectionProductsColumnsSettings',
+  'Forms': 'Form',
+  'Elements': 'SectionSystemStyle'
+}
 
 export default {
   name: 'MenuTreeItem',
@@ -51,10 +83,28 @@ export default {
     }
   },
 
+  data () {
+    return {
+      panels: PANELS
+    }
+  },
+
   computed: {
     ...mapState('Sidebar', [
       'sectionsGroups'
-    ])
+    ]),
+
+    areAdditionSettings () {
+      if (this.section.group !== 'Elements') {
+        if (GROUPS.indexOf(this.section.group) !== -1) {
+          return true
+        }
+      } else if (this.section.name.indexOf('FrequentlyAskedQuestions') === -1) {
+        if (GROUPS.indexOf(this.section.group) !== -1) {
+          return true
+        }
+      }
+    }
   },
 
   methods: {
@@ -89,9 +139,9 @@ export default {
     deleteSection (section) {
       // update group
       if (this.isSlaveSection(section.id)) {
-        let master = _.find(this.sectionsGroups, o => o.children.indexOf(section.id) > -1).main
+        let master = find(this.sectionsGroups, o => o.children.indexOf(section.id) > -1).main
         let absorb = master.data.mainStyle.absorb
-        master.set('$sectionData.mainStyle', _.merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
+        master.set('$sectionData.mainStyle', merge({}, master.data.mainStyle, { absorb: absorb - 1 }))
       }
 
       this.builder.remove(section)
@@ -105,11 +155,21 @@ export default {
     },
 
     isMasterSection () {
-      return !!_.find(this.sectionsGroups, o => o.main.id === this.sectionId)
+      return !!find(this.sectionsGroups, o => o.main.id === this.sectionId)
     },
 
     isSlaveSection (sectionId) {
-      return !!_.find(this.sectionsGroups, o => o.children.indexOf(sectionId) > -1)
+      return !!find(this.sectionsGroups, o => o.children.indexOf(sectionId) > -1)
+    },
+
+    async showAdditionSettings (panel, section) {
+      console.log(section)
+
+      this.setSettingSection(section)
+
+      await this.$nextTick()
+
+      this.setControlPanel(panel)
     }
   }
 }
@@ -158,6 +218,10 @@ export default {
         width: 14rem
         overflow: hidden
         text-overflow: ellipsis
+      &._short
+        width: 10rem
+        > span
+          width: 10rem
 
     &:hover
       background: rgba(0, 0, 0, 0.05)

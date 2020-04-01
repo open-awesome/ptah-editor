@@ -9,6 +9,7 @@
   align-items: stretch
   justify-content: flex-start
 
+  position: relative
   &__title
     font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif
     font-size: 1.4rem
@@ -46,7 +47,13 @@
     margin: 0 0 0 1.6rem
   &__inner
     max-width: 330rem
-    padding: 0
+    padding: 0 1rem 0 0
+  &__layout
+    position: absolute
+    top: 7rem
+    right: 0
+    bottom: 0
+    left: 0
   &__platform
     margin: 0.8rem 0 2.2rem
     text-align: center
@@ -65,8 +72,13 @@
 
   box-sizing: border-box
   padding: 0 3.7rem 2rem 2rem
+  &._top-2
+    top: 2rem
   &__bg
     padding-right: 0
   &-padding
     width: 100%
     padding: 0 5rem 0 0
+    &._pr-1
+      padding-right: 2rem
+
