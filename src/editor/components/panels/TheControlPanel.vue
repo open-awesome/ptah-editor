@@ -1,6 +1,6 @@
 <template>
   <!-- @click.stop was here. this breaks down the color picker -->
-  <div class="b-control-panel" v-if="controlPanel.name">
+  <div class="b-control-panel" v-show="controlPanel.name">
     <span class="b-control-panel__close" @click="close">
       <IconBase
         name="close"
@@ -11,6 +11,8 @@
     </span>
 
     <component
+      class="b-control-panel__c"
+      v-show="controlPanel.name"
       :is="panelName"
       :builder="builder"
     />
@@ -132,6 +134,9 @@ export default {
   font-size: 1.4rem
   letter-spacing: -0.01em
 
+  transition: display .3s cubic-bezier(.2,.85,.4,1.275)
+  &__c
+    transition: display .3s cubic-bezier(.2,.85,.4,1.275)
   &__title
     color: $black
     font-size: 2rem

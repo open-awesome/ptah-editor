@@ -244,7 +244,7 @@ $top-panel-height: 7.2rem
     flex-direction: column
     flex-grow: 1
 
-    transition: all 0.1s ease
+    transition: display .3s cubic-bezier(.2,.85,.4,1.275)
     &.slots-settings
       flex-direction: row
       .slots-settings__list

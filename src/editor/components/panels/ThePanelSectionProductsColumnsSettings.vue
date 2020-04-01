@@ -1,19 +1,34 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Products settings
+      Products
     </h6>
-    <base-scroll-container backgroundBar="#999">
-      <div class="b-panel__inner">
-        <!-- Products Section Controls -->
-        <control-section-products/>
-
-        <!-- Vertical align -->
-        <div class="b-panel__control">
-          <control-vertical-align :propAlign="`align-items`"/>
-        </div>
+    <div class="b-panel__layout">
+      <div class="layout _top-2">
+        <base-scroll-container>
+          <div class="layout-padding _pr-1">
+            <!-- Columns settings -->
+            <div class="b-panel__control">
+              <base-caption>
+                Products settings
+              </base-caption>
+              <div class="b-panel__control">
+                <div class="b-panel__col">
+                  <control-section-products/>
+                </div>
+              </div>
+              <div class="b-panel__control">
+                <div class="b-panel__col">
+                  <control-vertical-align
+                    :propAlign="`align-items`"
+                  />
+                </div>
+              </div>
+            </div>
+          </div>
+        </base-scroll-container>
       </div>
-    </base-scroll-container>
+    </div>
   </div>
 </template>
 
