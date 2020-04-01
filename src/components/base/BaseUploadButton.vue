@@ -10,8 +10,11 @@
         ref="uploadInput"
         @change="onUploadClick"
       />
+      <BaseLoading
+        v-if="progress"
+      />
       <BaseButton
-        :disabled="progress"
+        v-if="!progress"
         @click.prevent="upload"
         color="main-green"
         size="middle"
