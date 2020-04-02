@@ -102,12 +102,10 @@ import IconBase from '../../../components/base/icons/IconBase'
 import ControlBox from './../controls/TheControlBox'
 import { resetIndents } from '@editor/util'
 import TheControlCarousel from '../controls/TheControlCarousel'
-import TheControlSectionBanner from '../controls/TheControlSectionBanner'
 import ControlSectionSticky from '../controls/TheControlSectionSticky'
 
 export default {
   components: {
-    TheControlSectionBanner,
     TheControlCarousel,
     IconBase,
     BuilderSettingsBarGroup,

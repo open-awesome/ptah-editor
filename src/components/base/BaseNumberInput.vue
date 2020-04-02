@@ -53,6 +53,13 @@ export default {
         return value > 0
       }
     },
+    minimum: {
+      type: Number,
+      default: Infinity,
+      validator: function (value) {
+        return value > 0
+      }
+    },
     hasError: {
       type: Boolean,
       default: false
@@ -82,11 +89,15 @@ export default {
 
   watch: {
     value (value) {
-      this.innerValue = value !== '' ? Math.min(value, this.maximum) : 0
+      this.innerValue = value !== ''
+        ? Math.min(Math.max(value, this.minimum), this.maximum)
+        : 0
     },
 
     innerValue  (value) {
-      let val = value !== '' ? Math.min(value, this.maximum) : 0
+      let val = value !== ''
+        ? Math.min(Math.max(value, this.minimum), this.maximum)
+        : 0
       this.innerValue = val
 
       this.$emit('input', val)
@@ -101,7 +112,9 @@ export default {
   },
 
   mounted () {
-    this.innerValue = this.value !== '' ? Math.min(this.value, this.maximum) : 0
+    this.innerValue = this.value !== ''
+      ? Math.min(Math.max(this.value, this.minimum), this.maximum)
+      : 0
   }
 }
 </script>
@@ -143,7 +156,7 @@ export default {
     letter-spacing: 0.065em
     text-align: center
 
-    border: 2px solid #00ADB6
+    border: 2px solid #BDBDBD
     border-radius: 5px
     transition: border-color 0.1s ease
     background: transparent
@@ -166,7 +179,7 @@ export default {
 
     &:focus
       outline: none
-      border-color: #0B99FF
+      border-color: $main-green
 
     &:disabled
       border-color: transparent

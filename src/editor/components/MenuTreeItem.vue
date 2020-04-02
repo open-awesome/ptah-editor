@@ -61,7 +61,7 @@ const GROUPS = [
 ]
 
 const PANELS = {
-  'Slider': 'Section',
+  'Slider': 'Slider',
   'Columns': 'SectionColumnsSettings',
   'Galleries': 'SectionGalleryStyle',
   'Products': 'SectionProductsColumnsSettings',
