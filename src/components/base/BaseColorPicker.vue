@@ -1,11 +1,10 @@
 <template>
   <div class="b-picker">
     <div class="b-picker__row">
-      <div
-        class="b-picker__label"
-        v-if="label !== ''"
-      >
-        {{ label }}
+      <div class="b-picker__label">
+        <base-label v-if="label != ''">
+          {{ label }}
+        </base-label>
       </div>
 
       <slot />
@@ -132,12 +131,6 @@ export default {
     &:hover
       border-color: $main-green
   &__label
-    font-size: 1.4rem
-    line-height: 1.2
-    font-weight: 600
-    color: $dark-grey
-    letter-spacing: 0.065em
-
     width: 18rem
     margin-right: $size-step/2
     overflow: hidden

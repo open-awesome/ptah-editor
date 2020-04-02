@@ -1,77 +1,121 @@
 <template>
-  <div class="control-carousel">
-    <base-label>
-      Banner settings
-    </base-label>
-
-    <p class="b-warning">
-      <icon-base name="pling" color="#F68125"></icon-base>
-      {{ $t('c.sliderWarn') }}
-    </p>
-
-    <div class="b-control">
-      <base-range-slider
-        v-model="count"
-        :label="$t('c.sliderNumber')"
-        step="1"
-        min="2"
-        max="6">
-        {{count}}
-      </base-range-slider>
+  <div class="b-control-slider">
+    <div class="b-panel__control">
+      <div class="b-panel__col">
+        <base-range-slider
+          v-model="count"
+          :label="$t('c.sliderNumber')"
+          step="1"
+          min="2"
+          max="6"
+          @change="setCount"
+        >
+          <base-number-input
+            class="b-control-height__number-input"
+            :value="countValue"
+            :minimum="2"
+            :maximum="6"
+            @input="setCountValue"
+          />
+        </base-range-slider>
+      </div>
     </div>
 
-    <!-- pagination -->
-    <div class="b-control">
-      <base-switcher
-        v-model="pagination"
-        :label="$t('c.pagiShow')"/>
-
-      <base-color-picker
-        v-if="pagination"
-        class="b-optional"
-        :label="$t('c.pagiColor')"
-        v-model="paginationColor"/>
-
-      <base-range-slider
-        v-if="pagination"
-        class="b-optional"
-        v-model="navigationSize"
-        :label="$t('c.pagiSize')"
-        step="1"
-        min="5"
-        max="50">
-        {{settingObjectSection.data.mainStyle.swiper.navSize}}
-      </base-range-slider>
+    <div class="b-panel__control">
+      <div class="b-panel__row">
+        <base-caption>
+          Pagination
+        </base-caption>
+        <div class="b-panel__col">
+          <base-switcher
+            v-model="pagination"
+          />
+        </div>
+      </div>
+      <div class="b-panel__col">
+        <div class="b-panel__control">
+          <base-color-picker
+            v-if="pagination"
+            class="b-optional"
+            :label="$t('c.pagiColor')"
+            v-model="paginationColor"
+          />
+        </div>
+        <div class="b-panel__control">
+          <base-range-slider
+            v-if="pagination"
+            class="b-optional"
+            v-model="navigationSize"
+            :label="$t('c.pagiSize')"
+            step="1"
+            min="5"
+            max="50"
+            @change="setNavigationSize"
+          >
+            <base-number-input
+              class="b-control-height__number-input"
+              :value="navigationSizeValue"
+              :minimum="5"
+              :maximum="50"
+              @input="setNavigationSizeValue"
+            />
+          </base-range-slider>
+        </div>
+      </div>
     </div>
 
-    <!-- navigation -->
-    <div class="b-control">
-      <base-switcher
-        v-model="navigation"
-        :label="$t('c.navShow')"/>
-
-      <base-color-picker
-        v-if="navigation"
-        class="b-optional"
-        :label="$t('c.navColor')"
-        v-model="navigationColor"/>
+    <div class="b-panel__control">
+      <div class="b-panel__row">
+        <base-caption>
+          Navigation arrows
+        </base-caption>
+        <div class="b-panel__col">
+          <base-switcher
+            v-model="navigation"
+           />
+        </div>
+      </div>
+      <div class="b-panel__col">
+        <base-color-picker
+          v-if="navigation"
+          class="b-optional"
+          :label="$t('c.navColor')"
+          v-model="navigationColor"
+        />
+      </div>
     </div>
 
-    <div class="b-control">
-      <base-switcher
-        v-model="autoplay"
-        :label="$t('c.autoplay')"/>
-      <base-range-slider
-        v-if="autoplay !== false"
-        class="b-optional"
-        :value="settingObjectSection.data.mainStyle.swiper.autoplay.delay"
-        :label="$t('c.transDelay')"
-        @change="changeSwiperDelay"
-        step="1000"
-        min="1000"
-        max="10000">
-        {{settingObjectSection.data.mainStyle.swiper.autoplay.delay}}
-      </base-range-slider>
+    <div class="b-panel__control">
+      <div class="b-panel__row">
+        <base-caption>
+          Autoplay
+        </base-caption>
+        <div class="b-panel__col">
+          <base-switcher
+            v-model="autoplay"
+           />
+        </div>
+      </div>
+      <div class="b-panel__col" v-if="autoplay !== false">
+        <base-range-slider
+          class="b-optional"
+          :value="delay"
+          :label="$t('c.transDelay')"
+          @change="setDelay"
+          step="1"
+          min="1"
+          max="10"
+        >
+          <base-number-input
+            class="b-control-height__number-input"
+            :value="delayValue"
+            :minimum="1"
+            :maximum="10"
+            unit="seс"
+            @input="setDelayValue"
+          />
+        </base-range-slider>
+      </div>
     </div>
   </div>
 </template>
@@ -85,6 +129,9 @@ export default {
 
   data () {
     return {
+      countValue: 0,
+      navigationSizeValue: 0,
+      delayValue: 0
     }
   },
 
@@ -189,6 +236,24 @@ export default {
           count: value
         }))
       }
+    },
+
+    delay: {
+      get () {
+        const delay = this.settingObjectOptions.swiper.autoplay ? this.settingObjectOptions.swiper.autoplay.delay : 2000
+        return delay / 1000
+      },
+
+      set (value) {
+        const delay = value * 1000
+        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+          swiper: {
+            autoplay: {
+              delay
+            }
+          }
+        }))
+      }
     }
   },
 
@@ -204,7 +269,7 @@ export default {
             autoplay: {
               disableOnInteraction: false,
               waitForTransition: false,
-              delay: 2000
+              delay: this.delay * 1000
             }
           }
         }))
@@ -217,37 +282,35 @@ export default {
       }
     },
 
-    changeSwiperDelay (delay) {
-      this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, {
-          swiper: {
-            autoplay: {
-              delay
-            }
-          }
-        })
-      )
+    setCount (value) {
+      this.countValue = value
+    },
+
+    setCountValue (value) {
+      this.count = value
+    },
+
+    setNavigationSize (value) {
+      this.navigationSizeValue = value
+    },
+
+    setNavigationSizeValue (value) {
+      this.navigationSize = value
+    },
+
+    setDelay (value) {
+      this.delayValue = value
+    },
+
+    setDelayValue (value) {
+      this.delay = value
     }
+  },
+
+  mounted () {
+    this.countValue = this.count
+    this.navigationSizeValue = this.navigationSize
+    this.delayValue = this.delay
   }
 }
 </script>
-
-<style lang="sass" scoped>
-.b-control
-  border-bottom: 0.2rem dotted rgba(0, 0, 0, 0.15)
-  padding-bottom: 2.5rem
-  margin-bottom: 2.5rem
-
-.b-optional
-  margin-top: 1.5rem
-
-.b-warning
-  max-width: 24rem
-  margin: 1rem 0 2rem
-  font-size: 1.35rem
-  color: $gray300
-
-  svg
-    float: left
-    margin: 1rem .7rem 1rem 0
-</style>

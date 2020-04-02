@@ -12,7 +12,7 @@
 
     <component
       class="b-control-panel__c"
-      v-show="controlPanel.name"
+      v-if="controlPanel.name"
       :is="panelName"
       :builder="builder"
     />
@@ -49,6 +49,7 @@ import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsCol
 import ThePanelSectionColumnsSettings from './ThePanelSectionColumnsSettings'
 import ThePanelToggleElement from './ThePanelToggleElement'
 import ThePanelGroupBackground from './ThePanelGroupBackground'
+import ThePanelSlider from './ThePanelSlider'
 
 export default {
   name: 'TheControlPanel',
@@ -111,7 +112,8 @@ export default {
     ThePanelSectionGalleryStyle,
     ThePanelSectionColumnsSettings,
     ThePanelToggleElement,
-    ThePanelGroupBackground
+    ThePanelGroupBackground,
+    ThePanelSlider
   }
 }
 </script>

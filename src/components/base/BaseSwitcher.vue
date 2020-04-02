@@ -37,10 +37,9 @@ export default {
 
 <template>
   <div class="b-base-switcher" :class="classObject">
-    <div class="b-base-switcher__label" v-if="$slots.label || label">
-      <slot name="label"></slot>
-      {{label}}
-    </div>
+    <base-label v-if="$slots.label || label">
+      {{ label }}
+    </base-label>
     <div class="b-base-switcher-core" :class="classObject">
       <input class="b-base-switcher-core__checkbox"
         type="checkbox"
@@ -68,14 +67,6 @@ export default {
   max-width: 24rem
 
   $this: &
-
-  &__label
-    color: #575A5F
-    font-size: 1.4rem
-    letter-spacing: 0.065em
-    font-weight: 600
-    &:first-letter
-      text-transform: uppercase
 
   &_checked
     .b-base-switcher-core
