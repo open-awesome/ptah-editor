@@ -91,8 +91,6 @@ export default {
 
 <style lang="sass" scoped>
 .b-integrations-google-analitycs
-  height: auto
-
   &__inner
     padding: 0 1.5rem 0 2.5rem
 

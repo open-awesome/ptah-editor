@@ -3,10 +3,10 @@
     class="b-integrations-mailchimp"
     >
     <div class="b-integrations-mailchimp__inner">
-      <img
-        class="b-integrations-mailchimp__logo"
-        src="https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/64004e89-19d2-4ce4-84d6-6d0df226d8af.png">
       <template v-if="integrationComplete">
+        <img
+          class="b-integrations-mailchimp__logo"
+          src="https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/64004e89-19d2-4ce4-84d6-6d0df226d8af.png">
         <base-select
           :options="lists"
           :value="selectedList"
@@ -133,6 +133,7 @@ export default {
 
   &__inner
     padding: 0 2.5rem
+    height: 100%
 
   &__logo
     max-width: 100%
@@ -148,5 +149,5 @@ export default {
 
 iframe
   border: none
-  height: 52rem
+  // height: 52rem
 </style>

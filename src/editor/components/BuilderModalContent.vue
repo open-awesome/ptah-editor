@@ -5,7 +5,7 @@
       >
       <div
         class="b-builder-modal-content"
-        :class="{ 'b-builder-modal-content--wide': isWide }"
+        :class="{ 'b-builder-modal-content--wide': isWide, 'b-builder-modal-content--ultrawide': isUltraWide }"
         >
         <div class="b-builder-modal-content__padd">
           <div class="b-builder-modal-content__chapter">
@@ -61,6 +61,10 @@ export default {
 
     isWide () {
       return this.$route.meta.wide
+    },
+
+    isUltraWide () {
+      return this.$route.meta.ultraWide
     }
   },
 
@@ -148,6 +152,9 @@ export default {
 
     &--wide
       width: 38rem
+
+    &--ultrawide
+      width: 68rem
 
     @media only screen and (max-height: 600px)
       &

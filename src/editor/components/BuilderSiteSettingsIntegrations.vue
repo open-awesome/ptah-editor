@@ -1,34 +1,28 @@
 <template>
-  <div>
-    <div class="b-integrations">
-      <div class="b-integrations__item"
-        v-if="!isIntegrationVisible"
-        v-for="integration in integrations"
-        :key="integration.name"
-        @click="selectIntegration(integration.name)"
-        >
-        <div class="b-integrations__item-icon"
-          :style="{'background-image': 'url(' + integration.icon + ')'}"
-          >
-        </div>
-        <div class="b-integrations__item-label">
-          {{ integration.label }}
-        </div>
-        <span class="b-integrations__item-settings">
+  <div class="b-integrations">
+    <div class="b-integrations__item"
+         v-if="!isIntegrationVisible"
+         v-for="integration in integrations"
+         :key="integration.name"
+         @click="selectIntegration(integration.name)"
+    >
+      <div class="b-integrations__item-icon"
+           :style="{'background-image': 'url(' + integration.icon + ')'}"
+      >
+      </div>
+      <div class="b-integrations__item-label">
+        {{ integration.label }}
+      </div>
+      <span class="b-integrations__item-settings">
           <icon-base name="settings" color="#00ADB6"></icon-base>
         </span>
-      </div>
-
-      <div class="b-integrations__component"
-        v-if="isIntegrationVisible"
-        >
-        <router-view></router-view>
-      </div>
     </div>
-    <!--<div slot="controls">
-      <BaseButton color="gray" size="middle" :transparent="true" @click="close()">{{ $t('nav.cancel') }}</BaseButton>
-      <BaseButton color="blue" size="middle" @click="applySettings">{{ $t('nav.save') }}</BaseButton>
-    </div>-->
+
+    <div class="b-integrations__component"
+         v-if="isIntegrationVisible"
+    >
+      <router-view></router-view>
+    </div>
   </div>
 </template>
 
@@ -127,6 +121,7 @@ export default {
   display: flex
   flex-direction: column
   align-items: center
+  height: 100%
   &__item
     width: 28rem
     height: $size-step*5
@@ -170,6 +165,7 @@ export default {
     height: 100%
   &__component
     width: 100%
+    height: 100%
   &__help
     margin-left: 1rem
     & svg

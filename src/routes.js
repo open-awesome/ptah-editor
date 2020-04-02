@@ -70,7 +70,10 @@ const routes = [
               },
               {
                 path: 'mailchimp',
-                component: BuilderSiteSettingsIntegrationsMailchimp
+                component: BuilderSiteSettingsIntegrationsMailchimp,
+                meta: {
+                  ultraWide: true
+                }
               }
             ]
           },
