@@ -3,17 +3,7 @@
     <div class="b-builder-modal-content-layout__content"
       :class="{ 'no-controls': !$slots.controls }"
     >
-        <base-scroll-container class="b-scrolled-content" backgroundBar="#999" v-if="!noScroll">
-          <div class="b-scrolled-content__inner">
-            <slot></slot>
-          </div>
-        </base-scroll-container>
-
-        <div class="b-scrolled-content" v-if="noScroll">
-          <div class="b-scrolled-content__inner">
-            <slot></slot>
-          </div>
-        </div>
+      <slot></slot>
     </div>
     <div class="b-builder-modal-content-layout__controls" v-if="$slots.controls">
       <slot class="b-builder-modal-content-layout__controls-slot" name="controls"></slot>
@@ -23,13 +13,7 @@
 
 <script>
 export default {
-  name: 'BuilderModalContentLayout',
-  props: {
-    noScroll: {
-      type: Boolean,
-      default: false
-    }
-  }
+  name: 'BuilderModalContentLayout'
 }
 </script>
 

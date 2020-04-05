@@ -1,5 +1,5 @@
 <template>
-  <div id="settings-fonts" :noScroll="true">
+  <div id="settings-fonts">
     <v-style>
       <template v-for="font in visibleFonts">
         {{ `@import url("https://fonts.googleapis.com/css?family=${font.family}:${font.variant}");` }}

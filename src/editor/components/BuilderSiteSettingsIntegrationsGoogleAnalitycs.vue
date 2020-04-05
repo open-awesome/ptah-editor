@@ -1,7 +1,6 @@
 <template>
   <builder-modal-content-layout
     class="b-integrations-google-analitycs"
-    :noScroll="true"
     >
     <div class="b-integrations-google-analitycs__inner">
       <base-caption>Google Analitycs</base-caption>
