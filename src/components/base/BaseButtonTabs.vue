@@ -2,8 +2,8 @@
   <div class="b-base-button-tabs"
     :class="{'_buttons' : type === 'buttons'}"
   >
-    <div class="b-base-button-tabs__label">
-      <base-label v-if="label != ''">
+    <div class="b-base-button-tabs__label" v-if="label != ''">
+      <base-label>
         {{ label }}
       </base-label>
     </div>

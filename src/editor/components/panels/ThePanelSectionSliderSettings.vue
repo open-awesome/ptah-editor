@@ -31,7 +31,7 @@ export default {
   components: {
     ControlSectionSlider
   },
-  name: 'ThePanelSectionSlider',
+  name: 'ThePanelSectionSliderSettings',
 
   props: {
     builder: {

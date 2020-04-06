@@ -1,25 +1,48 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      System settings
+      System requirements
     </h6>
-    <base-scroll-container backgroundBar="#999">
-      <div class="b-panel__inner">
-        <!-- System requirements -->
-        <control-system-requirements/>
+    <div class="b-system-requirements">
+      <base-button-tabs
+        :list="tabs"
+        v-model="activeTab"
+        class="b-panel__tabs"
+      />
+      <div class="layout layout__bg" v-if="activeTab === 'settings'">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <div class="b-panel__control">
+              <!-- System requirements -->
+              <control-system-requirements/>
+            </div>
+          </div>
+        </base-scroll-container>
       </div>
-    </base-scroll-container>
+      <div class="layout layout__bg" v-if="activeTab === 'style'">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <div class="b-panel__control">
+              <!-- System requirements -->
+              <control-system-requirements-style/>
+            </div>
+          </div>
+        </base-scroll-container>
+      </div>
+    </div>
   </div>
 </template>
 
 <script>
 import ControlSystemRequirements from './../controls/TheControlSystemRequirements.vue'
+import ControlSystemRequirementsStyle from './../controls/TheControlSystemRequirementsStyle.vue'
 
 export default {
   name: 'ThePanelSectionSystemSettings',
 
   components: {
-    ControlSystemRequirements
+    ControlSystemRequirements,
+    ControlSystemRequirementsStyle
   },
 
   props: {
@@ -31,8 +54,21 @@ export default {
 
   data () {
     return {
-      /* vars for control system requirements */
+      tabs: [
+        { value: 'settings', text: 'Table settings' },
+        { value: 'style', text: 'Table style' }
+      ],
+      activeTab: 'settings'
     }
   }
 }
 </script>
+
+<style lang="sass" scoped>
+@import '../../../assets/sass/_colors.sass'
+@import '../../../assets/sass/_variables.sass'
+
+.b-system-requirements
+  height: 100%
+  position: relative
+</style>

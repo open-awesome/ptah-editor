@@ -61,12 +61,12 @@ const GROUPS = [
 ]
 
 const PANELS = {
-  'Slider': 'SectionSlider',
+  'Slider': 'SectionSliderSettings',
   'Columns': 'SectionColumnsSettings',
   'Galleries': 'SectionGallerySettings',
   'Products': 'SectionProductsColumnsSettings',
-  'Forms': 'SectionForm',
-  'Elements': 'SectionSystemStyle'
+  'Forms': 'SectionFormSettings',
+  'Elements': 'SectionSystemSettings'
 }
 
 export default {

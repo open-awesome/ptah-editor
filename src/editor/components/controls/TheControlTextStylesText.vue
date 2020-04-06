@@ -38,14 +38,12 @@
 
 <script>
 import { mapState, mapActions } from 'vuex'
-import { FONT_SIZES_LIST } from '../../util'
 import { merge, get } from 'lodash-es'
 
 export default {
 
   data () {
     return {
-      sizes: FONT_SIZES_LIST,
       td: { prop: 'text-decoration', value: 'underline', base: 'none' },
       fs: { prop: 'font-style', value: 'italic', base: 'normal' },
       fw: { prop: 'font-weight', value: 'bold', base: 'normal' },

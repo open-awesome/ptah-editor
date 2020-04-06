@@ -29,7 +29,7 @@ import { mapState } from 'vuex'
 import ControlSectionFormSettings from '../controls/TheControlSectionFormSettings'
 
 export default {
-  name: 'ThePanelSectionForm',
+  name: 'ThePanelSectionFormSettings',
   props: {
     builder: {
       type: Object,

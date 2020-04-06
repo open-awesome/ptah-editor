@@ -63,31 +63,35 @@ export default {
 <template>
   <div class="b-control-section-gallery">
     <div class="b-panel__control">
-      <base-range-slider
-        v-model="vCount"
-        label="Number of slides in the gallery"
-        @change="countChange"
-        step="1"
-        min="1"
-        :max="maxCount"
-      >
-        <base-number-input
-          class="b-control-height__number-input"
-          :value="vCountValue"
-          :minimum="1"
-          :maximum="maxCount"
-          @input="setCountValue"
-        />
-      </base-range-slider>
+      <div class="b-panel__col">
+        <base-range-slider
+          v-model="vCount"
+          label="Number of slides in the gallery"
+          @change="countChange"
+          step="1"
+          min="1"
+          :max="maxCount"
+        >
+          <base-number-input
+            class="b-control-height__number-input"
+            :value="vCountValue"
+            :minimum="1"
+            :maximum="maxCount"
+            @input="setCountValue"
+          />
+        </base-range-slider>
+      </div>
     </div>
     <div class="b-panel__control" v-if="this.settingObjectOptions.isLabel">
       <base-caption>
         Labels
       </base-caption>
-      <BaseSwitcher
-        v-model="isLabelPreview"
-        label="Show label for image"
-      />
+      <div class="b-panel__col" v-if="this.settingObjectOptions.isLabel">
+        <BaseSwitcher
+          v-model="isLabelPreview"
+          label="Show label for image"
+        />
+      </div>
     </div>
   </div>
 </template>

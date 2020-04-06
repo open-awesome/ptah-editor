@@ -134,11 +134,9 @@ export default {
     top: 0
     bottom: 0
     right: 0
-    display: flex
-    align-items: center
 
-    font-size: 1.4rem
-    line-height: 6.2rem
+    font-size: 1.3rem
+    line-height: 2.5
     padding: 0 0.6rem
 
   &__input
@@ -148,7 +146,7 @@ export default {
     position: relative
 
     color: #575A5F
-    font-size: 1.4rem
+    font-size: 1.3rem
     line-height: 6.4rem
     letter-spacing: 0.065em
     text-align: center

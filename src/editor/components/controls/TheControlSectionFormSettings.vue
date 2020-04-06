@@ -71,11 +71,13 @@ export default {
   svg
     margin: 0 auto 3.2rem
   p
-    font-family: 'Roboto'
+    font-family: 'Roboto', Helvetica, Arial, sans-serif
     padding: 0 0 .8rem
     font-size: 1rem
     line-height: 1.2
     color: #A2A5A5
+    b
+      color: #000000
     a
       color: #00ADB6
       font-style: italic
