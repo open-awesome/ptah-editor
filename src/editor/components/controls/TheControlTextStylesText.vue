@@ -1,7 +1,45 @@
+
+<template>
+  <div class="b-panel__control">
+    <base-caption>
+      Text style
+    </base-caption>
+    <div class="b-panel__control">
+      <div class="b-panel__col">
+        <base-color-picker
+          :label="$t('c.textColor')"
+          v-model="color"
+        />
+      </div>
+    </div>
+    <div class="b-panel__control">
+      <div class="b-panel__col">
+        <base-range-slider
+          position-label="left"
+          v-model="size"
+          :label="$t('c.size')"
+          step="1"
+          min="8"
+          max="72"
+          @change="setSize"
+        >
+          <base-number-input
+            :value="sizeValue"
+            :minimum="8"
+            :maximum="72"
+            unit="px"
+            @input="setSizeValue"
+          />
+        </base-range-slider>
+      </div>
+    </div>
+  </div>
+</template>
+
 <script>
 import { mapState, mapActions } from 'vuex'
 import { FONT_SIZES_LIST } from '../../util'
-import * as _ from 'lodash-es'
+import { merge, get } from 'lodash-es'
 
 export default {
 
@@ -31,7 +69,8 @@ export default {
         ],
         valueMultiple: []
       },
-      temp: {}
+      temp: {},
+      sizeValue: 0
     }
   },
 
@@ -71,7 +110,7 @@ export default {
         media[device]['textStyles']['text'] = this.textStyles.text
       }
 
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, {
         media: media
       }))
 
@@ -82,17 +121,20 @@ export default {
       get () {
         let props = `textStyles['text']`
         let size = ''
+        let newSize = ''
 
         if (this.isMobile) props = `media['is-mobile']['textStyles']['text']`
 
-        size = _.get(this.settingObjectOptions, `${props}['font-size']`)
+        size = get(this.settingObjectOptions, `${props}['font-size']`)
 
-        if (size === undefined) size = _.get(this.settingObjectOptions, `textStyles['text']['font-size']`)
+        if (size === undefined) size = get(this.settingObjectOptions, `textStyles['text']['font-size']`)
 
-        return _.find(this.sizes, { value: size })
+        newSize = size.split('rem')
+
+        return parseFloat(newSize[0]) * 10
       },
       set (value) {
-        this.update('font-size', value.value)
+        this.update('font-size', `${value / 10}rem`)
       }
     },
 
@@ -103,9 +145,9 @@ export default {
 
         if (this.isMobile) props = `media['is-mobile']['textStyles']['text']`
 
-        color = _.get(this.settingObjectOptions, `${props}['color']`)
+        color = get(this.settingObjectOptions, `${props}['color']`)
 
-        if (color === undefined) color = _.get(this.settingObjectOptions, `textStyles['text']['color']`)
+        if (color === undefined) color = get(this.settingObjectOptions, `textStyles['text']['color']`)
 
         return color
       },
@@ -133,52 +175,20 @@ export default {
 
       this.isMobile ? props = { 'media': media } : props = { 'textStyles': textStyles }
 
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, props))
+    },
+
+    setSize (value) {
+      this.sizeValue = value
+    },
+
+    setSizeValue (value) {
+      this.size = value
     }
+  },
+
+  mounted () {
+    this.sizeValue = this.size
   }
 }
 </script>
-
-<template>
-  <div class="b-table-controls">
-    <div class="b-table-controls__chapter">
-      Text style
-    </div>
-    <div class="b-table-controls__control">
-      <div class="b-table-controls__control-col">
-        <base-select :label="$t('c.size')" :options="sizes" v-model="size"></base-select>
-      </div>
-    </div>
-    <div class="b-table-controls__control">
-      <div class="b-table-controls__control-col">
-        <base-color-picker :label="$t('c.text')" v-model="color"></base-color-picker>
-      </div>
-    </div>
-  </div>
-</template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-table-controls
-  padding: 0 0 $size-step/2
-  &__control
-    display: flex
-    justify-content: stretch
-    align-items: center
-
-    width: 100%
-    margin-top: $size-step/2
-    &-col
-      flex-basis: 50%
-      margin: 0 0 0 $size-step/2
-      &-font-name
-        flex-basis: 90%
-      &:first-child
-        margin: 0
-  &__chapter
-    font-size: 1.4rem
-    font-weight: bold
-    margin-top: $size-step
-</style>

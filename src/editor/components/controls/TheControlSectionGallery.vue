@@ -7,7 +7,8 @@ export default {
 
   data () {
     return {
-      vCount: 0
+      vCount: 0,
+      vCountValue: 0
     }
   },
 
@@ -43,26 +44,50 @@ export default {
       'updateSettingOptions'
     ]),
 
-    countChange () {
-      this.count = this.vCount
+    countChange (value) {
+      this.vCountValue = value
+    },
+
+    setCountValue (value) {
+      this.count = value
     }
   },
 
   created () {
     this.vCount = this.count
+    this.vCountValue = this.vCount
   }
 }
 </script>
 
 <template>
-  <div class="b-text-controls">
-      <div class="b-text-controls__control">
-        <base-range-slider v-model="vCount" label="Count" @change="countChange" step="1" min="1" :max="maxCount">
-            {{ vCount }}
-        </base-range-slider>
-      </div>
-    <div class="b-text-controls__control" v-if="this.settingObjectOptions.isLabel">
-      <BaseSwitcher v-model="isLabelPreview" label="Show label for image" />
+  <div class="b-control-section-gallery">
+    <div class="b-panel__control">
+      <base-range-slider
+        v-model="vCount"
+        label="Number of slides in the gallery"
+        @change="countChange"
+        step="1"
+        min="1"
+        :max="maxCount"
+      >
+        <base-number-input
+          class="b-control-height__number-input"
+          :value="vCountValue"
+          :minimum="1"
+          :maximum="maxCount"
+          @input="setCountValue"
+        />
+      </base-range-slider>
+    </div>
+    <div class="b-panel__control" v-if="this.settingObjectOptions.isLabel">
+      <base-caption>
+        Labels
+      </base-caption>
+      <BaseSwitcher
+        v-model="isLabelPreview"
+        label="Show label for image"
+      />
     </div>
   </div>
 </template>

@@ -131,7 +131,8 @@ export default {
     &:hover
       border-color: $main-green
   &__label
-    width: 18rem
+    width: 100%
+    max-width: 18rem
     margin-right: $size-step/2
     overflow: hidden
     text-overflow: ellipsis

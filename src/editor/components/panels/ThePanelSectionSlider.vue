@@ -14,7 +14,7 @@
                 Slider settings
               </base-caption>
 
-              <control-section-banner />
+              <control-section-slider />
             </div>
           </div>
         </base-scroll-container>
@@ -25,13 +25,13 @@
 
 <script>
 import { mapState } from 'vuex'
-import ControlSectionBanner from '../controls/TheControlSectionBanner'
+import ControlSectionSlider from '../controls/TheControlSectionSlider'
 
 export default {
   components: {
-    ControlSectionBanner
+    ControlSectionSlider
   },
-  name: 'ThePanelSlider',
+  name: 'ThePanelSectionSlider',
 
   props: {
     builder: {
@@ -47,16 +47,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-section-settings
-  /deep/
-    .vb.vb-visible
-      padding-right: 0 !important
-      width: calc(100% + 17px) !important
-  &__control
-    margin: 0 0 2.1rem 2.2rem
-</style>

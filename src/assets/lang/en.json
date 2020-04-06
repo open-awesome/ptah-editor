@@ -115,7 +115,8 @@
         "navShow":                      "Show/hide navigation arrows",
         "navColor":                     "Navigation color",
         "transDelay":                   "Transition delay (ms)",
-        "carouselWidth":                "Carousel width (columns)"
+        "carouselWidth":                "Carousel width (columns)",
+        "textColor":                    "Text color"
     },
     "d": {
         "createNew":                    "Create new landing",

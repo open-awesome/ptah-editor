@@ -110,7 +110,7 @@
             class="b-control-height__number-input"
             :value="delayValue"
             :minimum="1"
-            :maximum="10"
+            :maximum="9"
             unit="seс"
             @input="setDelayValue"
           />
@@ -125,7 +125,7 @@ import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 
 export default {
-  name: 'TheControlSectionBanner',
+  name: 'TheControlSectionSlider',
 
   data () {
     return {

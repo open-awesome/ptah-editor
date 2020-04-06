@@ -28,11 +28,11 @@ export default {
 .b-base-label
   font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif
   font-size: 1.4rem
-  line-height: 1.4rem
+  line-height: 1.6rem
   font-weight: 600
   color: rgba(#575A5F, 0.87)
 
-  padding: 0 0 .9rem 0
+  padding: 0
   display: inline-block
 
   transition: color 0.1s ease

@@ -1,10 +1,10 @@
 <template>
   <div class="b-range-slider">
-    <base-label v-if="label != '' && position === 'top'">
+    <base-label class="b-range-slider__label _top" v-if="label != '' && positionLabel === 'top'">
       {{ label }}
     </base-label>
     <div class="b-range-slider__row">
-      <base-label v-if="label != '' && position !== 'top'">
+      <base-label class="b-range-slider__label _left" v-if="label != '' && positionLabel !== 'top'">
         {{ label }}
       </base-label>
       <range-slider
@@ -43,7 +43,7 @@ export default {
       type: String,
       default: ''
     },
-    position: {
+    positionLabel: {
       type: String,
       default: 'top'
     },
@@ -97,15 +97,18 @@ $knob-shadow: 0px 2px 8px rgba($main-green, 0.2)
     display: flex
     justify-content: space-between
     align-items: center
-    /deep/
-    .b-base-label
-      font-family: 'Open Sans', Helvetica, Arial, sans-serif
-      font-size: 1.4rem
-      font-weight: 600
-      padding: 0
-      width: 6.8rem
+  .b-base-label
+    font-family: 'Open Sans', Helvetica, Arial, sans-serif
+    font-size: 1.4rem
+    font-weight: 600
+    &._top
+      padding: 0 0 .9rem
+    &._left
+      width: 6rem
+      padding: 0 .9rem 0 0
   &__text-input
     width: $size-step*2
+    padding: 0 0 0 .8rem
 
     font-size: 1.4rem
     line-height: $size-step

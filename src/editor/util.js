@@ -574,40 +574,27 @@ export function getJquerySetup (parallax = '', fullPageScroll ='') {
   return ``
 }
 
-export const FONT_SIZES_LIST = [
-  { name: '12px', value: '1.2rem' },
-  { name: '14px', value: '1.4rem' },
-  { name: '16px', value: '1.6rem' },
-  { name: '18px', value: '1.8rem' },
-  { name: '20px', value: '2rem' },
-  { name: '24px', value: '2.4rem' },
-  { name: '28px', value: '2.8rem' },
-  { name: '30px', value: '3rem' },
-  { name: '32px', value: '3.2rem' },
-  { name: '36px', value: '3.6rem' },
-  { name: '40px', value: '4rem' },
-  { name: '44px', value: '4.4rem' },
-  { name: '48px', value: '4.8rem' },
-  { name: '52px', value: '5.2rem' },
-  { name: '56px', value: '5.6rem' },
-  { name: '64px', value: '6.4rem' },
-  { name: '72px', value: '7.2rem' }
-]
+function setFontSizesList () {
+  let sizes = []
 
-export const LINES_HEIGHT_LIST = [
-  { name: '1', value: '1' },
-  { name: '1.1', value: '1.1' },
-  { name: '1.2', value: '1.2' },
-  { name: '1.3', value: '1.3' },
-  { name: '1.4', value: '1.4' },
-  { name: '1.5', value: '1.5' },
-  { name: '1.6', value: '1.6' },
-  { name: '1.7', value: '1.7' },
-  { name: '1.9', value: '1.9' },
-  { name: '1.8', value: '1.8' },
-  { name: '2', value: '2' },
-  { name: '2.4', value: '2.4' },
-  { name: '2.8', value: '2.8' },
-  { name: '3', value: '3' }
-]
+  for (let i = 8; i < 73; i++) {
+    sizes.push({ name: `${i}px`, value: `${i/10}rem` })
+  }
+
+  return sizes
+}
+
+export const FONT_SIZES_LIST = setFontSizesList()
+
+function setLinesHeightList () {
+  let sizes = []
+
+  for (let i = 10; i < 31; i++) {
+    sizes.push({ name: i/10, value: i/10 })
+  }
+
+  return sizes
+}
+
+export const LINES_HEIGHT_LIST = setLinesHeightList()
 

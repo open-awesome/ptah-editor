@@ -20,26 +20,16 @@ export default {
 </script>
 
 <template>
-  <div class="b-text-controls">
+  <div class="b-panel__control">
     <div>
-      <div class="b-text-controls__control" v-if="settingObjectOptions.isChapter">
+      <div class="b-panel__control" v-if="settingObjectOptions.isChapter">
         <control-text-styles-chapter/>
       </div>
     </div>
     <div>
-      <div class="b-text-controls__control">
+      <div class="b-panel__control">
         <control-text-styles-text/>
       </div>
     </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-text-controls
-  &__control
-    margin-top: 2.2rem
-
-</style>

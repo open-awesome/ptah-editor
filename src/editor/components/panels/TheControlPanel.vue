@@ -41,7 +41,6 @@ import ThePanelSlotBackground from './ThePanelSlotBackground'
 import ThePanelSectionSystemSettings from './ThePanelSectionSystemSettings'
 import ThePanelSectionSystemStyle from './ThePanelSectionSystemStyle'
 import ThePanelSectionGallerySettings from './ThePanelSectionGallerySettings'
-import ThePanelSectionGalleryStyle from './ThePanelSectionGalleryStyle'
 import ThePanelVideo from './ThePanelVideo'
 import ThePanelIframe from './ThePanelIframe'
 import ThePanelForm from './ThePanelForm'
@@ -49,7 +48,7 @@ import ThePanelSectionProductsColumnsSettings from './ThePanelSectionProductsCol
 import ThePanelSectionColumnsSettings from './ThePanelSectionColumnsSettings'
 import ThePanelToggleElement from './ThePanelToggleElement'
 import ThePanelGroupBackground from './ThePanelGroupBackground'
-import ThePanelSlider from './ThePanelSlider'
+import ThePanelSectionSlider from './ThePanelSectionSlider'
 
 export default {
   name: 'TheControlPanel',
@@ -109,11 +108,10 @@ export default {
     ThePanelIframe,
     ThePanelSectionProductsColumnsSettings,
     ThePanelSectionGallerySettings,
-    ThePanelSectionGalleryStyle,
     ThePanelSectionColumnsSettings,
     ThePanelToggleElement,
     ThePanelGroupBackground,
-    ThePanelSlider
+    ThePanelSectionSlider
   }
 }
 </script>
