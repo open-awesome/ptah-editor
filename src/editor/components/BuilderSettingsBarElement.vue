@@ -90,11 +90,6 @@
             @open="onExpand"/>
         </div>
 
-        <!-- Form -->
-        <div class="b-elem-settings__control" v-if="settingObjectOptions.form">
-          <control-form></control-form>
-        </div>
-
       </div>
     </base-scroll-container>
 
@@ -114,7 +109,6 @@ import ControlBackground from './controls/TheControlBackground'
 import ControlBackgroundColor from './controls/TheControlBackgroundColor'
 import ControlBackgroundImage from './controls/TheControlBackgroundImage'
 import ControlSize from './controls/TheControlSize'
-import ControlForm from './controls/TheControlForm'
 import ControlAvailablePlatforms from './controls/TheControlAvailablePlatforms'
 import ControlAgeRestrictions from './controls/TheControlAgeRestrictions'
 import ControlSocialNetworks from './controls/TheControlSocialNetworks'
@@ -144,7 +138,6 @@ export default {
     ControlAvailablePlatforms,
     ControlAgeRestrictions,
     ControlSocialNetworks,
-    ControlForm,
     ControlVideo,
     ControlBorderRadius,
     ControlHoverAnimation

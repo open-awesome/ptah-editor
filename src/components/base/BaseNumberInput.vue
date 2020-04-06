@@ -55,10 +55,7 @@ export default {
     },
     minimum: {
       type: Number,
-      default: Infinity,
-      validator: function (value) {
-        return value > 0
-      }
+      default: 0
     },
     hasError: {
       type: Boolean,
@@ -142,12 +139,12 @@ export default {
 
     font-size: 1.4rem
     line-height: 6.2rem
-    padding-right: 0.6rem
+    padding: 0 0.6rem
 
   &__input
-    width: 6.6rem
+    width: 100%
     height: 3.4rem
-    padding: 0 2.6rem 0 1rem
+    padding: 0 2rem 0 .5rem
     position: relative
 
     color: #575A5F

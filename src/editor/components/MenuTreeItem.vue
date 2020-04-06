@@ -65,7 +65,7 @@ const PANELS = {
   'Columns': 'SectionColumnsSettings',
   'Galleries': 'SectionGallerySettings',
   'Products': 'SectionProductsColumnsSettings',
-  'Forms': 'Form',
+  'Forms': 'SectionForm',
   'Elements': 'SectionSystemStyle'
 }
 

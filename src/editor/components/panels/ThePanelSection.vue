@@ -29,33 +29,6 @@
           <the-control-carousel></the-control-carousel>
         </div>
 
-        <!-- Banner section options -->
-        <div class="b-section-settings__control" v-if="settingObjectOptions.bannerSection && !isMobile">
-          <the-control-section-banner></the-control-section-banner>
-        </div>
-
-        <!-- Form -->
-        <div class="b-section-settings__control mailchimp" v-if="settingObjectSection.group === 'Forms' && !isMobile">
-          <div v-if="user.mailchimpIntegration && currentLanding.settings.mailchimpList">
-            <div class="mailchimp_complete">
-              <img src="https://s3.protocol.one/src/o_CaMZ6.png" alt="">
-              <icon-base name="checkMark" width="40" height="40"></icon-base>
-            </div>
-            <p>Now emails from this form will be sent to the list:
-              <b>{{currentLanding.settings.mailchimpList}}</b>
-            </p>
-            <p>Change this in <b><router-link :to="mailchimpLink">Integrations Settings</router-link></b></p>
-          </div>
-
-          <div v-if="!user.mailchimpIntegration || !currentLanding.settings.mailchimpList">
-            <div class="b-mailchimp_none">
-              <img src="https://s3.protocol.one/src/o_CaMZ6.png" alt="">
-              <icon-base name="close" width="40" height="40"></icon-base>
-            </div>
-            <p>Change this in <b><router-link :to="mailchimpLink">Integrations Settings</router-link></b></p>
-          </div>
-        </div>
-
         <div class="b-section-settings__control" v-if="!isHeader && !isMobile">
           <control-section-height></control-section-height>
         </div>
@@ -148,10 +121,6 @@ export default {
 
     isHeader () {
       return this.settingObjectSection.isHeader
-    },
-
-    mailchimpLink () {
-      return `/editor/${this.$route.params.slug}/settings/integrations/mailchimp`
     }
   },
 
@@ -320,21 +289,4 @@ export default {
       ~ .picker__item
         margin-top: .4rem
 
-.b-mailchimp
-  p
-    padding: 1rem 0
-  &_complete
-    display: flex
-    align-items: center
-    img
-      margin-right: 2rem
-    svg
-      fill: $emerald-green
-  &_none
-    display: flex
-    align-items: center
-    img
-      margin-right: 2rem
-    svg
-      fill: red
 </style>
