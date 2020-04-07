@@ -5,7 +5,6 @@ import VuseIcon from '@editor/components/VuseIcon'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 import sectionMedia from '../../mixins/sectionMedia'
-import { mapActions } from 'vuex'
 
 const REQUIREMENTS = [
   {
@@ -538,24 +537,12 @@ export default {
   },
 
   methods: {
-    ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
-
     selectPlatform (key) {
       if (!this.$sectionData.mainStyle.systemRequirements[key].visible) {
         return
       }
 
       this.$sectionData.mainStyle.selectPlatform.name = key
-    },
-
-    async showSettings (panel) {
-      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
-
-      this.setSettingSection(this.$builder.sections[index])
-
-      await this.$nextTick()
-
-      this.setControlPanel(panel)
     }
   },
 
@@ -611,26 +598,6 @@ export default {
         <div class="b-grid__col-12">
           <div class="b-system">
             <div class="b-section-padd">
-              <!-- Setting controls -->
-              <div class="b-section-menu__controls">
-                <div>
-                  <a href="#" class="b-section-menu__control"
-                     tooltip="Settings"
-                     tooltip-position="bottom"
-                     @click.stop="showSettings('SectionSystemSettings')">
-                    <icon-base name="cog" width="12" height="15" />
-                  </a>
-                </div>
-                <div>
-                  <a href="#" class="b-section-menu__control"
-                     tooltip="Table style"
-                     tooltip-position="bottom"
-                     @click.stop="showSettings('SectionSystemStyle')">
-                    <icon-base name="style" width="12" height="15" />
-                  </a>
-                </div>
-              </div>
-
               <div class="b-section-padd-border">
                 <div class="b-system-platforms flex flex_center">
                   <div tabs-link="tabs-link" class="b-system-platforms__item" v-for="(value, key) in $sectionData.mainStyle.systemRequirements" :key="key"

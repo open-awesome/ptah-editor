@@ -4,7 +4,6 @@ import * as _ from 'lodash-es'
 import Seeder from '@editor/seeder'
 import defaults from '../../mixins/defaults'
 import sectionMedia from '../../mixins/sectionMedia'
-import { mapActions } from 'vuex'
 
 let prev = [
   'https://s3.protocol.one/images/ash_p_1.png',
@@ -487,20 +486,6 @@ export default {
     componentsUltimateD: _.merge([], COMPONENTS_D)
   },
 
-  methods: {
-    ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
-
-    async showSettings (panel) {
-      let index = _.findIndex(this.$builder.sections, ['group', GROUP_NAME])
-
-      this.setSettingSection(this.$builder.sections[index])
-
-      await this.$nextTick()
-
-      this.setControlPanel(panel)
-    }
-  },
-
   created () {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
@@ -549,18 +534,6 @@ export default {
       </div>
       <div class="b-section-padd">
         <div class="b-section-padd-border">
-          <!-- Setting controls -->
-          <div class="b-section-menu__controls">
-            <div>
-              <a href="#" class="b-section-menu__control"
-                 tooltip="Products"
-                 tooltip-position="bottom"
-                 @click.stop="showSettings('SectionProductsColumnsSettings')">
-                <icon-base name="cog" width="12" height="15" />
-              </a>
-            </div>
-          </div>
-
           <div class="b-grid__row b-products-columns__row"
                :style="{ 'align-items' : $sectionData.mainStyle.styles['align-items']}">
             <div class="b-grid__col-3 b-grid__col-m-12 "

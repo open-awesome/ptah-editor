@@ -8,7 +8,7 @@
           step="1"
           min="2"
           max="6"
-          @change="setCount"
+        @change="setCount"
         >
           <base-number-input
             class="b-control-height__number-input"

@@ -15,20 +15,6 @@
           <IconBase name="platformDesktop" />
         </div>
 
-        <!-- Carousel Images Multiple Upload -->
-        <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages && !isMobile">
-          <base-uploader
-            :value="galleryImages"
-            @change="updateGalleryImages"
-            label="Image"
-            multiple/>
-        </div>
-
-        <!-- Carousel options -->
-        <div class="b-section-settings__control" v-if="settingObjectOptions.hasMultipleImages && !isMobile">
-          <the-control-carousel></the-control-carousel>
-        </div>
-
         <div class="b-section-settings__control" v-if="!isHeader && !isMobile">
           <control-section-height></control-section-height>
         </div>
@@ -96,12 +82,6 @@ export default {
     }
   },
 
-  data () {
-    return {
-      galleryImages: []
-    }
-  },
-
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
@@ -126,9 +106,6 @@ export default {
 
   created () {
     this.header = this.settingObjectOptions.header || ''
-
-    /* Gallery */
-    this.galleryImages = this.settingObjectOptions.galleryImages || []
 
     if (this.settingObjectOptions.classes !== undefined && this.settingObjectOptions.classes.indexOf('full-height') !== -1) {
       this.fullScreen = true
@@ -166,13 +143,6 @@ export default {
       this.updateSettingOptions(
         _.merge({}, this.settingObjectOptions, { [propName]: value })
       )
-    },
-
-    updateGalleryImages (galleryImages) {
-      this.updateSettingOptions({
-        ..._.cloneDeep(this.settingObjectOptions),
-        galleryImages
-      })
     },
 
     isMasterSection () {
