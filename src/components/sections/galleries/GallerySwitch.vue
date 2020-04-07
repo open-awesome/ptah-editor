@@ -39,25 +39,6 @@
           <div class="b-gallery-one">
             <div class="b-section-padd">
               <div class="b-section-padd-border">
-                <!-- Setting controls -->
-                  <div class="b-section-menu__controls">
-                    <div>
-                      <a href="#" class="b-section-menu__control"
-                         tooltip="Items count"
-                         tooltip-position="bottom"
-                         @click.stop="showSettings('SectionGallerySettings')">
-                        <icon-base name="cog" width="12" height="15" />
-                      </a>
-                    </div>
-                    <div>
-                      <a href="#" class="b-section-menu__control"
-                         tooltip="Gallery style"
-                         tooltip-position="bottom"
-                         @click.stop="showSettings('SectionGalleryStyle')">
-                        <icon-base name="style" width="12" height="15" />
-                      </a>
-                    </div>
-                  </div>
                 <!-- b-gallery-one-list -->
                   <div class="b-gallery-one-list flex__item flex flex_center b-draggable-slot">
                     <div class="b-gallery-one-list__tiles b-gallery-one-list__tiles_mobile">
@@ -401,15 +382,7 @@ export default {
   },
 
   methods: {
-    ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
-
-    async showSettings (panel) {
-      this.setSettingSection(this.$section)
-
-      await this.$nextTick()
-
-      this.setControlPanel(panel)
-    },
+    ...mapActions('Sidebar', ['setControlPanel']),
 
     changeSrc (data) {
       this.$section.set(`$sectionData.${data.path}.styles['background-image']`, `url(${data.url})`)

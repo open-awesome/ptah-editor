@@ -500,10 +500,11 @@
       justify-content: center
       align-items: center
     &-title
-      .is-mobile &
-      font-family: var(--mobile-section-text-styles-text-font-family) !important
-      font-size: var(--mobile-section-text-styles-text-font-size) !important
-      color: var(--mobile-section-text-styles-text-color) !important
+      .is-mobile
+        &
+          font-family: var(--mobile-section-text-styles-text-font-family) !important
+          font-size: var(--mobile-section-text-styles-text-font-size) !important
+          color: var(--mobile-section-text-styles-text-color) !important
       @media only screen and (max-width: 768px)
         &
           font-family: var(--mobile-section-text-styles-text-font-family) !important

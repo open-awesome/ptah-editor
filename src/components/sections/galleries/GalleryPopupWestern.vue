@@ -4,7 +4,6 @@ import * as _ from 'lodash-es'
 import defaults from '../../mixins/defaults'
 import sectionMedia from '../../mixins/sectionMedia'
 import Seeder from '@editor/seeder'
-import { mapActions } from 'vuex'
 
 const GALLERY_ITEM = [
   {
@@ -172,17 +171,6 @@ export default {
     this.$sectionData.isShowPopup = false
   },
 
-  methods: {
-    ...mapActions('Sidebar', ['setControlPanel', 'setSettingSection']),
-    async showSettings (panel) {
-      this.setSettingSection(this.$section)
-
-      await this.$nextTick()
-
-      this.setControlPanel(panel)
-    }
-  },
-
   created () {
     if (this.$sectionData.edited === undefined) {
       Seeder.seed(_.merge(this.$sectionData, SCHEMA_CUSTOM))
@@ -231,19 +219,6 @@ export default {
         <div class="b-grid__col-12">
           <div class="b-section-padd">
             <div class="b-section-padd-border">
-              <!-- Setting controls -->
-              <div class="b-section-menu__controls">
-                <div>
-                  <a href="#" class="b-section-menu__control" @click.stop="showSettings('SectionGallerySettings')">
-                    <icon-base name="cog" width="12" height="15" />
-                  </a>
-                </div>
-                <div>
-                  <a href="#" class="b-section-menu__control" @click.stop="showSettings('SectionGalleryStyle')">
-                    <icon-base name="style" width="12" height="15" />
-                  </a>
-                </div>
-              </div>
               <!-- .b-gallery-popup__wrap -->
               <div class="b-gallery-popup__wrap">
                 <div class="b-gallery-popup">
@@ -280,10 +255,7 @@ export default {
                        :is="$sectionData[key][1].name"
                        :style="{
                           'color' : $sectionData.mainStyle.textStyles.text['color'],
-                          'font-size' : $sectionData.mainStyle.textStyles.text['font-size'],
-                          'font-weight' : $sectionData.mainStyle.textStyles.text['font-weight'],
-                          'font-style' : $sectionData.mainStyle.textStyles.text['font-style'],
-                          'text-decoration' : $sectionData.mainStyle.textStyles.text['text-decoration'],
+                          'font-size' : $sectionData.mainStyle.textStyles.text['font-size']
                         }"
                        :class="[$sectionData[key][1].element.classes, $sectionData[key][1].class]">
                         <div v-html="$sectionData[key][1].element.text"></div>
