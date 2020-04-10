@@ -75,7 +75,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['storeSettings']),
+    ...mapActions(['storeSettings', 'activateCheckListItem']),
     ...mapActions('User', ['mailchimpLists', 'getUser']),
 
     listenFrame () {
@@ -89,6 +89,7 @@ export default {
         if (data.success) {
           this.getLists()
             .then(() => {
+              this.activateCheckListItem('integrations')
               return this.getUser()
             })
         }

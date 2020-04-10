@@ -63,7 +63,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'storeSettings'
+      'storeSettings',
+      'activateCheckListItem'
     ]),
 
     updateGoogleTag () {
@@ -76,6 +77,8 @@ export default {
       const data = {
         gtmId: this.gtmId
       }
+
+      this.activateCheckListItem('integrations')
 
       this.storeSettings(data)
       this.back()

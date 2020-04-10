@@ -255,7 +255,7 @@ export default {
   },
 
   computed: {
-    ...mapState(['currentLanding']),
+    ...mapState(['currentLanding', 'defaultFavicon']),
     ...mapState({
       policy: ({ currentLanding: { settings } }) => settings.cookiesPolicy
     }),
@@ -295,7 +295,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'storeSettings'
+      'storeSettings',
+      'activateCheckListItem'
     ]),
     ...mapActions('Sidebar', ['toggleSidebar']),
 
@@ -345,6 +346,19 @@ export default {
           pdf: this.pdfFile
         },
         ogTags: ogTags
+      }
+
+      // mark if more than one tag is filled in
+      if (ogTags.length > 1) {
+        this.activateCheckListItem('seo')
+      }
+
+      if (data.title !== '') {
+        this.activateCheckListItem('title')
+      }
+
+      if (data.favicon !== '' && data.favicon !== this.defaultFavicon) {
+        this.activateCheckListItem('favicon')
       }
 
       this.storeSettings(data)

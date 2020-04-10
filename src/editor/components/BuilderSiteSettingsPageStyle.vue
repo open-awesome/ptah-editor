@@ -288,10 +288,12 @@ export default {
     },
 
     pageBackgroundUrl  () {
+      this.activateCheckListItem('bg')
       this.applySettings()
     },
 
     pageBackgroundColor () {
+      this.activateCheckListItem('bg')
       this.applySettings()
     },
 
@@ -316,6 +318,7 @@ export default {
     },
 
     bgVideo () {
+      this.activateCheckListItem('bg')
       this.applySettings()
     },
 
@@ -339,11 +342,14 @@ export default {
   methods: {
     ...mapActions([
       'storeSettings',
-      'storeSaveSettingsPalette'
+      'storeSaveSettingsPalette',
+      'activateCheckListItem'
     ]),
+
     ...mapActions('Sidebar', [
       'toggleSidebar'
     ]),
+
     updateSettings () {
       const settings = this.currentLanding.settings
 
@@ -407,6 +413,7 @@ export default {
 
     changeImagePalette (value) {
       if (value === null) {
+        this.activateCheckListItem('colors')
         this.storeSaveSettingsPalette({ palette: null, image: null })
       }
     },

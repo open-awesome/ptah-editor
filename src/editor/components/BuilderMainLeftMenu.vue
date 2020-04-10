@@ -42,7 +42,11 @@
      ]"
     >
       <span class="b-main-left-menu-list__progress-icon">
-        <IconBase name="progress" />
+        <!--<IconBase name="progress" />-->
+        <ProgressIcon
+          :progress="progress"
+          :fill="isProgressPanelExpanded ? '#ffffff' : '#f3f6f6'">
+        </ProgressIcon>
       </span>
       <span class="b-main-left-menu-list__progress-text" >
         Progress
@@ -52,10 +56,12 @@
 </template>
 
 <script>
-import { mapState, mapActions } from 'vuex'
+import { mapState, mapActions, mapGetters } from 'vuex'
+import ProgressIcon from './ProgressIcon'
 
 export default {
   name: 'BuilderMainLeftMenu',
+  components: { ProgressIcon },
   props: {
     builder: {
       type: Object,
@@ -78,6 +84,8 @@ export default {
       'isProgressPanelExpanded',
       'isAddSectionExpanded'
     ]),
+
+    ...mapGetters(['progress']),
 
     modalContentID () {
       return this.$route.path.split('/')[4] || ''
@@ -168,6 +176,19 @@ export default {
     box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.15)
   &-list
     height: 100%
+    &__progress
+      /deep/
+        svg
+          fill: #f3f6f6
+      &._open
+        /deep/
+          svg
+            fill: #fff
+      &:hover:not(._open)
+        /deep/
+          svg
+            fill: #def2f2
+
     &__item,
     &__progress
       width: 100%

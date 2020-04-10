@@ -266,6 +266,7 @@ export default {
 
     this.$builder.rootEl = this.$refs.artboard
     this.initSettings()
+    this.fillCheckList()
 
     this.parsing(css)
 
@@ -296,7 +297,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['clearLandingData']),
+    ...mapActions(['clearLandingData', 'activateCheckListItem']),
     ...mapActions('Sidebar', [
       'updateBuilderSections',
       'updateBuilderGroups',
@@ -425,9 +426,11 @@ export default {
         this.toggleProgressPanelExpanded(false)
       }
     },
+
     addTheme (theme) {
       this.$builder.set(theme)
     },
+
     toggleGroupVisibility (e) {
       const element = e.target
       const group = element.closest('.menu-group')
@@ -669,6 +672,29 @@ export default {
         return
       }
       return bg.replace(/^url[(]/, '').replace(/[)]$/, '')
+    },
+
+    fillCheckList () {
+      let settings = this.currentLanding.settings
+      let list = []
+
+      if (settings.title !== '') {
+        list.push('title')
+      }
+
+      if (settings.favicon !== '') {
+        list.push('favicon')
+      }
+
+      if (settings.styles.backgroundImage !== '' || settings.styles.backgroundColor !== '') {
+        list.push('background')
+      }
+
+      if (settings.css !== '' || settings.script !== '') {
+        list.push('code')
+      }
+
+      list.forEach(item => this.activateCheckListItem(item))
     }
   }
 }

@@ -1,6 +1,6 @@
 <script>
 import { omit } from 'lodash-es'
-import { mapState } from 'vuex'
+import { mapState, mapActions } from 'vuex'
 
 export default {
   name: 'BuilderAddSectionBar',
@@ -99,6 +99,8 @@ export default {
   },
 
   methods: {
+    ...mapActions(['activateCheckListItem']),
+
     selectSection (section) {
       if (this.processing) {
         return
@@ -110,6 +112,7 @@ export default {
       this.addSection(this.selectedSection)
     },
     addSection () {
+      this.activateCheckListItem('section')
       this.builder.add(this.selectedSection, this.builder.sections.length + 1)
       this.closeAddSectionBar()
       this.$emit('add', this.builder.sections[this.builder.sections.length - 1])

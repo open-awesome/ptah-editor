@@ -132,9 +132,11 @@ export default {
     this.elements = Seeder.seed(this.elements)
   },
   methods: {
+    ...mapActions(['activateCheckListItem']),
     ...mapActions('Sidebar', ['clearSettingObjectLight', 'setControlPanel']),
 
     addElement (element) {
+      this.activateCheckListItem('element')
       element.element.removable = true
       element.key = randomPoneId()
       this.components = [...this.components, element]

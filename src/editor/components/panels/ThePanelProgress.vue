@@ -16,14 +16,70 @@
       </span>
     </h6>
 
+    <div class="b-progress">
+      <div class="b-progress__header">
+        <radial-progress-bar
+          :diameter="95"
+          :completed-steps="progress"
+          :total-steps="100"
+          :strokeWidth="15"
+          strokeLinecap="butt"
+          :startColor="`#00ADB6`"
+          :stopColor="`#00ADB6`"
+          :innerStrokeColor="`#F3F6F6`"
+        >
+          <div class="b-progress__circle">{{progress}}%</div>
+        </radial-progress-bar>
+      </div>
+
+      <div class="b-progress__title">Basic steps</div>
+      <check-list-item v-for="(item, index) in basic" :key="index" :active="item.status" class="b-progress__i">
+        {{ item.text }}
+      </check-list-item>
+
+      <div class="b-progress__title">Advanced steps</div>
+      <check-list-item v-for="(item, index) in advanced" :key="'#'+index" :active="item.status" class="b-progress__i">
+        {{ item.text }}
+      </check-list-item>
+    </div>
+
   </div>
 </template>
 
 <script>
-import { mapActions } from 'vuex'
+import { mapActions, mapState, mapGetters } from 'vuex'
+import { filter } from 'lodash-es'
+import CheckListItem from '../CheckListItem'
+import RadialProgressBar from 'vue-radial-progress/src/RadialProgressBar'
 
 export default {
   name: 'ThePanelProgress',
+  components: { RadialProgressBar, CheckListItem },
+  data () {
+    return {
+
+    }
+  },
+
+  computed: {
+    ...mapState([
+      'currentLanding'
+    ]),
+
+    ...mapGetters(['progress']),
+
+    checkList () {
+      return this.currentLanding.checkList
+    },
+
+    basic () {
+      return filter(this.checkList, ['level', 0])
+    },
+
+    advanced () {
+      return filter(this.checkList, ['level', 1])
+    }
+  },
 
   methods: {
     ...mapActions('Sidebar', [
@@ -47,6 +103,7 @@ export default {
 
 .b-panel
   display: block
+  width: 100%
   &__title
     position: relative
     display: flex
@@ -65,4 +122,44 @@ export default {
     cursor: pointer
     &:hover
       color: $main-green
+
+.b-progress
+  &__title
+    background: #F3F6F6
+    width: 100%
+    height: 3.5rem
+    display: flex
+    align-items: center
+    justify-content: center
+    margin-bottom: 1.5rem
+
+    font-size: 1.2rem
+    font-weight: bold
+    letter-spacing: 0.065em
+    text-transform: uppercase
+
+    color: #575A5F
+
+  &__circle
+    display: flex
+    justify-content: center
+    align-items: center
+    width: 5rem
+    height: 5rem
+    border-radius: 50%
+
+    background: #fff
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.1)
+
+  &__header
+    display: flex
+    justify-content: center
+    margin-bottom: 2rem
+
+    font-size: 1.2rem
+    font-weight: bold
+    color: #575A5F
+
+  &__i
+    margin-left: 4.5rem
 </style>

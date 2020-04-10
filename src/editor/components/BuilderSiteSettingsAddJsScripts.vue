@@ -84,7 +84,7 @@ export default {
   },
 
   methods: {
-    ...mapActions(['storeSettings']),
+    ...mapActions(['storeSettings', 'activateCheckListItem']),
     ...mapActions('Sidebar', ['toggleSidebar']),
 
     applySettings () {
@@ -92,6 +92,8 @@ export default {
         script: this.script,
         css: this.css
       })
+
+      this.activateCheckListItem('code')
 
       this.close()
     },
