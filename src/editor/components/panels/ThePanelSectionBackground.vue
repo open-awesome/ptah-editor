@@ -5,7 +5,7 @@
         <span>{{ settingObjectSection.name }}</span>
       </span>
     </span>
-    <div class="b-panel-section-background" v-if="settingObjectOptions.background">
+    <div class="b-panel__content" v-if="settingObjectOptions.background">
       <base-button-tabs
         :list="tabs"
         v-model="activeTab"
@@ -443,9 +443,6 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-panel-section-background
-  height: 100%
-  position: relative
 .b-panel
   .vue-scrollbar__wrapper
     margin: 0

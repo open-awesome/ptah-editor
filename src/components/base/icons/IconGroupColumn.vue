@@ -1,7 +1,5 @@
 <template>
-  <svg width="14" height="16" viewBox="0 0 14 16">
-    <rect x="0.5" y="0.5" width="3" height="13" rx="0.5" transform="matrix(4.37114e-08 1 1 -4.37114e-08 2.18557e-08 -2.18557e-08)" stroke-miterlimit="9.43363" stroke-linecap="round" stroke-linejoin="bevel"/>
-    <rect x="0.5" y="0.5" width="3" height="13" rx="0.5" transform="matrix(4.37114e-08 1 1 -4.37114e-08 2.18557e-08 6)" stroke-opacity="0.7" stroke-miterlimit="9.43363" stroke-linecap="square" stroke-dasharray="1 4"/>
-    <rect x="0.5" y="0.5" width="3" height="13" rx="0.5" transform="matrix(4.37114e-08 1 1 -4.37114e-08 2.18557e-08 12)" stroke-opacity="0.7" stroke-miterlimit="9.43363" stroke-linecap="square" stroke-dasharray="1 4"/>
+  <svg width="20" height="15" viewBox="0 0 20 15" xmlns="http://www.w3.org/2000/svg">
+    <path d="M1 9C0.447716 9 0 8.55228 0 8V7C0 6.44772 0.447715 6 1 6H18.9688C19.521 6 19.9688 6.44772 19.9688 7V8C19.9688 8.55229 19.521 9 18.9688 9H1ZM0 1C0 0.447715 0.447715 0 1 0H18.9688C19.521 0 19.9688 0.447715 19.9688 1V2C19.9688 2.55228 19.521 3 18.9688 3H1C0.447716 3 0 2.55228 0 2V1ZM1 15C0.447716 15 0 14.5523 0 14V13C0 12.4477 0.447715 12 1 12H18.9688C19.521 12 19.9688 12.4477 19.9688 13V14C19.9688 14.5523 19.521 15 18.9688 15H1Z"/>
   </svg>
 </template>

@@ -1,7 +1,5 @@
 <template>
-  <svg width="16" height="14" viewBox="0 0 16 14">
-    <rect x="-0.5" y="0.5" width="3" height="13" rx="0.5" transform="matrix(-1 0 0 1 15 0)" stroke-miterlimit="9.43363" stroke-linecap="round" stroke-linejoin="bevel"/>
-    <rect x="-0.5" y="0.5" width="3" height="13" rx="0.5" transform="matrix(-1 0 0 1 8.99997 0)" stroke-opacity="0.7" stroke-miterlimit="9.43363" stroke-linecap="square" stroke-dasharray="1 4"/>
-    <rect x="-0.5" y="0.5" width="3" height="13" rx="0.5" transform="matrix(-1 0 0 1 2.99997 0)" stroke-opacity="0.7" stroke-miterlimit="9.43363" stroke-linecap="square" stroke-dasharray="1 4"/>
+  <svg width="15" height="20" viewBox="0 0 15 20" xmlns="http://www.w3.org/2000/svg">
+    <path d="M9 19C9 19.5523 8.55228 20 8 20H7C6.44772 20 6 19.5523 6 19L6 1.03125C6 0.478966 6.44772 0.03125 7 0.03125H8C8.55229 0.03125 9 0.478966 9 1.03125L9 19ZM1 20C0.447715 20 0 19.5523 0 19L0 1.03125C0 0.478966 0.447715 0.03125 1 0.03125H2C2.55228 0.03125 3 0.478966 3 1.03125L3 19C3 19.5523 2.55228 20 2 20H1ZM15 19C15 19.5523 14.5523 20 14 20H13C12.4477 20 12 19.5523 12 19L12 1.03125C12 0.478966 12.4477 0.03125 13 0.03125H14C14.5523 0.03125 15 0.478966 15 1.03125L15 19Z"/>
   </svg>
 </template>

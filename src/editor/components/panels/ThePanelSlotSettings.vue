@@ -54,19 +54,19 @@
                           :class="{ active: align === 'flex-start' }"
                           @click="changeAlign('flex-start')"
                         >
-                          <icon-base name="groupTop"/>
-                        </li>
-                        <li
-                          :class="{ active: align === 'center' }"
-                          @click="changeAlign('center')"
-                        >
-                          <icon-base name="groupCenterVertical"/>
+                          <icon-base name="groupToTop"/>
                         </li>
                         <li
                           :class="{ active: align === 'flex-end' }"
                           @click="changeAlign('flex-end')"
                         >
-                          <icon-base name="groupBottom"/>
+                          <icon-base name="groupToBottom"/>
+                        </li>
+                        <li
+                          :class="{ active: align === 'center' }"
+                          @click="changeAlign('center')"
+                        >
+                          <icon-base name="groupToVerticalCenter"/>
                         </li>
                       </ul>
                     </div>
