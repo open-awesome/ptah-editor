@@ -13,7 +13,7 @@ Vue.use(Vuex)
 Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
-const demoLanding = 'https://s3.protocol.one/files/Demo-page-2020-v5.json'
+const demoLanding = 'https://s3.protocol.one/files/Demo-page-2020-v6.json'
 const FONTS = {
   'Lato': {
     variants: ['regular'],
@@ -32,6 +32,74 @@ const SETUP_FONTS = {
   'btn': 'Montserrat'
 }
 
+const DEFAULT_CHECK_LIST = {
+  logo: {
+    status: false,
+    text: 'Add logo',
+    level: 0
+  },
+  bg: {
+    status: false,
+    text: 'Page background',
+    level: 0
+  },
+  title: {
+    status: false,
+    text: 'Page title',
+    level: 0
+  },
+  favicon: {
+    status: false,
+    text: 'Favicon',
+    level: 0
+  },
+  content: {
+    status: false,
+    text: 'Edit content',
+    level: 0
+  },
+  colors: {
+    status: false,
+    text: 'Change colors',
+    level: 0
+  },
+  section: {
+    status: false,
+    text: 'Add section',
+    level: 1
+  },
+  element: {
+    status: false,
+    text: 'Add elements',
+    level: 1
+  },
+  seo: {
+    status: false,
+    text: 'SEO options',
+    level: 1
+  },
+  integrations: {
+    status: false,
+    text: 'Integrations',
+    level: 1
+  },
+  domain: {
+    status: false,
+    text: 'Connect domain',
+    level: 1
+  },
+  fonts: {
+    status: false,
+    text: 'Add new Fonts',
+    level: 1
+  },
+  code: {
+    status: false,
+    text: 'Add custom JS/CSS',
+    level: 1
+  }
+}
+
 const state = {
   storefrontPreview: false,
   landings: [],
@@ -41,17 +109,26 @@ const state = {
       setupFonts: SETUP_FONTS,
       imageForPalette: null,
       palette: []
-    }
+    },
+    checkList: DEFAULT_CHECK_LIST // landing check-list in navigation menu
   },
   isSaved: false,
   slug: '', // landing ID
   name: '',
-  version: null // landing version
+  version: null, // landing version
+  defaultFavicon: 'https://s3-eu-west-1.amazonaws.com/dev.s3.ptah.super.com/image/7b750777-57ba-4757-b864-140ac77e3395.png'
 }
 
 const getters = {
   storefrontPreview: (state) => {
     return state.storefrontPreview
+  },
+
+  progress: (state) => {
+    let all = Object.keys(state.currentLanding.checkList).length
+    let checked = _.filter(state.currentLanding.checkList, 'status').length
+
+    return (checked / all * 100).toFixed(0)
   }
 }
 
@@ -114,7 +191,7 @@ const actions = {
           fullPageScroll: 'no',
           gtmId: '',
           gtag: '',
-          favicon: 'https://protocol.one/wp-content/uploads/2018/09/03.png',
+          favicon: state.defaultFavicon,
           styles: {
             backgroundImage: '',
             backgroundColor: '',
@@ -136,6 +213,13 @@ const actions = {
           fonts: fonts,
           setupFonts: setupFonts
         })
+
+        if (!landing.checkList) {
+          landing.checkList = DEFAULT_CHECK_LIST
+        } else {
+          landing.checkList = _.defaultsDeep(landing.checkList, DEFAULT_CHECK_LIST)
+        }
+
         commit('isSaved', false)
         commit('updateCurrentLanding', landing)
         commit('name', data.name)
@@ -252,7 +336,8 @@ const actions = {
     const parsedData = JSON.parse(data)
     const mergedData = {
       ...parsedData,
-      settings: state.currentLanding.settings
+      settings: state.currentLanding.settings,
+      checkList: state.currentLanding.checkList
     }
     const resultDataString = JSON.stringify(mergedData)
 
@@ -362,6 +447,10 @@ const actions = {
       settings: lnd.settings,
       sections: []
     })
+  },
+
+  activateCheckListItem ({ state, commit }, item) {
+    commit('activateCheckListItem', item)
   }
 }
 
@@ -396,6 +485,10 @@ const mutations = {
 
   version (state, value) {
     state.version = value
+  },
+
+  activateCheckListItem (state, item) {
+    state.currentLanding.checkList[item].status = true
   }
 }
 

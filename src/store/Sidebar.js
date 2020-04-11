@@ -262,6 +262,8 @@ export default {
         label,
         options: elementOptions
       })
+
+      commit('isProgressPanelExpanded', false)
     },
 
     updateBuilderSections ({ commit }, sectionsArray) {
@@ -305,12 +307,14 @@ export default {
         // close 'add section bar'
         commit('isAddSectionExpanded', false)
         commit('isSectionsTreeExpanded', false)
+        commit('isProgressPanelExpanded', false)
       } else {
         commit('controlPanel', {
           expanded: false,
           name: ''
         })
 
+        commit('isProgressPanelExpanded', false)
         dispatch('toggleGrouping', false)
       }
     },

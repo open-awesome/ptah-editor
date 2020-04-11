@@ -245,7 +245,12 @@ export default {
   },
 
   methods: {
-    ...mapActions(['storeSettings', 'storeSaveSettingsFonts', 'storeSaveSettingsSetupFonts']),
+    ...mapActions([
+      'storeSettings',
+      'storeSaveSettingsFonts',
+      'storeSaveSettingsSetupFonts',
+      'activateCheckListItem'
+    ]),
 
     getFontsData () {
       this.isLoaded = false
@@ -291,6 +296,8 @@ export default {
     },
 
     saveFonts () {
+      this.activateCheckListItem('fonts')
+
       this.storeSettings({
         fonts: this.selectFonts
       })

@@ -47,7 +47,8 @@ export default {
 
   methods: {
     ...mapActions([
-      'storeSettings'
+      'storeSettings',
+      'activateCheckListItem'
     ]),
 
     updateGoogleTag () {
@@ -60,6 +61,8 @@ export default {
       const data = {
         gtag: this.gtag
       }
+
+      this.activateCheckListItem('integrations')
 
       this.storeSettings(data)
       this.back()
