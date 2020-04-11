@@ -697,33 +697,41 @@ export default {
   &.is-editable table.is-editable
     outline: none
     transition: border 0.25s
-    border: .2rem dotted transparent
+    border: .4rem solid transparent
     &:hover
       cursor: pointer
-      border-color: $main-green !important
+      border-color: $main-yellow !important
+      background-color: rgba(255, 230, 0, 0.1) !important
+      border-radius: .5rem !important
     &.styler-active
       border-color: transparent !important
+      background-color: rgba(255, 230, 0, 0.1) !important
+      border-radius: .5rem !important
       &:hover
         border-color: transparent !important
       .is-mobile &.b-image,
       .is-mobile &.b-logo,
       .is-tablet &.b-image,
-      .is-tablet &.b-logo,
-        border-color: $main-green !important
+      .is-tablet &.b-logo
+        border-color: $main-yellow !important
         &:hover
-          border-color: $main-green !important
+          border-color: $main-yellow !important
   &.is-editable div.b-border,
   &.is-editable table.b-border
     outline: none
     transition: border 0.25s
-    border: .2rem dotted transparent
+    border: .4rem solid transparent
     &:hover
       cursor: pointer
-      border-color: $main-green !important
+      border-color: $main-yellow !important
+      background-color: rgba(255, 230, 0, 0.1) !important
+      border-radius: .5rem !important
     &.styler-active
-      border-color: $main-green !important
+      border-color: $main-yellow !important
+      background-color: rgba(255, 230, 0, 0.1) !important
+      border-radius: .5rem !important
       &:hover
-        border-color: $main-green !important
+        border-color: $main-yellow !important
       &.b-text
         cursor: pointer
   &.fp-scroll section:not(.b-section-header):not(.b-section-footer):not(.is-mobile)

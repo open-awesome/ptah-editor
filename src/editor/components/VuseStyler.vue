@@ -166,38 +166,35 @@
       </template>
 
       <!-- Copy el -->
-      <div class="b-styler__controls" v-if="options.copyStyles">
-        <a href="#" class="b-styler__control b-styler__control_copy"
-          tooltip="Copy"
-          tooltip-position="bottom"
-          @click.stop="copyStylesBuffer"
-          >
-          <icon-base name="copy" width="10" height="10"></icon-base>
-        </a>
-      </div>
+      <a href="#" class="b-styler__control b-styler__control_copy"
+        v-if="options.copyStyles"
+       tooltip="Copy"
+        tooltip-position="bottom"
+        @click.stop="copyStylesBuffer"
+        >
+        <icon-base name="copy" width="10" height="10"></icon-base>
+      </a>
 
       <!-- Paste el -->
-      <div class="b-styler__controls" v-if="type === stylesBuffer.type">
-        <a href="#" class="b-styler__control b-styler__control_paste"
-          tooltip="Paste"
-          tooltip-position="bottom"
-          @click.stop="pasteStylesBuffer"
-          >
-          <icon-base name="paste" width="10" height="10"></icon-base>
-        </a>
-      </div>
-
-    </div>
-
-    <!-- Delete element -->
-    <div class="b-styler__controls" v-if="options.removable">
-      <a href="#" class="b-styler__control b-styler__control_del"
-        tooltip="Delete"
+      <a href="#" class="b-styler__control b-styler__control_paste"
+        v-if="type === stylesBuffer.type"
+        tooltip="Paste"
         tooltip-position="bottom"
-        @click.stop="removeElement"
+        @click.stop="pasteStylesBuffer"
         >
+        <icon-base name="paste" width="10" height="10"></icon-base>
+      </a>
+
+      <!-- Delete element -->
+      <a href="#" class="b-styler__control b-styler__control_del"
+         v-if="options.removable"
+         tooltip="Delete"
+         tooltip-position="bottom"
+         @click.stop="removeElement"
+      >
         <icon-base name="close" width="10" height="10"></icon-base>
       </a>
+
     </div>
 
     <!-- Modals -->
@@ -889,11 +886,11 @@ export default {
 
 .b-styler
   display: none
-  justify-content: space-between
+  justify-content: center
   align-items: flex-start
-  height: 2.6rem
+  height: 3.6rem
   z-index: 20
-  margin: 0 0 0 -0.2rem
+  margin: 0 0 -0.3rem
 
   &.is-show-modal
     z-index: 0
@@ -909,56 +906,30 @@ export default {
     flex-wrap: nowrap
 
   &__control
-    width: $size-step/1.8
-    height: $size-step/1.8
+    width: 4.6rem
+    height: 3.6rem
 
     display: flex
     align-items: center
     justify-content: center
 
-    width: $size-step/1.5
-    height: $size-step/1.5
-
-    background: $main-green
-    box-shadow: 0 6px 16px rgba(26, 70, 122, 0.39)
+    background: $main-yellow
 
     cursor: pointer
+    transition: all .3s
+    &:first-child
+      border-radius: .5rem 0 0 .5rem
+    &:last-child
+      border-radius: 0 .5rem .5rem 0
     & svg
       fill:  $white
-      width: 14px
-      height: 14px
+      width: 20px
+      height: 20px
 
     &:hover, .active
-      background: $white
-      svg
-        fill: $main-green
-
-    &_del
-      margin-right: -0.2rem
-      background: $black
+      background: #0C71C3
       svg
         fill: $white
-        margin-bottom: 0
-      &:hover, .active
-        background: $black
-        svg
-          fill: $orange
-
-    &_link
-      svg
-        width: 18px
-        height: 18px
-
-    &_copy,
-    &_paste
-      background: $emerald-green
-      svg
-        fill: $white
-        margin-bottom: 0
-      &:hover, .active
-        background: $white
-        svg
-          fill: $main-green
 
   &__modal
     width: 40rem
@@ -968,7 +939,7 @@ export default {
     position: absolute
 
     background: $white
-    box-shadow: 0px 0.4rem 4rem rgba($black, 0.35)
+    box-shadow: 0 0.4rem 4rem rgba($black, 0.35)
     &-buttons
       position: absolute
       right: 0
