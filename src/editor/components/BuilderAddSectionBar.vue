@@ -138,7 +138,7 @@ export default {
 <template>
   <div class="b-add-section">
     <span
-      class="b-add-section__close-bt"
+      class="b-panel__close"
       @click="closeAddSectionBar"
     >
       <IconBase
@@ -227,32 +227,6 @@ export default {
   background: $white
   border-radius: 0 10px 10px 0
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25)
-
-  &__close-bt
-    position: absolute
-    top: 1.9rem
-    right: 1.7rem
-    cursor: pointer
-
-    width: 3.6rem
-    height: 3.6rem
-
-    display: flex
-    justify-content: center
-    align-items: center
-
-    border-radius: 100%
-    transition: background .3s cubic-bezier(.2,.85,.4,1.275)
-    & svg
-      transition: fill .3s cubic-bezier(.2,.85,.4,1.275)
-    &:hover
-      cursor: pointer
-      background: rgba(#000000, 0.05)
-    &:active
-      cursor: pointer
-      background: rgba(#00ADB6, 0.05)
-      & svg
-        fill: $main-green
   &__padd
     padding: 8rem 0 0
     width: calc(100% + .5rem)

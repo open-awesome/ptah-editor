@@ -1,91 +1,194 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Slot
+      Block
     </h6>
 
-    <div class="direction">
-      <div class="b-panel__control">
-        <h6 class="">Section direction</h6>
+    <div class="b-panel__layout">
+      <div class="layout _top-2 _pr-05">
+        <base-scroll-container>
+          <div class="layout-padding _pr-6">
+            <div class="b-panel__control direction">
+              <div class="b-panel__control">
+                <base-caption>
+                  Block settings
+                </base-caption>
 
-        <ul>
-          <li :class="{ active: isRowDir }" @click="changeDirection('row')">
-            <icon-base name="groupRow"/>
-          </li>
-          <li :class="{ active: isColumnDir }" @click="changeDirection('column')">
-            <icon-base name="groupColumn"/>
-          </li>
-        </ul>
+                <div class="b-panel__control">
+                  <div class="b-panel__col">
+                    <div class="b-panel__row _v-center">
+                      <base-label>
+                        Direction
+                      </base-label>
+                      <div class="b-panel__col">
+                        <ul>
+                          <li
+                            :class="{ active: isRowDir }"
+                            @click="changeDirection('row')"
+                          >
+                            <icon-base name="groupRow"/>
+                          </li>
+                          <li
+                            :class="{ active: isColumnDir }"
+                            @click="changeDirection('column')"
+                          >
+                            <icon-base name="groupColumn"/>
+                          </li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="b-panel__col">
+                <div class="b-panel__control">
+                  <div class="b-panel__row _v-center" v-show="isRowDir">
+                    <base-label>
+                      Position
+                    </base-label>
+
+                    <div class="b-panel__col">
+                      <ul>
+                        <li
+                          :class="{ active: align === 'flex-start' }"
+                          @click="changeAlign('flex-start')"
+                        >
+                          <icon-base name="groupTop"/>
+                        </li>
+                        <li
+                          :class="{ active: align === 'center' }"
+                          @click="changeAlign('center')"
+                        >
+                          <icon-base name="groupCenterVertical"/>
+                        </li>
+                        <li
+                          :class="{ active: align === 'flex-end' }"
+                          @click="changeAlign('flex-end')"
+                        >
+                          <icon-base name="groupBottom"/>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="b-panel__control">
+                  <div class="b-panel__row _v-center" v-show="isRowDir">
+                    <base-label>
+                      Content
+                    </base-label>
+                    <div class="b-panel__col">
+                      <ul>
+                        <li
+                          :class="{ active: justify === 'flex-start' }"
+                          @click="changeJustify('flex-start')"
+                        >
+                          <icon-base name="groupLeft"/>
+                        </li>
+
+                        <li
+                          :class="{ active: justify === 'flex-end' }"
+                          @click="changeJustify('flex-end')"
+                        >
+                          <icon-base name="groupRight"/>
+                        </li>
+
+                        <li
+                          :class="{ active: justify === 'center' }"
+                          @click="changeJustify('center')"
+                        >
+                          <icon-base name="groupCenterHorizontal"/>
+                        </li>
+
+                        <li
+                          :class="{ active: justify === 'space-between' }"
+                          @click="changeJustify('space-between')"
+                        >
+                          <icon-base name="groupSpaceBetween"/>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="b-panel__control">
+                  <div class="b-panel__row _v-center" v-show="isColumnDir">
+                    <base-label>
+                      Position
+                    </base-label>
+                    <div class="b-panel__col">
+                      <ul>
+                        <li
+                          :class="{ active: align === 'flex-start' }"
+                          @click="changeAlign('flex-start')"
+                        >
+                          <icon-base name="groupLeft"/>
+                        </li>
+                        <li
+                          :class="{ active: align === 'center' }"
+                          @click="changeAlign('center')"
+                        >
+                          <icon-base name="groupCenterHorizontal"/>
+                        </li>
+                        <li
+                          :class="{ active: align === 'flex-end' }"
+                          @click="changeAlign('flex-end')"
+                        >
+                          <icon-base name="groupRight"/>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="b-panel__control">
+                  <div class="b-panel__row _v-center" v-show="isColumnDir">
+                    <base-label>
+                      Content
+                    </base-label>
+                    <div class="b-panel__col">
+                      <ul>
+                        <li
+                          :class="{ active: justify === 'flex-start' }"
+                          @click="changeJustify('flex-start')"
+                        >
+                          <icon-base name="groupTop"/>
+                        </li>
+                        <li
+                          :class="{ active: justify === 'center' }"
+                          @click="changeJustify('center')"
+                        >
+                          <icon-base name="groupCenterVertical"/>
+                        </li>
+                        <li
+                          :class="{ active: justify === 'flex-end' }"
+                          @click="changeJustify('flex-end')"
+                        >
+                          <icon-base name="groupBottom"/>
+                        </li>
+                        <li
+                          :class="{ active: justify === 'space-between' }"
+                          @click="changeJustify('space-between')"
+                        >
+                          <icon-base class="b-groupSpaceBetween" name="groupSpaceBetween"/>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+                <div class="b-panel__control" v-if="settingObjectOptions.width && !isMobile">
+                  <control-slot-width />
+                </div>
+              </div> <!-- /_b-panel__control-->
+            </div><!-- /_direction-->
+
+            <div class="b-panel__control">
+              <control-box />
+            </div>
+          </div>
+        </base-scroll-container>
       </div>
-
-      <div class="b-panel__control">
-        <h6 v-show="direction" class="">Content direction</h6>
-
-        <ul v-show="isRowDir">
-          <li :class="{ active: align === 'flex-start' }" tooltip="Vertical align Top" @click="changeAlign('flex-start')">
-            <icon-base name="groupTop"/>
-          </li>
-          <li :class="{ active: align === 'center' }" tooltip="Vertical align Center" @click="changeAlign('center')">
-            <icon-base name="groupCenterVertical"/>
-          </li>
-          <li :class="{ active: align === 'flex-end' }" tooltip="Vertical align Bottom" @click="changeAlign('flex-end')">
-            <icon-base name="groupBottom"/>
-          </li>
-        </ul>
-
-        <ul v-show="isRowDir">
-          <li :class="{ active: justify === 'flex-start' }" tooltip="Horizontal align Left" @click="changeJustify('flex-start')">
-            <icon-base name="groupLeft"/>
-          </li>
-
-          <li :class="{ active: justify === 'flex-end' }" tooltip="Horizontal align Right" @click="changeJustify('flex-end')">
-            <icon-base name="groupRight"/>
-          </li>
-
-          <li :class="{ active: justify === 'center' }" tooltip="Horizontal align Center" @click="changeJustify('center')">
-            <icon-base name="groupCenterHorizontal"/>
-          </li>
-
-          <li :class="{ active: justify === 'space-between' }" tooltip="Horizontal align Space between" @click="changeJustify('space-between')">
-            <icon-base name="groupSpaceBetween"/>
-          </li>
-        </ul>
-
-        <ul v-show="isColumnDir">
-          <li :class="{ active: align === 'flex-start' }" tooltip="Horizontal align Left" @click="changeAlign('flex-start')">
-            <icon-base name="groupLeft"/>
-          </li>
-          <li :class="{ active: align === 'center' }" tooltip="Horizontal align Center" @click="changeAlign('center')">
-            <icon-base name="groupCenterHorizontal"/>
-          </li>
-          <li :class="{ active: align === 'flex-end' }" tooltip="Horizontal align Right" @click="changeAlign('flex-end')">
-            <icon-base name="groupRight"/>
-          </li>
-        </ul>
-
-        <ul v-show="isColumnDir">
-          <li :class="{ active: justify === 'flex-start' }" tooltip="Vertical align Top" @click="changeJustify('flex-start')">
-            <icon-base name="groupTop"/>
-          </li>
-          <li :class="{ active: justify === 'center' }" tooltip="Vertical align Center" @click="changeJustify('center')">
-            <icon-base name="groupCenterVertical"/>
-          </li>
-          <li :class="{ active: justify === 'flex-end' }" tooltip="Vertical align Bottom" @click="changeJustify('flex-end')">
-            <icon-base name="groupBottom"/>
-          </li>
-          <li :class="{ active: justify === 'space-between' }" tooltip="Horizontal align Space between" @click="changeJustify('space-between')">
-            <icon-base class="b-groupSpaceBetween" name="groupSpaceBetween"/>
-          </li>
-        </ul>
-      </div> <!-- /_b-panel__control-->
-    </div><!-- /_direction-->
-
-    <div class="b-panel__control" v-if="settingObjectOptions.width && !isMobile">
-      <control-slot-width></control-slot-width>
-    </div>
-
-    <div class="b-panel__control">
-      <control-box></control-box>
     </div>
   </div>
 </template>
@@ -271,42 +374,42 @@ export default {
     overflow: hidden
     margin-bottom: .8rem
 
-    h6
-      font-size: 1.4rem
-      font-weight: normal
-      line-height: 1.8rem
-      color: $grey-middle
-      letter-spacing: -0.01em
-
-      padding: 0 0 0.5rem 0
-      margin: 0
-      display: inline-block
-
     ul
       width: 100%
       display: flex
       align-items: center
       list-style-type: none
-      margin: 0 0 1.5rem
+      margin: 0
       padding: 0
       &:last-child
         border-bottom: none
       li
-        padding: .8rem
-        cursor: pointer
-        color: $blue
-        border-radius: 3px
-        margin-right: 6px
+        width: 3.4rem
+        height: 3.4rem
 
-        transition: all .3s cubic-bezier(.2,.85,.4,1.275)
+        display: flex
+        justify-content: center
+        align-items: center
+
+        cursor: pointer
+        color: #A2A5A5
+        border-radius: 3px
+        margin-left: .6rem
+        background: #F3F6F6
+
+        transition: background .3s linear
         &:hover,
         &.active
           background: $main-green
         &:hover
-          color: #ffffff
+          color: #575A5F
         &.active
-          color: #ffffff
+          color: #575A5F
           cursor: default
+
+    /deep/
+      .range-slider
+        width: 10.5rem
 
 .b-groupSpaceBetween
   transform: rotate(90deg)

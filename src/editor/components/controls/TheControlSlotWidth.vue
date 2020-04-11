@@ -1,14 +1,25 @@
 <template>
-  <div class="control-width">
-    <div class="b-control">
-      <base-range-slider
-        v-model="width"
-        label="Slot width (columns)"
-        step="1"
-        :min="minWidth"
-        :max="maxWidth">
-        {{ width }}
-      </base-range-slider>
+  <div class="b-panel__control">
+    <div class="b-panel__row _v-center">
+      <base-label>
+        Width
+      </base-label>
+      <div class="b-panel__col">
+        <base-range-slider
+          v-model="width"
+          label=""
+          step="1"
+          :min="minWidth"
+          :max="maxWidth"
+          @change="setWidth"
+        >
+          <base-number-input
+            :value="widthValue"
+            :maximum="maxWidth"
+            @input="setWidthValue"
+          />
+        </base-range-slider>
+      </div>
     </div>
   </div>
 </template>
@@ -19,6 +30,12 @@ import { find } from 'lodash-es'
 
 export default {
   name: 'TheControlSlotWidth',
+
+  data () {
+    return {
+      widthValue: 0
+    }
+  },
 
   computed: {
     ...mapState('Sidebar', [
@@ -83,14 +100,19 @@ export default {
       return this.slot.grow.map(path => this.settingObjectSection.get(path)).map(slot => {
         return { width: slot.width, name: slot.selfName || slot.name }
       })
+    },
+
+    setWidth (value) {
+      this.widthValue = value
+    },
+
+    setWidthValue (value) {
+      this.width = value
     }
+  },
+
+  mounted () {
+    this.widthValue = this.width
   }
 }
 </script>
-
-<style lang="sass" scoped>
-.b-control
-  border-bottom: 0.2rem dotted rgba(0, 0, 0, 0.15)
-  padding-bottom: 2.5rem
-  margin-bottom: 2.5rem
-</style>

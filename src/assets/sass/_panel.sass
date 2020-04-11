@@ -44,6 +44,8 @@
   &__row
     display: flex
     justify-content: space-between
+    &._v-center
+      align-items: center
   &__col
     margin: 0 0 0 1.6rem
     &._m-0
@@ -62,6 +64,31 @@
     text-align: center
     & svg
       width: 25px
+  &__close
+    position: absolute
+    top: 1.9rem
+    right: 1.7rem
+    cursor: pointer
+
+    width: 3.6rem
+    height: 3.6rem
+
+    display: flex
+    justify-content: center
+    align-items: center
+
+    border-radius: 100%
+    transition: background .3s cubic-bezier(.2,.85,.4,1.275)
+    & svg
+      transition: fill .3s cubic-bezier(.2,.85,.4,1.275)
+    &:hover
+      cursor: pointer
+      background: rgba(#000000, 0.05)
+    &:active
+      cursor: pointer
+      background: rgba(#00ADB6, 0.05)
+      & svg
+        fill: $main-green
 
 .b-tabs
   margin-bottom: $size-step
@@ -77,11 +104,17 @@
   padding: 0 3.7rem 2rem 2rem
   &._top-2
     top: 2rem
+  &._pr-05
+    padding: 0 .5rem 2rem 2rem
   &__bg
     padding-right: 0
   &-padding
     width: 100%
     padding: 0 5rem 0 0
+    &._pr-2
+      padding-right: 2rem
+    &._pr-6
+      padding-right: 6rem
     &._pr-1
-      padding-right: 3rem
+      padding-right: 0
 

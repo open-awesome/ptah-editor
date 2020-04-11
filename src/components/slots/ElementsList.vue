@@ -1,14 +1,13 @@
 <template>
   <div class="b-elements is-editable">
     <aside class="b-elements__list ptah-control">
-      <div class="b-elements__header">
-        {{ $t('c.elementsLibrary') }}
-        <div class="b-elements__close" @click="hideList">
-          <icon-base name="close" width="14" height="14"/>
-        </div>
-      </div>
       <ul>
-        <li v-for="(el, name) in elSrc" :key="name" @click.prevent="addEl(name)" class="b-elements__button">
+        <li
+          v-for="(el, name) in elSrc"
+          :key="name"
+          @click.prevent="addEl(name)"
+          class="b-elements__button"
+        >
           <div class="b-elements__icon">
             <icon-base :name="el.ico" :width="el.width" />
           </div>
@@ -199,49 +198,11 @@ export default {
 
 <style lang="sass">
 .b-elements
-  &__show-list
-    border: none
-    background: #D8D8D8
-    width: 3.5rem
-    height: 3.5rem
-    display: flex
-    justify-content: center
-    align-items: center
-    padding: 0.5rem
-    margin-top: .1rem
-    cursor: pointer
-    color: #474747
-
-    &:hover, &.active
-      background: #fff
-      color: #355CCC
-
-    img
-      width: 2rem
-      height: 2rem
   &__list
-    position: absolute
-    top: 0
-    right: 0
-    left: 0
-    bottom: 0
-    background: $white
-    overflow: auto
-    overflow-x: hidden
-    z-index: 20
     ul
       margin: 0
       padding: 0
       list-style: none
-  &__header
-    padding: 1.7rem 3.1rem
-    color: $black
-    font-weight: normal
-    font-size: 2rem
-    line-height: 2.4rem
-    letter-spacing: -0.02em
-    text-align: left
-    position: relative
 
   &__button
     display: flex
@@ -256,20 +217,21 @@ export default {
       fill: $grey-middle
 
     &:hover
-      background-color: rgba(116, 169, 230, 0.25)
+      background-color: rgba($main-green, 0.25)
       svg
         fill: $dark-grey
   &__title
     &--name
-      font-size: 1.6rem
+      font-size: 1.4rem
       line-height: 1.9rem
       letter-spacing: -0.02em
       color: #4F4F4F
       padding-bottom: .6rem
+      font-weight: 600
 
     &--description
-      font-size: 1.4rem
-      line-height: 1.7rem
+      font-size: 1.2rem
+      line-height: 1.4rem
       color: $grey-middle
 
   &__icon
