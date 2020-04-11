@@ -2,8 +2,13 @@
   <div class="b-logo is-editable"
     @dragover.prevent
     @drop="onDrop"
+    @mouseleave="mouseleave"
+    @mouseover.stop="mouseover"
     :data-href="link.href"
-    :class="{'js-element-link' : isSetUrlImage }"
+    :class="[
+      {'js-element-link' : isSetUrlImage },
+      { '_hover' : hoverBy === 'element' }
+    ]"
     :path="path"
     :style="[objVarsMedia, objVarsResize]"
     >
@@ -42,13 +47,15 @@
 import Uploader from '@editor/plugins/Uploader.vue'
 import elementMedia from '../mixins/elementMedia'
 import elementResize from '../mixins/elementResize'
+import elementHover from '../mixins/elementHover'
 
 export default {
   name: 'Logo',
 
   mixins: [
     elementMedia,
-    elementResize
+    elementResize,
+    elementHover
   ],
 
   components: {

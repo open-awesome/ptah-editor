@@ -3,8 +3,12 @@
      @click.stop.prevent
      :path="path"
      :style="[objVarsMedia, objVarsResize, objVarsTypo]"
-    >
-
+     @mouseleave="mouseleave"
+     @mouseover.stop="mouseover"
+     :class="[
+      { '_hover' : hoverBy === 'element' }
+    ]"
+  >
     <slot v-if="!isActive"></slot>
 
     <editor-menu-bar :editor="editor" v-if="isActive && !hideMenubar">
@@ -147,6 +151,7 @@ import { EditorContent, EditorMenuBar } from 'tiptap'
 import textElement from '../mixins/textElement'
 import elementMedia from '../mixins/elementMedia'
 import elementResize from '../mixins/elementResize'
+import elementHover from '../mixins/elementHover'
 
 export default {
   name: 'Button',
@@ -154,7 +159,8 @@ export default {
   mixins: [
     textElement,
     elementMedia,
-    elementResize
+    elementResize,
+    elementHover
   ],
 
   components: {

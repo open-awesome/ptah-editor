@@ -1,5 +1,9 @@
 <template>
-  <div class="b-slot" :style="{
+  <div class="b-slot"
+    @mouseleave.self="mouseleave"
+    @mouseover="mouseover"
+    :class="[{ '_hover' : hoverBy === 'block' }]"
+    :style="{
       '--mobile-slot-flex-direction': mediaStyles['is-mobile']['flex-direction'],
       '--mobile-slot-align-items': mediaStyles['is-mobile']['align-items'],
       '--mobile-slot-justify-content': mediaStyles['is-mobile']['justify-content'],
@@ -17,31 +21,27 @@
       '--mobile-slot-padding-right': mediaStyles['is-mobile']['padding-right'],
       '--mobile-slot-padding-bottom': mediaStyles['is-mobile']['padding-bottom'],
       '--mobile-slot-padding-left': mediaStyles['is-mobile']['padding-left']
-    }">
-    <div class="b-slot__settings" :style="[
-        isMobile ? { 'margin-top': mediaStyles['is-mobile']['margin-top'] } : { 'margin-top': styles['margin-top'] },
-        isMobile ? { 'margin-left': mediaStyles['is-mobile']['margin-left'] } : { 'margin-left': styles['margin-left'] },
-      ]">
+    }
+  ">
+    <div
+      @mouseover.self="mouseover"
+      @mouseleave.self="mouseleave"
+      class="b-slot__settings"
+    >
       <span
         @click.stop="showSandboxSidebar($event, 'SlotSettings')"
-        tooltip="Slot settings"
-        tooltip-position="right"
         class="b-slot__settings-item b-slot__settings-item-settings"
         >
           <icon-base name="cog" fill="white" />
       </span>
       <span
         @click.stop="showSandboxSidebar($event, 'SlotBackground')"
-        tooltip="Slot background"
-        tooltip-position="right"
         class="b-slot__settings-item b-slot__settings-item-slot-bg"
         >
           <icon-base name="background" fill="white" />
       </span>
       <span
         @click.stop="showSandboxSidebar($event, 'Slot')"
-        tooltip="Add element"
-        tooltip-position="right"
         class="b-slot__settings-item b-slot__settings-item-add-el"
         >
           <icon-base name="plus" fill="white" />
@@ -70,7 +70,8 @@ export default {
       'sandbox',
       'settingObjectOptions',
       'settingObjectSection',
-      'device'
+      'device',
+      'hoverBy'
     ]),
 
     slot () {
@@ -137,7 +138,8 @@ export default {
       'toggleSidebar',
       'setControlPanel',
       'setElement',
-      'setSettingObject'
+      'setSettingObject',
+      'setHoverBy'
     ]),
 
     showSandboxSidebar (e, openElBar) {
@@ -186,6 +188,14 @@ export default {
       }
 
       return s
+    },
+
+    mouseover () {
+      this.setHoverBy('block')
+    },
+
+    mouseleave () {
+      this.setHoverBy(null)
     }
   }
 }

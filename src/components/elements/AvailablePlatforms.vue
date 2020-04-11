@@ -2,7 +2,12 @@
   <div class="b-available-platforms b-border"
     :path="path"
     :style="objVarsMedia"
-    >
+    @mouseleave="mouseleave"
+    @mouseover.stop="mouseover"
+    :class="[
+      { '_hover' : hoverBy === 'element' }
+    ]"
+  >
     <div class="b-available-platforms__item"
       v-for="(value, key) in platforms" :key="key"
       v-if="platforms[key].visible"
@@ -26,12 +31,14 @@
 <script>
 import VuseIcon from '@editor/components/VuseIcon'
 import elementMedia from '../mixins/elementMedia'
+import elementHover from '../mixins/elementHover'
 
 export default {
   name: 'AvailablePlatforms',
 
   mixins: [
-    elementMedia
+    elementMedia,
+    elementHover
   ],
 
   components: {

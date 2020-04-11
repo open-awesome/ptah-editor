@@ -34,7 +34,8 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
       &__col#{$modifier}-#{$i}
         max-width: (100 / ($grid-cols / $i) ) * 1%
         flex: 1 1 (100 / ($grid-cols / $i) ) * 1%
-        padding: $basis / 2 * 1px
+        // padding: $basis / 2 * 1px // TODO:
+        padding: 0
         box-sizing: border-box
         @if($breakpoint == $grid__bp-m)
           padding: $basis / 2 * 1px 0
@@ -48,10 +49,12 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
       &__col#{$modifier}-#{$i}
         max-width: 100% !important
         flex-basis: (100 / ($grid-cols / $i) ) * 1%
-        padding: $basis / 2 * 1px
+        // padding: $basis / 2 * 1px // TODO:
+        padding: 0
         box-sizing: border-box
         @if($breakpoint == $grid__bp-m)
-          padding: $basis / 2 * 1px 0
+          // padding: $basis / 2 * 1px 0 // TODO:
+          padding: 0
       &__col#{$modifier}-offset-#{$i}
         margin-left: (100 / ($grid-cols / $i) ) * 1%
 
@@ -77,9 +80,9 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
   margin: 0 auto
 
   height: 100% // TODO:
-  &_fluid
-    margin: 0
-    max-width: 100%
+
+  display: flex
+  flex-direction: column
   &__row
     display: flex
     flex-wrap: nowrap
@@ -90,7 +93,8 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
     max-width: 100%
 
     box-sizing: border-box
-    padding: 0 $basis / 2 * 1px
+    // padding: 0 $basis / 2 * 1px // TODO:
+    padding: 0
 
     height: 100% // TODO:
     .is-editable &
@@ -98,10 +102,12 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
     .is-tablet &,
     .is-mobile &
       flex-wrap: wrap
-      padding: 0 $basis / 4 * 1px
+      // padding: 0 $basis / 4 * 1px // TODO:
+      padding: 0
     @media only screen and (max-width: 768px)
       &
         flex-wrap: wrap
-        padding: 0 $basis / 4 * 1px
+        // padding: 0 $basis / 4 * 1px // TODO:
+        padding: 0
   @each $modifier , $breakpoint in $map-grid-props
     @include create-col-classes($modifier, $grid__cols, $breakpoint)

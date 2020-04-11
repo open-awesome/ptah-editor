@@ -80,6 +80,7 @@ export default {
       styles: {} // sandbox current section's styles
     },
     device: 'is-desktop', // selected platform in platforms menu
+    hoverBy: '', // hovering by element in editor
     isMobile: false, // detect mobile mode
     mainGreenColor: '#00ADB6'
   },
@@ -142,6 +143,9 @@ export default {
     },
     device (state, value) {
       state.device = value
+    },
+    hoverBy (state, value) {
+      state.hoverBy = value
     },
     isMobile (state, value) {
       state.isMobile = value
@@ -337,6 +341,10 @@ export default {
       } else {
         commit('isMobile', false)
       }
+    },
+
+    setHoverBy ({ state, commit }, value) {
+      commit('hoverBy', (typeof value !== 'undefined') ? value : '')
     },
 
     toggleModal ({ state, commit }, value) {

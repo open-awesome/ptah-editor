@@ -28,6 +28,11 @@
     :data-utc-offset="timer.UTC"
     :path="path"
     :style="[objVarsMedia, objVarsTypo]"
+    @mouseleave="mouseleave"
+    @mouseover.stop="mouseover"
+    :class="[
+      { '_hover' : hoverBy === 'element' }
+    ]"
   >
 
   <thead v-show="labels.show && labels.position === 'top'" class="b-timer__labels">
@@ -71,12 +76,14 @@
 
 <script>
 import elementMedia from '../mixins/elementMedia'
+import elementHover from '../mixins/elementHover'
 
 export default {
   name: 'Timer',
 
   mixins: [
-    elementMedia
+    elementMedia,
+    elementHover
   ],
 
   filters: {

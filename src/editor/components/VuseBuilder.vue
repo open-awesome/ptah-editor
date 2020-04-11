@@ -27,7 +27,10 @@
         :class="[ $builder.isEditing ? device: '' ]"
         @click.native="selectSidebarSection(headerSection)">
 
+        <!-- TODO: -->
+        <!-- hide section's menu in all sections
         <menu-settings slot="menu" :section="headerSection"/>
+        -->
 
         <div
           class="b-overlay"
@@ -59,7 +62,10 @@
         :data-image-src="getImageFromBgStyles(section.data.mainStyle.styles['background-image'])"
         @click.native="selectSidebarSection(section)">
 
+        <!-- TODO: -->
+        <!-- hide section's menu in all sections
         <menu-settings slot="menu" :section="section"/>
+        -->
 
         <video
           v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
@@ -113,7 +119,7 @@ import VuseIcon from './VuseIcon'
 import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 import * as _ from 'lodash-es'
-import MenuSettings from '@components/slots/MenuSettings'
+// import MenuSettings from '@components/slots/MenuSettings'
 import { getFontsSetup } from '../util'
 
 import { sectionsGroups } from '@cscripts/sectionsGroups'
@@ -125,8 +131,8 @@ export default {
   components: {
     BaseLoading,
     VuseIcon,
-    BuilderLayout,
-    MenuSettings
+    BuilderLayout
+    // MenuSettings
   },
 
   props: {

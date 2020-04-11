@@ -1,11 +1,16 @@
 <template>
   <div class="b-text-icon is-editable b-border"
-    :class="{ 'b-text-icon_hide': !icon.visible }"
     ref="icon"
     @click.stop.stop=""
     :path="path"
     :style="[objVarsMedia, objVarsTypo]"
-    >
+    @mouseleave="mouseleave"
+    @mouseover.stop="mouseover"
+    :class="[
+      { 'b-text-icon_hide': !icon.visible },
+      { '_hover' : hoverBy === 'element' }
+    ]"
+  >
 
     <slot v-if="!isActive"></slot>
 
@@ -151,13 +156,15 @@
 import { EditorContent, EditorMenuBar } from 'tiptap'
 import elementMedia from '../mixins/elementMedia'
 import textElement from '../mixins/textElement'
+import elementHover from '../mixins/elementHover'
 
 export default {
   name: 'IconWithText',
 
   mixins: [
     elementMedia,
-    textElement
+    textElement,
+    elementHover
   ],
 
   components: {

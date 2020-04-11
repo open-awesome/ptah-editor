@@ -6,6 +6,11 @@
     @click.stop.stop=""
     :path="path"
     :style="[objVarsMedia, objVarsTypo]"
+    @mouseleave="mouseleave"
+    @mouseover.stop="mouseover"
+    :class="[
+      { '_hover' : hoverBy === 'element' }
+    ]"
     >
 
     <div class="b-toggle-element__item"
@@ -160,13 +165,15 @@ import { merge } from 'lodash-es'
 import { EditorContent, EditorMenuBar } from 'tiptap'
 import elementMedia from '../mixins/elementMedia'
 import textElement from '../mixins/textElement'
+import elementHover from '../mixins/elementHover'
 
 export default {
   name: 'ToggleElement',
 
   mixins: [
     elementMedia,
-    textElement
+    textElement,
+    elementHover
   ],
 
   components: {

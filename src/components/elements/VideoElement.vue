@@ -2,7 +2,12 @@
 <div class="b-video"
   :path="path"
   :style="[objVarsMedia, objVarsResize]"
-  >
+  @mouseleave="mouseleave"
+  @mouseover.stop="mouseover"
+  :class="[
+    { '_hover' : hoverBy === 'element' }
+  ]"
+>
   <div class="b-video__padd">
     <iframe
       v-if="videoType === 'youtube'"
@@ -59,6 +64,7 @@
 import { getYoutubeVideoIdFromUrl } from '@editor/util'
 import elementMedia from '../mixins/elementMedia'
 import elementResize from '../mixins/elementResize'
+import elementHover from '../mixins/elementHover'
 
 const ALLOW_IFRAME = 'accelerometer; encrypted-media; gyroscope; picture-in-picture;'
 
@@ -67,7 +73,8 @@ export default {
 
   mixins: [
     elementMedia,
-    elementResize
+    elementResize,
+    elementHover
   ],
 
   props: {

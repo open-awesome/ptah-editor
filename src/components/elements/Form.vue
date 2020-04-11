@@ -2,7 +2,12 @@
   <div class="b-form b-border" @click.stop.stop="" ref="form"
     :path="path"
     :style="[objVarsMedia, objVarsTypo]"
-    >
+    @mouseleave="mouseleave"
+    @mouseover.stop="mouseover"
+    :class="[
+      { '_hover' : hoverBy === 'element' }
+    ]"
+  >
 
     <slot v-if="!isActive"></slot>
 
@@ -175,13 +180,15 @@ import { mapState } from 'vuex'
 import { EditorContent, EditorMenuBar } from 'tiptap'
 import elementMedia from '../mixins/elementMedia'
 import textElement from '../mixins/textElement'
+import elementHover from '../mixins/elementHover'
 
 export default {
   name: 'Form',
 
   mixins: [
     elementMedia,
-    textElement
+    textElement,
+    elementHover
   ],
 
   inject: ['$builder'],
