@@ -9,7 +9,7 @@
           class="b-elements__button"
         >
           <div class="b-elements__icon">
-            <icon-base :name="el.ico" :width="el.width" />
+            <icon-base :name="el.ico" width="24px" />
           </div>
           <div class="b-elements__title">
             <div class="b-elements__title--name">
@@ -64,13 +64,13 @@ export default {
           width: 20
         },
         platforms: {
-          name: 'Available platforms',
+          name: 'Platforms',
           descr: this.$t('el.platformsDescr'),
           ico: 'elPlatforms',
           width: 22
         },
         restrictions: {
-          name: 'Age restrictions',
+          name: 'Age restriction',
           descr: this.$t('el.ageDescr'),
           ico: 'elAge',
           width: 20
@@ -82,7 +82,7 @@ export default {
           width: 17
         },
         icontext: {
-          name: 'Icon with text',
+          name: 'Icon & text',
           descr: this.$t('el.icontextDescr'),
           ico: 'elIconText',
           width: 19
@@ -206,10 +206,17 @@ export default {
 
   &__button
     display: flex
+    align-items: center
+    justify-content: flex-start
+
     background: transparent
-    padding: .3rem 3rem 0 2rem
+
+    padding: .6rem 2.5rem .6rem 2rem
+    margin: .5rem 0
     width: 100%
-    height: 6.6rem
+    max-width: 27rem
+    min-height: 5.5rem
+
     text-align: left
     box-sizing: border-box
     cursor: pointer
@@ -220,27 +227,32 @@ export default {
       background-color: rgba($main-green, 0.25)
       svg
         fill: $dark-grey
+      .b-elements__title--name,
+      .b-elements__title--description
+        color: #575A5F
   &__title
+    padding-left: 2.4rem
     &--name
       font-size: 1.4rem
       line-height: 1.9rem
-      letter-spacing: -0.02em
-      color: #4F4F4F
+      letter-spacing: 0.065em
+      color: #A2A5A5
       padding-bottom: .6rem
+      text-transform: uppercase
       font-weight: 600
 
     &--description
-      font-size: 1.2rem
+      font-size: 1.1rem
       line-height: 1.4rem
-      color: $grey-middle
+      color: #A2A5A5
 
   &__icon
-    width: 4.6rem
+    width: 3.2rem
+    height: 3.2rem
+
     display: flex
     justify-content: center
-    flex-shrink: 0
-    padding-top: .5rem
-
+    align-items: center
   &__close
     color: $grey-middle
     position: absolute

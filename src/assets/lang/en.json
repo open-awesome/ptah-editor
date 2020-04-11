@@ -64,7 +64,7 @@
         "setupFonts":                   "Setup fonts"
     },
     "c": {
-        "elementsLibrary":              "Elements library",
+        "elementsLibrary":              "Elements",
         "margin":                       "Margin",
         "padding":                      "Padding",
         "editIndents":                  "Indents setting",

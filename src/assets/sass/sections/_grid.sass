@@ -38,7 +38,8 @@ $map-grid-props: ( '': 0, '-m': $grid__bp-m, '-l': $grid__bp-l, '-d': $grid__bp-
         padding: 0
         box-sizing: border-box
         @if($breakpoint == $grid__bp-m)
-          padding: $basis / 2 * 1px 0
+          // padding: $basis / 2 * 1px 0 // TODO:
+          padding: 0
       &__col#{$modifier}-offset-#{$i}
         margin-left: (100 / ($grid-cols / $i) ) * 1%
 
