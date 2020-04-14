@@ -693,7 +693,7 @@ export default {
       }
 
       if (settings.styles.backgroundImage !== '' || settings.styles.backgroundColor !== '') {
-        list.push('background')
+        list.push('bg')
       }
 
       if (settings.css !== '' || settings.script !== '') {
@@ -715,6 +715,7 @@ export default {
   margin: 0 auto
   transition: 0.2s
   position: relative
+  min-height: calc(100vh - 6rem)
 
   display: flex
   flex-direction: column

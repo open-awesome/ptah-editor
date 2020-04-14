@@ -9,6 +9,20 @@
       <div class="layout layout__bg" v-if="activeTab === 'bg'">
         <base-scroll-container>
           <div class="layout-padding">
+
+            <div class="b-page-style__row">
+              <BaseCaption>
+                {{ $t('s.backgroundColor') }}
+              </BaseCaption>
+
+              <div class="b-page-style__col">
+                <BaseColorPicker
+                  :label="$t('s.chooseColor')"
+                  v-model="pageBackgroundColor"
+                />
+              </div>
+            </div>
+
             <div class="b-page-style__row">
               <BaseCaption help="Image for page background">
                 {{ $t('s.backgroundImage') }}
@@ -20,7 +34,8 @@
                   label="Image"
                 />
               </div>
-              <template v-if="pageBackgroundUrl !== ''">
+
+              <div class="b-page-style__add" :class="{ 'show': pageBackgroundUrl }">
                 <div class="b-page-style__col">
                   <BaseRangeSlider
                     :label="$t('s.posX')"
@@ -55,26 +70,22 @@
                     />
                   </BaseRangeSlider>
                 </div>
-              </template>
-              <div class="b-page-style__col">
-                <BaseColorPicker
-                  :label="$t('s.backgroundColor')"
-                  v-model="pageBackgroundColor"
-                />
-              </div>
-              <div class="b-page-style__col">
-                <BaseSwitcher
-                  v-model="backgroundFillValue"
-                  label="Background fill"
-                />
-              </div>
-              <div class="b-page-style__col">
-                <BaseSwitcher
-                  v-model="bgAttachmentCheckbox"
-                  :label="$t('s.fixedScrolling')"
-                />
-              </div>
-            </div>
+
+                <div class="b-page-style__col">
+                  <BaseSwitcher
+                    v-model="backgroundFillValue"
+                    label="Background fill"
+                  />
+                </div>
+                <div class="b-page-style__col">
+                  <BaseSwitcher
+                    v-model="bgAttachmentCheckbox"
+                    :label="$t('s.fixedScrolling')"
+                  />
+                </div>
+              </div><!-- /__b-page-style__add -->
+            </div><!-- /__b-page-style__row -->
+
             <div class="b-page-style__row">
               <BaseCaption help="Video for page background">
                 {{ $t('s.backgroundVideo') }}
@@ -456,10 +467,22 @@ export default {
 
     margin: 0 0 3rem
     padding: 0
+
+  &__add
+    transition: all .2s ease-out
+    opacity: 0
+    height: 0
+
+    &.show
+      height: auto
+      opacity: 1
   &__col
     width: 100%
     max-width: 24rem
-    margin: 1rem 0 1rem 1.8rem
+    padding: 1rem 0 1rem 1.8rem
+    /deep/
+      .b-uploader-item
+        margin: 0
   &__number-input
     margin-left: 0.8rem
   /deep/

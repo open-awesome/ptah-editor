@@ -17,7 +17,6 @@
         </div>
         <base-scroll-container
           class="b-scrolled-content"
-          backgroundBar="#999"
           v-if="isLoaded"
         >
         <div class="b-setup-fonts-list">
@@ -80,7 +79,6 @@
           >
             <base-scroll-container
               class="b-scrolled-content"
-              backgroundBar="#999"
               v-if="isLoaded"
             >
                 <ul class="b-fonts-list">
@@ -296,8 +294,6 @@ export default {
     },
 
     saveFonts () {
-      this.activateCheckListItem('fonts')
-
       this.storeSettings({
         fonts: this.selectFonts
       })
@@ -324,6 +320,7 @@ export default {
     },
 
     applyFont (font) {
+      this.activateCheckListItem('fonts')
       const name = this.checkSpace(font.family)
       const variant = font.variant
 
