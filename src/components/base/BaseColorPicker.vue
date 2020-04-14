@@ -108,9 +108,10 @@ export default {
 .b-picker
   position: relative
   width: 100%
-  max-width: 24rem
+  // max-width: 24rem
   &__row
     display: flex
+    justify-content: space-between
     align-items: center
 
     width: 100%
@@ -132,7 +133,7 @@ export default {
       border-color: $main-green
   &__label
     width: 100%
-    max-width: 18rem
+    max-width: 16rem
     margin-right: $size-step/2
     overflow: hidden
     text-overflow: ellipsis

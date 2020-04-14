@@ -458,7 +458,7 @@ export default {
     padding: 0
   &__col
     width: 100%
-    max-width: 24rem
+    max-width: 30rem
     margin: 1rem 0 1rem 1.8rem
   &__number-input
     margin-left: 0.8rem

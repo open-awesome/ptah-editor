@@ -92,7 +92,7 @@ $knob-size: 1.2rem
 $knob-shadow: 0px 2px 8px rgba($main-green, 0.2)
 
 .b-range-slider
-  max-width: 24rem
+  // max-width: 24rem
   &__row
     display: flex
     justify-content: space-between
