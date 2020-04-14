@@ -23,7 +23,10 @@
       <aside
         id="sidebar"
         class="b-builder-layout-content__sidebar"
-        :class="{'b-builder-layout-content__sidebar_expanded': isExpanded}"
+        :class="{
+          'b-builder-layout-content__sidebar_expanded': isExpanded,
+          'b-builder-layout-content__sidebar_expanded-content': isContentVisible
+        }"
       >
         <BuilderSidebar
           :builder="builder"
@@ -150,6 +153,9 @@ $topBarHeight: 6rem
     order: 1
     width: 5rem
     transition: width 0.3s ease-in-out
+
+    position: relative
+    z-index: 11
     &:hover,
     &._expanded
       width: 9rem
@@ -157,6 +163,7 @@ $topBarHeight: 6rem
   &__sidebar
     width: 0
     position: relative
+    z-index: 10
     padding: 6rem 0 0
     opacity: 0
 
@@ -167,6 +174,9 @@ $topBarHeight: 6rem
       opacity: 1
       width: 30.5rem
       display: flex
+      z-index: 11
+      &-content
+        z-index: 10
   &__main
     position: absolute
     top: $topBarHeight
