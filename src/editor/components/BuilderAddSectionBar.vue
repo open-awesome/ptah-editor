@@ -370,7 +370,7 @@ export default {
         font-size: 1.6rem
         font-weight: 600
         color: #333333
-        margin-bottom: .6rem
+        margin: .6rem 0
       &-descr
         font-size: 1.2rem
         line-height: 1.4rem
