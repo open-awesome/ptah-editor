@@ -87,6 +87,12 @@ export default {
 
   methods: {
     ...mapActions('User', ['refreshToken'])
+  },
+
+  mounted () {
+    const body = document.querySelector('body')
+
+    body.classList.add('b-body_app')
   }
 }
 </script>

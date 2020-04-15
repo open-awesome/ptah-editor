@@ -33,7 +33,7 @@
           {{ item.name }}
         </span>
       </div>
-      <div class="b-main-left-menu-list__item" />
+      <div class="b-main-left-menu-list__item _last" />
     </div>
     <div class="b-main-left-menu-list__progress"
      @click="openPanels('progress')"
@@ -175,7 +175,6 @@ export default {
   &._selected-item
     box-shadow: inset 0px 2px 2px rgba(0, 0, 0, 0.15)
   &-list
-    height: 100%
     &__progress
       /deep/
         svg
@@ -253,6 +252,10 @@ export default {
         & .b-main-left-menu-list__item-text,
         & .b-main-left-menu-list__progress-text
           opacity: 0
+
+      &._last
+        @media only screen and (max-height: 600px)
+          height: 0
 
 .b-main-left-menu-list__progress
   padding-bottom: 2.2rem

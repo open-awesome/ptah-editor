@@ -47,17 +47,17 @@ export default {
 </script>
 
 <template>
-  <div class="b-control-sticky">
+  <div class="b-panel__control">
     <BaseCaption>
       Header position
     </BaseCaption>
-    <div class="b-control-sticky__control" v-if="!isMobile">
+    <div class="b-panel__col" v-if="!isMobile">
       <base-switcher
         :value="sticky"
         label="Sticky position"
         @change="toggleSticky"/>
     </div>
-    <div class="b-control-sticky__control" v-if="isMobile">
+    <div class="b-panel__control" v-if="isMobile">
       <base-range-slider v-model="hamPosition" :label="`Menu icon position`" step="1" min="0" max="64">
         {{ hamPosition }} <span class="b-border-radius-control__px">px</span>
       </base-range-slider>

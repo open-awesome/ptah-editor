@@ -253,7 +253,7 @@ $top-panel-height: 7.2rem
   &-add-section
     width: 100%
     position: absolute
-    left: 305px
+    left: 30.5rem
     top: 0
     bottom: 0
     z-index: 20

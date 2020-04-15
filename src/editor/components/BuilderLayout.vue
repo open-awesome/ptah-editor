@@ -32,16 +32,21 @@
       </aside>
 
       <main class="b-builder-layout-content__main"
-        :class="{'b-builder-layout-content__main_expanded': isExpanded}"
+        :class="[
+          {'b-builder-layout-content__main_expanded': isExpanded && !isContentVisible},
+          {'b-builder-layout-content__main_expanded-setting': isExpanded && isContentVisible}
+        ]"
       >
+        <router-view
+          :builder="builder"
+        />
+
         <base-scroll-container
           backgroundBar="#fff">
           <div class="b-builder-layout-content__main-layout" :class="device">
             <slot></slot>
           </div>
         </base-scroll-container>
-
-        <router-view :builder="builder"/>
       </main>
     </div>
   </div>
@@ -141,11 +146,12 @@ $topBarHeight: 6rem
 
   display: flex
   align-items: stretch
-  justify-content: stretch
+  justify-content: flex-start
 
   width: 100%
   z-index: 0
 
+  transition: all .2s ease-out
   &__main-left-menu
     order: 1
     width: 5rem
@@ -175,8 +181,11 @@ $topBarHeight: 6rem
     left: 5rem
     z-index: 10
 
+    display: flex
+    justify-content: stretch
+
     min-height: 5rem
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out
+    transition: all .2s ease-out
     background-color: $ligth-grey
     &:after
       content: ""
@@ -189,6 +198,10 @@ $topBarHeight: 6rem
       z-index: 20
     &_expanded
       left: 39.5rem
+    &_expanded-setting
+      left: 9rem
+      &:after
+        display: none
 
     &-layout
       transition: width 0.2s
