@@ -893,7 +893,7 @@ export default {
   margin: 0 0 -0.3rem
 
   &.is-show-modal
-    z-index: 0
+    z-index: -1
 
   &.is-visible
     display: flex

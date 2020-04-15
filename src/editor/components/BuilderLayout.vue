@@ -34,7 +34,8 @@
       <main class="b-builder-layout-content__main"
         :class="[
           {'b-builder-layout-content__main_expanded': isExpanded && !isContentVisible},
-          {'b-builder-layout-content__main_expanded-setting': isExpanded && isContentVisible}
+          {'b-builder-layout-content__main_expanded-setting': isExpanded && isContentVisible},
+          {'b-builder-layout-content__main_show-modal': isShowModal}
         ]"
       >
         <router-view
@@ -84,7 +85,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'isExpanded',
-      'device'
+      'device',
+      'isShowModal'
     ]),
 
     isContentVisible () {
@@ -202,6 +204,9 @@ $topBarHeight: 6rem
       left: 9rem
       &:after
         display: none
+    &_show-modal
+      &:after
+        z-index: 4
 
     &-layout
       transition: width 0.2s
