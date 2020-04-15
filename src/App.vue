@@ -87,16 +87,10 @@ export default {
 
   methods: {
     ...mapActions('User', ['refreshToken'])
-  },
-
-  mounted () {
-    const body = document.querySelector('body')
-
-    body.classList.add('b-body_app')
   }
 }
 </script>
 
 <style lang="sass">
-@import 'assets/sass/app'
+  @import 'assets/sass/app'
 </style>
