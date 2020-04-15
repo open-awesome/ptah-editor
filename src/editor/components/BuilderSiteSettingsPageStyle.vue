@@ -290,9 +290,17 @@ export default {
       }
 
       setTimeout(() => {
-        const palette = colorThief.getPalette(preview, 6).map(c => {
+        const getPalette = colorThief.getPalette(preview, 6)
+
+        if (getPalette === null) {
+          this.progress = false
+          return
+        }
+
+        const palette = getPalette.map(c => {
           return this.getHexColor(c)
         })
+
         this.storeSaveSettingsPalette({ palette: _.uniqBy(palette), image: this.imagePalette })
         this.progress = false
       }, 1000)
