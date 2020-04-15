@@ -1,28 +1,31 @@
 <template>
   <div class="b-integrations">
-    <div class="b-integrations__item"
-         v-if="!isIntegrationVisible"
-         v-for="integration in integrations"
-         :key="integration.name"
-         @click="selectIntegration(integration.name)"
-    >
-      <div class="b-integrations__item-icon"
-           :style="{'background-image': 'url(' + integration.icon + ')'}"
-      >
-      </div>
-      <div class="b-integrations__item-label">
-        {{ integration.label }}
-      </div>
-      <span class="b-integrations__item-settings">
-          <icon-base name="settings" color="#00ADB6"></icon-base>
-        </span>
-    </div>
+    <base-scroll-container>
+      <div class="b-integrations__padd">
+        <div class="b-integrations__item"
+             v-if="!isIntegrationVisible"
+             v-for="integration in integrations"
+             :key="integration.name"
+             @click="selectIntegration(integration.name)"
+        >
+          <div class="b-integrations__item-icon"
+            :style="{'background-image': 'url(' + integration.icon + ')'}"
+          />
+          <div class="b-integrations__item-label">
+            {{ integration.label }}
+          </div>
+          <span class="b-integrations__item-settings">
+            <icon-base name="settings" color="#00ADB6" />
+          </span>
+        </div>
 
-    <div class="b-integrations__component"
-         v-if="isIntegrationVisible"
-    >
-      <router-view></router-view>
-    </div>
+        <div class="b-integrations__component"
+          v-if="isIntegrationVisible"
+        >
+          <router-view />
+        </div>
+      </div>
+    </base-scroll-container>
   </div>
 </template>
 
@@ -118,14 +121,17 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-integrations
+  width: 102%
+  height: 98%
+
   display: flex
   flex-direction: column
   align-items: center
-  height: 100%
+  &__padd
+    padding: 1rem 5rem 0 3rem
   &__item
-    width: 28rem
+    width: 100%
     height: $size-step*5
-    background-position: center center
     border: 2px solid #A2A5A5
     box-sizing: border-box
     border-radius: 10px
@@ -147,9 +153,14 @@ export default {
       display: inline-block
       width: $size-step*2
       height: $size-step*2
+
+      background-position: center center
+      background-size: cover
     &-label
       font-size: 1.6rem
       color: $dark-grey
+
+      padding: 1rem 0
     &-settings
       display: none
       position: absolute

@@ -1,12 +1,15 @@
 <template>
-  <transition name="slide-fade">
-    <div class="b-builder-modal"
-      @mousedown.self="closeContent"
-      >
+  <div class="b-builder-modal"
+    @mousedown.self="closeContent"
+   >
       <div
         class="b-builder-modal-content"
-        :class="{ 'b-builder-modal-content--wide': isWide, 'b-builder-modal-content--ultrawide': isUltraWide }"
-        >
+        :class="{
+          'b-builder-modal-content--wide': isWide,
+          'b-builder-modal-content--ultrawide': isUltraWide,
+          'b-builder-modal-content--show-modal': isShowModal
+        }"
+      >
         <div class="b-builder-modal-content__padd">
           <div class="b-builder-modal-content__chapter">
             {{ title }}
@@ -21,7 +24,6 @@
         </div>
       </div>
     </div>
-  </transition>
 </template>
 
 <script>
@@ -47,7 +49,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'isAddSectionExpanded',
-      'siteSettingsMenu'
+      'siteSettingsMenu',
+      'isShowModal'
     ]),
 
     contentID () {
@@ -123,13 +126,13 @@ export default {
 .b-builder-modal
   background-color: rgba($dark-blue, 0.2)
 
-  position: fixed
-  top: 6rem
-  // right: 0
-  bottom: 0
-  left: 9rem
-  z-index: 999
-  overflow-x: hidden
+  /*position: absolute*/
+  /*top: 6rem*/
+  /*right: 0*/
+  /*bottom: 0*/
+  /*left: 9rem*/
+  /*z-index: 999*/
+  /*overflow: auto*/
 
   display: flex
   justify-content: flex-start
@@ -139,7 +142,7 @@ export default {
     &
       display: block
   &-content
-    width: 33rem
+    width: 38rem
     min-height: 100%
     z-index: 10
     position: relative
@@ -155,11 +158,8 @@ export default {
 
     &--ultrawide
       width: 68rem
-
-    @media only screen and (max-height: 600px)
-      &
-        width: 29.5rem
-        min-height: 100%
+    &--show-modal
+      z-index: 5
     &__padd
       display: flex
       flex-direction: column
@@ -171,9 +171,6 @@ export default {
       right: 0
       bottom: 0
       left: 0
-      @media only screen and (max-height: 600px)
-        &
-          position: relative
     &__chapter
       font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif
       font-size: 1.8rem

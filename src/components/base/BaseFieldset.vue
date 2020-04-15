@@ -28,7 +28,7 @@ export default {
 </script>
 
 <template>
-  <section class="b-base-fieldset">
+  <div class="b-base-fieldset">
     <header class="b-base-fieldset__header"
       @click="isOpenedInner = !isOpenedInner">
       <span class="b-base-fieldset__toggle-icon" v-if="hasToggle">
@@ -42,7 +42,7 @@ export default {
     <template v-else>
       <slot></slot>
     </template>
-  </section>
+  </div>
 </template>
 
 <style lang="sass" scoped>

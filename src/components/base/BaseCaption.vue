@@ -46,7 +46,7 @@ export default {
   margin: 0 0 1.8rem 0
 
   width: 100%
-  max-width: 24rem
+  // max-width: 24rem
 
   display: flex
   justify-content: flex-start

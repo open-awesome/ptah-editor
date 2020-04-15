@@ -486,7 +486,7 @@ export default {
       opacity: 1
   &__col
     width: 100%
-    max-width: 24rem
+    max-width: 30rem
     padding: 1rem 0 1rem 1.8rem
     /deep/
       .b-uploader-item

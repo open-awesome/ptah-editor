@@ -113,6 +113,11 @@ export default {
 .b-add-js-scripts
   height: 100%
   position: relative
+  /deep/
+    .b-panel__control,
+    .b-panel__row,
+    .b-panel__col
+      max-width: 30rem
 
 .b-textarea
   border: 1px solid rgba(162, 165, 165, 0.5)

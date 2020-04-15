@@ -16,15 +16,15 @@
         </div>
 
         <div class="b-section-settings__control" v-if="!isHeader && !isMobile">
-          <control-section-height></control-section-height>
+          <control-section-height />
         </div>
 
         <div class="b-section-settings__control" v-if="isHeader">
-          <control-section-sticky></control-section-sticky>
+          <control-section-sticky />
         </div>
 
         <div class="b-section-settings__control">
-          <control-box></control-box>
+          <control-box />
         </div>
 
       </div>
