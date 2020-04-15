@@ -53,7 +53,7 @@
         :is="section.name"
         :id="section.id"
         :class="[
-          { 'video-background': section.data.mainStyle.backgroundType === 'video' },
+          { 'video-background': section.data.mainStyle.backgroundVideo },
           $builder.isEditing ? device: '',
           isActiveSection(section.id) ? '_section-active' : '',
           section.data.mainStyle.parallax ? '_parallax' : ''
@@ -68,7 +68,7 @@
         -->
 
         <video
-          v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
+          v-if="section.data.mainStyle.backgroundVideo"
           :id="`bg-video-${ section.id }`"
           slot="video"
           autoplay="true"
@@ -693,7 +693,7 @@ export default {
       }
 
       if (settings.styles.backgroundImage !== '' || settings.styles.backgroundColor !== '') {
-        list.push('background')
+        list.push('bg')
       }
 
       if (settings.css !== '' || settings.script !== '') {
@@ -715,6 +715,7 @@ export default {
   margin: 0 auto
   transition: 0.2s
   position: relative
+  min-height: calc(100vh - 6rem)
 
   display: flex
   flex-direction: column

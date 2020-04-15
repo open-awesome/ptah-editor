@@ -2,7 +2,7 @@
   <div class="b-panel">
     <h6 class="b-panel__title">
       <span>
-        Your progress
+        progress
       </span>
       <span
         class="b-panel__icon-close"
@@ -17,30 +17,32 @@
     </h6>
 
     <div class="b-progress">
-      <div class="b-progress__header">
-        <radial-progress-bar
-          :diameter="95"
-          :completed-steps="progress"
-          :total-steps="100"
-          :strokeWidth="15"
-          strokeLinecap="butt"
-          :startColor="`#00ADB6`"
-          :stopColor="`#00ADB6`"
-          :innerStrokeColor="`#F3F6F6`"
-        >
-          <div class="b-progress__circle">{{progress}}%</div>
-        </radial-progress-bar>
-      </div>
+      <base-scroll-container>
+        <div class="b-progress__header">
+          <radial-progress-bar
+            :diameter="95"
+            :completed-steps="progressInt"
+            :total-steps="100"
+            :strokeWidth="15"
+            strokeLinecap="butt"
+            :startColor="`#00ADB6`"
+            :stopColor="`#00ADB6`"
+            :innerStrokeColor="`#F3F6F6`"
+          >
+            <div class="b-progress__circle">{{progress}}%</div>
+          </radial-progress-bar>
+        </div>
 
-      <div class="b-progress__title">Basic steps</div>
-      <check-list-item v-for="(item, index) in basic" :key="index" :active="item.status" class="b-progress__i">
-        {{ item.text }}
-      </check-list-item>
+        <div class="b-progress__title">Basic steps</div>
+        <check-list-item v-for="(item, index) in basic" :key="index" :active="item.status" class="b-progress__i">
+          {{ item.text }}
+        </check-list-item>
 
-      <div class="b-progress__title">Advanced steps</div>
-      <check-list-item v-for="(item, index) in advanced" :key="'#'+index" :active="item.status" class="b-progress__i">
-        {{ item.text }}
-      </check-list-item>
+        <div class="b-progress__title">Advanced steps</div>
+        <check-list-item v-for="(item, index) in advanced" :key="'#'+index" :active="item.status" class="b-progress__i">
+          {{ item.text }}
+        </check-list-item>
+      </base-scroll-container>
     </div>
 
   </div>
@@ -78,6 +80,10 @@ export default {
 
     advanced () {
       return filter(this.checkList, ['level', 1])
+    },
+
+    progressInt () {
+      return parseInt(this.progress)
     }
   },
 
@@ -107,8 +113,10 @@ export default {
   &__title
     position: relative
     display: flex
-    align-items:  flex-start
-    justify-content: flex-start
+    align-items: center
+    justify-content: center
+
+    color: $dark-grey
     width: 100%
     padding: 1.7rem 3.1rem
     font-size: 2rem
@@ -117,13 +125,14 @@ export default {
   &__icon-close
     color: $grey
     position: absolute
-    top: 18px
+    top: 22px
     right: 17px
     cursor: pointer
     &:hover
       color: $main-green
 
 .b-progress
+  height: calc(100% - 7rem)
   &__title
     background: #F3F6F6
     width: 100%

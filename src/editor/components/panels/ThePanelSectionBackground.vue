@@ -15,6 +15,52 @@
         <base-scroll-container>
           <div class="layout-padding">
             <div class="b-panel__control">
+              <base-caption>
+                Section color
+              </base-caption>
+
+              <div class="b-panel__col">
+                <div class="b-panel__picker"
+                     v-for="(picker, index) in backgroundPickers"
+                     :key="`picker-item-${ _uid }-${ index }`"
+                >
+                  <base-color-picker
+                    v-model="backgroundPickers[index]"
+                    :label="`Background color ${ index > 0 ? index + 1: '' }`"
+                    @change="updateBgColor"
+                  >
+                    <div class="b-panel__picker-buttons" slot="buttons">
+                      <span class="del"
+                            tooltip="Remove color"
+                            tooltip-position="top"
+                            v-show="backgroundPickers.length > 1 && index > 0"
+                            @click="removeBackgroundPicker(index)"
+                      >
+                        <icon-base
+                          name="close"
+                          color="#B1B1B1"
+                          width="10" height="10"
+                        />
+                      </span>
+                      <span class="plus"
+                            tooltip="Create gradient"
+                            tooltip-position="top"
+                            v-show="index === 0 && backgroundPickers.length < 4"
+                            @click="addBackgroundPicker"
+                      >
+                        <icon-base
+                          name="plus"
+                          color="#B1B1B1"
+                          width="10" height="10"
+                        />
+                      </span>
+                    </div>
+                  </base-color-picker>
+                </div>
+              </div>
+
+            </div>
+            <div class="b-panel__control">
               <base-caption help="Section's background image">
                   Background image
               </base-caption>
@@ -28,44 +74,6 @@
                 <template v-if="sectionBgUrl !== '' && sectionBgUrl !== null">
                   <control-background-position/>
                 </template>
-
-                <div class="b-panel__picker"
-                  v-for="(picker, index) in backgroundPickers"
-                  :key="`picker-item-${ _uid }-${ index }`"
-                >
-                  <base-color-picker
-                    v-model="backgroundPickers[index]"
-                    :label="`Background color ${ index > 0 ? index + 1: '' }`"
-                    @change="updateBgColor"
-                  >
-                    <div class="b-panel__picker-buttons" slot="buttons">
-                      <span class="del"
-                        tooltip="Remove color"
-                        tooltip-position="top"
-                        v-show="backgroundPickers.length > 1 && index > 0"
-                        @click="removeBackgroundPicker(index)"
-                      >
-                        <icon-base
-                          name="close"
-                          color="#B1B1B1"
-                          width="10" height="10"
-                        />
-                      </span>
-                      <span class="plus"
-                        tooltip="Create gradient"
-                        tooltip-position="top"
-                        v-show="index === 0 && backgroundPickers.length < 4"
-                        @click="addBackgroundPicker"
-                      >
-                        <icon-base
-                          name="plus"
-                          color="#B1B1B1"
-                          width="10" height="10"
-                        />
-                      </span>
-                    </div>
-                  </base-color-picker>
-                </div>
               </div>
             </div>
             <div class="b-panel__control">

@@ -92,21 +92,30 @@
           {{ label }}
         </template>
       </div>
-      <div class="b-uploader-item__text">
-        <base-text-field
-          :value="path"
-          :hasError="error"
-          errorText="Invalid image url"
-          @input="onInput"
-        />
-      </div>
 
-      <div class="b-uploader-item__remove"
-           tooltip="Remove"
-           @click="$emit('remove')"
-           v-if="hasPreview">
-        <icon-base name="close" width="12" height="12"></icon-base>
+      <div class="b-uploader-item__text">
+        <button
+          class="b-uploader-item__button-url"
+          :class="{ 'drop' : openUrl }"
+          @click="openUrl = !openUrl">
+          URL <IconBase name="arrowDown" width="7" />
+        </button>
+
+        <div class="b-uploader-item__remove"
+             @click="$emit('remove')"
+             v-if="hasPreview">
+          {{$t('nav.delete')}}
+        </div>
       </div>
+    </div>
+
+    <div class="b-uploader-item__url" :class="{ 'show' : openUrl }">
+      <base-text-field
+        :value="path"
+        :hasError="error"
+        errorText="Invalid image url"
+        @input="onInput"
+      />
     </div>
 
   </figure>
@@ -142,7 +151,8 @@ export default {
     return {
       progress: 100,
       totalSteps: 100,
-      error: false
+      error: false,
+      openUrl: false
     }
   },
 
@@ -297,9 +307,11 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-uploader-item
+  font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif
   display: flex
   justify-content: space-between
   align-items: flex-start
+  flex-wrap: wrap
 
   margin: 0 0 $size-step/2
   padding: 0
@@ -309,6 +321,7 @@ export default {
     align-items: center
     justify-content: center
     flex-shrink: 0
+    flex-basis: 45%
 
     width: $size-step*3.5
     height: 8rem
@@ -358,6 +371,7 @@ export default {
   &__controls
     position: relative
     flex-grow: 1
+    flex-basis: 50%
 
     font-size: 1.4rem
     line-height: 1.7rem
@@ -365,6 +379,8 @@ export default {
 
   &__label
     color: $dark-grey
+    font-weight: 500
+    height: 5rem
     text-transform: capitalize
     &-help
       position: absolute
@@ -378,15 +394,42 @@ export default {
 
   &__text
     margin-top: .5rem
-    /deep/
-      .b-base-text-field__input
-        margin-top: 1rem
-        font-size: 1.4rem
+    display: flex
+    align-items: center
+
+  &__url
+    flex-basis: 100%
+    margin-top: 2rem
+    overflow: hidden
+    height: 0
+    opacity: 0
+    transition: all .2s ease-out
+
+    &.show
+      height: 3.5rem
+      opacity: 1
 
   &__remove
-    position: absolute
-    top: 1px
-    right: 0
-    color: $grey-middle
+    color: #A2A5A5
     cursor: pointer
+    font-size: 1.4rem
+
+  &__button-url
+    background: transparent
+    color: $main-green
+    border: none
+    display: flex
+    align-items: center
+    font-size: 1.4rem
+    font-weight: 500
+    font-family: 'Roboto', Helvetica Neue, Helvetica, Arial, sans-serif
+    margin-right: 1.5rem
+    cursor: pointer
+    outline: none
+
+    &.drop svg
+      transform: rotate(180deg)
+
+    svg
+      margin-left: .7rem
 </style>
