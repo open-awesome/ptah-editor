@@ -125,11 +125,11 @@ export default {
 
   position: fixed
   top: 6rem
-  right: 0
+  // right: 0
   bottom: 0
   left: 9rem
   z-index: 999
-  overflow: auto
+  overflow-x: hidden
 
   display: flex
   justify-content: flex-start
