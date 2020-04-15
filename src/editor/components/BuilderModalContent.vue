@@ -6,7 +6,8 @@
         class="b-builder-modal-content"
         :class="{
           'b-builder-modal-content--wide': isWide,
-          'b-builder-modal-content--ultrawide': isUltraWide
+          'b-builder-modal-content--ultrawide': isUltraWide,
+          'b-builder-modal-content--show-modal': isShowModal
         }"
       >
         <div class="b-builder-modal-content__padd">
@@ -48,7 +49,8 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'isAddSectionExpanded',
-      'siteSettingsMenu'
+      'siteSettingsMenu',
+      'isShowModal'
     ]),
 
     contentID () {
@@ -156,6 +158,8 @@ export default {
 
     &--ultrawide
       width: 68rem
+    &--show-modal
+      z-index: 5
     &__padd
       display: flex
       flex-direction: column
