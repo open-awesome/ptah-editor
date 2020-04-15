@@ -53,7 +53,7 @@
         :is="section.name"
         :id="section.id"
         :class="[
-          { 'video-background': section.data.mainStyle.backgroundType === 'video' },
+          { 'video-background': section.data.mainStyle.backgroundVideo },
           $builder.isEditing ? device: '',
           isActiveSection(section.id) ? '_section-active' : '',
           section.data.mainStyle.parallax ? '_parallax' : ''
@@ -68,7 +68,7 @@
         -->
 
         <video
-          v-if="section.data.mainStyle.backgroundType === 'video' && section.data.mainStyle.backgroundVideo"
+          v-if="section.data.mainStyle.backgroundVideo"
           :id="`bg-video-${ section.id }`"
           slot="video"
           autoplay="true"
