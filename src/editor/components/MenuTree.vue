@@ -91,7 +91,7 @@
 
       <div
         class="b-delete-section"
-        v-if="menuTree.length > 0 && settingObjectSection.id && selectedSections.length === 1"
+        v-if="sections.length > 0 && settingObjectSection.id && selectedSections.length === 1"
       >
         <BaseButton
           @click.stop="showConfirmDelete = true"

@@ -8,11 +8,7 @@
         class="b-panel__icon-close"
        @click="closeSidebarSection"
       >
-        <IconBase
-          name="close"
-          width="14"
-          height="14"
-        />
+        <icon-minimize />
       </span>
     </h6>
 

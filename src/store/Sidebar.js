@@ -53,24 +53,6 @@ export default {
         id: 'integrations',
         name: 'menu.integrations'
       }
-      /*
-      {
-        id: 'cookiesSettings',
-        name: 'menu.cookie'
-      },
-      {
-        id: 'openGraph',
-        name: 'menu.openGraph'
-      },
-      {
-        id: 'addJsScrips',
-        name: 'menu.addJs'
-      },
-      {
-        id: 'addCss',
-        name: 'menu.addCss'
-      }
-      */
     ],
     builderSections: [],
     builderGroups: [], // section layouts
