@@ -222,6 +222,10 @@ export default {
         width: 10rem
         > span
           width: 10rem
+    &.group-node &__name._short
+        width: 6rem !important
+        > span
+          width: 6rem !important
 
     &:hover
       background: rgba(0, 0, 0, 0.05)
