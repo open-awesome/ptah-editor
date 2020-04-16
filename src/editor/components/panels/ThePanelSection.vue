@@ -15,15 +15,15 @@
           <IconBase name="platformDesktop" />
         </div>
 
-        <div class="b-section-settings__control" v-if="!isHeader && !isMobile">
+        <div class="b-panel__control" v-if="!isHeader && !isMobile">
           <control-section-height />
         </div>
 
-        <div class="b-section-settings__control" v-if="isHeader">
+        <div class="b-panel__control" v-if="isHeader">
           <control-section-sticky />
         </div>
 
-        <div class="b-section-settings__control">
+        <div class="b-panel__control">
           <control-box />
         </div>
 
@@ -193,8 +193,6 @@ export default {
       margin: 0 auto
       max-width: 100%
       display: block
-  &__control
-    margin: 0 0 2.1rem 2.2rem
 
   &__description
     font-size: 1.4rem
