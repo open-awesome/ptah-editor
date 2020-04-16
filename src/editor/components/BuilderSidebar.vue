@@ -2,7 +2,7 @@
   <div class="b-builder-sidebar" :class="{'b-builder-sidebar_expanded': isExpanded}">
     <!-- Show Sections panel -->
     <PanelSectionsTree
-      v-show="isExpanded && isSectionsTreeExpanded"
+      v-show="isExpanded && isSectionsTreeExpanded && !isShowSettingsPage"
       :builder="builder"
       :increment="increment"
     />
@@ -18,24 +18,28 @@
     </div>
 
     <!-- Showed Add Section panel -->
-    <transition name="slide-fade">
-      <div
-        v-show="isExpanded && isAddSectionExpanded"
-        class="b-builder-sidebar-add-section"
-      >
-        <BuilderAddSectionBar
-          :builder="builder"
-          :title="$t('nav.addSection')"
-          @add="onAddSection"
-          @requestClose="closeAddSectionBar">
-        </BuilderAddSectionBar>
-      </div>
-    </transition>
+    <div
+      v-show="isExpanded && isAddSectionExpanded"
+      class="b-builder-sidebar-add-section"
+    >
+      <BuilderAddSectionBar
+        :builder="builder"
+        :title="$t('nav.addSection')"
+        @add="onAddSection"
+        @requestClose="closeAddSectionBar">
+      </BuilderAddSectionBar>
+    </div>
 
     <!-- Show Progress panel -->
     <div class="b-builder-sidebar__content" v-if="isExpanded && isProgressPanelExpanded">
       <PanelProgress />
     </div>
+
+    <!-- Show Page settings panel -->
+    <router-view
+      v-show="isShowSettingsPage"
+      :builder="builder"
+    />
 
   </div>
 </template>
@@ -110,6 +114,10 @@ export default {
 
     isSlotsSettings () {
       return this.settingObjectType !== 'section'
+    },
+
+    isShowSettingsPage () {
+      return this.$route.path.split('/').indexOf('settings') > 0
     }
   },
 
@@ -210,7 +218,7 @@ $top-panel-height: 7.2rem
   transition: width, opacity 0.3s cubic-bezier(.2,.85,.4,1.275)
   &_expanded
     opacity: 1
-    width: 30.5rem
+    width: 100%
 
   &__content
     height: 100%

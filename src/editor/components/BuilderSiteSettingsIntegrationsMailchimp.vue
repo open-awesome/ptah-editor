@@ -133,9 +133,14 @@ export default {
   min-height: 60rem
 
   &__inner
-    padding: 0 2.5rem
-    height: 100%
+    position: absolute
+    top: 0
+    right: 0
+    bottom: 0
+    left: 0
+    z-index: 0
 
+    padding: 0 2.5rem
   &__logo
     max-width: 100%
     margin: 2rem 0 4rem
@@ -149,6 +154,12 @@ export default {
     border-top: none !important
 
 iframe
+  position: absolute
+  top: 0
+  right: 0
+  bottom: 0
+  left: 0
+  z-index: 0
+
   border: none
-  // height: 52rem
 </style>
