@@ -6,7 +6,7 @@
     <div class="b-panel__layout">
       <div class="layout _top-2">
         <base-scroll-container>
-          <div class="layout-padding _pr-1">
+          <div class="layout-padding _pr-0">
             <!-- Columns settings -->
             <div class="b-panel__control">
               <base-caption>

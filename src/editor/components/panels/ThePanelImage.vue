@@ -3,29 +3,38 @@
     <h6 class="b-panel__title">
       {{ settingObjectLabel }}
     </h6>
-    <!-- image -->
-    <div class="b-panel__control" v-if="!isMobile">
-      <control-image/>
-    </div>
 
-    <div class="b-panel__control" v-if="settingObjectOptions.hasLink && !isMobile">
-      <control-image-link/>
-    </div>
+    <div class="b-panel__layout">
+      <div class="layout _top-2 _pr-05">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <!-- image -->
+            <div class="b-panel__control" v-if="!isMobile">
+              <control-image/>
+            </div>
 
-    <div class="b-panel__control">
-      <control-box :hidePadding="true"></control-box>
-    </div>
+            <div class="b-panel__control" v-if="settingObjectOptions.hasLink && !isMobile">
+              <control-image-link/>
+            </div>
 
-    <!-- Width / Height -->
-    <div class="b-panel__control" v-if="settingObjectOptions.resizable">
-       <control-size></control-size>
+            <div class="b-panel__control">
+              <control-box :hidePadding="true"></control-box>
+            </div>
+
+            <!-- Width / Height -->
+            <div class="b-panel__control" v-if="settingObjectOptions.resizable">
+               <control-size></control-size>
+            </div>
+            <!-- Alt prop for image -->
+            <!-- TODO: We're still not using <img>
+            <div class="b-panel__control">
+              <control-alt/>
+            </div>
+            -->
+          </div>
+        </base-scroll-container>
+      </div>
     </div>
-    <!-- Alt prop for image -->
-    <!-- TODO: We're still not using <img>
-    <div class="b-panel__control">
-      <control-alt/>
-    </div>
-    -->
   </div>
 </template>
 

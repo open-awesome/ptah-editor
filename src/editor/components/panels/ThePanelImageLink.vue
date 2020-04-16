@@ -3,9 +3,17 @@
     <h6 class="b-panel__title">
       Open content
     </h6>
-    <!-- image -->
-    <div class="b-panel__control">
-      <control-image-link/>
+    <div class="b-panel__layout">
+      <div class="layout _top-2 _pr-05">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <!-- image -->
+            <div class="b-panel__control">
+              <control-image-link/>
+            </div>
+          </div>
+        </base-scroll-container>
+      </div>
     </div>
   </div>
 </template>

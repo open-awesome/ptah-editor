@@ -4,21 +4,28 @@
       Setting restrictions
     </h6>
 
-    <!-- Styles -->
-    <div class="b-panel__control">
-      <control-age-restrictions-style/>
-    </div>
+    <div class="b-panel__layout">
+      <div class="layout _top-2 _pr-05">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <!-- Styles -->
+            <div class="b-panel__control">
+              <control-age-restrictions-style/>
+            </div>
 
-    <!-- Visible elements -->
-    <div class="b-panel__control" v-if="!isMobile">
-      <control-age-restrictions/>
-    </div>
+            <!-- Visible elements -->
+            <div class="b-panel__control" v-if="!isMobile">
+              <control-age-restrictions/>
+            </div>
 
-    <!-- Padding/Margin -->
-    <div class="b-panel__control">
-      <control-box></control-box>
+            <!-- Padding/Margin -->
+            <div class="b-panel__control">
+              <control-box></control-box>
+            </div>
+         </div>
+        </base-scroll-container>
+      </div>
     </div>
-
   </div>
 </template>
 
