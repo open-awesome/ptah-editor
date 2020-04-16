@@ -50,7 +50,8 @@ export default {
     ...mapState('Sidebar', [
       'isAddSectionExpanded',
       'siteSettingsMenu',
-      'isShowModal'
+      'isShowModal',
+      'controlPanel'
     ]),
 
     contentID () {
@@ -68,6 +69,17 @@ export default {
 
     isUltraWide () {
       return this.$route.meta.ultraWide
+    }
+  },
+
+  watch: {
+    'controlPanel.name': {
+      handler (value) {
+        if (value !== '') {
+          this.$router.push(`/editor/${this.$route.params.slug}`)
+        }
+      },
+      deep: true
     }
   },
 
@@ -125,15 +137,6 @@ export default {
 
 .b-builder-modal
   background-color: rgba($dark-blue, 0.2)
-
-  /*position: absolute*/
-  /*top: 6rem*/
-  /*right: 0*/
-  /*bottom: 0*/
-  /*left: 9rem*/
-  /*z-index: 999*/
-  /*overflow: auto*/
-
   display: flex
   justify-content: flex-start
   align-items: center
