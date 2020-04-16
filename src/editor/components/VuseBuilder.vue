@@ -421,7 +421,7 @@ export default {
       this.styleArtboard(settings.styles)
       this.updateVideo()
 
-      if (this.emptySections) {
+      /* if (this.emptySections) {
         this.toggleSidebar(true)
         this.toggleSectionsTreeMenu(true)
         this.toggleAddSectionMenu(true)
@@ -430,7 +430,7 @@ export default {
         this.toggleSectionsTreeMenu(true)
         this.toggleAddSectionMenu(false)
         this.toggleProgressPanelExpanded(false)
-      }
+      } */
     },
 
     addTheme (theme) {
