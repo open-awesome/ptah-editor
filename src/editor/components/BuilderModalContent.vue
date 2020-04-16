@@ -136,6 +136,10 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-builder-modal
+  position: relative
+  width: 100%
+  height: 100%
+
   background-color: rgba($dark-blue, 0.2)
   display: flex
   justify-content: flex-start
@@ -182,6 +186,7 @@ export default {
       text-transform: uppercase
       text-align: center
       letter-spacing: 0.065em
+      color: #575A5F
 
       display: flex
       align-items: center

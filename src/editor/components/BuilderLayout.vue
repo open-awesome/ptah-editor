@@ -3,7 +3,7 @@
     <BuilderTopBar
       class="b-builder-layout__top-bar"
       :class="{
-          'b-builder-layout__top-bar_down' : isContentVisible
+          'b-builder-layout__top-bar_down' : isShowSettingsPage
       }"
       @backToLandings="backToLandings"
       @preview="$emit('preview', $event)"
@@ -25,7 +25,7 @@
         class="b-builder-layout-content__sidebar"
         :class="{
           'b-builder-layout-content__sidebar_expanded': isExpanded,
-          'b-builder-layout-content__sidebar_expanded-content': isContentVisible
+          'b-builder-layout-content__sidebar_expanded-content': isShowSettingsPage
         }"
       >
         <BuilderSidebar
@@ -36,15 +36,11 @@
 
       <main class="b-builder-layout-content__main"
         :class="[
-          {'b-builder-layout-content__main_expanded': isExpanded && !isContentVisible},
-          {'b-builder-layout-content__main_expanded-setting': isExpanded && isContentVisible},
+          {'b-builder-layout-content__main_expanded': isExpanded && !isShowSettingsPage},
+          {'b-builder-layout-content__main_expanded-setting': isExpanded && isShowSettingsPage},
           {'b-builder-layout-content__main_show-modal': isShowModal}
         ]"
       >
-        <router-view
-          :builder="builder"
-        />
-
         <base-scroll-container
           backgroundBar="#fff">
           <div class="b-builder-layout-content__main-layout" :class="device">
@@ -92,7 +88,7 @@ export default {
       'isShowModal'
     ]),
 
-    isContentVisible () {
+    isShowSettingsPage () {
       return this.$route.path.split('/').indexOf('settings') > 0
     }
   },
@@ -184,7 +180,8 @@ $topBarHeight: 6rem
       display: flex
       z-index: 11
       &-content
-        z-index: 10
+        z-index: 9
+        width: 38rem
   &__main
     position: absolute
     top: $topBarHeight
@@ -211,7 +208,7 @@ $topBarHeight: 6rem
     &_expanded
       left: 39.5rem
     &_expanded-setting
-      left: 9rem
+      left: 47rem
       &:after
         display: none
     &_show-modal
