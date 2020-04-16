@@ -194,6 +194,7 @@ export default {
       width: 3rem
       margin-right: 1.2rem
       text-align: center
+      cursor: move
       svg
         fill: #A2A5A5
         width: .4rem
