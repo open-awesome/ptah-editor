@@ -23,6 +23,7 @@
       class="b-builder-sidebar-add-section"
     >
       <BuilderAddSectionBar
+        v-if="isAddSectionExpanded"
         :builder="builder"
         :title="$t('nav.addSection')"
         @add="onAddSection"

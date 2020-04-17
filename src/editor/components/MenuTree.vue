@@ -417,9 +417,20 @@ export default {
       let i = this.selectedSections.indexOf(section.id)
       this.selectedGroup = []
 
+      // header can't be grouped
+      if (this.headerSection() !== undefined) {
+        const idHeader = this.headerSection().id
+        const indexHeader = this.selectedSections.indexOf(idHeader)
+
+        if (indexHeader > -1) {
+          this.selectedSections.splice(indexHeader, 1)
+        }
+      }
+
       if (i > -1) {
         this.selectedSections.splice(i, 1)
-      } else {
+      } else if (this.selectedSections.length !== 2) {
+        console.log(this.selectedSections)
         this.selectedSections.push(section.id)
       }
     },
@@ -449,6 +460,13 @@ export default {
 
     ungroup () {
       const section = this.selectedGroup[0]
+
+      this.selectedGroup.forEach((s) => {
+        s['data']['mainStyle']['styles']['padding-top'] = '16px'
+        s['data']['mainStyle']['styles']['padding-bottom'] = '16px'
+        s['data']['mainStyle']['styles']['margin-top'] = '0'
+        s['data']['mainStyle']['styles']['margin-bottom'] = '0'
+      })
 
       this.setSectionData(section, 'absorb', 0)
       resetIndents()
@@ -544,7 +562,7 @@ export default {
 
     setActive (section, event) {
       this.setSettingSection(section)
-      if (!event.ctrlKey || this.headerSection().id === section.id) {
+      if (!event.ctrlKey || (this.headerSection() !== undefined && this.headerSection().id === section.id)) {
         this.selectedSections = [section.id]
       }
       this.selectedGroup = []
@@ -590,7 +608,9 @@ export default {
     clearBackgrounds (sections) {
       sections.forEach((section) => {
         section.set(`$sectionData.mainStyle.styles['background-image']`, 'none')
+        section.set(`$sectionData.mainStyle.media['is-mobile']['background-image']`, 'none')
         section.set(`$sectionData.mainStyle.styles['background-color']`, 'transparent')
+        section.set(`$sectionData.mainStyle.media['is-mobile']['background-color']`, 'transparent')
       })
     },
 

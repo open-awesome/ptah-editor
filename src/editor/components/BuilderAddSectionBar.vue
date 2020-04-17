@@ -108,7 +108,6 @@ export default {
 
       this.processing = true
       this.selectedSection = section
-      this.selectedGroup = null
       this.addSection(this.selectedSection)
     },
     addSection () {
@@ -119,7 +118,7 @@ export default {
     },
     showSelectSection (group) {
       if (this.selectedGroup === group) {
-        this.isVisibleBar = !this.isVisibleBar
+        this.isVisibleBar = false
         this.selectedGroup = []
         return
       }
@@ -128,12 +127,21 @@ export default {
       this.isVisibleBar = true
     },
     closeAddSectionBar () {
-      this.$emit('requestClose')
       this.isVisibleBar = false
       this.selectedSection = null
-      this.selectedGroup = null
+      this.selectedGroup = []
       this.processing = false
+
+      this.$emit('requestClose')
     }
+  },
+
+  mounted () {
+    console.log(this.selectedGroup)
+    this.isVisibleBar = false
+    this.selectedSection = null
+    this.selectedGroup = []
+    this.processing = false
   }
 }
 </script>
@@ -155,7 +163,7 @@ export default {
       <BaseScrollContainer
         backgroundBar="#00ADB6"
       >
-        <ul class="b-add-section__menu is-visiable" ref="menu">
+        <ul class="b-add-section__menu" ref="menu">
           <li class="b-add-section__menu-group"
             :class="[{ 'b-add-section__menu-group_selected': group === selectedGroup}, `g_${name}`]"
             v-for="(group, name) in groups"

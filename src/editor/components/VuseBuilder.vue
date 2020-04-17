@@ -436,12 +436,6 @@ export default {
     addTheme (theme) {
       this.$builder.set(theme)
     },
-
-    toggleGroupVisibility (e) {
-      const element = e.target
-      const group = element.closest('.menu-group')
-      group.classList.toggle('is-visiable')
-    },
     save () {
       this.$emit('save', this.$builder)
     },
