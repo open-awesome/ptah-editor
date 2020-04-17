@@ -188,7 +188,7 @@ export default {
     max-width: 28rem
     height: 5rem
     padding: 1.3rem 1.1rem 1.3rem 1.6rem
-    margin: 0 1.6rem 0 1.3rem
+    margin: 0 0 0 1.3rem
     cursor: pointer
     &__drag
       width: 3rem
