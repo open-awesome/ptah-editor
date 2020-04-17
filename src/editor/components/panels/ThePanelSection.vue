@@ -2,7 +2,9 @@
   <div class="b-panel">
     <h6 class="b-panel__title b-panel__title_name-section">
       <span>
-        {{ settingObjectSection.name }}
+        <span>
+          {{ name }}
+        </span>
       </span>
     </h6>
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
@@ -101,6 +103,10 @@ export default {
 
     isHeader () {
       return this.settingObjectSection.isHeader
+    },
+
+    name () {
+      return _.startCase(this.settingObjectSection.name)
     }
   },
 

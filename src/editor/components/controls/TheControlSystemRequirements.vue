@@ -54,20 +54,22 @@ export default {
           <div class="b-check-list">
             <div class="b-check-list__item is-editable"
               v-for="(value, key) in requirements" :key="key"
-              :class="{ 'b-check-list__item_opacity' : false === requirements[key].visible, 'b-check-list__item_select' : requirements[key].expand }"
-              >
+              :class="{
+                'b-check-list__item_opacity' : false === requirements[key].visible,
+                'b-check-list__item_select' : requirements[key].expand
+              }"
+              @click="visible(key)"
+            >
               <span class="b-check-list__item-check"
-                @click="visible(key)"
                 title="Show / Hide"
                 :class="{ 'b-check-list__item-check_color' : true === requirements[key].visible }"
                 >
                  <icon-base width="10" height="7" name="checkMark"
                    v-show="requirements[key].visible"
-                   />
+                 />
               </span>
 
               <a class="b-check-list__item-button"
-                @click="visible(key)"
                 :title="key"
                 >
                 {{ key }}
@@ -85,11 +87,13 @@ export default {
           <div class="b-check-list">
             <div class="b-check-list__item is-editable"
               v-for="(value, key) in rowsRequirements" :key="key"
-              :class="{ 'b-check-list__item_opacity' : false === rowsRequirements[key].visible, 'b-check-list__item_select' : rowsRequirements[key].expand }"
-              >
-
+              :class="{
+                'b-check-list__item_opacity' : false === rowsRequirements[key].visible,
+                'b-check-list__item_select' : rowsRequirements[key].expand
+              }"
+              @click="visibleRows(key)"
+            >
               <span class="b-check-list__item-check"
-                @click="visibleRows(key)"
                 title="Show / Hide"
                 :class="{ 'b-check-list__item-check_color' : true === rowsRequirements[key].visible }"
                 >
@@ -99,7 +103,6 @@ export default {
               </span>
 
               <a class="b-check-list__item-button"
-                @click="visibleRows(key)"
                 :title="key"
                 >
                 {{ key }}
