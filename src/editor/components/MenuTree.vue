@@ -414,8 +414,15 @@ export default {
     },
 
     onSelect (section) {
+      let isInGroup = false
       let i = this.selectedSections.indexOf(section.id)
       this.selectedGroup = []
+
+      this.menuTree.forEach(item => {
+        if (this.isGroup(item) && item.findIndex(i => i.Id === section.id)) {
+          isInGroup = true
+        }
+      })
 
       // header can't be grouped
       if (this.headerSection() !== undefined) {
@@ -429,8 +436,12 @@ export default {
 
       if (i > -1) {
         this.selectedSections.splice(i, 1)
-      } else if (this.selectedSections.length !== 2) {
-        console.log(this.selectedSections)
+      }
+
+      if (this.selectedSections.length < 2 && !isInGroup) {
+        this.selectedSections.push(section.id)
+      } else {
+        this.selectedSections.splice(0, 1)
         this.selectedSections.push(section.id)
       }
     },
@@ -466,6 +477,11 @@ export default {
         s['data']['mainStyle']['styles']['padding-bottom'] = '16px'
         s['data']['mainStyle']['styles']['margin-top'] = '0'
         s['data']['mainStyle']['styles']['margin-bottom'] = '0'
+
+        s['data']['mainStyle']['media']['is-mobile']['padding-top'] = '16px'
+        s['data']['mainStyle']['media']['is-mobile']['padding-bottom'] = '16px'
+        s['data']['mainStyle']['media']['is-mobile']['margin-top'] = '0'
+        s['data']['mainStyle']['media']['is-mobile']['margin-bottom'] = '0'
       })
 
       this.setSectionData(section, 'absorb', 0)
@@ -562,9 +578,25 @@ export default {
 
     setActive (section, event) {
       this.setSettingSection(section)
-      if (!event.ctrlKey || (this.headerSection() !== undefined && this.headerSection().id === section.id)) {
-        this.selectedSections = [section.id]
+
+      if (!event.ctrlKey) {
+        if (this.headerSection()) {
+          if (this.headerSection().id === section.id) {
+            this.selectedSections = []
+          } else {
+            this.selectedSections = [section.id]
+          }
+        } else {
+          this.selectedSections = [section.id]
+        }
+      } else {
+        if (this.headerSection()) {
+          if (this.headerSection().id === section.id) {
+            this.selectedSections = []
+          }
+        }
       }
+
       this.selectedGroup = []
       this.toggleAddSectionMenu(false)
     },
@@ -666,7 +698,7 @@ export default {
   &._short,
   &._long
     .b-menu-tree__bottom
-      box-shadow: 11px 2px 16px rgba($black, 0.1)
+      box-shadow: 0 2px 16px rgba($black, 0.1)
 
   &__group
     .menu-tree-item:nth-child(2)
@@ -710,8 +742,9 @@ export default {
 
   &__bottom
     position: absolute
+    left: 0
+    right: 1.5rem
     bottom: 0
-    width: 100%
     padding: 0 1rem 2.4rem
     height: 12rem
 

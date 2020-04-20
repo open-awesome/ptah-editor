@@ -182,7 +182,7 @@ export default {
 
 <template>
   <section
-    class="b-form"
+    class="b-form-section"
     :class="$sectionData.mainStyle.classes"
     :style="[$sectionData.mainStyle.styles, $sectionData.objVarsMedia]"
     v-styler:section="$sectionData.mainStyle"

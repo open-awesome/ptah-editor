@@ -37,14 +37,17 @@ export function sectionsGroups () {
       forEachRight(group.children, (el) => {
         let height = el.offsetHeight
         let style = el.style
+
+        style.paddingBottom = `${offset}px`
         offset = offset + height
+
         style.position = 'relative'
-        style.marginTop = `-${height}px`
+        style.marginTop = `-${offset}px`
       })
     })
   }
 
-  window.addEventListener('resize', throttle(getGroups, 300))
+  window.addEventListener('resize', throttle(getGroups, 1000))
 
   getGroups()
 }

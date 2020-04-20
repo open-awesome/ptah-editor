@@ -50,6 +50,8 @@ export default {
     ]),
 
     selectDevice (type) {
+      this.setControlPanel(false)
+      this.toggleSectionsTreeMenu(true)
       this.setDevice(type)
     }
   }

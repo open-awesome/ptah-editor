@@ -94,10 +94,8 @@ export default {
   },
 
   watch: {
-    device: function (value) {
-      setTimeout(function () {
-        sectionsGroups()
-      }, 300)
+    device: function () {
+      sectionsGroups()
     }
   },
 
