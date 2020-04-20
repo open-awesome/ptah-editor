@@ -594,7 +594,12 @@ export default {
     removeGroupClasses (nodes) {
       nodes.forEach((node) => {
         node.classList.remove('ptah-g-main')
-        node.classList.remove('ptah-g-child')
+
+        if (node.classList.contains('ptah-g-child')) {
+          node.classList.remove('ptah-g-child')
+          node.style.position = 'relative'
+          node.style.top = '0'
+        }
       })
     },
 

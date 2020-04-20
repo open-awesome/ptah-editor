@@ -473,23 +473,9 @@ export default {
       const section = this.selectedGroup[0]
 
       this.selectedGroup.forEach((s) => {
-        s['data']['mainStyle']['styles']['padding-top'] = '16px'
-        s['data']['mainStyle']['styles']['padding-bottom'] = '16px'
-        s['data']['mainStyle']['styles']['margin-top'] = '0'
-        s['data']['mainStyle']['styles']['margin-bottom'] = '0'
-
-        s['data']['mainStyle']['media']['is-mobile']['padding-top'] = '16px'
-        s['data']['mainStyle']['media']['is-mobile']['padding-bottom'] = '16px'
-        s['data']['mainStyle']['media']['is-mobile']['margin-top'] = '0'
-        s['data']['mainStyle']['media']['is-mobile']['margin-bottom'] = '0'
-
-        if (s.group === 'Slider') {
-          s['data']['mainStyle']['styles']['padding-top'] = '0'
-          s['data']['mainStyle']['styles']['padding-bottom'] = '0'
-
-          s['data']['mainStyle']['media']['is-mobile']['padding-top'] = '0'
-          s['data']['mainStyle']['media']['is-mobile']['padding-bottom'] = '0'
-        }
+        s['data']['mainStyle']['styles']['padding-bottom'] = '0'
+        s['data']['mainStyle']['styles']['top'] = '0'
+        s['data']['mainStyle']['styles']['position'] = 'relative'
       })
 
       this.setSectionData(section, 'absorb', 0)
@@ -516,6 +502,7 @@ export default {
       this.applyGroup(newMain)
 
       await this.$nextTick()
+
       this.destroySortable()
       this.buildTree(true)
       this.initSortable()
@@ -526,6 +513,8 @@ export default {
       this.moveSections(this.sIndex(newMain.id))
       // apply changes
       this.setSectionData(newMain, 'absorb', this.absorbed.length)
+      // set active
+      this.setActive(newMain)
 
       resetIndents()
 
@@ -587,7 +576,7 @@ export default {
     setActive (section, event) {
       this.setSettingSection(section)
 
-      if (!event.ctrlKey) {
+      if (event && !event.ctrlKey) {
         if (this.headerSection()) {
           if (this.headerSection().id === section.id) {
             this.selectedSections = []

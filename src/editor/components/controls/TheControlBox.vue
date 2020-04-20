@@ -180,15 +180,11 @@ export default {
         s = style[camelCase(prop)]
       }
 
-      if (this.isMain && (prop === 'padding-bottom' || prop === 'margin-top')) {
+      if (this.isMain && prop === 'padding-bottom') {
         let style = window.getComputedStyle(this.settingObjectElement)
         s = style[camelCase(prop)]
       }
 
-      if (this.isChild && prop === 'margin-top') {
-        let style = window.getComputedStyle(this.settingObjectElement)
-        s = style[camelCase(prop)]
-      }
       return parseInt(s)
     },
 
@@ -247,11 +243,7 @@ export default {
       <template v-if="!hideMargin">
         <base-number-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern="" />
         <base-number-field v-model="marginRight" class="ctrl ctrl__m-right" />
-        <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"
-          :disabled="isChild"
-          :[tooltipChild]="isTextTooltipChild"
-          tooltip-position="top"
-        />
+        <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"/>
         <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom" />
       </template>
       <!-- padding -->
