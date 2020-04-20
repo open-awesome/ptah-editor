@@ -174,14 +174,20 @@ export default {
 
       s = props[prop]
 
-      console.log(this.isMain || this.isChild)
-
-      if (this.isMain || this.isChild || s === undefined) {
+      if (s === undefined) {
         // get values from node
         let style = window.getComputedStyle(this.settingObjectElement)
         s = style[camelCase(prop)]
+      }
 
-        console.log(style)
+      if (this.isMain && (prop === 'padding-bottom' || prop === 'margin-top')) {
+        let style = window.getComputedStyle(this.settingObjectElement)
+        s = style[camelCase(prop)]
+      }
+
+      if (this.isChild && prop === 'margin-top') {
+        let style = window.getComputedStyle(this.settingObjectElement)
+        s = style[camelCase(prop)]
       }
       return parseInt(s)
     },
@@ -254,7 +260,7 @@ export default {
         <base-number-field v-model="paddingRight" class="ctrl ctrl__p-right" />
         <base-number-field v-model="paddingTop" class="ctrl ctrl__p-top" />
         <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"
-          :disabled="isMain || isChild"
+          :disabled="isMain"
           :[tooltipMain]="isTextTooltipMain"
           tooltip-position="bottom"
         />

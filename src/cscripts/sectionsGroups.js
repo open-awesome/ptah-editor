@@ -34,11 +34,14 @@ export function sectionsGroups () {
 
       let offset = 0
 
-      forEachRight(group.children, (el) => {
+      forEachRight(group.children, (el, i) => {
         let height = el.offsetHeight
         let style = el.style
 
-        style.paddingBottom = `${offset}px`
+        if (groups.length - 1 !== i) {
+          style.paddingBottom = `${offset}px`
+        }
+
         offset = offset + height
 
         style.position = 'relative'

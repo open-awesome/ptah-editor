@@ -647,7 +647,7 @@ export default {
     },
 
     autoHeightToMain (mainSection) {
-      mainSection.set(`$sectionData.mainStyle.styles['height']`, 'auto')
+      mainSection.set(`$sectionData.mainStyle.styles['height']`, '80vh')
     },
 
     deleteSection () {
@@ -703,14 +703,14 @@ export default {
   &__group
     .menu-tree-item:nth-child(2)
       /deep/
-        .menu-tree-item__controls > span:nth-child(2)
+        .menu-tree-item__controls > span:last-child
           visibility: hidden
     & .tree-node
       padding-left: 6.4rem
       /deep/
         .menu-tree-item__name,
         .menu-tree-item__name > span
-          width: 11rem !important
+          width: 9.5rem !important
 
   &__group-name
     color: $gray300
