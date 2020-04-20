@@ -438,7 +438,7 @@ export default {
         this.selectedSections.splice(i, 1)
       }
 
-      if (this.selectedSections.length < 2 && !isInGroup) {
+      if (!isInGroup) {
         this.selectedSections.push(section.id)
       } else {
         this.selectedSections.splice(0, 1)
@@ -482,6 +482,14 @@ export default {
         s['data']['mainStyle']['media']['is-mobile']['padding-bottom'] = '16px'
         s['data']['mainStyle']['media']['is-mobile']['margin-top'] = '0'
         s['data']['mainStyle']['media']['is-mobile']['margin-bottom'] = '0'
+
+        if (s.group === 'Slider') {
+          s['data']['mainStyle']['styles']['padding-top'] = '0'
+          s['data']['mainStyle']['styles']['padding-bottom'] = '0'
+
+          s['data']['mainStyle']['media']['is-mobile']['padding-top'] = '0'
+          s['data']['mainStyle']['media']['is-mobile']['padding-bottom'] = '0'
+        }
       })
 
       this.setSectionData(section, 'absorb', 0)
@@ -647,7 +655,13 @@ export default {
     },
 
     autoHeightToMain (mainSection) {
-      mainSection.set(`$sectionData.mainStyle.styles['height']`, '80vh')
+      mainSection.set(`$sectionData.mainStyle.styles['height']`, 'auto')
+      mainSection.set(`$sectionData.mainStyle.media['is-mobile']['height']`, 'auto')
+
+      if (mainSection.group === 'Slider') {
+        mainSection.set(`$sectionData.mainStyle.styles['height']`, '80vh')
+        mainSection.set(`$sectionData.mainStyle.media['is-mobile']['height']`, '80vh')
+      }
     },
 
     deleteSection () {
