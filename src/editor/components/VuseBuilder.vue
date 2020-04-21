@@ -436,12 +436,6 @@ export default {
     addTheme (theme) {
       this.$builder.set(theme)
     },
-
-    toggleGroupVisibility (e) {
-      const element = e.target
-      const group = element.closest('.menu-group')
-      group.classList.toggle('is-visiable')
-    },
     save () {
       this.$emit('save', this.$builder)
     },
@@ -600,7 +594,12 @@ export default {
     removeGroupClasses (nodes) {
       nodes.forEach((node) => {
         node.classList.remove('ptah-g-main')
-        node.classList.remove('ptah-g-child')
+
+        if (node.classList.contains('ptah-g-child')) {
+          node.classList.remove('ptah-g-child')
+          node.style.position = 'relative'
+          node.style.top = '0'
+        }
       })
     },
 

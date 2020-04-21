@@ -414,12 +414,34 @@ export default {
     },
 
     onSelect (section) {
+      let isInGroup = false
       let i = this.selectedSections.indexOf(section.id)
       this.selectedGroup = []
 
+      this.menuTree.forEach(item => {
+        if (this.isGroup(item) && item.findIndex(i => i.Id === section.id)) {
+          isInGroup = true
+        }
+      })
+
+      // header can't be grouped
+      if (this.headerSection() !== undefined) {
+        const idHeader = this.headerSection().id
+        const indexHeader = this.selectedSections.indexOf(idHeader)
+
+        if (indexHeader > -1) {
+          this.selectedSections.splice(indexHeader, 1)
+        }
+      }
+
       if (i > -1) {
         this.selectedSections.splice(i, 1)
+      }
+
+      if (!isInGroup) {
+        this.selectedSections.push(section.id)
       } else {
+        this.selectedSections.splice(0, 1)
         this.selectedSections.push(section.id)
       }
     },
@@ -450,6 +472,12 @@ export default {
     ungroup () {
       const section = this.selectedGroup[0]
 
+      this.selectedGroup.forEach((s) => {
+        s['data']['mainStyle']['styles']['padding-bottom'] = '0'
+        s['data']['mainStyle']['styles']['top'] = '0'
+        s['data']['mainStyle']['styles']['position'] = 'relative'
+      })
+
       this.setSectionData(section, 'absorb', 0)
       resetIndents()
 
@@ -474,6 +502,7 @@ export default {
       this.applyGroup(newMain)
 
       await this.$nextTick()
+
       this.destroySortable()
       this.buildTree(true)
       this.initSortable()
@@ -484,6 +513,8 @@ export default {
       this.moveSections(this.sIndex(newMain.id))
       // apply changes
       this.setSectionData(newMain, 'absorb', this.absorbed.length)
+      // set active
+      this.setActive(newMain)
 
       resetIndents()
 
@@ -544,9 +575,25 @@ export default {
 
     setActive (section, event) {
       this.setSettingSection(section)
-      if (!event.ctrlKey || this.headerSection().id === section.id) {
-        this.selectedSections = [section.id]
+
+      if (event && !event.ctrlKey) {
+        if (this.headerSection()) {
+          if (this.headerSection().id === section.id) {
+            this.selectedSections = []
+          } else {
+            this.selectedSections = [section.id]
+          }
+        } else {
+          this.selectedSections = [section.id]
+        }
+      } else {
+        if (this.headerSection()) {
+          if (this.headerSection().id === section.id) {
+            this.selectedSections = []
+          }
+        }
       }
+
       this.selectedGroup = []
       this.toggleAddSectionMenu(false)
     },
@@ -590,12 +637,20 @@ export default {
     clearBackgrounds (sections) {
       sections.forEach((section) => {
         section.set(`$sectionData.mainStyle.styles['background-image']`, 'none')
+        section.set(`$sectionData.mainStyle.media['is-mobile']['background-image']`, 'none')
         section.set(`$sectionData.mainStyle.styles['background-color']`, 'transparent')
+        section.set(`$sectionData.mainStyle.media['is-mobile']['background-color']`, 'transparent')
       })
     },
 
     autoHeightToMain (mainSection) {
       mainSection.set(`$sectionData.mainStyle.styles['height']`, 'auto')
+      mainSection.set(`$sectionData.mainStyle.media['is-mobile']['height']`, 'auto')
+
+      if (mainSection.group === 'Slider') {
+        mainSection.set(`$sectionData.mainStyle.styles['height']`, '80vh')
+        mainSection.set(`$sectionData.mainStyle.media['is-mobile']['height']`, '80vh')
+      }
     },
 
     deleteSection () {
@@ -646,19 +701,19 @@ export default {
   &._short,
   &._long
     .b-menu-tree__bottom
-      box-shadow: 11px 2px 16px rgba($black, 0.1)
+      box-shadow: 0 2px 16px rgba($black, 0.1)
 
   &__group
     .menu-tree-item:nth-child(2)
       /deep/
-        .menu-tree-item__controls > span:nth-child(2)
+        .menu-tree-item__controls > span:last-child
           visibility: hidden
     & .tree-node
       padding-left: 6.4rem
       /deep/
         .menu-tree-item__name,
         .menu-tree-item__name > span
-          width: 11rem !important
+          width: 9.5rem !important
 
   &__group-name
     color: $gray300
@@ -690,8 +745,9 @@ export default {
 
   &__bottom
     position: absolute
+    left: 0
+    right: 1.5rem
     bottom: 0
-    width: 100%
     padding: 0 1rem 2.4rem
     height: 12rem
 

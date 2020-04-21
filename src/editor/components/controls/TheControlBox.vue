@@ -7,6 +7,7 @@ export default {
 
   data () {
     return {
+      isLoading: false,
       lockMargins: false,
       lockPaddings: false,
       padding: {
@@ -173,11 +174,17 @@ export default {
 
       s = props[prop]
 
-      if (s === undefined || this.isMain || this.isChild) {
+      if (s === undefined) {
         // get values from node
         let style = window.getComputedStyle(this.settingObjectElement)
         s = style[camelCase(prop)]
       }
+
+      if (this.isMain && prop === 'padding-bottom') {
+        let style = window.getComputedStyle(this.settingObjectElement)
+        s = style[camelCase(prop)]
+      }
+
       return parseInt(s)
     },
 
@@ -201,70 +208,73 @@ export default {
 
       this.updateSettingOptions(merge({}, this.settingObjectOptions, props))
     }
+  },
+
+  mounted () {
+    setTimeout(() => {
+      this.isLoading = true
+    }, 150)
   }
 }
 </script>
 
 <template>
 <div>
-  <base-caption help="Set margins and paddings">
-    {{ $t('c.editIndents') }}
-  </base-caption>
-  <div class="control-box">
+  <div v-if="isLoading">
+    <base-caption help="Set margins and paddings">
+      {{ $t('c.editIndents') }}
+    </base-caption>
+    <div class="control-box">
 
-    <!-- preview -->
-    <div class="control-box__element-edge">
-      <div class="control-box__content-edge">
-        <IconBase name="backgroundGrey" />
+      <!-- preview -->
+      <div class="control-box__element-edge">
+        <div class="control-box__content-edge">
+          <IconBase name="backgroundGrey" />
+        </div>
       </div>
-    </div>
-    <div class="control-box__title-m" v-if="!hideMargin">
-      {{ $t('c.margin') }}
-    </div>
-    <div class="control-box__title-p" v-if="!hidePadding">
-      {{ $t('c.padding') }}
-    </div>
-    <!-- CONTROLS -->
-    <!-- margin -->
-    <template v-if="!hideMargin">
-      <base-number-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern=""></base-number-field>
-      <base-number-field v-model="marginRight" class="ctrl ctrl__m-right"></base-number-field>
-      <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"></base-number-field>
-      <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom"
-        :disabled="isChild"
-        :[tooltipChild]="isTextTooltipChild"
-        tooltip-position="bottom"
+      <div class="control-box__title-m" v-if="!hideMargin">
+        {{ $t('c.margin') }}
+      </div>
+      <div class="control-box__title-p" v-if="!hidePadding">
+        {{ $t('c.padding') }}
+      </div>
+      <!-- CONTROLS -->
+      <!-- margin -->
+      <template v-if="!hideMargin">
+        <base-number-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern="" />
+        <base-number-field v-model="marginRight" class="ctrl ctrl__m-right" />
+        <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"/>
+        <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom" />
+      </template>
+      <!-- padding -->
+      <template v-if="!hidePadding">
+        <base-number-field v-model="paddingLeft" class="ctrl ctrl__p-left" />
+        <base-number-field v-model="paddingRight" class="ctrl ctrl__p-right" />
+        <base-number-field v-model="paddingTop" class="ctrl ctrl__p-top" />
+        <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"
+          :disabled="isMain"
+          :[tooltipMain]="isTextTooltipMain"
+          tooltip-position="bottom"
+        />
+      </template>
+      <!-- locks -->
+      <a href="#"
+         class="control-box__lock control-box__lock--margin"
+         :class="{ 'active': lockMargins }"
+         @click.prevent="lockMargins = !lockMargins"
+         v-if="!hideMargin"
         >
-      </base-number-field>
-    </template>
-    <!-- padding -->
-    <template v-if="!hidePadding">
-      <base-number-field v-model="paddingLeft" class="ctrl ctrl__p-left"></base-number-field>
-      <base-number-field v-model="paddingRight" class="ctrl ctrl__p-right"></base-number-field>
-      <base-number-field v-model="paddingTop" class="ctrl ctrl__p-top"></base-number-field>
-      <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"
-        :disabled="isMain"
-        :[tooltipMain]="isTextTooltipMain"
-        tooltip-position="bottom"
-        ></base-number-field>
-    </template>
-    <!-- locks -->
-    <a href="#"
-       class="control-box__lock control-box__lock--margin"
-       :class="{ 'active': lockMargins }"
-       @click.prevent="lockMargins = !lockMargins"
-       v-if="!hideMargin"
-      >
-      <IconBase name="chain" />
-    </a>
-    <a href="#"
-       class="control-box__lock control-box__lock--padding"
-       :class="{ 'active': lockPaddings }"
-       @click.prevent="lockPaddings = !lockPaddings"
-       v-if="!hidePadding"
-      >
-      <IconBase name="chain" />
-    </a>
+        <IconBase name="chain" />
+      </a>
+      <a href="#"
+         class="control-box__lock control-box__lock--padding"
+         :class="{ 'active': lockPaddings }"
+         @click.prevent="lockPaddings = !lockPaddings"
+         v-if="!hidePadding"
+        >
+        <IconBase name="chain" />
+      </a>
+    </div>
   </div>
 </div>
 </template>
