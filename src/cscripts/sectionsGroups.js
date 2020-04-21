@@ -46,7 +46,7 @@ export function sectionsGroups () {
     })
   }
 
-  window.addEventListener('resize', throttle(getGroups, 1000))
+  window.addEventListener('resize', throttle(getGroups, 300))
 
   getGroups()
 }

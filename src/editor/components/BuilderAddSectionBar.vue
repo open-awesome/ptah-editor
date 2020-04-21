@@ -137,7 +137,6 @@ export default {
   },
 
   mounted () {
-    console.log(this.selectedGroup)
     this.isVisibleBar = false
     this.selectedSection = null
     this.selectedGroup = []
