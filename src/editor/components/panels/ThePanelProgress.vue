@@ -121,11 +121,18 @@ export default {
   &__icon-close
     color: $grey
     position: absolute
-    top: 22px
-    right: 17px
+    top: 1.7rem
+    right: 1.7rem
     cursor: pointer
+    width: 3.6rem
+    height: 3.6rem
+    display: flex
+    justify-content: center
+    align-items: center
+    border-radius: 100%
+    transition: background 0.3s cubic-bezier(0.2, 0.85, 0.4, 1.275)
     &:hover
-      color: $main-green
+      background: rgba(0, 0, 0, 0.05)
 
 .b-progress
   height: calc(100% - 7rem)
