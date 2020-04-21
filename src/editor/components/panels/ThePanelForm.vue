@@ -5,7 +5,7 @@
     </h6>
 
     <div class="b-panel__layout">
-      <div class="layout _top-2">
+      <div class="layout _top-2 _pr-05">
         <base-scroll-container>
           <div class="layout-padding">
             <!-- Columns settings -->

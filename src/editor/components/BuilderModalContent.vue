@@ -1,12 +1,15 @@
 <template>
-  <transition name="slide-fade">
-    <div class="b-builder-modal"
-      @mousedown.self="closeContent"
-      >
+  <div class="b-builder-modal"
+    @mousedown.self="closeContent"
+   >
       <div
         class="b-builder-modal-content"
-        :class="{ 'b-builder-modal-content--wide': isWide, 'b-builder-modal-content--ultrawide': isUltraWide }"
-        >
+        :class="{
+          'b-builder-modal-content--wide': isWide,
+          'b-builder-modal-content--ultrawide': isUltraWide,
+          'b-builder-modal-content--show-modal': isShowModal
+        }"
+      >
         <div class="b-builder-modal-content__padd">
           <div class="b-builder-modal-content__chapter">
             {{ title }}
@@ -21,7 +24,6 @@
         </div>
       </div>
     </div>
-  </transition>
 </template>
 
 <script>
@@ -47,7 +49,9 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'isAddSectionExpanded',
-      'siteSettingsMenu'
+      'siteSettingsMenu',
+      'isShowModal',
+      'controlPanel'
     ]),
 
     contentID () {
@@ -65,6 +69,17 @@ export default {
 
     isUltraWide () {
       return this.$route.meta.ultraWide
+    }
+  },
+
+  watch: {
+    'controlPanel.name': {
+      handler (value) {
+        if (value !== '') {
+          this.$router.push(`/editor/${this.$route.params.slug}`)
+        }
+      },
+      deep: true
     }
   },
 
@@ -121,16 +136,11 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-builder-modal
+  position: relative
+  width: 100%
+  height: 100%
+
   background-color: rgba($dark-blue, 0.2)
-
-  position: fixed
-  top: 6rem
-  right: 0
-  bottom: 0
-  left: 9rem
-  z-index: 999
-  overflow: auto
-
   display: flex
   justify-content: flex-start
   align-items: center
@@ -139,7 +149,7 @@ export default {
     &
       display: block
   &-content
-    width: 33rem
+    width: 38rem
     min-height: 100%
     z-index: 10
     position: relative
@@ -155,11 +165,8 @@ export default {
 
     &--ultrawide
       width: 68rem
-
-    @media only screen and (max-height: 600px)
-      &
-        width: 29.5rem
-        min-height: 100%
+    &--show-modal
+      z-index: 5
     &__padd
       display: flex
       flex-direction: column
@@ -171,9 +178,6 @@ export default {
       right: 0
       bottom: 0
       left: 0
-      @media only screen and (max-height: 600px)
-        &
-          position: relative
     &__chapter
       font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif
       font-size: 1.8rem
@@ -182,6 +186,7 @@ export default {
       text-transform: uppercase
       text-align: center
       letter-spacing: 0.065em
+      color: #575A5F
 
       display: flex
       align-items: center

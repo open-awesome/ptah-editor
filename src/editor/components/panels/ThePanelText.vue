@@ -4,23 +4,31 @@
       Text
     </h6>
 
-    <!-- Typography -->
-    <div class="b-panel__control">
-      <control-typography :show-text-styles="false"></control-typography>
-    </div>
+    <div class="b-panel__layout">
+      <div class="layout _top-2 _pr-05">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <!-- Typography -->
+            <div class="b-panel__control">
+              <control-typography :show-text-styles="false"></control-typography>
+            </div>
 
-    <!-- Align -->
-    <div class="b-panel__control">
-      <control-align/>
-    </div>
+            <!-- Align -->
+            <div class="b-panel__control">
+              <control-align/>
+            </div>
 
-    <!-- Text Link -->
-    <div class="b-panel__control" v-if="!isMobile">
-      <control-text-link></control-text-link>
-    </div>
+            <!-- Text Link -->
+            <div class="b-panel__control" v-if="!isMobile">
+              <control-text-link></control-text-link>
+            </div>
 
-    <div class="b-panel__control">
-      <control-box></control-box>
+            <div class="b-panel__control">
+              <control-box></control-box>
+            </div>
+          </div>
+        </base-scroll-container>
+      </div>
     </div>
   </div>
 </template>

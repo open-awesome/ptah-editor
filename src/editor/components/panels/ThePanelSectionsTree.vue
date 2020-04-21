@@ -205,5 +205,5 @@ export default {
       padding: 0
     &-outer
       height: 100%
-      padding: 0 2.3rem 0 0
+      padding: 0 1.5rem 0 0
 </style>

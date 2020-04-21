@@ -3,10 +3,17 @@
     <h6 class="b-panel__title">
       Text
     </h6>
-
-    <!-- Typography -->
-    <div class="b-panel__control">
-      <control-typography :show-text-styles="false"></control-typography>
+    <div class="b-panel__layout">
+      <div class="layout _top-2 _pr-05">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <!-- Typography -->
+            <div class="b-panel__control">
+              <control-typography :show-text-styles="false"></control-typography>
+            </div>
+          </div>
+        </base-scroll-container>
+      </div>
     </div>
   </div>
 </template>

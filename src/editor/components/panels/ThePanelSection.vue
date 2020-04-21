@@ -2,7 +2,9 @@
   <div class="b-panel">
     <h6 class="b-panel__title b-panel__title_name-section">
       <span>
-        {{ settingObjectSection.name }}
+        <span>
+          {{ name }}
+        </span>
       </span>
     </h6>
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
@@ -15,16 +17,16 @@
           <IconBase name="platformDesktop" />
         </div>
 
-        <div class="b-section-settings__control" v-if="!isHeader && !isMobile">
-          <control-section-height></control-section-height>
+        <div class="b-panel__control" v-if="!isHeader && !isMobile">
+          <control-section-height />
         </div>
 
-        <div class="b-section-settings__control" v-if="isHeader">
-          <control-section-sticky></control-section-sticky>
+        <div class="b-panel__control" v-if="isHeader">
+          <control-section-sticky />
         </div>
 
-        <div class="b-section-settings__control">
-          <control-box></control-box>
+        <div class="b-panel__control">
+          <control-box />
         </div>
 
       </div>
@@ -101,6 +103,10 @@ export default {
 
     isHeader () {
       return this.settingObjectSection.isHeader
+    },
+
+    name () {
+      return _.startCase(this.settingObjectSection.name)
     }
   },
 
@@ -193,8 +199,6 @@ export default {
       margin: 0 auto
       max-width: 100%
       display: block
-  &__control
-    margin: 0 0 2.1rem 2.2rem
 
   &__description
     font-size: 1.4rem

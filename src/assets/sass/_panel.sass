@@ -1,6 +1,6 @@
 .b-panel
   height: 100%
-  width: 102.5%
+  width: 100%
 
   padding-bottom: 0
 
@@ -14,7 +14,7 @@
     font-family: 'Open Sans', Helvetica Neue, Helvetica, Arial, sans-serif
     font-size: 1.4rem
     font-weight: 600
-    line-height: 1
+    line-height: 1.2
     text-transform: uppercase
     text-align: center
     letter-spacing: 0.065em
@@ -48,15 +48,20 @@
   &__row
     display: flex
     justify-content: space-between
+    align-items: center
+
+    max-width: 25.6rem
+    padding: 0 0.3rem 0 0
     &._v-center
       align-items: center
   &__col
     margin: 0 0 0 1.6rem
+    max-width: 24rem
     &._m-0
       margin: 0
   &__inner
-    max-width: 330rem
-    padding: 0 1rem 0 0
+    width: 100%
+    padding: 0 5rem 0 3rem
   &__content
     height: 100%
     position: relative
@@ -103,7 +108,7 @@
 .layout
   position: absolute
   top: 7rem
-  right: .3rem
+  right: -.5rem
   bottom: 0
   left: 0
 
@@ -122,6 +127,6 @@
       padding-right: 2rem
     &._pr-6
       padding-right: 6rem
-    &._pr-1
+    &._pr-0
       padding-right: 0
 

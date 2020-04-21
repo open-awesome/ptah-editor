@@ -2,7 +2,9 @@
   <div class="b-panel">
     <span class="b-panel__title">
       <span>
-        <span>{{ settingObjectSection.name }}</span>
+        <span>
+          {{ name }}
+        </span>
       </span>
     </span>
     <div class="b-panel__content" v-if="settingObjectOptions.background">
@@ -295,6 +297,10 @@ export default {
 
     parallax () {
       return this.settingObjectOptions.parallax
+    },
+
+    name () {
+      return _.startCase(this.settingObjectSection.name)
     }
   },
 

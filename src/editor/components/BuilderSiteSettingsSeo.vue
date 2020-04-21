@@ -1,10 +1,10 @@
 <template>
   <builder-modal-content-layout>
-    <div class="seo-panel">
+    <div class="b-seo-panel">
       <base-button-tabs
         :list="tabs"
         v-model="activeTab"
-        class="seo-tabs"
+        class="b-seo-tabs"
       />
       <div class="layout" v-if="activeTab === 'seo'">
           <form @submit.prevent="applySettings" class="layout__content">
@@ -39,16 +39,22 @@
               <base-caption help="Cookie policy">
                 Cookie policy
               </base-caption>
-              <div class="b-panel__col">
-                <base-switcher
-                  v-model="useCookie"
-                  :label="$t('s.useCookie')"
-                />
-                <base-upload-input
-                  v-model="pdfFile"
-                  :label="$t('s.policyFile')"
-                  placeholder="Paste URL or upload pdf file"
-                />
+              <div class="b-panel__control">
+                <div class="b-panel__col">
+                  <base-switcher
+                    v-model="useCookie"
+                    :label="$t('s.useCookie')"
+                  />
+                </div>
+              </div>
+              <div class="b-panel__control">
+                <div class="b-panel__col">
+                  <base-upload-input
+                    v-model="pdfFile"
+                    :label="$t('s.policyFile')"
+                    placeholder="Paste URL or upload pdf file"
+                  />
+                </div>
               </div>
             </div>
           </form>
@@ -390,11 +396,16 @@ export default {
 
 <style lang="sass" scoped>
 @import '../../assets/sass/_variables.sass'
-.seo-panel
+.b-seo-panel
   height: 100%
   position: relative
+  /deep/
+  .b-panel__control,
+  .b-panel__row,
+  .b-panel__col
+    max-width: 30rem
 
-.seo-tabs
+.b-seo-tabs
   margin-bottom: $size-step
 
 .layout

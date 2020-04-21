@@ -3,20 +3,27 @@
     <h6 class="b-panel__title">
       Video
     </h6>
+    <div class="b-panel__layout">
+      <div class="layout _top-2 _pr-05">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <!-- Settings video element -->
+            <div class="b-panel__control" v-if="!isMobile">
+              <control-video :show-text-styles="false"></control-video>
+            </div>
 
-    <!-- Settings video element -->
-    <div class="b-panel__control" v-if="!isMobile">
-      <control-video :show-text-styles="false"></control-video>
-    </div>
+            <!-- Padding/Margin -->
+            <div class="b-panel__control">
+              <control-box></control-box>
+            </div>
 
-    <!-- Padding/Margin -->
-    <div class="b-panel__control">
-      <control-box></control-box>
-    </div>
-
-    <!-- Width / Height -->
-    <div class="b-panel__control" v-if="settingObjectOptions.resizable">
-       <control-size></control-size>
+            <!-- Width / Height -->
+            <div class="b-panel__control" v-if="settingObjectOptions.resizable">
+               <control-size></control-size>
+            </div>
+          </div>
+        </base-scroll-container>
+      </div>
     </div>
   </div>
 </template>

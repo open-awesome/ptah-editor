@@ -92,5 +92,5 @@ export default {
 </script>
 
 <style lang="sass">
-@import 'assets/sass/app'
+  @import 'assets/sass/app'
 </style>

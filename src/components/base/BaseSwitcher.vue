@@ -64,7 +64,8 @@ export default {
   justify-content: space-between
   align-items: center
 
-  max-width: 24rem
+  margin: 0 2px 0 0
+  // max-width: 24rem
 
   $this: &
 

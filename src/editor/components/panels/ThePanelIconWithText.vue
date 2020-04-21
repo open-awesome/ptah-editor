@@ -3,20 +3,27 @@
     <h6 class="b-panel__title">
       Icon style
     </h6>
+    <div class="b-panel__layout">
+      <div class="layout _top-2 _pr-05">
+        <base-scroll-container>
+          <div class="layout-padding">
+            <!-- Typography -->
+            <div class="b-panel__control" v-if="settingObjectOptions.typography">
+              <control-typography :show-text-styles="false"/>
+            </div>
 
-    <!-- Typography -->
-    <div class="b-panel__control" v-if="settingObjectOptions.typography">
-      <control-typography :show-text-styles="false"/>
-    </div>
+            <!-- Control icon -->
+            <div class="b-panel__control">
+              <control-icon-with-text-settings/>
+            </div>
 
-    <!-- Control icon -->
-    <div class="b-panel__control">
-      <control-icon-with-text-settings/>
-    </div>
-
-    <!-- Padding/Margin -->
-    <div class="b-panel__control">
-      <control-box/>
+            <!-- Padding/Margin -->
+            <div class="b-panel__control">
+              <control-box/>
+            </div>
+          </div>
+        </base-scroll-container>
+      </div>
     </div>
   </div>
 </template>
@@ -43,30 +50,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-  @import '../../../assets/sass/_colors.sass'
-  @import '../../../assets/sass/_variables.sass'
-
-  .b-panel
-    padding-bottom: 4.5rem
-    display: flex
-    flex-direction: column
-    height: auto
-    width: 100%
-    align-items: stretch
-
-    &__title
-      color: $black
-      font-size: 2rem
-      font-weight: bold
-
-      min-width: 28rem
-      margin: 0 0 2.8rem 0
-      padding: 0
-      &:first-letter
-        text-transform: uppercase
-
-    &__control
-      margin-bottom: 1.6rem
-</style>

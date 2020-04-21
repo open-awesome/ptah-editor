@@ -3,7 +3,7 @@
     <BuilderTopBar
       class="b-builder-layout__top-bar"
       :class="{
-          'b-builder-layout__top-bar_down' : isContentVisible
+          'b-builder-layout__top-bar_down' : isShowSettingsPage
       }"
       @backToLandings="backToLandings"
       @preview="$emit('preview', $event)"
@@ -23,7 +23,10 @@
       <aside
         id="sidebar"
         class="b-builder-layout-content__sidebar"
-        :class="{'b-builder-layout-content__sidebar_expanded': isExpanded}"
+        :class="{
+          'b-builder-layout-content__sidebar_expanded': isExpanded,
+          'b-builder-layout-content__sidebar_expanded-content': isShowSettingsPage
+        }"
       >
         <BuilderSidebar
           :builder="builder"
@@ -32,7 +35,11 @@
       </aside>
 
       <main class="b-builder-layout-content__main"
-        :class="{'b-builder-layout-content__main_expanded': isExpanded}"
+        :class="[
+          {'b-builder-layout-content__main_expanded': isExpanded && !isShowSettingsPage},
+          {'b-builder-layout-content__main_expanded-setting': isExpanded && isShowSettingsPage},
+          {'b-builder-layout-content__main_show-modal': isShowModal}
+        ]"
       >
         <base-scroll-container
           backgroundBar="#fff">
@@ -40,8 +47,6 @@
             <slot></slot>
           </div>
         </base-scroll-container>
-
-        <router-view :builder="builder"/>
       </main>
     </div>
   </div>
@@ -79,10 +84,11 @@ export default {
   computed: {
     ...mapState('Sidebar', [
       'isExpanded',
-      'device'
+      'device',
+      'isShowModal'
     ]),
 
-    isContentVisible () {
+    isShowSettingsPage () {
       return this.$route.path.split('/').indexOf('settings') > 0
     }
   },
@@ -141,15 +147,19 @@ $topBarHeight: 6rem
 
   display: flex
   align-items: stretch
-  justify-content: stretch
+  justify-content: flex-start
 
   width: 100%
   z-index: 0
 
+  transition: all .2s ease-out
   &__main-left-menu
     order: 1
     width: 5rem
     transition: width 0.3s ease-in-out
+
+    position: relative
+    z-index: 11
     &:hover,
     &._expanded
       width: 9rem
@@ -157,6 +167,7 @@ $topBarHeight: 6rem
   &__sidebar
     width: 0
     position: relative
+    z-index: 10
     padding: 6rem 0 0
     opacity: 0
 
@@ -167,6 +178,10 @@ $topBarHeight: 6rem
       opacity: 1
       width: 30.5rem
       display: flex
+      z-index: 11
+      &-content
+        z-index: 9
+        width: 38rem
   &__main
     position: absolute
     top: $topBarHeight
@@ -175,8 +190,11 @@ $topBarHeight: 6rem
     left: 5rem
     z-index: 10
 
+    display: flex
+    justify-content: stretch
+
     min-height: 5rem
-    transition: left 0.3s ease-in-out, width 0.3s ease-in-out
+    transition: all .2s ease-out
     background-color: $ligth-grey
     &:after
       content: ""
@@ -189,6 +207,13 @@ $topBarHeight: 6rem
       z-index: 20
     &_expanded
       left: 39.5rem
+    &_expanded-setting
+      left: 47rem
+      &:after
+        display: none
+    &_show-modal
+      &:after
+        z-index: 4
 
     &-layout
       transition: width 0.2s
