@@ -156,6 +156,22 @@
           </div>
         </base-scroll-container>
       </div>
+      <div class="layout" v-if="activeTab === 'logo'">
+        <div class="layout-padding">
+          <div class="b-page-style__row">
+            <BaseCaption>
+              Logo
+            </BaseCaption>
+
+            <div class="b-page-style__col">
+              <base-uploader
+                v-model="logo"
+                label="Game logo"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </builder-modal-content-layout>
 </template>
@@ -202,10 +218,11 @@ export default {
       fullPageScroll: '',
       imageForColorThief: null,
       tabs: [
+        { value: 'logo', text: 'Logo' },
         { value: 'colors', text: 'Colors' },
         { value: 'bg', text: 'Background' }
       ],
-      activeTab: 'bg',
+      activeTab: 'logo',
       progress: false
     }
   },
@@ -244,10 +261,7 @@ export default {
         }
       },
       get () {
-        if (this.bgSize === 'cover') {
-          return false
-        }
-        return true
+        return this.bgSize !== 'cover'
       }
     },
 
@@ -266,6 +280,16 @@ export default {
 
     imageForPalette () {
       return this.currentLanding.settings.imageForPalette
+    },
+
+    logo: {
+      set (value) {
+        this.storeSettings({ logo: value })
+      },
+
+      get () {
+        return this.currentLanding.settings.logo
+      }
     }
   },
 

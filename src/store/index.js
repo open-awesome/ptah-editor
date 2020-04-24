@@ -26,8 +26,6 @@ const FONTS = {
 }
 const SETUP_FONTS = {
   'h1': 'Montserrat',
-  // 'h2': 'Montserrat',
-  // 'h3': 'Lato',
   'p': 'Lato',
   'btn': 'Montserrat'
 }
@@ -108,7 +106,8 @@ const state = {
       fonts: FONTS,
       setupFonts: SETUP_FONTS,
       imageForPalette: null,
-      palette: []
+      palette: [],
+      logo: ''
     },
     checkList: DEFAULT_CHECK_LIST // landing check-list in navigation menu
   },

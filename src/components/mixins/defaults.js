@@ -1,5 +1,6 @@
 import Draggable from 'vuedraggable'
 import { mapActions } from 'vuex'
+import forEach from 'lodash-es/forEach'
 
 export default {
   components: {
@@ -26,11 +27,27 @@ export default {
         this.saveState(newState)
       },
       deep: true
+    },
+
+    '$store.state.currentLanding.settings.logo': {
+      handler (value) {
+        if (value.length) {
+          this.changeLogos(value)
+        }
+      }
     }
   },
 
   beforeDestroy () {
     this.$section.set(`$sectionData.components`, [])
+  },
+
+  mounted () {
+    let logo = this.$store.state.currentLanding.settings.logo
+
+    if (logo.length) {
+      this.changeLogos(logo)
+    }
   },
 
   methods: {
@@ -65,6 +82,23 @@ export default {
     clickOnElement (el) {
       let machineEvent = new Event('mousedown', { bubbles: true })
       el.dispatchEvent(machineEvent)
+    },
+
+    changeLogos (url) {
+      let paths = []
+
+      // find all logos in section
+      forEach(this.$sectionData, (value, key) => {
+        if (key.indexOf('components') > -1) {
+          value.forEach((element, index) => {
+            if (element.name === 'Logo') {
+              paths.push(`$sectionData.${key}[${index}].element.styles['background-image']`)
+            }
+          })
+        }
+      })
+
+      paths.forEach(path => this.$section.set(path, `url(${url})`))
     }
   }
 }
