@@ -40,4 +40,6 @@ export default {
     color: rgba(#747474, 0.5)
   &_error
     color: #FF3737
+  &:first-letter
+    text-transform: uppercase
 </style>

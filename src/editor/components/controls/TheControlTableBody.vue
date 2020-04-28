@@ -30,7 +30,8 @@ export default {
         valueMultiple: []
       },
       sizeValue: 0,
-      lineHeightValue: 0
+      lineHeightValue: 0,
+      temp: {}
     }
   },
 
@@ -197,6 +198,7 @@ export default {
     this.style.list[0].value = this.td
     this.style.list[1].value = this.fs
     this.style.list[2].value = this.fw
+
     this.temp['text-decoration'] = this.td
     this.temp['font-style'] = this.fs
     this.temp['font-weight'] = this.fw

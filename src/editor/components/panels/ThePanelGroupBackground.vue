@@ -5,6 +5,9 @@
         Group background
       </span>
     </span>
+
+    <IndicatorPlatform />
+
     <div class="b-panel-section-background" v-if="settingObjectOptions.background">
       <base-button-tabs
         :list="tabs"
@@ -173,6 +176,7 @@ import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import BaseUploader from '../../../components/base/BaseUploader'
 import ControlBackgroundPosition from './../controls/TheControlBackgroundPosition'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 const DEFAULT_COLOR = 'rgba(255,255,255,1)'
 
@@ -187,6 +191,7 @@ export default {
   name: 'ThePanelSectionBackground',
 
   components: {
+    IndicatorPlatform,
     BaseUploader,
     ControlBackgroundPosition
   },

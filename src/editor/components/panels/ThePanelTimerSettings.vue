@@ -1,71 +1,78 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Timer settings
+      Timer
     </h6>
+
+    <IndicatorPlatform />
 
     <base-scroll-container backgroundBar="#999">
       <div class="b-panel__inner">
         <!-- Settings -->
-        <div class="b-panel__control" v-if="!isMobile">
-          <base-label v-text="$t('c.setTimer')"/>
-          <date-picker
-            v-model="timer.timestamp"
-            :minuteStep="10"
-            :editable="false"
-            :not-before="notBeforeDate"
-            :not-after="notAfterDate"
-            :disabled-days="getDisabledDays"
-            style="width:100%"
-            type="datetime"
-            format="DD.MM.YYYY hh:mm a"
-            value-type="timestamp"
-            placeholder="Select date and time"
-            lang="en"
-            confirm/>
-        </div>
+        <div class="b-panel__control">
+          <base-caption>
+            Timer settings
+          </base-caption>
+          <div class="b-panel__col">
+            <div class="b-panel__control">
+              <date-picker
+                v-model="timer.timestamp"
+                :minuteStep="10"
+                :editable="false"
+                :not-before="notBeforeDate"
+                :not-after="notAfterDate"
+                :disabled-days="getDisabledDays"
+                style="width:100%"
+                type="datetime"
+                format="DD.MM.YYYY hh:mm a"
+                value-type="timestamp"
+                placeholder="Select date and time"
+                lang="en"
+                confirm
+              />
+            </div>
+            <div class="b-panel__control" v-if="!isMobile">
+              <base-select
+                :options="UTCOptions"
+                :value="UTC"
+                @input="UTC = $event.value"
+              />
+            </div>
 
-        <div class="b-panel__control" v-if="!isMobile">
-          <base-select
-            :options="UTCOptions"
-            :value="UTC"
-            @input="UTC = $event.value"
-            :label="$t('c.timeZone')"/>
-        </div>
+            <div class="b-panel__control" v-if="!isMobile">
+              <base-switcher v-model="labels.show" :label="$t('c.labels')"/>
+            </div>
 
-        <div class="b-panel__control" v-if="!isMobile">
-          <base-switcher v-model="labels.show" :label="$t('c.labels')"/>
-        </div>
+            <div class="b-panel__control" v-if="labels.show && !isMobile">
+              <base-select
+                :options="positionOptions"
+                :value="position"
+                @input="position = $event.value"
+              />
+            </div>
 
-        <div class="b-panel__control" v-if="labels.show && !isMobile">
-          <base-select
-            :options="positionOptions"
-            :value="position"
-            @input="position = $event.value"
-            label="Position"/>
-        </div>
-
-        <div class="b-panel__control" v-if="labels.show && !isMobile">
-          <base-select
-            :options="languageOptions"
-            :value="language"
-            @input="language = $event.value"
-            label="Labels language"/>
+            <div class="b-panel__control" v-if="labels.show && !isMobile">
+              <base-select
+                :options="languageOptions"
+                :value="language"
+                @input="language = $event.value"
+              />
+            </div>
+          </div>
         </div>
 
         <!-- Typography -->
         <div class="b-panel__control">
+          <base-caption>
+            Timer style
+          </base-caption>
           <control-typography/>
-        </div>
-
-        <!-- Background -->
-        <div class="b-panel__control" v-if="!isMobile">
-          <control-background-timer/>
+          <control-background-timer v-if="!isMobile"/>
         </div>
 
         <!-- Padding/Margin -->
         <div class="b-panel__control">
-          <control-box></control-box>
+          <control-box />
         </div>
 
       </div><!--/.b-panel__inner-->
@@ -79,11 +86,13 @@ import { mapState } from 'vuex'
 import ControlTypography from './../controls/TheControlTypography'
 import ControlBackgroundTimer from './../controls/TheControlBackgroundTimer'
 import ControlBox from '../controls/TheControlBox'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 export default {
   name: 'ThePanelTimerSettings',
 
   components: {
+    IndicatorPlatform,
     DatePicker,
     ControlTypography,
     ControlBackgroundTimer,

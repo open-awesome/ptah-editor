@@ -123,9 +123,6 @@ $main-font-size: 6rem
   display: flex
   justify-content: center
   align-items: center
-  &.styler-active
-    border: 0.2rem $white dotted
-    border-radius: 0.5rem
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     height: auto !important
@@ -183,9 +180,6 @@ $main-font-size: 6rem
   & .contenteditable
     position: relative
     z-index: 9999
-  &.is-editable
-    .styler-active
-      border-color: $white
   & span
     display: block
   .is-mobile &,
@@ -398,10 +392,6 @@ $main-font-size: 6rem
     @media only screen and (max-width: 768px)
       &
         display: none
-  .styler-active
-    .is-mobile &,
-    .is-tablet &
-      border: .2rem dotted $main-green
 
 .b-logo
   $this: &
@@ -475,9 +465,6 @@ $main-font-size: 6rem
   justify-content: center
   align-items: center
   flex-wrap: wrap
-  &.styler-active
-    border: 0.2rem $white dotted
-    border-radius: 0.5rem
   .is-tablet &, .is-mobile &
     flex-wrap: wrap
     height: auto !important

@@ -22,6 +22,8 @@
           class="b-base-button-tabs-button__icon"
           v-if="item.iconName"
           :name="item.iconName"
+          :color="color"
+          :strokeColor="strokeColor"
         />
         <span
           class="b-base-button-tabs-button__text"
@@ -72,6 +74,16 @@ export default {
     type: {
       type: String,
       default: ''
+    },
+
+    color: {
+      type: String,
+      default: '#575A5F'
+    },
+
+    strokeColor: {
+      type: String,
+      default: 'transparent'
     }
   },
 
@@ -132,6 +144,7 @@ $tabs-bg: #EEF9FA
     display: flex
     box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.1)
     background-color: $tabs-bg
+    justify-content: stretch
 
   &__button
     @include button-style-reset
@@ -193,26 +206,30 @@ $tabs-bg: #EEF9FA
   &._buttons
     .b-base-button-tabs__row
       justify-content: center
+      flex-wrap: wrap
+
       background: transparent
       box-shadow: none
     .b-base-button-tabs__button
-      width: 4.6rem
+      width: 3.4rem
+      min-width: 3.4rem
+      max-width: 3.4rem
       height: 3.4rem
-      margin: 0 .25rem
+      padding: 0
+      margin: .8rem .3rem
       background: #F3F6F6
-      border-radius: 5px
-
-      flex-grow: 0
+      border-radius: .5rem
+      & svg
+        width: 55%
+        height: 55%
       &:after,
       &:before
         display: none
       &:hover
         background: rgba(162, 165, 165, 0.5)
-        & svg
-          color: #575A5F
       &._selected
-        color: #575A5F
         background: #00ADB6
+        color: #575A5F
         &:hover
           color: #575A5F
           background: #00ADB6

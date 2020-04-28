@@ -116,7 +116,12 @@
         "navColor":                     "Navigation color",
         "transDelay":                   "Transition delay (ms)",
         "carouselWidth":                "Carousel width (columns)",
-        "textColor":                    "Text color"
+        "textColor":                    "Text color",
+        "hoverColor":                   "Hover color",
+        "style":                        "Style",
+        "color":                        "Color",
+        "corner":                       "Corner",
+        "radius":                       "Radius"
     },
     "d": {
         "createNew":                    "Create new landing",

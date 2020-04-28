@@ -206,5 +206,21 @@ export default {
 </script>
 
 <template>
-  <BaseButtonTabs :list="align.list" v-model="align.value" @change="aligned"/>
+  <div class="b-panel__control">
+    <div class="b-panel__col" v-if="!isMobile">
+      <div class="b-panel__row" v-if="!isMobile">
+        <base-label>
+          Text align
+        </base-label>
+        <div class="b-panel__col _m-0">
+          <BaseButtonTabs
+            type="buttons"
+            :list="align.list"
+            v-model="align.value"
+            @change="aligned"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
 </template>

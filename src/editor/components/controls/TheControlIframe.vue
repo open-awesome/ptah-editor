@@ -1,18 +1,23 @@
 <template>
-<div class="b-iframe-control">
+<div>
   <!-- IframeUrl -->
-  <div class="b-iframe-control__control">
-    <BaseTextField
-      v-model="vUrl"
-      label="URL"
-      placeholder="https://www.url.com"
-      :hasError="error.url"
-      @input="validUrl(vUrl)"
-    >
-      <span slot="error">
-        Invalid URL
-      </span>
-    </BaseTextField>
+  <div class="b-panel__control">
+    <base-caption>
+      Iframe url
+    </base-caption>
+    <div class="b-panel__col">
+      <BaseTextField
+        v-model="vUrl"
+        label="URL"
+        placeholder="https://www.url.com"
+        :hasError="error.url"
+        @input="validUrl(vUrl)"
+      >
+        <span slot="error">
+          Invalid URL
+        </span>
+      </BaseTextField>
+    </div>
   </div>
 </div>
 </template>
@@ -82,7 +87,7 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-iframe-control
+.b-panel
   &__header
     margin-bottom: .8rem
 

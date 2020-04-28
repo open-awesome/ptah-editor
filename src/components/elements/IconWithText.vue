@@ -7,8 +7,7 @@
     @mouseleave="mouseleave"
     @mouseover.stop="mouseover"
     :class="[
-      { 'b-text-icon_hide': !icon.visible },
-      { '_hover' : hoverBy === 'element' }
+      { 'b-text-icon_hide': !icon.visible }
     ]"
   >
 

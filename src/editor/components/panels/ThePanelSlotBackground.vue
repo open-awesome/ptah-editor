@@ -3,8 +3,11 @@
     <h6 class="b-panel__title">
       Block
     </h6>
+
+    <IndicatorPlatform />
+
     <div class="b-panel__content">
-      <div class="layout _top-2 layout__bg">
+      <div class="layout _top-0 layout__bg">
         <base-scroll-container>
           <div class="layout-padding">
             <div class="b-panel__control">
@@ -73,6 +76,7 @@ import { mapState } from 'vuex'
 import * as _ from 'lodash-es'
 import BaseUploader from '../../../components/base/BaseUploader'
 import ControlBackgroundPosition from './../controls/TheControlBackgroundPosition'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
 
@@ -87,6 +91,7 @@ export default {
   name: 'ThePanelSlotBackground',
 
   components: {
+    IndicatorPlatform,
     BaseUploader,
     ControlBackgroundPosition
   },

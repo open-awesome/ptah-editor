@@ -3,18 +3,27 @@
     <h6 class="b-panel__title">
       Icon style
     </h6>
-    <div class="b-panel__layout">
+
+    <IndicatorPlatform />
+
+    <div class="b-panel__layout _top-9">
       <div class="layout _top-2 _pr-05">
         <base-scroll-container>
           <div class="layout-padding">
-            <!-- Typography -->
-            <div class="b-panel__control" v-if="settingObjectOptions.typography">
-              <control-typography :show-text-styles="false"/>
-            </div>
-
             <!-- Control icon -->
             <div class="b-panel__control">
+              <base-caption>
+                Icon properties
+              </base-caption>
               <control-icon-with-text-settings/>
+            </div>
+
+            <!-- Typography -->
+            <div class="b-panel__control" v-if="settingObjectOptions.typography">
+              <base-caption>
+                Text settings
+              </base-caption>
+              <control-typography :show-text-styles="false"/>
             </div>
 
             <!-- Padding/Margin -->
@@ -33,11 +42,13 @@ import { mapState } from 'vuex'
 import ControlTypography from '../controls/TheControlTypography'
 import ControlIconWithTextSettings from '../controls/TheControlIconWithTextSettings'
 import ControlBox from '../controls/TheControlBox'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 export default {
   name: 'ThePanelIconWithTextStyles',
 
   components: {
+    IndicatorPlatform,
     ControlTypography,
     ControlBox,
     ControlIconWithTextSettings

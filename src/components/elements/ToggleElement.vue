@@ -8,9 +8,6 @@
     :style="[objVarsMedia, objVarsTypo]"
     @mouseleave="mouseleave"
     @mouseover.stop="mouseover"
-    :class="[
-      { '_hover' : hoverBy === 'element' }
-    ]"
     >
 
     <div class="b-toggle-element__item"

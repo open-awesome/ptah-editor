@@ -4,9 +4,6 @@
     :style="objVarsMedia"
     @mouseleave="mouseleave"
     @mouseover.stop="mouseover"
-    :class="[
-      { '_hover' : hoverBy === 'element' }
-    ]"
   >
     <div class="b-age-restrictions__item"
       v-for="(value, key) in restrictions" :key="key"

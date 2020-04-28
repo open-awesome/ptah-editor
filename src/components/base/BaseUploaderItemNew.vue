@@ -381,7 +381,8 @@ export default {
     color: $dark-grey
     font-weight: 500
     height: 5rem
-    text-transform: capitalize
+    &:first-letter
+      text-transform: uppercase
     &-help
       position: absolute
       right: 0rem

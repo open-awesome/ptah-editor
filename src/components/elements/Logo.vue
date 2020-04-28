@@ -6,8 +6,7 @@
     @mouseover.stop="mouseover"
     :data-href="link.href"
     :class="[
-      {'js-element-link' : isSetUrlImage },
-      { '_hover' : hoverBy === 'element' }
+      {'js-element-link' : isSetUrlImage }
     ]"
     :path="path"
     :style="[objVarsMedia, objVarsResize]"

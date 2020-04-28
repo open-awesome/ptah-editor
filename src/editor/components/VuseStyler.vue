@@ -888,9 +888,9 @@ export default {
   display: none
   justify-content: center
   align-items: flex-start
-  height: 3.6rem
+  height: 3.8rem
   z-index: 20
-  margin: 0 0 -0.3rem
+  margin: -0.6rem 0 0
 
   &.is-show-modal
     z-index: -1
@@ -900,36 +900,33 @@ export default {
 
   &__controls
     display: flex
+    background: $main-yellow
+    border-radius: .5rem
 
   &__col
     display: flex
     flex-wrap: nowrap
 
   &__control
-    width: 4.6rem
-    height: 3.6rem
+    width: 3.4rem
+    height: 3.4rem
+    margin: 0 .9rem
 
     display: flex
     align-items: center
     justify-content: center
 
-    background: $main-yellow
+    border-radius: 50%
 
     cursor: pointer
     transition: all .3s
-    &:first-child
-      border-radius: .5rem 0 0 .5rem
-    &:last-child
-      border-radius: 0 .5rem .5rem 0
     & svg
       fill:  $white
       width: 20px
       height: 20px
 
     &:hover, .active
-      background: #0C71C3
-      svg
-        fill: $white
+      background: rgba(255, 255, 255, 0.35)
 
   &__modal
     width: 40rem

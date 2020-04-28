@@ -8,8 +8,7 @@
     @mouseleave="mouseleave"
     @mouseover.stop="mouseover"
     :class="[
-      {'js-element-link' : isSetUrlImage },
-      { '_hover' : hoverBy === 'element' }
+      {'js-element-link' : isSetUrlImage }
     ]"
   >
 

@@ -78,12 +78,16 @@ export default {
 </script>
 
 <template>
-  <div class="b-hover-animation-control">
-    <base-select :label="$t('c.hoverAnim')" :options="animationList" v-model="animationClass" @input="changeAnimation" />
+  <div class="b-panel__control">
+    <base-caption>
+      {{ $t('c.hoverAnim') }}
+    </base-caption>
+    <div class="b-panel__col">
+      <base-select
+        :options="animationList"
+        v-model="animationClass"
+        @input="changeAnimation"
+      />
+    </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-.b-hover-animation-control
-  margin-top: 2.2rem
-</style>

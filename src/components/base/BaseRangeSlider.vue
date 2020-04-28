@@ -119,7 +119,7 @@ $knob-shadow: 0px 2px 8px rgba($main-green, 0.2)
     .range-slider
       box-sizing: border-box
       padding: 0 0.6rem
-      width: 13rem
+      width: 11rem
       height: $size-step
       display: block
 

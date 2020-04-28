@@ -1,7 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import { getPseudoTemplate, randomPoneId, FONT_SIZES_LIST, LINES_HEIGHT_LIST } from '../../util'
-import * as _ from 'lodash-es'
+import { getPseudoTemplate, randomPoneId } from '../../util'
+import { get, merge } from 'lodash-es'
 
 export default {
   props: {
@@ -17,8 +17,6 @@ export default {
 
   data () {
     return {
-      sizes: FONT_SIZES_LIST,
-      linesHeight: LINES_HEIGHT_LIST,
       color: '',
       colorHover: '',
       td: { prop: 'text-decoration', value: 'underline', base: 'none' },
@@ -44,7 +42,9 @@ export default {
         ],
         valueMultiple: []
       },
-      temp: {}
+      temp: {},
+      sizeValue: 0,
+      lineHeightValue: 0
     }
   },
 
@@ -52,6 +52,7 @@ export default {
     ...mapState('Sidebar', [
       'settingObjectSection',
       'settingObjectElement',
+      'settingObjectLabel',
       'settingObjectOptions',
       'isMobile'
     ]),
@@ -78,7 +79,7 @@ export default {
         media[device] = this.styles
       }
 
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, {
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, {
         media: media
       }))
 
@@ -93,17 +94,20 @@ export default {
       get () {
         let props = 'styles'
         let size = ''
+        let newSize = ''
 
         if (this.isMobile) props = `media['is-mobile']`
 
-        size = _.get(this.settingObjectOptions, `${props}['font-size']`)
+        size = get(this.settingObjectOptions, `${props}['font-size']`)
 
-        if (size === undefined) size = _.get(this.settingObjectOptions, `styles['font-size']`)
+        if (size === undefined) size = get(this.settingObjectOptions, `styles['font-size']`)
 
-        return _.find(this.sizes, { value: size })
+        newSize = size.split('rem')
+
+        return parseFloat(newSize[0]) * 10
       },
       set (value) {
-        this.update('font-size', value.value)
+        this.update('font-size', `${value / 10}rem`)
       }
     },
 
@@ -115,7 +119,7 @@ export default {
 
         if (this.isMobile) props = `media['is-mobile']`
 
-        s = _.get(this.settingObjectOptions, `${props}['line-height']`)
+        s = get(this.settingObjectOptions, `${props}['line-height']`)
         gotLineHeight = s
 
         if (s === undefined) {
@@ -123,13 +127,13 @@ export default {
           let lineHeight = parseFloat(style['line-height'])
           let fontSize = parseFloat(style['font-size'])
 
-          gotLineHeight = Math.round((lineHeight / fontSize) * 10) / 10
+          gotLineHeight = Math.round((lineHeight / fontSize) * 10) * 100
         }
 
-        return { name: gotLineHeight, value: gotLineHeight }
+        return gotLineHeight * 100
       },
       set (value) {
-        this.update('line-height', value.value)
+        this.update('line-height', value / 100)
       }
     }
   },
@@ -164,6 +168,9 @@ export default {
           this.style.valueMultiple.push(this.temp[key])
         }
       }
+
+      this.sizeValue = this.size
+      this.lineHeightValue = this.lineHeight
     },
 
     changeColor () {
@@ -183,7 +190,7 @@ export default {
       if (style !== '') {
         pseudo[pseudoClass] = {}
         pseudo[pseudoClass][attr] = style + '!important'
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { pseudo }))
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, { pseudo }))
 
         this.changePseudoStyle(attr, style + '!important')
       }
@@ -221,7 +228,23 @@ export default {
 
       this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
 
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, props))
+    },
+
+    setSize (value) {
+      this.sizeValue = value
+    },
+
+    setSizeValue (value) {
+      this.size = value
+    },
+
+    setLineHeight (value) {
+      this.lineHeightValue = value
+    },
+
+    setLineHeightValue (value) {
+      this.lineHeight = value
     }
   },
 
@@ -232,48 +255,76 @@ export default {
 </script>
 
 <template>
-  <div class="b-typography-controls">
-    <div class="b-typography-controls__control">
-      <div class="b-typography-controls__control-col">
-        <base-select :label="$t('c.size')" :options="sizes" v-model="size" height="23" @input="updateProps"></base-select>
+  <div class="b-panel__control">
+    <div class="b-panel__col" v-if="!isMobile">
+      <div class="b-panel__control">
+        <base-color-picker
+          :label="$t('c.textColor')"
+          v-model="color"
+          @change="changeColor"
+        />
       </div>
-      <div class="b-typography-controls__control-col">
-        <base-select :label="$t('c.line')" :options="linesHeight" v-model="lineHeight" height="23" @input="updateProps"></base-select>
+      <div class="b-panel__control" v-if="colorTextHover">
+        <base-color-picker
+          class="b-picker_color-hover"
+          :label="$t('c.hoverColor')"
+          v-model="colorHover"
+          @change="changeColorHover"
+        />
       </div>
     </div>
-    <div class="b-typography-controls__control" v-if="!isMobile">
-      <div class="b-typography-controls__control-col">
-        <base-color-picker :label="$t('c.text')" v-model="color" @change="changeColor"></base-color-picker>
-      </div>
-      <div class="b-typography-controls__control-col b-typography-controls__control-col" v-if="colorTextHover">
-        <base-color-picker class="b-picker_color-hover" :label="$t('c.hover')" v-model="colorHover" @change="changeColorHover"></base-color-picker>
+
+    <div class="b-panel__col" v-if="!isMobile">
+      <div class="b-panel__control" v-if="showTextStyles">
+        <BaseButtonTabs
+          :list="style.list"
+          v-model="style.valueMultiple"
+          @change="changeStyle"
+        />
       </div>
     </div>
-    <div class="b-typography-controls__control" v-if="!isMobile">
-      <div class="b-typography-controls__control-col" v-if="showTextStyles">
-        <BaseButtonTabs :list="style.list" v-model="style.valueMultiple" @change="changeStyle"/>
+
+    <div class="b-panel__control">
+      <div class="b-panel__col">
+        <base-range-slider
+          position-label="left"
+          v-model="size"
+          :label="$t('c.size')"
+          step="1"
+          min="8"
+          max="72"
+          @change="setSize"
+        >
+          <base-number-input
+            :value="sizeValue"
+            :minimum="8"
+            :maximum="72"
+            unit="px"
+            @input="setSizeValue"
+          />
+        </base-range-slider>
+      </div>
+    </div>
+    <div class="b-panel__control">
+      <div class="b-panel__col" >
+        <base-range-slider
+          position-label="left"
+          v-model="lineHeight"
+          :label="$t('c.line')"
+          step="1"
+          min="100"
+          max="130"
+          @change="setLineHeight"
+        >
+          <base-number-input
+            :value="lineHeightValue"
+            :minimum="100"
+            :maximum="130"
+            unit="%"
+            @input="setLineHeightValue"
+          />
+        </base-range-slider>
       </div>
     </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-typography-controls
-  &__control
-    display: flex
-    justify-content: stretch
-    align-items: center
-
-    width: 100%
-    margin-top: $size-step/2
-    &-col
-      flex-basis: 50%
-      margin: 0 0 0 $size-step/2
-      &-font-name
-        flex-basis: 90%
-      &:first-child
-        margin: 0
-</style>

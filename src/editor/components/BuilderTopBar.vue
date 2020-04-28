@@ -120,7 +120,8 @@ export default {
 
   methods: {
     ...mapActions('Sidebar', [
-      'clearSettingObject'
+      'clearSettingObject',
+      'setControlPanel'
     ]),
 
     setDevice (type) {
@@ -128,6 +129,7 @@ export default {
     },
 
     backToLandings ($event) {
+      this.setControlPanel(false)
       this.clearSettingObject()
       this.$emit('backToLandings', $event)
     },

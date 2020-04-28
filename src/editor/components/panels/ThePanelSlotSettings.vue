@@ -4,7 +4,9 @@
       Block
     </h6>
 
-    <div class="b-panel__layout">
+    <IndicatorPlatform />
+
+    <div class="b-panel__layout _top-9">
       <div class="layout _top-2 _pr-05">
         <base-scroll-container>
           <div class="layout-padding _pr-6">
@@ -198,10 +200,11 @@ import { mapState } from 'vuex'
 import * as _ from 'lodash-es'
 import ControlBox from '../controls/TheControlBox'
 import ControlSlotWidth from '../controls/TheControlSlotWidth'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 export default {
   name: 'ThePanelSlotSettings',
-  components: { ControlSlotWidth, ControlBox },
+  components: { IndicatorPlatform, ControlSlotWidth, ControlBox },
   props: {
     builder: {
       type: Object,

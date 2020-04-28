@@ -15,38 +15,17 @@
   &__item
     position: relative
 
-    margin: 0
-    min-height: 3.8rem
+    margin: 0 0 1.6rem
+    // min-height: 3.8rem
 
     display: flex
     justify-content: flex-start
     align-items: center
+    flex-wrap: wrap
 
     font-size: 1.4rem
-    line-height: 1.9rem
+    line-height: 1
     cursor: pointer
-    &:after
-      content: ''
-      height: 1.8rem
-      width: 1.8rem
-      position: absolute
-      top: 50%
-      left: 0.9rem
-      margin:  -0.9rem 0 0 0
-
-      border-radius: 100%
-      background: #00ADB6
-      transition: all .3s cubic-bezier(.2,.85,.4,1.275)
-      opacity: 0
-    &:hover
-      &:after
-        height: 4.4rem
-        width: 4.4rem
-        top: 50%
-        left: -1.4rem
-        margin:  -2.2rem 0 0 0
-
-        opacity: 0.08
     &_opacity
       opacity: 0.2
       color: $black
@@ -76,13 +55,15 @@
       display: inline-block
       user-select: none
       text-align: left
-      width: 20rem
+      width: 18rem
       &:hover
         filter: brightness(120%)
       &:active
         filter: brightness(50%)
       .vuse-icon
         width: 100%
+    &._restrictions &-button
+        width: 9rem
     &-check
       width: 1.8rem
       height: 1.8rem
@@ -95,6 +76,9 @@
       display: flex
       justify-content: center
       align-items: center
+
+      position: relative
+      z-index: 1
       & svg
         fill: $dark-grey
       &_color
@@ -102,6 +86,52 @@
         border: 0.3rem solid $main-green
         & svg
           fill: #ffffff
+      &:after
+        content: ''
+        height: 1.8rem
+        width: 1.8rem
+        position: absolute
+        z-index: 0
+        top: 50%
+        left: 50%
+        margin: -.9rem 0 0 -.9rem
+
+        border-radius: 100%
+        background: #00ADB6
+        transition: all .3s cubic-bezier(.2,.85,.4,1.275)
+        opacity: 0
+      &:hover
+        &:after
+          height: 4.4rem
+          width: 4.4rem
+          margin: -2.2rem 0 0 -2.3rem
+
+          opacity: 0.08
+    &-select
+      width: 10rem
+      &._restrictions
+        /deep/
+         .b-pth-base-select__container
+           padding: .6rem .8rem
+         .b-pth-base-select
+           width: 13rem
+           max-width: 13rem
+           height: 2.4rem
+         .b-pth-base-select__name
+           font-size: 1rem
+         .b-pth-base-select__arrow
+           position: absolute
+           right: 0.6rem
+           top: .8rem
+           & svg
+             width: .8rem
+             height: .5rem
+         .b-pth-base-select__options-item
+           font-size: 1rem
+           padding: .6rem .8rem
+    &-set-link-input
+      margin: .8rem 0 0
+      width: 100%
 
 @keyframes ripples
   0%

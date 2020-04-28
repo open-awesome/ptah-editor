@@ -4,9 +4,6 @@
   :style="[objVarsMedia, objVarsResize]"
   @mouseleave="mouseleave"
   @mouseover.stop="mouseover"
-  :class="[
-    { '_hover' : hoverBy === 'element' }
-  ]"
 >
   <div class="b-video__padd">
     <iframe

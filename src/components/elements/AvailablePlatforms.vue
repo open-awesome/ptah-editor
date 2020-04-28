@@ -4,9 +4,6 @@
     :style="objVarsMedia"
     @mouseleave="mouseleave"
     @mouseover.stop="mouseover"
-    :class="[
-      { '_hover' : hoverBy === 'element' }
-    ]"
   >
     <div class="b-available-platforms__item"
       v-for="(value, key) in platforms" :key="key"

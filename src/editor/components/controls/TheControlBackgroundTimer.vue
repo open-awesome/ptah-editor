@@ -47,25 +47,20 @@ export default {
 </script>
 
 <template>
-  <div class="b-bg-controls">
-    <div class="b-bg-controls__control">
-      <base-color-picker label="Background color" v-model="bgColor" @change="changeColor"></base-color-picker>
+  <div class="b-panel__col">
+    <div class="b-panel__control">
+      <base-color-picker
+        label="Background color"
+        v-model="bgColor"
+        @change="changeColor"
+      />
     </div>
-    <div class="b-bg-controls__control">
-      <base-color-picker label="Tile color" v-model="bgTile" @change="changeBgTileColor"></base-color-picker>
+    <div class="b-panel__control">
+      <base-color-picker
+        label="Tile color"
+        v-model="bgTile"
+        @change="changeBgTileColor"
+      />
     </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-bg-controls
-  margin-top: 2.2rem
-  padding: 0 0 $size-step/2
-  border-bottom: 0.2rem dotted rgba($black, 0.15)
-  &__control
-    &:first-child
-      margin-bottom: $size-step/2
-</style>

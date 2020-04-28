@@ -14,10 +14,12 @@ export default {
       'setHoverBy'
     ]),
     mouseover () {
+      this.$el.classList.add('_hover')
       this.setHoverBy('element')
     },
 
     mouseleave () {
+      this.$el.classList.remove('_hover')
       this.setHoverBy('')
     }
   }

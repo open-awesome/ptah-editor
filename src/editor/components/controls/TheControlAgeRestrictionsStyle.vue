@@ -5,6 +5,12 @@ import * as _ from 'lodash-es'
 export default {
   name: 'ControlAgeRestrictionsStyle',
 
+  data () {
+    return {
+      elWidthValue: 0
+    }
+  },
+
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions',
@@ -66,27 +72,39 @@ export default {
   methods: {
     ...mapActions('Sidebar', [
       'updateSettingOptions'
-    ])
+    ]),
+
+    setWidth (value) {
+      this.elWidthValue = value
+    },
+
+    setWidthValue (value) {
+      this.elWidth = value
+    }
   }
 }
 </script>
 
 <template>
-  <div class="b-text-controls">
-    <div class="b-size-controls__control">
-      <base-range-slider v-model="elWidth" :label="$t('c.iconsWidth')" step="8" min="16" max="128">
-        {{ elWidth }} px
+  <div class="b-panel__col">
+    <div class="b-panel__control">
+      <base-range-slider
+        position-label="left"
+        v-model="elWidth"
+        :label="$t('c.width')"
+        step="8"
+        min="16"
+        max="128"
+        @change="setWidth"
+      >
+        <base-number-input
+          :value="elWidthValue"
+          :minimum="32"
+          :maximum="128"
+          unit="px"
+          @input="setWidthValue"
+        />
       </base-range-slider>
     </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-text-controls
-  &__control
-    margin-top: $size-step/2
-
-</style>

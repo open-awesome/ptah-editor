@@ -116,7 +116,12 @@
         "navColor":                     "Цвет стрелок",
         "transDelay":                   "Задержка (мс)",
         "carouselWidth":                "Ширина (в колонках)",
-        "textColor":                    "Цвет текста"
+        "textColor":                    "Цвет текста",
+        "hoverColor":                   "Цвет при наведении",
+        "style":                        "Стиль",
+        "color":                        "Цвет",
+        "corner":                       "Угол",
+        "radius":                       "Радиус"
     },
     "d": {
         "createNew":                    "Создать лендинг",

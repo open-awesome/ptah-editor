@@ -5,9 +5,6 @@
      :style="[objVarsMedia, objVarsResize, objVarsTypo]"
      @mouseleave="mouseleave"
      @mouseover.stop="mouseover"
-     :class="[
-      { '_hover' : hoverBy === 'element' }
-    ]"
   >
     <slot v-if="!isActive"></slot>
 

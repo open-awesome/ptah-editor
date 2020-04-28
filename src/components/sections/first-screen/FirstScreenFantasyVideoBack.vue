@@ -147,7 +147,9 @@ const C_CUSTOM = [
         'text-align': 'center',
         'width': '240px',
         'height': '64px',
-        'border': '1px solid #000000',
+        'border-width': '1px',
+        'border-style': 'solid',
+        'border-color': '#000000',
         'margin-top': '25px',
         'margin-right': '0px',
         'margin-bottom': '25px',
@@ -156,7 +158,9 @@ const C_CUSTOM = [
       pseudo: {
         'hover': {
           'background-color': '#333333 !important',
-          'border': '1px solid #AF2E12 !important'
+          'border-width': '1px',
+          'border-style': 'solid',
+          'border-color': '#000000'
         }
       }
     }

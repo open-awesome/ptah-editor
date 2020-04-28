@@ -7,16 +7,11 @@
         </span>
       </span>
     </h6>
+
+    <IndicatorPlatform />
+
     <base-scroll-container backgroundBar="#999" v-if="!isGrouping">
       <div class="b-panel__inner">
-
-        <div class="b-panel__platform" v-if="isMobile">
-          <IconBase name="platformMobile" />
-        </div>
-        <div class="b-panel__platform" v-if="!isMobile">
-          <IconBase name="platformDesktop" />
-        </div>
-
         <div class="b-panel__control" v-if="!isHeader && !isMobile">
           <control-section-height />
         </div>
@@ -64,9 +59,11 @@ import ControlBox from './../controls/TheControlBox'
 import { resetIndents } from '@editor/util'
 import TheControlCarousel from '../controls/TheControlCarousel'
 import ControlSectionSticky from '../controls/TheControlSectionSticky'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 export default {
   components: {
+    IndicatorPlatform,
     TheControlCarousel,
     IconBase,
     BuilderSettingsBarGroup,

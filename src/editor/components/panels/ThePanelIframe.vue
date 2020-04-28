@@ -3,23 +3,29 @@
     <h6 class="b-panel__title">
       Iframe
     </h6>
-    <div class="b-panel__layout">
+
+    <IndicatorPlatform />
+
+    <div class="b-panel__layout _top-9">
       <div class="layout _top-2 _pr-05">
         <base-scroll-container>
           <div class="layout-padding">
             <!-- Settings video element -->
             <div class="b-panel__control" v-if="!isMobile">
-              <control-iframe :show-text-styles="false"></control-iframe>
-            </div>
-
-            <!-- Padding/Margin -->
-            <div class="b-panel__control">
-              <control-box></control-box>
+              <control-iframe :show-text-styles="false" />
             </div>
 
             <!-- Width / Height -->
             <div class="b-panel__control" v-if="settingObjectOptions.resizable">
-               <control-size></control-size>
+              <base-caption v-if="isMobile">
+                Iframe size
+              </base-caption>
+              <control-size />
+            </div>
+
+            <!-- Padding/Margin -->
+            <div class="b-panel__control">
+              <control-box />
             </div>
           </div>
         </base-scroll-container>
@@ -34,11 +40,13 @@ import { mapState } from 'vuex'
 import ControlIframe from '../controls/TheControlIframe'
 import ControlBox from '../controls/TheControlBox'
 import ControlSize from '../controls/TheControlSize'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 export default {
   name: 'ThePanelIframe',
 
   components: {
+    IndicatorPlatform,
     ControlIframe,
     ControlBox,
     ControlSize

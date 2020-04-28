@@ -7,6 +7,9 @@
         </span>
       </span>
     </span>
+
+    <IndicatorPlatform />
+
     <div class="b-panel__content" v-if="settingObjectOptions.background">
       <base-button-tabs
         :list="tabs"
@@ -79,16 +82,18 @@
               </div>
             </div>
             <div class="b-panel__control">
-              <div class="b-panel__row">
-                <base-caption help="Layer overlaps background ">
-                  Overlay layer
-                </base-caption>
-                <div class="b-panel__col b-panel__col_overlay-color">
-                  <base-color-picker
-                    v-model="sectionOverlayColor"
-                    @change="updateOverlayColor"
-                    label=""
-                  />
+              <div class="b-panel__control">
+                <div class="b-panel__row">
+                  <base-caption help="Layer overlaps background ">
+                    Overlay layer
+                  </base-caption>
+                  <div class="b-panel__col">
+                    <base-color-picker
+                      v-model="sectionOverlayColor"
+                      @change="updateOverlayColor"
+                      label=""
+                    />
+                  </div>
                 </div>
               </div>
               <div class="b-panel__col">
@@ -142,16 +147,18 @@
               />
             </div>
             <div class="b-panel__control">
-              <div class="b-panel__row">
-                <base-caption help="Layer overlaps background ">
-                  Overlay layer
-                </base-caption>
-                <div class="b-panel__col b-panel__col_overlay-color">
-                  <base-color-picker
-                    v-model="sectionOverlayColor"
-                    @change="updateOverlayColor"
-                    label=""
-                  />
+              <div class="b-panel__control">
+                <div class="b-panel__row">
+                  <base-caption help="Layer overlaps background ">
+                    Overlay layer
+                  </base-caption>
+                  <div class="b-panel__col">
+                    <base-color-picker
+                      v-model="sectionOverlayColor"
+                      @change="updateOverlayColor"
+                      label=""
+                    />
+                  </div>
                 </div>
               </div>
               <div class="b-panel__col">
@@ -183,6 +190,7 @@ import { mapState, mapActions } from 'vuex'
 import * as _ from 'lodash-es'
 import BaseUploader from '../../../components/base/BaseUploader'
 import ControlBackgroundPosition from './../controls/TheControlBackgroundPosition'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 const DEFAULT_COLOR = 'rgba(255,255,255,1)'
 
@@ -198,7 +206,8 @@ export default {
 
   components: {
     BaseUploader,
-    ControlBackgroundPosition
+    ControlBackgroundPosition,
+    IndicatorPlatform
   },
 
   props: {

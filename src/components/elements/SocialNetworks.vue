@@ -4,9 +4,6 @@
     :style="objVarsMedia"
     @mouseleave="mouseleave"
     @mouseover.stop="mouseover"
-    :class="[
-      { '_hover' : hoverBy === 'element' }
-    ]"
   >
     <div class="b-social-networks__item"
       v-for="(value, key) in networks" :key="key"

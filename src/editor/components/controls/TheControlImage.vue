@@ -78,34 +78,21 @@ export default {
 </script>
 
 <template>
-  <div class="b-controls"
+  <div class="b-panel__control"
        v-if="settingObjectType === 'button' || settingObjectType === 'image' || settingObjectType === 'slogan'">
-    <div class="b-controls__control">
-      <base-uploader
-        v-model="bgImage"
-        @change="changeImage"
-        :label="label"
-      />
-    </div>
-    <div class="b-controls__control">
-      <BaseSwitcher
-        v-model="isStretchImage"
-        :label="$t('c.stretch')"
-        @change="setStretch"
-      />
+    <div class="b-panel__col">
+      <div class="b-panel__control">
+        <base-uploader
+          v-model="bgImage"
+          @change="changeImage"
+          :label="label"
+        />
+        <BaseSwitcher
+          v-model="isStretchImage"
+          :label="$t('c.stretch')"
+          @change="setStretch"
+        />
+      </div>
     </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-controls
-  margin-top: 2.2rem
-  padding: 0 0 $size-step/2
-  &__control
-    margin-bottom: $size-step/2
-    &:lastt-child
-      margin-bottom: 0
-</style>

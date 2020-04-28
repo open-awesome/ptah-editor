@@ -13,13 +13,15 @@ export default {
       borderColorHover: '',
       borderStyleHover: '',
       borderStyleList: [
-        { name: 'solid', value: 'solid' },
-        { name: 'dashed', value: 'dashed' },
-        { name: 'dotted', value: 'dotted' },
-        { name: 'double', value: 'double' }
+        { name: 'solid', value: 'solid', iconName: 'borderSolid' },
+        { name: 'dashed', value: 'dashed', iconName: 'borderDashed' },
+        { name: 'dotted', value: 'dotted', iconName: 'borderDotted' },
+        { name: 'double', value: 'double', iconName: 'borderDouble' }
       ],
-      borderStyleValue: {},
-      borderStyleHoverValue: {}
+      borderStyleValue: '',
+      borderStyleHoverValue: '',
+      borderWidthValue: 0,
+      borderWidthHoverValue: 0
     }
   },
 
@@ -38,7 +40,7 @@ export default {
     }
   },
 
-  created () {
+  mounted () {
     let self = this
 
     this.borderWidth = this.styles['border-width'] ? parseFloat(this.styles['border-width'].split('px')[0]) : 0
@@ -49,12 +51,12 @@ export default {
     this.borderColorHover = this.pseudo['border-color'] ? this.pseudo['border-color'].split('!')[0] : 'rgba(0, 0, 0, 0)'
     this.borderStyleHover = this.pseudo['border-style'] ? this.pseudo['border-style'].split('!')[0] : 'solid'
 
-    this.borderStyleList.forEach(function (item, i, arr) {
+    this.borderStyleList.forEach(function (item, i) {
       if (self.borderStyle === self.borderStyleList[i].value) {
-        self.borderStyleValue = item
+        self.borderStyleValue = item.value
       }
       if (self.borderStyleHover === self.borderStyleList[i].value) {
-        self.borderStyleHoverValue = item
+        self.borderStyleHoverValue = item.value
       }
     })
   },
@@ -76,12 +78,24 @@ export default {
       this.changePseudo('border-color', color)
     },
 
-    changeWidth () {
-      this.update('border-width', `${this.borderWidth}px`)
+    changeWidth (value) {
+      this.borderWidthValue = value
+      this.update('border-width', `${value}px`)
     },
 
-    changeWidthHover () {
+    changeWidthValue (value) {
+      this.borderWidth = value
+      this.update('border-width', `${value}px`)
+    },
+
+    changeWidthHover (value) {
+      this.borderWidthHoverValue = value
       this.changePseudo('border-width', `${this.borderWidthHover}px`)
+    },
+
+    changeWidthHoverValue (value) {
+      this.borderWidthHover = value
+      this.update('border-width', `${value}px`)
     },
 
     update (prop, value) {
@@ -91,11 +105,11 @@ export default {
     },
 
     changeStyle () {
-      this.update('border-style', this.borderStyleValue.value)
+      this.update('border-style', this.borderStyleValue)
     },
 
     changeStyleHover () {
-      this.changePseudo('border-style', this.borderStyleHoverValue.value)
+      this.changePseudo('border-style', this.borderStyleHoverValue)
     },
 
     changePseudo (attr, style, pseudoClass = 'hover') {
@@ -120,88 +134,110 @@ export default {
 </script>
 
 <template>
-<div class="b-border-style">
-  <div class="b-border-style__control">
-    <base-label>{{ $t('c.borderStyle') }}</base-label>
-    <div class="b-border-style__color-style">
-      <div class="b-border-style__color-style-col">
-        <base-color-picker v-model="borderColor" @change="changeColor" label=""/>
-      </div>
-      <div class="b-border-style__color-style-col">
-        <base-range-slider v-model="borderWidth" label="" step="1" min="0" max="16" @change="changeWidth">
-          {{ borderWidth }} <span class="b-border-radius-control__px">px</span>
-        </base-range-slider>
-      </div>
-      <div class="b-border-style__color-style-col">
-        <base-select typeItems="class" label="" :options="borderStyleList" v-model="borderStyleValue" @input="changeStyle"/>
+<div class="b-panel__control">
+  <base-caption>
+    Border
+  </base-caption>
+  <div class="b-panel__col">
+    <div class="b-panel__control">
+      <div class="b-panel__row">
+        <base-label>
+          {{ $t('c.style') }}
+        </base-label>
+        <div class="b-panel__col _m-0">
+          <BaseButtonTabs
+            type="buttons"
+            :list="borderStyleList"
+            v-model="borderStyleValue"
+            @change="changeStyle"
+            color="transparent"
+            strokeColor="#A2A5A5"
+          />
+        </div>
       </div>
     </div>
   </div>
-  <div class="b-border-style__control b-border-style__control_h">
-    <base-label>{{ $t('c.borderHover') }}</base-label>
-    <div class="b-border-style__color-style">
-      <div class="b-border-style__color-style-col">
-        <base-color-picker v-model="borderColorHover" @change="changeColorHover" label=""/>
-      </div>
-      <div class="b-border-style__color-style-col">
-        <base-range-slider v-model="borderWidthHover" label="" step="1" min="0" max="16" @change="changeWidthHover">
-          {{ borderWidthHover }} <span class="b-border-radius-control__px">px</span>
+  <div class="b-panel__control">
+    <div class="b-panel__col">
+      <div class="b-panel__control">
+        <base-range-slider
+          position-label="left"
+          v-model="borderWidth"
+          step="1"
+          min="0"
+          max="16"
+          :label="$t('c.width')"
+          @change="changeWidth"
+        >
+          <base-number-input
+            :value="borderWidthValue"
+            :minimum="0"
+            :maximum="16"
+            unit="px"
+            @input="changeWidthValue"
+          />
         </base-range-slider>
       </div>
-      <div class="b-border-style__color-style-col">
-        <base-select typeItems="class" label="" :options="borderStyleList" v-model="borderStyleHoverValue" @input="changeStyleHover"/>
+      <div class="b-panel__control">
+        <base-color-picker
+          v-model="borderColor"
+          @change="changeColor"
+          :label="$t('c.color')"
+        />
+      </div>
+    </div>
+  </div>
+  <base-caption>
+    {{ $t('c.borderHover') }}
+  </base-caption>
+  <div class="b-panel__col">
+    <div class="b-panel__control">
+      <div class="b-panel__row">
+        <base-label>
+          {{ $t('c.style') }}
+        </base-label>
+        <div class="b-panel__col _m-0">
+          <BaseButtonTabs
+            type="buttons"
+            :list="borderStyleList"
+            v-model="borderStyleHoverValue"
+            @change="changeStyleHover"
+            color="transparent"
+            strokeColor="#A2A5A5"
+          />
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="b-panel__control">
+    <div class="b-panel__col">
+      <div class="b-panel__control">
+        <base-range-slider
+          position-label="left"
+          v-model="borderWidthHover"
+          step="1"
+          min="0"
+          max="16"
+          :label="$t('c.width')"
+          @change="changeWidthHover"
+        >
+          <base-number-input
+            :value="borderWidthHoverValue"
+            :minimum="0"
+            :maximum="16"
+            unit="px"
+            @input="changeWidthHoverValue"
+          />
+        </base-range-slider>
+      </div>
+      <div class="b-panel__control">
+        <base-color-picker
+          v-model="borderColorHover"
+          @change="changeColor"
+          :label="$t('c.color')"
+        />
       </div>
     </div>
   </div>
 </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-border-style
-  margin-top: 2.2rem
-  max-width: 25.5rem
-  &__control
-    &_h
-      margin-top: 1rem
-  &__px
-    color: $grey-middle
-  &__color-style
-    display: flex
-    &-col
-      /deep/
-       .b-pth-base-select
-         width: $size-step * 2
-         margin-top: 5px
-       .b-pth-base-select__name,
-       .b-pth-base-select__options-item
-         display: flex
-         align-items: center
-         white-space: nowrap
-       .b-pth-base-select__name-icon
-         width: 100%
-         height: 10px
-       .b-pth-base-select__name-icon-solid
-         border: 2px solid #6D6D6D
-       .b-pth-base-select__name-icon-dotted
-         border: 2px dotted #6D6D6D
-       .b-pth-base-select__name-icon-dashed
-         border: 2px dashed #6D6D6D
-       .b-pth-base-select__name-icon-double
-         border: 3px double #6D6D6D
-       .b-pth-base-select__name
-         width: $size-step * 1.5
-         padding: 0
-
-       .b-range-slider__row
-         flex-direction: row-reverse
-       .b-range-slider__text
-         padding-left: 0.5rem
-         width: 5rem
-       .b-range-slider
-         padding-left: 1rem
-         .range-slider
-           width: $size-step * 2
-</style>

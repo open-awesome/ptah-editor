@@ -239,7 +239,6 @@ const data = new Map([
         'background-size': 'cover',
         'background-color': '',
         'color': '#000',
-        'border-color': '',
         'font-size': '1.6rem',
         'line-height': '1.4',
         'border-radius': 0,
@@ -483,8 +482,8 @@ const data = new Map([
         url: 'https://ptah.super.com/'
       },
       styles: {
-        'width': '',
-        'height': ''
+        'width': '278px',
+        'height': '152px'
       },
       media: {
         'is-mobile': {

@@ -78,25 +78,22 @@ export default {
 </script>
 
 <template>
-  <div class="b-bg-controls">
-    <div class="b-bg-controls__control">
-      <base-color-picker :label="label" v-model="bgColor" @change="changeColor"></base-color-picker>
-    </div>
-    <div class="b-bg-controls__control" v-if="settingObjectType === 'button'">
-      <base-color-picker :label="labelHover" v-model="bgColorHover" @change="changeHoverBgColor"></base-color-picker>
+  <div>
+    <div class="b-panel__col">
+      <div class="b-panel__control">
+        <base-color-picker
+          :label="label"
+          v-model="bgColor"
+          @change="changeColor"
+        />
+      </div>
+      <div class="b-panel__control" v-if="settingObjectType === 'button'">
+        <base-color-picker
+          :label="labelHover"
+          v-model="bgColorHover"
+          @change="changeHoverBgColor"
+        />
+      </div>
     </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-bg-controls
-  margin-top: 2.2rem
-  padding: 0 0 $size-step/2
-  border-bottom: 0.2rem dotted rgba($black, 0.15)
-  &__control
-    &:first-child
-      margin-bottom: $size-step/2
-</style>

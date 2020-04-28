@@ -110,7 +110,7 @@ export default {
   width: 100%
   height: 3.4rem
   max-width: 50rem
-  margin-bottom: 1.5rem
+  // margin-bottom: 1.5rem
 
   position: relative
   display: flex
@@ -133,10 +133,12 @@ export default {
     width: 100%
     padding: .5rem 1.5rem
   &__name
-    font-size: 1.6rem
+    font-size: 1.4rem
     line-height: 1.8rem
     color: $dark-grey
     cursor: pointer
+    white-space: nowrap
+
     & input
       border: transparent solid 1px
   &__arrow

@@ -113,10 +113,6 @@ export default {
       return this.builder.sections.filter(section => !section.isHeader)
     },
 
-    isSlotsSettings () {
-      return this.settingObjectType !== 'section'
-    },
-
     isShowSettingsPage () {
       return this.$route.path.split('/').indexOf('settings') > 0
     }

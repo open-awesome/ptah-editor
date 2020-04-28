@@ -4,7 +4,9 @@
       Slider
     </h6>
 
-    <div class="b-panel__layout">
+    <IndicatorPlatform />
+
+    <div class="b-panel__layout _top-9">
       <div class="layout _top-2">
         <base-scroll-container>
           <div class="layout-padding _pr-0">
@@ -26,9 +28,11 @@
 <script>
 import { mapState } from 'vuex'
 import ControlSectionSlider from '../controls/TheControlSectionSlider'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 export default {
   components: {
+    IndicatorPlatform,
     ControlSectionSlider
   },
   name: 'ThePanelSectionSliderSettings',

@@ -15,7 +15,9 @@ export default {
       bgSize: '',
       label: '',
       labelHover: '',
-      isStretchImage: false
+      isStretchImage: false,
+      isShowBgImage: false,
+      isShowHoverBgImage: false
     }
   },
 
@@ -119,46 +121,73 @@ export default {
 
       document.head.insertAdjacentHTML('beforeend', styleTemplate)
     }
+  },
+
+  mounted () {
+    if (this.bgImage !== '' && this.bgImage !== null) {
+      this.isShowBgImage = true
+    }
+
+    if (this.bgHoverImage !== '' && this.bgHoverImage !== null) {
+      this.isShowHoverBgImage = true
+    }
   }
 }
 </script>
 
 <template>
-  <div class="b-bg-controls"
-       v-if="settingObjectType === 'button' || settingObjectType === 'image' || settingObjectType === 'slogan'">
-    <div class="b-bg-controls__control">
-      <base-uploader
+  <div v-if="settingObjectType === 'button' || settingObjectType === 'image' || settingObjectType === 'slogan'">
+    <div class="b-panel__control">
+      <div class="b-panel__col">
+        <div class="b-panel__row">
+          <BaseSwitcher
+            :label="label"
+            v-model="isShowBgImage"
+          />
+        </div>
+      </div>
+    </div>
+
+    <div class="b-panel__col" v-if="isShowBgImage">
+      <div>
+        <base-uploader
           v-model="bgImage"
           @change="changeImage"
-          :label="label"/>
-    </div>
-    <div class="b-bg-controls__control" v-if="pseudo">
-      <base-uploader
-        v-model="bgHoverImage"
-        @change="changeBgHoverImage"
-        :label="labelHover"/>
-    </div>
-    <template v-if="settingObjectType === 'button' && bgImage !== '' && bgImage !== null">
-      <div class="b-panel__control">
-        <control-background-position/>
+          :label="label"
+        />
       </div>
-    </template>
-    <div class="b-bg-controls__control">
-      <BaseSwitcher v-model="isStretchImage" :label="$t('c.stretch')" @change="setStretch" />
+      <template v-if="settingObjectType === 'button' && bgImage !== '' && bgImage !== null">
+        <div class="b-panel__control">
+          <control-background-position />
+        </div>
+      </template>
+      <div class="b-panel__control">
+        <BaseSwitcher
+          v-model="isStretchImage"
+          :label="$t('c.stretch')"
+          @change="setStretch"
+        />
+      </div>
+    </div>
+
+    <div class="b-panel__control">
+      <div class="b-panel__col">
+        <div class="b-panel__row">
+          <BaseSwitcher
+            :label="labelHover"
+            v-model="isShowHoverBgImage"
+          />
+        </div>
+      </div>
+    </div>
+    <div class="b-panel__col" v-if="pseudo && isShowHoverBgImage">
+      <div class="b-panel__control">
+        <base-uploader
+          v-model="bgHoverImage"
+          @change="changeBgHoverImage"
+          :label="labelHover"
+        />
+      </div>
     </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-bg-controls
-  margin-top: 2.2rem
-  padding: 0 0 $size-step/2
-  border-bottom: 0.2rem dotted rgba($black, 0.15)
-  &__control
-    margin-bottom: $size-step/2
-    &:lastt-child
-      margin-bottom: 0
-</style>

@@ -724,12 +724,15 @@ export default {
     outline: none
     transition: border 0.25s
     border: .4rem solid transparent
-    &:hover
+    &.b-button:not(.styler-active):hover
+      border: .4rem solid $main-yellow !important
+      // background-color: rgba(255, 230, 0, 0.1) !important
+    &:not(.b-button):hover
       cursor: pointer
       border-color: $main-yellow !important
       background-color: rgba(255, 230, 0, 0.1) !important
       border-radius: .5rem !important
-    &.styler-active
+    &:not(.b-button).styler-active
       border-color: transparent !important
       background-color: rgba(255, 230, 0, 0.1) !important
       border-radius: .5rem !important
@@ -747,17 +750,20 @@ export default {
     outline: none
     transition: border 0.25s
     border: .4rem solid transparent
-    &:hover
+    &.b-button:not(.styler-active):hover
+      border: .4rem solid $main-yellow !important
+      // background-color: rgba(255, 230, 0, 0.1) !important
+    &:not(.b-button):hover
       cursor: pointer
-      border-color: $main-yellow !important
+      border: .4rem solid $main-yellow !important
       background-color: rgba(255, 230, 0, 0.1) !important
       border-radius: .5rem !important
-    &.styler-active
-      border-color: $main-yellow !important
+    &:not(.b-button).styler-active
+      border: .4rem solid $main-yellow !important
       background-color: rgba(255, 230, 0, 0.1) !important
       border-radius: .5rem !important
       &:hover
-        border-color: $main-yellow !important
+        border: .4rem solid $main-yellow !important
       &.b-text
         cursor: pointer
   &.fp-scroll section:not(.b-section-header):not(.b-section-footer):not(.is-mobile)

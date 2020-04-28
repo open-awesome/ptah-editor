@@ -685,7 +685,7 @@ export default {
   padding-bottom: 0
 
 .b-menu-tree
-  padding: 0 0 9rem
+  padding: 0 0 12rem
   margin: 0
   height: 100%
 

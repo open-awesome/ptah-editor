@@ -12,7 +12,8 @@ export default {
 
   data () {
     return {
-      color: ''
+      color: '',
+      elWidthValue: 0
     }
   },
 
@@ -87,36 +88,51 @@ export default {
     changeColor () {
       const color = this.color.rgba ? `rgba(${Object.values(this.color.rgba).toString()}` : this.color
       this.colorFill['color'] = color
+    },
+
+    setWidth (value) {
+      this.elWidthValue = value
+    },
+
+    setWidthValue (value) {
+      this.elWidth = value
     }
   },
 
   mounted () {
     this.color = this.colorFill.color
+    this.elWidthValue = this.elWidth
   }
 }
 </script>
 
 <template>
-  <div class="b-social-networks-controls">
-      <div class="b-size-controls__control">
-        <base-range-slider v-model="elWidth" :label="$t('c.iconsWidth')" step="2" min="16" max="64">
-          {{ elWidth }} px
+  <div class="b-panel__col">
+      <div class="b-panel__control">
+        <base-range-slider
+          position-label="left"
+          v-model="elWidth"
+          :label="$t('c.width')"
+          step="8"
+          min="16"
+          max="128"
+          @change="setWidth"
+        >
+          <base-number-input
+            :value="elWidthValue"
+            :minimum="32"
+            :maximum="128"
+            unit="px"
+            @input="setWidthValue"
+          />
         </base-range-slider>
       </div>
-      <div class="b-social-networks-controls__control" v-if="!isMobile">
-        <base-color-picker :label="$t('c.iconsColor')" v-model="color" @change="changeColor"></base-color-picker>
+      <div class="b-panel__control" v-if="!isMobile">
+        <base-color-picker
+          :label="$t('c.iconsColor')"
+          v-model="color"
+          @change="changeColor"
+        />
       </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-social-networks-controls
-  margin-top: 2.2rem
-  padding: 0 0 $size-step/2
-  border-bottom: 0.2rem dotted rgba($black, 0.15)
-  &__control
-    padding: $size-step/2 0
-</style>

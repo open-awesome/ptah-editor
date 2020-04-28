@@ -3,6 +3,9 @@
     <h6 class="b-panel__title">
       System requirements
     </h6>
+
+    <IndicatorPlatform />
+
     <div class="b-system-requirements">
       <base-button-tabs
         :list="tabs"
@@ -36,11 +39,13 @@
 <script>
 import ControlSystemRequirements from './../controls/TheControlSystemRequirements.vue'
 import ControlSystemRequirementsStyle from './../controls/TheControlSystemRequirementsStyle.vue'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 export default {
   name: 'ThePanelSectionSystemSettings',
 
   components: {
+    IndicatorPlatform,
     ControlSystemRequirements,
     ControlSystemRequirementsStyle
   },

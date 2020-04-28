@@ -1,26 +1,34 @@
 <template>
   <div class="b-panel">
     <h6 class="b-panel__title">
-      Setting restrictions
+      Restrictions
     </h6>
 
-    <div class="b-panel__layout">
+    <IndicatorPlatform />
+
+    <div class="b-panel__layout _top-9">
       <div class="layout _top-2 _pr-05">
         <base-scroll-container>
           <div class="layout-padding">
-            <!-- Styles -->
-            <div class="b-panel__control">
-              <control-age-restrictions-style/>
-            </div>
-
             <!-- Visible elements -->
             <div class="b-panel__control" v-if="!isMobile">
-              <control-age-restrictions/>
+              <base-caption>
+                Content rationg systems
+              </base-caption>
+              <control-age-restrictions />
+            </div>
+
+            <!-- Styles -->
+            <div class="b-panel__control">
+              <base-caption>
+                Icon settings
+              </base-caption>
+              <control-age-restrictions-style />
             </div>
 
             <!-- Padding/Margin -->
             <div class="b-panel__control">
-              <control-box></control-box>
+              <control-box />
             </div>
          </div>
         </base-scroll-container>
@@ -34,11 +42,13 @@ import { mapState } from 'vuex'
 import ControlAgeRestrictionsStyle from '../controls/TheControlAgeRestrictionsStyle'
 import ControlAgeRestrictions from '../controls/TheControlAgeRestrictions'
 import ControlBox from '../controls/TheControlBox'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 export default {
   name: 'ThePanelRestrictions',
 
   components: {
+    IndicatorPlatform,
     ControlAgeRestrictionsStyle,
     ControlAgeRestrictions,
     ControlBox

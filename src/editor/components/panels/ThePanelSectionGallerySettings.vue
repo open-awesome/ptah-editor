@@ -3,6 +3,9 @@
     <h6 class="b-panel__title">
       {{ !isCarousel ? 'Gallery' : 'Carousel' }}
     </h6>
+
+    <IndicatorPlatform />
+
     <div class="b-gallery-settings">
       <base-button-tabs
         :list="tabs"
@@ -63,11 +66,13 @@ import ControlSectionGalleryStyle from './../controls/TheControlSectionGallerySt
 import ControlCarousel from './../controls/TheControlCarousel.vue'
 import { cloneDeep } from 'lodash-es'
 import { mapActions, mapState } from 'vuex'
+import IndicatorPlatform from '../IndicatorPlatform'
 
 export default {
   name: 'ThePanelSectionGallerySettings',
 
   components: {
+    IndicatorPlatform,
     ControlSectionGallery,
     ControlSectionGalleryStyle,
     ControlCarousel

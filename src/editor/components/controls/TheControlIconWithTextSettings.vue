@@ -1,12 +1,7 @@
 <script>
 import { mapState, mapActions } from 'vuex'
-import * as _ from 'lodash-es'
-
-const LIST_ICONS = [
-  'checkMark',
-  'close',
-  'plus'
-]
+import { get, merge } from 'lodash-es'
+import { LIST_ICONS } from '../../util'
 
 export default {
   name: 'ControlTextWithIconSettings',
@@ -14,7 +9,10 @@ export default {
   data () {
     return {
       iconName: {},
-      color: ''
+      color: '',
+      value: '',
+      left: 0,
+      elWidthValue: 0
     }
   },
 
@@ -30,7 +28,7 @@ export default {
 
     icons () {
       const options = LIST_ICONS.map((icon) => {
-        return { name: icon, value: icon }
+        return { iconName: icon, value: icon }
       })
       return {
         options
@@ -47,9 +45,9 @@ export default {
 
     mediaSizeIconsWidth: {
       get () {
-        let w = _.get(this.settingObjectOptions, `media['is-mobile']['sizeIcons']['width']`)
+        let w = get(this.settingObjectOptions, `media['is-mobile']['sizeIcons']['width']`)
 
-        if (w === undefined) w = _.get(this.settingObjectOptions, `sizeIcons['width']`)
+        if (w === undefined) w = get(this.settingObjectOptions, `sizeIcons['width']`)
 
         return w
       },
@@ -67,7 +65,7 @@ export default {
 
         this.isMobile ? props = { 'media': media } : props = { 'sizeIcons': sizeIcons }
 
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, props))
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, props))
       }
     },
 
@@ -106,8 +104,8 @@ export default {
     },
 
     changeIcon () {
-      let name = this.iconName.value
-      let value = this.iconName.value
+      let name = this.iconName
+      let value = this.iconName
 
       this.update('name', name)
       this.update('value', value)
@@ -118,124 +116,142 @@ export default {
       let colorFill = {}
 
       colorFill['color'] = color
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { colorFill }))
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, { colorFill }))
     },
 
     update (prop, value) {
       let icon = {}
 
       icon[prop] = value
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { icon }))
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, { icon }))
+    },
+
+    changeLeft (x) {
+      this.left += x
+    },
+
+    setWidth (value) {
+      this.elWidthValue = value
+    },
+
+    setWidthValue (value) {
+      this.elWidth = value
     }
   },
 
   mounted () {
-    this.iconName = this.icon
+    this.iconName = this.icon.name
     this.color = this.colorFill.color
+
+    const index = this.icons.options.findIndex(o => o.iconName === this.iconName)
+
+    if (index > 5) {
+      this.left = -(index - 4) * 4
+    }
   }
 }
 </script>
 
 <template>
-  <div class="b-text-controls">
-    <div class="b-text-controls__control" v-if="!isMobile">
-      <div>{{ $t('c.visibleIcon') }}</div>
-      <div class="b-icon-with-text">
-        <div class="b-icon-with-text__item"
-          :class="{ 'b-icon-with-text__item_opacity' : false === icon.visible }"
-          @click="visibleIcon"
-        >
-
-          <span class="b-icon-with-text__item-check"
-            title="Show / Hide"
-            :class="{ 'b-icon-with-text__item-check_color' : true === icon.visible }"
-            >
-             <icon-base width="10" height="7" name="checkMark"
-               v-show="icon.visible"
-             />
+  <div class="b-panel__col">
+    <div class="b-panel__control" v-if="icon.visible && !isMobile">
+      <base-label>
+        Choose icon
+      </base-label>
+      <div class="b-panel__control">
+        <div class="b-icons-list">
+          <div class="b-icons-list__content">
+            <BaseButtonTabs
+              class="b-icons-list__tabs"
+              type="buttons"
+              :list="icons.options"
+              v-model="iconName"
+              @change="changeIcon"
+              :style="[{'left': left + 'rem'}]"
+            />
+          </div>
+          <span
+            v-show="left !== 0"
+            class="b-icons-list__arrow _left"
+            @click="changeLeft(4)"
+          >
+            <IconBase name="arrowRight" />
           </span>
-
-          <a class="b-icon-with-text__item-button"
-            title="Visible icon"
-            >
-            {{ $t('c.visible') }}
-          </a>
-
+          <span
+            v-show="left >= -((icons.options.length - 6) * 4)"
+            class="b-icons-list__arrow _right"
+            @click="changeLeft(-4)"
+          >
+            <IconBase name="arrowRight" />
+          </span>
         </div>
       </div>
     </div>
-    <div class="b-text-controls__control" v-if="icon.visible && !isMobile">
-      <base-select :label="$t('c.icon')" :options="icons.options" :value="iconName" v-model="iconName" @input="changeIcon"></base-select>
-    </div>
-    <div class="b-text-controls__control" v-if="icon.visible">
-      <base-range-slider v-model="elWidth" :label="$t('c.iconsWidth')" step="2" min="14" max="34">
-        {{ elWidth }} px
+    <div class="b-panel__control">
+      <base-range-slider
+        position-label="left"
+        v-model="elWidth"
+        :label="$t('c.width')"
+        step="8"
+        min="16"
+        max="128"
+        @change="setWidth"
+      >
+        <base-number-input
+          :value="elWidthValue"
+          :minimum="32"
+          :maximum="128"
+          unit="px"
+          @input="setWidthValue"
+        />
       </base-range-slider>
     </div>
-    <div class="b-text-controls__control" v-if="icon.visible && !isMobile">
-      <base-color-picker :label="$t('c.iconsColor')" v-model="color" @change="changeColor"></base-color-picker>
+    <div class="b-panel__control" v-if="!isMobile">
+      <base-color-picker
+        :label="$t('c.iconsColor')"
+        v-model="color"
+        @change="changeColor"
+      />
     </div>
   </div>
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-text-controls
-  margin-bottom: 1.6rem
-  &__control
-    margin-top: 2.2rem
-.b-icon-with-text
-  margin: 0.8rem 0
-  &__item
+  .b-icons-list
+    height: 5rem
+    padding: 0 2rem
+    overflow: hidden
     position: relative
-
-    margin: $size-step/2 0
-    min-height: $size-step/2
-
-    display: flex
-    justify-content: flex-start
-    align-items: center
-
-    font-size: 1.6rem
-    line-height: 2.4rem
-    cursor: pointer
-    &_opacity
-      opacity: 0.2
-      color: $black
-      fill: $black
-    &-button
-      padding: 0 $size-step/2
-      border: none
-      position: relative
-      display: inline-block
-      user-select: none
-      text-align: left
+    &__content
       width: 20rem
-      &:hover
-        filter: brightness(120%)
-      &:active
-        filter: brightness(50%)
-      .vuse-icon
-         width: 100%
-    &-check
-      width: 2rem
-      height: 2rem
+      height: 5rem
+      overflow: hidden
+      position: relative
+    &__tabs
+      width: 100%
+      position: absolute
+      top: 0
 
-      border: 0.2rem solid $grey
-      border-radius: 0.3rem
-      background: transparent
-      text-align: center
+      transition: left .3s
+      /deep/
+        .b-base-button-tabs__row
+          justify-content: flex-start !important
+          flex-wrap: nowrap !important
+          & svg
+            stroke: none !important
+    &__arrow
+      position: absolute
+      top: 30%
+      width: 10px
+      height: 10px
+      cursor: pointer
 
-      display: inline-block
       & svg
-        fill: $dark-grey
-        vertical-align: middle
-
-        position: relative
-        top: -0.5rem
-      &_color
-        border: 0.2rem solid rgba($cornflower-blue, 0.5)
-
+        fill: #00ADB6
+      &._left
+        left: 0.5rem
+        & svg
+          transform: rotate(-180deg)
+      &._right
+        right: 1rem
 </style>

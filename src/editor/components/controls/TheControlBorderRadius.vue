@@ -3,6 +3,12 @@ import { mapState, mapActions } from 'vuex'
 import { merge } from 'lodash-es'
 
 export default {
+  data () {
+    return {
+      elRadiusValue: 0
+    }
+  },
+
   computed: {
     ...mapState('Sidebar', [
       'settingObjectOptions'
@@ -27,25 +33,42 @@ export default {
   },
 
   methods: {
-    ...mapActions('Sidebar', ['updateSettingOptions'])
+    ...mapActions('Sidebar', ['updateSettingOptions']),
+
+    setElRadius (value) {
+      this.elRadiusValue = value
+    },
+
+    setElRadiusValue (value) {
+      this.elRadius = value
+    }
   }
 }
 </script>
 
 <template>
-  <div class="b-border-radius-control">
-    <base-range-slider v-model="elRadius" :label="$t('c.cornerRadius')" step="1" min="0" max="100">
-      {{ elRadius }} <span class="b-border-radius-control__px">px</span>
-    </base-range-slider>
+  <div class="b-panel__control">
+    <base-caption>
+      {{ $t('c.corner') }}
+    </base-caption>
+    <div class="b-panel__col">
+      <base-range-slider
+        position-label="left"
+        v-model="elRadius"
+        step="1"
+        min="0"
+        max="100"
+        :label="$t('c.radius')"
+        @change="setElRadius"
+      >
+        <base-number-input
+          :value="elRadiusValue"
+          :minimum="0"
+          :maximum="100"
+          unit="%"
+          @input="setElRadiusValue"
+        />
+      </base-range-slider>
+    </div>
   </div>
 </template>
-
-<style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-border-radius-control
-  margin-top: 2.2rem
-  &__px
-    color: $grey-middle
-</style>

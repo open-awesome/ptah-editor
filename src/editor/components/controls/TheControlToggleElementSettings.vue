@@ -1,20 +1,17 @@
 <script>
-import * as _ from 'lodash-es'
+import { merge } from 'lodash-es'
 import { mapState, mapActions } from 'vuex'
-
-const LIST_ICONS = [
-  'checkMark',
-  'close',
-  'plus'
-]
+import { LIST_ICONS } from '../../util'
 
 export default {
   name: 'ControlToggleElementSettings',
 
   data () {
     return {
-      icon: {},
-      color: ''
+      iconName: '',
+      color: '',
+      left: 0,
+      elWidthValue: 0
     }
   },
 
@@ -35,7 +32,7 @@ export default {
       }
     },
 
-    elSize: {
+    elWidth: {
       get () {
         return this.settingObjectOptions.sizeIcons.width
       },
@@ -44,11 +41,11 @@ export default {
         let sizeIcons = {}
 
         sizeIcons['width'] = value
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { sizeIcons: sizeIcons }))
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, { sizeIcons: sizeIcons }))
       }
     },
 
-    elIcon () {
+    icon () {
       return this.settingObjectOptions.el.icon
     },
 
@@ -64,7 +61,7 @@ export default {
 
     icons () {
       const options = LIST_ICONS.map((icon) => {
-        return { name: icon, value: icon }
+        return { iconName: icon, value: icon }
       })
       return {
         options
@@ -82,8 +79,11 @@ export default {
     },
 
     changeIcon () {
-      this.elIcon.name = this.icon.name
-      this.elIcon.value = this.icon.value
+      let name = this.iconName
+      let value = this.iconName
+
+      this.updateIcon('name', name)
+      this.updateIcon('value', value)
     },
 
     changeColor () {
@@ -94,112 +94,157 @@ export default {
       let el = {}
 
       el[prop] = value
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { el }))
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, { el }))
+    },
+
+    updateIcon (prop, value) {
+      let el = { icon: {} }
+
+      el['icon'][prop] = value
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, { el }))
+    },
+
+    changeLeft (x) {
+      this.left += x
+    },
+
+    setWidth (value) {
+      this.elWidthValue = value
+    },
+
+    setWidthValue (value) {
+      this.elWidth = value
     }
   },
 
   mounted () {
-    this.icon = this.elIcon
+    this.iconName = this.icon.name
     this.color = this.elColor
+    this.elWidthValue = this.elWidth
+
+    const index = this.icons.options.findIndex(o => o.iconName === this.iconName)
+
+    if (index > 5) {
+      this.left = -(index - 4) * 4
+    }
   }
 }
 </script>
 
 <template>
-  <div class="b-text-controls">
-    <div class="b-text-controls__control" v-if="!isMobile">
-      <div class="b-icon-with-text">
-        <div class="b-toggle-element-settings__item"
-          :class="{ 'b-toggle-element-settings__item_opacity' : false === elIconVisible }"
-          >
-          <span class="b-toggle-element-settings__item-check"
-            @click="visibleIcon"
-            title="Show / Hide"
-            :class="{ 'b-toggle-element-settings__item-check_color' : true === elIconVisible }"
-            >
-            <icon-base width="10" height="7" name="checkMark"
-              v-show="elIconVisible"
-            />
-          </span>
-          <a class="b-toggle-element-settings__item-button"
-            @click="visibleIcon"
-            >
-            Show icon
-          </a>
+  <div>
+    <div class="b-panel__control" v-if="!isMobile">
+      <div class="b-panel__row">
+        <base-caption>
+          Icon settings
+        </base-caption>
+        <div class="b-panel__col">
+          <base-switcher
+            v-model="elIconVisible"
+          />
         </div>
       </div>
     </div>
-    <div class="b-text-controls__control" v-if="elIconVisible">
-      <base-range-slider v-model="elSize" label="Width icons" step="1" min="14" max="32">
-        {{ elSize }} px
-      </base-range-slider>
-    </div>
-    <div class="b-text-controls__control" v-if="elIconVisible && !isMobile">
-      <base-select label="Icon" :options="icons.options" :value="icon" v-model="icon" @input="changeIcon"/>
-    </div>
-    <div class="b-text-controls__control" v-if="elIconVisible && !isMobile">
-      <base-color-picker label="Color icon" v-model="color" @change="changeColor"/>
+    <div class="b-panel__control" v-if="elIconVisible && !isMobile">
+      <div class="b-panel__col">
+        <base-label>
+          Choose icon
+        </base-label>
+        <div class="b-panel__control">
+          <div class="b-icons-list">
+            <div class="b-icons-list__content">
+              <BaseButtonTabs
+                class="b-icons-list__tabs"
+                type="buttons"
+                :list="icons.options"
+                v-model="iconName"
+                @change="changeIcon"
+                :style="[{'left': left + 'rem'}]"
+              />
+            </div>
+            <span
+              v-show="left !== 0"
+              class="b-icons-list__arrow _left"
+              @click="changeLeft(4)"
+            >
+              <IconBase name="arrowRight" />
+            </span>
+            <span
+              v-show="left >= -((icons.options.length - 6) * 4)"
+              class="b-icons-list__arrow _right"
+              @click="changeLeft(-4)"
+            >
+              <IconBase name="arrowRight" />
+            </span>
+          </div>
+        </div>
+        <div class="b-panel__control">
+          <base-range-slider
+            position-label="left"
+            v-model="elWidth"
+            :label="$t('c.width')"
+            step="8"
+            min="16"
+            max="128"
+            @change="setWidth"
+          >
+            <base-number-input
+              :value="elWidthValue"
+              :minimum="16"
+              :maximum="128"
+              unit="px"
+              @input="setWidthValue"
+            />
+          </base-range-slider>
+        </div>
+        <div class="b-text-controls__control" v-if=" !isMobile">
+          <base-color-picker
+            label="Color icon"
+            v-model="color"
+            @change="changeColor"
+          />
+        </div>
+      </div>
     </div>
   </div>
 </template>
 
 <style lang="sass" scoped>
-@import '../../../assets/sass/_colors.sass'
-@import '../../../assets/sass/_variables.sass'
-
-.b-text-controls
-  &__control
-    margin-top: 1rem
-.b-toggle-element-settings
-  margin: 0.8rem 0
-  &__item
+  .b-icons-list
+    height: 5rem
+    padding: 0 2rem
+    overflow: hidden
     position: relative
-
-    margin: $size-step/2 0
-    min-height: $size-step/2
-
-    display: flex
-    justify-content: flex-start
-    align-items: center
-
-    font-size: 1.6rem
-    line-height: 2.4rem
-    cursor: pointer
-    &_opacity
-      opacity: 0.2
-      color: $black
-      fill: $black
-    &-button
-      padding: 0 $size-step/2
-      border: none
-      position: relative
-      display: inline-block
-      user-select: none
-      text-align: left
+    &__content
       width: 20rem
-      &:hover
-        filter: brightness(120%)
-      &:active
-        filter: brightness(50%)
-      .vuse-icon
-         width: 100%
-    &-check
-      width: 2rem
-      height: 2rem
+      height: 5rem
+      overflow: hidden
+      position: relative
+    &__tabs
+      width: 100%
+      position: absolute
+      top: 0
 
-      border: 0.2rem solid $grey
-      border-radius: 0.3rem
-      background: transparent
-      text-align: center
+      transition: left .3s
+      /deep/
+        .b-base-button-tabs__row
+          justify-content: flex-start !important
+          flex-wrap: nowrap !important
+          & svg
+            stroke: none !important
+    &__arrow
+      position: absolute
+      top: 30%
+      width: 10px
+      height: 10px
+      cursor: pointer
 
-      display: inline-block
       & svg
-        fill: $dark-grey
-        vertical-align: middle
-
-        position: relative
-        top: -0.5rem
-      &_color
-        border: 0.2rem solid rgba($cornflower-blue, 0.5)
-
+        fill: #00ADB6
+      &._left
+        left: 0.5rem
+        & svg
+          transform: rotate(-180deg)
+      &._right
+        right: 1rem
 </style>

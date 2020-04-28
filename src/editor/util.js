@@ -598,3 +598,14 @@ function setLinesHeightList () {
 
 export const LINES_HEIGHT_LIST = setLinesHeightList()
 
+export const LIST_ICONS = [
+  'checkMark',
+  'close',
+  'plus',
+  'flash',
+  'start',
+  'whatshot',
+  'help',
+  'preview'
+]
+
