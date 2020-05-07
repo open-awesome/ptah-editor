@@ -94,6 +94,13 @@
 
       <v-style>
         {{ parsedCss.content }}
+
+        <!-- apply headers color -->
+        <template v-if="currentLanding.settings.colors.headers !== ''">
+          h1, h2, h3 {
+            color: {{currentLanding.settings.colors.headers}} !important;
+          }
+        </template>
       </v-style>
 
     </div>

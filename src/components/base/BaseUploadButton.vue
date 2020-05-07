@@ -16,14 +16,14 @@
       <BaseButton
         v-if="!progress"
         @click.prevent="upload"
-        color="main-green"
-        size="middle"
+        :color="palette ? 'main-green-transparent' : 'main-green'"
+        :size="palette ? 'small' : 'middle'"
       >
         <template v-if="!palette">
           Upload an image
         </template>
         <template v-else>
-          Upload a new image
+          New image
         </template>
       </BaseButton>
     </form>
@@ -80,7 +80,6 @@ export default {
 @import '../../assets/sass/_variables.sass'
 
 .b-base-upload-button
-  margin: 2.6rem 0
   width: 100%
 
   display: flex

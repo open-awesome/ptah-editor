@@ -110,11 +110,16 @@ export default {
   },
 
   computed: {
+    ...mapState(['currentLanding']),
     ...mapState('Sidebar', [
       'settingObjectOptions',
       'settingObjectSection',
       'sandbox']
     ),
+
+    colors () {
+      return this.currentLanding.settings.colors
+    },
 
     components: {
       set (value) {
@@ -186,13 +191,37 @@ export default {
     },
 
     addEl (name) {
-      const el = _.merge({}, Seeder.seed(this.elements[name]))
+      const el = _.merge({}, Seeder.seed(this.elements[name]), {
+        element: {
+          styles: this.fillColors(name)
+        }
+      })
       this.addElement(el)
     },
 
     hideList () {
       this.setControlPanel(false)
       document.removeEventListener('click', this.hideList, true)
+    },
+
+    fillColors (name) {
+      let colors = {}
+
+      if ((name === 'text' || name === 'icontext') && this.colors.text !== '') {
+        colors.color = this.colors.text
+      }
+
+      if (name === 'button') {
+        if (this.colors.button) {
+          colors['background-color'] = this.colors.button
+        }
+
+        if (this.colors.buttonText) {
+          colors['color'] = this.colors.buttonText
+        }
+      }
+
+      return colors
     }
   }
 }

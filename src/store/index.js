@@ -98,6 +98,15 @@ const DEFAULT_CHECK_LIST = {
   }
 }
 
+const COLORS = {
+  headers: '',
+  text: '',
+  button: '',
+  buttonText: '',
+  add1: '',
+  add2: ''
+}
+
 const state = {
   storefrontPreview: false,
   landings: [],
@@ -105,6 +114,7 @@ const state = {
     settings: {
       fonts: FONTS,
       setupFonts: SETUP_FONTS,
+      colors: COLORS,
       imageForPalette: null,
       palette: [],
       logo: ''
@@ -128,6 +138,10 @@ const getters = {
     let checked = _.filter(state.currentLanding.checkList, 'status').length
 
     return (checked / all * 100).toFixed(0)
+  },
+
+  colorsPalette: (state) => {
+    return Object.values(state.currentLanding.settings.colors).filter(c => c !== '')
   }
 }
 
@@ -167,19 +181,9 @@ const actions = {
     })
       .then((data) => {
         let landing = data.landing
-        let fonts = {}
-        let setupFonts = {}
 
         if (typeof landing === 'string') {
           landing = JSON.parse(landing)
-        }
-
-        if (!landing.settings.fonts) {
-          fonts = FONTS
-        }
-
-        if (!landing.settings.setupFonts) {
-          setupFonts = SETUP_FONTS
         }
 
         landing.settings = _.defaultsDeep(landing.settings, {
@@ -209,15 +213,12 @@ const actions = {
           mailchimpUrl: false,
           mailchimpList: false,
           name: data.name,
-          fonts: fonts,
-          setupFonts: setupFonts
+          fonts: FONTS,
+          setupFonts: SETUP_FONTS,
+          colors: COLORS
         })
 
-        if (!landing.checkList) {
-          landing.checkList = DEFAULT_CHECK_LIST
-        } else {
-          landing.checkList = _.defaultsDeep(landing.checkList, DEFAULT_CHECK_LIST)
-        }
+        landing.checkList = _.defaultsDeep(landing.checkList, DEFAULT_CHECK_LIST)
 
         commit('isSaved', false)
         commit('updateCurrentLanding', landing)
@@ -431,6 +432,15 @@ const actions = {
     landingData.palette = palette
 
     commit('updateCurrentLandingSettings', landingData)
+    commit('isSaved', false)
+  },
+
+  storeColorSettings ({ state, commit }, colors) {
+    const settings = _.merge({}, state.currentLanding.settings)
+    Object.keys(settings.colors).forEach((key, index) => {
+      settings.colors[key] = colors[index]
+    })
+    commit('updateCurrentLandingSettings', settings)
     commit('isSaved', false)
   },
 

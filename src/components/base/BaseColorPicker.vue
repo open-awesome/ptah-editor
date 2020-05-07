@@ -33,9 +33,15 @@
 
 <script>
 import { Sketch } from 'vue-color'
-import { mapState } from 'vuex'
+import { mapGetters } from 'vuex'
 
 const DEFAULT_COLOR = 'rgba(0,0,0,1)'
+const DEFAULT_PALETTE_COLORS = [
+  'rgba(0,0,0,1)',
+  'rgba(155,155,155,1)',
+  'rgba(255,255,255,1)',
+  'rgba(0,0,0,0)'
+]
 
 export default {
   name: 'BaseColorPicker',
@@ -55,10 +61,10 @@ export default {
     }
   },
   computed: {
-    ...mapState(['currentLanding']),
+    ...mapGetters(['colorsPalette']),
 
     palette () {
-      return this.currentLanding.settings.palette
+      return [...new Set(this.colorsPalette.concat(DEFAULT_PALETTE_COLORS))]
     },
 
     isTransparent () {
@@ -69,6 +75,10 @@ export default {
       }
 
       if (this.pickerValue.rgba && this.pickerValue.rgba.indexOf('0)') !== -1) {
+        isOpacity = true
+      }
+
+      if (this.pickerValue === '') {
         isOpacity = true
       }
 

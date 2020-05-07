@@ -35,6 +35,13 @@ export default {
           this.changeLogos(value)
         }
       }
+    },
+
+    '$store.state.currentLanding.settings.colors': {
+      handler () {
+        this.changeColors()
+      },
+      deep: true
     }
   },
 
@@ -45,9 +52,11 @@ export default {
   mounted () {
     let logo = this.$store.state.currentLanding.settings.logo
 
-    if (logo.length) {
+    if (logo && logo.length) {
       this.changeLogos(logo)
     }
+
+    this.changeColors()
   },
 
   methods: {
@@ -85,20 +94,51 @@ export default {
     },
 
     changeLogos (url) {
+      let paths = this.getElementPropertyPath('Logo', 'background-image')
+      paths.forEach(path => this.$section.set(path, `url(${url})`))
+    },
+
+    changeColors () {
+      // Text color
+      let plainTextColor = this.$store.state.currentLanding.settings.colors.text
+      if (plainTextColor !== '') {
+        let textPaths = this.getElementPropertyPath('TextElement', 'color')
+        let iconTextPaths = this.getElementPropertyPath('IconWithText', 'color')
+        let plainText = textPaths.concat(iconTextPaths)
+
+        plainText.forEach(path => this.$section.set(path, plainTextColor))
+      }
+
+      // Buttons color
+      let buttonColor = this.$store.state.currentLanding.settings.colors.button
+      let buttonTextColor = this.$store.state.currentLanding.settings.colors.buttonText
+
+      if (buttonColor !== '') {
+        let buttonBgPaths = this.getElementPropertyPath('Button', 'background-color')
+        buttonBgPaths.forEach(path => this.$section.set(path, buttonColor))
+      }
+
+      if (buttonTextColor !== '') {
+        let buttonColorPaths = this.getElementPropertyPath('Button', 'color')
+        buttonColorPaths.forEach(path => this.$section.set(path, buttonTextColor))
+      }
+    },
+
+    getElementPropertyPath (el, prop) {
       let paths = []
 
       // find all logos in section
       forEach(this.$sectionData, (value, key) => {
         if (key.indexOf('components') > -1) {
           value.forEach((element, index) => {
-            if (element.name === 'Logo') {
-              paths.push(`$sectionData.${key}[${index}].element.styles['background-image']`)
+            if (element.name === el) {
+              paths.push(`$sectionData.${key}[${index}].element.styles[${prop}]`)
             }
           })
         }
       })
 
-      paths.forEach(path => this.$section.set(path, `url(${url})`))
+      return paths
     }
   }
 }

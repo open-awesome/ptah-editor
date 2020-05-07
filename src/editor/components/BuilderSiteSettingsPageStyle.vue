@@ -115,44 +115,7 @@
       <div class="layout" v-if="activeTab === 'colors'">
         <base-scroll-container>
           <div class="layout-padding">
-            <div class="b-page-style__row">
-              <BaseCaption>
-                Color palette generator
-              </BaseCaption>
-              <div class="b-page-style__col">
-                <p class="b-page-style__generator-text">
-                  Simply upload an image, and we’ll use the hues in the image to create your palette.
-                </p>
-                <base-upload-button
-                  v-model="imagePalette"
-                  @change="changeImagePalette"
-                  @upload="getInputSrcFiles"
-                  :progress="progress"
-                  @startProgress="startProgress"
-                >
-                </base-upload-button>
-              </div>
-              <div class="b-page-style__col" v-if="palette">
-                <div class="b-palette">
-                  <ul class="b-palette__list">
-                    <li class="b-palette__list-item b-palette__list-item_palette">
-                      <IconBase
-                        width="24"
-                        height="24"
-                        name="palette"
-                        color="#A2A5A5"
-                      />
-                    </li>
-                    <li
-                      v-for="(color, index) in palette"
-                      :key="color + index"
-                      :style="{'background-color' : color}"
-                      class="b-palette__list-item"
-                    />
-                  </ul>
-                </div>
-              </div>
-            </div>
+            <the-color-palette></the-color-palette>
           </div>
         </base-scroll-container>
       </div>
@@ -180,13 +143,14 @@
 import _ from 'lodash-es'
 import { mapState, mapActions } from 'vuex'
 import BuilderModalContentLayout from './BuilderModalContentLayout'
-import ColorThief from 'colorthief/dist/color-thief.umd.js'
 import BaseUploadButton from '../../components/base/BaseUploadButton'
+import TheColorPalette from './TheColorPalette'
 
 export default {
   name: 'BuilderSiteSettingsPageStyle',
 
   components: {
+    TheColorPalette,
     BaseUploadButton,
     BuilderModalContentLayout
   },
@@ -216,7 +180,6 @@ export default {
       bgVideo: '',
       bgVideoPosition: '',
       fullPageScroll: '',
-      imageForColorThief: null,
       tabs: [
         { value: 'logo', text: 'Logo' },
         { value: 'colors', text: 'Colors' },
@@ -274,14 +237,6 @@ export default {
       }
     },
 
-    palette () {
-      return this.currentLanding.settings.palette
-    },
-
-    imageForPalette () {
-      return this.currentLanding.settings.imageForPalette
-    },
-
     logo: {
       set (value) {
         this.storeSettings({ logo: value })
@@ -296,38 +251,6 @@ export default {
   watch: {
     currentLanding () {
       this.updateSettings()
-    },
-
-    imageForColorThief (images) {
-      const image = images[0] || images
-      const reader = new FileReader()
-      const preview = document.createElement('img')
-      const colorThief = new ColorThief()
-
-      preview.crossOrigin = 'Anonymous'
-      preview.setAttribute('width', '100')
-      preview.setAttribute('height', '200')
-
-      reader.readAsDataURL(image)
-      reader.onloadend = function () {
-        preview.src = reader.result
-      }
-
-      setTimeout(() => {
-        const getPalette = colorThief.getPalette(preview, 6)
-
-        if (getPalette === null) {
-          this.progress = false
-          return
-        }
-
-        const palette = getPalette.map(c => {
-          return this.getHexColor(c)
-        })
-
-        this.storeSaveSettingsPalette({ palette: _.uniqBy(palette), image: this.imagePalette })
-        this.progress = false
-      }, 1000)
     },
 
     pageBackgroundUrl  () {
@@ -370,10 +293,6 @@ export default {
     },
 
     fullPageScroll () {
-      this.applySettings()
-    },
-
-    imagePalette () {
       this.applySettings()
     }
   },
@@ -440,27 +359,6 @@ export default {
       this.$router.push(`/editor/${this.$route.params.slug}`)
     },
 
-    getInputSrcFiles (value) {
-      this.progress = true
-      this.imageForColorThief = value
-    },
-
-    getHexColor (color) {
-      const rgbToHex = color.map(x => {
-        const hex = x.toString(16)
-        return hex.length === 1 ? '0' + hex : hex
-      }).join('')
-
-      return `#${rgbToHex}`
-    },
-
-    changeImagePalette (value) {
-      if (value === null) {
-        this.activateCheckListItem('colors')
-        this.storeSaveSettingsPalette({ palette: null, image: null })
-      }
-    },
-
     setLeft (value) {
       this.numLeftValue = value
     },
@@ -475,10 +373,6 @@ export default {
 
     setTopValue (value) {
       this.pageBackgroundPositionY = value
-    },
-
-    startProgress (value) {
-      this.progress = value
     }
   }
 }
@@ -520,25 +414,4 @@ export default {
   /deep/
     .b-base-switcher__label
       margin-right: $size-step/2
-  &__generator-text
-    font-size: 1rem
-    line-height: 1.4
-    color: #575A5F
-    font-weight: 600
-.b-palette
-  &__list
-    display: flex
-    justify-content: center
-
-    margin: 0 0 $size-step / 4 0
-    padding: 0
-    &-item
-      list-style: none
-      width: 2rem
-      height: 2rem
-      border-radius: 100%
-      margin: 4px
-      &_palette
-        margin: 2px 14px 4px 4px
-
 </style>
