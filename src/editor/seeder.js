@@ -24,7 +24,7 @@ const DEFAULT_OPTIONS = {
     href: '#',
     target: '_blank',
     behavior: 'auto',
-    action: ''
+    action: { name: 'Open URL', value: '' }
   },
   textLinkStyles: false, // styling links in text
   removable: false,

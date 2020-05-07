@@ -1,7 +1,14 @@
 <script>
-import * as _ from 'lodash-es'
+import { merge, remove } from 'lodash-es'
 import { mapState, mapActions } from 'vuex'
 import { getYoutubeVideoIdFromUrl, isValidUrl } from '@editor/util'
+
+const DEF_LINK = {
+  href: '#',
+  target: '_blank',
+  behavior: 'auto',
+  action: { name: 'Open URL', value: '' }
+}
 
 export default {
   name: 'TheModalButton',
@@ -12,8 +19,9 @@ export default {
 
   data () {
     return {
-      link: '',
+      link: DEF_LINK,
       behavior: '',
+      href: '',
       target: false,
       videoId: '',
       actionList: [
@@ -22,7 +30,7 @@ export default {
         { name: 'Scroll into section', value: 'scroll-into-section' }
       ],
       action: { name: 'Open URL', value: '' },
-      section: { name: 'Select section', value: '' },
+      section: {},
       scrollBehaviors: [
         { name: 'Auto', value: 'auto' },
         { name: 'Instant', value: 'instant' },
@@ -57,7 +65,7 @@ export default {
         return this.settingObjectOptions.classes
       },
       set: function (newValue) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { classes: newValue }))
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, { classes: newValue }))
       }
     },
 
@@ -66,38 +74,34 @@ export default {
         return this.settingObjectOptions.video
       },
       set: function (newValue) {
-        this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { video: newValue }))
+        this.updateSettingOptions(merge({}, this.settingObjectOptions, { video: newValue }))
       }
     }
   },
 
-  created () {
+  mounted () {
     if (this.elLink) {
-      this.link = this.elLink.href
+      this.href = this.elLink.href
       this.behavior = this.elLink.behavior
       this.target = this.elLink.target === '_blank'
-      this.action = this.elLink.action
+      this.action = this.elLink.action || { name: 'Open URL', value: '' }
     }
 
     this.videoId = this.videoLink || ''
+    this.section = this.sections[0]
 
-    if (this.action === '') {
-      this.action = { name: 'Open URL', value: '' }
-    }
-
-    if (this.action === 'ptah-d-video') {
-      this.action = { name: 'Open video popup', value: 'ptah-d-video' }
-    }
-
-    if (this.action === 'scroll-into-section') {
-      let matches = this.link.match(/\d+(?!\d+)/)
+    if (this.action.value === 'scroll-into-section') {
+      let matches = this.href.match(/\d+(?!\d+)/)
       if (matches) {
         let id = Number(matches[0])
         let section = this.builder.sections.find(section => section.id === id)
-        this.section = (section) ? { name: section.name, value: this.link } : { name: 'Select section', value: '' }
+        this.section = section !== {}
+          ? { name: section.name, value: this.href }
+          : this.sections[0]
       }
-      this.action = { name: 'Scroll into section', value: 'scroll-into-section' }
-      this.scrollBehavior = this.scrollBehaviors.find(({ value }) => value === this.behavior) || this.scrollBehaviors[0]
+      this.scrollBehavior = this.scrollBehaviors.find(({ value }) => {
+        return value === this.behavior
+      }) || this.scrollBehaviors[0]
     }
   },
 
@@ -106,13 +110,12 @@ export default {
       'updateSettingOptions'
     ]),
 
-    setUrl (link) {
-      this.updateSettingOptions(_.merge({}, this.settingObjectOptions, { link }))
+    update () {
+      this.updateSettingOptions(merge({}, this.settingObjectOptions, { link: this.link }))
     },
 
     validUrl (url) {
       let v = true
-      let link = {}
 
       if (url !== '') {
         v = isValidUrl(url)
@@ -124,12 +127,15 @@ export default {
         return
       }
 
-      link['href'] = url
-      this.setUrl(link)
+      this.link['href'] = url
+
+      this.update()
     },
 
     changeTarget () {
-      this.elLink['target'] = this.target === true ? '_blank' : '_self'
+      this.link['target'] = this.target === true ? '_blank' : '_self'
+
+      this.update()
     },
 
     setVideoUrl () {
@@ -137,55 +143,74 @@ export default {
 
       if (ytId) {
         this.videoLink = ytId
-        this.$emit('changeProps', { video: ytId })
+        this.updateSettingOptions(
+          merge({}, this.settingObjectOptions, {
+            video: ytId
+          })
+        )
       }
     },
 
-    changeAction () {
-      if (this.action.value === '') {
-        this.link = (this.link.includes('#section_')) ? '' : this.link.href
-        this.setUrl(this.link)
-
+    changeAction (action) {
+      if (action.value === '') {
         this.classes.push('js-element-link')
       } else {
-        _.remove(this.classes, (n) => n === 'js-element-link')
+        remove(this.classes, (n) => n === 'js-element-link')
       }
 
-      if (this.action.value !== 'ptah-d-video') {
-        _.remove(this.classes, (n) => n === 'ptah-d-video')
+      if (action.value !== 'ptah-d-video') {
+        remove(this.classes, (n) => n === 'ptah-d-video')
       } else {
         this.classes.push('ptah-d-video')
       }
 
-      this.elLink['action'] = this.action.value
+      this.href = ''
+      this.link.href = ''
+
+      if (action.value === 'scroll-into-section') {
+        this.href = this.section.value
+        this.link.href = this.section.value
+      }
+
+      this.target = false
+      this.link.target = '_self'
+
+      this.link['action'] = this.action
+
+      this.update()
     },
 
     changeScrollIntoSection ({ value }) {
       this.updateSettingOptions(
-        _.merge({}, this.settingObjectOptions, {
+        merge({}, this.settingObjectOptions, {
           link: { href: value, target: '_self' }
         })
       )
     },
 
     changeScrollBehavior () {
-      this.elLink['behavior'] = this.scrollBehavior.value
-      this.$emit('changeProps', { behavior: this.scrollBehavior.value })
+      this.link.behavior = this.scrollBehavior.value
+
+      this.update()
     }
   }
 }
 </script>
 
 <template>
-  <div class="b-link-controls">
-
+  <div class="b-modal-button">
     <!-- action -->
-    <div class="b-link-controls__control">
-      <base-select label="Action" :options="actionList" v-model="action" @input="changeAction(action)"></base-select>
+    <div class="b-panel__control">
+      <base-select
+        label="Action"
+        :options="actionList"
+        v-model="action"
+        @input="changeAction(action)"
+      />
     </div>
 
     <!-- scroll into section -->
-    <div v-if="action.value === 'scroll-into-section' && sections.length > 0" class="b-link-controls__control">
+    <div v-if="action.value === 'scroll-into-section' && sections.length > 0" class="b-panel__control">
       <base-select
         v-model="section"
         :options="sections"
@@ -196,28 +221,44 @@ export default {
         v-model="scrollBehavior"
         :options="scrollBehaviors"
         @input="changeScrollBehavior"
-        label="Scroll behavior"/>
+        label="Scroll behavior"
+      />
     </div>
 
-    <div class="b-link-controls__no-sections" v-if="action.value === 'scroll-into-section' && sections.length === 0">
+    <div class="b-modal-button__no-sections" v-if="action.value === 'scroll-into-section' && sections.length === 0">
       No more sections
     </div>
 
     <!-- open link -->
-    <div class="b-link-controls__control" v-if="action.value === ''">
-      <base-text-field v-model="link" label="URL" placeholder="https://www.url.com" :hasError="error.url" @input="validUrl(link)">
+    <div class="b-panel__control" v-if="action.value === ''">
+      <base-text-field
+        v-model="href"
+        label="URL"
+        placeholder="https://www.url.com"
+        :hasError="error.url"
+        @input="validUrl(href)"
+      >
         <span slot="error">
           Invalid URL
         </span>
       </base-text-field>
     </div>
-    <div class="b-link-controls__control" v-if="action.value === ''">
-      <BaseSwitcher v-model="target" label="Open in new window" @change="changeTarget" />
+    <div class="b-panel__control" v-if="action.value === ''">
+      <BaseSwitcher
+        v-model="target"
+        label="Open in new window"
+        @change="changeTarget"
+      />
     </div>
 
     <!-- video popup -->
-    <div class="b-link-controls__control" v-if="action.value === 'ptah-d-video'">
-      <base-text-field v-model="videoId" label="Video" @input="setVideoUrl" placeholder="Youtube video url"></base-text-field>
+    <div class="b-panel__control" v-if="action.value === 'ptah-d-video'">
+      <base-text-field
+        v-model="videoId"
+        label="Youtube video url or id"
+        @input="setVideoUrl"
+        placeholder="Youtube video Url or Id"
+      />
     </div>
 
   </div>
@@ -227,9 +268,18 @@ export default {
 @import '../../../assets/sass/_colors.sass'
 @import '../../../assets/sass/_variables.sass'
 
-.b-link-controls
-  &__control
-    margin-top: $size-step/1.45
+.b-modal-button
+  /deep/
+    .b-base-label
+      font-size:  1.2rem
+    .b-pth-base-select__name
+      font-size:  1.2rem
+      max-width: 15rem
+      overflow: hidden
+      text-overflow: ellipsis
+    .b-pth-base-select__options-item
+      font-size:  1.2rem
+      padding: .6rem 1.2rem
   &__no-sections
     padding: $size-step
     text-align: center

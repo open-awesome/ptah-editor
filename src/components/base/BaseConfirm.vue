@@ -10,6 +10,7 @@
 
       <div class="b-confirm__footer">
         <base-button
+          v-if="!isHideCancel"
           tabindex="0"
           ref="cancel"
           size="middle"
@@ -48,6 +49,10 @@ export default {
     button: {
       type: String,
       default: 'OK'
+    },
+    isHideCancel: {
+      type: Boolean,
+      default: false
     }
   },
   mounted () {
@@ -61,6 +66,10 @@ export default {
       this.$nextTick(() => this.focusInput())
     },
     focusInput () {
+      if (this.isHideCancel) {
+        return
+      }
+
       this.$refs.cancel.$el.focus()
     }
   }
@@ -78,7 +87,7 @@ export default {
   align-items: center
   justify-content: center
 
-  background: rgba(#575A5F, 0.4)
+  background: rgba(#000, 0.6)
 
   z-index: 1001
 
@@ -94,6 +103,8 @@ export default {
   border-radius: 10px
 
   text-align: center
+  .is-expanded &
+    margin-left: 41rem
 
   h3
     font-style: normal

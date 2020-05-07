@@ -9,7 +9,11 @@
   <div
     :style="`${fontsSetup}`"
   >
-    <base-loading v-if="loading" class="preloader"></base-loading>
+    <base-loading
+      v-if="loading"
+      class="preloader"
+    />
+
     <div
       :class="{
         'is-editable': $builder.isEditing,
@@ -117,6 +121,21 @@
     >
       You are going to delete <span class="b-modal-delete-element__name">{{ settingObjectLabel }}</span>, this cannot be undone. Confirm deleting?
     </base-confirm>
+
+    <base-confirm
+      class="b-modal-button"
+      :class="{'is-expanded': isExpanded }"
+      title="Set target"
+      @confirm="toggleModalButton(false)"
+      @close="toggleModalButton(false)"
+      v-if="isShowModalButton"
+      button="Done"
+      :isHideCancel="true"
+    >
+      <ModalButton
+        :builder="$builder"
+      />
+    </base-confirm>
   </div>
 </builder-layout>
 </template>
@@ -126,7 +145,7 @@ import VuseIcon from './VuseIcon'
 import BuilderLayout from './BuilderLayout.vue'
 import { mapState, mapActions, mapMutations } from 'vuex'
 import * as _ from 'lodash-es'
-// import MenuSettings from '@components/slots/MenuSettings'
+import ModalButton from './modals/TheModalButton'
 import { getFontsSetup } from '../util'
 
 import { sectionsGroups } from '@cscripts/sectionsGroups'
@@ -138,8 +157,8 @@ export default {
   components: {
     BaseLoading,
     VuseIcon,
-    BuilderLayout
-    // MenuSettings
+    BuilderLayout,
+    ModalButton
   },
 
   props: {
@@ -182,6 +201,7 @@ export default {
       'settingObjectOptions',
       'settingObjectLabel',
       'isShowModal',
+      'isShowModalButton',
       'controlPanel',
       'sandbox'
     ]),
@@ -324,7 +344,8 @@ export default {
       'toggleModal',
       'toggleSectionsTreeMenu',
       'toggleAddSectionMenu',
-      'toggleProgressPanelExpanded'
+      'toggleProgressPanelExpanded',
+      'toggleModalButton'
     ]),
     ...mapActions('Landing', [
       'saveState',
@@ -887,6 +908,12 @@ export default {
   &__name
     font-weight: 600
     text-transform: capitalize
+
+.b-modal-button
+  text-align: left
+  /deep/
+    .b-confirm__footer
+      justify-content: center
 
 .preloader
   z-index: 1000

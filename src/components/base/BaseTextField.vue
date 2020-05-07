@@ -5,10 +5,10 @@
     'b-base-text-field_focus': hasFocus,
     'b-base-text-field_filled': innerValue.length > 0
     }">
-    <label class="b-base-text-field__label" v-if="label || $slots.label" :hasError="hasError" :hasFocus="hasFocus">
+    <base-label v-if="label || $slots.label" :hasError="hasError" :hasFocus="hasFocus">
       {{label}}
       <slot name="label"></slot>
-    </label>
+    </base-label>
 
     <input class="b-base-text-field__input" type="text"
        ref="inputText"

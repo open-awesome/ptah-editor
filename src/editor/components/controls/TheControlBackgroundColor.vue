@@ -59,8 +59,8 @@ export default {
 
     changePseudo (attr, style, pseudoClass = 'hover') {
       if (style !== '') {
-        this.changePseudoStyle(attr, style + '!important')
-        this.pseudo[pseudoClass][attr] = style + '!important'
+        this.changePseudoStyle(attr, style + ' !important')
+        this.pseudo[pseudoClass][attr] = style + ' !important'
       }
     },
 

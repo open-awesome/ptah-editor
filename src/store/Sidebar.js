@@ -20,6 +20,7 @@ export default {
       name: ''
     },
     isShowModal: false, // show/hide modal of elemets settings
+    isShowModalButton: false, // show/hide modal of button target settings
     isAddSectionExpanded: false, // show/hide add section panel
     isSectionsTreeExpanded: false, // show/hide panel of sections tree
     isProgressPanelExpanded: false, // show/hide progress panel
@@ -134,6 +135,9 @@ export default {
     },
     isShowModal (state, value) {
       state.isShowModal = value
+    },
+    isShowModalButton (state, value) {
+      state.isShowModalButton = value
     }
   },
 
@@ -335,6 +339,10 @@ export default {
 
     toggleModal ({ state, commit }, value) {
       commit('isShowModal', (typeof value !== 'undefined') ? value : !state.isShowModal)
+    },
+
+    toggleModalButton ({ state, commit }, value) {
+      commit('isShowModalButton', (typeof value !== 'undefined') ? value : !state.isShowModalButton)
     }
   },
 

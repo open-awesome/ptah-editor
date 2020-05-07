@@ -3,7 +3,7 @@
     <BuilderTopBar
       class="b-builder-layout__top-bar"
       :class="{
-          'b-builder-layout__top-bar_down' : isShowSettingsPage
+        'b-builder-layout__top-bar_down' : isShowSettingsPage
       }"
       @backToLandings="backToLandings"
       @preview="$emit('preview', $event)"
@@ -14,7 +14,10 @@
     />
     <div class="b-builder-layout-content">
       <div class="b-builder-layout-content__main-left-menu"
-        :class="{'_expanded': isExpanded}"
+        :class="{
+          '_expanded': isExpanded,
+          '_show-modal': isShowModal || isShowModalButton
+        }"
       >
         <BuilderMainLeftMenu
           :builder="builder"
@@ -25,7 +28,8 @@
         class="b-builder-layout-content__sidebar"
         :class="{
           'b-builder-layout-content__sidebar_expanded': isExpanded,
-          'b-builder-layout-content__sidebar_expanded-content': isShowSettingsPage
+          'b-builder-layout-content__sidebar_expanded-content': isShowSettingsPage,
+          '_show-modal': isShowModal || isShowModalButton
         }"
       >
         <BuilderSidebar
@@ -38,7 +42,7 @@
         :class="[
           {'b-builder-layout-content__main_expanded': isExpanded && !isShowSettingsPage},
           {'b-builder-layout-content__main_expanded-setting': isExpanded && isShowSettingsPage},
-          {'b-builder-layout-content__main_show-modal': isShowModal}
+          {'b-builder-layout-content__main_show-modal': isShowModal || isShowModalButton}
         ]"
       >
         <base-scroll-container
@@ -85,7 +89,8 @@ export default {
     ...mapState('Sidebar', [
       'isExpanded',
       'device',
-      'isShowModal'
+      'isShowModal',
+      'isShowModalButton'
     ]),
 
     isShowSettingsPage () {
@@ -159,6 +164,8 @@ $topBarHeight: 6rem
     position: relative
     z-index: 11
     &:hover,
+    &._show-modal
+      z-index: 9
     &._expanded
       width: 9rem
 
@@ -172,6 +179,8 @@ $topBarHeight: 6rem
     order: 2
     flex-shrink: 0
     transition: width 0.3s ease-in-out, opacity 0.3s ease-in-out
+    &._show-modal
+      z-index: 9
     &_expanded
       opacity: 1
       width: 30.5rem
