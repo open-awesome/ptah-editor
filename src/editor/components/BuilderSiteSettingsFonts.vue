@@ -179,8 +179,6 @@ export default {
       ],
       textFonts: {
         'h1': this.$i18n.t('font.h1'),
-        // 'h2': this.$i18n.t('font.h2'),
-        // 'h3': this.$i18n.t('font.h3'),
         'p': this.$i18n.t('font.p'),
         'btn': this.$i18n.t('font.btn')
       },
@@ -277,9 +275,9 @@ export default {
       this.filterVisibledFonts()
     },
 
-    searchFonts () {
-      this.visibleFonts = this.tempFonts.filter((font) => ~font.family.toLowerCase().indexOf(this.search.toLowerCase()))
-    },
+    searchFonts: throttle(function () {
+      this.visibleFonts = this.list.filter((font) => ~font.family.toLowerCase().indexOf(this.search.toLowerCase()))
+    }, 300),
 
     filterVisibledFonts () {
       let defFonts = this.visibleFonts
@@ -576,8 +574,6 @@ export default {
         color: #fff
     &-category
       color: $gray300
-    &:last-child
-      border-bottom: none
     &-button
       display: block
       position: absolute
