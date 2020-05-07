@@ -91,7 +91,7 @@
 
       <div
         class="b-delete-section"
-        v-if="sections.length > 0 && settingObjectSection.id && selectedSections.length === 1"
+        v-if="sections.length > 0 && settingObjectSection.id && selectedSections.length < 2"
       >
         <BaseButton
           @click.stop="showConfirmDelete = true"
@@ -654,7 +654,7 @@ export default {
     },
 
     deleteSection () {
-      const sectionId = this.selectedSections[0]
+      const sectionId = this.settingObjectSection.id
 
       // update group
       if (this.isSlaveSection(sectionId)) {
