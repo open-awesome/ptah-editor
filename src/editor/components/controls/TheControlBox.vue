@@ -21,7 +21,9 @@ export default {
         marginRight: 'margin-right',
         marginBottom: 'margin-bottom',
         marginLeft: 'margin-left'
-      }
+      },
+      max: 999,
+      min: -999
     }
   },
 
@@ -138,14 +140,6 @@ export default {
 
     tooltipMain () {
       return this.isMain ? 'tooltip' : ''
-    },
-
-    isTextTooltipChild () {
-      return this.isChild ? this.$t('s.sectionOfGroup') : ''
-    },
-
-    tooltipChild () {
-      return this.isChild ? 'tooltip' : ''
     }
   },
 
@@ -207,12 +201,30 @@ export default {
       this.isMobile ? props = { 'media': media } : props = { 'styles': styles }
 
       this.updateSettingOptions(merge({}, this.settingObjectOptions, props))
+    },
+
+    getLock (group) {
+      let lock = false
+      let value
+
+      Object.keys(this[group]).forEach((key) => {
+        if (value !== this[key]) {
+          value = this[key]
+          lock = false
+        } else {
+          lock = true
+        }
+      })
+
+      return lock
     }
   },
 
   mounted () {
     setTimeout(() => {
       this.isLoading = true
+      this.lockPaddings = this.getLock('padding')
+      this.lockMargins = this.getLock('margin')
     }, 150)
   }
 }
@@ -241,17 +253,17 @@ export default {
       <!-- CONTROLS -->
       <!-- margin -->
       <template v-if="!hideMargin">
-        <base-number-field v-model="marginLeft" class="ctrl ctrl__m-left" pattern="" />
-        <base-number-field v-model="marginRight" class="ctrl ctrl__m-right" />
-        <base-number-field v-model="marginTop" class="ctrl ctrl__m-top"/>
-        <base-number-field v-model="marginBottom" class="ctrl ctrl__m-bottom" />
+        <base-number-field v-model="marginLeft" :maximum="max" :minimum="min" class="ctrl ctrl__m-left" />
+        <base-number-field v-model="marginRight" :maximum="max" :minimum="min" class="ctrl ctrl__m-right" />
+        <base-number-field v-model="marginTop" :maximum="max" :minimum="min" class="ctrl ctrl__m-top"/>
+        <base-number-field v-model="marginBottom" :maximum="max" :minimum="min" class="ctrl ctrl__m-bottom" />
       </template>
       <!-- padding -->
       <template v-if="!hidePadding">
-        <base-number-field v-model="paddingLeft" class="ctrl ctrl__p-left" />
-        <base-number-field v-model="paddingRight" class="ctrl ctrl__p-right" />
-        <base-number-field v-model="paddingTop" class="ctrl ctrl__p-top" />
-        <base-number-field v-model="paddingBottom" class="ctrl ctrl__p-bottom"
+        <base-number-field v-model="paddingLeft" :maximum="max" :minimum="min" class="ctrl ctrl__p-left" />
+        <base-number-field v-model="paddingRight" :maximum="max" :minimum="min" class="ctrl ctrl__p-right" />
+        <base-number-field v-model="paddingTop" :maximum="max" :minimum="min" class="ctrl ctrl__p-top" />
+        <base-number-field v-model="paddingBottom" :maximum="max" :minimum="min" class="ctrl ctrl__p-bottom"
           :disabled="isMain"
           :[tooltipMain]="isTextTooltipMain"
           tooltip-position="bottom"
@@ -351,9 +363,11 @@ export default {
     transition: color 0.1s ease
     &.active
       color: $main-green
+      &:hover
+        color: $main-green
 
     &:hover
-      color: rgba($main-green, 0.8)
+      color: rgba(#000, 0.8)
 
     &--margin
       right: .8rem

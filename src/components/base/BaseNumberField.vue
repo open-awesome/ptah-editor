@@ -46,6 +46,10 @@ export default {
         return value > 0
       }
     },
+    minimum: {
+      type: [String, Number],
+      default: 0
+    },
     hasError: {
       type: Boolean,
       default: false
@@ -70,8 +74,16 @@ export default {
   },
 
   watch: {
+    value (value) {
+      this.innerValue = value !== ''
+        ? Math.min(Math.max(value, this.minimum), this.maximum)
+        : 0
+    },
+
     innerValue  (value) {
-      let val = value !== '' ? Math.min(value, this.maximum) : 0
+      let val = value !== ''
+        ? Math.min(Math.max(value, this.minimum), this.maximum)
+        : 0
       this.innerValue = val
 
       this.$emit('input', val)
@@ -86,7 +98,9 @@ export default {
   },
 
   mounted () {
-    this.innerValue = this.value !== '' ? Math.min(this.value, this.maximum) : 0
+    this.innerValue = this.value !== ''
+      ? Math.min(Math.max(this.value, this.minimum), this.maximum)
+      : 0
   }
 }
 </script>
