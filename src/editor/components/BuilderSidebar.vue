@@ -228,13 +228,10 @@ $top-panel-height: 7.2rem
     &-inner
       padding: 0
     /deep/
-      .vb.vb-invisible .vb-content
-        padding-right: 0 !important
-        overflow: hidden !important
-        width: 100% !important
+      .vb.vb-invisible .vb-content,
       .vb.vb-visible .vb-content
-        padding-right: 0 !important
-        width: calc(100% + 17px) !important
+        // padding-right: 0 !important
+        // width: 100% !important
     &-outer
       height: 100%
       padding: 0

@@ -9,13 +9,11 @@
       <div class="layout layout__bg" v-if="activeTab === 'bg'">
         <base-scroll-container>
           <div class="layout-padding">
-
-            <div class="b-page-style__row">
+            <div class="b-panel__control">
               <BaseCaption>
                 {{ $t('s.backgroundColor') }}
               </BaseCaption>
-
-              <div class="b-page-style__col">
+              <div class="b-panel__col">
                 <BaseColorPicker
                   :label="$t('s.chooseColor')"
                   v-model="pageBackgroundColor"
@@ -23,11 +21,11 @@
               </div>
             </div>
 
-            <div class="b-page-style__row">
+            <div class="b-panel__control">
               <BaseCaption help="Image for page background">
                 {{ $t('s.backgroundImage') }}
               </BaseCaption>
-              <div class="b-page-style__col">
+              <div class="b-panel__col">
                 <base-uploader
                   key="0"
                   v-model="pageBackgroundUrl"
@@ -35,98 +33,108 @@
                 />
               </div>
 
-              <div class="b-page-style__add" :class="{ 'show': pageBackgroundUrl }">
-                <div class="b-page-style__col">
-                  <BaseRangeSlider
-                    :label="$t('s.posX')"
-                    position="left"
-                    :value="pageBackgroundPositionX"
-                    step="1" :min="0" :max="980"
-                    @change="setLeft"
-                  >
-                    <base-number-input
-                      class="b-page-style__number-input"
-                      :value="numLeftValue"
-                      unit="px"
-                      :maximum="980"
-                      @input="setLeftValue"
-                    />
-                  </BaseRangeSlider>
+              <div class="b-panel__add" :class="{ 'show': pageBackgroundUrl }">
+                <div class="b-panel__control">
+                  <div class="b-panel__col">
+                    <BaseRangeSlider
+                      :label="$t('s.posX')"
+                      position="left"
+                      position-label="left"
+                      :value="pageBackgroundPositionX"
+                      step="1" :min="0" :max="980"
+                      @change="setLeft"
+                    >
+                      <base-number-input
+                        class="b-panel__number-input"
+                        :value="numLeftValue"
+                        unit="px"
+                        :maximum="980"
+                        @input="setLeftValue"
+                      />
+                    </BaseRangeSlider>
+                  </div>
                 </div>
-                <div class="b-page-style__col">
-                  <BaseRangeSlider
-                    position="left"
-                    :label="$t('s.poxY')"
-                    v-model="pageBackgroundPositionY"
-                    step="1" :min="0" :max="980"
-                    @change="setTop"
-                  >
-                    <base-number-input
-                      class="b-page-style__number-input"
-                      :value="numTopValue"
-                      unit="px"
-                      :maximum="980"
-                      @input="setTopValue"
-                    />
-                  </BaseRangeSlider>
+                <div class="b-panel__control">
+                  <div class="b-panel__col">
+                    <BaseRangeSlider
+                      position="left"
+                      position-label="left"
+                      :label="$t('s.poxY')"
+                      v-model="pageBackgroundPositionY"
+                      step="1" :min="0" :max="980"
+                      @change="setTop"
+                    >
+                      <base-number-input
+                        class="b-panel__number-input"
+                        :value="numTopValue"
+                        unit="px"
+                        :maximum="980"
+                        @input="setTopValue"
+                      />
+                    </BaseRangeSlider>
+                  </div>
                 </div>
 
-                <div class="b-page-style__col">
-                  <BaseSwitcher
-                    v-model="backgroundFillValue"
-                    label="Background fill"
-                  />
+                <div class="b-panel__control">
+                  <div class="b-panel__col">
+                    <BaseSwitcher
+                      v-model="backgroundFillValue"
+                      label="Background fill"
+                    />
+                  </div>
                 </div>
-                <div class="b-page-style__col">
-                  <BaseSwitcher
-                    v-model="bgAttachmentCheckbox"
-                    :label="$t('s.fixedScrolling')"
-                  />
-                </div>
-              </div><!-- /__b-page-style__add -->
-            </div><!-- /__b-page-style__row -->
 
-            <div class="b-page-style__row">
+                <div class="b-panel__control">
+                  <div class="b-panel__col">
+                    <BaseSwitcher
+                      v-model="bgAttachmentCheckbox"
+                      :label="$t('s.fixedScrolling')"
+                    />
+                  </div>
+                </div>
+              </div><!-- /__b-panel__add -->
+            </div><!-- /__b-panel__row -->
+
+            <div class="b-panel__control">
               <BaseCaption help="Video for page background">
                 {{ $t('s.backgroundVideo') }}
               </BaseCaption>
-              <div class="b-page-style__col">
+              <div class="b-panel__col">
                 <base-uploader
                   v-model="bgVideo"
                   label="Video"
                   type="video"
                 />
               </div>
-              <div class="b-page-style__col">
+              <div class="b-panel__col">
                 <BaseSwitcher v-model="bgVideoPositionCheckbox" :label="$t('s.fixedScrolling')" />
               </div>
             </div>
-            <div class="b-page-style__row">
+            <div class="b-panel__control">
               <BaseCaption help="Create a smooth fullpage scrolling effect" >
                 Full page scroll
               </BaseCaption>
-              <div class="b-page-style__col">
+              <div class="b-panel__col">
                 <BaseSwitcher v-model="fullPageScrollCheckbox" :label="$t('s.fpScroll')" />
               </div>
             </div>
           </div>
         </base-scroll-container>
       </div>
-      <div class="layout" v-if="activeTab === 'colors'">
+      <div class="layout _pr-05" v-if="activeTab === 'colors'">
         <base-scroll-container>
           <div class="layout-padding">
-            <the-color-palette></the-color-palette>
+            <the-color-palette />
           </div>
         </base-scroll-container>
       </div>
       <div class="layout" v-if="activeTab === 'logo'">
-        <div class="layout-padding">
-          <div class="b-page-style__row">
+        <div class="layout-padding _pr-0">
+          <div class="b-panel__control">
             <BaseCaption>
               Logo
             </BaseCaption>
-
-            <div class="b-page-style__col">
+            <div class="b-panel__col">
               <base-uploader
                 v-model="logo"
                 label="Game logo"
@@ -377,41 +385,3 @@ export default {
   }
 }
 </script>
-
-<style lang="sass" scoped>
-@import '../../assets/sass/_colors.sass'
-@import '../../assets/sass/_variables.sass'
-
-.b-page-style
-  height: 100%
-  position: relative
-
-  &__row
-    display: flex
-    flex-direction: column
-    align-items: flex-start
-
-    margin: 0 0 3rem
-    padding: 0
-
-  &__add
-    transition: all .2s ease-out
-    opacity: 0
-    height: 0
-
-    &.show
-      height: auto
-      opacity: 1
-  &__col
-    width: 100%
-    max-width: 30rem
-    padding: 1rem 0 1rem 1.8rem
-    /deep/
-      .b-uploader-item
-        margin: 0
-  &__number-input
-    margin-left: 0.8rem
-  /deep/
-    .b-base-switcher__label
-      margin-right: $size-step/2
-</style>

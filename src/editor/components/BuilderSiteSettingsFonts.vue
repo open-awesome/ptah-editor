@@ -518,8 +518,10 @@ export default {
 
 .b-font-filter
   display: flex
+  flex-direction: column
+  justify-content: center
   &__search
-    width: 35rem
+    width: 27rem
     margin: 0 3.2rem 1rem 1.5rem
     /deep/
       & input
@@ -529,14 +531,14 @@ export default {
     width: $size-step * 5.5
     margin-left: $size-step
   &__text
-    width: 300px
+    width: 27rem
 
 .b-fonts-list
   padding: 0 0 0 1.5rem
   margin: 0
   &__item
     $this: &
-    width: 35rem
+    width: 27rem
     height: 17rem
     padding: 0
     margin: 0 0 1.5rem
@@ -670,14 +672,17 @@ export default {
     padding: 0
     margin: 0
     width: 100%
-    padding-left: 1.5rem
+    display: flex
+    flex-direction: column
+    align-items: center
+    justify-content: center
     &__item
       $this: &
       border: 2px solid $main-green
       box-sizing: border-box
       border-radius: 10px
       margin-bottom: 1.5rem
-      width: 35rem
+      width: 26rem
 
       .change-font
         display: none
@@ -727,10 +732,12 @@ export default {
   height: 11.5rem
   box-sizing: border-box
   padding: .8rem 1.8rem
-  font-size: 2.1rem
-  line-height: 2.5rem
+  font-size: 1.8rem
+  line-height: 1.4
   letter-spacing: 0.065em
   border-top: 1px solid #F4F4F4
+
+  overflow: hidden
 
 .change-font
   @include control

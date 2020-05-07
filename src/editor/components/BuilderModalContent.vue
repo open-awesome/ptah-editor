@@ -149,7 +149,7 @@ export default {
     &
       display: block
   &-content
-    width: 38rem
+    width: 30.5rem
     min-height: 100%
     z-index: 10
     position: relative
@@ -161,7 +161,7 @@ export default {
     justify-content: stretch
 
     &--wide
-      width: 38rem
+      width: 30.5rem
 
     &--ultrawide
       width: 68rem

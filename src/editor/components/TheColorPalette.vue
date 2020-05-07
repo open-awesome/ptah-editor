@@ -199,7 +199,7 @@ export default {
 
   &__col
     width: 100%
-    max-width: 30rem
+    max-width: 24rem
     padding: 1rem 0 1rem 1.8rem
 
   &__generator-text

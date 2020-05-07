@@ -119,7 +119,7 @@ export default {
 <style lang="sass" scoped>
 .b-base-number-input
   font-size: 1.4rem
-  line-height: 1.7rem
+  line-height: 3.4rem
   width: 100%
 
   &_error
@@ -136,7 +136,7 @@ export default {
     right: 0
 
     font-size: 1.3rem
-    line-height: 2.5
+    line-height: 3.4rem
     padding: 0 0.6rem
 
   &__input

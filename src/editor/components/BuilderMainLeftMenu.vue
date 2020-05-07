@@ -253,10 +253,6 @@ export default {
         & .b-main-left-menu-list__progress-text
           opacity: 0
 
-      &._last
-        @media only screen and (max-height: 600px)
-          height: 0
-
 .b-main-left-menu-list__progress
   padding-bottom: 2.2rem
 .b-main-left-menu-list__progress-text
@@ -318,4 +314,15 @@ export default {
     background: #def2f2
   &:after
     background: #fff
+
+.b-main-left-menu-list__item._last
+  &:hover
+    cursor: default
+    background: transparent none !important
+    &:after
+      background: #fff none !important
+    &:before
+      background: #f3f6f6 none !important
+  @media only screen and (max-height: 600px)
+    height: 0
 </style>
