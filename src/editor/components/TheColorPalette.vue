@@ -211,9 +211,11 @@ export default {
   &__controls
     display: flex
     justify-content: center
+    margin-top: 1.5rem
 
   &__loaded
     justify-content: space-between
+    margin-top: 0
 
     & > *
       width: 49%

@@ -13,7 +13,7 @@ Vue.use(Vuex)
 Vue.use(vOutsideEvents)
 Vue.use(Vuebar)
 
-const demoLanding = 'https://s3.protocol.one/files/Demo-page-2020-v6.json'
+const demoLanding = 'https://s3.protocol.one/files/demoLanding080520_v1.json'
 const FONTS = {
   'Lato': {
     variants: ['regular'],
