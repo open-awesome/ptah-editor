@@ -78,7 +78,7 @@ export default {
 <style lang="sass" scoped>
 .b-integrations-google-analitycs
   &__inner
-    padding: 0 1.5rem 0 2.5rem
+    padding: 0
   &__controls
     justify-content: flex-start !important
     border-top: none !important

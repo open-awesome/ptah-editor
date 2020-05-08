@@ -1,6 +1,8 @@
 <template>
   <div class="b-caption">
-    <slot></slot>
+    <span>
+      <slot />
+    </span>
     <span
       class="b-caption__help"
       :tooltip="help"
@@ -46,14 +48,12 @@ export default {
   margin: 0 0 1.8rem 0
 
   width: 100%
-  // max-width: 24rem
-
-  display: flex
-  justify-content: flex-start
-  align-items: center
 
   &__help
+    display: inline-block
+    vertical-align: middle
     width: 1.2rem
+    height: 1.8rem
     margin: 0 0 0 1.2rem
     cursor: pointer
     position: relative

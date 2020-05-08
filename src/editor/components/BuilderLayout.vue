@@ -166,6 +166,7 @@ $topBarHeight: 6rem
     &:hover,
     &._show-modal
       z-index: 9
+      width: 9rem
     &._expanded
       width: 9rem
 
@@ -188,7 +189,7 @@ $topBarHeight: 6rem
       z-index: 11
       &-content
         z-index: 9
-        width: 38rem
+        width: 30.5rem
   &__main
     position: absolute
     top: $topBarHeight
@@ -215,7 +216,7 @@ $topBarHeight: 6rem
     &_expanded
       left: 39.5rem
     &_expanded-setting
-      left: 47rem
+      left: 39.5rem
       &:after
         display: none
     &_show-modal

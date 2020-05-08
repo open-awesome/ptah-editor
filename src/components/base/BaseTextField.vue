@@ -5,9 +5,14 @@
     'b-base-text-field_focus': hasFocus,
     'b-base-text-field_filled': innerValue.length > 0
     }">
-    <base-label v-if="label || $slots.label" :hasError="hasError" :hasFocus="hasFocus">
+    <base-label
+      class="b-base-text-field__label"
+      v-if="label || $slots.label"
+      :hasError="hasError"
+      :hasFocus="hasFocus"
+    >
       {{label}}
-      <slot name="label"></slot>
+      <slot name="label" />
     </base-label>
 
     <input class="b-base-text-field__input" type="text"
@@ -96,7 +101,7 @@ export default {
     color: $dark-grey
     font-size: 1.2rem
     line-height: 1.6rem
-    margin-bottom: .82rem
+    margin-bottom: .8rem
     display: block
     position: relative
 

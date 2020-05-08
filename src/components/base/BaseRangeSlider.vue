@@ -107,7 +107,7 @@ $knob-shadow: 0px 2px 8px rgba($main-green, 0.2)
       width: 6rem
       padding: 0 .9rem 0 0
   &__text-input
-    width: $size-step*2
+    width: 7rem
     padding: 0 0 0 .8rem
 
     font-size: 1.4rem

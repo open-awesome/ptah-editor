@@ -8,7 +8,6 @@
       />
       <div class="layout" v-if="activeTab === 'seo'">
           <form @submit.prevent="applySettings" class="layout__content">
-
             <!-- Title & Favicon -->
             <div class="b-panel__control">
               <base-caption help="Page title">
@@ -16,7 +15,6 @@
               </base-caption>
               <div class="b-panel__col">
                 <BaseTextField
-                  :label="$t('s.pageTitle')"
                   v-model="pageTitle"
                 />
               </div>
@@ -424,4 +422,8 @@ export default {
 
 .upload-pdf
   margin-top: 2rem
+
+.b-open-graph
+  &__select
+    margin-bottom: 1.6rem
 </style>

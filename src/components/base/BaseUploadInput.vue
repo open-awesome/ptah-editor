@@ -1,6 +1,6 @@
 <template>
   <div class="b-base-upload">
-    <base-label v-if="label">
+    <base-label class="b-base-upload__label" v-if="label">
       {{label}}
     </base-label>
 
@@ -89,7 +89,8 @@ export default {
 @import '../../assets/sass/_variables.sass'
 .b-base-upload
   width: 100%
-
+  &__label
+    margin-bottom: 0.4rem
   &__inner
     display: flex
     justify-content: space-between

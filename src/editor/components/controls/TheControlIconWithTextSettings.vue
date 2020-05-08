@@ -224,6 +224,7 @@ export default {
     position: relative
     &__content
       width: 20rem
+      min-width: 20rem
       height: 5rem
       overflow: hidden
       position: relative
