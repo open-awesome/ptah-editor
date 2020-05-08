@@ -9,7 +9,7 @@
     <div class="b-panel__layout _top-9">
       <div class="layout _top-2 _pr-05">
         <base-scroll-container>
-          <div class="layout-padding _pr-6">
+          <div class="layout-padding _pr-2">
             <div class="b-panel__control direction">
               <div class="b-panel__control">
                 <base-caption>
