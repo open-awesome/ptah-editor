@@ -11,7 +11,11 @@
     :path="`${name}-${section.id}`"
   >
 
-    <div class="b-styler__controls">
+    <div class="b-styler__controls"
+      :class="[
+        { '_hover-del': hoverBy === 'element-del'}
+      ]"
+    >
       <!-- Button -->
       <template v-if="type === 'button'">
 
@@ -153,6 +157,8 @@
       <a href="#" class="b-styler__control b-styler__control_del"
          v-if="options.removable"
          @click.stop="removeElement"
+         @mouseover="mouseoverDelEl"
+         @mouseleave.self="mouseleaveDelEl"
       >
         <icon-base name="delete" width="10" height="10"></icon-base>
       </a>
@@ -242,7 +248,8 @@ export default {
       'isDragStop',
       'stylesBuffer',
       'isShowModal',
-      'isShowModalButton'
+      'isShowModalButton',
+      'hoverBy'
     ]),
     ...mapState('Landing', ['textEditorActive']),
 
@@ -382,7 +389,8 @@ export default {
       'updateStylesBuffer',
       'toggleSectionsTreeMenu',
       'toggleSidebar',
-      'toggleModalButton'
+      'toggleModalButton',
+      'setHoverBy'
     ]),
 
     setPanels (panel, isEditText) {
@@ -744,6 +752,16 @@ export default {
       } else {
         this.initPopper()
       }
+    },
+
+    mouseoverDelEl  () {
+      this.setHoverBy('element-del')
+      this.el.classList.add('_hover-red')
+    },
+
+    mouseleaveDelEl () {
+      this.el.classList.remove('_hover-red')
+      this.setHoverBy('element')
     }
   }
 }
@@ -771,6 +789,10 @@ export default {
     display: flex
     background: $main-yellow
     border-radius: .5rem
+
+    transition: background-color .1s
+    &._hover-del
+      background: #D36083
 
   &__col
     display: flex

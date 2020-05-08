@@ -13,6 +13,7 @@ export default {
     ...mapActions('Sidebar', [
       'setHoverBy'
     ]),
+
     mouseover () {
       this.$el.classList.add('_hover')
       this.setHoverBy('element')

@@ -333,9 +333,9 @@ export default {
       }
     },
 
-    setHoverBy ({ state, commit }, value) {
+    setHoverBy: _.throttle(function ({ state, commit }, value) {
       commit('hoverBy', (typeof value !== 'undefined') ? value : '')
-    },
+    }, 250),
 
     toggleModal ({ state, commit }, value) {
       commit('isShowModal', (typeof value !== 'undefined') ? value : !state.isShowModal)

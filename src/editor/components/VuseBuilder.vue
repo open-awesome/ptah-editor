@@ -754,12 +754,12 @@ export default {
     border: .4rem solid transparent
     &.b-button:not(.styler-active):hover
       border: .4rem solid $main-yellow !important
-      // background-color: rgba(255, 230, 0, 0.1) !important
     &:not(.b-button):hover
       cursor: pointer
       border-color: $main-yellow !important
       background-color: rgba(255, 230, 0, 0.1) !important
       border-radius: .5rem !important
+
     &:not(.b-button).styler-active
       border-color: transparent !important
       background-color: rgba(255, 230, 0, 0.1) !important
@@ -773,6 +773,19 @@ export default {
         border-color: $main-yellow !important
         &:hover
           border-color: $main-yellow !important
+    &._hover-red:not(.b-button).styler-active
+      border-color: transparent !important
+      background-color: rgba(#D36083, 0.1) !important
+      border-radius: .5rem !important
+      &:hover
+        border-color: transparent !important
+      .is-mobile &.b-image,
+      .is-mobile &.b-logo,
+      .is-tablet &.b-image,
+      .is-tablet &.b-logo
+        border-color: #D36083 !important
+        &:hover
+          border-color: #D36083 !important
   &.is-editable div.b-border,
   &.is-editable table.b-border
     outline: none
@@ -780,7 +793,6 @@ export default {
     border: .4rem solid transparent
     &.b-button:not(.styler-active):hover
       border: .4rem solid $main-yellow !important
-      // background-color: rgba(255, 230, 0, 0.1) !important
     &:not(.b-button):hover
       cursor: pointer
       border: .4rem solid $main-yellow !important
@@ -792,6 +804,27 @@ export default {
       border-radius: .5rem !important
       &:hover
         border: .4rem solid $main-yellow !important
+      &.b-text
+        cursor: pointer
+
+  &.is-editable div.b-border,
+  &.is-editable table.b-border
+    outline: none
+    transition: border 0.25s
+    border: .4rem solid transparent
+    &._hover-red.b-button:not(.styler-active):hover
+      border: .4rem solid #D36083 !important
+    &._hover-red:not(.b-button):hover
+      cursor: pointer
+      border: .4rem solid #D36083 !important
+      background-color: rgba(#D36083, 0.1) !important
+      border-radius: .5rem !important
+    &._hover-red:not(.b-button).styler-active
+      border: .4rem solid #D36083 !important
+      background-color: rgba(#D36083, 0.1) !important
+      border-radius: .5rem !important
+      &:hover
+        border: .4rem solid #D36083 !important
       &.b-text
         cursor: pointer
   &.fp-scroll section:not(.b-section-header):not(.b-section-footer):not(.is-mobile)

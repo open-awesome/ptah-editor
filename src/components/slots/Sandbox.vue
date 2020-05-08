@@ -53,7 +53,7 @@
 
 <script>
 import { mapState, mapMutations, mapActions } from 'vuex'
-import * as _ from 'lodash-es'
+import { merge } from 'lodash-es'
 
 export default {
   name: 'Sandbox',
@@ -107,7 +107,7 @@ export default {
         return media
       },
       set (value) {
-        this.settingObjectSection.set(this.sandbox.container, _.merge({}, this.slot, {
+        this.settingObjectSection.set(this.sandbox.container, merge({}, this.slot, {
           media: value
         }))
       }

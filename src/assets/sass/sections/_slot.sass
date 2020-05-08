@@ -33,7 +33,7 @@
     border: none
     border-radius: 0 0 .5rem 0
 
-    display: flex
+    display: none
     align-items: center
     justify-content: center
 
@@ -66,6 +66,7 @@
   .is-editable &._hover:hover
     #{$this}__settings
       opacity: 1
+      display: flex
 
   .is-mobile & .b-draggable-slot
     flex-direction: var(--mobile-slot-flex-direction) !important
