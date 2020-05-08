@@ -207,9 +207,12 @@ export default {
       let lock = false
       let value
 
-      Object.keys(this[group]).forEach((key) => {
-        if (value !== this[key]) {
+      Object.keys(this[group]).forEach((key, index) => {
+        if (index === 0) {
           value = this[key]
+        }
+
+        if (value !== this[key]) {
           lock = false
         } else {
           lock = true

@@ -297,7 +297,7 @@ export default {
 
   mixins: [defaults, sectionMedia],
 
-  inject: ['device'],
+  inject: ['device', 'isExpanded'],
 
   cover: 'https://s3.protocol.one/images/ZCAexs7b_cover_s.jpg',
 
@@ -334,10 +334,18 @@ export default {
     },
 
     'device.type': {
-      handler () {
+      handler (value) {
         setTimeout(() => {
           this.swiper.update()
-        }, 500)
+        }, 250)
+      }
+    },
+
+    'isExpanded.status': {
+      handler (value) {
+        setTimeout(() => {
+          this.swiper.update()
+        }, 250)
       }
     }
   },

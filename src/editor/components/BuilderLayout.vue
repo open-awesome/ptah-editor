@@ -68,9 +68,11 @@ export default {
 
   provide () {
     let device = {}
+    let isExpanded = {}
     Object.defineProperty(device, 'type', { enumerable: true, get: () => this.device })
+    Object.defineProperty(isExpanded, 'status', { enumerable: true, get: () => this.isExpanded })
 
-    return { device }
+    return { device, isExpanded }
   },
 
   props: {
