@@ -104,7 +104,10 @@ export default {
       if (plainTextColor !== '') {
         let textPaths = this.getElementPropertyPath('TextElement', 'color')
         let iconTextPaths = this.getElementPropertyPath('IconWithText', 'color')
-        let plainText = textPaths.concat(iconTextPaths)
+        let toggle = this.getElementPropertyPath('ToggleElement', 'color')
+        let plainText = textPaths
+          .concat(iconTextPaths)
+          .concat(toggle)
 
         plainText.forEach(path => this.$section.set(path, plainTextColor))
       }

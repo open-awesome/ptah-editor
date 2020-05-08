@@ -40,7 +40,7 @@
         </div>
       </div>
 
-      <div class="b-palette__controls">
+      <div class="b-palette__controls" :class="{ 'b-palette__loaded': palette }">
         <base-upload-button
           v-model="imagePalette"
           @change="changeImagePalette"
@@ -210,6 +210,9 @@ export default {
 
   &__controls
     display: flex
+    justify-content: center
+
+  &__loaded
     justify-content: space-between
 
     & > *
