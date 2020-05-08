@@ -130,7 +130,6 @@
       @close="toggleModalButton(false)"
       v-if="isShowModalButton"
       button="Done"
-      :isHideCancel="true"
     >
       <ModalButton
         :builder="$builder"

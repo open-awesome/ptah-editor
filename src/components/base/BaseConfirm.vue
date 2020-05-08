@@ -1,7 +1,9 @@
 <template>
   <div class="b-confirm-overlay">
     <div class="b-confirm">
-      <h3>{{title}}</h3>
+      <div class="b-confirm__chapter">
+        {{ title }}
+      </div>
 
       <div class="b-confirm__content">
         <slot>
@@ -106,7 +108,7 @@ export default {
   .is-expanded &
     margin-left: 41rem
 
-  h3
+  &__chapter
     font-style: normal
     font-weight: 600
     font-size: 1.8rem
